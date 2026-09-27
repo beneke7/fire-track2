@@ -1,0 +1,1783 @@
+diff --git a/src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90 b/src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90
+index e0e1b4c..7d5194a 100644
+--- a/src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90
++++ b/src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90
+@@ -55,6 +55,8 @@ program flutas
+                             rho0, &
+                             n,ng,l,dl,dli, &
+                             bulk_ftype,rkcoeff, &
++                            gacc_x,gacc_y,gacc_z,bvel_x,bvel_y,bvel_z, &
++                            dpdl_x,dpdl_y,dpdl_z, &
+                             time_scheme,space_scheme_mom,n_stage, &
+                             is_noise_vel, noise_vel, &
+                             read_input
+@@ -79,7 +81,16 @@ program flutas
+   use mod_solver_cpu, only: solver_cpu
+ #endif
+   use mod_types
+-  use mod_vof       , only: initvof,advvof,update_vof,update_property
++  use mod_vof       , only: initvof,advvof,update_vof,update_property, &
++                            restas_source_read,restas_source_enabled,restas_source_validate, &
++                            restas_source_write_header,restas_source_set_initial_flow, &
++                            restas_source_apply_velocity,restas_source_assert_velocity, &
++                            restas_source_prepare_boundary, &
++                            restas_source_begin_step,restas_source_record_inventory, &
++                            restas_source_record_velocity_audit,restas_source_close_log, &
++                            restas_source_record_phase_stage,restas_source_record_velocity_stage, &
++                            restas_source_record_timestep_restriction, &
++                            restas_source_capture_timestep_inputs
+   use profiler
+ #if defined(_DO_POSTPROC)
+   use mod_tagging   , only: droplet_tagging
+@@ -127,7 +138,7 @@ program flutas
+   integer  :: nh_d,nh_u,nh_p,nh_v
+   !
+   integer  :: i,j,k,im,ip,jm,jp,km,kp
+-  integer  :: irk,istep
++  integer  :: irk,istep,source_interval
+   character(len=1)   :: action_load
+   logical  :: is_data
+   !
+@@ -139,7 +150,7 @@ program flutas
+   character(len=3)   :: cnum_ichkpt
+   character(len=100) :: datadir,datadir_ta,restart_dir
+   character(len=100), allocatable, dimension(:) :: restart_subdir
+-  real(rp) :: twi,tw,rho0i
++  real(rp) :: twi,tw,rho0i,source_qtop,source_qbottom
+   integer :: it,kk,it_chkpt
+   logical :: is_done,kill
+   !
+@@ -168,6 +179,7 @@ program flutas
+   ! read parameter file
+   !
+   call read_input(myid)
++  call restas_source_read()
+   !
+   ! create data folder and subfolders for restating files and post-processing (if they do not exist).
+   !
+@@ -206,6 +218,16 @@ program flutas
+   !$call omp_set_num_threads(nthreadsmax)
+   call initmpi(.false.,ng,cbcpre,dims_in,dims_xyz,dims,n)
+   !
++  if(restas_source_enabled()) then
++    if(product(dims).ne.1.or.any(n.ne.ng)) &
++      error stop 'Source-boundary diagnostic requires one rank and the full global grid'
++    call restas_source_validate(ng,dl,dt_input,constant_dt,cbcvel,cbcpre,cbcvof, &
++      bcvel,bcpre,bcvof,is_outflow,restart,late_init,is_forced, &
++      (/gacc_x,gacc_y,gacc_z/),(/bvel_x,bvel_y,bvel_z/), &
++      (/dpdl_x,dpdl_y,dpdl_z/),bulk_ftype)
++    call restas_source_write_header(trim(datadir)//'restas')
++  endif
++  !
+   n1 = n(1)
+   n2 = n(2)
+   n3 = n(3)
+@@ -383,6 +405,7 @@ program flutas
+     endif
+     !
+     call initflow(inivel,n(1),n(2),n(3),dims,is_noise_vel,noise_vel,nh_d,nh_u,nh_p,rho2,mu2,zc/lz,dzc/lz,dzf/lz,u,v,w,p)
++    if(restas_source_enabled()) call restas_source_set_initial_flow(n,nh_u,u,v,w)
+     !
+     ! set to zeros the rhs of momentum equation 
+     ! (only for the first time-step, not for the restarting)
+@@ -430,6 +453,10 @@ program flutas
+     !
+   endif
+   !
++  if(restas_source_enabled()) then
++    call restas_source_capture_timestep_inputs(time,dt_input,(/dx,dy,dz/),(/dxi,dyi,dzi/), &
++      dzc,dzf,dzci,dzfi)
++  endif
+   !@cuf istat = cudaMemPrefetchAsync(dudtrko, size(dudtrko), mydev, 0)
+   !@cuf istat = cudaMemPrefetchAsync(dvdtrko, size(dvdtrko), mydev, 0)
+   !@cuf istat = cudaMemPrefetchAsync(dwdtrko, size(dwdtrko), mydev, 0)
+@@ -437,8 +464,13 @@ program flutas
+   ! set boundary conditions on the initial/loaded fields
+   !
+   call bounduvw(cbcvel,n,bcvel,nh_d,nh_u,halo_u,is_outflow,dl,dzc,dzf,u,v,w)
++  if(restas_source_enabled()) then
++    call restas_source_apply_velocity(n,nh_u,0,dl,u,v,w,source_qtop,source_qbottom)
++    call restas_source_record_velocity_stage(n,nh_u,dl,0,-1,'initial_u0',u,v,w)
++  endif
+   call boundp(cbcpre,n,bcpre,nh_d,nh_p,halo_p,dl,dzc,dzf,p)
+   call boundp(cbcvof,n,bcvof,nh_d,nh_v,halo_v,dl,dzc,dzf,psi)
++  if(restas_source_enabled()) call restas_source_prepare_boundary(n,nh_u,0,psi,w)
+   !
+   ! for the first time-step and the restarting we use a 0th order extrapolation 
+   ! in time-splitting of the pressure equation
+@@ -462,6 +494,11 @@ program flutas
+   call boundp(cbcvof,n,bcvof,nh_d,nh_v,halo_v,dl,dzc,dzf,rho)
+   call update_property(n,(/mu1 ,mu2 /),psi,mu ) 
+   call boundp(cbcvof,n,bcvof,nh_d,nh_v,halo_v,dl,dzc,dzf,mu)
++  if(restas_source_enabled()) then
++    call restas_source_prepare_boundary(n,nh_u,0,psi,w,rho,mu)
++    call restas_source_record_inventory(n,dl,dzf,psi,0,time)
++    call restas_source_record_velocity_audit(n,nh_u,dl,dzf,dt_input,0,0,time,psi,u,v,w)
++  endif
+   !
+   ! post-process and write initial condition
+ #if !defined(_BENCHMARK_NO_IO)
+@@ -504,6 +541,10 @@ program flutas
+     dtmax = dt_input
+     dt    = dtmax
+   endif
++  if(restas_source_enabled()) then
++    call restas_source_record_timestep_restriction(n,nh_d,nh_u,dt,time,0,nstep.gt.0, &
++      dli,dzci,dzfi,u,v,w)
++  endif
+   if(istep.eq.0) dto = dt
+   if(myid.eq.0) print*, 'dtmax = ', dtmax, 'dt = ', dt
+   dti  = 1._rp/dt
+@@ -589,12 +630,30 @@ program flutas
+       !
+       call profiler_start("VOF", tag = .true., tag_color = COLOR_YELLOW)
+       !
+-      call advvof(n,dli,dt,halo_v,nh_d,nh_u,dzc,dzf,u,v,w,psi,nor,cur_t,kappa,d_thinc)
++      ! Interval k advects U_k into completed state k+1.
++      source_interval=istep-1
++      if(restas_source_enabled()) then
++        call restas_source_record_velocity_stage(n,nh_u,dl,source_interval,source_interval, &
++          'pre_vof',u,v,w)
++        call restas_source_assert_velocity(n,nh_u,source_interval,dl,w)
++        call restas_source_begin_step()
++        call advvof(n,dli,dt,halo_v,nh_d,nh_u,dzc,dzf,u,v,w,psi,nor,cur_t,kappa, &
++          d_thinc,source_interval,rho,mu)
++      else
++        call advvof(n,dli,dt,halo_v,nh_d,nh_u,dzc,dzf,u,v,w,psi,nor,cur_t,kappa,d_thinc)
++      endif
+       !
+       call update_property(n,(/rho1,rho2/),psi,rho)           
+       call boundp(cbcvof,n,bcvof,nh_d,nh_v,halo_v,dl,dzc,dzf,rho)
+       call update_property(n,(/mu1 ,mu2 /),psi,mu )           
+       call boundp(cbcvof,n,bcvof,nh_d,nh_v,halo_v,dl,dzc,dzf,mu )
++      if(restas_source_enabled()) then
++        call restas_source_prepare_boundary(n,nh_u,source_interval,psi,w,rho,mu)
++        call restas_source_record_phase_stage(n,nh_u,source_interval,source_interval, &
++          'pre_momentum',psi,w,rho,mu)
++        ! Boundary/mass rows are completed state k+1 after interval k.
++        call restas_source_record_inventory(n,dl,dzf,psi,istep,time)
++      endif
+       !
+       call profiler_stop("VOF")
+       !
+@@ -647,6 +706,11 @@ program flutas
+     endif
+     !
+     call bounduvw(cbcvel,n,bcvel,nh_d,nh_u,halo_u,no_outflow,dl,dzc,dzf,u,v,w) ! we impose bc at end (not valid for all cases)
++    if(restas_source_enabled()) then
++      call restas_source_apply_velocity(n,nh_u,istep,dl,u,v,w,source_qtop,source_qbottom)
++      call restas_source_record_velocity_stage(n,nh_u,dl,istep,source_interval, &
++        'projection_override',u,v,w)
++    endif
+     !
+     call profiler_stop("RK")
+     !
+@@ -694,6 +758,15 @@ program flutas
+     !
+     call correc(n(1),n(2),n(3),nh_d,nh_u,dxi,dyi,dzi,dzci,f_t12,rho0,p,u,v,w,rho)
+     call bounduvw(cbcvel,n,bcvel,nh_d,nh_u,halo_u,is_outflow,dl,dzc,dzf,u,v,w)
++    if(restas_source_enabled()) then
++      call restas_source_apply_velocity(n,nh_u,istep,dl,u,v,w,source_qtop,source_qbottom)
++      call restas_source_record_velocity_stage(n,nh_u,dl,istep,source_interval, &
++        'corrected_endpoint',u,v,w)
++      ! Corrected U_(k+1) is checked before any later interval consumes it.
++      call restas_source_record_velocity_audit(n,nh_u,dl,dzf,dt,istep,istep,time,psi,u,v,w)
++      call restas_source_record_timestep_restriction(n,nh_d,nh_u,dt,time,istep,istep.lt.nstep, &
++        dli,dzci,dzfi,u,v,w)
++    endif
+     !
+ #if defined(_OPENACC)
+     !$acc parallel loop collapse(3)
+@@ -937,6 +1010,7 @@ program flutas
+   if(myid.eq.0.and.(.not.kill)) print*, '*** Fim ***'
+   !
+   call profiler_report()
++  if(restas_source_enabled()) call restas_source_close_log()
+   !
+   call decomp_2d_finalize
+   call MPI_FINALIZE(ierr)
+diff --git a/src/restas_source.inc b/src/restas_source.inc
+new file mode 100644
+index 0000000..227d784
+--- /dev/null
++++ b/src/restas_source.inc
+@@ -0,0 +1,1367 @@
++  subroutine restas_source_read()
++    use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
++    implicit none
++    integer :: iunit,ierr,islot
++    logical :: exists
++    inquire(file='source-boundary.in',exist=exists)
++    if(.not.exists) return
++    open(newunit=iunit,file='source-boundary.in',status='old',action='read',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot open source-boundary.in'
++    read(iunit,*,iostat=ierr) restas_slot_count
++    if(ierr.ne.0) error stop 'Invalid source slot count'
++    if(restas_slot_count.lt.0.or.restas_slot_count.gt.4.or. &
++       (restas_slot_count.gt.0.and.restas_slot_count.ne.1.and.restas_slot_count.ne.4)) &
++      error stop 'Source diagnostic supports zero, one, or four slots'
++    read(iunit,*,iostat=ierr) restas_grid
++    if(ierr.ne.0) error stop 'Invalid source grid record'
++    read(iunit,*,iostat=ierr) restas_step_on,restas_step_off
++    if(ierr.ne.0) error stop 'Invalid source step interval'
++    read(iunit,*,iostat=ierr) restas_dt
++    if(ierr.ne.0) error stop 'Invalid source time step'
++    read(iunit,*,iostat=ierr) restas_source_velocity
++    if(ierr.ne.0) error stop 'Invalid source velocity record'
++    read(iunit,*,iostat=ierr) restas_background_velocity
++    if(ierr.ne.0) error stop 'Invalid background velocity record'
++    read(iunit,*,iostat=ierr) restas_gravity
++    if(ierr.ne.0) error stop 'Invalid gravity record'
++    read(iunit,*,iostat=ierr) restas_short_x,restas_long_y,restas_gap_x,restas_gap_y
++    if(ierr.ne.0) error stop 'Invalid source geometry record'
++    do islot=1,restas_slot_count
++      read(iunit,*,iostat=ierr) restas_slot_i0(islot),restas_slot_i1(islot), &
++        restas_slot_j0(islot),restas_slot_j1(islot)
++      if(ierr.ne.0) error stop 'Invalid source slot mask'
++    enddo
++    read(iunit,*,iostat=ierr) restas_fixed_step_factor
++    if(ierr.ne.0) error stop 'Missing explicit fixed_step_factor in source-boundary.in'
++    close(iunit)
++    if(restas_slot_count.eq.0) then
++      if(restas_step_on.ne.0.or.restas_step_off.ne.0) &
++        error stop 'Dry diagnostic requires the disabled interval [0,0)'
++    else
++      if(restas_step_on.lt.0.or.restas_step_off.le.restas_step_on) &
++        error stop 'Invalid half-open source step interval'
++    endif
++    if(.not.ieee_is_finite(restas_fixed_step_factor).or. &
++       restas_fixed_step_factor.le.0._rp.or.restas_fixed_step_factor.gt.1._rp) &
++      error stop 'fixed_step_factor must be finite and in (0,1]'
++    if(restas_source_velocity(3).ge.0._rp) &
++      error stop 'The upper source must point into negative z'
++    if(abs(restas_background_velocity(3)).gt.restas_input_tol) &
++      error stop 'This diagnostic requires zero initial vertical flow'
++    if(any(restas_slot_i0(1:restas_slot_count).lt.1).or. &
++       any(restas_slot_j0(1:restas_slot_count).lt.1)) &
++      error stop 'Source indices are one-based'
++    if(any(restas_slot_i1(1:restas_slot_count).lt.restas_slot_i0(1:restas_slot_count)).or. &
++       any(restas_slot_j1(1:restas_slot_count).lt.restas_slot_j0(1:restas_slot_count))) &
++      error stop 'Source mask extents are inverted'
++    restas_source_loaded=.true.
++  end subroutine restas_source_read
++  !
++  logical function restas_source_enabled()
++    implicit none
++    restas_source_enabled=restas_source_loaded
++  end function restas_source_enabled
++  !
++  logical function restas_source_active_at(step_index)
++    implicit none
++    integer, intent(in) :: step_index
++    restas_source_active_at=.false.
++    if(.not.restas_source_loaded) return
++    restas_source_active_at=(step_index.ge.restas_step_on.and.step_index.lt.restas_step_off)
++  end function restas_source_active_at
++  !
++  subroutine restas_source_get_background(velocity)
++    implicit none
++    real(rp), intent(out) :: velocity(3)
++    velocity=restas_background_velocity
++  end subroutine restas_source_get_background
++  !
++  subroutine restas_source_get_velocity(velocity)
++    implicit none
++    real(rp), intent(out) :: velocity(3)
++    velocity=restas_source_velocity
++  end subroutine restas_source_get_velocity
++  !
++  logical function restas_source_cell(i,j)
++    implicit none
++    integer, intent(in) :: i,j
++    integer :: islot
++    restas_source_cell=.false.
++    do islot=1,restas_slot_count
++      if(i.ge.restas_slot_i0(islot).and.i.le.restas_slot_i1(islot).and. &
++         j.ge.restas_slot_j0(islot).and.j.le.restas_slot_j1(islot)) then
++        restas_source_cell=.true.
++        return
++      endif
++    enddo
++  end function restas_source_cell
++  !
++  subroutine restas_source_validate(ng,dl,dt_input,constant_dt,cbcvel,cbcpre,cbcvof, &
++                                   bcvel,bcpre,bcvof,is_outflow,restart,late_init, &
++                                   is_forced,gacc,bvel,dpdl,bulk_ftype)
++    implicit none
++    integer, intent(in) :: ng(3)
++    real(rp), intent(in) :: dl(3),dt_input
++    logical, intent(in) :: constant_dt,restart,late_init
++    character(len=1), intent(in) :: cbcvel(0:1,3,3),cbcpre(0:1,3),cbcvof(0:1,3)
++    real(rp), intent(in) :: bcvel(0:1,3,3),bcpre(0:1,3),bcvof(0:1,3)
++    logical, intent(in) :: is_outflow(0:1,3),is_forced(3)
++    real(rp), intent(in) :: gacc(3),bvel(3),dpdl(3)
++    character(len=*), intent(in) :: bulk_ftype
++    integer :: islot,jslot,nxslot,nyslot,xlo(2),ylo(2),ix,iy
++    integer :: combinations(2,2),expected_i0(4),expected_i1(4)
++    integer :: expected_j0(4),expected_j1(4)
++    real(rp) :: q0,q1
++    if(.not.restas_source_loaded) return
++    if(any(ng.ne.restas_grid)) error stop 'Source grid does not match the case grid'
++    if(any(ng.ne.(/160,84,40/))) error stop 'Source fixture grid is frozen at 160x84x40'
++    if(product(ng).gt.1000000) error stop 'Source diagnostic is capped below one million cells'
++    if(any(abs(dl-0.025_rp).gt.restas_input_tol)) &
++      error stop 'Source fixture requires uniform 0.025 m spacing'
++    if(any(abs(real(ng,rp)*dl-(/4._rp,2.1_rp,1._rp/)).gt.restas_input_tol)) &
++      error stop 'Source fixture extents are frozen at 4.0x2.1x1.0 m'
++    if(.not.constant_dt.or.dt_input.le.0._rp) &
++      error stop 'Source diagnostic requires fixed positive dt'
++    if(abs(dt_input-restas_dt).gt.restas_input_tol.or. &
++       abs(dt_input-1.e-4_rp).gt.restas_input_tol) &
++      error stop 'Source fixture time step is frozen at 1.0e-4 s'
++    if(restas_slot_count.eq.0) then
++      if(restas_step_on.ne.0.or.restas_step_off.ne.0) &
++        error stop 'Dry fixture uses the disabled interval [0,0)'
++    else
++      if(restas_step_on.ne.2.or.restas_step_off.ne.12) &
++        error stop 'Source interval is frozen to zero-based [2,12)'
++    endif
++    if(abs(restas_source_velocity(3)+4.8_rp).gt.restas_input_tol) &
++      error stop 'Source normal speed is frozen at W=-4.8 m/s'
++    if(abs(restas_short_x-0.15_rp).gt.restas_input_tol.or. &
++       abs(restas_long_y-1._rp).gt.restas_input_tol.or. &
++       abs(restas_gap_x-0.05_rp).gt.restas_input_tol.or. &
++       abs(restas_gap_y-0.05_rp).gt.restas_input_tol) &
++      error stop 'Provisional slot dimensions and gaps are frozen'
++    if(restart.or.late_init) &
++      error stop 'Source diagnostic does not support restart or late initialization'
++    if(any(abs(gacc-restas_gravity).gt.restas_input_tol)) &
++      error stop 'dns.in gravity differs from source-boundary.in'
++    if(abs(restas_background_velocity(2)).gt.restas_input_tol.or. &
++       (abs(restas_background_velocity(1)).gt.restas_input_tol.and. &
++        abs(restas_background_velocity(1)+50._rp).gt.restas_input_tol)) &
++      error stop 'Background is frozen to quiescent U=0 or crossflow U=-50, with V=0'
++    if(abs(restas_source_velocity(1)-restas_background_velocity(1)).gt.restas_input_tol.or. &
++       abs(restas_source_velocity(2)-restas_background_velocity(2)).gt.restas_input_tol) &
++      error stop 'Source tangential velocity must match the fixed z-face values'
++    if(abs(restas_gravity(1)).gt.restas_input_tol.or. &
++       abs(restas_gravity(2)).gt.restas_input_tol.or. &
++       (abs(restas_background_velocity(1)).lt.restas_input_tol.and. &
++        abs(restas_gravity(3)).gt.restas_input_tol).or. &
++       (restas_background_velocity(1).lt.-1._rp.and. &
++        abs(restas_gravity(3)+9.81_rp).gt.restas_input_tol)) &
++      error stop 'Gravity is frozen to 0 or gz=-9.81 for crossflow'
++    if(any(is_forced)) error stop 'Source diagnostic requires is_forced=false on all axes'
++    if(any(abs(bvel).gt.restas_input_tol).or.any(abs(dpdl).gt.restas_input_tol)) &
++      error stop 'Source diagnostic requires zero bvel and dpdl'
++    if(trim(bulk_ftype).ne.'cfr') error stop 'Source diagnostic freezes bulk_ftype=cfr'
++    q0=real(restas_step_on,rp)
++    q1=real(restas_step_off,rp)
++    if(restas_slot_count.gt.0.and.q1.le.q0) error stop 'Invalid source interval'
++    if(any(dl.le.0._rp)) error stop 'Source diagnostic requires positive grid spacing'
++    if(abs(real(nint(restas_short_x/dl(1)),rp)*dl(1)-restas_short_x).gt.restas_input_tol.or. &
++       abs(real(nint(restas_long_y/dl(2)),rp)*dl(2)-restas_long_y).gt.restas_input_tol) &
++      error stop 'Source dimensions do not align with the grid'
++    if(abs(real(nint(restas_gap_x/dl(1)),rp)*dl(1)-restas_gap_x).gt.restas_input_tol.or. &
++       abs(real(nint(restas_gap_y/dl(2)),rp)*dl(2)-restas_gap_y).gt.restas_input_tol) &
++      error stop 'Source gaps do not align with the grid'
++    nxslot=nint(restas_short_x/dl(1))
++    nyslot=nint(restas_long_y/dl(2))
++    if(any(restas_slot_i1(1:restas_slot_count).gt.ng(1)).or. &
++       any(restas_slot_j1(1:restas_slot_count).gt.ng(2))) &
++      error stop 'Source mask exceeds the domain'
++    expected_i0=(/74,82,74,82/)
++    expected_i1=(/79,87,79,87/)
++    expected_j0=(/2,2,44,44/)
++    expected_j1=(/41,41,83,83/)
++    if(any(restas_slot_i0(1:restas_slot_count).ne.expected_i0(1:restas_slot_count)).or. &
++       any(restas_slot_i1(1:restas_slot_count).ne.expected_i1(1:restas_slot_count)).or. &
++       any(restas_slot_j0(1:restas_slot_count).ne.expected_j0(1:restas_slot_count)).or. &
++       any(restas_slot_j1(1:restas_slot_count).ne.expected_j1(1:restas_slot_count))) &
++      error stop 'Source mask indices differ from the frozen provisional geometry'
++    if(any(restas_slot_i1(1:restas_slot_count)-restas_slot_i0(1:restas_slot_count)+1.ne.nxslot).or. &
++       any(restas_slot_j1(1:restas_slot_count)-restas_slot_j0(1:restas_slot_count)+1.ne.nyslot)) &
++      error stop 'Source mask area differs from declared dimensions'
++    do islot=1,restas_slot_count
++      do jslot=islot+1,restas_slot_count
++        if(max(restas_slot_i0(islot),restas_slot_i0(jslot)).le. &
++           min(restas_slot_i1(islot),restas_slot_i1(jslot)).and. &
++           max(restas_slot_j0(islot),restas_slot_j0(jslot)).le. &
++           min(restas_slot_j1(islot),restas_slot_j1(jslot))) &
++          error stop 'Source masks overlap'
++      enddo
++    enddo
++    if(restas_slot_count.eq.4) then
++      xlo=(/minval(restas_slot_i0(1:4)),maxval(restas_slot_i0(1:4))/)
++      ylo=(/minval(restas_slot_j0(1:4)),maxval(restas_slot_j0(1:4))/)
++      if(xlo(1).eq.xlo(2).or.ylo(1).eq.ylo(2)) &
++        error stop 'Four slots must occupy two positions on each axis'
++      combinations=0
++      do islot=1,4
++        ix=1
++        iy=1
++        if(restas_slot_i0(islot).eq.xlo(2)) ix=2
++        if(restas_slot_j0(islot).eq.ylo(2)) iy=2
++        combinations(ix,iy)=combinations(ix,iy)+1
++      enddo
++      if(any(combinations.ne.1)) error stop 'Four slots must form a complete 2x2 array'
++      if(abs(real(xlo(2)-minval(restas_slot_i1(1:4), &
++             mask=restas_slot_i0(1:4).eq.xlo(1))-1,rp)*dl(1)-restas_gap_x).gt.restas_input_tol) &
++        error stop 'x-axis gap does not match declaration'
++      if(abs(real(ylo(2)-minval(restas_slot_j1(1:4), &
++             mask=restas_slot_j0(1:4).eq.ylo(1))-1,rp)*dl(2)-restas_gap_y).gt.restas_input_tol) &
++        error stop 'y-axis gap does not match declaration'
++    endif
++    ! The accepted paired faces are periodic x/y and fixed-normal DD/NN z.
++    if(any(cbcpre(:,1).ne.'P').or.any(cbcpre(:,2).ne.'P').or.any(cbcpre(:,3).ne.'N')) &
++      error stop 'Source case requires pressure PP,PP,NN'
++    if(any(abs(bcpre).gt.restas_input_tol)) error stop 'Pressure values are frozen to zero'
++    if(any(cbcvof(:,1).ne.'P').or.any(cbcvof(:,2).ne.'P').or.any(cbcvof(:,3).ne.'N')) &
++      error stop 'Source case requires VOF PP,PP,NN'
++    if(any(abs(bcvof).gt.restas_input_tol)) error stop 'VOF boundary values are frozen to zero gradient'
++    if(any(cbcvel(:,1,:).ne.'P').or.any(cbcvel(:,2,:).ne.'P').or.any(cbcvel(:,3,:).ne.'D')) &
++      error stop 'Source case requires velocity PP,PP,DD on all components'
++    if(any(is_outflow)) error stop 'Paired source/return faces require is_outflow=false'
++    if(any(abs(bcvel(:,3,1)-restas_background_velocity(1)).gt.restas_input_tol).or. &
++       any(abs(bcvel(:,3,2)-restas_background_velocity(2)).gt.restas_input_tol)) &
++      error stop 'Tangential z-face values must match the background velocity'
++    if(any(abs(bcvel(:,3,3)).gt.restas_input_tol)) &
++      error stop 'Normal z-face base velocity values must be zero before source overrides'
++    if(abs(restas_source_velocity(1)-restas_background_velocity(1)).gt.restas_input_tol.or. &
++       abs(restas_source_velocity(2)-restas_background_velocity(2)).gt.restas_input_tol) &
++      error stop 'Source tangential velocity must match the fixed z-face values'
++    q0=real(restas_step_on,rp)*dt_input
++    q1=real(restas_step_off,rp)*dt_input
++    if(restas_slot_count.gt.0.and.q1.le.q0) error stop 'Invalid source schedule duration'
++  end subroutine restas_source_validate
++  !
++  subroutine restas_source_set_initial_flow(n,nh_u,u,v,w)
++    implicit none
++    integer, intent(in) :: n(3),nh_u
++    real(rp), intent(inout) :: u(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(inout) :: v(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(inout) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    integer :: i,j,k
++    if(.not.restas_source_loaded) return
++    do k=1,n(3)
++      do j=1,n(2)
++        do i=1,n(1)
++          u(i,j,k)=restas_background_velocity(1)
++          v(i,j,k)=restas_background_velocity(2)
++          w(i,j,k)=restas_background_velocity(3)
++        enddo
++      enddo
++    enddo
++  end subroutine restas_source_set_initial_flow
++  !
++  subroutine restas_source_apply_velocity(n,nh_u,step_index,dl,u,v,w,qtop,qbottom)
++    implicit none
++    integer, intent(in) :: n(3),nh_u,step_index
++    real(rp), intent(in) :: dl(3)
++    real(rp), intent(inout) :: u(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(inout) :: v(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(inout) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(out) :: qtop,qbottom
++    integer :: islot,i,j
++    logical :: active
++    real(rp) :: face_area,return_velocity
++    qtop=0._rp
++    qbottom=0._rp
++    if(.not.restas_source_loaded) return
++    active=restas_source_active_at(step_index)
++    face_area=dl(1)*dl(2)
++    ! W at k=nz is the z+ top face; W at k=0 is the z- bottom face.
++    do islot=1,restas_slot_count
++      do j=restas_slot_j0(islot),restas_slot_j1(islot)
++        do i=restas_slot_i0(islot),restas_slot_i1(islot)
++          w(i,j,n(3))=0._rp
++          if(active) w(i,j,n(3))=restas_source_velocity(3)
++          qtop=qtop+max(0._rp,-w(i,j,n(3)))*face_area
++        enddo
++      enddo
++    enddo
++    qbottom=qtop
++    return_velocity=0._rp
++    if(qbottom.gt.0._rp) return_velocity=-qbottom/(real(n(1)*n(2),rp)*face_area)
++    ! This uniform normal field must include periodic x/y stencil halos.
++    do j=1-nh_u,n(2)+nh_u
++      do i=1-nh_u,n(1)+nh_u
++        w(i,j,0)=return_velocity
++      enddo
++    enddo
++  end subroutine restas_source_apply_velocity
++  !
++  subroutine restas_source_assert_velocity(n,nh_u,step_index,dl,w)
++    implicit none
++    integer, intent(in) :: n(3),nh_u,step_index
++    real(rp), intent(in) :: dl(3),w(1-nh_u:,1-nh_u:,1-nh_u:)
++    integer :: islot,i,j
++    real(rp) :: face_area,qexpected,return_velocity,expected_w,tol
++    logical :: active
++    if(.not.restas_source_loaded) return
++    face_area=dl(1)*dl(2)
++    qexpected=0._rp
++    active=restas_source_active_at(step_index)
++    do islot=1,restas_slot_count
++      do j=restas_slot_j0(islot),restas_slot_j1(islot)
++        do i=restas_slot_i0(islot),restas_slot_i1(islot)
++          expected_w=0._rp
++          if(active) expected_w=restas_source_velocity(3)
++          tol=restas_input_tol*max(1._rp,abs(expected_w))
++          if(abs(w(i,j,n(3))-expected_w).gt.tol) &
++            error stop 'Current top velocity does not match projected source interval'
++          qexpected=qexpected+max(0._rp,-expected_w)*face_area
++        enddo
++      enddo
++    enddo
++    return_velocity=0._rp
++    if(qexpected.gt.0._rp) return_velocity=-qexpected/(real(n(1)*n(2),rp)*face_area)
++    do j=1-nh_u,n(2)+nh_u
++      do i=1-nh_u,n(1)+nh_u
++        tol=restas_input_tol*max(1._rp,abs(return_velocity))
++        if(abs(w(i,j,0)-return_velocity).gt.tol) &
++          error stop 'Current bottom return does not match projected source interval'
++      enddo
++    enddo
++  end subroutine restas_source_assert_velocity
++  !
++  subroutine restas_source_check_volume_pair(n,dl,dt,step_index,flux,w,qtop,qbottom)
++    implicit none
++    integer, intent(in) :: n(3),step_index
++    real(rp), intent(in) :: dl(3),dt,flux(0:,0:,0:)
++    real(rp), intent(in) :: w(0:,0:,0:)
++    real(rp), intent(out) :: qtop,qbottom
++    integer :: islot,i,j
++    real(rp) :: area,top_volume,qexpected,tol,qbottom_comp,qbottom_term,qbottom_y,qbottom_tmp
++    qtop=0._rp
++    qbottom=0._rp
++    if(.not.restas_source_loaded) return
++    if(dt.le.0._rp) error stop 'Source return requires positive dt'
++    area=dl(1)*dl(2)
++    top_volume=0._rp
++    do islot=1,restas_slot_count
++      do j=restas_slot_j0(islot),restas_slot_j1(islot)
++        do i=restas_slot_i0(islot),restas_slot_i1(islot)
++          top_volume=top_volume+max(0._rp,-flux(i,j,n(3))*area)
++        enddo
++      enddo
++    enddo
++    qtop=top_volume/dt
++    qexpected=0._rp
++    if(restas_source_active_at(step_index)) then
++      do islot=1,restas_slot_count
++        qexpected=qexpected+real((restas_slot_i1(islot)-restas_slot_i0(islot)+1)* &
++          (restas_slot_j1(islot)-restas_slot_j0(islot)+1),rp)*area* &
++          abs(restas_source_velocity(3))
++      enddo
++    endif
++    tol=restas_input_tol*max(1._rp,abs(qexpected))
++    qbottom=0._rp
++    qbottom_comp=0._rp
++    do j=1,n(2)
++      do i=1,n(1)
++        qbottom_term=-w(i,j,0)*area
++        qbottom_y=qbottom_term-qbottom_comp
++        qbottom_tmp=qbottom+qbottom_y
++        qbottom_comp=(qbottom_tmp-qbottom)-qbottom_y
++        qbottom=qbottom_tmp
++      enddo
++    enddo
++    ! Persist both measured rates and signed residuals before a rate abort.
++    call restas_source_record_rate_check(step_index,qtop,qexpected,qbottom,qexpected)
++    if(abs(qtop-qexpected).gt.tol) &
++      error stop 'Geometric liquid source flux differs from frozen total-volume schedule'
++    if(abs(qbottom-qexpected).gt.tol) &
++      error stop 'Projected bottom return differs from frozen total-volume schedule'
++  end subroutine restas_source_check_volume_pair
++  !
++  subroutine restas_source_prepare_boundary(n,nh_u,step_index,vof,w,rho,mu)
++    use mod_param, only: rho1,rho2,mu1,mu2
++    implicit none
++    integer, intent(in) :: n(3),nh_u,step_index
++    real(rp), intent(inout) :: vof(0:,0:,0:)
++    real(rp), intent(in) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), optional, intent(inout) :: rho(0:,0:,0:),mu(0:,0:,0:)
++    integer :: i,j
++    real(rp) :: alpha_in
++    logical :: active,in_slot
++    if(.not.restas_source_loaded) return
++    if(present(rho).neqv.present(mu)) &
++      error stop 'Density and viscosity ghost updates must be paired'
++    active=restas_source_active_at(step_index)
++    ! z+ inflow: active slot is liquid; all other inflow is air.
++    ! Leave every outflow ghost from generic NN extrapolation untouched.
++    do j=1,n(2)
++      do i=1,n(1)
++        if(w(i,j,n(3)).lt.0._rp) then
++          in_slot=restas_source_cell(i,j)
++          alpha_in=0._rp
++          if(active.and.in_slot) alpha_in=1._rp
++          vof(i,j,n(3)+1)=alpha_in
++          if(present(rho)) then
++            rho(i,j,n(3)+1)=alpha_in*rho1+(1._rp-alpha_in)*rho2
++            mu(i,j,n(3)+1)=alpha_in*mu1+(1._rp-alpha_in)*mu2
++          endif
++        endif
++        ! z- reverse inflow is air; normal bottom return (w<0) is outflow.
++        if(w(i,j,0).gt.0._rp) then
++          vof(i,j,0)=0._rp
++          if(present(rho)) then
++            rho(i,j,0)=rho2
++            mu(i,j,0)=mu2
++          endif
++        endif
++      enddo
++    enddo
++  end subroutine restas_source_prepare_boundary
++  !
++  subroutine restas_source_refresh_vof_state(n,dli,nh_d,nh_u,dzc,dzf,halo, &
++      step_index,vof,wg,nor,cur,kappa,d_thinc,rho,mu)
++    use mod_param, only: cbcvof,bcvof,rho1,rho2,mu1,mu2
++    use mod_bound, only: boundp
++    implicit none
++    integer, intent(in) :: n(3),nh_d,nh_u,halo(3),step_index
++    real(rp), intent(in) :: dli(3),dzc(1-nh_d:),dzf(1-nh_d:)
++    real(rp), intent(inout) :: vof(0:,0:,0:)
++    real(rp), intent(in) :: wg(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(inout) :: nor(0:,0:,0:,1:),cur(0:,0:,0:,1:)
++    real(rp), intent(inout) :: kappa(0:,0:,0:),d_thinc(0:,0:,0:)
++    real(rp), optional, intent(inout) :: rho(0:,0:,0:),mu(0:,0:,0:)
++    real(rp) :: dl(3)
++    ! Match NVFortran's managed attributes on advvof and the called routines.
++    !@cuf attributes(managed) :: vof,wg,nor,cur,kappa,d_thinc,dzc,dzf,rho,mu
++    if(.not.restas_source_loaded) return
++    dl=dli**(-1)
++    ! Rebuild ordinary boundaries before applying interval-specific phase.
++    call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,vof)
++    if(present(rho).and.present(mu)) then
++      ! The incoming U_k may carry a newly installed schedule profile. Rebuild
++      ! properties from this stage's alpha before refreshing its ghost state.
++      call update_property(n,(/rho1,rho2/),vof,rho)
++      call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,rho)
++      call update_property(n,(/mu1,mu2/),vof,mu)
++      call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,mu)
++      call restas_source_prepare_boundary(n,nh_u,step_index,vof,wg,rho,mu)
++    else
++      call restas_source_prepare_boundary(n,nh_u,step_index,vof,wg)
++    endif
++    ! Reconstruction must match the refreshed alpha before the first flux sweep.
++    call update_vof(n,dli,nh_d,dzc,dzf,+1,halo,vof,nor,cur,kappa,d_thinc)
++  end subroutine restas_source_refresh_vof_state
++  !
++  subroutine restas_source_write_header(path_prefix)
++    implicit none
++    integer :: ierr
++    character(len=*), intent(in) :: path_prefix
++    if(.not.restas_source_loaded) return
++    call restas_source_close_log()
++    open(newunit=restas_source_flux_unit,file=trim(path_prefix)//'_source-flux.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 ledger without overwrite'
++    open(newunit=restas_offmask_unit,file=trim(path_prefix)//'_source-offmask.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 ledger without overwrite'
++    open(newunit=restas_rate_unit,file=trim(path_prefix)//'_rate-check.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 ledger without overwrite'
++    open(newunit=restas_boundary_unit,file=trim(path_prefix)//'_boundary-ledger.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 ledger without overwrite'
++    open(newunit=restas_mass_unit,file=trim(path_prefix)//'_mass-ledger.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 ledger without overwrite'
++    open(newunit=restas_velocity_unit,file=trim(path_prefix)//'_velocity-audit.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 ledger without overwrite'
++    write(restas_source_flux_unit,'(A)') &
++      'interval_index,slot,requested_volume_m3,geometric_inward_volume_m3,requested_mass_kg,'// &
++      'applied_inward_mass_kg,requested_mom_x_kgm_s,requested_mom_y_kgm_s,'// &
++      'requested_mom_z_kgm_s,applied_mom_x_kgm_s,applied_mom_y_kgm_s,'// &
++      'applied_mom_z_kgm_s,slot_reverse_out_m3'
++    write(restas_offmask_unit,'(A)') 'interval_index,offmask_in_m3,offmask_out_m3'
++    write(restas_rate_unit,'(A)') &
++      'interval_index,measured_top_liquid_m3_s,expected_top_liquid_m3_s,top_residual_m3_s,'// &
++      'measured_bottom_volume_m3_s,expected_bottom_volume_m3_s,bottom_residual_m3_s'
++    write(restas_boundary_unit,'(A)') &
++      'completed_state_index,xlow_in_m3,xlow_out_m3,xhigh_in_m3,xhigh_out_m3,'// &
++      'ylow_in_m3,ylow_out_m3,yhigh_in_m3,yhigh_out_m3,'// &
++      'zlow_in_m3,zlow_out_m3,zhigh_in_m3,zhigh_out_m3'
++    write(restas_mass_unit,'(A)') &
++      'state_index,time_s,box_liquid_kg,initial_liquid_kg,cumulative_boundary_in_kg,'// &
++      'cumulative_boundary_out_kg,residual_kg,net_boundary_liquid_m3,'// &
++      'xlow_in_kg,xlow_out_kg,xhigh_in_kg,xhigh_out_kg,'// &
++      'ylow_in_kg,ylow_out_kg,yhigh_in_kg,yhigh_out_kg,'// &
++      'zlow_in_kg,zlow_out_kg,zhigh_in_kg,zhigh_out_kg'
++    write(restas_velocity_unit,'(A)') &
++      'state_index,source_profile_interval,time_s,dt_s,total_cell_count,'// &
++      'global_chkdt_advective_courant_max,interface_cell_count,interface_courant_defined,'// &
++      'interface_advective_courant_max,top_in_m3_s,bottom_out_m3_s,net_boundary_m3_s,'// &
++      'integrated_divergence_m3_s,closure_m3_s,max_abs_divergence_s,'// &
++      'volume_integrated_abs_divergence_m3_s,xlow_out_m3_s,xhigh_out_m3_s,'// &
++      'ylow_out_m3_s,yhigh_out_m3_s,zlow_out_m3_s,zhigh_out_m3_s'
++    open(newunit=restas_phase_stage_unit,file=trim(path_prefix)// &
++      '_phase-property-stage-audit.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 phase audit without overwrite'
++    open(newunit=restas_velocity_stage_unit,file=trim(path_prefix)// &
++      '_boundary-velocity-stage-audit.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 velocity audit without overwrite'
++    open(newunit=restas_timestep_unit,file=trim(path_prefix)// &
++      '_timestep-restriction.csv',status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 timestep audit without overwrite'
++    write(restas_phase_stage_unit,'(A)') &
++      'state_index,transport_interval_index,stage_id,face,source_class,property,'// &
++      'scanned_cells,mismatch_count,nonfinite_count,max_abs_error,first_bad_i,'// &
++      'first_bad_j,first_bad_k,expected,observed'
++    write(restas_velocity_stage_unit,'(A)') &
++      'state_index,transport_interval_index,stage_id,face,source_class,component,'// &
++      'scanned_cells,mismatch_count,nonfinite_count,max_abs_error,first_bad_i,'// &
++      'first_bad_j,first_bad_k,requested,applied'
++    write(restas_timestep_unit,'(A)') &
++      'state_index,time_s,dt_s,dtic_raw_s_inv,dtic_used_s_inv,zero_advection_fallback,'// &
++      'nu_max_m2_s,h_min_m,dlmini_m_inv,dtiv_s_inv,dtik_s_inv,dtig_s_inv,capillary_active,'// &
++      'dtmax_s,fixed_step_factor,dt_over_dtmax,guard_pass'
++    restas_output_prefix=trim(path_prefix)
++    restas_source_log_open=.true.
++  end subroutine restas_source_write_header
++  !
++  subroutine restas_source_record_rate_check(step_index,measured_top,expected_top, &
++                                               measured_bottom,expected_bottom)
++    implicit none
++    integer, intent(in) :: step_index
++    real(rp), intent(in) :: measured_top,expected_top,measured_bottom,expected_bottom
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    write(restas_rate_unit,'(I0,6(",",ES24.16E3))') step_index,measured_top,expected_top, &
++      measured_top-expected_top,measured_bottom,expected_bottom,measured_bottom-expected_bottom
++    flush(restas_rate_unit)
++  end subroutine restas_source_record_rate_check
++  !
++  subroutine restas_source_begin_step()
++    implicit none
++    if(.not.restas_source_loaded) return
++    restas_step_in_volume=0._rp
++    restas_step_out_volume=0._rp
++  end subroutine restas_source_begin_step
++  !
++  subroutine restas_source_accumulate_boundary_flux(n,dl,dzf,dir,flux)
++    implicit none
++    integer, intent(in) :: n(3),dir
++    real(rp), intent(in) :: dl(3),dzf(:)
++    real(rp), intent(in) :: flux(0:,0:,0:)
++    integer :: i,j,k,low_face,high_face
++    real(rp) :: area,outward_volume
++    if(.not.restas_source_loaded) return
++    select case(dir)
++    case(1)
++      low_face=1
++      high_face=2
++      do k=1,n(3)
++        area=dl(2)*dzf(k)
++        do j=1,n(2)
++          call restas_source_add_boundary_volume(low_face,-flux(0,j,k)*area)
++          call restas_source_add_boundary_volume(high_face,flux(n(1),j,k)*area)
++        enddo
++      enddo
++    case(2)
++      low_face=3
++      high_face=4
++      do k=1,n(3)
++        area=dl(1)*dzf(k)
++        do i=1,n(1)
++          call restas_source_add_boundary_volume(low_face,-flux(i,0,k)*area)
++          call restas_source_add_boundary_volume(high_face,flux(i,n(2),k)*area)
++        enddo
++      enddo
++    case(3)
++      low_face=5
++      high_face=6
++      area=dl(1)*dl(2)
++      do j=1,n(2)
++        do i=1,n(1)
++          call restas_source_add_boundary_volume(low_face,-flux(i,j,0)*area)
++          call restas_source_add_boundary_volume(high_face,flux(i,j,n(3))*area)
++        enddo
++      enddo
++    case default
++      error stop 'Unsupported geometric flux direction'
++    end select
++  end subroutine restas_source_accumulate_boundary_flux
++  !
++  subroutine restas_source_add_boundary_volume(face,outward_volume)
++    implicit none
++    integer, intent(in) :: face
++    real(rp), intent(in) :: outward_volume
++    if(outward_volume.ge.0._rp) then
++      restas_step_out_volume(face)=restas_step_out_volume(face)+outward_volume
++    else
++      restas_step_in_volume(face)=restas_step_in_volume(face)-outward_volume
++    endif
++  end subroutine restas_source_add_boundary_volume
++  !
++  subroutine restas_source_record_flux(n,nh_u,dl,dt,step_index,flux,u,v,w)
++    use mod_param, only: rho1
++    implicit none
++    integer, intent(in) :: n(3),nh_u,step_index
++    real(rp), intent(in) :: dl(3),dt
++    real(rp), intent(in) :: flux(0:,0:,0:)
++    real(rp), intent(in) :: u(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: v(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    integer :: islot,i,j
++    real(rp) :: area,requested_volume,applied_volume,requested_mass,applied_mass
++    real(rp) :: requested_momentum(3),applied_momentum(3),dm,uf,vf,wf
++    real(rp) :: reverse_out,offmask_in,offmask_out
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    area=dl(1)*dl(2)
++    offmask_in=0._rp
++    offmask_out=0._rp
++    do j=1,n(2)
++      do i=1,n(1)
++        if(.not.restas_source_cell(i,j)) then
++          offmask_in=offmask_in+max(0._rp,-flux(i,j,n(3))*area)
++          offmask_out=offmask_out+max(0._rp, flux(i,j,n(3))*area)
++        endif
++      enddo
++    enddo
++    write(restas_offmask_unit,'(I0,2(",",ES24.16E3))') step_index,offmask_in,offmask_out
++    flush(restas_offmask_unit)
++    do islot=1,restas_slot_count
++      requested_volume=0._rp
++      if(restas_source_active_at(step_index)) then
++        requested_volume=real((restas_slot_i1(islot)-restas_slot_i0(islot)+1)* &
++          (restas_slot_j1(islot)-restas_slot_j0(islot)+1),rp)*area* &
++          abs(restas_source_velocity(3))*dt
++      endif
++      requested_mass=rho1*requested_volume
++      requested_momentum=requested_mass*restas_source_velocity
++      applied_volume=0._rp
++      applied_momentum=0._rp
++      reverse_out=0._rp
++      do j=restas_slot_j0(islot),restas_slot_j1(islot)
++        do i=restas_slot_i0(islot),restas_slot_i1(islot)
++          dm=rho1*max(0._rp,-flux(i,j,n(3))*area)
++          applied_volume=applied_volume+max(0._rp,-flux(i,j,n(3))*area)
++          reverse_out=reverse_out+max(0._rp,flux(i,j,n(3))*area)
++          ! U/V live at z cell centers; average interior and ghost to z+ face.
++          uf=0.5_rp*(u(i,j,n(3))+u(i,j,n(3)+1))
++          vf=0.5_rp*(v(i,j,n(3))+v(i,j,n(3)+1))
++          wf=w(i,j,n(3))
++          applied_momentum(1)=applied_momentum(1)+dm*uf
++          applied_momentum(2)=applied_momentum(2)+dm*vf
++          applied_momentum(3)=applied_momentum(3)+dm*wf
++        enddo
++      enddo
++      applied_mass=rho1*applied_volume
++      write(restas_source_flux_unit,'(I0,",",I0,11(",",ES24.16E3))') &
++        step_index,islot,requested_volume,applied_volume,requested_mass,applied_mass, &
++        requested_momentum(1),requested_momentum(2),requested_momentum(3), &
++        applied_momentum(1),applied_momentum(2),applied_momentum(3),reverse_out
++    enddo
++    flush(restas_source_flux_unit)
++  end subroutine restas_source_record_flux
++  !
++  subroutine restas_source_record_inventory(n,dl,dzf,vof,step_index,time)
++    use mod_param, only: rho1
++    implicit none
++    integer, intent(in) :: n(3),step_index
++    real(rp), intent(in) :: dl(3),dzf(:),time
++    real(rp), intent(in) :: vof(0:,0:,0:)
++    integer :: i,j,k,face
++    real(rp) :: box_mass,residual,net_volume,face_in_mass(6),face_out_mass(6)
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    box_mass=0._rp
++    do k=1,n(3)
++      do j=1,n(2)
++        do i=1,n(1)
++          box_mass=box_mass+rho1*vof(i,j,k)*dl(1)*dl(2)*dzf(k)
++        enddo
++      enddo
++    enddo
++    if(step_index.eq.0) then
++      restas_initial_mass=box_mass
++      restas_cumulative_in_mass=0._rp
++      restas_cumulative_out_mass=0._rp
++    else
++      restas_cumulative_in_mass=restas_cumulative_in_mass+rho1*sum(restas_step_in_volume)
++      restas_cumulative_out_mass=restas_cumulative_out_mass+rho1*sum(restas_step_out_volume)
++    endif
++    residual=restas_cumulative_in_mass-restas_cumulative_out_mass- &
++             (box_mass-restas_initial_mass)
++    face_in_mass=rho1*restas_step_in_volume
++    face_out_mass=rho1*restas_step_out_volume
++    net_volume=sum(restas_step_in_volume)-sum(restas_step_out_volume)
++    write(restas_boundary_unit,'(I0,12(",",ES24.16E3))') step_index, &
++      restas_step_in_volume(1),restas_step_out_volume(1), &
++      restas_step_in_volume(2),restas_step_out_volume(2), &
++      restas_step_in_volume(3),restas_step_out_volume(3), &
++      restas_step_in_volume(4),restas_step_out_volume(4), &
++      restas_step_in_volume(5),restas_step_out_volume(5), &
++      restas_step_in_volume(6),restas_step_out_volume(6)
++    write(restas_mass_unit,'(I0,19(",",ES24.16E3))') step_index,time,box_mass, &
++      restas_initial_mass,restas_cumulative_in_mass,restas_cumulative_out_mass,residual, &
++      net_volume,face_in_mass(1),face_out_mass(1),face_in_mass(2),face_out_mass(2), &
++      face_in_mass(3),face_out_mass(3),face_in_mass(4),face_out_mass(4), &
++      face_in_mass(5),face_out_mass(5),face_in_mass(6),face_out_mass(6)
++    flush(restas_boundary_unit)
++    flush(restas_mass_unit)
++  end subroutine restas_source_record_inventory
++  !
++  subroutine restas_source_record_velocity_audit(n,nh_u,dl,dzf,dt,state_index, &
++                                                    source_profile_interval,time,vof,u,v,w)
++    implicit none
++    integer, intent(in) :: n(3),nh_u,state_index,source_profile_interval
++    real(rp), intent(in) :: dl(3),dzf(:),dt,time
++    real(rp), intent(in) :: vof(0:,0:,0:)
++    real(rp), intent(in) :: u(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: v(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    integer :: i,j,k,interface_cell_count,interface_courant_defined,total_cell_count
++    real(rp) :: face_out(6),net_boundary,div,div_integral,div_l1,div_max,cell_volume
++    real(rp) :: top_in,bottom_out,closure,ux,uy,uz,vx,vy,vz,wx,wy,wz
++    real(rp) :: dtix,dtiy,dtiz,cell_courant,global_courant,interface_courant
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    face_out=0._rp
++    do k=1,n(3)
++      do j=1,n(2)
++        face_out(1)=face_out(1)-u(0,j,k)*dl(2)*dzf(k)
++        face_out(2)=face_out(2)+u(n(1),j,k)*dl(2)*dzf(k)
++      enddo
++    enddo
++    do k=1,n(3)
++      do i=1,n(1)
++        face_out(3)=face_out(3)-v(i,0,k)*dl(1)*dzf(k)
++        face_out(4)=face_out(4)+v(i,n(2),k)*dl(1)*dzf(k)
++      enddo
++    enddo
++    do j=1,n(2)
++      do i=1,n(1)
++        face_out(5)=face_out(5)-w(i,j,0)*dl(1)*dl(2)
++        face_out(6)=face_out(6)+w(i,j,n(3))*dl(1)*dl(2)
++      enddo
++    enddo
++    div_integral=0._rp
++    div_l1=0._rp
++    div_max=0._rp
++    global_courant=0._rp
++    interface_courant=0._rp
++    interface_cell_count=0
++    total_cell_count=product(n)
++    do k=1,n(3)
++      cell_volume=dl(1)*dl(2)*dzf(k)
++      do j=1,n(2)
++        do i=1,n(1)
++          div=(u(i,j,k)-u(i-1,j,k))/dl(1)+ &
++              (v(i,j,k)-v(i,j-1,k))/dl(2)+ &
++              (w(i,j,k)-w(i,j,k-1))/dzf(k)
++          div_integral=div_integral+div*cell_volume
++          div_l1=div_l1+abs(div)*cell_volume
++          div_max=max(div_max,abs(div))
++          ! Match chkdt_tw's three directional face-speed estimates. These
++          ! are advective Courant diagnostics, not its complete stability limit.
++          ux=abs(u(i,j,k))
++          vx=0.25_rp*abs(v(i,j,k)+v(i,j-1,k)+v(i+1,j,k)+v(i+1,j-1,k))
++          wx=0.25_rp*abs(w(i,j,k)+w(i,j,k-1)+w(i+1,j,k)+w(i+1,j,k-1))
++          dtix=ux/dl(1)+vx/dl(2)+wx/dzf(k)
++          uy=0.25_rp*abs(u(i,j,k)+u(i,j+1,k)+u(i-1,j+1,k)+u(i-1,j,k))
++          vy=abs(v(i,j,k))
++          wy=0.25_rp*abs(w(i,j,k)+w(i,j+1,k)+w(i,j+1,k-1)+w(i,j,k-1))
++          dtiy=uy/dl(1)+vy/dl(2)+wy/dzf(k)
++          uz=0.25_rp*abs(u(i,j,k)+u(i-1,j,k)+u(i-1,j,k+1)+u(i,j,k+1))
++          vz=0.25_rp*abs(v(i,j,k)+v(i,j-1,k)+v(i,j-1,k+1)+v(i,j,k+1))
++          wz=abs(w(i,j,k))
++          dtiz=uz/dl(1)+vz/dl(2)+wz/dzf(k)
++          cell_courant=dt*max(dtix,dtiy,dtiz)
++          global_courant=max(global_courant,cell_courant)
++          if(vof(i,j,k).gt.0._rp.and.vof(i,j,k).lt.1._rp) then
++            interface_cell_count=interface_cell_count+1
++            interface_courant=max(interface_courant,cell_courant)
++          endif
++        enddo
++      enddo
++    enddo
++    interface_courant_defined=0
++    if(interface_cell_count.gt.0) interface_courant_defined=1
++    net_boundary=sum(face_out)
++    closure=div_integral-net_boundary
++    top_in=max(0._rp,-face_out(6))
++    bottom_out=max(0._rp,face_out(5))
++    write(restas_velocity_unit,'(I0,",",I0,2(",",ES24.16E3),",",I0,",",ES24.16E3,",",I0,",",I0,14(",",ES24.16E3))') &
++      state_index,source_profile_interval,time,dt,total_cell_count,global_courant, &
++      interface_cell_count,interface_courant_defined,interface_courant,top_in,bottom_out, &
++      net_boundary,div_integral,closure,div_max,div_l1,face_out
++    flush(restas_velocity_unit)
++  end subroutine restas_source_record_velocity_audit
++  !
++  subroutine restas_source_scan_reset(summary)
++    implicit none
++    type(restas_scan_summary), intent(out) :: summary
++    summary=restas_scan_summary()
++  end subroutine restas_source_scan_reset
++  !
++  subroutine restas_source_scan_add(summary,i,j,k,expected,observed)
++    use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_is_nan
++    implicit none
++    type(restas_scan_summary), intent(inout) :: summary
++    integer, intent(in) :: i,j,k
++    real(rp), intent(in) :: expected,observed
++    real(rp) :: error_value
++    logical :: finite_pair,bad
++    summary%scanned_cells=summary%scanned_cells+1
++    finite_pair=ieee_is_finite(expected).and.ieee_is_finite(observed)
++    bad=.not.finite_pair
++    if(finite_pair) then
++      error_value=abs(observed-expected)
++      if(observed.ne.expected) then
++        summary%mismatch_count=summary%mismatch_count+1
++        bad=.true.
++      endif
++      if(.not.ieee_is_finite(error_value)) then
++        summary%max_abs_error=error_value
++        summary%max_abs_error_overflow=.true.
++        bad=.true.
++      elseif(.not.summary%max_abs_error_overflow) then
++        summary%max_abs_error=max(summary%max_abs_error,error_value)
++      endif
++    else
++      summary%nonfinite_count=summary%nonfinite_count+1
++    endif
++    if(bad.and..not.summary%has_first_bad) then
++      summary%has_first_bad=.true.
++      summary%first_bad_i=i
++      summary%first_bad_j=j
++      summary%first_bad_k=k
++      summary%first_expected_nonfinite=.not.ieee_is_finite(expected)
++      if(summary%first_expected_nonfinite) then
++        if(ieee_is_nan(expected)) then
++          summary%first_expected_token='NaN'
++        elseif(expected.gt.0._rp) then
++          summary%first_expected_token='+Inf'
++        else
++          summary%first_expected_token='-Inf'
++        endif
++      else
++        summary%first_expected=expected
++        summary%first_expected_token=''
++      endif
++      summary%first_observed_nonfinite=.not.ieee_is_finite(observed)
++      if(.not.summary%first_observed_nonfinite) then
++        summary%first_observed=observed
++        summary%first_observed_token=''
++      else
++        if(ieee_is_nan(observed)) then
++          summary%first_observed_token='NaN'
++        elseif(observed.gt.0._rp) then
++          summary%first_observed_token='+Inf'
++        else
++          summary%first_observed_token='-Inf'
++        endif
++      endif
++    endif
++  end subroutine restas_source_scan_add
++  !
++  logical function restas_source_scan_failed(summary)
++    implicit none
++    type(restas_scan_summary), intent(in) :: summary
++    restas_source_scan_failed=(summary%mismatch_count.gt.0.or.summary%nonfinite_count.gt.0.or. &
++                               summary%max_abs_error_overflow)
++  end function restas_source_scan_failed
++  !
++  subroutine restas_source_write_audit_row(unit,state_index,transport_interval_index, &
++      stage_id,face,source_class,quantity,summary)
++    implicit none
++    integer, intent(in) :: unit,state_index,transport_interval_index
++    character(len=*), intent(in) :: stage_id,face,source_class,quantity
++    type(restas_scan_summary), intent(in) :: summary
++    character(len=64) :: first_i,first_j,first_k,expected_text,observed_text
++    character(len=64) :: error_text
++    if(.not.summary%has_first_bad) then
++      first_i='not_applicable'
++      first_j='not_applicable'
++      first_k='not_applicable'
++      expected_text='not_applicable'
++      observed_text='not_applicable'
++    else
++      write(first_i,'(I0)') summary%first_bad_i
++      write(first_j,'(I0)') summary%first_bad_j
++      write(first_k,'(I0)') summary%first_bad_k
++      if(summary%first_expected_nonfinite) then
++        expected_text=summary%first_expected_token
++      else
++        expected_text=restas_source_real_text(summary%first_expected)
++      endif
++      if(summary%first_observed_nonfinite) then
++        observed_text=summary%first_observed_token
++      else
++        observed_text=restas_source_real_text(summary%first_observed)
++      endif
++    endif
++    if(summary%max_abs_error_overflow) then
++      error_text='+Inf'
++    else
++      error_text=restas_source_real_text(summary%max_abs_error)
++    endif
++    write(unit,'(I0,",",I0,4(",",A),",",I0,",",I0,",",I0,",",A,5(",",A))') &
++      state_index,transport_interval_index,trim(stage_id),trim(face), &
++      trim(source_class),trim(quantity),summary%scanned_cells, &
++      summary%mismatch_count,summary%nonfinite_count,trim(error_text), &
++      trim(first_i),trim(first_j),trim(first_k),trim(expected_text),trim(observed_text)
++  end subroutine restas_source_write_audit_row
++  !
++  function restas_source_real_text(value) result(text)
++    implicit none
++    real(rp), intent(in) :: value
++    character(len=64) :: text
++    character(len=24) :: buffer
++    if(value.eq.0._rp) then
++      text='0'
++    else
++      write(buffer,'(ES24.16E3)') value
++      text=adjustl(buffer)
++    endif
++  end function restas_source_real_text
++  !
++  subroutine restas_source_json_number(unit,key,value,comma)
++    implicit none
++    integer, intent(in) :: unit
++    character(len=*), intent(in) :: key
++    real(rp), intent(in) :: value
++    character(len=1), intent(in) :: comma
++    character(len=64) :: text
++    text=restas_source_real_text(value)
++    write(unit,'(A)',advance='no') '"'//trim(key)//'":"'//trim(text)//'"'//comma
++  end subroutine restas_source_json_number
++  !
++  subroutine restas_source_json_array(unit,key,values,comma)
++    implicit none
++    integer, intent(in) :: unit
++    character(len=*), intent(in) :: key
++    real(rp), intent(in) :: values(0:)
++    character(len=1), intent(in) :: comma
++    integer :: idx
++    write(unit,'(A)',advance='no') '"'//trim(key)//'":['
++    do idx=lbound(values,1),ubound(values,1)
++      if(idx.gt.lbound(values,1)) write(unit,'(A)',advance='no') ','
++      write(unit,'(A)',advance='no') '"'//trim(restas_source_real_text(values(idx)))//'"'
++    enddo
++    write(unit,'(A)') ']'//comma
++  end subroutine restas_source_json_array
++  !
++  subroutine restas_source_capture_timestep_inputs(time,fixed_step,spacing,inverse_spacing, &
++      dzc,dzf,dzci,dzfi)
++    use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
++    use mod_param, only: time_scheme,pi,rho1,rho2,mu1,mu2,sigma,small,cfl_c,cfl_d
++    implicit none
++    real(rp), intent(in) :: time,fixed_step,spacing(3),inverse_spacing(3)
++    real(rp), intent(in) :: dzc(0:),dzf(0:),dzci(0:),dzfi(0:)
++    integer :: unit,ierr,k
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    if(restas_runtime_inputs_written) return
++    if(trim(time_scheme).ne.'ab2') error stop 'Candidate5 runtime inputs require time_scheme=ab2'
++    if(size(dzc).ne.42.or.size(dzf).ne.42.or.size(dzci).ne.42.or.size(dzfi).ne.42) &
++      error stop 'Candidate5 runtime vertical arrays must cover indices 0..41'
++    if(.not.ieee_is_finite(time).or.any(.not.ieee_is_finite(spacing)).or. &
++       any(.not.ieee_is_finite(inverse_spacing)).or.any(.not.ieee_is_finite(dzc)).or. &
++       any(.not.ieee_is_finite(dzf)).or.any(.not.ieee_is_finite(dzci)).or. &
++       any(.not.ieee_is_finite(dzfi))) &
++      error stop 'Candidate5 runtime timestep inputs contain a non-finite value'
++    open(newunit=unit,file=trim(restas_output_prefix)//'_timestep-inputs.json', &
++      status='new',action='write',iostat=ierr)
++    if(ierr.ne.0) error stop 'Cannot create candidate5 runtime timestep inputs without overwrite'
++    write(unit,'(A)') '{'
++    call restas_source_json_number(unit,'cfl_c',cfl_c,',')
++    call restas_source_json_number(unit,'cfl_d',cfl_d,',')
++    call restas_source_json_number(unit,'dx_m',spacing(1),',')
++    call restas_source_json_number(unit,'dxi_m_inv',inverse_spacing(1),',')
++    call restas_source_json_number(unit,'dy_m',spacing(2),',')
++    call restas_source_json_number(unit,'dyi_m_inv',inverse_spacing(2),',')
++    call restas_source_json_number(unit,'dz_m',spacing(3),',')
++    call restas_source_json_array(unit,'dzc_m',dzc,',')
++    call restas_source_json_array(unit,'dzci_m_inv',dzci,',')
++    call restas_source_json_array(unit,'dzf_m',dzf,',')
++    call restas_source_json_array(unit,'dzfi_m_inv',dzfi,',')
++    call restas_source_json_number(unit,'dzi_m_inv',inverse_spacing(3),',')
++    call restas_source_json_number(unit,'fixed_step_factor',restas_fixed_step_factor,',')
++    call restas_source_json_number(unit,'fixed_step_s',fixed_step,',')
++    write(unit,'(A)',advance='no') '"gravity_m_s2":['
++    do k=1,3
++      if(k.gt.1) write(unit,'(A)',advance='no') ','
++      write(unit,'(A)',advance='no') '"'//trim(restas_source_real_text(restas_gravity(k)))//'"'
++    enddo
++    write(unit,'(A)') '],'
++    call restas_source_json_number(unit,'machine_epsilon',epsilon(pi),',')
++    call restas_source_json_number(unit,'mu1_pa_s',mu1,',')
++    call restas_source_json_number(unit,'mu2_pa_s',mu2,',')
++    write(unit,'(A,I0,A)') '"precision_digits":',precision(pi),','
++    write(unit,'(A,I0,A)') '"real_kind":',kind(0._rp),','
++    call restas_source_json_number(unit,'rho1_kg_m3',rho1,',')
++    call restas_source_json_number(unit,'rho2_kg_m3',rho2,',')
++    call restas_source_json_number(unit,'sigma_n_m',sigma,',')
++    call restas_source_json_number(unit,'small_s_inv',small,',')
++    write(unit,'(A)',advance='no') '"time_scheme":"'//trim(time_scheme)//'",'
++    call restas_source_json_number(unit,'time_start_s',time,' ')
++    write(unit,'(A)') '}'
++    flush(unit)
++    close(unit)
++    restas_runtime_inputs_written=.true.
++  end subroutine restas_source_capture_timestep_inputs
++  !
++  subroutine restas_source_record_phase_stage(n,nh_u,state_index,transport_interval_index, &
++                                               stage_id,vof,w,rho,mu)
++    use mod_param, only: rho1,rho2,mu1,mu2
++    implicit none
++    integer, intent(in) :: n(3),nh_u,state_index,transport_interval_index
++    character(len=*), intent(in) :: stage_id
++    real(rp), intent(in) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(inout) :: vof(0:,0:,0:)
++    real(rp), intent(inout) :: rho(0:,0:,0:),mu(0:,0:,0:)
++    integer, parameter :: npair=8,nprop=3
++    integer, parameter :: alpha_id=1,rho_id=2,mu_id=3
++    integer, parameter :: active_pair=5,inactive_pair=6,offmask_pair=7,bottom_pair=8
++    character(len=8), parameter :: face_name(npair) = &
++      [character(len=8) :: 'xlow','xhigh','ylow','yhigh', &
++       'zhigh','zhigh','zhigh','zlow']
++    character(len=16), parameter :: class_name(npair) = &
++      [character(len=16) :: 'periodic','periodic','periodic','periodic', &
++       'active_slot','inactive_slot','top_offmask','bottom_return']
++    character(len=5), parameter :: prop_name(nprop) = &
++      [character(len=5) :: 'alpha','rho','mu']
++    type(restas_scan_summary) :: summary(npair,nprop)
++    integer :: pair,p,i,j,k,jwrap,pair_id,nprop_stage
++    real(rp) :: expected_alpha,expected_value
++    logical :: active,any_failed,inflow
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    active=restas_source_active_at(transport_interval_index)
++    select case(trim(stage_id))
++    case('pre_vof_x','pre_vof_y','pre_vof_z')
++      nprop_stage=1
++    case('pre_momentum')
++      nprop_stage=nprop
++    case default
++      error stop 'Candidate5 phase audit received an unknown stage'
++    end select
++    if(state_index.ne.transport_interval_index) &
++      error stop 'Candidate5 phase audit state must equal its transport interval'
++    do pair=1,npair
++      do p=1,nprop
++        call restas_source_scan_reset(summary(pair,p))
++      enddo
++    enddo
++    ! The scalar arrays have one explicit ghost cell (0 and n+1) on each side.
++    ! X owns edge/corner ghosts; Y scans the remaining shell; Z scans interior i,j.
++    do j=0,n(2)+1
++      do k=0,n(3)+1
++        jwrap=j
++        if(jwrap.eq.0) jwrap=n(2)
++        if(jwrap.eq.n(2)+1) jwrap=1
++        call restas_source_scan_add(summary(1,alpha_id),0,j,k,vof(n(1),jwrap,k),vof(0,j,k))
++        call restas_source_scan_add(summary(2,alpha_id),n(1)+1,j,k,vof(1,jwrap,k),vof(n(1)+1,j,k))
++        if(nprop_stage.eq.nprop) then
++          call restas_source_scan_add(summary(1,rho_id),0,j,k,rho(n(1),jwrap,k),rho(0,j,k))
++          call restas_source_scan_add(summary(1,mu_id),0,j,k,mu(n(1),jwrap,k),mu(0,j,k))
++          call restas_source_scan_add(summary(2,rho_id),n(1)+1,j,k,rho(1,jwrap,k),rho(n(1)+1,j,k))
++          call restas_source_scan_add(summary(2,mu_id),n(1)+1,j,k,mu(1,jwrap,k),mu(n(1)+1,j,k))
++        endif
++      enddo
++    enddo
++    do i=1,n(1)
++      do k=0,n(3)+1
++        call restas_source_scan_add(summary(3,alpha_id),i,0,k,vof(i,n(2),k),vof(i,0,k))
++        call restas_source_scan_add(summary(4,alpha_id),i,n(2)+1,k,vof(i,1,k),vof(i,n(2)+1,k))
++        if(nprop_stage.eq.nprop) then
++          call restas_source_scan_add(summary(3,rho_id),i,0,k,rho(i,n(2),k),rho(i,0,k))
++          call restas_source_scan_add(summary(3,mu_id),i,0,k,mu(i,n(2),k),mu(i,0,k))
++          call restas_source_scan_add(summary(4,rho_id),i,n(2)+1,k,rho(i,1,k),rho(i,n(2)+1,k))
++          call restas_source_scan_add(summary(4,mu_id),i,n(2)+1,k,mu(i,1,k),mu(i,n(2)+1,k))
++        endif
++      enddo
++    enddo
++    do i=1,n(1)
++      do j=1,n(2)
++        inflow=w(i,j,0).gt.0._rp
++        expected_alpha=vof(i,j,1)
++        expected_value=rho(i,j,1)
++        if(inflow) then
++          expected_alpha=0._rp
++          expected_value=rho2
++        endif
++        call restas_source_scan_add(summary(bottom_pair,alpha_id),i,j,0, &
++          expected_alpha,vof(i,j,0))
++        if(nprop_stage.eq.nprop) then
++          call restas_source_scan_add(summary(bottom_pair,rho_id),i,j,0, &
++            expected_value,rho(i,j,0))
++          expected_value=mu(i,j,1)
++          if(inflow) expected_value=mu2
++          call restas_source_scan_add(summary(bottom_pair,mu_id),i,j,0, &
++            expected_value,mu(i,j,0))
++        endif
++        pair_id=offmask_pair
++        if(restas_source_cell(i,j)) then
++          pair_id=inactive_pair
++          if(active) pair_id=active_pair
++        endif
++        inflow=w(i,j,n(3)).lt.0._rp
++        expected_alpha=vof(i,j,n(3))
++        expected_value=rho(i,j,n(3))
++        if(inflow) then
++          expected_alpha=0._rp
++          if(pair_id.eq.active_pair) expected_alpha=1._rp
++          expected_value=expected_alpha*rho1+(1._rp-expected_alpha)*rho2
++        endif
++        call restas_source_scan_add(summary(pair_id,alpha_id),i,j,n(3)+1, &
++          expected_alpha,vof(i,j,n(3)+1))
++        if(nprop_stage.eq.nprop) then
++          call restas_source_scan_add(summary(pair_id,rho_id),i,j,n(3)+1, &
++            expected_value,rho(i,j,n(3)+1))
++          expected_value=mu(i,j,n(3))
++          if(inflow) expected_value=expected_alpha*mu1+(1._rp-expected_alpha)*mu2
++          call restas_source_scan_add(summary(pair_id,mu_id),i,j,n(3)+1, &
++            expected_value,mu(i,j,n(3)+1))
++        endif
++      enddo
++    enddo
++    any_failed=.false.
++    do pair=1,npair
++      do p=1,nprop_stage
++        call restas_source_write_audit_row(restas_phase_stage_unit,state_index, &
++          transport_interval_index,stage_id,face_name(pair),class_name(pair), &
++          prop_name(p),summary(pair,p))
++        any_failed=any_failed.or.restas_source_scan_failed(summary(pair,p))
++      enddo
++    enddo
++    flush(restas_phase_stage_unit)
++    if(any_failed) error stop 'Candidate5 phase/property ghost scan failed'
++  end subroutine restas_source_record_phase_stage
++  !
++  subroutine restas_source_record_velocity_stage(n,nh_u,dl,state_index, &
++      transport_interval_index,stage_id,u,v,w)
++    implicit none
++    integer, intent(in) :: n(3),nh_u,state_index,transport_interval_index
++    real(rp), intent(in) :: dl(3)
++    character(len=*), intent(in) :: stage_id
++    real(rp), intent(in) :: u(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: v(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    integer, parameter :: npair=4,ncomp=3
++    integer, parameter :: active_pair=1,inactive_pair=2,offmask_pair=3,bottom_pair=4
++    character(len=8), parameter :: face_name(npair) = &
++      [character(len=8) :: 'zhigh','zhigh','zhigh','zlow']
++    character(len=16), parameter :: class_name(npair) = &
++      [character(len=16) :: 'active_slot','inactive_slot','top_offmask','bottom_return']
++    character(len=1), parameter :: component_name(ncomp) = ['u','v','w']
++    type(restas_scan_summary) :: summary(npair,ncomp)
++    integer :: pair,q,i,j
++    real(rp) :: expected,return_velocity,top_volume,area,applied
++    logical :: active,any_failed
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    select case(trim(stage_id))
++    case('initial_u0')
++      if(state_index.ne.0.or.transport_interval_index.ne.-1) &
++        error stop 'Candidate5 initial velocity audit must identify U0 and interval -1'
++    case('pre_vof')
++      if(state_index.ne.transport_interval_index) &
++        error stop 'Candidate5 pre-VOF velocity audit must identify U_k and interval k'
++    case('projection_override','corrected_endpoint')
++      if(state_index.ne.transport_interval_index+1) &
++        error stop 'Candidate5 endpoint velocity audit must identify U_(k+1) and interval k'
++    case default
++      error stop 'Candidate5 velocity audit received an unknown stage'
++    end select
++    active=restas_source_active_at(state_index)
++    do pair=1,npair
++      do q=1,ncomp
++        call restas_source_scan_reset(summary(pair,q))
++      enddo
++    enddo
++    area=dl(1)*dl(2)
++    top_volume=0._rp
++    if(active) then
++      do pair=1,restas_slot_count
++        do j=restas_slot_j0(pair),restas_slot_j1(pair)
++          do i=restas_slot_i0(pair),restas_slot_i1(pair)
++            top_volume=top_volume+max(0._rp,-restas_source_velocity(3))*area
++          enddo
++        enddo
++      enddo
++    endif
++    return_velocity=0._rp
++    if(top_volume.gt.0._rp) &
++      return_velocity=-top_volume/(real(n(1)*n(2),rp)*area)
++    ! Tangential z-face values are the boundary average of interior and ghost.
++    do i=1-nh_u,n(1)+nh_u
++      do j=1-nh_u,n(2)+nh_u
++        pair=offmask_pair
++        if(restas_source_cell(i,j)) then
++          pair=inactive_pair
++          if(active) pair=active_pair
++        endif
++        expected=restas_background_velocity(1)
++        if(pair.eq.active_pair) expected=restas_source_velocity(1)
++        applied=2._rp*expected-u(i,j,n(3))
++        call restas_source_scan_add(summary(pair,1),i,j,n(3)+1, &
++          applied,u(i,j,n(3)+1))
++        expected=restas_background_velocity(2)
++        if(pair.eq.active_pair) expected=restas_source_velocity(2)
++        applied=2._rp*expected-v(i,j,n(3))
++        call restas_source_scan_add(summary(pair,2),i,j,n(3)+1, &
++          applied,v(i,j,n(3)+1))
++        expected=0._rp
++        if(active.and.pair.eq.active_pair) expected=restas_source_velocity(3)
++        call restas_source_scan_add(summary(pair,3),i,j,n(3),expected,w(i,j,n(3)))
++        expected=restas_background_velocity(1)
++        applied=2._rp*expected-u(i,j,1)
++        call restas_source_scan_add(summary(bottom_pair,1),i,j,0, &
++          applied,u(i,j,0))
++        expected=restas_background_velocity(2)
++        applied=2._rp*expected-v(i,j,1)
++        call restas_source_scan_add(summary(bottom_pair,2),i,j,0, &
++          applied,v(i,j,0))
++        call restas_source_scan_add(summary(bottom_pair,3),i,j,0, &
++          return_velocity,w(i,j,0))
++      enddo
++    enddo
++    any_failed=.false.
++    do pair=1,npair
++      do q=1,ncomp
++        call restas_source_write_audit_row(restas_velocity_stage_unit,state_index, &
++          transport_interval_index,stage_id,face_name(pair),class_name(pair), &
++          component_name(q),summary(pair,q))
++        any_failed=any_failed.or.restas_source_scan_failed(summary(pair,q))
++      enddo
++    enddo
++    flush(restas_velocity_stage_unit)
++    if(any_failed) error stop 'Candidate5 requested/applied boundary vector scan failed'
++  end subroutine restas_source_record_velocity_stage
++  !
++  subroutine restas_source_record_timestep_restriction(n,nh_d,nh_u,dt,time, &
++      state_index,consumed_state,dli,dzci,dzfi,u,v,w)
++    use mpi
++    use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
++    use mod_param, only: rho1,rho2,mu1,mu2,sigma,small,cfl_c,cfl_d
++    use mod_types, only: MPI_REAL_RP
++    use mod_common_mpi, only: ierr
++    implicit none
++    integer, intent(in) :: n(3),nh_d,nh_u,state_index
++    logical, intent(in) :: consumed_state
++    real(rp), intent(in) :: dt,time,dli(3)
++    real(rp), intent(in) :: dzci(1-nh_d:),dzfi(1-nh_d:)
++    real(rp), intent(in) :: u(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: v(1-nh_u:,1-nh_u:,1-nh_u:)
++    real(rp), intent(in) :: w(1-nh_u:,1-nh_u:,1-nh_u:)
++    integer :: i,j,k
++    real(rp) :: ux,uy,uz,vx,vy,vz,wx,wy,wz
++    real(rp) :: dtix,dtiy,dtiz,dtic_raw,dtic_used,nu_max,dlmin,dlmini
++    real(rp) :: h_min
++    real(rp) :: dtiv,dtik,dtig,dtmax,dt_bound,dt_over,guard_limit
++    logical :: zero_fallback,capillary_active,guard_pass,all_finite,rate_nonfinite
++    character(len=16) :: guard_text
++    character(len=5) :: zero_fallback_text,capillary_text
++    if(.not.restas_source_loaded.or..not.restas_source_log_open) return
++    if(restas_heat_transfer_enabled) &
++      error stop 'Candidate5 timestep guard requires heat-transfer term implementation'
++    dtic_raw=0._rp
++    rate_nonfinite=.false.
++    all_finite=ieee_is_finite(dt).and.ieee_is_finite(time)
++    do k=1,n(3)
++      do j=1,n(2)
++        do i=1,n(1)
++          ux=abs(u(i,j,k))
++          vx=0.25_rp*abs(v(i,j,k)+v(i,j-1,k)+v(i+1,j,k)+v(i+1,j-1,k))
++          wx=0.25_rp*abs(w(i,j,k)+w(i,j,k-1)+w(i+1,j,k)+w(i+1,j,k-1))
++          dtix=ux*dli(1)+vx*dli(2)+wx*dzfi(k)
++          uy=0.25_rp*abs(u(i,j,k)+u(i,j+1,k)+u(i-1,j+1,k)+u(i-1,j,k))
++          vy=abs(v(i,j,k))
++          wy=0.25_rp*abs(w(i,j,k)+w(i,j+1,k)+w(i,j+1,k-1)+w(i,j,k-1))
++          dtiy=uy*dli(1)+vy*dli(2)+wy*dzfi(k)
++          uz=0.25_rp*abs(u(i,j,k)+u(i-1,j,k)+u(i-1,j,k+1)+u(i,j,k+1))
++          vz=0.25_rp*abs(v(i,j,k)+v(i,j-1,k)+v(i,j-1,k+1)+v(i,j,k+1))
++          wz=abs(w(i,j,k))
++          dtiz=uz*dli(1)+vz*dli(2)+wz*dzci(k)
++          if(.not.ieee_is_finite(dtix).or..not.ieee_is_finite(dtiy).or. &
++             .not.ieee_is_finite(dtiz)) then
++            all_finite=.false.
++            if(.not.rate_nonfinite) then
++              if(.not.ieee_is_finite(dtix)) then
++                dtic_raw=dtix
++              elseif(.not.ieee_is_finite(dtiy)) then
++                dtic_raw=dtiy
++              else
++                dtic_raw=dtiz
++              endif
++              rate_nonfinite=.true.
++            endif
++          elseif(.not.rate_nonfinite) then
++            dtic_raw=max(dtic_raw,dtix,dtiy,dtiz)
++          endif
++        enddo
++      enddo
++    enddo
++    ! The source fixture is validated as one rank; keep a raw non-finite rate
++    ! out of MPI_MAX so the failure token cannot be hidden by reduction rules.
++    if(.not.rate_nonfinite) &
++      call mpi_allreduce(MPI_IN_PLACE,dtic_raw,1,MPI_REAL_RP,MPI_MAX,MPI_COMM_WORLD,ierr)
++    zero_fallback=(dtic_raw.eq.0._rp)
++    dtic_used=dtic_raw
++    if(zero_fallback) dtic_used=1._rp
++    zero_fallback_text='false'
++    if(zero_fallback) zero_fallback_text='true'
++    ! Match chkdt_tw operation order, including its full vertical dummy-array range.
++    dlmin=min(1._rp/dli(1),1._rp/dli(2),1._rp/dli(3))
++    dlmin=min(dlmin,minval(1._rp/dzfi(:)))
++    dlmini=dlmin**(-1)
++    h_min=dlmin
++    nu_max=max(mu1/rho1,mu2/rho2)
++    dtiv=nu_max*dlmini**2/cfl_d
++    capillary_active=(sigma.ne.0._rp)
++    capillary_text='false'
++    if(capillary_active) capillary_text='true'
++    dtik=small
++    if(capillary_active) dtik=sqrt(sigma/(min(rho1,rho2))*dlmini**3)
++    dtig=sqrt(max(abs(restas_gravity(1)),abs(restas_gravity(2)), &
++                  abs(restas_gravity(3)))*dlmini)
++    dt_bound=cfl_c*2._rp*(dtic_used+dtiv+sqrt((dtic_used+dtiv)**2+ &
++      4._rp*(dtig**2+dtik**2)))**(-1)
++    dtmax=min(dt_bound,1._rp/dtik)
++    if(.not.ieee_is_finite(dtic_raw).or..not.ieee_is_finite(dtic_used).or. &
++       .not.ieee_is_finite(nu_max).or..not.ieee_is_finite(h_min).or. &
++       .not.ieee_is_finite(dlmini).or..not.ieee_is_finite(dtiv).or..not.ieee_is_finite(dtik).or. &
++       .not.ieee_is_finite(dtig).or..not.ieee_is_finite(dtmax).or.dtmax.le.0._rp) &
++      all_finite=.false.
++    dt_over=dt/dtmax
++    guard_limit=restas_fixed_step_factor*dtmax
++    if(.not.ieee_is_finite(dt_over)) all_finite=.false.
++    if(.not.ieee_is_finite(guard_limit)) all_finite=.false.
++    guard_pass=all_finite.and.dt.gt.0._rp.and.dtmax.gt.0._rp.and. &
++      restas_fixed_step_factor.gt.0._rp.and.dt.le.guard_limit
++    if(guard_pass) then
++      guard_text='true'
++    else
++      guard_text='false'
++    endif
++    if(.not.consumed_state) guard_text='not_applicable'
++    write(restas_timestep_unit, &
++      '(I0,4(",",ES24.16E3),",",A,6(",",ES24.16E3),",",A,3(",",ES24.16E3),",",A)') &
++      state_index,time,dt,dtic_raw,dtic_used, &
++      trim(zero_fallback_text),nu_max,h_min,dlmini,dtiv,dtik,dtig, &
++      trim(capillary_text),dtmax,restas_fixed_step_factor,dt_over, &
++      trim(guard_text)
++    flush(restas_timestep_unit)
++    if(.not.all_finite) &
++      error stop 'Candidate5 full AB2 restriction contains a non-finite state'
++    if(consumed_state.and..not.guard_pass) &
++      error stop 'Candidate5 fixed-step AB2 restriction failed'
++  end subroutine restas_source_record_timestep_restriction
++  !
++  subroutine restas_source_close_log()
++    implicit none
++    if(restas_source_log_open) then
++      close(restas_source_flux_unit)
++      close(restas_offmask_unit)
++      close(restas_rate_unit)
++      close(restas_boundary_unit)
++      close(restas_mass_unit)
++      close(restas_velocity_unit)
++      close(restas_phase_stage_unit)
++      close(restas_velocity_stage_unit)
++      close(restas_timestep_unit)
++    endif
++    restas_source_log_open=.false.
++  end subroutine restas_source_close_log
+diff --git a/src/vof.f90 b/src/vof.f90
+index 5e3fcc6..8140ff8 100644
+--- a/src/vof.f90
++++ b/src/vof.f90
+@@ -16,6 +16,11 @@ module mod_vof
+   real(rp), parameter :: b_th  = 2.0_rp, qu_th  = 1.0_rp, limit = 10._rp**(-8)
+   real(rp), parameter :: b_thi = 1.0_rp/b_th
+   real(rp), parameter :: small = 10._rp**(-16)
++#if defined(_HEAT_TRANSFER)
++  logical, parameter :: restas_heat_transfer_enabled = .true.
++#else
++  logical, parameter :: restas_heat_transfer_enabled = .false.
++#endif
+   !
+   real(rp), parameter :: rmm = 0.5_rp*(1.0_rp-1.0_rp/sqrt(3.0_rp)), &
+                          rpp = 0.5_rp*(1.0_rp+1.0_rp/sqrt(3.0_rp))
+@@ -38,14 +43,75 @@ module mod_vof
+   real(rp), allocatable, dimension(:,:,:) :: dvof1,dvof2,flux
+   !@cuf attributes(managed) :: dvof1,dvof2,flux
+   !
++  integer, parameter :: restas_max_slots = 4
++  logical :: restas_source_loaded = .false.
++  logical :: restas_source_log_open = .false.
++  integer :: restas_slot_count = 0
++  integer :: restas_slot_i0(restas_max_slots) = 0
++  integer :: restas_slot_i1(restas_max_slots) = 0
++  integer :: restas_slot_j0(restas_max_slots) = 0
++  integer :: restas_slot_j1(restas_max_slots) = 0
++  integer :: restas_grid(3) = 0
++  integer :: restas_step_on = 0, restas_step_off = 0
++  real(rp) :: restas_source_velocity(3) = 0._rp
++  real(rp) :: restas_background_velocity(3) = 0._rp
++  real(rp) :: restas_short_x = 0._rp, restas_long_y = 0._rp
++  real(rp) :: restas_dt = 0._rp
++  real(rp) :: restas_gravity(3) = 0._rp
++  real(rp) :: restas_gap_x = 0._rp, restas_gap_y = 0._rp
++  real(rp) :: restas_step_in_volume(6) = 0._rp
++  real(rp) :: restas_step_out_volume(6) = 0._rp
++  real(rp) :: restas_initial_mass = 0._rp
++  real(rp) :: restas_cumulative_in_mass = 0._rp
++  real(rp) :: restas_cumulative_out_mass = 0._rp
++  integer :: restas_source_flux_unit, restas_offmask_unit, restas_rate_unit
++  integer :: restas_boundary_unit
++  integer :: restas_mass_unit, restas_velocity_unit
++  integer :: restas_phase_stage_unit, restas_velocity_stage_unit, restas_timestep_unit
++  character(len=512) :: restas_output_prefix = ''
++  logical :: restas_runtime_inputs_written = .false.
++  real(rp) :: restas_fixed_step_factor = 0._rp
++  real(rp), parameter :: restas_input_tol = 1.e-12_rp
++  type :: restas_scan_summary
++    integer :: scanned_cells = 0
++    integer :: mismatch_count = 0
++    integer :: nonfinite_count = 0
++    integer :: first_bad_i = 0, first_bad_j = 0, first_bad_k = 0
++    real(rp) :: max_abs_error = 0._rp
++    real(rp) :: first_expected = 0._rp, first_observed = 0._rp
++    logical :: has_first_bad = .false.
++    logical :: max_abs_error_overflow = .false.
++    logical :: first_expected_nonfinite = .false.
++    logical :: first_observed_nonfinite = .false.
++    character(len=8) :: first_expected_token = ''
++    character(len=8) :: first_observed_token = ''
++  end type restas_scan_summary
++  !
+   private
+   public  :: advvof,update_vof,update_property,initvof
++  public :: restas_source_read,restas_source_enabled,restas_source_validate
++  public :: restas_source_active_at,restas_source_cell
++  public :: restas_source_get_background,restas_source_get_velocity
++  public :: restas_source_set_initial_flow,restas_source_apply_velocity
++  public :: restas_source_prepare_boundary,restas_source_check_volume_pair,restas_source_write_header
++  public :: restas_source_refresh_vof_state
++  public :: restas_source_assert_velocity
++  public :: restas_source_begin_step,restas_source_accumulate_boundary_flux
++  public :: restas_source_record_flux,restas_source_record_inventory
++  public :: restas_source_record_velocity_audit,restas_source_close_log
++  public :: restas_scan_summary,restas_source_scan_reset,restas_source_scan_add
++  public :: restas_source_record_phase_stage,restas_source_record_velocity_stage
++  public :: restas_source_record_timestep_restriction
++  public :: restas_source_capture_timestep_inputs
+   !
+   contains
+   !
+-  subroutine advvof(n,dli,dt,halo,nh_d,nh_u,dzc,dzf,ug,vg,wg,vof,nor,cur,kappa,d_thinc)
++  include 'restas_source.inc'
++  !
++  subroutine advvof(n,dli,dt,halo,nh_d,nh_u,dzc,dzf,ug,vg,wg,vof,nor,cur, &
++                   kappa,d_thinc,source_step,rho_state,mu_state)
+     !
+-    use mod_param, only: cbcvof,bcvof
++    use mod_param, only: cbcvof,bcvof,rho1,rho2,mu1,mu2
+     use mod_bound, only: boundp
+     !
+     ! VoF advection
+@@ -58,17 +124,20 @@ module mod_vof
+     integer , intent(in   ), dimension(3)                       :: halo
+     integer , intent(in   )                                     :: nh_d,nh_u
+     real(rp), intent(in   ), dimension(1-nh_d:)                 :: dzc,dzf
+-    real(rp), intent(in   ), dimension(1-nh_u:,1-nh_u:,1-nh_u:) :: ug,vg,wg ! interface velocity
++    real(rp), intent(in   ), dimension(1-nh_u:,1-nh_u:,1-nh_u:) :: ug,vg ! interface velocity
++    real(rp), intent(inout), dimension(1-nh_u:,1-nh_u:,1-nh_u:) :: wg
+     real(rp), intent(inout), dimension(0:,0:,0:)                :: vof
+     real(rp), intent(inout), dimension(0:,0:,0:,1:)             :: nor,cur
+     real(rp), intent(inout), dimension(0:,0:,0:)                :: kappa    ! curvature
+     real(rp), intent(inout), dimension(0:,0:,0:)                :: d_thinc
++    integer, optional, intent(in) :: source_step
++    real(rp), optional, intent(inout) :: rho_state(0:,0:,0:),mu_state(0:,0:,0:)
+     !
+     real(rp), dimension(3) :: dl
+-    real(rp) :: dli1, dli2, dli3
++    real(rp) :: dli1, dli2, dli3,source_qtop,source_qbottom
+     integer :: i,j,k,im,jm,km
+     integer :: n1, n2, n3
+-    !@cuf attributes(managed) :: nor, cur, kappa, d_thinc, vof, ug, vg, wg, dzc, dzf
++    !@cuf attributes(managed) :: nor, cur, kappa, d_thinc, vof, ug, vg, wg, dzc, dzf, rho_state, mu_state
+     !
+     ! we allocate dvof1, dvof2 and flux only once
+     !
+@@ -84,12 +153,23 @@ module mod_vof
+     n2 = n(2)
+     n3 = n(3)
+     !
++    ! The source interval is a zero-based interval [n,n+1); main passes istep-1.
++    if(present(source_step)) then
++      if(.not.present(rho_state).or..not.present(mu_state)) &
++        error stop 'Candidate5 VOF stages require density and viscosity fields'
++      call restas_source_refresh_vof_state(n,dli,nh_d,nh_u,dzc,dzf,halo, &
++        source_step,vof,wg,nor,cur,kappa,d_thinc,rho_state,mu_state)
++      call restas_source_record_phase_stage(n,nh_u,source_step,source_step, &
++        'pre_vof_x',vof,wg,rho_state,mu_state)
++    endif
++    !
+     ! TODO: prefetcing
+     !
+     ! flux in x
+     !
+ #if !defined(_TWOD)
+     call cmpt_vof_flux(n(1), n(2), n(3),dli(1),dt,nh_u,vof,nor,cur,d_thinc,1,ug,flux) 
++    if(present(source_step)) call restas_source_accumulate_boundary_flux(n,dl,dzf,1,flux)
+ #endif
+     !
+     !$acc kernels
+@@ -114,12 +194,28 @@ module mod_vof
+ #if !defined(_TWOD)
+     call clip_vof(n,dvof1)
+     call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,dvof1)
++    if(present(source_step)) call restas_source_prepare_boundary(n,nh_u,source_step,dvof1,wg)
+     call update_vof(n,dli,nh_d,dzc,dzf,+1,halo,dvof1,nor,cur,kappa,d_thinc)
++    if(present(source_step)) then
++      ! Keep the audit state aligned with the directional VOF stage. These
++      ! properties are rebuilt again from final vof by the main time step.
++      call update_property(n,(/rho1,rho2/),dvof1,rho_state)
++      call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,rho_state)
++      call update_property(n,(/mu1,mu2/),dvof1,mu_state)
++      call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,mu_state)
++      call restas_source_prepare_boundary(n,nh_u,source_step,dvof1,wg,rho_state,mu_state)
++    endif
+ #endif
+     !
+     ! flux in y
+     !
++    if(present(source_step)) then
++      call restas_source_prepare_boundary(n,nh_u,source_step,dvof1,wg,rho_state,mu_state)
++      call restas_source_record_phase_stage(n,nh_u,source_step,source_step, &
++        'pre_vof_y',dvof1,wg,rho_state,mu_state)
++    endif
+     call cmpt_vof_flux(n(1), n(2), n(3),dli(2),dt,nh_u,dvof1,nor,cur,d_thinc,2,vg,flux) 
++    if(present(source_step)) call restas_source_accumulate_boundary_flux(n,dl,dzf,2,flux)
+     !
+     !$acc kernels
+     do k=1,n3
+@@ -138,11 +234,31 @@ module mod_vof
+     !
+     call clip_vof(n,dvof2)
+     call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,dvof2)
++    if(present(source_step)) call restas_source_prepare_boundary(n,nh_u,source_step,dvof2,wg)
+     call update_vof(n,dli,nh_d,dzc,dzf,+1,halo,dvof2,nor,cur,kappa,d_thinc)
++    if(present(source_step)) then
++      call update_property(n,(/rho1,rho2/),dvof2,rho_state)
++      call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,rho_state)
++      call update_property(n,(/mu1,mu2/),dvof2,mu_state)
++      call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,mu_state)
++      call restas_source_prepare_boundary(n,nh_u,source_step,dvof2,wg,rho_state,mu_state)
++    endif
+     !
+     ! flux in z
+     !
+-    call cmpt_vof_flux(n(1), n(2), n(3),dli(3),dt,nh_u,dvof2,nor,cur,d_thinc,3,wg,flux) 
++    if(present(source_step)) then
++      call restas_source_prepare_boundary(n,nh_u,source_step,dvof2,wg,rho_state,mu_state)
++      call restas_source_record_phase_stage(n,nh_u,source_step,source_step, &
++        'pre_vof_z',dvof2,wg,rho_state,mu_state)
++    endif
++    call cmpt_vof_flux(n(1), n(2), n(3),dli(3),dt,nh_u,dvof2,nor,cur,d_thinc,3,wg,flux)
++    if(present(source_step)) then
++      ! The return is fixed in the projected velocity state from the exact source
++      ! mask and requested speed. Audit actual phase flux; never change W here.
++      call restas_source_check_volume_pair(n,dl,dt,source_step,flux,wg,source_qtop,source_qbottom)
++      call restas_source_accumulate_boundary_flux(n,dl,dzf,3,flux)
++      call restas_source_record_flux(n,nh_u,dl,dt,source_step,flux,ug,vg,wg)
++    endif
+     !
+     !$acc kernels
+     do k=1,n3
+@@ -186,6 +302,7 @@ module mod_vof
+     !
+     call clip_vof(n,vof)
+     call boundp(cbcvof,n,bcvof,nh_d,+1,halo,dl,dzc,dzf,vof)
++    if(present(source_step)) call restas_source_prepare_boundary(n,nh_u,source_step,vof,wg)
+     call update_vof(n,dli,nh_d,dzc,dzf,+1,halo,vof,nor,cur,kappa,d_thinc)
+     !
+     return

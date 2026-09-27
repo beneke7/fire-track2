@@ -1,0 +1,3 @@
+.venv/bin/python scripts/run_local.py --threads 1 --timeout 120 -- docker run --rm --network none --cpus=1 --memory=4g --memory-swap=4g --mount type=bind,src=/home/v/proj/bene/fire-track2/containers/flutas/candidate6,dst=/candidate6,readonly --mount type=bind,src=/home/v/proj/bene/fire-track2/containers/flutas/candidate6/evidence/dzf-two-halo-20260925T143734Z,dst=/evidence --entrypoint bash sha256:78cd4fe3764e5010e09eaf77d792ee5e2cbdc35d2131497f906f7004c0f94ee8 -lc 'set -e
+PYTHONDONTWRITEBYTECODE=1 python3 /candidate6/tests/test_dzf_lower_bound_helpers.py /candidate6 /evidence/one-halo
+PYTHONDONTWRITEBYTECODE=1 python3 /candidate6/tests/test_dzf_two_halo_helpers.py /candidate6 /evidence/two-halo'

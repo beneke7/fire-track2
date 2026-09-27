@@ -1,0 +1,9 @@
+Candidate6 H4 two-halo bounded helper verification, corrected retry
+Started UTC: 2026-09-25 14:37:34
+CPU envelope: 1 CPU through scripts/run_local.py and Docker --cpus=1
+Memory envelope: Docker --memory=4g --memory-swap=4g
+GPU: disabled; no --gpus option
+Network: disabled with Docker --network none
+Compiler image digest: sha256:78cd4fe3764e5010e09eaf77d792ee5e2cbdc35d2131497f906f7004c0f94ee8
+Test scope: existing one-halo case plus compiled two-halo explicit dzf(0:) physical-index calls and whole-array shifted negative control; independent face area, boundary volume, inventory, divergence and legacy Courant expectations; source patch hunk/hash integrity. No solver, source case, GPU or candidate native rebuild.
+Preserved prior failed attempt: evidence/dzf-two-halo-20260925T143646Z/ exited 1 because its first geometric-area oracle incorrectly expected both inward and outward totals on each individual face; this retry models low/high face signs separately.

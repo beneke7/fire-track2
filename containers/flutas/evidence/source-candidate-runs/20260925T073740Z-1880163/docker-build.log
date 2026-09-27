@@ -1,0 +1,1279 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  254.5kB
+Step 1/8 : ARG BASE_IMAGE=track2/flutas-nvhpc:26.9
+Step 2/8 : FROM ${BASE_IMAGE}
+ ---> 78cd4fe3764e
+Step 3/8 : ARG FLUTAS_COMMIT=598210616bebd51f7d51f61455f196e6f3479916
+ ---> Using cache
+ ---> 5915d3e7d0dd
+Step 4/8 : COPY source-boundary.patch /tmp/source-boundary.patch
+ ---> ca8689bc8a80
+Step 5/8 : COPY tests /opt/flutas-source-protocol/tests
+ ---> 78f04ef51706
+Step 6/8 : COPY cases/source_boundary /opt/flutas-source-protocol/cases/source_boundary
+ ---> ff144392c398
+Step 7/8 : RUN set -eux;     test "$(git -C /opt/FluTAS rev-parse HEAD)" = "${FLUTAS_COMMIT}";     git -C /opt/FluTAS apply --check /tmp/source-boundary.patch;     git -C /opt/FluTAS apply /tmp/source-boundary.patch;     python3 /opt/flutas-source-protocol/tests/test_source_boundary.py /opt/FluTAS;     make -C /opt/FluTAS/src clean;     make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot;     cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot | grep -F 'sm_120.cubin';     test -x /opt/FluTAS/src/flutas.two_phase_inc_isot
+ ---> Running in acec8fff3801
+[91m+ git -C /opt/FluTAS rev-parse HEAD
+[0m[91m+ test 598210616bebd51f7d51f61455f196e6f3479916 = 598210616bebd51f7d51f61455f196e6f3479916
++ git -C /opt/FluTAS apply --check /tmp/source-boundary.patch
+[0m[91m+ git -C /opt/FluTAS apply /tmp/source-boundary.patch
+[0m[91m+ python3 /opt/flutas-source-protocol/tests/test_source_boundary.py /opt/FluTAS
+[0m[91mtest_all_declared_cases_are_grid_aligned_and_under_one_million_cells (__main__.FrozenInputTests.test_all_declared_cases_are_grid_aligned_and_under_one_million_cells) ... [0m[91mok
+[0m[91mtest_dry_fixture_has_no_source_or_return_across_the_full_window (__main__.FrozenInputTests.test_dry_fixture_has_no_source_or_return_across_the_full_window) ... [0m[91mok
+[0m[91mtest_fixture_files_match_frozen_hashes (__main__.FrozenInputTests.test_fixture_files_match_frozen_hashes) ... [0m[91mok
+[0m[91mtest_mask_geometry_and_expected_source_totals (__main__.FrozenInputTests.test_mask_geometry_and_expected_source_totals) ... [0m[91mok
+[0m[91mtest_inflow_only_alpha_and_property_ghosts (__main__.SourceCodeTests.test_inflow_only_alpha_and_property_ghosts) ... [0m[91mok
+[0m[91mtest_interval_and_vof_boundary_state_order (__main__.SourceCodeTests.test_interval_and_vof_boundary_state_order) ... [0m[91mok
+[0m[91mtest_physical_flux_units_mass_momentum_ledgers_and_divergence (__main__.SourceCodeTests.test_physical_flux_units_mass_momentum_ledgers_and_divergence) ... [0m[91mok
+test_pulse_endpoint_reaches_postprojection_velocity_state (__main__.SourceCodeTests.test_pulse_endpoint_reaches_postprojection_velocity_state) ... [0m[91mok
+[0m[91mtest_upstream_co_formula_and_fixed_fixture_values_are_static_only (__main__.SourceCodeTests.test_upstream_co_formula_and_fixed_fixture_values_are_static_only) ... [0m[91mok
+[0m[91mtest_velocity_override_order_and_return_from_actual_geometric_flux (__main__.SourceCodeTests.test_velocity_override_order_and_return_from_actual_geometric_flux) ... [0m[91mok
+[0m[91m
+[0m[91m----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+[0m[91mOK
+[0m[91m+ make -C /opt/FluTAS/src clean
+[0mmake: Entering directory '/opt/FluTAS/src'
+rm -rf *.o *.mod *dSYM && rm -rf 2decomp/*.{mod,d,o} && rm -rf postprocessing/*.{mod,d,o} && rm -rf apps/two_phase_inc_isot/*.{mod,d,o}
+rm -rf flutas*
+make: Leaving directory '/opt/FluTAS/src'
+[91m+ make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot
+[0mmake: Entering directory '/opt/FluTAS/src'
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o profiler.o profiler.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o types.o types.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o common_mpi.o common_mpi.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o apps/two_phase_inc_isot/param.o apps/two_phase_inc_isot/param.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o fftw.o fftw.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o fillps.o fillps.f90
+[91mfillps:
+     36, Generating implicit copyout(p(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(u(0:nx,1:ny,1:nz),v(1:nx,0:ny,1:nz),w(1:nx,1:ny,0:nz),dzfi(1:nz)) [if not already present]
+     42, Loop is parallelizable
+     43, Loop is parallelizable
+     44, Loop is parallelizable
+         Generating NVIDIA GPU code
+         42, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+         43,   ! blockidx%x threadidx%x auto-collapsed
+         44,   ! blockidx%x threadidx%x auto-collapsed
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o 2decomp/decomp_2d.o 2decomp/decomp_2d.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o initgrid.o initgrid.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o funcs.o funcs.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o bound.o bound.f90
+[91mset_bc:
+    278, Generating implicit firstprivate(nh_p,ny,nz)
+         Generating NVIDIA GPU code
+        279, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        280,   ! blockidx%x threadidx%x collapsed
+        281,   ! blockidx%x threadidx%x collapsed
+    278, Generating implicit copyin(p(:,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyout(p(-nh_p+1:0,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+    281, Generating implicit firstprivate(nx)
+    293, Generating implicit firstprivate(nh_p,nx,nz)
+         Generating NVIDIA GPU code
+        294, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        295,   ! blockidx%x threadidx%x collapsed
+        296,   ! blockidx%x threadidx%x collapsed
+    293, Generating implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:0,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyin(p(-nh_p+1:nh_p+nx,:,-nh_p+1:nh_p+nz)) [if not already present]
+    296, Generating implicit firstprivate(ny)
+    308, Generating implicit firstprivate(nh_p,nx,ny)
+         Generating NVIDIA GPU code
+        309, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        310,   ! blockidx%x threadidx%x collapsed
+        311,   ! blockidx%x threadidx%x collapsed
+    308, Generating implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,-nh_p+1:0)) [if not already present]
+         Generating implicit copyin(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,:)) [if not already present]
+    311, Generating implicit firstprivate(nz)
+    331, Generating implicit firstprivate(nh_p,ny,nz)
+         Generating NVIDIA GPU code
+        332, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        333,   ! blockidx%x threadidx%x collapsed
+    331, Generating implicit allocate(p(:,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyin(p(q+1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyout(p(-q,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+    333, Generating implicit firstprivate(sgn,factor_value)
+    347, Generating implicit firstprivate(nh_p,ny,nz)
+         Generating NVIDIA GPU code
+        348, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        349,   ! blockidx%x threadidx%x collapsed
+    347, Generating implicit allocate(p(:,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyout(p(q+nx+1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyin(p(nx-q,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+    349, Generating implicit firstprivate(factor_value,sgn,nx)
+    365, Generating implicit firstprivate(nh_p,nx,nz)
+         Generating NVIDIA GPU code
+        366, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        367,   ! blockidx%x threadidx%x collapsed
+    365, Generating implicit allocate(p(-nh_p+1:nh_p+nx,:,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyin(p(-nh_p+1:nh_p+nx,q+1,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyout(p(-nh_p+1:nh_p+nx,-q,-nh_p+1:nh_p+nz)) [if not already present]
+    367, Generating implicit firstprivate(sgn,factor_value)
+    381, Generating implicit [0m[91mfirstprivate(nh_p,nx,nz)
+         Generating NVIDIA GPU code
+        382, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        383,   ! blockidx%x threadidx%x collapsed
+    381, Generating implicit allocate(p(-nh_p+1:nh_p+nx,:,-nh_p+1:nh_p+nz)) [if not already present]
+         Generating implicit copyout(p(-nh_p+1:nh_p+nx,q+ny+1,-nh_p+1:nh_p+nz)) [if not already present]
+         Ge[0m[91mnerating implicit copyin(p(-nh_p+1:nh_p+nx,ny-q,-nh_p+1:nh_p+nz)) [if not[0m[91m already present[0m[91m]
+    383, Generati[0m[91mng implici[0m[91mt firstpri[0m[91mvate(factor_value,sgn,ny)
+[0m[91m    399, Generat[0m[91ming impli[0m[91mcit firstpriv[0m[91mate(nh_p,nx,ny)
+         G[0m[91menerating [0m[91mNVIDIA GPU code
+        400, [0m[91m!$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        401,  [0m[91m ! blockidx%x threadidx%x collapsed
+    399, Generating[0m[91m implicit allocate(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,:)[0m[91m) [if not[0m[91m already pre[0m[91msent]
+         G[0m[91menerating implicit copyin(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,q+1)) [if not already present]
+         Generati[0m[91mng implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,-q)) [if not already present]
+    401, Generating implicit firstprivate(sgn,factor_value)[0m[91m
+    415, Generating implici[0m[91mt firstprivate(nh_p,nx[0m[91m,ny)
+         Generating NVIDIA GPU code
+        416, [0m[91m!$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        417,   ! blockidx%x threadidx%x collapsed
+    415, Gener[0m[91mating implicit allocate(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,:)) [0m[91m[if not already pr[0m[91mesent]
+         Generatin[0m[91mg implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,q+nz+1)) [if[0m[91m not already prese[0m[91mnt]
+         G[0m[91menerating implicit[0m[91m copyin(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,nz-q)) [if n[0m[91mot alrea[0m[91mdy present[0m[91m]
+    417, Gener[0m[91mating imp[0m[91mlicit fi[0m[91mrstpriva[0m[91mte(factor_value,sgn,nz)
+    436, [0m[91mGenerating[0m[91m implici[0m[91mt firstpri[0m[91mvate(nh_p,ny,nz)
+  [0m[91m       Generating[0m[91m NVIDIA GPU code
+[0m[91m        437, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        438,   ! blockidx%x threadidx%x collapsed
+    436, Generating implicit copyout(p(-q,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not already present]
+    438, Generating impl[0m[91micit firstprivate(factor_value)
+    452, Gen[0m[91merating implici[0m[91mt firstpriva[0m[91mte(nh_p,ny,nz)
+[0m[91m         Gen[0m[91merating [0m[91mNVIDIA GPU co[0m[91mde
+        453, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x[0m[91m
+        454,   ! blockidx%x threadidx%x collapsed
+    452, G[0m[91menerati[0m[91mng implicit al[0m[91mlocate([0m[91mp(:,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if [0m[91mnot alrea[0m[91mdy presen[0m[91mt]
+         Ge[0m[91mnerat[0m[91ming implicit copyout([0m[91mp(q+nx:q+nx+1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if no[0m[91mt alread[0m[91my prese[0m[91mnt]
+[0m[91m         Generati[0m[91mng implicit copyin(p(nx-q-1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not alre[0m[91mady present]
+    454, Gen[0m[91merating implicit [0m[91mfirstprivate([0m[91mnx,factor_value)
+    471, Gener[0m[91mating implici[0m[91mt firstpriva[0m[91mte(nh_p,nx,nz)
+         Gener[0m[91mating NVIDIA GPU code
+        472, !$acc loop[0m[91m gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        473,   ! blockidx%x threadidx%x collapsed
+    471, G[0m[91menerating implicit copyout(p(-nh_p+1:nh_p+nx,-q,-nh_p+1:nh_p+nz)[0m[91m) [if not already present]
+    473, Genera[0m[91mting implicit [0m[91mfirstpriva[0m[91mte(factor_value)
+    487, G[0m[91menerating i[0m[91mmplicit firs[0m[91mtprivat[0m[91me(nh_p,nx,nz[0m[91m)
+         Gen[0m[91meratin[0m[91mg NVIDIA GPU[0m[91m code
+      [0m[91m  488, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        489,   ! blockidx%x threadidx%x collapsed
+[0m[91m    487, Generating[0m[91m implicit allocate(p(-nh_p+1:nh_p+nx,:,-nh_p+1:nh_p+nz)[0m[91m) [if not [0m[91malready pre[0m[91msent]
+         Ge[0m[91mnerating implicit [0m[91mcopyout(p(-nh_p+1:nh_p+nx,q+ny:q+ny+1,-nh_p+1:nh_p+nz)) [if not a[0m[91mlready pre[0m[91msent]
+         Ge[0m[91mnerating implicit copyin(p(-nh_p+1:nh_p+nx,ny-q-1,-nh_p+1:nh_p+nz)[0m[91m) [if not alread[0m[91my present]
+[0m[91m    489, Generating implicit firstprivate(ny,factor_value)
+  [0m[91m  506, Generating implicit firstprivate(nh_p,nx,ny)
+  [0m[91m       Generatin[0m[91mg NVIDIA GPU code
+      [0m[91m  507, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        508,   ! blockidx%x threadidx%x collapsed[0m[91m
+    506, Generat[0m[91ming implicit copyout([0m[91mp(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,-q)) [if not already present]
+    508, Generatin[0m[91mg implicit firstprivat[0m[91me(factor_value)
+    522, Generatin[0m[91mg implicit first[0m[91mprivate(nh_p,nx,ny)
+  [0m[91m       Generating [0m[91mNVIDIA GPU code
+        523, !$acc loop[0m[91m gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        524,   ! blockidx%x threadidx%x collapsed
+    522, Gen[0m[91merating implicit a[0m[91mllocate([0m[91mp(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,:)) [if not already present[0m[91m]
+         Ge[0m[91mnerating implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,q+nz:q+nz+1)) [[0m[91mif not already present]
+         Generating implicit copyin(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,nz-q-1)) [if not already pre[0m[91msent]
+    524, Generating implicit firstprivate(nz[0m[91m,factor_value)
+  [0m[91m  544, Gener[0m[91mating [0m[91mimplicit f[0m[91mirst[0m[91mprivate[0m[91m(nh_p[0m[91m,ny,nz)
+         Gene[0m[91mratin[0m[91mg NVIDIA GPU cod[0m[91me
+        545, !$acc loop[0m[91m gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+[0m[91m        546,   ! blockidx%x threadidx%x collapsed[0m[91m
+    544, Gener[0m[91mati[0m[91mng implicit allo[0m[91mcate(p(:,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [0m[91m[if[0m[91m not al[0m[91mrea[0m[91mdy pr[0m[91mesent]
+         Ge[0m[91mnerat[0m[91ming[0m[91m implicit copyin(p(q+1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [[0m[91mif not a[0m[91mlready[0m[91m pres[0m[91ment[0m[91m]
+         Ge[0m[91mnerating implicit[0m[91m copyout[0m[91m(p(-q,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz))[0m[91m [if not al[0m[91mready present[0m[91m]
+    546, Generating [0m[91mimplicit first[0m[91mprivate(factor_value)
+  [0m[91m  560, Generating [0m[91mimplicit fi[0m[91mrstprivat[0m[91me(nh_p,ny,nz)
+         Gener[0m[91mating NVIDIA GPU code
+[0m[91m        561, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        562,  [0m[91m ! blockidx%x threadidx%x collapsed
+    560, Generating implicit[0m[91m allocate(p(:,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [i[0m[91mf not alread[0m[91my presen[0m[91mt]
+         Gen[0m[91merating implicit [0m[91mcopyout(p(q+nx:q+nx+1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz)) [if not[0m[91m already pre[0m[91msent]
+         Gen[0m[91merating implicit copyin(p(nx-q-1,-nh_p+1:nh_p+ny,-nh_p+1:nh_p+nz))[0m[91m [if not al[0m[91mready prese[0m[91mnt]
+    562, G[0m[91menerating [0m[91mimplicit[0m[91m firstpr[0m[91mivate(nx,factor_value)
+[0m[91m    579, Generat[0m[91ming imp[0m[91mlicit firs[0m[91mtprivate([0m[91mnh_p,nx,nz)
+         Gener[0m[91mating NVIDIA GPU co[0m[91mde
+        580, !$acc loop [0m[91mgang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        581,   ! blockidx%x threadidx%x collapsed[0m[91m
+    579, Gener[0m[91mating implicit all[0m[91mocate(p(-nh_p+1:nh_p+nx,:,-nh_p+1:nh_p+nz))[0m[91m [if not [0m[91malready pre[0m[91msent]
+         G[0m[91menerating implicit[0m[91m copyin(p(-nh_p+1:nh_p+nx,q+1,-nh_p+1:nh_p+nz)) [if no[0m[91mt already p[0m[91mresent]
+[0m[91m         Generatin[0m[91mg implicit copyout(p(-nh_p+1:nh_p+nx,-q,-nh_p+1:nh_p+nz)) [[0m[91mif not alrea[0m[91mdy present[0m[91m]
+    581, Gener[0m[91mating im[0m[91mplicit f[0m[91mirstpriva[0m[91mte(factor_value)
+    595, Gen[0m[91merating i[0m[91mmplicit[0m[91m firstpr[0m[91mivate(nh_p,nx,nz)
+  [0m[91m       Generatin[0m[91mg NVIDIA GPU code
+      [0m[91m  596, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        597,   ! blockidx%x threadidx%x collapsed
+    595, Genera[0m[91mting implicit allocat[0m[91me(p(-nh_p+1:nh_p+nx,:,-nh_p+1:nh_p+nz)) [if[0m[91m not already present]
+         Gene[0m[91mrating implicit copyout(p(-nh_p+1:nh_p+nx,q+ny:q+ny+1,-nh_p+1:nh_p+nz)) [if not already presen[0m[91mt]
+         Generati[0m[91mng implicit copyin(p(-nh_p+1:nh_p+nx,ny-q-1,-nh_p+1:nh_p+nz)) [0m[91m[if[0m[91m not a[0m[91mlready [0m[91mpresent]
+[0m[91m    597, G[0m[91menerati[0m[91mng implicit fi[0m[91mrstprivate(ny,factor_value)
+[0m[91m    614, Generating im[0m[91mplicit firstp[0m[91mrivate(nh_p,nx,ny)
+[0m[91m         Generating[0m[91m NVIDIA GPU code
+        615, [0m[91m!$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        616,   ! blockidx%x threadidx%x collapsed
+    614, Gene[0m[91mrating implicit all[0m[91mocate(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,:)) [if not al[0m[91mready [0m[91mpresent[0m[91m]
+         Generating[0m[91m implicit copyin(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,q+1)) [if not[0m[91m already p[0m[91mresent]
+         [0m[91mGenerating[0m[91m implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,-q)) [if[0m[91m not alrea[0m[91mdy present][0m[91m
+    616, Ge[0m[91mnerati[0m[91mng [0m[91mimplic[0m[91mit fir[0m[91mstpri[0m[91mvate([0m[91mfactor_value)
+    630, Ge[0m[91mner[0m[91mating i[0m[91mmpl[0m[91mici[0m[91mt f[0m[91mirstpriv[0m[91mate(nh_p[0m[91m,nx,ny)
+[0m[91m         Generat[0m[91ming[0m[91m NVIDIA GPU code
+[0m[91m        631, !$acc loop [0m[91mgang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        632, [0m[91m  ! blockidx%x threadidx%x collapsed
+    630, G[0m[91mene[0m[91mrating[0m[91m implicit allocate([0m[91mp(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,:)) [if not alre[0m[91mady present]
+         Generating implicit copyout(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,q+nz:q+nz+1)) [if not al[0m[91mready present]
+         Generating implicit copyin(p(-nh_p+1:nh_p+nx,-nh_p+1:nh_p+ny,nz-q-1)) [if not[0m[91m already present]
+    632, Gen[0m[91merating impl[0m[91micit firstpriva[0m[91mte(nz,factor_value)
+[0m[91mupdt_rhs_b:
+    859, Generating implicit copyin(rhsbx(:ny,:nz,0)) [if not already present]
+         Generating implicit copy(p(1,1:ny,1:nz)) [if not already present]
+    860, Loop is parallelizable
+    861, Loop is parallelizable
+         Generating NVIDIA GPU code
+        860, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        861,   ! blockidx%x threadidx%x auto-collapsed
+    873, Generating implicit copy(p(nx-q1,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rhsbx(:ny,:nz,1)) [if not already present]
+    874, Loop is parallelizable
+    875, Loop is parallelizable
+         Generating NVIDIA GPU code
+        874, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        875,   ! blockidx%x threadidx%x auto-collapsed
+    889, Generating implicit copyin(rhsby(:nx,:nz,0)) [if not already present]
+         Generating implicit copy(p(1:nx,1,1:nz)) [if not already present]
+    890, Loop is parallelizable
+    891, Loop is parallelizable
+         Generating NVIDIA GPU code
+        890, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        891,   ! blockidx%x threadidx%x auto-collapsed
+    903, Generating implicit copyin(rhsby(:nx,:nz,1)) [if not already present]
+         Generating implicit copy(p(1:nx,ny-q2,1:nz)) [if not already present]
+    904, Loop is parallelizable
+    905, Loop is parallelizable
+         Generating NVIDIA GPU code
+        904, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        905,   ! blockidx%x threadidx%x auto-collapsed
+    919, Generating implicit copyin(rhsbz(:nx,:ny,0)) [if not already present]
+         Generating implicit copy(p(1:nx,1:ny,1)) [if not already present]
+    920, Loop is parallelizable
+    921, Loop is parallelizable
+         Generating NVIDIA GPU code
+        920, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        921,   ! blockidx%x threadidx%x auto-collapsed
+    933, Generating implicit copyin(rhsbz(:nx,:ny,1)) [if not already present]
+         Generating implicit copy(p(1:nx,1:ny,nz-q3)) [if not already present]
+    934, Loop is parallelizable
+    935, Loop is parallelizable
+         Generating NVIDIA GPU code
+        934, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        935,   ! blockidx%x threadidx%x auto-collapsed
+[0m[91mupdthalo:
+    973, Loop is parallelizable
+         Generating NVIDIA GPU code
+        973,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+    974, Loop is parallelizable
+         Generating NVIDIA GPU code
+        974,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+    975, Loop is parallelizable
+         Generating NVIDIA GPU code
+        975,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+    976, Loop is parallelizable
+         Generating NVIDIA GPU code
+        976,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+    980, Generating implicit copyin(p(:,-nh+1:nh+ny,-nh+1:nh+nz)) [if not already present]
+    981, Loop is parallelizable
+    982, Loop is parallelizable
+         Generating NVIDIA GPU code
+        981, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        982,   ! blockidx%x threadidx%x auto-collapsed
+    998, Generating implicit allocate(p(:,-nh+1:nh+ny,-nh+1:nh+nz)) [if not already present]
+         Generating implicit copyout(p(-q,-nh+1:nh+ny,-nh+1:nh+nz)) [if not already present]
+    999, Loop is parallelizable
+   1000, Loop is parallelizable
+         Generating NVIDIA GPU code
+        999, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+       1000,   ! blockidx%x threadidx%x auto-collapsed
+   1018, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1018,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1019, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1019,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1020, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1020,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1021, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1021,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1025, Generating implicit copyin(p(-nh+1:nh+nx,:,-nh+1:nh+nz)) [if not already present]
+   1026, Loop is parallelizable
+   1027, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1026, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+       1027,   ! blockidx%x threadidx%x auto-collapsed
+   1043, Generating implicit allocate(p(-nh+1:nh+nx,:,-nh+1:nh+nz)) [if not already present]
+         Generating implicit copyout(p(-nh+1:nh+nx,-q,-nh+1:nh+nz)) [if not already present]
+   1044, Loop is parallelizable
+   1045, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1044, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+       1045,   ! blockidx%x threadidx%x auto-collapsed
+   1063, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1063,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1064, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1064,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1065, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1065,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1066, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1066,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+   1070, Generating implicit copyin(p(-nh+1:nh+nx,-nh+1:nh+ny,:)) [if not already present]
+   1071, Loop is parallelizable
+   1072, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1071, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+       1072,   ! blockidx%x threadidx%x auto-collapsed
+   1088, Generating implicit allocate(p(-nh+1:nh+nx,-nh+1:nh+ny,:)) [if not already present]
+         Generating implicit copyout(p(-nh+1:nh+nx,-nh+1:nh+ny,-q)) [if not already present]
+   1089, Loop is parallelizable
+   1090, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1089, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+       1090,   ! blockidx%x threadidx%x auto-collapsed
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o chkdiv.o chkdiv.f90
+[91mchkdiv:
+     38, Generating implicit firstprivate(nx,ny,nz)
+         Generating NVIDIA GPU code
+         46, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+             Generating reduction(+:divtot)
+             Generating reduction(max:divmax)
+         47,   ! blockidx%x threadidx%x collapsed
+         48,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(div)
+     38, Generating implicit copyin(dzfi(1:nz),u(0:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copy(divtot) [if not already present]
+         Generating implicit copyin(w(1:nx,1:ny,0:nz),v(1:nx,0:ny,1:nz)) [if not already present]
+         Generating implicit copy(divmax) [if not already present]
+     48, Generating implicit firstprivate(div,dyi,dxi)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o chkdt.o chkdt.f90
+[91mchkdt_tw:
+     56, Generating implicit firstprivate(nx,ny,nz)
+         Generating NVIDIA GPU code
+         63, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+             Generating reduction(max:dti)
+         64,   ! blockidx%x threadidx%x collapsed
+         65,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(vz,vx,wx,dtix,uy,dtiz,uz,vy,ux,wz,wy,dtiy)
+     56, Generating implicit copy(dti) [if not already present]
+         Generating implicit copyin(dzfi(1:nz),dzci(1:nz),v(1:nx+1,0:ny,1:nz+1),w(1:nx+1,1:ny+1,0:nz),u(0:nx,1:ny+1,1:nz+1)) [if not already present]
+     65, Generating implicit firstprivate(dyi,uz,vz,dxi,dtiz,ux,vx,wx,dtix,uy,vy,wz,wy,dtiy)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o correc.o correc.f90
+[91mcorrec:
+     43, Generating implicit copy(w(1:nx,1:ny,1:nz),v(1:nx,1:ny,1:nz),u(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(dzci(1:nz),p(1:nx+1,1:ny+1,1:nz+1)) [if not already present]
+     49, Loop is parallelizable
+     50, Loop is parallelizable
+     51, Loop is parallelizable
+         Generating NVIDIA GPU code
+         49, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+         50,   ! blockidx%x threadidx%x auto-collapsed
+         51,   ! blockidx%x threadidx%x auto-collapsed
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o debug.o debug.f90
+[91mcmpt_mean:
+     38, Generating implicit firstprivate(nx,ny,nz)
+         Generating NVIDIA GPU code
+         45, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+             Generating reduction(+:mean)
+         46,   ! blockidx%x threadidx%x collapsed
+         47,   ! blockidx%x threadidx%x collapsed
+     38, Generating implicit copyin(p(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copy(mean) [if not already present]
+         Generating implicit copyin(dzf(1:nz)) [if not already present]
+     47, Generating implicit firstprivate(dy,dx)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o fft.o fft.f90
+[91mposp_fftf:
+    312, Generating implicit firstprivate(n2,n3)
+         Generating NVIDIA GPU code
+        313, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        314,   ! blockidx%x threadidx%x collapsed
+    314, Generating implicit firstprivate(nn)
+[0m[91mprep_fftb:
+    345, Generating implicit firstprivate(n2,n3)
+         Generating NVIDIA GPU code
+        346, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        347,   ! blockidx%x threadidx%x collapsed
+    347, Generating implicit firstprivate(nn)
+[0m[91mprep_dctiif:
+    394, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        395, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        396,   ! blockidx%x threadidx%x collapsed
+        397,   ! blockidx%x threadidx%x collapsed
+    397, Generating implicit firstprivate(ii)
+    405, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        406, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        407,   ! blockidx%x threadidx%x collapsed
+        408,   ! blockidx%x threadidx%x collapsed
+    408, Generating implicit firstprivate(ii)
+    418, Generating implicit firstprivate(nn,n3,n2)
+         Generating NVIDIA GPU code
+        419, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        420,   ! blockidx%x threadidx%x collapsed
+        421,   ! blockidx%x threadidx%x collapsed
+    431, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+        432, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        433,   ! blockidx%x threadidx%x collapsed
+        434,   ! blockidx%x threadidx%x collapsed
+    434, Generating implicit firstprivate(nn,ii)
+    446, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+        447, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        448,   ! blockidx%x threadidx%x collapsed
+        449,   ! blockidx%x threadidx%x collapsed
+    449, Generating implicit firstprivate(ii)
+[0m[91mposp_dctiif:
+    500, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        501, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        502,   ! blockidx%x threadidx%x collapsed
+        503,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(carg,arg,sarg,ii)
+    503, Generating implicit firstprivate(carg,arg,ii,sarg)
+    526, Generating [0m[91mimplicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        527, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        528,   ! blockidx%x threadidx%x collapsed
+        529,   ! blockidx%x threadidx%x collapsed
+    529, Generatin[0m[91mg implicit firstp[0m[91mrivate(ii)
+    539, Gen[0m[91merating im[0m[91mplicit firs[0m[91mtprivate(n3,n2[0m[91m,nn)
+         Generat[0m[91ming NVIDIA GPU code
+[0m[91m        540, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+      [0m[91m  541,   ! blockidx%x threadidx%x collapsed
+        542,   ! blockidx%x threadidx%x collapsed
+  [0m[91m  542, Generating [0m[91mimplicit [0m[91mfirstpriva[0m[91mte(ii)
+    550, Ge[0m[91mnerating imp[0m[91mlicit firs[0m[91mtprivate([0m[91mn3,n2,nn)
+         Ge[0m[91mnerating[0m[91m NVIDIA GPU code
+        551, !$acc loop [0m[91mgang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        552,   ! blockidx%x threadidx%x collapsed
+        553,   ! blockidx%x threadidx%x collapsed[0m[91m
+    553, Generatin[0m[91mg implicit f[0m[91mirstprivat[0m[91me(ii)
+    565, Genera[0m[91mting implic[0m[91mit firstpr[0m[91mivate(nn,n3,n2)
+         [0m[91mGeneratin[0m[91mg NVIDIA GPU code
+        566, !$acc loop [0m[91mgang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        567,   ! blockidx%x threadidx%x collapsed
+  [0m[91m      568,   ! blockidx%x threadidx%x collapsed
+[0m[91mprep_dctiib:
+    614, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        615, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        616,   ! blockidx%x threadidx%x collapsed
+        617,   ! blockidx%x threadidx%x collapsed
+    617, Generating implicit firstprivate(ii)
+    623, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        624, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        625,   ! blockidx%x threadidx%x collapsed
+        626,   ! blockidx%x threadidx%x collapsed
+    626, Generating implicit firstprivate(ii)
+    635, Generating implicit firstprivate(nn,n3,n2)
+         Generating NVIDIA GPU code
+        636, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        637,   ! blockidx%x threadidx%x collapsed
+        638,   ! blockidx%x threadidx%x collapsed
+    647, Generating implicit firstprivate(n2,n3)
+         Generating NVIDIA GPU code
+        648, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        649,   ! blockidx%x threadidx%x collapsed
+    649, Generating implicit firstprivate(nn)
+    663, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        664, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        665,   ! blockidx%x threadidx%x collapsed
+        666,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(carg,arg,sarg,ii)
+    666, Generating implicit firstprivate(carg,arg,sarg,ii)
+    680, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        681, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        682,   ! blockidx%x threadidx%x collapsed
+        683,   ! blockidx%x threadidx%x collapsed
+    683, Generating implicit firstprivate(ii)
+[0m[91mposp_dctiib:
+    729, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+        730, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        731,   ! blockidx%x threadidx%x collapsed
+        732,   ! blockidx%x threadidx%x collapsed
+    732, Generating implicit firstprivate(ii)
+    738, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+        739, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        740,   ! blockidx%x threadidx%x collapsed
+        741,   ! blockidx%x threadidx%x collapsed
+    741, Generating implicit firstprivate(nn,ii)
+    753, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        754, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        755,   ! blockidx%x threadidx%x collapsed
+        756,   ! blockidx%x threadidx%x collapsed
+    756, Generating implicit firstprivate(ii)
+    763, Generating implicit firstprivate(n3,n2,nn)
+         Generating NVIDIA GPU code
+        764, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        765,   ! blockidx%x threadidx%x collapsed
+        766,   ! blockidx%x threadidx%x collapsed
+    766, Generating implicit firstprivate(ii)
+    775, Generating implicit firstprivate(nn,n3,n2)
+         Generating NVIDIA GPU code
+        776, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        777,   ! blockidx%x threadidx%x collapsed
+        778,   ! blockidx%x threadidx%x collapsed
+[0m[91mtranspose_x_to_yct:
+          89, CUDA kernel generated
+              89, !$cuf kernel do <<< (*,*,*), (8,8,8) >>>
+         131, CUDA kernel generated
+             131, !$cuf kernel do <<< (*,*,*), (8,8,8) >>>
+                  Generating implicit private(idx)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o mom.o mom.f90
+[91mmomad_xyz_tw_cen:
+     46, Generating implicit copyout(dvdt(1:nx,1:ny,1:nz),dudt(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(dzci(0:nz),mu(0:nx+1,0:ny+1,0:nz+1),dzfi(1:nz+1)) [if not already present]
+         Generating implicit copyout(dwdt(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(w(0:nx+1,0:ny+1,0:nz+1),v(0:nx+1,0:ny+1,0:nz+1),u(0:nx+1,0:ny+1,0:nz+1),rho(1:nx+1,1:ny+1,1:nz+1)) [if not already present]
+     47, Loop is parallelizable
+     48, Loop is parallelizable
+     49, Loop is parallelizable
+         Generating NVIDIA GPU code
+         47, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+         48,   ! blockidx%x threadidx%x auto-collapsed
+         49,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(rhoz,uvip,uwip,muzp,vvjm,uwkp,vwjp,dvdxm,dwdym,wwkp,wwkm,dwdyp,uuim,dvdzm,vvjp,dwdxp,uwkm,wvkp,muym,dwdzm,uvjm,muxp,uuip,dudym,dwdzp,muzm,muxm,dvdyp,muyp,dudxm,uvim,rhoy,dudyp,dudzm,uwim,dvdzp,wvkm,dwdxm,vwjm,uvjp,rhox,dvdxp,dvdym,dudxp,dudzp)
+[0m[91mmomad_xyz_tw_fll:
+    229, Generating implicit copyout(dvdt(1:nx,1:ny,1:nz),dudt(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(dzci(0:nz),mu(0:nx+1,0:ny+1,0:nz+1),dzfi(1:nz+1)) [if not already present]
+         Generating implicit copyout(dwdt(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(w(-1:nx+2,-1:ny+2,-1:nz+2),v(-1:nx+2,-1:ny+2,-1:nz+2),u(-1:nx+2,-1:ny+2,-1:nz+2),rho(1:nx+1,1:ny+1,1:nz+1)) [if not already present]
+    230, Loop is parallelizable
+    231, Loop is parallelizable
+    232, Loop is parallelizable
+         Generating NVIDIA GPU code
+        230, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        231,   ! blockidx%x threadidx%x auto-collapsed
+        232,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(uc,wc,dudxm,muzp,vg_u,wg_u,dudzp,dudxp,dwdym,dvdzp,rhoy,dvdyp,vg_w,vc,dvdzm,muyp,muxm,muxp,dwdxp,ug_u,dwdxm,ug_v,dvdym,dwdzm,dudzm,dwdzp,dvdxp,dwdyp,muzm,vec5,muym,dudym,vec4,dudyp,wg_w,wg_v,rhoz,dvdxm,vec3,vg_v,ug_w,rhox,vec2,vec1)
+[0m[91mtranspose_yt_to_zp:
+          85, CUDA kernel generated
+              85, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+                  Generating implicit private(idx)
+         105, CUDA kernel generated
+             105, !$cuf kernel do <<< (*,*,*), (8,8,8) >>>
+         145, CUDA kernel generated
+             145, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+                  Generating implicit private(idx)
+[0m[91mtranspose_zp_to_yt:
+          85, CUDA kernel generated
+              85, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+                  Generating implicit private(idx)
+         105, CUDA kernel generated
+             105, !$cuf kernel do <<< (*,*,*), (8,8,8) >>>
+         145, CUDA kernel generated
+             145, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+                  Generating implicit private(idx)
+[0m[91mtranspose_yct_to_x:
+          84, CUDA kernel generated
+              84, !$cuf kernel do <<< (*,*,*), (8,8,8) >>>
+                  Generating implicit private(idx)
+         115, CUDA kernel generated
+             115, !$cuf kernel do <<< (*,*,*), (8,8,8) >>>
+[0m[91mtranspose_xc_to_z:
+          83, CUDA kernel generated
+              83, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+                  Generating implicit private(idx)
+         108, CUDA kernel generated
+             108, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+[0m[91mtranspose_z_to_xc:
+          78, CUDA kernel generated
+              78, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+         118, CUDA kernel generated
+             118, !$cuf kernel do <<< (*,*,*), (64,2,4) >>>
+                  Generating implicit private(idx)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o initmpi.o initmpi.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o initsolver.o initsolver.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o solver_gpu.o solver_gpu.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o solver_cpu.o solver_cpu.f90
+[91msolver_gpu:
+    116, Generating present(p(:,:,:))
+         Generating implicit firstprivate(ng1,dims2,ng3,ng2,dims1)
+         Generating NVIDIA GPU code
+        117, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        118,   ! blockidx%x threadidx%x collapsed
+        119,   ! blockidx%x threadidx%x collapsed
+    133, Generating present(px(:,:,:))
+         Generating implicit firstprivate(dims2,ng1,ng2,ng3,dims1)
+         Generating NVIDIA GPU code
+        134, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        135,   ! blockidx%x threadidx%x collapsed
+        136,   ! blockidx%x threadidx%x collapsed
+    203, Generating present(px(:,:,:))
+         Generating implicit firstprivate(ng1,dims2,ng3,ng2,dims1)
+         Generating NVIDIA GPU code
+        204, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        205,   ! blockidx%x threadidx%x collapsed
+        206,   ! blockidx%x threadidx%x collapsed
+    220, Generating present(p(:,:,:))
+         Generating implicit firstprivate(dims2,ng1,ng2,dims1,ng3)
+         Generating NVIDIA GPU code
+        221, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        222,   ! blockidx%x threadidx%x collapsed
+        223,   ! blockidx%x threadidx%x collapsed
+    223, Generating implicit firstprivate(normfft)
+[0m[91mgaussel_gpu:
+    493, Generating implicit firstprivate(n,nx,ny)
+         Generating NVIDIA GPU code
+        494, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        495,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(z)
+        498, !$acc loop seq
+        506, !$acc loop seq
+             Generating implicit private(z)
+        522, !$acc loop seq
+    493, Generating implicit copyin(a(2:n),c(:n-1),b(:n)) [if not already present]
+         Generating implicit copy(p(:nx,:ny,:n)) [if not already present]
+         Generating implicit copyin(lambdaxy(:nx,:ny)) [if not already present]
+    495, Generating implicit firstprivate(z)
+[0m[91mgaussel_periodic_gpu:
+    553, Generating implicit firstprivate(n,nx,ny)
+         Generating NVIDIA GPU code
+        554, !$acc loop gang, vector(128) collapse(2) ! blockidx%x threadidx%x
+        555,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(z)
+        558, !$acc loop seq
+        563, !$acc loop seq
+        571, !$acc loop seq
+             Generating implicit private(z)
+        587, !$acc loop seq
+        593, !$acc loop seq
+        605, !$acc loop seq
+             Generating implicit private(z)
+        621, !$acc loop seq
+        628, !$acc loop seq
+    553, Generating implicit copyin(a(:n),c(:n),b(:n)) [if not already present]
+         Generating implicit copy(p(:nx,:ny,:n)) [if not already present]
+         Generating implicit copyin(lambdaxy(:nx,:ny)) [if not already present]
+    555, Generating implicit firstprivate(z)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o 2decomp/io.o 2decomp/io.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o sanity.o sanity.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o initflow.o initflow.f90
+[91minitflow:
+    186, Generating implicit copyout(u(1:nx,1:ny,1:nz),p(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(u1d(1:nz)) [if not already present]
+         Generating implicit copyout(w(1:nx,1:ny,1:nz),v(1:nx,1:ny,1:nz)) [if not already present]
+    187, Loop is parallelizable
+    188, Loop is parallelizable
+    189, Loop is parallelizable
+         Generating NVIDIA GPU code
+        187, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        188,   ! blockidx%x threadidx%x auto-collapsed
+        189,   ! blockidx%x threadidx%x auto-collapsed
+    257, Generating implicit copyin(zclzi(1:nz)) [if not already present]
+         Generating implicit copyout(w(1:nx,1:ny,1:nz),p(1:nx,1:ny,1:nz),v(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(dzclzi(1:nz)) [if not already present]
+    258, Loop is parallelizable
+    259, Loop is parallelizable
+    260, Loop is parallelizable
+         Generating NVIDIA GPU code
+        258, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        259,   ! blockidx%x threadidx%x auto-collapsed
+        260,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(yf,zf,zc,xc,yc)
+[0m[91madd_noise_cuda:
+    475, Generating implicit firstprivate(iseed,nxg,nyg,nzg)
+         Generating NVIDIA GPU code
+        478, !$acc loop seq
+        479, !$acc loop seq
+        480, !$acc loop seq
+             Generating implicit private(rn)
+    475, CUDA shared memory used for h
+         Generating implicit copy(p(-ijk_start_x+1:nxg-ijk_start_x,-ijk_start_y+1:nyg-ijk_start_y,-ijk_start_z+1:nzg-ijk_start_z)) [if not already present]
+    478, Generating implicit firstprivate(j)
+    479, Generating implicit firstprivate(i)
+    480, Generating implicit firstprivate(ii,ijk_start_x,ijk_start_z,ijk_start_y,jj,rn,nz,norm,nx,ny,kk)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o rk.o rk.f90
+[91mrk:
+     75, Generating implicit copyin(dudtrk(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copy(dwdtrko(:nx,:ny,:nz)) [if not already present]
+         Generating implicit copyin(dvdtrk(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copy(dudtrko(:nx,:ny,:nz),u(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(dwdtrk(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copy(dvdtrko(:nx,:ny,:nz),w(1:nx,1:ny,1:nz),v(1:nx,1:ny,1:nz)) [if not already present]
+     81, Loop is parallelizable
+     82, Loop is parallelizable
+     83, Loop is parallelizable
+         Generating NVIDIA GPU code
+         81, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+         82,   ! blockidx%x threadidx%x auto-collapsed
+         83,   ! blockidx%x threadidx%x auto-collapsed
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o source.o source.f90
+[91msurft_src:
+     46, Generating implicit copy(v(1:nx,1:ny,1:nz),w(1:nx,1:ny,1:nz),u(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rho(1:nx+1,1:ny+1,1:nz+1),kappa(1:nx+1,1:ny+1,1:nz+1),dzci(1:nz),psi(1:nx+1,1:ny+1,1:nz+1)) [if not already present]
+     47, Loop is parallelizable
+     48, Loop is parallelizable
+     49, Loop is parallelizable
+         Generating NVIDIA GPU code
+         47, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+         48,   ! blockidx%x threadidx%x auto-collapsed
+         49,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(kappaz,rhox,rhoz,rhoy,kappax,kappay)
+[0m[91mgrav_tw_src:
+    119, Generating implicit firstprivate(nx,ny,nz)
+         Generating NVIDIA GPU code
+        121, !$acc loop gang ! blockidx%x
+             Generating reduction(+:rho_av)
+        122, !$acc loop seq
+        123, !$acc loop vector(128) ! threadidx%x
+    119, Generating implicit copyin(dzfi(1:nz)) [if not already present]
+         Generating implicit copy(rho_av) [if not already present]
+         Generating implicit copyin(rho(1:nx,1:ny,1:nz)) [if not already present]
+    121, Generating implicit firstprivate(j)
+    122, Loop is parallelizable
+         Generating implicit firstprivate(i)
+    123, Loop is parallelizable
+         Generating implicit firstprivate(dyi,dxi)
+    135, Generating implicit copy(w(1:nx,1:ny,1:nz),v(1:nx,1:ny,1:nz),u(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rho(1:nx+1,1:ny+1,1:nz+1)) [if not already present]
+    136, Loop is parallelizable
+    137, Loop is parallelizable
+    138, Loop is parallelizable
+         Generating NVIDIA GPU code
+        136, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        137,   ! blockidx%x threadidx%x auto-collapsed
+        138,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(rhox,rhoy,rhoz,termx,termz,termy)
+[0m[91mpres_tw_src:
+    272, Generating implicit copy(v(1:nx,1:ny,1:nz),w(1:nx,1:ny,1:nz),u(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rho(1:nx+1,1:ny+1,1:nz+1),p(1:nx+1,1:ny+1,1:nz+1),dzci(1:nz),pold(1:nx+1,1:ny+1,1:nz+1)) [if not already present]
+    273, Loop is parallelizable
+    274, Loop is parallelizable
+    275, Loop is parallelizable
+         Generating NVIDIA GPU code
+        273, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        274,   ! blockidx%x threadidx%x auto-collapsed
+        275,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(rhox,rhoxi,rhoy,rhoyi,rhozi,rhoz)
+[0m[91mbulk_forcing_src:
+    466, Generating implicit copy(u(1:nx,1:ny,1:nz)) [if not already present]
+    467, Loop is parallelizable
+    468, Loop is parallelizable
+    469, Loop is parallelizable
+         Generating NVIDIA GPU code
+        467, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        468,   ! blockidx%x threadidx%x auto-collapsed
+        469,   ! blockidx%x threadidx%x auto-collapsed
+    479, Generating implicit copy(v(1:nx,1:ny,1:nz)) [if not already present]
+    480, Loop is parallelizable
+    481, Loop is parallelizable
+    482, Loop is parallelizable
+         Generating NVIDIA GPU code
+        480, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        481,   ! blockidx%x threadidx%x auto-collapsed
+        482,   ! blockidx%x threadidx%x auto-collapsed
+    492, Generating implicit copy(w(1:nx,1:ny,1:nz)) [if not already present]
+    493, Loop is parallelizable
+    494, Loop is parallelizable
+    495, Loop is parallelizable
+         Generating NVIDIA GPU code
+        493, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        494,   ! blockidx%x threadidx%x auto-collapsed
+        495,   ! blockidx%x threadidx%x auto-collapsed
+    508, Generating implicit copy(u(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rho(1:nx+1,1:ny,1:nz)) [if not already present]
+    509, Loop is parallelizable
+    510, Loop is parallelizable
+    511, Loop is parallelizable
+         Generating NVIDIA GPU code
+        509, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        510,   ! blockidx%x threadidx%x auto-collapsed
+        511,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(rhof)
+    522, Generating implicit copy(v(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rho(1:nx,1:ny+1,1:nz)) [if not already present]
+    523, Loop is parallelizable
+    524, Loop is parallelizable
+    525, Loop is parallelizable
+         Generating NVIDIA GPU code
+        523, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        524,   ! blockidx%x threadidx%x auto-collapsed
+        525,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(rhof)
+    536, Generating implicit copy(w(1:nx,1:ny,1:nz)) [if not already present]
+         Generating implicit copyin(rho(1:nx,1:ny,1:nz+1)) [if not already present]
+    537, Loop is parallelizable
+    538, Loop is parallelizable
+    539, Loop is parallelizable
+         Generating NVIDIA GPU code
+        537, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        538,   ! blockidx%x threadidx%x auto-collapsed
+        539,   ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(rhof)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o vof.o vof.f90
+[91madvvof:
+    140, Generating implicit copyin(ug(0:n1,1:n2,1:n3),vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyout(dvof1(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(flux(0:n1,1:n2,1:n3)) [if not already present]
+    141, Loop is parallelizable
+    142, Loop is parallelizable
+    143, Loop is parallelizable
+         Generating NVIDIA GPU code
+        141, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        142,   ! blockidx%x threadidx%x auto-collapsed
+        143,   ! blockidx%x threadidx%x auto-collapsed
+    172, Generating implicit copyout(dvof2(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(vg(1:n1,0:n2,1:n3),flux(1:n1,0:n2,1:n3),dvof1(1:n1,1:n2,1:n3)) [if not already present]
+    173, Loop is parallelizable
+    174, Loop is parallelizable
+    175, Loop is parallelizable
+         Generating NVIDIA GPU code
+        173, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        174,   ! blockidx%x threadidx%x auto-collapsed
+        175,   ! blockidx%x threadidx%x auto-collapsed
+    204, Generating implicit copyin(dvof2(1:n1,1:n2,1:n3),wg(1:n1,1:n2,0:n3)) [if not already present]
+         Generating implicit copyout(vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(flux(1:n1,1:n2,0:n3)) [if not already present]
+    205, Loop is parallelizable
+    206, Loop is parallelizable
+    207, Loop is parallelizable
+         Generating NVIDIA GPU code
+        205, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        206,   ! blockidx%x threadidx%x auto-collapsed
+        207,   ! blockidx%x threadidx%x auto-collapsed
+    225, Generating implicit copyin(vg(1:n1,0:n2,1:n3),wg(1:n1,1:n2,0:n3)) [if not already present]
+         Generating implicit copy(vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(ug(0:n1,1:n2,1:n3),dvof1(1:n1,1:n2,1:n3),dvof2(1:n1,1:n2,1:n3)) [if not already present]
+    226, Loop is parallelizable
+    227, Loop is parallelizable
+    228, Loop is parallelizable
+         Generating NVIDIA GPU code
+        226, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        227,   ! blockidx%x threadidx%x auto-collapsed
+        228,   ! blockidx%x threadidx%x auto-collapsed
+[0m[91mupdate_property:
+    318, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+        319, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        320,   ! blockidx%x threadidx%x collapsed
+        321,   ! blockidx%x threadidx%x collapsed
+    318, Generating implicit copyout(prop(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(vof(1:n1,1:n2,1:n3)) [if not already present]
+    321, Generating implicit firstprivate(prop12_2,prop12_1)
+[0m[91mclip_vof:
+    345, Generating implicit firstprivate(n1,n3,n2)
+         Generating NVIDIA GPU code
+        346, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        347,   ! blockidx%x threadidx%x collapsed
+        348,   ! blockidx%x threadidx%x collapsed
+    345, Generating implicit copy(vof(0:n1+1,0:n2+1,0:n3+1)) [if not already present]
+[0m[91mcmpt_nor_curv_1o:
+    381, Generating implicit copyout(nor(1:n1,1:n2,1:n3,1:3)) [if not already present]
+         Generating implicit copyout(cur(1:n1,1:n2,1:n3,1:6),kappa(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(vof(0:n1+1,0:n2+1,0:n3+1)) [if not already present]
+         Generating implicit copyin(nor(0:n1+1,0:n2+1,0:n3+1,1:3)) [if not already present]
+    382, Loop is parallelizable
+    383, Loop is parallelizable
+    384, Loop is parallelizable
+         Generating NVIDIA GPU code
+        382, !$acc loop gang, vector(4) ! blockidx%z threadidx%y
+             Cached references to size [(x+2)x3x(y+2)] block of vof
+        383, !$acc loop gang ! blockidx%y
+        384, !$acc loop gang, vector(32) ! blockidx%x threadidx%x
+             Generating implicit private(nor1,nor2,nor3,norm)
+             Replaced 54 loads by cache loads
+    427, Loop is parallelizable
+    428, Loop is parallelizable
+    429, Loop is parallelizable
+         Generating NVIDIA GPU code
+        427, !$acc loop gang ! blockidx%y
+        428, !$acc loop gang, vector(4) ! blockidx%z threadidx%y
+             Cached references to size [(x+2)x(y+2)x3x3] block of nor
+             Cached references to size [(x+2)x(y)] block of nor
+             Cached references to size [(x)x(y+2)] block of nor
+             Cached references to size [(x)x(y)x3] block of nor
+        429, !$acc loop gang, vector(32) ! blockidx%x threadidx%x
+             Generating implicit private(dndx,dndz,dndy)
+             Replaced 6 loads by cache loads
+[0m[91mcmpt_nor_curv_2o:
+    646, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+        647, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        648,   ! blockidx%x threadidx%x collapsed
+        649,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(mx3,mx4,mx5,mx6,mx7,mx8,my1,my2,my3,my4,my5,my6,my7,my8,mz1,mz2,mz3,nx4,ny4,nz4,nx5,ny5,mx1,nz5,nx6,nz6,nx7,mx2,ny7,nz8,nz7,ny6,mz8,nx1,nz3,ny3,nx3,nz2,ny2,nx2,nz1,ny1,ny8,nx8,norm,mz7,mz6,mz5,mz4)
+        791, !$acc loop seq
+    646, Generating implicit copyout(cur(1:n1,1:n2,1:n3,1:6),kappa(1:n1,1:n2,1:n3),nor(1:n1,1:n2,1:n3,1:3)) [if not already present]
+         Generating implicit copyin(vof(0:n1+1,0:n2+1,0:n3+1)) [if not already present]
+    649, Generating implicit firstprivate(dl3,dli3,mx1,mx2,mx3,mx4,mx5,mx6,mx7,dli1,mx8,my1,my2,my3,my4,my5,my6,my7,dli2,my8,mz1,mz2,mz3,mz4,mz5,mz6,mz7,norm,nx8,ny8,nx1,ny1,nz1,nx2,ny2,nz2,nx3,ny3,nz3,nx4,ny4,nz4,nx5,ny5,nz5,nx6,ny6,nz6,nx7,ny7,nz8,nz7,mz8,dl1,dl2)
+[0m[91mcmpt_d_thinc:
+   1084, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+       1085, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       1086,   ! blockidx%x threadidx%x collapsed
+       1087,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(fpp,qq,ind2,e4,fmm,fmp,fpm,aa,b4,c4,a4,d4)
+       1095, !$acc loop seq
+       1096, !$acc loop seq
+       1108, !$acc loop seq
+       1109, !$acc loop seq
+       1110, !$acc loop seq
+       1111, !$acc loop seq
+       1112, !$acc loop seq
+       1113, !$acc loop seq
+       1114, !$acc loop seq
+       1115, !$acc loop seq
+       1116, !$acc loop seq
+       1161, !$acc loop seq
+             Generating implicit reduction(+:fpm,fmp,fmm,aa,qq,fpp)
+             Generating implicit private(surf)
+       1166, !$acc loop seq
+             Generating implicit reduction(+:xmm$ac$r,ev$r)
+       1169, !$acc loop seq
+             Generating implicit reduction(+:ev$r824,bv$r)
+       1172, !$acc loop seq
+             Generating implicit reduction(+:ev$r825,bv$r826)
+       1175, !$acc loop seq
+             Generating implicit reduction(+:ev$r827,bv$r828)
+   1084, Local memory used for z_x_0,nor_v,ev,cur_v,cv,av,dv,bv
+         Generating implicit copyin(cur(1:n1,1:n2,1:n3,1:6),nor(1:n1,1:n2,1:n3,1:3),vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copy(d_thinc(1:n1,1:n2,1:n3)) [if not already present]
+   1087, Generating implicit firstprivate(fpp,a4,qq,p,e4,fmm,fmp,fpm,ind2,aa,b4,c4,dtemp,d4)
+   1095, Loop is parallelizable
+   1096, Loop is parallelizable
+   1108, Loop is parallelizable
+   1109, Loop is parallelizable
+   1110, Loop is parallelizable
+   1111, Loop is parallelizable
+   1112, Loop is parallelizable
+   1113, Loop is parallelizable
+   1114, Loop is parallelizable
+   1115, Loop is parallelizable
+   1116, Loop is parallelizable
+   1161, Loop is parallelizable
+         Generating implicit firstprivate(surf)
+   1166, Loop is parallelizable
+   1169, Loop is parallelizable
+   1172, Loop is parallelizable
+   1175, Loop is parallelizable
+[0m[91mcmpt_vof_flux:
+   1575, Generating implicit firstprivate(n1,n2,n3)
+         Generating NVIDIA GPU code
+       1576, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       1577,   ! blockidx%x threadidx%x collapsed
+       1578,   ! blockidx%x threadidx%x collapsed
+             Generating implicit private(sum_int_func,czza,jj,vel_sign,xa,xb,ya,ind2,yb,za,zb,kk,cyza,a100,a001,cxza,ii,a010,rp1,b,cyya,a,rm2,cxya,cxxa,cf,rp2,rm1)
+       1582, !$acc loop seq
+       1584, !$acc loop seq
+       1586, !$acc loop seq
+       1589, !$acc loop seq
+       1590, !$acc loop seq
+       1628, !$acc loop seq
+       1629, !$acc loop seq
+       1726, !$acc loop seq
+       1741, !$acc loop seq
+             Generating implicit private(surf_b,surf_a)
+   1575, Local memory used for f2_l,cur_v,crd,f1_l,nor_v,xv,cv
+         Generating implicit copyin(d_thinc(:,:,:),nor(:,:,:,1:3),vof(:,:,:),vel(0:n1,0:n2,0:n3)) [if not already present]
+         Generating implicit copy(flux(0:n1,0:n2,0:n3)) [if not already present]
+         Generating implicit copyin(cur(:,:,:,1:6)) [if not already present]
+   1578, Generating implicit firstprivate(czza,sum_int_func,dt,ind2,jj,b,dl,dli,vel_sign,xa,xb,ya,yb,za,zb,ii,a100,kk,rm2,rm1,rp1,cf,cxza,cyza,cxxa,cxya,cyya,a010,a001,a,rp2,dir)
+   1582, Loop is parallelizable
+   1584, Loop is parallelizable
+   1586, Loop is parallelizable
+   1589, Loop is parallelizable
+   1590, Loop is parallelizable
+   1628, Loop is parallelizable
+   1629, Loop is parallelizable
+   1726, Loop is parallelizable
+   1741, Generating implicit firstprivate(q,surf_b,surf_a)
+[0m[91msolve_quar_paper:
+   1774, Generating acc routine seq
+         Generating NVIDIA GPU code
+[0m[91msolve_quad:
+   1839, Generating acc routine seq
+         Generating NVIDIA GPU code
+[0m[91minitvof:
+   1911, Generating implicit copyout(vof(0:,0:,0:)) [if not already present]
+   1912, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1912,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+   1926, Generating implicit copyin(iperiod(:),nx_b(:),nz_b(1:2)) [if not already present]
+         Generating implicit copy(vof(:,:,:)) [if not already present]
+         Generating implicit copyin(xc(i_b),yc(i_b),zc(i_b),ijk_start(:),dl(:),r(i_b),dlbox(:),ny_b(:)) [if not already present]
+   1927, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1927, !$acc loop gang ! blockidx%x
+             Generating implicit private(z,j)
+       1929, !$acc loop seq
+             Generating implicit private(i,y)
+       1931, !$acc loop vector(128) ! threadidx%x
+             Generating implicit private(sdistmin,zl,yl,xl,sdist,x)
+       1939, !$acc loop seq
+       1940, !$acc loop seq
+       1941, !$acc loop seq
+             Generating implicit private(sdistmin,sdist)
+       1964, !$acc loop seq
+             Generating implicit private(zz)
+       1966, !$acc loop seq
+             Generating implicit private(yy)
+       1968, !$acc loop seq
+             Generating implicit private(xx,sdist)
+   1929, Loop is parallelizable
+   1931, Loop is parallelizable
+   1939, Loop carried scalar dependence for sdistmin at line 1951
+         Scalar last value needed after loop for sdistmin at line 1955
+   1940, Loop carried scalar dependence for sdistmin at line 1951
+         Scalar last value needed after loop for sdistmin at line 1955
+   1941, Loop carried scalar dependence for sdistmin at line 1951
+         Scalar last value needed after loop for sdistmin at line 1955
+         Inner sequential loop scheduled on accelerator
+   1964, Loop carried dependence of vof prevents parallelization
+         Loop carried backward dependence of vof prevents vectorization
+   1966, Loop carried dependence of vof prevents parallelization
+         Loop carried backward dependence of vof prevents vectorization
+   1968, Complex loop carried dependence of vof prevents parallelization
+         Loop carried dependence of vof prevents parallelization
+         Loop carried backward dependence of vof prevents vectorization
+         Inner sequential loop scheduled on accelerator
+   1990, Generating implicit copyout(vof(1:n1,1:n2,1:n3)) [if not already present]
+   1991, Loop is parallelizable
+   1992, Loop is parallelizable
+   1993, Loop is parallelizable
+         Generating NVIDIA GPU code
+       1991, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       1992,   ! blockidx%x threadidx%x auto-collapsed
+       1993,   ! blockidx%x threadidx%x auto-collapsed
+   2002, Generating implicit copyout(vof(1:n1,1:n2,1:n3)) [if not already present]
+   2003, Loop is parallelizable
+   2004, Loop is parallelizable
+   2005, Loop is paral[0m[91mlelizable
+         Generating NVIDIA GPU code
+       2003, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       2004,   ! blockidx%x threadidx%x auto-collapsed
+       2005,   ! blockidx%x threadidx%x auto-collapsed
+   2052, Generating implicit copy(vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(ijk_start(:1),dlbox(:1),dl(:1)) [if not already present]
+   2053, Loop is parallelizable
+   2054, Loop is parallelizable
+   2055, Loop is paralleli[0m[91mzable
+         Generating NVIDIA GPU code
+       2053, [0m[91m!$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       2054,   ! blockidx%x threadidx%x auto-collapsed
+       2055,   ! blockidx%x threadidx%x auto-collapsed
+             [0m[91mGenerating implic[0m[91mit private(sdist1[0m[91m,xl,x)
+       2065, !$acc loop [0m[91mseq
+             Generating[0m[91m implicit priv[0m[91mate(xx)
+       2067, !$acc loop [0m[91mseq
+       2068, !$acc loop seq
+             [0m[91mGenerating impl[0m[91micit private[0m[91m(sdist1)
+   2065, Loop c[0m[91married dep[0m[91mendence of vof[0m[91m prevents p[0m[91marallelizat[0m[91mion
+         Lo[0m[91mop carried backward [0m[91mdependence of vof prevents vectorization
+   2067, Loop carried dependence of vof prevents parallelization
+         Loop carried backward dependence of vof preve[0m[91mnts vectorization
+   2068, Complex loop carried dependence of vof prevents parallelization
+         Loop carried dependence of vof prevents parallelizati[0m[91mon
+         Loop carried[0m[91m ba[0m[91mckward depe[0m[91mndence of [0m[91mvof p[0m[91mreve[0m[91mnts vecto[0m[91mri[0m[91mzation
+         Inne[0m[91mr seque[0m[91mnti[0m[91mal loop sch[0m[91meduled on [0m[91maccele[0m[91mrator
+[0m[91m  [0m[91m 2085, Generatin[0m[91mg implicit[0m[91m copyin(dlbox(2),dl(2)) [if not already present][0m[91m
+         Generating implicit copy(vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(ijk_start(2)) [0m[91m[if not already present]
+   2086, Loop is parallelizable[0m[91m
+         Generating [0m[91mNVIDIA GPU code
+       2086, !$acc loop gang ! blockidx%x
+             Generating implicit privat[0m[91me(y)
+       2089, !$acc loop vector(128) collapse(2) ! threadidx%x[0m[91m
+       2090,  [0m[91m ! threadidx%x auto-collapsed
+             Gene[0m[91mrating im[0m[91mpli[0m[91mcit pr[0m[91mivate(yl,sdist1)[0m[91m
+       2098, !$acc loop[0m[91m seq
+             Generat[0m[91ming im[0m[91mplicit [0m[91mprivate[0m[91m(yy)
+  [0m[91m     2100, !$acc loop[0m[91m seq
+       2101, !$acc loop seq[0m[91m
+             Gen[0m[91merating[0m[91m implici[0m[91mt priva[0m[91mte([0m[91msdist1)
+   2089, Loop [0m[91mis paral[0m[91mlelizable[0m[91m
+   2090, Loop is paralleliz[0m[91mabl[0m[91me
+   2098, Lo[0m[91mop carried d[0m[91mepen[0m[91mdence of[0m[91m vof[0m[91m preven[0m[91mts [0m[91mpar[0m[91mallelizatio[0m[91mn
+[0m[91m         Loop[0m[91m c[0m[91marri[0m[91med backward[0m[91m dependence o[0m[91mf vof prev[0m[91ments ve[0m[91mcto[0m[91mrizati[0m[91mon
+   2100, Loop car[0m[91mried dependence [0m[91mof vof preven[0m[91mts paral[0m[91mlelization[0m[91m
+         Loop car[0m[91mried backwar[0m[91md dependen[0m[91mce of vof prev[0m[91ments vectoriza[0m[91mtion
+   2101, C[0m[91momplex loop carried dependence of vof prevents pa[0m[91mrallelization
+         Loop carried dependence of vof prevent[0m[91ms parall[0m[91meli[0m[91mzation[0m[91m
+  [0m[91m       Loop [0m[91mcarried backward dependence of vof prevents vectorizat[0m[91mion
+         Inner sequential loop scheduled on accelerator
+   2118, Generating implicit copyin(dlbox(3),dl(3)) [if not already present]
+         Generating implicit copy(vof(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(ijk_start(3)) [if not already present]
+   2119, Loop is parallelizable
+         Generating NVIDIA GPU code
+       2119, !$acc loop gang ! blockidx%x
+             Gen[0m[91merating implici[0m[91mt private(z)
+       2122, !$acc loop vector(128) collapse(2) ! threadidx%x
+       2123,   ! threadidx%x auto-collapsed
+             Generating implicit private(zl,sdist1)
+       2131, !$acc loop seq
+             Generating implicit private(zz)
+       2133, !$acc loop seq
+       2134, !$acc loop seq
+             Generating implicit private(sdist1)
+   2122, Loop is parallelizable
+   2123, Loop is parallelizable
+   2131, Loop carried depe[0m[91mndence of vof prevents parallelization
+         Lo[0m[91mop carried backward dependence of[0m[91m vof prevents vectorizat[0m[91mion
+   2133, Loop carri[0m[91med depend[0m[91mence of vof prevents[0m[91m parallelizatio[0m[91mn
+         Loop ca[0m[91mrried backward [0m[91mdependence of vof preve[0m[91mnts vector[0m[91mization
+  [0m[91m 2134, Complex loop [0m[91mcarried dependence[0m[91m of vof prevents [0m[91mparallelizat[0m[91mion
+         Loop c[0m[91married de[0m[91mpendence of vof [0m[91mprevents pa[0m[91mrallelization[0m[91m
+         Loop carr[0m[91mied backward dependence of vof prevents[0m[91m vectorizati[0m[91mon
+         Inner seq[0m[91muential lo[0m[91mop scheduled [0m[91mon accelerator
+   2152, G[0m[91menerating implicit copy[0m[91m(vof(1:n1,1:n2,1:n3)) [if not already present]
+         Gen[0m[91merating implicit copyin(ijk_start(:1),dl(:1)) [0m[91m[if not already present]
+   2153, Loop is p[0m[91marallelizable
+   2154, [0m[91mLoop is paral[0m[91mlelizable
+   2155, Loop[0m[91m is parallel[0m[91mizable
+         Generating [0m[91mNVIDIA GPU code
+       2153, !$acc loop [0m[91mgang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       2154,   ! blockidx%x threadidx%x auto-collapsed
+       2155, [0m[91m  ! blockidx%x threadidx%x auto-collapsed
+             Generating implicit private(x,csi2,csi1)
+   2184, Gene[0m[91mrating implicit copy(vof(1:n1,1:n2,1:n3)) [if not already present]
+         G[0m[91menerating implicit[0m[91m copyin(ijk_start(2),dl(2)) [if not already present]
+[0m[91m   2185, Loop is parallel[0m[91mizable
+   2186, Loop i[0m[91ms paralle[0m[91mlizable
+   2187, Loop [0m[91mis paralle[0m[91mlizable
+  [0m[91m       Generating NVIDIA GPU [0m[91mcode
+       2185, [0m[91m!$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       2186,   ! blockidx%x threadidx%x auto-collapsed
+       2187, [0m[91m  ! blockidx%x threadidx%x auto-collapsed
+             Generating[0m[91m implicit[0m[91m private(y,csi2[0m[91m,csi1)
+   2216, Genera[0m[91mting implicit copy(vof(1:n1,1:n2,1:n3)) [if not already present][0m[91m
+         Generatin[0m[91mg implicit copyin(ijk_start(3),dl(3)) [if not already present]
+   2217, Loop [0m[91mis paralleliz[0m[91mable
+   2218, Loop [0m[91mis parallelizable
+  [0m[91m 2219, Loop is par[0m[91mallelizable
+  [0m[91m       Generatin[0m[91mg NVIDIA GPU code
+       2217, [0m[91m!$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+       2218,   ! blockidx%x threadidx%x auto-collapsed
+  [0m[91m     2219,   ! blockidx%x threadidx%x auto-collapsed
+             Generatin[0m[91mg implicit pr[0m[91mivate(z,csi2,csi1)
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o load.o load.f90
+mpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -c -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -o output.o output.f90
+[91mout1d:
+    109, Generating implicit copyout(p1d(1:ng_idir)) [if not already present]
+    110, Loop is parallelizable
+         Generating NVIDIA GPU code
+        110, !$acc loop gang, vector(128) ! blockidx%x threadidx%x
+    117, Generating implicit copy(p1d(start+1:nz+start)) [if not already present]
+         Generating implicit copyin(p(1:nx,1:ny,1:nz)) [if not already present]
+    118, Loop is parallelizable
+    119, Loop carried dependence of p1d prevents parallelization
+         Loop carried backward dependence of p1d prevents vectorization
+    120, Complex loop carried dependence of p1d prevents parallelization
+         Loop carried dependence of p1d prevents parallelization
+         Loop carried backward dependence of p1d prevents vectorization
+         Inner sequential loop scheduled on accelerator
+         Generating NVIDIA GPU code
+        118, !$acc loop gang, vector(128) ! blockidx%x threadidx%x
+        119, !$acc loop seq
+        120, !$acc loop seq
+    138, Generating implicit copy(p1d(start+1:ny+start)) [if not already present]
+         Generating implicit copyin(p(1:nx,1:ny,1:nz),dzlzi(1:nz)) [if not already present]
+    139, Loop carried dependence due to exposed use of p1d(start+1:ny+start) prevents parallelization
+         Complex loop carried dependence of p1d prevents parallelization
+    140, Loop is parallelizable
+    141, Complex loop carried dependence of p1d prevents parallelization
+         Loop carried dependence of p1d prevents parallelization
+         Loop carried backward dependence of p1d prevents vectorization
+         Inner sequential loop scheduled on accelerator
+         Generating NVIDIA GPU code
+        139, !$acc loop seq
+        140, !$acc loop gang, vector(128) ! blockidx%x threadidx%x
+        141, !$acc loop seq
+    159, Generating implicit copy(p1d(start+1:nx+start)) [if not already present]
+         Generating implicit copyin(p(1:nx,1:ny,1:nz),dzlzi(1:nz)) [if not already present]
+    160, Loop carried dependence due to exposed use of p1d(start+1:nx+start) prevents parallelization
+         Complex loop carried dependence of p1d prevents parallelization
+    161, Loop carried dependence due to exposed use of p1d(start+1:nx+start) prevents parallelization
+    162, Loop is parallelizable
+         Generating NVIDIA GPU code
+        160, !$acc loop seq
+        161, !$acc loop seq
+        162, !$acc loop gang, vector(128) ! blockidx%x threadidx%x
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF -cpp  -Iapps/two_phase_inc_isot/postp.two_phase_inc_isot -I./postprocessing -c -o main.o apps/two_phase_inc_isot/main__two_phase_inc_isot.f90
+[91mflutas:
+    398, Generating implicit copyout(psi(0:(n(1))+1,0:(n(2))+1,0:(n(3))+1)) [if not already present]
+    399, Loop is parallelizable
+         Generating NVIDIA GPU code
+        399,   ! blockidx%x threadidx%x auto-collapsed
+             !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+    410, Generating implicit copyout(dudtrko(1:n1,1:n2,1:n3),dvdtrko(1:n1,1:n2,1:n3),dwdtrko(1:n1,1:n2,1:n3)) [if not already present]
+    411, Loop is parallelizable
+    412, Loop is parallelizable
+    413, Loop is parallelizable
+         Generating NVIDIA GPU code
+        411, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        412,   ! blockidx%x threadidx%x auto-collapsed
+        413,   ! blockidx%x threadidx%x auto-collapsed
+    468, Generating implicit copyout(pold(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copyin(p(1:n1,1:n2,1:n3)) [if not already present]
+    469, Loop is parallelizable
+    470, Loop is parallelizable
+    471, Loop is parallelizable
+         Generating NVIDIA GPU code
+        469, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        470,   ! blockidx%x threadidx%x auto-collapsed
+        471,   ! blockidx%x threadidx%x auto-collapsed
+    695, Generating present(pold(:,:,:),p(:,:,:))
+         Generating implicit firstprivate(n1,n3,n2)
+         Generating NVIDIA GPU code
+        701, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        702,   ! blockidx%x threadidx%x collapsed
+        703,   ! blockidx%x threadidx%x collapsed
+    742, Generating implicit firstprivate(n1,n3,n2)
+         Generating NVIDIA GPU code
+        746, !$acc loop gang, vector(128) collapse(3) ! blockidx%x threadidx%x
+        747,   ! blockidx%x threadidx%x collapsed
+        748,   ! blockidx%x threadidx%x collapsed
+    742, Generating implicit copyin(pold(1:n1,1:n2,1:n3)) [if not already present]
+         Generating implicit copy(p(1:n1,1:n2,1:n3)) [if not already present]
+[0mmpif90  -Minfo=accel -fast   -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand -D_TIMING -D_EPA2A -D_DECOMP_X  -D_EPHC -D_GPU_MPI -D_CONSTANT_COEFFS_POISSON  -D_USE_VOF profiler.o bound.o chkdiv.o chkdt.o common_mpi.o correc.o debug.o fft.o fftw.o fillps.o initflow.o initgrid.o initmpi.o initsolver.o load.o output.o apps/two_phase_inc_isot/param.o rk.o source.o sanity.o 2decomp/decomp_2d.o 2decomp/io.o types.o solver_gpu.o solver_cpu.o vof.o mom.o funcs.o -L/usr/lib -lfftw3 main.o -o flutas.two_phase_inc_isot
+ln -sf flutas.two_phase_inc_isot flutas
+make: Leaving directory '/opt/FluTAS/src'
+[91m+ cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot
+[0m[91m+ grep -F sm_120.cubin
+[0mELF file    1: pgcudafat-yj92yQFLAU.sm_120.cubin
+[91m+ test -x /opt/FluTAS/src/flutas.two_phase_inc_isot
+[0m ---> Removed intermediate container acec8fff3801
+ ---> 17678c69d877
+Step 8/8 : ENTRYPOINT ["/bin/true"]
+ ---> Running in 57d9d71beb66
+ ---> Removed intermediate container 57d9d71beb66
+ ---> 6ecfa8e248fe
+Successfully built 6ecfa8e248fe
+Successfully tagged track2/flutas-source-boundary:5982106-candidate2

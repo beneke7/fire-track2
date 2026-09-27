@@ -1,0 +1,164 @@
++ evidence=/evidence
++ helper=/evidence/build/candidate5_m3_arithmetic_helper
++ case_dir=/evidence/inputs/quiescent_four
++ outputs=/evidence/outputs
++ logs=/evidence/logs
++ mkdir -p /evidence/outputs /evidence/logs
++ unexpected=0
++ run_case m3-pass 0 m3-pass
++ local name=m3-pass
++ local expected_status=0
++ shift 2
++ local mode=m3-pass
++ shift
++ mkdir -p /evidence/outputs/m3-pass
++ local actual_status=0
++ printf 'expected_status=%s\nactual_status=%s\n' 0 0
++ [[ 0 -ne 0 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case scalar_x_mismatch 1 m3-bad scalar_x_mismatch
++ local name=scalar_x_mismatch
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/scalar_x_mismatch
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case scalar_y_zero_inverse 1 m3-bad scalar_y_zero_inverse
++ local name=scalar_y_zero_inverse
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/scalar_y_zero_inverse
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case scalar_z_negative_spacing 1 m3-bad scalar_z_negative_spacing
++ local name=scalar_z_negative_spacing
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/scalar_z_negative_spacing
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case vertical_dzc_negative_spacing 1 m3-bad vertical_dzc_negative_spacing
++ local name=vertical_dzc_negative_spacing
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/vertical_dzc_negative_spacing
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case vertical_dzfi_zero_inverse 1 m3-bad vertical_dzfi_zero_inverse
++ local name=vertical_dzfi_zero_inverse
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/vertical_dzfi_zero_inverse
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case vertical_dzci_nan_inverse 1 m3-bad vertical_dzci_nan_inverse
++ local name=vertical_dzci_nan_inverse
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/vertical_dzci_nan_inverse
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case vertical_dzfi_inf_inverse 1 m3-bad vertical_dzfi_inf_inverse
++ local name=vertical_dzfi_inf_inverse
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/vertical_dzfi_inf_inverse
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case scalar_x_overflow_reciprocal 1 m3-bad scalar_x_overflow_reciprocal
++ local name=scalar_x_overflow_reciprocal
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/scalar_x_overflow_reciprocal
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case vertical_dzf_overflow_reciprocal 1 m3-bad vertical_dzf_overflow_reciprocal
++ local name=vertical_dzf_overflow_reciprocal
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/vertical_dzf_overflow_reciprocal
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ for bad_case in scalar_x_mismatch scalar_y_zero_inverse scalar_z_negative_spacing vertical_dzc_negative_spacing vertical_dzfi_zero_inverse vertical_dzci_nan_inverse vertical_dzfi_inf_inverse scalar_x_overflow_reciprocal vertical_dzf_overflow_reciprocal vertical_dzci_mismatch
++ run_case vertical_dzci_mismatch 1 m3-bad vertical_dzci_mismatch
++ local name=vertical_dzci_mismatch
++ local expected_status=1
++ shift 2
++ local mode=m3-bad
++ shift
++ mkdir -p /evidence/outputs/vertical_dzci_mismatch
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ run_case m3-nonfinite-rate 1 m3-nonfinite-rate
++ local name=m3-nonfinite-rate
++ local expected_status=1
++ shift 2
++ local mode=m3-nonfinite-rate
++ shift
++ mkdir -p /evidence/outputs/m3-nonfinite-rate
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ run_case m3-nonfinite-dt 1 m3-nonfinite-dt
++ local name=m3-nonfinite-dt
++ local expected_status=1
++ shift 2
++ local mode=m3-nonfinite-dt
++ shift
++ mkdir -p /evidence/outputs/m3-nonfinite-dt
++ local actual_status=0
++ actual_status=1
++ printf 'expected_status=%s\nactual_status=%s\n' 1 1
++ [[ 1 -ne 1 ]]
++ [[ -s /evidence/outputs/m3-pass/ledger_timestep-inputs.json ]]
++ [[ -s /evidence/outputs/m3-pass/ledger_timestep-restriction.csv ]]
++ [[ -s /evidence/outputs/m3-nonfinite-rate/ledger_timestep-restriction.csv ]]
++ [[ -s /evidence/outputs/m3-nonfinite-dt/ledger_timestep-restriction.csv ]]
++ [[ 0 -eq 0 ]]

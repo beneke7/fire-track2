@@ -1,0 +1,17 @@
+# Result storage
+
+Generated runs live in ignored `runs/`; the machine snapshot is `machine.json`.
+E0 bundles contain analytical checks and a synthetic ground map, not an aircraft
+prediction. Preserve each run directory as immutable evidence.
+
+Keep large CFD fields, renders and derived paper text out of Git. Commit concise
+reviewed summaries with exact artifact paths/hashes and reproducible commands.
+For a result used in a scientific claim, archive its full manifest, source inputs,
+checkpoint/solver configuration, raw metrics and uncertainty evidence in durable
+storage before relying on a local ignored directory.
+
+The small [one-second Restás visualization](restas-still-air-alpha65-1s-preview.mp4)
+is a shareable preview. Current CPU and GPU trial findings, local evidence paths,
+and solver-selection research are summarized in
+[`VOF_TRIALS_2026-09-27.md`](VOF_TRIALS_2026-09-27.md); full run bundles remain
+local and ignored.

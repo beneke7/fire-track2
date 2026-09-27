@@ -1,0 +1,140 @@
+{
+  "experiment_id": "P1_SOURCE_EVENT_LEDGER",
+  "execution_status": "ready",
+  "independent_review": {
+    "reviewer": "scientific_contract",
+    "decision": "approved_with_revisions",
+    "scope": "source-flux definition, expected sampling dose, timestep choice, and ledger tolerance",
+    "amendment_1_review_decision": "approved_with_revisions",
+    "amendment_1_reviewer": "scientific_contract",
+    "amendment_1_reviewed_utc": "2026-09-25T01:55:14Z",
+    "execution_code_review": "approved",
+    "execution_code_reviewer": "general_reviewer_astra",
+    "execution_code_reviewed_utc": "2026-09-25T07:39:40Z",
+    "execution_code_review_scope": "Prospective exact-hash review of the complete current Makefile P1 target and its six-file local execution path. Confirmed the current target has no hidden include/evaluation hooks or prerequisites and directly invokes the previously reviewed launcher/analyzer path with the frozen P1 limits. This does not assert the unavailable historical Makefile diff; no solver run was performed.",
+    "execution_code_review_history": [
+      {
+        "decision": "approved",
+        "reviewer": "scientific_contract",
+        "reviewed_utc": "2026-09-25T00:26:10Z",
+        "scope": "Local launch path, P1 case generation, dictionary/source validation, log parsing, wall/Co stops, and ledger checks; exact files are SHA-256-bound above.",
+        "sha256": {
+          "Makefile": "5bfb80e60a08a27ce0f2295a311664821a873d8842872e1583f8f4298f65bdd2",
+          "scripts/analyze_restas_pilot.py": "d7e88a2460df77ab4d9de781910569e9fb8b52f5a34a9fb0ba6a81a197a533cf",
+          "scripts/run_restas_pilot.py": "d7e53bf581b826136586f99811dcaaa6328fc4aa3cc7e2f75b8978e15b5861a5",
+          "scripts/analyze_restas_ledger.py": "36de1f21be5fc814f0ace792daa36cdb187934b123432c90c7c52f64e24c145c",
+          "scripts/doctor.py": "e9e1f76a1c1ce5b39331a20353d7923ebd588a2e9a29954f6d6ecba53023bf03",
+          "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db"
+        },
+        "superseded_because": "First OpenFOAM 2512 startup failed before any timestep: surfaceFieldValue required writeFields."
+      },
+      {
+        "decision": "approved",
+        "reviewer": "scientific_contract",
+        "reviewed_utc": "2026-09-25T00:32:41Z",
+        "scope": "OpenFOAM 2512 surfaceFieldValue compatibility; generated dictionaries for all seven flux objects; ledger analyzer and regression behavior; unchanged local launch, hard-stop, and wall-time gates; exact file hashes.",
+        "sha256": {
+          "Makefile": "5bfb80e60a08a27ce0f2295a311664821a873d8842872e1583f8f4298f65bdd2",
+          "scripts/analyze_restas_pilot.py": "d7e88a2460df77ab4d9de781910569e9fb8b52f5a34a9fb0ba6a81a197a533cf",
+          "scripts/run_restas_pilot.py": "204e0d21019cecb4d33fc9c4f10e356fa3bbe9139d9e3a0d473fdb21e2c28c68",
+          "scripts/analyze_restas_ledger.py": "019b6390dc303811ca37a480a9e8169fdcab50a56f8deb79f07fcb0f3d512475",
+          "scripts/doctor.py": "e9e1f76a1c1ce5b39331a20353d7923ebd588a2e9a29954f6d6ecba53023bf03",
+          "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db"
+        },
+        "superseded_because": "Completed P1 solver data reached 0.12 s, but analyzer used OpenFOAM table path 0/ instead of 0.000000/ and ran before final exit/wall metadata was persisted."
+      },
+      {
+        "decision": "not_approved",
+        "reviewer": "scientific_contract",
+        "recorded_utc": "2026-09-25T01:48:31Z",
+        "scope": "Review of numeric output discovery and manifest timing passed. Approval withheld because the aggregate container status was labelled solver_exit_code and the analyzer could fall back from absent raw solver status to aggregate exit_code.",
+        "sha256": {
+          "Makefile": "5bfb80e60a08a27ce0f2295a311664821a873d8842872e1583f8f4298f65bdd2",
+          "scripts/analyze_restas_pilot.py": "d7e88a2460df77ab4d9de781910569e9fb8b52f5a34a9fb0ba6a81a197a533cf",
+          "scripts/run_restas_pilot.py": "3c30be7aaecfa88efc133ce717941a14e970e5aab6e865143917377b303bdb94",
+          "scripts/analyze_restas_ledger.py": "118c3fc26f2f4fdb326c05c92af99764fef9715bcefab3b6a1a4de6f05cfc237",
+          "scripts/doctor.py": "e9e1f76a1c1ce5b39331a20353d7923ebd588a2e9a29954f6d6ecba53023bf03",
+          "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db"
+        },
+        "superseded_by": "Separate OpenFOAM stage codes and protocol revision 2 alphaPhi_ time-centering amendment; awaiting exact-hash review."
+      },
+      {
+        "decision": "approved",
+        "reviewer": "scientific_contract",
+        "reviewed_utc": "2026-09-25T01:55:14Z",
+        "scope": "Protocol amendment 1 and exact-hash review of the P1 launch/analyzer path, including numeric output discovery, ordered stage exit capture, separate case-command and runner status, manifest persistence, and regression tests.",
+        "sha256": {
+          "Makefile": "5bfb80e60a08a27ce0f2295a311664821a873d8842872e1583f8f4298f65bdd2",
+          "scripts/analyze_restas_pilot.py": "d7e88a2460df77ab4d9de781910569e9fb8b52f5a34a9fb0ba6a81a197a533cf",
+          "scripts/run_restas_pilot.py": "46a79400ba532825cf0940ff803a452b838404a90df030ccbdeecdfdca721a38",
+          "scripts/analyze_restas_ledger.py": "6e59408ebaac5b5904fbff3c6d385773eb7bc527688e7f68b2d7a0c902904ce0",
+          "scripts/doctor.py": "e9e1f76a1c1ce5b39331a20353d7923ebd588a2e9a29954f6d6ecba53023bf03",
+          "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db",
+          "experiments/P1_SOURCE_EVENT_LEDGER_AMENDMENT_1.md": "98002c2252a7f6ded3b98758248cf5e194739fcedc2050e95a4caee8e4fd9829"
+        }
+      },
+      {
+        "decision": "approved",
+        "reviewer": "general_reviewer_astra",
+        "reviewed_utc": "2026-09-25T07:39:40Z",
+        "scope": "Prospective exact-hash review of the complete current Makefile P1 target and its six-file local execution path. Confirmed the current target has no hidden include/evaluation hooks or prerequisites and directly invokes the previously reviewed launcher/analyzer path with the frozen P1 limits. This does not assert the unavailable historical Makefile diff; no solver run was performed.",
+        "sha256": {
+          "Makefile": "f6dfe1e67c443186c7ca14f1bedd0b7e3beebc17114311921baa8ffe0a682182",
+          "scripts/analyze_restas_pilot.py": "d7e88a2460df77ab4d9de781910569e9fb8b52f5a34a9fb0ba6a81a197a533cf",
+          "scripts/run_restas_pilot.py": "46a79400ba532825cf0940ff803a452b838404a90df030ccbdeecdfdca721a38",
+          "scripts/analyze_restas_ledger.py": "6e59408ebaac5b5904fbff3c6d385773eb7bc527688e7f68b2d7a0c902904ce0",
+          "scripts/doctor.py": "e9e1f76a1c1ce5b39331a20353d7923ebd588a2e9a29954f6d6ecba53023bf03",
+          "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db"
+        }
+      }
+    ]
+  },
+  "reviewed_code_sha256": {
+    "Makefile": "f6dfe1e67c443186c7ca14f1bedd0b7e3beebc17114311921baa8ffe0a682182",
+    "scripts/analyze_restas_pilot.py": "d7e88a2460df77ab4d9de781910569e9fb8b52f5a34a9fb0ba6a81a197a533cf",
+    "scripts/run_restas_pilot.py": "46a79400ba532825cf0940ff803a452b838404a90df030ccbdeecdfdca721a38",
+    "scripts/analyze_restas_ledger.py": "6e59408ebaac5b5904fbff3c6d385773eb7bc527688e7f68b2d7a0c902904ce0",
+    "scripts/doctor.py": "e9e1f76a1c1ce5b39331a20353d7923ebd588a2e9a29954f6d6ecba53023bf03",
+    "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db"
+  },
+  "source_profile_m_s": [
+    [
+      0.0,
+      -4.8
+    ],
+    [
+      0.0795,
+      -4.8
+    ],
+    [
+      0.0805,
+      0.0
+    ],
+    [
+      0.12,
+      0.0
+    ]
+  ],
+  "protocol_revision": 2,
+  "protocol_amendment_id": "P1_SOURCE_EVENT_LEDGER_AMENDMENT_1",
+  "protocol_document_sha256": "98002c2252a7f6ded3b98758248cf5e194739fcedc2050e95a4caee8e4fd9829",
+  "continuous_expected_release_kg": 230.4,
+  "alpha_phi_sampling_convention": "left_endpoint_of_completed_interval",
+  "alpha_phi_left_sampled_expected_release_kg": 230.544,
+  "alpha_phi_left_sampled_expected_release_per_slot_kg": 57.636,
+  "phi_right_sampled_expected_release_kg": 230.256,
+  "phi_right_sampled_expected_release_per_slot_kg": 57.564,
+  "previous_alpha_phi_right_sampled_expected_release_kg": 230.256,
+  "previous_alpha_phi_right_sampled_expected_release_per_slot_kg": 57.564,
+  "source_dose_tolerance_fraction": 0.001,
+  "mass_ledger_tolerance_fraction_of_cumulative_source": 0.001,
+  "fixed_delta_t_s": 0.0001,
+  "expected_time_steps": 1200,
+  "n_alpha_sub_cycles": 1,
+  "max_courant": 0.5,
+  "max_alpha_courant": 0.25,
+  "hard_stop_on_courant_breach": true,
+  "max_wall_time_s": 3600,
+  "max_memory_gib": 48,
+  "mpi_ranks": 16
+}

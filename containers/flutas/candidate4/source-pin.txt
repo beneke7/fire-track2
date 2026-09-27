@@ -1,0 +1,12 @@
+FluTAS repository: https://github.com/Multiphysics-Flow-Solvers/FluTAS.git
+FluTAS commit: 598210616bebd51f7d51f61455f196e6f3479916
+Original src/targets/target.generic-gpu SHA-256: ca815f1b4f2839459703e634d1b8ab11d3bca3cff01cec37876217af967bbf6f
+
+NVIDIA HPC SDK release: 26.9, Linux x86_64, CUDA 13.3
+Installer: https://developer.download.nvidia.com/hpc-sdk/26.9/nvhpc_2026_269_Linux_x86_64_cuda_13.3.tar.gz
+Installer size: 6,927,405,256 bytes
+Installer SHA-256: e1bbf2ccdb112a3773d2cc141f09fb1d087562e266ec7ec7adb30a0519d45877
+
+Base image: nvidia/cuda:12.8.0-devel-ubuntu24.04
+Base image manifest digest: sha256:9a8fffc32a955361aa66d754e7a0cda2513052eaf5aaf8f3ba69b80578d1c6a9
+FluTAS GPU target delta: use cc120,cuda13.3 and set FFTW_HOME=/usr

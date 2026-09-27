@@ -1,0 +1,9 @@
+[run_local] thread limit: 2
+++ git -C /opt/FluTAS rev-parse HEAD
++ test 598210616bebd51f7d51f61455f196e6f3479916 = 598210616bebd51f7d51f61455f196e6f3479916
++ git -C /opt/FluTAS apply -R /candidate5.patch
+/candidate5.patch:1779: trailing whitespace.
+    call cmpt_vof_flux(n(1), n(2), n(3),dli(3),dt,nh_u,dvof2,nor,cur,d_thinc,3,wg,flux) 
+warning: 1 line adds whitespace errors.
+++ git -C /opt/FluTAS status --porcelain
++ test -z ' M src/targets/target.generic-gpu'

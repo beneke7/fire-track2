@@ -1,0 +1,9 @@
+# Project-scoped worker defaults. The primary model stays user-selected.
+# Three spawned-agent threads matches this session's runtime cap; hardware
+# simulation concurrency is managed separately by scripts/run_local.py.
+# Supported by Codex CLI 0.156.1; see docs/WORKFLOW.md.
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "max"

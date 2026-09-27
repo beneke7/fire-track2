@@ -1,0 +1,1 @@
+python3 scripts/run_local.py --threads 1 --timeout 900 -- docker run --rm --network none --cpus=1 --memory=4g --memory-swap=4g --mount type=bind,src=/home/v/proj/bene/fire-track2/containers/flutas/candidate6,dst=/candidate6,readonly --entrypoint bash track2/flutas-nvhpc:26.9 -lc 'PYTHONDONTWRITEBYTECODE=1 python3 /candidate6/tests/test_dzf_lower_bound_helpers.py /candidate6'

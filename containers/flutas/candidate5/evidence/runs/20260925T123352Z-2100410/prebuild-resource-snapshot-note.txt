@@ -1,0 +1,5 @@
+Pre-build resource snapshot provenance
+
+Immediately before the successful isolated build retry (run id 20260925T123352Z-2100410), `make doctor` was refreshed and the active-job inspection showed an empty `docker ps`; only the inspection shell matched the candidate/solver process search. The contemporaneous recorded readback was: 20 effective CPUs; 118.1 GiB available RAM; 260.7 GiB free disk; NVIDIA RTX 5090 visible and unused. The raw stdout was not tee'd into the run directory at that moment. This is a transparent note of the pre-build readback, not a raw command transcript. The build's own metadata separately records 20 online/allowed CPUs and 123807212 KiB available RAM at build start.
+
+A raw post-build `make doctor` transcript is preserved in `postbuild-resource-snapshot.txt`; it reports 20 effective CPUs, 118.1 GiB available RAM, 260.6 GiB free disk, RTX 5090 visible, and `nvcc` missing. Post-build `docker ps` and the candidate/solver process search were empty.

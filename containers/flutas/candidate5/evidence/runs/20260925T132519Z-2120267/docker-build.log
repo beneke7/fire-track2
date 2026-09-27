@@ -1,0 +1,116 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  350.7kB
+Step 1/9 : ARG BASE_IMAGE=track2/flutas-nvhpc:26.9
+Step 2/9 : FROM ${BASE_IMAGE}
+ ---> 78cd4fe3764e
+Step 3/9 : ARG FLUTAS_COMMIT=598210616bebd51f7d51f61455f196e6f3479916
+ ---> Using cache
+ ---> 5915d3e7d0dd
+Step 4/9 : COPY source-boundary.patch /tmp/source-boundary.patch
+ ---> cdc7732889e7
+Step 5/9 : COPY tests /opt/flutas-source-protocol/tests
+ ---> e0e12a42c667
+Step 6/9 : COPY tools /opt/flutas-source-protocol/tools
+ ---> eec13be2b46f
+Step 7/9 : COPY cases/source_boundary /opt/flutas-source-protocol/cases/source_boundary
+ ---> bfba564105d3
+Step 8/9 : RUN set -eux;     test "$(git -C /opt/FluTAS rev-parse HEAD)" = "${FLUTAS_COMMIT}";     git -C /opt/FluTAS apply --check /tmp/source-boundary.patch;     git -C /opt/FluTAS apply /tmp/source-boundary.patch;     /opt/flutas-source-protocol/tests/run_source_validator_tests.sh       /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary;     make -C /opt/FluTAS/src clean;     make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot;     cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot | grep -F 'sm_120.cubin';     test -x /opt/FluTAS/src/flutas.two_phase_inc_isot
+ ---> Running in 5043aa93bd77
+[91m+ git -C /opt/FluTAS rev-parse HEAD
+[0m[91m+ test 598210616bebd51f7d51f61455f196e6f3479916 = 598210616bebd51f7d51f61455f196e6f3479916
++ git -C /opt/FluTAS apply --check /tmp/source-boundary.patch
+[0m[91m+ git -C /opt/FluTAS apply /tmp/source-boundary.patch
+[0m[91m+ /opt/flutas-source-protocol/tests/run_source_validator_tests.sh /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary
+[0mPASS source-boundary behavior: dry
+PASS source-boundary behavior: dry-crossflow
+PASS source-boundary behavior: active-one
+PASS source-boundary behavior: active-four
+PASS source-boundary behavior: active-crossflow
+PASS source-boundary behavior: ledger-active
+PASS source-boundary behavior: ledger-four
+PASS source-boundary behavior: ledger-dry
+PASS unsupported input rejected: unsupported-slot-count
+PASS unsupported input rejected: dry-active-interval
+PASS unsupported input rejected: factor-out-of-range
+PASS unsupported input rejected: missing-factor
+PASS unsupported input rejected: nonfinite-factor
+PASS mismatched flux records are flushed before expected abort
+[91mtest_active_and_dry_histories_have_declared_schema_and_counts (__main__.EmittedLedgerTests.test_active_and_dry_histories_have_declared_schema_and_counts) ... [0m[91mok
+test_all_declared_cases_are_grid_aligned_and_under_one_million_cells (__main__.FrozenInputTests.test_all_declared_cases_are_grid_aligned_and_under_one_million_cells) ... [0m[91mok
+test_dry_crossflow_is_distinct_from_quiescent_dry (__main__.FrozenInputTests.test_dry_crossflow_is_distinct_from_quiescent_dry) ... [0m[91mok
+test_dry_fixture_has_no_source_or_return_across_the_full_window (__main__.FrozenInputTests.test_dry_fixture_has_no_source_or_return_across_the_full_window) ... ok
+test_explicit_provisional_fixed_step_factor_is_present_in_every_case (__main__.FrozenInputTests.test_explicit_provisional_fixed_step_factor_is_present_in_every_case) ... [0m[91mok
+test_fixture_files_match_frozen_hashes (__main__.FrozenInputTests.test_fixture_files_match_frozen_hashes) ... [0m[91mok
+test_mask_geometry_and_expected_source_totals (__main__.FrozenInputTests.test_mask_geometry_and_expected_source_totals) ... [0m[91mok
+[0m[91mtest_advvof_entry_refills_phase_and_rebuilds_geometry_before_flux (__main__.SourceCodeTests.test_advvof_entry_refills_phase_and_rebuilds_geometry_before_flux) ... ok
+test_candidate5_phase_property_stages_and_velocity_field_keys (__main__.SourceCodeTests.test_candidate5_phase_property_stages_and_velocity_field_keys) ... ok
+test_candidate5_scan_ranges_and_exact_first_failure_reduction (__main__.SourceCodeTests.test_candidate5_scan_ranges_and_exact_first_failure_reduction) ... ok
+test_candidate5_timestep_guard_uses_complete_chkdt_formula_and_terminal_sentinel (__main__.SourceCodeTests.test_candidate5_timestep_guard_uses_complete_chkdt_formula_and_terminal_sentinel) ... ok
+test_dry_duration_guard_and_periodic_bottom_halos (__main__.SourceCodeTests.test_dry_duration_guard_and_periodic_bottom_halos) ... [0m[91mok
+test_inflow_only_alpha_and_property_ghosts (__main__.SourceCodeTests.test_inflow_only_alpha_and_property_ghosts) ... ok
+test_interval_and_vof_boundary_state_order (__main__.SourceCodeTests.test_interval_and_vof_boundary_state_order) ... ok
+test_physical_flux_units_mass_momentum_ledgers_and_divergence (__main__.SourceCodeTests.test_physical_flux_units_mass_momentum_ledgers_and_divergence) ... ok
+test_provisional_gamma_fails_frozen_crossflow_arithmetic (__main__.SourceCodeTests.test_provisional_gamma_fails_frozen_crossflow_arithmetic) ... ok
+test_pulse_endpoint_reaches_postprojection_velocity_state (__main__.SourceCodeTests.test_pulse_endpoint_reaches_postprojection_velocity_state) ... [0m[91mok
+test_upstream_co_formula_and_fixed_fixture_values_are_static_only (__main__.SourceCodeTests.test_upstream_co_formula_and_fixed_fixture_values_are_static_only) ... [0m[91mok
+[0m[91mtest_velocity_override_order_and_return_from_actual_geometric_flux (__main__.SourceCodeTests.test_velocity_override_order_and_return_from_actual_geometric_flux) ... [0m[91mok
+[0m[91m
+----------------------------------------------------------------------
+[0m[91mRan 19 tests in 0.005s
+
+[0m[91mOK
+[0m[91mtest_every_phase_stage_class_and_available_property_records_first_failure (__main__.Candidate5ScanTests.test_every_phase_stage_class_and_available_property_records_first_failure) ... [0m[91mok
+test_every_velocity_face_class_and_component_records_first_failure (__main__.Candidate5ScanTests.test_every_velocity_face_class_and_component_records_first_failure) ... [0m[91mok
+test_finite_subtraction_overflow_is_preserved_and_fails_closed (__main__.Candidate5ScanTests.test_finite_subtraction_overflow_is_preserved_and_fails_closed) ... [0m[91mok
+test_first_finite_mismatch_is_retained_when_a_later_cell_is_nonfinite (__main__.Candidate5ScanTests.test_first_finite_mismatch_is_retained_when_a_later_cell_is_nonfinite) ... [0m[91mok
+test_full_phase_and_velocity_scans_emit_all_stage_keys_and_exact_counts (__main__.Candidate5ScanTests.test_full_phase_and_velocity_scans_emit_all_stage_keys_and_exact_counts) ... [0m[91mok
+test_unknown_stage_and_existing_output_paths_fail_closed (__main__.Candidate5ScanTests.test_unknown_stage_and_existing_output_paths_fail_closed) ... [0m[91mok
+test_crossflow_guard_failure_is_preserved_and_terminal_state_is_not_consumed (__main__.Candidate5TimestepTests.test_crossflow_guard_failure_is_preserved_and_terminal_state_is_not_consumed) ... [0m[91mok
+test_multistate_compiled_candidate_output_matches_frozen_analyzer (__main__.Candidate5TimestepTests.test_multistate_compiled_candidate_output_matches_frozen_analyzer) ... skipped 'set CANDIDATE5_ANALYZER_ROOT to run the independent multi-state analyzer check'
+test_nonfinite_ab2_rate_is_preserved_without_a_finite_sentinel (__main__.Candidate5TimestepTests.test_nonfinite_ab2_rate_is_preserved_without_a_finite_sentinel) ... [0m[91mok
+test_nonfinite_timestep_ratio_is_preserved_before_fail_closed_abort (__main__.Candidate5TimestepTests.test_nonfinite_timestep_ratio_is_preserved_before_fail_closed_abort) ... [0m[91mok
+test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses (__main__.Candidate5TimestepTests.test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses) ... [0m[91mERROR
+test_runtime_timestep_input_capture_keeps_all_actual_vertical_operands (__main__.Candidate5TimestepTests.test_runtime_timestep_input_capture_keeps_all_actual_vertical_operands) ... [0m[91mok
+test_serialized_finite_values_are_canonical_decimal_tokens (__main__.Candidate5TimestepTests.test_serialized_finite_values_are_canonical_decimal_tokens) ... [0m[91mok
+test_staggered_rates_use_each_actual_directional_velocity_term (__main__.Candidate5TimestepTests.test_staggered_rates_use_each_actual_directional_velocity_term) ... [0m[91mok
+test_timestep_serialization_uses_canonical_real_serializer_for_finite_values (__main__.Candidate5TimestepTests.test_timestep_serialization_uses_canonical_real_serializer_for_finite_values) ... [0m[91mERROR
+test_zero_advection_fallback_capillary_branch_and_full_bound (__main__.Candidate5TimestepTests.test_zero_advection_fallback_capillary_branch_and_full_bound) ... [0m[91mok
+
+======================================================================
+ERROR: test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses (__main__.Candidate5TimestepTests.test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/flutas-source-protocol/tests/test_candidate5_observability.py", line 725, in test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses
+    patch_text = (Path(__file__).resolve().parent.parent / "source-boundary.patch").read_text(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/flutas-source-protocol/source-boundary.patch'
+
+======================================================================
+ERROR: test_timestep_serialization_uses_canonical_real_serializer_for_finite_values (__main__.Candidate5TimestepTests.test_timestep_serialization_uses_canonical_real_serializer_for_finite_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/flutas-source-protocol/tests/test_candidate5_observability.py", line 736, in test_timestep_serialization_uses_canonical_real_serializer_for_finite_values
+    patch_text = (Path(__file__).resolve().parent.parent / "source-boundary.patch").read_text(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/flutas-source-protocol/source-boundary.patch'
+
+----------------------------------------------------------------------
+Ran 16 tests in 65.920s
+
+FAILED (errors=2, skipped=1)
+[0mThe command '/bin/sh -c set -eux;     test "$(git -C /opt/FluTAS rev-parse HEAD)" = "${FLUTAS_COMMIT}";     git -C /opt/FluTAS apply --check /tmp/source-boundary.patch;     git -C /opt/FluTAS apply /tmp/source-boundary.patch;     /opt/flutas-source-protocol/tests/run_source_validator_tests.sh       /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary;     make -C /opt/FluTAS/src clean;     make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot;     cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot | grep -F 'sm_120.cubin';     test -x /opt/FluTAS/src/flutas.two_phase_inc_isot' returned a non-zero code: 1

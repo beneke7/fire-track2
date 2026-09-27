@@ -1,0 +1,1 @@
+docker build --pull=false --cpu-period=100000 --cpu-quota=200000 --file Dockerfile --build-arg BASE_IMAGE=track2/flutas-nvhpc:26.9 --build-arg FLUTAS_COMMIT=598210616bebd51f7d51f61455f196e6f3479916 --tag <unique-candidate3-tag> .

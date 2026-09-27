@@ -1,0 +1,26 @@
++ evidence=/evidence
++ source_root=/opt/FluTAS/src
++ build_dir=/evidence/build/objects-focused
++ mkdir -p /evidence/build/objects-focused /evidence/reference/pinned-source
++ cd /opt/FluTAS/src
++ printf cpu.max=
++ cat /sys/fs/cgroup/cpu.max
++ printf memory.max=
++ cat /sys/fs/cgroup/memory.max
++ printf 'network=none (docker run --network=none)\n'
++ printf 'gpu_devices=not requested (docker run has no --gpus option)\n'
++ cp types.f90 common_mpi.f90 funcs.f90 bound.f90 vof.f90 initgrid.f90 rk.f90 /evidence/reference/pinned-source/
++ cp apps/two_phase_inc_isot/param.f90 /evidence/reference/pinned-source/param.f90
++ cp /tmp/source-boundary.patch /evidence/reference/pinned-source/source-boundary.patch
++ flags=(-fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I"$build_dir" -module "$build_dir")
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c types.f90 -o /evidence/build/objects-focused/types.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c common_mpi.f90 -o /evidence/build/objects-focused/common_mpi.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c apps/two_phase_inc_isot/param.f90 -o /evidence/build/objects-focused/param.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c funcs.f90 -o /evidence/build/objects-focused/funcs_host.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c /evidence/reference/source_boundary_sanity_stub.f90 -o /evidence/build/objects-focused/sanity_stub.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c bound.f90 -o /evidence/build/objects-focused/bound_host.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c vof.f90 -o /evidence/build/objects-focused/vof_candidate5.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c /evidence/build/candidate5_m3_arithmetic_helper.f90 -o /evidence/build/objects-focused/candidate5_m3_arithmetic_helper.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 /evidence/build/objects-focused/types.o /evidence/build/objects-focused/common_mpi.o /evidence/build/objects-focused/param.o /evidence/build/objects-focused/funcs_host.o /evidence/build/objects-focused/sanity_stub.o /evidence/build/objects-focused/bound_host.o /evidence/build/objects-focused/vof_candidate5.o /evidence/build/objects-focused/candidate5_m3_arithmetic_helper.o -o /evidence/build/candidate5_m3_arithmetic_helper
++ sha256sum /evidence/build/candidate5_m3_arithmetic_helper /evidence/build/candidate5_m3_arithmetic_helper.f90
++ cuobjdump --list-elf /evidence/build/candidate5_m3_arithmetic_helper

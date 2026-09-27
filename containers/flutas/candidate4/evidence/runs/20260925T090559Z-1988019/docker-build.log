@@ -1,0 +1,29 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  251.9kB
+Step 1/8 : ARG BASE_IMAGE=track2/flutas-nvhpc:26.9
+Step 2/8 : FROM ${BASE_IMAGE}
+ ---> 78cd4fe3764e
+Step 3/8 : ARG FLUTAS_COMMIT=598210616bebd51f7d51f61455f196e6f3479916
+ ---> Using cache
+ ---> 5915d3e7d0dd
+Step 4/8 : COPY source-boundary.patch /tmp/source-boundary.patch
+ ---> 00c78b554d11
+Step 5/8 : COPY tests /opt/flutas-source-protocol/tests
+ ---> cce20d3f2a9f
+Step 6/8 : COPY cases/source_boundary /opt/flutas-source-protocol/cases/source_boundary
+ ---> 2897000c1e17
+Step 7/8 : RUN set -eux;     test "$(git -C /opt/FluTAS rev-parse HEAD)" = "${FLUTAS_COMMIT}";     git -C /opt/FluTAS apply --check /tmp/source-boundary.patch;     git -C /opt/FluTAS apply /tmp/source-boundary.patch;     /opt/flutas-source-protocol/tests/run_source_validator_tests.sh       /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary;     make -C /opt/FluTAS/src clean;     make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot;     cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot | grep -F 'sm_120.cubin';     test -x /opt/FluTAS/src/flutas.two_phase_inc_isot
+ ---> Running in 9216fb372e5a
+[91m+ git -C /opt/FluTAS rev-parse HEAD
+[0m[91m+ test 598210616bebd51f7d51f61455f196e6f3479916 = 598210616bebd51f7d51f61455f196e6f3479916
++ git -C /opt/FluTAS apply --check /tmp/source-boundary.patch
+[0m[91m+ git -C /opt/FluTAS apply /tmp/source-boundary.patch
+[0m[91m+ /opt/flutas-source-protocol/tests/run_source_validator_tests.sh /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary
+[0m[91mNVFORTRAN-W-0189-Argument number 1 to update_property: association of scalar actual argument to array dummy argument (/opt/flutas-source-protocol/tests/source_boundary_validator.f90: 193)
+NVFORTRAN-W-0189-Argument number 1 to update_property: association of scalar actual argument to array dummy argument (/opt/flutas-source-protocol/tests/source_boundary_validator.f90: 195)
+[0m[91mNVFORTRAN-S-0038-Symbol, n, has not been explicitly declared (/opt/flutas-source-protocol/tests/source_boundary_validator.f90)
+  0 inform,   2 warnings,   1 severes, 0 fatal for test_phase_transition_and_momentum_halos
+[0mThe command '/bin/sh -c set -eux;     test "$(git -C /opt/FluTAS rev-parse HEAD)" = "${FLUTAS_COMMIT}";     git -C /opt/FluTAS apply --check /tmp/source-boundary.patch;     git -C /opt/FluTAS apply /tmp/source-boundary.patch;     /opt/flutas-source-protocol/tests/run_source_validator_tests.sh       /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary;     make -C /opt/FluTAS/src clean;     make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot;     cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot | grep -F 'sm_120.cubin';     test -x /opt/FluTAS/src/flutas.two_phase_inc_isot' returned a non-zero code: 2

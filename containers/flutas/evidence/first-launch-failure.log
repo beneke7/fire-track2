@@ -1,0 +1,8 @@
+Attempt: run the pinned FluTAS rising-bubble executable with one MPI rank in the
+new HPC SDK 26.9 CUDA container, through scripts/run_local.py --gpu.
+Result: exit status 127 before the solver entered its time loop.
+
+/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/bin/.bin/prterun: error while loading shared libraries: libnl-route-3.so.200: cannot open shared object file: No such file or directory
+
+Correction: add Ubuntu runtime package libnl-route-3-200 to the container.
+The clean recipe build and the packaged GPU gate passed after that change.

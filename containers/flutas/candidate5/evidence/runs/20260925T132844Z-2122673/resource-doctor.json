@@ -1,0 +1,243 @@
+{
+  "gpu": {
+    "cuda_toolkit_available": false,
+    "cuda_toolkit_path": null,
+    "detected": true,
+    "devices": [
+      {
+        "driver_version": "580.159.03",
+        "memory_total_bytes": 34190917632,
+        "memory_used_bytes": 16777216,
+        "name": "NVIDIA GeForce RTX 5090"
+      }
+    ],
+    "driver_cuda_version": "13.0",
+    "nvidia_smi_available": true,
+    "solver_support_verified": false
+  },
+  "host": {
+    "hostname": "greengoblin",
+    "machine": "x86_64",
+    "release": "7.0.0-28-generic",
+    "system": "Linux"
+  },
+  "interpreter": {
+    "base_prefix": "/usr",
+    "executable": "/home/v/proj/bene/fire-track2/.venv/bin/python",
+    "implementation": "CPython",
+    "prefix": "/home/v/proj/bene/fire-track2/.venv",
+    "version": "3.12.3"
+  },
+  "packages": {
+    "cupy": {
+      "installed": false,
+      "version": null
+    },
+    "fire-track2": {
+      "installed": true,
+      "version": "0.1.0"
+    },
+    "matplotlib": {
+      "installed": true,
+      "version": "3.11.2"
+    },
+    "mpi4py": {
+      "installed": false,
+      "version": null
+    },
+    "numpy": {
+      "installed": true,
+      "version": "2.5.3"
+    },
+    "pip": {
+      "installed": false,
+      "version": null
+    },
+    "pytest": {
+      "installed": true,
+      "version": "9.1.1"
+    },
+    "pyvista": {
+      "installed": true,
+      "version": "0.49.0"
+    },
+    "ruff": {
+      "installed": true,
+      "version": "0.16.9"
+    },
+    "scipy": {
+      "installed": false,
+      "version": null
+    },
+    "torch": {
+      "installed": false,
+      "version": null
+    },
+    "vtk": {
+      "installed": true,
+      "version": "9.7.0"
+    }
+  },
+  "readiness": {
+    "cpu_vof_case": "candidate_found",
+    "gpu_solver_support_verified": false,
+    "gpu_vof_pilot": "not_ready",
+    "notes": [
+      "CUDA toolkit compiler nvcc was not found on PATH.",
+      "A CPU OpenFOAM VOF solver is available in a local Docker image; this is not GPU readiness or benchmark validation.",
+      "GPU visibility and driver CUDA version do not confirm solver or VOF support.",
+      "An executable candidate does not confirm inlet, crossflow, or GPU VOF capability."
+    ]
+  },
+  "resources": {
+    "cpu": {
+      "affinity_count": 20,
+      "affinity_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "cgroup_cpuset": "0-19",
+      "cgroup_cpuset_count": 20,
+      "cgroup_cpuset_path": "/sys/fs/cgroup/user.slice/cpuset.cpus.effective",
+      "cgroup_period_path": null,
+      "cgroup_quota_cores": null,
+      "cgroup_quota_path": null,
+      "default_threads": 18,
+      "effective": 20,
+      "logical": 20
+    },
+    "disk": {
+      "free_bytes": 279813607424,
+      "path": "/home/v/proj/bene/fire-track2",
+      "total_bytes": 3935709487104,
+      "used_bytes": 3455896260608
+    },
+    "memory": {
+      "available_bytes": 126653546496,
+      "cgroup_current_bytes": 9637945344,
+      "cgroup_limit_bytes": null,
+      "current_path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/tmux-spawn-09ca51db-7ee2-4061-a225-8f7089bee630.scope/memory.current",
+      "effective_available_bytes": 126653546496,
+      "limit_path": null,
+      "total_bytes": 134292787200
+    }
+  },
+  "schema_version": 1,
+  "tools": {
+    "CUDA compiler (nvcc)": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "nvcc"
+      ]
+    },
+    "Docker": {
+      "available": true,
+      "command": "docker",
+      "path": "/usr/bin/docker"
+    },
+    "FFmpeg": {
+      "available": true,
+      "command": "ffmpeg",
+      "path": "/usr/bin/ffmpeg"
+    },
+    "FluTAS candidate": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "flutas",
+        "FluTAS"
+      ]
+    },
+    "MPI launcher": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "mpirun",
+        "mpiexec"
+      ]
+    },
+    "OpenFOAM VOF container": {
+      "available": true,
+      "backend": "CPU",
+      "command": "interIsoFoam",
+      "image": "opencfd/openfoam-default:2512",
+      "image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+      "path": "docker image opencfd/openfoam-default:2512",
+      "solver": "interIsoFoam",
+      "solver_path": "/usr/lib/openfoam/openfoam2512/platforms/linux64GccDPInt32Opt/bin/interIsoFoam",
+      "solver_support_verified": false
+    },
+    "OpenFOAM VOF solver": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "interFoam",
+        "interIsoFoam",
+        "multiphaseInterFoam",
+        "compressibleInterFoam"
+      ]
+    },
+    "OpenFOAM version tool": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "foamVersion"
+      ]
+    },
+    "ParaView": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "paraview"
+      ]
+    },
+    "SU2 solver": {
+      "available": false,
+      "command": null,
+      "path": null,
+      "searched": [
+        "SU2_CFD"
+      ]
+    },
+    "git": {
+      "available": true,
+      "command": "git",
+      "path": "/usr/bin/git"
+    },
+    "nvidia-smi": {
+      "available": true,
+      "command": "nvidia-smi",
+      "path": "/usr/bin/nvidia-smi"
+    },
+    "uv": {
+      "available": true,
+      "command": "uv",
+      "path": "/home/v/.local/bin/uv"
+    }
+  }
+}

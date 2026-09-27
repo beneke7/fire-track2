@@ -1,0 +1,6 @@
++ evidence=/evidence
++ build_dir=/evidence/build/objects-focused
++ source=/evidence/build/candidate5_m3_overflow_probe.f90
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-focused -module /evidence/build/objects-focused -c /evidence/build/candidate5_m3_overflow_probe.f90 -o /evidence/build/objects-focused/candidate5_m3_overflow_probe.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 /evidence/build/objects-focused/types.o /evidence/build/objects-focused/common_mpi.o /evidence/build/objects-focused/param.o /evidence/build/objects-focused/funcs_host.o /evidence/build/objects-focused/sanity_stub.o /evidence/build/objects-focused/bound_host.o /evidence/build/objects-focused/vof_candidate5.o /evidence/build/objects-focused/candidate5_m3_overflow_probe.o -o /evidence/build/candidate5_m3_overflow_probe
++ sha256sum /evidence/build/candidate5_m3_overflow_probe /evidence/build/candidate5_m3_overflow_probe.f90

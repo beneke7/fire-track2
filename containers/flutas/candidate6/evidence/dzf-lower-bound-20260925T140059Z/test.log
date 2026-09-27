@@ -1,0 +1,10 @@
+[run_local] thread limit: 1
+Traceback (most recent call last):
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 389, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 380, in main
+    assert_close(actual, expected, f"velocity audit field {column}")
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 291, in assert_close
+    raise AssertionError(f"{label}: observed {actual:.17g}, expected {expected:.17g}")
+AssertionError: velocity audit field 8: observed 0.12532708333333334, expected 0.12518124999999999

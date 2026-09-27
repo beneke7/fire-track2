@@ -1,0 +1,286 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2512                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application interIsoFoam;
+startFrom startTime;
+startTime 0;
+stopAt endTime;
+endTime 5;
+deltaT 0.001;
+writeControl runTime;
+writeInterval 0.01;
+purgeWrite 0;
+writeFormat ascii;
+writePrecision 12;
+writeCompression off;
+timeFormat general;
+timePrecision 8;
+runTimeModifiable false;
+functions
+{
+    rouaixStations
+    {
+        type                surfaces;
+        libs                (sampling);
+        writeControl        writeTime;
+        timeStart           4.50;
+        interpolationScheme cellPoint; // OpenFOAM interpolationCellPoint
+        surfaceFormat       vtk;
+        fields              (alpha.water);
+        surfaces
+        (
+        penetration_y_X_0p250
+        {
+            type            plane;
+            point           (0.1 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_0p500
+        {
+            type            plane;
+            point           (0.2 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_0p750
+        {
+            type            plane;
+            point           (0.3 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_1p000
+        {
+            type            plane;
+            point           (0.4 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_1p250
+        {
+            type            plane;
+            point           (0.5 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_1p500
+        {
+            type            plane;
+            point           (0.6 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_1p750
+        {
+            type            plane;
+            point           (0.7 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_2p000
+        {
+            type            plane;
+            point           (0.8 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_2p250
+        {
+            type            plane;
+            point           (0.9 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_2p500
+        {
+            type            plane;
+            point           (1 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_2p750
+        {
+            type            plane;
+            point           (1.1 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_3p000
+        {
+            type            plane;
+            point           (1.2 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_3p250
+        {
+            type            plane;
+            point           (1.3 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_3p500
+        {
+            type            plane;
+            point           (1.4 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_3p750
+        {
+            type            plane;
+            point           (1.5 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_4p000
+        {
+            type            plane;
+            point           (1.6 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_4p250
+        {
+            type            plane;
+            point           (1.7 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_4p500
+        {
+            type            plane;
+            point           (1.8 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_4p750
+        {
+            type            plane;
+            point           (1.9 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        penetration_y_X_4p875
+        {
+            type            plane;
+            point           (1.95 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_0p250
+        {
+            type            plane;
+            point           (0.1 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_0p500
+        {
+            type            plane;
+            point           (0.2 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_0p750
+        {
+            type            plane;
+            point           (0.3 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_1p000
+        {
+            type            plane;
+            point           (0.4 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_1p250
+        {
+            type            plane;
+            point           (0.5 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_1p500
+        {
+            type            plane;
+            point           (0.6 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_1p750
+        {
+            type            plane;
+            point           (0.7 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_2p000
+        {
+            type            plane;
+            point           (0.8 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_2p250
+        {
+            type            plane;
+            point           (0.9 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        width_z_X_2p500
+        {
+            type            plane;
+            point           (1 0 0);
+            normal          (1 0 0);
+            interpolate     true;
+            triangulate     true;
+        }
+        );
+    }
+}

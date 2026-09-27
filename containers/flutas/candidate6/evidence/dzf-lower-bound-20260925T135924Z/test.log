@@ -1,0 +1,11 @@
+[run_local] thread limit: 1
+Traceback (most recent call last):
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 389, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 376, in main
+    expected_velocity_values = expected_velocity()
+                               ^^^^^^^^^^^^^^^^^^^
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 262, in expected_velocity
+    raise AssertionError("nonuniform fixture failed to distinguish the two Courant contracts")
+AssertionError: nonuniform fixture failed to distinguish the two Courant contracts

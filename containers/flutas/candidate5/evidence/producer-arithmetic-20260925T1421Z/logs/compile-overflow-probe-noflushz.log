@@ -1,0 +1,16 @@
++ evidence=/evidence
++ source_root=/opt/FluTAS/src
++ build_dir=/evidence/build/objects-noflushz
++ mkdir -p /evidence/build/objects-noflushz
++ cd /opt/FluTAS/src
++ flags=(-fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I"$build_dir" -module "$build_dir")
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c types.f90 -o /evidence/build/objects-noflushz/types.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c common_mpi.f90 -o /evidence/build/objects-noflushz/common_mpi.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c apps/two_phase_inc_isot/param.f90 -o /evidence/build/objects-noflushz/param.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c funcs.f90 -o /evidence/build/objects-noflushz/funcs_host.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c /evidence/reference/source_boundary_sanity_stub.f90 -o /evidence/build/objects-noflushz/sanity_stub.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c bound.f90 -o /evidence/build/objects-noflushz/bound_host.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c vof.f90 -o /evidence/build/objects-noflushz/vof_candidate5.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -I/evidence/build/objects-noflushz -module /evidence/build/objects-noflushz -c /evidence/build/candidate5_m3_overflow_probe.f90 -o /evidence/build/objects-noflushz/candidate5_m3_overflow_probe.o
++ mpif90 -fast -Mnoflushz -cuda -acc -gpu=cc120,cuda13.3 /evidence/build/objects-noflushz/types.o /evidence/build/objects-noflushz/common_mpi.o /evidence/build/objects-noflushz/param.o /evidence/build/objects-noflushz/funcs_host.o /evidence/build/objects-noflushz/sanity_stub.o /evidence/build/objects-noflushz/bound_host.o /evidence/build/objects-noflushz/vof_candidate5.o /evidence/build/objects-noflushz/candidate5_m3_overflow_probe.o -o /evidence/build/candidate5_m3_overflow_probe_noflushz
++ sha256sum /evidence/build/candidate5_m3_overflow_probe_noflushz /evidence/build/candidate5_m3_overflow_probe.f90

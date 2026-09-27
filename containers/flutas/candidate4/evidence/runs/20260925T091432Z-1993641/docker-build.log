@@ -1,0 +1,28 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon    254kB
+Step 1/8 : ARG BASE_IMAGE=track2/flutas-nvhpc:26.9
+Step 2/8 : FROM ${BASE_IMAGE}
+ ---> 78cd4fe3764e
+Step 3/8 : ARG FLUTAS_COMMIT=598210616bebd51f7d51f61455f196e6f3479916
+ ---> Using cache
+ ---> 5915d3e7d0dd
+Step 4/8 : COPY source-boundary.patch /tmp/source-boundary.patch
+ ---> Using cache
+ ---> eeae943ff638
+Step 5/8 : COPY tests /opt/flutas-source-protocol/tests
+ ---> Using cache
+ ---> 697268cd1ecf
+Step 6/8 : COPY cases/source_boundary /opt/flutas-source-protocol/cases/source_boundary
+ ---> Using cache
+ ---> 80a39adcca27
+Step 7/8 : RUN set -eux;     test "$(git -C /opt/FluTAS rev-parse HEAD)" = "${FLUTAS_COMMIT}";     git -C /opt/FluTAS apply --check /tmp/source-boundary.patch;     git -C /opt/FluTAS apply /tmp/source-boundary.patch;     /opt/flutas-source-protocol/tests/run_source_validator_tests.sh       /opt/FluTAS /opt/flutas-source-protocol/cases/source_boundary;     make -C /opt/FluTAS/src clean;     make -C /opt/FluTAS/src -j2 ARCH=generic-gpu APP=two_phase_inc_isot;     cuobjdump --list-elf /opt/FluTAS/src/flutas.two_phase_inc_isot | grep -F 'sm_120.cubin';     test -x /opt/FluTAS/src/flutas.two_phase_inc_isot
+ ---> Using cache
+ ---> bc9be26f4193
+Step 8/8 : ENTRYPOINT ["/bin/true"]
+ ---> Using cache
+ ---> 0e691aecc885
+Successfully built 0e691aecc885
+Successfully tagged track2/flutas-source-boundary:5982106-candidate4-20260925T091432Z-1993641

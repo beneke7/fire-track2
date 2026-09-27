@@ -1,0 +1,47 @@
++ git -C /opt/FluTAS rev-parse HEAD
+598210616bebd51f7d51f61455f196e6f3479916
++ git -C /opt/FluTAS status --short
+ M src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90
+ M src/targets/target.generic-gpu
+ M src/vof.f90
+?? src/restas_source.inc
++ sha256sum /evidence/reference/pinned-source/bound.f90 /evidence/reference/pinned-source/common_mpi.f90 /evidence/reference/pinned-source/funcs.f90 /evidence/reference/pinned-source/initgrid.f90 /evidence/reference/pinned-source/param.f90 /evidence/reference/pinned-source/rk.f90 /evidence/reference/pinned-source/source-boundary.patch /evidence/reference/pinned-source/types.f90 /evidence/reference/pinned-source/vof.f90
+5356d2fe15c24515f670c006de749fd6b0c45962a8150c45eff6d1d168e14e1e  /evidence/reference/pinned-source/bound.f90
+ec24e37ebcbfdf43999fdda32548aa4494a6219c44a10e203fe75e6da44e8186  /evidence/reference/pinned-source/common_mpi.f90
+93040522d17a96dcb5cc8b57a71a451420166b359f1056da2777d965fdec58ae  /evidence/reference/pinned-source/funcs.f90
+87010cb1b014355eb70b299264d5b6cd274ab3248c309906a39ac4a66ab8ca28  /evidence/reference/pinned-source/initgrid.f90
+153519b5efb1be6b454a57a7bb6a96d7803511effe5d376e4b993df8cd8e4507  /evidence/reference/pinned-source/param.f90
+6f86e54d8c95423099526228d72fcb3ee2720c9ac96a0692c486c0fc119a2e42  /evidence/reference/pinned-source/rk.f90
+aabff8059c9f50834166bdbbd7b92a2891a2821177719cb21beb9acbb52973a7  /evidence/reference/pinned-source/source-boundary.patch
+b356113a254a9d0e18c6ee4490004580ef8049a6b37469caf4fb820144aeb142  /evidence/reference/pinned-source/types.f90
+657e4d7e4c7ec0739b506ae806c9bd5e80df7aaa238e248cb9fab4ee43fcea61  /evidence/reference/pinned-source/vof.f90
++ printf '\n--- nvfortran ---\n'
+
+--- nvfortran ---
++ nvfortran --version
+
+nvfortran 26.9-0 64-bit target on x86-64 Linux -tp haswell 
+NVIDIA Compilers and Tools
+Copyright (c) 2026, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
++ printf '\n--- mpif90 ---\n'
+
+--- mpif90 ---
++ mpif90 --version
+
+nvfortran 26.9-0 64-bit target on x86-64 Linux -tp haswell 
+NVIDIA Compilers and Tools
+Copyright (c) 2026, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
++ printf '\n--- mpif90 wrapper ---\n'
+
+--- mpif90 wrapper ---
++ mpif90 -show
+nvfortran -I/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/include -I/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/lib -L/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/lib -Wl,-rpath -Wl,/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/lib -Wl,--enable-new-dtags -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lmpi
++ printf '\n--- cuobjdump ---\n'
+
+--- cuobjdump ---
++ cuobjdump --version
+cuobjdump: NVIDIA (R) fat binary listing tool
+Copyright (c) 2005-2026 NVIDIA Corporation
+Built on Tue_Jun_09_02:43:40_PM_PDT_2026
+Cuda compilation tools, release 13.3, V13.3.73
+Build cuda_13.3.r13.3/compiler.38244171_0

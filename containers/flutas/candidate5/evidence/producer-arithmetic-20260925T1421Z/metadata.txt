@@ -1,0 +1,13 @@
+Candidate5 M3 arithmetic capture metadata
+UTC bundle stamp: 2026-09-25T1421Z
+Candidate patch SHA-256: aabff8059c9f50834166bdbbd7b92a2891a2821177719cb21beb9acbb52973a7
+Upstream checkout commit: 598210616bebd51f7d51f61455f196e6f3479916
+Candidate NVHPC image: sha256:73b7a60de5be7da33fd8af0802a6b70e32a6486d22452b449454eaaafa7d9e43
+Pinned base image: sha256:78cd4fe3764e5010e09eaf77d792ee5e2cbdc35d2131497f906f7004c0f94ee8
+Container: Ubuntu 24.04.1; Python 3.12.3; NVHPC nvfortran/nvc 26.9-0; Open MPI 5.0.10rc2; CUDA toolkit/cuobjdump 13.3.73.
+Main compile/link flags: -fast -cuda -acc -gpu=cc120,cuda13.3 plus captured -cpp -D_USE_VOF -D_DECOMP_X and module include paths.
+Resource constraints: Docker --network=none --cpus=1 --memory=4g; GPU not passed; no source solver / no source case / no GPU runtime.
+Compiled code-object evidence: sm_120.cubin, logs/helper-code-objects-focused.txt.
+Analysis: binary64 input and CSV exact-byte comparison pass; nonfinite-rate and nonfinite-dt expected bytes pass; analyzer integration synthetic and not adjudicated.
+Known runtime limitation: regular production-flags smallest-subnormal inputs hit positivity guard. MXCSR-clear diagnostic reaches exact reciprocal mismatch after IEEE overflow but changes runtime FPU state.
+Scientific gate disposition: none.

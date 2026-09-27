@@ -1,0 +1,17 @@
+diff --git a/src/targets/target.generic-gpu b/src/targets/target.generic-gpu
+index e931312..95f136b 100644
+--- a/src/targets/target.generic-gpu
++++ b/src/targets/target.generic-gpu
+@@ -25,10 +25,10 @@ LDFLAGS :=
+ USE_NVTX = 0
+ 
+ # Required for FFTW
+-FFTW_HOME := /data/nicolos/numerical_libraries/fftw-3.3.10
++FFTW_HOME := /usr
+ LDFLAGS   += -L${FFTW_HOME}/lib -lfftw3
+ 
+-FFLAGS    += -cuda -acc -gpu=cc70,cuda11.0 -cudalib=cufft,curand 
++FFLAGS    += -cuda -acc -gpu=cc120,cuda13.3 -cudalib=cufft,curand
+ DFLAGS    += -D_EPHC -D_GPU_MPI
+ 
+ # Required for NVTX

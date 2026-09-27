@@ -1,0 +1,36 @@
+started_utc=2026-09-25T12:55:22Z
+run_id=20260925T125522Z-2108516
+purpose=source-disabled candidate GPU regression; not a source-boundary gate
+image_ref=sha256:7bad4d20c55fa718321de53f49083f98042be522b6848b73903c7c8b005202d4
+image_id=sha256:7bad4d20c55fa718321de53f49083f98042be522b6848b73903c7c8b005202d4
+image_entrypoint=["/bin/true"]
+explicit_entrypoint=/usr/local/bin/flutas-gpu-tests (GPU test container)
+upstream_runner_expected_sha256=e90285710e1ce77724d85bcf331c2fe993fdd6367cf3ccec159f81c70c88757c
+git_revision=5bee7e762775e2ada7b129cb83faf0a3f96feacd
+git_status=
+ M track2_aerial_drop_experiment_plan.md
+?? .codex/
+?? .github/
+?? .gitignore
+?? .python-version
+?? AGENTS.md
+?? Makefile
+?? README.md
+?? cases/
+?? containers/
+?? data/
+?? docs/
+?? experiments/
+?? pyproject.toml
+?? results/
+?? scripts/
+?? src/
+?? tests/
+?? uv.lock
+expected_embedded_candidate_patch_sha256=22c80953e3646dd6ba01ca9aa877a61b8e009c7ebd25d269c1b9aa8c2207d543
+launcher_sha256=282bfce5c5f2f86682318e26e7f9a6473e3277090a362fe3eb28232698c83d36  containers/flutas/run-candidate-gpu-regression.sh
+locked_runner_sha256=9c88514318ed24ce30b607f3fdd2f9b3b20bcf3e9227a5cc9aa24817a7b24492  /home/v/proj/bene/fire-track2/containers/flutas/run-candidate-gpu-regression-locked.sh
+docker_cpu_limit=2
+gpu_lock= scripts/run_local.py --gpu
+source_input=absent; upstream rising-bubble case only
+verified_embedded_candidate_patch_sha256=22c80953e3646dd6ba01ca9aa877a61b8e009c7ebd25d269c1b9aa8c2207d543

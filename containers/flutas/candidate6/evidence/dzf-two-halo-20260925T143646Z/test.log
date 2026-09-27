@@ -1,0 +1,16 @@
+[run_local] thread limit: 1
+PASS: compiled extracted candidate6 helpers with nvfortran
+PASS: 0:nz+1 one-halo mapping, nonconstant dzf face areas, inventory volumes, divergence and legacy Courant
+PASS: captured dzfi/dzci v1.2 Courant remains a distinct expression and expected value
+Traceback (most recent call last):
+  File "/candidate6/tests/test_dzf_two_halo_helpers.py", line 244, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/candidate6/tests/test_dzf_two_halo_helpers.py", line 203, in main
+    correct = compare_case(prefixes["explicit-slice"], reference.DZF, "explicit physical slice")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/candidate6/tests/test_dzf_two_halo_helpers.py", line 59, in compare_case
+    reference.assert_close(outgoing_area, expected_area, f"{label}: face {face_index} outward area")
+  File "/candidate6/tests/test_dzf_lower_bound_helpers.py", line 310, in assert_close
+    raise AssertionError(f"{label}: observed {actual:.17g}, expected {expected:.17g}")
+AssertionError: explicit physical slice: face 1 outward area: observed 0, expected 42.599999999999994

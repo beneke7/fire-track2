@@ -1,0 +1,38 @@
++ evidence=/evidence
++ source_root=/opt/FluTAS/src
++ build_dir=/evidence/build/objects
++ mkdir -p /evidence/build/objects /evidence/reference/pinned-source
++ cd /opt/FluTAS/src
++ printf cpu.max=
++ cat /sys/fs/cgroup/cpu.max
++ printf memory.max=
++ cat /sys/fs/cgroup/memory.max
++ printf 'network=none (docker run --network=none)\n'
++ printf 'gpu_devices=not requested (docker run has no --gpus option)\n'
++ cp types.f90 common_mpi.f90 funcs.f90 bound.f90 vof.f90 initgrid.f90 rk.f90 /evidence/reference/pinned-source/
++ cp apps/two_phase_inc_isot/param.f90 /evidence/reference/pinned-source/param.f90
++ cp /tmp/source-boundary.patch /evidence/reference/pinned-source/source-boundary.patch
++ flags=(-fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I"$build_dir" -module "$build_dir")
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c types.f90 -o /evidence/build/objects/types.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c common_mpi.f90 -o /evidence/build/objects/common_mpi.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c apps/two_phase_inc_isot/param.f90 -o /evidence/build/objects/param.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c funcs.f90 -o /evidence/build/objects/funcs_host.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c /evidence/reference/source_boundary_sanity_stub.f90 -o /evidence/build/objects/sanity_stub.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c bound.f90 -o /evidence/build/objects/bound_host.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -c vof.f90 -o /evidence/build/objects/vof_candidate5.o
++ mpif90 -fast -cuda -acc -gpu=cc120,cuda13.3 -cpp -D_USE_VOF -D_DECOMP_X -I/evidence/build/objects -module /evidence/build/objects -I/evidence/build/objects -module /evidence/build/objects -c /evidence/build/candidate5_m3_arithmetic_helper.f90 -o /evidence/build/objects/candidate5_m3_arithmetic_helper.o
+NVFORTRAN-S-0536-Argument number 9 to bounduvw: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 314)
+NVFORTRAN-S-0536-Argument number 10 to bounduvw: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 314)
+NVFORTRAN-S-0536-Argument number 11 to bounduvw: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 314)
+NVFORTRAN-S-0536-Argument number 12 to bounduvw: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 314)
+NVFORTRAN-S-0536-Argument number 13 to bounduvw: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 314)
+NVFORTRAN-S-0536-Argument number 8 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 318)
+NVFORTRAN-S-0536-Argument number 9 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 318)
+NVFORTRAN-S-0536-Argument number 10 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 318)
+NVFORTRAN-S-0536-Argument number 8 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 321)
+NVFORTRAN-S-0536-Argument number 9 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 321)
+NVFORTRAN-S-0536-Argument number 10 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 321)
+NVFORTRAN-S-0536-Argument number 8 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 323)
+NVFORTRAN-S-0536-Argument number 9 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 323)
+NVFORTRAN-S-0536-Argument number 10 to boundp: managed attribute mismatch (/evidence/build/candidate5_m3_arithmetic_helper.f90: 323)
+  0 inform,   0 warnings,  14 severes, 0 fatal for initialize_state

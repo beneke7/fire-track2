@@ -1,0 +1,13 @@
+docker run --rm --memory=4g --cpus=1 --network=none \
+  -v /home/v/proj/bene/fire-track2:/repo:ro \
+  --entrypoint bash track2/flutas-nvhpc:26.9 -c '
+set -euo pipefail
+git -C /opt/FluTAS apply --check /repo/containers/flutas/candidate5/source-boundary.patch
+git -C /opt/FluTAS apply /repo/containers/flutas/candidate5/source-boundary.patch
+export CANDIDATE5_ANALYZER_ROOT=/repo
+export PYTHONPATH=/repo/src
+/repo/containers/flutas/candidate5/tests/run_source_validator_tests.sh \
+  /opt/FluTAS \
+  /repo/containers/flutas/candidate5/cases/source_boundary \
+  /repo/experiments
+'

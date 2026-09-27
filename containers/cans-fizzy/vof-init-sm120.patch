@@ -1,0 +1,41 @@
+diff --git a/configs/flags.mk b/configs/flags.mk
+index 4af4d2d..28e6e0b 100644
+--- a/configs/flags.mk
++++ b/configs/flags.mk
+@@ -7,7 +7,7 @@ endif
+ ifeq ($(strip $(FCOMP)),NVIDIA)
+ FFLAGS_MOD_DIR := -module
+ ifeq ($(strip $(GPU)),1)
+-override FFLAGS += -acc -cuda -Minfo=accel -gpu=cc60,cc70,cc80
++override FFLAGS += -acc -cuda -Minfo=accel -gpu=cc120,cuda13.3
+ endif
+ endif
+ ifeq ($(strip $(FCOMP)),CRAY)
+diff --git a/src/main.f90 b/src/main.f90
+index b16b1d4..49e4a9a 100644
+--- a/src/main.f90
++++ b/src/main.f90
+@@ -71,8 +71,11 @@ program cans
+ #endif
+ #if !defined(_INTERFACE_CAPTURING_VOF)
+   use mod_acdi           , only: acdi_set_epsilon,acdi_set_gamma,acdi_cmpt_phi
+-#elif defined(_SDF_NORMALS)
++#else
++  use mod_acdi           , only: acdi_set_epsilon
++#if defined(_SDF_NORMALS)
+   use mod_vof_thinc_qq   , only: vof_thinc_cmpt_phi
++#endif
+ #endif
+   use mod_two_fluid      , only: init2fl,cmpt_norm_curv => cmpt_norm_curv_youngs
+ #if !defined(_CONSTANT_COEFFS_POISSON)
+@@ -299,9 +302,8 @@ program cans
+                           nb,is_bound,cbcvel,cbcpre,bcvel,bcpre)
+ #endif
+   !
+-#if !defined(_INTERFACE_CAPTURING_VOF)
++  ! The analytic initial-interface profile uses this width for both ACDI and VOF.
+   call acdi_set_epsilon(dl,dzfi,psi_thickness_factor,seps)
+-#endif
+   !
+   fexts(1) = 'u'
+   fexts(2) = 'v'

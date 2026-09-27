@@ -1,0 +1,156 @@
+{
+  "case_input_hash_note": "Recomputed post-run from retained case inputs because the original completion manifest's case_file_hashes field is empty.",
+  "case_input_sha256": {
+    "0/U": "3dd6ca8c3cee7ff063ffc9f06831b0b8e97249beb53a103a126fda8d243854d4",
+    "0/alpha.water": "a1c12a3e7219ea46a59f1cf174e8a694e3bd2bfafcaed0df01e93ad49e74f11d",
+    "0/p_rgh": "4b6393c477611a74cffd082a05ea5a1e6658106becdbf7aa5eb88e2349d7a7bd",
+    "constant/g": "f0c5adeea6719e37369aa728ac5a5522f1fb1ec0c47b1927b9b547b47477f78d",
+    "constant/polyMesh/boundary": "c0bd999573a160040c864f755688044926a399c4c1c37b2a1ab56a641a1bd7f2",
+    "constant/polyMesh/faces": "81719d184c3ae8790271df98445457f80aec9629ec58d0860199c4872e0b90c8",
+    "constant/polyMesh/neighbour": "b9f6cf6c94d8f0aaef32bcd88f038f9102b66dba96fb6cffb9e479e7483fc41e",
+    "constant/polyMesh/owner": "32ce81e6e647e5807ec9b6fc0f02e9b5013dcbbcc847de785a77ef187fb3d304",
+    "constant/polyMesh/points": "a984d999761c41b29729f7f6bb885bfe8f3e62e1e712058e0e7e75f00db3a171",
+    "constant/transportProperties": "69f66a9703603dfba719270ec3a14d71a9017e3feb63d6bdd1d16f5726447b57",
+    "constant/turbulenceProperties": "eb54db6a9605181b3aa51dde7c8dd8e1037e9c889f394fbebbd659c25053893c",
+    "system/blockMeshDict": "1eb300403a7a462320aabc99a5a2eda741063edaa14b1118389fb5c6fd361150",
+    "system/controlDict": "ef08688719674659f4d58d802e6947dcd48369e6016657cdd302f9bac73a05a9",
+    "system/decomposeParDict": "cbb8a45431b066fb2b168f286e14cae968f70f687c174641343a0a5e5c4619f6",
+    "system/fvSchemes": "db7d4dd2e7680c8c997477d63cb6797589c55d291489c074b44c3d2212dca27a",
+    "system/fvSolution": "03dbf0e14907ecd347908c91adfe8020118ea079bbc037f9ddd7f43aba1d464b"
+  },
+  "execution": {
+    "docker_cpu_limit": 18,
+    "docker_memory_limit_gib": 48,
+    "mpi_ranks": 16
+  },
+  "figure": {
+    "cell_count": 1826,
+    "claim_limit": "Computed geometric VOF interface only; provisional source; not a validated Restas plume, resolved droplet field, or field prediction.",
+    "color_scale": "frame-specific min/max of cell-centered |U|; not held constant across frames",
+    "file": "P0_RESTAS_CPU_VOF_0p08s.png",
+    "geometry_bounds_m": [
+      -0.22378166019916534,
+      0.17499999701976776,
+      -1.1817876100540161,
+      1.1823582649230957,
+      3.520219564437866,
+      4.0
+    ],
+    "input_vtp": "results/runs/restas-cpu-vof-20260924T222240.919816Z-49f65225/case/postProcessing/liquidInterface/0.080000/freeSurface.vtp",
+    "input_vtp_sha256": "8c2a2a5fb667f466750d3a9e18c2adb0388d7d00bef7f1ffb1f58179276d2424",
+    "point_count": 7256,
+    "pyvista_version": "0.49.0",
+    "sha256": "d81c5aa654a672833b3125a5f0e51dba33107d3e1b08968a6876038f3f9fea4d",
+    "simulation_time_s": 0.08,
+    "surface_speed_m_s": {
+      "max": 72.33570098876953,
+      "min": 0.7906900644302368
+    },
+    "vtk_version": [
+      9,
+      7,
+      0
+    ]
+  },
+  "finished_utc": "2026-09-24T22:38:56.488282+00:00",
+  "git_revision": "5bee7e762775e2ada7b129cb83faf0a3f96feacd",
+  "git_worktree_dirty_at_launch": true,
+  "input_manifest_sha256": "fab9178ef25882fd0cf60d51e19598b0cb1758c09db6a2b6aaf53b848f17b777",
+  "observations": {
+    "exit_code": 0,
+    "gate_decision": "Exploratory characterization only. No E1-E6 gate passed. Before a follow-on run, pre-register source-event treatment and conservation tolerances, save boundary liquid-flux histories, and have the contract independently reviewed.",
+    "mesh": {
+      "cell_count_matches": true,
+      "cells_across_slot_short_axis": 3,
+      "check_mesh_passed": true,
+      "expected_cells": 2081200,
+      "observed_cells": 2081200,
+      "slot_patch_count": 4
+    },
+    "resources": {
+      "docker_cpu_limit": 18,
+      "docker_memory_limit_gib": 48,
+      "mpi_rank_wall_clock_core_hours_estimate": 4.3358328583877945,
+      "mpi_ranks": 16,
+      "profile_gaps": [
+        "pressure-solve wall-time share (iteration counts only)",
+        "checkpoint and filesystem I/O time share",
+        "GPU/VRAM use (CPU-only case)"
+      ],
+      "sample_summary": {
+        "peak_sampled_cpu_percent": 1619.97,
+        "peak_sampled_memory_gib": 5.551,
+        "sample_count": 322
+      },
+      "sampling_note": "docker stats snapshots at approximately 2 s intervals; peak between samples may be higher",
+      "simulated_seconds_per_wall_hour": 0.44282149767044277,
+      "wall_time_s": 975.5623931372538
+    },
+    "solver_advance": {
+      "configured_max_courant": 0.5,
+      "configured_max_interface_courant": 0.25,
+      "declared_end_time_s": 0.12,
+      "interface_courant_within_configured_limit": false,
+      "last_time_written_s": 0.12,
+      "latest_execution_time_s": 958.45,
+      "logged_alpha_max": 1.0,
+      "logged_alpha_min": -2.3457151e-09,
+      "logged_time_step_count": 507,
+      "max_abs_logged_cumulative_continuity_error": 2.1732481e-07,
+      "max_courant_within_configured_limit": false,
+      "observed_max_courant": 0.54166382,
+      "observed_max_interface_courant": 0.29263678,
+      "pressure_solver_iteration_summary": {
+        "max_iterations_per_solve": 32,
+        "mean_iterations_per_solve": 7.347883597883598,
+        "pressure_solve_time_share_measured": false,
+        "solve_count": 1512,
+        "total_iterations": 11110
+      },
+      "reached_declared_end_time": true,
+      "time_step_s": {
+        "max": 0.00037820456,
+        "min": 0.00011976048
+      }
+    },
+    "surface_artifacts": {
+      "count": 6,
+      "fields": [
+        "alpha.water",
+        "U"
+      ],
+      "format": "VTK PolyData interface surfaces (.vtp)",
+      "times_s": [
+        "0.020000",
+        "0.040000",
+        "0.060000",
+        "0.080000",
+        "0.100000",
+        "0.120000"
+      ],
+      "total_bytes": 1095369
+    },
+    "water_inventory": {
+      "expected_prescribed_release_kg": 230.4,
+      "expected_release_volume_m3": 0.2304,
+      "interpretation": "Domain inventory compared with the intended rectangular source integral; no predeclared acceptance tolerance or saved per-patch liquid-flux history exists for this exploratory run.",
+      "latest_domain_inventory_m3": 0.231019355,
+      "latest_inventory_time_s": 0.119177,
+      "observed_minus_expected_m3": 0.0006193550000000159,
+      "observed_minus_expected_percent": 0.26881727430556246,
+      "water_density_kg_m3": 1000.0
+    }
+  },
+  "run_id": "restas-cpu-vof-20260924T222240.919816Z-49f65225",
+  "solver_image": "opencfd/openfoam-default:2512",
+  "solver_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+  "source_sha256": {
+    "Numerical simulation of aerial liquid drops of Canadair CL-415 and Dash-8 airtankers.pdf": "128eeb1ea3ad30f5a2ecf9194e2b784be37e837982dec3bdcb7b9db48aa4e7e4",
+    "cases/restas_four_slot/README.md": "eb1cee9e221eec9c20bf455b460816157095b079c1b36d065bdc149e52f2eb5a",
+    "scripts/doctor.py": "6f79405d5c8c53e065c96b22929c528a8de221949340b3c2c143cfd22aa8e19f",
+    "scripts/run_local.py": "13e3d2fd6fcebe58ad623af339de36ed4d29f842b7588c18c59e750ae16d73db",
+    "scripts/run_restas_pilot.py": "6c755433106035b585596f6b4d694a8fac1c8b5d740cc6614c05e9c3c0a01b84",
+    "track2_aerial_drop_experiment_plan.md": "c87c308ab21a6834ee749a48a4f62298580b55096da9345d8f518c6ef1593f6d"
+  },
+  "started_utc": "2026-09-24T22:22:40.922122+00:00"
+}

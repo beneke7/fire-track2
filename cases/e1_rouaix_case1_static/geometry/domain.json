@@ -1,0 +1,72 @@
+{
+  "case": "Rouaix et al. 2023 E1 Reference Case 1; static preparation only",
+  "coordinate_frame": {
+    "x": "crossflow +",
+    "y": "upward +",
+    "z": "spanwise +"
+  },
+  "curved_aircraft_wall": {
+    "amplitude_m": 0.08000000000000002,
+    "citation": "Rouaix PDF p. 7 / article p. 6, Fig. 3 and section 3.2",
+    "classification": "assumed analytic wall; not source-derived geometry",
+    "figure3_rendered_page_sha256": "12cd10ef2d1cb06b397dcc2fa81e83067a83bf8f7be5eca64a2d302fa2291726",
+    "figure3_source_pdf_sha256": "624efe9ee2aec11b85624e9c2ac5364802b12c42657711d211e625052cf28446",
+    "figure3_trace_status": "not_quantitatively_defensible_from_source_schematic",
+    "length_x_m": 0.8,
+    "length_z_m": 0.8,
+    "mesh_representation": "piecewise bilinear top faces through top_wall_nodes.csv; no aircraft CAD is claimed",
+    "parameter_classification": "assumed SI reconstruction parameters; not dimensioned by the paper",
+    "profile": "y=A*(1-exp(-((x/Lx)^2+(z/Lz)^2))) with nozzle center y=0"
+  },
+  "domain": {
+    "bottom_span_m": 16.0,
+    "gas_inlet_to_nozzle_m": 2.5,
+    "nominal_opening_angle_deg": 25.0,
+    "nominal_trapezoid_volume_m3": 2300.0,
+    "streamwise_length_m": 20.0,
+    "top_span_m": 7.0,
+    "vertical_height_m": 10.0,
+    "x_max_m": 17.5,
+    "x_min_m": -2.5
+  },
+  "mesh": {
+    "background_cells": "1x20x1 cells per structured block; not meshed or checked",
+    "family": "blockMesh plus snappyHexMesh hex-dominant refinement; source uses unstructured polyhedra",
+    "layer_candidate": {
+      "count": 5,
+      "expansion_ratio": 1.1,
+      "thickness_parameters": "assumed; not paper-recovered"
+    },
+    "near_nozzle_refinement_level": 2,
+    "utility_order": [
+      "blockMesh",
+      "topoSet",
+      "createPatch",
+      "snappyHexMesh -overwrite"
+    ]
+  },
+  "nozzle_origin_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "patch_map": {
+    "aircraftWall": "curved top boundary; no-slip",
+    "bottomOutlet": "y=-10 m; atmospheric pressure outlet",
+    "downstreamOutlet": "x=17.5 m; atmospheric pressure outlet",
+    "gasInlet": "x=-2.5 m; prescribed +x air",
+    "nozzle": "aircraftWall boundary faces intersected with the cylinderToFace face-centre selection of radius 0.2 m; actual mesh area remains to be measured",
+    "spanwiseMinus": "negative span side; atmospheric pressure outlet",
+    "spanwisePlus": "positive span side; atmospheric pressure outlet"
+  },
+  "source": {
+    "doi": "10.1016/j.ijmultiphaseflow.2023.104419",
+    "locations": [
+      "PDF p. 4 / article p. 3, Fig. 1",
+      "PDF p. 5 / article p. 4, Table 3",
+      "PDF p. 7 / article p. 6, Fig. 3 and section 3.2"
+    ],
+    "pdf_sha256": "624efe9ee2aec11b85624e9c2ac5364802b12c42657711d211e625052cf28446",
+    "pdf_url": "https://hal.science/hal-04098260v1/file/Rouaix_28516.pdf"
+  }
+}

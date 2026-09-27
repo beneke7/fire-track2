@@ -1,0 +1,11 @@
+Candidate: candidate6 H4 native compile and code-object inspection
+Started UTC: 2026-09-25 14:04:22
+CPU envelope: 2 CPU through scripts/run_local.py and Docker --cpus=2; make -j2
+Memory envelope: Docker --memory=6g --memory-swap=6g
+Time limit: scripts/run_local.py --timeout 900 seconds
+GPU: disabled; no --gpus option
+Network: disabled
+Seed image: candidate5 image track2/flutas-source-boundary:5982106-candidate5-20260925T132844Z
+Seed image ID: sha256:73b7a60de5be7da33fd8af0802a6b70e32a6486d22452b449454eaaafa7d9e43
+Source commit: 598210616bebd51f7d51f61455f196e6f3479916
+Procedure: in an ephemeral container only, reverse candidate5 patch to restore the pinned source tree, apply candidate6 patch, clean and build, inspect the expected code object; no solver execution or GPU runtime

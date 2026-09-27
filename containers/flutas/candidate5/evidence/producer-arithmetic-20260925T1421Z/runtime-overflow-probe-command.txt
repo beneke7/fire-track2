@@ -1,0 +1,1 @@
+docker run --rm --pull=never --network=none --cpus=1 --memory=4g --entrypoint /bin/bash -v /home/v/proj/bene/fire-track2/containers/flutas/candidate5/evidence/producer-arithmetic-20260925T1421Z:/evidence:rw -w /evidence/inputs/quiescent_four sha256:73b7a60de5be7da33fd8af0802a6b70e32a6486d22452b449454eaaafa7d9e43 /evidence/build/run-overflow-probe.sh

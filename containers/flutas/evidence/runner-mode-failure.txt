@@ -1,0 +1,9 @@
+Command:
+FLUTAS_GPU_IMAGE=local/flutas-nvhpc:26.9-recipe-test containers/flutas/run-gpu-gate.sh
+
+Result:
+/bin/bash: line 1: containers/flutas/run-gpu-gate.sh: Permission denied
+exit status 126; no Docker or GPU process started.
+
+Correction: mark the build and GPU-run helper scripts executable, then rerun
+the packaged GPU gate successfully.

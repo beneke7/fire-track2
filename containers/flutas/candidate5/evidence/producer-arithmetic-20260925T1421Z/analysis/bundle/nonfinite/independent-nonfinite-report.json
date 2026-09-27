@@ -1,0 +1,53 @@
+{
+  "dt": {
+    "actual_path": "outputs/m3-nonfinite-dt/ledger_timestep-restriction.csv",
+    "actual_sha256": "768a142e84ff16bedc6454132a55ba59c652430301193faac5c322c65229a1f1",
+    "exact_bytes_match": true,
+    "expected_row": [
+      "0",
+      "0",
+      "Inf",
+      "1.3333333333333369E+001",
+      "1.3333333333333369E+001",
+      "false",
+      "1.8000000000000000E-005",
+      "2.3099999999999999E-002",
+      "4.3290043290043293E+001",
+      "2.0239500758981283E-001",
+      "7.0216669371534017E-009",
+      "0",
+      "false",
+      "7.3878551254360991E-002",
+      "2.0000000000000001E-001",
+      "Inf",
+      "false"
+    ],
+    "expected_sha256": "768a142e84ff16bedc6454132a55ba59c652430301193faac5c322c65229a1f1"
+  },
+  "method": "Finite restriction quantities derive from independent binary64 initgrid and velocity arithmetic in independent_expectations.py; IEEE overflow and dt=+Inf are independently inserted into the corresponding formula outputs; the exact NVHPC ES24.16E3 nonfinite spelling is represented as Inf.",
+  "rate": {
+    "actual_path": "outputs/m3-nonfinite-rate/ledger_timestep-restriction.csv",
+    "actual_sha256": "3bb681bdd918dcdc0ab90e6b5dbab4d6fde78ccbb6cf33d6d37768667c81c1ce",
+    "exact_bytes_match": true,
+    "expected_row": [
+      "0",
+      "0",
+      "1.0000000000000000E-004",
+      "Inf",
+      "Inf",
+      "false",
+      "1.8000000000000000E-005",
+      "2.3099999999999999E-002",
+      "4.3290043290043293E+001",
+      "2.0239500758981283E-001",
+      "7.0216669371534017E-009",
+      "0",
+      "false",
+      "0",
+      "2.0000000000000001E-001",
+      "Inf",
+      "false"
+    ],
+    "expected_sha256": "3bb681bdd918dcdc0ab90e6b5dbab4d6fde78ccbb6cf33d6d37768667c81c1ce"
+  }
+}

@@ -1,0 +1,29 @@
+160 84 40                         ! itot, jtot, ktot
+4.0 2.1 1.0                       ! lx, ly, lz [m]
+0.0                                ! gr: uniform vertical grid
+0.2 1.0e-4                         ! cfl, dt_input [s]
+T                                  ! constant_dt
+ab2 cen                            ! time_scheme, space_scheme_mom
+1000.0 1.0e-3                      ! rho_sp, mu_sp [kg/m3, Pa s]
+zer F 0.0                          ! inivel, is_noise_vel, noise_vel; helper sets declared background
+F hkv                              ! is_wallturb, wallturb_type
+cfr                                ! bulk_ftype
+14 0.0014 1.0                      ! nstep, time_max [s], tw_max [h]
+T F F                              ! stop_type: stop after nstep
+F 1 1 T                            ! restart, num_max_chkpt, input_chkpt, latest
+1 1 1000000 1000000 1000000 1000000 ! output/checkpoint intervals
+P P P P D D                        ! U BC: x PP, y PP, z DD
+P P P P D D                        ! V BC: x PP, y PP, z DD
+P P P P D D                        ! W BC: x PP, y PP, z DD
+P P P P N N                        ! pressure: x/y PP, z NN
+0 0 0 0 -50 -50 ! U values; z tangential fixed to background
+0 0 0 0 0 0 ! V values; z tangential fixed to background
+0 0 0 0 0 0                        ! W base values; source/return override after bounduvw
+0 0 0 0 0 0                        ! p value/gradient, frozen zero
+F F F                              ! is_forced(1:3)
+0 0 -9.81                             ! gacc_x,y,z [m/s2]
+0 0 0                              ! bvel_x,y,z
+0 0 0                              ! dpdl_x,y,z
+F F F F F F                        ! is_outflow=false on every face
+1 1                                ! dims_in: single rank
+1                                  ! nthreadsmax

@@ -1,0 +1,7 @@
+Two-halo caller storage: dzf(-1:nz+2) = (9.9, 0.4, 1.1, 2.3, 3.7, 5.2, 8.8)
+Correct call operands: dzf(0:) for boundary flux, inventory and velocity audit.
+Negative control operands: whole dzf array; helper dummy 0 maps to caller -1.
+Both compiled paths matched independent geometric face-area, flux-volume, inventory, divergence and Courant expectations.
+The whole-array path mismatched the physical-spacing results for inventory, x/y-low face area, boundary flux volume, divergence maximum and Courant.
+Physical slice: {'xlow_geometric_area': 42.6, 'ylow_geometric_area': 28.4, 'initial_inventory_kg': 37032.0, 'updated_inventory_kg': 42144.0, 'ylow_inward_volume_m3': 4.814, 'max_abs_divergence_s_inv': 1.0019166666666666, 'global_legacy_courant': 0.12532708333333334, 'divergence_integral_m3_s': 79.5266}
+Shifted negative: {'xlow_geometric_area': 22.8, 'ylow_geometric_area': 15.2, 'initial_inventory_kg': 20064.0, 'updated_inventory_kg': 22800.0, 'ylow_inward_volume_m3': 2.7520000000000002, 'max_abs_divergence_s_inv': 2.751916666666667, 'global_legacy_courant': 0.3440770833333333, 'divergence_integral_m3_s': 79.37480000000002}

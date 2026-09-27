@@ -1,0 +1,9 @@
+Candidate: candidate6 H4 dzf lower-bound repair helper test
+Started UTC: 2026-09-25 14:00:59
+CPU envelope: 1 CPU through scripts/run_local.py and Docker --cpus=1
+Memory envelope: Docker --memory=4g --memory-swap=4g
+GPU: disabled; no --gpus option
+Network: disabled
+Compiler image: track2/flutas-nvhpc:26.9
+Compiler image ID: sha256:78cd4fe3764e5010e09eaf77d792ee5e2cbdc35d2131497f906f7004c0f94ee8
+Test scope: compile and execute the exact added bodies of all three corrected helpers plus their boundary-volume accumulator from candidate6/source-boundary.patch; independent Python expectations cover face areas, inventory/volume, divergence and inherited Courant terms

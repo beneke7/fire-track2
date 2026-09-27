@@ -1,0 +1,7 @@
+[run_local] thread limit: 1
+PASS: compiled extracted candidate6 helpers with nvfortran
+PASS: 0:nz+1 one-halo mapping, nonconstant dzf face areas, inventory volumes, divergence and legacy Courant
+PASS: captured dzfi/dzci v1.2 Courant remains a distinct expression and expected value
+PASS: two-halo physical slice matched independent face, inventory, divergence and Courant expectations
+PASS: whole-array negative control produced the expected shifted-index mismatch: {'xlow_geometric_area': 22.8, 'ylow_geometric_area': 15.2, 'initial_inventory_kg': 20064.0, 'updated_inventory_kg': 22800.0, 'ylow_inward_volume_m3': 2.7520000000000002, 'max_abs_divergence_s_inv': 2.751916666666667, 'global_legacy_courant': 0.3440770833333333, 'divergence_integral_m3_s': 79.37480000000002}
+Evidence artifacts retained in /evidence/two-halo
