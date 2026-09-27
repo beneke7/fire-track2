@@ -42,10 +42,17 @@ The full bundle is not in Git; keep it available locally until it is archived
 with the larger research data.
 
 The [preview video](restas-still-air-alpha65-1s-preview.mp4) shows ten saved
-states from 0.1 through 1.0 s at a fixed alpha.water threshold of 0.65. It uses
-matte blue thresholded cells and a 0.45 px image blur, with no interpolated
-simulation states. The per-frame JSON and PNG files remain in the local run
-bundle. The view is intentionally a rendering of cell fractions, not droplets.
+states from 0.1 through 1.0 s at a fixed alpha.water threshold of 0.65. Its
+camera now stays fixed on the same 10 m region for every frame, and the matte
+blue cells have a 0.8 px display blur; no simulation states are interpolated.
+The per-frame JSON and PNG files remain in the local run bundle. The earlier
+preview auto-fitted each frame separately, which made the spray appear to
+change scale. The current camera fix corrects that presentation defect, but
+the field itself still has isolated thresholded cell clusters: VTK reports 8,
+28, and 35 connected regions at 0.1, 0.5, and 1.0 s respectively. Changing the
+alpha cutoff from 0.5 to 0.8 does not remove that fragmentation. At six cells
+across the slot, these are unresolved cell groups, not validated droplets or
+evidence of physical breakup.
 
 ## GPU solver benchmark
 

@@ -3,7 +3,15 @@
   "run_id": "restas-still-air-20260925T161158.078698Z-b5d19c1c",
   "local_run_bundle": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c",
   "output": "results/restas-still-air-alpha65-1s-preview.mp4",
-  "output_sha256": "2d5ef0d7592935c32660bc7049afa7b7a20c9e80a68c1c4ffdcc710e0014356e",
+  "output_sha256": "ceb3d59d36d0ae7efdd3174244c4c7eb106caabe9229c5be2453bf75eaccbe87",
+  "codec": "H.264 / libx264, CRF 18, yuv420p",
+  "duration_s": 1.0,
+  "frame_rate_fps": 10,
+  "frame_count": 10,
+  "resolution_px": [
+    1600,
+    1100
+  ],
   "simulation_times_s": [
     0.1,
     0.2,
@@ -16,77 +24,191 @@
     0.9,
     1.0
   ],
-  "frame_count": 10,
-  "frame_rate_fps": 10,
-  "duration_s": 1.0,
-  "resolution_px": [
-    1600,
-    1100
-  ],
-  "codec": "H.264 / libx264, CRF 18, yuv420p",
   "alpha_threshold": 0.65,
-  "style": "matte blue thresholded cell-volume surface; 0.45 px Gaussian blur per saved frame",
+  "camera": {
+    "bounds_m": [
+      -0.75,
+      0.75,
+      -1.5,
+      1.5,
+      0.0,
+      10.0
+    ],
+    "focal_point_m": [
+      0.0,
+      0.0,
+      5.0
+    ],
+    "mode": "fixed-isometric-parallel",
+    "parallel_scale_m": 5.301104051673262,
+    "view_direction": [
+      -0.5773502691896258,
+      -0.5773502691896258,
+      -0.5773502691896258
+    ]
+  },
+  "image_blur_radius_px": 0.8,
   "interpolated_simulation_states": false,
   "frames": [
     {
       "simulation_time_s": 0.1,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p100000s.png",
-      "sha256": "1d87750f3d40eed92598d75088d5919a4c4056d1c1f070505f4efa93404b6844",
-      "source_alpha_field_sha256": "24e42a9787c8bae8cefc3c2e874cac1c2600925f80ac76babafb5ae104fa28ef"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p100000s-fixed-camera.png",
+      "png_sha256": "051cb64142e5df924fba883607b2b95206425dfd702475a6a3f211cff650db7b",
+      "alpha_field_relative_path": "case/0.100000/alpha.water",
+      "alpha_field_sha256": "24e42a9787c8bae8cefc3c2e874cac1c2600925f80ac76babafb5ae104fa28ef",
+      "thresholded_cell_count": 8408,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        9.507569313049316,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.2,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p200000s.png",
-      "sha256": "9f849b26cd901e8e41ae254873cc10fb2139d4097a1f1c8493be9fd83c9f6c05",
-      "source_alpha_field_sha256": "cad60846db5609fce621d2a5dfc91a193397800288dfb82c16226025d1f3756f"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p200000s-fixed-camera.png",
+      "png_sha256": "f875367bf68cfc8b3fae08ab2efe20e2a9978bbecaa21746bf89c470f27b6ead",
+      "alpha_field_relative_path": "case/0.200000/alpha.water",
+      "alpha_field_sha256": "cad60846db5609fce621d2a5dfc91a193397800288dfb82c16226025d1f3756f",
+      "thresholded_cell_count": 6636,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        8.89039134979248,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.3,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p300000s.png",
-      "sha256": "c83cb6818771f5dd4f430dbb781be5cda1d9bc583b0ba3f368abc477bcc712a7",
-      "source_alpha_field_sha256": "d46714c3f44c94dacb19f5d3c903ee9c0779f45a9aaebac93afec0d6ca65eaa7"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p300000s-fixed-camera.png",
+      "png_sha256": "2f5823bbb62c5cddf0db6254f8e6311d454bd86a84a9df0ad224680f85026f59",
+      "alpha_field_relative_path": "case/0.300000/alpha.water",
+      "alpha_field_sha256": "d46714c3f44c94dacb19f5d3c903ee9c0779f45a9aaebac93afec0d6ca65eaa7",
+      "thresholded_cell_count": 5622,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        8.172296524047852,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.4,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p400000s.png",
-      "sha256": "7b54d45b6b4282fbc3099d281e2e11ca667759d1c6e9bbc88865190491f26fb6",
-      "source_alpha_field_sha256": "1eb16552dc01ccdc7f8bc4ce4b354e60fcc6e74c47f34a91f6c72837cf8ea172"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p400000s-fixed-camera.png",
+      "png_sha256": "610eec94b8ace5880c8c408aa610cf45c85f3bcba0235f83ab8902dd98c09f0d",
+      "alpha_field_relative_path": "case/0.400000/alpha.water",
+      "alpha_field_sha256": "1eb16552dc01ccdc7f8bc4ce4b354e60fcc6e74c47f34a91f6c72837cf8ea172",
+      "thresholded_cell_count": 4609,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        7.336784362792969,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.5,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p500000s.png",
-      "sha256": "0a77eb302610b1d7dcbc15aadb6f11cba30a40cbff9d772cd09303807db6d226",
-      "source_alpha_field_sha256": "bf9f0ea19828e707905e4b1a394ab8c30ede18c2fe03b388262dc9ffc25d3ec4"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p500000s-fixed-camera.png",
+      "png_sha256": "3424da20ab1e9a7c92727b7ea5e42470ce9954e8cac7f343941ce9647504795d",
+      "alpha_field_relative_path": "case/0.500000/alpha.water",
+      "alpha_field_sha256": "bf9f0ea19828e707905e4b1a394ab8c30ede18c2fe03b388262dc9ffc25d3ec4",
+      "thresholded_cell_count": 3879,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        6.444771766662598,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.6,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p600000s.png",
-      "sha256": "87d53eeb697344d85162b923250ceb124a45d38a6c39cbf604428bd99aecfeb2",
-      "source_alpha_field_sha256": "febf088c5ec6487491c1baa6d4b02642c0fb65b227bb024ee43782a65295b846"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p600000s-fixed-camera.png",
+      "png_sha256": "32c85545f2210f3dbccbeb60868b86c9e6f9c51997414ac41c3034b4932a9543",
+      "alpha_field_relative_path": "case/0.600000/alpha.water",
+      "alpha_field_sha256": "febf088c5ec6487491c1baa6d4b02642c0fb65b227bb024ee43782a65295b846",
+      "thresholded_cell_count": 3045,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        5.5099945068359375,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.7,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p700000s.png",
-      "sha256": "15a4eb200bb304b43618ffe66356851b027893f8e719848f990a620a57992956",
-      "source_alpha_field_sha256": "e23dc33728bc000a7d1285b62ef3319d34c9129402bb6a0964d8b40ddf63cfce"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p700000s-fixed-camera.png",
+      "png_sha256": "d6fc333209a6c08854633b71b7b52c46bad990f4659e5a13e1591ace500aeaf5",
+      "alpha_field_relative_path": "case/0.700000/alpha.water",
+      "alpha_field_sha256": "e23dc33728bc000a7d1285b62ef3319d34c9129402bb6a0964d8b40ddf63cfce",
+      "thresholded_cell_count": 2227,
+      "surface_bounds_m": [
+        -0.17499999701976776,
+        0.17499999701976776,
+        -1.024999976158142,
+        1.024999976158142,
+        4.447416305541992,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.8,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p800000s.png",
-      "sha256": "9ffb6dad0be6e2b12948fbda8602b1e6364dd3e59a84bf89d4372e9ac7844326",
-      "source_alpha_field_sha256": "eda3f8e2345af96f1f7f8ce96b84f2b6b91822b9cd416ef85de754d0e39c5578"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p800000s-fixed-camera.png",
+      "png_sha256": "182be6747e2e0103a903a2fa96216962479d6614553a08bd2e6492b04757f758",
+      "alpha_field_relative_path": "case/0.800000/alpha.water",
+      "alpha_field_sha256": "eda3f8e2345af96f1f7f8ce96b84f2b6b91822b9cd416ef85de754d0e39c5578",
+      "thresholded_cell_count": 1693,
+      "surface_bounds_m": [
+        -0.3310000002384186,
+        0.3310000002384186,
+        -1.024999976158142,
+        1.024999976158142,
+        3.239565134048462,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 0.9,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p900000s.png",
-      "sha256": "5c1767f51ed27611c7f01a324e7ffede296025ab102de6865dfaba2757363fc5",
-      "source_alpha_field_sha256": "e9fb5dddf80ff832f5aa70632bc2ec470e976ed01df89c2ce76750e52a870ad9"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-0p900000s-fixed-camera.png",
+      "png_sha256": "4c40e1b88dd5be5922159db526fc6eb6ce6346a438b6875403d18804e63be8ea",
+      "alpha_field_relative_path": "case/0.900000/alpha.water",
+      "alpha_field_sha256": "e9fb5dddf80ff832f5aa70632bc2ec470e976ed01df89c2ce76750e52a870ad9",
+      "thresholded_cell_count": 1237,
+      "surface_bounds_m": [
+        -0.3310000002384186,
+        0.3310000002384186,
+        -1.024999976158142,
+        1.024999976158142,
+        1.9987927675247192,
+        10.0
+      ]
     },
     {
       "simulation_time_s": 1.0,
-      "run_bundle_relative_path": "runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-1p000000s.png",
-      "sha256": "ccfb93280b8970c15236470d5ac4e4e4a6462a415adee98404d4d1ca07d6bb2d",
-      "source_alpha_field_sha256": "f381d9869b7152999282129d693d1af49aeb4307da8a4724b0c1b868c62af9d8"
+      "png_local_path": "results/runs/restas-still-air-20260925T161158.078698Z-b5d19c1c/figures/water-volume-alpha-0p65-t-1p000000s-fixed-camera.png",
+      "png_sha256": "8e2f78b36a2823af4f9f071b58702329d55fbd27906a32a9d25f46f24d08ea97",
+      "alpha_field_relative_path": "case/1.000000/alpha.water",
+      "alpha_field_sha256": "f381d9869b7152999282129d693d1af49aeb4307da8a4724b0c1b868c62af9d8",
+      "thresholded_cell_count": 823,
+      "surface_bounds_m": [
+        -0.4869999885559082,
+        0.4869999885559082,
+        -1.024999976158142,
+        1.024999976158142,
+        0.45617151260375977,
+        10.0
+      ]
     }
   ],
   "claim_limit": "Exploratory cell-fraction rendering, not validated breakup, droplet size, deposition, or field prediction."

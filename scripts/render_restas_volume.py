@@ -8,6 +8,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
@@ -36,7 +37,59 @@ def _numeric_time_dirs(case_dir: Path) -> list[Path]:
     return sorted(found, key=lambda path: float(path.name))
 
 
-def render(run_dir: Path, time_s: float | None, alpha_threshold: float) -> dict[str, Any]:
+def _fixed_isometric_camera(
+    plotter: Any,
+    bounds: tuple[float, float, float, float, float, float],
+    window_size: tuple[int, int],
+) -> dict[str, Any]:
+    """Set a repeatable parallel camera that frames a fixed physical region."""
+    import numpy as np
+
+    limits = np.asarray(bounds, dtype=np.float64).reshape(3, 2)
+    if not np.isfinite(limits).all() or np.any(limits[:, 1] <= limits[:, 0]):
+        raise ValueError("camera bounds must be six finite, increasing physical limits")
+
+    center = limits.mean(axis=1)
+    corners = np.asarray(
+        [(x, y, z) for x in limits[0] for y in limits[1] for z in limits[2]],
+        dtype=np.float64,
+    )
+    direction = np.asarray((-1.0, -1.0, -1.0)) / math.sqrt(3.0)
+    view_up = np.asarray((0.0, 0.0, 1.0))
+    right = np.cross(direction, view_up)
+    right /= np.linalg.norm(right)
+    screen_up = np.cross(right, direction)
+    relative = corners - center
+    half_height = float(np.max(np.abs(relative @ screen_up)))
+    half_width = float(np.max(np.abs(relative @ right)))
+    aspect = window_size[0] / window_size[1]
+    parallel_scale = 1.06 * max(half_height, half_width / aspect)
+
+    distance = 2.0 * float(np.max(limits[:, 1] - limits[:, 0]))
+    camera = plotter.camera
+    camera.focal_point = tuple(center)
+    camera.position = tuple(center - direction * distance)
+    camera.up = tuple(view_up)
+    camera.parallel_projection = True
+    camera.parallel_scale = parallel_scale
+    plotter.reset_camera_clipping_range()
+    return {
+        "mode": "fixed-isometric-parallel",
+        "bounds_m": [float(value) for value in bounds],
+        "focal_point_m": [float(value) for value in center],
+        "view_direction": [float(value) for value in direction],
+        "parallel_scale_m": parallel_scale,
+    }
+
+
+def render(
+    run_dir: Path,
+    time_s: float | None,
+    alpha_threshold: float,
+    camera_bounds: tuple[float, float, float, float, float, float] | None = None,
+    blur_radius_px: float = 0.45,
+    output_suffix: str | None = None,
+) -> dict[str, Any]:
     try:
         import numpy as np
         import pyvista as pv
@@ -115,11 +168,27 @@ def render(run_dir: Path, time_s: float | None, alpha_threshold: float) -> dict[
         geometry_bounds = [float(value) for value in surface.bounds]
         selected_cell_count = int(np.count_nonzero(threshold_mask))
 
+        if camera_bounds is not None and any(
+            geometry_bounds[index] < camera_bounds[index] - 1e-6
+            or geometry_bounds[index + 1] > camera_bounds[index + 1] + 1e-6
+            for index in (0, 2, 4)
+        ):
+            raise ValueError("fixed camera bounds do not contain the thresholded water surface")
+        if not math.isfinite(blur_radius_px) or blur_radius_px < 0.0:
+            raise ValueError("blur radius must be finite and nonnegative")
+        if output_suffix is not None and not re.fullmatch(r"[A-Za-z0-9_-]+", output_suffix):
+            raise ValueError(
+                "output suffix may contain only letters, numbers, underscores, and hyphens"
+            )
+
         output_dir = run_dir / "figures"
         output_dir.mkdir(parents=True, exist_ok=True)
         time_label = time_dir.name.replace(".", "p")
         threshold_label = f"{alpha_threshold:.2f}".replace(".", "p")
-        output_path = output_dir / f"water-volume-alpha-{threshold_label}-t-{time_label}s.png"
+        suffix = f"-{output_suffix}" if output_suffix else ""
+        output_path = (
+            output_dir / f"water-volume-alpha-{threshold_label}-t-{time_label}s{suffix}.png"
+        )
         if output_path.exists():
             raise FileExistsError(f"Refusing to overwrite existing render: {output_path}")
 
@@ -143,14 +212,20 @@ def render(run_dir: Path, time_s: float | None, alpha_threshold: float) -> dict[
             color="#182338",
         )
         plotter.add_axes(xlabel="x", ylabel="y", zlabel="z")
-        plotter.view_isometric()
-        plotter.camera.parallel_projection = True
-        plotter.camera.zoom(1.4)
+        camera_record = None
+        if camera_bounds is None:
+            plotter.view_isometric()
+            plotter.camera.parallel_projection = True
+            plotter.camera.zoom(1.4)
+        else:
+            camera_record = _fixed_isometric_camera(
+                plotter, camera_bounds, window_size=(2400, 1650)
+            )
         plotter.show(screenshot=str(hi_res_path), auto_close=True)
 
         image = Image.open(hi_res_path).convert("RGB")
         image = image.resize((1600, 1100), Image.Resampling.LANCZOS)
-        image = image.filter(ImageFilter.GaussianBlur(radius=0.45))
+        image = image.filter(ImageFilter.GaussianBlur(radius=blur_radius_px))
         image.save(output_path)
 
     return {
@@ -175,7 +250,8 @@ def render(run_dir: Path, time_s: float | None, alpha_threshold: float) -> dict[
             "supersampled_window_px": [2400, 1650],
             "output_window_px": [1600, 1100],
             "downsampling": "Lanczos",
-            "gaussian_blur_radius_px": 0.45,
+            "gaussian_blur_radius_px": blur_radius_px,
+            "camera": camera_record,
         },
         "claim_limit": (
             "Exploratory VOF water-volume rendering from saved OpenFOAM cell fractions; "
@@ -189,11 +265,27 @@ def main() -> int:
     parser.add_argument("--run-dir", required=True, type=Path)
     parser.add_argument("--time", type=float, help="reconstructed simulation time in seconds")
     parser.add_argument("--alpha-threshold", type=float, default=0.65)
+    parser.add_argument(
+        "--camera-bounds",
+        type=float,
+        nargs=6,
+        metavar=("XMIN", "XMAX", "YMIN", "YMAX", "ZMIN", "ZMAX"),
+        help="fixed camera region in metres, ordered xmin xmax ymin ymax zmin zmax",
+    )
+    parser.add_argument("--blur-radius-px", type=float, default=0.45)
+    parser.add_argument("--output-suffix", help="optional filename suffix for a new render")
     args = parser.parse_args()
     if not 0.5 <= args.alpha_threshold <= 0.8:
         parser.error("--alpha-threshold must be between 0.5 and 0.8")
     try:
-        record = render(args.run_dir, args.time, args.alpha_threshold)
+        record = render(
+            args.run_dir,
+            args.time,
+            args.alpha_threshold,
+            camera_bounds=tuple(args.camera_bounds) if args.camera_bounds else None,
+            blur_radius_px=args.blur_radius_px,
+            output_suffix=args.output_suffix,
+        )
     except (OSError, RuntimeError, ValueError, json.JSONDecodeError) as error:
         parser.error(str(error))
     record_path = Path(record["output_png"]).with_suffix(".json")

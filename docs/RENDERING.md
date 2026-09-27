@@ -1,5 +1,22 @@
 # Rendering computed pilot surfaces
 
+## Cell-thresholded water-volume preview
+
+`scripts/render_restas_volume.py` renders the saved cell-centered
+`alpha.water` field as matte blue cells above a declared alpha threshold. A
+single still defaults to automatic framing. For frames that will be assembled
+into an animation, pass the **same** `--camera-bounds` to every render; without
+it, the camera fits each frame's water surface independently and apparent
+scale jumps over time. For the current 10 m still-air preview, use
+`--camera-bounds -0.75 0.75 -1.5 1.5 0 10`. `--blur-radius-px` affects only the
+final image and does not smooth the simulation field. The image and JSON
+sidecar record the camera bounds, alpha cutoff and source-field hash.
+
+The current video uses ten stored fields from 0.1 to 1.0 s. It does not
+interpolate between them. At this mesh's six cells across the slot, isolated
+thresholded cells are underresolved volume-fraction features and must not be
+presented as resolved droplets.
+
 The P0 renderer reads OpenFOAM's computed `.vtp` interface output, verifies that
 the surface contains cells and velocity field `U`, derives its magnitude, and
 saves a 3D PNG plus a JSON provenance record. It does not generate or smooth
