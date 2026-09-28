@@ -1,0 +1,2016 @@
+{
+  "schema": "flutas-dry-output-map-v0.1",
+  "status": "PROSPECTIVE; map artifact only; requires Astra Max exact review and primary disposition before launch",
+  "scope": {
+    "case_id": "dry_four",
+    "candidate": "candidate6",
+    "source_repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+    "source_commit": "598210616bebd51f7d51f61455f196e6f3479916",
+    "candidate_patch_path": "containers/flutas/candidate6/source-boundary.patch",
+    "candidate_patch_sha256": "3302908d5542d7fee022293f060584f762f7afc01e2a76aea3982b0c4ce79dee",
+    "allowlisted_input_root": "containers/flutas/candidate5/cases/source_boundary/dry_four",
+    "staged_inputs": [
+      {
+        "path": "dns.in",
+        "sha256": "929011ead3bf96a094b0082520de0aa333ac69b1a4fc5209847e9ca9dfda10e0"
+      },
+      {
+        "path": "source-boundary.in",
+        "sha256": "f14d5e44d14928e5c3db0b4158e9ff7122aec64ac591fc8ea2fea9ce5df154e0"
+      },
+      {
+        "path": "vof.in",
+        "sha256": "2b18cca4d60c9d64eb52804db2573afdab59be782b96d58f23fcf91eaabefa54"
+      }
+    ],
+    "normal_case_facts": {
+      "global_cells": [
+        160,
+        84,
+        40
+      ],
+      "cell_count": 537600,
+      "physical_domain_m": [
+        4,
+        2.1,
+        1
+      ],
+      "planned_intervals": 14,
+      "planned_states": 15,
+      "input_dt_s": 0.0001,
+      "planned_duration_s": 0.0014,
+      "active_slot_count": 0,
+      "source_schedule_half_open": [
+        0,
+        0
+      ],
+      "initial_vof": "empty",
+      "source_boundary_parameter_m_s": [
+        0,
+        0,
+        -4.8
+      ],
+      "parameter_effect": "Declared only; no slot/mask receives it under slot_count=0 and schedule [0,0).",
+      "refs": [
+        "I1",
+        "I2",
+        "I3"
+      ]
+    },
+    "claim_limit": "A passing check supports only this exact candidate's one quiescent zero-slot execution/telemetry diagnostic within its recorded envelope; no source/VOF physical qualification."
+  },
+  "normal_lifecycle": {
+    "events": [
+      {
+        "id": "source_validation_and_headers",
+        "order": 1,
+        "description": "After source validation, open six v0.3 and three v1.2 CSVs with new-file semantics and write headers. Earlier stops may leave them absent; faults during writes may leave partial bytes.",
+        "refs": [
+          "P1"
+        ]
+      },
+      {
+        "id": "grid_setup",
+        "order": 2,
+        "description": "Write grid.bin and formatted grid.out/geometry.out during grid setup.",
+        "refs": [
+          "S1",
+          "I1"
+        ]
+      },
+      {
+        "id": "post_initialization_timestep_capture",
+        "order": 3,
+        "description": "Capture timestep inputs after initialization and before initial U0 output; interruptions may leave JSON absent or partial.",
+        "refs": [
+          "P2"
+        ]
+      },
+      {
+        "id": "initial_u0_output",
+        "order": 4,
+        "description": "Write U0 diagnostics, five initial 3D arrays, four native j=42 midplane arrays and visualization logs.",
+        "refs": [
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "P3"
+        ]
+      },
+      {
+        "id": "interval_and_state_output",
+        "order": 5,
+        "description": "Write 14 U1-U14 time/VOF rows and interval/state table rows as calls complete; preserve all flushed rows and any partial record.",
+        "refs": [
+          "S6",
+          "P4",
+          "P5",
+          "I1"
+        ]
+      },
+      {
+        "id": "final_u14_checkpoint",
+        "order": 6,
+        "description": "On normal completion, write eight checkpoint arrays and scalar/index metadata. No periodic field output is expected because output/checkpoint cadence is 1,000,000 and nstep=14.",
+        "refs": [
+          "S7",
+          "S8",
+          "I1"
+        ]
+      },
+      {
+        "id": "normal_shutdown",
+        "order": 7,
+        "description": "Write timing/performance diagnostics on _TIMING build; a normal roster has exactly these 37 files.",
+        "refs": [
+          "S10"
+        ]
+      }
+    ],
+    "early_failure_prefix_rules": [
+      "Never infer an empty result from an absent file. Distinguish absent, header-only, complete-row prefix, partial trailing record and complete normal output.",
+      "Preserve every emitted file byte-for-byte, including empty/partial/malformed files; record path, size, hash, last reached writer and failure point. Never normalize, rewrite, truncate or delete.",
+      "A CSV failure retains its exact flushed prefix or partial record. An incomplete prefix is a failed/inconclusive attempt, not a successful short table.",
+      "Timestep JSON exists only if capture was reached; hash exact producer bytes and parse read-only; never regenerate.",
+      "Initial arrays/logs require U0 output to have been reached. Final arrays/scalar/index are promised only after normal final checkpoint completion.",
+      "Any abnormal exit, missing normal output, prefix/hash/copy/cap mismatch, analyzer rejection, sample fault/gap or unverified termination consumes the one attempt; preserve evidence and do not retry."
+    ],
+    "strict_roster": "Normal completion emits exactly the 37 listed native files; no glob acceptance, extra solver output, alternate canonical path or periodic snapshot is accepted. Failure may leave only a reached prefix."
+  },
+  "producer_files": [
+    {
+      "id": "grid_bin",
+      "native_path": "data/grid.bin",
+      "canonical_path": "canonical/data/grid.bin",
+      "event": "grid_setup",
+      "role": "four vertical-grid arrays dzc,dzf,zc,zf",
+      "native_format": "raw unformatted binary stream; four 40-element arrays",
+      "shape": [
+        4,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran array order; 40 values per array",
+      "units": "m",
+      "size_bytes": {
+        "normal_expected_bytes": 1280,
+        "frozen_max_bytes": 1280,
+        "bound_basis": "4 arrays * 40 values * 8 bytes"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S1",
+        "S9"
+      ],
+      "components": [
+        "dzc",
+        "dzf",
+        "zc",
+        "zf"
+      ]
+    },
+    {
+      "id": "initial_3d_vex",
+      "native_path": "data/vex_fld_000000000.bin",
+      "canonical_path": "canonical/initial/3d/field-01",
+      "event": "initial_u0_output",
+      "role": "initial 3D velocity_x",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S3",
+        "S9"
+      ],
+      "variable": "velocity_x",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_3d_vey",
+      "native_path": "data/vey_fld_000000000.bin",
+      "canonical_path": "canonical/initial/3d/field-02",
+      "event": "initial_u0_output",
+      "role": "initial 3D velocity_y",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S3",
+        "S9"
+      ],
+      "variable": "velocity_y",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_3d_vez",
+      "native_path": "data/vez_fld_000000000.bin",
+      "canonical_path": "canonical/initial/3d/field-03",
+      "event": "initial_u0_output",
+      "role": "initial 3D velocity_z",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S3",
+        "S9"
+      ],
+      "variable": "velocity_z",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_3d_pre",
+      "native_path": "data/pre_fld_000000000.bin",
+      "canonical_path": "canonical/initial/3d/field-04",
+      "event": "initial_u0_output",
+      "role": "initial 3D projection pressure (gauge; arbitrary reference)",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "Pa",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S3",
+        "S9",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "variable": "pressure",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Source dimensional analysis with SI case inputs establishes Pa; pressure is a projection/gauge field with arbitrary reference, not absolute thermodynamic pressure."
+    },
+    {
+      "id": "initial_3d_vof_fld",
+      "native_path": "data/vof_fld_fld_000000000.bin",
+      "canonical_path": "canonical/initial/3d/field-05",
+      "event": "initial_u0_output",
+      "role": "initial 3D volume_fraction",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "dimensionless volume fraction",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S3",
+        "S9"
+      ],
+      "variable": "volume_fraction",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_midplane_u",
+      "native_path": "data/u_slice_fld_000000000.bin",
+      "canonical_path": "canonical/initial/midplane/field-01",
+      "event": "initial_u0_output",
+      "role": "initial midplane velocity_x",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        1,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 51200,
+        "frozen_max_bytes": 51200,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S4",
+        "S5",
+        "S9"
+      ],
+      "variable": "velocity_x",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          42,
+          42
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "native_plane_j": 42,
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_midplane_v",
+      "native_path": "data/v_slice_fld_000000000.bin",
+      "canonical_path": "canonical/initial/midplane/field-02",
+      "event": "initial_u0_output",
+      "role": "initial midplane velocity_y",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        1,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 51200,
+        "frozen_max_bytes": 51200,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S4",
+        "S5",
+        "S9"
+      ],
+      "variable": "velocity_y",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          42,
+          42
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "native_plane_j": 42,
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_midplane_w",
+      "native_path": "data/w_slice_fld_000000000.bin",
+      "canonical_path": "canonical/initial/midplane/field-03",
+      "event": "initial_u0_output",
+      "role": "initial midplane velocity_z",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        1,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 51200,
+        "frozen_max_bytes": 51200,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S4",
+        "S5",
+        "S9"
+      ],
+      "variable": "velocity_z",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          42,
+          42
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "native_plane_j": 42,
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "initial_midplane_p",
+      "native_path": "data/p_slice_fld_000000000.bin",
+      "canonical_path": "canonical/initial/midplane/field-04",
+      "event": "initial_u0_output",
+      "role": "initial midplane projection pressure (gauge; arbitrary reference)",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        1,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "Pa",
+      "size_bytes": {
+        "normal_expected_bytes": 51200,
+        "frozen_max_bytes": 51200,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S4",
+        "S5",
+        "S9",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "variable": "pressure",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          42,
+          42
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "native_plane_j": 42,
+      "unit_review": "Source dimensional analysis with SI case inputs establishes Pa; pressure is a projection/gauge field with arbitrary reference, not absolute thermodynamic pressure."
+    },
+    {
+      "id": "final_checkpoint_fldu",
+      "native_path": "data/restart_dir/restart_subdir_001/fldu.bin",
+      "canonical_path": "canonical/final-checkpoint/array-01",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint velocity_x",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9"
+      ],
+      "variable": "u",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "final_checkpoint_fldv",
+      "native_path": "data/restart_dir/restart_subdir_001/fldv.bin",
+      "canonical_path": "canonical/final-checkpoint/array-02",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint velocity_y",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9"
+      ],
+      "variable": "v",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "final_checkpoint_fldw",
+      "native_path": "data/restart_dir/restart_subdir_001/fldw.bin",
+      "canonical_path": "canonical/final-checkpoint/array-03",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint velocity_z",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9"
+      ],
+      "variable": "w",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "final_checkpoint_flddu",
+      "native_path": "data/restart_dir/restart_subdir_001/flddu.bin",
+      "canonical_path": "canonical/final-checkpoint/array-04",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint previous advection and viscous momentum RHS for velocity_x",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s^2",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9",
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "variable": "dxdt_history",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "RK source copies the advection+viscous momentum RHS into the next-step history; pressure, gravity, surface tension, and forcing are applied separately. Units are m/s^2."
+    },
+    {
+      "id": "final_checkpoint_flddv",
+      "native_path": "data/restart_dir/restart_subdir_001/flddv.bin",
+      "canonical_path": "canonical/final-checkpoint/array-05",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint previous advection and viscous momentum RHS for velocity_y",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s^2",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9",
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "variable": "dydt_history",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "RK source copies the advection+viscous momentum RHS into the next-step history; pressure, gravity, surface tension, and forcing are applied separately. Units are m/s^2."
+    },
+    {
+      "id": "final_checkpoint_flddw",
+      "native_path": "data/restart_dir/restart_subdir_001/flddw.bin",
+      "canonical_path": "canonical/final-checkpoint/array-06",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint previous advection and viscous momentum RHS for velocity_z",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "m/s^2",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9",
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "variable": "dzdt_history",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "RK source copies the advection+viscous momentum RHS into the next-step history; pressure, gravity, surface tension, and forcing are applied separately. Units are m/s^2."
+    },
+    {
+      "id": "final_checkpoint_fldp",
+      "native_path": "data/restart_dir/restart_subdir_001/fldp.bin",
+      "canonical_path": "canonical/final-checkpoint/array-07",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint projection/gauge pressure with arbitrary reference",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "Pa",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "variable": "p",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Projection pressure from the SI dimensional correction dt*grad(p)/rho; it is not absolute thermodynamic pressure."
+    },
+    {
+      "id": "final_checkpoint_fldpsi",
+      "native_path": "data/restart_dir/restart_subdir_001/fldpsi.bin",
+      "canonical_path": "canonical/final-checkpoint/array-08",
+      "event": "final_u14_checkpoint",
+      "role": "final checkpoint VOF_phase_indicator",
+      "native_format": "raw unformatted binary stream; no record markers",
+      "shape": [
+        160,
+        84,
+        40
+      ],
+      "dtype": "IEEE-754 binary64",
+      "endianness": "little",
+      "storage_order": "Fortran order; first index i varies fastest",
+      "units": "dimensionless volume fraction",
+      "size_bytes": {
+        "normal_expected_bytes": 4300800,
+        "frozen_max_bytes": 4300800,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8",
+        "S9"
+      ],
+      "variable": "psi",
+      "index_bounds": {
+        "i": [
+          1,
+          160
+        ],
+        "j": [
+          1,
+          84
+        ],
+        "k": [
+          1,
+          40
+        ]
+      },
+      "unit_review": "Variable identity is source-bound; physical qualification is outside this diagnostic."
+    },
+    {
+      "id": "grid_out",
+      "native_path": "data/grid.out",
+      "canonical_path": "canonical/data/grid.out",
+      "event": "grid_setup",
+      "role": "tabular grid-coordinate diagnostic",
+      "native_format": "Fortran formatted text; 42 rows x 5 E15.7 fields",
+      "shape": null,
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "column 1: dimensionless grid index; columns 2-5: m (zf, zc, dzf, dzc)",
+      "size_bytes": {
+        "normal_expected_bytes": 3192,
+        "frozen_max_bytes": 3192,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S1"
+      ],
+      "exact_length_basis": "42 rows x 5 E15.7 fields (75 characters) plus LF per row, for the pinned 40-cell grid and one halo.",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count."
+    },
+    {
+      "id": "geometry_out",
+      "native_path": "data/geometry.out",
+      "canonical_path": "canonical/data/geometry.out",
+      "event": "grid_setup",
+      "role": "geometry metadata",
+      "native_format": "Fortran list-directed formatted text; two records: (nx,ny,nz), then (Lx,Ly,Lz); pinned NVHPC 26.9 output",
+      "shape": null,
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "first record: dimensionless cell counts; second record: m",
+      "size_bytes": {
+        "normal_expected_bytes": 119,
+        "frozen_max_bytes": 119,
+        "bound_basis": "Reproduced exact two-record writer output for pinned candidate, NVHPC 26.9, Linux amd64, and frozen dns.in inputs."
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S1"
+      ],
+      "exact_length_basis": "Exact 119-byte result reproduced in the pinned candidate image with the recorded compiler and inputs.",
+      "byte_limit_action": "Preserve bytes and fail the read-only analyzer if size differs from 119 bytes."
+    },
+    {
+      "id": "log_2d",
+      "native_path": "data/log_visu_2d_slice_1.out",
+      "canonical_path": "canonical/data/log_visu_2d_slice_1.out",
+      "event": "initial_u0_output",
+      "role": "2D visualization metadata log",
+      "native_format": "Fortran formatted text",
+      "shape": null,
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "metadata",
+      "size_bytes": {
+        "normal_expected_bytes": 416,
+        "frozen_max_bytes": 416,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S4"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count."
+    },
+    {
+      "id": "log_3d",
+      "native_path": "data/log_visu_3d.out",
+      "canonical_path": "canonical/data/log_visu_3d.out",
+      "event": "initial_u0_output",
+      "role": "3D visualization metadata log",
+      "native_format": "Fortran formatted text",
+      "shape": null,
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "metadata",
+      "size_bytes": {
+        "normal_expected_bytes": 493,
+        "frozen_max_bytes": 493,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S2",
+        "S3"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count."
+    },
+    {
+      "id": "time_out",
+      "native_path": "data/time.out",
+      "canonical_path": "canonical/data/time.out",
+      "event": "interval_and_state_output",
+      "role": "time diagnostic; U1-U14",
+      "native_format": "Fortran formatted text; 14 records of 3E15.7 fields",
+      "shape": {
+        "states": "U1..U14; one state per row",
+        "fields": [
+          "istep",
+          "dt_s",
+          "time_s"
+        ]
+      },
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "s",
+      "size_bytes": {
+        "normal_expected_bytes": 644,
+        "frozen_max_bytes": 644,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S6",
+        "I1"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count.",
+      "row_count": 14
+    },
+    {
+      "id": "vof_info",
+      "native_path": "data/vof_info.out",
+      "canonical_path": "canonical/data/vof_info.out",
+      "event": "initialization and each completed state",
+      "role": "VOF initialization/state summary",
+      "native_format": "Fortran formatted text; 15 records of 6E15.7 fields",
+      "shape": {
+        "states": "U0..U14; one state per row",
+        "fields": [
+          "istep",
+          "dt_s",
+          "time_s",
+          "vof_min",
+          "vof_max",
+          "water_volume_m3"
+        ]
+      },
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "source-defined mixed diagnostics",
+      "size_bytes": {
+        "normal_expected_bytes": 1365,
+        "frozen_max_bytes": 1365,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S6",
+        "I1"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count.",
+      "row_count": 15
+    },
+    {
+      "id": "performance",
+      "native_path": "data/performance.out",
+      "canonical_path": "canonical/data/performance.out",
+      "event": "normal_shutdown",
+      "role": "solver performance/timing diagnostic",
+      "native_format": "Fortran formatted timing text; _TIMING build",
+      "shape": null,
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "producer-defined timing units",
+      "size_bytes": {
+        "normal_expected_bytes": 1064,
+        "frozen_max_bytes": 1064,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S10"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count."
+    },
+    {
+      "id": "scalar_out",
+      "native_path": "data/restart_dir/restart_subdir_001/scalar.out",
+      "canonical_path": "canonical/data/restart_dir/restart_subdir_001/scalar.out",
+      "event": "final_u14_checkpoint",
+      "role": "checkpoint scalar metadata",
+      "native_format": "Fortran formatted checkpoint text; (2E15.7,1I9.8)",
+      "shape": {
+        "records": 1,
+        "fields": [
+          "time_s",
+          "previous_dt_s",
+          "istep"
+        ]
+      },
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "time in s plus source-defined scalar/integer",
+      "size_bytes": {
+        "normal_expected_bytes": 40,
+        "frozen_max_bytes": 40,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7",
+        "S8"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count.",
+      "row_count": 1
+    },
+    {
+      "id": "restart_checkpoints",
+      "native_path": "data/restart_dir/restart_checkpoints.out",
+      "canonical_path": "canonical/data/restart_dir/restart_checkpoints.out",
+      "event": "final_u14_checkpoint",
+      "role": "restart checkpoint index",
+      "native_format": "Fortran formatted checkpoint text; 1 record of 3E15.7 fields",
+      "shape": {
+        "records": 1,
+        "fields": [
+          "istep",
+          "time_s",
+          "checkpoint_index"
+        ]
+      },
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "metadata",
+      "size_bytes": {
+        "normal_expected_bytes": 46,
+        "frozen_max_bytes": 46,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S7"
+      ],
+      "exact_length_basis": "Warden source audit and frozen normal cadence; post-run byte check required",
+      "byte_limit_action": "Fail post-run analysis on an unexpected byte count.",
+      "row_count": 1
+    },
+    {
+      "id": "source_flux",
+      "native_path": "data/restas_source-flux.csv",
+      "canonical_path": "restas_source-flux.csv",
+      "event": "v0.3_header_then_interval_or_state_rows",
+      "role": "v0.3 source flux ledger",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 0,
+        "columns": 13
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 254,
+        "frozen_max_bytes": 1024,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P5"
+      ],
+      "normal_record_count_including_header": 1,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "Zero dry data rows; header only.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "source_offmask",
+      "native_path": "data/restas_source-offmask.csv",
+      "canonical_path": "restas_source-offmask.csv",
+      "event": "v0.3_header_then_interval_or_state_rows",
+      "role": "v0.3 off-mask volume ledger",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 14,
+        "columns": 3
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 776,
+        "frozen_max_bytes": 15360,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P5"
+      ],
+      "normal_record_count_including_header": 15,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "One data row per interval.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "rate_check",
+      "native_path": "data/restas_rate-check.csv",
+      "canonical_path": "restas_rate-check.csv",
+      "event": "v0.3_header_then_interval_or_state_rows",
+      "role": "v0.3 rate check",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 14,
+        "columns": 7
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 2292,
+        "frozen_max_bytes": 15360,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P5",
+        "P4"
+      ],
+      "normal_record_count_including_header": 15,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "One row per interval; bottom is signed total-volume -w*area including air.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "boundary_ledger",
+      "native_path": "data/restas_boundary-ledger.csv",
+      "canonical_path": "restas_boundary-ledger.csv",
+      "event": "v0.3_header_then_interval_or_state_rows",
+      "role": "v0.3 boundary-volume ledger",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 15,
+        "columns": 13
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 4701,
+        "frozen_max_bytes": 16384,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "normal_record_count_including_header": 16,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "One row per U0-U14 state.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "mass_ledger",
+      "native_path": "data/restas_mass-ledger.csv",
+      "canonical_path": "restas_mass-ledger.csv",
+      "event": "v0.3_header_then_interval_or_state_rows",
+      "role": "v0.3 mass/inventory ledger",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 15,
+        "columns": 20
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 7443,
+        "frozen_max_bytes": 16384,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "normal_record_count_including_header": 16,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "One row per U0-U14 state.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "velocity_audit",
+      "native_path": "data/restas_velocity-audit.csv",
+      "canonical_path": "restas_velocity-audit.csv",
+      "event": "v0.3_header_then_interval_or_state_rows",
+      "role": "v0.3 velocity/boundary audit",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 15,
+        "columns": 22
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 7021,
+        "frozen_max_bytes": 16384,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "normal_record_count_including_header": 16,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "Dry interface: count=0, defined=0, stored Courant=0 explicitly undefined.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "phase_property",
+      "native_path": "data/restas_phase-property-stage-audit.csv",
+      "canonical_path": "phase-property-stage-audit.csv",
+      "event": "v1.2_header_then_u0_interval_stage_rows",
+      "role": "v1.2 phase/property stage audit",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 672,
+        "columns": 15
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 83086,
+        "frozen_max_bytes": 689152,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P3",
+        "P4"
+      ],
+      "normal_record_count_including_header": 673,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "Production: 14*(8+8+8+24)=672 rows; host helper's 64 rows are not production count.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "boundary_velocity",
+      "native_path": "data/restas_boundary-velocity-stage-audit.csv",
+      "canonical_path": "boundary-velocity-stage-audit.csv",
+      "event": "v1.2_header_then_u0_interval_stage_rows",
+      "role": "v1.2 boundary velocity stage audit",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 516,
+        "columns": 15
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": 65170,
+        "frozen_max_bytes": 529408,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P3",
+        "P4"
+      ],
+      "normal_record_count_including_header": 517,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "Production: (1+3*14)*12=516 rows.",
+      "expected_size_note": "Expected normal byte size from Warden audit; cap uses larger per-record envelope.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "timestep_restriction",
+      "native_path": "data/restas_timestep-restriction.csv",
+      "canonical_path": "timestep-restriction.csv",
+      "event": "v1.2_header_then_u0_interval_stage_rows",
+      "role": "v1.2 timestep restriction audit",
+      "native_format": "ASCII CSV; Fortran formatted sequential text; exact headers/order required",
+      "shape": {
+        "header_rows": 1,
+        "data_rows_normal": 15,
+        "columns": 17
+      },
+      "dtype": "schema-defined integer/real text fields",
+      "endianness": null,
+      "storage_order": "CSV source row order and exact column order",
+      "units": "column-specific units from frozen header",
+      "size_bytes": {
+        "normal_expected_bytes": null,
+        "frozen_max_bytes": 16384,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "normal_record_count_including_header": 16,
+      "per_record_policy_cap_bytes": 1024,
+      "detail": "U0-U14; normal size <=5528 bytes; U14 operands finite and only guard_pass is not_applicable.",
+      "expected_size_note": "No exact expected length asserted; normal upper expectation is 5528 bytes.",
+      "cap_accounting": "Each header/data record <=1024 bytes; file fails read-only analysis if a record exceeds cap.",
+      "prefix_policy": "Preserve exact partial bytes; never repair, normalize, truncate, or remove."
+    },
+    {
+      "id": "timestep_inputs_json",
+      "native_path": "data/restas_timestep-inputs.json",
+      "canonical_path": "timestep-inputs.json",
+      "event": "post_initialization_timestep_capture",
+      "role": "runtime timestep input capture",
+      "native_format": "UTF-8/ASCII JSON emitted by Fortran; preserve exact bytes",
+      "shape": {
+        "top_level_keys": 26
+      },
+      "dtype": "JSON object with producer real values/arrays",
+      "endianness": null,
+      "storage_order": "JSON key order and bytes are producer evidence",
+      "units": "mixed SI parameters/settings",
+      "size_bytes": {
+        "normal_expected_bytes": null,
+        "frozen_max_bytes": 8192,
+        "bound_basis": "source/Warden roster; exact independent review and post-run byte check required"
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "P2"
+      ],
+      "normal_key_count": 26,
+      "exact_byte_sha256_required": true,
+      "do_not_regenerate_or_normalize": true,
+      "byte_limit_action": "If >8192 bytes, preserve and fail the attempt."
+    }
+  ],
+  "nonproducer_artifacts": {
+    "count_policy": "Excluded from the 37 native producer files and 57,447,891-byte deterministic native bound. Their mutable bytes, including canonical duplicates, count under sampled disk roots when covered.",
+    "required": [
+      {
+        "id": "launch_bundle",
+        "bundle_path": "metadata/run-manifest.json; metadata/command.json; metadata/source-supervisor.json; metadata/primary-disposition.json; metadata/astra-review-memo.md; metadata/attempt-claim.json; metadata/run-local-command.json; metadata/launch-result.json or metadata/launch-failure.json; logs/run-local.stdout.log; logs/run-local.stderr.log",
+        "origin": "prospective launcher and run_local wrapper",
+        "format": "JSON and raw text streams",
+        "policy": "Retain exact amendment, output-map, input preflight, candidate, commands, hard limits and exit state. A reserved or failed attempt is never overwritten or retried."
+      },
+      {
+        "id": "reviewed_output_map",
+        "bundle_path": "metadata/dry-output-map.json",
+        "origin": "byte-identical copy of experiments/dry-output-map.json",
+        "format": "JSON",
+        "policy": "Retain and hash the exact reviewed map bytes."
+      },
+      {
+        "id": "staged_inputs",
+        "bundle_path": "dry_four/",
+        "origin": "exact read-only copy of the three allowlisted candidate5 input files",
+        "format": "regular files",
+        "policy": "Directory leaf is dry_four for the frozen adapter interface. Reject symlink, hardlink, extra input, restart or changed bytes; retain input-preflight.json."
+      },
+      {
+        "id": "candidate_provenance",
+        "bundle_path": "metadata/candidate-build.json; metadata/candidate-build.sha256; metadata/source-tree-blobs.tsv; metadata/oci-layout-reference.json; metadata/candidate6-identity.json; metadata/candidate-identity-command.json; logs/candidate-identity.stdout.log; logs/candidate-identity.stderr.log",
+        "origin": "frozen candidate receipt and launch-time identity verifier",
+        "format": "exact receipt/source inventory and JSON/text",
+        "policy": "Bind candidate6 build and executable, external offline OCI archive/layout, image ID, manifest digest, command, verifier status and verifier streams."
+      },
+      {
+        "id": "host_snapshot",
+        "bundle_path": "metadata/host-snapshot.json",
+        "origin": "byte-identical copy of results/machine.json at bundle preparation",
+        "format": "JSON",
+        "policy": "Retain the host CPU/RAM/GPU/disk snapshot inside the immutable bundle; refresh it with make doctor before preparing the launch bundle."
+      },
+      {
+        "id": "supervisor_configuration_and_evidence",
+        "bundle_path": "metadata/source-supervisor.json; supervisor/stage.txt; supervisor/evidence/stdout.log; supervisor/evidence/stderr.log; supervisor/evidence/supervision.jsonl; supervisor/evidence/summary.json",
+        "origin": "H7 supervisor and attached Docker streams",
+        "format": "JSON/text/raw bytes/JSON Lines",
+        "policy": "The config and events retain exact image/container configuration, mounts, command, hard resource limits, one-second monitoring (plus reviewed bounded startup samples), control calls, stop state, exit and verified termination. Attached streams have no rotation and a combined 64 MiB cap; events cap at 16 MiB. Unverified termination keeps the GPU lock held."
+      },
+      {
+        "id": "postrun_analysis_and_manifest",
+        "bundle_path": "analysis/dry-output-annex.json; analysis/adapter-run-metadata.json; manifest.json",
+        "origin": "CPU-only post-run finalizer after full output check",
+        "format": "JSON",
+        "policy": "Only after successful solver exit and complete independent output/analyzer checks, retain the exact annex and unchanged candidate5 v2 manifest. Never create a normal manifest for failed, incomplete or rejected output."
+      },
+      {
+        "id": "finalization_record",
+        "bundle_path": "metadata/finalizer-command.json; metadata/finalization-result.json",
+        "origin": "CPU-only post-run finalizer",
+        "format": "JSON",
+        "policy": "Retain the finalizer inputs and success/failure reason. Failure cases still receive an inventory and preserve all available diagnostics."
+      },
+      {
+        "id": "sorted_inventory",
+        "bundle_path": "SHA256SUMS; metadata/SHA256SUMS.sha256",
+        "origin": "post-run finalizer",
+        "format": "sorted SHA-256 lines and one-line inventory hash",
+        "policy": "SHA256SUMS lists every singly-linked regular file in the bundle in sorted relative-path order except itself and metadata/SHA256SUMS.sha256; sidecar records SHA256SUMS digest. Includes native/canonical outputs and all success or failure evidence."
+      },
+      {
+        "id": "source_evidence_manifest",
+        "bundle_path": "metadata/source-evidence-manifest.json (only if exact reviewed annex defines it)",
+        "origin": "separate versioned source evidence",
+        "format": "versioned JSON",
+        "policy": "Do not alter v1.2 manifest; absent unless expressly reviewed and defined."
+      }
+    ],
+    "canonical_copy_policy": "A successful normal run adds up to 37 byte-identical canonical files. Those duplicates are excluded from native producer subtotal/allocation but included in sampled disk usage and SHA256SUMS. Failed attempts retain any native files already produced and inventory them without synthesizing missing outputs."
+  },
+  "accounting": {
+    "normal_solver_producer_file_count": 37,
+    "expected_count": 37,
+    "count_breakdown": {
+      "grid_binary": 1,
+      "initial_3d_binary": 5,
+      "initial_midplane_binary": 4,
+      "final_checkpoint_binary": 8,
+      "text_diagnostics": 9,
+      "csv_tables": 9,
+      "timestep_input_json": 1
+    },
+    "native_producer_bytes": {
+      "binary_subtotal": 56116480,
+      "known_non_csv_text_subtotal_excluding_geometry_out": 7260,
+      "timestep_inputs_json_policy_cap": 8192,
+      "csv_whole_record_envelope": {
+        "record_count_including_nine_headers": 1285,
+        "max_bytes_each_record": 1024,
+        "formula_bytes": "1285 * 1024",
+        "bytes": 1315840,
+        "treatment": "Use one 1,024-byte record envelope for each header/data row. The envelope replaces, rather than adds to, exact expected CSV byte sizes."
+      },
+      "deterministic_native_producer_bound_bytes": 57447891,
+      "formula_bytes": "56,116,480 + 7,260 + 119 + 8,192 + 1,315,840",
+      "deterministic_bound_mib": 54.79,
+      "producer_data_allocation_bytes": 67108864,
+      "producer_allocation_mib": 64,
+      "margin_bytes": 9660973,
+      "expected_fixed_csv_sizes_separate_from_cap": {
+        "entries_with_exact_expected_size_bytes": 8,
+        "exact_expected_subtotal_bytes": 170743,
+        "timestep_restriction_upper_expected_bytes": 5528,
+        "note": "Per-file expected sizes are listed; the cap uses the larger whole-record envelope."
+      },
+      "expected_native_plus_canonical_copy_bytes_before_other_evidence": 114895782,
+      "canonical_copy_accounting": "Canonical copies are derived nonproducer bytes, excluded from the 37 native count and 64 MiB producer allocation, included in sampled mutable-run disk.",
+      "geometry_expected_bytes": 119,
+      "note": "The exact 119-byte geometry.out size replaces the previous 4,096-byte conservative policy cap."
+    },
+    "sampled_bundle_cap": {
+      "current_implementation_bytes": 1073741824,
+      "current_implementation_gib": 1,
+      "inclusive_scope": "Sum st_size for regular files recursively under configured disk_roots plus evidence_dir; nested roots are deduplicated. This is logical file-byte accounting, not filesystem free space or allocated-block accounting. Freeze absolute paths; a root must cover the entire mutable run bundle.",
+      "symlink_policy": "Sampler rejects symlinks in measured roots.",
+      "sample_period_seconds": 1,
+      "max_sample_gap_seconds": 2,
+      "threshold_behavior": "Fail/stop when sampled disk_used_bytes >= disk_stop_bytes.",
+      "excluded_storage": "Immutable OCI layout is external to this mutable-run cap and separately measured/budgeted; copying it under a measured root makes it count.",
+      "amendment_alignment": "The prospective amendment must match the implementation 1 GiB sampled stop threshold; run config must use exactly one absolute disk root equal to the whole new bundle, with evidence nested under it."
+    },
+    "other_supervisor_subcaps": {
+      "combined_attached_stdout_stderr_bytes": 67108864,
+      "supervision_jsonl_bytes": 16777216,
+      "gpu_memory_stop_bytes": 25769803776,
+      "cgroup_memory_hard_bytes": 17179869184,
+      "cpu_quota_cores": 2,
+      "solver_wall_seconds": 1800,
+      "sampling_deadline_seconds": 0.8,
+      "graceful_stop_seconds": 10,
+      "force_dispatch_seconds": 1,
+      "termination_verification_seconds": 30
+    },
+    "prior_arithmetic_disposition": "Previous 57,451,868-byte estimate used a 4,096-byte geometry policy cap. The source/compiler reproduction replaces it with an exact 119-byte geometry output; current deterministic native bound is 57,447,891 bytes."
+  },
+  "source_refs": {
+    "S1": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90",
+      "lines": "324-358",
+      "purpose": "Grid arrays and grid.bin/grid.out/geometry.out writers."
+    },
+    "S2": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90",
+      "lines": "465-481, 504-546",
+      "purpose": "U0 initial postprocessing/output sequence."
+    },
+    "S3": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/postp.two_phase_inc_isot/out3d.h90",
+      "lines": "22-36",
+      "purpose": "Initial 3D field filenames and variables."
+    },
+    "S4": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/postp.two_phase_inc_isot/out2d.h90",
+      "lines": "23-34",
+      "purpose": "Initial midplane filenames and variables."
+    },
+    "S5": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/2decomp/io_write_plane.f90",
+      "lines": "52-75, 106-120",
+      "purpose": "Native plane bounds/j index and Fortran-order raw writer."
+    },
+    "S6": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90",
+      "lines": "787-811",
+      "purpose": "Time/VOF per-step diagnostic cadence."
+    },
+    "S7": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90",
+      "lines": "859-913, 932-980",
+      "purpose": "Normal final checkpoint branch and arrays."
+    },
+    "S8": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/load.f90",
+      "lines": "74-125",
+      "purpose": "Checkpoint writers and scalar.out format."
+    },
+    "S9": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/types.f90",
+      "lines": "6-11",
+      "purpose": "Double precision real-kind selection."
+    },
+    "S10": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/targets/target.generic-gpu",
+      "lines": "17",
+      "purpose": "_TIMING build define for performance output."
+    },
+    "P1": {
+      "workspace_path": "containers/flutas/candidate6/source-boundary.patch",
+      "lines": "58-70, 662-729",
+      "purpose": "Source validation, CSV table creation, exact headers."
+    },
+    "P2": {
+      "workspace_path": "containers/flutas/candidate6/source-boundary.patch",
+      "lines": "83-90, 1182-1217",
+      "purpose": "Timestep capture order and JSON writer."
+    },
+    "P3": {
+      "workspace_path": "containers/flutas/candidate6/source-boundary.patch",
+      "lines": "94-127, 1223-1348, 1350-1576",
+      "purpose": "U0 diagnostics, stage scans and timestep audit."
+    },
+    "P4": {
+      "workspace_path": "containers/flutas/candidate6/source-boundary.patch",
+      "lines": "131-186, 1722-1785",
+      "purpose": "Per-interval stage scans and ledger/timestep/audit calls."
+    },
+    "P5": {
+      "workspace_path": "containers/flutas/candidate6/source-boundary.patch",
+      "lines": "731-740, 858-910, 912-998, 1108",
+      "purpose": "v0.3 row writers, formats and flushes."
+    },
+    "I1": {
+      "workspace_path": "containers/flutas/candidate5/cases/source_boundary/dry_four/dns.in",
+      "lines": "1-14",
+      "purpose": "Grid, 14 steps, dt, restart and output cadence."
+    },
+    "I2": {
+      "workspace_path": "containers/flutas/candidate5/cases/source_boundary/dry_four/source-boundary.in",
+      "lines": "1-9",
+      "purpose": "Zero slots, schedule [0,0), declared source vector."
+    },
+    "I3": {
+      "workspace_path": "containers/flutas/candidate5/cases/source_boundary/dry_four/vof.in",
+      "lines": "1-8",
+      "purpose": "Empty initial VOF and phase properties."
+    },
+    "R1": {
+      "workspace_path": "scripts/flutas_source_supervisor.py",
+      "lines": "30-86",
+      "purpose": "Current resource limits and hard maxima."
+    },
+    "R2": {
+      "workspace_path": "scripts/flutas_source_supervisor.py",
+      "lines": "555-575, 645-675, 864-875",
+      "purpose": "Measured roots, evidence inclusion, sampling and stop behavior."
+    },
+    "R3": {
+      "workspace_path": "scripts/flutas_source_supervisor.py",
+      "lines": "759-790, 1262-1285, 1441-1455",
+      "purpose": "Supervisor evidence filenames, OCI separation and summary."
+    },
+    "S11": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/rk.f90",
+      "lines": "26-32, 57-90",
+      "purpose": "Momentum RHS history arrays updated between Adams-Bashforth steps."
+    },
+    "S12": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/mom.f90",
+      "lines": "21-32, 64-102",
+      "purpose": "Advection and viscous momentum RHS components used for du/dv/dw history."
+    },
+    "S13": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/main__two_phase_inc_isot.f90",
+      "lines": "672-705, 958-969",
+      "purpose": "Pressure, gravity, surface tension and forcing are added separately; final restart writes history arrays and projection pressure."
+    },
+    "S14": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/correc.f90",
+      "lines": "16-27, 37-68",
+      "purpose": "Pressure correction dimensional form establishes pressure units."
+    },
+    "S15": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/fillps.f90",
+      "lines": "16-26, 32-57",
+      "purpose": "Pressure RHS equation and units for the projection/gauge field."
+    }
+  },
+  "open_checks": [
+    "The diagnostic amendment revision 2 aligns its per-run sampled disk stop threshold with the implemented 1 GiB value. The launch config must use one absolute run-bundle root, with all mutable evidence nested beneath it.",
+    "geometry.out exact list-directed schema, units, and 119-byte bound are source-derived and reproduced in the pinned candidate image with NVHPC 26.9.",
+    "Little-endian binary64 is bound to the retained linux/amd64 candidate image and executable identity; the runtime output checker validates expected exact byte lengths and hashes.",
+    "Pressure and checkpoint history-RHS units/semantics are source-resolved in source_refs S11-S15. They are archival outputs for this dry diagnostic; no predicate depends on their numeric values.",
+    "All 37 file sizes/counts are expected source/Warden values, not measurements from a solver run. Exact independent review must verify names, calls, formats, shapes, byte bounds, cadence and maps.",
+    "Eight CSV expected byte sizes plus the timestep upper expectation are listed separately; deterministic cap uses 1,024 bytes per header/data record and does not add fixed CSV sizes.",
+    "Generalized raw directional flux/momentum, pre/post-clipping and full raw-ledger reconstruction remain deferred/unassessed for this no-liquid/no-active-slot runtime-only attempt."
+  ],
+  "self_check": {
+    "producer_files_listed": 37,
+    "expected_normal_producer_files": 37,
+    "count_matches": true,
+    "binary_subtotal_bytes": 56116480,
+    "known_non_csv_text_bytes": 7260,
+    "json_policy_cap_bytes": 8192,
+    "csv_records_including_headers": 1285,
+    "csv_envelope_bytes": 1315840,
+    "formula_bytes": "56,116,480 + 7,260 + 119 + 8,192 + (1,285 * 1,024) = 57,447,891",
+    "native_producer_bound_bytes": 57447891,
+    "bound_under_64_MiB_allocation": true,
+    "margin_bytes": 9660973,
+    "geometry_expected_bytes": 119
+  }
+}

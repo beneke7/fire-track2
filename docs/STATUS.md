@@ -1,6 +1,6 @@
 # Project status
 
-Updated: 2026-09-27 UTC. Latest result and solver comparison:
+Updated: 2026-09-28 13:04 UTC. Latest OpenFOAM result and solver comparison:
 [`VOF trial results`](../results/VOF_TRIALS_2026-09-27.md). The one-second
 still-air OpenFOAM run completed on CPU with the declared mesh and Courant
 limits; its sampled source/inventory/outflow ledger closes within 0.1%.
@@ -10,8 +10,54 @@ CaNS-Fizzy THINC/QQ build passed the upstream rising-bubble contour criterion
 on the RTX 5090 after fixing an uninitialized interface-width value. This is a
 solver benchmark, not a four-slot source run. The pipe preview is
 [`available here`](../results/restas-still-air-alpha65-1s-preview.mp4).
-No E1–E6 validation gate changed. The detailed queue snapshot below is from
-2026-09-25 and is retained as historical checkpoint context, not a live queue.
+No E1–E6 validation gate changed. Older queue details below are preserved as
+historical checkpoint context; the live source-diagnostic queue follows.
+
+## Current source-diagnostic checkpoint — 2026-09-28 13:04 UTC
+
+The user has explicitly requested the first GPU diagnostic. The proposed first
+case is the frozen **dry_four** empty-box case: zero liquid, zero active slots,
+zero gravity and background velocity, 160×84×40 cells, and 14 intervals of
+1e-4 s (1.4 ms total). It exercises the source-enabled solver path but does not
+exercise four-slot injection or produce a water plume. A passing run would be
+execution/telemetry evidence only unless independently retained raw states and
+their auditor support stronger claims; it would not close B1-pre, B2, E1–E6,
+or authorize the next water case.
+
+Candidate6's retained native build and host checks are **accepted by Astra Max
+at bounded build/static-wiring/host-test scope** in
+[`the exact review`](reviews/FLUTAS_CANDIDATE6_BUILD_HOST_EXACT_REVIEW_20260928T1128Z.md).
+It contains an sm_120 code object and retained executable, but has not run on
+The Warden's final packet review is
+[`archived here`](reviews/PROJECT_WARDEN_20260928T1300Z.md); it identified
+integration gaps before the exact launch review. The primary fixed the
+candidate identity CLI mismatch (`--archive`) and added a real-CLI CPU test.
+Remaining work aligns the staged case directory with the adapter, verifies
+native clocks and timestep fields, reconciles the output-map roster, retains a
+host snapshot, and adds the post-run report/manifest/inventory finalizer.
+Short-run telemetry sampling also needs a bounded CPU timeline check. No
+solver or GPU diagnostic has started.
+
+The frozen diagnostic remains an empty-box execution check: 537,600 cells,
+14 steps, 1.4 ms simulated, no water and no active outlets. It can prove only
+software execution and runtime telemetry. The separate CPU OpenFOAM 1-second
+run remains exploratory with provisional physics inputs and no mesh-sensitivity
+study. The GPU queue stays idle until an independent Astra exact review accepts
+the final hashes and the primary records the one-run disposition. No water run
+starts automatically.
+
+AMR screening indicates two levels could keep a fine interface inside a few
+million cells if only a small plume fraction is refined, versus about 105M
+cells for a uniformly level-2 mesh. This is a geometric estimate, not a runtime
+speedup: published dam-break results show roughly 10× runtime gains, while
+spray breakup studies show the advantage can disappear as interface area grows.
+The first useful comparison is CPU `interIsoFoam` with `dynamicRefineFvMesh`
+against a static mesh at the same finest spacing; the dry GPU diagnostic cannot
+measure AMR.
+
+The Warden trigger is the corrected exact launch-gate transition or a material
+supervisor/output-contract change. Current machine headroom must be refreshed
+with `make doctor` immediately before any launch.
 
 Updated: 2026-09-25 15:08 UTC. The candidate5 successor passed one
 source-disabled GPU regression after exact Astra eligibility review. It
@@ -513,7 +559,7 @@ gate. Keep this bundle and the revision-1 run immutable.
   arithmetic target, not a validated water footprint or fourfold performance
   gain. Water-only inputs do not establish foam or fire-suppression behavior.
 
-## Compute and worker queues
+## Archived compute and worker queue snapshot (2026-09-25)
 
 - **Machine snapshot (2026-09-25 14:46 UTC):** `make doctor` reports 20
   effective CPUs (18 shared, two reserved), 117.6 GiB available RAM,
@@ -622,7 +668,7 @@ gate. Keep this bundle and the revision-1 run immutable.
   change that count. Source simulation, E1 characterization, later E2–E6
   validation and the full aircraft-to-ground objective remain incomplete.
 
-## Next work, in order
+## Archived next-work snapshot (2026-09-25)
 
 1. Complete the active exact Astra review of the sealed M3 arithmetic bundle
    and record the primary's narrow disposition. No GPU trial applies.

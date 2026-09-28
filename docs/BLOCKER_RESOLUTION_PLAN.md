@@ -3,6 +3,24 @@
 **Working plan · 25 September 2026 15:08 UTC. This is a proposed work sequence, not a
 validation result, accepted experiment protocol, or permission to start CFD.**
 
+**Current primary checkpoint · 28 September 2026 13:04 UTC.** The user has
+authorized one GPU diagnostic, but no solver/GPU run has started. Candidate6's
+build/static/host checkpoint is accepted narrowly by Astra Max. The primary
+accepts Warden 14's dry-only scope and Warden 15's integration findings; these
+are archived at [Warden 14](reviews/PROJECT_WARDEN_20260928T1127Z.md) and
+[Warden 15](reviews/PROJECT_WARDEN_20260928T1300Z.md). The allowed claim is
+software execution and telemetry for the zero-liquid, zero-slot `dry_four`
+case; it cannot establish injection, conservation, plume behavior, or E1–E6.
+The launcher now passes the candidate identity check's required OCI archive
+argument, with a CPU-only test. Before exact Astra launch review, the primary
+will align the staged directory with the manifest adapter, close native clock
+and timestep predicates, align output-map paths with actual producers, capture
+the host snapshot in-bundle, implement success/failure finalization and
+inventory, and test bounded startup telemetry sampling. The GPU queue remains
+idle until those checks and the exact review/disposition pass. Current machine
+headroom is refreshed immediately before launch; no water case starts
+automatically.
+
 E0 is the only completed scientific gate: 1/7 (about 14% by gate count only).
 The candidate5 successor passed one exact-reviewed, source-disabled GPU smoke;
 it is not source qualification. Analyzer F1 closed on exact hashes after 57

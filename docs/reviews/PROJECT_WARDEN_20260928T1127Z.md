@@ -1,0 +1,11 @@
+# Project Warden checkpoint — first dry diagnostic request
+
+**Astra Max Warden, read-only; no gate approval.** The user explicitly requested a first GPU diagnostic run. At 11:27 UTC on 2026-09-28 the RTX 5090 was idle, with 16 MiB used; current machine snapshots report 20 effective CPUs, 118.1 GiB available RAM, and 243.6 GiB available disk.
+
+The candidate6 exact review accepts only its retained build, source wiring, and host tests. It verifies image ID sha256:c0b459afb9b80ce788ecae69c118fae0e3095b5ddb9839c9f2fb56e34ac3b11b and executable SHA-256 0c3563ed2bbd8a29586d1cdd9f61b8e53087854950e440812492154839b2bb58, including an sm_120 cubin. No solver or GPU runtime was tested.
+
+The frozen dry_four input is an empty-box, zero-liquid, zero-slot case on a 160×84×40 grid for 14 intervals of 1e-4 s. It does not exercise four-slot injection. A prospective dry-only amendment is a defensible way to authorize one non-adjudicative execution/telemetry diagnostic while leaving B1-pre, B2, E1–E6, and positive-source qualification closed. It may defer positive-dose, vector-momentum, pulse-edge, nonzero-reduction, crossflow, and clipping claims. The amendment must explicitly narrow the claims; without independently retained raw alpha and U/V/W states, the run cannot claim conservation, absence of spurious liquid, clipping correctness, or completion of the original dry qualification gate.
+
+The amendment must retain exact allowlisted inputs, an independent semantic validator, read-only staging and post-run byte verification, complete completion/failure records, frozen dry-case zero/absent-interface semantics, exact candidate provenance, bounded resources, H7 supervisor verification, Astra exact review, and primary disposition. H7 cannot be waived for zero forcing: the current outer runner may release its GPU lock without proving container and child termination.
+
+Primary disposition: **accept** the dry-only amendment as the shortest prospective route to the requested diagnostic; **retain** provenance, input, evidence, supervisor, and independent-review requirements; **defer** no full scientific gate or positive-source qualification. No source run is authorized by this memo. The next Warden trigger is the dry-amendment/launch-gate transition, a material candidate or instrumentation change, or two accepted bounded checkpoints.

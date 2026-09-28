@@ -1,0 +1,61 @@
+[run_local] thread limit: 2
+PASS source-boundary behavior: dry
+PASS source-boundary behavior: dry-crossflow
+PASS source-boundary behavior: active-one
+PASS source-boundary behavior: active-four
+PASS source-boundary behavior: active-crossflow
+PASS source-boundary behavior: ledger-active
+PASS source-boundary behavior: ledger-four
+PASS source-boundary behavior: ledger-dry
+PASS unsupported input rejected: unsupported-slot-count
+PASS unsupported input rejected: dry-active-interval
+PASS unsupported input rejected: factor-out-of-range
+PASS unsupported input rejected: missing-factor
+PASS unsupported input rejected: nonfinite-factor
+PASS mismatched flux records are flushed before expected abort
+test_active_and_dry_histories_have_declared_schema_and_counts (__main__.EmittedLedgerTests.test_active_and_dry_histories_have_declared_schema_and_counts) ... ok
+test_all_declared_cases_are_grid_aligned_and_under_one_million_cells (__main__.FrozenInputTests.test_all_declared_cases_are_grid_aligned_and_under_one_million_cells) ... ok
+test_dry_crossflow_is_distinct_from_quiescent_dry (__main__.FrozenInputTests.test_dry_crossflow_is_distinct_from_quiescent_dry) ... ok
+test_dry_fixture_has_no_source_or_return_across_the_full_window (__main__.FrozenInputTests.test_dry_fixture_has_no_source_or_return_across_the_full_window) ... ok
+test_explicit_provisional_fixed_step_factor_is_present_in_every_case (__main__.FrozenInputTests.test_explicit_provisional_fixed_step_factor_is_present_in_every_case) ... ok
+test_fixture_files_match_frozen_hashes (__main__.FrozenInputTests.test_fixture_files_match_frozen_hashes) ... ok
+test_mask_geometry_and_expected_source_totals (__main__.FrozenInputTests.test_mask_geometry_and_expected_source_totals) ... ok
+test_advvof_entry_refills_phase_and_rebuilds_geometry_before_flux (__main__.SourceCodeTests.test_advvof_entry_refills_phase_and_rebuilds_geometry_before_flux) ... ok
+test_candidate5_phase_property_stages_and_velocity_field_keys (__main__.SourceCodeTests.test_candidate5_phase_property_stages_and_velocity_field_keys) ... ok
+test_candidate5_scan_ranges_and_exact_first_failure_reduction (__main__.SourceCodeTests.test_candidate5_scan_ranges_and_exact_first_failure_reduction) ... ok
+test_candidate5_timestep_guard_uses_complete_chkdt_formula_and_terminal_sentinel (__main__.SourceCodeTests.test_candidate5_timestep_guard_uses_complete_chkdt_formula_and_terminal_sentinel) ... ok
+test_dry_duration_guard_and_periodic_bottom_halos (__main__.SourceCodeTests.test_dry_duration_guard_and_periodic_bottom_halos) ... ok
+test_inflow_only_alpha_and_property_ghosts (__main__.SourceCodeTests.test_inflow_only_alpha_and_property_ghosts) ... ok
+test_interval_and_vof_boundary_state_order (__main__.SourceCodeTests.test_interval_and_vof_boundary_state_order) ... ok
+test_physical_flux_units_mass_momentum_ledgers_and_divergence (__main__.SourceCodeTests.test_physical_flux_units_mass_momentum_ledgers_and_divergence) ... ok
+test_provisional_gamma_fails_frozen_crossflow_arithmetic (__main__.SourceCodeTests.test_provisional_gamma_fails_frozen_crossflow_arithmetic) ... ok
+test_pulse_endpoint_reaches_postprojection_velocity_state (__main__.SourceCodeTests.test_pulse_endpoint_reaches_postprojection_velocity_state) ... ok
+test_upstream_co_formula_and_fixed_fixture_values_are_static_only (__main__.SourceCodeTests.test_upstream_co_formula_and_fixed_fixture_values_are_static_only) ... ok
+test_velocity_override_order_and_return_from_actual_geometric_flux (__main__.SourceCodeTests.test_velocity_override_order_and_return_from_actual_geometric_flux) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.004s
+
+OK
+test_every_phase_stage_class_and_available_property_records_first_failure (__main__.Candidate5ScanTests.test_every_phase_stage_class_and_available_property_records_first_failure) ... ok
+test_every_velocity_face_class_and_component_records_first_failure (__main__.Candidate5ScanTests.test_every_velocity_face_class_and_component_records_first_failure) ... ok
+test_finite_subtraction_overflow_is_preserved_and_fails_closed (__main__.Candidate5ScanTests.test_finite_subtraction_overflow_is_preserved_and_fails_closed) ... ok
+test_first_finite_mismatch_is_retained_when_a_later_cell_is_nonfinite (__main__.Candidate5ScanTests.test_first_finite_mismatch_is_retained_when_a_later_cell_is_nonfinite) ... ok
+test_full_phase_and_velocity_scans_emit_all_stage_keys_and_exact_counts (__main__.Candidate5ScanTests.test_full_phase_and_velocity_scans_emit_all_stage_keys_and_exact_counts) ... ok
+test_unknown_stage_and_existing_output_paths_fail_closed (__main__.Candidate5ScanTests.test_unknown_stage_and_existing_output_paths_fail_closed) ... ok
+test_crossflow_guard_failure_is_preserved_and_terminal_state_is_not_consumed (__main__.Candidate5TimestepTests.test_crossflow_guard_failure_is_preserved_and_terminal_state_is_not_consumed) ... ok
+test_multistate_compiled_candidate_output_matches_frozen_analyzer (__main__.Candidate5TimestepTests.test_multistate_compiled_candidate_output_matches_frozen_analyzer) ... ok
+test_nonfinite_ab2_rate_is_preserved_without_a_finite_sentinel (__main__.Candidate5TimestepTests.test_nonfinite_ab2_rate_is_preserved_without_a_finite_sentinel) ... ok
+test_nonfinite_timestep_ratio_is_preserved_before_fail_closed_abort (__main__.Candidate5TimestepTests.test_nonfinite_timestep_ratio_is_preserved_before_fail_closed_abort) ... ok
+test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses (__main__.Candidate5TimestepTests.test_pinned_initgrid_fixture_has_nonuniform_binary64_spacing_and_exact_inverses) ... ok
+test_runtime_timestep_input_capture_keeps_all_actual_vertical_operands (__main__.Candidate5TimestepTests.test_runtime_timestep_input_capture_keeps_all_actual_vertical_operands) ... ok
+test_serialized_finite_values_are_canonical_decimal_tokens (__main__.Candidate5TimestepTests.test_serialized_finite_values_are_canonical_decimal_tokens) ... ok
+test_staggered_rates_use_each_actual_directional_velocity_term (__main__.Candidate5TimestepTests.test_staggered_rates_use_each_actual_directional_velocity_term) ... ok
+test_timestep_serialization_uses_canonical_real_serializer_for_finite_values (__main__.Candidate5TimestepTests.test_timestep_serialization_uses_canonical_real_serializer_for_finite_values) ... ok
+test_zero_advection_fallback_capillary_branch_and_full_bound (__main__.Candidate5TimestepTests.test_zero_advection_fallback_capillary_branch_and_full_bound) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 68.645s
+
+OK
+PASS: 7 helper calls pass dzf(0:)
