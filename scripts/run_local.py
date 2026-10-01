@@ -32,9 +32,9 @@ THREAD_ENV_VARS = (
 
 
 def default_threads(cpu_count: int | None = None) -> int:
-    """Use the available budget while reserving two CPUs when possible."""
+    """Use the full detected CPU budget unless the caller sets a smaller one."""
     count = max(1, effective_cpu_count() if cpu_count is None else cpu_count)
-    return max(1, count - 2)
+    return count
 
 
 def gpu_lock_path() -> Path:

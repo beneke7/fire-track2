@@ -22,7 +22,7 @@ help:
 	@echo 'make render-animation RENDER_CASE=label=results/runs/<run-id> RENDER_OUTPUT=results/runs/<new-id> Render one diagnostic animation'
 	@echo 'make papers  Index and extract the supplied PDFs locally'
 	@echo 'make digitize-e2 Rebuild Dash-8 Fig. 4 second read and Figs. 6-9 cloud-envelope traces'
-	@echo 'make digitize-e3 Rebuild CL-415 Fig. 4 velocity and Fig. 11 structure-count traces'
+	@echo 'make digitize-e3 Rebuild CL-415 Fig. 4 velocity, Fig. 6 penetration and Fig. 11 count traces'
 	@echo 'make digitize-e4  Rebuild the plotted M134 Fig. 9 marker trace from the local PDF'
 	@echo 'make digitize  Run all scripted E2-E4 paper-trace rebuild targets'
 	@echo 'make gpu-smoke  Compile and run a small native CUDA kernel in Docker (GPU preflight only)'
@@ -65,6 +65,7 @@ digitize-e2:
 digitize-e3:
 	$(PYTHON) scripts/digitize_calbrix_e3_fig4.py
 	$(PYTHON) scripts/digitize_calbrix_e3_fig4_independent.py
+	$(PYTHON) scripts/digitize_cl415_penetration.py
 	$(PYTHON) scripts/digitize_calbrix_e3_fig11.py
 	$(PYTHON) scripts/digitize_calbrix_e3_fig11_independent.py
 

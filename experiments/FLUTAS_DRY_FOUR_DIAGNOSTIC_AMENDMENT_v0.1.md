@@ -1,7 +1,10 @@
-# Prospective `dry_four` GPU diagnostic amendment — revision 3
+# Prospective `dry_four` GPU diagnostic amendment — revision 4
 
-**Status: proposed, not approved.** This revision supersedes the earlier
-unreviewed draft and scopes exactly one
+**Status: proposed, not approved.** This revision supersedes revision 3 after
+correcting two exact-launch defects found during independent review: the
+source-ordered vertical-grid operands and interruption handling before
+finalization. It remains subject to exact launch review and primary disposition.
+It scopes exactly one
 quiescent, zero-slot GPU diagnostic. It does not authorize a launch. Astra Max
 must exact-review this file against the hashes below, the selected candidate,
 the output analyzer, and the launch supervisor; the primary must then record a
@@ -91,6 +94,15 @@ The proposed pass criteria are structural/software checks for this one input:
    `guard_pass` is `not_applicable`; all numeric operands, bounds, and ratios
    remain finite and conform to the schema. The independent analyzer
    reproduces exact row keys, ordering, counts, prefixes, and byte hashes.
+   For `dzf_m`, `dzc_m`, and their reciprocals, reconstruct the exact binary64
+   operands using the pinned `initgrid.f90` operation order for `nz=40`,
+   `gr=0`, `lz=1`, and one halo. Compare values exactly; do not assume rounded
+   `0.025`/`40` constants or add a tolerance. A CPU-only probe compiled with
+   the pinned NVHPC image matched all 42 entries; its source and output are
+   retained in
+   [`candidate6/evidence/grid-operand-probe-20260928`](../containers/flutas/candidate6/evidence/grid-operand-probe-20260928/).
+   The captured output SHA-256 is
+   `2dcae7e998372857d763e6b94fbdf60d45725bd265c06d94239c479db136253a`.
 4. The inherited tables follow v0.3 H1 for N=14 and S=0: zero data rows in
    `source-flux.csv`; 14 rows each in `source-offmask.csv` and `rate-check.csv`;
    and 15 rows each in `boundary-ledger.csv`, `mass-ledger.csv`, and
@@ -161,8 +173,12 @@ snapshot, in-bundle host snapshot, preflight result, full command/argv and
 environment, container configuration, stdout/stderr, solver exit status,
 analyzer output, resource samples, stop/cleanup events, termination proof,
 and a sorted SHA-256 inventory. Retain the primary launch result or failure
-record. Once the locked runner has returned and released the GPU lock, the
-launcher runs the CPU-only finalizer automatically. It saves the exact
+record. The launcher catches `SIGINT`/`SIGTERM`, forwards the signal to the
+`run_local` client, and waits for that client to return after its detached
+guardian has stopped the solver and released the GPU lock. It must not finalize
+while the guardian may still be writing. Once the locked runner has returned
+and released the GPU lock, the launcher runs the CPU-only finalizer
+automatically. It saves the exact
 output-check report at `analysis/dry-output-annex.json` and invokes the
 unchanged candidate6 manifest adapter only after solver exit 0 and a complete
 output check. Only that pass may produce
@@ -211,7 +227,8 @@ glob-based acceptance or unlisted extra solver output is allowed. Copy
 native streams unchanged and verify byte identity for each mapped pair.
 Preserve every produced file on success or failure, including partial files.
 The timestep-input JSON is not regenerated or normalized: retain and hash the
-exact producer bytes, then independently parse its values against v1.2.
+exact producer bytes, then independently parse its values against v1.2 and the
+source-derived dry_four binary64 vertical-grid operands above.
 Preserve a separately versioned `source-evidence-manifest.json` only if the
 reviewed dry-scope annex defines it; never add keys to the frozen v1.2
 manifest.
@@ -331,9 +348,9 @@ attached-log stop threshold, 16 MiB supervisor event-file limit, and
 the only `disk_roots` entry; supervisor evidence is nested inside that root.
 The immutable OCI archive/layout remains outside and is budgeted separately.
 Disk and attached-log thresholds are sampled stop triggers, not filesystem
-quotas: output can grow between samples and during shutdown. The 1 GiB
-threshold has at least 196.7 GiB of host free-space headroom in the latest
-snapshot, while declared normal native-plus-canonical output is under
+quotas: output can grow between samples and during shutdown. The latest
+13:47 UTC snapshot records 196.4 GiB of host free space, while declared normal
+native-plus-canonical output is under
 110 MiB. Preserve the measured bundle size and any threshold overshoot. These
 are engineering limits, not measured demand or scientific tolerances; do not
 raise them from runtime results under this amendment.

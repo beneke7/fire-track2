@@ -24,7 +24,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from aerial_drop import flutas_source_analyzer as analyzer  # noqa: E402
 
-MAP_SHA256 = "47be3ec5072fdea9ea331a8f1b604e87eea3efc525d28559bca7404f7478d87c"
+MAP_SHA256 = "3f54d634afbd4338ef144f6fd97238de57dae52046b8c18da25b42d5d2876d33"
 CASE_ID = "dry_four"
 CANDIDATE_ID = "candidate6-20260928T093141Z-4092509"
 CANDIDATE_RECEIPT_SHA256 = "629e792cf9ebd02d203442b2b943de4aa1176a121f8be303fd86770543c643e0"
@@ -139,7 +139,7 @@ V12_SPECS = {
     "boundary_velocity": (analyzer.VELOCITY_FILE, analyzer.VELOCITY_HEADER, 516),
     "timestep_restriction": (analyzer.TIMESTEP_FILE, analyzer.TIMESTEP_HEADER, 15),
 }
-NATIVE_TEXT_OUTPUTS = {"time_out", "vof_info", "scalar_out", "restart_checkpoints"}
+NATIVE_TEXT_OUTPUTS = {"time_out", "vof_info", "pos_vt", "scalar_out", "restart_checkpoints"}
 
 
 class OutputCheckError(ValueError):
@@ -257,10 +257,10 @@ def _load_map(bundle_root: Path, requested_map: Path | None) -> tuple[dict[str, 
         or scope.get("case_id") != CASE_ID
         or scope.get("candidate") != "candidate6"
         or not isinstance(files, list)
-        or len(files) != 37
-        or value.get("accounting", {}).get("expected_count") != 37
+        or len(files) != 38
+        or value.get("accounting", {}).get("expected_count") != 38
     ):
-        raise OutputCheckError("output map is not the exact 37-entry candidate6 dry_four map")
+        raise OutputCheckError("output map is not the exact 38-entry candidate6 dry_four map")
     return value, copied_raw
 
 
@@ -605,8 +605,77 @@ def _check_native_state_outputs(raw_by_id: Mapping[str, bytes], inputs: Mapping[
         "vof_info.out",
         [[float(state), fixed_step, native_times[state], 0.0, 0.0, 0.0] for state in range(15)],
     )
+    _check_empty_phase_position_velocity(raw_by_id["pos_vt"], native_times)
     _check_checkpoint_scalar(raw_by_id["scalar_out"], native_times, fixed_step)
     _check_restart_index(raw_by_id["restart_checkpoints"], native_times)
+
+
+def _check_empty_phase_position_velocity(raw: bytes, native_times: list[float]) -> None:
+    """Validate the pinned writer's undefined centroid rows for this zero-VOF case."""
+    if raw.startswith(b"\xef\xbb\xbf") or b"\r" in raw or not raw.endswith(b"\n"):
+        raise OutputCheckError("pos_vt.out must be BOM-free LF text with a final LF")
+    try:
+        lines = raw.decode("ascii", errors="strict")[:-1].split("\n")
+    except UnicodeDecodeError as exc:
+        raise OutputCheckError("pos_vt.out must be ASCII") from exc
+    if len(lines) != 14 or len(native_times) != 15:
+        raise OutputCheckError("pos_vt.out must contain the 14 U1..U14 rows")
+    undefined = "NaN".rjust(15)
+    for state, line in enumerate(lines, start=1):
+        if len(line) != 7 * 15:
+            raise OutputCheckError(f"pos_vt.out state U{state} is not seven E15.7 fields")
+        fields = [line[index : index + 15] for index in range(0, len(line), 15)]
+        if fields[0] != _fortran_e15_7(native_times[state]):
+            raise OutputCheckError(f"pos_vt.out time differs from native state U{state}")
+        if fields[1:] != [undefined] * 6:
+            raise OutputCheckError(
+                f"pos_vt.out U{state} must mark all six zero-volume centroid fields NaN"
+            )
+
+
+def _expected_dry_four_vertical_grid() -> tuple[list[float], list[float]]:
+    """Reproduce pinned initgrid steps 1–5 for dry_four (n=40, gr=0, lz=1, nh_d=1)."""
+    nz = 40
+    zf = [0.0] * (nz + 2)  # Fortran indices 0..41.
+    for k in range(1, nz + 1):
+        z0 = (k - 0.0) / (1.0 * nz)
+        # gridpoint_cluster_two_end(alpha=0, z0) returns z0 exactly.
+        zf[k] = z0 * 1.0
+
+    dzf = [0.0] * (nz + 2)
+    for k in range(1, nz + 1):
+        dzf[k] = zf[k] - zf[k - 1]
+    dzf[0] = dzf[1]
+    dzf[nz + 1] = dzf[nz]
+
+    dzc = [0.0] * (nz + 2)
+    for k in range(0, nz + 1):
+        dzc[k] = 0.5 * (dzf[k] + dzf[k + 1])
+    dzc[nz + 1] = dzc[nz]
+
+    # Mirror the source's halo extension order, including its upper-face index.
+    for k in range(1 - 1, 1):
+        dzf[k] = dzf[-k + 1]
+        dzc[k] = dzc[-k]
+    for k in range(nz + 1, nz + 2):
+        dzf[k] = dzf[2 * nz - k - 1]
+        dzc[k] = dzc[2 * nz - k]
+    return dzc, dzf
+
+
+def _strict_float_array(inputs: Mapping[str, Any], key: str) -> list[float]:
+    values = inputs.get(key)
+    if not isinstance(values, list) or len(values) != 42:
+        raise OutputCheckError(f"timestep input {key} must contain the 42 pinned vertical entries")
+    if any(not isinstance(value, str) for value in values):
+        raise OutputCheckError(f"timestep input {key} entries must be decimal strings")
+    try:
+        numbers = [float(value) for value in values]
+    except ValueError as exc:
+        raise OutputCheckError(f"timestep input {key} contains a nonnumeric entry") from exc
+    if any(not math.isfinite(value) for value in numbers):
+        raise OutputCheckError(f"timestep input {key} contains a non-finite entry")
+    return numbers
 
 
 def _validate_dry_timestep_inputs(inputs: Any) -> dict[str, Any]:
@@ -663,25 +732,19 @@ def _validate_dry_timestep_inputs(inputs: Any) -> dict[str, Any]:
             raise OutputCheckError("timestep epsilon operands differ from frozen binary64 inputs")
     except ValueError as exc:
         raise OutputCheckError("timestep epsilon operands are not numeric") from exc
-    for key in ("dzc_m", "dzf_m"):
-        values = inputs.get(key)
-        if (
-            not isinstance(values, list)
-            or len(values) != 42
-            or any(float(x) != 0.025 for x in values)
-        ):
+    expected_dzc, expected_dzf = _expected_dry_four_vertical_grid()
+    for key, expected in (("dzc_m", expected_dzc), ("dzf_m", expected_dzf)):
+        if _strict_float_array(inputs, key) != expected:
             raise OutputCheckError(
-                f"timestep input {key} differs from the frozen uniform vertical grid"
+                f"timestep input {key} differs from the pinned dry_four grid construction"
             )
-    for key in ("dzci_m_inv", "dzfi_m_inv"):
-        values = inputs.get(key)
-        if (
-            not isinstance(values, list)
-            or len(values) != 42
-            or any(float(x) != 40.0 for x in values)
-        ):
+    for key, expected in (
+        ("dzci_m_inv", [1.0 / value for value in expected_dzc]),
+        ("dzfi_m_inv", [1.0 / value for value in expected_dzf]),
+    ):
+        if _strict_float_array(inputs, key) != expected:
             raise OutputCheckError(
-                f"timestep input {key} differs from the frozen vertical inverses"
+                f"timestep input {key} differs from the pinned dry_four vertical inverses"
             )
     return inputs
 

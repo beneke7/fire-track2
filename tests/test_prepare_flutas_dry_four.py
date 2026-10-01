@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -77,6 +80,189 @@ def _fake_subprocess_run(calls: list[list[str]]):
     return run
 
 
+def _fake_run_local_supervisor(calls: list[list[str]]):
+    def run_local(**kwargs):
+        argv = [
+            sys.executable,
+            str(kwargs["repository_root"] / launcher.RUN_LOCAL_RELATIVE_PATH),
+            "--gpu",
+            "--threads",
+            "2",
+            "--source-supervisor",
+            str(kwargs["config_path"]),
+            "--",
+            *kwargs["solver_argv"],
+        ]
+        calls.append(argv)
+        kwargs["stdout_path"].write_bytes(b"mock run_local stdout\n")
+        kwargs["stderr_path"].write_bytes(b"mock run_local stderr\n")
+        return 0, argv
+
+    return run_local
+
+
+def test_signal_waits_for_detached_guardian_before_failed_bundle_inventory(tmp_path: Path) -> None:
+    bundle = tmp_path / "bundle"
+    (bundle / "metadata").mkdir(parents=True)
+    (bundle / "logs").mkdir()
+    lock_path = tmp_path / "guardian.lock"
+    ready_path = tmp_path / "guardian-ready.json"
+    release_path = tmp_path / "release-guardian"
+    trace_path = tmp_path / "guardian-trace.txt"
+    fake_run_local = tmp_path / "fake-run-local.py"
+    fake_run_local.write_text(
+        """\
+import fcntl
+import pathlib
+import signal
+import subprocess
+import sys
+
+lock, ready, release, trace = map(pathlib.Path, sys.argv[-4:])
+guardian = r'''\
+import fcntl
+import pathlib
+import signal
+import sys
+import time
+
+lock, ready, release, trace = map(pathlib.Path, sys.argv[1:])
+stream = lock.open('a+')
+fcntl.flock(stream, fcntl.LOCK_EX)
+ready.write_text('locked', encoding='ascii')
+def record_signal(signum, frame):
+    with trace.open('a', encoding='ascii') as output:
+        output.write(f'signal:{signum}\\n')
+signal.signal(signal.SIGTERM, record_signal)
+signal.signal(signal.SIGINT, record_signal)
+while not release.exists():
+    with trace.open('a', encoding='ascii') as output:
+        output.write('pulse\\n')
+    time.sleep(0.02)
+with trace.open('a', encoding='ascii') as output:
+    output.write('guardian-finished\\n')
+'''
+child = subprocess.Popen(
+    [sys.executable, '-c', guardian, *(str(path) for path in (lock, ready, release, trace))],
+    start_new_session=True,
+)
+received = []
+def forward(signum, frame):
+    received.append(signum)
+    child.send_signal(signum)
+signal.signal(signal.SIGTERM, forward)
+signal.signal(signal.SIGINT, forward)
+child.wait()
+raise SystemExit(128 + received[-1] if received else 0)
+""",
+        encoding="utf-8",
+    )
+    harness = tmp_path / "launch-harness.py"
+    harness.write_text(
+        """\
+import json
+import pathlib
+import sys
+
+root, fake, bundle, lock, ready, release, trace = map(pathlib.Path, sys.argv[1:])
+sys.path.insert(0, str(root))
+from scripts import prepare_flutas_dry_four as launcher
+from scripts.finalize_flutas_dry_four import finalize_bundle
+
+launcher.RUN_LOCAL_RELATIVE_PATH = fake
+status, argv = launcher._run_local_supervisor(
+    repository_root=root,
+    config_path=root / 'unused-config.json',
+    solver_argv=['--fake', str(lock), str(ready), str(release), str(trace)],
+    stdout_path=bundle / 'logs/run-local.stdout.log',
+    stderr_path=bundle / 'logs/run-local.stderr.log',
+)
+(bundle / 'metadata/launch-result.json').write_text(
+    json.dumps({'state': 'SUPERVISED_LAUNCH_FINISHED', 'solver_exit_status': status}),
+    encoding='utf-8',
+)
+result = finalize_bundle(bundle, repository_root=root)
+print(json.dumps({'status': status, 'finalization': result}, sort_keys=True))
+""",
+        encoding="utf-8",
+    )
+
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            str(harness),
+            str(ROOT),
+            str(fake_run_local),
+            str(bundle),
+            str(lock_path),
+            str(ready_path),
+            str(release_path),
+            str(trace_path),
+        ],
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        start_new_session=True,
+    )
+    try:
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and not ready_path.exists():
+            assert process.poll() is None, (
+                "launch harness exited before its fake guardian held the lock"
+            )
+            time.sleep(0.02)
+        assert ready_path.exists(), "fake detached guardian did not acquire its lock"
+        os.kill(process.pid, signal.SIGTERM)
+
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline:
+            if trace_path.exists() and f"signal:{signal.SIGTERM}" in trace_path.read_text():
+                break
+            assert process.poll() is None, "launcher finalized before forwarded signal was observed"
+            time.sleep(0.02)
+        else:
+            raise AssertionError("detached guardian did not receive the forwarded termination")
+
+        before = trace_path.read_text(encoding="ascii").count("pulse\n")
+        time.sleep(0.1)
+        after = trace_path.read_text(encoding="ascii").count("pulse\n")
+        assert after > before, "fake guardian must remain active after receiving termination"
+        assert process.poll() is None, "launcher must wait for guardian-backed run_local completion"
+        assert not (bundle / "SHA256SUMS").exists()
+        assert not (bundle / "metadata/finalization-result.json").exists()
+        with lock_path.open("a+") as lock_file:
+            import fcntl
+
+            with pytest.raises(BlockingIOError):
+                fcntl.flock(lock_file, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+        release_path.touch()
+        stdout, stderr = process.communicate(timeout=10)
+        assert process.returncode == 0, stderr
+        result = json.loads(stdout.strip())
+        assert result["status"] == 128 + signal.SIGTERM
+        assert result["finalization"]["status"] == "failed"
+        assert result["finalization"]["failure_stage"] == "launch_result"
+        sums_path = bundle / "SHA256SUMS"
+        sums_raw = sums_path.read_bytes()
+        assert b"./metadata/finalization-result.json" in sums_raw
+        entries = dict(
+            line.decode("ascii").rstrip("\n").split("  ./", 1)[::-1]
+            for line in sums_raw.splitlines()
+        )
+        for relative, digest in entries.items():
+            assert hashlib.sha256((bundle / relative).read_bytes()).hexdigest() == digest
+        stable_trace = hashlib.sha256(trace_path.read_bytes()).hexdigest()
+        time.sleep(0.05)
+        assert hashlib.sha256(trace_path.read_bytes()).hexdigest() == stable_trace
+    finally:
+        release_path.touch()
+        if process.poll() is None:
+            process.kill()
+            process.wait(timeout=5)
+
+
 def test_default_cli_only_prepares_and_stages_exact_readonly_inputs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -92,7 +278,10 @@ def test_default_cli_only_prepares_and_stages_exact_readonly_inputs(
     manifest = json.loads((bundle / "metadata" / "run-manifest.json").read_text())
     assert manifest["state"] == "PREPARED_ONLY_PROSPECTIVE"
     assert manifest["approval_gate"]["status"] == "PROSPECTIVE; NOT APPROVED TO LAUNCH"
-    assert manifest["amendment"]["expected_sha256_pin_configured"] is False
+    assert manifest["amendment"]["expected_sha256_pin_configured"] is True
+    assert manifest["amendment"]["expected_sha256_pin"] == _sha256(
+        ROOT / launcher.AMENDMENT_RELATIVE_PATH
+    )
     assert manifest["input_sha256"] == launcher.INPUTS
     assert not (bundle / "metadata" / "candidate6-identity.json").exists()
     assert not (bundle / launcher.ATTEMPT_CLAIM_NAME).exists()
@@ -113,6 +302,11 @@ def test_default_cli_only_prepares_and_stages_exact_readonly_inputs(
 def test_launch_rejects_missing_or_wrong_disposition_without_external_calls(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    monkeypatch.setattr(
+        launcher,
+        "DISPOSITION_RELATIVE_PATH",
+        Path("experiments/__missing_test_disposition__.json"),
+    )
     monkeypatch.setattr(
         launcher,
         "EXPECTED_AMENDMENT_SHA256",
@@ -195,6 +389,7 @@ def test_accepted_mocked_launch_preserves_verifier_and_refuses_second_attempt(
     temp_dir, disposition_path, memo_path = _launch_documents()
     calls: list[list[str]] = []
     monkeypatch.setattr(launcher.subprocess, "run", _fake_subprocess_run(calls))
+    monkeypatch.setattr(launcher, "_run_local_supervisor", _fake_run_local_supervisor(calls))
     try:
         result = launcher.prepare_bundle(
             runs_root=runs_root,

@@ -79,10 +79,16 @@ The liquid core is `alpha_L >= 0.9`, and the cloud envelope is
 | Fig. 11, PDF p. 10 / journal p. 1524 | Paper reports CL-415 time evolution of detected liquid-structure count at `alpha_L>=0.9` and `alpha_L>=0.001`; structures are reconstructed with a Matlab post-processing code. This is a secondary fragmentation observable, not outlet-history data. The preceding description is on PDF p. 8 / journal p. 1522. |
 
 The source's lateral expansion is a maximum plume width. The paper does not
-provide raw field arrays or numeric curve data for penetration/width, and the
-local source note does not digitize them. A later digitization should state
-axis calibration, color/line selection, timing choice, and uncertainty; Figure
-8's timing discrepancy must remain visible in any comparison record.
+provide raw field arrays or numeric penetration/width data. The CL-415 red
+Fig. 6(b) penetration curve at 0.5 s is now extracted in
+[`calbrix_cl415_fig6_penetration.csv`](../data/derived/calbrix_cl415_fig6_penetration.csv)
+by [`digitize_cl415_penetration.py`](../scripts/digitize_cl415_penetration.py).
+Its 339 samples retain the PDF hash, pixel positions, color selection, and
+axis calibration. The extraction reuses the independently calibrated Dash-8
+Fig. 6(b) axes; it is not a second independent calibration. Heuristic read
+allowances are ±0.020 m streamwise and ±0.030 m vertically, excluding shared
+calibration and source-model uncertainty. Width curves remain undigitized;
+Figure 8's timing discrepancy must remain visible in comparisons.
 
 ### Fig. 4 CL-415 plotted outlet-velocity traces
 

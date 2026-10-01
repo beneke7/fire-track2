@@ -1,0 +1,154 @@
+{
+  "classification": "Exploratory simplified CL415, not E3 acceptance or an exact published-case reproduction",
+  "source_run": "results/runs/cl415-pilot-20261001T161500Z",
+  "evidence_sha256": {
+    "manifest.json": "ae3785997e6ed01907103f4af8d9a8793d158425942dbc4d3b480ad588df9139",
+    "openfoam-console.log": "1ea306b7932aede86e6918b1e498937642c0a028da117b4fe6c3a763dec94b46",
+    "analytics/report.json": "c0bcbc6e66d27a2f83fd6a081cef5471acb47279690e3d9022403fa61950484e"
+  },
+  "solver_summary": {
+    "last_time_s": 0.1,
+    "solver_steps": 437,
+    "solver_clock_time_s": 224.0,
+    "stage_exit_codes": {
+      "blockMesh": 0,
+      "checkMesh": 0,
+      "decomposePar": 0,
+      "interIsoFoam": 0,
+      "reconstructPar": 0
+    },
+    "mesh_ok": true,
+    "reached_requested_horizon": true,
+    "fatal_error_observed": false
+  },
+  "mesh_cells": 594000,
+  "local_cell_size_m": 0.05,
+  "ranks": 20,
+  "inputs": "Assumed four coplanar belly openings, prescribed digitized Fig4 histories, 50m/s air, standard k-epsilon, zero surface tension, no aircraft CAD",
+  "snapshots": [
+    {
+      "time_s": 0.0,
+      "cells": 594000,
+      "thresholds": [
+        {
+          "alpha_threshold": 0.001,
+          "selected_cells": 0,
+          "selected_water_volume_m3": 0.0,
+          "total_water_volume_m3": 0.0,
+          "connected_cell_regions": 0,
+          "single_cell_regions": 0,
+          "point_connected_cell_regions": 0,
+          "structure_statistics_note": "Face adjacency, all sizes retained; alpha-volume sphere-equivalent diameter and liquid-mass-weighted velocity; shared-point count is a sensitivity. Paper detection/diameter/bar weighting equivalence unverified."
+        },
+        {
+          "alpha_threshold": 0.9,
+          "selected_cells": 0,
+          "selected_water_volume_m3": 0.0,
+          "total_water_volume_m3": 0.0,
+          "connected_cell_regions": 0,
+          "single_cell_regions": 0,
+          "point_connected_cell_regions": 0,
+          "structure_statistics_note": "Face adjacency, all sizes retained; alpha-volume sphere-equivalent diameter and liquid-mass-weighted velocity; shared-point count is a sensitivity. Paper detection/diameter/bar weighting equivalence unverified."
+        }
+      ],
+      "face_geometry_tolerance_m": 2.86102294921875e-06,
+      "airborne_water_mass_kg": 0.0,
+      "sampled_mass_residual_kg": 0.0,
+      "sampled_injected_water_kg": -0.0,
+      "ledger_note": "Signed trapezoidal samples of alphaPhi_, initial all-air mass zero; diagnostic rather than exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.05,
+      "cells": 594000,
+      "thresholds": [
+        {
+          "alpha_threshold": 0.001,
+          "selected_cells": 410,
+          "selected_water_volume_m3": 0.0222484286910767,
+          "total_water_volume_m3": 0.022248700375058408,
+          "connected_cell_regions": 2,
+          "single_cell_regions": 0,
+          "point_connected_cell_regions": 2,
+          "structure_statistics_note": "Face adjacency, all sizes retained; alpha-volume sphere-equivalent diameter and liquid-mass-weighted velocity; shared-point count is a sensitivity. Paper detection/diameter/bar weighting equivalence unverified."
+        },
+        {
+          "alpha_threshold": 0.9,
+          "selected_cells": 0,
+          "selected_water_volume_m3": 0.0,
+          "total_water_volume_m3": 0.022248700375058408,
+          "connected_cell_regions": 0,
+          "single_cell_regions": 0,
+          "point_connected_cell_regions": 0,
+          "structure_statistics_note": "Face adjacency, all sizes retained; alpha-volume sphere-equivalent diameter and liquid-mass-weighted velocity; shared-point count is a sensitivity. Paper detection/diameter/bar weighting equivalence unverified."
+        }
+      ],
+      "face_geometry_tolerance_m": 2.86102294921875e-06,
+      "airborne_water_mass_kg": 22.24870037505841,
+      "sampled_mass_residual_kg": 0.10697318057593108,
+      "sampled_injected_water_kg": 22.141727194482478,
+      "ledger_note": "Signed trapezoidal samples of alphaPhi_, initial all-air mass zero; diagnostic rather than exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.1,
+      "cells": 594000,
+      "thresholds": [
+        {
+          "alpha_threshold": 0.001,
+          "selected_cells": 1102,
+          "selected_water_volume_m3": 0.08627614708854528,
+          "total_water_volume_m3": 0.08627804339210259,
+          "connected_cell_regions": 2,
+          "single_cell_regions": 0,
+          "point_connected_cell_regions": 2,
+          "structure_statistics_note": "Face adjacency, all sizes retained; alpha-volume sphere-equivalent diameter and liquid-mass-weighted velocity; shared-point count is a sensitivity. Paper detection/diameter/bar weighting equivalence unverified."
+        },
+        {
+          "alpha_threshold": 0.9,
+          "selected_cells": 492,
+          "selected_water_volume_m3": 0.06104936754703523,
+          "total_water_volume_m3": 0.08627804339210259,
+          "connected_cell_regions": 2,
+          "single_cell_regions": 0,
+          "point_connected_cell_regions": 2,
+          "structure_statistics_note": "Face adjacency, all sizes retained; alpha-volume sphere-equivalent diameter and liquid-mass-weighted velocity; shared-point count is a sensitivity. Paper detection/diameter/bar weighting equivalence unverified."
+        }
+      ],
+      "face_geometry_tolerance_m": 2.86102294921875e-06,
+      "airborne_water_mass_kg": 86.27804339210259,
+      "sampled_mass_residual_kg": 0.19371986511710304,
+      "sampled_injected_water_kg": 86.08432352698549,
+      "ledger_note": "Signed trapezoidal samples of alphaPhi_, initial all-air mass zero; diagnostic rather than exact solver-time quadrature"
+    }
+  ],
+  "final_sampled_mass_residual_fraction": 0.0022503500890772086,
+  "published_count_at_0p1_s": [
+    {
+      "series": "cloud_alpha_0p001_to_1",
+      "time_s": "0.1",
+      "count_digitized": "37",
+      "read_bound_count": "5",
+      "read_bound_time_s": "0.01",
+      "plot_x_px": "100.583",
+      "plot_y_px": "1033.500"
+    },
+    {
+      "series": "core_alpha_0p9_to_1",
+      "time_s": "0.1",
+      "count_digitized": "3",
+      "read_bound_count": "5",
+      "read_bound_time_s": "0.01",
+      "plot_x_px": "100.583",
+      "plot_y_px": "1119.500"
+    }
+  ],
+  "interpretation": "Initial counts differ from digitized paper. Mesh, assumed source geometry, omitted aircraft, curve ramp and unpublished detector choices are unresolved. No inputs were fitted to counts. Face-connected counts retain every selected component; shared-point sensitivity also reported. Diameter and velocity weighting are explicit conventions, not recovered author code.",
+  "recovery": {
+    "utc": "2026-10-01T16:50:05.457209+00:00",
+    "reason": "Startup trapFpe banner was incorrectly classified as actual exception. All solver stages exited zero. Retained fields reanalyzed; no CFD rerun. First face-check attempt failed due VTK float32 geometry; retained failed directory. Adjacency tolerance now bounded by 4 ULP at domain scale.",
+    "code_sha256": {
+      "recovery-structure_counts.py": "59fc1ce40d473547f1bbf3d8236442df6de931a6431dad5d6fe90771aef93eeb",
+      "recovery-run_cl415_case.py": "8c781d0596b3dceb7162f07b780d83075811cbe494c367cdfa8c1fbd8fb9988f",
+      "recovery-analyze_cl415_case.py": "55da416a36ef6e2ec86a13ff2b404b9fe373de15b62c642f7df96abc1bfa8386"
+    }
+  }
+}

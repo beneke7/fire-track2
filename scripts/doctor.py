@@ -276,7 +276,7 @@ def _cpu_limits() -> dict[str, Any]:
         "cgroup_quota_path": quota_path,
         "cgroup_period_path": period_path,
         "effective": effective,
-        "default_threads": max(1, effective - 2),
+        "default_threads": max(1, effective),
     }
 
 

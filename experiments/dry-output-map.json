@@ -101,9 +101,10 @@
       {
         "id": "interval_and_state_output",
         "order": 5,
-        "description": "Write 14 U1-U14 time/VOF rows and interval/state table rows as calls complete; preserve all flushed rows and any partial record.",
+        "description": "Write 14 U1-U14 time, VOF and phase-centroid rows plus interval/state table rows as calls complete; preserve all flushed rows and any partial record.",
         "refs": [
           "S6",
+          "S16",
           "P4",
           "P5",
           "I1"
@@ -122,7 +123,7 @@
       {
         "id": "normal_shutdown",
         "order": 7,
-        "description": "Write timing/performance diagnostics on _TIMING build; a normal roster has exactly these 37 files.",
+        "description": "Write timing/performance diagnostics on _TIMING build; a normal roster has exactly these 38 files.",
         "refs": [
           "S10"
         ]
@@ -136,7 +137,7 @@
       "Initial arrays/logs require U0 output to have been reached. Final arrays/scalar/index are promised only after normal final checkpoint completion.",
       "Any abnormal exit, missing normal output, prefix/hash/copy/cap mismatch, analyzer rejection, sample fault/gap or unverified termination consumes the one attempt; preserve evidence and do not retry."
     ],
-    "strict_roster": "Normal completion emits exactly the 37 listed native files; no glob acceptance, extra solver output, alternate canonical path or periodic snapshot is accepted. Failure may leave only a reached prefix."
+    "strict_roster": "Normal completion emits exactly the 38 listed native files; no glob acceptance, extra solver output, alternate canonical path or periodic snapshot is accepted. Failure may leave only a reached prefix."
   },
   "producer_files": [
     {
@@ -372,7 +373,7 @@
     },
     {
       "id": "initial_3d_vof_fld",
-      "native_path": "data/vof_fld_fld_000000000.bin",
+      "native_path": "data/vof_fld_000000000.bin",
       "canonical_path": "canonical/initial/3d/field-05",
       "event": "initial_u0_output",
       "role": "initial 3D volume_fraction",
@@ -1209,6 +1210,48 @@
       "row_count": 15
     },
     {
+      "id": "pos_vt",
+      "native_path": "data/pos_vt.out",
+      "canonical_path": "canonical/data/pos_vt.out",
+      "event": "each completed state U1..U14 when iout0d is reached",
+      "role": "phase-volume-weighted centroid and velocity diagnostic",
+      "native_format": "Fortran formatted text; 14 records of 7E15.7 fields",
+      "shape": {
+        "states": "U1..U14; one state per row",
+        "fields": [
+          "time_s",
+          "centroid_x_m",
+          "centroid_y_m",
+          "centroid_z_m",
+          "phase_velocity_x_m_s",
+          "phase_velocity_y_m_s",
+          "phase_velocity_z_m_s"
+        ]
+      },
+      "dtype": "ASCII/UTF-8 text",
+      "endianness": null,
+      "storage_order": "line-oriented; preserve exact bytes",
+      "units": "first field s; centroid fields m; velocity fields m/s",
+      "size_bytes": {
+        "normal_expected_bytes": 1484,
+        "frozen_max_bytes": 1484,
+        "bound_basis": "Observed candidate6 dry_four output: 14 records, 106 bytes each; pinned Fortran writer format."
+      },
+      "canonical_copy": {
+        "operation": "copy native byte stream unchanged",
+        "required_sha256_relation": "sha256(native bytes) == sha256(canonical bytes)",
+        "no_normalization_or_regeneration": true
+      },
+      "source_refs": [
+        "S16",
+        "I1",
+        "I3"
+      ],
+      "empty_phase_policy": "This exact fixture has zero VOF volume at U0..U14. The six centroid/velocity fields are undefined and the pinned source writes right-justified NaN after dividing zero sums by zero volume. Accept only the exact NaN token in all six fields for every row, with finite source-clock time; do not interpret these values as physical output.",
+      "byte_limit_action": "Fail post-run analysis on any changed row width, count, or byte total.",
+      "row_count": 14
+    },
+    {
       "id": "performance",
       "native_path": "data/performance.out",
       "canonical_path": "canonical/data/performance.out",
@@ -1687,7 +1730,7 @@
     }
   ],
   "nonproducer_artifacts": {
-    "count_policy": "Excluded from the 37 native producer files and 57,447,891-byte deterministic native bound. Their mutable bytes, including canonical duplicates, count under sampled disk roots when covered.",
+    "count_policy": "Excluded from the 38 native producer files and 57,449,375-byte deterministic native bound. Their mutable bytes, including canonical duplicates, count under sampled disk roots when covered.",
     "required": [
       {
         "id": "launch_bundle",
@@ -1760,23 +1803,23 @@
         "policy": "Do not alter v1.2 manifest; absent unless expressly reviewed and defined."
       }
     ],
-    "canonical_copy_policy": "A successful normal run adds up to 37 byte-identical canonical files. Those duplicates are excluded from native producer subtotal/allocation but included in sampled disk usage and SHA256SUMS. Failed attempts retain any native files already produced and inventory them without synthesizing missing outputs."
+    "canonical_copy_policy": "A successful normal run adds up to 38 byte-identical canonical files. Those duplicates are excluded from native producer subtotal/allocation but included in sampled disk usage and SHA256SUMS. Failed attempts retain any native files already produced and inventory them without synthesizing missing outputs."
   },
   "accounting": {
-    "normal_solver_producer_file_count": 37,
-    "expected_count": 37,
+    "normal_solver_producer_file_count": 38,
+    "expected_count": 38,
     "count_breakdown": {
       "grid_binary": 1,
       "initial_3d_binary": 5,
       "initial_midplane_binary": 4,
       "final_checkpoint_binary": 8,
-      "text_diagnostics": 9,
+      "text_diagnostics": 10,
       "csv_tables": 9,
       "timestep_input_json": 1
     },
     "native_producer_bytes": {
       "binary_subtotal": 56116480,
-      "known_non_csv_text_subtotal_excluding_geometry_out": 7260,
+      "known_non_csv_text_subtotal_excluding_geometry_out": 8744,
       "timestep_inputs_json_policy_cap": 8192,
       "csv_whole_record_envelope": {
         "record_count_including_nine_headers": 1285,
@@ -1785,20 +1828,20 @@
         "bytes": 1315840,
         "treatment": "Use one 1,024-byte record envelope for each header/data row. The envelope replaces, rather than adds to, exact expected CSV byte sizes."
       },
-      "deterministic_native_producer_bound_bytes": 57447891,
-      "formula_bytes": "56,116,480 + 7,260 + 119 + 8,192 + 1,315,840",
+      "deterministic_native_producer_bound_bytes": 57449375,
+      "formula_bytes": "56,116,480 + 8,744 + 119 + 8,192 + 1,315,840",
       "deterministic_bound_mib": 54.79,
       "producer_data_allocation_bytes": 67108864,
       "producer_allocation_mib": 64,
-      "margin_bytes": 9660973,
+      "margin_bytes": 9659489,
       "expected_fixed_csv_sizes_separate_from_cap": {
         "entries_with_exact_expected_size_bytes": 8,
         "exact_expected_subtotal_bytes": 170743,
         "timestep_restriction_upper_expected_bytes": 5528,
         "note": "Per-file expected sizes are listed; the cap uses the larger whole-record envelope."
       },
-      "expected_native_plus_canonical_copy_bytes_before_other_evidence": 114895782,
-      "canonical_copy_accounting": "Canonical copies are derived nonproducer bytes, excluded from the 37 native count and 64 MiB producer allocation, included in sampled mutable-run disk.",
+      "expected_native_plus_canonical_copy_bytes_before_other_evidence": 114898750,
+      "canonical_copy_accounting": "Canonical copies are derived nonproducer bytes, excluded from the 38 native count and 64 MiB producer allocation, included in sampled mutable-run disk.",
       "geometry_expected_bytes": 119,
       "note": "The exact 119-byte geometry.out size replaces the previous 4,096-byte conservative policy cap."
     },
@@ -1825,7 +1868,7 @@
       "force_dispatch_seconds": 1,
       "termination_verification_seconds": 30
     },
-    "prior_arithmetic_disposition": "Previous 57,451,868-byte estimate used a 4,096-byte geometry policy cap. The source/compiler reproduction replaces it with an exact 119-byte geometry output; current deterministic native bound is 57,447,891 bytes."
+    "prior_arithmetic_disposition": "Previous 57,451,868-byte estimate used a 4,096-byte geometry policy cap. Source/compiler reproduction set geometry.out to 119 bytes; the observed 1,484-byte pos_vt.out adds the current 38-file deterministic bound of 57,449,375 bytes."
   },
   "source_refs": {
     "S1": {
@@ -1987,6 +2030,13 @@
       "path": "src/fillps.f90",
       "lines": "16-26, 32-57",
       "purpose": "Pressure RHS equation and units for the projection/gauge field."
+    },
+    "S16": {
+      "repository": "https://github.com/Multiphysics-Flow-Solvers/FluTAS",
+      "commit": "598210616bebd51f7d51f61455f196e6f3479916",
+      "path": "src/apps/two_phase_inc_isot/postp.two_phase_inc_isot/dropcheck.h90; src/output.f90",
+      "lines": "dropcheck.h90: 0-10, 15-54; output.f90: 33-56",
+      "purpose": "Per-step phase centroid/velocity fields, zero-volume NaNs, and seven E15.7 formatted output."
     }
   },
   "open_checks": [
@@ -1994,23 +2044,23 @@
     "geometry.out exact list-directed schema, units, and 119-byte bound are source-derived and reproduced in the pinned candidate image with NVHPC 26.9.",
     "Little-endian binary64 is bound to the retained linux/amd64 candidate image and executable identity; the runtime output checker validates expected exact byte lengths and hashes.",
     "Pressure and checkpoint history-RHS units/semantics are source-resolved in source_refs S11-S15. They are archival outputs for this dry diagnostic; no predicate depends on their numeric values.",
-    "All 37 file sizes/counts are expected source/Warden values, not measurements from a solver run. Exact independent review must verify names, calls, formats, shapes, byte bounds, cadence and maps.",
+    "The failed candidate6 diagnostic observed the correct VOF filename and the additional 14-record pos_vt.out output. This prospective 38-file map records that evidence; any next attempt needs a new amendment and exact review that bind this map and its narrowly defined empty-phase NaNs.",
     "Eight CSV expected byte sizes plus the timestep upper expectation are listed separately; deterministic cap uses 1,024 bytes per header/data record and does not add fixed CSV sizes.",
     "Generalized raw directional flux/momentum, pre/post-clipping and full raw-ledger reconstruction remain deferred/unassessed for this no-liquid/no-active-slot runtime-only attempt."
   ],
   "self_check": {
-    "producer_files_listed": 37,
-    "expected_normal_producer_files": 37,
+    "producer_files_listed": 38,
+    "expected_normal_producer_files": 38,
     "count_matches": true,
     "binary_subtotal_bytes": 56116480,
-    "known_non_csv_text_bytes": 7260,
+    "known_non_csv_text_bytes": 8744,
     "json_policy_cap_bytes": 8192,
     "csv_records_including_headers": 1285,
     "csv_envelope_bytes": 1315840,
-    "formula_bytes": "56,116,480 + 7,260 + 119 + 8,192 + (1,285 * 1,024) = 57,447,891",
-    "native_producer_bound_bytes": 57447891,
+    "formula_bytes": "56,116,480 + 8,744 + 119 + 8,192 + (1,285 * 1,024) = 57,449,375",
+    "native_producer_bound_bytes": 57449375,
     "bound_under_64_MiB_allocation": true,
-    "margin_bytes": 9660973,
+    "margin_bytes": 9659489,
     "geometry_expected_bytes": 119
   }
 }

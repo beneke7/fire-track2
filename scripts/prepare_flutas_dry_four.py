@@ -15,6 +15,7 @@ import json
 import os
 import re
 import secrets
+import signal
 import stat
 import subprocess
 import sys
@@ -36,7 +37,9 @@ else:  # Running as ``python scripts/prepare_flutas_dry_four.py``.
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 # The primary pins this to the final reviewed amendment hash before any launch.
-EXPECTED_AMENDMENT_SHA256: str | None = None
+EXPECTED_AMENDMENT_SHA256: str | None = (
+    "abc329f3c5b7296cd69ae406dfd8f33b666b7fb441945443956ee93ef76a548a"
+)
 AMENDMENT_RELATIVE_PATH = Path("experiments/FLUTAS_DRY_FOUR_DIAGNOSTIC_AMENDMENT_v0.1.md")
 OUTPUT_MAP_RELATIVE_PATH = Path("experiments/dry-output-map.json")
 INPUT_RELATIVE_PATH = Path("containers/flutas/candidate5/cases/source_boundary/dry_four")
@@ -510,9 +513,45 @@ def _run_local_supervisor(
         "--",
         *solver_argv,
     ]
-    with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
-        result = subprocess.run(argv, stdout=stdout, stderr=stderr, check=False)
-    return result.returncode, argv
+    process: subprocess.Popen[bytes] | None = None
+    queued_signals: list[int] = []
+
+    def forward_guardian_signal(signum: int, frame: object) -> None:
+        del frame
+        queued_signals.append(signum)
+        if process is not None:
+            try:
+                process.send_signal(signum)
+            except ProcessLookupError:
+                pass
+
+    previous_handlers = {
+        signum: signal.signal(signum, forward_guardian_signal)
+        for signum in (signal.SIGTERM, signal.SIGINT)
+    }
+    try:
+        with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
+            process = subprocess.Popen(
+                argv,
+                stdin=subprocess.DEVNULL,
+                stdout=stdout,
+                stderr=stderr,
+                start_new_session=True,
+            )
+            pending_at_spawn = tuple(queued_signals)
+            queued_signals.clear()
+            for requested_signal in pending_at_spawn:
+                try:
+                    process.send_signal(requested_signal)
+                except ProcessLookupError:
+                    pass
+            # Keep this client alive until run_local returns after its detached
+            # lock guardian has stopped the solver and proved lock release.
+            return_code = process.wait()
+            return return_code, argv
+    finally:
+        for signum, handler in previous_handlers.items():
+            signal.signal(signum, handler)
 
 
 def prepare_bundle(

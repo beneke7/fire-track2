@@ -90,6 +90,23 @@ unstated figure sampling time, ambiguous width definition, source-aware
 comparison limits, and solver/resource qualification remain open before an E1
 benchmark run.
 
+## Additional external source: Gu et al. (2026)
+
+Yin Gu, Hui Lv, and Rui Zhou, “Fighting with wildfire: unsteady discharge
+flow dynamics and drop pattern prediction for air tankers,” *Results in
+Engineering* 30 (2026), 110410
+([DOI and publisher record](https://doi.org/10.1016/j.rineng.2026.110410)).
+The abstract describes a reduced-order unsteady tank-discharge model based on
+non-constant Bernoulli flow and rigid-body rotation, coupled to a variable-flow
+drop-pattern model. It reports validation against full-scale discharge/drop
+data, including 8.17% average relative error in coverage-line lengths and
+−6.51% error in cumulative deposition versus 23.55% for the earlier model.
+This may help supply a time-varying outlet-flow history and an independent
+whole-drop mass/deposition check when its system geometry and assumptions fit.
+It is not a VOF method or a direct benchmark for the four horizontal Restás
+outlets. This is an abstract-level review; the signed PDF link supplied in chat
+expired before its equations and case data could be checked.
+
 ## Non-PDF implementation reference
 
 The experiment plan lists [FluTAS](https://github.com/Multiphysics-Flow-Solvers/FluTAS) as a GPU-capable VOF implementation. No upstream FluTAS source is bundled with the papers. The [GPU feasibility record](GPU_FLUTAS_FEASIBILITY.md) pins the reviewed upstream revision; a native Blackwell build and upstream bubble check have passed. The first synthetic source/return candidate compiled and passed static/fixture checks but was withdrawn after review found state-timing and return-flow defects. A corrected candidate is in progress. No source CFD has run. Treat aircraft inlet, turbulence, and boundary behavior as unqualified until their specific gates pass.

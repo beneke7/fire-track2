@@ -1,11 +1,16 @@
 # Local compute procedure
 
-The compute gates follow the [experiment plan](../track2_aerial_drop_experiment_plan.md).
-The local workstation has a usable CPU-only OpenFOAM VOF container for short
-characterization and small reference runs, plus a pinned FluTAS Blackwell image
-that passed upstream VOF verification. Its Restas source-boundary and GPU pilot
-gates remain closed. Do not start a large CFD case from GPU visibility or from a
-CPU pilot alone.
+Formal compute gates follow the [experiment plan](../track2_aerial_drop_experiment_plan.md).
+The user has separately authorized exploratory runs on idle local CPU/GPU
+capacity, including short physical VOF, AMR, turbulence, profiling and rendering
+trials, without per-run Astra/Warden approval. Keep provisional inputs and
+exploratory status explicit; this does not pass a scientific gate. Check other
+workloads first and use available capacity without a fixed CPU reserve or rigid
+per-run cap. Avoid routine resource negotiation; workers coordinate when an
+active long run materially delays assigned work or observed pressure affects
+responsiveness. Serialize GPU jobs through the lock. The prior failed
+`dry_four` bundle remains immutable; distinct experiments are allowed and must
+write new case/run directories.
 
 ## Inspect the host
 
@@ -17,8 +22,10 @@ The JSON report is written to `results/machine.json`; use
 `.venv/bin/python scripts/doctor.py --output PATH` to save a report elsewhere. These values are a
 snapshot, so rerun the doctor before scheduling a substantial job.
 
-The latest `make doctor` inspection on 2026-09-25 found a Linux x86-64 host with CPython 3.12.3, 20 CPUs in process
-affinity, 118.1 GiB of available RAM, and 260.8 GiB free on the working filesystem.
+The CL415 launch doctor inspection on 2026-10-01 found a Linux x86-64 host with CPython 3.12.3, 20 CPUs in process
+affinity, 121.4 GiB of available RAM, and 717.4 GiB free on the working filesystem.
+The retained snapshot is `results/runs/cl415-halfsecond-priority-20261001T165200Z/machine.json`;
+these are launch-time readings, not standing resource guarantees.
 An RTX 5090 with 32 GB is visible through `nvidia-smi`; driver 580.159.03 reports CUDA 13.0.
 The host has no `nvcc`, host OpenFOAM, FluTAS, or SU2. Docker is available and contains
 `opencfd/openfoam-default:2512`, a GCC CPU image with `interIsoFoam`, `interFoam`,
@@ -29,7 +36,7 @@ installed host CUDA toolkit. No finite CPU quota or cgroup memory limit was dete
 separate digest-pinned container now builds FluTAS with NVIDIA HPC SDK 26.9 for `cc120` and
 passes its OpenACC kernel, CUDA-buffer MPI, and upstream rising-bubble checks. The container
 does not install a compiler on the host. The latest doctor still reports GPU VOF as not ready
-because Restas source and boundary qualification has not passed.
+because the candidate-specific source-boundary gate has not passed.
 
 ## Current CPU VOF pilot
 
@@ -41,7 +48,10 @@ ranks inside an 18-CPU Docker cap and a 48 GiB memory limit. It writes sparse VO
 surfaces and a water-volume time series. The launcher applies a one-hour wall-time limit.
 Three cells across the slot width, laminar flow, the short time window, and the missing
 aircraft/ground mean this is a software and boundary-condition characterization only. It
-cannot establish physical breakup or useful-strip performance.
+cannot establish physical breakup or useful-strip performance. The earlier
+one-second still-air case also discharged vertically downward; it is retained as
+an exploratory software run and does not represent the horizontal outlet
+orientation now specified by the user. New horizontal cases are being prepared.
 
 The runner samples Docker memory and CPU use approximately every two seconds. Peaks between
 samples may be higher; use these measurements for rough cost estimates only. The first run
@@ -109,10 +119,13 @@ look like:
 ```
 
 The launcher passes the command and arguments directly to a child process without a shell.
-By default it reserves two CPUs when the detected budget allows, with at least one thread.
-An explicit `--threads N` is capped at the effective CPU budget reported by affinity and
-cgroup limits. The launcher sets common OpenMP and BLAS thread variables in the child
-environment only; it does not alter the current shell or system configuration.
+By default it sets common OpenMP and BLAS thread variables to the full effective CPU budget
+reported by affinity and cgroup limits. An explicit `--threads N` can select a smaller
+starting allocation. Workers coordinate directly only when an active long run materially
+slows another assigned task or observed resource pressure affects responsiveness. The
+launcher changes child environment variables only; it does not alter the current shell or
+system configuration, and its thread setting is not a hard CPU quota for tools that ignore
+those variables.
 
 Pass `--gpu` for any command that uses the local GPU. The launcher takes a Linux `flock`
 under `/tmp`, keyed by user ID, so local GPU jobs launched from separate worktrees by that
@@ -172,11 +185,13 @@ command’s exit status. No timeout is set unless requested.
    size from measured pilot data. Attempt 5–10 million cells only if the measured cost and
    boundary behavior support it. Compare at least two nearfield resolutions and add a
    third when penetration, transfer flux, or `L95` remains sensitive.
-5. **CPU and cluster work:** keep small CPU references and post-processing within the
-   shared budget managed by the orchestrator. Reserve two workstation cores for
-   responsiveness; use one thread within process-parallel sweeps to prevent nested
-   oversubscription. Before relying on the later CPU cluster, profile a short partition,
-   memory per rank, and MPI scaling. Cluster availability is not implied by the plan.
+5. **CPU and cluster work:** run CPU references and post-processing against the actual
+   shared load; do not hold a fixed workstation reserve or renegotiate allocations routinely.
+   Workers coordinate if a long-running job materially slows assigned work, and adjust for
+   actual responsiveness, memory, disk, or solver-stability issues. Use one thread within
+   process-parallel sweeps to prevent nested oversubscription. Before relying on the later
+   CPU cluster, profile a short partition, memory per rank, and MPI scaling. Cluster
+   availability is not implied by the plan.
 
 For every scientific run, use the project experiment record and preserve inputs, revision,
 mesh, time-step settings, resources, conservation errors, checkpoints, and the advance or

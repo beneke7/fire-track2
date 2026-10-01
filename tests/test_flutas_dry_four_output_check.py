@@ -175,6 +175,7 @@ def _pad_v12_to_size(
 
 def _timestep_inputs() -> dict[str, object]:
     eps = math.ulp(1.0)
+    dzc, dzf = output_check._expected_dry_four_vertical_grid()
     return {
         "time_scheme": "ab2",
         "time_start_s": "0",
@@ -194,10 +195,10 @@ def _timestep_inputs() -> dict[str, object]:
         "dxi_m_inv": "4.0000000000000000E+001",
         "dyi_m_inv": "4.0000000000000000E+001",
         "dzi_m_inv": "4.0000000000000000E+001",
-        "dzc_m": ["2.5000000000000000E-002"] * 42,
-        "dzf_m": ["2.5000000000000000E-002"] * 42,
-        "dzci_m_inv": ["4.0000000000000000E+001"] * 42,
-        "dzfi_m_inv": ["4.0000000000000000E+001"] * 42,
+        "dzc_m": [repr(value) for value in dzc],
+        "dzf_m": [repr(value) for value in dzf],
+        "dzci_m_inv": [repr(1.0 / value) for value in dzc],
+        "dzfi_m_inv": [repr(1.0 / value) for value in dzf],
         "sigma_n_m": "0",
         "gravity_m_s2": ["0", "0", "0"],
         "fixed_step_factor": "2.0000000000000001E-001",
@@ -297,6 +298,15 @@ def _make_bundle(root: Path) -> Path:
                 )
                 + "\n"
             ).encode("ascii")
+        elif file_id == "pos_vt":
+            times = output_check._native_clock_values(_timestep_inputs())
+            raw = (
+                "\n".join(
+                    output_check._fortran_e15_7(times[state]) + "NaN".rjust(15) * 6
+                    for state in range(1, 15)
+                )
+                + "\n"
+            ).encode("ascii")
         elif file_id == "vof_info":
             times = output_check._native_clock_values(_timestep_inputs())
             raw = (
@@ -341,6 +351,30 @@ def _make_bundle(root: Path) -> Path:
     return bundle
 
 
+def test_native_output_map_names_initial_vof_file():
+    output_map = json.loads((ROOT / "experiments/dry-output-map.json").read_bytes())
+    vof = next(item for item in output_map["producer_files"] if item["id"] == "initial_3d_vof_fld")
+    assert vof["native_path"] == "data/vof_fld_000000000.bin"
+    pos_vt = next(item for item in output_map["producer_files"] if item["id"] == "pos_vt")
+    assert pos_vt["native_path"] == "data/pos_vt.out"
+
+
+def test_empty_phase_position_velocity_requires_only_expected_nan_fields():
+    times = output_check._native_clock_values(_timestep_inputs())
+    raw = (
+        "\n".join(
+            output_check._fortran_e15_7(times[state]) + "NaN".rjust(15) * 6
+            for state in range(1, 15)
+        )
+        + "\n"
+    ).encode("ascii")
+    output_check._check_empty_phase_position_velocity(raw, times)
+
+    malformed = raw.replace(b"            NaN", b"  0.0000000E+00", 1)
+    with pytest.raises(output_check.OutputCheckError, match="zero-volume centroid fields NaN"):
+        output_check._check_empty_phase_position_velocity(malformed, times)
+
+
 def test_success_bundle_checks_rows_and_copies_native_bytes(tmp_path, monkeypatch):
     bundle = _make_bundle(tmp_path)
     resources = {
@@ -353,7 +387,7 @@ def test_success_bundle_checks_rows_and_copies_native_bytes(tmp_path, monkeypatc
     )
     report = output_check.check_bundle(bundle)
     assert report["status"] == "complete"
-    assert report["native_file_count"] == 37
+    assert report["native_file_count"] == 38
     assert report["v03_data_rows"] == output_check.V03_ROW_COUNTS
     assert report["v12_analysis"]["row_counts"] == {
         analyzer.PHASE_FILE: 672,
@@ -463,6 +497,25 @@ def test_fixed_dt_substitution_rejected(tmp_path, monkeypatch, table):
     _replace_csv_field(path, header, 4, "dt_s", replacement)
     with pytest.raises(output_check.OutputCheckError, match="dt_s|TIMESTEP_INPUT_MISMATCH"):
         output_check.check_bundle(bundle)
+
+
+@pytest.mark.parametrize("key", ["dzc_m", "dzf_m", "dzci_m_inv", "dzfi_m_inv"])
+def test_source_derived_vertical_operands_accept_exact_values_and_reject_mutations(key):
+    inputs = _timestep_inputs()
+    assert output_check._validate_dry_timestep_inputs(inputs) is inputs
+
+    mutated = dict(inputs)
+    values = list(inputs[key])
+    changed = float(values[17]) + math.ulp(float(values[17]))
+    values[17] = repr(changed)
+    mutated[key] = values
+    inverse_key = {"dzc_m": "dzci_m_inv", "dzf_m": "dzfi_m_inv"}.get(key)
+    if inverse_key is not None:
+        inverse_values = list(inputs[inverse_key])
+        inverse_values[17] = repr(1.0 / changed)
+        mutated[inverse_key] = inverse_values
+    with pytest.raises(output_check.OutputCheckError, match=key):
+        output_check._validate_dry_timestep_inputs(mutated)
 
 
 @pytest.mark.parametrize(

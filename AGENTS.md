@@ -9,14 +9,29 @@ inputs; preserve their original names and contents. `docs/REFERENCES.md` maps
 them to benchmarks. This project starts at analytical E0 verification, not at
 a validated CFD solver.
 
+User correction (2026-09-28): the four Restás outlets face horizontally and
+discharge liquid at high speed. Use horizontal outlet vectors in new Restás
+cases; the speed remains provisional until a source or measurement provides it.
+Earlier downward-discharge CPU cases are exploratory and do not reproduce this
+orientation.
+
 ## Orchestrator and subagents
 
 - The primary agent directs the work, owns the plan and shared interfaces,
   reviews all contributions, integrates them, and reports evidence to the user.
-- Keep the available worker pool productively occupied with independent paper
-  extraction, implementation, testing, and review tasks. The current project
-  config allows three spawned workers alongside the orchestrator; respect any
-  lower runtime limit. Give each a disjoint file scope and a bounded handoff.
+- The user explicitly authorizes exploratory CPU/GPU runs and parallel agents
+  without per-run permission requests. Start clearly labelled trials when
+  local capacity is idle; do not let routine paperwork or exact reviews block
+  a diagnostic, profiling run, baseline, or rendering check. Respect unrelated
+  workloads: inspect process/GPU use first. Do not impose a fixed CPU reserve
+  or small per-run limit when the machine is idle; use available capacity while
+  keeping the desktop responsive.
+- Use parallel workers when independent work shortens the critical path.
+  Prefer Luna Max for bounded research, implementation, and compute tasks; use
+  Astra Max sparingly for consequential scientific interpretation or a hard
+  cross-project blocker. Do not fill slots just to keep them busy. The current
+  project config allows three spawned workers alongside the orchestrator;
+  respect any lower runtime limit and release workers promptly after handoff.
 - Use **`gpt-6-luna` with `max` reasoning** for bounded research and
   implementation workers. Use **`gpt-6-astra` with `max` reasoning** for the
   blocker planner, general repository reviewer, and project warden. Spawn with
@@ -34,90 +49,33 @@ a validated CFD solver.
   interface, resource allocation, tests, and expected handoff. Give workers
   disjoint write ownership. Shared-file changes go through the orchestrator.
   All agents share a filesystem; never revert another agent's changes.
-- Use a separate reviewer for substantial physics, conservation, or scoring
-  changes. That reviewer checks analytic expectations and source evidence, not
-  just implementation consistency. The orchestrator resolves findings and
-  reruns affected checks before accepting the result.
+- Use independent scientific review when changing a published-case
+  interpretation, conservation method, or E0–E6 acceptance decision. Ordinary
+  exploratory runs and their implementation do not need advance Astra or
+  Warden review. Label assumptions, inspect outputs, and decide later what
+  merits formal review.
 - Worker handoffs contain changed files, commands and results, source locations,
   assumptions, remaining defects, and evidence paths. A worker's completion
   message is not proof that a scientific gate passed.
 
-### Warden and checkpoint cadence
+### Independent oversight and status
 
-- Use the project-scoped `project_warden` role in `.codex/agents/` as an
-  independent Astra Max steering check at each major gate transition, after a
-  source/solver architecture change, after two completed checkpoints, when
-  a blocker repeats, or immediately for a high-severity cross-discipline
-  decision that could redirect the critical path. The warden checks critical
-  path, parallel work, compute queue, stale claims and user-only dependencies,
-  then recommends concrete next assignments with owners, dependencies and
-  acceptance evidence, especially for hard blockers. It is read-only and
-  advisory: only the primary changes the
-  shared plan, and only the assigned scientific reviewer approves a gate. The
-  primary archives each memo in `docs/reviews/PROJECT_WARDEN_<UTC timestamp>.md`,
-  integrates confirmed steering into `docs/STATUS.md` and
-  `docs/BLOCKER_RESOLUTION_PLAN.md`, and preserves the full review record.
-- Count a completed checkpoint only when a bounded deliverable, its prescribed
-  checks, exact evidence references, and the primary's handoff disposition are
-  recorded. Status edits, repeated discussion, and unchanged reruns are not
-  checkpoints. Record the last Warden memo, completed checkpoints since it, and
-  the next trigger in `docs/STATUS.md`. Coalesce simultaneous triggers into one
-  memo for the same evidence snapshot.
-- Each Warden recommendation names the blocker, responsible owner, prerequisite,
-  next action, acceptance or stop evidence, and CPU/GPU eligibility. For a
-  repeated blocker, identify the attempted resolution and remaining evidence,
-  then recommend a bounded discriminating check, implementation change, or
-  supported fallback. The primary records each recommendation as accepted,
-  deferred, or rejected, with a reason and next evidence trigger, in the status
-  or blocker records. Warden advice never substitutes for exact independent
-  review or the primary's launch decision.
-- For a repeated, cross-discipline, or critical-path blocker needing a deeper
-  resolution plan, assign `.codex/agents/blocker_planner.toml` to an Astra Max
-  worker at max reasoning. Give it a disjoint, timestamped memo path and ask
-  for ranked fixes, owners, prerequisites, exact acceptance evidence, GPU/CPU
-  eligibility, and whether user or external evidence is truly required. The
-  separate `.codex/agents/general_reviewer.toml` role is also Astra Max at max
-  reasoning and is used for independent repository-wide consistency review.
-  Warden steers the whole project; deblocker and general reviewer return
-  bounded artifacts. The primary integrates advice and remains responsible for
-  shared plans, implementation choices, and gate decisions.
-- At each handoff, dependency change, or Warden checkpoint, refresh the
-  timestamped queue ledger in `docs/STATUS.md`: list each worker's live
-  assignment, each compute job's ready/running/blocked/finished state, owner,
-  candidate and review state, resource ceiling, and next evidence trigger.
-  Identify the exact dependency when a queue is idle. Keep agent occupancy,
-  running processes, resource allocations, and measured utilization distinct.
-- Maintain separate CPU and GPU queues. Schedule one GPU-owning task at a time
-  through `scripts/run_local.py`'s shared GPU lock, and keep independent
-  CPU-only research, implementation, and review work moving during it. The
-  project has one RTX 5090; parallel GPU trials would contend for the same
-  device and are not an increase in useful throughput.
-- Native builds and code-object inspection are CPU prerequisites. Every
-  GPU-relevant implementation checkpoint gets its smallest meaningful GPU
-  runtime check as soon as the exact candidate has independent review and all
-  other prerequisites for that check pass; source diagnostics need their own
-  gate approval. Overlap a GPU trial with independent CPU work when both queues
-  have ready tasks. Record
-  `not applicable` for CPU-only checkpoints, or name the exact gate blocking a
-  GPU trial. Build or smoke evidence never substitutes for a source-boundary
-  solver gate. Run dependent source CFD cases in order and stop on first
-  failure; do not launch later stages in parallel.
-- At every worker handoff, rebalance the worker pool and both compute queues.
-  Keep every available worker slot on independent, gate-ready work when one
-  exists, and schedule CPU jobs against measured headroom up to the shared
-  18-core ceiling. The throughput target is the measured safe compute budget:
-  overlap independent CPU and GPU work and avoid idle ready work. One RTX 5090
-  means one ordered GPU trial at a time; never duplicate or parallelize jobs to
-  inflate utilization. Record why a queue is empty or a trial is ineligible,
-  size approved work from measured profiles, and never let utilization release
-  a scientific gate. When a worker completes its bounded task, capture the
-  handoff and promptly reassign or release that slot; do not keep completed
-  workers occupying the pool while independent ready work is waiting.
-- A scientific gate remains closed until its frozen inputs, observables,
-  limits, diagnostics and independent review are complete. While it is closed,
-  use CPU capacity for approved builds and the GPU for already-approved runtime
-  smoke checks; continue independent tracks. Do not use utilization pressure to
-  skip validation.
+- The Astra Max Warden is an occasional read-only project advisor. Use it for a
+  major solver/architecture decision, a repeated cross-project blocker, or a
+  difficult scientific choice that could redirect the work. Do not invoke it
+  for routine launches, worker handoffs, or merely because time/checkpoints
+  passed. Ask for concrete options, owners, dependencies and useful CPU/GPU
+  experiments. The primary decides and records only the resulting action in
+  `docs/STATUS.md`; write a separate memo only when it carries substantial
+  review evidence.
+- Use the Astra Max general reviewer or blocker planner only when a consequential
+  scientific decision or hard blocker needs independent analysis. Routine
+  exploratory simulations do not need advance review. Formal E0–E6 decisions
+  retain their independent validation requirements.
+- Update the compact `docs/STATUS.md` when work ownership, compute state, or a
+  material decision changes. Distinguish live agents from actual processes and
+  measured utilization. Do not maintain a separate timestamped ledger for each
+  ordinary handoff or repeat the same information across documents.
 
 ## Working commands and layout
 
@@ -146,10 +104,13 @@ Use `make help` for commands. Python dependencies live in `pyproject.toml` and
 - Follow E0–E6 and the gates in `docs/VALIDATION.md`. E1–E3 are numerical
   benchmarks; E4–E5 supply measured ground evidence. Never infer field validity
   or a fourfold gain from nearfield appearance or one historical fraction.
-- Before a scientific run, declare inputs, observables, tolerances, uncertainty,
-  grid/time/parcel/domain refinements, compute budget and stop conditions in
-  an experiment record. Select tolerances with physical/source justification;
-  do not tune them after seeing results. Preserve a case without fit adjustments.
+- Before a formal benchmark or gate run, declare inputs, observables,
+  tolerances, uncertainty, grid/time/parcel/domain refinements, compute budget
+  and stop conditions in an experiment record. Select tolerances with
+  physical/source justification; do not tune them after seeing results. For
+  exploratory runs, a brief case record with provisional inputs, solver,
+  resolution, horizon, resources and diagnostic is enough. Preserve each run
+  without fit adjustments.
 - Keep released mass in mutually exclusive compartments: deposited (inside and
   outside the map), airborne VOF, airborne parcels, escaped, and evaporated if
   modeled. Do not double-count cumulative handoff flux as stored mass. Check
@@ -177,20 +138,33 @@ Use `make help` for commands. Python dependencies live in `pyproject.toml` and
 
 ## Efficient execution
 
+The user's standing authorization covers exploratory GPU smoke/debug runs,
+CPU OpenFOAM baselines, short physical VOF cases, AMR and turbulence
+comparisons, plus rendering and image inspection. It does not turn assumed
+inputs into measured facts or make an exploratory result a validation pass.
+Before a run, keep a brief case record (directory or run metadata) with
+solver/version, grid, horizon, boundaries, turbulence model, resource limits,
+and intended diagnostic. Preserve failures, render fields promptly, and avoid
+separate review memos unless a hard decision needs one.
+
 - Run `make doctor` before assigning compute. Detect CPU affinity/cgroup limits,
   current free RAM, GPU memory and disk; do not assume the workstation or a
   remote cluster is available from the plan's hardware description.
 - Use `scripts/run_local.py` for local jobs. Allocate a **shared total** CPU
   budget across workers, processes and MPI ranks; keep BLAS/OpenMP threads at
   one inside process-parallel sweeps. Avoid nested oversubscription.
-- The orchestrator is the single compute scheduler. Start with two CPU cores
-  reserved for responsiveness. Independent light CPU work can overlap one GPU
-  pilot; serialize GPU jobs with the launcher's lock. A per-job thread cap is
-  not a reservation for the whole machine.
-- Profile the 1–3 million-cell pilot before larger CFD: report peak RAM/VRAM,
-  step time, pressure solve and I/O share, mass error, physical-time throughput,
-  and projected checkpoint cost. Advance to 5–10 million cells only on measured
-  evidence. GPU visibility is not proof that a solver supports this problem.
+- The orchestrator and workers share the compute schedule. Use all effective
+  CPU capacity when the machine is idle; there is no fixed 18-core ceiling or
+  two-core reserve. Allocations are initial estimates, not standing caps.
+  Avoid routine negotiation or allocation reports: workers coordinate directly
+  only when an active long run materially delays assigned work or observed
+  contention affects desktop responsiveness, memory, disk, or solver stability.
+  Serialize GPU work with the launcher's lock.
+- Profile small pilots to learn peak RAM/VRAM, step time, pressure-solve and I/O
+  share, mass error, physical-time throughput, and checkpoint cost. The user
+  also authorizes larger exploratory tests when measured memory, disk and
+  solver support make them viable; size is not itself a review gate. GPU
+  visibility is not proof that a solver supports this problem.
 - Keep full 3D snapshots sparse; routinely save compact flux, impact, ledger,
   and scoring data. Checkpoint expensive jobs; measure CPU/MPI scaling before
   requesting cluster resources. Stop failed or unaffordable runs with evidence.

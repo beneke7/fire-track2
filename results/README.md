@@ -15,3 +15,22 @@ is a shareable preview. Current CPU and GPU trial findings, local evidence paths
 and solver-selection research are summarized in
 [`VOF_TRIALS_2026-09-27.md`](VOF_TRIALS_2026-09-27.md); full run bundles remain
 local and ignored.
+
+
+Latest inspected videos use cell-to-point interpolated alpha=0.5 geometry:
+
+| Video | Saved physical horizon | Playback | Orientation |
+| --- | --- | --- | --- |
+| [Corrected horizontal four-slot case](restas-horizontal-alpha50-100ms-100x.mp4) | 0–0.1 s | 100× slower, 11 s including final hold | +x horizontal |
+| [Longest available historical case](restas-legacy-downward-alpha50-1s-10x.mp4) | 0–1.0 s | 10× slower, 11 s including final hold | Legacy downward; predates outlet correction |
+
+Each video has matching `.json` provenance and a `.png` final-frame preview.
+Both begin with all air and hold the stored snapshots; no intermediate fluid
+states are fabricated. They are exploratory water-only fields, without modeled
+foam, ground deposition or a paper-validation claim. Rendering commands are
+recorded in the adjacent JSON files; raw fields remain local and ignored.
+
+[CL415 pilot diagnostics](cl415-pilot-2026-10-01.json) include actual structure
+counts, sampled mass balance, the digitized paper count for context, and the
+retained classification-recovery evidence. The assumed-geometry pilot has not
+reproduced the published structure count.

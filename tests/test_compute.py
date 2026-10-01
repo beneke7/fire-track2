@@ -112,6 +112,7 @@ def test_doctor_honors_parent_cgroup_cpu_and_memory_limits(tmp_path: Path, monke
     memory_limit, memory_current, _ = doctor._memory_cgroup()
     assert cpu["cgroup_quota_cores"] == 2
     assert cpu["effective"] <= 2
+    assert cpu["default_threads"] == cpu["effective"]
     assert memory_limit == 1024 * 1024 * 1024
     assert memory_current == 512 * 1024 * 1024
 
