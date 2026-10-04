@@ -705,7 +705,10 @@ def _write_dictionaries(
     mesh_details: dict[str, Any],
     ranks: int,
     patches: list[str],
+    snapshot_interval_s: float = SNAPSHOT_INTERVAL_S,
 ) -> float:
+    if not math.isfinite(snapshot_interval_s) or snapshot_interval_s <= 0:
+        raise ValueError("snapshot_interval_s must be finite and positive")
     (case_dir / "constant" / "g").write_text(
         foam_header("g", "uniformDimensionedVectorField", "constant")
         + "dimensions [0 1 -2 0 0 0 0];\nvalue (0 0 -9.81);\n",
@@ -732,7 +735,7 @@ def _write_dictionaries(
     )
     delta_t_s = min(1.0e-4, 0.25 * min_width / AIR_SPEED_M_S)
     maximum_delta_t_s = min(MAX_DELTA_T_S, 0.25 * min_width / AIR_SPEED_M_S)
-    write_interval = min(SNAPSHOT_INTERVAL_S, horizon_s)
+    write_interval = min(snapshot_interval_s, horizon_s)
     (case_dir / "system" / "controlDict").write_text(
         foam_header("controlDict", location="system")
         + "application interIsoFoam;\nstartFrom startTime;\nstartTime 0;\nstopAt endTime;\n"

@@ -393,15 +393,24 @@ def render(
             raise ValueError(f"No interpolated alpha.water={isosurface_alpha:g} isosurface found")
 
         inputs_path = run_dir / "inputs.json"
+        if not inputs_path.exists():
+            inputs_path = run_dir / "case" / "case-inputs.json"
         inputs_record = (
             json.loads(inputs_path.read_text(encoding="utf-8")) if inputs_path.is_file() else {}
         )
-        input_mesh_spacing = inputs_record.get("mesh_spacing_m")
+        input_mesh_spacing = inputs_record.get(
+            "mesh_spacing_m", inputs_record.get("local_spacing_m")
+        )
         if input_mesh_spacing is None:
-            raise ValueError("inputs.json must declare mesh_spacing_m for display sampling")
+            raise ValueError("case metadata must declare mesh_spacing_m or local_spacing_m")
         input_mesh_spacing = float(input_mesh_spacing)
         if not math.isfinite(input_mesh_spacing) or input_mesh_spacing <= 0.0:
             raise ValueError("mesh_spacing_m must be finite and positive")
+        if (
+            whitewater
+            and inputs_record.get("coarse_spacing_m", input_mesh_spacing) != input_mesh_spacing
+        ):
+            raise ValueError("inferred whitewater sampling currently requires a uniform mesh")
         kernel_h = (
             2.5 * input_mesh_spacing
             if whitewater_smoothing_length_m is None
@@ -520,9 +529,10 @@ def render(
         "coordinate_frame": inputs_record.get("coordinate_frame"),
         "domain_bounds_m": inputs_record.get("domain_bounds_m"),
         "mesh_shape": inputs_record.get("mesh_shape"),
-        "mesh_spacing_m": inputs_record.get("mesh_spacing_m"),
+        "mesh_spacing_m": input_mesh_spacing,
+        "spacing_note": "local display scale; native mesh geometry is used for water surfaces",
         "solver": inputs_record.get("solver"),
-        "turbulence_model": inputs_record.get("model"),
+        "turbulence_model": inputs_record.get("turbulence_model", inputs_record.get("model")),
         "source_velocity_m_s_each": inputs_record.get("source_velocity_m_s_each"),
         "source_velocity_evidence": inputs_record.get("source_velocity_evidence"),
         "source_duration_s": inputs_record.get("source_duration_s"),

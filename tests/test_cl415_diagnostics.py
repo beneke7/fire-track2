@@ -3,6 +3,7 @@
 import importlib.util
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -102,6 +103,28 @@ def test_openfoam_startup_trapping_message_is_not_a_failure():
     result = runner.solver_summary(log, 0.1)
     assert result["reached_requested_horizon"]
     assert not result["fatal_error_observed"]
+
+
+def test_dash8_runner_rejects_cl415_metadata_before_solver_launch(tmp_path, monkeypatch):
+    case = tmp_path / "wrong-aircraft"
+    case.mkdir()
+    (case / "case-inputs.json").write_text(json.dumps({"aircraft": "CL415", "ranks": 20}))
+    monkeypatch.setattr(runner, "ROOT", tmp_path)
+    args = SimpleNamespace(
+        run_id="wrong-aircraft-probe",
+        case_dir=case,
+        ranks=20,
+        memory_gib=96,
+        after_run_dir=None,
+        require_after_success=False,
+        expected_aircraft="Dash-8",
+    )
+    assert runner.run(args) == 1
+    manifest = json.loads(
+        (tmp_path / "results/runs/wrong-aircraft-probe/manifest.json").read_text()
+    )
+    assert "runner expects Dash-8" in manifest["error"]
+    assert "solver_started_utc" not in manifest
 
 
 @pytest.mark.parametrize("residual", [None, float("nan"), 2.0])

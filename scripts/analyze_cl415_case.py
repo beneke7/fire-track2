@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Native-cell CL415 cloud diagnostics; no smoothing or formal paper scoring."""
+"""Native-cell Calbrix cloud diagnostics; no smoothing or formal paper scoring."""
 
 from __future__ import annotations
 
@@ -183,7 +183,7 @@ def analyze(run_dir: Path, output_dir: Path) -> dict:
     output_dir.mkdir(parents=True, exist_ok=False)
     case = run_dir / "case"
     inputs = json.loads((case / "case-inputs.json").read_text())
-    marker = case / "cl415.foam"
+    marker = case / "nearfield.foam"
     marker.touch(exist_ok=True)
     reader = pv.OpenFOAMReader(str(marker))
     reader.disable_all_cell_arrays()
@@ -191,8 +191,13 @@ def analyze(run_dir: Path, output_dir: Path) -> dict:
     reader.enable_cell_array("U")
     report = {
         "classification": "Exploratory unsmoothed numerical diagnostics; not paper acceptance",
+        "case_id": inputs.get("case_id"),
+        "aircraft": inputs.get("aircraft", "CL415"),
         "coordinate_mapping": "paper y = simulation x - origin_x; downward z = origin_z - simulation z; transverse x = simulation y - origin_y",
         "source_origin_m": inputs["source_origin_m"],
+        "paper_origin_registration": inputs.get("coordinate_frame", {}).get(
+            "streamwise_origin_note", "assumed origin; paper-to-case registration is unverified"
+        ),
         "operator": "Full-cell threshold envelopes on native structured slabs; dimensions uncertain at cell scale",
         "native_coordinate_grouping_m": 1e-9,
         "structure_operator": "Face-connected native Cartesian cells, minimum one cell; VTK shared-point count as sensitivity; unpublished paper Matlab equivalence unverified",

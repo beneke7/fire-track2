@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preserve and execute a prepared, exploratory CL415 water-air case."""
+"""Preserve and execute a prepared, exploratory Calbrix water-air case."""
 
 from __future__ import annotations
 
@@ -147,12 +147,12 @@ def run(args: argparse.Namespace) -> int:
         "run_id": args.run_id,
         "started_utc": utc(),
         "status": "preparing",
-        "classification": "Exploratory simplified CL415; no E3 acceptance decision",
+        "classification": "Exploratory nearfield VOF; no paper acceptance decision",
         "allocation": {"ranks": args.ranks, "memory_gib": args.memory_gib},
         "solver_image": IMAGE,
         "after_run_dir": str(args.after_run_dir) if args.after_run_dir else None,
         "require_successful_pilot": args.require_after_success,
-        "pilot_stop_rule": "When required, missing diagnostics or sampled mass residual above 1% prevents the longer exploratory run; this is not E3 acceptance",
+        "pilot_stop_rule": "When required, missing diagnostics or sampled mass residual above 1% prevents the longer exploratory run; this is not paper acceptance",
         "runner_sha256": sha256(Path(__file__)),
     }
     save(manifest_path, manifest)
@@ -166,9 +166,16 @@ def run(args: argparse.Namespace) -> int:
         case = run_dir / "case"
         shutil.copytree(args.case_dir, case)
         inputs = json.loads((case / "case-inputs.json").read_text())
+        expected_aircraft = getattr(args, "expected_aircraft", None)
+        if expected_aircraft and inputs.get("aircraft") != expected_aircraft:
+            raise ValueError(f"runner expects {expected_aircraft} input metadata")
         if int(inputs["ranks"]) != args.ranks:
             raise ValueError("runner ranks must match the frozen prepared decomposition")
         manifest["inputs"] = inputs
+        manifest["classification"] = inputs.get(
+            "evidence_label", "Exploratory nearfield VOF; no paper acceptance decision"
+        )
+        manifest["case_id"] = inputs.get("case_id")
         shutil.copy2(Path(__file__), run_dir / "runner-snapshot.py")
         analyzer = ROOT / "scripts/analyze_cl415_case.py"
         shutil.copy2(analyzer, run_dir / "analyzer-snapshot.py")
@@ -349,7 +356,7 @@ def run(args: argparse.Namespace) -> int:
         save(manifest_path, manifest)
 
 
-def main() -> int:
+def main(*, expected_aircraft: str | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case-dir", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
@@ -361,6 +368,7 @@ def main() -> int:
     parser.add_argument("--require-after-success", action="store_true")
     parser.add_argument("--prepare-only", action="store_true")
     args = parser.parse_args()
+    args.expected_aircraft = expected_aircraft
     if not RUN_ID.fullmatch(args.run_id) or not 1 <= args.ranks <= 20:
         parser.error("invalid run id or ranks (1..20)")
     if args.memory_gib <= 0 or not 0 < args.timeout_s < float("inf"):

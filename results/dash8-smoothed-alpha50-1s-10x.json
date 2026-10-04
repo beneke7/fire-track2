@@ -1,0 +1,1311 @@
+{
+  "claim_limit": "Exploratory video of saved water-only VOF fields. The 0.50 surface is interpolated display geometry; playback holds stored states and does not create intermediate physics. This does not validate breakup, descent, deposition, foam behavior, or field performance.",
+  "inspection_frames": {
+    "end_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-010-t-1p000000s.png",
+    "middle_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-005-t-0p500000s.png",
+    "middle_simulation_time_s": 0.5,
+    "start_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-000-t-0s.png"
+  },
+  "label": "dash8-smoothed-10x",
+  "orientation": {
+    "coordinate_frame": {
+      "mesh": {
+        "x": "aircraft-frame streamwise axis; relative air flows in +x",
+        "y": "cross-track horizontal axis",
+        "z": "vertical upward; outlet flow and gravity act in -z"
+      },
+      "paper_frame_note": "The published component directions are figure-read; a formal right-handed basis and signed gravity vector are not stated in the paper.",
+      "paper_plot_transform": {
+        "paper_cross_track_x_m": "mesh_y_m - source_origin_m[1]",
+        "paper_downward_z_m": "source_plane_z_m - mesh_z_m",
+        "paper_streamwise_y_m": "mesh_x_m - source_origin_m[0]"
+      },
+      "source_origin_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_plane_z_m": 0.0,
+      "streamwise_origin_note": "The coordinate origin is placed at the center of the assumed opening by convention; the paper does not identify the source rectangle's streamwise leading edge or origin."
+    },
+    "historical_orientation_warning": null,
+    "operator_label": "Single belly opening | Failed run, saved interval only",
+    "source_velocity_m_s": null,
+    "source_velocity_m_s_each": null
+  },
+  "orientation_label": "Single belly opening | Failed run, saved interval only",
+  "physics_and_display": {
+    "alpha_source_is_saved_cell_field": true,
+    "case_file_sha256": {
+      "constant/polyMesh/boundary": "2a5c04d14d27b637d6241a07cea4c928a3f6e34a3bb716912be6a9dbb5e13d76",
+      "constant/polyMesh/faces": "eeb01a3938580826c7e88e25bf75cd7c3a0890f8dfae3ddc89ab23bb5876f42e",
+      "constant/polyMesh/neighbour": "34ce4241fd7d70a67cf4fe94dd2d4b247ff969c2f24a3fe01234f6318481d62f",
+      "constant/polyMesh/owner": "81d2baee3de1471c4a0639d7a35badedb4e7cefac3e9fce814e01205ac2232c7",
+      "constant/polyMesh/points": "87e13d7cd323f1fe9b326f46d64ac28b3845eb20bb8d88e366e8db77f061a9e8",
+      "constant/transportProperties": "3e6e89292583e53f61cee2e978792105d97a2974d6b4fae78ff53a2d98b877c4",
+      "constant/turbulenceProperties": "3d6d07a0492beced0a978de81b91cc1e86a17f4bb68c234341b3db93377d8fd2",
+      "system/controlDict": "10939f460e7b45cc860065a5a5c86b1c7fc5acb16cda59c08e8ff9d1b85ee5ee"
+    },
+    "computed_fields": [
+      "saved cell-centered alpha.water",
+      "water inventory from alpha.water times cell volume"
+    ],
+    "domain_bounds_from_inputs_m": {
+      "x": [
+        -3.0,
+        23.0
+      ],
+      "y": [
+        -10.0,
+        10.0
+      ],
+      "z": [
+        -31.0,
+        0.0
+      ]
+    },
+    "empty_t0_frame_preserved": true,
+    "foam_bubbles_mist_or_secondary_droplets_modeled": false,
+    "mesh_spacing_m": 0.08,
+    "reconstructed_mesh_bounds_m": [
+      -3.0,
+      23.0,
+      -10.0,
+      10.0,
+      -31.0,
+      0.0
+    ],
+    "solver": "interIsoFoam",
+    "surface_is_display_interpolation": true,
+    "surface_method": "cell_data_to_point_data(pass_cell_data=True), then linear contour at alpha.water=0.50, triangulate",
+    "surface_smoothing": {
+      "boundary_smoothing": false,
+      "changes_cell_alpha_or_water_inventory": false,
+      "iterations": 20,
+      "method": "Taubin windowed-sinc, display geometry only",
+      "pass_band": 0.1
+    },
+    "temporal_interpolation_or_extrapolation": false,
+    "turbulence_model": "standard k-epsilon RANS",
+    "water_only": true
+  },
+  "playback": {
+    "actual_saved_simulation_times_s": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "duration_s": 11.0,
+    "endpoint_hold_s": 1.0,
+    "fps": 30,
+    "maximum_actual_simulation_time_s": 1.0,
+    "schedule": [
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 0,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.1,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.1,
+        "simulation_time_s": 0.0
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 30,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.1,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.2,
+        "simulation_time_s": 0.1
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 60,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.3,
+        "simulation_time_s": 0.2
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 90,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.10000000000000003,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.4,
+        "simulation_time_s": 0.3
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 120,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.5,
+        "simulation_time_s": 0.4
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 150,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.6,
+        "simulation_time_s": 0.5
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 180,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.7,
+        "simulation_time_s": 0.6
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 210,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.10000000000000009,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.8,
+        "simulation_time_s": 0.7
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 240,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.9,
+        "simulation_time_s": 0.8
+      },
+      {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 270,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 1.0,
+        "simulation_time_s": 0.9
+      },
+      {
+        "endpoint_hold": true,
+        "frame_count": 30,
+        "frame_start_inclusive": 300,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.0,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 1.0,
+        "simulation_time_s": 1.0
+      }
+    ],
+    "slowdown_factor": 10.0,
+    "timestamp_rule": "each saved time snapshot is held through its following saved-time interval",
+    "total_frame_count": 330
+  },
+  "render": {
+    "anti_aliasing": "supersampling (SSAA)",
+    "camera": {
+      "focal_point_m": [
+        10.0,
+        0.0,
+        -15.5
+      ],
+      "mode": "fixed-isometric-parallel",
+      "parallel_scale_m": 23.368132146151524,
+      "physical_bounds_m": [
+        -3.0,
+        23.0,
+        -10.0,
+        10.0,
+        -31.0,
+        0.0
+      ],
+      "view_direction": [
+        -0.5773502691896258,
+        -0.5773502691896258,
+        -0.5773502691896258
+      ]
+    },
+    "ffmpeg_command": [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "warning",
+      "-nostdin",
+      "-framerate",
+      "30",
+      "-i",
+      "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/encode_frames/frame-%06d.png",
+      "-frames:v",
+      "330",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-threads",
+      "1",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/dash8-smoothed-10x.mp4"
+    ],
+    "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": {
+      "format": {
+        "duration": "11.000000",
+        "size": "147023"
+      },
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "duration": "11.000000",
+          "height": 1080,
+          "nb_frames": "330",
+          "r_frame_rate": "30/1",
+          "width": 1920
+        }
+      ]
+    },
+    "git": {
+      "dirty": true,
+      "revision": "550471dec035b0bc9ffdb2b72d24289880dff350"
+    },
+    "lighting": "smooth shaded computed alpha=0.50 isosurface",
+    "output_mp4": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/dash8-smoothed-10x.mp4",
+    "output_mp4_sha256": "416a0e4e376a56ff9b02ff4a05fcfb1f5c4ed88e8645813e700deaf201e95099",
+    "output_size_bytes": 147023,
+    "pixel_size": [
+      1920,
+      1080
+    ],
+    "pyvista_version": "0.49.0",
+    "render_script_sha256": "d1597fe6549fb65f520dfeee356b96d15fb94f69edbcabb70a0d96c5f89bb757",
+    "surface_color": "#2e91bd",
+    "vtk_version": "9.7.0"
+  },
+  "rendered_utc": "2026-10-04T15:37:13.564554+00:00",
+  "run": {
+    "case_classification": "exploratory source-limited approximation; not E2 validation",
+    "case_id": "E2_CALBRIX_DASH8_EXPLORATORY_NEARFIELD_SINGLE_OPENING",
+    "inputs": {
+      "air_speed_m_s": 50.0,
+      "aircraft": "Dash-8",
+      "analytic_expected_mass_by_source_kg": {
+        "dash8Opening": 15921.395999999999
+      },
+      "analytic_expected_mass_kg": 15921.395999999999,
+      "analytic_expected_momentum_impulse_by_source_N_s": {
+        "dash8Opening": [
+          0.0,
+          0.0,
+          -51271.64769599999
+        ]
+      },
+      "boundary_conditions": {
+        "airInlet": "x-min plane; fixed 50 m/s +x aircraft-relative air flow",
+        "open_boundaries": [
+          "airInlet",
+          "xOutlet",
+          "yMin",
+          "yMax",
+          "zMin"
+        ],
+        "source_flow_sign": "top patch outward normal is +z; prescribed velocity is -z and enters the domain",
+        "top_belly": "flat slip wall over the top plane except for the single source rectangle; no aircraft or tank CAD geometry"
+      },
+      "case_id": "E2_CALBRIX_DASH8_EXPLORATORY_NEARFIELD_SINGLE_OPENING",
+      "coarse_spacing_m": 0.6,
+      "coordinate_frame": {
+        "mesh": {
+          "x": "aircraft-frame streamwise axis; relative air flows in +x",
+          "y": "cross-track horizontal axis",
+          "z": "vertical upward; outlet flow and gravity act in -z"
+        },
+        "paper_frame_note": "The published component directions are figure-read; a formal right-handed basis and signed gravity vector are not stated in the paper.",
+        "paper_plot_transform": {
+          "paper_cross_track_x_m": "mesh_y_m - source_origin_m[1]",
+          "paper_downward_z_m": "source_plane_z_m - mesh_z_m",
+          "paper_streamwise_y_m": "mesh_x_m - source_origin_m[0]"
+        },
+        "source_origin_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_plane_z_m": 0.0,
+        "streamwise_origin_note": "The coordinate origin is placed at the center of the assumed opening by convention; the paper does not identify the source rectangle's streamwise leading edge or origin."
+      },
+      "domain_bounds_m": {
+        "x": [
+          -3.0,
+          23.0
+        ],
+        "y": [
+          -10.0,
+          10.0
+        ],
+        "z": [
+          -31.0,
+          0.0
+        ]
+      },
+      "domain_placement_assumption": "Selected computational bounds are {'x': [-3.0, 23.0], 'y': [-10.0, 10.0], 'z': [-31.0, 0.0]} m; the top source plane is at z=0 m. The reported nearfield dimensions are 26 x 20 x 31 m. The outlet-to-boundary distances and source placement are assumed.",
+      "evidence_label": "exploratory source-limited approximation; not E2 validation",
+      "fluid_properties": {
+        "air": {
+          "evidence": "assumed; numeric E2 air properties are absent from the paper",
+          "mu_Pa_s": 1.8e-05,
+          "rho_kg_m3": 1.2
+        },
+        "surface_tension_N_m": 0.0,
+        "surface_tension_evidence": "set to zero to match the paper's omitted momentum term; applicability on this mesh is unverified",
+        "water": {
+          "evidence": "reported, E2 source record PDF p. 5 / journal p. 1519",
+          "mu_Pa_s": 0.001,
+          "rho_kg_m3": 1000.0
+        }
+      },
+      "gravity_m_s2": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "horizon_s": 5.0,
+      "input_hashes": {
+        "cl415_helper_module_sha256": "c3379e8498173ec923e5a7d071f74e58c53c6ec205a0fd1694feaefa2a058e04",
+        "e2_source_record_sha256": "61ec860e3a30a36a051757801386d24ee9a756b41bd1f69a02004e33346eb1bf",
+        "fig4_independent_csv_sha256": "fd4791bf79e39e2dbd3261af59c96b13d731b2a0a6ce4fe5450092aa2c1d7f0b",
+        "fig4_primary_csv_sha256": "b43f2ee1220182cca532c290a0d265a5d6f382eb6025b9b7689216fea8f6c332",
+        "prepare_case_sha256": "cea61aa0a21a757d4ca4e24529a7b85ea3d34b6e433a8fbd753ca81f4084129a",
+        "source_geometry_sha256": "867cd1f1f7e2594e326828af8f158b78994b7ba00b4acbe4655cad900938495d"
+      },
+      "intended_diagnostic": "exploratory E2 nearfield VOF run; compare alpha>=0.001 cloud and alpha>=0.9 core morphology at available paper times; no ground deposition",
+      "local_spacing_m": 0.08,
+      "mesh_breaks_m": {
+        "x": [
+          -3.0,
+          -2.5,
+          -2.22,
+          2.22,
+          4.0,
+          23.0
+        ],
+        "y": [
+          -10.0,
+          -1.5,
+          -0.15,
+          0.15,
+          1.5,
+          10.0
+        ],
+        "z": [
+          -31.0,
+          -3.0,
+          0.0
+        ]
+      },
+      "mesh_cells_expected": 670480,
+      "mesh_cells_per_segment": {
+        "x": [
+          1,
+          4,
+          56,
+          23,
+          32
+        ],
+        "y": [
+          15,
+          17,
+          4,
+          17,
+          15
+        ],
+        "z": [
+          47,
+          38
+        ]
+      },
+      "mesh_shape": {
+        "x": 116,
+        "y": 68,
+        "z": 85
+      },
+      "mesh_widths_by_segment_m": {
+        "x": [
+          0.5,
+          0.06999999999999995,
+          0.07928571428571429,
+          0.07739130434782608,
+          0.59375
+        ],
+        "y": [
+          0.5666666666666667,
+          0.07941176470588236,
+          0.075,
+          0.07941176470588236,
+          0.5666666666666667
+        ],
+        "z": [
+          0.5957446808510638,
+          0.07894736842105263
+        ]
+      },
+      "open_patches": [
+        "airInlet",
+        "xOutlet",
+        "yMin",
+        "yMax",
+        "zMin"
+      ],
+      "openfoam_image": "opencfd/openfoam-default:2512",
+      "provenance": {
+        "cl415_helper_module_sha256": "c3379e8498173ec923e5a7d071f74e58c53c6ec205a0fd1694feaefa2a058e04",
+        "dirty": true,
+        "e2_source_record_sha256": "61ec860e3a30a36a051757801386d24ee9a756b41bd1f69a02004e33346eb1bf",
+        "fig4_independent_csv_sha256": "fd4791bf79e39e2dbd3261af59c96b13d731b2a0a6ce4fe5450092aa2c1d7f0b",
+        "fig4_primary_csv_sha256": "b43f2ee1220182cca532c290a0d265a5d6f382eb6025b9b7689216fea8f6c332",
+        "prepare_case_sha256": "cea61aa0a21a757d4ca4e24529a7b85ea3d34b6e433a8fbd753ca81f4084129a",
+        "revision": "550471dec035b0bc9ffdb2b72d24289880dff350",
+        "source_artifacts_relative_paths": {
+          "e2_source_record": "source/E2_CALBRIX_SOURCE.md",
+          "fig4_independent_csv": "source/calbrix_dash8_fig4_velocity_independent.csv",
+          "fig4_primary_csv": "source/calbrix_dash8_fig4_velocity.csv"
+        },
+        "source_geometry_sha256": "867cd1f1f7e2594e326828af8f158b78994b7ba00b4acbe4655cad900938495d"
+      },
+      "ranks": 20,
+      "refinement_covers_all_source_faces": true,
+      "refinement_region_m": {
+        "x": [
+          -2.5,
+          4.0
+        ],
+        "y": [
+          -1.5,
+          1.5
+        ],
+        "z": [
+          -3.0,
+          0.0
+        ]
+      },
+      "resources": {
+        "mpi_ranks": 20,
+        "starting_allocation_only": true
+      },
+      "scope_limitations": [
+        "single 4.44 m by 0.3 m rectangle is provisional; the default candidate uses Fig. 2 labels, but the paper gives no numerical exit area",
+        "the pictured 0.10 m bottom feature is not treated as an aperture gap",
+        "the digitized U_L(t) may be maximum velocity while the paper also defines U_L=Q_L/S as mean; this discrepancy is unresolved",
+        "one uniform scalar speed is assigned over the assumed patch because pointwise exit profiles are unavailable",
+        "the t=5 s digitized endpoint remains nonzero; this case does not append a shutoff, an extrapolated tail, or a claimed completed discharge",
+        "no tank or aircraft geometry, rotor wake, foam, parcels, evaporation, ground impact, fire, or deposition",
+        "air properties, gravity, turbulence boundary values, surface-tension omission, wall slip, and open boundaries are assumptions where not numerically specified",
+        "the case is exploratory and cannot establish E2 validation, field performance, suppression, or design gain"
+      ],
+      "solver": "interIsoFoam",
+      "source_geometry": {
+        "geometry_evidence": "provisional figure-derived candidate inference: Fig. 2 labels 4.44 m for the narrow lower section and 0.30 m for a bottom projection; the article does not identify these labels as aperture dimensions or report exit area",
+        "schema_version": 1,
+        "source_origin_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_plane_z_m": 0.0,
+        "sources": [
+          {
+            "area_m2": 1.332,
+            "bounds_m": {
+              "x": [
+                -2.22,
+                2.22
+              ],
+              "y": [
+                -0.15,
+                0.15
+              ]
+            },
+            "center_x_m": 0.0,
+            "center_y_m": 0.0,
+            "discharge_direction_unit": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "history": "dash8",
+            "length_x_m": 4.44,
+            "name": "dash8Opening",
+            "plane_z_m": 0.0,
+            "width_y_m": 0.3
+          }
+        ],
+        "unused_figure_dimension_note": "Fig. 2 also shows a 0.10 m bottom feature; it is not interpreted as an aperture gap"
+      },
+      "source_geometry_assumption": {
+        "0_10_m_dimension": "pictured bottom feature; not used as aperture height or gap",
+        "area_m2": 1.332,
+        "direction_evidence": "assumed vertical downward discharge from belly into domain",
+        "direction_unit": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "evidence_class": "provisional figure-derived candidate inference, not a reported aperture",
+        "evidence_location": "Calbrix et al. (2023), Fig. 2(b-c), PDF p. 4 / journal p. 1518",
+        "length_x_m": 4.44,
+        "mapping": "4.44 m narrow lower-section label and 0.30 m bottom-projection width label are provisionally mapped to one opening; the source does not establish that mapping",
+        "opening_count": 1,
+        "shape": "single longitudinal rectangle",
+        "source_center_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_profile": "uniform over the rectangle; no spatially varying profile is published",
+        "width_y_m": 0.3
+      },
+      "source_histories": {
+        "dash8": {
+          "analytic_expected_by_source": {
+            "dash8Opening": {
+              "analytic_expected_mass_kg": 15921.395999999999,
+              "analytic_expected_momentum_impulse_N_s": [
+                0.0,
+                0.0,
+                -51271.64769599999
+              ],
+              "analytic_expected_volume_m3": 15.921396,
+              "integral_speed_m": 11.953,
+              "integral_speed_squared_m2_s": 38.492228,
+              "source_area_m2": 1.332
+            }
+          },
+          "analytic_expected_mass_kg": 15921.395999999999,
+          "analytic_expected_momentum_impulse_N_s": [
+            0.0,
+            0.0,
+            -51271.64769599999
+          ],
+          "analytic_expected_volume_m3": 15.921396,
+          "curve_quantity": "digitized scalar U_L(t); paper defines U_L=Q_L/S as mean but Fig. 4 caption/results call the plotted quantity maximum velocity",
+          "digitized_endpoint_speed_m_s": 0.074,
+          "figure_legend": "blue Dash-8 curve",
+          "figure_read_allowances": {
+            "status": "heuristic raster-read allowances, not paper uncertainty",
+            "time_s": "copied unchanged from the CSV; about 0.03 s",
+            "velocity_m_s": "copied unchanged from the CSV; varies from about 0.10 to 0.20 m/s"
+          },
+          "history_support_s": [
+            0.0,
+            5.0
+          ],
+          "horizon_s": 5.0,
+          "independent_read": {
+            "source_artifact": "source/calbrix_dash8_fig4_velocity_independent.csv",
+            "status": "second raster implementation copied as provenance; not blended into primary history"
+          },
+          "integration_method": "exact trapezoidal integral of the piecewise-linear speed history",
+          "interpolation": "piecewise linear between primary digitized samples",
+          "mapping": "one uniform scalar speed on one assumed outlet rectangle",
+          "samples_used_m_s": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.1,
+              2.29
+            ],
+            [
+              0.2,
+              3.668
+            ],
+            [
+              0.3,
+              4.425
+            ],
+            [
+              0.4,
+              4.693
+            ],
+            [
+              0.5,
+              4.677
+            ],
+            [
+              0.6,
+              4.567
+            ],
+            [
+              0.7,
+              4.401
+            ],
+            [
+              0.8,
+              4.249
+            ],
+            [
+              0.9,
+              4.078
+            ],
+            [
+              1.0,
+              3.947
+            ],
+            [
+              1.1,
+              3.815
+            ],
+            [
+              1.2,
+              3.684
+            ],
+            [
+              1.3,
+              3.557
+            ],
+            [
+              1.4,
+              3.463
+            ],
+            [
+              1.5,
+              3.389
+            ],
+            [
+              1.6,
+              3.316
+            ],
+            [
+              1.7,
+              3.247
+            ],
+            [
+              1.8,
+              3.171
+            ],
+            [
+              1.9,
+              3.121
+            ],
+            [
+              2.0,
+              3.068
+            ],
+            [
+              2.1,
+              2.924
+            ],
+            [
+              2.2,
+              2.808
+            ],
+            [
+              2.3,
+              3.026
+            ],
+            [
+              2.4,
+              2.719
+            ],
+            [
+              2.5,
+              2.619
+            ],
+            [
+              2.6,
+              2.495
+            ],
+            [
+              2.7,
+              2.408
+            ],
+            [
+              2.8,
+              2.301
+            ],
+            [
+              2.9,
+              2.24
+            ],
+            [
+              3.0,
+              2.19
+            ],
+            [
+              3.1,
+              2.156
+            ],
+            [
+              3.2,
+              2.119
+            ],
+            [
+              3.3,
+              2.043
+            ],
+            [
+              3.4,
+              1.972
+            ],
+            [
+              3.5,
+              1.933
+            ],
+            [
+              3.6,
+              1.77
+            ],
+            [
+              3.7,
+              1.714
+            ],
+            [
+              3.8,
+              1.433
+            ],
+            [
+              3.9,
+              1.236
+            ],
+            [
+              4.0,
+              0.805
+            ],
+            [
+              4.1,
+              0.486
+            ],
+            [
+              4.2,
+              0.313
+            ],
+            [
+              4.3,
+              0.239
+            ],
+            [
+              4.4,
+              0.192
+            ],
+            [
+              4.5,
+              0.15
+            ],
+            [
+              4.6,
+              0.121
+            ],
+            [
+              4.7,
+              0.082
+            ],
+            [
+              4.8,
+              0.089
+            ],
+            [
+              4.9,
+              0.084
+            ],
+            [
+              5.0,
+              0.074
+            ]
+          ],
+          "series_id": "dash8_blue",
+          "source_artifact": "source/calbrix_dash8_fig4_velocity.csv",
+          "source_endpoint_policy": "no forced shutoff at the horizon; the primary curve is still 0.074 m/s at 5.0 s",
+          "source_patch_areas_m2": {
+            "dash8Opening": 1.332
+          },
+          "spatial_profile_assumption": "uniform profile; pointwise velocity profile is unavailable",
+          "zero_at_t0": "t=0, U_L=0 is explicitly present in the primary digitization"
+        }
+      },
+      "source_origin_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_patch_areas_m2": {
+        "dash8Opening": 1.332
+      },
+      "source_patch_macro_face_counts": {
+        "dash8Opening": 1
+      },
+      "source_patches": [
+        "dash8Opening"
+      ],
+      "time_controls": {
+        "adaptive": true,
+        "end_s": 5.0,
+        "initial_delta_t_s": 0.0001,
+        "max_Co": 0.3,
+        "max_alpha_Co": 0.15,
+        "max_delta_t_s": 0.0003499999999999998,
+        "requested_snapshot_interval_s": 0.1,
+        "snapshot_interval_s": 0.1
+      },
+      "turbulence_assumptions": {
+        "air_length_scale_m": 0.05,
+        "air_turbulence_epsilon_m2_s3": 94.33411780077238,
+        "air_turbulence_k_m2_s2": 9.375,
+        "intensity": 0.05,
+        "source_turbulence_epsilon_m2_s3": 0.16300935555973473,
+        "source_turbulence_k_m2_s2": 0.13500000000000004,
+        "status": "assumed; E2 inlet turbulence values are not fully reported",
+        "water_length_scale_m": 0.05
+      },
+      "turbulence_model": "standard k-epsilon RANS"
+    },
+    "inputs_sha256": "b4eb029347a0b1e2cfdbbc6ba18297fc40aa65d5011c345ed5165de7087542e9",
+    "run_directory": "/home/v/proj/bene/fire-track2/results/runs/dash8-recovery-20261004T173700Z",
+    "run_exit_code": 1,
+    "run_finished_utc": "2026-10-01T23:34:54.512653+00:00",
+    "run_git_revision": "550471dec035b0bc9ffdb2b72d24289880dff350",
+    "run_git_worktree_dirty": null,
+    "run_id": "dash8-economy-overnight-20261001T210320Z",
+    "run_manifest_sha256": "5da0abbf6c5429df746715db2603d6105ee5b17a0e2e061aa567bb77c3eee11c",
+    "run_started_utc": "2026-10-01T21:16:40.591443+00:00",
+    "run_status": "failed_or_incomplete",
+    "solver_image": "opencfd/openfoam-default:2512"
+  },
+  "schema": "vof-saved-snapshot-animation/v1",
+  "snapshots": [
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        0.0
+      ],
+      "alpha_water_sha256": "6da2460f71fc8f50bf66f24c682ef677c1a63576969a41e340feccdc79823bf1",
+      "display_point_alpha_range": null,
+      "display_surface_bounds_m": null,
+      "display_surface_point_count": 0,
+      "display_surface_triangle_count": 0,
+      "empty_water_field": true,
+      "simulation_time_s": 0.0,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-000-t-0s.png",
+      "snapshot_png_sha256": "6341e7760bc1fda1707a5230c948288eb695601254d398bfe2b7a0b32db3ebc5",
+      "time_directory": "0",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 0,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.1,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.1,
+        "simulation_time_s": 0.0
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 0.0
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "a565dc138b4a7d1536349489ceb24189c6df3f946311330eb7812985f488bf07",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.1900103092193604,
+        2.2502076625823975,
+        -0.17043736577033997,
+        0.17044639587402344,
+        -0.12982293963432312,
+        1.429446854217531e-07
+      ],
+      "display_surface_point_count": 512,
+      "display_surface_triangle_count": 900,
+      "empty_water_field": false,
+      "simulation_time_s": 0.1,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-001-t-0p100000s.png",
+      "snapshot_png_sha256": "7d19e61ec9646d75a3d316b435933e3ec3777d81e93839f33e0a3a333a13f681",
+      "time_directory": "0.100000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 30,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.1,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.2,
+        "simulation_time_s": 0.1
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 0.1519873994934825
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "c37c023eefd150be95ac990a09f5a0dacafdefcb2b844b2c65a59475fd7fc882",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.218801498413086,
+        2.269660711288452,
+        -0.2018686980009079,
+        0.20292438566684723,
+        -0.42411696910858154,
+        4.163221092312597e-07
+      ],
+      "display_surface_point_count": 894,
+      "display_surface_triangle_count": 1664,
+      "empty_water_field": false,
+      "simulation_time_s": 0.2,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-002-t-0p200000s.png",
+      "snapshot_png_sha256": "acff821fccbb260c575549b5f5042e95b6e1c09702b4b4669ad1d6a5ab9c23ba",
+      "time_directory": "0.200000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 60,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.3,
+        "simulation_time_s": 0.2
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 0.5485075645655487
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "f806994e87cd48d3bbddb33347ce192bb5ab2029a9f54499872370fe0a83e5ae",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.2185728549957275,
+        2.321211099624634,
+        -0.2673286199569702,
+        0.2688171863555908,
+        -0.8251891136169434,
+        8.370089403797465e-07
+      ],
+      "display_surface_point_count": 1752,
+      "display_surface_triangle_count": 3380,
+      "empty_water_field": false,
+      "simulation_time_s": 0.3,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-003-t-0p300000s.png",
+      "snapshot_png_sha256": "319bdd89417c749ede9f39009ad186c8a49a39593eed86b51099c0e913c79dd0",
+      "time_directory": "0.300000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 90,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.10000000000000003,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.4,
+        "simulation_time_s": 0.3
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 1.087358480373073
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "9c02ea8634486801ddeac77150c121ff0afdfdf95856c3064a7e6853708bc75d",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.2176458835601807,
+        2.403571128845215,
+        -0.3750966191291809,
+        0.37317585945129395,
+        -1.316179633140564,
+        1.2695962823272566e-06
+      ],
+      "display_surface_point_count": 2519,
+      "display_surface_triangle_count": 4912,
+      "empty_water_field": false,
+      "simulation_time_s": 0.4,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-004-t-0p400000s.png",
+      "snapshot_png_sha256": "eadb334e98d10e434d3bcf210998fdb456d49e9f1b68843e8176bd1bbdf347e9",
+      "time_directory": "0.400000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 120,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.5,
+        "simulation_time_s": 0.4
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 1.6945704118730418
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "38f2f30423ab6a85a7ebe07708f6a4a8cc5eed1e2d13bf160f907be5e4b2c2e7",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.2169313430786133,
+        2.541486978530884,
+        -0.5117514729499817,
+        0.5113375782966614,
+        -1.9165440797805786,
+        1.9307360616949154e-06
+      ],
+      "display_surface_point_count": 3635,
+      "display_surface_triangle_count": 7152,
+      "empty_water_field": false,
+      "simulation_time_s": 0.5,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-005-t-0p500000s.png",
+      "snapshot_png_sha256": "2f0bfb25a73952153c600c1486ea5b4df855f1e499250ba37d99e24833979686",
+      "time_directory": "0.500000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 150,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.6,
+        "simulation_time_s": 0.5
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 2.318615116073892
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "dcce4e0dd820efab8085c1b69efc8f3e7071946d96cf179fc81511d21dfa9872",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.216505289077759,
+        2.638620138168335,
+        -0.7276913523674011,
+        0.7247279286384583,
+        -2.6252307891845703,
+        2.5965023269236553e-06
+      ],
+      "display_surface_point_count": 4987,
+      "display_surface_triangle_count": 9848,
+      "empty_water_field": false,
+      "simulation_time_s": 0.6,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-006-t-0p600000s.png",
+      "snapshot_png_sha256": "4952bbd677fc770fb07152a16a82842fc057c9d1b46c6f8396573962a46c8b40",
+      "time_directory": "0.600000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 180,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.7,
+        "simulation_time_s": 0.6
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 2.934282224410592
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "9c978be424181923f59a9995114436cc4c2adbc360df5e23b2399c38592741a8",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.216097831726074,
+        2.706871747970581,
+        -1.0232226848602295,
+        1.023192048072815,
+        -3.491914749145508,
+        4.0653799260326196e-06
+      ],
+      "display_surface_point_count": 5835,
+      "display_surface_triangle_count": 11504,
+      "empty_water_field": false,
+      "simulation_time_s": 0.7,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-007-t-0p700000s.png",
+      "snapshot_png_sha256": "1269331751b787fdd419c17444ae57eb38825df2262819b80b3c0241bfa5a274",
+      "time_directory": "0.700000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 210,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.10000000000000009,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.8,
+        "simulation_time_s": 0.7
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 3.531574899289244
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "7b1cda72172417ed32184a487aa13042df8e4a5a54397907a02ac90cd3836561",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.215949296951294,
+        2.471247673034668,
+        -1.353666067123413,
+        1.2836830615997314,
+        -4.76778507232666,
+        5.0145963541581295e-06
+      ],
+      "display_surface_point_count": 5871,
+      "display_surface_triangle_count": 11544,
+      "empty_water_field": false,
+      "simulation_time_s": 0.8,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-008-t-0p800000s.png",
+      "snapshot_png_sha256": "7d0ee98fc5b31eb119ec18cfa82a8714a4cdfca6da16ded16d05c8269dbc6ea7",
+      "time_directory": "0.800000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 240,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 0.9,
+        "simulation_time_s": 0.8
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 4.1076864661944565
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "0b7c03fb810cc54edb6ca15e7444c164b7a6ad5c60d149470708217eb6260fa0",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.2157363891601562,
+        2.6223275661468506,
+        -1.1062533855438232,
+        1.1924220323562622,
+        -5.584667682647705,
+        5.330086423782632e-06
+      ],
+      "display_surface_point_count": 6159,
+      "display_surface_triangle_count": 12120,
+      "empty_water_field": false,
+      "simulation_time_s": 0.9,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-009-t-0p900000s.png",
+      "snapshot_png_sha256": "0566de40474337c9e68ba439d16d6dc5f5b460db30f37042bc625782df1574ba",
+      "time_directory": "0.900000",
+      "timing": {
+        "endpoint_hold": false,
+        "frame_count": 30,
+        "frame_start_inclusive": 270,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.09999999999999998,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 1.0,
+        "simulation_time_s": 0.9
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 4.660178642137476
+    },
+    {
+      "alpha_water_cell_value_range": [
+        0.0,
+        1.0
+      ],
+      "alpha_water_sha256": "5f88f7179e354b6557a3c33b07490ccecdec77be32ebb9b864e581ebace9b3cb",
+      "display_point_alpha_range": [
+        0.0,
+        1.0
+      ],
+      "display_surface_bounds_m": [
+        -2.215937852859497,
+        2.703392505645752,
+        -1.201562762260437,
+        1.3452736139297485,
+        -6.744319915771484,
+        6.4925629885692615e-06
+      ],
+      "display_surface_point_count": 6429,
+      "display_surface_triangle_count": 12568,
+      "empty_water_field": false,
+      "simulation_time_s": 1.0,
+      "snapshot_png": "/home/v/proj/bene/fire-track2/results/runs/dash8-smoothed-render-20261004T174000Z/snapshots/snapshot-010-t-1p000000s.png",
+      "snapshot_png_sha256": "481f8bbaf6fb3e2667f3cf19a40eb864f4e889625f4fa9e599e4d3aa3b2ab3b6",
+      "time_directory": "1.000000",
+      "timing": {
+        "endpoint_hold": true,
+        "frame_count": 30,
+        "frame_start_inclusive": 300,
+        "playback_duration_s": 1.0,
+        "represented_simulation_interval_s": 0.0,
+        "sampling": "hold_saved_snapshot; no temporal interpolation or extrapolation",
+        "simulation_interval_end_s": 1.0,
+        "simulation_time_s": 1.0
+      },
+      "volume_cell_count": 670480,
+      "water_inventory_m3_from_cell_alpha_times_volume": 5.190410380863896
+    }
+  ]
+}

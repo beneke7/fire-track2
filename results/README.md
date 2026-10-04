@@ -34,3 +34,15 @@ recorded in the adjacent JSON files; raw fields remain local and ignored.
 counts, sampled mass balance, the digitized paper count for context, and the
 retained classification-recovery evidence. The assumed-geometry pilot has not
 reproduced the published structure count.
+
+The Dash-8 five-second attempt failed at 1.039547 s. Complete checkpoints
+through 1.0 s were recovered and inspected. The [smoothed close-up video](dash8-smoothed-alpha50-1s-10x-closeup.mp4)
+and [full-domain video](dash8-smoothed-alpha50-1s-10x.mp4) cover 0–1.0 s at
+10× slowdown: 1080p, 30 fps, 11 s including the final hold. Each has matching
+JSON provenance and a PNG final-frame preview. Surface smoothing changes only
+the display; the saved cell fractions and mass diagnostics are unchanged.
+
+The [paper comparison plot](dash8-paper-comparison-2026-10-04.png) and
+[comparison data](dash8-paper-comparison-2026-10-04.json) show substantial
+discrepancies under provisional geometry and unverified coordinate registration.
+These partial, exploratory results do not establish paper reproduction.

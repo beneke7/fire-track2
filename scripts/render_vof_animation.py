@@ -202,18 +202,22 @@ def _make_frame(
     slowdown: float,
     alpha_max: float,
     empty_field: bool,
+    smoothing_iterations: int = 0,
+    view_bounds: tuple[float, float, float, float, float, float] | None = None,
 ) -> dict[str, Any]:
     plotter = pyvista_module.Plotter(off_screen=True, window_size=window_size)
     try:
         plotter.set_background("#f7f9fc")
-        plotter.add_mesh(
-            pyvista_module.Cube(bounds=camera_bounds),
-            color="#cad3df",
-            style="wireframe",
-            line_width=0.7,
-            opacity=0.75,
-            reset_camera=False,
-        )
+        plotter.enable_anti_aliasing("ssaa")
+        if view_bounds is None:
+            plotter.add_mesh(
+                pyvista_module.Cube(bounds=camera_bounds),
+                color="#cad3df",
+                style="wireframe",
+                line_width=0.7,
+                opacity=0.75,
+                reset_camera=False,
+            )
         if surface is not None:
             plotter.add_mesh(
                 surface,
@@ -222,13 +226,15 @@ def _make_frame(
                 smooth_shading=True,
                 ambient=0.42,
                 diffuse=0.76,
-                specular=0.28,
+                specular=0.08,
                 specular_power=28,
                 show_edges=False,
                 reset_camera=False,
             )
         plotter.add_axes(xlabel="x [m]", ylabel="y [m]", zlabel="z [m]")
-        camera_record = _fixed_isometric_camera(plotter, camera_bounds, window_size)
+        camera_record = _fixed_isometric_camera(
+            plotter, view_bounds if view_bounds is not None else camera_bounds, window_size
+        )
         plotter.add_text(
             f"{title}\n{orientation_label}",
             position="upper_left",
@@ -254,7 +260,12 @@ def _make_frame(
             )
         plotter.add_text(
             "Computed water VOF | display surface: cell-to-point interpolated alpha.water = 0.50\n"
-            "Water only; no foam, bubbles, inferred mist, or temporal interpolation",
+            + (
+                f"Display-only surface smoothing: {smoothing_iterations} iterations | "
+                if smoothing_iterations
+                else ""
+            )
+            + "Water only; no temporal interpolation",
             position="lower_left",
             font_size=12,
             color="#26344a",
@@ -299,6 +310,9 @@ def render(
     width: int = 1600,
     height: int = 900,
     endpoint_hold_s: float = 1.0,
+    surface_smoothing_iterations: int = 0,
+    surface_smoothing_pass_band: float = 0.1,
+    camera_bounds_override: tuple[float, float, float, float, float, float] | None = None,
 ) -> dict[str, Any]:
     """Render one water-only video and write a provenance record beside it."""
     try:
@@ -311,6 +325,21 @@ def render(
 
     if not re.fullmatch(r"[A-Za-z0-9_-]+", label):
         raise ValueError("label may contain only letters, numbers, underscores, and hyphens")
+    if (
+        isinstance(surface_smoothing_iterations, bool)
+        or not isinstance(surface_smoothing_iterations, int)
+        or surface_smoothing_iterations < 0
+    ):
+        raise ValueError("surface smoothing iterations must be a nonnegative integer")
+    if not math.isfinite(surface_smoothing_pass_band) or not 0 < surface_smoothing_pass_band < 2:
+        raise ValueError("surface smoothing pass band must be finite and between 0 and 2")
+    if camera_bounds_override is not None:
+        if (
+            len(camera_bounds_override) != 6
+            or not all(math.isfinite(value) for value in camera_bounds_override)
+            or any(camera_bounds_override[i] >= camera_bounds_override[i + 1] for i in (0, 2, 4))
+        ):
+            raise ValueError("camera bounds must contain six finite increasing axis limits")
     if not orientation_label.strip() or "\n" in orientation_label or "\r" in orientation_label:
         raise ValueError("orientation label must be one nonempty line")
     if isinstance(width, bool) or isinstance(height, bool) or width < 2 or height < 2:
@@ -334,6 +363,8 @@ def render(
     points_path = case_dir / "constant" / "polyMesh" / "points"
     control_dict_path = case_dir / "system" / "controlDict"
     inputs_path = run_dir / "inputs.json"
+    if not inputs_path.exists():
+        inputs_path = run_dir / "case" / "case-inputs.json"
     manifest_path = run_dir / "manifest.json"
     for required in (points_path, control_dict_path, inputs_path, manifest_path):
         if not required.is_file():
@@ -451,6 +482,19 @@ def render(
                 ).triangulate()
                 if surface.n_points == 0 or surface.n_cells == 0:
                     surface = None
+                elif surface_smoothing_iterations:
+                    surface = surface.smooth_taubin(
+                        n_iter=surface_smoothing_iterations,
+                        pass_band=surface_smoothing_pass_band,
+                        boundary_smoothing=False,
+                        feature_smoothing=False,
+                        normalize_coordinates=True,
+                        inplace=False,
+                    )
+                    if not np.isfinite(np.asarray(surface.points)).all():
+                        raise ValueError(
+                            f"display smoothing produced nonfinite points at t={time_s:g}"
+                        )
 
             snapshot_path = (
                 snapshots_dir
@@ -468,6 +512,8 @@ def render(
                 slowdown=slowdown,
                 alpha_max=float(alpha.max()),
                 empty_field=bool(np.max(np.abs(alpha)) <= 1e-12),
+                smoothing_iterations=surface_smoothing_iterations,
+                view_bounds=camera_bounds_override,
             )
             snapshot_records.append(
                 {
@@ -576,6 +622,7 @@ def render(
             "run_git_revision": manifest.get("git_revision"),
             "run_git_worktree_dirty": manifest.get("git_worktree_dirty"),
             "run_exit_code": manifest.get("exit_code", manifest.get("case_command_exit_code")),
+            "run_status": manifest.get("status"),
             "solver_image": manifest.get("solver_image") or inputs.get("openfoam_image"),
             "run_manifest_sha256": _sha256(manifest_path),
             "inputs_sha256": _sha256(inputs_path),
@@ -597,7 +644,7 @@ def render(
         "physics_and_display": {
             "solver": inputs.get("solver"),
             "turbulence_model": inputs.get("turbulence_model") or inputs.get("model"),
-            "mesh_spacing_m": inputs.get("mesh_spacing_m")
+            "mesh_spacing_m": inputs.get("mesh_spacing_m", inputs.get("local_spacing_m"))
             or inputs.get("finest_interface_cell_spacing_m")
             or inputs.get("mesh_cell_width_m"),
             "domain_bounds_from_inputs_m": inputs.get("domain_bounds_m"),
@@ -605,6 +652,13 @@ def render(
             "case_file_sha256": case_file_hashes,
             "surface_method": "cell_data_to_point_data(pass_cell_data=True), then linear contour at alpha.water=0.50, triangulate",
             "surface_is_display_interpolation": True,
+            "surface_smoothing": {
+                "method": "Taubin windowed-sinc, display geometry only",
+                "iterations": surface_smoothing_iterations,
+                "pass_band": surface_smoothing_pass_band,
+                "boundary_smoothing": False,
+                "changes_cell_alpha_or_water_inventory": False,
+            },
             "alpha_source_is_saved_cell_field": True,
             "computed_fields": [
                 "saved cell-centered alpha.water",
@@ -639,8 +693,11 @@ def render(
             "output_size_bytes": video_path.stat().st_size,
             "pixel_size": [width, height],
             "camera": camera_record,
+            "camera_bounds_override_m": camera_bounds_override,
+            "domain_wireframe_shown": camera_bounds_override is None,
             "surface_color": "#2e91bd",
             "lighting": "smooth shaded computed alpha=0.50 isosurface",
+            "anti_aliasing": "supersampling (SSAA)",
             "ffmpeg_command": ffmpeg_command,
             "ffmpeg_version": _tool_version("ffmpeg"),
             "ffprobe": probe,
@@ -678,6 +735,14 @@ def main() -> int:
     parser.add_argument("--width", type=int, default=1600)
     parser.add_argument("--height", type=int, default=900)
     parser.add_argument("--endpoint-hold", type=float, default=1.0, metavar="SECONDS")
+    parser.add_argument("--surface-smoothing-iterations", type=int, default=0)
+    parser.add_argument("--surface-smoothing-pass-band", type=float, default=0.1)
+    parser.add_argument(
+        "--camera-bounds",
+        type=float,
+        nargs=6,
+        metavar=("XMIN", "XMAX", "YMIN", "YMAX", "ZMIN", "ZMAX"),
+    )
     args = parser.parse_args()
     try:
         render(
@@ -690,6 +755,9 @@ def main() -> int:
             width=args.width,
             height=args.height,
             endpoint_hold_s=args.endpoint_hold,
+            surface_smoothing_iterations=args.surface_smoothing_iterations,
+            surface_smoothing_pass_band=args.surface_smoothing_pass_band,
+            camera_bounds_override=tuple(args.camera_bounds) if args.camera_bounds else None,
         )
     except (
         OSError,

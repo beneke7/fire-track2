@@ -1,0 +1,998 @@
+{
+  "classification": "Recovered partial data from a FAILED exploratory nearfield CFD run; descriptive comparison only, not E2 validation or a gate decision",
+  "recovery": {
+    "recovery_id": "dash8-recovery-20261004T173700Z",
+    "source_run_id": "dash8-economy-overnight-20261001T210320Z",
+    "source_run_status": "failed_or_incomplete",
+    "source_manifest_sha256": "5da0abbf6c5429df746715db2603d6105ee5b17a0e2e061aa567bb77c3eee11c",
+    "source_solver_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "source_failure": {
+      "last_time_s": 1.039547,
+      "solver_steps": 9169,
+      "solver_clock_time_s": 8287.0,
+      "stage_exit_codes": {
+        "blockMesh": 0,
+        "checkMesh": 0,
+        "decomposePar": 0,
+        "interIsoFoam": 136
+      },
+      "mesh_ok": true,
+      "reached_requested_horizon": false,
+      "fatal_error_observed": true
+    },
+    "reconstructed_times_s": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "no_new_cfd": true
+  },
+  "paper_source": {
+    "citation": "Calbrix et al. (2023), Numerical simulation of aerial liquid drops of Canadair CL-415 and Dash-8 airtankers, International Journal of Wildland Fire 32(11), 1515\u20131528",
+    "doi": "10.1071/WF22147",
+    "local_pdf_sha256_from_source_record": "128eeb1ea3ad30f5a2ecf9194e2b784be37e837982dec3bdcb7b9db48aa4e7e4",
+    "fig6_locator": "PDF p. 7 / journal p. 1521, Fig. 6(b), Dash-8 alpha_L=0.001, t=0.5 s; streamwise y vs downward penetration Z",
+    "fig9_locator": "PDF p. 9 / journal p. 1523, Fig. 9(a), Dash-8 alpha_L=0.001, captioned t=0.5 and 1.0 s; normalized lateral width L/Lc vs depth z/Lc",
+    "fig8_timing_conflict": {
+      "body_text_candidate_s": 0.5,
+      "caption_candidate_s": 1.0,
+      "status": "unresolved; no timing selected or used here"
+    },
+    "source_record_path": "experiments/E2_CALBRIX_SOURCE.md",
+    "source_record_sha256": "f1966d218efcac40cfafd5442c8251b9b69b4183304c9329f0ee207f8081fec6",
+    "source_record_local_pdf_sha256": "128eeb1ea3ad30f5a2ecf9194e2b784be37e837982dec3bdcb7b9db48aa4e7e4",
+    "digitization_files": {
+      "data/derived/calbrix_dash8_cloud_curves.csv": {
+        "sha256": "308c23d755828027acb54e9e9181f74142f831ad6649a1fc91f0a482023a5969",
+        "rows": 4965,
+        "status": "primary calibrated raster centerline reads with per-point bounds"
+      },
+      "data/derived/calbrix_dash8_cloud_curves_independent.csv": {
+        "sha256": "2634389063a3d75a2e1e2c8523b3d27ae204ae31557d9e354de7fe4c2aceab4b",
+        "rows": 1492,
+        "status": "separately calibrated independent raster reads with per-point bounds"
+      }
+    }
+  },
+  "recovered_run_assumptions_and_coordinate_mapping": {
+    "operator": "frozen native-cell full-cell alpha threshold envelope; no smoothing; source thresholds kept at alpha.water >=0.001 cloud and >=0.9 core",
+    "paper_mapping": "paper streamwise y = simulation x - assumed origin_x; paper downward Z/z = assumed source_plane_z - simulation z; transverse paper x = simulation y - origin_y",
+    "registration_status": "source origin is assumed at center of a provisional rectangle; paper source origin and exact exit shape/area are not identified, so coordinate registration is unverified; no shift fit applied",
+    "case_geometry_and_source": "one assumed 4.44 m by 0.30 m uniform downward opening, S=1.332 m^2, mapped from Fig. 2 labels; not established as paper aperture",
+    "other_source_limited_inputs": "digitized scalar U_L(t) applied uniformly; paper's pointwise outlet profile and exact Q_L(t) unavailable; air properties, turbulence, boundary details and surface-tension treatment remain assumed"
+  },
+  "mass_and_flux_diagnostics": [
+    {
+      "time_s": 0.1,
+      "airborne_water_mass_kg": 151.9874001877,
+      "sampled_cumulative_source_injection_kg": 151.46174241010854,
+      "signed_sampled_mass_residual_kg": 0.5256577775914479,
+      "absolute_residual_fraction_of_sampled_injection": 0.0034705647064863397,
+      "derived_net_outward_non_source_boundary_flux_kg": 0.0,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.2,
+      "airborne_water_mass_kg": 548.5075365287141,
+      "sampled_cumulative_source_injection_kg": 547.6984138610436,
+      "signed_sampled_mass_residual_kg": 0.8091226676705219,
+      "absolute_residual_fraction_of_sampled_injection": 0.0014773142430093,
+      "derived_net_outward_non_source_boundary_flux_kg": 0.0,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.3,
+      "airborne_water_mass_kg": 1087.3584585287658,
+      "sampled_cumulative_source_injection_kg": 1086.4060658858334,
+      "signed_sampled_mass_residual_kg": 0.9523926429324092,
+      "absolute_residual_fraction_of_sampled_injection": 0.0008766451816115806,
+      "derived_net_outward_non_source_boundary_flux_kg": 0.0,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.4,
+      "airborne_water_mass_kg": 1694.570396107214,
+      "sampled_cumulative_source_injection_kg": 1693.5708903313237,
+      "signed_sampled_mass_residual_kg": 0.999505775890384,
+      "absolute_residual_fraction_of_sampled_injection": 0.000590176520862876,
+      "derived_net_outward_non_source_boundary_flux_kg": 0.0,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.5,
+      "airborne_water_mass_kg": 2318.6149968288914,
+      "sampled_cumulative_source_injection_kg": 2317.6179675847184,
+      "signed_sampled_mass_residual_kg": 0.9970292548773614,
+      "absolute_residual_fraction_of_sampled_injection": 0.00043019568747838327,
+      "derived_net_outward_non_source_boundary_flux_kg": 1.0704297892516479e-08,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.6,
+      "airborne_water_mass_kg": 2934.2821268209836,
+      "sampled_cumulative_source_injection_kg": 2933.3017970482533,
+      "signed_sampled_mass_residual_kg": 0.9803298543988603,
+      "absolute_residual_fraction_of_sampled_injection": 0.00033420695251520135,
+      "derived_net_outward_non_source_boundary_flux_kg": 8.166853149305098e-08,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.7,
+      "airborne_water_mass_kg": 3531.5748315300743,
+      "sampled_cumulative_source_injection_kg": 3530.618402969403,
+      "signed_sampled_mass_residual_kg": 0.9564289829381778,
+      "absolute_residual_fraction_of_sampled_injection": 0.000270895597817589,
+      "derived_net_outward_non_source_boundary_flux_kg": 4.222670213493984e-07,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.8,
+      "airborne_water_mass_kg": 4107.686456787096,
+      "sampled_cumulative_source_injection_kg": 4106.7516675833585,
+      "signed_sampled_mass_residual_kg": 0.9347923469204034,
+      "absolute_residual_fraction_of_sampled_injection": 0.00022762329514569536,
+      "derived_net_outward_non_source_boundary_flux_kg": 3.1431827665073797e-06,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 0.9,
+      "airborne_water_mass_kg": 4660.17836454397,
+      "sampled_cumulative_source_injection_kg": 4661.376979622119,
+      "signed_sampled_mass_residual_kg": 0.9095351146779649,
+      "absolute_residual_fraction_of_sampled_injection": 0.0001951215528488961,
+      "derived_net_outward_non_source_boundary_flux_kg": 2.1081501928265425,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    },
+    {
+      "time_s": 1.0,
+      "airborne_water_mass_kg": 5190.410056781008,
+      "sampled_cumulative_source_injection_kg": 5195.876457687243,
+      "signed_sampled_mass_residual_kg": 0.8989970198517767,
+      "absolute_residual_fraction_of_sampled_injection": 0.00017302124620798486,
+      "derived_net_outward_non_source_boundary_flux_kg": 6.365397926086189,
+      "flux_note": "source and open-boundary alphaPhi histories integrated by trapezoidal sampling; diagnostic only, not exact solver-time quadrature"
+    }
+  ],
+  "raw_dimensional_cloud_and_core_extents": [
+    {
+      "time_s": 0.5,
+      "alpha_water_threshold": 0.001,
+      "selected_streamwise_slabs": 61,
+      "streamwise_cell_support_m": [
+        -2.2199999561428574,
+        2.6069565601739133
+      ],
+      "deepest_downward_front_m": 1.973684223074662,
+      "streamwise_position_of_deepest_front_m": -1.387499988,
+      "vertical_cell_width_at_deepest_front_m": 0.07894736842105263,
+      "maximum_cross_track_width_m": 1.252941151226268,
+      "depth_at_maximum_cross_track_width_m": 1.144736826,
+      "transverse_cell_width_at_maximum_m": 0.07941176470588236
+    },
+    {
+      "time_s": 0.5,
+      "alpha_water_threshold": 0.9,
+      "selected_streamwise_slabs": 60,
+      "streamwise_cell_support_m": [
+        -2.2199999561428574,
+        2.5295652931739134
+      ],
+      "deepest_downward_front_m": 1.894736857790696,
+      "streamwise_position_of_deepest_front_m": -1.308214247,
+      "vertical_cell_width_at_deepest_front_m": 0.07894736842105263,
+      "maximum_cross_track_width_m": 1.0941176312811234,
+      "depth_at_maximum_cross_track_width_m": 1.302631557,
+      "transverse_cell_width_at_maximum_m": 0.07941176470588236
+    },
+    {
+      "time_s": 1.0,
+      "alpha_water_threshold": 0.001,
+      "selected_streamwise_slabs": 86,
+      "streamwise_cell_support_m": [
+        -2.2199999561428574,
+        20.03125
+      ],
+      "deepest_downward_front_m": 8.36170200084118,
+      "streamwise_position_of_deepest_front_m": 2.101071358,
+      "vertical_cell_width_at_deepest_front_m": 0.5957446808510638,
+      "maximum_cross_track_width_m": 5.833333436648051,
+      "depth_at_maximum_cross_track_width_m": 6.872340441,
+      "transverse_cell_width_at_maximum_m": 0.5666666666666667
+    },
+    {
+      "time_s": 1.0,
+      "alpha_water_threshold": 0.9,
+      "selected_streamwise_slabs": 61,
+      "streamwise_cell_support_m": [
+        -2.2199999561428574,
+        2.6069565601739133
+      ],
+      "deepest_downward_front_m": 7.170212781175654,
+      "streamwise_position_of_deepest_front_m": 0.911785722,
+      "vertical_cell_width_at_deepest_front_m": 0.5957446808510638,
+      "maximum_cross_track_width_m": 2.761764784420238,
+      "depth_at_maximum_cross_track_width_m": 2.960526347,
+      "transverse_cell_width_at_maximum_m": 0.07941176470588236
+    }
+  ],
+  "fig6_dimensional_penetration_at_0p5s": {
+    "threshold": 0.001,
+    "primary_paper_digitization": {
+      "paper_source_samples": 1003,
+      "paper_segment_count": 1,
+      "paper_read_bounds_half_width_m": {
+        "streamwise_m_median": 0.004711425206124852,
+        "penetration_m_median": 0.03111111111111111
+      },
+      "paper_streamwise_range_m": [
+        0.028268551236749116,
+        2.0
+      ],
+      "paper_max_penetration_m": 2.4444444444444446,
+      "simulation_slices_compared": 25,
+      "simulation_slice_range_m": [
+        0.039642856,
+        1.942499995
+      ],
+      "cell_support_overlap_m": [
+        0.028268551236749116,
+        2.0
+      ],
+      "paper_streamwise_span_covered_by_simulation_cell_support_fraction": 1.0,
+      "simulation_minus_paper_signed_penetration_residual_m": {
+        "count": 25,
+        "median": -0.22304091998708198,
+        "p95": 1.5351833258915846,
+        "maximum": 1.8554995583595848
+      },
+      "absolute_vertical_curve_separation_m": {
+        "count": 25,
+        "median": 0.44232707354819367,
+        "p95": 1.5351833258915846,
+        "maximum": 1.8554995583595848
+      },
+      "within_combined_digitization_and_native_cell_allowance": {
+        "count": 3,
+        "total": 25,
+        "fraction": 0.12,
+        "allowance_note": "paper ordinate read bound + local-slope propagation of paper abscissa read bound and half simulation streamwise cell + one full native vertical cell; heuristic resolution/read envelope, not confidence interval"
+      }
+    },
+    "independent_paper_digitization": {
+      "paper_source_samples": 349,
+      "paper_segment_count": 1,
+      "paper_read_bounds_half_width_m": {
+        "streamwise_m_median": 0.02,
+        "penetration_m_median": 0.03
+      },
+      "paper_streamwise_range_m": [
+        0.029,
+        1.9958
+      ],
+      "paper_max_penetration_m": 2.4475,
+      "simulation_slices_compared": 25,
+      "simulation_slice_range_m": [
+        0.039642856,
+        1.942499995
+      ],
+      "cell_support_overlap_m": [
+        0.029,
+        1.9958
+      ],
+      "paper_streamwise_span_covered_by_simulation_cell_support_fraction": 1.0,
+      "simulation_minus_paper_signed_penetration_residual_m": {
+        "count": 25,
+        "median": -0.22538916688787558,
+        "p95": 1.5418484279531017,
+        "maximum": 1.8677819727380645
+      },
+      "absolute_vertical_curve_separation_m": {
+        "count": 25,
+        "median": 0.4407315786128134,
+        "p95": 1.5418484279531017,
+        "maximum": 1.8677819727380645
+      },
+      "within_combined_digitization_and_native_cell_allowance": {
+        "count": 2,
+        "total": 25,
+        "fraction": 0.08,
+        "allowance_note": "paper ordinate read bound + local-slope propagation of paper abscissa read bound and half simulation streamwise cell + one full native vertical cell; heuristic resolution/read envelope, not confidence interval"
+      }
+    },
+    "global_simulation_maximum_depth_m_all_streamwise_positions": 1.973684223074662,
+    "sim_maximum_depth_in_plotted_paper_y_0_to_2m_m": 1.894736857790696,
+    "paper_maximum_depth_m": 2.4444444444444446,
+    "paper_window_max_sim_minus_paper_m": -0.5497075866537486,
+    "paper_window_max_difference_relative_to_digitized_paper_max_fraction": -0.2248803763583517,
+    "sim_curve_for_plot": [
+      {
+        "streamwise_m": -2.180357099,
+        "downward_front_m": 0.31578947015498815,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -2.101071358,
+        "downward_front_m": 0.5526315734574669,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -2.021785676,
+        "downward_front_m": 0.7105262891242379,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.942499995,
+        "downward_front_m": 0.9473684445807808,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.863214314,
+        "downward_front_m": 1.1052631453463906,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.783928573,
+        "downward_front_m": 1.3421052411982888,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.704642832,
+        "downward_front_m": 1.5789473966548317,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.625357151,
+        "downward_front_m": 1.7368421272227639,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.54607147,
+        "downward_front_m": 1.81578949250673,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.466785729,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.387499988,
+        "downward_front_m": 1.973684223074662,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.308214247,
+        "downward_front_m": 1.973684223074662,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.228928566,
+        "downward_front_m": 1.973684223074662,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.149642885,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -1.070357144,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.991071433,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.911785722,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.832500011,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.7532143,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.673928559,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.594642848,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.515357152,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.436071441,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.356785715,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.277499996,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.198214285,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.118928567,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": -0.039642856,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.039642856,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.118928567,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.198214285,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.277499996,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.356785715,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.436071441,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.515357152,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.594642848,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.673928559,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.7532143,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.832500011,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.911785722,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 0.991071433,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.070357144,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.149642885,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.228928566,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.308214247,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.387499988,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.466785729,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.54607147,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.625357151,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.704642832,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.783928573,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.863214314,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 1.942499995,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.021785676,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.101071358,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.180357099,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.258695722,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.336086988,
+        "downward_front_m": 1.894736857790696,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.413478255,
+        "downward_front_m": 1.81578949250673,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.490869641,
+        "downward_front_m": 1.81578949250673,
+        "vertical_cell_width_m": 0.07894736842105263
+      },
+      {
+        "streamwise_m": 2.568260908,
+        "downward_front_m": 1.7368421272227639,
+        "vertical_cell_width_m": 0.07894736842105263
+      }
+    ],
+    "interpretation": "direct dimensional overlay over digitized y range; the maximum comparison is descriptive because the failed case's source origin and provisional outlet geometry do not establish paper-to-case registration"
+  },
+  "fig9_normalized_lateral_width_at_0p5s_and_1s": {
+    "threshold": 0.001,
+    "source_Lc_definition": "Lc=sqrt(S); numeric Dash-8 exit area S is absent from the paper",
+    "conditional_overlay_Lc_m": 1.1541230437002807,
+    "conditional_overlay_area_m2": 1.332,
+    "status": "illustrative shape overlays only; the assumed Lc is derived from provisional geometry, not recovered paper Lc; no shift/scale fitting and no percent match/error score",
+    "times": {
+      "0.5": {
+        "raw_dimensional_simulation_first": {
+          "time_s": 0.5,
+          "alpha_water_threshold": 0.001,
+          "selected_streamwise_slabs": 61,
+          "streamwise_cell_support_m": [
+            -2.2199999561428574,
+            2.6069565601739133
+          ],
+          "deepest_downward_front_m": 1.973684223074662,
+          "streamwise_position_of_deepest_front_m": -1.387499988,
+          "vertical_cell_width_at_deepest_front_m": 0.07894736842105263,
+          "maximum_cross_track_width_m": 1.252941151226268,
+          "depth_at_maximum_cross_track_width_m": 1.144736826,
+          "transverse_cell_width_at_maximum_m": 0.07941176470588236
+        },
+        "illustrative_assumed_Lc_m": 1.1541230437002807,
+        "Lc_status": "inferred solely for conditional overlay from provisional 1.332 m^2 opening; paper exit area S is unreported, so this is not recovered paper Lc",
+        "primary_digitization_conditional_overlay": {
+          "paper_sample_count": 299,
+          "paper_segment_count": 5,
+          "paper_digitized_depth_range_z_over_Lc": [
+            0.006144393241167435,
+            2.9185867895545314
+          ],
+          "paper_digitized_width_range_L_over_Lc": [
+            0.0,
+            2.410519951632406
+          ],
+          "paper_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 2.410519951632406,
+            "depth": 1.9600614439324118
+          },
+          "paper_read_bounds_median_half_width_normalized": {
+            "width": 0.08706166868198308,
+            "depth": 0.02457757296466974
+          },
+          "simulation_conditional_depth_range_z_over_Lc": [
+            0.03420231769521023,
+            1.6759136294503305
+          ],
+          "simulation_conditional_width_range_L_over_Lc": [
+            0.39755166410015597,
+            1.0856218130860316
+          ],
+          "simulation_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 1.0856218130860316,
+            "depth": 0.9918672296238127
+          },
+          "paper_depth_span_covered_by_simulation_extent_fraction_conditional": 0.5636888522956663,
+          "common_depth_range_z_over_Lc": [
+            0.03420231769521023,
+            1.6759136294503305
+          ],
+          "conditional_descriptive_nearest_sample_separation_only": {
+            "sim_to_paper_distance_in_normalized_plot_axes": {
+              "count": 25,
+              "median": 0.21714244076213352,
+              "p95": 0.9657367436239213,
+              "maximum": 0.9970256803701596
+            },
+            "paper_to_sim_distance_in_normalized_plot_axes": {
+              "count": 152,
+              "median": 0.6888332640295556,
+              "p95": 1.264610311132424,
+              "maximum": 1.3233704693204682
+            },
+            "sim_to_paper_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 25,
+                "median": 0.05562568188077821,
+                "p95": 0.12439567861043405,
+                "maximum": 0.13636665805420672
+              },
+              "depth_m_over_Lc": {
+                "count": 25,
+                "median": 0.20989669624707086,
+                "p95": 0.9609555640080389,
+                "maximum": 0.9968974304575036
+              }
+            },
+            "paper_to_sim_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 152,
+                "median": 0.6556115605536299,
+                "p95": 1.2076369535403286,
+                "maximum": 1.2378364698643916
+              },
+              "depth_m_over_Lc": {
+                "count": 152,
+                "median": 0.08460399540763947,
+                "p95": 0.395011681823872,
+                "maximum": 0.4680494342942181
+              }
+            },
+            "interpretation": "descriptive shape-overlay diagnostics on common depth span only; uses nearest recorded samples without bridging source gaps, no source/time/coordinate shifts or fitting, not a validation score and not a known-area comparison"
+          }
+        },
+        "independent_digitization_conditional_overlay": {
+          "paper_sample_count": 85,
+          "paper_segment_count": 4,
+          "paper_digitized_depth_range_z_over_Lc": [
+            0.0589,
+            2.885
+          ],
+          "paper_digitized_width_range_L_over_Lc": [
+            0.0066,
+            2.3934
+          ],
+          "paper_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 2.3934,
+            "depth": 1.943
+          },
+          "paper_read_bounds_median_half_width_normalized": {
+            "width": 0.08,
+            "depth": 0.07
+          },
+          "simulation_conditional_depth_range_z_over_Lc": [
+            0.03420231769521023,
+            1.6759136294503305
+          ],
+          "simulation_conditional_width_range_L_over_Lc": [
+            0.39755166410015597,
+            1.0856218130860316
+          ],
+          "simulation_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 1.0856218130860316,
+            "depth": 0.9918672296238127
+          },
+          "paper_depth_span_covered_by_simulation_extent_fraction_conditional": 0.5721714127066737,
+          "common_depth_range_z_over_Lc": [
+            0.0589,
+            1.6759136294503305
+          ],
+          "conditional_descriptive_nearest_sample_separation_only": {
+            "sim_to_paper_distance_in_normalized_plot_axes": {
+              "count": 24,
+              "median": 0.28843237605302474,
+              "p95": 1.053857303373468,
+              "maximum": 1.1041500370666577
+            },
+            "paper_to_sim_distance_in_normalized_plot_axes": {
+              "count": 43,
+              "median": 0.7741470839917561,
+              "p95": 1.2576377081120174,
+              "maximum": 1.297101475347391
+            },
+            "sim_to_paper_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 24,
+                "median": 0.0632702750143696,
+                "p95": 0.1834949778899599,
+                "maximum": 0.32383430868491714
+              },
+              "depth_m_over_Lc": {
+                "count": 24,
+                "median": 0.2710602908347513,
+                "p95": 1.008448299617806,
+                "maximum": 1.0912863705496694
+              }
+            },
+            "paper_to_sim_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 43,
+                "median": 0.7700781869139683,
+                "p95": 1.1957181869139684,
+                "maximum": 1.2159781869139685
+              },
+              "depth_m_over_Lc": {
+                "count": 43,
+                "median": 0.09821886593784313,
+                "p95": 0.38967886593784307,
+                "maximum": 0.4515188659378433
+              }
+            },
+            "interpretation": "descriptive shape-overlay diagnostics on common depth span only; uses nearest recorded samples without bridging source gaps, no source/time/coordinate shifts or fitting, not a validation score and not a known-area comparison"
+          }
+        }
+      },
+      "1.0": {
+        "raw_dimensional_simulation_first": {
+          "time_s": 1.0,
+          "alpha_water_threshold": 0.001,
+          "selected_streamwise_slabs": 86,
+          "streamwise_cell_support_m": [
+            -2.2199999561428574,
+            20.03125
+          ],
+          "deepest_downward_front_m": 8.36170200084118,
+          "streamwise_position_of_deepest_front_m": 2.101071358,
+          "vertical_cell_width_at_deepest_front_m": 0.5957446808510638,
+          "maximum_cross_track_width_m": 5.833333436648051,
+          "depth_at_maximum_cross_track_width_m": 6.872340441,
+          "transverse_cell_width_at_maximum_m": 0.5666666666666667
+        },
+        "illustrative_assumed_Lc_m": 1.1541230437002807,
+        "Lc_status": "inferred solely for conditional overlay from provisional 1.332 m^2 opening; paper exit area S is unreported, so this is not recovered paper Lc",
+        "primary_digitization_conditional_overlay": {
+          "paper_sample_count": 917,
+          "paper_segment_count": 5,
+          "paper_digitized_depth_range_z_over_Lc": [
+            0.07987711213517665,
+            7.514592933947773
+          ],
+          "paper_digitized_width_range_L_over_Lc": [
+            0.0,
+            6.165054413542927
+          ],
+          "paper_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 6.165054413542927,
+            "depth": 4.43010752688172
+          },
+          "paper_read_bounds_median_half_width_normalized": {
+            "width": 0.09794437726723096,
+            "depth": 0.02457757296466974
+          },
+          "simulation_conditional_depth_range_z_over_Lc": [
+            0.03420231769521023,
+            6.986975699008858
+          ],
+          "simulation_conditional_width_range_L_over_Lc": [
+            0.39755166410015597,
+            5.0543427483655154
+          ],
+          "simulation_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 5.0543427483655154,
+            "depth": 5.9545994497833705
+          },
+          "paper_depth_span_covered_by_simulation_extent_fraction_conditional": 0.9290333016642079,
+          "common_depth_range_z_over_Lc": [
+            0.07987711213517665,
+            6.986975699008858
+          ],
+          "conditional_descriptive_nearest_sample_separation_only": {
+            "sim_to_paper_distance_in_normalized_plot_axes": {
+              "count": 46,
+              "median": 0.49769496545326164,
+              "p95": 1.0402254381268041,
+              "maximum": 1.1232577189744066
+            },
+            "paper_to_sim_distance_in_normalized_plot_axes": {
+              "count": 848,
+              "median": 0.801665275046145,
+              "p95": 1.713239176157249,
+              "maximum": 1.9377999449153969
+            },
+            "sim_to_paper_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 46,
+                "median": 0.14069940764405142,
+                "p95": 0.8606242697740298,
+                "maximum": 0.9982383744564047
+              },
+              "depth_m_over_Lc": {
+                "count": 46,
+                "median": 0.3133309630295663,
+                "p95": 0.8439495654318201,
+                "maximum": 1.106436398916267
+              }
+            },
+            "paper_to_sim_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 848,
+                "median": 0.5869347520687935,
+                "p95": 1.6282787464248505,
+                "maximum": 1.88048551788797
+              },
+              "depth_m_over_Lc": {
+                "count": 848,
+                "median": 0.3080202458598569,
+                "p95": 1.2129711855744607,
+                "maximum": 1.659668574207334
+              }
+            },
+            "interpretation": "descriptive shape-overlay diagnostics on common depth span only; uses nearest recorded samples without bridging source gaps, no source/time/coordinate shifts or fitting, not a validation score and not a known-area comparison"
+          }
+        },
+        "independent_digitization_conditional_overlay": {
+          "paper_sample_count": 243,
+          "paper_segment_count": 5,
+          "paper_digitized_depth_range_z_over_Lc": [
+            0.1178,
+            7.4775
+          ],
+          "paper_digitized_width_range_L_over_Lc": [
+            0.0066,
+            6.1639
+          ],
+          "paper_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 6.1639,
+            "depth": 4.4158
+          },
+          "paper_read_bounds_median_half_width_normalized": {
+            "width": 0.08,
+            "depth": 0.07
+          },
+          "simulation_conditional_depth_range_z_over_Lc": [
+            0.03420231769521023,
+            6.986975699008858
+          ],
+          "simulation_conditional_width_range_L_over_Lc": [
+            0.39755166410015597,
+            5.0543427483655154
+          ],
+          "simulation_max_width_L_over_Lc_and_depth_z_over_Lc": {
+            "width": 5.0543427483655154,
+            "depth": 5.9545994497833705
+          },
+          "paper_depth_span_covered_by_simulation_extent_fraction_conditional": 0.9333499597821729,
+          "common_depth_range_z_over_Lc": [
+            0.1178,
+            6.986975699008858
+          ],
+          "conditional_descriptive_nearest_sample_separation_only": {
+            "sim_to_paper_distance_in_normalized_plot_axes": {
+              "count": 45,
+              "median": 0.46990161507328265,
+              "p95": 1.0668671376624557,
+              "maximum": 1.1931832186178175
+            },
+            "paper_to_sim_distance_in_normalized_plot_axes": {
+              "count": 226,
+              "median": 0.8448653577487408,
+              "p95": 1.729436507718219,
+              "maximum": 1.9078976641399499
+            },
+            "sim_to_paper_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 45,
+                "median": 0.14185166410015598,
+                "p95": 0.8390244451073915,
+                "maximum": 0.8954658659046224
+              },
+              "depth_m_over_Lc": {
+                "count": 45,
+                "median": 0.401395090488025,
+                "p95": 0.8644684192034472,
+                "maximum": 1.1814465371651148
+              }
+            },
+            "paper_to_sim_abs_axis_separation": {
+              "width_m_over_Lc": {
+                "count": 226,
+                "median": 0.6466291121550741,
+                "p95": 1.6571189217573774,
+                "maximum": 1.7997439217573774
+              },
+              "depth_m_over_Lc": {
+                "count": 226,
+                "median": 0.278320468956499,
+                "p95": 1.2959244497833706,
+                "maximum": 1.6270994497833708
+              }
+            },
+            "interpretation": "descriptive shape-overlay diagnostics on common depth span only; uses nearest recorded samples without bridging source gaps, no source/time/coordinate shifts or fitting, not a validation score and not a known-area comparison"
+          }
+        }
+      }
+    }
+  },
+  "validation_limits": [
+    "The source simulation failed with floating-point exception at 1.039547 s, after 9169 steps and 8287 solver-clock seconds; requested 5 s was not reached.",
+    "Only recovered saved states 0.1\u20131.0 s are reconstructed; no missing fields or later times are inferred.",
+    "No ground impact/deposition, collected fraction, or field performance is represented.",
+    "Paper exit area, exact source profile/flow history, full boundary conditions, and paper-to-case registration remain unresolved.",
+    "Figure 8 time remains conflicted between 0.5 s in body text and 1.0 s in its caption; it is not resolved by Fig. 9.",
+    "Results are exploratory diagnostics from an assumed case and cannot pass E2 or validate aircraft operations."
+  ]
+}
