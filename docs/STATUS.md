@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-04 16:18 UTC. The user clarified **Dash-8** as the
+Updated: 2026-10-04 16:44 UTC. The user clarified **Dash-8** as the
 single-opening paper case; diagnosing the failure is the current priority.
 Only analytical E0 has passed. No quantitative paper or ground validation has
 passed; measured Restás geometry/source histories remain pending.
@@ -11,9 +11,15 @@ The five-second Dash-8 attempt failed numerically at **1.039547 s** after
 9,169 steps and 8,287 s solver clock time (2 h 18 min). The first extreme
 epsilon residual appears at 1.039211 s; subsequent time steps collapse and
 pressure/continuity diverge before a floating-point exception. This was not
-a memory-limit or timeout stop. A Luna worker is preparing the user-requested
-short diagnostic restart from the intact 1.0 s checkpoint, with unchanged
-physics, per-step field extrema and 5 ms snapshots; no new solver is running yet.
+a memory-limit or timeout stop. The first instrumented restart reached 1.08 s
+without reproducing the crash. Its 5 ms adjustable writes change time-step
+alignment, so a second controlled restart is now active on 20 ranks through
+1.12 s. It uses unadjusted runtime writes and restores the original checkpoint
+deltaT=0.00017281653 s, verified on all 20 ranks and in the original log.
+Physics and solver schemes are unchanged. Per-step extrema include velocity,
+pressure, k, epsilon, nut and alpha with locations; momentum flux is not logged.
+The persistent controller stops on instability and preserves checkpoints.
+[Active diagnostic record](../results/runs/dash8-failure-diagnostic-20261004T164125Z-runtime-writes/run-record.json).
 [Failed original manifest](../results/runs/dash8-economy-overnight-20261001T210320Z/manifest.json).
 
 All 20 ranks retain complete 0.1–1.0 s checkpoints. A Luna worker verified
@@ -49,6 +55,10 @@ there is no temporal interpolation. The closer fixed view makes the water
 visible without the large air-domain wireframe. Both label the failed run.
 [Smoothed close-up video](../results/dash8-smoothed-alpha50-1s-10x-closeup.mp4).
 [Full-domain video](../results/dash8-smoothed-alpha50-1s-10x.mp4).
+A third [cloud-threshold video](../results/dash8-cloud-alpha0001-1s-10x.mp4)
+uses alpha=0.001, matching the paper cloud threshold. Root inspected the
+computed blobs; substantial morphology differences persist. Source-profile
+interpretation and source/downstream grid sensitivity are the next priorities.
 
 The earlier 0.1 s paired pilots passed. Reducing the distant-air spacing from
 400 to 600 mm cut cells from 1,177,848 to 670,480 and solver clock from 484 to
@@ -71,7 +81,12 @@ The Fig. 2 dimensions describe tank features, so their use as opening area is
 an inference. The paper also inconsistently calls the plotted velocity a mean
 and a maximum. Uniformly applying it over this candidate area gives about
 15,921 kg over five seconds; this is an assumed source integral, not measured
-payload. The extracted curve still has 0.074 m/s at 5 s. No shutdown or sixth
+payload. It exceeds the generic 10 m³ capacity by 59%, a source-interpretation
+warning rather than a calibration target. Only four cells span the opening
+width. Actual upstream air is about 49.99 m/s; side air is about 51–53 m/s,
+so the airflow is present. The assumed inputs give q=7.291 at 0.5 s versus
+the paper's 7.90. [Flow audit](../results/dash8-flow-audit-2026-10-04.json).
+The extracted curve still has 0.074 m/s at 5 s. No shutdown or sixth
 second is invented. Streamwise registration uses the assumed opening center;
 the paper's exact origin is unverified.
 

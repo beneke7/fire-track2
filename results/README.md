@@ -46,3 +46,8 @@ The [paper comparison plot](dash8-paper-comparison-2026-10-04.png) and
 [comparison data](dash8-paper-comparison-2026-10-04.json) show substantial
 discrepancies under provisional geometry and unverified coordinate registration.
 These partial, exploratory results do not establish paper reproduction.
+
+The [paper-cloud-threshold video](dash8-cloud-alpha0001-1s-10x.mp4) uses
+alpha=0.001 at the same 10× slowdown and full-domain camera. The
+[flow audit](dash8-flow-audit-2026-10-04.json) checks saved air/water velocities
+and documents the provisional area-times-velocity source calculation.

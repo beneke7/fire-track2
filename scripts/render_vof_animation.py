@@ -204,6 +204,7 @@ def _make_frame(
     empty_field: bool,
     smoothing_iterations: int = 0,
     view_bounds: tuple[float, float, float, float, float, float] | None = None,
+    isosurface_alpha: float = 0.5,
 ) -> dict[str, Any]:
     plotter = pyvista_module.Plotter(off_screen=True, window_size=window_size)
     try:
@@ -251,7 +252,9 @@ def _make_frame(
             if empty_field:
                 empty_label = "AIR ONLY - no water in saved alpha.water field"
             else:
-                empty_label = f"No alpha.water = 0.50 surface (field maximum {alpha_max:.3f})"
+                empty_label = (
+                    f"No alpha.water = {isosurface_alpha:g} surface (field maximum {alpha_max:.3f})"
+                )
             plotter.add_text(
                 empty_label,
                 position=(window_size[0] * 0.24, window_size[1] * 0.53),
@@ -259,7 +262,7 @@ def _make_frame(
                 color="#52627a",
             )
         plotter.add_text(
-            "Computed water VOF | display surface: cell-to-point interpolated alpha.water = 0.50\n"
+            f"Computed water VOF | display surface: cell-to-point interpolated alpha.water = {isosurface_alpha:g}\n"
             + (
                 f"Display-only surface smoothing: {smoothing_iterations} iterations | "
                 if smoothing_iterations
@@ -313,6 +316,7 @@ def render(
     surface_smoothing_iterations: int = 0,
     surface_smoothing_pass_band: float = 0.1,
     camera_bounds_override: tuple[float, float, float, float, float, float] | None = None,
+    isosurface_alpha: float = 0.5,
 ) -> dict[str, Any]:
     """Render one water-only video and write a provenance record beside it."""
     try:
@@ -325,6 +329,8 @@ def render(
 
     if not re.fullmatch(r"[A-Za-z0-9_-]+", label):
         raise ValueError("label may contain only letters, numbers, underscores, and hyphens")
+    if not math.isfinite(isosurface_alpha) or not 0 < isosurface_alpha < 1:
+        raise ValueError("isosurface alpha must be finite and between 0 and 1")
     if (
         isinstance(surface_smoothing_iterations, bool)
         or not isinstance(surface_smoothing_iterations, int)
@@ -471,14 +477,14 @@ def render(
 
             point_alpha_range: list[float] | None = None
             surface = None
-            if float(alpha.max()) >= 0.50 and float(alpha.min()) <= 0.50:
+            if float(alpha.max()) >= isosurface_alpha and float(alpha.min()) <= isosurface_alpha:
                 # Match the refined presentation render: retain the original
-                # cell field, interpolate it for display, contour at 0.50.
+                # cell field and interpolate it only for display.
                 point_mesh = volume_mesh.cell_data_to_point_data(pass_cell_data=True)
                 point_alpha = np.asarray(point_mesh.point_data["alpha.water"], dtype=np.float64)
                 point_alpha_range = [float(point_alpha.min()), float(point_alpha.max())]
                 surface = point_mesh.contour(
-                    isosurfaces=[0.50], scalars="alpha.water", method="contour"
+                    isosurfaces=[isosurface_alpha], scalars="alpha.water", method="contour"
                 ).triangulate()
                 if surface.n_points == 0 or surface.n_cells == 0:
                     surface = None
@@ -514,6 +520,7 @@ def render(
                 empty_field=bool(np.max(np.abs(alpha)) <= 1e-12),
                 smoothing_iterations=surface_smoothing_iterations,
                 view_bounds=camera_bounds_override,
+                isosurface_alpha=isosurface_alpha,
             )
             snapshot_records.append(
                 {
@@ -650,7 +657,11 @@ def render(
             "domain_bounds_from_inputs_m": inputs.get("domain_bounds_m"),
             "reconstructed_mesh_bounds_m": list(camera_bounds),
             "case_file_sha256": case_file_hashes,
-            "surface_method": "cell_data_to_point_data(pass_cell_data=True), then linear contour at alpha.water=0.50, triangulate",
+            "surface_method": (
+                "cell_data_to_point_data(pass_cell_data=True), then linear contour at "
+                f"alpha.water={isosurface_alpha:g}, triangulate"
+            ),
+            "isosurface_alpha": isosurface_alpha,
             "surface_is_display_interpolation": True,
             "surface_smoothing": {
                 "method": "Taubin windowed-sinc, display geometry only",
@@ -696,7 +707,7 @@ def render(
             "camera_bounds_override_m": camera_bounds_override,
             "domain_wireframe_shown": camera_bounds_override is None,
             "surface_color": "#2e91bd",
-            "lighting": "smooth shaded computed alpha=0.50 isosurface",
+            "lighting": f"smooth shaded computed alpha={isosurface_alpha:g} isosurface",
             "anti_aliasing": "supersampling (SSAA)",
             "ffmpeg_command": ffmpeg_command,
             "ffmpeg_version": _tool_version("ffmpeg"),
@@ -707,7 +718,7 @@ def render(
             "git": _git_record(repo_root),
         },
         "claim_limit": (
-            "Exploratory video of saved water-only VOF fields. The 0.50 surface is interpolated "
+            f"Exploratory video of saved water-only VOF fields. The {isosurface_alpha:g} surface is interpolated "
             "display geometry; playback holds stored states and does not create intermediate physics. "
             "This does not validate breakup, descent, deposition, foam behavior, or field performance."
         ),
@@ -737,6 +748,7 @@ def main() -> int:
     parser.add_argument("--endpoint-hold", type=float, default=1.0, metavar="SECONDS")
     parser.add_argument("--surface-smoothing-iterations", type=int, default=0)
     parser.add_argument("--surface-smoothing-pass-band", type=float, default=0.1)
+    parser.add_argument("--isosurface-alpha", type=float, default=0.5)
     parser.add_argument(
         "--camera-bounds",
         type=float,
@@ -758,6 +770,7 @@ def main() -> int:
             surface_smoothing_iterations=args.surface_smoothing_iterations,
             surface_smoothing_pass_band=args.surface_smoothing_pass_band,
             camera_bounds_override=tuple(args.camera_bounds) if args.camera_bounds else None,
+            isosurface_alpha=args.isosurface_alpha,
         )
     except (
         OSError,

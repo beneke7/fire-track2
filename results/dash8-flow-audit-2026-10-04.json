@@ -1,0 +1,136 @@
+{
+  "classification": "Exploratory audit of saved native-cell velocity; not paper validation",
+  "source_run": "results/runs/dash8-recovery-20261004T173700Z",
+  "source_manifest_sha256": "5da0abbf6c5429df746715db2603d6105ee5b17a0e2e061aa567bb77c3eee11c",
+  "frame": {
+    "x": "streamwise air +x",
+    "y": "cross-track",
+    "z": "upward"
+  },
+  "diagnostics": [
+    {
+      "time_s": 0.5,
+      "regions": {
+        "upstream_air_x_minus3_to_minus2p4_z_minus3_to0": {
+          "cells": 5168,
+          "volume_or_liquid_volume_m3": 34.19999599456787,
+          "weighted_mean_velocity_xyz_m_s": [
+            49.99053353363727,
+            4.0564188203630936e-05,
+            -0.1622352048892102
+          ],
+          "streamwise_velocity_min_m_s": 38.49597930908203,
+          "streamwise_velocity_max_m_s": 52.57501220703125
+        },
+        "side_air_x_minus2_to2_abs_y_0p3_to1p5_z_minus2_to0": {
+          "cells": 37116,
+          "volume_or_liquid_volume_m3": 18.44924508157993,
+          "weighted_mean_velocity_xyz_m_s": [
+            52.67534343864077,
+            0.0005851183959225436,
+            0.3983675096554666
+          ],
+          "streamwise_velocity_min_m_s": -18.63394546508789,
+          "streamwise_velocity_max_m_s": 75.70440673828125
+        },
+        "all_air_alpha_below_0p001": {
+          "cells": 664036,
+          "volume_or_liquid_volume_m3": 16116.939681211936,
+          "weighted_mean_velocity_xyz_m_s": [
+            49.82383514273848,
+            -0.0006261875986850157,
+            0.00015464179667835194
+          ],
+          "streamwise_velocity_min_m_s": -18.732309341430664,
+          "streamwise_velocity_max_m_s": 75.70440673828125
+        },
+        "water_alpha_weighted": {
+          "cells": 51352,
+          "volume_or_liquid_volume_m3": 2.3186151160738904,
+          "weighted_mean_velocity_xyz_m_s": [
+            0.3550047067681261,
+            1.938534231019571e-05,
+            -5.758855469071421
+          ],
+          "streamwise_velocity_min_m_s": -18.732309341430664,
+          "streamwise_velocity_max_m_s": 75.70140075683594
+        }
+      },
+      "velocity_units": "m/s",
+      "source_alpha_sha256": "38f2f30423ab6a85a7ebe07708f6a4a8cc5eed1e2d13bf160f907be5e4b2c2e7",
+      "source_U_sha256": "0941fa182cc7dd4359b00a28e3412fa511cfb8804b0d0ce0b3662ca92565bbb2"
+    },
+    {
+      "time_s": 1.0,
+      "regions": {
+        "upstream_air_x_minus3_to_minus2p4_z_minus3_to0": {
+          "cells": 5168,
+          "volume_or_liquid_volume_m3": 34.19999599456787,
+          "weighted_mean_velocity_xyz_m_s": [
+            49.98802235209168,
+            -0.0006887282369311348,
+            0.038136118988637245
+          ],
+          "streamwise_velocity_min_m_s": 39.023983001708984,
+          "streamwise_velocity_max_m_s": 52.28218078613281
+        },
+        "side_air_x_minus2_to2_abs_y_0p3_to1p5_z_minus2_to0": {
+          "cells": 36749,
+          "volume_or_liquid_volume_m3": 18.266820442701135,
+          "weighted_mean_velocity_xyz_m_s": [
+            50.98746302477589,
+            -0.14542315951407356,
+            3.238177917127281
+          ],
+          "streamwise_velocity_min_m_s": -8.073301315307617,
+          "streamwise_velocity_max_m_s": 78.4735107421875
+        },
+        "all_air_alpha_below_0p001": {
+          "cells": 659174,
+          "volume_or_liquid_volume_m3": 16104.018728818099,
+          "weighted_mean_velocity_xyz_m_s": [
+            49.898657732069346,
+            0.0006930333664801005,
+            -0.01947683239035152
+          ],
+          "streamwise_velocity_min_m_s": -12.02189826965332,
+          "streamwise_velocity_max_m_s": 78.4735107421875
+        },
+        "water_alpha_weighted": {
+          "cells": 163048,
+          "volume_or_liquid_volume_m3": 5.1904103808638915,
+          "weighted_mean_velocity_xyz_m_s": [
+            2.4469717515526304,
+            -0.00023399982440681086,
+            -7.939934281379494
+          ],
+          "streamwise_velocity_min_m_s": -12.02189826965332,
+          "streamwise_velocity_max_m_s": 77.96092224121094
+        }
+      },
+      "velocity_units": "m/s",
+      "source_alpha_sha256": "5f88f7179e354b6557a3c33b07490ccecdec77be32ebb9b864e581ebace9b3cb",
+      "source_U_sha256": "ef397134b71b4a80a4d66ec9f840c08a029ce5d9386d0336f56792dcde786223"
+    }
+  ],
+  "source_discharge_assumptions": {
+    "formula": "Q(t)=A*U(t); M(t)=rho_water*A*integral(U(t)dt)",
+    "source_area_m2": 1.332,
+    "source_area_evidence": "inferred from tank-feature dimensions, not reported aperture",
+    "velocity_mapping": "digitized Fig4 scalar uniformly imposed as an area mean; paper ambiguously calls it maximum",
+    "figure_locator": "PDF p3 mean-velocity definition; p4 Fig2 geometry; p5 Fig4 scalar history",
+    "integrated_speed_0_to_5s_m": 11.953,
+    "provisional_volume_0_to_5s_m3": 15.921396,
+    "provisional_mass_0_to_5s_kg": 15921.395999999999,
+    "digitized_peak_time_s": 0.4,
+    "digitized_peak_velocity_m_s": 4.693,
+    "provisional_peak_flow_m3_s": 6.251075999999999,
+    "momentum_ratio_at_0p5s": 7.291442999999998,
+    "paper_reported_momentum_ratio": 7.9,
+    "generic_maximum_tank_capacity_m3": 10,
+    "capacity_note": "consistency warning, not the published E2 payload or a calibration target",
+    "source_cross_track_width_cells": 4,
+    "cross_track_cell_width_m": 0.075
+  },
+  "publication_utc": "2026-10-04T16:44:47.067418+00:00"
+}
