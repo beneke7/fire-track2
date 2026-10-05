@@ -951,6 +951,7 @@ def prepare_case(
         output,
         sources,
         histories,
+        air_speed_m_s=AIR_SPEED_M_S,
         air_turbulence_intensity=air_intensity,
         water_turbulence_intensity=water_intensity,
         air_length_scale_m=air_length_scale,
@@ -988,6 +989,7 @@ def prepare_case(
         mesh_details=mesh_details,
         ranks=ranks,
         patches=patch_names,
+        air_speed_m_s=AIR_SPEED_M_S,
         snapshot_interval_s=snapshot,
     )
     if turbulence_linear_solver == "pbicgstab":
@@ -1133,7 +1135,7 @@ def prepare_case(
             "finite face-center samples determine the discrete flux factors recorded below."
         )
     else:
-        profile_boundary = "legacy uniformFixedValue table; no runtime code"
+        profile_boundary = "uniformFixedValue table; no runtime code"
         profile_momentum_note = (
             "The source is uniform over its mesh faces, so the analytic momentum impulse is "
             "exact for this prescribed area and scalar history."
@@ -1267,18 +1269,29 @@ def prepare_case(
             ],
         }
     else:
+        perturbed_profile_active = source_profile == "perturbed"
         inlet_profile = {
             "kind": source_profile,
             "boundary_condition": profile_boundary,
-            "mode": profile_mode,
-            "mode_description": SOURCE_PROFILE_MODES[profile_mode],
-            "amplitude_fraction_of_mean": amplitude,
+            "spatial_perturbation_active": perturbed_profile_active,
+            "temporal_perturbation_active": perturbed_profile_active,
+            "runtime_boundary_code_active": perturbed_profile_active,
+            "runtime_logging_active": perturbed_profile_active,
+            "mode": profile_mode if perturbed_profile_active else None,
+            "mode_description": (
+                SOURCE_PROFILE_MODES[profile_mode]
+                if perturbed_profile_active
+                else "not applicable; no perturbation mode is active for a uniform source"
+            ),
+            "amplitude_fraction_of_mean": amplitude if perturbed_profile_active else None,
             "amplitude_interpretation": (
                 "maximum absolute facewise deviation from the instantaneous area-mean normal "
                 "speed, after zero-area-mean normalization; values in [0, 1]"
+                if perturbed_profile_active
+                else "not applicable; every source face uses the scalar history speed"
             ),
-            "seed": profile_seed,
-            "correlation_time_s": correlation_time,
+            "seed": profile_seed if perturbed_profile_active else None,
+            "correlation_time_s": correlation_time if perturbed_profile_active else None,
             "temporal_model": (
                 "fixed seeded cosine modes with normally distributed angular frequencies "
                 "having standard deviation sqrt(2)/correlation_time_s; their ensemble "
@@ -1286,11 +1299,15 @@ def prepare_case(
                 "exp(-(delta_t/correlation_time_s)^2). The finite discrete realization is "
                 "continuous in solver time and draws no random numbers per step; the supplied "
                 "correlation time is nominal and the realized face-profile autocorrelation may differ."
+                if perturbed_profile_active
+                else "the uniformFixedValue table applies the digitized scalar history, piecewise linearly in time; no temporal modes or runtime code are active"
             ),
             "spatial_model": (
                 "finite seeded cosine modes evaluated from OpenFOAM patch().Cf() face centers; "
                 "the profile is recentered with actual face areas and scaled to the requested "
                 "maximum deviation at every boundary update"
+                if perturbed_profile_active
+                else "normal velocity is spatially uniform across all source faces; no facewise perturbation is active"
             ),
             "mode_terms": profile_terms,
             "instantaneous_area_mean_speed_matches_history": True,
@@ -1301,13 +1318,19 @@ def prepare_case(
             ),
             "exact_instantaneous_flux_constraint": (
                 "sum(face_area * normal_velocity_perturbation) = 0 at every runtime boundary update"
+                if perturbed_profile_active
+                else "there is no facewise perturbation; uniform normal velocity equals the scalar history speed"
             ),
             "normal_speed_nonnegative": True,
             "transverse_velocity_perturbation_m_s": 0.0,
             "source_area_m2": expected_area,
             "source_width_m": source_width,
             "momentum_change": {
-                "diagnostic": "rho_water * sum(face_area * normal_speed^2), logged at each boundary update",
+                "diagnostic": (
+                    "rho_water * sum(face_area * normal_speed^2), logged at each boundary update"
+                    if perturbed_profile_active
+                    else "analytic rho_water * source_area * scalar_history_speed^2; no runtime boundary log"
+                ),
                 "comparison": "ratio to rho_water * source_area * scalar_history_speed^2",
                 "uniform_reference_impulse_N_s": uniform_reference_momentum_impulse,
                 "actual_profile_impulse_status": (
@@ -1321,25 +1344,31 @@ def prepare_case(
             "turbulence_boundary_assumption": (
                 "k and epsilon retain the existing uniform-in-space tables generated from the "
                 "area-mean scalar history; they are not locally rescaled with the perturbed face speed"
-                if source_profile == "perturbed"
+                if perturbed_profile_active
                 else "k and epsilon retain the existing uniform-in-space tables generated from the scalar history"
             ),
             "actual_mesh_face_area_weighting": True,
-            "runtime_log_prefix": "DASH8_PROFILE",
+            "runtime_log_prefix": "DASH8_PROFILE" if perturbed_profile_active else None,
             "runtime_mass_flow_interpretation": (
                 "water_mass_flow_kg_s is density times the prescribed normal-velocity "
                 "flux, not the solver's transported alphaPhi_ water flux"
+                if perturbed_profile_active
+                else "mass flow is analytically rho_water times source area and scalar history speed; it is not the solver's transported alphaPhi_ water flux and is not runtime logged"
             ),
-            "runtime_log_fields": [
-                "source_area_m2",
-                "source_patch",
-                "source_faces",
-                "history_speed_m_s",
-                "area_mean_normal_speed_m_s",
-                "water_mass_flow_kg_s",
-                "normal_momentum_flux_N",
-                "uniform_momentum_ratio",
-            ],
+            "runtime_log_fields": (
+                [
+                    "source_area_m2",
+                    "source_patch",
+                    "source_faces",
+                    "history_speed_m_s",
+                    "area_mean_normal_speed_m_s",
+                    "water_mass_flow_kg_s",
+                    "normal_momentum_flux_N",
+                    "uniform_momentum_ratio",
+                ]
+                if perturbed_profile_active
+                else []
+            ),
             "seeded_mode_count": len(profile_terms),
         }
     metadata: dict[str, Any] = {
@@ -1510,8 +1539,13 @@ def prepare_case(
         "air_speed_m_s": AIR_SPEED_M_S,
         "gravity_m_s2": list(GRAVITY_M_S2),
         "boundary_conditions": {
-            "airInlet": "x-min plane; fixed 50 m/s +x aircraft-relative air flow",
+            "airInlet": f"x-min plane; fixed {AIR_SPEED_M_S:g} m/s +x aircraft-relative air flow",
             "open_boundaries": OPEN_PATCHES,
+            "open_boundary_backflow_tangential_velocity_m_s": [AIR_SPEED_M_S, 0.0, 0.0],
+            "open_boundary_backflow_behavior": (
+                "pressureInletOutletVelocity uses the configured freestream tangential "
+                "component on ambient backflow; its normal component remains pressure/flux controlled"
+            ),
             "top_belly": (
                 "flat slip wall over the top plane except for the single source rectangle; "
                 "no aircraft or tank CAD geometry"

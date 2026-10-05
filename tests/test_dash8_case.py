@@ -28,6 +28,35 @@ def prepared_case(tmp_path: Path) -> tuple[Path, dict]:
     return case, metadata
 
 
+def _legacy_backflow_velocity_bytes(path: Path) -> bytes:
+    """Remove only the declared freestream-tangential BC addition for history comparisons."""
+    content = path.read_bytes()
+    correction = b"        tangentialVelocity uniform (50 0 0);\n"
+    if content.count(correction) != 4:
+        raise AssertionError("expected the four declared 50 m/s backflow BC additions")
+    return content.replace(correction, b"")
+
+
+def _generated_input_tree_sha256(case: Path, *, account_for_backflow_fix: bool = False) -> str:
+    files = sorted(
+        path
+        for directory in ("0", "constant", "system")
+        for path in (case / directory).rglob("*")
+        if path.is_file()
+    )
+    records_list = []
+    for path in files:
+        relative = path.relative_to(case).as_posix()
+        content = (
+            _legacy_backflow_velocity_bytes(path)
+            if account_for_backflow_fix and relative == "0/U"
+            else path.read_bytes()
+        )
+        records_list.append(f"{relative} {hashlib.sha256(content).hexdigest()}\n")
+    records = "".join(records_list)
+    return hashlib.sha256(records.encode("utf-8")).hexdigest()
+
+
 def test_one_opening_area_history_mass_and_boundary_sign(prepared_case: tuple[Path, dict]) -> None:
     case, metadata = prepared_case
 
@@ -49,30 +78,144 @@ def test_one_opening_area_history_mass_and_boundary_sign(prepared_case: tuple[Pa
     samples = metadata["source_histories"]["dash8"]["samples_used_m_s"]
     assert samples[0] == [0.0, 0.0]
     assert samples[-1] == [0.5, pytest.approx(4.677)]
+    assert metadata["air_speed_m_s"] == pytest.approx(50.0)
+    assert metadata["boundary_conditions"]["open_boundary_backflow_tangential_velocity_m_s"] == [
+        50.0,
+        0.0,
+        0.0,
+    ]
 
     velocity = (case / "0/U").read_text(encoding="utf-8")
     assert re.search(r"airInlet\s*\{\s*type fixedValue;\s*value uniform \(50 0 0\);", velocity)
+    for patch in ["xOutlet", "yMin", "yMax", "zMin"]:
+        assert (
+            "tangentialVelocity uniform (50 0 0);"
+            in (velocity.split(patch, maxsplit=1)[1].split("}", maxsplit=1)[0])
+        )
     assert re.search(r"plate\s*\{\s*type slip;", velocity)
     opening = velocity.split("dash8Opening", maxsplit=1)[1].split("plate", maxsplit=1)[0]
     assert "uniformValue table" in opening
     assert "(0.5 (0 0 -4.677))" in opening
 
 
-def test_uniform_profile_velocity_field_bytes_match_the_legacy_generation(
+def test_uniform_and_perturbed_velocity_only_add_the_declared_backflow_correction(
     tmp_path: Path,
 ) -> None:
     case = tmp_path / "dash8-legacy-uniform-velocity"
     dash8.prepare_case(case, horizon_s=0.5, ranks=2)
 
-    assert hashlib.sha256((case / "0/U").read_bytes()).hexdigest() == (
+    assert hashlib.sha256(_legacy_backflow_velocity_bytes(case / "0/U")).hexdigest() == (
         "6b508db58a0511fc72af1aa5ec720ac23e2978d06ce223c5ca397de33fb2567e"
     )
 
     perturbed_case = tmp_path / "dash8-legacy-perturbed-velocity"
     dash8.prepare_case(perturbed_case, horizon_s=0.5, ranks=2, source_profile="perturbed")
-    assert hashlib.sha256((perturbed_case / "0/U").read_bytes()).hexdigest() == (
+    assert hashlib.sha256(_legacy_backflow_velocity_bytes(perturbed_case / "0/U")).hexdigest() == (
         "95457924cacb02d2cea67295f57dc76f5700407a574c318fed2e7ce3353355d9"
     )
+
+
+def test_inlet_profile_metadata_matches_boundary_activation_without_changing_inputs(
+    tmp_path: Path,
+) -> None:
+    uniform_case = tmp_path / "metadata-uniform"
+    uniform_metadata = dash8.prepare_case(uniform_case, horizon_s=0.5, ranks=2)
+    uniform_profile = uniform_metadata["inlet_profile"]
+    uniform_boundary = (
+        (uniform_case / "0/U")
+        .read_text(encoding="utf-8")
+        .split("dash8Opening", maxsplit=1)[1]
+        .split("plate", maxsplit=1)[0]
+    )
+
+    assert "type uniformFixedValue;" in uniform_boundary
+    assert "uniformValue table" in uniform_boundary
+    assert "(0.5 (0 0 -4.677))" in uniform_boundary
+    assert "codedFixedValue" not in uniform_boundary
+    assert "DASH8_PROFILE" not in uniform_boundary
+    assert uniform_profile["spatial_model"].startswith("normal velocity is spatially uniform")
+    assert "piecewise linearly in time" in uniform_profile["temporal_model"]
+    assert "cosine" not in uniform_profile["temporal_model"]
+    assert uniform_profile["mode"] is None
+    assert uniform_profile["seed"] is None
+    assert uniform_profile["correlation_time_s"] is None
+    assert uniform_profile["spatial_perturbation_active"] is False
+    assert uniform_profile["temporal_perturbation_active"] is False
+    assert uniform_profile["runtime_boundary_code_active"] is False
+    assert uniform_profile["runtime_logging_active"] is False
+    assert uniform_profile["runtime_log_prefix"] is None
+    assert uniform_profile["runtime_log_fields"] == []
+    assert "no runtime boundary log" in uniform_profile["momentum_change"]["diagnostic"]
+    # Preserve the historical physics-input hash while explicitly factoring
+    # out only the four corrected ambient-backflow tangential components.
+    assert _generated_input_tree_sha256(uniform_case, account_for_backflow_fix=True) == (
+        "27799c0e9b2301ebc5bc73b9fe9806291c10d2ac7e9fdf71b7badd053c542e92"
+    )
+
+    perturbed_case = tmp_path / "metadata-perturbed"
+    perturbed_metadata = dash8.prepare_case(
+        perturbed_case,
+        horizon_s=0.5,
+        ranks=2,
+        source_profile="perturbed",
+    )
+    perturbed_profile = perturbed_metadata["inlet_profile"]
+    perturbed_boundary = (
+        (perturbed_case / "0/U")
+        .read_text(encoding="utf-8")
+        .split("dash8Opening", maxsplit=1)[1]
+        .split("plate", maxsplit=1)[0]
+    )
+    assert "type codedFixedValue;" in perturbed_boundary
+    assert "DASH8_PROFILE" in perturbed_boundary
+    assert perturbed_profile["spatial_perturbation_active"] is True
+    assert perturbed_profile["temporal_perturbation_active"] is True
+    assert perturbed_profile["runtime_boundary_code_active"] is True
+    assert perturbed_profile["runtime_logging_active"] is True
+    assert perturbed_profile["runtime_log_prefix"] == "DASH8_PROFILE"
+    assert "cosine modes" in perturbed_profile["temporal_model"]
+    assert "seeded cosine modes" in perturbed_profile["spatial_model"]
+    assert perturbed_profile["runtime_log_fields"]
+    assert _generated_input_tree_sha256(perturbed_case, account_for_backflow_fix=True) == (
+        "d9d2f11fdeb3552180779f6297d4ed6daf39d164234afc0269ab9d3300754558"
+    )
+
+
+def test_open_backflow_velocity_tracks_configured_speed_without_changing_source_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    reference = tmp_path / "default-air"
+    reference_metadata = dash8.prepare_case(reference, horizon_s=0.5, ranks=2)
+    monkeypatch.setattr(dash8, "AIR_SPEED_M_S", 37.0)
+    changed = tmp_path / "changed-air"
+    changed_metadata = dash8.prepare_case(changed, horizon_s=0.5, ranks=2)
+
+    assert reference_metadata["air_speed_m_s"] == pytest.approx(50.0)
+    assert changed_metadata["air_speed_m_s"] == pytest.approx(37.0)
+    assert changed_metadata["boundary_conditions"][
+        "open_boundary_backflow_tangential_velocity_m_s"
+    ] == [
+        37.0,
+        0.0,
+        0.0,
+    ]
+    for case, speed in ((reference, 50), (changed, 37)):
+        velocity = (case / "0/U").read_text(encoding="utf-8")
+        assert f"value uniform ({speed} 0 0);" in _foam_patch_block(velocity, "airInlet")
+        for patch in ["xOutlet", "yMin", "yMax", "zMin"]:
+            assert f"tangentialVelocity uniform ({speed} 0 0);" in _foam_patch_block(
+                velocity, patch
+            )
+
+    assert _foam_patch_block((reference / "0/U").read_text(), "dash8Opening") == (
+        _foam_patch_block((changed / "0/U").read_text(), "dash8Opening")
+    )
+    for field in ("k", "epsilon"):
+        assert _foam_patch_block((reference / "0" / field).read_text(), "dash8Opening") == (
+            _foam_patch_block((changed / "0" / field).read_text(), "dash8Opening")
+        )
+    assert (reference / "0/alpha.water").read_bytes() == (changed / "0/alpha.water").read_bytes()
+    assert (reference / "constant/g").read_bytes() == (changed / "constant/g").read_bytes()
 
 
 def test_default_mesh_is_a_single_aligned_patch_in_the_reported_size_domain(

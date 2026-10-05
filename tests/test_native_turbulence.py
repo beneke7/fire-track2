@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import sys
 import tempfile
 import unittest
@@ -220,6 +221,91 @@ class NativeScalarFieldReaderTests(unittest.TestCase):
             ],
             1,
         )
+
+
+class NativeExportInputInventoryTests(unittest.TestCase):
+    def _fixture(self, root: Path, *, settings: bool) -> tuple[Path, dict[str, str]]:
+        case = root / "case"
+        expected: dict[str, str] = {}
+        files = [
+            *(
+                f"processor0/constant/polyMesh/{name}"
+                for name in (
+                    "boundary",
+                    "cellProcAddressing",
+                    "faces",
+                    "neighbour",
+                    "owner",
+                    "points",
+                )
+            ),
+            "processor0/1.000000/alpha.water",
+            "processor0/1.000000/U",
+        ]
+        if settings:
+            files.extend(("system/controlDict", "system/fvSchemes", "system/fvSolution"))
+        for index, relative in enumerate(files):
+            path = case / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            payload = f"synthetic input {index}: {relative}\n".encode()
+            path.write_bytes(payload)
+            expected[relative] = hashlib.sha256(payload).hexdigest()
+        return case, expected
+
+    def test_accepts_legacy_mesh_and_flow_inventory(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            case, inventory = self._fixture(Path(temp), settings=False)
+            actual, settings = turbulence.verify_native_export_input_inventory(
+                case, inventory, rank_count=1, time_name="1.000000"
+            )
+            self.assertEqual(actual, inventory)
+            self.assertEqual(settings, ())
+
+    def test_accepts_complete_new_system_dictionary_inventory_and_verifies_hashes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            case, inventory = self._fixture(Path(temp), settings=True)
+            actual, settings = turbulence.verify_native_export_input_inventory(
+                case, inventory, rank_count=1, time_name="1.000000"
+            )
+            self.assertEqual(actual, inventory)
+            self.assertEqual(
+                settings,
+                ("system/controlDict", "system/fvSchemes", "system/fvSolution"),
+            )
+
+    def test_rejects_partial_known_system_dictionary_inventory(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            case, inventory = self._fixture(Path(temp), settings=True)
+            inventory.pop("system/fvSolution")
+            with self.assertRaisesRegex(ValueError, "partial known system-dictionary"):
+                turbulence.verify_native_export_input_inventory(
+                    case, inventory, rank_count=1, time_name="1.000000"
+                )
+
+    def test_rejects_arbitrary_extra_or_missing_rank_input(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            case, inventory = self._fixture(Path(temp), settings=False)
+            inventory["system/unreviewedDictionary"] = "0" * 64
+            with self.assertRaisesRegex(ValueError, "unsupported files"):
+                turbulence.verify_native_export_input_inventory(
+                    case, inventory, rank_count=1, time_name="1.000000"
+                )
+
+            _, inventory = self._fixture(Path(temp) / "second", settings=False)
+            inventory.pop("processor0/constant/polyMesh/owner")
+            with self.assertRaisesRegex(ValueError, "does not cover every rank"):
+                turbulence.verify_native_export_input_inventory(
+                    Path(temp) / "second/case", inventory, rank_count=1, time_name="1.000000"
+                )
+
+    def test_rejects_tampered_known_system_dictionary(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            case, inventory = self._fixture(Path(temp), settings=True)
+            (case / "system/fvSchemes").write_text("changed after native export\n")
+            with self.assertRaisesRegex(ValueError, "case input changed since native export"):
+                turbulence.verify_native_export_input_inventory(
+                    case, inventory, rank_count=1, time_name="1.000000"
+                )
 
 
 if __name__ == "__main__":

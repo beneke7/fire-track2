@@ -6,6 +6,7 @@ import math
 import re
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -16,6 +17,13 @@ assert PREPARE_CASE_SPEC is not None and PREPARE_CASE_SPEC.loader is not None
 prepare_case = importlib.util.module_from_spec(PREPARE_CASE_SPEC)
 sys.modules[PREPARE_CASE_SPEC.name] = prepare_case
 PREPARE_CASE_SPEC.loader.exec_module(prepare_case)
+
+RUNNER_PATH = ROOT / "scripts/run_cl415_case.py"
+RUNNER_SPEC = importlib.util.spec_from_file_location("cl415_run_case", RUNNER_PATH)
+assert RUNNER_SPEC is not None and RUNNER_SPEC.loader is not None
+runner = importlib.util.module_from_spec(RUNNER_SPEC)
+sys.modules[RUNNER_SPEC.name] = runner
+RUNNER_SPEC.loader.exec_module(runner)
 
 
 def source_block(field_text: str, patch: str) -> str:
@@ -72,6 +80,12 @@ def test_default_case_records_geometry_histories_and_all_flux_patches(tmp_path: 
 
     assert inputs["case_id"] == "E3_CALBRIX_CL415_EXPLORATORY_NEARFIELD"
     assert inputs["solver"] == "interIsoFoam"
+    assert inputs["air_speed_m_s"] == pytest.approx(50.0)
+    assert inputs["boundary_conditions"]["open_boundary_backflow_tangential_velocity_m_s"] == [
+        50.0,
+        0.0,
+        0.0,
+    ]
     assert inputs["horizon_s"] == pytest.approx(0.1)
     assert inputs["ranks"] == 20
     assert inputs["domain_bounds_m"] == {
@@ -110,6 +124,181 @@ def test_default_case_records_geometry_histories_and_all_flux_patches(tmp_path: 
     ).is_file()
 
 
+@pytest.mark.parametrize("solver", ["interIsoFoam", "interFoam"])
+def test_solver_selection_matches_metadata_control_and_shell_stage(
+    tmp_path: Path, solver: str
+) -> None:
+    case = tmp_path / solver
+    system = case / "system"
+    system.mkdir(parents=True)
+    (system / "controlDict").write_text(
+        f"// application notSelected;\napplication {solver};\n", encoding="utf-8"
+    )
+    assert runner.validate_prepared_solver(case, {"solver": solver}) == solver
+    shell = runner.shell_script(20, solver)
+    assert f"run_stage {solver} mpirun -np 20 {solver} -parallel" in shell
+    other = "interFoam" if solver == "interIsoFoam" else "interIsoFoam"
+    assert f"run_stage {other} mpirun" not in shell
+    assert f"run_stage {solver} " in shell
+
+
+def test_solver_selection_rejects_unsupported_or_mismatched_dictionaries(tmp_path: Path) -> None:
+    case = tmp_path / "case"
+    system = case / "system"
+    system.mkdir(parents=True)
+    control = system / "controlDict"
+    control.write_text("application interFoam;\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="unsupported prepared solver"):
+        runner.validate_prepared_solver(case, {"solver": "compressibleInterFoam"})
+    with pytest.raises(ValueError, match="unsupported prepared solver"):
+        runner.validate_prepared_solver(case, {"solver": ["interFoam"]})
+    with pytest.raises(ValueError, match="prepared solver mismatch"):
+        runner.validate_prepared_solver(case, {"solver": "interIsoFoam"})
+    control.write_text("application interFoam;\napplication interFoam;\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="one literal application"):
+        runner.validate_prepared_solver(case, {"solver": "interFoam"})
+    with pytest.raises(ValueError, match="unsupported solver shell target"):
+        runner.shell_script(20, "otherFoam")
+
+
+def test_run_rejects_solver_mismatch_before_capacity_wait_or_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "repo"
+    case = tmp_path / "mismatched-case"
+    (case / "system").mkdir(parents=True)
+    (case / "case-inputs.json").write_text(
+        json.dumps({"solver": "interIsoFoam", "ranks": 1, "horizon_s": 0.1}),
+        encoding="utf-8",
+    )
+    (case / "system/controlDict").write_text(
+        "application interFoam;\nendTime 0.1;\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(runner, "ROOT", root)
+
+    def fail_if_waiting(*args, **kwargs):
+        pytest.fail("solver mismatch reached capacity wait")
+
+    monkeypatch.setattr(runner, "wait_for_capacity", fail_if_waiting)
+    args = SimpleNamespace(
+        run_id="mismatched-solver",
+        case_dir=case,
+        ranks=1,
+        memory_gib=1,
+        timeout_s=1.0,
+        wait_timeout_s=1.0,
+        after_run_dir=None,
+        require_after_success=False,
+        prepare_only=False,
+        expected_aircraft=None,
+    )
+    assert runner.run(args) == 1
+    manifest = json.loads(
+        (root / "results/runs/mismatched-solver/manifest.json").read_text(encoding="utf-8")
+    )
+    assert "prepared solver mismatch" in manifest["error"]
+    assert "solver_started_utc" not in manifest
+
+
+@pytest.mark.parametrize("solver", ["interIsoFoam", "interFoam"])
+def test_solver_summary_uses_selected_startup_and_excludes_utility_times(solver: str) -> None:
+    log = (
+        "Time = 9\n"
+        "CL415_STAGE_EXIT stage=blockMesh code=0\n"
+        "Time = 8\n"
+        "CL415_STAGE_EXIT stage=checkMesh code=0\n"
+        "Time = 7\n"
+        "CL415_STAGE_EXIT stage=decomposePar code=0\n"
+        f"Exec   : {solver} -parallel\n"
+        "Time = 0.05\nClockTime = 1.2 s\nTime = 0.1\n"
+        f"CL415_STAGE_EXIT stage={solver} code=0\n"
+        "Time = 6\nCL415_STAGE_EXIT stage=reconstructPar code=0\n"
+    )
+    summary = runner.solver_summary(log, 0.1, solver)
+    assert summary["solver"] == solver
+    assert summary["solver_steps"] == 2
+    assert summary["last_time_s"] == pytest.approx(0.1)
+    assert summary["solver_clock_time_s"] == pytest.approx(1.2)
+    assert summary["reached_requested_horizon"]
+    assert summary["stage_exit_codes"][solver] == 0
+
+
+def test_interrupted_selected_solver_counts_only_after_its_startup_header() -> None:
+    log = (
+        "Time = 9\nCL415_STAGE_EXIT stage=blockMesh code=0\n"
+        "Time = 8\nCL415_STAGE_EXIT stage=decomposePar code=0\n"
+        "Exec : interFoam -parallel\nTime = 0.03\nClockTime = 4 s\n"
+    )
+    summary = runner.solver_summary(log, 0.1, "interFoam")
+    assert summary["solver_steps"] == 1
+    assert summary["last_time_s"] == pytest.approx(0.03)
+    assert not summary["reached_requested_horizon"]
+    no_solver_startup = "Time = 9\nCL415_STAGE_EXIT stage=checkMesh code=0\n"
+    assert runner.solver_summary(no_solver_startup, 0.1, "interFoam")["solver_steps"] == 0
+
+
+def test_solver_summary_rejects_a_different_exec_even_without_stage_markers() -> None:
+    wrong_binary = "Exec : interIsoFoam -parallel\nTime = 0.1\n"
+    summary = runner.solver_summary(wrong_binary, 0.1, "interFoam")
+    assert summary["solver_steps"] == 0
+    assert summary["last_time_s"] is None
+
+    contradictory_stage = (
+        "Exec : interIsoFoam -parallel\nTime = 0.1\nCL415_STAGE_EXIT stage=interFoam code=0\n"
+    )
+    summary = runner.solver_summary(contradictory_stage, 0.1, "interFoam")
+    assert summary["solver_steps"] == 0
+
+    # Legacy logs with neither an Exec identity nor stage markers remain readable.
+    legacy = runner.solver_summary("Time = 0.1\n", 0.1, "interFoam")
+    assert legacy["solver_steps"] == 1
+    assert legacy["reached_requested_horizon"]
+
+
+@pytest.mark.parametrize("solver", ["interIsoFoam", "interFoam"])
+def test_prepared_manifest_records_solver_from_validated_case(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, solver: str
+) -> None:
+    root = tmp_path / "repo"
+    (root / "scripts").mkdir(parents=True)
+    (root / "src/aerial_drop").mkdir(parents=True)
+    (root / "scripts/analyze_cl415_case.py").write_text("# test analyzer\n", encoding="utf-8")
+    (root / "src/aerial_drop/structure_counts.py").write_text("# test module\n", encoding="utf-8")
+    case = tmp_path / "case"
+    (case / "system").mkdir(parents=True)
+    (case / "case-inputs.json").write_text(
+        json.dumps({"solver": solver, "ranks": 1, "horizon_s": 0.1}), encoding="utf-8"
+    )
+    (case / "system/controlDict").write_text(
+        f"application {solver};\nendTime 0.1;\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(runner, "ROOT", root)
+    monkeypatch.setattr(
+        runner.subprocess,
+        "check_output",
+        lambda *args, **kwargs: "revision\n",
+    )
+    args = SimpleNamespace(
+        run_id=f"solver-manifest-{solver}",
+        case_dir=case,
+        ranks=1,
+        memory_gib=1,
+        timeout_s=1.0,
+        wait_timeout_s=1.0,
+        after_run_dir=None,
+        require_after_success=False,
+        prepare_only=True,
+        expected_aircraft=None,
+    )
+    assert runner.run(args) == 0
+    manifest = json.loads(
+        (root / "results/runs" / args.run_id / "manifest.json").read_text(encoding="utf-8")
+    )
+    assert manifest["solver"] == solver
+    assert manifest["status"] == "prepared_only"
+    assert "solver_started_utc" not in manifest
+
+
 def test_initial_air_and_time_varying_velocity_and_turbulence_tables(tmp_path: Path) -> None:
     case = tmp_path / "cl415"
     prepare_case.prepare_case(case, horizon_s=0.1)
@@ -133,6 +322,8 @@ def test_initial_air_and_time_varying_velocity_and_turbulence_tables(tmp_path: P
     assert "type zeroGradient;" in source_block(k, "plate")
     assert "type zeroGradient;" in source_block(epsilon, "plate")
     assert "type calculated;" in source_block((case / "0/nut").read_text(encoding="utf-8"), "plate")
+    for patch in ["xOutlet", "yMin", "yMax", "zMin"]:
+        assert "tangentialVelocity uniform (50 0 0);" in source_block(velocity, patch)
     assert "RASModel kEpsilon;" in (case / "constant/turbulenceProperties").read_text(
         encoding="utf-8"
     )
@@ -140,6 +331,42 @@ def test_initial_air_and_time_varying_velocity_and_turbulence_tables(tmp_path: P
     assert "rho 1000;" in transport
     assert "rho 1.2;" in transport
     assert "sigma 0;" in transport
+
+
+def test_open_backflow_velocity_tracks_configured_speed_without_changing_source_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    reference = tmp_path / "default-air"
+    reference_inputs = prepare_case.prepare_case(reference, horizon_s=0.1, ranks=2)
+    monkeypatch.setattr(prepare_case, "AIR_SPEED_M_S", 37.0)
+    changed = tmp_path / "changed-air"
+    changed_inputs = prepare_case.prepare_case(changed, horizon_s=0.1, ranks=2)
+
+    assert reference_inputs["air_speed_m_s"] == pytest.approx(50.0)
+    assert changed_inputs["air_speed_m_s"] == pytest.approx(37.0)
+    assert changed_inputs["boundary_conditions"]["airInlet"].endswith("37 m/s +x relative air flow")
+    assert changed_inputs["boundary_conditions"][
+        "open_boundary_backflow_tangential_velocity_m_s"
+    ] == [
+        37.0,
+        0.0,
+        0.0,
+    ]
+    for case, speed in ((reference, 50), (changed, 37)):
+        velocity = (case / "0/U").read_text(encoding="utf-8")
+        assert f"value uniform ({speed} 0 0);" in source_block(velocity, "airInlet")
+        for patch in ["xOutlet", "yMin", "yMax", "zMin"]:
+            assert f"tangentialVelocity uniform ({speed} 0 0);" in source_block(velocity, patch)
+
+    assert source_block((reference / "0/U").read_text(), "source_01") == source_block(
+        (changed / "0/U").read_text(), "source_01"
+    )
+    for field in ("k", "epsilon"):
+        assert source_block((reference / "0" / field).read_text(), "source_01") == source_block(
+            (changed / "0" / field).read_text(), "source_01"
+        )
+    assert (reference / "0/alpha.water").read_bytes() == (changed / "0/alpha.water").read_bytes()
+    assert (reference / "constant/g").read_bytes() == (changed / "constant/g").read_bytes()
 
 
 def test_source_rectangles_are_disjoint_and_mesh_faces_recover_area() -> None:

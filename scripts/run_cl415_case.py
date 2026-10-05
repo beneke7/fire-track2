@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = "opencfd/openfoam-default:2512"
 RUN_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,59}")
+SUPPORTED_SOLVERS = frozenset({"interIsoFoam", "interFoam"})
 
 
 def utc() -> str:
@@ -59,26 +60,72 @@ def validate_prepared_horizon(case: Path, horizon_s: float) -> None:
         )
 
 
-def solver_summary(log: str, horizon_s: float) -> dict:
+def validate_prepared_solver(case: Path, metadata: dict) -> str:
+    """Require the frozen solver name and controlDict application to agree."""
+    metadata_solver = metadata.get("solver")
+    if not isinstance(metadata_solver, str) or metadata_solver not in SUPPORTED_SOLVERS:
+        raise ValueError(f"unsupported prepared solver: {metadata_solver!r}")
+    control = (case / "system/controlDict").read_text()
+    control = re.sub(r"/\*.*?\*/|//[^\n]*", "", control, flags=re.S)
+    applications = re.findall(r"^\s*application\s+([^;\s]+)\s*;", control, re.M)
+    if len(applications) != 1:
+        raise ValueError("prepared controlDict must contain one literal application")
+    control_solver = applications[0]
+    if control_solver not in SUPPORTED_SOLVERS:
+        raise ValueError(f"unsupported controlDict application: {control_solver!r}")
+    if control_solver != metadata_solver:
+        raise ValueError(
+            "prepared solver mismatch: case-inputs.json solver "
+            f"{metadata_solver!r} != controlDict application {control_solver!r}"
+        )
+    return metadata_solver
+
+
+def solver_summary(log: str, horizon_s: float, solver: str = "interIsoFoam") -> dict:
+    if not isinstance(solver, str) or solver not in SUPPORTED_SOLVERS:
+        raise ValueError(f"unsupported solver summary target: {solver!r}")
     solver_log = log
     stage_markers = list(re.finditer(r"^CL415_STAGE_EXIT stage=(\w+) code=(\d+)$", log, re.M))
-    for index, marker in enumerate(stage_markers):
-        if marker.group(1) == "interIsoFoam":
-            start = stage_markers[index - 1].end() if index else 0
-            solver_log = log[start : marker.start()]
-            break
-    else:
-        if stage_markers:
-            # A mesh utility also prints Time entries. Count an interrupted
-            # flow only when the actual solver startup header is present.
-            startup = re.search(r"^Exec\s*:\s*interIsoFoam\b", log, re.M)
-            solver_log = log[startup.start() :] if startup else ""
+    solver_startups = list(re.finditer(r"^Exec\s*:\s*([A-Za-z0-9_]+)\b", log, re.M))
+    startup = next(
+        (marker for marker in solver_startups if marker.group(1) == solver),
+        None,
+    )
+    solver_stage_index = next(
+        (index for index, marker in enumerate(stage_markers) if marker.group(1) == solver),
+        None,
+    )
+    if startup:
+        solver_end = next(
+            (
+                marker.start()
+                for marker in stage_markers
+                if marker.group(1) == solver and marker.start() >= startup.start()
+            ),
+            len(log),
+        )
+        solver_log = log[startup.start() : solver_end]
+    elif solver_startups:
+        # A different Exec header proves that the available flow belongs to a
+        # different binary; a stage label alone cannot override that evidence.
+        solver_log = ""
+    elif solver_stage_index is not None:
+        # Older saved logs may lack OpenFOAM's Exec header. The selected
+        # runner stage still isolates its own Time lines from mesh utilities.
+        marker = stage_markers[solver_stage_index]
+        start = stage_markers[solver_stage_index - 1].end() if solver_stage_index else 0
+        solver_log = log[start : marker.start()]
+    elif stage_markers:
+        # Every runner stage prints a marker. If no selected solver startup
+        # header appears, utility Time lines must not be counted as flow.
+        solver_log = ""
     values = re.findall(r"^Time = ([0-9.eE+-]+)$", solver_log, re.M)
     times = [float(value) for value in values]
     clocks = re.findall(r"ClockTime = ([0-9.eE+-]+) s", solver_log)
     stages = dict(re.findall(r"^CL415_STAGE_EXIT stage=(\w+) code=(\d+)$", log, re.M))
     last = times[-1] if times else None
     return {
+        "solver": solver,
         "last_time_s": last,
         "solver_steps": len(times),
         "solver_clock_time_s": float(clocks[-1]) if clocks else None,
@@ -91,7 +138,9 @@ def solver_summary(log: str, horizon_s: float) -> dict:
     }
 
 
-def shell_script(ranks: int) -> str:
+def shell_script(ranks: int, solver: str = "interIsoFoam") -> str:
+    if not isinstance(solver, str) or solver not in SUPPORTED_SOLVERS:
+        raise ValueError(f"unsupported solver shell target: {solver!r}")
     return f"""set +e +u
 source /usr/lib/openfoam/openfoam2512/etc/bashrc
 setup_code=$?
@@ -112,7 +161,7 @@ run_stage checkMesh checkMesh -allTopology -allGeometry
 grep -q 'Mesh OK.' log.checkMesh
 if grep -q 'Failed .*mesh checks' log.checkMesh; then exit 2; fi
 run_stage decomposePar decomposePar -force
-run_stage interIsoFoam mpirun -np {ranks} interIsoFoam -parallel
+run_stage {solver} mpirun -np {ranks} {solver} -parallel
 run_stage reconstructPar reconstructPar -fields '(alpha.water U k epsilon)'
 """
 
@@ -205,6 +254,8 @@ def run(args: argparse.Namespace) -> int:
         if int(inputs["ranks"]) != args.ranks:
             raise ValueError("runner ranks must match the frozen prepared decomposition")
         validate_prepared_horizon(case, inputs["horizon_s"])
+        solver = validate_prepared_solver(case, inputs)
+        manifest["solver"] = solver
         manifest["inputs"] = inputs
         manifest["classification"] = inputs.get(
             "evidence_label", "Exploratory nearfield VOF; no paper acceptance decision"
@@ -285,7 +336,7 @@ def run(args: argparse.Namespace) -> int:
             "/bin/bash",
             image_id,
             "-c",
-            shell_script(args.ranks),
+            shell_script(args.ranks, solver),
         ]
         manifest.update(status="running", solver_started_utc=utc())
         save(manifest_path, manifest)
@@ -328,7 +379,9 @@ def run(args: argparse.Namespace) -> int:
                         resources.flush()
                 exit_code = process.returncode
         summary = solver_summary(
-            (run_dir / "openfoam-console.log").read_text(errors="replace"), inputs["horizon_s"]
+            (run_dir / "openfoam-console.log").read_text(errors="replace"),
+            inputs["horizon_s"],
+            solver,
         )
         manifest["solver_summary"] = summary
         accepted = (

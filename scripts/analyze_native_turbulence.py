@@ -178,6 +178,57 @@ def _safe_hash_inventory(root: Path, inventory: dict[str, str]) -> dict[str, str
     return actual
 
 
+def verify_native_export_input_inventory(
+    case_dir: Path,
+    inventory: dict[str, str],
+    *,
+    rank_count: int,
+    time_name: str,
+) -> tuple[dict[str, str], tuple[str, ...]]:
+    """Verify the exact native mesh/flow inputs and known exporter settings.
+
+    Older native exporter attempts hash only each rank's polyMesh and the
+    selected alpha.water/U fields. Newer attempts also hash the three root
+    solver dictionaries that determine the run's numerical setup. Accept the
+    legacy set or that complete settings set; never silently tolerate a
+    partial settings inventory or arbitrary additional inputs.
+    """
+    expected_paths = {
+        f"processor{rank}/constant/polyMesh/{name}"
+        for rank in range(rank_count)
+        for name in ("boundary", "cellProcAddressing", "faces", "neighbour", "owner", "points")
+    }
+    expected_paths.update(
+        f"processor{rank}/{time_name}/{field}"
+        for rank in range(rank_count)
+        for field in ("alpha.water", "U")
+    )
+    known_system_settings = {
+        "system/controlDict",
+        "system/fvSchemes",
+        "system/fvSolution",
+    }
+    inventory_paths = set(inventory)
+    settings_present = inventory_paths & known_system_settings
+    if settings_present and settings_present != known_system_settings:
+        raise ValueError("native export has a partial known system-dictionary hash inventory")
+    unexpected = inventory_paths - expected_paths - known_system_settings
+    if unexpected:
+        raise ValueError(
+            f"native export input hashes contain unsupported files: {sorted(unexpected)}"
+        )
+    missing = expected_paths - inventory_paths
+    if missing:
+        raise ValueError(
+            "native export input hash inventory does not cover every rank's "
+            f"mesh and alpha/U fields: {sorted(missing)[:8]}"
+        )
+    verified = _safe_hash_inventory(case_dir, inventory)
+    if verified != inventory:
+        raise ValueError("native export input hashes differ from saved case inputs")
+    return verified, tuple(sorted(settings_present))
+
+
 def _validate_run_and_export(
     case_dir: Path, export_dir: Path, requested_time_s: float
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], Path]:
@@ -658,32 +709,12 @@ def analyze(
     if field_hashes_after != field_hashes_before:
         raise ValueError("saved turbulence fields changed during analysis")
     export_attempt_input_hashes = export_attempt["input_sha256_after"]
-    mesh_and_export_keys = {
-        path: digest
-        for path, digest in export_attempt_input_hashes.items()
-        if "/constant/polyMesh/" in path
-        or path.endswith(f"/{time_name}/alpha.water")
-        or path.endswith(f"/{time_name}/U")
-    }
-    if len(mesh_and_export_keys) != len(export_attempt_input_hashes):
-        raise ValueError("native export input hashes include unsupported non-mesh/non-flow files")
-    expected_export_input_paths = {
-        f"processor{rank}/constant/polyMesh/{name}"
-        for rank in range(native_rank_count)
-        for name in ("boundary", "cellProcAddressing", "faces", "neighbour", "owner", "points")
-    }
-    expected_export_input_paths.update(
-        f"processor{rank}/{time_name}/{field}"
-        for rank in range(native_rank_count)
-        for field in ("alpha.water", "U")
+    verified_input_hashes, verified_system_settings = verify_native_export_input_inventory(
+        case_dir,
+        export_attempt_input_hashes,
+        rank_count=native_rank_count,
+        time_name=time_name,
     )
-    if set(mesh_and_export_keys) != expected_export_input_paths:
-        raise ValueError(
-            "native export input hash inventory does not cover every rank's mesh and alpha/U fields"
-        )
-    checked_mesh_and_flow = _safe_hash_inventory(case_dir, mesh_and_export_keys)
-    if checked_mesh_and_flow != mesh_and_export_keys:
-        raise ValueError("mesh or exported flow fields differ from the sealed native export")
 
     log_path = case_dir / "log.interIsoFoam"
     log_text = log_path.read_text(encoding="utf-8", errors="replace") if log_path.is_file() else ""
@@ -754,9 +785,10 @@ def analyze(
             "saved_turbulence_fields_hashes_unchanged_after_analysis": True,
             "native_export_hashes_unchanged_after_analysis": True,
             "native_export_mesh_and_alpha_U_input_hashes_verified": True,
-            "native_export_verified_input_file_count": len(mesh_and_export_keys),
+            "native_export_known_system_settings_verified": list(verified_system_settings),
+            "native_export_verified_input_file_count": len(verified_input_hashes),
             "native_export_verified_input_hash_inventory_sha256": hashlib.sha256(
-                json.dumps(mesh_and_export_keys, sort_keys=True, separators=(",", ":")).encode()
+                json.dumps(verified_input_hashes, sort_keys=True, separators=(",", ":")).encode()
             ).hexdigest(),
             "rank_alignment": rank_alignment,
             "source_export_attempt": str(export_attempt_path),

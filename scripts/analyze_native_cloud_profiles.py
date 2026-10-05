@@ -38,6 +38,35 @@ WATER_DENSITY_KG_M3 = 1000.0
 DOMAIN_TOUCH_TOLERANCE_M = 1e-9
 CENTROID_BOUND_TOLERANCE_M = 1e-10
 DOMAIN_EXTENT_TOLERANCE_M = 1e-7
+FIG9_TIME_SERIES = (
+    {
+        "time_s": 0.5,
+        "time_label": "0.5",
+        "primary_series_id": "dash8_t0.5s",
+        "independent_series_id": "fig9_dash8_alpha0p001_t0p5s",
+        "color_name": "red",
+        "primary_color": "#a92f42",
+        "independent_color": "#d6818e",
+    },
+    {
+        "time_s": 1.0,
+        "time_label": "1.0",
+        "primary_series_id": "dash8_t1.0s",
+        "independent_series_id": "fig9_dash8_alpha0p001_t1p0s",
+        "color_name": "blue",
+        "primary_color": "#174a8b",
+        "independent_color": "#7fa6d1",
+    },
+    {
+        "time_s": 1.5,
+        "time_label": "1.5",
+        "primary_series_id": "dash8_t1.5s",
+        "independent_series_id": "fig9_dash8_alpha0p001_t1p5s",
+        "color_name": "green",
+        "primary_color": "#287a51",
+        "independent_color": "#78b48f",
+    },
+)
 SUPPORTED_PAPER_TRANSFORM = {
     "paper_streamwise_y_m": "mesh_x_m - source_origin_m[0]",
     "paper_downward_z_m": "source_plane_z_m - mesh_z_m",
@@ -70,6 +99,20 @@ def sha256_file(path: Path) -> str:
         for block in iter(lambda: stream.read(1 << 20), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+ANALYZER_SOURCE_PATH = Path(__file__).resolve()
+ANALYZER_LOADED_SOURCE_SHA256 = sha256_file(ANALYZER_SOURCE_PATH)
+
+
+def _analyzer_source_identity(source_path: Path, loaded_source_sha256: str) -> dict[str, Any]:
+    """Distinguish imported code provenance from the source currently on disk."""
+    on_disk_sha256 = sha256_file(source_path)
+    return {
+        "analyzer_loaded_source_sha256": loaded_source_sha256,
+        "analyzer_on_disk_source_sha256": on_disk_sha256,
+        "analyzer_source_unchanged_since_import": loaded_source_sha256 == on_disk_sha256,
+    }
 
 
 def _finite_vector(value: Any, count: int, label: str) -> tuple[float, ...]:
@@ -470,8 +513,11 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def _paper_series(
-    primary_rows: list[dict[str, str]], independent_rows: list[dict[str, str]]
+    primary_rows: list[dict[str, str]],
+    independent_rows: list[dict[str, str]],
+    snapshot_time_s: float = 1.0,
 ) -> dict[str, list[dict[str, str]]]:
+    fig9_spec = _fig9_series_spec(snapshot_time_s)
     return {
         "fig6_primary": [
             row
@@ -489,18 +535,30 @@ def _paper_series(
         "fig9_primary": [
             row
             for row in primary_rows
-            if row.get("figure") == "9"
-            and row.get("series_id") == "dash8_t1.0s"
-            and row.get("time_s") == "1.0"
+            if fig9_spec is not None
+            and row.get("figure") == "9"
+            and row.get("series_id") == fig9_spec["primary_series_id"]
+            and row.get("time_s") == fig9_spec["time_label"]
             and row.get("alpha_l_threshold") == "0.001"
         ],
         "fig9_independent": [
             row
             for row in independent_rows
             if row.get("figure") == "Fig. 9(a)"
-            and row.get("series") == "fig9_dash8_alpha0p001_t1p0s"
+            and fig9_spec is not None
+            and row.get("series") == fig9_spec["independent_series_id"]
         ],
     }
+
+
+def _fig9_series_spec(snapshot_time_s: float) -> dict[str, Any] | None:
+    """Return the reported Fig. 9 time series matching a native snapshot."""
+    if not math.isfinite(snapshot_time_s):
+        return None
+    for series in FIG9_TIME_SERIES:
+        if math.isclose(snapshot_time_s, series["time_s"], rel_tol=0.0, abs_tol=1e-9):
+            return series
+    return None
 
 
 def _validate_axis_declaration(
@@ -579,7 +637,13 @@ def _plot_digital_groups(
         label_used = True
 
 
-def _plot_fig9_independent(axis: Any, rows: list[dict[str, str]]) -> None:
+def _plot_fig9_independent(
+    axis: Any,
+    rows: list[dict[str, str]],
+    *,
+    source: str = "Independent raster read, t=1 s",
+    color: str = "#7fa6d1",
+) -> None:
     """Plot independent Fig. 9 x=L/Lc, y=z/Lc reads on depth/width axes."""
     _validate_axis_declaration(
         rows,
@@ -598,8 +662,8 @@ def _plot_fig9_independent(axis: Any, rows: list[dict[str, str]]) -> None:
     _plot_digital_groups(
         axis,
         rows,
-        source="Independent raster read, t=1 s",
-        color="#7fa6d1",
+        source=source,
+        color=color,
         x_key="y_value",
         y_key="x_value",
         x_error_key="read_bound_y",
@@ -634,30 +698,33 @@ def _validate_paper_axes(paper: dict[str, list[dict[str, str]]]) -> None:
         expected_y_unit="m",
         label="Independent Fig. 6(b)",
     )
-    _validate_axis_declaration(
-        paper["fig9_primary"],
-        x_variable_field="independent_variable",
-        expected_x_variable="z_over_Lc",
-        y_variable_field="dependent_variable",
-        expected_y_variable="L_over_Lc",
-        x_unit_field="independent_unit",
-        expected_x_unit="1",
-        y_unit_field="dependent_unit",
-        expected_y_unit="1",
-        label="Primary Fig. 9(a)",
-    )
-    _validate_axis_declaration(
-        paper["fig9_independent"],
-        x_variable_field="x_variable",
-        expected_x_variable="normalized_lateral_expansion_L_over_Lc",
-        y_variable_field="y_variable",
-        expected_y_variable="normalized_vertical_distance_z_over_Lc",
-        x_unit_field="x_unit",
-        expected_x_unit="1",
-        y_unit_field="y_unit",
-        expected_y_unit="1",
-        label="Independent Fig. 9(a)",
-    )
+    if bool(paper["fig9_primary"]) != bool(paper["fig9_independent"]):
+        raise ValueError("primary and independent Fig. 9 digitizations must select the same time")
+    if paper["fig9_primary"]:
+        _validate_axis_declaration(
+            paper["fig9_primary"],
+            x_variable_field="independent_variable",
+            expected_x_variable="z_over_Lc",
+            y_variable_field="dependent_variable",
+            expected_y_variable="L_over_Lc",
+            x_unit_field="independent_unit",
+            expected_x_unit="1",
+            y_unit_field="dependent_unit",
+            expected_y_unit="1",
+            label="Primary Fig. 9(a)",
+        )
+        _validate_axis_declaration(
+            paper["fig9_independent"],
+            x_variable_field="x_variable",
+            expected_x_variable="normalized_lateral_expansion_L_over_Lc",
+            y_variable_field="y_variable",
+            expected_y_variable="normalized_vertical_distance_z_over_Lc",
+            x_unit_field="x_unit",
+            expected_x_unit="1",
+            y_unit_field="y_unit",
+            expected_y_unit="1",
+            label="Independent Fig. 9(a)",
+        )
 
 
 def _native_contiguous_groups(
@@ -690,6 +757,7 @@ def make_comparison_plot(
     import matplotlib.pyplot as plt
 
     time_s = float(snapshot["time_value_s"])
+    fig9_spec = _fig9_series_spec(time_s)
     primary_spacing = profiles["station_spacings_m"][0]
     fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.4), constrained_layout=True)
     ax = axes[0]
@@ -758,20 +826,28 @@ def make_comparison_plot(
     ax.legend(fontsize=7, loc="best")
 
     ax = axes[1]
-    _plot_digital_groups(
-        ax,
-        paper["fig9_primary"],
-        source="Paper Fig. 9(a), blue primary raster, t=1 s",
-        color="#174a8b",
-        x_key="independent_value",
-        y_key="dependent_value",
-        x_error_key="read_bound_independent",
-        y_error_key="read_bound_dependent",
-        group_keys=("segment_id", "branch_id"),
-        point_key="point_index",
-    )
-    _plot_fig9_independent(ax, paper["fig9_independent"])
-    if math.isclose(time_s, 1.0, rel_tol=0.0, abs_tol=1e-9):
+    if fig9_spec is not None:
+        _plot_digital_groups(
+            ax,
+            paper["fig9_primary"],
+            source=(f"Paper Fig. 9(a), {fig9_spec['color_name']} primary raster, t={time_s:g} s"),
+            color=fig9_spec["primary_color"],
+            x_key="independent_value",
+            y_key="dependent_value",
+            x_error_key="read_bound_independent",
+            y_error_key="read_bound_dependent",
+            group_keys=("segment_id", "branch_id"),
+            point_key="point_index",
+        )
+        _plot_fig9_independent(
+            ax,
+            paper["fig9_independent"],
+            source=f"Independent raster read, t={time_s:g} s",
+            color=fig9_spec["independent_color"],
+        )
+    if fig9_spec is not None and math.isclose(
+        time_s, fig9_spec["time_s"], rel_tol=0.0, abs_tol=1e-9
+    ):
         for threshold, color, style, label in (
             (0.001, "#d1495b", "-", "Native AABB envelope alpha >= 0.001"),
             (0.9, "#555555", "--", "Native AABB envelope alpha >= 0.9 (core observer)"),
@@ -793,6 +869,16 @@ def make_comparison_plot(
                     linewidth=1.2,
                     label=label,
                 )
+        if math.isclose(time_s, 0.5, rel_tol=0.0, abs_tol=1e-9):
+            depth = np.linspace(0.0, 8.0, 201)
+            ax.plot(
+                depth,
+                0.07 * depth**2,
+                color="#111111",
+                linestyle="-.",
+                linewidth=1.0,
+                label="Eq. (6), Table 3 correlation at 0.5 s: 0.07(z/Lc)^2",
+            )
     else:
         ax.text(
             0.03,
@@ -802,7 +888,9 @@ def make_comparison_plot(
             fontsize=8,
             va="bottom",
         )
-    ax.set_title("Fig. 9(a): lateral width at t=1 s")
+    ax.set_title(
+        "Fig. 9(a): lateral width" + (f" at t={time_s:g} s" if fig9_spec else " (digitized series)")
+    )
     ax.set_xlabel("Downward depth z/Lc")
     ax.set_ylabel("Cross-track width L/Lc")
     ax.grid(True, linewidth=0.3, alpha=0.4)
@@ -891,11 +979,13 @@ def analyze(
     exporter_source_path = export_dir.parent / "buildsrc/exportNativeVof.C"
     primary_rows, _ = _read_csv(PAPER_PRIMARY_CSV)
     independent_rows, _ = _read_csv(PAPER_INDEPENDENT_CSV)
-    paper = _paper_series(primary_rows, independent_rows)
-    if any(not paper[name] for name in paper):
-        raise ValueError(
-            "required Fig. 6(b) t=0.5 or Fig. 9(a) blue t=1 digitized series is missing"
-        )
+    time_s = float(snapshot["time_value_s"])
+    fig9_spec = _fig9_series_spec(time_s)
+    paper = _paper_series(primary_rows, independent_rows, time_s)
+    if not paper["fig6_primary"] or not paper["fig6_independent"]:
+        raise ValueError("required Fig. 6(b) t=0.5 digitized series is missing")
+    if fig9_spec is not None and (not paper["fig9_primary"] or not paper["fig9_independent"]):
+        raise ValueError(f"required Fig. 9(a) t={time_s:g} digitized series is missing")
     _validate_paper_axes(paper)
     profiles = extract_profiles(snapshot, frame, station_spacing_m)
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -979,12 +1069,25 @@ def analyze(
                 "time_s": 0.5,
                 "threshold": 0.001,
             },
-            "fig9_blue_series": {
+            "fig9_series": {
                 "primary_count": len(paper["fig9_primary"]),
                 "independent_count": len(paper["fig9_independent"]),
-                "time_s": 1.0,
+                "time_s": fig9_spec["time_s"] if fig9_spec else None,
+                "series_color": fig9_spec["color_name"] if fig9_spec else None,
                 "threshold": 0.001,
             },
+            "fig9_table3_correlation": (
+                {
+                    "time_s": 0.5,
+                    "relation": "L/Lc = K_L (z/Lc)^beta",
+                    "K_L": 0.07,
+                    "beta": 2.0,
+                    "source_location": "PDF p. 9 / journal p. 1523, Table 3; Eq. (6) PDF p. 8 / journal p. 1522",
+                    "status": "reported correlation; plotted separately from digitized/simulated traces",
+                }
+                if math.isclose(time_s, 0.5, rel_tol=0.0, abs_tol=1e-9)
+                else None
+            ),
             "plot_axis_mapping": {
                 "fig6": {
                     "horizontal": "streamwise distance y (m)",
@@ -1015,7 +1118,10 @@ def analyze(
             "case_inputs_path": str(case_inputs_path.resolve()),
             "case_inputs_sha256": sha256_bytes(case_inputs_bytes),
             "export_attempt": case_provenance,
-            "analyzer_sha256": sha256_file(Path(__file__).resolve()),
+            # Keep the legacy key, but define it as the source hash captured at import.
+            # A long-running observer can continue using loaded code after an on-disk edit.
+            "analyzer_sha256": ANALYZER_LOADED_SOURCE_SHA256,
+            **_analyzer_source_identity(ANALYZER_SOURCE_PATH, ANALYZER_LOADED_SOURCE_SHA256),
             "native_loader": "scripts/analyze_native_vof.py::load_export",
             "native_loader_sha256": sha256_file(REPO_ROOT / "scripts/analyze_native_vof.py"),
             "native_exporter_source_path": str(exporter_source_path.resolve()),
@@ -1034,7 +1140,7 @@ def analyze(
             "The alpha threshold is applied to cell values; no within-cell alpha=.001 or alpha=.9 surface is reconstructed.",
             "Center-assigned per-slab alpha*V is a native-volume partition, not an AABB-overlap-weighted partial-cell integral.",
             "The paper-to-case origin is unspecified; center/upstream-edge/downstream-edge alternatives are fixed geometry anchors, not fitted registrations.",
-            "Fig. 6 comparison data are only at 0.5 s and Fig. 9 blue data only at 1.0 s. The script overlays native curves only at matching times; it does not interpolate simulation snapshots.",
+            "Fig. 6(b) is digitized at 0.5 s. Fig. 9(a) has separate red 0.5 s, blue 1.0 s and green 1.5 s traces; only the trace matching the exact native snapshot time is selected. The script never interpolates simulation snapshots or connects digitized gaps.",
             "Figure digitizations are pixel reads with recorded correlated read bounds, not author data or statistical confidence intervals.",
             "The case area is inferred/provisional and the paper numeric exit area is unknown; Fig. 9 dimensionalization remains conditional.",
         ],

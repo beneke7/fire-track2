@@ -352,6 +352,31 @@ def analyze_snapshot(
         "coordinate_frame": "OpenFOAM simulation axes; velocity components are signed x/y/z",
         "density_kg_m3": density_kg_m3,
         "mass_convention": "alpha.water * native cell volume * constant 1000 kg/m3",
+        "component_observer_sensitivities": {
+            "diameters": {
+                "equivalent_diameter_m": {
+                    "status": "existing primary descriptor; unchanged",
+                    "volume_m3": "sum(alpha.water * native cell volume) within component",
+                },
+                "selected_cell_geometric_volume_equivalent_diameter_m": {
+                    "status": "additive observer sensitivity; not a paper-method claim",
+                    "volume_m3": "sum(full native cell volume) for selected component cells, without alpha weighting",
+                    "not_mass": True,
+                    "paper_context": {
+                        "source": CALBRIX_SOURCE,
+                        "location": "PDF p. 10 / journal p. 1524, Fig. 11(d)",
+                        "reported_bins_m": [[0.04, 0.1], [0.1, 1.0], [1.0, 10.0]],
+                        "extraction": "bin edges transcribed from experiments/E2_CALBRIX_SOURCE.md; author equivalent-diameter operator remains unspecified",
+                    },
+                },
+            },
+            "component_velocity_m_s": {
+                "mass_weighted_velocity_m_s": "existing primary component statistic; alpha * cell volume * constant density weights; unchanged",
+                "geometric_volume_weighted_velocity_m_s": "sum(native cell volume * internal U) / sum(native cell volume) within selected component cells",
+                "cell_number_mean_velocity_m_s": "arithmetic mean of internal U over selected component cells",
+                "class_aggregation": "when summarized by diameter bin, report both arithmetic component mean and component-mass-weighted mean; Calbrix Fig. 11(d) does not specify its velocity averaging operator",
+            },
+        },
         "alpha_integrity": snapshot["alpha_input_validation"],
         "input_provenance": {
             "cloud_threshold": {
@@ -431,6 +456,25 @@ def analyze_snapshot(
             components = structure_statistics(
                 alpha, volumes, labels, velocity, density_kg_m3=density_kg_m3
             )
+            for component in components:
+                member_mask = labels == int(component["label"])
+                member_volumes = volumes[member_mask]
+                member_velocity = velocity[member_mask]
+                geometric_volume = float(np.sum(member_volumes, dtype=np.float64))
+                component["selected_cell_geometric_volume_m3"] = geometric_volume
+                component["selected_cell_geometric_volume_equivalent_diameter_m"] = float(
+                    np.cbrt(6.0 * geometric_volume / np.pi)
+                )
+                component["geometric_volume_weighted_velocity_m_s"] = tuple(
+                    float(value)
+                    for value in np.sum(
+                        member_velocity * member_volumes[:, None], axis=0, dtype=np.float64
+                    )
+                    / geometric_volume
+                )
+                component["cell_number_mean_velocity_m_s"] = tuple(
+                    float(value) for value in np.mean(member_velocity, axis=0, dtype=np.float64)
+                )
             attached_source_labels = set(
                 int(label) for label in labels[source_owners] if label >= 0
             )

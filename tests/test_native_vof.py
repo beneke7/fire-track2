@@ -179,3 +179,36 @@ def test_native_component_bounds_and_centroid_outside_refinement_mass():
         {"label": 0, "bounds_m": {"min": [-0.5, -0.5, -0.5], "max": [0.5, 0.5, 0.5]}},
         {"label": 1, "bounds_m": {"min": [2.0, 0.0, 0.0], "max": [3.0, 1.0, 1.0]}},
     ]
+
+
+def test_additive_geometric_volume_velocity_observers_preserve_primary_statistics():
+    payload = _rank_payload(
+        0,
+        1,
+        [0, 1],
+        [0.25, 0.5625],
+        [0.02, 0.08],
+        internal_edges=[[0, 1]],
+    )
+    payload["velocity_xyz_m_s"] = np.asarray([[1.0, 0.0, -2.0], [5.0, 4.0, 2.0]])
+    snapshot = assemble_rank_payloads([payload])
+    report = analyze_snapshot(snapshot, thresholds=(0.1,))
+    component = report["thresholds"]["0.1"]["min_cells_1"]["detached_components"][0]
+
+    # The established alpha-volume mass, equivalent diameter, and mass-weighted
+    # velocity remain intact. The new observer deliberately uses full V.
+    assert component["cell_count"] == 2
+    assert component["liquid_volume_m3"] == pytest.approx(0.05)
+    assert component["mass_kg"] == pytest.approx(50.0)
+    assert component["equivalent_diameter_m"] == pytest.approx(np.cbrt(6.0 * 0.05 / np.pi))
+    assert component["mass_weighted_velocity_m_s"] == pytest.approx((4.6, 3.6, 1.6))
+
+    assert component["selected_cell_geometric_volume_m3"] == pytest.approx(0.1)
+    assert component["selected_cell_geometric_volume_equivalent_diameter_m"] == pytest.approx(
+        np.cbrt(6.0 * 0.1 / np.pi)
+    )
+    assert component["selected_cell_geometric_volume_equivalent_diameter_m"] / component[
+        "equivalent_diameter_m"
+    ] == pytest.approx(2.0 ** (1.0 / 3.0))
+    assert component["geometric_volume_weighted_velocity_m_s"] == pytest.approx((4.2, 3.2, 1.2))
+    assert component["cell_number_mean_velocity_m_s"] == pytest.approx((3.0, 2.0, 0.0))

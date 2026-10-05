@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -11,11 +12,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from analyze_native_cloud_profiles import (  # noqa: E402
     CloudFrame,
+    _analyzer_source_identity,
     _native_contiguous_groups,
+    _paper_series,
     _plot_fig9_independent,
     _validate_native_domain,
     extract_profiles,
     frame_from_case_inputs,
+    sha256_file,
 )
 
 
@@ -63,6 +67,19 @@ def toy_frame() -> CloudFrame:
 
 
 class NativeCloudProfileTests(unittest.TestCase):
+    def test_analyzer_provenance_keeps_loaded_hash_after_source_file_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source_path = Path(directory) / "analyzer.py"
+            source_path.write_bytes(b"loaded source version\n")
+            loaded_hash = sha256_file(source_path)
+            source_path.write_bytes(b"later on-disk version\n")
+
+            identity = _analyzer_source_identity(source_path, loaded_hash)
+
+        self.assertEqual(identity["analyzer_loaded_source_sha256"], loaded_hash)
+        self.assertNotEqual(identity["analyzer_on_disk_source_sha256"], loaded_hash)
+        self.assertFalse(identity["analyzer_source_unchanged_since_import"])
+
     def setUp(self) -> None:
         self.snapshot = toy_snapshot()
         self.frame = toy_frame()
@@ -299,6 +316,44 @@ class NativeCloudProfileTests(unittest.TestCase):
         _plot_fig9_independent(axis, rows)
         self.assertEqual(axis.lines, [([1.5, 2.5], [3.0, 4.0])])
         self.assertEqual(axis.errors, [([1.5, 2.5], [3.0, 4.0], [0.2, 0.3], [0.4, 0.8])])
+
+    def test_fig9_series_selection_matches_native_snapshot_without_cross_time_rows(self) -> None:
+        primary_specs = [
+            ("dash8_t0.5s", "0.5"),
+            ("dash8_t1.0s", "1.0"),
+            ("dash8_t1.5s", "1.5"),
+        ]
+        independent_specs = [
+            "fig9_dash8_alpha0p001_t0p5s",
+            "fig9_dash8_alpha0p001_t1p0s",
+            "fig9_dash8_alpha0p001_t1p5s",
+        ]
+        primary = [
+            {
+                "figure": "9",
+                "series_id": series_id,
+                "time_s": time_s,
+                "alpha_l_threshold": "0.001",
+            }
+            for series_id, time_s in primary_specs
+        ]
+        primary.append({**primary[0], "alpha_l_threshold": "0.9"})
+        independent = [
+            {"figure": "Fig. 9(a)", "series": series_id} for series_id in independent_specs
+        ]
+
+        for time_s, primary_index, independent_index in (
+            (0.5, 0, 0),
+            (1.0, 1, 1),
+            (1.5, 2, 2),
+        ):
+            selected = _paper_series(primary, independent, time_s)
+            self.assertEqual(selected["fig9_primary"], [primary[primary_index]])
+            self.assertEqual(selected["fig9_independent"], [independent[independent_index]])
+
+        unsupported = _paper_series(primary, independent, 0.25)
+        self.assertEqual(unsupported["fig9_primary"], [])
+        self.assertEqual(unsupported["fig9_independent"], [])
 
 
 if __name__ == "__main__":

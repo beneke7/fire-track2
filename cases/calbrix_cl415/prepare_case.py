@@ -661,16 +661,27 @@ def _scalar_table_boundary(samples: list[tuple[float, float]]) -> str:
     )
 
 
+def _configured_air_speed(value: float | None) -> float:
+    speed = AIR_SPEED_M_S if value is None else value
+    if isinstance(speed, bool) or not isinstance(speed, (int, float)):
+        raise ValueError("air_speed_m_s must be a finite positive number")
+    if not math.isfinite(speed) or speed <= 0:
+        raise ValueError("air_speed_m_s must be a finite positive number")
+    return float(speed)
+
+
 def _write_fields(
     case_dir: Path,
     sources: list[dict[str, Any]],
     histories: dict[str, list[tuple[float, float]]],
     *,
+    air_speed_m_s: float | None = None,
     air_turbulence_intensity: float = TURBULENCE_INTENSITY,
     water_turbulence_intensity: float = TURBULENCE_INTENSITY,
     air_length_scale_m: float = AIR_LENGTH_SCALE_M,
     water_length_scale_m: float = WATER_LENGTH_SCALE_M,
 ) -> dict[str, Any]:
+    air_speed = _configured_air_speed(air_speed_m_s)
     source_names = [source["name"] for source in sources]
     roof = ["plate"]
     open_patches = ["xOutlet", "yMin", "yMax", "zMin"]
@@ -681,9 +692,13 @@ def _write_fields(
     velocity.update(
         {
             "plate": "        type slip;",
-            "airInlet": f"        type fixedValue;\n        value uniform ({AIR_SPEED_M_S:g} 0 0);",
+            "airInlet": f"        type fixedValue;\n        value uniform ({air_speed:g} 0 0);",
             **{
-                name: "        type pressureInletOutletVelocity;\n        value uniform (0 0 0);"
+                name: (
+                    "        type pressureInletOutletVelocity;\n"
+                    f"        tangentialVelocity uniform ({air_speed:g} 0 0);\n"
+                    "        value uniform (0 0 0);"
+                )
                 for name in open_patches
             },
         }
@@ -712,7 +727,11 @@ def _write_fields(
     order = [*source_names, "plate", "airInlet", *open_patches]
     (case_dir / "0" / "U").write_text(
         _field(
-            "U", "volVectorField", "[0 1 -1 0 0 0 0]", "(50 0 0)", {k: velocity[k] for k in order}
+            "U",
+            "volVectorField",
+            "[0 1 -1 0 0 0 0]",
+            f"({air_speed:g} 0 0)",
+            {k: velocity[k] for k in order},
         ),
         encoding="utf-8",
     )
@@ -729,9 +748,7 @@ def _write_fields(
         encoding="utf-8",
     )
 
-    air_k, air_epsilon = _turbulence_values(
-        AIR_SPEED_M_S, air_length_scale_m, air_turbulence_intensity
-    )
+    air_k, air_epsilon = _turbulence_values(air_speed, air_length_scale_m, air_turbulence_intensity)
     source_k, source_epsilon = _turbulence_values(
         6.0, water_length_scale_m, water_turbulence_intensity
     )
@@ -814,6 +831,7 @@ def _write_fields(
         encoding="utf-8",
     )
     return {
+        "air_speed_m_s": air_speed,
         "air_turbulence_k_m2_s2": air_k,
         "air_turbulence_epsilon_m2_s3": air_epsilon,
         "source_turbulence_k_m2_s2": source_k,
@@ -846,6 +864,7 @@ def _write_dictionaries(
     mesh_details: dict[str, Any],
     ranks: int,
     patches: list[str],
+    air_speed_m_s: float | None = None,
     snapshot_interval_s: float = SNAPSHOT_INTERVAL_S,
 ) -> float:
     if not math.isfinite(snapshot_interval_s) or snapshot_interval_s <= 0:
@@ -869,13 +888,14 @@ def _write_dictionaries(
         "    RASModel kEpsilon;\n    turbulence on;\n    printCoeffs on;\n}\n",
         encoding="utf-8",
     )
+    air_speed = _configured_air_speed(air_speed_m_s)
     min_width = min(
         width
         for axis in ("x", "y", "z")
         for width in mesh_details["mesh_widths_by_segment_m"][axis]
     )
-    delta_t_s = min(1.0e-4, 0.25 * min_width / AIR_SPEED_M_S)
-    maximum_delta_t_s = min(MAX_DELTA_T_S, 0.25 * min_width / AIR_SPEED_M_S)
+    delta_t_s = min(1.0e-4, 0.25 * min_width / air_speed)
+    maximum_delta_t_s = min(MAX_DELTA_T_S, 0.25 * min_width / air_speed)
     write_interval = min(snapshot_interval_s, horizon_s)
     (case_dir / "system" / "controlDict").write_text(
         foam_header("controlDict", location="system")
@@ -1068,6 +1088,7 @@ def prepare_case(
         "evidence_label": "exploratory source-limited approximation; not E3 validation",
         "solver": "interIsoFoam",
         "openfoam_image": IMAGE,
+        "air_speed_m_s": AIR_SPEED_M_S,
         "horizon_s": horizon_s,
         "ranks": ranks,
         "source_origin_m": geometry["source_origin_m"],
@@ -1155,8 +1176,13 @@ def prepare_case(
         },
         "gravity_m_s2": list(GRAVITY_M_S2),
         "boundary_conditions": {
-            "airInlet": "x-min plane; fixed 50 m/s +x relative air flow",
+            "airInlet": f"x-min plane; fixed {AIR_SPEED_M_S:g} m/s +x relative air flow",
             "open_boundaries": ["xOutlet", "yMin", "yMax", "zMin"],
+            "open_boundary_backflow_tangential_velocity_m_s": [AIR_SPEED_M_S, 0.0, 0.0],
+            "open_boundary_backflow_behavior": (
+                "pressureInletOutletVelocity uses the configured freestream tangential "
+                "component on ambient backflow; its normal component remains pressure/flux controlled"
+            ),
             "top_belly": "free-slip wall patch without aircraft geometry; k and epsilon use zeroGradient, and nut is calculated at zero",
             "source_flow_sign": "patch outward normal is +z; prescribed velocity has negative z component and enters the domain",
         },
