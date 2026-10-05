@@ -1,0 +1,44 @@
+{
+  "source_pdf": "Numerical simulation of aerial liquid drops of Canadair CL-415 and Dash-8 airtankers.pdf",
+  "source_pdf_sha256": "128eeb1ea3ad30f5a2ecf9194e2b784be37e837982dec3bdcb7b9db48aa4e7e4",
+  "source_locator": "PDF p. 10 / journal p. 1524, Fig. 11(c,d); Dash-8, not CL-415 panel (a,b)",
+  "render_dpi": 300,
+  "fig11c_axes_page_pixels": {
+    "x_zero_px": 390.0,
+    "x_six_px": 1177.0,
+    "y_zero_px": 2651.0,
+    "y_700_px": 2051.0
+  },
+  "fig11c_axis_calibration": {
+    "time_s": "6*(x_px-x_zero_px)/(x_six_px-x_zero_px)",
+    "structure_count": "700*(y_zero_px-y_px)/(y_zero_px-y_700_px)"
+  },
+  "fig11c_trace_masks": {
+    "red": "R>150 AND R>1.65G AND R>1.4B",
+    "blue": "B>130 AND B>1.6R AND B>1.35G",
+    "legend_exclusion_page_px": [
+      630,
+      2410,
+      935,
+      2550
+    ]
+  },
+  "digitization_allowances": {
+    "count_plus_minus": 5,
+    "time_plus_minus_s": 0.01,
+    "status": "heuristic raster-read allowances, not source uncertainty, confidence intervals, or author error bars"
+  },
+  "sampling": {
+    "native_trace": "one pixel-column median where at least two qualifying color pixels are visible",
+    "report_bins_s": 0.1,
+    "selected_report_points": "nearest native pixel-column read within the +/-0.01 s time-read allowance; no interpolation or extrapolation",
+    "target_count_interval": "digitized count +/-5 clipped to the plotted 0..700 physical axis; time and count read allowances are retained as separate bounds",
+    "source_solver_output_cadence": "not stated in paper"
+  },
+  "figure11d_values": "direct transcription of numeric bar labels; no error bars or class sample counts",
+  "limits": [
+    "the article's MATLAB 3D structure identification algorithm is not published",
+    "counts are identified liquid structures, not parcels and not direct experimental measurements",
+    "a different connected-component detector is not automatically equivalent"
+  ]
+}

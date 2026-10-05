@@ -258,6 +258,8 @@ def _axis_breaks(
     refinement_bounds: tuple[float, float],
     local_spacing_m: float,
     coarse_spacing_m: float,
+    inner_refinement_bounds: tuple[float, float] | None = None,
+    inner_spacing_m: float | None = None,
 ) -> tuple[list[float], list[int], list[float]]:
     lower, upper = bounds
     points = {lower, upper}
@@ -269,13 +271,27 @@ def _axis_breaks(
         points.add(region_lo)
     if lower < region_hi < upper:
         points.add(region_hi)
+    if inner_refinement_bounds is not None:
+        inner_lo, inner_hi = inner_refinement_bounds
+        if lower < inner_lo < upper:
+            points.add(inner_lo)
+        if lower < inner_hi < upper:
+            points.add(inner_hi)
     ordered = sorted(points)
     counts: list[int] = []
     widths: list[float] = []
     for start, end in zip(ordered, ordered[1:]):
         middle = (start + end) / 2
         in_refinement = region_lo - 1e-10 <= middle <= region_hi + 1e-10
-        target_width = local_spacing_m if in_refinement else coarse_spacing_m
+        in_inner_refinement = (
+            inner_refinement_bounds is not None
+            and inner_refinement_bounds[0] - 1e-10 <= middle <= inner_refinement_bounds[1] + 1e-10
+        )
+        if in_inner_refinement:
+            assert inner_spacing_m is not None
+            target_width = inner_spacing_m
+        else:
+            target_width = local_spacing_m if in_refinement else coarse_spacing_m
         count = max(1, math.ceil((end - start) / target_width - 1e-12))
         actual_width = (end - start) / count
         counts.append(count)
@@ -326,6 +342,68 @@ def _validate_refinement_region(
     return normalized
 
 
+def _validate_inner_refinement(
+    *,
+    inner_refinement_region: dict[str, tuple[float, float]] | None,
+    inner_spacing_m: float | None,
+    domain: dict[str, tuple[float, float]],
+    sources: list[dict[str, Any]],
+    refinement: dict[str, tuple[float, float]],
+    spacing_m: float,
+) -> tuple[dict[str, tuple[float, float]] | None, float | None]:
+    if (inner_refinement_region is None) != (inner_spacing_m is None):
+        raise ValueError("inner_refinement_region and inner_spacing_m must be provided together")
+    if inner_refinement_region is None:
+        return None, None
+
+    if not isinstance(inner_refinement_region, dict) or set(inner_refinement_region) != {
+        "x",
+        "y",
+        "z",
+    }:
+        raise ValueError("refinement region must provide exactly x, y, and z bounds")
+    for axis in ("x", "y", "z"):
+        axis_bounds = inner_refinement_region[axis]
+        if not isinstance(axis_bounds, (tuple, list)) or len(axis_bounds) != 2:
+            raise ValueError(f"refinement region {axis} bounds must be two finite numbers")
+        if any(
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+            for value in axis_bounds
+        ):
+            raise ValueError(f"refinement region {axis} bounds must be two finite numbers")
+
+    if (
+        isinstance(spacing_m, bool)
+        or not isinstance(spacing_m, (int, float))
+        or not math.isfinite(spacing_m)
+        or spacing_m <= 0.0
+    ):
+        raise ValueError("spacing_m must be finite and positive when inner refinement is enabled")
+    if (
+        isinstance(inner_spacing_m, bool)
+        or not isinstance(inner_spacing_m, (int, float))
+        or not math.isfinite(inner_spacing_m)
+        or inner_spacing_m <= 0.0
+    ):
+        raise ValueError("inner_spacing_m must be finite and positive")
+    inner_spacing = float(inner_spacing_m)
+    if inner_spacing > spacing_m:
+        raise ValueError("inner_spacing_m must be no larger than spacing_m")
+
+    inner = _validate_refinement_region(inner_refinement_region, domain, sources)
+    for axis in ("x", "y", "z"):
+        if (
+            inner[axis][0] < refinement[axis][0] - 1e-12
+            or inner[axis][1] > refinement[axis][1] + 1e-12
+        ):
+            raise ValueError(
+                f"inner refinement region {axis} bounds must lie inside the base refinement region"
+            )
+    return inner, inner_spacing
+
+
 def _face(vertices: tuple[int, int, int, int]) -> str:
     return "(" + " ".join(str(vertex) for vertex in vertices) + ")"
 
@@ -341,11 +419,28 @@ def block_mesh_dict(
     spacing_m: float,
     coarse_spacing_m: float,
     refinement_region: dict[str, tuple[float, float]] | None = None,
+    inner_refinement_region: dict[str, tuple[float, float]] | None = None,
+    inner_spacing_m: float | None = None,
 ) -> tuple[str, dict[str, Any]]:
     refinement = _validate_refinement_region(refinement_region, domain, sources)
+    inner_refinement, inner_spacing = _validate_inner_refinement(
+        inner_refinement_region=inner_refinement_region,
+        inner_spacing_m=inner_spacing_m,
+        domain=domain,
+        sources=sources,
+        refinement=refinement,
+        spacing_m=spacing_m,
+    )
     axes = {
         axis: _axis_breaks(
-            axis, domain[axis], sources, refinement[axis], spacing_m, coarse_spacing_m
+            axis,
+            domain[axis],
+            sources,
+            refinement[axis],
+            spacing_m,
+            coarse_spacing_m,
+            inner_refinement[axis] if inner_refinement is not None else None,
+            inner_spacing,
         )
         for axis in ("x", "y", "z")
     }
@@ -457,8 +552,35 @@ def block_mesh_dict(
         "source_patch_macro_face_counts": {
             name: len(faces) for name, faces in source_faces.items()
         },
+        "source_patch_face_counts": {
+            source["name"]: math.prod(
+                sum(
+                    count
+                    for start, end, count in zip(
+                        breaks[axis][:-1], breaks[axis][1:], counts[axis], strict=True
+                    )
+                    if start >= source["bounds_m"][axis][0] - 1e-10
+                    and end <= source["bounds_m"][axis][1] + 1e-10
+                )
+                for axis in ("x", "y")
+            )
+            for source in sources
+        },
         "source_patch_areas_m2": source_face_areas,
     }
+    if inner_refinement is not None:
+        details.update(
+            {
+                "inner_refinement_region_m": {
+                    axis: list(inner_refinement[axis]) for axis in inner_refinement
+                },
+                "inner_spacing_m": inner_spacing,
+                "mesh_refinement_interpretation": (
+                    "conforming Cartesian tensor-product axis bands extending across the box; "
+                    "not true local three-dimensional AMR"
+                ),
+            }
+        )
     return mesh, details
 
 
@@ -488,18 +610,24 @@ def _field(
     )
 
 
-def _turbulence_values(speed_m_s: float, length_scale_m: float) -> tuple[float, float]:
-    k = 1.5 * (TURBULENCE_INTENSITY * speed_m_s) ** 2
+def _turbulence_values(
+    speed_m_s: float,
+    length_scale_m: float,
+    turbulence_intensity: float = TURBULENCE_INTENSITY,
+) -> tuple[float, float]:
+    k = 1.5 * (turbulence_intensity * speed_m_s) ** 2
     epsilon = 0.09**0.75 * k**1.5 / length_scale_m
     return k, epsilon
 
 
 def _source_turbulence_history(
-    samples: list[tuple[float, float]], length_scale_m: float
+    samples: list[tuple[float, float]],
+    length_scale_m: float,
+    turbulence_intensity: float = TURBULENCE_INTENSITY,
 ) -> list[tuple[float, float, float]]:
     values = []
     for time_s, speed_m_s in samples:
-        k_value, epsilon_value = _turbulence_values(speed_m_s, length_scale_m)
+        k_value, epsilon_value = _turbulence_values(speed_m_s, length_scale_m, turbulence_intensity)
         values.append((time_s, max(k_value, 1.0e-12), max(epsilon_value, 1.0e-12)))
     return values
 
@@ -537,6 +665,11 @@ def _write_fields(
     case_dir: Path,
     sources: list[dict[str, Any]],
     histories: dict[str, list[tuple[float, float]]],
+    *,
+    air_turbulence_intensity: float = TURBULENCE_INTENSITY,
+    water_turbulence_intensity: float = TURBULENCE_INTENSITY,
+    air_length_scale_m: float = AIR_LENGTH_SCALE_M,
+    water_length_scale_m: float = WATER_LENGTH_SCALE_M,
 ) -> dict[str, Any]:
     source_names = [source["name"] for source in sources]
     roof = ["plate"]
@@ -596,14 +729,20 @@ def _write_fields(
         encoding="utf-8",
     )
 
-    air_k, air_epsilon = _turbulence_values(AIR_SPEED_M_S, AIR_LENGTH_SCALE_M)
-    source_k, source_epsilon = _turbulence_values(6.0, WATER_LENGTH_SCALE_M)
+    air_k, air_epsilon = _turbulence_values(
+        AIR_SPEED_M_S, air_length_scale_m, air_turbulence_intensity
+    )
+    source_k, source_epsilon = _turbulence_values(
+        6.0, water_length_scale_m, water_turbulence_intensity
+    )
     k_bc = {
         source["name"]: _scalar_table_boundary(
             [
                 (t, k)
                 for t, k, _ in _source_turbulence_history(
-                    histories[source["history"]], WATER_LENGTH_SCALE_M
+                    histories[source["history"]],
+                    water_length_scale_m,
+                    water_turbulence_intensity,
                 )
             ]
         )
@@ -614,7 +753,9 @@ def _write_fields(
             [
                 (t, epsilon)
                 for t, _, epsilon in _source_turbulence_history(
-                    histories[source["history"]], WATER_LENGTH_SCALE_M
+                    histories[source["history"]],
+                    water_length_scale_m,
+                    water_turbulence_intensity,
                 )
             ]
         )

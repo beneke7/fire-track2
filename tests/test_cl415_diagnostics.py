@@ -22,6 +22,30 @@ analysis = module("analyze_cl415_case")
 runner = module("run_cl415_case")
 
 
+def test_stale_horizon_record_is_rejected_before_launch(tmp_path):
+    system = tmp_path / "system"
+    system.mkdir()
+    (system / "controlDict").write_text("endTime 1.5;\n")
+    with pytest.raises(ValueError, match="does not match metadata"):
+        runner.validate_prepared_horizon(tmp_path, 5.0)
+    runner.validate_prepared_horizon(tmp_path, 1.5)
+    (system / "controlDict").write_text("// endTime 5;\n/* endTime 6; */\nendTime 1.5;\n")
+    runner.validate_prepared_horizon(tmp_path, 1.5)
+
+
+def test_solver_summary_excludes_mesh_and_reconstruction_times():
+    log = (
+        "Mesh OK.\nTime = 0\nCL415_STAGE_EXIT stage=decomposePar code=0\n"
+        "Time = 0.1\nClockTime = 5 s\nCL415_STAGE_EXIT stage=interIsoFoam code=0\n"
+        "Time = 0\nTime = 0.05\nTime = 0.1\n"
+        "CL415_STAGE_EXIT stage=reconstructPar code=0\n"
+    )
+    summary = runner.solver_summary(log, 0.1)
+    assert summary["solver_steps"] == 1
+    assert summary["last_time_s"] == 0.1
+    assert summary["solver_clock_time_s"] == 5
+
+
 def test_cartesian_face_pairs_preserve_reader_order_and_point_contacts():
     centers = np.array([[1, 1, 0], [0, 0, 0], [1, 0, 0], [0, 1, 0]], dtype=float)
     owner, neighbour = analysis.structured_face_pairs(centers, np.ones_like(centers))
@@ -86,7 +110,20 @@ def test_mesh_exit_zero_does_not_hide_quality_failure_or_short_flow():
     assert result["stage_exit_codes"]["checkMesh"] == 0
     assert not result["mesh_ok"]
     assert not result["reached_requested_horizon"]
+    assert result["last_time_s"] is None
+    assert result["solver_steps"] == 0
+
+
+def test_interrupted_solver_keeps_flow_times_without_exit_marker():
+    log = (
+        "Time = 0\nMesh OK.\nCL415_STAGE_EXIT stage=decomposePar code=0\n"
+        "Exec   : interIsoFoam -parallel\nTime = 0.03\nClockTime = 4 s\n"
+    )
+    result = runner.solver_summary(log, 0.1)
+    assert result["solver_steps"] == 1
     assert result["last_time_s"] == 0.03
+    assert result["solver_clock_time_s"] == 4
+    assert not result["reached_requested_horizon"]
 
 
 def test_fatal_at_target_is_not_a_success():

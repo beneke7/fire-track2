@@ -39,10 +39,43 @@ def save(path: Path, data: dict) -> None:
     temporary.replace(path)
 
 
+def validate_prepared_horizon(case: Path, horizon_s: float) -> None:
+    """Reject a stale case record before spending compute on the wrong horizon."""
+    expected = float(horizon_s)
+    if not math.isfinite(expected) or expected <= 0:
+        raise ValueError("prepared metadata horizon_s must be positive and finite")
+    control = (case / "system/controlDict").read_text()
+    control = re.sub(r"/\*.*?\*/|//[^\n]*", "", control, flags=re.S)
+    entries = re.findall(r"^\s*endTime\s+([^;]+);", control, re.M)
+    if len(entries) != 1:
+        raise ValueError("prepared controlDict must contain one literal endTime")
+    try:
+        actual = float(entries[0].strip())
+    except ValueError as error:
+        raise ValueError("prepared controlDict endTime must be a literal number") from error
+    if not math.isfinite(actual) or not math.isclose(actual, expected, rel_tol=0, abs_tol=1e-12):
+        raise ValueError(
+            f"prepared endTime={actual:g} does not match metadata horizon_s={expected:g}"
+        )
+
+
 def solver_summary(log: str, horizon_s: float) -> dict:
-    values = re.findall(r"^Time = ([0-9.eE+-]+)$", log, re.M)
+    solver_log = log
+    stage_markers = list(re.finditer(r"^CL415_STAGE_EXIT stage=(\w+) code=(\d+)$", log, re.M))
+    for index, marker in enumerate(stage_markers):
+        if marker.group(1) == "interIsoFoam":
+            start = stage_markers[index - 1].end() if index else 0
+            solver_log = log[start : marker.start()]
+            break
+    else:
+        if stage_markers:
+            # A mesh utility also prints Time entries. Count an interrupted
+            # flow only when the actual solver startup header is present.
+            startup = re.search(r"^Exec\s*:\s*interIsoFoam\b", log, re.M)
+            solver_log = log[startup.start() :] if startup else ""
+    values = re.findall(r"^Time = ([0-9.eE+-]+)$", solver_log, re.M)
     times = [float(value) for value in values]
-    clocks = re.findall(r"ClockTime = ([0-9.eE+-]+) s", log)
+    clocks = re.findall(r"ClockTime = ([0-9.eE+-]+) s", solver_log)
     stages = dict(re.findall(r"^CL415_STAGE_EXIT stage=(\w+) code=(\d+)$", log, re.M))
     last = times[-1] if times else None
     return {
@@ -171,6 +204,7 @@ def run(args: argparse.Namespace) -> int:
             raise ValueError(f"runner expects {expected_aircraft} input metadata")
         if int(inputs["ranks"]) != args.ranks:
             raise ValueError("runner ranks must match the frozen prepared decomposition")
+        validate_prepared_horizon(case, inputs["horizon_s"])
         manifest["inputs"] = inputs
         manifest["classification"] = inputs.get(
             "evidence_label", "Exploratory nearfield VOF; no paper acceptance decision"

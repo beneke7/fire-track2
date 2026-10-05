@@ -51,3 +51,31 @@ The [paper-cloud-threshold video](dash8-cloud-alpha0001-1s-10x.mp4) uses
 alpha=0.001 at the same 10× slowdown and full-domain camera. The
 [flow audit](dash8-flow-audit-2026-10-04.json) checks saved air/water velocities
 and documents the provisional area-times-velocity source calculation.
+
+The newer [smoothed continuation](dash8-restart-alpha50-1p22s-10x.mp4) and
+[whole-cloud continuation](dash8-restart-cloud001-1p22s-10x.mp4) reach the
+actual saved time **1.219995 s**, at 10× slowdown (13.2 s playback). Root
+inspected their first and last frames using the RTX 5090. These combine the
+original trajectory and two restart branches; the final branch changes only
+the k/epsilon linear solver. The last logged solver time is 1.300022 s, but
+no 1.3 s full field was saved. Their JSON records hash the recovery manifest,
+which lists the mixed numerical history. The sampled restart mass residual
+remains under investigation; these videos do not establish a stability or
+conservation pass.
+
+The [completed from-zero run](dash8-fromzero-alpha50-1p5s-10x.mp4) covers
+**0–1.5 s** at 10× slowdown (16 s including the final hold). It uses the
+candidate k/epsilon linear settings throughout, rather than combining restart
+branches. Root inspected the final frame. The alpha=0.5 surface is smoothed
+for display; computed cell fractions and fragment counts remain unchanged.
+Successful completion over this horizon does not establish paper agreement.
+
+The [uneven-outflow video](dash8-uneven-alpha50-1s-10x.mp4) shows the completed
+0–1 s trial at 10× slowdown. Its assumed exit-speed pattern varies across
+the opening and continuously over time; the area mean retains the digitized
+discharge history. The [uniform/uneven comparison](dash8-uniform-vs-uneven-native-t1.png)
+shows the computed cloud and core at 1 s: native cloud counts change from
+41 to 45, without a substantial breakup improvement. The [0.5 s mesh comparison](dash8-local-refinement-uniform-vs-reference-t0p5.png)
+compares 670,480 and 1,857,796 cells; both retain an attached sheet. The finer
+run was still active when sampled. [Preview provenance](dash8-uneven-preview.json)
+records source paths, hashes, actual forcing and display assumptions.

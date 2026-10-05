@@ -181,6 +181,54 @@ def test_source_rectangles_are_disjoint_and_mesh_faces_recover_area() -> None:
         assert all(sign * face_normal(vertices, face)[axis] > 0 for face in faces)
 
 
+def test_optional_inner_spacing_adds_conforming_axis_bands_and_preserves_source_area() -> None:
+    geometry = prepare_case._validate_geometry(
+        prepare_case._default_geometry(), prepare_case.PILOT_DOMAIN
+    )
+    inner_region = {"x": (-0.9, 0.9), "y": (-0.8, 0.8), "z": (-1.0, 0.0)}
+    base_kwargs = {
+        "domain": prepare_case.PILOT_DOMAIN,
+        "sources": geometry["sources"],
+        "spacing_m": 0.1,
+        "coarse_spacing_m": 0.2,
+    }
+    default_text, _ = prepare_case.block_mesh_dict(**base_kwargs)
+    explicit_default_text, _ = prepare_case.block_mesh_dict(
+        **base_kwargs, inner_refinement_region=None, inner_spacing_m=None
+    )
+    assert explicit_default_text == default_text
+
+    mesh_text, mesh = prepare_case.block_mesh_dict(
+        **base_kwargs,
+        inner_refinement_region=inner_region,
+        inner_spacing_m=0.05,
+    )
+    assert mesh["inner_refinement_region_m"] == {
+        axis: list(bounds) for axis, bounds in inner_region.items()
+    }
+    assert "not true local three-dimensional AMR" in mesh["mesh_refinement_interpretation"]
+    assert mesh["mesh_cells_expected"] == math.prod(mesh["mesh_shape"].values())
+    assert all(count == 1 for count in mesh["source_patch_macro_face_counts"].values())
+    assert all(area == pytest.approx(0.24) for area in mesh["source_patch_areas_m2"].values())
+    assert all(count == 96 for count in mesh["source_patch_face_counts"].values())
+
+    for axis in ("x", "y", "z"):
+        breaks = mesh["mesh_breaks_m"][axis]
+        widths = mesh["mesh_widths_by_segment_m"][axis]
+        assert len(widths) == len(breaks) - 1
+        inner_lower, inner_upper = inner_region[axis]
+        for lower, upper, actual_width in zip(breaks[:-1], breaks[1:], widths, strict=True):
+            midpoint = (lower + upper) / 2
+            if inner_lower <= midpoint <= inner_upper:
+                assert actual_width <= 0.05 + 1e-12
+
+    vertices = mesh_vertices(mesh_text)
+    for patch in mesh["source_patch_macro_face_counts"]:
+        assert sum(quad_area(vertices, face) for face in patch_faces(mesh_text, patch)) == (
+            pytest.approx(0.24)
+        )
+
+
 def test_nonuniform_mesh_caps_actual_widths_and_preserves_source_areas(tmp_path: Path) -> None:
     case = tmp_path / "cl415"
     inputs = prepare_case.prepare_case(

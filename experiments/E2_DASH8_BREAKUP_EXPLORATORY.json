@@ -1,0 +1,206 @@
+{
+  "experiment_id": "E2_DASH8_BREAKUP_EXPLORATORY",
+  "classification": "Exploratory source-target and sensitivity record; not E2 acceptance or field validation",
+  "objective": "Reproduce Dash-8 nearfield morphology, cloud/core structure counts and cloud envelopes while resolving standard k-epsilon instability. More cloud counts alone is insufficient.",
+  "source": {
+    "doi": "10.1071/WF22147",
+    "local_pdf": "Numerical simulation of aerial liquid drops of Canadair CL-415 and Dash-8 airtankers.pdf",
+    "sha256": "128eeb1ea3ad30f5a2ecf9194e2b784be37e837982dec3bdcb7b9db48aa4e7e4",
+    "input_record": "experiments/E2_CALBRIX_SOURCE.md",
+    "count_locator": "PDF p. 10 / journal p. 1524, Fig. 11(c); Dash-8 panels (c,d), CL-415 (a,b)",
+    "velocity_locator": "PDF p. 10 / journal p. 1524, Fig. 11(d), signed printed labels at 1 s",
+    "morphology_locator": "PDF p. 6 / journal p. 1520, Fig. 5(b), 0.1, 1 and 4.8 s"
+  },
+  "reference_inputs": {
+    "opening_m": [
+      4.44,
+      0.3
+    ],
+    "opening_status": "Inferred rectangle with streamwise long axis; actual exit area and profile are unpublished.",
+    "history": "data/derived/calbrix_dash8_fig4_velocity.csv",
+    "history_use": "Digitized scalar provisionally applied as area mean; mean/maximum naming ambiguity is retained.",
+    "aircraft_relative_air_speed_m_s": 50,
+    "turbulence": "Standard k-epsilon RANS; 5% intensity and 5 cm length scales are assumed.",
+    "surface_tension_N_m": 0,
+    "aircraft_mesh": "omitted, flat slip roof assumption"
+  },
+  "horizons": {
+    "diagnostic_s": [
+      0.5,
+      1,
+      1.5
+    ],
+    "full_source_supported_s": 5,
+    "late_morphology_target_s": 4.8,
+    "no_extrapolation": "Figure 4 inputs support 0\u20135 s. A run beyond 5 s requires a separately declared tail or shutdown assumption; later count traces remain source data."
+  },
+  "targets": {
+    "counts": "data/derived/calbrix_dash8_fig11_counts.csv",
+    "native_raster_trace": "data/derived/calbrix_dash8_fig11_native_trace.csv",
+    "velocity_labels": "data/derived/calbrix_dash8_fig11_velocity_labels.csv",
+    "digitization_metadata": "data/derived/calbrix_dash8_fig11_metadata.json",
+    "thresholds": [
+      0.001,
+      0.9
+    ],
+    "count_read_bound": 5,
+    "time_read_bound_s": 0.01,
+    "bound_status": "correlated rasterread allowances, not author uncertainty or statisticalconfidence",
+    "missing_reads": "leave blank; nearzero rawordinates retained with nonnegative physicalintervals, not fabricatedzero/extrapolation",
+    "cloud_curve_targets": "data/derived/calbrix_dash8_cloud_curves.csv; independent read retained",
+    "figure5_proxy_bundle": "results/runs/dash8-targets-20261004T1705Z",
+    "figure5_limits": "cyan-color2D proxy only; no calibratedcamera/physicalscale or extractedredcore target"
+  },
+  "comparison_rules": {
+    "sampling": "Count each saved 0.1 s state; report exact sample time and coverage of the full 0\u20135 s target window.",
+    "count_method": "Native face connectivity and minimum one cell primary; point connectivity and minimum two cells as sensitivities. Retain all mass independently.",
+    "source_bounds_compatibility": "Report the fraction within horizontal and vertical raster-read bounds separately for each threshold; descriptive 0.80 fraction target and 0.90 stretch. This is never stand-alone completion or gate evidence. Propagate time bounds through the native trace on steep slopes.",
+    "distance_metrics": "Also report per-time count differences and relative errors where source counts are positively resolved; near zero use absolute intervals only.",
+    "curve_registration": "Report fixed source-center and physical-edge hypotheses; no fitted shifts.",
+    "normalization": "Lc=sqrt(assumed area) is conditional; published numerical exit area is unavailable.",
+    "velocity_statistics": "Report attached versus detached structures and number- versus mass-mean velocities; author selection and weighting are unknown. Preserve signed velocity labels separately from downward penetration Z.",
+    "visuals": "Computed fields with fixed scales, camera and thresholds; inferred subgrid foam cannot stand in for computed fragmentation.",
+    "completion": "Requested 80\u201390% closeness remains unproven until counts and morphology broadly agree, sustained turbulence remains stable and results withstand mesh/detector sensitivities. A partial horizon or one favorable count is insufficient."
+  },
+  "single_factor_trials": [
+    {
+      "factor": "turbulence linear solver",
+      "change": "PBiCGStab/DILU for k and epsilon; unchanged physics, mesh, boundary conditions and convection.",
+      "horizon_s": 1.5
+    },
+    {
+      "factor": "smaller opening area informed by conditional Weber consistency",
+      "change": "2.22 x 0.15 m, S=0.333 m\u00b2, preserves default aspect ratio and Figure 4 mean-speed history; quarter flow/payload. Assumed rho_air1.15\u20131.25 and reference sigma0.070\u20130.074 imply S0.28048\u20130.37033 from reported We23643; no exact aperture is identified.",
+      "horizon_s": 1,
+      "note": "Only two cells span width at baseline spacing. Pair with source refinement; not a matched-payload comparison or standalone agreement result."
+    },
+    {
+      "factor": "small-area source resolution",
+      "change": "Same0.333m\u00b2 opening, uniform scalarhistory and boundaries as small-area trial; inner40mm conforming tensor-product axisbands x=[-1.11,1.11],y=[-.075,.075],z=[-.5,0], base80mm/far600mm. 927360cells, fourcellsacrosswidth, same1299.41595kg prescribedrelease.",
+      "horizon_s": 1,
+      "note": "Axis bands extend acrossbox and are not local3D AMR. FixedCourant adaptive time steps also refine; morelevels are needed for a convergence claim."
+    },
+    {
+      "factor": "inlet profile",
+      "change": "Seeded continuous normal velocity, maximum deviation 35% after area centering, seed 29, correlation time 0.18 s; fixed area and mean history.",
+      "horizon_s": 1,
+      "note": "Preserves prescribed velocity-derived flux; actual water alphaPhi flux must be checked separately. Momentum change is logged."
+    },
+    {
+      "factor": "plume refinement",
+      "change": "80 mm target spacing over x=[-2.5,8], y=[-3,3], z=[-10,0] m; original refinement ended 3 m below the outlet. Same physical domain.",
+      "horizon_s": 1
+    },
+    {
+      "factor": "aspect ratio",
+      "change": "2.22 x 0.60 m rectangle; same assumed 1.332 m\u00b2 area and scalar history.",
+      "horizon_s": 0.5
+    },
+    {
+      "factor": "larger opening",
+      "change": "4.44 x 0.60 m opening at unchanged UL; area, flow and payload double. Provisional larger-opening sensitivity, not a matched-payload comparison.",
+      "horizon_s": 0.5
+    },
+    {
+      "factor": "freestream tangential velocity on air backflow",
+      "change": "Add tangentialVelocity uniform (50 0 0) to the four pressureInletOutletVelocity patches; effective streamwise change is on yMin/yMax/zMin only because the vector projects to zero on the x-normal xOutlet. Preserve pressure, normal-velocity coupling, source, mesh and turbulence model.",
+      "horizon_s": 1.5,
+      "note": "Pinned v2512 source and saved pure-air inflows confirm that the baseline imposes approximately zero streamwise velocity on side/bottom backflow. This sensitivity tests artificial shear; it is not an author-reported boundary condition or a demonstrated explanation of the turbulence maxima."
+    },
+    {
+      "factor": "outer boundary placement",
+      "change": "Expand bounds to x=[-8,33], y=[-15,15], z=[-41,0] m; preserve source and near-source refinement. Diagnose pure-air far-corner turbulence.",
+      "horizon_s": 1.5
+    },
+    {
+      "factor": "full source horizon reference",
+      "change": "Standalone 0\u20135 s run with the complete digitized inlet tables, baseline mesh, uniform source and candidate linear settings. Not a selected refined reproduction.",
+      "horizon_s": 5
+    },
+    {
+      "factor": "source resolution on repaired matched background mesh",
+      "change": "Same 0.333 m\u00b2 source and digitized uniform history, original boundary conditions, base80/far300 mm in both cases; compare no inner source bands with inner40 mm bands. Actual meshes 1,888,128 and 2,411,094 cells; 56 and 224 source faces. Both checkMesh-clean before queueing.",
+      "horizon_s": 1,
+      "diagnostic": "Structure counts, threshold morphology, native transported-water ledger and turbulence stability. No convergence or acceptance claim from two meshes.",
+      "allocation": {
+        "ranks": 20,
+        "memory_gib": 96,
+        "wall_budget_s": 43200
+      },
+      "stop_conditions": "Runner stops before CFD on mesh failure; retain solver failures and wall-budget stops. Do not relax quality tolerance to salvage failed source40/far600 trial.",
+      "case_record": "results/runs/dash8-repaired-mesh-queue-20261004T210621Z/queue.json",
+      "time_step_caveat": "The source40 case also reduces the maximum timestep cap from 0.000375 to 0.0001875 s. This is a coupled space/time refinement pair, not an isolated spatial convergence test."
+    },
+    {
+      "factor": "maximum-versus-mean inlet-history hypothesis",
+      "change": "Stationary separable parabolic face-center profile with continuous maximum equal to the digitized Fig.4 history; no discrete-maximum renormalization. Same provisional 1.332 m\u00b2 source and mesh, corrected freestream tangential backflow, scalar maximum-referenced k/epsilon. F1=.45840640943877553; F2=.28541669206090986.",
+      "horizon_s": 1.5,
+      "note": "Shape is assumed, not recovered tank flow or calibrated to volume/counts. Release and momentum differ from uniform mean-history reference; not matched payload. Runtime coded boundary compile and MPI logs remain to verify. Five-second case prepared, not queued.",
+      "allocation": {
+        "ranks": 20,
+        "memory_gib": 96,
+        "wall_budget_s": 21600
+      },
+      "case_record": "results/runs/dash8-maximum-profile-priority-20261004T220830Z/launch.json"
+    },
+    {
+      "factor": "custom time-varying uneven outflow velocity forcing",
+      "change": "Apply a frozen custom 24-mode seeded cosine field (seed 29, maximum centered deviation 0.60, nominal tau 0.03 s; streamwise wavelengths 0.48-0.96 m and cross-track wavelengths 0.45-0.90 m) while preserving the uniform digitized mean-history flux over the assumed 1.332 m2 opening. Corrected air backflow, mesh, standard k-epsilon, k/epsilon history tables, and PBiCGStab/DILU remain the matched reference. This custom spectrum differs from both the stationary parabolic maximum-profile trial and the previous 35% long-wave/tau=0.18 s case. The imposed velocity field is a strong provisional forcing, not measured turbulence or an observed outlet profile.",
+      "horizon_s": 1,
+      "diagnostic": "Runtime area-mean/min/max source speed and momentum-flux logs; native alphaPhi water ledger; alpha>=0.001 cloud and alpha>=0.9 core counts with component masses/source attachment; near-source/far-air native nut/k/epsilon; fixed-scale computed fields. The prelaunch face-quadrature checks area-mean speed to 2.3e-16 relative error, confirms nonnegative [0.4,1.6] face multipliers and >=6 source-face spacings per shortest wavelength, and predicts 5.47% more normal momentum impulse than uniform (half-maxDeltaT vs maxDeltaT difference 1.7e-8 relative). Local peak is predicted at 7.503 m/s versus maximum digitized area-mean 4.693 m/s. These are input predictions, not CFD results; transported alphaPhi flux remains measured separately.",
+      "allocation": {
+        "ranks": 20,
+        "memory_gib": 96,
+        "wall_budget_s": 14400
+      },
+      "case_record": "results/runs/dash8-uneven-outflow-priority-20261004T231016Z/case-record.json",
+      "launch_record": "results/runs/dash8-uneven-outflow-priority-20261004T231016Z/launch.json",
+      "status": "queued after maximum-profile trial; diagnostic only; no E2 gate decision"
+    },
+    {
+      "factor": "assumed water turbulence length scale",
+      "change": "Uniform mean-history large1.332 m\u00b2 source with corrected freestream tangent; water ell0.05\u21920.005 m. Air ell0.05 m, both intensities0.05, k and source velocity/mesh unchanged. Only prepared 0/epsilon and metadata differ from same-horizon baseline.",
+      "horizon_s": 1,
+      "diagnostic": "Source-connected versus detached structures, cloud/core counts, size/speed distributions, native transported-water ledger, water-containing nut, morphology and stability. No physical superiority inferred before results.",
+      "allocation": {
+        "ranks": 20,
+        "memory_gib": 96,
+        "wall_budget_s": 14400
+      },
+      "case_record": "results/runs/dash8-water-length-priority-20261004T221706Z/launch.json"
+    },
+    {
+      "factor": "localized standard-k-epsilon turbulent-viscosity cap",
+      "change": "Use the pinned v2512 limitTurbulenceViscosity fvOption with nested limitTurbulenceViscosityCoeffs, c=1000 and fixed geometric box x=[-2.5,4], y=[-1.5,1.5], z=[-3,0] m. One shared nut is limited in both phases using the solver mixture nu=mu_mix/rho_mix; pure-water and pure-air limits are 0.001 and 0.015 m2/s. The selector is fixed in space and does not follow alpha.water. Source, 1.332 m2 geometry, corrected air boundary, mesh, standard k-epsilon, both I=0.05 and ell=0.05 m, and PBiCGStab/DILU remain unchanged. This is a model ablation, not the STAR paper interface-damping method or calibrated physics.",
+      "horizon_s": 1,
+      "diagnostic": "Compare alpha-connected counts/component and detached mass, speeds, native alphaPhi ledger, stored nut/k/epsilon by alpha and region, nLimited cell logs, and fixed-scale computed alpha/nut fields against the matched corrected-backflow uniform baseline. No numerical tolerance or acceptance gate is set.",
+      "allocation": {
+        "ranks": 20,
+        "memory_gib": 96,
+        "wall_budget_s": 14400
+      },
+      "case_record": "results/runs/dash8-nut-cap-preparation-20261004T225454Z/case-record.json",
+      "launch_record": "results/runs/dash8-uneven-outflow-priority-20261004T231016Z/launch.json",
+      "status": "queued after water-length trial; source80 remains held until cap terminal; not calibrated or accepted"
+    }
+  ],
+  "numerical_sensitivity": "Refine source and plume separately; further levels are needed if counts or envelopes change materially. One cell count cannot establish convergence.",
+  "stop_conditions": "Each run declares wall and memory budgets. Preserve fatal, nonfinite and unstable attempts. Healthy completion alone does not establish physical correctness.",
+  "source_conflicts": [
+    "Fig. 8 body says 0.5 s; caption says 1 s.",
+    "Fig. 4 scalar is called both mean and maximum.",
+    "Fig. 5 late time 4.8 s, approximate four-second discharge and low-flow tail remain unresolved.",
+    "Fig. 11 detector, sampling cadence, filtering, diameter and velocity averaging are unpublished."
+  ],
+  "artifacts": {
+    "extractor": "scripts/digitize_calbrix_dash8_breakup.py",
+    "raw_bundle": "results/runs/dash8-targets-corrected-20261004T175200Z",
+    "hashes": {
+      "calbrix_dash8_fig11_counts.csv": "410afc71e76c61772e4959616ef7b86de6105de53704668e4ae1d086814af268",
+      "calbrix_dash8_fig11_native_trace.csv": "1db4a3cb6d04ad665d178dd343a12b35a84f70ac629e6b05c07a48791e7161ef",
+      "calbrix_dash8_fig11_velocity_labels.csv": "55a410aedf930594c2c83904e2e828b3d2d6278dd659cd173958e3a30b88f20b",
+      "calbrix_dash8_fig11_metadata.json": "b6a48d912f5ea8f6dd175708eda63b4175f326eb23d49bbdc92888649dccbbbe"
+    },
+    "axis_check": "Independent 600 dpi read found the original zero-axis top edge biased low; corrected 300 dpi zero stroke center is y=2651 px. Original bundle is preserved."
+  }
+}

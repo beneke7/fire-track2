@@ -25,9 +25,10 @@ not the later Fire-Trol 931 retardant/field comparison.
 | --- | --- | --- |
 | Liquid | **Reported** | PDF p. 4 / journal p. 1518, Domains and meshes: water `rho_L=1000 kg/m^3`, `mu_L=0.001 Pa s`. |
 | Air speed and frame | **Reported** | PDF p. 4 / journal p. 1518, Domains and meshes: `U_G=50 m/s` for the first water-simulation set, for both CL-415 and Dash-8. It is stated to correspond approximately to the aircraft's operating ground speed in the absence of wind. The atomization calculations are in the aircraft-moving frame; `U_G` is imposed at the domain inlet. It is not the separate 65–70 m/s normal-air-speed background range for Dash-8 in the introduction (PDF p. 2 / journal p. 1516). |
-| Dash-8 tank exit | **Reported, incompletely specified** | PDF p. 3 / journal p. 1517, Tank geometry: the discharge calculation uses “full load” mode, with the maximum exit section imposed throughout the drop. The mean exit velocity is defined as `U_L=Q_L/S`. PDF p. 4 / journal p. 1518, Fig. 3(b): one exit at the bottom of the Dash-8 tank is shown in red. Numeric exit area `S`, the exact open-patch shape, and a spatial profile table are not stated in the prose. |
+| Dash-8 tank exit | **Reported, incompletely specified** | PDF p. 3 / journal p. 1517, Tank geometry: the discharge calculation uses “full load” mode, with the maximum exit section imposed throughout the drop. The mean exit velocity is defined as `U_L=Q_L/S`. PDF p. 5 / journal p. 1519, Fig. 3(b): one exit at the bottom of the Dash-8 tank is shown in red. Numeric exit area `S`, the exact open-patch shape, and a spatial profile table are not stated in the prose. |
 | Exit-velocity history | **Reported and digitized** | PDF p. 5 / journal p. 1519, Fig. 4 and adjacent Results text: the legend identifies the blue Dash-8 curve and the text says its peak is approximately `4.8 m/s` at `0.5 s`, with complete tank discharge in approximately `4 s`. A primary centerline read and a separately implemented second raster read, using the same documented axis calibration, are in [`data/derived/calbrix_dash8_fig4_velocity.csv`](../data/derived/calbrix_dash8_fig4_velocity.csv) and [`data/derived/calbrix_dash8_fig4_velocity_independent.csv`](../data/derived/calbrix_dash8_fig4_velocity_independent.csv). The prose elsewhere incorrectly calls a CL-415 top-exit trace blue; use the Fig. 4 legend to select Dash-8. Both are approximate figure reads, not raw flow data. |
 | Flow and payload | **Reported gap** | PDF p. 3 / journal p. 1517, Tank geometry: the Dash-8/CL-415 flow-rate measurements are confidential. The paper provides no exact `Q_L(t)`, total released mass, or measured payload for the E2 nearfield water case. The generic aircraft maximum tank capacity of 10,000 L (PDF p. 2 / journal p. 1516) is not the simulated E2 release mass. |
+| Later drop-volume cross-check | **Reported for retardant; water linkage incomplete** | PDF p. 11 / journal p. 1525, Table 5: Dash-8 drop volume is `8.840 m³` for the Fire-Trol 931 field-drop conditions (`rho=1100 kg/m³`, `mu=0.056 Pa s`). The adjacent paragraph says those volumes were used in tank-discharge simulations to determine inlet conditions. This is relevant to the profile setup, but the article does not explicitly identify it as the first water set's initial payload or give a water fill depth. |
 | Dimensionless case values | **Reported** | PDF p. 8 / journal p. 1522, Table 2: Dash-8 `We_G=23,643`, momentum ratio `q=7.90`, penetration prefactor `K_P=K q^alpha=3.0`, exponent `beta=1.36`. PDF p. 9 / journal p. 1523, Table 3: `We_G=23,643`, `q=7.90`, lateral-expansion prefactor `K_L=K' q^alpha'=0.07`, exponent `beta'=2.0`. Both tables describe the maximum ejection velocity at `t=0.5 s`. |
 | Air properties, surface tension, gravity magnitude | **Not fully reported** | PDF p. 3 / journal p. 1517, Eqs. (1)–(3): air density `rho_G`, air viscosity `mu_G`, and gravity `g` occur symbolically. No numeric values for those properties or `sigma` are stated for this case in the methods/results. The authors omit the surface-tension term from Eq. (3), explaining that the resolution is larger than a capillary length of about 3 mm. Do not silently supply values from another paper or default conditions. |
 
@@ -50,17 +51,29 @@ approximate `4.8 m/s` by slightly more than its listed `0.10 m/s` ordinate
 read bound. Treat these as an approximate source-text discrepancy, not as
 agreement within the listed digitization bound.
 
+Under the provisional area-mean interpretation, the digitized 0–5 s history
+integrates to 11.953 m. The inferred 1.332 m² aperture therefore releases
+15.921396 m³, exceeding both the nominal 10 m³ capacity and the later
+8.840 m³ drop-volume cross-check; the conditional 0.333 m² sensitivity
+releases 3.980349 m³. Neither is a paper-specified water payload. This
+unresolved consistency issue reinforces the need to distinguish prescribed
+velocity, actual water flux and tank inventory; matching `q` alone does not
+resolve the outlet area or mean-versus-maximum velocity interpretation.
+
 ## Geometry, coordinates, boundaries, and numerics
 
 | Item | Evidence class | Source location and value |
 | --- | --- | --- |
 | Tank geometry | **Reported drawing dimensions; outlet interpretation incomplete** | PDF p. 4 / journal p. 1518, Fig. 2(b–c): Dash-8 tank front/side views label a 2 m overall front width, 1.7 m internal width, 1.5 m height, a 0.3 m lower opening-region dimension, and a 0.1 m bottom feature; side view labels 7.46 m overall length and 4.44 m lower-section length. The drawing does not state a numerical open exit area or explain in text how these labels define `S`; do not calculate `S` from them without resolving the drawing geometry. |
+| Opening-axis alignment | **Figure-read support; exact aperture remains unknown** | PDF p. 5 / journal p. 1519, Fig. 3(b): the single red narrow exit follows the fuselage longitudinal axis and air-flow direction. PDF p. 4 / journal p. 1518, Fig. 2(b-c) places the 4.44 m lower-section span in side view and the 0.3 m bottom feature in front view; Figs. 6 and 8 confirm streamwise/transverse axes. An independent image review and root inspection support a streamwise long axis, without establishing numerical aperture edges or area. A 90-degree rotation would be a source-disfavored sensitivity. |
 | Nearfield domain | **Reported drawing dimensions** | PDF p. 5 / journal p. 1519, Fig. 3(b): domain under the Dash-8 belly is labeled 26 m long, 20 m wide, and 31 m high. These are figure dimensions; the paper does not tabulate coordinate bounds or exact outlet-to-boundary distances. |
+| Aircraft geometry and walls | **Body inclusion reported; wall condition unspecified** | PDF p. 4 / journal p. 1518, Domains and meshes, and PDF p. 5 / journal p. 1519, Fig. 3: the aircraft belly is meshed in the adapted external domain. Our flat slip roof omits that geometry. The paper's wall-cell sizes do not specify a slip/no-slip or wall-function treatment. |
 | Frame and axes | **Reported/figure-read** | PDF p. 4 / journal p. 1518: calculation is in a frame moving with the aircraft. PDF p. 7 / journal p. 1521, Fig. 6, shows `y` along the streamwise/downstream direction and `z` vertically downward from the exit; the airflow arrow points along `+y`. PDF p. 9 / journal p. 1523, Fig. 8(a), is a front view with `x` transverse and `z` downward. Text on PDF p. 8 / journal p. 1522 describes velocity components `v_Z`, `v_Y`, `v_X` as vertical, streamwise, and transverse. A formal right-handed basis and signed gravity vector are not stated; the axis signs above are figure-based conventions, not a published vector specification. |
 | Boundaries | **Reported in part; conditions missing** | PDF p. 4 / journal p. 1518, Domains and meshes: aircraft belly is meshed in an adapted external domain; the velocity profile from tank discharge is applied at the tank-exit inlet; relative air speed `U_G` is imposed at the domain inlet. The article does not specify outlet/top/side pressure or velocity conditions, wall-slip condition, initial field, or detailed inlet turbulence values. |
 | VOF and equations | **Reported** | PDF p. 3 / journal p. 1517, Numerical method, Eqs. (1)–(3): unsteady 3D incompressible, immiscible Newtonian fluids; VOF fraction `alpha_L` obeys `d(alpha_L)/dt + div(alpha_L v)=0`; `div(v)=0`; one-fluid density `rho=alpha_L rho_L+(1-alpha_L)rho_G` and viscosity `mu=alpha_L mu_L+(1-alpha_L)mu_G`; momentum includes pressure, viscous stress, and gravity. Surface tension is omitted as noted above. STAR-CCM+ and standard `k-epsilon` RANS turbulence are reported. |
 | Liquid observables | **Reported definitions** | PDF p. 6 / journal p. 1520: liquid core is `alpha_L >= 0.9`; cloud envelope is `alpha_L >= 0.001`. PDF p. 7 / journal p. 1521, Fig. 6: penetration `Z` is the front of the `alpha_L=0.001` surface as a function of streamwise `y`; plotted for Dash-8 and CL-415 at `t=0.5 s`. PDF p. 9 / journal p. 1523, Fig. 8: lateral expansion `L` is described as maximum width of the dispersed liquid. |
-| Mesh and compute | **Reported; exact benchmark mesh mapping incomplete** | PDF p. 3 / journal p. 1517: Dash-8 tank-discharge geometry uses a polyhedral mesh with about 1.9 million cells, sizes `2e-2 m` at the center to `5e-6 m` at walls. PDF p. 5 / journal p. 1519: nearfield domain uses a polyhedral mesh with cell sizes from `8e-2 m` in the center to `8e-6 m` at walls; about 8.7 million cells for Dash-8. The article says at least two mesh resolutions were considered for each case, but does not identify which exact mesh produced each comparison curve. The Dash-8 parallel run used 720 processors and 28,800 CPU-hours. |
+| Mesh and compute | **Reported; exact benchmark mesh mapping incomplete** | PDF p. 3 / journal p. 1517, Methods: at least two mesh resolutions were considered for each case, but the paper does not identify which exact mesh produced each comparison curve. PDF p. 5 / journal p. 1519, Fig. 3(b): the nearfield domain under the Dash-8 is labeled 26 m long, 20 m wide, and 31 m high; the adjacent results text reports a polyhedral mesh with cell sizes from `8e-2 m` in the center to `8e-6 m` at walls and about 8.7 million Dash-8 cells. PDF p. 11 / journal p. 1525, Concluding discussion, separately states that the “domain of study” extends up to 10 m under the airtanker with spatial resolution `0.04 m`. The article does not reconcile that conclusion statement with the Fig. 3 domain and nearfield mesh description or map it to a particular plotted comparison; do not conflate the two scales or claim the 40 mm resolution reproduces a specific figure. PDF p. 3 / journal p. 1517 also reports a separate Dash-8 tank-discharge mesh with about 1.9 million cells, sizes `2e-2 m` at the center to `5e-6 m` at walls. The Dash-8 parallel run used 720 processors and 28,800 CPU-hours. |
+| Data availability | **Reported access route; source arrays absent locally** | PDF p. 14 / journal p. 1528 states that the data used to generate the paper results are available by contacting the corresponding author. The supplied PDF has no embedded files, and no supplementary files or originating arrays were found in the local project tree; the local Dash-8 CSV/JSON inputs are documented project figure digitizations. No author contact was made. |
 
 The paper does not state a time step, CFL limit, temporal or spatial discretization
 schemes, full turbulence boundary values, exact external boundary conditions,
@@ -83,6 +96,22 @@ journal p. 1521:
   `L/L_c = K' q^alpha' (z/L_c)^beta'`. At `t=0.5 s`, Table 3 reports
   `K_L=K' q^alpha'=0.07` and `beta'=2.0` for Dash-8.
 
+A conditional area cross-check uses the reported `We_G=23,643` and
+`S=(We_G sigma / (rho_G U_G^2))^2`. With **assumed reference properties**
+`rho_G=1.15–1.25 kg/m³` and water `sigma=0.070–0.074 N/m`, and reported
+`U_G=50 m/s`, this gives `S=0.28048–0.37033 m²`. The current inferred
+`S=1.332 m²` instead gives `We_G=44,839–51,523` under those assumptions.
+Root requested an independent check; both source extraction and scientific
+review confirmed the equation and arithmetic in the local PDF. This is a
+conditional consistency warning, **not a recovered numerical aperture**.
+Surface tension supplies the dimensionless reference scale here even though
+the authors omit its force from their momentum equation. The reported `q`
+does not constrain area. A `2.22 × 0.15 m` opening (`S=0.333 m²`) preserves
+the current candidate's aspect ratio and is a useful provisional sensitivity;
+those individual dimensions are not drawing measurements. At unchanged
+digitized mean speed, its flow and release mass are one quarter of baseline,
+and its width spans only two baseline cells, requiring resolution sensitivity.
+
 There is an explicit timing conflict for dimensional lateral expansion. Section
 “Liquid lateral expansion” says **Fig. 8 is compared at `t=0.5 s`** (PDF p. 7 /
 journal p. 1521, text). Fig. 8's own caption says both its Dash-8
@@ -102,6 +131,42 @@ quietly rewriting the citation.
 Figure 5 (PDF p. 6 / journal p. 1520) provides qualitative Dash-8 water
 snapshots at `t=0.1, 1, 4.8 s` with `alpha_L=0.001` cloud envelope and
 `alpha_L=0.9` core. It is morphology context, not an outlet-history table.
+
+## Dash-8 structure counts and velocity classes
+
+Figure 11 (PDF p. 10 / journal p. 1524) assigns CL-415 to panels (a,b) and
+**Dash-8 to panels (c,d)**. Panel (c) plots the count history for
+`0.001 <= alpha_L <= 1` (red cloud) and `0.9 <= alpha_L <= 1` (blue core).
+These are figure-read targets, not tabulated raw counts. The earlier project
+statement that all Figure 11 counts were CL-415-only was incorrect; root and
+an independent worker rechecked the local PDF caption on 2026-10-04.
+
+The reproducible extraction is
+[`scripts/digitize_calbrix_dash8_breakup.py`](../scripts/digitize_calbrix_dash8_breakup.py);
+its count bins, native pixel trace and calibration metadata are linked in
+[`E2_DASH8_BREAKUP_EXPLORATORY.json`](E2_DASH8_BREAKUP_EXPLORATORY.json).
+An independent 600 dpi read checked the axes. The corrected 300 dpi zero-axis
+stroke center is y=2651 px; the earlier top-edge read is preserved in its
+original ignored bundle. At approximately 1 s, the cloud read is 266.583
+structures and core read 14.000, with heuristic +/-5 count and +/-0.01 s
+raster-read allowances. These are not author error bars. Near-zero unresolved
+reads and gaps remain explicit; missing values are not fabricated.
+
+Panel (d) reports Dash-8 velocity classes at `t=1 s`, detected with the dilute
+cloud threshold, for equivalent diameters `0.04–0.1`, `0.1–1`, and `1–10 m`.
+The printed component values, read from the labeled bars, are respectively:
+`v_x = (0.07, -0.02, -0.16) m/s`,
+`v_y = (25.95, 41.57, 18.7) m/s`, and
+`v_z = (1.07, -2.26, -5.13) m/s`.
+These use the paper's transverse x, streamwise y and vertical z components;
+keep the established signed mesh-to-paper transform explicit when comparing.
+
+The body (PDF p. 8 / journal p. 1522) describes MATLAB reconstruction of
+three-dimensional liquid structures but leaves connectivity, filtering,
+equivalent-diameter calculation and velocity averaging unspecified. Our
+face-connected native-cell counts, alpha-volume equivalent diameter and
+liquid-mass-weighted velocities therefore require detector sensitivity and
+cannot be asserted equivalent to the paper merely because counts agree.
 
 ## Figure 4 history digitization
 

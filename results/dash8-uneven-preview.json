@@ -1,0 +1,79 @@
+{
+  "classification": "Computed exploratory water-air VOF; no paper reproduction or validation pass",
+  "assets": [
+    {
+      "published_path": "results/dash8-uneven-alpha50-1s-10x.mp4",
+      "source_path": "results/runs/dash8-uneven-outflow-20261004T232704Z-1s-postprocessed/dash8-uneven-outflow-20261004T232704Z-1s/water-alpha50/water-alpha50.mp4",
+      "sha256": "6c96dc034574817affc810af34916931f07e4fe3dfa174397fde4cb6fd7321f3",
+      "size_bytes": 135988
+    },
+    {
+      "published_path": "results/dash8-uniform-vs-uneven-native-t1.png",
+      "source_path": "results/runs/dash8-uneven-terminal-comparison-20261005T005540Z/side-by-side-native-alpha-isosurfaces-t1p0.png",
+      "sha256": "64fd62959cd429e116a0bc32b19ba72c4ad77dccb7eae8f903d72aaffcd3cdc4",
+      "size_bytes": 586820
+    },
+    {
+      "published_path": "results/dash8-local-refinement-uniform-vs-reference-t0p5.png",
+      "source_path": "results/runs/dash8-local-uniform-live-t0p5-retry-20261005T084810Z/render/live-partial-nearfield-polyhedral-t0p5.png",
+      "sha256": "31619e2901847767e38d074528e0267ffb32de107ca08b9b03032c0c99f5d2ec",
+      "size_bytes": 204083
+    }
+  ],
+  "completed_uneven_trial": {
+    "time_range_s": [
+      0,
+      1
+    ],
+    "cells": 670480,
+    "video_slowdown": 10,
+    "velocity": "downward normal only; spatial and continuous temporal fluctuations",
+    "cosine_modes": 24,
+    "peak_deviation_fraction": 0.6,
+    "speed_range_relative_to_mean": [
+      0.4,
+      1.6
+    ],
+    "frequency_range_Hz": [
+      0.395,
+      17.171
+    ],
+    "mode_period_range_s": [
+      0.0582,
+      2.529
+    ],
+    "forcing_status": "assumed, not measured; frozen actual 0/U inspected",
+    "area_mean": "digitized Figure 4 history preserved at every update; no extra whole-opening pulsations",
+    "frozen_U_sha256": "55b4cb1260c2cf26111a34fc6965ed7d314b9d82632148f703297b9c43f36942",
+    "cloud_counts_t1_uniform_uneven": [
+      41,
+      45
+    ],
+    "core_counts_t1_uniform_uneven": [
+      123,
+      104
+    ]
+  },
+  "mesh_comparison": {
+    "time_s": 0.5,
+    "classification": "LIVE_PARTIAL saved checkpoint while local solver continues",
+    "cells_reference_local": [
+      670480,
+      1857796
+    ],
+    "cloud_counts_reference_local": [
+      1,
+      1
+    ],
+    "core_counts_reference_local": [
+      13,
+      19
+    ],
+    "detached_core_mass_kg_reference_local": [
+      14.166,
+      12.211
+    ],
+    "conclusion": "Attached sheet remains; not a demonstrated breakup improvement"
+  },
+  "display": "alpha=.5 video smoothed for display; comparison PNG thresholds .001 and .9; native counts unaffected"
+}

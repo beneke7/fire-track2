@@ -19,6 +19,10 @@ orientation.
 
 - The primary agent directs the work, owns the plan and shared interfaces,
   reviews all contributions, integrates them, and reports evidence to the user.
+- User preference (2026-10-05): the primary mostly plans, inspects evidence and
+  integrates; delegate implementation, case preparation, run launches, analysis,
+  rendering and check execution to Luna Max workers. Primary read-only
+  inspection remains appropriate.
 - The user explicitly authorizes exploratory CPU/GPU runs and parallel agents
   without per-run permission requests. Start clearly labelled trials when
   local capacity is idle; do not let routine paperwork or exact reviews block
