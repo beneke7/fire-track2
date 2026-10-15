@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-15 10:10 UTC. Full shared budget remains 20 available CPUs, CPU-only. Failed long continuation is paused; maxCo=1 pilot checkpointed before the failure point, and a scalar-convection diagnostic is being prepared. User requested commit/push and expects about 1,300 cluster cores tomorrow.
+Updated: 2026-10-15 10:17 UTC. Full shared budget remains 20 available CPUs, CPU-only. Failed long continuation is paused; maxCo=1 pilot checkpointed before the failure point, and the scalar-convection diagnostic is advancing. Code/results were pushed as `656850f`; user expects about 1,300 cluster cores tomorrow.
 **Analytical E0 is the only passed gate.** No nearfield, ground, field, suppression or 80–90% reproduction claim is validated.
 See [plan](../track2_aerial_drop_experiment_plan.md), [gates](VALIDATION.md) and [sources](REFERENCES.md).
 
@@ -57,7 +57,20 @@ Next bounded branch: restart from the same 3.0735945651412 s parent, restore
 baseline maxCo=2, and change only k/epsilon convection to first-order upwind.
 Keep physical inputs, mesh, momentum and pressure controls fixed; add compact
 field-extrema diagnostics. This is a transport-sensitivity experiment, not
-adoption of a more diffusive paper model. Launch/result remains pending.
+adoption of a more diffusive paper model. This branch is now running as
+`rouaix-c4-turbulence-upwind-pilot-20261015T101327Z`, container
+`rr-rouaix-c4-turbulence-upwind-pilot-20261015T101327Z` (`05eb04aaf234`),
+with 20 MPI ranks, hard 20-CPU quota, 48 GiB memory cap and a 90-minute limit.
+Root verified running/no OOM and advancement to 3.074108 s; worker later
+observed 3.074334 s. Field-extrema diagnostics registered. Reported max |U|
+about 1,229 m/s and max nut about 19.55 m2/s are extreme relative to the
+imposed source/freestream and raise concern that the pre-stall checkpoint is
+already numerically compromised. Finite fields and mass closure establish
+checkpoint integrity, not physical credibility. The worker is investigating
+locations/earlier onset without capping or clipping fields. Courant/alpha/dt
+and progress guards are active; epsilon's old bounding-line metric is null
+when no bounding message occurs, so direct-extrema coverage needs explicit
+verification. No numerical remedy or failure-time crossing is established.
 The worker owns this ignored run only; no automatic extension of the prior
 pilot is authorized. Initial budget is all available 20 CPUs.
 
