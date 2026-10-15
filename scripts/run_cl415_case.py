@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 IMAGE = "opencfd/openfoam-default:2512"
 RUN_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,59}")
 SUPPORTED_SOLVERS = frozenset({"interIsoFoam", "interFoam"})
+CAPACITY_BLOCKERS = frozenset({"interIsoFoam", "interFoam", "snappyHexMesh", "blockMesh"})
+DOCKER_CGROUP = re.compile(r"(?:^|/)docker-([0-9a-f]{64})\.scope$")
 
 
 def utc() -> str:
@@ -184,6 +186,122 @@ def pilot_mass_error(after: Path, dependency: dict) -> float:
     return abs(residual) / injected
 
 
+def _blocking_process_records() -> list[dict[str, str]]:
+    output = subprocess.run(
+        ["ps", "-eo", "pid=,comm="], capture_output=True, text=True, check=True
+    ).stdout
+    records = []
+    for line in output.splitlines():
+        fields = line.split(maxsplit=1)
+        if len(fields) == 2 and fields[1] in CAPACITY_BLOCKERS:
+            records.append({"pid": fields[0], "comm": fields[1]})
+    return records
+
+
+def _process_cgroup(pid: str) -> str | None:
+    try:
+        lines = Path(f"/proc/{pid}/cgroup").read_text().splitlines()
+    except OSError:
+        return None
+    for line in lines:
+        fields = line.split(":", 2)
+        if len(fields) == 3 and not fields[1]:
+            return fields[2]
+    return None
+
+
+def _process_cpu_ticks(pid: str) -> tuple[int, int] | None:
+    try:
+        stat = Path(f"/proc/{pid}/stat").read_text()
+        fields = stat[stat.rfind(")") + 2 :].split()
+        return int(fields[11]), int(fields[12])
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def _frozen_docker_state(cgroup_path: str) -> dict[str, str] | None:
+    """Return Docker/cgroup evidence only for a directly identified frozen container."""
+    match = DOCKER_CGROUP.search(cgroup_path)
+    if match is None:
+        return None
+    container_id = match.group(1)
+    events_path = Path("/sys/fs/cgroup") / cgroup_path.lstrip("/") / "cgroup.events"
+    try:
+        events = events_path.read_text()
+        state = subprocess.run(
+            [
+                "docker",
+                "inspect",
+                container_id,
+                "--format",
+                "{{.State.Paused}} {{.State.Running}}",
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
+        ).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if state != "true true" or "frozen 1" not in events.splitlines():
+        return None
+    return {
+        "container_id": container_id,
+        "docker_state_paused_running": state,
+        "cgroup_path": cgroup_path,
+        "cgroup_events": events.strip(),
+    }
+
+
+def _prove_all_blocking_processes_frozen(
+    records: list[dict[str, str]], *, sample_s: float = 2.0
+) -> dict | None:
+    """Ignore capacity blockers only when every PID is in one verified frozen Docker cgroup."""
+    if not records:
+        return None
+    pids = sorted(record["pid"] for record in records)
+    cgroups = {pid: _process_cgroup(pid) for pid in pids}
+    distinct_cgroups = set(cgroups.values())
+    if len(distinct_cgroups) != 1 or None in distinct_cgroups:
+        return None
+    cgroup_path = next(iter(distinct_cgroups))
+    assert cgroup_path is not None
+    frozen_before = _frozen_docker_state(cgroup_path)
+    if frozen_before is None:
+        return None
+    ticks_before = {pid: _process_cpu_ticks(pid) for pid in pids}
+    if any(value is None for value in ticks_before.values()):
+        return None
+    time.sleep(sample_s)
+    after_records = _blocking_process_records()
+    after_pids = sorted(record["pid"] for record in after_records)
+    after_cgroups = {pid: _process_cgroup(pid) for pid in after_pids}
+    ticks_after = {pid: _process_cpu_ticks(pid) for pid in after_pids}
+    frozen_after = _frozen_docker_state(cgroup_path)
+    if (
+        after_pids != pids
+        or after_cgroups != cgroups
+        or ticks_after != ticks_before
+        or frozen_after is None
+        or frozen_after["container_id"] != frozen_before["container_id"]
+    ):
+        return None
+    return {
+        "decision": "ignore capacity blockers proven frozen in one Docker cgroup",
+        "container_id": frozen_before["container_id"],
+        "docker_state_before": frozen_before["docker_state_paused_running"],
+        "docker_state_after": frozen_after["docker_state_paused_running"],
+        "cgroup_path": cgroup_path,
+        "cgroup_events_before": frozen_before["cgroup_events"],
+        "cgroup_events_after": frozen_after["cgroup_events"],
+        "processes": records,
+        "cpu_ticks_before": ticks_before,
+        "cpu_ticks_after": ticks_after,
+        "cpu_ticks_unchanged": True,
+        "sample_s": sample_s,
+    }
+
+
 def wait_for_capacity(
     manifest: dict,
     path: Path,
@@ -207,13 +325,11 @@ def wait_for_capacity(
                         manifest["dependency_sampled_mass_error_fraction"] = pilot_mass_error(
                             after, dependency
                         )
-        process = subprocess.run(
-            ["ps", "-eo", "comm"], capture_output=True, text=True, check=True
-        ).stdout.splitlines()
-        busy = any(
-            name.strip() in {"interIsoFoam", "interFoam", "snappyHexMesh", "blockMesh"}
-            for name in process
-        )
+        process_records = _blocking_process_records()
+        frozen_evidence = _prove_all_blocking_processes_frozen(process_records)
+        busy = bool(process_records) and frozen_evidence is None
+        if frozen_evidence is not None:
+            manifest["frozen_capacity_processes_ignored"] = frozen_evidence
         if dependency_ready and not busy:
             return
         manifest.update(status="waiting_for_capacity", updated_utc=utc())

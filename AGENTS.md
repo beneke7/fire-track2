@@ -23,6 +23,10 @@ orientation.
   integrates; delegate implementation, case preparation, run launches, analysis,
   rendering and check execution to Luna Max workers. Primary read-only
   inspection remains appropriate.
+- Current compute direction (2026-10-05): run the resumed instability and
+  Dash-8 experiments on CPU. Do not launch GPU compute or rendering jobs
+  unless the user changes this direction. Earlier GPU authorizations below
+  remain historical context and do not override this CPU-only instruction.
 - The user explicitly authorizes exploratory CPU/GPU runs and parallel agents
   without per-run permission requests. Start clearly labelled trials when
   local capacity is idle; do not let routine paperwork or exact reviews block
@@ -160,6 +164,11 @@ separate review memos unless a hard decision needs one.
 - The orchestrator and workers share the compute schedule. Use all effective
   CPU capacity when the machine is idle; there is no fixed 18-core ceiling or
   two-core reserve. Allocations are initial estimates, not standing caps.
+  User direction (2026-10-14): Goblin is free; resume using all available CPUs
+  (currently 20 effective CPU equivalents). This supersedes the earlier
+  half-capacity limit. Respect unrelated active workloads and account for
+  concurrent jobs together; a raised quota alone does not increase the number
+  of active single-threaded MPI ranks.
   Avoid routine negotiation or allocation reports: workers coordinate directly
   only when an active long run materially delays assigned work or observed
   contention affects desktop responsiveness, memory, disk, or solver stability.

@@ -198,3 +198,30 @@ mesh, time-step settings, resources, conservation errors, checkpoints, and the a
 stop decision. Keep full 3D fields sparse; routinely save compact flux and ground-map
 products. Follow the validation and stop conditions in the experiment plan before making
 any design or field-performance claim.
+
+## Cluster handoff for 16 October 2026
+
+The user expects about 1,300 CPU cores; Slurm is probable, but scheduler,
+node layout, memory, MPI and container support are unconfirmed. OpenFOAM is
+not expected to be preinstalled. No cluster installation or submission has
+been tested. Local Docker launchers are not a tested cluster backend.
+
+1. Establish the site's supported way to supply the same OpenCFD v2512 solver:
+   an allowed container runtime or a build against the cluster environment.
+   Verify the solver version and a small MPI job before transferring a large case.
+2. Transfer the selected mesh/checkpoint with hashes, physical dictionaries,
+   parent ledger offsets and exact native history prefixes. Use project scratch
+   with known quotas; local `/dev/shm` state is not a transferable durable artifact.
+3. Run a bounded stability diagnostic with mass, timestep, turbulence and
+   no-progress checks. The workstation run stalled at 3.09428 s; the maxCo=1
+   pilot stopped at 3.08515 s, so increased core count is not an established fix.
+4. Measure short strong-scaling pilots from the same state, for example
+   20/40/80/160 ranks where the node allocation permits. Choose ranks from
+   measured physical-time throughput and cost. The current 2,733,120-cell mesh
+   would have only about 2,102 cells per rank at 1,300 ranks; useful scaling is
+   unmeasured. Allocate the remaining capacity to independent, declared
+   stability/mesh/transport comparisons rather than assuming a 65-fold speedup.
+
+Only after numerical stability is demonstrated should the larger allocation
+carry long runs and fragmentation-corridor refinement. Preserve failed trials
+and report the paper's fine-case comparison separately from the coarse pilot.

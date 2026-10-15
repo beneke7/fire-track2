@@ -1,0 +1,44 @@
+{
+  "container_cpu_quota_initial": 19,
+  "declared_utc": "2026-10-15T09:03:15.678269+00:00",
+  "end_time_s": 3.12,
+  "memory_limit_gib": 48,
+  "mpi_ranks": 20,
+  "output_policy": "writeInterval 0.5 s; one manual write-now at target or stop; seven native alphaPhi boundaries plus water inventory each solver step; fresh attempt histories only.",
+  "question": "Does reducing only maxCo from 2 to 1 keep the restarted case numerically advancing through the baseline 3.09428 s collapse region?",
+  "restart_time_s": 3.0735945651412,
+  "run_id": "rouaix-c4-stall-pilot-maxco1-20261015T090213Z",
+  "scope": "Exploratory sensitivity only; not validation or paper match.",
+  "single_numerical_change": {
+    "baseline": 2,
+    "path": "system/controlDict:maxCo",
+    "pilot": 1,
+    "reason": "Baseline deltaT followed maxCo\u22482 as epsilon bounds escalated and deltaT fell below ulp(time); lower Co is a bounded time-step stability sensitivity."
+  },
+  "stall_stop_conditions": {
+    "co_max_gt_4_sustained_steps": 3,
+    "disk_write_floor_bytes": 2147483648,
+    "dt_below_one_time_ulp_sustained_steps": 3,
+    "dt_lt_1e-9_sustained_steps": 3,
+    "epsilon_abs_bound_gt_1e10_sustained_steps": 2,
+    "host_memavailable_floor_bytes": 25769803776,
+    "interface_co_max_gt_4_sustained_steps": 3,
+    "no_solver_time_line_progress_seconds": 180,
+    "post_bounded_alpha_violation_gt_1e-3_sustained_steps": 2,
+    "scratch_limit_bytes": 17179869184,
+    "wall_budget_seconds": 3600
+  },
+  "status": "declared_before_launch",
+  "threads_per_rank": 1,
+  "tmpfs_scratch_limit_gib": 16,
+  "unchanged": [
+    "mesh/source/BCs",
+    "VOF solver and isoAdvector",
+    "realizable k-epsilon",
+    "fvSchemes/fvSolution",
+    "water/air/g/sigma",
+    "maxAlphaCo=1",
+    "maxDeltaT=0.0005"
+  ],
+  "wall_budget_s": 3600
+}

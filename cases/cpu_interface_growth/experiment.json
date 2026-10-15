@@ -1,0 +1,117 @@
+{
+  "classification": "exploratory finite-shear water-air interface-instability diagnostic; not a Dash-8 reproduction or E1-E3 acceptance case",
+  "solver": "OpenCFD OpenFOAM v2512 interIsoFoam, pinned image opencfd/openfoam-default:2512",
+  "coordinate_frame": "periodic Cartesian domain; x is streamwise, y spanwise, z cross-shear",
+  "domain_m": [0.12, 0.06, 0.12],
+  "seeded_mode": {
+    "streamwise_mode_number": 1,
+    "wavelength_m": 0.12,
+    "interface_displacement_amplitude_m": 0.00075,
+    "phase": "eta=A*sin(2*pi*x/Lx); lower and upper water-film interfaces move in phase and the seed is invariant in y"
+  },
+  "initial_phase": {
+    "water_film_z_m": [0.03, 0.09],
+    "water_volume_fraction_expected": 0.5,
+    "alpha_water_initialization": "subcell quadrature of the displaced slab; water alpha in [0,1]"
+  },
+  "base_velocity": {
+    "air_streamwise_m_s": 50.0,
+    "water_streamwise_m_s": 0.0,
+    "finite_shear_thickness_delta_m": 0.0075,
+    "profile": "two periodic tanh transitions at the water-film interfaces; same shape on both interfaces",
+    "seeded_transverse_velocity_m_s": 0.0
+  },
+  "fluids": {
+    "water": {"rho_kg_m3": 1000.0, "nu_m2_s": 1.0e-6},
+    "air": {"rho_kg_m3": 1.2, "nu_m2_s": 1.5e-5},
+    "water_to_air_density_ratio": 833.3333333333334,
+    "surface_tension_N_m": 0.0
+  },
+  "boundary_conditions": "cyclic in x, y, and z; the periodic z-domain has two interfaces and no open boundaries",
+  "gravity_m_s2": [0.0, 0.0, 0.0],
+  "turbulence_treatment": "laminar molecular baseline plus the same added kinematic-viscosity increment in each phase as a damping surrogate; effective dynamic viscosity remains phase-density weighted, and this is not a RANS or LES closure",
+  "mesh_families": {
+    "pilot": [32, 16, 32],
+    "coarse": [48, 24, 48],
+    "fine": [72, 36, 72]
+  },
+  "case_variants": [
+    "uniform 25 m/s advection control, molecular viscosities",
+    "50 m/s finite-thickness air-water shear, molecular viscosities",
+    "same shear with nu_add=0.01 m2/s in both phases as a damping surrogate"
+  ],
+  "physical_horizon_s": {"pilot": 0.002, "mesh_comparison": 0.012},
+  "write_interval_s": {"pilot": 0.00025, "mesh_comparison": 0.0005},
+  "fit_window_s": [0.002, 0.008],
+  "diagnostics": [
+    "lower- and upper-interface complex Fourier modes, their relative phase, and symmetric/antisymmetric combinations",
+    "Fourier spectra of each interface mode",
+    "finite-time log-amplitude slope after the initial transient",
+    "plane-averaged velocity jump and tanh shear-thickness evolution around both interfaces",
+    "water volume, relative phase-volume drift, alpha bounds",
+    "periodic central-difference divergence and solver continuity residuals",
+    "time step, runtime, mesh size, and container resource samples"
+  ],
+  "interpretation": "The inviscid vortex-sheet growth rate is recorded only as an approximate reference. No finite-thickness eigenvalue or Dash-8 validation claim is made.",
+  "parameter_provenance": {
+    "50 m/s air-relative speed": "plan-scale Dash-8 crossflow input from the E2 description; used in an idealized periodic shear box, not a reproduction of that case",
+    "water and air density": "assumed nominal constant values",
+    "water and air molecular kinematic viscosity": "assumed nominal constant values",
+    "domain dimensions and water-film thickness": "assumed diagnostic geometry selected to fit periodic wavelengths and separated interfaces",
+    "seed amplitude and phase": "assumed deterministic Fourier perturbation, prescribed by this case",
+    "tanh shear thickness": "assumed diagnostic input, not measured from a Dash-8 sheet",
+    "added kinematic viscosity": "assumed controlled damping surrogate, not a calibrated turbulence closure",
+    "zero surface tension and gravity": "deliberate stability-diagnostic simplifications, not claims about the aircraft drop"
+  },
+  "v2_experiment": {
+    "classification": "new exploratory V2 eigenmode-seeded finite-shear diagnostic; V1 inputs and runs above are retained verbatim",
+    "coordinate_frame": "periodic Cartesian box; x streamwise, y spanwise, z across the two interfaces",
+    "domain_m": [0.12, 0.06, 0.12],
+    "water_film_z_m": [0.03, 0.09],
+    "finite_shear_thickness_delta_m": 0.0075,
+    "base_velocity_m_s": "U(z)=50-25*tanh((z-0.03)/delta)+25*tanh((z-0.09)/delta), periodic in z; 50 m/s air, 0 m/s water",
+    "phase_density_kg_m3": {"water": 1000.0, "air": 1.2},
+    "water_to_air_density_ratio": 833.3333333333334,
+    "molecular_kinematic_viscosity_m2_s": {"water": 1.0e-6, "air": 1.5e-5},
+    "seeded_mode": {
+      "mode_number": 1,
+      "wavelength_m": 0.12,
+      "initial_amplitude_m": 5.0e-5,
+      "alpha_interface_phase": "Use the finite-thickness eigenpair's two complex interface displacements, normalized so max(abs(eta_lower),abs(eta_upper)) is 0.05 mm",
+      "velocity_phase": "Initialize Re(u_hat(z)*exp(i*k*x)) and Re(w_hat(z)*exp(i*k*x)) from the same inviscid eigenpair; temporal convention exp(i*k*x+sigma*t)"
+    },
+    "linear_reference": "paired-interface, finite-thickness, variable-density inviscid eigenpair; reference and residual/hash recorded with each run; vortex-sheet rate remains diagnostic only",
+    "surface_tension_N_m": 0.0,
+    "gravity_m_s2": [0.0, 0.0, 0.0],
+    "mesh_families": {
+      "coarse": [128, 64, 128],
+      "fine": [192, 96, 192]
+    },
+    "cells_per_physical_shear_thickness": {"coarse": 8.0, "fine": 12.0},
+    "case_variants": [
+      "molecular-shear eigenmode baseline on both meshes",
+      "zero-shear uniform-advection control with the identical 0.05 mm geometric wave, no eigenmode velocity perturbation",
+      "coarse-mesh shear run with nu_add=1.0e-4 m2/s in each phase as a controlled damping surrogate (not RANS/LES)"
+    ],
+    "physical_horizon_s": 0.012,
+    "write_interval_s": 0.00025,
+    "fit_window_s": [0.006, 0.008],
+    "diagnostics": [
+      "alpha-volume Fourier mode for each interface and symmetric/antisymmetric combinations",
+      "alpha=.5 contour after cell-to-point interpolation, fixed lower/upper branches and subcell edge interpolation",
+      "native surfaceScalarField phi and fieldFunctionObjects div result divPhi; volume-weighted signed/absolute distributions",
+      "water volume/mass, alpha bounds, continuity residuals, time-step stability, resource use",
+      "transient and declared-window exponential growth rates against the finite-thickness eigenvalue"
+    ],
+    "boundary_conditions": "cyclic x,y,z; one streamwise wave per domain; two periodic interfaces; no physical/open boundary flux",
+    "turbulence_treatment": "laminar molecular baseline; an equal kinematic-viscosity increment in both phases is reported only as a damping surrogate, not as a RANS/LES closure",
+    "interpretation": "Isolated shear-mechanism diagnostic only. No Dash-8 geometry, aircraft-boundary interaction, or Dash-8 validation claim.",
+    "parameter_provenance": {
+      "density and molecular viscosity": "assumed nominal liquid water and air properties",
+      "finite shear thickness and film geometry": "declared diagnostic assumptions, not measured from a Dash-8 sheet",
+      "0.05 mm mode amplitude": "assumed linear-regime displacement chosen after the inviscid reference indicated rapid amplification",
+      "added viscosity increment": "assumed controlled numerical/physical damping surrogate; not a turbulence calibration",
+      "sigma=0 and zero gravity": "deliberate isolated-instability baseline"
+    }
+  }
+}

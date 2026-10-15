@@ -1,0 +1,83 @@
+{
+  "checkpoint": {
+    "all_fields_finite_and_alpha_bounded": true,
+    "directory_name": "3.0735945651412",
+    "native_water_mass_kg": 687.6296648686842,
+    "native_water_volume_m3": 0.6892839463399,
+    "rank_count": 20,
+    "time_s": 3.0735945651412
+  },
+  "declared_utc": "2026-10-15T09:03:15.678269+00:00",
+  "input_hashes": {
+    "controlDict": "b93a50215f50395ea80e65bd3b7be09341d3c54b8cd4b4d2ed8fe8205faca3d5",
+    "decomposeParDict": "27ff198ca691fb155989b05238658cf7081cff665538230e64d58aff8cc432b5",
+    "fvSchemes": "bd6c0ae56cc2582376268256f71c7d77500f3918cdfec98bf205fffac58a6287",
+    "fvSolution": "d02ffcd42e6df314bf94440b5554268d0032bf813ebc0388c173f7145e667f32",
+    "parent_audit_report": "3d6d2a3d8ed48ecbda3e06b4077f93b272ea519b8369fee66811c786fb69b6b5",
+    "parent_checkpoint_archive": "23d32baf14266820a195b13c5a83d397b2704471c2d4ebe283fb2e49fad9de40"
+  },
+  "mesh": {
+    "cell_count": 2733120,
+    "physical_mesh_unchanged": true,
+    "physical_root_mesh_sha256": "3e6aa7724239e2f4098c1f92fa28072994b054cf950af2a6236c35ea69676269",
+    "rank_count": 20
+  },
+  "parent_ledger_offsets": {
+    "checkpoint_inventory_volume_m3": 0.6892839463399,
+    "checkpoint_residual_expected_minus_observed_kg": -0.012074188513795204,
+    "offset_applied_once": true,
+    "prior_escape_volume_m3": 3.1129766060142954,
+    "prior_release_volume_m3": 3.8022484491179145,
+    "residual_sign_convention": "expected minus observed"
+  },
+  "pilot": {
+    "endTime_s": 3.12,
+    "maxAlphaCo": 1,
+    "maxDeltaT_s": 0.0005,
+    "native_histories_fresh": true,
+    "old_logs_and_postProcessing_excluded": true,
+    "single_numerical_change": "system/controlDict:maxCo 2 -> 1",
+    "source_outlet_water_velocity_m_s": [
+      0,
+      -10,
+      0
+    ],
+    "startFrom": "latestTime",
+    "stopAtWriteNowSignal": 12,
+    "wall_budget_s": 3600,
+    "writeInterval_s": 0.5,
+    "writeNowSignal": 10
+  },
+  "purpose": "One-variable bounded CPU stability pilot across the baseline 3.09428 s collapse region.",
+  "resources": {
+    "cpu_quota_initial": 19,
+    "cpu_shares": 512,
+    "disk_write_floor_gib": 2,
+    "gpu": "none",
+    "host_memavailable_floor_gib": 24,
+    "memory_gib": 48,
+    "mpi_ranks": 20,
+    "scratch_limit_gib": 16,
+    "threads_per_rank": 1
+  },
+  "run_id": "rouaix-c4-stall-pilot-maxco1-20261015T090213Z",
+  "schema_version": 1,
+  "solver": {
+    "application": "interIsoFoam",
+    "container_image": "opencfd/openfoam-default:2512",
+    "image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "physical_model_unchanged": true,
+    "turbulence_model": "realizable k-epsilon",
+    "version": "OpenFOAM v2512"
+  },
+  "source_run": {
+    "archive": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-checkpoints/checkpoint-3p0735945651412.tar.gz",
+    "archive_sha256": "23d32baf14266820a195b13c5a83d397b2704471c2d4ebe283fb2e49fad9de40",
+    "checkpoint_time_s": 3.0735945651412,
+    "ledger_report": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-native-ledgers/through-3p0735945651412-attempt1/ledger-report.json",
+    "ledger_report_sha256": "3d6d2a3d8ed48ecbda3e06b4077f93b272ea519b8369fee66811c786fb69b6b5",
+    "paused_and_untouched": true,
+    "run_id": "rouaix-c4-reproduction-5s-continue-20261014T114815Z"
+  },
+  "status": "predeclared_before_launch"
+}

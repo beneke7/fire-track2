@@ -1,0 +1,68 @@
+{
+  "baseline_failure_time_s": 3.0942804546046,
+  "checkpoint": {
+    "all_fields_finite_and_alpha_bounded": true,
+    "archive_sha256": "9c4d8f58af27f22208ea52bf3aaf21d27cc92fc34077ae3782b8fc29cd293415",
+    "archive_size_bytes": 176492636,
+    "rank_count": 20,
+    "status": "field_health_pass",
+    "time_s": 3.0851454757947256
+  },
+  "crossed_baseline_failure_time": false,
+  "interpretation": "MaxCo=1 produced a finite captured checkpoint with bounded alpha and a passing native mass-ledger audit, but the pilot stopped by request at 3.0851454757947256 s, before the earlier 3.0942804546046 s failure. It did not test crossing that region and establishes no numerical fix.",
+  "native_mass_ledger_audit": {
+    "actual_final_time_s": 3.0851454757947256,
+    "continuation_guards_0p1_percent": {
+      "cumulative_pass": true,
+      "incremental_pass": true
+    },
+    "cumulative_residual_expected_minus_observed_kg": -0.012074188435380063,
+    "cumulative_residual_fraction": -3.1712607298046866e-06,
+    "incremental_residual_expected_minus_observed_kg": 7.823170167231553e-11,
+    "incremental_residual_fraction": 5.4880265038655596e-12,
+    "native_boundary_count": 7,
+    "parent_offsets_applied_once": true,
+    "source_evidence_repo_relative_path": "results/runs/rouaix-c4-stall-pilot-maxco1-20261015T090213Z/durable-native-ledgers/through-3p08514547579472564-attempt1/ledger-report.json",
+    "source_history_rows": 1070,
+    "source_ledger_report_sha256": "508addd811c45adaa04bf6baff354ef0c61c57f105fefff4ebe0788815f6edb6",
+    "status": "PASS for saved checkpoint/ledger integrity only; not a solver-stability pass"
+  },
+  "question": "Does reducing only maxCo from 2 to 1 keep the restarted case numerically advancing through the baseline 3.09428 s collapse region?",
+  "restart_time_s": 3.0735945651412,
+  "run_id": "rouaix-c4-stall-pilot-maxco1-20261015T090213Z",
+  "schema": "rouaix-maxco1-pilot-outcome-v1",
+  "single_numerical_change": {
+    "baseline": 2,
+    "path": "system/controlDict:maxCo",
+    "pilot": 1,
+    "reason": "Baseline deltaT followed maxCo\u22482 as epsilon bounds escalated and deltaT fell below ulp(time); lower Co is a bounded time-step stability sensitivity."
+  },
+  "status": "manually_stopped_before_baseline_failure_region; no stability fix established",
+  "stop": {
+    "rank_handler_count": 20,
+    "reason": "primary requested checkpoint capture before 3600s timeout",
+    "signal_errors": 0,
+    "signal_name": "SIGUSR2/stopAtWriteNow",
+    "solver_client_exit_code": 0,
+    "utc": "2026-10-15T10:04:39.890886+00:00"
+  },
+  "terminal_solver_metrics": {
+    "alpha_range": [
+      0.0,
+      1.0
+    ],
+    "delta_t_s": 5.45485001057e-06,
+    "epsilon_abs_bound_max": 112180.09256,
+    "interfaceCo_sidecar": 0.0198048726145,
+    "maxCo_sidecar": 0.999355545929,
+    "stop_guard_counters": {
+      "alpha_violation": 0,
+      "dt_below_ulp": 0,
+      "epsilon_high": 0,
+      "high_co": 0,
+      "high_interface_co": 0,
+      "small_dt": 0
+    }
+  },
+  "terminal_time_s": 3.0851454757947256
+}

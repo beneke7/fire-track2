@@ -14,7 +14,9 @@ large diameter nozzle,” *International Journal of Multiphase Flow* 163,
 [HAL PDF](https://hal.science/hal-04098260v1/file/Rouaix_28516.pdf).
 The external author manuscript has 22 PDF pages. The PDF cover is an additional
 page: references below give PDF page first and printed article page second.
-The manuscript was inspected externally and is not included in this repository.
+The manuscript was initially inspected externally. The user added the identical
+file as [`Rouaix_28516.pdf`](../Rouaix_28516.pdf) on 6 October 2026; its hash
+matches the extraction source below.
 The exact PDF used for the recorded digitizations has SHA-256
 `624efe9ee2aec11b85624e9c2ac5364802b12c42657711d211e625052cf28446`; the raster
 script checks this hash before tracing so a changed source file cannot silently

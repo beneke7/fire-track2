@@ -33,7 +33,22 @@ flow histories, and patch mapping remain unpublished. The figure reads are
 not original solver arrays or a quantitative reproduction of the unpublished
 structure-detection method, so no E3 solver comparison or pass is claimed.
 
-## External E1 source: Rouaix et al.
+## Hybrid VOF–parcel source: Shi et al. (Yumeng)
+
+The user supplied [`yumeng.et.al.pdf`](../yumeng.et.al.pdf), Yumeng Shi,
+Qiuzu Yang, Xinzhe Chang, Jiyuan Ye and Fei Xu (2026), “A volume of
+fluid-enhanced-discrete phase model algorithm for water dropping simulation
+of firefighting aircraft,” *Physics of Fluids* 38, 043308,
+[DOI 10.1063/5.0311627](https://doi.org/10.1063/5.0311627).
+PDF p. 2 gives the bibliographic record. Added in commit `d23b73d`; SHA-256
+`e27a73fc252fe1e5350aeb54c144668a050b4eec2918bc9abfb9b4ba24741149`.
+PDF pp. 7–8 provide a small jet-in-crossflow validation case and VOF-to-DPM
+transfer sensitivities. Its AMR, SST k–omega and transfer criteria are inputs
+for controlled numerical comparisons, not adopted project physics or a
+passed conservation/field gate. Printed timestep and AG600 height-sweep
+inconsistencies require explicit treatment before using those cases.
+
+## E1 source: Rouaix et al.
 
 The plan's E1 citation is Clément Rouaix, Alexei Stoukov, Yannick Bury, David
 Joubert, and Dominique Legendre (2023), “Liquid jet breakup in gaseous
@@ -43,8 +58,12 @@ of Multiphase Flow* 163, article 104419
 [publisher record](https://www.sciencedirect.com/science/article/pii/S0301932223000423)).
 A full 22-page author manuscript is available at
 [HAL record hal-04098260](https://hal.science/hal-04098260v1) and its
-[PDF](https://hal.science/hal-04098260v1/file/Rouaix_28516.pdf). It was not one
-of the eight supplied local PDFs; the original local set remains unchanged.
+[PDF](https://hal.science/hal-04098260v1/file/Rouaix_28516.pdf). The user added
+the identical manuscript as [`Rouaix_28516.pdf`](../Rouaix_28516.pdf) on
+6 October 2026 (commit `90b99a1`). Its SHA-256 is
+`624efe9ee2aec11b85624e9c2ac5364802b12c42657711d211e625052cf28446`,
+matching the source used for the existing digitizations. The original eight
+local PDFs remain unchanged.
 
 The manuscript is the primary source for E1 conditions. PDF p. 5 (article p. 4),
 Tables 2–3, lists round-jet diameters 0.2–0.6 m and gas speeds 50–90 m/s. Its

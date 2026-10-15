@@ -200,6 +200,82 @@ def test_run_rejects_solver_mismatch_before_capacity_wait_or_launch(
     assert "solver_started_utc" not in manifest
 
 
+def test_capacity_exception_records_a_single_proven_frozen_solver_cgroup(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    records = [
+        {"pid": "101", "comm": "interIsoFoam"},
+        {"pid": "102", "comm": "interIsoFoam"},
+    ]
+    cgroup = "/system.slice/docker-" + "a" * 64 + ".scope"
+    state = {
+        "container_id": "a" * 64,
+        "docker_state_paused_running": "true true",
+        "cgroup_path": cgroup,
+        "cgroup_events": "populated 1\nfrozen 1",
+    }
+    monkeypatch.setattr(runner, "_blocking_process_records", lambda: records)
+    monkeypatch.setattr(runner, "_process_cgroup", lambda _pid: cgroup)
+    monkeypatch.setattr(runner, "_frozen_docker_state", lambda _path: state)
+    monkeypatch.setattr(runner, "_process_cpu_ticks", lambda _pid: (12, 3))
+    monkeypatch.setattr(runner.time, "sleep", lambda _seconds: None)
+
+    evidence = runner._prove_all_blocking_processes_frozen(records)
+
+    assert evidence is not None
+    assert evidence["container_id"] == "a" * 64
+    assert evidence["processes"] == records
+    assert evidence["cpu_ticks_unchanged"]
+    assert evidence["sample_s"] == 2.0
+
+
+def test_capacity_exception_keeps_mixed_cgroups_busy(monkeypatch: pytest.MonkeyPatch) -> None:
+    records = [
+        {"pid": "101", "comm": "interIsoFoam"},
+        {"pid": "202", "comm": "interFoam"},
+    ]
+    frozen_cgroup = "/system.slice/docker-" + "b" * 64 + ".scope"
+    monkeypatch.setattr(runner, "_blocking_process_records", lambda: records)
+    monkeypatch.setattr(
+        runner,
+        "_process_cgroup",
+        lambda pid: frozen_cgroup if pid == "101" else "/user.slice/active-job.scope",
+    )
+    monkeypatch.setattr(
+        runner,
+        "_frozen_docker_state",
+        lambda _path: pytest.fail("mixed process groups must not be ignored"),
+    )
+    monkeypatch.setattr(
+        runner,
+        "_process_cpu_ticks",
+        lambda _pid: pytest.fail("mixed process groups must remain busy without sampling"),
+    )
+
+    assert runner._prove_all_blocking_processes_frozen(records) is None
+
+
+def test_capacity_exception_rejects_solver_processes_with_changing_cpu_ticks(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    records = [{"pid": "101", "comm": "interIsoFoam"}]
+    cgroup = "/system.slice/docker-" + "c" * 64 + ".scope"
+    state = {
+        "container_id": "c" * 64,
+        "docker_state_paused_running": "true true",
+        "cgroup_path": cgroup,
+        "cgroup_events": "populated 1\nfrozen 1",
+    }
+    samples = iter([(12, 3), (13, 3)])
+    monkeypatch.setattr(runner, "_blocking_process_records", lambda: records)
+    monkeypatch.setattr(runner, "_process_cgroup", lambda _pid: cgroup)
+    monkeypatch.setattr(runner, "_frozen_docker_state", lambda _path: state)
+    monkeypatch.setattr(runner, "_process_cpu_ticks", lambda _pid: next(samples))
+    monkeypatch.setattr(runner.time, "sleep", lambda _seconds: None)
+
+    assert runner._prove_all_blocking_processes_frozen(records) is None
+
+
 @pytest.mark.parametrize("solver", ["interIsoFoam", "interFoam"])
 def test_solver_summary_uses_selected_startup_and_excludes_utility_times(solver: str) -> None:
     log = (

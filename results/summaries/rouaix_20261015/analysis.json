@@ -1,0 +1,635 @@
+{
+  "acceptance": {
+    "acceptance_tolerance": null,
+    "formal_e1_pass": null,
+    "status": "No formal E1 decision; exploratory coarse-grid observer only"
+  },
+  "artifacts": {
+    "figure_png": "rouaix_profiles_vs_fig13.png",
+    "profiles_csv": "profiles.csv",
+    "profiles_json": "profiles.json",
+    "reproducibility_json": "reproducibility.json"
+  },
+  "field_time": {
+    "exact_time_name": "3.0735945651412",
+    "native_export_metadata_time_s": 3.07359456514,
+    "time_s_from_exact_name": 3.0735945651412
+  },
+  "native_inventory_comparison": {
+    "absolute_volume_difference_m3": 6.050715484207103e-14,
+    "field_integral": "sum(alpha.water * native FV cell volume) over all cells",
+    "mass_difference_vs_saved_ledger_kg": 6.036771083017811e-11,
+    "mass_scope": "whole-field inventory only; no threshold-component mass is used or implied",
+    "observer_component_mass_used": false,
+    "observer_mass_at_997p6_kg": 687.6296648687446,
+    "observer_volume_m3": 0.6892839463399605,
+    "relative_volume_difference": 8.77826259604104e-14,
+    "saved_ledger_final_stored_mass_kg": 687.6296648686842,
+    "saved_native_water_inventory_volume_m3": 0.6892839463399,
+    "source_evidence_repo_relative_path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-native-ledgers/through-3p0735945651412-attempt1/native-water-inventory.dat",
+    "water_density_kg_m3": 997.6
+  },
+  "paper_fig13_comparison": {
+    "cloud_alpha_ge_0p1_penetration": {
+      "compared_point_count": 21,
+      "excluded_point_count": 0,
+      "interpretation": "Exploratory display comparison only. The CFD uses the coarse 70 mm mesh and one snapshot; Figure 13's detector and sample time are unspecified. For width, the paper does not identify z/d_j as half-width or full-width, while the native observer reports a full signed-z AABB span. No factor-of-two conversion or acceptance tolerance is applied.",
+      "maximum_absolute_difference_m": 9.25,
+      "mean_absolute_difference_m": 4.627460317461904,
+      "mean_native_minus_digitized_m": 4.627460317461904,
+      "method": "nearest nonempty 0.07 m native profile-bin center; values are not interpolated",
+      "observer_metric": "penetration_down_positive_m",
+      "paper_coordinate_conversion": "multiply digitized x/d_j and ordinate/d_j by nominal d_j=0.4 m",
+      "points": [
+        {
+          "native_minus_digitized_m": 9.25,
+          "native_observer_value_m": 9.25,
+          "nearest_bin_offset_m": 0.034999999999999976,
+          "nearest_native_bin_center_x_m": -0.034999999999999976,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 0.0,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.0,
+          "paper_x_over_dj": 0.0
+        },
+        {
+          "native_minus_digitized_m": 1.4416666666699998,
+          "native_observer_value_m": 2.04166666667,
+          "nearest_bin_offset_m": 0.005000000000000032,
+          "nearest_native_bin_center_x_m": 0.10500000000000004,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 0.6000000000000001,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.1,
+          "paper_x_over_dj": 0.25
+        },
+        {
+          "native_minus_digitized_m": 6.34,
+          "native_observer_value_m": 7.25,
+          "nearest_bin_offset_m": 0.024999999999999967,
+          "nearest_native_bin_center_x_m": 0.17500000000000004,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 0.91,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.2,
+          "paper_x_over_dj": 0.5
+        },
+        {
+          "native_minus_digitized_m": 4.76055555556,
+          "native_observer_value_m": 5.93055555556,
+          "nearest_bin_offset_m": 0.015000000000000013,
+          "nearest_native_bin_center_x_m": 0.31500000000000006,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 1.17,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.30000000000000004,
+          "paper_x_over_dj": 0.75
+        },
+        {
+          "native_minus_digitized_m": 7.38,
+          "native_observer_value_m": 8.75,
+          "nearest_bin_offset_m": 0.014999999999999902,
+          "nearest_native_bin_center_x_m": 0.3850000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 1.37,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.4,
+          "paper_x_over_dj": 1.0
+        },
+        {
+          "native_minus_digitized_m": 5.45,
+          "native_observer_value_m": 7.0,
+          "nearest_bin_offset_m": 0.025000000000000133,
+          "nearest_native_bin_center_x_m": 0.5250000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 1.55,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.5,
+          "paper_x_over_dj": 1.25
+        },
+        {
+          "native_minus_digitized_m": 3.94277777778,
+          "native_observer_value_m": 5.65277777778,
+          "nearest_bin_offset_m": 0.0050000000000000044,
+          "nearest_native_bin_center_x_m": 0.5950000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 1.7100000000000002,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.6000000000000001,
+          "paper_x_over_dj": 1.5
+        },
+        {
+          "native_minus_digitized_m": 3.74333333333,
+          "native_observer_value_m": 5.58333333333,
+          "nearest_bin_offset_m": 0.03499999999999992,
+          "nearest_native_bin_center_x_m": 0.6650000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 1.8399999999999999,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.7000000000000001,
+          "paper_x_over_dj": 1.75
+        },
+        {
+          "native_minus_digitized_m": 6.79,
+          "native_observer_value_m": 8.75,
+          "nearest_bin_offset_m": 0.0050000000000001155,
+          "nearest_native_bin_center_x_m": 0.8050000000000002,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 1.9600000000000002,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.8,
+          "paper_x_over_dj": 2.0
+        },
+        {
+          "native_minus_digitized_m": 3.8705555555599997,
+          "native_observer_value_m": 5.93055555556,
+          "nearest_bin_offset_m": 0.02499999999999991,
+          "nearest_native_bin_center_x_m": 0.8750000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.06,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 0.9,
+          "paper_x_over_dj": 2.25
+        },
+        {
+          "native_minus_digitized_m": 3.85,
+          "native_observer_value_m": 6.0,
+          "nearest_bin_offset_m": 0.015000000000000124,
+          "nearest_native_bin_center_x_m": 1.0150000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.15,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.0,
+          "paper_x_over_dj": 2.5
+        },
+        {
+          "native_minus_digitized_m": 4.51,
+          "native_observer_value_m": 6.75,
+          "nearest_bin_offset_m": 0.014999999999999902,
+          "nearest_native_bin_center_x_m": 1.0850000000000002,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.2399999999999998,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.1,
+          "paper_x_over_dj": 2.75
+        },
+        {
+          "native_minus_digitized_m": 5.9399999999999995,
+          "native_observer_value_m": 8.25,
+          "nearest_bin_offset_m": 0.02499999999999991,
+          "nearest_native_bin_center_x_m": 1.225,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.31,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.2000000000000002,
+          "paper_x_over_dj": 3.0
+        },
+        {
+          "native_minus_digitized_m": 3.5405555555599997,
+          "native_observer_value_m": 5.93055555556,
+          "nearest_bin_offset_m": 0.004999999999999893,
+          "nearest_native_bin_center_x_m": 1.2950000000000002,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.39,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.3,
+          "paper_x_over_dj": 3.25
+        },
+        {
+          "native_minus_digitized_m": 3.4705555555599994,
+          "native_observer_value_m": 5.93055555556,
+          "nearest_bin_offset_m": 0.03499999999999992,
+          "nearest_native_bin_center_x_m": 1.3650000000000002,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.4600000000000004,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.4000000000000001,
+          "paper_x_over_dj": 3.5
+        },
+        {
+          "native_minus_digitized_m": 5.47,
+          "native_observer_value_m": 8.0,
+          "nearest_bin_offset_m": 0.0050000000000003375,
+          "nearest_native_bin_center_x_m": 1.5050000000000003,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.5300000000000002,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.5,
+          "paper_x_over_dj": 3.75
+        },
+        {
+          "native_minus_digitized_m": 4.92,
+          "native_observer_value_m": 7.5,
+          "nearest_bin_offset_m": 0.02499999999999991,
+          "nearest_native_bin_center_x_m": 1.5750000000000002,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.58,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.6,
+          "paper_x_over_dj": 4.0
+        },
+        {
+          "native_minus_digitized_m": 3.0227777777799996,
+          "native_observer_value_m": 5.65277777778,
+          "nearest_bin_offset_m": 0.015000000000000124,
+          "nearest_native_bin_center_x_m": 1.7150000000000003,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.6300000000000003,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.7000000000000002,
+          "paper_x_over_dj": 4.25
+        },
+        {
+          "native_minus_digitized_m": 3.2705555555599997,
+          "native_observer_value_m": 5.93055555556,
+          "nearest_bin_offset_m": 0.014999999999999902,
+          "nearest_native_bin_center_x_m": 1.7850000000000001,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.66,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.8,
+          "paper_x_over_dj": 4.5
+        },
+        {
+          "native_minus_digitized_m": 3.11166666667,
+          "native_observer_value_m": 5.79166666667,
+          "nearest_bin_offset_m": 0.025000000000000133,
+          "nearest_native_bin_center_x_m": 1.9250000000000003,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.68,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.9000000000000001,
+          "paper_x_over_dj": 4.75
+        },
+        {
+          "native_minus_digitized_m": 3.1016666666700003,
+          "native_observer_value_m": 5.79166666667,
+          "nearest_bin_offset_m": 0.02499999999999991,
+          "nearest_native_bin_center_x_m": 1.9250000000000003,
+          "paper_value_digitization_bound_m": 0.028000000000000004,
+          "paper_value_m_using_nominal_D_0p4": 2.69,
+          "paper_x_digitization_bound_m": 0.008,
+          "paper_x_m_using_nominal_D_0p4": 1.9500000000000002,
+          "paper_x_over_dj": 4.875
+        }
+      ],
+      "rmse_m": 4.94541609560038
+    },
+    "cloud_alpha_ge_0p1_spanwise_width": {
+      "compared_point_count": 11,
+      "excluded_point_count": 0,
+      "interpretation": "Exploratory display comparison only. The CFD uses the coarse 70 mm mesh and one snapshot; Figure 13's detector and sample time are unspecified. For width, the paper does not identify z/d_j as half-width or full-width, while the native observer reports a full signed-z AABB span. No factor-of-two conversion or acceptance tolerance is applied.",
+      "maximum_absolute_difference_m": 0.7274874999999998,
+      "mean_absolute_difference_m": 0.41123569749218186,
+      "mean_native_minus_digitized_m": 0.12470501567399994,
+      "method": "nearest nonempty 0.07 m native profile-bin center; values are not interpolated",
+      "observer_metric": "full_spanwise_width_m",
+      "paper_coordinate_conversion": "multiply digitized x/d_j and ordinate/d_j by nominal d_j=0.4 m",
+      "points": [
+        {
+          "native_minus_digitized_m": 0.6290301724139999,
+          "native_observer_value_m": 0.6290301724139999,
+          "nearest_bin_offset_m": 0.034999999999999976,
+          "nearest_native_bin_center_x_m": -0.034999999999999976,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 0.0,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.0,
+          "paper_x_over_dj": 0.0
+        },
+        {
+          "native_minus_digitized_m": 0.29019375000000003,
+          "native_observer_value_m": 0.71859375,
+          "nearest_bin_offset_m": 0.005000000000000032,
+          "nearest_native_bin_center_x_m": 0.10500000000000004,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 0.4284,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.1,
+          "paper_x_over_dj": 0.25
+        },
+        {
+          "native_minus_digitized_m": 0.7274874999999998,
+          "native_observer_value_m": 1.5846874999999998,
+          "nearest_bin_offset_m": 0.024999999999999967,
+          "nearest_native_bin_center_x_m": 0.17500000000000004,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 0.8572,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.2,
+          "paper_x_over_dj": 0.5
+        },
+        {
+          "native_minus_digitized_m": -0.22135000000000016,
+          "native_observer_value_m": 0.84625,
+          "nearest_bin_offset_m": 0.015000000000000013,
+          "nearest_native_bin_center_x_m": 0.31500000000000006,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.0676,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.30000000000000004,
+          "paper_x_over_dj": 0.75
+        },
+        {
+          "native_minus_digitized_m": -0.3298468750000001,
+          "native_observer_value_m": 0.906953125,
+          "nearest_bin_offset_m": 0.014999999999999902,
+          "nearest_native_bin_center_x_m": 0.3850000000000001,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.2368000000000001,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.4,
+          "paper_x_over_dj": 1.0
+        },
+        {
+          "native_minus_digitized_m": -0.27822500000000017,
+          "native_observer_value_m": 1.029375,
+          "nearest_bin_offset_m": 0.025000000000000133,
+          "nearest_native_bin_center_x_m": 0.5250000000000001,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.3076,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.5,
+          "paper_x_over_dj": 1.25
+        },
+        {
+          "native_minus_digitized_m": 0.6552562500000001,
+          "native_observer_value_m": 2.04765625,
+          "nearest_bin_offset_m": 0.0050000000000000044,
+          "nearest_native_bin_center_x_m": 0.5950000000000001,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.3924,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.6000000000000001,
+          "paper_x_over_dj": 1.5
+        },
+        {
+          "native_minus_digitized_m": 0.6457062500000001,
+          "native_observer_value_m": 2.11890625,
+          "nearest_bin_offset_m": 0.03499999999999992,
+          "nearest_native_bin_center_x_m": 0.6650000000000001,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.4732,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.7000000000000001,
+          "paper_x_over_dj": 1.75
+        },
+        {
+          "native_minus_digitized_m": -0.2758218750000001,
+          "native_observer_value_m": 1.312578125,
+          "nearest_bin_offset_m": 0.0050000000000001155,
+          "nearest_native_bin_center_x_m": 0.8050000000000002,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.5884,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.8,
+          "paper_x_over_dj": 2.0
+        },
+        {
+          "native_minus_digitized_m": -0.27338125000000013,
+          "native_observer_value_m": 1.38421875,
+          "nearest_bin_offset_m": 0.02499999999999991,
+          "nearest_native_bin_center_x_m": 0.8750000000000001,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.6576000000000002,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 0.9,
+          "paper_x_over_dj": 2.25
+        },
+        {
+          "native_minus_digitized_m": -0.19729375000000027,
+          "native_observer_value_m": 1.53390625,
+          "nearest_bin_offset_m": 0.015000000000000124,
+          "nearest_native_bin_center_x_m": 1.0150000000000001,
+          "paper_value_digitization_bound_m": 0.016,
+          "paper_value_m_using_nominal_D_0p4": 1.7312000000000003,
+          "paper_x_digitization_bound_m": 0.004,
+          "paper_x_m_using_nominal_D_0p4": 1.0,
+          "paper_x_over_dj": 2.5
+        }
+      ],
+      "rmse_m": 0.4553091377292247
+    }
+  },
+  "query_and_observer": {
+    "alpha_ge_0p1_domain_proximity": {
+      "all_x_maximum_down_positive_AABB_depth_m": 10.0,
+      "all_x_minimum_selected_cell_y_low_m": -10.0,
+      "bottom_touch_cells": [
+        {
+          "alpha_water": 0.250108854779,
+          "bounds_minmax_xyz_m": [
+            6.36206896552,
+            -10.0,
+            -2.7,
+            6.43103448276,
+            -9.75,
+            -2.5634375
+          ],
+          "center_xyz_m": [
+            6.39655172414,
+            -9.875295043273013,
+            -2.631411167387884
+          ],
+          "global_cell_id": 168581,
+          "rank_directory": "rank-0004",
+          "within_profile_query_x_center_range": false
+        }
+      ],
+      "domain_bottom_y_m": -10.0,
+      "field": "alpha.water",
+      "inclusive_threshold": 0.1,
+      "interpretation": "The profile query maximum is close to the lower boundary. One alpha>=0.1 native cell touches the y=-10 m bottom outside the queried x range. Boundary influence/censoring therefore remains a limitation; this is not an uncensored penetration estimate.",
+      "native_full_field_scan": true,
+      "profile_query_x_edges_m": [
+        -0.21,
+        4.05
+      ],
+      "query_x_maximum_down_positive_AABB_depth_m": 9.5,
+      "query_x_minimum_selected_cell_y_low_m": -9.5,
+      "selected_cell_count_all_x": 6576,
+      "selected_cell_count_inside_profile_query_x_range": 6342,
+      "selected_cell_count_outside_profile_query_x_range": 234,
+      "selected_cells_touching_bottom": 1,
+      "selected_cells_within_1m_of_bottom": 20,
+      "source_plane_y0_m": 0.0
+    },
+    "cell_membership": "native cell-center x coordinate",
+    "core_graph_connectivity": {
+      "all_core_component_count": 94,
+      "edge_source": "native internal faces plus processor-face joins from the export",
+      "no_source_seed_fallback": true,
+      "selected_source_owner_cell_count": 80,
+      "selected_source_owner_component_count": 1,
+      "source_connected_core_cell_count": 2667,
+      "source_connected_core_component_count": 1,
+      "source_seed_rule": "components must intersect listed source_owner_global_ids",
+      "threshold_rule": "global alpha.water >= 0.9 selection, then native face-edge labels"
+    },
+    "full_cloud_alpha_ge_0p1_max_full_spanwidth": {
+      "station_index": 53,
+      "value_m": 4.86375,
+      "x_station_center_relative_to_origin_m": 3.535
+    },
+    "full_cloud_alpha_ge_0p1_max_penetration": {
+      "station_index": 40,
+      "value_m": 9.5,
+      "x_station_center_relative_to_origin_m": 2.625
+    },
+    "full_cloud_selected_cells_in_query_bins": 6342,
+    "full_cloud_selected_cells_outside_query_bins": 234,
+    "native_aabb_usage": "full native y/z AABB for each cell assigned once by its center",
+    "source_connected_core_alpha_ge_0p9_max_full_spanwidth": {
+      "station_index": 6,
+      "value_m": 0.55234375,
+      "x_station_center_relative_to_origin_m": 0.24500000000000005
+    },
+    "source_connected_core_alpha_ge_0p9_max_penetration": {
+      "station_index": 13,
+      "value_m": 4.05555555556,
+      "x_station_center_relative_to_origin_m": 0.7350000000000001
+    },
+    "source_connected_core_cells_in_query_bins": 2667,
+    "source_connected_core_cells_outside_query_bins": 0,
+    "thresholds_inclusive": {
+      "full_cloud": {
+        "comparison": ">=",
+        "value": 0.1
+      },
+      "native_roundoff_tolerance": 1e-12,
+      "raw_alpha_values_clipped": false,
+      "source_connected_core": {
+        "comparison": ">=",
+        "value": 0.9
+      }
+    },
+    "x_station_edges_m": [
+      -0.21,
+      -0.13999999999999999,
+      -0.06999999999999998,
+      2.7755575615628914e-17,
+      0.07000000000000003,
+      0.14000000000000004,
+      0.21000000000000005,
+      0.28,
+      0.3500000000000001,
+      0.42000000000000015,
+      0.4900000000000001,
+      0.56,
+      0.6300000000000001,
+      0.7000000000000002,
+      0.7700000000000001,
+      0.8400000000000001,
+      0.9100000000000001,
+      0.9800000000000002,
+      1.0500000000000003,
+      1.12,
+      1.1900000000000002,
+      1.2600000000000002,
+      1.33,
+      1.4000000000000001,
+      1.4700000000000002,
+      1.5400000000000003,
+      1.6100000000000003,
+      1.6800000000000002,
+      1.7500000000000002,
+      1.8200000000000003,
+      1.8900000000000001,
+      1.9600000000000004,
+      2.0300000000000002,
+      2.1,
+      2.1700000000000004,
+      2.24,
+      2.3100000000000005,
+      2.3800000000000003,
+      2.45,
+      2.5200000000000005,
+      2.5900000000000003,
+      2.66,
+      2.7300000000000004,
+      2.8000000000000003,
+      2.87,
+      2.9400000000000004,
+      3.0100000000000002,
+      3.0800000000000005,
+      3.1500000000000004,
+      3.22,
+      3.2900000000000005,
+      3.3600000000000003,
+      3.4300000000000006,
+      3.5000000000000004,
+      3.5700000000000003,
+      3.6400000000000006,
+      3.7100000000000004,
+      3.7800000000000002,
+      3.8500000000000005,
+      3.920000000000001,
+      3.99,
+      4.05
+    ],
+    "x_station_width_m_nominal": 0.07
+  },
+  "schema": "fire-track2-rouaix-actual-observer-summary-v1",
+  "source_and_geometry": {
+    "case_measured_area_declaration_m2_rounded": 0.1237069,
+    "domain_bounds_xyz_m": {
+      "x": [
+        -2.5,
+        17.5
+      ],
+      "y": [
+        -10.0,
+        0.0
+      ],
+      "z": [
+        -8.0,
+        8.0
+      ]
+    },
+    "field_health": {
+      "alpha_min_max": [
+        0.0,
+        1.0
+      ],
+      "alpha_out_of_bounds_count": 0,
+      "cell_count": 2733120,
+      "cell_volumes_positive_finite": true,
+      "native_rank_count": 20
+    },
+    "mesh_area_equivalent_diameter_m": 0.39687342144074905,
+    "native_area_minus_rounded_declaration_m2": -3.4482999927698543e-09,
+    "normalization_explanation": "Bundled over-D profile columns use the paper-declared nominal single-nozzle diameter d_j=0.4 m (E1_ROUAIX_CASE1_SOURCE.md, PDF p. 5 / article p. 4, Table 3). The native patch-area-equivalent diameter remains separately reported as 0.3968734214407491 m for geometry diagnostics. Dimensional profile data and SI figure were not changed in this packaging transform.",
+    "paper_nominal_diameter_m": 0.4,
+    "reported_profile_normalization_d_m": 0.4,
+    "source_face_normal_y_fraction_min_max": [
+      1.0,
+      1.0
+    ],
+    "source_origin_xyz_m_area_weighted_from_native_patch_faces": [
+      8.764282369919376e-19,
+      0.0,
+      3.067498829471782e-18
+    ],
+    "source_patch": "nozzle",
+    "source_patch_area_m2": 0.1237068965517,
+    "source_patch_center_ranges_xyz_m": [
+      [
+        -0.1724137931035,
+        0.17241379310350002
+      ],
+      [
+        0.0,
+        0.0
+      ],
+      [
+        -0.196875,
+        0.196875
+      ]
+    ],
+    "x_axis": "native x, streamwise",
+    "y_axis": "native y retained; down-positive depth is y0-min(y_low)",
+    "z_axis": "native z, signed spanwise edges retained"
+  },
+  "source_run": "rouaix-c4-reproduction-5s-continue-20261014T114815Z",
+  "status": "complete_exploratory_observer_analysis"
+}

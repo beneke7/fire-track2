@@ -1,0 +1,664 @@
+{
+  "case_and_toolchain": {
+    "case_dirty_at_prepare": true,
+    "case_revision": "d23b73d51db0302201c36e467eeebb504df97f4d",
+    "focused_pytest": "6 passed",
+    "matplotlib": "3.11.2",
+    "mesh_case": "Rouaix Table 3 Case 4 coarse 70 mm constant jet",
+    "mesh_cell_count": 2733120,
+    "mesh_root_sha256": "3e6aa7724239e2f4098c1f92fa28072994b054cf950af2a6236c35ea69676269",
+    "model_scope_caveat": "Exploratory interIsoFoam VOF with realizable k-epsilon on the coarse structured corridor; these outputs do not establish paper detector equivalence, mesh-converged physics, or validated application behavior.",
+    "numpy": "2.5.3",
+    "parent_full_make_check": "PASS; 649 tests, 1 skipped, 4 subtests; Ruff 122 files",
+    "platform": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "ruff_check": "PASS on observer, tests, and summarizer",
+    "ruff_format_check": "PASS on observer, tests, and summarizer",
+    "solver": {
+      "air_velocity_m_s": [
+        70.0,
+        0.0,
+        0.0
+      ],
+      "container_image": "opencfd/openfoam-default:2512",
+      "gravity_m_s2": [
+        0.0,
+        -9.81,
+        0.0
+      ],
+      "mesh_measured_nozzle_area_m2": 0.1237069,
+      "name": "interIsoFoam",
+      "nominal_round_nozzle_area_m2": 0.12566370614359174,
+      "physics_and_mesh_unchanged": true,
+      "resolved_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+      "surface_tension_N_m": 0.072,
+      "turbulence_model": "realizable k-epsilon",
+      "version": "OpenFOAM v2512",
+      "water_air_vof": true,
+      "water_density_kg_m3": 997.6,
+      "water_outlet_velocity_m_s": [
+        0.0,
+        -10.0,
+        0.0
+      ]
+    }
+  },
+  "cluster_integration": {
+    "evidence_scope": "The run used a local Docker OpenFOAM v2512 container on CPU. No Slurm/cluster launcher or site OpenFOAM environment was verified.",
+    "status": "not established"
+  },
+  "execution_pilot_timeline": {
+    "baseline_failure_summary": "pilot/baseline-failure-summary.json",
+    "baseline_failure_time_crossed": false,
+    "baseline_failure_time_s": 3.0942804546046,
+    "classification": "bounded numerical sensitivity pilot; run-scoped evidence, not a solver validation or stability pass",
+    "interpretation": "MaxCo=1 pilot advanced from restart and produced a healthy checkpoint but stopped before the previous stall region; it neither reproduced the failure nor established a fix.",
+    "maxCo1_pilot_outcome": "pilot/pilot-outcome.json",
+    "maxCo1_pilot_start_time_s": 3.0735945651412,
+    "maxCo1_pilot_stopped_by_manual_SIGUSR2_at": "2026-10-15T10:04:39.890886Z",
+    "maxCo1_pilot_terminal_time_s": 3.0851454757947256,
+    "stability_fix_established": false,
+    "supplemental_co_sidecar_observation": "pilot/co-sidecar-observation.json",
+    "terminal_checkpoint_and_native_mass_ledger_audit": "PASS for captured checkpoint/ledger integrity only; not a stability pass"
+  },
+  "exploratory_comparison_limits": [
+    "Rouaix Table 3 Case 4 coarse 70 mm structured corridor differs from Figure 13 Case 1 16 mm mesh and paper polyhedral/prism geometry.",
+    "Figure 13 detector and sample time are unspecified.",
+    "Paper z/d_j width convention is unresolved as half-width versus full-width; no factor-of-two conversion or acceptance tolerance is used.",
+    "One alpha>=0.1 cell touches y=-10 m at x=6.39655172414 m outside the query; the in-query maximum depth 9.5 m is close to the lower boundary.",
+    "One saved field time only; no stationarity claim and no formal E1 acceptance decision."
+  ],
+  "native_export": {
+    "container": "opencfd/openfoam-default:2512",
+    "container_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "cpu_budget": 1,
+    "finished_utc": "2026-10-15T08:58:30.282483+00:00",
+    "memory_limit": "12g",
+    "mpi_ranks": 20,
+    "native_export_file_sha256_by_rank_and_relative_path": "profiles.json:runs[0].native_export_sha256",
+    "native_export_hashed_file_count": 260,
+    "raw_native_export_included": false,
+    "read_only_utility": true,
+    "reported_solver_version": "OpenFOAM v2512",
+    "source_case_input_count": 163,
+    "source_case_input_hashes_before_after_equal": true,
+    "source_case_input_sha256_by_relative_path": {
+      "processor0/3.0735945651412/U": "abad30b1f4b3b18a726e2c2e625ebf59f194a00a0bbcc575119ac906bb4849c9",
+      "processor0/3.0735945651412/alpha.water": "1b78192a54bc72bc7162cdf98890c9d1372a7032faec2677d0fae750223df23f",
+      "processor0/constant/polyMesh/boundary": "41f73f3fd1245c8820ca8765bb13791b728538505fe56b2f9674d1c3ca942b46",
+      "processor0/constant/polyMesh/cellProcAddressing": "3a2658e964536b45e575a39e3f4aafc3831c2a44aa5a8ac7644323892ab412cb",
+      "processor0/constant/polyMesh/faces": "9d4ab8da434de4cede516db375fc522cdd58ff9b515b3b30ac958a41f247b809",
+      "processor0/constant/polyMesh/neighbour": "af21e7926a4cf2d397c98e0c08e8e7427e8213b5740692acb47b3d131cd8d1d7",
+      "processor0/constant/polyMesh/owner": "5b94c1d90c093827411c353e2a19b0afa57a6ee6846b18ddaa4cd606513b9398",
+      "processor0/constant/polyMesh/points": "2f17664850eda804ee6a6c0d9aa87a6bd5e3d07e45ea53c3b6734a56f7e474cf",
+      "processor1/3.0735945651412/U": "e7b4bea003c9dfe9d21526cad7363cc4080a56dfcaa3dbbe0a8e89ef94d970b0",
+      "processor1/3.0735945651412/alpha.water": "f183102117e2dafd3b640b8d2df8c80653b69973b615427d5862c17df242cf01",
+      "processor1/constant/polyMesh/boundary": "e7c2986977ac9e74463dd5b60183a0c35c7cf3f62118b5c3d2f5b685719c14c6",
+      "processor1/constant/polyMesh/cellProcAddressing": "1366b1e6c5206ed1932f8bd9e4e2dd97dc731ce9eff741fbc8f97b6f9514869a",
+      "processor1/constant/polyMesh/faces": "9497f66f1f825eda142bf9216b8914a58b83f0d536e8afcdf3337748e5ca48be",
+      "processor1/constant/polyMesh/neighbour": "202c04b464838db2bf6e77a9c769820bc699d351608db00bab81fe047e229b41",
+      "processor1/constant/polyMesh/owner": "49ca080c4c4247a6d32e28eebd372d943fb496459f212f96fc06b00458c1aeb2",
+      "processor1/constant/polyMesh/points": "e4c705dc0e789b268cc40c8052563e1a0167e9b90a41bda5a033755b6deb9ac0",
+      "processor10/3.0735945651412/U": "0f2bf2248443f811f2a68e4b3e3a998d473049790563f7d150bd7fe609bff8e3",
+      "processor10/3.0735945651412/alpha.water": "256e743e15ac8e3e87adc3485ec4b7007a599c6a359cf59e19955f409a9d43db",
+      "processor10/constant/polyMesh/boundary": "a6d69f509f0575f0c8bed8f72c3652b4ceb44f1c7ff14ebfd30f5a0aba20c1ed",
+      "processor10/constant/polyMesh/cellProcAddressing": "eaad659025248e1e1f9a70df139d2e8bc4e8b41aaa64604ed488df7941b94459",
+      "processor10/constant/polyMesh/faces": "f3710d7b2767f4e5ed6368bfff72b3df0df240f5d12109b70da0dc78bb658dfa",
+      "processor10/constant/polyMesh/neighbour": "15be6a6fba6adc4ec384a01ec260f52a049c0bbffd9aa29e20678b74592f98cb",
+      "processor10/constant/polyMesh/owner": "dac38b6a14e95644c086641f0c7c38e804af54d9bebc6eeabbec383845182251",
+      "processor10/constant/polyMesh/points": "551e3f8e53fcb2a8f6f130c4fced59bd688b118788d461e268f0b855c172a40d",
+      "processor11/3.0735945651412/U": "bf47e9136dabe62478cc04bca7971c9b9598f200a50a41ac67cde9ec8d14b072",
+      "processor11/3.0735945651412/alpha.water": "100fe6130c3fd15142e61eb95f35a7080db9b18eee4ce23955adf3a7d7fcc01c",
+      "processor11/constant/polyMesh/boundary": "dfca503866c6ee9a096848f63acd7f4fe49850e9ee9d9d9c0edf79d54c1cac3e",
+      "processor11/constant/polyMesh/cellProcAddressing": "1a06ffaf62aa624cef1c879ddadf63db15c80533c34557e6958d7a502e1d0abd",
+      "processor11/constant/polyMesh/faces": "bb86339b838f08ae643ddd91faef7d07f9038aee875ce359db249aef04a5df5f",
+      "processor11/constant/polyMesh/neighbour": "ce46c0f34733ba8653f186813c75d40305d9048fb38e1278dbaab4a33c2f7d2b",
+      "processor11/constant/polyMesh/owner": "1e62ef9f57e0f1c5482c26be4e025ccb44ad529ad96cebf5d2860dddce0d9823",
+      "processor11/constant/polyMesh/points": "8dc8dbc686eb6f28c00c0e8a4ca9a91a3303c894b7489bb549d625b91353e06f",
+      "processor12/3.0735945651412/U": "2db08d8dd38f1f76eace52a716aa4cdb32fbcdeec6a561a563efa9ceb5ae80dc",
+      "processor12/3.0735945651412/alpha.water": "bf6541fd8c86e4330cc5f5b34b13776f5d0ce30985bb23a6e2755906bfd4ead3",
+      "processor12/constant/polyMesh/boundary": "ee2bc516ac405475d5c57ccae20aba7727b9f20b32ea8c0a458be9611f642ffb",
+      "processor12/constant/polyMesh/cellProcAddressing": "8bfe9a4616aa24815f7df0d768b503a8bcf7dbc6e1c2a958e4e5e6c4031d0605",
+      "processor12/constant/polyMesh/faces": "fb06246fa9dfb972b6c529d106fa3001fe5cc6d3940a703a66254f5f6f729472",
+      "processor12/constant/polyMesh/neighbour": "3ba1b9ab932eeacb5871905a04967b226fc995d3587e1f8fdf7cb68d5949510a",
+      "processor12/constant/polyMesh/owner": "7a664bfeba26053261bd542526c5680e21d7d7f70f376df3e28bdc01e5005893",
+      "processor12/constant/polyMesh/points": "8cb44045f52147d13220ed3c09215cd8ac39af94491774043497ba62ca46fc67",
+      "processor13/3.0735945651412/U": "11ab39e0c1c9b7bd4bd7ace86950b064967056e6511b08b123e87feed2863977",
+      "processor13/3.0735945651412/alpha.water": "3f8c344761e2d62bbed215f9f22ff9c3cbfdde18832fc6b8d7b4c0d627b0a057",
+      "processor13/constant/polyMesh/boundary": "ca012ecd0426ce2a647a2af1cbf0eaf4a1582dc30c8e5b19993d2a7d5fbe9c57",
+      "processor13/constant/polyMesh/cellProcAddressing": "c81da32ca02fe4257d9364a1dbf70ec7daa8b9d325eae6c2fd42b52bda5f3445",
+      "processor13/constant/polyMesh/faces": "1349ded575dc63ff0dd88e4770975de01e0a27595147e2b54520866ca1390ceb",
+      "processor13/constant/polyMesh/neighbour": "8c7b93b0ae71bdf3312779670c1e14fd64620975e5d86e92bd49c5b344db17ca",
+      "processor13/constant/polyMesh/owner": "1a85f96676c8ed1af8f458622a87e0a385b68ca19391935591cbda829801a4b5",
+      "processor13/constant/polyMesh/points": "4692ee2c43717c77039a02c8ab87dea8fe6951443daff192eb242bcfa7f51586",
+      "processor14/3.0735945651412/U": "601986d314a40b62c252551c029fff01ecb778f450b0f7fc4b4c85341b68452f",
+      "processor14/3.0735945651412/alpha.water": "86fddaef58fb4c4db812cfe5576c16c1ae2346cd8f5d749ffd191fd2686c93cf",
+      "processor14/constant/polyMesh/boundary": "53f6c15f94f64cf0f8c18874232c74e69d3d5cca5be2c5f1fd2a64742a7903cb",
+      "processor14/constant/polyMesh/cellProcAddressing": "e2fdc4f0e3512a38be5393cdb84cd02a917f55b48d56731fa3a163dc361bf347",
+      "processor14/constant/polyMesh/faces": "ae8d14c60f0a99af99d39c8faf63d210bf19938ac078ca4afeed88ea10f6624a",
+      "processor14/constant/polyMesh/neighbour": "28432898e7e9ee3b4d57a29587634b6cb20689b0508339186479ae936875afe5",
+      "processor14/constant/polyMesh/owner": "e5717c4a2afb880d2d8e02926eb695351eedd2663c145e5fe1e6c0d5eca9ca59",
+      "processor14/constant/polyMesh/points": "533620e38ceccb3edb6c942f50e5d2583c85d20a47f2f25e2a8246f9d68ebed8",
+      "processor15/3.0735945651412/U": "a32bd39f3ca5f761aea75ad2a7efda16f4ce62984c06dfbfe62acd4fcec0b5da",
+      "processor15/3.0735945651412/alpha.water": "df15c11fa31e20ced945bc85a471a8bf459ade3dbc12aa3aeed681d31df28a93",
+      "processor15/constant/polyMesh/boundary": "5d9d86520641805af50420eecb9ea2923831ce021364544a3212cc48ea111556",
+      "processor15/constant/polyMesh/cellProcAddressing": "cc8d270ca963d7e2274e3569c2acae7cb189d93050faf7244f77f15a786cee7d",
+      "processor15/constant/polyMesh/faces": "fe2e84c41db48342275b88e3edf9628318f550b2451a583fc1c78376b36060bf",
+      "processor15/constant/polyMesh/neighbour": "e4ae00d031f77669cf461b1aedfeae7f3a3b82234f29400387fbe19146e6dd53",
+      "processor15/constant/polyMesh/owner": "12cc5f14edd650389caa298ea332ffa0b3637228a0e07dc380a48f553ef0bd2a",
+      "processor15/constant/polyMesh/points": "7d01c287639211b89ec8fa8cfc45da2bc8f207e1d64d98852ccf0f5f7e8546d6",
+      "processor16/3.0735945651412/U": "65154e05eee37b5e335613d6acef20a0e53f15ddd1c285b549f74f45e8aa5879",
+      "processor16/3.0735945651412/alpha.water": "97e01f330a62e6b4a3901aeeb2fd94a58241333589f30ff97b657cac8ce1c0fc",
+      "processor16/constant/polyMesh/boundary": "51baf02a0961b4864b0042f2befd104bbe48ea97064e9999c1f7a9cc37f9a6aa",
+      "processor16/constant/polyMesh/cellProcAddressing": "46f61616a9ed6bd7b9f55fd48247d42cadc609c29fdcd9a90339297888463053",
+      "processor16/constant/polyMesh/faces": "2cdea822091ccddcb9aea1aec7724ef5c2f5ca3b737b207bd618df250eef9e06",
+      "processor16/constant/polyMesh/neighbour": "d98365ea3e06fb332c696527d8417990d3967609c4a97ab827341f1e2190d087",
+      "processor16/constant/polyMesh/owner": "e227a57785192e10ca0bf6993c2d106ed21f3d428c9cb9952e6cafdff197938b",
+      "processor16/constant/polyMesh/points": "58fddfae02f3ce61e7f91c86c535b7ea8e6090fcea5067583001e2226f851f07",
+      "processor17/3.0735945651412/U": "54558af20419b9b9b26f387cd00800b6436f1c53e6590239d0b7f788ce547a78",
+      "processor17/3.0735945651412/alpha.water": "66738dd35e1c374ff771418a9d992e9bdc0343093f407e595a33fec54ec18381",
+      "processor17/constant/polyMesh/boundary": "754855cf4c519dbc9ce36304430ddeb170b826888025fb4893ecd553c4a600a3",
+      "processor17/constant/polyMesh/cellProcAddressing": "8960ca8cb6753b94122b747f689aea57aeb97707ba647c4e674370a9a4435d2c",
+      "processor17/constant/polyMesh/faces": "ab9cc7b120380b4f31efa0455b6a15b8ca5e0685d34be145fd16b3d7bf857328",
+      "processor17/constant/polyMesh/neighbour": "df5fff2d916f5708fa405a97714a137f5dbdc59428c6092adbc7abdc2a18af5d",
+      "processor17/constant/polyMesh/owner": "aa0ab741f273e8282285e01cd93b40f15c4d3734aed1d0959ae2336c7b2ec95d",
+      "processor17/constant/polyMesh/points": "0bee881c00c896e2a047db9990a544f4fae3f3b37189f9048153e40814e1a8ab",
+      "processor18/3.0735945651412/U": "c4b21736a91dba332b0a7ed03e698289e788ab58653670f9056e9cc304feee9c",
+      "processor18/3.0735945651412/alpha.water": "a53677f503db2420b1eca4d1d1e06c6b74b890ececa4de9af545171d91ad1c4b",
+      "processor18/constant/polyMesh/boundary": "0d1a1511c266a0f90f2039f861768c81891a2a20c4d94cb031c50b81b6d05809",
+      "processor18/constant/polyMesh/cellProcAddressing": "b1cffb8a7869bdb39f11c9dae74d5161d808032ead84f6093612c7bce3e7c650",
+      "processor18/constant/polyMesh/faces": "aa7e79ecc7722fd438f01348cb193a00817b5ae82e597600c4b9fa523a9aeeb4",
+      "processor18/constant/polyMesh/neighbour": "354847ea2af698bc1d29de69a4f172ec39117bdddf433abcddd59c4fdd8a6998",
+      "processor18/constant/polyMesh/owner": "4bdcf4634380e6e9953f9987f7836919230e660f729fa42306eb4183d9994d3a",
+      "processor18/constant/polyMesh/points": "b066fa01f23655b1cb0a791272da576a78bd2bf61f2b46cfb7b8d6f854ce4630",
+      "processor19/3.0735945651412/U": "6168ca58a280d79cb77813076bbe18cdb4f8646cecf4dbd3da9bf102de445af3",
+      "processor19/3.0735945651412/alpha.water": "44f8f44b4beee8f2ada4406948be360334cf1ae667c04f130733a6c7975db511",
+      "processor19/constant/polyMesh/boundary": "42a179573cdecc96500d38edbe30ccf45fefea16f4e8394c3f19db75fba04470",
+      "processor19/constant/polyMesh/cellProcAddressing": "3bccd049e07f01a53a1ce9336f52b695df0559d4ed02164ae83c935988c9d05d",
+      "processor19/constant/polyMesh/faces": "299f1bdb6c917e92746a9a1ba0110d65fc5787e37cfd50fd6791e42610ca90a3",
+      "processor19/constant/polyMesh/neighbour": "8811065ae740a53bf67b125dc26104a53f24f126100029aecb27a9fc4f1d819a",
+      "processor19/constant/polyMesh/owner": "879e9bad76d668943f94cd951839d5140d01843789b160d4b62b445a7c502499",
+      "processor19/constant/polyMesh/points": "729579fbd0a3929fa4e3bfcf56162463f1b5fb460b713e4cbfba7d07e92db85f",
+      "processor2/3.0735945651412/U": "3613ff8173aa81aeab83d0dacf76d7b6d421d2d973295a8d16f10011d5975210",
+      "processor2/3.0735945651412/alpha.water": "8513cc41adbd14fbbde8dde2062ede60318947e0e072b015c1d38ff21852911c",
+      "processor2/constant/polyMesh/boundary": "65e70007aa0ae0f0817a3da5368c5be9a0dc47b2c9eee7bb950a4a84d713091a",
+      "processor2/constant/polyMesh/cellProcAddressing": "5aeb129de71eae8060f20238d06db6e6afa9050c836240238d013103d9caa31c",
+      "processor2/constant/polyMesh/faces": "fe69832dca280b1fd050a467f18728b11fc74bdb734ab48505fb1711bf5a7aea",
+      "processor2/constant/polyMesh/neighbour": "7761e42c35bd0c7a9ecdcb8b7bbb46d0e8498be448de8cdaeeb46b697665ef3c",
+      "processor2/constant/polyMesh/owner": "c6ae757d83807ece799793719f734938f6c52b773fef7bdd8d38eac295d4c532",
+      "processor2/constant/polyMesh/points": "c04f10fd4251844ded89fba2f87839eacedccb8491d1f625254482d57ba260e6",
+      "processor3/3.0735945651412/U": "c922c6616ec6c5cafa8e1e9c94d74daecf6bd5ab9626901c918355c35d31bf9f",
+      "processor3/3.0735945651412/alpha.water": "75018b1b64f2b18b1abfad954136d52cb93cf59e4406f7ad2b5c456a992eb0ab",
+      "processor3/constant/polyMesh/boundary": "064b9126f41cdd7d89962cba1d742d5800551bb6f2d26a1e782af9234089b0ea",
+      "processor3/constant/polyMesh/cellProcAddressing": "a2b6b896ce4d2ffeac78c3dd119f077fb74081cd7bf2b63ddb8b452a56756f41",
+      "processor3/constant/polyMesh/faces": "6ad7672c53c95f6fa417e8bb43f88638b94b208cae0cd46b43e24f653f739bec",
+      "processor3/constant/polyMesh/neighbour": "6f91d40d8cecb9f4911971714c9c77cb7eb64e1e4913762e4953ea87f37443da",
+      "processor3/constant/polyMesh/owner": "0af18589da2e2e6ccb0c9acf4bb308a9fc6c0283ebe19b901e7510a30f256fcb",
+      "processor3/constant/polyMesh/points": "9ea03f7b42fa353c0d03abae91c9ed2d663e9015e4c8c1f293210f8d7fb5ae6d",
+      "processor4/3.0735945651412/U": "cf298f2f309cdc3917e2f59a98f8596c3b5e6bb050475336c2ef28a7d75adf67",
+      "processor4/3.0735945651412/alpha.water": "44a10de10bbc58c7071f4c964b72d6c671a23fbb390eaa15359ff7ad697956da",
+      "processor4/constant/polyMesh/boundary": "cc4e8c867df4daac022bedd21ff2475b449d28ea17617ae0d34bfd96b3653b99",
+      "processor4/constant/polyMesh/cellProcAddressing": "00196a3bddf8e2a1804d796b053cc9f704bf8593fe0566620a79946016df7d90",
+      "processor4/constant/polyMesh/faces": "39f688c42a3e10a43923cf3657eba07175e96a686c54dd12283be73889c8064b",
+      "processor4/constant/polyMesh/neighbour": "3667635b9e69a41fee85ebeb105eb56b9bdce9919fceee21b8799dcfbe819e45",
+      "processor4/constant/polyMesh/owner": "7666cc807a9e028300dc125bfa13a5792ba44c5a0ce29175a39df12253f37e28",
+      "processor4/constant/polyMesh/points": "9fed55ea44aa8c648790de7496de7f879cb994cecdadc5e2969270841ad49b9a",
+      "processor5/3.0735945651412/U": "5dcc8b127e65fe3f7486f88944d94dc7c2ec6fa282cf7ae4d8a62b57303aac1d",
+      "processor5/3.0735945651412/alpha.water": "9c136988b579f69bd6805bfe85b6dbd616b9f54cadc8f6646f3499f8ecb3de5e",
+      "processor5/constant/polyMesh/boundary": "44fa89b238ccecd5cc2efe7954831eb565acc0823f0cd977f4e5e3a235414e32",
+      "processor5/constant/polyMesh/cellProcAddressing": "41c8db6982d395931a6c20a292e3ebbafb6591a9d81d9c136f734cb0feed6a1f",
+      "processor5/constant/polyMesh/faces": "419aed2c56c7cc841052c0f7e337c8c66138b50276484eecd3bc3195bc600ea2",
+      "processor5/constant/polyMesh/neighbour": "0fd1b9965a876c6f61989bd4e29197c2642172d11fda7ebd9fae09db300cc2e7",
+      "processor5/constant/polyMesh/owner": "01a358e29ed1d20dd2657313bc8801ddc79c0bfcac0019cd820f804741940164",
+      "processor5/constant/polyMesh/points": "aeae6c2e494d31140d6247b9150de3a8a9f566ceebe0b7762feb7aea1eae1aff",
+      "processor6/3.0735945651412/U": "2e63b2873da37a50beb57addcc44f3f84045b170f0e17dd8e73e2d873618fb61",
+      "processor6/3.0735945651412/alpha.water": "133290a4193cb13d1da5d8a9718519fd97c4d86edea8e319dc4e9b85f8b41ff3",
+      "processor6/constant/polyMesh/boundary": "04605352f5907d93616eb0c75502e4cfc260a2570b775473701a46771f03dee4",
+      "processor6/constant/polyMesh/cellProcAddressing": "5e97c4fbcfdfce2c21f4044718d8ee113ca1c5141e11f194a045ffd14650ad08",
+      "processor6/constant/polyMesh/faces": "60124381a428739bb82ccf704d98a40147bdb9c6f95697a700f8e652828009c2",
+      "processor6/constant/polyMesh/neighbour": "377101409c2aa94844bb319306b70ac03c6739aec52a830cd49509508d899c42",
+      "processor6/constant/polyMesh/owner": "ac606ed506fd30dcd909af9cf6d83ba9dfb903e8541c86f947b125d560229a9a",
+      "processor6/constant/polyMesh/points": "f8886468fcce89945e76aa62eabbb0beee808b1a1bce49a054a684cf45a8cf28",
+      "processor7/3.0735945651412/U": "74d98afc71afddfc986b4fce1952c16eac9c0670a55e3e168f5d87d71d473e8b",
+      "processor7/3.0735945651412/alpha.water": "7aba45e877acd9fb01a6eab11b007a5ceddd4704c0869d54409fd93c7d49a2ab",
+      "processor7/constant/polyMesh/boundary": "2d6d4f9ef816834a9b4ac25b02d20983bfb3a78ecd2d6f3ebac16e15b500001b",
+      "processor7/constant/polyMesh/cellProcAddressing": "93f454ad372015b42466d3bbfad088efc8c79bea2d01619543b15419adbb728b",
+      "processor7/constant/polyMesh/faces": "8012b1d9460fd005ac00eed6f93f072e2d6c0fbb0fe606a63f9e5c31c31ad08a",
+      "processor7/constant/polyMesh/neighbour": "23623b17360ccaaa5d9b7e9fcc04913765681fe92472d122436fa58641a9884e",
+      "processor7/constant/polyMesh/owner": "20a859c8e23de5398144436d3948673cda5cf47716173f36c42b7075bb284486",
+      "processor7/constant/polyMesh/points": "0ed0cd9172c80622cea525b512257e921c08ddbfd046ee5d469a64bbe3af82ce",
+      "processor8/3.0735945651412/U": "97766fe13e000711f2c9730213dd82e49146fd85d8bfb8e6c7fb7d89be6cac3b",
+      "processor8/3.0735945651412/alpha.water": "e194031113d3c2ba0579c32da22a2b82a0a044e37f7f50125a66cf14e9c1715f",
+      "processor8/constant/polyMesh/boundary": "4543e33a58db5200e043e7c34492d4177d57c42053b310ed0cfe71a5cf7be5e0",
+      "processor8/constant/polyMesh/cellProcAddressing": "14552a713a9dc5b0fb34b16952353ddf35c0fefd1a618386db15eee44f4bb5d2",
+      "processor8/constant/polyMesh/faces": "8e455b5f68629019d0e9c7a2619099a5fca0415848e3200f4b1b9d3a1227a5fd",
+      "processor8/constant/polyMesh/neighbour": "7462e824a15fd38e88a1d6d0ca5c013fddf044489e008b9f34cd0ba4e7e5aca8",
+      "processor8/constant/polyMesh/owner": "d88f9d250c6c0d2d4413474643f990252dee04c4a2454acb399436ed2077c96c",
+      "processor8/constant/polyMesh/points": "3ae0afa62e539d9a5fdbee646109cea8db698a4079dfc8a432f534af5be57521",
+      "processor9/3.0735945651412/U": "c6b08d81432ef3d646a0c5cb48e2d056f44ea2782ee2bb2abc7f35f57d03b723",
+      "processor9/3.0735945651412/alpha.water": "8f542d122eaa1c6210c0251906ab5e869f0d744ed822fd00f92633a608ed6fe6",
+      "processor9/constant/polyMesh/boundary": "9171d98157ae6b1dcbccb70c5fe2993068777dd8eef3d8b27d3d2f62a3f7604c",
+      "processor9/constant/polyMesh/cellProcAddressing": "029eb3b54ef155ff0469ff4d80656d869c1e9dacac45ddfebe9531c16820ba00",
+      "processor9/constant/polyMesh/faces": "33b027aa315714f6e3708b7224d2f04dce78da28755f1fc990b4f778c2be8eb5",
+      "processor9/constant/polyMesh/neighbour": "e5ebd2ded76a400ba5e32d4d4a9e432dc33848ec6be94b64894e9eadbb4e3589",
+      "processor9/constant/polyMesh/owner": "fc187129cfb5df985e2fc7cae31f1b812593e458b0aa945ff1f149da88d06062",
+      "processor9/constant/polyMesh/points": "f6dbb338dc207dfc6495cc1268657c61117a526274cfc97d1ae917b7a00ae31a",
+      "system/controlDict": "945f54cf2661b620e93be4e4e667d330524b1aafe80b2655558996a58a40931a",
+      "system/fvSchemes": "bd6c0ae56cc2582376268256f71c7d77500f3918cdfec98bf205fffac58a6287",
+      "system/fvSolution": "d02ffcd42e6df314bf94440b5554268d0032bf813ebc0388c173f7145e667f32"
+    },
+    "source_patch": "nozzle",
+    "started_utc": "2026-10-15T08:58:09.632578+00:00",
+    "status": "complete",
+    "time_name": "3.0735945651412"
+  },
+  "native_inventory": {
+    "absolute_difference_m3": 6.050715484207103e-14,
+    "density_kg_m3": 997.6,
+    "field_time_name": "3.0735945651412",
+    "mass_scope": "whole field only; no threshold-component mass",
+    "profile_sum_alpha_times_native_volume_m3": 0.6892839463399605,
+    "saved_volume_m3": 0.6892839463399,
+    "source_path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-native-ledgers/through-3p0735945651412-attempt1/native-water-inventory.dat",
+    "source_sha256": "a1585f16e8875d0d482fe496b8ccbea8d4ced183a3e2ce3fcea693bc3a0e89bb"
+  },
+  "observer": {
+    "paper_detector_equivalence": false,
+    "profile_schema": "fire-track2-rouaix-native-profiles-v1",
+    "source_code_sha256": "0da2ecc09a6b27233d63f188430034df4d566715f65a7e583ecb5016d4431ff5",
+    "source_core_connectivity": {
+      "all_core_component_count": 94,
+      "edge_source": "native internal faces plus processor-face joins from the export",
+      "no_source_seed_fallback": true,
+      "selected_source_owner_cell_count": 80,
+      "selected_source_owner_component_count": 1,
+      "source_connected_core_cell_count": 2667,
+      "source_connected_core_component_count": 1,
+      "source_seed_rule": "components must intersect listed source_owner_global_ids",
+      "threshold_rule": "global alpha.water >= 0.9 selection, then native face-edge labels"
+    },
+    "station_assignment": {
+      "diameter_normalization_m": 0.39687342144074905,
+      "source_plane_y0_m": 0.0,
+      "station_tolerance_m": 1e-09,
+      "x_origin_m": 0.0,
+      "x_station_edges_m": [
+        -0.21,
+        -0.13999999999999999,
+        -0.06999999999999998,
+        2.7755575615628914e-17,
+        0.07000000000000003,
+        0.14000000000000004,
+        0.21000000000000005,
+        0.28,
+        0.3500000000000001,
+        0.42000000000000015,
+        0.4900000000000001,
+        0.56,
+        0.6300000000000001,
+        0.7000000000000002,
+        0.7700000000000001,
+        0.8400000000000001,
+        0.9100000000000001,
+        0.9800000000000002,
+        1.0500000000000003,
+        1.12,
+        1.1900000000000002,
+        1.2600000000000002,
+        1.33,
+        1.4000000000000001,
+        1.4700000000000002,
+        1.5400000000000003,
+        1.6100000000000003,
+        1.6800000000000002,
+        1.7500000000000002,
+        1.8200000000000003,
+        1.8900000000000001,
+        1.9600000000000004,
+        2.0300000000000002,
+        2.1,
+        2.1700000000000004,
+        2.24,
+        2.3100000000000005,
+        2.3800000000000003,
+        2.45,
+        2.5200000000000005,
+        2.5900000000000003,
+        2.66,
+        2.7300000000000004,
+        2.8000000000000003,
+        2.87,
+        2.9400000000000004,
+        3.0100000000000002,
+        3.0800000000000005,
+        3.1500000000000004,
+        3.22,
+        3.2900000000000005,
+        3.3600000000000003,
+        3.4300000000000006,
+        3.5000000000000004,
+        3.5700000000000003,
+        3.6400000000000006,
+        3.7100000000000004,
+        3.7800000000000002,
+        3.8500000000000005,
+        3.920000000000001,
+        3.99,
+        4.05
+      ]
+    },
+    "thresholds_inclusive": {
+      "full_cloud": {
+        "comparison": ">=",
+        "value": 0.1
+      },
+      "native_roundoff_tolerance": 1e-12,
+      "raw_alpha_values_clipped": false,
+      "source_connected_core": {
+        "comparison": ">=",
+        "value": 0.9
+      }
+    },
+    "x_axis": "native x streamwise; x-origin from area-weighted nozzle patch center",
+    "y_axis": "native y retained; down-positive penetration is y0-min(y_low)",
+    "z_axis": "native z signed spanwise edges; full width max(z_high)-min(z_low)"
+  },
+  "pilot_dictionary_and_physical_input_evidence": {
+    "case_declaration": "pilot/case-declaration.json",
+    "exact_parent_checkpoint_hashes": {
+      "controlDict": "b93a50215f50395ea80e65bd3b7be09341d3c54b8cd4b4d2ed8fe8205faca3d5",
+      "decomposeParDict": "27ff198ca691fb155989b05238658cf7081cff665538230e64d58aff8cc432b5",
+      "fvSchemes": "bd6c0ae56cc2582376268256f71c7d77500f3918cdfec98bf205fffac58a6287",
+      "fvSolution": "d02ffcd42e6df314bf94440b5554268d0032bf813ebc0388c173f7145e667f32",
+      "parent_audit_report": "3d6d2a3d8ed48ecbda3e06b4077f93b272ea519b8369fee66811c786fb69b6b5",
+      "parent_checkpoint_archive": "23d32baf14266820a195b13c5a83d397b2704471c2d4ebe283fb2e49fad9de40"
+    },
+    "mesh_inputs_from_parent_case": {
+      "cell_count": 2733120,
+      "physical_mesh_unchanged": true,
+      "physical_root_mesh_sha256": "3e6aa7724239e2f4098c1f92fa28072994b054cf950af2a6236c35ea69676269",
+      "rank_count": 20
+    },
+    "physical_inputs_from_parent_case": {
+      "application": "interIsoFoam",
+      "container_image": "opencfd/openfoam-default:2512",
+      "image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+      "physical_model_unchanged": true,
+      "turbulence_model": "realizable k-epsilon",
+      "version": "OpenFOAM v2512"
+    },
+    "pilot_control_dict_sha256": "b93a50215f50395ea80e65bd3b7be09341d3c54b8cd4b4d2ed8fe8205faca3d5",
+    "pilot_declaration": "pilot/pilot-declaration.json",
+    "pilot_single_numerical_change": "system/controlDict:maxCo 2 -> 1",
+    "prepared_case_manifest": "pilot/prepared-case-manifest.json",
+    "unchanged_dictionary_sha256": {
+      "decomposeParDict": "27ff198ca691fb155989b05238658cf7081cff665538230e64d58aff8cc432b5",
+      "fvSchemes": "bd6c0ae56cc2582376268256f71c7d77500f3918cdfec98bf205fffac58a6287",
+      "fvSolution": "d02ffcd42e6df314bf94440b5554268d0032bf813ebc0388c173f7145e667f32"
+    }
+  },
+  "publication_artifacts": {
+    "analysis.json": {
+      "sha256": "e8e8c2143f0c7048c82c1792dfda0211ea38986acda3d90b55f8b5c0ee27523e",
+      "size_bytes": 26394
+    },
+    "pilot/baseline-failure-summary.json": {
+      "sha256": "d6d6855c752e4769da8c149c9bee813cfe8240b0b232ef1851a07d6906e0dac3",
+      "size_bytes": 1077
+    },
+    "pilot/case-declaration.json": {
+      "sha256": "5f041b17404025a0561cbc675962ca7ad45cd0cbc736025164fa68899284a6c2",
+      "size_bytes": 3371
+    },
+    "pilot/co-guard-start.json": {
+      "sha256": "8bd4bc5f9ef50f1f8ec4ecb8359ed6691937004d9379d13f996e7bb6bd43bc2f",
+      "size_bytes": 537
+    },
+    "pilot/co-sidecar-observation.json": {
+      "sha256": "0690594ce1e0e406d0cffa6996ba86570e428172892089ed27194b384e6fcf70",
+      "size_bytes": 1923
+    },
+    "pilot/co_guard.py": {
+      "sha256": "7cc11a20831bb03c926a62ecebf2c8a35e1f1c4dd8a5f764c5a09f63caa02d10",
+      "size_bytes": 4340
+    },
+    "pilot/pilot-declaration.json": {
+      "sha256": "30684eeb820d2e1a3c2188a41d7c9be5657dc7d661a673ec07aac4d318639fbf",
+      "size_bytes": 1805
+    },
+    "pilot/pilot-outcome.json": {
+      "sha256": "a3260fc9067dab7ab1fcb8195cd8275669dad98928a47bc82cc175d95ecdab4b",
+      "size_bytes": 3045
+    },
+    "pilot/pilot_supervisor_active_source_at_launch.py": {
+      "sha256": "09bbdb280fa23858dbd6c9cd57a9959d3e0a8acf4a6ff2d9efa4937f186bb517",
+      "size_bytes": 18700
+    },
+    "pilot/prepared-case-manifest.json": {
+      "sha256": "2e53edd566c583c9434ca5f541a0460f7d19f8b8ed7d306c043334452f787335",
+      "size_bytes": 1148
+    },
+    "pilot/solver_process_helper.py": {
+      "sha256": "e59e8562717c18125f0d47b07b66477b361267ad5da7c17b397caaedeb073664",
+      "size_bytes": 49715
+    },
+    "pilot/terminal-field-health.json": {
+      "sha256": "33d49e3f28351e297576f26cc18711257f348633fbecbc78e1249bdda51f18bd",
+      "size_bytes": 15523
+    },
+    "profiles.csv": {
+      "sha256": "d58eb9fe3b86d526d8cc2d2baf29a38166571d543ad62508b63b78aea8084e9e",
+      "size_bytes": 26477
+    },
+    "profiles.json": {
+      "sha256": "53851ea31bb0e0ff0245d64504034e990b0aae8db6bf436d9a6fdf4273bcfa75",
+      "size_bytes": 120649
+    },
+    "rouaix_profiles_vs_fig13.png": {
+      "sha256": "9112e1af8cc49bd5ea92bc73b99d93c4495bcd49b920c029191920253a097969",
+      "size_bytes": 238988
+    }
+  },
+  "reported_profile_normalization": {
+    "native_patch_area_equivalent_diameter_m": 0.39687342144074905,
+    "native_patch_area_equivalent_diameter_usage": "geometry diagnostic only; not the publication normalization denominator",
+    "nominal_paper_source": "experiments/E1_ROUAIX_CASE1_SOURCE.md, PDF p. 5 / article p. 4, Table 3: Case 1 d_j=40 cm",
+    "observer_source_run_normalization_diameter_m": 0.39687342144074905,
+    "original_unmodified_observer_profiles_csv_repo_relative_path": "results/runs/rouaix-observer-actual-3p0735945651412-20261015/profiles/profiles.csv",
+    "original_unmodified_observer_profiles_csv_sha256": "c543c1b7eed10c7a852775001adbbd2cd653a33450142c4c236ebed425f56a8a",
+    "original_unmodified_observer_profiles_json_repo_relative_path": "results/runs/rouaix-observer-actual-3p0735945651412-20261015/profiles/profiles.json",
+    "original_unmodified_observer_profiles_json_sha256": "761328783cda9db28b6e82d72c578e272f3b5e656218919ff6a07cd36114bb9e",
+    "reported_diameter_m": 0.4,
+    "reproduction": "Re-run scripts/analyze_rouaix_profiles.py against the native export with --diameter-m 0.4 to directly regenerate reported over_D values.",
+    "transform": "Only bundled over_D columns/fields were recomputed as corresponding unchanged SI values divided by 0.4 m. The original ignored run outputs, SI profile fields, native export, and SI figure were not edited."
+  },
+  "reproduction_command_templates": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/run_local.py",
+        "--threads",
+        "1",
+        "--",
+        ".venv/bin/python",
+        "scripts/export_native_vof.py",
+        "--case-dir",
+        "<source-case-directory>",
+        "--time",
+        "3.0735945651412",
+        "--output-dir",
+        "<temporary-native-export-directory>",
+        "--source-patch",
+        "nozzle",
+        "--mpi-ranks",
+        "20"
+      ],
+      "purpose": "Read native OpenFOAM fields from the saved source case without running the solver",
+      "substitutions": "Source case and temporary export paths were ephemeral and are intentionally omitted; full input hashes and export image ID are recorded above."
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/run_local.py",
+        "--threads",
+        "1",
+        "--",
+        ".venv/bin/python",
+        "scripts/analyze_rouaix_profiles.py",
+        "--export-dir",
+        "<temporary-native-export-directory>/raw",
+        "--output-dir",
+        "<profile-output-directory>",
+        "--x-range-m",
+        "-0.21",
+        "4.05",
+        "--x-station-width-m",
+        "0.07",
+        "--x-origin-m",
+        "0.0",
+        "--source-plane-y0-m",
+        "0.0",
+        "--diameter-m",
+        "0.39687342144074905"
+      ],
+      "purpose": "Build x-station full-cloud and source-connected core profiles from native export",
+      "substitutions": "The source origin, y0, and normalization diameter were derived from exported nozzle patch area-weighted geometry; the values are retained here explicitly."
+    },
+    {
+      "commands": [
+        ".venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python -m pytest -q tests/test_rouaix_profiles.py",
+        ".venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python -m ruff check scripts/analyze_rouaix_profiles.py tests/test_rouaix_profiles.py results/runs/rouaix-observer-actual-3p0735945651412-20261015/summarize_and_plot.py",
+        ".venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python -m ruff format --check scripts/analyze_rouaix_profiles.py tests/test_rouaix_profiles.py results/runs/rouaix-observer-actual-3p0735945651412-20261015/summarize_and_plot.py"
+      ],
+      "purpose": "Focused tests and style checks run on the observer changes"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/run_local.py",
+        "--threads",
+        "1",
+        "--",
+        ".venv/bin/python",
+        "scripts/analyze_rouaix_profiles.py",
+        "--export-dir",
+        "<temporary-native-export-directory>/raw",
+        "--output-dir",
+        "<profile-output-directory>",
+        "--x-range-m",
+        "-0.21",
+        "4.05",
+        "--x-station-width-m",
+        "0.07",
+        "--x-origin-m",
+        "0.0",
+        "--source-plane-y0-m",
+        "0.0",
+        "--diameter-m",
+        "0.4"
+      ],
+      "purpose": "Regenerate profile outputs with bundled over-D columns normalized by the paper-declared nominal d_j=0.4 m.",
+      "substitutions": "The publication denominator follows E1_ROUAIX_CASE1_SOURCE.md, PDF p. 5 / article p. 4, Table 3; SI field/profile values are unchanged."
+    }
+  ],
+  "run_scoped_guard_sources": {
+    "classification": "Frozen sources from this local CPU pilot; provenance evidence only, not a portable Slurm/HPC backend or production guard.",
+    "helper_sha256": "e59e8562717c18125f0d47b07b66477b361267ad5da7c17b397caaedeb073664",
+    "helper_source": "pilot/solver_process_helper.py",
+    "main_supervisor_launch_sha256_recorded_by_execution": "09bbdb280fa23858dbd6c9cd57a9959d3e0a8acf4a6ff2d9efa4937f186bb517",
+    "main_supervisor_parsed_courant_number": false,
+    "main_supervisor_sha256": "09bbdb280fa23858dbd6c9cd57a9959d3e0a8acf4a6ff2d9efa4937f186bb517",
+    "main_supervisor_source": "pilot/pilot_supervisor_active_source_at_launch.py",
+    "sidecar_is_source_of_reported_co_values": true,
+    "sidecar_sha256": "7cc11a20831bb03c926a62ecebf2c8a35e1f1c4dd8a5f764c5a09f63caa02d10",
+    "sidecar_source": "pilot/co_guard.py"
+  },
+  "schema": "fire-track2-rouaix-publication-provenance-v1",
+  "source_checkpoint": {
+    "native_export_selected_time_unchanged": true,
+    "relative_path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-checkpoints/checkpoint-3p0735945651412.tar.gz",
+    "sha256": "23d32baf14266820a195b13c5a83d397b2704471c2d4ebe283fb2e49fad9de40",
+    "size_bytes": 175954077,
+    "time_name": "3.0735945651412",
+    "time_value_s": 3.0735945651412
+  },
+  "source_run_id": "rouaix-c4-reproduction-5s-continue-20261014T114815Z",
+  "sources": {
+    "case_metadata": {
+      "path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/case.json",
+      "sha256": "772cc1a31399502415a964b00d8369beffc6afc85dc86c3f538969ca07834e54",
+      "size_bytes": 16689
+    },
+    "checkpoint_archive": {
+      "path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-checkpoints/checkpoint-3p0735945651412.tar.gz",
+      "sha256": "23d32baf14266820a195b13c5a83d397b2704471c2d4ebe283fb2e49fad9de40",
+      "size_bytes": 175954077
+    },
+    "digitized_fig13_case1_data": {
+      "path": "data/derived/rouaix_e1_case1_fig13.csv",
+      "sha256": "c55b7985adf584d1f8815d22d01c21cca6660f4c637da220009d9f44b5b719f7",
+      "size_bytes": 1221
+    },
+    "figure_summarizer": {
+      "note": "Run-local plotting helper source at analysis time; the output figure is packaged, the temporary native export is not.",
+      "path": "results/runs/rouaix-observer-actual-3p0735945651412-20261015/summarize_and_plot.py",
+      "sha256": "34802c743cca5acdbaaffda18149c1db9a5d44967899bbeb9c16fb1f5c44e031"
+    },
+    "liquid_component_labeler": {
+      "path": "src/aerial_drop/structure_counts.py",
+      "sha256": "59fc1ce40d473547f1bbf3d8236442df6de931a6431dad5d6fe90771aef93eeb",
+      "size_bytes": 11703
+    },
+    "native_vof_export_cpp": {
+      "path": "src/openfoam/exportNativeVof/exportNativeVof.C",
+      "sha256": "1916df0f862b338bc2de935dd2463398e7e9bd7c4b0b34d698dfac7dc7f63eb7",
+      "size_bytes": 13097
+    },
+    "native_vof_export_wrapper": {
+      "path": "scripts/export_native_vof.py",
+      "sha256": "0950ba690621921d15b65ca56835117be54d349146ff14797569ad6800b46002",
+      "size_bytes": 10749
+    },
+    "native_vof_loader": {
+      "path": "scripts/analyze_native_vof.py",
+      "sha256": "b11acaa5011fd188f29ba5e3a0d41180070e87899b42018165aa3be7baf74787",
+      "size_bytes": 32234
+    },
+    "rouaix_observer_tests": {
+      "path": "tests/test_rouaix_profiles.py",
+      "sha256": "0e8593492d76e9d464370e32138a97541a931da2871c93b500bf2e5fdb3eb18f",
+      "size_bytes": 7586
+    },
+    "rouaix_paper_pdf": {
+      "path": "Rouaix_28516.pdf",
+      "sha256": "624efe9ee2aec11b85624e9c2ac5364802b12c42657711d211e625052cf28446",
+      "size_bytes": 7091011
+    },
+    "rouaix_paper_source_record": {
+      "path": "experiments/E1_ROUAIX_CASE1_SOURCE.md",
+      "sha256": "c9c9200cc5014090cff6cac9d5a75ec3e2c665cfa76669a6df6344369d80a590",
+      "size_bytes": 14522
+    },
+    "rouaix_profile_observer": {
+      "path": "scripts/analyze_rouaix_profiles.py",
+      "sha256": "0da2ecc09a6b27233d63f188430034df4d566715f65a7e583ecb5016d4431ff5",
+      "size_bytes": 25374
+    },
+    "saved_ledger_report": {
+      "path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-native-ledgers/through-3p0735945651412-attempt1/ledger-report.json",
+      "sha256": "3d6d2a3d8ed48ecbda3e06b4077f93b272ea519b8369fee66811c786fb69b6b5",
+      "size_bytes": 4842
+    },
+    "saved_native_water_inventory": {
+      "path": "results/runs/rouaix-c4-reproduction-5s-continue-20261014T114815Z/durable-native-ledgers/through-3p0735945651412-attempt1/native-water-inventory.dat",
+      "sha256": "a1585f16e8875d0d482fe496b8ccbea8d4ced183a3e2ce3fcea693bc3a0e89bb",
+      "size_bytes": 73672
+    },
+    "uv_lock": {
+      "path": "uv.lock",
+      "sha256": "b0022a0c8e6a471c416c539f19df89557cf3c31e83abb75616ee9c091df0ec2e",
+      "size_bytes": 281796
+    }
+  },
+  "status": "exploratory_native_field_profile_package"
+}

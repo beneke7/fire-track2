@@ -1,0 +1,41 @@
+{
+  "classification": "run-specific provenance snapshot; not a validated production guard module",
+  "limitations": [
+    "The sidecar began after the supervisor parser issue was detected and scanned new log bytes only; its measurements do not cover records before its initial offset.",
+    "The main supervisor did not parse Co in this attempt; these Co values come from the supplemental sidecar.",
+    "The pilot was manually stopped before reaching the prior baseline failure time, so the sidecar result does not establish stability through that region."
+  ],
+  "schema": "rouaix-maxco1-pilot-co-sidecar-observation-v1",
+  "sidecar_start": {
+    "co_threshold": 4.0,
+    "consecutive_records": 3,
+    "coverage_note": "Started after supervisor parser defect was found; does not rescan prior output; the primary dt/epsilon/alpha/time guard remains active.",
+    "initial_log_offset_bytes": 89490,
+    "interface_co_threshold": 4.0,
+    "started_utc": "2026-10-15T09:07:38.978450+00:00",
+    "status": "watching_new_bytes_only"
+  },
+  "source_files": {
+    "co_guard.py": {
+      "path": "co_guard.py",
+      "sha256": "7cc11a20831bb03c926a62ecebf2c8a35e1f1c4dd8a5f764c5a09f63caa02d10"
+    },
+    "corrected_supervisor_source_sha256": "2cb8f184d0f85afec13f4d95fa0cd556713bd410e16010641a68e40cb6a05d51",
+    "main_supervisor_source_at_launch_sha256": "09bbdb280fa23858dbd6c9cd57a9959d3e0a8acf4a6ff2d9efa4937f186bb517",
+    "solver_process_helper.py": {
+      "path": "solver_process_helper.py",
+      "sha256": "e59e8562717c18125f0d47b07b66477b361267ad5da7c17b397caaedeb073664"
+    }
+  },
+  "terminal_observation": {
+    "co_high_count": 0,
+    "container_exit_code": 0,
+    "interfaceCo": 0.0198048726145,
+    "interface_high_count": 0,
+    "maxCo": 0.999355545929,
+    "observed_utc": "2026-10-15T10:04:59.764873+00:00",
+    "oom_killed": false,
+    "status": "container_not_running",
+    "stop_guard_fired": false
+  }
+}
