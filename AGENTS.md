@@ -173,6 +173,13 @@ separate review memos unless a hard decision needs one.
   only when an active long run materially delays assigned work or observed
   contention affects desktop responsiveness, memory, disk, or solver stability.
   Serialize GPU work with the launcher's lock.
+- User direction (2026-10-15): keep useful CPU experiments ready while a run
+  is active. Arm an actual bounded dispatcher for declared follow-up jobs;
+  a written queue plan is not a running queue. Advance when the prior job and
+  required checkpoint capture finish, sharing the available CPU budget and
+  respecting unrelated workloads. A user pause must also suspend queued jobs.
+  Do not wait for another status prompt to launch an already authorized next
+  experiment, or repeat failed cases without a new diagnostic purpose.
 - Profile small pilots to learn peak RAM/VRAM, step time, pressure-solve and I/O
   share, mass error, physical-time throughput, and checkpoint cost. The user
   also authorizes larger exploratory tests when measured memory, disk and

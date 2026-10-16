@@ -1,0 +1,140 @@
+{
+  "schema": "rouaix-video-artifacts/v1",
+  "generated_utc": "2026-10-16",
+  "claim_limit": "Both are exploratory visualizations of saved OpenFOAM alpha.water fields. Neither validates the model, reproduction, or physical velocity/breakup behavior.",
+  "artifacts": {
+    "rouaix-long-attempt-10x.mp4": {
+      "sha256": "2ddeef61e2ad6f71f93ededbaf289d1247780dea23e1811ea3da50dcaa8e1774",
+      "bytes": 608188
+    },
+    "rouaix-long-attempt-10x-poster.png": {
+      "sha256": "e9c5d0351180998873545b32a96576bb4ece15e6df18985b6f8de810ceb9c33c",
+      "bytes": 324424
+    },
+    "rouaix-startup-diagnostic-10x.mp4": {
+      "sha256": "91e0754c98c01356df2b2888ad2e1781a5120eabd5be8bc8bfe1dc57155d0844",
+      "bytes": 55084
+    },
+    "rouaix-startup-diagnostic-10x-poster.png": {
+      "sha256": "de3da2724bd8133877dfe656396bf157618cb305d37a801edea4e853a2c4cbbb",
+      "bytes": 168743
+    }
+  },
+  "videos": {
+    "rouaix-long-attempt-10x.mp4": {
+      "source_run": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z",
+      "source_analysis": "results/runs/rouaix-results-cpu-20261007T153625Z",
+      "source_reconstructed_fields": "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01",
+      "solver": "interIsoFoam, OpenFOAM v2512; 16 MPI ranks; 2,733,120-cell mesh",
+      "saved_simulation_times_s": [
+        0.4,
+        0.49989058,
+        0.59995942,
+        0.69993523,
+        0.80007068,
+        0.90011602,
+        1.00015191,
+        1.10021183,
+        1.200145389,
+        1.299888041,
+        1.3999269276,
+        1.5000193048
+      ],
+      "alpha_observer": "Computed cell-centered alpha.water; left panel uses the nearest-to-z=0 cell layer at each y, right panel uses maximum cell alpha over span z. Full color scale 0\u20131; orange contour alpha=0.1, black contour alpha=0.9.",
+      "spatial_and_temporal_display": "No smoothing or temporal interpolation. Matplotlib contours interpolate native cell-center samples for display; each saved snapshot is held without generating intermediate flow fields.",
+      "orientation": "Native y coordinate retained; y=0 roof/source at top, y=-10 m at bottom; gravity is -y and points down on screen.",
+      "window_m": {
+        "x": [
+          -2.5,
+          17.5
+        ],
+        "y": [
+          -10.0,
+          0.0
+        ]
+      },
+      "playback": {
+        "slowdown_factor": 10,
+        "fps": 10,
+        "frames": 120,
+        "duration_s": 12.0,
+        "endpoint_hold_s": 1.0
+      },
+      "run_context": "Continuation reaches t=1.500019 s, before the paper-described approximately 5 s stabilization horizon. Labeled NOT VALIDATED; not presented as a credible reproduction.",
+      "poster": "rouaix-long-attempt-10x-poster.png",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 2030,
+            "height": 1062,
+            "r_frame_rate": "10/1",
+            "duration": "12.000000",
+            "nb_frames": "120"
+          }
+        ],
+        "format": {
+          "duration": "12.000000",
+          "size": "608188"
+        }
+      }
+    },
+    "rouaix-startup-diagnostic-10x.mp4": {
+      "source_run": "results/runs/recovery-air-only-20261015T201744Z-water-C-gradlim",
+      "source_case": "results/runs/recovery-air-only-20261015T201744Z-water-C-gradlim/case",
+      "source_reconstructed_fields": "results/runs/rouaix-20261016-video-production/clean-start-C/case",
+      "solver": "interIsoFoam, OpenFOAM v2512; 20 MPI ranks; 2,733,120-cell mesh; gradient-limited C diagnostic branch",
+      "saved_simulation_times_s": [
+        0.0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.125,
+        0.15
+      ],
+      "alpha_observer": "Computed alpha.water=0.5 isosurface, interpolated from cell to point data, linear contour, then triangulated.",
+      "smoothing": "Display geometry only: two Taubin windowed-sinc iterations, pass band 0.1; does not modify alpha.water or water inventory.",
+      "orientation": "Screen-up is world +y; gravity -y points down.",
+      "camera_bounds_m": [
+        -1.0,
+        1.7,
+        -2.4,
+        0.4,
+        -1.0,
+        1.0
+      ],
+      "playback": {
+        "slowdown_factor": 10,
+        "fps": 30,
+        "frames": 75,
+        "duration_s": 2.5,
+        "endpoint_hold_s": 1.0,
+        "sampling": "hold each saved snapshot; no temporal interpolation or extrapolation"
+      },
+      "run_context": "Fresh-start water diagnostic, not a paper reproduction. Run stopped at t=0.17425 s when max |U|=1025.043 m/s exceeded the predeclared 1000 m/s operational runaway stop. Video ends at last saved field t=0.15 s; no clipping or velocity cap.",
+      "poster": "rouaix-startup-diagnostic-10x-poster.png",
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 760,
+            "r_frame_rate": "30/1",
+            "duration": "2.500000",
+            "nb_frames": "75"
+          }
+        ],
+        "format": {
+          "duration": "2.500000",
+          "size": "55084"
+        }
+      }
+    }
+  },
+  "render_code_revision": "40ac7574adfece9987acb526c6a7a9e0ef4076e3",
+  "render_worktree_dirty": true,
+  "reproduction_note": "Raw CFD fields, reconstruction bundles and intermediate render outputs are preserved locally under ignored results/runs paths; the published preview bundle does not contain the full source fields."
+}
