@@ -1,19 +1,22 @@
 # Live project status
 
-Updated: 2026-10-16 11:46 UTC. CPU-only work; use available capacity within a
+Updated: 2026-10-16 13:09 UTC. CPU-only work; use available capacity within a
 shared 20-CPU budget and respect unrelated workloads. Analytical E0 is the
 only passed gate. No E1, aircraft, ground or field reproduction is validated.
 
 ## Current work
 
-- Air-only checkpoint continuation is running under the durable user service
+- The clean-start water B diagnostic is running under the durable user service
   `fire-track2-air-only-resume-20261016.service` (MainPID 4054741, dispatcher
   4054742), independent of the tool session. Container
-  `air-only-water-a_resume-20261015-flow` has 20 MPI ranks and 20-CPU quota;
-  root measured about 1,980% CPU and 7.5 GiB memory. It advanced from the
-  preserved 0.05 s checkpoint to about 0.390 s. All native water inventories
-  and seven boundary water fluxes remain zero. The nozzle still injects air
-  downward at 10 m/s: this is phase replacement, not a sealed-nozzle baseline.
+  `air-only-water-b_resume-20261015-flow` has 20 MPI ranks and is at t=0.13275 s.
+  Root verified its actual Docker quota restored to 20 CPUs after rendering
+  and checks. Its latest water-ledger relative residual is 2.44e-12; all 530
+  k solves so far iterated. These checks do not establish physical accuracy.
+- Air-only A stopped at t=0.421 s on its predeclared wall-budget stop; solver
+  exit was zero and all 20 ranks received the write/stop request. It did not
+  reach 0.5 s. All water inventory/flux remained zero. Its nozzle injected air
+  downward at 10 m/s: phase replacement, not a sealed-nozzle baseline.
 - The air-only flow is not qualified as healthy: recorded peaks include
   k=2,734.93 m2/s2, epsilon=906,154 m2/s3 and nut=494.97 m2/s, at different
   cells/times. Logs show negative epsilon before bounding, frequent zero k
@@ -29,6 +32,18 @@ only passed gate. No E1, aircraft, ground or field reproduction is validated.
   excluded because C failed its velocity diagnostic. Each case retains its
   finite 0.5 s/3-hour declaration and the shared PAUSE behavior. Actual solver
   startup registers stopAtWriteNowSignal=12 from nested OptimisationSwitches.
+- CPU Mitsuba rendering trial completed in
+  `results/summaries/rouaix_mitsuba_20261016/`: a 64-spp matte-blue near-field
+  still at 1.5000193048 s, dielectric alternative, and six-state 0.025–0.15 s
+  startup movie at 10× slow motion. Root inspected the still; sampling grain
+  remains. Optical D32=0.5 mm, Qext=2, albedo=0.999 and HG g=0.85 are assumed;
+  only 0<alpha<0.1 supplies the inferred spray proxy. These are presentation
+  trials from exploratory fields, not measured foam or a validated reproduction.
+  A portable cropped grid and replay command accompany the still. No CFD
+  physics or acceptance criteria changed. Two Luna workers implemented and
+  checked this; `make check` passed (656 tests, one optional Docker skip).
+  A pre-existing SIGTERM test race was corrected by waiting for both mock
+  startup markers; the original failed check log remains preserved.
 - The morning check found no active CFD: the main finite queue had finished
   at 22:10 UTC on 15 Oct, while the prior resource dispatcher disappeared
   after its 21:21 update and never launched follow-ups. Its failed attempt

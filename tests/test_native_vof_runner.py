@@ -660,12 +660,15 @@ output_path.write_text(json.dumps(result))
         text=True,
     )
     deadline = time.monotonic() + 10
-    while time.monotonic() < deadline and not stats_started_path.is_file():
+    container_cid_path = run_dir / "container.cid"
+    while time.monotonic() < deadline and not (
+        stats_started_path.is_file() and container_cid_path.is_file()
+    ):
         if child_process.poll() is not None:
             stdout, stderr = child_process.communicate()
             raise AssertionError(f"runner exited before starting mock container: {stdout} {stderr}")
         time.sleep(0.02)
-    assert (run_dir / "container.cid").is_file()
+    assert container_cid_path.is_file()
     assert stats_started_path.is_file()
     os.kill(child_process.pid, signal.SIGTERM)
     stdout, stderr = child_process.communicate(timeout=15)

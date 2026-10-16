@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "purpose": "single legacy OpenFOAM water-volume-fraction field prepared for Mitsuba hero still; not an aerosol optical-property field",
+  "npz": "rouaix-water-alpha-t1p5000193048.npz",
+  "interface": {
+    "alpha_zyx": {
+      "dtype": "float32",
+      "axis_order": [
+        "z",
+        "y",
+        "x"
+      ],
+      "shape": [
+        49,
+        129,
+        60
+      ],
+      "samples": "uniform voxel centers",
+      "range": [
+        0.0,
+        1.0
+      ]
+    },
+    "bounds_m": {
+      "dtype": "float32",
+      "order": [
+        "xmin",
+        "xmax",
+        "ymin",
+        "ymax",
+        "zmin",
+        "zmax"
+      ],
+      "values": [
+        -0.58965517,
+        1.796551725,
+        -5.150032080000001,
+        -1.2739999999997198e-05,
+        -0.95429917,
+        0.966017875
+      ],
+      "meaning": "outer voxel boundaries"
+    },
+    "spacing_m_xyz": [
+      0.03977011491666667,
+      0.039922630542635666,
+      0.0391901437755102
+    ]
+  },
+  "source": {
+    "time_s": 1.5000193048,
+    "alpha_field": "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01/1.5000193048/alpha.water",
+    "alpha_field_resolved": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/1.5000193048/alpha.water",
+    "alpha_water_sha256": "edf7d64084958533f59e9e8842d3665f30cc9b72a8bcdeba91c0735959cba19f",
+    "native_centres": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/0.4/C",
+    "native_centres_sha256": "83d37d85bf16cde4d6b9f89c6ac835ae1cd8b0730db49a7a683960c4bd49d4d3",
+    "native_cell_volumes": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/0.4/V",
+    "native_cell_volumes_sha256": "92bcaaeb96ac369f6873bba816ab917c98b464adff85e4581746adfcb122b5ae",
+    "geometry_time_s": 0.4,
+    "native_mesh_cells": 2733120,
+    "native_structured_shape_yxz": [
+      117,
+      146,
+      160
+    ],
+    "native_domain_cell_volume_sum_m3": 2299.9999999999054,
+    "coordinate_frame": {
+      "x": "downstream with crossflow; m",
+      "y": "vertical, roof at y=0, negative downward; m",
+      "z": "spanwise; m"
+    }
+  },
+  "resampling": {
+    "method": "trilinear interpolation in physical xyz coordinates on the reconstructed structured cell-center lattice; each y-plane uses its own z-center coordinates because z spacing varies with y",
+    "native_support_for_crop": "six-face-connected alpha.water >= 0.1 component(s) seeded on nearest-to-roof y plane inside x^2+z^2 <= 0.22^2 m^2; this matches the existing exploratory morphology observer and selects crop center/extents only; the box is padded by 0.4 m on each side and clipped to mesh domain bounds; all alpha values, including detached and dilute cells, within the final box are retained",
+    "source_connected_support_bounds_m": [
+      -0.18965517,
+      1.3965517250000001,
+      -4.75003208,
+      -1.2739999999997198e-05,
+      -0.55429917,
+      0.566017875
+    ],
+    "mesh_domain_outer_bounds_m": [
+      -2.5,
+      17.5,
+      -10.00029292,
+      -1.2739999999997198e-05,
+      -7.943882765000001,
+      7.943882765000001
+    ],
+    "padding_m_each_side_before_domain_clip": 0.4,
+    "target_voxel_spacing_requested_m": 0.04,
+    "native_support_cell_count": 5003,
+    "all_cells_above_threshold": 6890,
+    "global_threshold_component_count": 367,
+    "top_source_seed_component_count": 1,
+    "median_native_pitch_in_support_xyz_m": [
+      0.03448276,
+      0.06944414999999982,
+      0.05425805
+    ],
+    "target_spacing_is_coarser_than_or_equal_to_native_median_pitch_xyz": [
+      true,
+      false,
+      false
+    ],
+    "assumptions": [
+      "native C and V at 0.4 s are geometry for the unchanged mesh; reconstruction helper documents matching field order at the target time",
+      "samples outside the native center-coordinate range are edge-clamped; the padded axis-aligned crop may cut native cells at its boundary"
+    ]
+  },
+  "liquid_volume_accounting": {
+    "water_density_used_kg_m3": 997.6,
+    "native_full_field_alpha_times_V_m3": 0.7545674503357194,
+    "native_full_field_water_mass_kg": 752.7564884549137,
+    "native_cell_center_in_crop_alpha_times_V_m3": 0.47763300808157205,
+    "native_cell_center_in_crop_water_mass_kg": 476.48668886217627,
+    "native_cell_count_with_center_in_crop": 149088,
+    "native_source_connected_component_alpha_times_V_m3": 0.39412756087588113,
+    "native_alpha_times_V_outside_crop_m3": 0.2769344422541473,
+    "native_water_mass_excluded_outside_crop_kg": 276.26979959273734,
+    "native_outside_crop_fraction_of_full": 0.367010851224678,
+    "regular_voxel_integral_sum_alpha_dV_m3": 0.47714051710735494,
+    "voxel_minus_native_crop_m3": -0.000492490974217108,
+    "relative_voxel_minus_native_crop": -0.0010311074944238327,
+    "note": "sampling/interpolation discrepancy is reported, never corrected by scaling alpha; crop integral uses whole native cell volumes selected by center-in-crop, so boundary-cut cells can differ from exact geometric intersection"
+  },
+  "export": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "npz_sha256": "2dc5d6b82a6d08693d1e37411e646e5bf9b86a538123009149cfd629790836bc",
+    "elapsed_s": 6.295083800912835
+  }
+}

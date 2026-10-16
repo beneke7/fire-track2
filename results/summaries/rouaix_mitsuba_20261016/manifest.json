@@ -1,0 +1,834 @@
+{
+  "schema_version": 1,
+  "task": "CPU Mitsuba exploratory multiple-scattering visualization from saved Rouaix VOF alpha.water fields",
+  "source": {
+    "run": "results/runs/rouaix-20261016-video-production/clean-start-C/case",
+    "mesh_case": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case",
+    "mesh_C_path": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/0.4/C",
+    "mesh_C_sha256": "83d37d85bf16cde4d6b9f89c6ac835ae1cd8b0730db49a7a683960c4bd49d4d3",
+    "mesh_V_path": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/0.4/V",
+    "mesh_V_sha256": "92bcaaeb96ac369f6873bba816ab917c98b464adff85e4581746adfcb122b5ae",
+    "fresh_start_mesh_field_order_sha256_match": {
+      "points": {
+        "field_case_sha256": "4eabf8b9c41d3aa68aded45066379fb90e430f7e087f4acbb683614406569510",
+        "coordinate_source_sha256": "4eabf8b9c41d3aa68aded45066379fb90e430f7e087f4acbb683614406569510"
+      },
+      "faces": {
+        "field_case_sha256": "a70415020ce8f77e7363a43ff436d5377a42aefe51fc4982b4c79d4f9235816c",
+        "coordinate_source_sha256": "a70415020ce8f77e7363a43ff436d5377a42aefe51fc4982b4c79d4f9235816c"
+      },
+      "owner": {
+        "field_case_sha256": "1cb812a30ebd1ace749d0673d58cb85692d12f5875cb922e9d544b17e4e85bad",
+        "coordinate_source_sha256": "1cb812a30ebd1ace749d0673d58cb85692d12f5875cb922e9d544b17e4e85bad"
+      },
+      "neighbour": {
+        "field_case_sha256": "979b8f7c437cb6636b0c58056dd146212886646bcce1bfd029c2d5cc45514336",
+        "coordinate_source_sha256": "979b8f7c437cb6636b0c58056dd146212886646bcce1bfd029c2d5cc45514336"
+      },
+      "boundary": {
+        "field_case_sha256": "3d11b6493abc395e0e4637302a8a8751d04a894b3792c49962087583b7f9125d",
+        "coordinate_source_sha256": "3d11b6493abc395e0e4637302a8a8751d04a894b3792c49962087583b7f9125d"
+      }
+    },
+    "solver_case": "fresh-start C gradient-limited U exploratory run; stopped at 0.17425 s after max|U| operational guard; not validated",
+    "mesh_cells": 2733120,
+    "native_structured_dimensions_yxz": [
+      117,
+      146,
+      160
+    ],
+    "coordinate_frame": {
+      "x": "streamwise",
+      "y": "vertical; roof y=0, gravity -y",
+      "z": "spanwise"
+    },
+    "native_cell_center_support_xyz_m": [
+      [
+        -2.375,
+        17.25
+      ],
+      [
+        -9.87529504,
+        -0.01725409
+      ],
+      [
+        -7.8942335,
+        7.8942335
+      ]
+    ],
+    "estimated_outer_cell_face_bounds_xyz_m": [
+      [
+        -2.5,
+        17.5
+      ],
+      [
+        -10.00029292,
+        -1.2740000000000667e-05
+      ],
+      [
+        -7.943882765000001,
+        7.943882765000001
+      ]
+    ]
+  },
+  "display_grid": {
+    "bounds_xyz_m": [
+      [
+        -0.8,
+        1.5
+      ],
+      [
+        -2.25,
+        -0.001
+      ],
+      [
+        -1.3,
+        1.3
+      ]
+    ],
+    "dimensions_xyz": [
+      96,
+      96,
+      96
+    ],
+    "axis_layout": "[z,y,x] contiguous NumPy array; x fastest; verified against Mitsuba VolumeGrid dimensions [x,y,z] and an asymmetric impulse",
+    "sampling_convention": "uniform samples at voxel centers (i+0.5)/N mapped by the gridvolume affine transform to declared crop bounds; native field samples at OpenFOAM cell centers; no half-cell shift",
+    "resampling": "display-only trilinear interpolation in x,z on each native y-plane then linear interpolation between y-planes; out-of-support samples zero",
+    "crop_native_vs_uniform_integrals": [
+      {
+        "time_s": 0.025,
+        "native_m3": 0.030926724137922607,
+        "uniform_m3": 0.027997788407531202,
+        "ratio": 0.9052943429336598
+      },
+      {
+        "time_s": 0.05,
+        "native_m3": 0.06185344827583639,
+        "uniform_m3": 0.05886655814626874,
+        "ratio": 0.9517102083581894
+      },
+      {
+        "time_s": 0.075,
+        "native_m3": 0.09278017241375792,
+        "uniform_m3": 0.08983322486284279,
+        "ratio": 0.9682373132723544
+      },
+      {
+        "time_s": 0.1,
+        "native_m3": 0.1237068965516903,
+        "uniform_m3": 0.12098154836601588,
+        "ratio": 0.9779693108335665
+      },
+      {
+        "time_s": 0.125,
+        "native_m3": 0.15463362068964476,
+        "uniform_m3": 0.15168858077430386,
+        "ratio": 0.9809547244499196
+      },
+      {
+        "time_s": 0.15,
+        "native_m3": 0.1855602793864054,
+        "uniform_m3": 0.18251558352533628,
+        "ratio": 0.9835918771455989
+      }
+    ]
+  },
+  "optical_interpretation": {
+    "coherent_bulk": "alpha.water=0.5 isosurface rendered as a dielectric water/air interface (int_ior=1.333, ext_ior=1.000277); this is display geometry extracted from cell-centered, resampled VOF data",
+    "dilute_medium": "only clipped alpha.water in 0 < alpha < 0.1 is used as an inferred dilute spray-equivalent volume-fraction proxy; this is a visual inference, not calibrated spray classifier or measured droplet field",
+    "extinction_equation": "sigma_t [m^-1] = 1.5 Qext alpha / D32",
+    "D32_m": 0.0005,
+    "Qext": 2.0,
+    "Qsca_over_Qext": 0.999,
+    "HG_g": 0.85,
+    "assumption_status": "illustrative geometric-optics Qext\u22482, high single-scattering albedo and g are assumptions, not measured; alpha is a water fraction and does not encode droplet size or count",
+    "coefficient_scale_m_inv_per_alpha": 6000.0,
+    "surface_alpha_threshold": 0.5,
+    "alpha_clamp": "clip to [0,1] for VOF physical range; clamped native-cell count recorded per snapshot"
+  },
+  "render_settings": {
+    "backend": "Mitsuba 3 llvm_ad_rgb CPU",
+    "integrator": "volpath, Russian roulette after depth 8, max_depth=-1",
+    "environment": {
+      "type": "constant",
+      "radiance_rgb": [
+        0.4,
+        0.5,
+        0.8
+      ],
+      "interpretation": "illustrative environment boundary condition"
+    },
+    "camera": "perspective 34 degrees; all crop corners fitted; up +y",
+    "threads": 4,
+    "tone_mapping": "linear HDR * exposure then 1-exp(-x), then sRGB; overlay records exploratory interpretation",
+    "exposure": 1.0,
+    "time_handling": "only saved times 0.025\u20130.15 s rendered; no temporal interpolation; each snapshot held for the next saved-time interval at 10x slow motion; endpoint repeated for the final interval",
+    "resolution_px": [
+      384,
+      256
+    ],
+    "spp": 24,
+    "broad_area_key": {
+      "type": "rectangle emitter",
+      "position_relative_to_crop_center_m": [
+        -2.0,
+        3.0,
+        1.5
+      ],
+      "dimensions_m": [
+        4.0,
+        4.0
+      ],
+      "radiance_rgb": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "orientation": "facing crop center, world up +y"
+    },
+    "camera_fit": {
+      "origin_m": [
+        3.488564589755518,
+        0.5263760998713256,
+        8.259380499356627
+      ],
+      "target_m": [
+        0.35,
+        -1.1255,
+        0.0
+      ],
+      "direction_from_target": [
+        0.3491679693993151,
+        0.18377261547332377,
+        0.9188630773666188
+      ],
+      "distance_m": 8.988695598725426,
+      "fov_degrees": 34.0,
+      "aspect": 1.5,
+      "fit_margin_fraction": 0.08,
+      "all_crop_corners_in_frustum": true
+    }
+  },
+  "snapshots": [
+    {
+      "field_path": "results/runs/rouaix-20261016-video-production/clean-start-C/case/0.025/alpha.water",
+      "field_sha256": "d8ba9050725abbf3e5f31a122035d86c76cf000717e05f57b3cc5fa7edfae602",
+      "native_cells_inside_crop": 112770,
+      "native_liquid_volume_inside_crop_m3": 0.030926724137922607,
+      "uniform_resampled_liquid_volume_inside_crop_m3": 0.027997788407531202,
+      "uniform_over_native_crop_integral": 0.9052943429336598,
+      "alpha_native_minmax": [
+        0.0,
+        1.0
+      ],
+      "alpha_clipped_cell_count": 0,
+      "resampled_shape_zyx": [
+        96,
+        96,
+        96
+      ],
+      "time_s": 0.025,
+      "output_png": "results/runs/rouaix-mitsuba-c-startup-20261016-b/rendered/rouaix-startup-d32-0.5mm-t-0p025.png",
+      "output_png_sha256": "d6a90fad224320fe504d2c6790d1c34d87a9427758f43e45cb1fffa9e1867e18",
+      "output_png_bytes": 7689,
+      "linear_render_stats": {
+        "finite_fraction": 1.0,
+        "finite_min": 0.05353820323944092,
+        "finite_max": 18.565773010253906,
+        "finite_mean": 0.5656256079673767
+      },
+      "render": {
+        "variant": "llvm_ad_rgb",
+        "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+        "resolution_px": [
+          384,
+          256
+        ],
+        "spp": 24,
+        "threads": 4,
+        "surface": {
+          "point_count": 1054,
+          "triangle_count": 2104,
+          "boundary_edges_before_source_cap": 0,
+          "boundary_edges_after_cap": 0,
+          "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+          "bounds_m_xyz": [
+            [
+              -0.8,
+              1.5
+            ],
+            [
+              -2.25,
+              -0.001
+            ],
+            [
+              -1.3,
+              1.3
+            ]
+          ],
+          "level": 0.5,
+          "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+        },
+        "exposure": 1.0,
+        "tonemap": "linear HDR, exposure multiplier, exponential shoulder 1-exp(-x), then sRGB",
+        "camera_up": "+y (opposite gravity), perspective 34 degrees; camera fitted to all crop corners and fixed for all frames",
+        "camera_fit": {
+          "origin_m": [
+            3.488564589755518,
+            0.5263760998713256,
+            8.259380499356627
+          ],
+          "target_m": [
+            0.35,
+            -1.1255,
+            0.0
+          ],
+          "direction_from_target": [
+            0.3491679693993151,
+            0.18377261547332377,
+            0.9188630773666188
+          ],
+          "distance_m": 8.988695598725426,
+          "fov_degrees": 34.0,
+          "aspect": 1.5,
+          "fit_margin_fraction": 0.08,
+          "all_crop_corners_in_frustum": true
+        }
+      },
+      "cached_grid_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p025/alpha-uniform-zyx.npz",
+      "mesh_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p025/alpha-half-surface.ply",
+      "linear_hdr_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p025/linear-rgb.npy",
+      "linear_hdr_sha256": "8fb309abdca4e526425ce4aaa37ec37876b226d1ff1172ab81c7406d8765f931"
+    },
+    {
+      "field_path": "results/runs/rouaix-20261016-video-production/clean-start-C/case/0.05/alpha.water",
+      "field_sha256": "93365d95c3e35b8a65f447c5e23e3657ea912c503424bcf21793bb763c0f8573",
+      "native_cells_inside_crop": 112770,
+      "native_liquid_volume_inside_crop_m3": 0.06185344827583639,
+      "uniform_resampled_liquid_volume_inside_crop_m3": 0.05886655814626874,
+      "uniform_over_native_crop_integral": 0.9517102083581894,
+      "alpha_native_minmax": [
+        0.0,
+        1.0
+      ],
+      "alpha_clipped_cell_count": 0,
+      "resampled_shape_zyx": [
+        96,
+        96,
+        96
+      ],
+      "time_s": 0.05,
+      "output_png": "results/runs/rouaix-mitsuba-c-startup-20261016-b/rendered/rouaix-startup-d32-0.5mm-t-0p05.png",
+      "output_png_sha256": "ecbd9920bc49684f45a028b82f9f4534f2ba32d197c43751aa314723cb094d3b",
+      "output_png_bytes": 9353,
+      "linear_render_stats": {
+        "finite_fraction": 1.0,
+        "finite_min": 0.052975933998823166,
+        "finite_max": 7.311535358428955,
+        "finite_mean": 0.5633461475372314
+      },
+      "render": {
+        "variant": "llvm_ad_rgb",
+        "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+        "resolution_px": [
+          384,
+          256
+        ],
+        "spp": 24,
+        "threads": 4,
+        "surface": {
+          "point_count": 1834,
+          "triangle_count": 3664,
+          "boundary_edges_before_source_cap": 0,
+          "boundary_edges_after_cap": 0,
+          "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+          "bounds_m_xyz": [
+            [
+              -0.8,
+              1.5
+            ],
+            [
+              -2.25,
+              -0.001
+            ],
+            [
+              -1.3,
+              1.3
+            ]
+          ],
+          "level": 0.5,
+          "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+        },
+        "exposure": 1.0,
+        "tonemap": "linear HDR, exposure multiplier, exponential shoulder 1-exp(-x), then sRGB",
+        "camera_up": "+y (opposite gravity), perspective 34 degrees; camera fitted to all crop corners and fixed for all frames",
+        "camera_fit": {
+          "origin_m": [
+            3.488564589755518,
+            0.5263760998713256,
+            8.259380499356627
+          ],
+          "target_m": [
+            0.35,
+            -1.1255,
+            0.0
+          ],
+          "direction_from_target": [
+            0.3491679693993151,
+            0.18377261547332377,
+            0.9188630773666188
+          ],
+          "distance_m": 8.988695598725426,
+          "fov_degrees": 34.0,
+          "aspect": 1.5,
+          "fit_margin_fraction": 0.08,
+          "all_crop_corners_in_frustum": true
+        }
+      },
+      "cached_grid_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p05/alpha-uniform-zyx.npz",
+      "mesh_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p05/alpha-half-surface.ply",
+      "linear_hdr_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p05/linear-rgb.npy",
+      "linear_hdr_sha256": "c8d9e0e1c7693741630e86c65729bf86879234a979b8addbedefa368a5e3f63f"
+    },
+    {
+      "field_path": "results/runs/rouaix-20261016-video-production/clean-start-C/case/0.075/alpha.water",
+      "field_sha256": "a07fe03c3224346ad40657dda96a640fd2c2b8542b26fddf688c11f641810c07",
+      "native_cells_inside_crop": 112770,
+      "native_liquid_volume_inside_crop_m3": 0.09278017241375792,
+      "uniform_resampled_liquid_volume_inside_crop_m3": 0.08983322486284279,
+      "uniform_over_native_crop_integral": 0.9682373132723544,
+      "alpha_native_minmax": [
+        0.0,
+        1.0
+      ],
+      "alpha_clipped_cell_count": 0,
+      "resampled_shape_zyx": [
+        96,
+        96,
+        96
+      ],
+      "time_s": 0.075,
+      "output_png": "results/runs/rouaix-mitsuba-c-startup-20261016-b/rendered/rouaix-startup-d32-0.5mm-t-0p075.png",
+      "output_png_sha256": "e17f5b26fe67b1b5a326ca4a3401a7e19cc54ad217236652dacba643a04afb64",
+      "output_png_bytes": 11329,
+      "linear_render_stats": {
+        "finite_fraction": 1.0,
+        "finite_min": 0.02585092931985855,
+        "finite_max": 4.53648042678833,
+        "finite_mean": 0.5614424347877502
+      },
+      "render": {
+        "variant": "llvm_ad_rgb",
+        "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+        "resolution_px": [
+          384,
+          256
+        ],
+        "spp": 24,
+        "threads": 4,
+        "surface": {
+          "point_count": 2726,
+          "triangle_count": 5448,
+          "boundary_edges_before_source_cap": 0,
+          "boundary_edges_after_cap": 0,
+          "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+          "bounds_m_xyz": [
+            [
+              -0.8,
+              1.5
+            ],
+            [
+              -2.25,
+              -0.001
+            ],
+            [
+              -1.3,
+              1.3
+            ]
+          ],
+          "level": 0.5,
+          "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+        },
+        "exposure": 1.0,
+        "tonemap": "linear HDR, exposure multiplier, exponential shoulder 1-exp(-x), then sRGB",
+        "camera_up": "+y (opposite gravity), perspective 34 degrees; camera fitted to all crop corners and fixed for all frames",
+        "camera_fit": {
+          "origin_m": [
+            3.488564589755518,
+            0.5263760998713256,
+            8.259380499356627
+          ],
+          "target_m": [
+            0.35,
+            -1.1255,
+            0.0
+          ],
+          "direction_from_target": [
+            0.3491679693993151,
+            0.18377261547332377,
+            0.9188630773666188
+          ],
+          "distance_m": 8.988695598725426,
+          "fov_degrees": 34.0,
+          "aspect": 1.5,
+          "fit_margin_fraction": 0.08,
+          "all_crop_corners_in_frustum": true
+        }
+      },
+      "cached_grid_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p075/alpha-uniform-zyx.npz",
+      "mesh_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p075/alpha-half-surface.ply",
+      "linear_hdr_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p075/linear-rgb.npy",
+      "linear_hdr_sha256": "44de063cf5b44cf7e24acdf077f37130d7fdc15cf8765903bac6e98c94aace85"
+    },
+    {
+      "field_path": "results/runs/rouaix-20261016-video-production/clean-start-C/case/0.1/alpha.water",
+      "field_sha256": "675be8f08a11488c1956d03909e555e41521a339aeda3b332f442b2d745e17e3",
+      "native_cells_inside_crop": 112770,
+      "native_liquid_volume_inside_crop_m3": 0.1237068965516903,
+      "uniform_resampled_liquid_volume_inside_crop_m3": 0.12098154836601588,
+      "uniform_over_native_crop_integral": 0.9779693108335665,
+      "alpha_native_minmax": [
+        0.0,
+        1.0
+      ],
+      "alpha_clipped_cell_count": 0,
+      "resampled_shape_zyx": [
+        96,
+        96,
+        96
+      ],
+      "time_s": 0.1,
+      "output_png": "results/runs/rouaix-mitsuba-c-startup-20261016-b/rendered/rouaix-startup-d32-0.5mm-t-0p1.png",
+      "output_png_sha256": "6f290141315c5df9a2c07f0fd3dc9f678015ed9ae4deb68f73688e8bbfe059c6",
+      "output_png_bytes": 13313,
+      "linear_render_stats": {
+        "finite_fraction": 1.0,
+        "finite_min": 0.019081519916653633,
+        "finite_max": 2.069904327392578,
+        "finite_mean": 0.5583474636077881
+      },
+      "render": {
+        "variant": "llvm_ad_rgb",
+        "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+        "resolution_px": [
+          384,
+          256
+        ],
+        "spp": 24,
+        "threads": 4,
+        "surface": {
+          "point_count": 3694,
+          "triangle_count": 7384,
+          "boundary_edges_before_source_cap": 0,
+          "boundary_edges_after_cap": 0,
+          "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+          "bounds_m_xyz": [
+            [
+              -0.8,
+              1.5
+            ],
+            [
+              -2.25,
+              -0.001
+            ],
+            [
+              -1.3,
+              1.3
+            ]
+          ],
+          "level": 0.5,
+          "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+        },
+        "exposure": 1.0,
+        "tonemap": "linear HDR, exposure multiplier, exponential shoulder 1-exp(-x), then sRGB",
+        "camera_up": "+y (opposite gravity), perspective 34 degrees; camera fitted to all crop corners and fixed for all frames",
+        "camera_fit": {
+          "origin_m": [
+            3.488564589755518,
+            0.5263760998713256,
+            8.259380499356627
+          ],
+          "target_m": [
+            0.35,
+            -1.1255,
+            0.0
+          ],
+          "direction_from_target": [
+            0.3491679693993151,
+            0.18377261547332377,
+            0.9188630773666188
+          ],
+          "distance_m": 8.988695598725426,
+          "fov_degrees": 34.0,
+          "aspect": 1.5,
+          "fit_margin_fraction": 0.08,
+          "all_crop_corners_in_frustum": true
+        }
+      },
+      "cached_grid_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p1/alpha-uniform-zyx.npz",
+      "mesh_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p1/alpha-half-surface.ply",
+      "linear_hdr_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p1/linear-rgb.npy",
+      "linear_hdr_sha256": "619d39c197472d47bcc04da0c22481263a585f8b8c6296c970a1eed7e5b13e10"
+    },
+    {
+      "field_path": "results/runs/rouaix-20261016-video-production/clean-start-C/case/0.125/alpha.water",
+      "field_sha256": "63fc06c2e6f789c9665f04ee80168a4d1d0eb358b932895aee1fe79457bec291",
+      "native_cells_inside_crop": 112770,
+      "native_liquid_volume_inside_crop_m3": 0.15463362068964476,
+      "uniform_resampled_liquid_volume_inside_crop_m3": 0.15168858077430386,
+      "uniform_over_native_crop_integral": 0.9809547244499196,
+      "alpha_native_minmax": [
+        0.0,
+        1.0
+      ],
+      "alpha_clipped_cell_count": 0,
+      "resampled_shape_zyx": [
+        96,
+        96,
+        96
+      ],
+      "time_s": 0.125,
+      "output_png": "results/runs/rouaix-mitsuba-c-startup-20261016-b/rendered/rouaix-startup-d32-0.5mm-t-0p125.png",
+      "output_png_sha256": "0f449977edbd90f08cee734e963aa56ad701154bb73fdf064e4f7c239bf3bca5",
+      "output_png_bytes": 16373,
+      "linear_render_stats": {
+        "finite_fraction": 1.0,
+        "finite_min": 0.018137237057089806,
+        "finite_max": 290.05523681640625,
+        "finite_mean": 0.5603013038635254
+      },
+      "render": {
+        "variant": "llvm_ad_rgb",
+        "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+        "resolution_px": [
+          384,
+          256
+        ],
+        "spp": 24,
+        "threads": 4,
+        "surface": {
+          "point_count": 5014,
+          "triangle_count": 10012,
+          "boundary_edges_before_source_cap": 0,
+          "boundary_edges_after_cap": 0,
+          "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+          "bounds_m_xyz": [
+            [
+              -0.8,
+              1.5
+            ],
+            [
+              -2.25,
+              -0.001
+            ],
+            [
+              -1.3,
+              1.3
+            ]
+          ],
+          "level": 0.5,
+          "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+        },
+        "exposure": 1.0,
+        "tonemap": "linear HDR, exposure multiplier, exponential shoulder 1-exp(-x), then sRGB",
+        "camera_up": "+y (opposite gravity), perspective 34 degrees; camera fitted to all crop corners and fixed for all frames",
+        "camera_fit": {
+          "origin_m": [
+            3.488564589755518,
+            0.5263760998713256,
+            8.259380499356627
+          ],
+          "target_m": [
+            0.35,
+            -1.1255,
+            0.0
+          ],
+          "direction_from_target": [
+            0.3491679693993151,
+            0.18377261547332377,
+            0.9188630773666188
+          ],
+          "distance_m": 8.988695598725426,
+          "fov_degrees": 34.0,
+          "aspect": 1.5,
+          "fit_margin_fraction": 0.08,
+          "all_crop_corners_in_frustum": true
+        }
+      },
+      "cached_grid_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p125/alpha-uniform-zyx.npz",
+      "mesh_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p125/alpha-half-surface.ply",
+      "linear_hdr_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p125/linear-rgb.npy",
+      "linear_hdr_sha256": "aea837554d390d63d30607a5f57746070a3bf546a960fc09dbf80894791fdea3"
+    },
+    {
+      "field_path": "results/runs/rouaix-20261016-video-production/clean-start-C/case/0.15/alpha.water",
+      "field_sha256": "cc945ea91257a6a2cff67c35e8c0d09d95e33e2667bb3b3c5810decb7283ade4",
+      "native_cells_inside_crop": 112770,
+      "native_liquid_volume_inside_crop_m3": 0.1855602793864054,
+      "uniform_resampled_liquid_volume_inside_crop_m3": 0.18251558352533628,
+      "uniform_over_native_crop_integral": 0.9835918771455989,
+      "alpha_native_minmax": [
+        0.0,
+        1.0
+      ],
+      "alpha_clipped_cell_count": 0,
+      "resampled_shape_zyx": [
+        96,
+        96,
+        96
+      ],
+      "time_s": 0.15,
+      "output_png": "results/runs/rouaix-mitsuba-c-startup-20261016-b/rendered/rouaix-startup-d32-0.5mm-t-0p15.png",
+      "output_png_sha256": "2c338405a222269d78dc2bce1f8c09dd00c547f588ac4fec65de52ccf62bc1c5",
+      "output_png_bytes": 19742,
+      "linear_render_stats": {
+        "finite_fraction": 1.0,
+        "finite_min": 0.016006560996174812,
+        "finite_max": 32.3187255859375,
+        "finite_mean": 0.5519444346427917
+      },
+      "render": {
+        "variant": "llvm_ad_rgb",
+        "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+        "resolution_px": [
+          384,
+          256
+        ],
+        "spp": 24,
+        "threads": 4,
+        "surface": {
+          "point_count": 6562,
+          "triangle_count": 13128,
+          "boundary_edges_before_source_cap": 0,
+          "boundary_edges_after_cap": 0,
+          "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+          "bounds_m_xyz": [
+            [
+              -0.8,
+              1.5
+            ],
+            [
+              -2.25,
+              -0.001
+            ],
+            [
+              -1.3,
+              1.3
+            ]
+          ],
+          "level": 0.5,
+          "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+        },
+        "exposure": 1.0,
+        "tonemap": "linear HDR, exposure multiplier, exponential shoulder 1-exp(-x), then sRGB",
+        "camera_up": "+y (opposite gravity), perspective 34 degrees; camera fitted to all crop corners and fixed for all frames",
+        "camera_fit": {
+          "origin_m": [
+            3.488564589755518,
+            0.5263760998713256,
+            8.259380499356627
+          ],
+          "target_m": [
+            0.35,
+            -1.1255,
+            0.0
+          ],
+          "direction_from_target": [
+            0.3491679693993151,
+            0.18377261547332377,
+            0.9188630773666188
+          ],
+          "distance_m": 8.988695598725426,
+          "fov_degrees": 34.0,
+          "aspect": 1.5,
+          "fit_margin_fraction": 0.08,
+          "all_crop_corners_in_frustum": true
+        }
+      },
+      "cached_grid_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p15/alpha-uniform-zyx.npz",
+      "mesh_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p15/alpha-half-surface.ply",
+      "linear_hdr_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/t-0p15/linear-rgb.npy",
+      "linear_hdr_sha256": "cd75567adb0bdb5e07688223b2594e3c0dba4d60164e5236a8ab7edefa4e60fc"
+    }
+  ],
+  "video": {
+    "path": "results/summaries/rouaix_mitsuba_20261016/rouaix-startup-multiple-scattering.mp4",
+    "sha256": "bab247bddccc7cc28e49354ed6e73b9b418608f6154e98ef557b747535228f37",
+    "size_bytes": 12489,
+    "presentation": "10x slow-motion held snapshots; no temporal interpolation"
+  },
+  "poster": {
+    "path": "results/summaries/rouaix_mitsuba_20261016/rouaix-startup-multiple-scattering-poster.png",
+    "sha256": "2c338405a222269d78dc2bce1f8c09dd00c547f588ac4fec65de52ccf62bc1c5",
+    "size_bytes": 19742,
+    "time_s": 0.15
+  },
+  "scientific_limitations": [
+    "The source run is exploratory and failed a declared operational velocity guard at 0.17425 s; no solver-validation claim follows from these images.",
+    "The dilute-band optical mapping depends strongly on assumed D32, Qext, albedo and HG g; none is measured by alpha.water.",
+    "Alpha 0.1 is an explicit display mask only; the actual dispersed-droplet population and breakup are unresolved by this VOF export.",
+    "All resampling, alpha=.5 mesh extraction, dielectric optical properties and environment illumination are rendering choices."
+  ],
+  "provenance": {
+    "repository_revision_at_recording": "b2b67a93eae15cf4c5471bde2c311cc6fec1c90f",
+    "working_tree_dirty_at_recording": true,
+    "working_tree_status_porcelain_at_recording": [
+      " M .gitignore",
+      " M README.md",
+      " M docs/STATUS.md",
+      " M pyproject.toml",
+      " M tests/test_native_vof_runner.py",
+      " M uv.lock",
+      "?? results/summaries/rouaix_mitsuba_20261016/",
+      "?? scripts/render_vof_mitsuba.py",
+      "?? tests/test_vof_mitsuba.py"
+    ],
+    "provenance_recorded_at_utc": "2026-10-16T13:10:29.007021+00:00",
+    "renderer_script_path": "scripts/render_vof_mitsuba.py",
+    "renderer_script_sha256_for_replay": "d5244fb40cac8bbd86f99c59ffa759eb3af16361bf606549204f5b5911647d76",
+    "render_revision": "b2b67a93eae15cf4c5471bde2c311cc6fec1c90f",
+    "renderer_invocation_settings": {
+      "field_root": "results/runs/rouaix-20261016-video-production/clean-start-C/case",
+      "mesh_case": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case",
+      "times_s": [
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.125,
+        0.15
+      ],
+      "bounds_m_xyz": [
+        [
+          -0.8,
+          1.5
+        ],
+        [
+          -2.25,
+          -0.001
+        ],
+        [
+          -1.3,
+          1.3
+        ]
+      ],
+      "dimensions_xyz": [
+        96,
+        96,
+        96
+      ],
+      "resolution_px": [
+        384,
+        256
+      ],
+      "spp": 24,
+      "threads": 4,
+      "D32_m": 0.0005,
+      "exposure": 1.0
+    },
+    "equivalent_replay_command": ".venv/bin/python scripts/run_local.py --threads 4 --timeout 3600 -- .venv/bin/python scripts/render_vof_mitsuba.py --field-root results/runs/rouaix-20261016-video-production/clean-start-C/case --mesh-case results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case --times 0.025,0.05,0.075,0.1,0.125,0.15 --bounds-m=-0.8,1.5,-2.25,-0.001,-1.3,1.3 --dims 96,96,96 --run-dir results/runs/rouaix-mitsuba-replay-20261016/startup --summary-dir results/runs/rouaix-mitsuba-replay-20261016/startup/summary --d32-mm 0.5 --width 384 --height 256 --spp 24 --threads 4 --exposure 1.0",
+    "postprocessing_script_path": "results/runs/rouaix-mitsuba-c-startup-20261016-b/finalize_outputs.py",
+    "postprocessing_script_sha256": "839e0f6b204ff00971580d4c23deba4fb861aa3affd354004668e7165299acaa",
+    "video": "Saved snapshots only; held at 10x slow motion, no temporal interpolation. The displayed source run stopped at 0.17425 s after its operational velocity guard."
+  }
+}

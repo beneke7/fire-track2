@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "task": "Portable CPU Mitsuba legacy Rouaix near-field crop, exploratory optical interpretation",
+  "source_metadata": "results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-source-metadata.json",
+  "optical_interpretation": {
+    "coherent_bulk": "alpha.water=0.5 isosurface rendered with a matte-blue diffuse display material; this is deliberately nonphysical and geometry is display-only",
+    "dilute_medium": "only 0 < alpha.water < 0.1 is used as an inferred spray-equivalent optical proxy; not a measured droplet population",
+    "extinction_equation": "sigma_t [m^-1] = 1.5 Qext alpha / D32",
+    "D32_m": 0.0005,
+    "Qext": 2.0,
+    "Qsca_over_Qext": 0.999,
+    "HG_g": 0.85,
+    "assumption_status": "illustrative geometric-optics Qext\u22482, albedo and g assumptions; alpha is not a droplet-size or number-density measurement",
+    "alpha_mask": "display inference: 0 < alpha < 0.1 dilute medium; alpha=0.5 matte-blue nonphysical surface",
+    "bulk_surface_material": "matte-blue"
+  },
+  "render_settings": {
+    "backend": "Mitsuba 3 llvm_ad_rgb CPU",
+    "software_versions": {
+      "mitsuba": "3.9.1",
+      "drjit": "1.5.0",
+      "python": "3.12.3"
+    },
+    "environment": {
+      "type": "constant",
+      "radiance_rgb": [
+        0.4,
+        0.5,
+        0.8
+      ],
+      "interpretation": "illustrative environment boundary condition"
+    },
+    "broad_area_key": {
+      "type": "rectangle emitter",
+      "position_relative_to_crop_center_m": [
+        -2.0,
+        3.0,
+        1.5
+      ],
+      "dimensions_m": [
+        4.0,
+        4.0
+      ],
+      "radiance_rgb": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "orientation": "facing crop center, world up +y"
+    },
+    "camera": "perspective 34 degrees; fixed center-relative camera; up +y",
+    "camera_fit": {
+      "origin_m": [
+        3.213286472942602,
+        -1.2014233384699273,
+        6.873854641292627
+      ],
+      "target_m": [
+        0.6034482717514038,
+        -2.575022391728453,
+        0.005859375
+      ],
+      "direction_from_target": [
+        0.3491679693993151,
+        0.18377261547332377,
+        0.9188630773666188
+      ],
+      "distance_m": 7.474449061524706,
+      "fov_degrees": 34.0,
+      "aspect": 0.6666666666666666,
+      "fit_margin_fraction": 0.08,
+      "all_crop_corners_in_frustum": true
+    },
+    "bulk_surface_material": "matte-blue",
+    "axis_layout": "[z,y,x], x fastest",
+    "sampling_convention": "input grid values at voxel centers; bounds_m are outer voxel boundaries",
+    "threads": 8,
+    "tone_mapping": "linear HDR * exposure then 1-exp(-x), then sRGB",
+    "exposure": 1.0,
+    "resolution_px": [
+      384,
+      576
+    ],
+    "spp": 64
+  },
+  "snapshot": {
+    "time_s": 1.5000193048,
+    "field_path": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/1.5000193048/alpha.water",
+    "field_sha256": "edf7d64084958533f59e9e8842d3665f30cc9b72a8bcdeba91c0735959cba19f",
+    "npz_sha256": "2dc5d6b82a6d08693d1e37411e646e5bf9b86a538123009149cfd629790836bc",
+    "portable_npz": "results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-alpha-zyx.npz",
+    "portable_npz_sha256": "2dc5d6b82a6d08693d1e37411e646e5bf9b86a538123009149cfd629790836bc",
+    "portable_source_metadata": "results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-source-metadata.json",
+    "portable_source_metadata_sha256": "5092a930ffee7c4c2465727660ad777a89012662a57fd2aae0e8e0997fe0592c",
+    "native_liquid_volume_inside_crop_m3": 0.47763300808157205,
+    "uniform_resampled_liquid_volume_inside_crop_m3": 0.4771405099703675,
+    "uniform_over_native_crop_integral": 0.9989688775631679,
+    "alpha_minmax": [
+      0.0,
+      1.0
+    ],
+    "alpha_clipped_cell_count": 0,
+    "resampled_shape_zyx": [
+      49,
+      129,
+      60
+    ],
+    "bounds_xyz_m": [
+      [
+        -0.5896551609039307,
+        1.7965517044067383
+      ],
+      [
+        -5.150032043457031,
+        -1.2739999874611385e-05
+      ],
+      [
+        -0.9542991518974304,
+        0.9660179018974304
+      ]
+    ],
+    "surface": {
+      "point_count": 7329,
+      "triangle_count": 14502,
+      "boundary_edges_before_source_cap": 42,
+      "boundary_edges_after_cap": 0,
+      "crop_boundary_cap": "VTK fill_holes on alpha=.5 isosurface; display-only closure of inlet/crop openings",
+      "bounds_m_xyz": [
+        [
+          -0.5896551609039307,
+          1.7965517044067383
+        ],
+        [
+          -5.150032043457031,
+          -1.2739999874611385e-05
+        ],
+        [
+          -0.9542991518974304,
+          0.9660179018974304
+        ]
+      ],
+      "level": 0.5,
+      "point_location_convention": "uniform voxel centers; VTK points at first center plus integer spacing"
+    },
+    "render": {
+      "variant": "llvm_ad_rgb",
+      "mitsuba_version": "3.9.1",
+      "drjit_version": "1.5.0",
+      "python_version": "3.12.3",
+      "integrator": "volpath; multiple scattering with Russian roulette after depth 8; no finite max depth",
+      "resolution_px": [
+        384,
+        576
+      ],
+      "spp": 64,
+      "threads": 8,
+      "wall_seconds": 470.2318725910736,
+      "exposure": 1.0,
+      "bulk_surface_material": "matte-blue",
+      "tonemap": "linear HDR, exposure multiplier, exponential shoulder, then sRGB",
+      "linear_rgb_finite_fraction": 1.0,
+      "camera_fit": {
+        "origin_m": [
+          3.213286472942602,
+          -1.2014233384699273,
+          6.873854641292627
+        ],
+        "target_m": [
+          0.6034482717514038,
+          -2.575022391728453,
+          0.005859375
+        ],
+        "direction_from_target": [
+          0.3491679693993151,
+          0.18377261547332377,
+          0.9188630773666188
+        ],
+        "distance_m": 7.474449061524706,
+        "fov_degrees": 34.0,
+        "aspect": 0.6666666666666666,
+        "fit_margin_fraction": 0.08,
+        "all_crop_corners_in_frustum": true
+      }
+    },
+    "output_png": "results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-multiple-scattering-final-matte-blue-t1p5.png",
+    "output_png_sha256": "8a46fe25c85f64caa91cbeb5b74c2a83eaff5b09da9f21ff4e75f0f5e27e7856",
+    "output_png_bytes": 104101
+  },
+  "scientific_limitations": [
+    "The source is a failed exploratory numerical attempt, not a validated Rouaix reproduction.",
+    "The image is a near-field crop: 36.70% of whole-field liquid volume lies outside the retained crop.",
+    "The crop NPZ is resampled display data; its crop alpha-volume integral differs from native by the value recorded above, with no normalization.",
+    "The spray-equivalent medium, dielectric interface, closure, illumination and tone mapping are rendering assumptions, not CFD variables."
+  ],
+  "provenance": {
+    "repository_revision_at_recording": "b2b67a93eae15cf4c5471bde2c311cc6fec1c90f",
+    "working_tree_dirty_at_recording": true,
+    "working_tree_status_porcelain_at_recording": [
+      " M .gitignore",
+      " M README.md",
+      " M docs/STATUS.md",
+      " M pyproject.toml",
+      " M tests/test_native_vof_runner.py",
+      " M uv.lock",
+      "?? results/summaries/rouaix_mitsuba_20261016/",
+      "?? scripts/render_vof_mitsuba.py",
+      "?? tests/test_vof_mitsuba.py"
+    ],
+    "provenance_recorded_at_utc": "2026-10-16T13:10:29.007021+00:00",
+    "renderer_script_path": "scripts/render_vof_mitsuba.py",
+    "renderer_script_sha256_for_replay": "d5244fb40cac8bbd86f99c59ffa759eb3af16361bf606549204f5b5911647d76",
+    "render_script_sha256_at_render": "d5244fb40cac8bbd86f99c59ffa759eb3af16361bf606549204f5b5911647d76",
+    "render_revision": "b2b67a93eae15cf4c5471bde2c311cc6fec1c90f",
+    "render_command": ".venv/bin/python scripts/run_local.py --threads 8 --timeout 3600 -- .venv/bin/python scripts/render_vof_mitsuba.py --grid-npz results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-alpha-zyx.npz --grid-metadata results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-source-metadata.json --time-s 1.5000193048 --artifact-prefix legacy-multiple-scattering-final-matte-blue --run-dir results/runs/rouaix-mitsuba-legacy-hero-final-20261016-a --summary-dir results/summaries/rouaix_mitsuba_20261016 --width 384 --height 576 --spp 64 --threads 8 --bulk-material matte-blue",
+    "fresh_replay_command": ".venv/bin/python scripts/run_local.py --threads 8 --timeout 3600 -- .venv/bin/python scripts/render_vof_mitsuba.py --grid-npz results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-alpha-zyx.npz --grid-metadata results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-source-metadata.json --time-s 1.5000193048 --artifact-prefix final-matte-blue-replay --run-dir results/runs/rouaix-mitsuba-replay-20261016/final-matte-blue --summary-dir results/runs/rouaix-mitsuba-replay-20261016/final-matte-blue/summary --width 384 --height 576 --spp 64 --threads 8 --bulk-material matte-blue",
+    "random_seed": "No explicit seed was set; Mitsuba sampler default is used."
+  }
+}

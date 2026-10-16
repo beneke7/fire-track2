@@ -66,6 +66,30 @@ For actual timestamped surfaces, the same guide documents the provenance-checked
 diagnostic and validated animation modes. The available six-frame P0 render is
 only a 0.10 s nearfield diagnostic, not the planned full experiment.
 
+For CPU Mitsuba multiple-scattering presentation trials, install
+`uv sync --frozen --extra visualization --extra physical-rendering` and see
+`.venv/bin/python scripts/render_vof_mitsuba.py --help`. Droplet size and spray
+optics are assumed display inputs, not quantities established by the VOF fields;
+these renders do not validate foam or change the simulated water inventory.
+The [published examples](results/summaries/rouaix_mitsuba_20261016/) include a
+portable cropped alpha grid. To render it without the original CFD case:
+
+```bash
+.venv/bin/python scripts/run_local.py --threads 8 --timeout 3600 -- \
+  .venv/bin/python scripts/render_vof_mitsuba.py \
+  --grid-npz results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-alpha-zyx.npz \
+  --grid-metadata results/summaries/rouaix_mitsuba_20261016/rouaix-legacy-t1p5-source-metadata.json \
+  --bulk-material matte-blue --width 384 --height 576 --spp 64 --threads 8 \
+  --run-dir results/runs/mitsuba-replay-01 \
+  --summary-dir results/runs/mitsuba-replay-01/presentation --no-video
+```
+
+Use a new run directory for each attempt and share CPU capacity with active CFD.
+These examples assume D32 = 0.5 mm and HG g = 0.85; the matte-blue bulk surface
+is a display material. The 1.5 s still is a near-field crop, and the short movie
+holds six saved states from 0.025–0.15 s at 10× slow motion without inventing
+intermediate fluid motion.
+
 The Rouaix Case 1 source record includes vector-path and independent raster
 traces of Figure 13 in [`experiments/E1_ROUAIX_CASE1_SOURCE.md`](experiments/E1_ROUAIX_CASE1_SOURCE.md).
 The two traces agree within their extraction bounds. The paper's Section 4.3

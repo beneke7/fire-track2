@@ -11,7 +11,13 @@ requires-python = ">=3.11"
 dependencies = ["numpy>=2.1,<3"]
 
 [project.optional-dependencies]
-visualization = ["pyvista>=0.49,<0.50"]
+visualization = [
+    "pyvista>=0.49,<0.50",
+]
+physical-rendering = [
+    "mitsuba>=3.9,<4",
+    "scipy>=1.13,<2",
+]
 
 [dependency-groups]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
