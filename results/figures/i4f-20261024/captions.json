@@ -1,0 +1,94 @@
+{
+  "assets": {
+    "i4f_fine_alpha_pressure_t0p158508211.png": {
+      "caption": "Current fine-branch water fraction and absolute-pressure cuts at the exact saved time 0.158508211 s. The display includes longitudinal and nozzle-elevation cuts, an external alpha.water=0.50 surface projection, and saved pressure-probe/tank-inventory histories.",
+      "case_inputs_sha256": "9cbe5eb82f8bd01a0da2b6639c4a7869cd87f66e7fc1d7edf4acd0d0176a8c41",
+      "cell_count_method": "OpenFOAMReader reconstructed internalMesh.n_cells; independently checked against native nonuniform V count and polyMesh nCells. Archived case-inputs.json contains stale 146354 metadata and was not used for the caption.",
+      "field": "p absolute (Pa), alpha.water (dimensionless)",
+      "file": "i4f_fine_alpha_pressure_t0p158508211.png",
+      "file_bytes": 388652,
+      "file_sha256": "16494096f9f41f155ee154850694aaaf692994c5e7701accaf0b21b52def1b84",
+      "kind": "computed CFD field view",
+      "limitations": [
+        "Provisional water/ideal-air hydraulic reference; CO2 thermodynamics, dissolved gas, foam and retardant rheology are not modeled.",
+        "The valve is represented by a scalar loss zone; it is not a resolved butterfly disk and does not show a disk wake.",
+        "The five reported lamellae are omitted because orientation and dimensions are unresolved.",
+        "The alpha.water=0.50 display surface/contours use cell-to-point interpolation for visualization.",
+        "The far-domain patch named outlet is not the nozzle discharge plane.",
+        "Single saved field only; no temporal interpolation. This is a short provisional discharge snapshot, not a validated device or emptying-duration prediction."
+      ],
+      "mesh_cell_count": 642480,
+      "pressure_color_range_Pa": [
+        99951.4609375,
+        861654.0625
+      ],
+      "render_manifest": "results/runs/i4f-curated-render-20261024T110315Z/rendered-fine-0158508211-correct-count/render-manifest.json",
+      "snapshot_tree_sha256": "7e18fe03d504a8730ea0a56431f808a0b344b36dfbf13888ebb3633ec03ffa26",
+      "source_case": "results/runs/i4f-fine-full-discharge-20261024T1002Z/case",
+      "source_field_directory": "results/runs/i4f-fine-full-discharge-20261024T1002Z/case/processors12/0.158508211",
+      "source_saved_time_s": 0.158508211,
+      "source_solver": "OpenCFD compressibleInterFoam v2512"
+    },
+    "i4f_fine_external_alpha050_surface_t0p158508211.png": {
+      "caption": "Computed external alpha.water=0.50 surface projected along the discharge axis at the exact saved time 0.158508211 s. The plotted surface extends from x=4.5000 to 4.6492 m beyond the nominal nozzle plane.",
+      "case_inputs_sha256": "9cbe5eb82f8bd01a0da2b6639c4a7869cd87f66e7fc1d7edf4acd0d0176a8c41",
+      "cell_count_method": "OpenFOAMReader reconstructed internalMesh.n_cells, independently verified against native V count.",
+      "file": "i4f_fine_external_alpha050_surface_t0p158508211.png",
+      "file_bytes": 55721,
+      "file_sha256": "cd170c8ec90fca36744d8e168f73854c18b700072d15d4ed3b0214b35ab71b96",
+      "isosurface": "alpha.water=0.50 with cell-to-point display interpolation; computed from saved fields, no particles or foam",
+      "kind": "computed CFD isosurface view",
+      "limitations": [
+        "Provisional water/ideal-air hydraulic reference; CO2 thermodynamics, dissolved gas, foam and retardant rheology are not modeled.",
+        "The valve is represented by a scalar loss zone; it is not a resolved butterfly disk and does not show a disk wake.",
+        "The five reported lamellae are omitted because orientation and dimensions are unresolved.",
+        "The alpha.water=0.50 display surface/contours use cell-to-point interpolation for visualization.",
+        "The far-domain patch named outlet is not the nozzle discharge plane.",
+        "Projection collapses the x extent; the colored surface is a display isosurface, not a resolved free-surface film thickness."
+      ],
+      "mesh_cell_count": 642480,
+      "render_manifest": "results/runs/i4f-curated-render-20261024T110315Z/rendered-fine-0158508211-correct-count/render-manifest.json",
+      "snapshot_tree_sha256": "7e18fe03d504a8730ea0a56431f808a0b344b36dfbf13888ebb3633ec03ffa26",
+      "source_case": "results/runs/i4f-fine-full-discharge-20261024T1002Z/case",
+      "source_field_directory": "results/runs/i4f-fine-full-discharge-20261024T1002Z/case/processors12/0.158508211",
+      "source_saved_time_s": 0.158508211,
+      "source_solver": "OpenCFD compressibleInterFoam v2512",
+      "surface_x_bounds_m": [
+        4.5,
+        4.649207592010498
+      ]
+    },
+    "i4f_pressure_floor_limiter_diagnostic.png": {
+      "caption": "Matched linearUpwind reference and cell-limited velocity-convection-gradient diagnostic. Limiting did not prevent the raw pressure from falling well below the 10 kPa floor or the clipped-water support from exceeding the declared stop threshold on this short test.",
+      "file": "i4f_pressure_floor_limiter_diagnostic.png",
+      "file_bytes": 243488,
+      "file_sha256": "fd9fbc533f52a160e0bffb46ac0504341c35a557b04e2c0cfd3be28a0627001e",
+      "kind": "exploratory CFD numerical diagnostic",
+      "limitations": [
+        "Exploratory numerical diagnostic; this is not a validated solver result or a physical cavitation determination."
+      ],
+      "source_metrics": "results/runs/i4f-convection-gradient-pair-20261024T094505Z/analysis/pair_metrics.json",
+      "source_metrics_sha256": "bf4628748c92cf0ab575b71f2f08c4a487395db48ed0dad049e563fb87067a21",
+      "source_plot": "results/runs/i4f-convection-gradient-pair-20261024T094505Z/analysis/convection_gradient_pair.png",
+      "source_plot_sha256": "fd9fbc533f52a160e0bffb46ac0504341c35a557b04e2c0cfd3be28a0627001e"
+    },
+    "i4f_reduced_static_pressure_screen.png": {
+      "caption": "Single-liquid reduced-model pressure-balance screen for polytropic exponent n=1.25, 0.5 s valve stroke and zero minimum valve opening. It warns that the assumed single-liquid model can predict sub-vapor and negative absolute pressure under these provisional inputs.",
+      "file": "i4f_reduced_static_pressure_screen.png",
+      "file_bytes": 163331,
+      "file_sha256": "c80e82151841c4f8cbc4bbf0661aa601c06cc7a809199e60573ec08b6cbb0d67",
+      "kind": "reduced-model pressure screen",
+      "limitations": [
+        "Reduced-model output, not CFD or a measured pressure trace. It does not model vapor formation, gas ingestion, cavity dynamics or two-phase pressure recovery; threshold crossings do not establish cavitation."
+      ],
+      "source_plot": "results/runs/i4f-reduced-static-pressure-screen-20261024T100659Z/representative_pressure_screen.png",
+      "source_plot_sha256": "c80e82151841c4f8cbc4bbf0661aa601c06cc7a809199e60573ec08b6cbb0d67",
+      "source_summary": "results/runs/i4f-reduced-static-pressure-screen-20261024T100659Z/summary.json",
+      "source_summary_sha256": "c2386a551ff25ccbe8263387e21c6974fd19bba5f673ce343f26f84b4528e684"
+    }
+  },
+  "created_utc": "2026-10-24T11:04:45.660639+00:00",
+  "directory": "results/figures/i4f-20261024",
+  "schema": "i4f-curated-figures-v1",
+  "scope": "Four curated PNGs only: two saved-field CFD visuals and two previously computed diagnostic plots. No run was launched for this curation."
+}
