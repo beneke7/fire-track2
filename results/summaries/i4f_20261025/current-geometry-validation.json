@@ -1,0 +1,159 @@
+{
+  "status": "final CLI-validation frozen-UV smoke agrees with approved v4 metrics at reported precision",
+  "generator_sha256": "c806b00eb546521f12b829226ee757efdea096581c8df6acbdc93817ed0cfadd",
+  "comparison_method": "Compare SI geometry quantities and exact BREP sections; STEP byte hashes are intentionally not compared because generated serialization metadata can differ.",
+  "reference": {
+    "approved_basis": "root-approved aligned-ruled-v4 handoff metrics and exact BREP section record",
+    "approved_envelope_sha256": "230d1c99a5cfa5645ffcc85949821a9bd942ba049c2dc4cc8ab699edfbfa8cab",
+    "approved_fitted_dividers_sha256": "03f704599d14f45672bea5b834cbbe5927037eb1a6056b93233b291202cd9a7f",
+    "tank_capacity_each_m3": 1.65375,
+    "flat_ended_tank_length_m": 2.599530737168,
+    "pipe_area_m2": 0.07068583470577036,
+    "section_samples": {
+      "4.0001": {
+        "gross_m2": 0.07068999053579132,
+        "open_m2": 0.07068999053579132
+      },
+      "4.000001": {
+        "gross_m2": 0.07068575996122763,
+        "open_m2": 0.07068575996122763
+      },
+      "4.80001": {
+        "gross_m2": 0.0784062559134,
+        "blockage_m2": 0.00236829400123,
+        "open_m2": 0.0760379619122
+      },
+      "5.50001": {
+        "gross_m2": 0.15,
+        "blockage_m2": 0.0024,
+        "open_m2": 0.1476
+      }
+    },
+    "mouth_count": 4,
+    "dividers_per_mouth": 4,
+    "mid_surface_segments": 48,
+    "first_lower_divider_centerline_m": [
+      [
+        4.75,
+        -0.91076,
+        0.65
+      ],
+      [
+        4.8,
+        -0.9012,
+        0.65
+      ],
+      [
+        5.5,
+        -0.8512,
+        0.65
+      ],
+      [
+        5.8,
+        -0.8512,
+        0.65
+      ]
+    ]
+  },
+  "uv_smoke": {
+    "tank_capacity_each_m3": 1.65375,
+    "flat_ended_tank_length_m": 2.599530737167624,
+    "pipe_area_m2": 0.07068583470577035,
+    "mouth_count": 4,
+    "divider_count": 16,
+    "mid_surface_segments": 48,
+    "section_samples": [
+      {
+        "x_m": 4.0001,
+        "centerline_y_m": -0.75,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07068999053579132,
+        "divider_blockage_area_m2": 0.0,
+        "open_area_after_dividers_m2": 0.07068999053579132
+      },
+      {
+        "x_m": 4.000001,
+        "centerline_y_m": -0.75,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07068575996122763,
+        "divider_blockage_area_m2": 0.0,
+        "open_area_after_dividers_m2": 0.07068575996122763
+      },
+      {
+        "x_m": 4.80001,
+        "centerline_y_m": -0.7499971428571427,
+        "section_normal_xyz": [
+          1.0,
+          0.2857142857142856,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07840625591342147,
+        "divider_blockage_area_m2": 0.002368294001226204,
+        "open_area_after_dividers_m2": 0.07603796191219526
+      },
+      {
+        "x_m": 5.50001,
+        "centerline_y_m": -0.55,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.1499999999999999,
+        "divider_blockage_area_m2": 0.0024000000000000007,
+        "open_area_after_dividers_m2": 0.1475999999999999
+      },
+      {
+        "x_m": 5.7999,
+        "centerline_y_m": -0.55,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.1499999999999999,
+        "divider_blockage_area_m2": 0.0024000000000000007,
+        "open_area_after_dividers_m2": 0.1475999999999999
+      }
+    ]
+  },
+  "absolute_differences": {
+    "tank_capacity_each_m3": 0.0,
+    "flat_ended_tank_length_m": -3.7614356074300304e-13,
+    "pipe_area_m2": -1.3877787807814457e-17,
+    "section_area_abs_differences_m2": {
+      "4.0001": {
+        "gross_m2": 0.0,
+        "open_m2": 0.0
+      },
+      "4.000001": {
+        "gross_m2": 0.0,
+        "open_m2": 0.0
+      },
+      "4.80001": {
+        "gross_m2": 2.1468937738688965e-14,
+        "blockage_m2": 3.796008646306248e-15,
+        "open_m2": 4.73232564246473e-15
+      },
+      "5.50001": {
+        "gross_m2": 8.326672684688674e-17,
+        "blockage_m2": 8.673617379884035e-19,
+        "open_m2": 1.1102230246251565e-16
+      }
+    },
+    "first_lower_divider_centerline_max_abs_difference_m": 1.1102230246251565e-16,
+    "topology_counts_match": true
+  },
+  "limitations": [
+    "4 mm divider thickness and reconstructed branch routing remain assumptions.",
+    "Discrete exact BREP sections do not certify a continuous minimum-area bound."
+  ]
+}

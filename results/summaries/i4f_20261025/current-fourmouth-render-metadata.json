@@ -1,0 +1,119 @@
+{
+  "title": "True-grid alpha water free surface and blue bulk cutaway",
+  "checkpoint_time_s": 0.200021166664,
+  "view_case": "results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/true-grid-cutaway-20261025T1407Z/view-case",
+  "view_case_source": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case",
+  "antialiasing": {
+    "fourmouth_true_grid_with_external_water_t0200021-v7.png": {
+      "requested": "FXAA",
+      "enabled": true,
+      "backend_note": "VTK OSMesa/EGL warning reports FXAA unsupported; backend automatically uses SSAA."
+    },
+    "fourmouth_outlet_external_water_detail_t0200021-v7.png": {
+      "requested": "FXAA",
+      "enabled": true,
+      "backend_note": "VTK OSMesa/EGL warning reports FXAA unsupported; backend automatically uses SSAA."
+    }
+  },
+  "reader": {
+    "pyvista_version": "0.49.0",
+    "vtk_version": [
+      9,
+      7,
+      0
+    ],
+    "decompose_polyhedra": "backend setter unavailable in bundled VTK 9.7; reader default left unchanged and verified by cell count plus initial field order",
+    "cell_to_point_creation": false,
+    "internal_mesh_cells": 303108,
+    "native_global_cells": 303108,
+    "reader_cell_order_check": {
+      "initial_alpha_max_abs_difference": 2.9800757084252893e-08,
+      "initial_p_max_abs_difference_Pa": 0.0624997999984771,
+      "passed": true
+    }
+  },
+  "native_mapping": {
+    "address_count": 303108,
+    "unique_global_ids": 303108,
+    "global_min": 0,
+    "global_max": 303107
+  },
+  "current_fields_attached": [
+    "alpha.water",
+    "U"
+  ],
+  "display": {
+    "bulk_definition": "cell threshold alpha.water >= 0.5; clipped at tank midplanes for display cutaway",
+    "free_surface": "alpha.water = 0.5 contour after explicit VTK cell-to-point interpolation from native cell-centered values; this is a display interpolation, not a new solved field",
+    "water_bulk_cells_preclip": 178319,
+    "free_surface_cells_preclip": 15960,
+    "cutaway_bulk_cells_A": 35863,
+    "cutaway_bulk_cells_B": 36475,
+    "cutaway_iso_cells_A": 1343,
+    "cutaway_iso_cells_B": 1336,
+    "velocity_glyph_count": 120,
+    "geometry": "actual apparatusWall.stl; each train clipped at its tank y-centre plane for display"
+  },
+  "images": {
+    "full_assembly": {
+      "png": "results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/true-grid-cutaway-20261025T1407Z/fourmouth_true_grid_with_external_water_t0200021-v7.png",
+      "sha256": "058694fe614e86c050a2bcec195aaf56959c3604cc547df71eee708eedddf5dc",
+      "camera_bounds_m": [
+        0.0,
+        7.9,
+        -2.1,
+        2.1,
+        -0.55,
+        2.05
+      ]
+    },
+    "outlet_detail": {
+      "png": "results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/true-grid-cutaway-20261025T1407Z/fourmouth_outlet_external_water_detail_t0200021-v7.png",
+      "sha256": "4c4413c744e1272cdddf8ccd714a5792286d7610311b259a820edf8b2f42f32f",
+      "camera_bounds_m": [
+        5.35,
+        7.9,
+        -1.45,
+        1.45,
+        0.15,
+        1.75
+      ]
+    }
+  },
+  "external_liquid": {
+    "selection": "native cells clipped only by x>=5.799 m; no downstream/lateral/top/bottom clipping",
+    "native_domain_bounds_m": [
+      0.0,
+      7.800000190734863,
+      -2.049999952316284,
+      2.049999952316284,
+      -0.5,
+      2.0
+    ],
+    "bulk_surface_triangles_external": 17818,
+    "alpha_0p5_surface_cells_external": 12546,
+    "native_cells_alpha_ge_0p5_external": 5724,
+    "native_water_max_cellcenter_x_m": 5.95958811044693,
+    "external_U_glyph_count": 160
+  },
+  "source_sha256": {
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/constant/polyMesh/points": "0674e597013ebc6cfad4c26603b1aad4152ac55502bd457c54588c67371efdee",
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/constant/polyMesh/faces": "56e2df57eedfb9af0120a760d0202ddb9ec9ff4dfe1e39c005a76e8b737737a0",
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/constant/polyMesh/owner": "b9928233cd391ef56e4e9700f30d8ac0ae1d6170b8e66575cbcb72ab0598ec8c",
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/constant/polyMesh/neighbour": "55e0f827dcd69f71fce2a4e167e094e590f20bca37c43cbc2897d72bffbdae0e",
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/constant/triSurface/apparatusWall.stl": "5f5c420953b3c1542d0cebd0bbdb15fdae913bd8c26733856c5a562f9b63838e",
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/0/alpha.water": "96626f354202a2a8c3b9e457797a393225a90082925945480dc820c42c0acd96",
+    "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/0/p": "f7f3ec77a1b98acb92f6db808ca4b21ce2a7d80cce479798e20ddfc79ba012c1",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/constant/polyMesh/cellProcAddressing": "5ed5ff95c2d9d896f99124c5528283e58725720dc3d7e151ce284d14ca446592",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/0.200021166664/alpha.water": "bf399445c6315c39d768fbe8ee36cdf13774d41096983a6391ac117f3eb489a5",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/0.200021166664/U": "a5481eb826a6536d3d9afa247b56e571a55ccc2e200c6db1eec9c93f82f609d8"
+  },
+  "analysis_script_sha256": "0c50ea76a2ccd07d97616b4f0a6b5015aa06f2572b5ab6a003a25c846e396475",
+  "qualification": [
+    "Exploratory quality-limited mesh; not a validation result.",
+    "No geometry or flow fields are synthesized: alpha.water and U come from native collated checkpoint fields and are mapped by verified cellProcAddressing.",
+    "Reader cell ordering was checked against global initial alpha.water and p before attaching checkpoint arrays.",
+    "Bulk is a thresholded cellwise display. The cyan interface is linearly interpolated from cell-centre alpha.water to mesh points by VTK; do not read it as subcell physics or native face flux.",
+    "Walls are the actual STL, cut at tank centre planes only to expose the fluid interior."
+  ]
+}

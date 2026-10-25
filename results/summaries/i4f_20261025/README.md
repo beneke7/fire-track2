@@ -57,6 +57,39 @@ tested patch-only dictionaries and provenance are in the
 pressure and polytropic sensitivities. Their stop is a mean-level intake event,
 not a five-second discharge or measured gas breakthrough.
 
+An ongoing 303,108-cell four-outlet continuation has a saved native checkpoint
+at 0.200021 s on its way toward 0.8 s; the mesh retains two configured
+face-decomposition tetrahedron-quality failures, so results remain exploratory.
+The [matched timestep comparison](current-timestep-comparison.json)
+and [metrics](current-timestep-comparison.csv) cover only the first
+0.05 s (0.25 versus 0.125 ms), not full convergence. The
+[CFD/reduced-network plot](current-reduced-network-comparison.png),
+[CSV](current-reduced-network-comparison.csv), and
+[JSON](current-reduced-network-comparison.json) use complete mouth
+profiles through 0.100021 s; native scalar histories continue to 0.167021 s.
+All four mouths exceeded 5% gas area for three
+samples from 0.060021 to 0.070021 s, but sampled signed gas flow was negative;
+this does not identify gas delivered from the headspaces.
+
+At 0.200021 s, the [native headspace EOS summary](current-headspace-state.json)
+reports per tank about 1.03844 MPa volume-weighted gas pressure and 284.905 K
+mass-weighted temperature; the local probe reads 1.038412 MPa and 281.357 K.
+Pure-gas and mixed-cell temperatures average 282.475 K and 291.847 K,
+respectively, showing the effect of spatial and phase weighting. The reported
+pV/(gamma−1) change is storage only, not a global energy balance. See the
+[headspace table](current-headspace-state.csv) and
+[geometry comparison](current-geometry-validation.json). The portable
+geometry generator and its fixed horizontal +X layout are documented in the
+[geometry source README](../../../scripts/i4f_four_outlet_geometry/README.md).
+
+The native 0.200021 s [true-grid diagnostic cutaway](current-fourmouth-cutaway.png)
+and [outlet detail](current-fourmouth-outlet-detail.png) show whole-cell
+alpha.water ≥ 0.5 bulk with an interpolated alpha.water = 0.5 display contour;
+the visible blockiness reflects the mesh cells. The external native-water
+cell-centre extent reaches x ≈ 5.96 m, inside the 7.8 m domain end. These are
+diagnostic snapshots, not a finished smooth video; [render metadata](current-fourmouth-render-metadata.json)
+records the field mapping and display thresholds.
+
 Small JSON/CSV results accompany the figures. [Publication manifest](publication-manifest.json)
 records source paths and byte hashes. Raw native fields, full logs and restart
 bundles remain local under ignored `results/runs/`; these files are selected

@@ -1,0 +1,687 @@
+{
+  "schema": "i4f-fouroutlet-dt-sensitivity-matched-time-v1",
+  "target_time_s": 0.05,
+  "created_utc": "2026-10-25T13:33:47.366352+00:00",
+  "comparison": "Exploratory single-interval time-step sensitivity on the same quality-limited 303108-cell four-outlet mesh, binary, physics, BCs, and 10-way decomposition. Halved dt controls are the only intended numerical input change.",
+  "limitations": [
+    "Both arms retain the same two configured face-decomposition tet-quality failures; this is not formal time-step convergence or hardware validation.",
+    "Scalar histories are linearly interpolated to 0.050 s from completed-step/function-object records. Native extrema are reported at the nearest saved endpoint because location interpolation is not meaningful.",
+    "The sampled four-mouth plane integrals are observer diagnostics, not substitutes for the native alphaPhi0.water phase ledger.",
+    "Only the first 0.05 s of cold start is compared."
+  ],
+  "runs": {
+    "baseline": {
+      "bundle": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z",
+      "container_id": "4b648cc29115bdbd7d637d5919287d035af82dbf675e7738875427045243c641",
+      "started_at": "2026-10-25T13:08:01.012540316Z",
+      "finished_at": "2026-10-25T13:16:24.736958666Z",
+      "exit_code": 0,
+      "oom_killed": false,
+      "actual_terminal_time_s": 0.050021166664,
+      "actual_terminal_deltaT_s": 0.00025,
+      "completed_steps": 212,
+      "elapsed_docker_wall_s": 503.724418,
+      "seconds_per_completed_step": 2.3760585754716983,
+      "physical_time_per_wall_second": 9.930264421686225e-05,
+      "native_input_tree_sha256": "88d92d6adbbe8d970dbc668ea690445a4f5b9537e34c2033b49f5e1ade84878f",
+      "source_case_tree_sha256": null,
+      "solver_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+      "cumulative_water_defect_kg": 0.00048521629095347953,
+      "cumulative_gas_defect_kg": -6.19286248983846e-06,
+      "raw_pressure_contact_count": 0,
+      "maximum_clipped_liquid_mass_kg": 0.0,
+      "persistent_final_floor_steps": 0,
+      "parser_errors": [],
+      "diagnostic_errors": [],
+      "last_field_extrema": {
+        "T": {
+          "time_s": 0.050021166664,
+          "field": "T",
+          "min": 291.470897,
+          "min_xyz": [
+            2.48581741,
+            0.305277949,
+            1.5965499
+          ],
+          "max": 293.181786,
+          "max_xyz": [
+            2.28750018,
+            0.256525012,
+            0.566587518
+          ]
+        },
+        "alpha.water": {
+          "time_s": 0.050021166664,
+          "field": "alpha.water",
+          "min": -4.2741785e-09,
+          "min_xyz": [
+            5.81100748,
+            -0.0623352457,
+            0.787667376
+          ],
+          "max": 1.0,
+          "max_xyz": [
+            5.76900238,
+            0.242811217,
+            0.969365898
+          ]
+        },
+        "p": {
+          "time_s": 0.050021166664,
+          "field": "p",
+          "min": 97800.8868,
+          "min_xyz": [
+            2.41250001,
+            -0.738673887,
+            0.649052742
+          ],
+          "max": 1188247.7,
+          "max_xyz": [
+            2.08749993,
+            -0.738657711,
+            0.350938985
+          ]
+        },
+        "p_rgh": {
+          "time_s": 0.050021166664,
+          "field": "p_rgh",
+          "min": 99994.171,
+          "min_xyz": [
+            5.83364814,
+            -1.12499998,
+            -0.5
+          ],
+          "max": 1191703.99,
+          "max_xyz": [
+            2.08750095,
+            -0.736428463,
+            0.513585503
+          ]
+        },
+        "rho": {
+          "time_s": 0.050021166664,
+          "field": "rho",
+          "min": 1.18833632,
+          "min_xyz": [
+            5.80498976,
+            -0.25593603,
+            0.807252489
+          ],
+          "max": 998.2,
+          "max_xyz": [
+            5.76900238,
+            0.242811217,
+            0.969365898
+          ]
+        },
+        "mag(U)": {
+          "time_s": 0.050021166664,
+          "field": "mag(U)",
+          "min": 0.0,
+          "min_xyz": [
+            5.78682201,
+            -0.537616563,
+            0.725000024
+          ],
+          "max": 2.86238387,
+          "max_xyz": [
+            5.81480544,
+            1.01173007,
+            0.710963592
+          ]
+        }
+      },
+      "last_courant_records": {
+        "bulk": {
+          "mean": 0.001864656978450564,
+          "max": 0.06204207604134874,
+          "time_s": 0.050021166664
+        },
+        "interface": {
+          "mean": 1.585037522408575e-05,
+          "max": 0.03049768782898653,
+          "time_s": 0.050021166664
+        }
+      },
+      "probe_times_for_target": {
+        "p": [
+          0.049771167,
+          0.050021167
+        ],
+        "T": [
+          0.049771167,
+          0.050021167
+        ],
+        "alpha.water": [
+          0.049771167,
+          0.050021167
+        ]
+      },
+      "observer_bracket_times_for_target": {
+        "tankAWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "tankBWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "lineAInitialWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "lineAMouthBoundaryWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "lineBInitialWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "lineBMouthBoundaryWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "totalWaterVolume": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "ambientAnnulusWaterPhaseFlux": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "externalSidesWaterPhaseFlux": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "farOutletWaterPhaseFlux": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "fourMouthPlaneAreaAlpha": [
+          0.049021166664,
+          0.050021166664
+        ],
+        "fourMouthPlaneWaterWeightedUIntegral": [
+          0.049771166664,
+          0.050021166664
+        ],
+        "fourMouthPlaneTotalUIntegral": [
+          0.049771166664,
+          0.050021166664
+        ]
+      },
+      "native_phase_ledger_interpolated_at_0.05_s": {
+        "time_s": 0.05,
+        "deltaT_logged_s": 0.00025,
+        "deltaT_from_printed_times_s": 0.0002500000000000002,
+        "outer_iteration": 8.0,
+        "phase_mass_pass": 3390.645333504,
+        "water_inventory_kg": 4441.151746899645,
+        "water_boundary_flux_kg_s": 0.005723309593698109,
+        "water_step_defect_kg": 5.000146266038555e-06,
+        "water_cumulative_defect_kg": 0.00048479242485677395,
+        "water_step_defect_fraction_initial": 1.1258670625903377e-09,
+        "water_cumulative_defect_fraction_initial": 1.0915917141199373e-07,
+        "gas_inventory_kg": 32.84374258504273,
+        "gas_boundary_flux_kg_s": 0.23314827714612094,
+        "gas_step_defect_kg": -2.4044148619670677e-08,
+        "gas_cumulative_defect_kg": -6.190825508506449e-06,
+        "gas_step_defect_fraction_initial": 7.318299287176519e-10,
+        "gas_cumulative_defect_fraction_initial": 1.8842968666759762e-07,
+        "raw_corrector_min_pressure_Pa_this_step": 97849.4672768848,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_clip_cells_at_peak_single_pass": 0.0,
+        "final_field_min_p_Pa": 97801.26142939278,
+        "final_min_p_cell": 2952.0,
+        "final_field_min_T_K": 291.47139351057757,
+        "final_field_min_rho_kg_m3": 1.188336352625356,
+        "final_outer_max_abs_dp_Pa": 0.0011638738759506943,
+        "coldstart_age_s": 0.05,
+        "pressure_update_final_to_penultimate_ratio": 0.7239141537033791,
+        "pressure_update_threshold_Pa": 100.0,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_consecutive_steps": 0.0,
+        "pressure_update_stop_after_steps": 3.0,
+        "final_outer_max_abs_dU_m_s": 1.028584499649977e-05,
+        "final_outer_max_abs_dphi_m3_s": 1.840702249182663e-09,
+        "final_outer_max_abs_dalpha1": 1.228994009086974e-07,
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_drho2_kg_m3": 1.9109540703469637e-08,
+        "penultimate_outer_max_abs_dp_Pa": 0.0016080303085741375,
+        "penultimate_outer_max_abs_dU_m_s": 1.4459082648806918e-05,
+        "penultimate_outer_max_abs_dphi_m3_s": 2.6056799689048746e-09,
+        "penultimate_outer_max_abs_dalpha1": 1.6992924745439284e-07,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_drho2_kg_m3": 2.775690852058269e-08
+      }
+    },
+    "half_dt": {
+      "bundle": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z",
+      "container_id": "1d2568d08685a58240e8dfa1a965f3431dcaebd1c61d855741d88009be5fbeb8",
+      "started_at": "2026-10-25T13:13:01.212966854Z",
+      "finished_at": "2026-10-25T13:30:24.43990186Z",
+      "exit_code": 0,
+      "oom_killed": false,
+      "actual_terminal_time_s": 0.050010583332,
+      "actual_terminal_deltaT_s": 0.000125,
+      "completed_steps": 412,
+      "elapsed_docker_wall_s": 1043.226935,
+      "seconds_per_completed_step": 2.5321042111650485,
+      "physical_time_per_wall_second": 4.793835516909847e-05,
+      "native_input_tree_sha256": "8607fd6ec751a6781ef71cfb7c05c0c19d168f91bd8252a0d1497ce4af0a2111",
+      "source_case_tree_sha256": "88d92d6adbbe8d970dbc668ea690445a4f5b9537e34c2033b49f5e1ade84878f",
+      "solver_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+      "cumulative_water_defect_kg": 0.00034149552418758053,
+      "cumulative_gas_defect_kg": -4.812744655651847e-06,
+      "raw_pressure_contact_count": 0,
+      "maximum_clipped_liquid_mass_kg": 0.0,
+      "persistent_final_floor_steps": 0,
+      "parser_errors": [],
+      "diagnostic_errors": [],
+      "last_field_extrema": {
+        "T": {
+          "time_s": 0.050010583332,
+          "field": "T",
+          "min": 291.473084,
+          "min_xyz": [
+            2.48581818,
+            0.794719116,
+            1.59654933
+          ],
+          "max": 293.181349,
+          "max_xyz": [
+            2.28749783,
+            0.390554197,
+            0.486456289
+          ]
+        },
+        "alpha.water": {
+          "time_s": 0.050010583332,
+          "field": "alpha.water",
+          "min": -2.96647529e-10,
+          "min_xyz": [
+            5.81100748,
+            -0.0623352457,
+            0.787667376
+          ],
+          "max": 1.0,
+          "max_xyz": [
+            2.01250284,
+            0.537371925,
+            0.833883607
+          ]
+        },
+        "p": {
+          "time_s": 0.050010583332,
+          "field": "p",
+          "min": 97659.9845,
+          "min_xyz": [
+            2.41250001,
+            -0.738673887,
+            0.649052742
+          ],
+          "max": 1188604.84,
+          "max_xyz": [
+            2.08749993,
+            -0.738657711,
+            0.350938985
+          ]
+        },
+        "p_rgh": {
+          "time_s": 0.050010583332,
+          "field": "p_rgh",
+          "min": 99994.171,
+          "min_xyz": [
+            5.83364814,
+            -1.12499998,
+            -0.5
+          ],
+          "max": 1192064.14,
+          "max_xyz": [
+            2.08750095,
+            -0.736428463,
+            0.513585503
+          ]
+        },
+        "rho": {
+          "time_s": 0.050010583332,
+          "field": "rho",
+          "min": 1.18833384,
+          "min_xyz": [
+            5.80499272,
+            -0.45611846,
+            0.807242258
+          ],
+          "max": 998.2,
+          "max_xyz": [
+            2.01250284,
+            0.537371925,
+            0.833883607
+          ]
+        },
+        "mag(U)": {
+          "time_s": 0.050010583332,
+          "field": "mag(U)",
+          "min": 0.0,
+          "min_xyz": [
+            5.78682201,
+            -0.537616563,
+            0.725000024
+          ],
+          "max": 2.7454795,
+          "max_xyz": [
+            5.81466918,
+            -0.962486566,
+            0.959779349
+          ]
+        }
+      },
+      "last_courant_records": {
+        "bulk": {
+          "mean": 0.0009312487773580621,
+          "max": 0.03103920185031978,
+          "time_s": 0.050010583332
+        },
+        "interface": {
+          "mean": 7.86719842599358e-06,
+          "max": 0.01533940971157152,
+          "time_s": 0.050010583332
+        }
+      },
+      "probe_times_for_target": {
+        "p": [
+          0.049885583,
+          0.050010583
+        ],
+        "T": [
+          0.049885583,
+          0.050010583
+        ],
+        "alpha.water": [
+          0.049885583,
+          0.050010583
+        ]
+      },
+      "observer_bracket_times_for_target": {
+        "tankAWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "tankBWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "lineAInitialWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "lineAMouthBoundaryWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "lineBInitialWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "lineBMouthBoundaryWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "totalWaterVolume": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "ambientAnnulusWaterPhaseFlux": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "externalSidesWaterPhaseFlux": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "farOutletWaterPhaseFlux": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "fourMouthPlaneAreaAlpha": [
+          0.049010583332,
+          0.050010583332
+        ],
+        "fourMouthPlaneWaterWeightedUIntegral": [
+          0.049885583332,
+          0.050010583332
+        ],
+        "fourMouthPlaneTotalUIntegral": [
+          0.049885583332,
+          0.050010583332
+        ]
+      },
+      "native_phase_ledger_interpolated_at_0.05_s": {
+        "time_s": 0.05,
+        "deltaT_logged_s": 0.000125,
+        "deltaT_from_printed_times_s": 0.0001250000000000001,
+        "outer_iteration": 8.0,
+        "phase_mass_pass": 6590.6453335040005,
+        "water_inventory_kg": 4441.151686997331,
+        "water_boundary_flux_kg_s": 0.005858552960493731,
+        "water_step_defect_kg": 9.702664389228325e-07,
+        "water_cumulative_defect_kg": 0.0003414130329753219,
+        "water_step_defect_fraction_initial": 2.1847181410265042e-10,
+        "water_cumulative_defect_fraction_initial": 7.68748888761047e-08,
+        "gas_inventory_kg": 32.84379137161351,
+        "gas_boundary_flux_kg_s": 0.23480208993513585,
+        "gas_step_defect_kg": -5.759699897679921e-09,
+        "gas_cumulative_defect_kg": -4.8122563909367075e-06,
+        "gas_step_defect_fraction_initial": 1.753075491350833e-10,
+        "gas_cumulative_defect_fraction_initial": 1.464702829473074e-07,
+        "raw_corrector_min_pressure_Pa_this_step": 97727.14335454325,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_clip_cells_at_peak_single_pass": 0.0,
+        "final_field_min_p_Pa": 97660.30914284322,
+        "final_min_p_cell": 2952.0,
+        "final_field_min_T_K": 291.4732669999171,
+        "final_field_min_rho_kg_m3": 1.1883335240576165,
+        "final_outer_max_abs_dp_Pa": 0.0006284128257111402,
+        "coldstart_age_s": 0.05,
+        "pressure_update_final_to_penultimate_ratio": 2.560010986221435,
+        "pressure_update_threshold_Pa": 100.0,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_consecutive_steps": 0.0,
+        "pressure_update_stop_after_steps": 3.0,
+        "final_outer_max_abs_dU_m_s": 1.396404067473233e-07,
+        "final_outer_max_abs_dphi_m3_s": 5.561050459473942e-11,
+        "final_outer_max_abs_dalpha1": 7.495664576742648e-08,
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_drho2_kg_m3": 2.9208813849375365e-09,
+        "penultimate_outer_max_abs_dp_Pa": 0.0002457864208759777,
+        "penultimate_outer_max_abs_dU_m_s": 1.130289536163791e-06,
+        "penultimate_outer_max_abs_dphi_m3_s": 2.0796368621778256e-10,
+        "penultimate_outer_max_abs_dalpha1": 2.5950221028278733e-08,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_drho2_kg_m3": 1.325533317810885e-08
+      }
+    }
+  },
+  "metrics_csv": "metrics.csv",
+  "source_files": [
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/step_health.csv",
+      "sha256": "cda183e4373fe70b79b2e3a778833dd8586a661b5928516833f41f6069bf8213"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/log.cold-coupled",
+      "sha256": "5d218c9762f5600a87e139467dc7f61f512a73848d8119350f8c8adc1dd01660"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/guardian-status.json",
+      "sha256": "b0e0e427dac3ba6caa43c607b7ae829d496f43980b92492f96940bd7db7a44e8"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/input-freeze.json",
+      "sha256": "bcfb578a95adc430eafd19bdebd7be0e9c7e59301056f47a0b553b55ad110c7e"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/i4fTankHeadspaceProbes/0/p",
+      "sha256": "60db729403cfa2ae61378fe9eb5c21d99cb652b5b8090051225a454f42785d84"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/i4fTankHeadspaceProbes/0/T",
+      "sha256": "197d9fd574ac5203a4a105ef489dd70d85b497430833dd5421a5821fb9983ef0"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/i4fTankHeadspaceProbes/0/alpha.water",
+      "sha256": "19f2d9b2b85e0653c433016e2b471475bb87deb06d25138350248be523d111c6"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/tankAWaterVolume/0/volFieldValue.dat",
+      "sha256": "8166d14885863918d9431b2c5d24fdd908e8dbdeaca8d1a73b83f902155e5a53"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/tankBWaterVolume/0/volFieldValue.dat",
+      "sha256": "b506fa80cbbf285671d5e0d69e00919aa26f139e2c87b5117ac5d042d2a511c2"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/lineAInitialWaterVolume/0/volFieldValue.dat",
+      "sha256": "5d610e5dba3b709af537ab0a749e0dee034a496748d2136571007a4a1c2190cb"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0/volFieldValue.dat",
+      "sha256": "72c7f9c692225f12fc9d2b801e843736673040ed217f35ca8f5531d00a8fad19"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/lineBInitialWaterVolume/0/volFieldValue.dat",
+      "sha256": "e2443cdb115a8ebf39765aca74e8c8a87eec1c2d3d506c6e3ac7c3ed04378f00"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0/volFieldValue.dat",
+      "sha256": "a9126f61fb864fbf104141e8a72c6fc7c6fe7a3adf1072ade4315c8e28ebe697"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/totalWaterVolume/0/volFieldValue.dat",
+      "sha256": "2c381bea1cd542c3dbe6122d37024fb4f4b7cfe2b68c550e4fe0f2d8908c6b7e"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/ambientAnnulusWaterPhaseFlux/0/surfaceFieldValue.dat",
+      "sha256": "85093a23fe2eb0607fd43e94db900890325281c4bb308a7e6a2c371a567b54d7"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/externalSidesWaterPhaseFlux/0/surfaceFieldValue.dat",
+      "sha256": "237956a81e434033c2bbbf38a3781a2ff309c3e072f1bfa3f231fa5c3c9a90e7"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/farOutletWaterPhaseFlux/0/surfaceFieldValue.dat",
+      "sha256": "d2ccd312f9cbdd73802f38f5f4315959643cb271604691eb8f940d1446cef7fc"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/fourMouthPlaneAreaAlpha/0/surfaceFieldValue.dat",
+      "sha256": "04d002b640acc0892bfdffafcdd288a54216dd1f4934b455dd51f4f9dda8417e"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0/surfaceFieldValue.dat",
+      "sha256": "43ff42e39f5b60bc1c66020d688364faec1c6adfd741ad7e96142c559ae8c149"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/fourMouthPlaneTotalUIntegral/0/surfaceFieldValue.dat",
+      "sha256": "7535872b67b80815a832461aaab0eaaa84104f592a7a26f56377c5ea1c16f8c1"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/i4fPimpleCaptureExtrema/0/fieldMinMax.dat",
+      "sha256": "cbc2c79ee6a71525a9cddfb360dc630c5c1b624c3a823451843e3ca2cf3bb2d0"
+    },
+    {
+      "path": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z/case/postProcessing/i4fPimpleCaptureSpeedExtrema/0/fieldMinMax.dat",
+      "sha256": "77c0cd026a701244c42612f1818e3628fe10225c46a4377e3d21aea44adfde22"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/step_health.csv",
+      "sha256": "5ab78ca711dcbff26e79c84c0042e949d52ced570c33d484b26ac2e5fe8eb524"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/log.cold-coupled",
+      "sha256": "7698aee3f794fff5477d171a7c6b4bbe153058ef4bfef3a1f669c1c63b34510b"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/guardian-status.json",
+      "sha256": "3d794ca3d0124366375ee5d64941bc5d56b0e7ec1074863ff4e8319c58741ae8"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/input-freeze.json",
+      "sha256": "320b3423762cc1e2eb12fcb8ae75ad50b480e6e6122da1a8fa05e138aee43718"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/i4fTankHeadspaceProbes/0/p",
+      "sha256": "1581867627a40dea2441e1c8460849a3b1a6f58c715edf94f138710e2f53fe80"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/i4fTankHeadspaceProbes/0/T",
+      "sha256": "194f4ad83883a39a6a28dd8867e644bee4e8679033f2c0f062e77610692474ac"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/i4fTankHeadspaceProbes/0/alpha.water",
+      "sha256": "7d766dbcec30f56350bf8c420402060e6f34059d935112305be4509383bdcb6a"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/tankAWaterVolume/0/volFieldValue.dat",
+      "sha256": "ba7d51622ab2473c219d3cc7a39427714b58b8b829f9abb9fa0b09dff6fccb8a"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/tankBWaterVolume/0/volFieldValue.dat",
+      "sha256": "4300cf6615545ee973b8d58a652f7fb2797818ad06656f37ac7eaef1761ec316"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/lineAInitialWaterVolume/0/volFieldValue.dat",
+      "sha256": "3853f48bdfee52dc0173283e814d97dd0b9ad2524be58b3061054192ef0f7e4d"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0/volFieldValue.dat",
+      "sha256": "4ee838151ec6e18319afc975906d590d82a885c1ccab668a232f580e9ad3d622"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/lineBInitialWaterVolume/0/volFieldValue.dat",
+      "sha256": "2fbb06d86b58ac62c0823e5c150c54e3cc108083ebe3ab8603e8a05442425f66"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0/volFieldValue.dat",
+      "sha256": "c82eed2b6224c5832c2b6c4aa229dfcd9996ee18e0b1e915f896d0a83ce9d947"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/totalWaterVolume/0/volFieldValue.dat",
+      "sha256": "d275134ecb8b9820281c9a2533212d88cb47e72a73e0632430556af8b52fdc0f"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/ambientAnnulusWaterPhaseFlux/0/surfaceFieldValue.dat",
+      "sha256": "e2379ce5c08a277931d083e0e482a7da3860e069a8743bc7a5a526754238d6ec"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/externalSidesWaterPhaseFlux/0/surfaceFieldValue.dat",
+      "sha256": "97f9503afcc4c726e357ec83a6a7483354832ff166f300512c2976bb63ba8c99"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/farOutletWaterPhaseFlux/0/surfaceFieldValue.dat",
+      "sha256": "ab95c75dca2fb52dbd80c81bfe84bc2cd4841e040156e3c54d0b522e2780cd40"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/fourMouthPlaneAreaAlpha/0/surfaceFieldValue.dat",
+      "sha256": "8abdaaa7d1bf6528e98ddd1e03a190eca6d5546cb82a53a108046ea7929f8007"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0/surfaceFieldValue.dat",
+      "sha256": "a00c0f1572613ab13c13624c790be5b4e36644015142bce53809b2541798d73f"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/fourMouthPlaneTotalUIntegral/0/surfaceFieldValue.dat",
+      "sha256": "53c902361fd38e3df9a57b8726485451cb00970131935e07e396438f6114b3ec"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/i4fPimpleCaptureExtrema/0/fieldMinMax.dat",
+      "sha256": "18a36a21b0994d3c77969ef7c976b234fc1518bd3bd9250b425f2e2b33bf1417"
+    },
+    {
+      "path": "results/runs/i4f-fouroutlet-dt-half-20261025T131044Z/case/postProcessing/i4fPimpleCaptureSpeedExtrema/0/fieldMinMax.dat",
+      "sha256": "5843ad03ec6fefd2a0cb66752350594fa037bc636d5e114c0c9d64310714b005"
+    }
+  ]
+}

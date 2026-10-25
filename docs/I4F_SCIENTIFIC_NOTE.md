@@ -24,8 +24,21 @@ hydraulic reference uses 12 bar absolute with 13 bar absolute sensitivity,
 because the user did not specify gauge versus absolute pressure. These are
 reported/derived inputs and declared scenarios, not new measurements. They are
 preserved in [the hardware record](../experiments/i4f_hardware_notes_20261024.json).
-The executed calculations below retain their original 9 bar, larger-headspace,
+Historical calculations below retain their original 9 bar, larger-headspace,
 no-lamella inputs and must not be presented as this revised hardware case.
+
+The current 12-bar, two-tank/four-outlet run uses a 303,108-cell mesh with two
+recorded face-tet quality failures. It completed .05 s and has continued beyond
+.3 s; this remains exploratory. A matched .05 s halved-timestep trial changes
+probe pressure by 103 Pa, sampled flow by about .2% and maximum speed by 4.1%,
+at about twice the wall cost. A separate 1,779,258-cell reservoir-boundary case
+is running from the initial state to assess numerical sensitivity. At .2 s,
+native gas mass remains nearly constant, while mass-weighted gas temperature is
+284.905 K versus 281.357 K at the gas probe; mixed cells contain 26.5% of the
+tank-zone gas volume. This is an interface-resolution and thermal-model
+question, not evidence of foam. See the [current results and diagnostic images](../results/summaries/i4f_20261025/README.md).
+The [portable geometry generator](../scripts/i4f_four_outlet_geometry/README.md)
+reproduces the approved horizontal layout in an isolated locked CAD environment.
 
 The corrected two-tank, four-mouth geometry has a 1,779,258-cell mesh. Its
 zero-thickness divider-wall variant passes all configured mesh-quality rows,
@@ -2089,3 +2102,13 @@ storage change does not measure heat transfer to gas or close the budget without
 boundary and transport fluxes. See the [reproducible private audit](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-storage-extension-20261025T123001Z/water_thermal_storage.json),
 [plot](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-storage-extension-20261025T123001Z/water_storage_vs_gas_remainder.png),
 and [analysis script](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-storage-extension-20261025T123001Z/analyze_water_storage.py).
+
+The subsequent [thermo-source audit](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-thermo-pressure-extension-20261025T130002Z/water_internal_energy_terms.json)
+clarifies that the configured water sensible internal energy is
+`e_s = 4182 (T - 298.15 K) - p/998.2`, with absolute thermodynamic pressure.
+Thus the temperature-excess diagnostic is only one storage term. In that
+historical one-tank prefix, the pressure contribution `-sum(alpha_water p V)`
+changes by +527.721 kJ. Energy-reference terms also change as water leaves the
+open tank control volume; their corresponding transported energy must use the
+same reference. These storage results do not establish gas heating or a closed
+energy balance. No thermal closure or hardware result is inferred from them.
