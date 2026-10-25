@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 23:10 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 23:11 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -8,8 +8,8 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 - **Live pressure-coupling diagnostic:** ten MPI ranks in Docker
   `dc9e1ff553ed`, StartedAt 2026-10-25T23:07:03.122833725Z, advance from the
-  clean .400086712911 s checkpoint. It reached .402370906292 s in its first
-  16 completed steps without raw pressure contacts. The only numerical change
+  clean .400086712911 s checkpoint. It reached .413553340104 s after
+  115 completed steps without raw pressure contacts. The only numerical change
   is one non-orthogonal pressure correction instead of zero; all pressure and
   momentum relaxation entries are absent. The bounded serial dispatcher tests
   momentum relaxation only if this arm fails before a healthy .46 s endpoint.
@@ -22,9 +22,13 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   .00126 Pa. Local tank/interface spacing is about 25 mm rather than 50 mm;
   the 48-layer valve bands are preserved. Native gas capacity differs by
   approximately .88%, so comparisons must normalize by each mesh's own initial
-  gas volume. The conditional continuation to .4 s failed during preflight,
-  before a solver step; the fine worker is repairing that setup failure using
-  the saved pilot, not rerunning the cold start. Bundle:
+  gas volume. The first continuation failed during preflight because a dictionary
+  reader was incorrectly used on a collated binary field; that no-step attempt
+  is preserved. Fresh continuation `09f65430a32a`, StartedAt
+  2026-10-25T23:10:37.351624880Z, now advances on ten ranks toward .4 s. Four
+  completed steps reached .051271166664 s without raw pressure contacts.
+  Restart field hashes and uniform/time are exact; only the printed startTime
+  metadata comparison uses numeric tolerance. Bundle:
   `results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/`.
 - **The principal blocker remains a repeated pressure-coupling cycle near
   .44 s.** The original 299,248-cell run saved at .443669498426 s after sustained
