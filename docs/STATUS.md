@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 23:29 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 23:37 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -98,6 +98,10 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   after all three pressure/source arms fail and their ten ranks are free;
   its refined region covers the localized pressure-cycle cells. Preparation
   is not an executed mesh comparison.
+  A low-priority CPU/Mesa render watcher is armed for a healthy, complete
+  selected long-run checkpoint at or beyond .65 s; no new movie exists yet.
+  Its 22-hour bound includes waiting, and it honors PAUSE. Status:
+  `results/runs/i4f-current-discharge-milestone-render-20261025T233209Z/milestone/watch-status.json`.
   Legacy primed-line, one-tank and aerial runs are not resumed.
 
 A bounded Astra review found no obvious pressure-operator sign error and
@@ -107,6 +111,12 @@ implement those directions; no repeated routine review is required. Current
 runs use CPU only and leave unrelated GPU workloads untouched. Full logs and
 restart fields remain in ignored run bundles. The prior detailed status is
 preserved in `results/runs/i4f-status-consolidation-20261025T231009Z/previous-STATUS.md`; those historical jobs are not live.
+
+At 23:35 UTC, doctor detected 20 effective CPUs, 101 GiB available RAM and
+86.6 GiB free disk. Unrelated CPU model work used approximately 4.7 cores in
+a two-second tick sample; the two ten-rank CFD jobs received roughly 13–15
+cores combined. Allocated MPI ranks therefore exceed delivered CPU capacity;
+wall-cost estimates must include this contention. Other workloads are untouched.
 
 ## Current inputs and scientific direction
 
