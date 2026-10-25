@@ -24,6 +24,10 @@ mouth water near .612/.620 s, conditionally on a full-bore front. The
 [thermal sensitivity](air-filled-model-thermal-sensitivity.json) advances those
 times to .580/.587 s for isothermal gas and changes intake-crown timing by 14%.
 These are one-tank/two-branch model results, not measured discharge or emptying.
+The [native gas-state diagnostic](air-filled-gas-apparent-exponent.json) and
+[data](air-filled-gas-apparent-exponent.csv) give an apparent expansion exponent
+near 1.24 by .20 s, versus dry-air gamma near 1.40. This is an output diagnostic,
+not a fitted input or a measured heat-transfer rate; energy closure remains open.
 Run the model from the [frozen input packet](../../../experiments/i4f_filling_reference/inputs-manifest.json)
 using `.venv/bin/python scripts/run_i4f_filling_network.py --max-time 1.3`.
 

@@ -2228,6 +2228,16 @@ has already become fully wetted. Both fronts are upstream of the transition.
 Thus the initially mixed source and its discrete pressure–flow behavior must
 be separated; an early improvement alone does not identify the right closure.
 
+The [native gas-state diagnostic](../results/summaries/i4f_20261025/air-filled-gas-apparent-exponent.json)
+finds an apparent exponent -log(p/p0)/log(Vg/Vg0) decreasing from about
+1.283 at .05 s to 1.242 at .20 s in both source arms, compared with dry-air
+gamma=1.399814. EOS tank-gas mass changes by at most .00235%, and pressure
+standard deviation is at most .0111% of the mean over these samples. This
+quantifies a gas-trajectory difference from the adiabatic reduced model;
+it does not identify physical heat transfer, close energy fluxes, or justify
+fitting the reduced model to CFD. The common-temperature equation and its
+interface transport still require appropriate energy accounting.
+
 The resulting numerical action is a .30 m initially wetted source upstream
 of the seat, with local axial refinement and explicitly normalized weights.
 Prepared 279,536- and 299,248-cell meshes pass all nine configured quality

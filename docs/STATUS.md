@@ -1,20 +1,23 @@
 # Live project status
 
-Updated: 2026-10-25 18:08 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 18:22 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
-- **Physical baseline revised: downstream passages initially contain air.**
+- **Air-filled baseline saved after a numerical pressure-floor event.**
   User confirmed this directly. The compact cold start completed .050021 s
-  normally with all restart fields. Its same-physics ten-rank continuation is
+  normally with all restart fields. Its same-physics ten-rank continuation was
   Docker `42b79f4695fa`, StartedAt 16:09:55 UTC, in
   `results/runs/i4f-short1-dryline-continue-20261025T160951Z/`, targeting 1.3 s.
-  Root verified progress through .38884 s without pressure contacts or guard
-  errors. Full states every .05 s; .8 s is an intermediate observation.
-  An active exact-ID wall-budget controller allows only healthy wall-save
-  continuations, with four-hour stages and a twelve-hour campaign bound.
+  It saved all 14 restart fields at .392111585448 s and exited 0 at
+  17:58:18 UTC after raw pressure contacts at .391995691185 s. Raw minimum
+  reached -18.53 kPa in two cells; peak clipped liquid was .0264 kg. This is
+  a diagnostic stop despite normal solver End. The wall-budget controller
+  correctly holds with `held_validation_error_no_restart`. No child resumed.
+  Fine worker localizes the raw event; final saved minimum is a different
+  observation and must not be substituted for the raw offending cell.
   Tank load is 2.700 m3 plus .502166 m3 of wetted upstream feed; the assumed
   effective valve plane is x=2.25 m. All downstream gas starts at 100 kPa and
   293.15 K. The old fully
@@ -23,12 +26,12 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   dense scalar comparisons use common-time interpolation without extrapolation,
   while field pairs disclose their 64 microsecond offset. Maximum compared
   probe-pressure difference is 178 Pa; no water outflow is resolved through .05 s.
-- **Wet-side valve-source diagnostic continues on the other ten ranks.**
+- **Wet-side valve-source diagnostic completed .300000921939 s.**
   Pilot Docker `b34ec61f05d6` completed .050021 s normally with all 14 fields,
   no pressure contacts and phase-ledger errors below 3e-7 of initial inventory.
-  Its ten-rank continuation `5a6bb983ac5a`, StartedAt 16:58:04 UTC, reached
-  .19477 s without pressure contacts or diagnostic errors and targets .3 s
-  with two-hour hard / 1 h 40 save bounds. It uses the same native initial
+  Its ten-rank continuation `5a6bb983ac5a`, StartedAt 16:58:04 UTC, ended
+  normally at 18:08:47 UTC, exit 0 with all 14 fields and no pressure contacts
+  or diagnostic errors. It uses the same native initial
   state and partition. Only the source support moves into an initially wetted
   upstream band, preserving fully wet integrated resistance. The original
   .3 m source zone starts half-water/half-air; its wet coverage rises to .656
@@ -47,11 +50,16 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   x=1.95–2.25 m, retaining Cd/opening and normalizing discrete source weights.
   Two axial-refinement meshes (279,536 and 299,248 cells) pass all nine
   configured checks. All 14 zones and initial fields were repaired/verified
-  through the refinement map. The actual user-systemd queue is active as
-  `i4f-short1-valve-band-axial-dispatcher.service`, restarted at 17:59:40 UTC
-  with a six-hour bound. It waits for the exact thin-source parent to finish
-  and capture before sequential ten-rank .05 s cold starts. No child is
-  launched yet. A post-pair comparison/conditional fine continuation is being
+  through the refinement map. Both corrected cold starts are now launched in
+  parallel, ten ranks each, under exact-ID guards. Docker `0b27687ba66d`
+  (12.5 mm, StartedAt 18:21:55 UTC) and `f7577b552a14` (6.25 mm, 18:22:18)
+  use the unchanged binary. Root verified their full IDs/start times/resource
+  caps and advancing CFD steps (.00477/.00127 s), with no guard errors or
+  pressure-floor contacts at this capture. Current bundle:
+  `results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/`.
+  Earlier missing-dictionary, parser/path/marker and dynamic-code-manifest
+  failures are preserved; none reached a CFD step. No quality threshold was
+  relaxed. A post-pair comparison/conditional fine continuation is being
   prepared separately; do not count it as armed yet. Prospective 2% source-flow accuracy
   and apparatus mesh sensitivity are separate numerical targets, not hardware
   validation. Evidence: `results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/analysis/`
@@ -63,6 +71,14 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   Both fronts remain upstream of the transition. Native inventory/field
   mapping checks passed; the reduced model remains a consistency reference.
   Published: `air-filled-source-history-comparison.{json,csv,png}`.
+- **Gas trajectory differs from the adiabatic reduced assumption.** The
+  apparent exponent falls from about 1.283 to 1.242 through .05–.20 s in both
+  source arms; dry-air gamma is 1.399814. Gas EOS mass changes by at most
+  .00235%, with small tank-pressure spread. This is not a heat-transfer
+  measurement or fitted input. Dense energy fluxes remain unmeasured; the
+  common-temperature equation's net energy behavior is not established by
+  checking source selection alone. Fine worker prepares a separate logging-only
+  binary for actual raw pressure-contact cells, without changing equations.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.
