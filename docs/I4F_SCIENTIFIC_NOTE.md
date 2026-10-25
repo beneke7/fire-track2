@@ -66,9 +66,12 @@ discharge interval; a complete verified discharge has not yet finished.
 The finer reference saved at .443669 s when pressure corrections stopped
 settling between outer iterations: the last correction was 3291 Pa and
 the velocity update 4.54 m/s, despite positive pressure and no clipping.
-This is a diagnostic stop, not evidence of a converged discharge. A matched
-restart-control and smaller-Courant comparison is being prepared from the
-clean .400087 s checkpoint, retaining the original stop thresholds.
+This is a diagnostic stop, not evidence of a converged discharge. A restart
+from the clean .400087 s checkpoint reproduced the condition at .443925 s;
+the 24-layer source-resolution comparison stopped at .442746 s. Both saved
+all restart fields with positive pressure and no clipping. A smaller-Courant
+trial and a cell-localized diagnostic trace are running with the original
+stop thresholds. No completed-discharge or late mesh-convergence claim follows.
 The earlier air-filled original-source case saved at .392 s after a raw
 pressure-floor event. A short restart passed .395 s without reproducing it;
 original and diagnostic binaries produce identical short-restart results.
@@ -101,6 +104,21 @@ it is not a fitted polytropic closure or an identified heat-transfer rate.
 Its inputs are the whole-tank rows of the
 [regional thermal data](../results/summaries/i4f_20261025/corrected-source-temperature-zones.csv)
 and the initial native gas volume in the audit record.
+
+Adiabatic solid walls do not imply adiabatic gas evolution in this model:
+SST also supplies turbulent thermal transport inside the fluid. At .40 s,
+the gas-rich headspace's median eddy-to-molecular diffusivity ratio is about
+234, with the installed default turbulent Prandtl number equal to one. The
+[native transport audit](../results/summaries/i4f_20261025/corrected-source-temperature-diffusion-v2.json)
+and [coefficient table](../results/summaries/i4f_20261025/corrected-source-temperature-diffusion-v2.csv)
+distinguish base enthalpy coefficients from the sensible-internal-energy
+temperature coefficient, which includes Cp/Cv in pure gas. They explicitly
+qualify the gas-rich selection's mixed cells. Equivalent-cell diffusion
+times of several seconds are local scale estimates, not interfacial heat
+fluxes or an explanation of the pressure difference. The historical
+[OpenFOAM design note](https://openfoam.org/release/2-2-0/thermophysical-multiphase-energy/)
+describes the mixture-temperature formulation's boundedness motivation;
+that motivation does not validate its thermal accuracy for this apparatus.
 
 The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
 also shows how the initial agreement evolves. At that same time, CFD tank-A
