@@ -61,13 +61,64 @@ two timesteps differ by up to 5.12%, while endpoint flow differs about 1.50%.
 The reduced model has .634% more initial wet-feed volume, so even close early
 agreement is a consistency check rather than independent validation.
 
-Long continuations of both corrected-source meshes target the useful
+Long continuations of the corrected-source meshes target the useful
 discharge interval; a complete verified discharge has not yet finished.
+The finer reference saved at .443669 s when pressure corrections stopped
+settling between outer iterations: the last correction was 3291 Pa and
+the velocity update 4.54 m/s, despite positive pressure and no clipping.
+This is a diagnostic stop, not evidence of a converged discharge. A matched
+restart-control and smaller-Courant comparison is being prepared from the
+clean .400087 s checkpoint, retaining the original stop thresholds.
 The earlier air-filled original-source case saved at .392 s after a raw
 pressure-floor event. A short restart passed .395 s without reproducing it;
 original and diagnostic binaries produce identical short-restart results.
 The cause of that earlier event remains unresolved. Current execution belongs
 in [STATUS](STATUS.md), not in a completed-discharge claim.
+
+The saved .350114 and .400087 s corrected-source fields locate the coldest
+cells in tank gas, at 255.02 and 245.66 K. The lowest pressures instead occur
+in the lines, at 96.84 and 92.58 kPa absolute and approximately 293 K. At
+.400087 s, whole-tank gas-mass-weighted temperature is about 261.21 K, while
+global water-mass-weighted temperature is 293.121 K. Water in cells with
+alpha >= .99 remains above 292.799 K; only .0592 g of water is assigned
+T < 273.15 K, entirely outside that water-rich group. This locates the
+cooling in the computed gas inventory without establishing its heat-transfer
+mechanism or full energy closure. The solver has one shared temperature;
+T.air and T.water agree with it to roundoff. The
+[native thermal audit](../results/summaries/i4f_20261025/corrected-source-temperature-audit.json)
+and [phase-mass distribution](../results/summaries/i4f_20261025/corrected-source-temperature-distributions.png)
+record the EOS and native-volume checks. These saved fields do not locate
+extrema reported later by the live guard.
+
+Cooling alone does not establish an adiabatic trajectory. At .400087 s,
+tank A gas volume is 1.63454 times its initial value. The constant-mass
+adiabatic comparison evaluated at that same volume,
+`p_ad = p0 (Vg0/Vg)^1.399814`, gives 6.032 bar absolute and 240.86 K,
+whereas CFD gives about 6.541 bar and a gas-mass-weighted 261.21 K. Tank
+gas mass changes by only .00389%. This same-volume comparison separates
+the thermal-trajectory difference from differences in drainage timing;
+it is not a fitted polytropic closure or an identified heat-transfer rate.
+Its inputs are the whole-tank rows of the
+[regional thermal data](../results/summaries/i4f_20261025/corrected-source-temperature-zones.csv)
+and the initial native gas volume in the audit record.
+
+The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
+also shows how the initial agreement evolves. At that same time, CFD tank-A
+water is 2.480 L below the reduced model, while its pressure is 654.125 versus
+607.529 kPa absolute, a 7.67% difference. The model starts with 1.592 L more
+water in its equivalent upstream feed; that initial geometry difference is
+kept separate from the tank comparison. Native valve-flow sample means
+exceed the model by about 2.25% in the final .35–.40 s bin, with instantaneous
+endpoint differences of 5.20–6.06% across the valves. These are consistency
+comparisons, not calibrated error estimates. Connected liquid fronts extend
+farther than the model's full-bore front, with substantial dependence on the
+phase-fraction threshold; that is not a demonstrated outlet-water arrival.
+Exact common-time 24/48-layer scalars through .20 s differ by at most
+1.554 kPa in pressure, .421 L in tank volume and 1.57% in valve flow. This
+prefix evidence does not replace the original startup HOLD or establish
+convergence through the later failure. The
+[analysis record](../results/summaries/i4f_20261025/corrected-source-model-comparison.json)
+preserves masks, connected-front definition, temperature weighting and inputs.
 
 The parameterized CAD now supports horizontal and vertical tank axes with
 inspected connection sections. This is geometry capability; there is no
@@ -77,7 +128,10 @@ the corrected-source long continuations. Its filename is retained for link
 stability. The [new corrected-source preview at .350114 s](../results/summaries/i4f_20261025/corrected-source-preview-0p350.png)
 shows all four branches in the outlet view, with no resolved exterior water
 at alpha >= .5 at that time. Its native mapping and CPU/Mesa backend are
-recorded alongside it. A later checkpoint movie is scheduled.
+recorded alongside it. The later .8 s movie milestone was not reached.
+The [10x cutaway movie through the saved .443669 s diagnostic endpoint](../results/summaries/i4f_20261025/corrected-source-cutaway-through-0p443-10x.mp4)
+and [all-four-branches view](../results/summaries/i4f_20261025/corrected-source-outlets-through-0p443-10x.mp4)
+retain actual native states and label the incomplete discharge explicitly.
 
 ### Earlier primed-line four-mouth context
 

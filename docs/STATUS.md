@@ -1,27 +1,46 @@
 # Live project status
 
-Updated: 2026-10-25 20:27 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 20:56 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
-- **Two CPU runs are live, ten ranks each.** Root checked Docker and
-  exact-ID guards at 20:26 UTC. The 299,248-cell, 48-layer reference
-  (`ee2629b9f7b1`, StartedAt 18:45:08 UTC) has reached about .437 s;
-  its 1.3 s limit is an observation horizon, not emptying. The 279,536-cell,
-  24-layer comparison is now the diagnostic-upgraded child
+- **The reference saved after a coupling-convergence stop.** Docker
+  `ee2629b9f7b1` exited 0 at 20:31:52 UTC with all 14 fields at
+  .443669498426 s. Its final pressure correction was 3291 Pa, nearly equal
+  to the penultimate correction, and velocity update was 4.54 m/s. The guard
+  requested a save after sustained uncollapsed pressure updates; there were
+  no raw pressure contacts or clipped liquid. Normal End therefore does not
+  establish convergence. The campaign is held with no automatic restart,
+  and its .8 s renderer ended without reaching that milestone. The 1.3 s
+  observation horizon was not achieved. The inspected CPU/Mesa 10x movies
+  now cover actual initialization through this diagnostic endpoint.
+- **A ten-rank restart-control is running from the clean .400087 s state.**
+  Docker `350f5910699f`, StartedAt 20:50:33 UTC, reached .40829 s with
+  66 completed steps and no guard errors. Bundle:
+  `results/runs/i4f-short1-courant-pressure-pair-20261025T204743Z/control-retry2/`.
+  The matched half-Courant arm targets the same .46 s endpoint from the same
+  clean seed, with unchanged physics and guard thresholds. Individual bounds
+  are 2 h hard / 1 h 40 save under a 5 h pair bound. Two no-step launch
+  failures are retained. The dispatcher was reattached to that exact control
+  after correcting a terminal-capture race, without relaunching it. Active unit:
+  `i4f-courant-pressure-pair-20261025t204743-recovery-attempt3.service`;
+  authoritative `pair-status-attempt3.json` is in the pair bundle. The original
+  pair deadline remains 01:50:31 UTC October 26; the old `pair-status.json`
+  describes a preserved failed attempt. The second arm waits for actual
+  terminal capture, with a bounded 180 s wait for guard metadata after exit.
+- **The 279,536-cell comparison remains live on ten ranks.** Root checked
+  actual Docker at 20:56 UTC. The 24-layer diagnostic-upgraded child
   `74ad24071782`, StartedAt 20:14:12 UTC, in
   `results/runs/i4f-short1-valve-band-12p5-continue-20261025T201408Z/`,
-  reaching about .200 s toward .8 s. Both report no guard diagnostic errors
+  reached .40692 s toward .8 s, without guard diagnostic errors
   or raw pressure clipping. The 24-layer parent saved all 14 fields normally
   at .158521 s; a first upgraded child failed on missing observer flux-scheme
   aliases before completing a step, and is preserved. The corrected child
   has the aliases inside divSchemes and emits partial energy diagnostics.
-  The 48-layer reference remains unchanged. Both bounded campaigns are active;
-  their original deadlines remain 06:45 and 07:35 UTC on October 26.
-  A single CPU/Mesa watcher is armed to render the reference at a verified
-  checkpoint at or beyond .8 s. No aerial/HPC/GPU jobs were started.
+  The active comparison campaign retains its 07:35 UTC October 26 deadline.
+  No aerial/HPC/GPU jobs were started.
 - **The original-case logger replay did not reproduce the floor event.**
   Docker `4f5645618b2f` ended normally at .395023685933 s, exit 0 at 19:07:26,
   with all 14 fields and zero raw contacts. Original-binary and logger/full
@@ -130,6 +149,17 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   The confirmed air-filled .05 s state is dry at the mouths and suppresses
   normalized outlet metrics. New tool evidence remains private until useful
   current discharge fields exist.
+- **Saved-field cooling localized.** A read-only audit of the current fine
+  case at .35/.40 s puts the temperature minima in tank gas, spatially separate
+  from the low-pressure line cells near 293 K. At .40 s, water-rich cells
+  remain above 292.799 K and only .0592 g of water is assigned T < 273.15 K,
+  entirely in other phase-fraction cells. Native EOS and volume checks agree.
+  This does not locate later live extrema or establish full energy closure.
+- **Corrected model comparison now reaches .400087 s.** Native tank-A water
+  differs by 2.480 L, but pressure is 46.60 kPa above the forward adiabatic
+  model. Native gas is warmer; this is not a fitted heat-transfer attribution.
+  Exact 24/48-layer common-time scalar comparisons through .2 s remain close
+  and do not change the preserved startup HOLD or validate the later failure.
 - **Full 3D downstream remeshing succeeded.** The canonical 881,431-cell
   snappy-region mesh passes all nine configured checks; optional geometry
   checks still identify concave cells. Native center-spacing comparisons
@@ -137,9 +167,12 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   all three directions, with the 48-layer valve band retained. Cold phase
   initialization retains the tank loads and dry downstream pipes. Earlier
   generic-cut and intermediate meshes are preserved and excluded from CFD.
-  Luna fine worker is preparing one bounded ten-rank cold-start pilot, to
-  start after healthy .8 s completion/capture of the current 24-layer campaign.
-  Preparation is not yet an executed resolution comparison.
+  A bounded ten-rank cold-start pilot passes preflight. Its one-shot dispatcher
+  waits for healthy .8 s completion/capture of the current 24-layer campaign.
+  The corrected dispatcher is active as
+  `i4f-outlet2x-source4x-coldstart-dispatch-20261025T2026Z.service`, accepting
+  official child identity and structured numeric mesh-quality evidence.
+  No pilot solver has started. Preparation is not an executed resolution comparison.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.

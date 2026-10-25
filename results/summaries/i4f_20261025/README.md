@@ -1,5 +1,17 @@
 # I4F discharge: published results, 25 October 2026
 
+[Watch corrected-source pipe filling through 0.443669 s, 10× slow](corrected-source-cutaway-through-0p443-10x.mp4)
+or the [all-four-branches outlet view](corrected-source-outlets-through-0p443-10x.mp4).
+The 4.874-second movies show ten actual saved states, including initialization,
+with no temporal field interpolation. The final frame is held for the preceding
+saved interval and identifies the pressure-iteration diagnostic stop. This is
+incomplete discharge, with no alpha >= .5 exterior water at the endpoint.
+The [movie record](corrected-source-movie-through-0p443.json),
+[checkpoint hashes](corrected-source-movie-checkpoints.json) and
+[timing proof](corrected-source-movie-timing.json) document the sequence.
+
+![Corrected-source initialization and diagnostic endpoint](corrected-source-start-end-through-0p443.png)
+
 The newer corrected-source case is shown below at **0.350114 s**, on its
 299,248-cell mesh. Blue marks native cells with water fraction at least .5;
 cyan is the spatially interpolated .5 display surface. The right view retains
@@ -12,7 +24,35 @@ filling, not an exterior discharge sheet.
 The [native-field render record](corrected-source-preview-0p350.json) includes
 checkpoint hashes and cell-address mapping checks; the
 [backend record](corrected-source-preview-backend.json) verifies CPU/Mesa
-rendering. A longer movie is scheduled after a verified .8 s checkpoint.
+rendering. The run subsequently saved at .443669 s after pressure corrections
+stopped settling; its .8 s movie watcher ended without reaching that milestone.
+The shorter terminal movie above is now available. A complete verified
+discharge remains pending.
+
+The [saved-field thermal audit](corrected-source-temperature-audit.json)
+locates the .40 s temperature minimum of 245.66 K in tank gas, while the
+lowest-pressure line cell is near 293 K. Bulk water stays near 293 K; only
+.0592 g of water is assigned a temperature below 273.15 K, all outside
+cells with water fraction >= .99. The
+[phase-mass distributions](corrected-source-temperature-distributions.png),
+[regional data](corrected-source-temperature-zones.csv) and
+[extrema](corrected-source-temperature-extrema.csv) distinguish gas cooling
+from water cooling. This is a one-temperature model; the audit does not close
+the energy budget or establish physical interphase heat transfer.
+
+The [comparison through .400087 s](corrected-source-model-comparison.json)
+shows close tank-water histories but a growing pressure difference: CFD is
+46.60 kPa above the reduced model at the endpoint, alongside a warmer gas
+state. Tank-A withdrawal differs by 2.480 L; the initial 1.592 L equivalent-feed
+volume mismatch is recorded separately. The .35–.40 s valve-flow mean differs
+by about 2.25%, while endpoint differences reach 5.20–6.06% by valve.
+Connected-front locations depend on the stated water-fraction threshold and
+are not an unqualified first-water measurement. The
+[checkpoint table](corrected-source-model-checkpoints.csv),
+[flow bins](corrected-source-model-flow-bins.csv) and
+[connected fronts](corrected-source-model-fronts.csv) retain those definitions.
+
+![Corrected-source CFD and reduced-model histories through 0.40 s](corrected-source-model-comparison.png)
 
 [Watch the earlier air-filled compact startup, 10× slow](current-air-filled-cutaway-10x.mp4)
 or its [outlet view](current-air-filled-outlet-10x.mp4). These show pipe filling

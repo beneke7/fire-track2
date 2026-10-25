@@ -1,0 +1,269 @@
+{
+  "schema": "i4f-48layer-terminal-render-duration-proof/v1",
+  "created_utc": "2026-10-25T20:52:35.931129+00:00",
+  "native_checkpoint_manifest": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/metadata/native-checkpoint-manifest.json",
+  "native_checkpoint_manifest_sha256": "30852b2d74a5ea8336cad58dd0cd7911a34d2f866f1844c070e4fa59c3027493",
+  "render_manifest": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/milestone-render-manifest.json",
+  "render_manifest_sha256_before_proof_refresh": "5dfe4938af1a0857b58d9aa90374838e3d871425ab1b6a2ee229670dff9544b5",
+  "native_state_times_s": [
+    0.0,
+    0.050021166664044305,
+    0.10002116666400004,
+    0.1500211666640001,
+    0.20002116666400013,
+    0.25002116666400015,
+    0.2999266649839629,
+    0.35011445668282176,
+    0.40008671291114567,
+    0.4436694984262083
+  ],
+  "unique_native_state_count": 10,
+  "requested_playback": {
+    "factor": 10,
+    "duration_rule": "each native frame held for 10 times the next saved physical interval; terminal frame held for 10 times the previous saved interval; no in-between fields",
+    "requested_total_duration_s": 4.872522839412709,
+    "terminal_actual_time_s": 0.4436694984262083,
+    "terminal_extra_hold_physical_interval_s": 0.043582785515062616,
+    "ffconcat_input_framerate_hz": 1000,
+    "encoder_time_base_s": 0.001,
+    "quantization": "VFR frame start times rounded to 1 ms; measured per-frame start-time errors recorded below"
+  },
+  "movies": {
+    "tank_cutaway": {
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/tank-half-sections-10x.mp4",
+      "sha256": "c1832b2fef0ac0f9e785028c42e3561dd0d9fe79039b1484296b62165d4aeabe",
+      "bytes": 148804,
+      "ffprobe": {
+        "width": 1400,
+        "height": 900,
+        "r_frame_rate": "2/1",
+        "avg_frame_rate": "5500/2501",
+        "time_base": "1/1000000",
+        "duration": "4.874000",
+        "nb_frames": "11",
+        "nb_read_frames": "11"
+      },
+      "decoded_frame_count": 11,
+      "decoded_frame_start_times_s": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        2.999,
+        3.501,
+        4.001,
+        4.437,
+        4.873
+      ],
+      "expected_10x_frame_start_times_s": [
+        0.0,
+        0.500211666640443,
+        1.0002116666400005,
+        1.500211666640001,
+        2.000211666640001,
+        2.500211666640001,
+        2.9992666498396288,
+        3.5011445668282173,
+        4.000867129111456,
+        4.436694984262083,
+        4.872522839412709
+      ],
+      "start_time_rounding_errors_s": [
+        0.0,
+        -0.00021166664044303118,
+        -0.0002116666400004963,
+        -0.00021166664000094038,
+        -0.00021166664000116242,
+        -0.00021166664000116242,
+        -0.0002666498396286521,
+        -0.0001445668282173962,
+        0.00013287088854418982,
+        0.0003050157379176355,
+        0.00047716058729108113
+      ],
+      "max_abs_start_time_error_s": 0.00047716058729108113,
+      "requested_state_hold_durations_s": [
+        0.500211666640443,
+        0.4999999999995574,
+        0.5000000000000004,
+        0.5000000000000004,
+        0.5000000000000002,
+        0.4990549831996277,
+        0.5018779169885884,
+        0.4997225622832391,
+        0.43582785515062616,
+        0.43582785515062616
+      ]
+    },
+    "outlet_all_four": {
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/outlet-all-four-branches-10x.mp4",
+      "sha256": "76c9b5baf123c327d2f9a9369119e7bc8d275491a85a0b571f98b493373eaa8b",
+      "bytes": 170705,
+      "ffprobe": {
+        "width": 1500,
+        "height": 900,
+        "r_frame_rate": "2/1",
+        "avg_frame_rate": "5500/2501",
+        "time_base": "1/1000000",
+        "duration": "4.874000",
+        "nb_frames": "11",
+        "nb_read_frames": "11"
+      },
+      "decoded_frame_count": 11,
+      "decoded_frame_start_times_s": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        2.999,
+        3.501,
+        4.001,
+        4.437,
+        4.873
+      ],
+      "expected_10x_frame_start_times_s": [
+        0.0,
+        0.500211666640443,
+        1.0002116666400005,
+        1.500211666640001,
+        2.000211666640001,
+        2.500211666640001,
+        2.9992666498396288,
+        3.5011445668282173,
+        4.000867129111456,
+        4.436694984262083,
+        4.872522839412709
+      ],
+      "start_time_rounding_errors_s": [
+        0.0,
+        -0.00021166664044303118,
+        -0.0002116666400004963,
+        -0.00021166664000094038,
+        -0.00021166664000116242,
+        -0.00021166664000116242,
+        -0.0002666498396286521,
+        -0.0001445668282173962,
+        0.00013287088854418982,
+        0.0003050157379176355,
+        0.00047716058729108113
+      ],
+      "max_abs_start_time_error_s": 0.00047716058729108113,
+      "requested_state_hold_durations_s": [
+        0.500211666640443,
+        0.4999999999995574,
+        0.5000000000000004,
+        0.5000000000000004,
+        0.5000000000000002,
+        0.4990549831996277,
+        0.5018779169885884,
+        0.4997225622832391,
+        0.43582785515062616,
+        0.43582785515062616
+      ]
+    }
+  },
+  "decoded_first_middle_terminal_frames": [
+    {
+      "view": "tank",
+      "selection": "first",
+      "video_frame_index_zero_based": 0,
+      "video_timestamp_s": 0.0,
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/decoded-final/tank-01.png",
+      "sha256": "c5003ad5d776d4ba14977706a658bf4176887decd39cc4639835f2d6b341e79a",
+      "bytes": 301024,
+      "visually_inspected": true
+    },
+    {
+      "view": "tank",
+      "selection": "middle",
+      "video_frame_index_zero_based": 5,
+      "video_timestamp_s": 2.5,
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/decoded-final/tank-02.png",
+      "sha256": "99aee34d6276f8a0bd065b9b9a982885a48a463ca7cf0caa89e3cc3c2b91a802",
+      "bytes": 321145,
+      "visually_inspected": true
+    },
+    {
+      "view": "tank",
+      "selection": "terminal_duplicate",
+      "video_frame_index_zero_based": 10,
+      "video_timestamp_s": 4.873,
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/decoded-final/tank-03.png",
+      "sha256": "fa0cb8569c7bc11d03eb6e847195aa01f7a6f3848cbd93681a48ddf4e26a126b",
+      "bytes": 356365,
+      "visually_inspected": true
+    },
+    {
+      "view": "outlet",
+      "selection": "first",
+      "video_frame_index_zero_based": 0,
+      "video_timestamp_s": 0.0,
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/decoded-final/outlet-01.png",
+      "sha256": "16da8326252c1c4a45b56b74e94eb78eab061f67c83cb99e0966664aefec2481",
+      "bytes": 300252,
+      "visually_inspected": true
+    },
+    {
+      "view": "outlet",
+      "selection": "middle",
+      "video_frame_index_zero_based": 5,
+      "video_timestamp_s": 2.5,
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/decoded-final/outlet-02.png",
+      "sha256": "daecc563e3f0d0a68c9530ce99eab1b2b88c8b02ac7dbf35f4f33bfa30ba0bfb",
+      "bytes": 344000,
+      "visually_inspected": true
+    },
+    {
+      "view": "outlet",
+      "selection": "terminal_duplicate",
+      "video_frame_index_zero_based": 10,
+      "video_timestamp_s": 4.873,
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/decoded-final/outlet-03.png",
+      "sha256": "2e61f5fe4c7df1315c8323c40a84601c9058ec6e2dfcd066db480f9d42ed9927",
+      "bytes": 421161,
+      "visually_inspected": true
+    }
+  ],
+  "terminal_diagnostic_stop": {
+    "time_s": 0.443669498426,
+    "completed_steps": 2051,
+    "write_now_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+    "raw_pressure_contact_count": 0,
+    "maximum_clipped_liquid_mass_kg": 0.0,
+    "interpretation": "diagnostic stop at sustained outer-pressure updates; not a complete discharge"
+  },
+  "render_source_hashes": {
+    "analysis/prepare_terminal_render_request.py": "a00926c7acfccbda06af3ca9796a2ad061d1b4d98d7cbf28b2fc7683367aeb4e",
+    "analysis/render_native_cutaway.py": "1b34bf021a90722c853e453a80127b01a7c2b215b9e5a4f6ddf62791d680fd53",
+    "analysis/render_native_cutaway_v1-tested-image.py": "10c0a723db972a4f6fcb5bc3f0f8e3b03f4b939d08342b23567cc0a27df5f7b1",
+    "analysis/render_native_cutaway_v2-tested-image.py": "f24830826a32ad5295480dcb730dbb7a07cd2d5e051e2070f575072b2d02026c",
+    "analysis/render_native_cutaway_v2.py": "afa119db523ceae58f48ab58ca91f9236ba8de3ac731f1b1bb1745cef25f8363",
+    "analysis/watch_and_render_milestone-v1.py": "f9d94bbabfe5e7edcfa6c6d02993df9a66f87201b86bc9a1b7c1f9db0d86b1c5",
+    "analysis/watch_and_render_milestone.py": "ce7bd744ec96e2ff0574346361c84a44c306c9efd0933d3f738a952ab040b0aa",
+    "analysis/write_duration_proof.py": "699f75e4f572b0215f02f8ed480540e988da5c2a8f24f5df4de5ad86fcefeab5"
+  },
+  "software_backend": {
+    "render_window_class": "vtkXOpenGLRenderWindow",
+    "vendor": "OpenGL vendor string:  Mesa",
+    "renderer": "OpenGL renderer string:  llvmpipe (LLVM 20.1.2, 256 bits)",
+    "probe_sha256": "b9426c3ffd93282b04cd0bcdb209889a9c95a0385d9cac0ed01e46e4e4d159a1",
+    "capability_report_sha256": "62ef06424a0c7d6b3a0d866ab818f814f6c49591af42f7403c173f373d7ce50e"
+  },
+  "render_execution": {
+    "command": "nice -n 10 xvfb-run -a env PYVISTA_OFF_SCREEN=false LIBGL_ALWAYS_SOFTWARE=1 MESA_LOADER_DRIVER_OVERRIDE=llvmpipe __GLX_VENDOR_LIBRARY_NAME=mesa LP_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=-1 .venv/bin/python analysis/watch_and_render_milestone.py --render-candidate milestone/render-request.json",
+    "observed_nice_level": 10,
+    "CPU_threads": 1
+  },
+  "encoding_command_template": "ffmpeg -f concat -safe 0 -i <VFR input> -fps_mode vfr -enc_time_base 1:1000 -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -video_track_timescale 1000000 -threads 1",
+  "qualification": [
+    "Eleven encoded frames comprise ten distinct saved states plus one repeated terminal image to realize the endpoint hold.",
+    "Only spatial alpha=0.5 display interpolation is used; no temporal field interpolation.",
+    "The terminal frame explicitly says diagnostic stop for sustained outer-pressure updates, with no raw pressure contacts or clipped liquid; the run is not a complete discharge or validation result."
+  ],
+  "duration_difference_s": 0.001477160587290527,
+  "duration_relative_difference": 0.000303161347001212
+}
