@@ -5,6 +5,12 @@ These are the exact small dictionaries from the completed 1,779,258-cell,
 in [dictionary-manifest.json](dictionary-manifest.json). They accompany the
 [executed solver source](../../solvers/i4f_frozen_sp/README.md).
 
+**Later input correction:** the user confirms that passages downstream of the
+valves start with air. This archived primed-line/static-ambient case is not the
+current physical baseline. The compact air-filled run and tested reservoir
+boundaries are identified in [current status](../../docs/STATUS.md); native
+initial fields and restart inputs must accompany any transfer.
+
 This is **not a standalone case**: the native mesh, nonuniform initial fields,
 14-field restart and collated addressing remain in the local run bundle and
 must be transferred separately. Do not replace them with uniform fields or a

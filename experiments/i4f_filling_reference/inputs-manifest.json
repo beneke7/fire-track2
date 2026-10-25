@@ -1,0 +1,63 @@
+{
+  "files": [
+    {
+      "bytes": 11660,
+      "path": "inputs/branch-hydraulic-geometry.json",
+      "sha256": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+      "source_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/branch-hydraulic-geometry.json"
+    },
+    {
+      "bytes": 308707,
+      "path": "inputs/branch-centerline-sections.csv",
+      "sha256": "d388897de6d4cbeefd932c8af79eaab7607c737272737e198875a7ef95e6c7b8",
+      "source_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/branch-centerline-sections.csv"
+    },
+    {
+      "bytes": 19409,
+      "path": "inputs/preview-geometry.json",
+      "sha256": "496cacb13db991ba8a6d4ff179cde9dd8c20c2de1cda1a0e68573591cdf62cbe",
+      "source_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/preview-geometry.json"
+    },
+    {
+      "bytes": 10382,
+      "path": "inputs/native-initialization-dryline.json",
+      "sha256": "5eb1fae298039fa2e1f954ba68b16127171a4f76456681c9a08625ae6a9f4608",
+      "source_path": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json"
+    },
+    {
+      "bytes": 8591,
+      "path": "inputs/geometry_summary.json",
+      "sha256": "6a2eb2a1aabeed24898e5c339e5042695586b362d684a5ea40c7d1fab708b310",
+      "source_path": "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry/short1-generated/geometry_summary.json"
+    },
+    {
+      "bytes": 27146,
+      "path": "inputs/geometry-adapter-short1.json",
+      "sha256": "27de9d8135aa94ab746638e93e1bbfff493516b4c52960ac2071cba88bf9f175",
+      "source_path": "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry-adapter-short1.json"
+    },
+    {
+      "bytes": 1104,
+      "path": "inputs/thermophysicalProperties.air",
+      "sha256": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+      "source_path": "results/runs/i4f-short1-compact-mesh-20261025T150312Z/case/constant/thermophysicalProperties.air"
+    },
+    {
+      "bytes": 1137,
+      "path": "inputs/thermophysicalProperties.water",
+      "sha256": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+      "source_path": "results/runs/i4f-short1-compact-mesh-20261025T150312Z/case/constant/thermophysicalProperties.water"
+    }
+  ],
+  "provisional_qualifications": [
+    "The native tank state is tankA represented as one horizontal tank with two branches; the actual apparatus has two independent tanks and four outlets.",
+    "Legacy preview branch centerlines are x-only mapped to the compact x=4.8 m candidate; y/z are retained. Geometry dimensions and routing are provisional, not measurements.",
+    "The model assumes an effective valve plane at x=2.25 m, Cd=0.7, 1 s smoothstep opening, and minimum effective opening 0.02.",
+    "Tank headspace is modeled as sealed air at 1.2 MPa absolute, 293.15 K, with polytropic exponent set to the thermophysical air gamma; actual pressure convention and gas composition remain uncertain.",
+    "Downstream branches start with ambient air; the moving-front calculation holds front pressure at ambient and does not solve compressible gas flow. Omitted dry-path minor-loss K makes its air validity screen incomplete.",
+    "The 1-D full-bore front model omits stratification, pockets, water hammer, valve disk geometry, and gas ingestion at the intake crown. It is exploratory, not hardware validation."
+  ],
+  "purpose": "Small frozen input packet for the exploratory initially-air moving-front reference driver.",
+  "runtime_dependency_note": "The driver reads this packaged inputs directory only. The historical results/runs paths below record provenance; they are not required to run the driver.",
+  "schema": "i4f-filling-reference-input-packet.v1"
+}

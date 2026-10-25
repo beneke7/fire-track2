@@ -514,6 +514,82 @@ identified as a separate experiment.
 
 ## Connected models and interpretation
 
+### Initially air-filled downstream passages
+
+The new moving-front model distinguishes tank withdrawal, water stored in each
+growing wetted pipe column, and water released from a mouth. For branch j,
+`dVtank/dt = -sum(Qj)` and `dVwet,j/dt = Qj` before mouth arrival; outlet water
+flow is zero until that arrival. Thereafter line storage is fixed and its branch
+flow enters the external-water compartment. Branch and global ledgers are both
+checked, including different branches crossing their mouths in the same step.
+
+Integrating one-dimensional Euler flow over the wetted path gives
+
+`pg - pfront + rho*g*(zlevel-zfront) = Iwet*dQ/dt + rho*(Q/Afront)^2/2 + losses`,
+
+with `Iwet = rho*integral_wet(ds/A)`. The front velocity head follows from the
+convective term and reservoir inlet condition; entrance and valve losses are
+additional terms, each counted once. This is the variable-area counterpart of
+the lengthening-column balance in [Tijsseling, Hou and Bozkus (2019),
+Eq. (2)](https://doi.org/10.1115/1.4043321). It assumes a full-bore liquid front;
+ambient front pressure is an approximation, with air Mach, pressure-loss and
+front Froude diagnostics. It does not solve stratified filling or trapped air.
+
+The current representative-tank calculation matches the native compact case's
+1.350 m3 tank water, .298497 m3 headspace, 12 bar absolute and 293.15 K, using
+the ideal-air adiabatic exponent 1.399814. Its equivalent wet feed is .252648 m3
+(.634% above the native feed), and full line volume .693420 m3 (1.016% above
+the CAD envelope). No volume or valve coefficient was fitted to CFD.
+
+The 50/25 microsecond model steps bracket first lower-mouth water at
+.611600–.611650/.611625–.611650 s and upper-mouth water at
+.619800–.619850/.619825–.619850 s. The intake-crown stop is about 1.12688 s,
+with .295950 m3 in the tank, .693420 m3 in its two branches and .613278 m3
+released from this **one-tank** network. This is not emptying. Its adiabatic
+gas temperature reaches about 160 K, emphasizing the importance of the thermal
+assumption; no measured thermal history is implied. Numerical repeatability
+does not validate the piston front: the air approximation remains incomplete,
+and its diagnostic flags passage through the transition. Earlier .72 s results
+used the older long route and different tank state, and are not current compact
+predictions. Immutable input tables and histories identify each calculation.
+
+The portable command is
+`.venv/bin/python scripts/run_i4f_filling_network.py --max-time 1.3`;
+it writes a fresh ignored run with source snapshots. The small frozen inputs in
+`experiments/i4f_filling_reference/` remove any dependency on private historical
+run directories. Eleven focused checks cover Euler flow, branch/global water
+accounting, arrival, crown stopping and analytical air diagnostics; eight
+existing network checks also pass. Independent review confirms those numerical
+claims while retaining the physical applicability limits above.
+
+Holding only the gas polytropic exponent at the isothermal limit n=1 gives
+first-positive outlet samples at .58005/.58690 s and crown exposure at
+.97013 s, versus .61165/.61985 s and 1.12688 s for n=gamma. At .5 s, gas
+pressure is .578 versus .456 MPa and total two-branch flow 1.350 versus
+1.177 m3/s. Both stop at the same geometric inventory condition, so equal
+terminal released volume is expected; it does not validate either thermal
+assumption. The [thermal sensitivity record](../results/summaries/i4f_20261025/air-filled-model-thermal-sensitivity.json)
+preserves the inputs and numerical scope.
+
+Early CFD/model disagreement has a specific candidate mechanism. The .30 m
+distributed valve-loss source initially spans a half-water/half-air region,
+while the reduced model places the full liquid loss at the assumed seat.
+The native source's wet coverage grows from .500 to .656 by .05 s; its
+density-weighted water coefficient therefore changes during filling. At .05 s,
+native tank withdrawal and line gain are about 6.55 L versus 4.57 L in the
+moving-front model. The [source audit](../results/summaries/i4f_20261025/air-filled-valve-zone-audit.json)
+and [plot](../results/summaries/i4f_20261025/air-filled-valve-zone-audit.png)
+support this as a plausible mechanism. The momentum source is resistive under
+the actual `UEqn == fvOptions(rho,U)` assembly. A separate matched source-band
+trial moves resistance wholly upstream while preserving its fully wet integral;
+its .05 s pilot completed without pressure clipping. In the exact-time
+[paired comparison](../results/summaries/i4f_20261025/air-filled-valve-source-comparison.json),
+tank drawdown falls from 6.547 to 5.756 L, a 12.1% reduction, and headspace
+pressure rises by 3.88 kPa. This isolates a source-placement effect but leaves
+a gap against the 4.573 L reduced-model prediction. The matched continuation
+to .3 s tests persistence after wetting; a small fully water-filled duct test
+will verify the imposed pressure/flow resistance independently of front motion.
+
 The reduced model predicts liquid inventory and gas volume, pressure from a
 declared thermodynamic approximation, hydrostatic head, valve and pipe losses,
 liquid inertia, discharge and the first approach of gas to the pipe entrance.

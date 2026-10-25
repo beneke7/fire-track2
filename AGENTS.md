@@ -22,6 +22,13 @@ dimensions or their provisional reconstruction as measurements. Always generate
 and inspect pictures of parameterized CAD/geometry for debugging, including
 connection/cross-section views; preserve the original models.
 
+User correction (2026-10-25): passages downstream of the valves initially
+contain air. New apparatus baselines use that initial state and separately
+account for wetted tank-to-valve feeds. Earlier primed-line runs are conditional
+sensitivities, not the confirmed startup. The current provisional outlet train
+has no added post-rise straight and a 1 m transition/mouth assembly; preserve
+historical geometries and fields rather than changing them in place.
+
 Build the multiregion aerial-water-drop pipeline in
 `track2_aerial_drop_experiment_plan.md`. Read that plan before changing physics,
 metrics, validation order, or solver architecture. The root PDFs are reference

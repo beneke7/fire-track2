@@ -1,0 +1,203 @@
+{
+  "created_from_existing_runs": true,
+  "inputs": {
+    "compact_line_geometry": {
+      "compact_equivalent_line_total_m3_per_tank": 0.6934198804786633,
+      "coordinate_map": {
+        "compact_mouth_x_m": 4.8,
+        "legacy_x_at_or_above_4p0_m": "x_compact=3.8+(x_legacy-4.0)/1.8",
+        "legacy_x_at_or_below_3p8_unchanged": true,
+        "remove_exposed_round_straight_x3p8_to_4p0_m": true,
+        "y_z_mapping": "retain legacy preview y,z; recompute 3D polyline arclength after x map"
+      },
+      "current_compact_cad_line_volume_outside_tank_m3_per_tank": 0.6864456960875336,
+      "current_native_full_line_zone_including_mouth_slabs_m3_per_tank": 0.6867231340348099,
+      "equivalent_minus_compact_cad_percent": 1.0159848668117144,
+      "equivalent_minus_native_full_line_zone_percent": 0.9751741439824491
+    },
+    "compact_preflight_summary": "results/runs/i4f-filling-network-20261025T161926.613138Z/summary.json",
+    "native_input_assertions": {
+      "all_direct_state_assertions_pass": true,
+      "assertions": {
+        "downstream_initial_air_temperature_K": {
+          "absolute_difference": 0.0,
+          "model_air_screen": 293.15,
+          "native": 293.15,
+          "pass": true,
+          "tolerance": 1e-12
+        },
+        "downstream_initial_gas_pressure_absolute_Pa": {
+          "absolute_difference": 0.0,
+          "model_front_boundary": 100000.0,
+          "native": 100000.0,
+          "pass": true,
+          "tolerance": 1e-09
+        },
+        "downstream_initial_water_m3": {
+          "absolute_difference": 0.0,
+          "model": 0.0,
+          "native": 0.0,
+          "pass": true,
+          "tolerance": 1e-15
+        },
+        "headspace_m3": {
+          "absolute_difference": 0.0,
+          "model": 0.29849720040811945,
+          "native": 0.29849720040811945,
+          "pass": true,
+          "tolerance": 1e-12
+        },
+        "initial_tank_pressure_absolute_Pa": {
+          "absolute_difference": 0.0,
+          "model": 1200000.0,
+          "native": 1200000.0,
+          "pass": true,
+          "tolerance": 1e-09
+        },
+        "initial_temperature_K": {
+          "absolute_difference": 0.0,
+          "model": 293.15,
+          "native": 293.15,
+          "pass": true,
+          "tolerance": 1e-12
+        },
+        "initial_wet_tank_to_valve_feed_m3": {
+          "absolute_difference": 0.001591588576952685,
+          "assertion": "reported as grid/centerline volume difference, not required to match exactly",
+          "model": 0.25264843238893564,
+          "native": 0.25105684381198295,
+          "relative_difference": 0.006339554631478617
+        },
+        "tank_capacity_m3": {
+          "absolute_difference": 0.0,
+          "model": 1.6484972004081189,
+          "native": 1.6484972004081189,
+          "pass": true,
+          "tolerance": 1e-12
+        },
+        "tank_payload_water_m3": {
+          "absolute_difference": 0.0,
+          "model": 1.3499999999999994,
+          "native": 1.3499999999999994,
+          "pass": true,
+          "tolerance": 1e-12
+        }
+      },
+      "source": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json"
+    }
+  },
+  "interpretation": [
+    "The matched first-positive output brackets and crown endpoint agree closely between dt=5e-5 and 2.5e-5 s for this 1-D model.",
+    "This numerical repeatability does not validate the rigid full-bore front, the ambient-air front-pressure approximation, valve opening, or mapped preview geometry.",
+    "The front Froude diagnostic is retained separately; piston-front kinematics may fail through stratification or air intrusion."
+  ],
+  "run_pair": {
+    "absolute_difference_half_dt_minus_full_dt": {
+      "gas_pressure_abs_Pa": 0.0,
+      "gas_temperature_K": 0.0,
+      "tank_water_volume_m3": 0.0,
+      "total_branch_flow_m3_s": 8.013968377795777e-09,
+      "total_external_water_volume_m3": 4.218847493575595e-15,
+      "total_wet_line_water_volume_m3": 0.0,
+      "water_volume_balance_residual_m3": 4.440892098500626e-15
+    },
+    "arrival_resolution_note": "First positive cumulative outlet-water sample brackets the mouth crossing; bracket width is the integration time step. It is not reported as an exact event time.",
+    "endpoints": [
+      {
+        "branch_external_water_m3": {
+          "lower": 0.31046427274617167,
+          "upper": 0.302814206796863
+        },
+        "crown_endpoint": {
+          "gas_pressure_abs_Pa": 144745.90141682702,
+          "gas_temperature_K": 160.22381637590473,
+          "tank_water_volume_m3": 0.29595007236724247,
+          "total_branch_flow_m3_s": 0.9963194068100367,
+          "total_external_water_volume_m3": 0.6132784795430346,
+          "total_wet_line_water_volume_m3": 0.6934198804786633,
+          "water_volume_balance_residual_m3": 5.440092820663267e-15
+        },
+        "crown_stop_time_s": 1.126882431628556,
+        "dt_s": 5e-05,
+        "first_water_output_brackets_by_branch": {
+          "lower": {
+            "bracket_s": [
+              0.6115999999999409,
+              0.6116499999999409
+            ],
+            "bracket_width_s": 5e-05,
+            "first_positive_output_time_s": 0.6116499999999409
+          },
+          "upper": {
+            "bracket_s": [
+              0.61979999999994,
+              0.61984999999994
+            ],
+            "bracket_width_s": 5e-05,
+            "first_positive_output_time_s": 0.61984999999994
+          }
+        },
+        "max_abs_branch_volume_residual_m3": 3.164135620181696e-15,
+        "max_abs_global_volume_residual_m3": 7.438494264988549e-15,
+        "run": "results/runs/i4f-filling-network-20261025T161752.477231Z",
+        "stop_reason": "tank_intake_crown_reached"
+      },
+      {
+        "branch_external_water_m3": {
+          "lower": 0.3104645889288204,
+          "upper": 0.30281389061420994
+        },
+        "crown_endpoint": {
+          "gas_pressure_abs_Pa": 144745.90141682702,
+          "gas_temperature_K": 160.22381637590473,
+          "tank_water_volume_m3": 0.29595007236724247,
+          "total_branch_flow_m3_s": 0.9963193987960683,
+          "total_external_water_volume_m3": 0.6132784795430304,
+          "total_wet_line_water_volume_m3": 0.6934198804786633,
+          "water_volume_balance_residual_m3": 9.992007221626409e-16
+        },
+        "crown_stop_time_s": 1.1268824446080612,
+        "dt_s": 2.5e-05,
+        "first_water_output_brackets_by_branch": {
+          "lower": {
+            "bracket_s": [
+              0.6116250000001846,
+              0.6116500000001847
+            ],
+            "bracket_width_s": 2.5e-05,
+            "first_positive_output_time_s": 0.6116500000001847
+          },
+          "upper": {
+            "bracket_s": [
+              0.6198250000002019,
+              0.619850000000202
+            ],
+            "bracket_width_s": 2.5e-05,
+            "first_positive_output_time_s": 0.619850000000202
+          }
+        },
+        "max_abs_branch_volume_residual_m3": 3.552713678800501e-15,
+        "max_abs_global_volume_residual_m3": 7.438494264988549e-15,
+        "run": "results/runs/i4f-filling-network-20261025T161827.956273Z",
+        "stop_reason": "tank_intake_crown_reached"
+      }
+    ],
+    "same_frozen_driver_module_and_geometry_input_hashes": true,
+    "shared_source_hashes": {
+      "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/branch-centerline-sections.csv": "d388897de6d4cbeefd932c8af79eaab7607c737272737e198875a7ef95e6c7b8",
+      "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/branch-hydraulic-geometry.json": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+      "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/preview-geometry.json": "496cacb13db991ba8a6d4ff179cde9dd8c20c2de1cda1a0e68573591cdf62cbe",
+      "results/runs/i4f-short1-compact-mesh-20261025T150312Z/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+      "results/runs/i4f-short1-compact-mesh-20261025T150312Z/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+      "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry-adapter-short1.json": "27de9d8135aa94ab746638e93e1bbfff493516b4c52960ac2071cba88bf9f175",
+      "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry/short1-generated/geometry_summary.json": "6a2eb2a1aabeed24898e5c339e5042695586b362d684a5ea40c7d1fab708b310",
+      "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json": "5eb1fae298039fa2e1f954ba68b16127171a4f76456681c9a08625ae6a9f4608",
+      "scripts/run_i4f_filling_network.py": "dec2c9d88cf91e5bd67a2c318a19dee35f562b394897364f15b5df0b94f51a6f",
+      "src/aerial_drop/i4f_filling_network.py": "7b54471bd79f010afcdc60a320fcc68374e279a8d6bd2dd4393b28667c8094c8",
+      "src/aerial_drop/i4f_reduced.py": "22c2d12a3150a802dcd1dc5185e34808562b0175b1e94766caf4fcec6579423d",
+      "src/aerial_drop/i4f_reduced_network.py": "56a6259469341f9af1b39d05a641803e75c5caa600dc7795fb8715fe43474e7c"
+    }
+  },
+  "schema": "i4f.compact.initially-air.moving-front.dt-comparison.v1",
+  "status": "exploratory reduced-network integration; not CFD validation or hardware validation"
+}

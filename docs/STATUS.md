@@ -1,31 +1,58 @@
 # Live project status
 
-Updated: 2026-10-25 15:58 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 17:06 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
 - **Physical baseline revised: downstream passages initially contain air.**
-  User confirmed this directly. New compact dry-line cold start is running on
-  ten MPI ranks in `results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/`:
-  Docker `c49fa7487931`, StartedAt 15:58:24 UTC. Root verified exact identity,
-  GO and first five steps without raw pressure contacts or guard errors.
+  User confirmed this directly. The compact cold start completed .050021 s
+  normally with all restart fields. Its same-physics ten-rank continuation is
+  Docker `42b79f4695fa`, StartedAt 16:09:55 UTC, in
+  `results/runs/i4f-short1-dryline-continue-20261025T160951Z/`, targeting 1.3 s.
+  Root verified progress through .27477 s without pressure contacts or guard
+  errors. Full states every .05 s; .8 s is an intermediate observation.
+  An active exact-ID wall-budget controller allows only healthy wall-save
+  continuations, with four-hour stages and a twelve-hour campaign bound.
   Tank load is 2.700 m3 plus .502166 m3 of wetted upstream feed; the assumed
   effective valve plane is x=2.25 m. All downstream gas starts at 100 kPa and
   293.15 K. The old fully
   wetted network is a conditional limit, not a line-filling model. Owner:
-  Luna coupling worker. Luna fine worker is preparing a separate ten-rank
-  half-timestep startup comparison; release follows the baseline's healthy
-  complete .005 s checkpoint. The energy worker is implementing a physically
-  derived, explicitly vented moving-front reduced model in separate files.
+  Luna coupling worker. The half-timestep run ended normally at .04995696 s;
+  dense scalar comparisons use common-time interpolation without extrapolation,
+  while field pairs disclose their 64 microsecond offset. Maximum compared
+  probe-pressure difference is 178 Pa; no water outflow is resolved through .05 s.
+- **Wet-side valve-source diagnostic continues on the other ten ranks.**
+  Pilot Docker `b34ec61f05d6` completed .050021 s normally with all 14 fields,
+  no pressure contacts and phase-ledger errors below 3e-7 of initial inventory.
+  Its ten-rank continuation `5a6bb983ac5a`, StartedAt 16:58:04 UTC, targets .3 s
+  with two-hour hard / 1 h 40 save bounds. It uses the same native initial
+  state and partition. Only the source support moves into an initially wetted
+  upstream band, preserving fully wet integrated resistance. The original
+  .3 m source zone starts half-water/half-air; its wet coverage rises to .656
+  by .05 s. This is a source-placement sensitivity, not a fitted valve curve.
+  The exact-time .05 comparison reduces tank drawdown by 12.1% (6.547 to
+  5.756 L), explaining part of the gap to the reduced model. Owner: coupling
+  worker; `results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/`.
+- **Moving-front reduced model implemented and independently reviewed.**
+  A portable frozen input packet supports execution without private history.
+  Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.
+  The one-tank/two-branch approximation predicts mouth-water arrival brackets
+  near .612/.620 s and intake-crown exposure near 1.127 s. It assumes a
+  full-bore front and ambient air pressure; incomplete air/transition screens,
+  geometry mismatch and strong adiabatic cooling prevent a validation claim.
+  Energy worker now verifies resistance in a small all-water plug-flow limit.
+  A current air-filled cutaway movie through .200021 s is ready and inspected;
+  no resolved exterior water appears in those sparse saved states. It is pipe
+  filling, not a completed sheet-discharge movie.
 - **User-directed compact geometry:** fresh CAD now defaults to zero straight
   after the upward bend and a 1.0 m transition/outlet train; 0.8 m is the
   alternative. The photo supplies proportions, not measured lengths. Geometry
   generation, roof/floor contacts and common-scale comparison passed. Compact
   mesh has 269,680 cells and passes all nine configured quality rows; optional
   geometry checks still report concave cells. Native initialization gives
-  1.350 m3 water per tank and no unclassified/overlapping cells. Compact CFD is
+  1.350 m3 water per tank and no unclassified/overlapping cells. The compact
   primed-line pilot finished normally at .050021 s: Docker `9d73e14fb678`,
   StartedAt 15:37:08 UTC, exited 0 at 15:49:28 UTC with all 14 restart fields
   and no raw pressure contacts. It remains a conditional initial-state

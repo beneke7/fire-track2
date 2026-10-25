@@ -1,0 +1,476 @@
+{
+  "OpenFOAMReader_native_initial_alpha_cell_order_check_max_abs_diff": 2.9788730371294037e-08,
+  "apparatus_wall_stl": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case/constant/triSurface/apparatusWall.stl",
+  "display": {
+    "camera": "fixed full and outlet views; same geometry/scale/camera across frames",
+    "exterior": "only cell-to-point interpolated alpha.water=0.5 surface; no exterior voxel overlay",
+    "inside_cutaway": "cell alpha.water >= 0.5 native field bulk within apparatus cutaway",
+    "rendering": "CPU/Mesa requested with LIBGL_ALWAYS_SOFTWARE=1; not solver evidence",
+    "sparsity": "native fields are sparse: 0, 0.005021, 0.050021, 0.100021, 0.150021, 0.200021 s; gaps held as still frames",
+    "temporal_interpolation": "none; saved fields repeated at 24 fps to match physical-time interval at 10x speed; intervals quantized to whole frames"
+  },
+  "encoded_timing_groups": [
+    {
+      "frames": 72,
+      "groups": [
+        {
+          "encoded_frames": 1,
+          "encoded_hold_s": 0.041666666666666664,
+          "label": "dry_t000",
+          "physical_time_s": 0.0,
+          "requested_hold_s": 0.050211666640442645,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_000.png"
+        },
+        {
+          "encoded_frames": 11,
+          "encoded_hold_s": 0.4583333333333333,
+          "label": "dry_t005",
+          "physical_time_s": 0.0050211666640442645,
+          "requested_hold_s": 0.4500000000000004,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_001.png"
+        },
+        {
+          "encoded_frames": 12,
+          "encoded_hold_s": 0.5,
+          "label": "dry_t050",
+          "physical_time_s": 0.050021166664044305,
+          "requested_hold_s": 0.4999999999995574,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_002.png"
+        },
+        {
+          "encoded_frames": 12,
+          "encoded_hold_s": 0.5,
+          "label": "restart_t100",
+          "physical_time_s": 0.10002116666400004,
+          "requested_hold_s": 0.5000000000000004,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_003.png"
+        },
+        {
+          "encoded_frames": 12,
+          "encoded_hold_s": 0.5,
+          "label": "restart_t150",
+          "physical_time_s": 0.1500211666640001,
+          "requested_hold_s": 0.5000000000000004,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_004.png"
+        },
+        {
+          "encoded_frames": 24,
+          "encoded_hold_s": 1.0,
+          "label": "restart_t200",
+          "physical_time_s": 0.20002116666400013,
+          "requested_hold_s": 1.0,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_005.png"
+        }
+      ],
+      "view": "full"
+    },
+    {
+      "frames": 72,
+      "groups": [
+        {
+          "encoded_frames": 1,
+          "encoded_hold_s": 0.041666666666666664,
+          "label": "dry_t000",
+          "physical_time_s": 0.0,
+          "requested_hold_s": 0.050211666640442645,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_000.png"
+        },
+        {
+          "encoded_frames": 11,
+          "encoded_hold_s": 0.4583333333333333,
+          "label": "dry_t005",
+          "physical_time_s": 0.0050211666640442645,
+          "requested_hold_s": 0.4500000000000004,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_001.png"
+        },
+        {
+          "encoded_frames": 12,
+          "encoded_hold_s": 0.5,
+          "label": "dry_t050",
+          "physical_time_s": 0.050021166664044305,
+          "requested_hold_s": 0.4999999999995574,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_002.png"
+        },
+        {
+          "encoded_frames": 12,
+          "encoded_hold_s": 0.5,
+          "label": "restart_t100",
+          "physical_time_s": 0.10002116666400004,
+          "requested_hold_s": 0.5000000000000004,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_003.png"
+        },
+        {
+          "encoded_frames": 12,
+          "encoded_hold_s": 0.5,
+          "label": "restart_t150",
+          "physical_time_s": 0.1500211666640001,
+          "requested_hold_s": 0.5000000000000004,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_004.png"
+        },
+        {
+          "encoded_frames": 24,
+          "encoded_hold_s": 1.0,
+          "label": "restart_t200",
+          "physical_time_s": 0.20002116666400013,
+          "requested_hold_s": 1.0,
+          "source_png": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_005.png"
+        }
+      ],
+      "view": "outlet"
+    }
+  ],
+  "frames": [
+    {
+      "alpha05_bulk_cells_cutaway_A": 12768,
+      "alpha05_bulk_cells_cutaway_B": 12924,
+      "alpha05_surface_cells_external": 0,
+      "label": "dry_t000",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_000.png",
+      "sha256": "64905bfb17b956325a1762eb17382045a8b3fcc4f5944846348465dddd392fba",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.0,
+      "view": "full"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12768,
+      "alpha05_bulk_cells_cutaway_B": 12924,
+      "alpha05_surface_cells_external": 0,
+      "label": "dry_t000",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_000.png",
+      "sha256": "2c09ac16eeb84e8d599ca49fa29610f2fb21e8e5429b071e2f8a74c54eece3e7",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.0,
+      "view": "outlet"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12776,
+      "alpha05_bulk_cells_cutaway_B": 12932,
+      "alpha05_surface_cells_external": 0,
+      "label": "dry_t005",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_001.png",
+      "sha256": "87071a76c37f5cc2a73cffd984c2f3109c4e926148e7203f229ba8661bcc9dae",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.0050211666640442645,
+      "view": "full"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12776,
+      "alpha05_bulk_cells_cutaway_B": 12932,
+      "alpha05_surface_cells_external": 0,
+      "label": "dry_t005",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_001.png",
+      "sha256": "6f607edccd5da5ccc48599ccbd9358e1c4c8463774c8ed9438764a22eb925a31",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.0050211666640442645,
+      "view": "outlet"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12872,
+      "alpha05_bulk_cells_cutaway_B": 13028,
+      "alpha05_surface_cells_external": 0,
+      "label": "dry_t050",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_002.png",
+      "sha256": "415c4e1d1d2c5cd56a9385eebaa10c7a34145a2109fcf6f218c898a844197247",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.050021166664044305,
+      "view": "full"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12872,
+      "alpha05_bulk_cells_cutaway_B": 13028,
+      "alpha05_surface_cells_external": 0,
+      "label": "dry_t050",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_002.png",
+      "sha256": "737cc991882c28145c97a0d63760e5e439fd4797948176a37fb6c95717fdbc41",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.050021166664044305,
+      "view": "outlet"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12958,
+      "alpha05_bulk_cells_cutaway_B": 13114,
+      "alpha05_surface_cells_external": 0,
+      "label": "restart_t100",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_003.png",
+      "sha256": "62470d200ac9a3abb27234f36e5db6051a6ce171b765f707bb19e19821e6781b",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.10002116666400004,
+      "view": "full"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 12958,
+      "alpha05_bulk_cells_cutaway_B": 13114,
+      "alpha05_surface_cells_external": 0,
+      "label": "restart_t100",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_003.png",
+      "sha256": "1f9f15d82585a831957fb8c3bcdbdbc8cdde16f4196f8e640d5d8157ba69f4cd",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.10002116666400004,
+      "view": "outlet"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 13080,
+      "alpha05_bulk_cells_cutaway_B": 13236,
+      "alpha05_surface_cells_external": 0,
+      "label": "restart_t150",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_004.png",
+      "sha256": "3d83a521e8b37f66ae806ce3bcecb42ec4f9170cf5a845919715ca1ff5308ad0",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.1500211666640001,
+      "view": "full"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 13080,
+      "alpha05_bulk_cells_cutaway_B": 13236,
+      "alpha05_surface_cells_external": 0,
+      "label": "restart_t150",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_004.png",
+      "sha256": "4899f37af7ce4893043c824fe9f749ff2b71f466a7e308f1801a110c5f505c32",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.1500211666640001,
+      "view": "outlet"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 13298,
+      "alpha05_bulk_cells_cutaway_B": 13454,
+      "alpha05_surface_cells_external": 0,
+      "label": "restart_t200",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/full/full_005.png",
+      "sha256": "a507b48631c5de85b1f5f8d9bd77aac8718a174cacb6d0af8f6143df616e0edf",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.20002116666400013,
+      "view": "full"
+    },
+    {
+      "alpha05_bulk_cells_cutaway_A": 13298,
+      "alpha05_bulk_cells_cutaway_B": 13454,
+      "alpha05_surface_cells_external": 0,
+      "label": "restart_t200",
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/frames/v2/outlet/outlet_005.png",
+      "sha256": "efd55e3268e02c15e5631c42aa874989fc4a0aeae8ca5f214e8e6f3f04170b11",
+      "state": "pipe filling; downstream air remains",
+      "time_s": 0.20002116666400013,
+      "view": "outlet"
+    }
+  ],
+  "input_freeze": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/pre_render_freeze_v2.json",
+  "mesh_cells": 269680,
+  "mesh_geometry_source": "dryline cold-start case constant/polyMesh via read-only OpenFOAMReader; geometry directly matches current case",
+  "movies": [
+    {
+      "ffmpeg_command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-y",
+        "-framerate",
+        "24",
+        "-start_number",
+        "0",
+        "-i",
+        "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/timed_frames/full/frame_%05d.png",
+        "-frames:v",
+        "72",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-crf",
+        "20",
+        "-pix_fmt",
+        "yuv420p",
+        "-movflags",
+        "+faststart",
+        "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/i4f_compact_dryline_full_10x_to_0p2s_v2.mp4"
+      ],
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "avg_frame_rate": "24/1",
+            "codec_name": "h264",
+            "duration": "3.000000",
+            "height": 720,
+            "nb_read_frames": "72",
+            "r_frame_rate": "24/1",
+            "width": 1280
+          }
+        ]
+      },
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/i4f_compact_dryline_full_10x_to_0p2s_v2.mp4",
+      "sha256": "806a85f289f5f38c22a0f1e20be6a9fce9638f57cb29af4e42096c768919d75c",
+      "view": "full"
+    },
+    {
+      "ffmpeg_command": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-y",
+        "-framerate",
+        "24",
+        "-start_number",
+        "0",
+        "-i",
+        "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/timed_frames/outlet/frame_%05d.png",
+        "-frames:v",
+        "72",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "fast",
+        "-crf",
+        "20",
+        "-pix_fmt",
+        "yuv420p",
+        "-movflags",
+        "+faststart",
+        "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/i4f_compact_dryline_outlet_10x_to_0p2s_v2.mp4"
+      ],
+      "ffprobe": {
+        "programs": [],
+        "streams": [
+          {
+            "avg_frame_rate": "24/1",
+            "codec_name": "h264",
+            "duration": "3.000000",
+            "height": 720,
+            "nb_read_frames": "72",
+            "r_frame_rate": "24/1",
+            "width": 1280
+          }
+        ]
+      },
+      "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/i4f_compact_dryline_outlet_10x_to_0p2s_v2.mp4",
+      "sha256": "e9447aa101bc0b7e4d7ef132d09cd6db1f87817ef78eed85adef9fbb6f885759",
+      "view": "outlet"
+    }
+  ],
+  "native_address_count": 269680,
+  "native_address_unique": 269680,
+  "pyvista": "0.49.0",
+  "qualification": "Air-filled compact startup; the clip is pipe filling unless a saved field shows water past x=4.8 m. It is a partial exploratory discharge prefix, not a complete discharge or validation. No foam, particles, or temporal field interpolation are shown.",
+  "renderer_sha256": "47bf22b5cf77edb43d0a4ceacb8dc9a7b045fa387a20f31a8b2fadd7b8b1957a",
+  "restart_context": {
+    "coldstart_bundle": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z",
+    "continuation_full_checkpoint_interval_s": 0.05,
+    "continuation_native_seed_record": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/continuation-seed.json",
+    "ordinary_restart_bundle": "results/runs/i4f-short1-dryline-continue-20261025T160951Z",
+    "restart_seed_path": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case/processors10/0.050021166664",
+    "restart_seed_time_s": 0.050021166664
+  },
+  "schema": "i4f.compact-dryline-actual-field-movie-v2",
+  "snapshots": [
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0,
+      "alpha_path": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case/processors10/0/alpha.water",
+      "alpha_sha256": "2684b67d7355065cf299e0e03bc3844ae0b7efb85a079180ec21b77e995dc6e1",
+      "case": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case",
+      "complete_14_field_restart_checkpoint": false,
+      "external_alpha_max": 0.0,
+      "external_cells_alpha_ge_0p001": 0,
+      "external_cells_alpha_ge_0p5": 0,
+      "label": "dry_t000",
+      "physical_time_s": 0.0,
+      "state_label": "pipe filling; downstream air remains",
+      "time_dir": "0",
+      "uniform_time_sha256": null,
+      "wet_cell_center_max_x_m": 2.590039700269699
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0,
+      "alpha_path": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case/processors10/0.00502116666404/alpha.water",
+      "alpha_sha256": "9c3ec0f4edacccd85b24018525805286d19fd346925a72af357c62f803ad09ee",
+      "case": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case",
+      "complete_14_field_restart_checkpoint": true,
+      "external_alpha_max": 5.828949089753771e-292,
+      "external_cells_alpha_ge_0p001": 0,
+      "external_cells_alpha_ge_0p5": 0,
+      "label": "dry_t005",
+      "physical_time_s": 0.0050211666640442645,
+      "state_label": "pipe filling; downstream air remains",
+      "time_dir": "0.00502116666404",
+      "uniform_time_sha256": "9111fe21e979739a88a23850063de874dd11669a8e2fc332f08836e336e55795",
+      "wet_cell_center_max_x_m": 2.590039700269699
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0,
+      "alpha_path": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case/processors10/0.050021166664/alpha.water",
+      "alpha_sha256": "0d35e1939d73fc38963c28f65a13ea13e6ea2159b609cd70dcdbcb7d425896e8",
+      "case": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case",
+      "complete_14_field_restart_checkpoint": true,
+      "external_alpha_max": 3.912665867625946e-178,
+      "external_cells_alpha_ge_0p001": 0,
+      "external_cells_alpha_ge_0p5": 0,
+      "label": "dry_t050",
+      "physical_time_s": 0.050021166664044305,
+      "state_label": "pipe filling; downstream air remains",
+      "time_dir": "0.050021166664",
+      "uniform_time_sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+      "wet_cell_center_max_x_m": 2.590039700269699
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0,
+      "alpha_path": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/processors10/0.100021166664/alpha.water",
+      "alpha_sha256": "34e44c241ca62974fdabf2ef71abd2aa4306456a7373aebaae8035943ab79cd0",
+      "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+      "complete_14_field_restart_checkpoint": true,
+      "external_alpha_max": 4.800679444485889e-169,
+      "external_cells_alpha_ge_0p001": 0,
+      "external_cells_alpha_ge_0p5": 0,
+      "label": "restart_t100",
+      "physical_time_s": 0.10002116666400004,
+      "state_label": "pipe filling; downstream air remains",
+      "time_dir": "0.100021166664",
+      "uniform_time_sha256": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f",
+      "wet_cell_center_max_x_m": 2.590039700269699
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0,
+      "alpha_path": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/processors10/0.150021166664/alpha.water",
+      "alpha_sha256": "5d6c582aac8cda133052d56627418afdef1eed22a71cf5645933a54dd2eeb126",
+      "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+      "complete_14_field_restart_checkpoint": true,
+      "external_alpha_max": 2.0377358703976188e-161,
+      "external_cells_alpha_ge_0p001": 0,
+      "external_cells_alpha_ge_0p5": 0,
+      "label": "restart_t150",
+      "physical_time_s": 0.1500211666640001,
+      "state_label": "pipe filling; downstream air remains",
+      "time_dir": "0.150021166664",
+      "uniform_time_sha256": "9f3b1a92f2ff624477b934ef726167d03826fc083850e7982b198036ca4e5261",
+      "wet_cell_center_max_x_m": 2.590039700269699
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0,
+      "alpha_path": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/processors10/0.200021166664/alpha.water",
+      "alpha_sha256": "8d9cc756701655e55c319be1bc99f59386cb3c2850d260245fe48f498a2ea622",
+      "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+      "complete_14_field_restart_checkpoint": true,
+      "external_alpha_max": 9.739005856854258e-149,
+      "external_cells_alpha_ge_0p001": 0,
+      "external_cells_alpha_ge_0p5": 0,
+      "label": "restart_t200",
+      "physical_time_s": 0.20002116666400013,
+      "state_label": "pipe filling; downstream air remains",
+      "time_dir": "0.200021166664",
+      "uniform_time_sha256": "ae3c057211b72becf39a534ff758ede1924d23bbde931400eb22bb54db88c514",
+      "wet_cell_center_max_x_m": 2.590039700269699
+    }
+  ],
+  "status": "rendered from actual saved native fields through longest complete checkpoint in frozen input list",
+  "true_grid_reader_marker": "/home/v/proj/bene/fire-track2/results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/current-compact-dryline-movie-20261025T1642Z/view-case/true_grid.foam",
+  "vtk": [
+    9,
+    7,
+    0
+  ]
+}

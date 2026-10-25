@@ -1,13 +1,47 @@
 # I4F discharge: published results, 25 October 2026
 
+[Watch the current air-filled compact startup, 10× slow](current-air-filled-cutaway-10x.mp4)
+or its [outlet view](current-air-filled-outlet-10x.mp4). These show pipe filling
+through **0.200021 s**, with downstream air still present and no resolved sheet
+outside the mouths. Six saved states are held at their actual timing; the
+3-second clip includes a 1-second endpoint hold and no field interpolation.
+The [movie manifest](current-air-filled-movie-manifest.json) records the inputs.
+
+![Current air-filled startup at 0.200021 s](current-air-filled-preview.png)
+
 **Initial-state correction:** the user confirms that passages downstream of
-the valves initially contain air. The existing movies and liquid-full-line
+the valves initially contain air. The older movies and liquid-full-line
 comparisons here preserve the earlier primed-line assumption. They do not show
 that confirmed startup. The new 269,680-cell air-filled compact baseline is
 running. Its [native initial-state image](current-air-filled-initial-state.png)
 shows 1.350 m3 in each tank, with another .25106/.25111 m3 in wetted upstream
 feeds and air downstream of the assumed x=2.25 m valve planes. The image shows
 initialization, not a discharge result. The rectangular mouths are at x=4.8 m.
+
+The portable [moving-front model](air-filled-moving-front-model.json) and its
+[timestep comparison](air-filled-moving-front-model-dt.json) predict first
+mouth water near .612/.620 s, conditionally on a full-bore front. The
+[thermal sensitivity](air-filled-model-thermal-sensitivity.json) advances those
+times to .580/.587 s for isothermal gas and changes intake-crown timing by 14%.
+These are one-tank/two-branch model results, not measured discharge or emptying.
+Run the model from the [frozen input packet](../../../experiments/i4f_filling_reference/inputs-manifest.json)
+using `.venv/bin/python scripts/run_i4f_filling_network.py --max-time 1.3`.
+
+The [CFD timestep comparison](air-filled-timestep-comparison.json) separates
+common-time scalar interpolation from field snapshots at slightly different
+times. The [initial-fill comparison](air-filled-initial-fill-comparison.json)
+and [CSV](air-filled-initial-fill-comparison.csv) retain the different initial
+water inventories. The [valve-source audit](air-filled-valve-zone-audit.json),
+[plot](air-filled-valve-zone-audit.png) and
+[inventory comparison](air-filled-valve-inventory-comparison.csv) identify an
+early model/CFD mismatch: the distributed CFD resistance initially overlaps
+water and air, while the reduced model applies a full liquid valve loss. A
+separate source-placement trial is testing that mechanism without fitting Cd.
+Its [first exact-time result](air-filled-valve-source-comparison.json) and
+[CSV](air-filled-valve-source-comparison.csv) show 12.1% less tank drawdown at
+.05 s with resistance wholly upstream of the initial front, preserving its
+fully wet integral. This explains part of the model/CFD gap; later sensitivity
+and a direct resistance benchmark remain pending.
 
 [Watch the 3D tank cutaway video, 10× slower](tank-cutaway-10x.mp4).
 [Alternate outlet-focused render, same computed sequence](outlet-reference-10x.mp4).

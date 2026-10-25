@@ -1,0 +1,308 @@
+{
+  "caveats": [
+    "legacy branch preview coordinates are transformed to the current 4.8 m compact candidate by the frozen x-only map; y/z are retained and 3D arclength is recomputed",
+    "current dry-line native initialization supplies tank capacity, water, pressure, temperature, air thermo and wetted upstream-feed reference; Tank A is modeled as representative",
+    "compact line areas and transition losses remain an equivalent-line approximation; the network line volume is compared against current compact CAD and native zones",
+    "single full-bore water front per branch; no stratification, slugs, or trapped pockets",
+    "front Froude number is reported as a diagnostic and does not validate piston-front kinematics",
+    "front pressure is held at ambient only as a declared approximation and has an air-loss screen",
+    "unknown valve seat, Cd, opening history, bend loss, and actual branch geometry remain provisional",
+    "tank-to-line water entering the branch is stored until the front reaches the open mouth"
+  ],
+  "git": {
+    "dirty": true,
+    "revision": "4d4ed0f084fff892c9a87afcbdf043796d577162",
+    "status_short": [
+      "?? scripts/run_i4f_filling_network.py",
+      "?? src/aerial_drop/i4f_filling_network.py",
+      "?? tests/test_i4f_filling_network.py"
+    ]
+  },
+  "input_assumptions": {
+    "actual_initial_wet_feed_reference_m3": 0.25105684381198295,
+    "air_gamma_from_current_thermophysicalProperties": 1.3998140369692171,
+    "air_minor_loss_K": null,
+    "air_volume_flow_screen": "assumes dry-path air volume flow equals front displacement rate",
+    "ambient_front_validity_caveat": "screen is incomplete when air_minor_loss_K is omitted; dry-path local losses (including bends/transition) and detailed gas compressibility are not modeled",
+    "ambient_pressure_Pa": 100000.0,
+    "case_scope": "current compact one-tank / two-branch candidate, 4.8 m mouth",
+    "dimensions_and_centerlines_are_provisional_preview_not_measurements": true,
+    "downstream_air_temperature_K": 293.15,
+    "front_pressure_model": "ambient static pressure; declared vented approximation",
+    "gas_initial_pressure_absolute_Pa": 1200000.0,
+    "gas_initial_temperature_K": 293.15,
+    "gas_polytropic_n_assumed": 1.3998140369692171,
+    "headspace_initial_m3": 0.29849720040811945,
+    "initial_wet_upstream_line_water_m3": 0.25264843238893564,
+    "model_initial_wet_feed_minus_native_m3": 0.001591588576952685,
+    "native_initialization_source": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json",
+    "route_geometry": {
+      "actual_compact_geometry_adapter": "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry-adapter-short1.json",
+      "branches": {
+        "lower": {
+          "branch_full_inertance_integral_m_minus1": 58.29119603030572,
+          "full_wet_volume_m3": 0.3443155341637749,
+          "initial_front_s_m": 1.7859314980042726,
+          "initial_front_z_m": 0.5,
+          "initial_wet_inertance_kg_m4": 25220.28393281936,
+          "initial_wet_volume_m3": 0.12624005866375884,
+          "mouth_s_m": 4.395522075377403,
+          "mouth_x_m": 4.8,
+          "mouth_z_m": 0.65,
+          "transition_end_s_m": 4.228855408710736,
+          "transition_start_s_m": 3.3471072163962003
+        },
+        "upper": {
+          "branch_full_inertance_integral_m_minus1": 59.249631812111005,
+          "full_wet_volume_m3": 0.34910434631488846,
+          "initial_front_s_m": 1.7883126690284048,
+          "initial_front_z_m": 0.5,
+          "initial_wet_inertance_kg_m4": 25253.909975804952,
+          "initial_wet_volume_m3": 0.12640837372517683,
+          "mouth_s_m": 4.463269908678855,
+          "mouth_x_m": 4.8,
+          "mouth_z_m": 0.9,
+          "transition_end_s_m": 4.296603242012188,
+          "transition_start_s_m": 3.4148550496976546
+        }
+      },
+      "compact_equivalent_line_total_m3_per_tank": 0.6934198804786633,
+      "compact_geometry_summary_path": "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry/short1-generated/geometry_summary.json",
+      "coordinate_map": {
+        "compact_mouth_x_m": 4.8,
+        "legacy_x_at_or_above_4p0_m": "x_compact=3.8+(x_legacy-4.0)/1.8",
+        "legacy_x_at_or_below_3p8_unchanged": true,
+        "remove_exposed_round_straight_x3p8_to_4p0_m": true,
+        "y_z_mapping": "retain legacy preview y,z; recompute 3D polyline arclength after x map"
+      },
+      "current_compact_cad_line_volume_outside_tank_m3_per_tank": 0.6864456960875336,
+      "equivalent_minus_compact_cad_m3_per_tank": 0.006974184391129734,
+      "equivalent_minus_compact_cad_percent": 1.0159848668117144,
+      "initial_wet_feed_comparison": {
+        "interpretation": "provisional 1-D centerline integral vs cell-zone volume, not normalized",
+        "model_minus_native_m3": 0.001591588576952685,
+        "model_minus_native_percent": 0.6339554631478617,
+        "model_two_branch_area_integral_m3": 0.25264843238893564,
+        "native_tankA_feed_zone_m3": 0.25105684381198295
+      },
+      "model_scope": "current compact 1-tank / 2-branch equivalent line, downstream air, wetted feed through assumed valve plane",
+      "native_initialization_input_comparison": {
+        "all_direct_state_assertions_pass": true,
+        "assertions": {
+          "downstream_initial_water_m3": {
+            "absolute_difference": 0.0,
+            "model": 0.0,
+            "native": 0.0,
+            "pass": true,
+            "tolerance": 1e-15
+          },
+          "headspace_m3": {
+            "absolute_difference": 0.0,
+            "model": 0.29849720040811945,
+            "native": 0.29849720040811945,
+            "pass": true,
+            "tolerance": 1e-12
+          },
+          "initial_tank_pressure_absolute_Pa": {
+            "absolute_difference": 0.0,
+            "model": 1200000.0,
+            "native": 1200000.0,
+            "pass": true,
+            "tolerance": 1e-09
+          },
+          "initial_temperature_K": {
+            "absolute_difference": 0.0,
+            "model": 293.15,
+            "native": 293.15,
+            "pass": true,
+            "tolerance": 1e-12
+          },
+          "initial_wet_tank_to_valve_feed_m3": {
+            "absolute_difference": 0.001591588576952685,
+            "assertion": "reported as grid/centerline volume difference, not required to match exactly",
+            "model": 0.25264843238893564,
+            "native": 0.25105684381198295,
+            "relative_difference": 0.006339554631478617
+          },
+          "tank_capacity_m3": {
+            "absolute_difference": 0.0,
+            "model": 1.6484972004081189,
+            "native": 1.6484972004081189,
+            "pass": true,
+            "tolerance": 1e-12
+          },
+          "tank_payload_water_m3": {
+            "absolute_difference": 0.0,
+            "model": 1.3499999999999994,
+            "native": 1.3499999999999994,
+            "pass": true,
+            "tolerance": 1e-12
+          }
+        },
+        "source": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json"
+      },
+      "native_initialization_path": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json",
+      "seat_x_m_assumed": 2.25,
+      "source_bundle": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z",
+      "source_centerline_is_legacy_preview_x_only_remapped_to_compact_current_candidate": true,
+      "tank_state_from_current_dryline_native_initialization": {
+        "air_Cp_J_kg_K": 1005.0,
+        "air_R_J_kg_K": 287.047490982475,
+        "air_gamma_and_selected_polytropic_n": 1.3998140369692171,
+        "air_molecular_weight_g_mol": 28.96546,
+        "current_compact_mouth_center_z_m_by_branch": {
+          "lower": 0.65,
+          "upper": 0.9
+        },
+        "initial_headspace_m3": 0.29849720040811945,
+        "initial_pressure_abs_Pa": 1200000.0,
+        "initial_temperature_K": 293.15,
+        "tank_capacity_m3": 1.6484972004081189,
+        "tank_center_z_m": 1.25,
+        "tank_diameter_m": 0.9,
+        "tank_identity": "tankA representative; tankB differs by sub-microlitre capacity",
+        "tank_water_m3": 1.3499999999999994,
+        "water_density_kg_m3": 998.2,
+        "water_dynamic_viscosity_Pa_s": 0.001002
+      }
+    },
+    "tank_capacity_m3": 1.6484972004081189,
+    "tank_intake_crown_stop": {
+      "highest_crown_z_m": 1.0118300605414665,
+      "tank_water_volume_at_crown_m3": 0.29595007236724247
+    },
+    "tank_water_initial_m3": 1.3499999999999994,
+    "valve_Cd_assumed": 0.7,
+    "valve_minimum_effective_opening_assumed": 0.02,
+    "valve_opening_law": "smoothstep",
+    "valve_opening_time_s_assumed": 1.0,
+    "valve_seat_x_m_assumed": 2.25,
+    "vent_screen_thresholds_are_engineering_choices": {
+      "maximum_air_mach": 0.1,
+      "maximum_air_pressure_loss_fraction_of_liquid_drive": 0.05
+    }
+  },
+  "integration": {
+    "actual_stop_time_s": 1.126882431628556,
+    "air_minor_loss_K_sensitivity": {
+      "assumed_values_are_scenarios_not_measurements_or_rigorous_bounds": [
+        0,
+        10,
+        100
+      ],
+      "diagnostic_time_target_s": 0.05,
+      "rows": [
+        {
+          "air_mach_estimate": 0.0019013134475261702,
+          "assumed_air_minor_loss_K": 0.0,
+          "branch": "upper",
+          "diagnostic_time_s": 0.05000000000000092,
+          "friction_only_pressure_drop_Pa": 0.05838384346149723,
+          "liquid_driving_pressure_Pa": 1084383.365611002,
+          "pressure_loss_to_drive_ratio": 5.384059301629043e-08,
+          "screen_pass": true,
+          "sensitivity_changes_only_diagnostic_not_front_pressure_or_flow": true,
+          "total_pressure_drop_estimate_Pa": 0.05838384346149723
+        },
+        {
+          "air_mach_estimate": 0.0019013134475261702,
+          "assumed_air_minor_loss_K": 10.0,
+          "branch": "upper",
+          "diagnostic_time_s": 0.05000000000000092,
+          "friction_only_pressure_drop_Pa": 0.05838384346149723,
+          "liquid_driving_pressure_Pa": 1084383.365611002,
+          "pressure_loss_to_drive_ratio": 2.387110293334864e-06,
+          "screen_pass": true,
+          "sensitivity_changes_only_diagnostic_not_front_pressure_or_flow": true,
+          "total_pressure_drop_estimate_Pa": 2.5885426939711262
+        },
+        {
+          "air_mach_estimate": 0.0019013134475261702,
+          "assumed_air_minor_loss_K": 100.0,
+          "branch": "upper",
+          "diagnostic_time_s": 0.05000000000000092,
+          "friction_only_pressure_drop_Pa": 0.05838384346149723,
+          "liquid_driving_pressure_Pa": 1084383.365611002,
+          "pressure_loss_to_drive_ratio": 2.3386537596202028e-05,
+          "screen_pass": true,
+          "sensitivity_changes_only_diagnostic_not_front_pressure_or_flow": true,
+          "total_pressure_drop_estimate_Pa": 25.35997234855779
+        },
+        {
+          "air_mach_estimate": 0.0019013131568365882,
+          "assumed_air_minor_loss_K": 0.0,
+          "branch": "lower",
+          "diagnostic_time_s": 0.05000000000000092,
+          "friction_only_pressure_drop_Pa": 0.056790729689947576,
+          "liquid_driving_pressure_Pa": 1084383.365611002,
+          "pressure_loss_to_drive_ratio": 5.2371450439899094e-08,
+          "screen_pass": true,
+          "sensitivity_changes_only_diagnostic_not_front_pressure_or_flow": true,
+          "total_pressure_drop_estimate_Pa": 0.056790729689947576
+        },
+        {
+          "air_mach_estimate": 0.0019013131568365882,
+          "assumed_air_minor_loss_K": 10.0,
+          "branch": "lower",
+          "diagnostic_time_s": 0.05000000000000092,
+          "friction_only_pressure_drop_Pa": 0.056790729689947576,
+          "liquid_driving_pressure_Pa": 1084383.365611002,
+          "pressure_loss_to_drive_ratio": 2.3856404372967937e-06,
+          "screen_pass": true,
+          "sensitivity_changes_only_diagnostic_not_front_pressure_or_flow": true,
+          "total_pressure_drop_estimate_Pa": 2.5869488065336
+        },
+        {
+          "air_mach_estimate": 0.0019013131568365882,
+          "assumed_air_minor_loss_K": 100.0,
+          "branch": "lower",
+          "diagnostic_time_s": 0.05000000000000092,
+          "friction_only_pressure_drop_Pa": 0.056790729689947576,
+          "liquid_driving_pressure_Pa": 1084383.365611002,
+          "pressure_loss_to_drive_ratio": 2.3385061319008848e-05,
+          "screen_pass": true,
+          "sensitivity_changes_only_diagnostic_not_front_pressure_or_flow": true,
+          "total_pressure_drop_estimate_Pa": 25.358371498126473
+        }
+      ]
+    },
+    "first_outlet_water_arrival_s_by_branch": {
+      "lower": 0.6116499999999409,
+      "upper": 0.61984999999994
+    },
+    "full_bore_front_froude_at_screen_time": {
+      "by_branch": {
+        "lower": 0.3803797769031814,
+        "upper": 0.3803798350590081
+      },
+      "interpretation": "diagnostic only; no universal cutoff is applied",
+      "time_s": 0.05000000000000092
+    },
+    "max_abs_branch_volume_balance_residual_m3": 3.164135620181696e-15,
+    "max_abs_volume_balance_residual_m3": 7.438494264988549e-15,
+    "method": "explicit midpoint RK2",
+    "requested_max_time_s": 2.0,
+    "stop_reason": "tank_intake_crown_reached",
+    "time_step_s": 5e-05,
+    "total_external_water_volume_m3": 0.6132784795430346,
+    "wall_seconds": 20.844768083999952
+  },
+  "purpose": "exploratory 1-D filling of initially air-filled downstream branch paths",
+  "schema": "i4f-moving-front-fill-run-v2",
+  "source_sha256": {
+    "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/branch-centerline-sections.csv": "d388897de6d4cbeefd932c8af79eaab7607c737272737e198875a7ef95e6c7b8",
+    "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/branch-hydraulic-geometry.json": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+    "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/inputs/preview-geometry.json": "496cacb13db991ba8a6d4ff179cde9dd8c20c2de1cda1a0e68573591cdf62cbe",
+    "results/runs/i4f-short1-compact-mesh-20261025T150312Z/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+    "results/runs/i4f-short1-compact-mesh-20261025T150312Z/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry-adapter-short1.json": "27de9d8135aa94ab746638e93e1bbfff493516b4c52960ac2071cba88bf9f175",
+    "results/runs/i4f-short1-compact-mesh-20261025T150312Z/geometry/short1-generated/geometry_summary.json": "6a2eb2a1aabeed24898e5c339e5042695586b362d684a5ea40c7d1fab708b310",
+    "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/analysis/native-initialization-dryline.json": "5eb1fae298039fa2e1f954ba68b16127171a4f76456681c9a08625ae6a9f4608",
+    "scripts/run_i4f_filling_network.py": "dec2c9d88cf91e5bd67a2c318a19dee35f562b394897364f15b5df0b94f51a6f",
+    "src/aerial_drop/i4f_filling_network.py": "7b54471bd79f010afcdc60a320fcc68374e279a8d6bd2dd4393b28667c8094c8",
+    "src/aerial_drop/i4f_reduced.py": "22c2d12a3150a802dcd1dc5185e34808562b0175b1e94766caf4fcec6579423d",
+    "src/aerial_drop/i4f_reduced_network.py": "56a6259469341f9af1b39d05a641803e75c5caa600dc7795fb8715fe43474e7c"
+  },
+  "utc_bundle_created_at": "20261025T161752.477231Z",
+  "utc_simulation_started_at": "2026-10-25T16:17:52.480030+00:00"
+}
