@@ -1,0 +1,29 @@
+FoamFile { version 2.0; format ascii; class dictionary; object topoSetDict; }
+actions
+(
+ { name tankAFullCells; type cellSet; action new; source cylinderToCell; p1 (0 -0.55 1.25); p2 (2.599530737168 -0.55 1.25); radius 0.45; }
+ { name tankBFullCells; type cellSet; action new; source cylinderToCell; p1 (0 0.55 1.25); p2 (2.599530737168 0.55 1.25); radius 0.45; }
+ { name tankAZone; type cellZoneSet; action new; source setToCellZone; set tankAFullCells; }
+ { name tankBZone; type cellZoneSet; action new; source setToCellZone; set tankBFullCells; }
+ { name trainALowerCells; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainA_lowerBranch.stl"; outsidePoints ((6.20 -0.55 0.65)); includeCut false; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+ { name trainAUpperCells; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainA_upperBranch.stl"; outsidePoints ((6.20 -0.55 0.90)); includeCut false; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+ { name trainBLowerCells; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainB_lowerBranch.stl"; outsidePoints ((6.20 0.55 0.65)); includeCut false; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+ { name trainBUpperCells; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainB_upperBranch.stl"; outsidePoints ((6.20 0.55 0.90)); includeCut false; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+ { name lineACells; type cellSet; action new; source cellToCell; set trainALowerCells; }
+ { name lineACells; type cellSet; action add; source cellToCell; set trainAUpperCells; }
+ { name lineACells; type cellSet; action subtract; source cellToCell; set tankAFullCells; }
+ { name lineBCells; type cellSet; action new; source cellToCell; set trainBLowerCells; }
+ { name lineBCells; type cellSet; action add; source cellToCell; set trainBUpperCells; }
+ { name lineBCells; type cellSet; action subtract; source cellToCell; set tankBFullCells; }
+ { name lineAZone; type cellZoneSet; action new; source setToCellZone; set lineACells; }
+ { name lineBZone; type cellZoneSet; action new; source setToCellZone; set lineBCells; }
+ { name valve0Cells; type cellSet; action new; source cylinderToCell; p1 (2.10 -0.75 0.50); p2 (2.40 -0.75 0.50); radius 0.15; }
+ { name valve1Cells; type cellSet; action new; source cylinderToCell; p1 (2.10 -0.35 0.50); p2 (2.40 -0.35 0.50); radius 0.15; }
+ { name valve2Cells; type cellSet; action new; source cylinderToCell; p1 (2.10 0.35 0.50); p2 (2.40 0.35 0.50); radius 0.15; }
+ { name valve3Cells; type cellSet; action new; source cylinderToCell; p1 (2.10 0.75 0.50); p2 (2.40 0.75 0.50); radius 0.15; }
+ { name allValveCells; type cellSet; action new; source cellToCell; set valve0Cells; }
+ { name allValveCells; type cellSet; action add; source cellToCell; set valve1Cells; }
+ { name allValveCells; type cellSet; action add; source cellToCell; set valve2Cells; }
+ { name allValveCells; type cellSet; action add; source cellToCell; set valve3Cells; }
+ { name allFourValves; type cellZoneSet; action new; source setToCellZone; set allValveCells; }
+);

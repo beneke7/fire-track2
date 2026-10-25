@@ -1,0 +1,52 @@
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location "system";
+    object createBafflesDict;
+}
+internalFacesOnly true;
+baffles
+{
+    lamellae
+    {
+        type faceZone;
+        zoneName lamellaMidSurfaceZone;
+        patches
+        {
+            master
+            {
+                name lamellaMaster;
+                type wall;
+                patchFields
+                {
+                    alpha.water { type zeroGradient; }
+                    p { type fixedFluxPressure; gradient uniform 0; value uniform 100000; }
+                    p_rgh { type fixedFluxPressure; gradient uniform 0; value uniform 100000; }
+                    U { type noSlip; }
+                    T { type zeroGradient; }
+                    k { type kqRWallFunction; value uniform 0.02; }
+                    omega { type omegaWallFunction; value uniform 10; }
+                    nut { type nutkWallFunction; value uniform 0; }
+                }
+            }
+            slave
+            {
+                name lamellaSlave;
+                type wall;
+                patchFields
+                {
+                    alpha.water { type zeroGradient; }
+                    p { type fixedFluxPressure; gradient uniform 0; value uniform 100000; }
+                    p_rgh { type fixedFluxPressure; gradient uniform 0; value uniform 100000; }
+                    U { type noSlip; }
+                    T { type zeroGradient; }
+                    k { type kqRWallFunction; value uniform 0.02; }
+                    omega { type omegaWallFunction; value uniform 10; }
+                    nut { type nutkWallFunction; value uniform 0; }
+                }
+            }
+        }
+    }
+}

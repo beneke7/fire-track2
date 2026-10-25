@@ -1,0 +1,969 @@
+{
+  "bundle": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z",
+  "cases": [
+    {
+      "event": {
+        "crown_event_time_s": 1.1196518276305023,
+        "cumulative_discharged_kg_per_tank": 1051.2113148421117,
+        "cumulative_discharged_m3_per_tank": 1.053106907275207,
+        "highest_intake_crown_z_m": 1.0118300605414665,
+        "initial_tank_water_m3_per_tank": 1.3500000000000003,
+        "line_water_stored_m3_per_tank": 0.8810916141975422,
+        "mass_balance_residual_max_abs_m3": 1.970645868709653e-15,
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.1196518276305023,
+        "tank_water_at_stop_m3_per_tank": 0.29689309272479175,
+        "tank_water_withdrawn_m3_per_tank": 1.0531069072752086
+      },
+      "final_gas_pressure_abs_Pa_at_crown": 147623.7990419297,
+      "flow_metrics": {
+        "branches": {
+          "lower": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5280878642948502,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6547506440254889,
+            "time_of_peak_s": 0.7020000000000005
+          },
+          "upper": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5250190429803573,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6510163188175638,
+            "time_of_peak_s": 0.7000000000000005
+          }
+        },
+        "peak_total_flow_m3_s": 1.3057617969501756,
+        "time_of_peak_total_flow_s": 0.7020000000000005,
+        "total_flow_at_stop_m3_s": 1.0371476232660584
+      },
+      "gas_initial_state": {
+        "ambient_abs_Pa": 100000.0,
+        "gas_kind": "dry ideal air reference",
+        "initial_gas_mass_kg_per_tank": 4.331617333516381,
+        "polytropic_n": 1.4,
+        "pressure_abs_Pa": 1200000.0,
+        "pressure_abs_bar": 12.0,
+        "pressure_work_scales": {
+          "ideal_ambient_displacement_work_J_per_tank": 148834.08968407032,
+          "ideal_net_pressure_work_to_ambient_J_per_tank": 314393.186105754,
+          "ideal_polytropic_gas_work_until_ambient_J_per_tank": 463227.2757898243,
+          "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.7920908968407032,
+          "initial_gauge_pressure_times_headspace_J_per_tank": 334125.0,
+          "initial_pV_characteristic_J_per_tank": 364500.0,
+          "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+        },
+        "temperature_K": 293.15
+      },
+      "headspace_fraction_of_liquid": 0.225,
+      "headspace_gauge_pressure_work_to_crown_J_per_tank": 305179.62820701476,
+      "initial_gas_mass_kg_per_tank": 4.331617333516381,
+      "initial_gas_volume_m3_per_tank": 0.30374999999999996,
+      "label": "central: 22.5%, 12 bar abs, n=1.4",
+      "polytropic_n": 1.4,
+      "pressure_abs_bar": 12.0,
+      "pressure_work_scales_per_tank": {
+        "ideal_ambient_displacement_work_J_per_tank": 148834.08968407032,
+        "ideal_net_pressure_work_to_ambient_J_per_tank": 314393.186105754,
+        "ideal_polytropic_gas_work_until_ambient_J_per_tank": 463227.2757898243,
+        "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.7920908968407032,
+        "initial_gauge_pressure_times_headspace_J_per_tank": 334125.0,
+        "initial_pV_characteristic_J_per_tank": 364500.0,
+        "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+      },
+      "scenario_id": "central_hs22p5_p12_n1p4_dt002",
+      "tank_geometry_volume_match": {
+        "diameter_m": 0.9,
+        "headspace_fraction_of_liquid": 0.225,
+        "headspace_volume_m3_per_tank": 0.30375,
+        "initial_free_surface_z_m": 1.48472525518957,
+        "length_m_ideal_flat_ended_cylinder": 2.599530737167624,
+        "liquid_fill_fraction_of_total_tank_volume": 0.8163265306122449,
+        "liquid_volume_m3_per_tank": 1.35,
+        "qualification": "Flat-ended cylinder volume match; real endcaps and tank length are unknown.",
+        "tank_center_z_m": 1.25,
+        "tank_orientation": "horizontal",
+        "tank_total_volume_m3": 1.65375
+      },
+      "time_step_s": 0.002,
+      "timeseries_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/central_hs22p5_p12_n1p4_dt002.csv",
+      "timeseries_sha256": "ebbd9f831cf318ea78c3c6ca7ec294223b9f91d2e55c9a4bda7f62e207bf0b6d",
+      "two_tank_aggregate_if_independent_simultaneous_equal": {
+        "assumptions": "Two separate tanks with their own independent sealed headspaces and identical parameters, both starting/discharging simultaneously through corresponding equal valves. This is postprocessed doubling, never one four-outlet shared tank.",
+        "headspace_initial_m3": 0.6075,
+        "initial_gas_mass_kg": 8.663234667032762,
+        "integrated_headspace_gauge_pressure_work_to_stop_J": 610359.2564140295,
+        "line_water_stored_m3": 1.7621832283950845,
+        "peak_four_mouths_flow_m3_s": 2.611523593900351,
+        "tank_water_initial_m3": 2.7000000000000006,
+        "total_discharge_kg_at_stop": 2102.4226296842235,
+        "total_discharge_m3_at_stop": 2.106213814550414,
+        "total_tank_water_withdrawal_m3_at_stop": 2.1062138145504172
+      }
+    },
+    {
+      "event": {
+        "crown_event_time_s": 1.1779533732762784,
+        "cumulative_discharged_kg_per_tank": 1057.259451273907,
+        "cumulative_discharged_m3_per_tank": 1.059165949983878,
+        "highest_intake_crown_z_m": 1.0118300605414665,
+        "initial_tank_water_m3_per_tank": 1.35,
+        "line_water_stored_m3_per_tank": 0.8810916141975422,
+        "mass_balance_residual_max_abs_m3": 5.551115123125783e-16,
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.1779533732762784,
+        "tank_water_at_stop_m3_per_tank": 0.29083405001612256,
+        "tank_water_withdrawn_m3_per_tank": 1.0591659499838775
+      },
+      "final_gas_pressure_abs_Pa_at_crown": 128848.57677670497,
+      "flow_metrics": {
+        "branches": {
+          "lower": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.531331790289858,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6221040286868851,
+            "time_of_peak_s": 0.6880000000000005
+          },
+          "upper": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5278341596940205,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6183834552620814,
+            "time_of_peak_s": 0.6860000000000005
+          }
+        },
+        "peak_total_flow_m3_s": 1.2404814838087277,
+        "time_of_peak_total_flow_s": 0.6860000000000005,
+        "total_flow_at_stop_m3_s": 0.9086329048105749
+      },
+      "gas_initial_state": {
+        "ambient_abs_Pa": 100000.0,
+        "gas_kind": "dry ideal air reference",
+        "initial_gas_mass_kg_per_tank": 3.8503265186812285,
+        "polytropic_n": 1.4,
+        "pressure_abs_Pa": 1200000.0,
+        "pressure_abs_bar": 12.0,
+        "pressure_work_scales": {
+          "ideal_ambient_displacement_work_J_per_tank": 132296.9686080625,
+          "ideal_net_pressure_work_to_ambient_J_per_tank": 279460.6098717813,
+          "ideal_polytropic_gas_work_until_ambient_J_per_tank": 411757.5784798438,
+          "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.592969686080625,
+          "initial_gauge_pressure_times_headspace_J_per_tank": 297000.0,
+          "initial_pV_characteristic_J_per_tank": 324000.0,
+          "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+        },
+        "temperature_K": 293.15
+      },
+      "headspace_fraction_of_liquid": 0.2,
+      "headspace_gauge_pressure_work_to_crown_J_per_tank": 275931.7970824775,
+      "initial_gas_mass_kg_per_tank": 3.8503265186812285,
+      "initial_gas_volume_m3_per_tank": 0.27,
+      "label": "20% headspace, 12 bar abs, n=1.4",
+      "polytropic_n": 1.4,
+      "pressure_abs_bar": 12.0,
+      "pressure_work_scales_per_tank": {
+        "ideal_ambient_displacement_work_J_per_tank": 132296.9686080625,
+        "ideal_net_pressure_work_to_ambient_J_per_tank": 279460.6098717813,
+        "ideal_polytropic_gas_work_until_ambient_J_per_tank": 411757.5784798438,
+        "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.592969686080625,
+        "initial_gauge_pressure_times_headspace_J_per_tank": 297000.0,
+        "initial_pV_characteristic_J_per_tank": 324000.0,
+        "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+      },
+      "scenario_id": "hs20_p12_n1p4_dt002",
+      "tank_geometry_volume_match": {
+        "diameter_m": 0.9,
+        "headspace_fraction_of_liquid": 0.2,
+        "headspace_volume_m3_per_tank": 0.27,
+        "initial_free_surface_z_m": 1.498981720535267,
+        "length_m_ideal_flat_ended_cylinder": 2.5464790894703255,
+        "liquid_fill_fraction_of_total_tank_volume": 0.8333333333333334,
+        "liquid_volume_m3_per_tank": 1.35,
+        "qualification": "Flat-ended cylinder volume match; real endcaps and tank length are unknown.",
+        "tank_center_z_m": 1.25,
+        "tank_orientation": "horizontal",
+        "tank_total_volume_m3": 1.62
+      },
+      "time_step_s": 0.002,
+      "timeseries_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/hs20_p12_n1p4_dt002.csv",
+      "timeseries_sha256": "a399c2aaf771ee0db9fe4acbf893e0d9e1d80677817fcaa03c5c5b6e5c892683",
+      "two_tank_aggregate_if_independent_simultaneous_equal": {
+        "assumptions": "Two separate tanks with their own independent sealed headspaces and identical parameters, both starting/discharging simultaneously through corresponding equal valves. This is postprocessed doubling, never one four-outlet shared tank.",
+        "headspace_initial_m3": 0.54,
+        "initial_gas_mass_kg": 7.700653037362457,
+        "integrated_headspace_gauge_pressure_work_to_stop_J": 551863.594164955,
+        "line_water_stored_m3": 1.7621832283950845,
+        "peak_four_mouths_flow_m3_s": 2.4809629676174554,
+        "tank_water_initial_m3": 2.7,
+        "total_discharge_kg_at_stop": 2114.518902547814,
+        "total_discharge_m3_at_stop": 2.118331899967756,
+        "total_tank_water_withdrawal_m3_at_stop": 2.118331899967755
+      }
+    },
+    {
+      "event": {
+        "crown_event_time_s": 1.0753717317436184,
+        "cumulative_discharged_kg_per_tank": 1045.1631784103192,
+        "cumulative_discharged_m3_per_tank": 1.0470478645665389,
+        "highest_intake_crown_z_m": 1.0118300605414665,
+        "initial_tank_water_m3_per_tank": 1.35,
+        "line_water_stored_m3_per_tank": 0.8810916141975422,
+        "mass_balance_residual_max_abs_m3": 1.4710455076283324e-15,
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.0753717317436184,
+        "tank_water_at_stop_m3_per_tank": 0.3029521354334609,
+        "tank_water_withdrawn_m3_per_tank": 1.0470478645665393
+      },
+      "final_gas_pressure_abs_Pa_at_crown": 166315.7468223328,
+      "flow_metrics": {
+        "branches": {
+          "lower": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.524908409532292,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6846879174671832,
+            "time_of_peak_s": 0.7140000000000005
+          },
+          "upper": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5221394550342473,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6809460008293654,
+            "time_of_peak_s": 0.7120000000000005
+          }
+        },
+        "peak_total_flow_m3_s": 1.3656315392910732,
+        "time_of_peak_total_flow_s": 0.7140000000000005,
+        "total_flow_at_stop_m3_s": 1.1468162180264452
+      },
+      "gas_initial_state": {
+        "ambient_abs_Pa": 100000.0,
+        "gas_kind": "dry ideal air reference",
+        "initial_gas_mass_kg_per_tank": 4.812908148351534,
+        "polytropic_n": 1.4,
+        "pressure_abs_Pa": 1200000.0,
+        "pressure_abs_bar": 12.0,
+        "pressure_work_scales": {
+          "ideal_ambient_displacement_work_J_per_tank": 165371.21076007813,
+          "ideal_net_pressure_work_to_ambient_J_per_tank": 349325.7623397267,
+          "ideal_polytropic_gas_work_until_ambient_J_per_tank": 514696.9730998048,
+          "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.9912121076007814,
+          "initial_gauge_pressure_times_headspace_J_per_tank": 371250.0,
+          "initial_pV_characteristic_J_per_tank": 405000.0,
+          "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+        },
+        "temperature_K": 293.15
+      },
+      "headspace_fraction_of_liquid": 0.25,
+      "headspace_gauge_pressure_work_to_crown_J_per_tank": 332116.17809131765,
+      "initial_gas_mass_kg_per_tank": 4.812908148351534,
+      "initial_gas_volume_m3_per_tank": 0.3374999999999999,
+      "label": "25% headspace, 12 bar abs, n=1.4",
+      "polytropic_n": 1.4,
+      "pressure_abs_bar": 12.0,
+      "pressure_work_scales_per_tank": {
+        "ideal_ambient_displacement_work_J_per_tank": 165371.21076007813,
+        "ideal_net_pressure_work_to_ambient_J_per_tank": 349325.7623397267,
+        "ideal_polytropic_gas_work_until_ambient_J_per_tank": 514696.9730998048,
+        "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.9912121076007814,
+        "initial_gauge_pressure_times_headspace_J_per_tank": 371250.0,
+        "initial_pV_characteristic_J_per_tank": 405000.0,
+        "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+      },
+      "scenario_id": "hs25_p12_n1p4_dt002",
+      "tank_geometry_volume_match": {
+        "diameter_m": 0.9,
+        "headspace_fraction_of_liquid": 0.25,
+        "headspace_volume_m3_per_tank": 0.3375,
+        "initial_free_surface_z_m": 1.4713378247436695,
+        "length_m_ideal_flat_ended_cylinder": 2.652582384864922,
+        "liquid_fill_fraction_of_total_tank_volume": 0.8,
+        "liquid_volume_m3_per_tank": 1.35,
+        "qualification": "Flat-ended cylinder volume match; real endcaps and tank length are unknown.",
+        "tank_center_z_m": 1.25,
+        "tank_orientation": "horizontal",
+        "tank_total_volume_m3": 1.6875
+      },
+      "time_step_s": 0.002,
+      "timeseries_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/hs25_p12_n1p4_dt002.csv",
+      "timeseries_sha256": "5d0f78f5f7b8b52dffbe9ff996a1c2787bb833b54f73082160527d97eaf0ea19",
+      "two_tank_aggregate_if_independent_simultaneous_equal": {
+        "assumptions": "Two separate tanks with their own independent sealed headspaces and identical parameters, both starting/discharging simultaneously through corresponding equal valves. This is postprocessed doubling, never one four-outlet shared tank.",
+        "headspace_initial_m3": 0.675,
+        "initial_gas_mass_kg": 9.625816296703068,
+        "integrated_headspace_gauge_pressure_work_to_stop_J": 664232.3561826353,
+        "line_water_stored_m3": 1.7621832283950845,
+        "peak_four_mouths_flow_m3_s": 2.7312630785821463,
+        "tank_water_initial_m3": 2.7,
+        "total_discharge_kg_at_stop": 2090.3263568206385,
+        "total_discharge_m3_at_stop": 2.0940957291330777,
+        "total_tank_water_withdrawal_m3_at_stop": 2.0940957291330786
+      }
+    },
+    {
+      "event": {
+        "crown_event_time_s": 1.0840397737772804,
+        "cumulative_discharged_kg_per_tank": 1051.2113148421117,
+        "cumulative_discharged_m3_per_tank": 1.053106907275207,
+        "highest_intake_crown_z_m": 1.0118300605414665,
+        "initial_tank_water_m3_per_tank": 1.3500000000000003,
+        "line_water_stored_m3_per_tank": 0.8810916141975422,
+        "mass_balance_residual_max_abs_m3": 2.1094237467877974e-15,
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.0840397737772804,
+        "tank_water_at_stop_m3_per_tank": 0.29689309272479175,
+        "tank_water_withdrawn_m3_per_tank": 1.0531069072752086
+      },
+      "final_gas_pressure_abs_Pa_at_crown": 159925.78229542385,
+      "flow_metrics": {
+        "branches": {
+          "lower": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5279523391977788,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6775807054771423,
+            "time_of_peak_s": 0.7020000000000005
+          },
+          "upper": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5251545680774284,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.6739398388367195,
+            "time_of_peak_s": 0.7000000000000005
+          }
+        },
+        "peak_total_flow_m3_s": 1.351514934460306,
+        "time_of_peak_total_flow_s": 0.7020000000000005,
+        "total_flow_at_stop_m3_s": 1.1129732142303148
+      },
+      "gas_initial_state": {
+        "ambient_abs_Pa": 100000.0,
+        "gas_kind": "dry ideal air reference",
+        "initial_gas_mass_kg_per_tank": 4.692585444642747,
+        "polytropic_n": 1.4,
+        "pressure_abs_Pa": 1300000.0,
+        "pressure_abs_bar": 13.0,
+        "pressure_work_scales": {
+          "ideal_ambient_displacement_work_J_per_tank": 159378.63740689514,
+          "ideal_net_pressure_work_to_ambient_J_per_tank": 353424.76907586714,
+          "ideal_polytropic_gas_work_until_ambient_J_per_tank": 512803.4064827623,
+          "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.8975363740689513,
+          "initial_gauge_pressure_times_headspace_J_per_tank": 364500.0,
+          "initial_pV_characteristic_J_per_tank": 394875.0,
+          "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+        },
+        "temperature_K": 293.15
+      },
+      "headspace_fraction_of_liquid": 0.225,
+      "headspace_gauge_pressure_work_to_crown_J_per_tank": 339387.2255546588,
+      "initial_gas_mass_kg_per_tank": 4.692585444642747,
+      "initial_gas_volume_m3_per_tank": 0.30374999999999996,
+      "label": "13 bar abs, 22.5%, n=1.4",
+      "polytropic_n": 1.4,
+      "pressure_abs_bar": 13.0,
+      "pressure_work_scales_per_tank": {
+        "ideal_ambient_displacement_work_J_per_tank": 159378.63740689514,
+        "ideal_net_pressure_work_to_ambient_J_per_tank": 353424.76907586714,
+        "ideal_polytropic_gas_work_until_ambient_J_per_tank": 512803.4064827623,
+        "ideal_polytropic_volume_at_ambient_m3_per_tank": 1.8975363740689513,
+        "initial_gauge_pressure_times_headspace_J_per_tank": 364500.0,
+        "initial_pV_characteristic_J_per_tank": 394875.0,
+        "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+      },
+      "scenario_id": "central_hs22p5_p13_n1p4_dt002",
+      "tank_geometry_volume_match": {
+        "diameter_m": 0.9,
+        "headspace_fraction_of_liquid": 0.225,
+        "headspace_volume_m3_per_tank": 0.30375,
+        "initial_free_surface_z_m": 1.48472525518957,
+        "length_m_ideal_flat_ended_cylinder": 2.599530737167624,
+        "liquid_fill_fraction_of_total_tank_volume": 0.8163265306122449,
+        "liquid_volume_m3_per_tank": 1.35,
+        "qualification": "Flat-ended cylinder volume match; real endcaps and tank length are unknown.",
+        "tank_center_z_m": 1.25,
+        "tank_orientation": "horizontal",
+        "tank_total_volume_m3": 1.65375
+      },
+      "time_step_s": 0.002,
+      "timeseries_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/central_hs22p5_p13_n1p4_dt002.csv",
+      "timeseries_sha256": "5f2238d4d9f2f33fd65d6a931b986d046e67bb8401fc7cfc1fa8e2576482e4f4",
+      "two_tank_aggregate_if_independent_simultaneous_equal": {
+        "assumptions": "Two separate tanks with their own independent sealed headspaces and identical parameters, both starting/discharging simultaneously through corresponding equal valves. This is postprocessed doubling, never one four-outlet shared tank.",
+        "headspace_initial_m3": 0.6075,
+        "initial_gas_mass_kg": 9.385170889285494,
+        "integrated_headspace_gauge_pressure_work_to_stop_J": 678774.4511093176,
+        "line_water_stored_m3": 1.7621832283950845,
+        "peak_four_mouths_flow_m3_s": 2.703029868920612,
+        "tank_water_initial_m3": 2.7000000000000006,
+        "total_discharge_kg_at_stop": 2102.4226296842235,
+        "total_discharge_m3_at_stop": 2.106213814550414,
+        "total_tank_water_withdrawal_m3_at_stop": 2.1062138145504172
+      }
+    },
+    {
+      "event": {
+        "crown_event_time_s": 0.9715955647682243,
+        "cumulative_discharged_kg_per_tank": 1051.211314842115,
+        "cumulative_discharged_m3_per_tank": 1.0531069072752102,
+        "highest_intake_crown_z_m": 1.0118300605414665,
+        "initial_tank_water_m3_per_tank": 1.3500000000000003,
+        "line_water_stored_m3_per_tank": 0.8810916141975422,
+        "mass_balance_residual_max_abs_m3": 1.609823385706477e-15,
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 0.9715955647682243,
+        "tank_water_at_stop_m3_per_tank": 0.29689309272479175,
+        "tank_water_withdrawn_m3_per_tank": 1.0531069072752086
+      },
+      "final_gas_pressure_abs_Pa_at_crown": 268635.54885236634,
+      "flow_metrics": {
+        "branches": {
+          "lower": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5276433803867502,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.8144998953889138,
+            "time_of_peak_s": 0.8040000000000006
+          },
+          "upper": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5254635268884593,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.810474976723687,
+            "time_of_peak_s": 0.8040000000000006
+          }
+        },
+        "peak_total_flow_m3_s": 1.6249748721126007,
+        "time_of_peak_total_flow_s": 0.8040000000000006,
+        "total_flow_at_stop_m3_s": 1.5681688164335759
+      },
+      "gas_initial_state": {
+        "ambient_abs_Pa": 100000.0,
+        "gas_kind": "dry ideal air reference",
+        "initial_gas_mass_kg_per_tank": 4.331617333516381,
+        "polytropic_n": 1.0,
+        "pressure_abs_Pa": 1200000.0,
+        "pressure_abs_bar": 12.0,
+        "pressure_work_scales": {
+          "ideal_ambient_displacement_work_J_per_tank": 334125.00000000006,
+          "ideal_net_pressure_work_to_ambient_J_per_tank": 571623.4738477261,
+          "ideal_polytropic_gas_work_until_ambient_J_per_tank": 905748.4738477261,
+          "ideal_polytropic_volume_at_ambient_m3_per_tank": 3.6450000000000005,
+          "initial_gauge_pressure_times_headspace_J_per_tank": 334125.0,
+          "initial_pV_characteristic_J_per_tank": 364500.0,
+          "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+        },
+        "temperature_K": 293.15
+      },
+      "headspace_fraction_of_liquid": 0.225,
+      "headspace_gauge_pressure_work_to_crown_J_per_tank": 440245.4122246963,
+      "initial_gas_mass_kg_per_tank": 4.331617333516381,
+      "initial_gas_volume_m3_per_tank": 0.30374999999999996,
+      "label": "12 bar abs, n=1.0 reference",
+      "polytropic_n": 1.0,
+      "pressure_abs_bar": 12.0,
+      "pressure_work_scales_per_tank": {
+        "ideal_ambient_displacement_work_J_per_tank": 334125.00000000006,
+        "ideal_net_pressure_work_to_ambient_J_per_tank": 571623.4738477261,
+        "ideal_polytropic_gas_work_until_ambient_J_per_tank": 905748.4738477261,
+        "ideal_polytropic_volume_at_ambient_m3_per_tank": 3.6450000000000005,
+        "initial_gauge_pressure_times_headspace_J_per_tank": 334125.0,
+        "initial_pV_characteristic_J_per_tank": 364500.0,
+        "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+      },
+      "scenario_id": "central_hs22p5_p12_n1p0_dt002",
+      "tank_geometry_volume_match": {
+        "diameter_m": 0.9,
+        "headspace_fraction_of_liquid": 0.225,
+        "headspace_volume_m3_per_tank": 0.30375,
+        "initial_free_surface_z_m": 1.48472525518957,
+        "length_m_ideal_flat_ended_cylinder": 2.599530737167624,
+        "liquid_fill_fraction_of_total_tank_volume": 0.8163265306122449,
+        "liquid_volume_m3_per_tank": 1.35,
+        "qualification": "Flat-ended cylinder volume match; real endcaps and tank length are unknown.",
+        "tank_center_z_m": 1.25,
+        "tank_orientation": "horizontal",
+        "tank_total_volume_m3": 1.65375
+      },
+      "time_step_s": 0.002,
+      "timeseries_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/central_hs22p5_p12_n1p0_dt002.csv",
+      "timeseries_sha256": "242854abe68a9a14e715ae03eeaa8abdab6a56090e0d8b56ddd6692bf9e1d814",
+      "two_tank_aggregate_if_independent_simultaneous_equal": {
+        "assumptions": "Two separate tanks with their own independent sealed headspaces and identical parameters, both starting/discharging simultaneously through corresponding equal valves. This is postprocessed doubling, never one four-outlet shared tank.",
+        "headspace_initial_m3": 0.6075,
+        "initial_gas_mass_kg": 8.663234667032762,
+        "integrated_headspace_gauge_pressure_work_to_stop_J": 880490.8244493926,
+        "line_water_stored_m3": 1.7621832283950845,
+        "peak_four_mouths_flow_m3_s": 3.2499497442252014,
+        "tank_water_initial_m3": 2.7000000000000006,
+        "total_discharge_kg_at_stop": 2102.42262968423,
+        "total_discharge_m3_at_stop": 2.1062138145504203,
+        "total_tank_water_withdrawal_m3_at_stop": 2.1062138145504172
+      }
+    },
+    {
+      "event": {
+        "crown_event_time_s": 1.0563150100175647,
+        "cumulative_discharged_kg_per_tank": 1051.211314842113,
+        "cumulative_discharged_m3_per_tank": 1.0531069072752084,
+        "highest_intake_crown_z_m": 1.0118300605414665,
+        "initial_tank_water_m3_per_tank": 1.3500000000000003,
+        "line_water_stored_m3_per_tank": 0.8810916141975422,
+        "mass_balance_residual_max_abs_m3": 9.159339953157541e-16,
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.0563150100175647,
+        "tank_water_at_stop_m3_per_tank": 0.29689309272479175,
+        "tank_water_withdrawn_m3_per_tank": 1.0531069072752086
+      },
+      "final_gas_pressure_abs_Pa_at_crown": 184781.73561228835,
+      "flow_metrics": {
+        "branches": {
+          "lower": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5278828823095842,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.7064426605197863,
+            "time_of_peak_s": 0.7380000000000005
+          },
+          "upper": {
+            "cumulative_discharge_volume_m3_per_mouth_per_tank": 0.5252240249656234,
+            "peak_flow_m3_s_per_mouth_per_tank": 0.7025753568751603,
+            "time_of_peak_s": 0.7360000000000005
+          }
+        },
+        "peak_total_flow_m3_s": 1.4090129067654131,
+        "time_of_peak_total_flow_s": 0.7360000000000005,
+        "total_flow_at_stop_m3_s": 1.2349956504045778
+      },
+      "gas_initial_state": {
+        "ambient_abs_Pa": 100000.0,
+        "gas_kind": "dry ideal air reference",
+        "initial_gas_mass_kg_per_tank": 4.331617333516381,
+        "polytropic_n": 1.25,
+        "pressure_abs_Pa": 1200000.0,
+        "pressure_abs_bar": 12.0,
+        "pressure_work_scales": {
+          "ideal_ambient_displacement_work_J_per_tank": 191373.80262007352,
+          "ideal_net_pressure_work_to_ambient_J_per_tank": 379630.9868996325,
+          "ideal_polytropic_gas_work_until_ambient_J_per_tank": 571004.789519706,
+          "ideal_polytropic_volume_at_ambient_m3_per_tank": 2.2174880262007353,
+          "initial_gauge_pressure_times_headspace_J_per_tank": 334125.0,
+          "initial_pV_characteristic_J_per_tank": 364500.0,
+          "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+        },
+        "temperature_K": 293.15
+      },
+      "headspace_fraction_of_liquid": 0.225,
+      "headspace_gauge_pressure_work_to_crown_J_per_tank": 349801.06159976847,
+      "initial_gas_mass_kg_per_tank": 4.331617333516381,
+      "initial_gas_volume_m3_per_tank": 0.30374999999999996,
+      "label": "12 bar abs, n=1.25 reference",
+      "polytropic_n": 1.25,
+      "pressure_abs_bar": 12.0,
+      "pressure_work_scales_per_tank": {
+        "ideal_ambient_displacement_work_J_per_tank": 191373.80262007352,
+        "ideal_net_pressure_work_to_ambient_J_per_tank": 379630.9868996325,
+        "ideal_polytropic_gas_work_until_ambient_J_per_tank": 571004.789519706,
+        "ideal_polytropic_volume_at_ambient_m3_per_tank": 2.2174880262007353,
+        "initial_gauge_pressure_times_headspace_J_per_tank": 334125.0,
+        "initial_pV_characteristic_J_per_tank": 364500.0,
+        "qualification": "Analytical sealed uniform ideal-gas expansion scale from initial state to p=ambient; not realized outlet work, a tank-pressure prediction beyond the reduced model event, or a hardware fit."
+      },
+      "scenario_id": "central_hs22p5_p12_n1p25_dt002",
+      "tank_geometry_volume_match": {
+        "diameter_m": 0.9,
+        "headspace_fraction_of_liquid": 0.225,
+        "headspace_volume_m3_per_tank": 0.30375,
+        "initial_free_surface_z_m": 1.48472525518957,
+        "length_m_ideal_flat_ended_cylinder": 2.599530737167624,
+        "liquid_fill_fraction_of_total_tank_volume": 0.8163265306122449,
+        "liquid_volume_m3_per_tank": 1.35,
+        "qualification": "Flat-ended cylinder volume match; real endcaps and tank length are unknown.",
+        "tank_center_z_m": 1.25,
+        "tank_orientation": "horizontal",
+        "tank_total_volume_m3": 1.65375
+      },
+      "time_step_s": 0.002,
+      "timeseries_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/central_hs22p5_p12_n1p25_dt002.csv",
+      "timeseries_sha256": "89de413b301a72f4f478d5c1e5d650e250bf350ee34e330d5dd178d3b8f7a32a",
+      "two_tank_aggregate_if_independent_simultaneous_equal": {
+        "assumptions": "Two separate tanks with their own independent sealed headspaces and identical parameters, both starting/discharging simultaneously through corresponding equal valves. This is postprocessed doubling, never one four-outlet shared tank.",
+        "headspace_initial_m3": 0.6075,
+        "initial_gas_mass_kg": 8.663234667032762,
+        "integrated_headspace_gauge_pressure_work_to_stop_J": 699602.1231995369,
+        "line_water_stored_m3": 1.7621832283950845,
+        "peak_four_mouths_flow_m3_s": 2.8180258135308263,
+        "tank_water_initial_m3": 2.7000000000000006,
+        "total_discharge_kg_at_stop": 2102.422629684226,
+        "total_discharge_m3_at_stop": 2.106213814550417,
+        "total_tank_water_withdrawal_m3_at_stop": 2.1062138145504172
+      }
+    }
+  ],
+  "central_time_step_refinement": {
+    "coarse_dt_s": 0.002,
+    "common_time_comparison": [
+      {
+        "cumulative_discharge_volume_m3": {
+          "difference_dt002_minus_dt001": 1.8454826375751895e-06,
+          "dt0.001": 0.0044478892969753705,
+          "dt0.002": 0.004449734779612946,
+          "relative_difference_pct_denominator_dt001": 0.04149119985585398
+        },
+        "flow_rate_lower_m3_s": {
+          "difference_dt002_minus_dt001": -2.1194104728172736e-07,
+          "dt0.001": 0.04612875781171064,
+          "dt0.002": 0.04612854587066336,
+          "relative_difference_pct_denominator_dt001": -0.0004594553535276907
+        },
+        "flow_rate_upper_m3_s": {
+          "difference_dt002_minus_dt001": -2.12180714866117e-07,
+          "dt0.001": 0.046076889194848716,
+          "dt0.002": 0.04607667701413385,
+          "relative_difference_pct_denominator_dt001": -0.00046049270810981374
+        },
+        "gas_pressure_abs_Pa": {
+          "difference_dt002_minus_dt001": -9.857067756354809,
+          "dt0.001": 1175824.5488388557,
+          "dt0.002": 1175814.6917710993,
+          "relative_difference_pct_denominator_dt001": -0.0008383111039898606
+        },
+        "tank_water_volume_m3": {
+          "difference_dt002_minus_dt001": -1.8454826380409628e-06,
+          "dt0.001": 1.3455521107030253,
+          "dt0.002": 1.3455502652203872,
+          "relative_difference_pct_denominator_dt001": -0.00013715430441982163
+        },
+        "time_s": 0.05,
+        "total_flow_rate_m3_s": {
+          "difference_dt002_minus_dt001": -4.2412176215478326e-07,
+          "dt0.001": 0.09220564700655937,
+          "dt0.002": 0.09220522288479721,
+          "relative_difference_pct_denominator_dt001": -0.00045997373905376087
+        }
+      },
+      {
+        "cumulative_discharge_volume_m3": {
+          "difference_dt002_minus_dt001": 1.7941641157481758e-06,
+          "dt0.001": 0.00925743287494457,
+          "dt0.002": 0.009259227039060318,
+          "relative_difference_pct_denominator_dt001": 0.01938079530237932
+        },
+        "flow_rate_lower_m3_s": {
+          "difference_dt002_minus_dt001": -3.8354634769727225e-06,
+          "dt0.001": 0.06136340278288906,
+          "dt0.002": 0.061359567319412084,
+          "relative_difference_pct_denominator_dt001": -0.006250408717624483
+        },
+        "flow_rate_upper_m3_s": {
+          "difference_dt002_minus_dt001": -3.840595500494148e-06,
+          "dt0.001": 0.06125742514445747,
+          "dt0.002": 0.06125358454895698,
+          "relative_difference_pct_denominator_dt001": -0.006269599956963981
+        },
+        "gas_pressure_abs_Pa": {
+          "difference_dt002_minus_dt001": -9.233367054490373,
+          "dt0.001": 1150608.3895339237,
+          "dt0.002": 1150599.1561668692,
+          "relative_difference_pct_denominator_dt001": -0.0008024769451081898
+        },
+        "tank_water_volume_m3": {
+          "difference_dt002_minus_dt001": -1.7941641161645094e-06,
+          "dt0.001": 1.340742567125056,
+          "dt0.002": 1.3407407729609397,
+          "relative_difference_pct_denominator_dt001": -0.00013381868825211704
+        },
+        "time_s": 0.1,
+        "total_flow_rate_m3_s": {
+          "difference_dt002_minus_dt001": -7.67605897747381e-06,
+          "dt0.001": 0.12262082792734653,
+          "dt0.002": 0.12261315186836906,
+          "relative_difference_pct_denominator_dt001": -0.006259996044083077
+        }
+      },
+      {
+        "cumulative_discharge_volume_m3": {
+          "difference_dt002_minus_dt001": 1.4673743052168176e-06,
+          "dt0.001": 0.0352983306574545,
+          "dt0.002": 0.03529979803175972,
+          "relative_difference_pct_denominator_dt001": 0.004157064308385159
+        },
+        "flow_rate_lower_m3_s": {
+          "difference_dt002_minus_dt001": -2.1524570904263296e-06,
+          "dt0.001": 0.20811500379223866,
+          "dt0.002": 0.20811285133514823,
+          "relative_difference_pct_denominator_dt001": -0.0010342632925087558
+        },
+        "flow_rate_upper_m3_s": {
+          "difference_dt002_minus_dt001": -2.1479866869345e-06,
+          "dt0.001": 0.20764364376729316,
+          "dt0.002": 0.20764149578060623,
+          "relative_difference_pct_denominator_dt001": -0.001034458193837975
+        },
+        "gas_pressure_abs_Pa": {
+          "difference_dt002_minus_dt001": -6.233656578115188,
+          "dt0.001": 1028816.1965957653,
+          "dt0.002": 1028809.9629391872,
+          "relative_difference_pct_denominator_dt001": -0.0006059057583601077
+        },
+        "tank_water_volume_m3": {
+          "difference_dt002_minus_dt001": -1.467374305841318e-06,
+          "dt0.001": 1.314701669342546,
+          "dt0.002": 1.3147002019682401,
+          "relative_difference_pct_denominator_dt001": -0.00011161272097381
+        },
+        "time_s": 0.2,
+        "total_flow_rate_m3_s": {
+          "difference_dt002_minus_dt001": -4.300443777416341e-06,
+          "dt0.001": 0.41575864755953185,
+          "dt0.002": 0.41575434711575443,
+          "relative_difference_pct_denominator_dt001": -0.0010343606327035126
+        }
+      },
+      {
+        "cumulative_discharge_volume_m3": {
+          "difference_dt002_minus_dt001": 1.11760254351001e-06,
+          "dt0.001": 0.09358805566293085,
+          "dt0.002": 0.09358917326547436,
+          "relative_difference_pct_denominator_dt001": 0.0011941722002807667
+        },
+        "flow_rate_lower_m3_s": {
+          "difference_dt002_minus_dt001": -8.174746510825059e-07,
+          "dt0.001": 0.37336218340021643,
+          "dt0.002": 0.37336136592556535,
+          "relative_difference_pct_denominator_dt001": -0.00021894950464392213
+        },
+        "flow_rate_upper_m3_s": {
+          "difference_dt002_minus_dt001": -8.204120049981611e-07,
+          "dt0.001": 0.37231132825651425,
+          "dt0.002": 0.37231050784450925,
+          "relative_difference_pct_denominator_dt001": -0.0002203564443875625
+        },
+        "gas_pressure_abs_Pa": {
+          "difference_dt002_minus_dt001": -3.2443941506789997,
+          "dt0.001": 823910.0874395747,
+          "dt0.002": 823906.843045424,
+          "relative_difference_pct_denominator_dt001": -0.0003937801223870733
+        },
+        "tank_water_volume_m3": {
+          "difference_dt002_minus_dt001": -1.1176025449533e-06,
+          "dt0.001": 1.25641194433707,
+          "dt0.002": 1.256410826734525,
+          "relative_difference_pct_denominator_dt001": -8.8951919789571e-05
+        },
+        "time_s": 0.3,
+        "total_flow_rate_m3_s": {
+          "difference_dt002_minus_dt001": -1.637886656080667e-06,
+          "dt0.001": 0.7456735116567307,
+          "dt0.002": 0.7456718737700746,
+          "relative_difference_pct_denominator_dt001": -0.00021965198313691274
+        }
+      }
+    ],
+    "event_time_dt002_minus_dt001_s": -4.4509814900450806e-07,
+    "event_time_relative_difference_pct_denominator_dt001": -3.975324838306991e-05,
+    "fine_dt_s": 0.001,
+    "fine_summary_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/data/central_hs22p5_p12_n1p4_dt001-summary.json",
+    "fine_timeseries_sha256": "309927febc98137d0f323dd24ae2fcca5a0a3b1a82088b951ae3e805f7e5a19f"
+  },
+  "created_utc": "2026-10-25T08:59:24.048117+00:00",
+  "figure": {
+    "dpi": 160,
+    "path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/figures/confirmed-inventory-reduced-model.png",
+    "plot_unit": "per tank/two mouths; no doubled system trace",
+    "sha256": "fe1dbf96cafe2112db07c7424b7ab709d3e8d95b45abb5f489936f4ea208f453"
+  },
+  "five_second_duration_interpretation": "The ~5 s user report is total discharged duration, not a valve-opening time. The 1 s smoothstep valve opening in these reduced runs is an explicit model assumption. Because these runs stop at highest intake crown/reversal before gas ingestion, they cannot judge or predict total release over ~5 s.",
+  "hashes": {
+    "case_builder_sha256": "1bb46cb69826ae8b00fc4fc58e68a2613c4553a2a4176382a18ee8d2a2d669d9",
+    "dependency_source_sha256": "22c2d12a3150a802dcd1dc5185e34808562b0175b1e94766caf4fcec6579423d",
+    "figure_sha256": "fe1dbf96cafe2112db07c7424b7ab709d3e8d95b45abb5f489936f4ea208f453",
+    "finalizer_script_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/scripts/finalize_results-v5.py",
+    "finalizer_script_sha256": "58c4689db37962c584c90c770fa2413748321d097fe26420bcaf3961852a91d5",
+    "legacy_9bar_dt001_csv_sha256": "b2ae74aeb34193624e22ec6ac24509e97c87e32a8f11b414f346afaac31ee212",
+    "legacy_9bar_summary_sha256": "4fad46d606413ba89f557e1a963b52cc4db90e49bfd14c19ee1573bc11fb3359",
+    "network_source_sha256": "56a6259469341f9af1b39d05a641803e75c5caa600dc7795fb8715fe43474e7c",
+    "run_script_sha256": "a4563f25b2b25ac0d6cbc1e6019faab635035259d6546652681d08ee83a6d703"
+  },
+  "historical_9bar_reference": {
+    "initial_gas_volume_m3_per_tank": 0.591640436487298,
+    "initial_pressure_abs_Pa": 900000.0,
+    "initial_water_volume_m3_per_tank": 1.380494351803695,
+    "peak_two_mouth_Q_m3_s_per_tank": 1.50075839918471,
+    "qualification": "Preserved historical comparator at 9 bar absolute with different tank capacity/fill/headspace; not a matched-inventory control.",
+    "source_bundle": "results/runs/i4f-parallel-branch-adiabatic-comparator-20261024T212300Z",
+    "stop_time_s": 1.017543967484321,
+    "withdrawn_volume_m3_per_tank": 1.0264425322627335
+  },
+  "initial_state_pressure_work_scales_method": "Each case summary gives p0*Vg0 and (p0-pamb)*Vg0, an ideal polytropic sealed expansion work-to-ambient bound, and numerical integral of (pg-pamb)dVwithdrawn through the crown event. Values are per tank; the two-tank aggregate doubles only under the explicit independent-identical-simultaneous assumption.",
+  "model": "Existing frozen two-branch network reduced integrator; shared tank per run, two outlets, liquid-full lines, sealed uniform dry ideal-air headspace.",
+  "model_limits": [
+    "All cases stop at highest generated-preview intake crown or predicted reversal; no tank emptying, gas-ingestion continuation, cavitation, or after-event extrapolation.",
+    "This is not a five-second total discharge prediction; model dynamics terminate before gas enters lines.",
+    "Liquid stored in primed lines remains constant in the model and is reported separately from cumulative discharge and tank inventory.",
+    "Tank length is volume-matched ideal flat-ended cylinder; endcaps/internal structure unknown.",
+    "Line geometry/inertance/intake crowns are reused prior assumptions pending CAD; no CGD fit or measured-geometry validation.",
+    "Dry ideal-air n=1.4 is the baseline, n=1 and 1.25 are thermodynamic references only, not fits."
+  ],
+  "network_and_geometry_scope": {
+    "actual_device": "Two tanks are not combined into one common reservoir. Total four-mouth metrics are only the postprocessed double for identical independent tanks with simultaneous equal valves.",
+    "branches": "Same prior provisional intake crowns, branch paths, line volumes, and inertances; two mouths per tank.",
+    "lamellae": "Four equally spaced first-pass lamellae are not represented in this reduced model; geometry worker is handling this separately.",
+    "tank": "Confirmed D=0.9m, liquid=1.35m3 per tank, gas headspace=20/22.5/25% of liquid. Ideal flat-ended cylinder length set by total volume; endcaps unmodeled.",
+    "valve": "D=0.3m reported; model retains Cd=0.7 scalar restriction, no disk/wake."
+  },
+  "plan_path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/predeclared-inputs.json",
+  "plan_sha256": "9a35c96100ea4277905508e7698c18fac97ad2b076a3928a6bf635c8a39dca02",
+  "plot_render_revision_history": {
+    "v1": {
+      "outcome": "failed before rendering with NameError (plot block outside main); numerical runs unaffected",
+      "script": "scripts/finalize_results-v1.py",
+      "sha256": "8546c1202a90fac8bc7f01da03636feee8796752a63d671efb41a26148b154c4"
+    },
+    "v2": {
+      "figure_path": "figures/confirmed-inventory-reduced-model-v2.png",
+      "figure_sha256": "e7fd35ec77ccc244759da3f17301e6332e9eaea9561e9f5eafb923e7a78e8de3",
+      "outcome": "rendered; legend omitted five case labels, superseded by v3",
+      "script": "scripts/finalize_results-v2.py",
+      "sha256": "111b8680e915a531277798af36f8fe61718b90c080db63c558d901e044c5abeb"
+    },
+    "v3": {
+      "outcome": "rendered explicit one-entry-per-case legend; earlier summary omitted expanded pressure-work table",
+      "script": "scripts/finalize_results-v3.py",
+      "sha256": "c0f6bfb990d74ebb92057050c46898babf689e1cd1d51036a85efd88d865cc2c"
+    },
+    "v4": {
+      "figure_path": "figures/confirmed-inventory-reduced-model.png",
+      "figure_sha256": "fe1dbf96cafe2112db07c7424b7ab709d3e8d95b45abb5f489936f4ea208f453",
+      "outcome": "rendered current figure and added per-case pressure-work and execution-reconciliation data; v5 corrects revision-history bookkeeping",
+      "script": "scripts/finalize_results-v4.py",
+      "sha256": "a467f2e84a31884cea7f8973c51d46bb9aac844a36029c00f2002c08ec51c93a"
+    },
+    "v5": {
+      "outcome": "current private summary/figure regeneration from persisted trajectory data only; no physics rerun",
+      "script": "scripts/finalize_results-v5.py",
+      "sha256": "58c4689db37962c584c90c770fa2413748321d097fe26420bcaf3961852a91d5"
+    }
+  },
+  "resource_use": {
+    "completed": [
+      {
+        "runtime_s": 97.67769806100023,
+        "scenario_id": "central_hs22p5_p12_n1p4_dt002",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.1196518276305023,
+        "timeseries_sha256": "ebbd9f831cf318ea78c3c6ca7ec294223b9f91d2e55c9a4bda7f62e207bf0b6d"
+      },
+      {
+        "runtime_s": 108.50972155999989,
+        "scenario_id": "hs20_p12_n1p4_dt002",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.1779533732762784,
+        "timeseries_sha256": "a399c2aaf771ee0db9fe4acbf893e0d9e1d80677817fcaa03c5c5b6e5c892683"
+      },
+      {
+        "runtime_s": 97.9699100580001,
+        "scenario_id": "hs25_p12_n1p4_dt002",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.0753717317436184,
+        "timeseries_sha256": "5d0f78f5f7b8b52dffbe9ff996a1c2787bb833b54f73082160527d97eaf0ea19"
+      },
+      {
+        "runtime_s": 104.93794805200014,
+        "scenario_id": "central_hs22p5_p13_n1p4_dt002",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.0840397737772804,
+        "timeseries_sha256": "5f2238d4d9f2f33fd65d6a931b986d046e67bb8401fc7cfc1fa8e2576482e4f4"
+      },
+      {
+        "runtime_s": 89.79458721299943,
+        "scenario_id": "central_hs22p5_p12_n1p0_dt002",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 0.9715955647682243,
+        "timeseries_sha256": "242854abe68a9a14e715ae03eeaa8abdab6a56090e0d8b56ddd6692bf9e1d814"
+      },
+      {
+        "runtime_s": 95.00321758799964,
+        "scenario_id": "central_hs22p5_p12_n1p25_dt002",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.0563150100175647,
+        "timeseries_sha256": "89de413b301a72f4f478d5c1e5d650e250bf350ee34e330d5dd178d3b8f7a32a"
+      },
+      {
+        "runtime_s": 193.2458964360003,
+        "scenario_id": "central_hs22p5_p12_n1p4_dt001",
+        "stop_reason": "tank free surface reached the highest submerged-intake crown",
+        "stop_time_s": 1.1196522727286513,
+        "timeseries_sha256": "309927febc98137d0f323dd24ae2fcca5a0a3b1a82088b951ae3e805f7e5a19f"
+      }
+    ],
+    "completed_utc": "2026-10-25T08:55:33.948026+00:00",
+    "cpu_affinity": [
+      0
+    ],
+    "nice": 10,
+    "plan_sha256": "9a35c96100ea4277905508e7698c18fac97ad2b076a3928a6bf635c8a39dca02",
+    "remaining": [],
+    "schema": "i4f-reduced-run-progress-v1",
+    "started_utc": "2026-10-25T08:42:26.558975+00:00",
+    "status": "completed",
+    "updated_utc": "2026-10-25T08:55:33.947886+00:00"
+  },
+  "run_execution_reconciliation": {
+    "path": "results/runs/i4f-confirmed-inventory-reduced-network-20261025T084122Z/logs/run-execution-reconciliation.json",
+    "qualification": "Post-run print error only; all seven trajectory artifacts completed before exit.",
+    "sha256": "cff3c3235f3e3f1f005af24f04649d1da0be9bec565523f8759bf0aabea31b11"
+  },
+  "schema": "i4f-confirmed-inventory-reduced-model-results-v1",
+  "sealed_gas_full_displacement_limit": {
+    "critical_headspace_ratios_at_1bar_ambient": [
+      {
+        "critical_initial_headspace_to_liquid_ratio_f_for_p_final_equal_1bar": 0.20408630888579976,
+        "initial_pressure_bar_abs": 12.0
+      },
+      {
+        "critical_initial_headspace_to_liquid_ratio_f_for_p_final_equal_1bar": 0.1905838856085358,
+        "initial_pressure_bar_abs": 13.0
+      }
+    ],
+    "formula": "For dry sealed gas with fixed mass and p V^gamma constant: p_final = p0 * (Vg0/Vtank)^gamma = p0 * [f/(1+f)]^gamma, where f=Vg0/Vl0 and Vtank=Vl0+Vg0. Critical f solves p0[f/(1+f)]^gamma = pamb.",
+    "initial_ideal_orifice_velocity_increase_percent": 4.4465935734187,
+    "initial_ideal_orifice_velocity_ratio_13bar_vs_12bar": 1.044465935734187,
+    "limitations": "This sealed-gas limiting estimate cannot continue physically after gas reaches/exposes the intake. Actual late response needs gas venting/ingestion, gravity, line inertia, possible CO2 transfer, and two-phase discharge; none are modeled here.",
+    "rows": [
+      {
+        "adiabatic_exponent_gamma": 1.4,
+        "assumed_final_gas_volume_ratio_Vg_final_over_Vg_initial": 5.999999999999999,
+        "headspace_to_liquid_volume_ratio_f": 0.2,
+        "hypothetical_pressure_above_1bar_ambient": false,
+        "hypothetical_pressure_bar_abs_when_liquid_volume_is_zero_and_gas_fills_total_vessel": 0.9767186838611742,
+        "initial_pressure_bar_abs": 12.0,
+        "qualification": "Fixed-mass dry ideal gas, sealed, spatially uniform pressure, reversible polytropic expansion to total tank capacity; no outflow of gas and no valve/line/gravity effects. This is a limiting analytic calculation, not a full-drain prediction."
+      },
+      {
+        "adiabatic_exponent_gamma": 1.4,
+        "assumed_final_gas_volume_ratio_Vg_final_over_Vg_initial": 5.444444444444445,
+        "headspace_to_liquid_volume_ratio_f": 0.225,
+        "hypothetical_pressure_above_1bar_ambient": true,
+        "hypothetical_pressure_bar_abs_when_liquid_volume_is_zero_and_gas_fills_total_vessel": 1.1190416403022945,
+        "initial_pressure_bar_abs": 12.0,
+        "qualification": "Fixed-mass dry ideal gas, sealed, spatially uniform pressure, reversible polytropic expansion to total tank capacity; no outflow of gas and no valve/line/gravity effects. This is a limiting analytic calculation, not a full-drain prediction."
+      },
+      {
+        "adiabatic_exponent_gamma": 1.4,
+        "assumed_final_gas_volume_ratio_Vg_final_over_Vg_initial": 5.0,
+        "headspace_to_liquid_volume_ratio_f": 0.25,
+        "hypothetical_pressure_above_1bar_ambient": true,
+        "hypothetical_pressure_bar_abs_when_liquid_volume_is_zero_and_gas_fills_total_vessel": 1.2607333461138086,
+        "initial_pressure_bar_abs": 12.0,
+        "qualification": "Fixed-mass dry ideal gas, sealed, spatially uniform pressure, reversible polytropic expansion to total tank capacity; no outflow of gas and no valve/line/gravity effects. This is a limiting analytic calculation, not a full-drain prediction."
+      },
+      {
+        "adiabatic_exponent_gamma": 1.4,
+        "assumed_final_gas_volume_ratio_Vg_final_over_Vg_initial": 5.999999999999999,
+        "headspace_to_liquid_volume_ratio_f": 0.2,
+        "hypothetical_pressure_above_1bar_ambient": true,
+        "hypothetical_pressure_bar_abs_when_liquid_volume_is_zero_and_gas_fills_total_vessel": 1.0581119075162722,
+        "initial_pressure_bar_abs": 13.0,
+        "qualification": "Fixed-mass dry ideal gas, sealed, spatially uniform pressure, reversible polytropic expansion to total tank capacity; no outflow of gas and no valve/line/gravity effects. This is a limiting analytic calculation, not a full-drain prediction."
+      },
+      {
+        "adiabatic_exponent_gamma": 1.4,
+        "assumed_final_gas_volume_ratio_Vg_final_over_Vg_initial": 5.444444444444445,
+        "headspace_to_liquid_volume_ratio_f": 0.225,
+        "hypothetical_pressure_above_1bar_ambient": true,
+        "hypothetical_pressure_bar_abs_when_liquid_volume_is_zero_and_gas_fills_total_vessel": 1.2122951103274857,
+        "initial_pressure_bar_abs": 13.0,
+        "qualification": "Fixed-mass dry ideal gas, sealed, spatially uniform pressure, reversible polytropic expansion to total tank capacity; no outflow of gas and no valve/line/gravity effects. This is a limiting analytic calculation, not a full-drain prediction."
+      },
+      {
+        "adiabatic_exponent_gamma": 1.4,
+        "assumed_final_gas_volume_ratio_Vg_final_over_Vg_initial": 5.0,
+        "headspace_to_liquid_volume_ratio_f": 0.25,
+        "hypothetical_pressure_above_1bar_ambient": true,
+        "hypothetical_pressure_bar_abs_when_liquid_volume_is_zero_and_gas_fills_total_vessel": 1.3657944582899593,
+        "initial_pressure_bar_abs": 13.0,
+        "qualification": "Fixed-mass dry ideal gas, sealed, spatially uniform pressure, reversible polytropic expansion to total tank capacity; no outflow of gas and no valve/line/gravity effects. This is a limiting analytic calculation, not a full-drain prediction."
+      }
+    ]
+  },
+  "status": "completed_private_reduced_model_exploration"
+}

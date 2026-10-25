@@ -1,0 +1,314 @@
+{
+  "status": "User-reported hardware notes with follow-up confirmations. Consult current_user_hardware_interpretation for precedence; original raw notes and prior interpretations are preserved.",
+  "received_date": "2026-10-24",
+  "raw_notes": "1350l+20-25% oldat, L=\n900mm tartály, 300mm cső\n1000mm, 150mm -kifolyás\npillangószelep, 5s\n12 bar belső nyomás\n\n15-60m+lombkorona és alatta\n30m/s-60m/s helikopter, folfele megyunk\nbigger: 240",
+  "source_files": {
+    "git_commit": "e5d8115",
+    "step": "docs/bencz 3D model (1).step",
+    "photograph": "docs/IMG_20180209_103212.jpg",
+    "qualification": "User says STEP dimensions are inexact; originals must be preserved. Photo is useful for visible topology, not calibrated dimensions or hidden connections."
+  },
+  "tentative_interpretations": {
+    "tank_diameter_m": {
+      "value": 0.9,
+      "status": "Confirmed by user on 2026-10-25 as tank diameter; maker/user-reported, not CAD measurement."
+    },
+    "valve_diameter_m": {
+      "value": 0.3,
+      "status": "Confirmed by user on 2026-10-25; ID/OD/nominal convention not otherwise specified."
+    },
+    "liquid_volume_per_tank_m3": {
+      "value": 1.35,
+      "status": "Confirmed by user on 2026-10-25; two tanks imply 2.70 m3 total nominal payload."
+    },
+    "gas_headspace_fraction_of_liquid_volume": [
+      0.2,
+      0.25
+    ],
+    "usual_total_discharge_duration_s": {
+      "value_approx": 5,
+      "status": "User says this is usual discharge duration; not valve-opening time."
+    },
+    "pressure_bar": {
+      "value": 12,
+      "status": "User-reported magnitude; gauge/absolute convention not specified. Next hydraulic comparison uses 12 bar absolute and 13 bar absolute as primary-agent choices, not measurements."
+    },
+    "valve_type": {
+      "value": "butterfly",
+      "status": "Earlier user-reported note; no new confirmation in this follow-up."
+    },
+    "lamellae": {
+      "count": 4,
+      "spacing": "equally spaced",
+      "start_location": "about halfway through expansion/outlet",
+      "status": "User-reported first-pass description; detailed orientation/dimensions unknown."
+    }
+  },
+  "unresolved": [
+    "Tank length, end caps, wall thickness and actual internal capacity.",
+    "Exact tank-to-valve plumbing and opening sequence for the four valves.",
+    "Valve opening time/law remains unknown; the approximate 5 s report refers to total discharge duration.",
+    "The 12 bar gauge/absolute convention remains unknown; next absolute-pressure scenarios are a primary-agent modeling choice, not a measured conversion.",
+    "Gas composition, temperature, pressure-control/regulator details and pressure history; earlier CO2 notes remain historical context, not confirmation.",
+    "Lamella orientation, dimensions, thickness, and exact hardware reference frame.",
+    "Meaning and units of bigger: 240.",
+    "Interpretation of the prior aerial-operation notes about 15–60 m, canopy, helicopter speed 30–60 m/s, and “folfele megyunk”; these remain outside current internal-flow boundaries."
+  ],
+  "dated_user_clarifications": [
+    {
+      "date": "2026-10-25",
+      "source": "User hardware clarification relayed to this worker by the primary agent; wording below is copied from that relay, with whitespace normalized only.",
+      "verbatim_as_relayed": "2 tanks, each connected to 2 valves, one outlet per valve. 900mm, 300mm diameters of valve and tank [order ambiguous vs prior 900 tank]. 1350l liquid in the tank plus 20-25% additional volume. 5s I think discharge duration usually. Soda can pressurized to 12 bars then released only at drop. 4 lamelles equally spaced starting ~1/2 expansion/outlet for first pass.",
+      "structured_facts": {
+        "apparatus_topology": {
+          "tank_count": 2,
+          "valves_per_tank": 2,
+          "outlets_per_valve": 1,
+          "reported_total_valve_outlets": 4,
+          "status": "User-reported topology; exact tank-to-valve plumbing, valve independence, and simultaneous/sequential operation not specified."
+        },
+        "diameter_values_mm": [
+          900,
+          300
+        ],
+        "diameter_assignment": {
+          "value": null,
+          "status": "Unresolved which of 900 mm and 300 mm is the tank diameter versus valve diameter. The prior tentative 900 mm tank interpretation remains historical, not locked by this clarification."
+        },
+        "liquid_volume_l": {
+          "value": 1350,
+          "scope": "unresolved: per tank or total system",
+          "status": "User-reported amount; do not choose per-vessel versus aggregate."
+        },
+        "additional_volume_percent": [
+          20,
+          25
+        ],
+        "additional_volume_basis": {
+          "value": null,
+          "status": "Unresolved whether this means headspace as a percentage of liquid volume, percentage of vessel capacity, or another volume allowance. The private scenario JSON explicitly evaluates only the first interpretation."
+        },
+        "usual_discharge_duration_s": {
+          "value_approx": 5,
+          "status": "User says 5 s is usually the discharged duration; this is not the valve-opening time."
+        },
+        "pressure": {
+          "reported_bar": 12,
+          "status": "Soda-can pressurization analogy; sealed until release at the drop, per user report. Gauge versus absolute convention and actual pressure history are unresolved."
+        },
+        "lamellae": {
+          "count": 4,
+          "spacing": "equally spaced",
+          "start_location": "approximately halfway through the expansion/outlet",
+          "scope": "first-pass description",
+          "status": "User-reported; orientation, dimensions, thickness, material, and exact reference frame remain unknown."
+        }
+      },
+      "structured_uncertainties": [
+        "Mapping of 900 mm and 300 mm diameters to tank and valve; retain the earlier 900 mm tank hypothesis as unconfirmed only.",
+        "Whether 1350 L is the charge per tank or the total across both tanks; if total, its distribution between tanks is unknown.",
+        "Meaning and denominator of the extra 20-25% volume.",
+        "Whether 12 bar is gauge or absolute, gas composition, temperature, charge pressure history, and pressure at valve release. Earlier CO2 charging notes remain historical context, not confirmation of gas identity in this clarification.",
+        "Valve opening duration, opening law, individual valve timing, and whether all four outlets discharge simultaneously.",
+        "Lamella orientation, thickness, chord/length, span, attachment, and exact axial start location."
+      ],
+      "interpretation_updates": [
+        "The 5 s note is recorded as the approximate usual total discharge duration, not valve-opening time; the actual valve-opening time remains unknown. A hypothetical 1 s/5 s smoothstep valve-opening sensitivity pair was prepared but not launched in results/runs/i4f-twooutlet-valve-opening-pair-prep-20261025T0822Z; treat it as a low-priority numerical sensitivity, not realistic or confirmed actuation.",
+        "Four lamellae supersede the earlier five-lamella report for a future first-pass setup only; historical inputs and runs are unchanged.",
+        "The apparatus is reported as two tanks times two valves times one outlet each. This does not establish that the current single-tank CFD represents the actual apparatus.",
+        "A sealed blowdown interpretation is a working hypothesis based on the soda-can analogy and release-at-drop statement. Do not assign a specific gas mixture from this clarification."
+      ],
+      "case_lock_status": "Do not lock or alter a new case using these facts until the primary agent receives any pending confirmation on diameter mapping, volume scope, and pressure convention. Current live CFD jobs are unaffected.",
+      "supersession_and_history": {
+        "pre_clarification_fields_preserved_without_overwrite": [
+          "tentative_interpretations.time_s",
+          "tentative_interpretations.tank_diameter_m",
+          "unresolved number and connectivity of independent tanks, valves and outlets",
+          "the prior reported lamella count of five"
+        ],
+        "current_reading": "Read the dated clarification as the current user report: about 5 s is discharge duration; four lamellae are the first-pass reported count; the reported topology is two tanks, two valves per tank, and one outlet per valve. Diameter mapping and volume scope remain unresolved.",
+        "prior_unresolved_topology_item": "Narrowed by the new report to unresolved exact plumbing and valve operation; the reported count/connectivity topology is now recorded above.",
+        "prior_tank_diameter_item": "The older 900 mm tank interpretation remains an unconfirmed hypothesis because the latest paired 900/300 mm statement leaves assignment ambiguous.",
+        "superseded_statement_history": {
+          "former_statement": "The 5 s note is now recorded as usual total discharge duration, not valve opening time; any previous suggestion that 5 s is a realistic opening time is withdrawn. No case has been prepared or launched with a 5 s opening law.",
+          "superseded_because": "The later user clarification distinguishes usual total discharge duration from valve-opening duration; a hypothetical unlaunched 1 s/5 s opening pair had in fact been prepared.",
+          "corrected_current_statement": "The 5 s note is recorded as the approximate usual total discharge duration, not valve-opening time; the actual valve-opening time remains unknown. A hypothetical 1 s/5 s smoothstep valve-opening sensitivity pair was prepared but not launched in results/runs/i4f-twooutlet-valve-opening-pair-prep-20261025T0822Z; treat it as a low-priority numerical sensitivity, not realistic or confirmed actuation.",
+          "preparation_record": {
+            "path": "results/runs/i4f-twooutlet-valve-opening-pair-prep-20261025T0822Z/pair-record.json",
+            "sha256": "47a6ae559041242078c0a4254506f5ab5c8a2657c166d1226009ddfb77a7339b",
+            "status": "prepared_not_launched",
+            "arms": [
+              {
+                "id": "fast1s",
+                "smoothstep_opening_time_s": 1.0,
+                "stop_bound_s": 1.2
+              },
+              {
+                "id": "slow5s",
+                "smoothstep_opening_time_s": 5.0,
+                "stop_bound_s": 3.2
+              }
+            ],
+            "qualification": "Prepared sensitivity only; neither arm launched; the 5 s stroke is unsourced actuation and is not represented as realistic hardware timing."
+          }
+        },
+        "later_confirmation_2026_10_25": "A later user response confirmed 900 mm tank diameter, 300 mm valve diameter, 1350 L liquid per tank, and gas headspace equal to 20–25% of liquid volume. The earlier diameter/volume ambiguity in this initial clarification is retained as an as-of-that-message history only. The user did not specify gauge versus absolute pressure; the 12/13 bar absolute pair is a primary-agent modeling decision."
+      }
+    },
+    {
+      "date": "2026-10-25",
+      "recorded_utc": "2026-10-25T08:38:07.565551+00:00",
+      "source": "User follow-up answers in the project chat; the primary agent checked the exact answer strings below against the received messages.",
+      "exact_user_answers": {
+        "diameter_assignment": "Tank 900 mm; valve 300 mm",
+        "liquid_and_headspace": "1,350 L per tank + 20–25% headspace",
+        "pressure_convention": "idk, doesnt really matter",
+        "headspace_question_basis": "The accepted option explicitly defined the additional headspace as 270–338 L per tank, equal to 20–25% of liquid volume."
+      },
+      "verbatim_user_phrases_as_relayed": [
+        "tank diameter 900 mm",
+        "valve diameter 300 mm",
+        "1350 L PER TANK",
+        "gas headspace 20–25% OF LIQUID VOLUME",
+        "idk, doesnt really matter"
+      ],
+      "confirmed_facts": {
+        "tank_diameter_m": {
+          "value": 0.9,
+          "status": "User confirmed 900 mm tank diameter; user-reported hardware value, not a CAD measurement."
+        },
+        "valve_diameter_m": {
+          "value": 0.3,
+          "status": "User confirmed 300 mm valve diameter; user-reported hardware value, with ID/OD/nominal convention not otherwise specified."
+        },
+        "liquid_volume_per_tank_m3": {
+          "value": 1.35,
+          "status": "User confirmed 1350 L per tank; two tanks therefore have 2.70 m3 total nominal liquid payload."
+        },
+        "additional_gas_headspace_fraction_of_liquid_volume": [
+          0.2,
+          0.25
+        ],
+        "headspace_basis_status": "User selected the explicit interpretation: gas headspace is 20–25% of liquid volume.",
+        "usual_total_discharge_duration_s": {
+          "value_approx": 5,
+          "status": "Approximate usual total discharge duration; valve opening duration remains unknown."
+        },
+        "reported_pressure_bar": 12,
+        "pressure_convention_reply": "idk, doesnt really matter",
+        "lamellae": {
+          "count": 4,
+          "spacing": "equally spaced",
+          "start_location": "about halfway through the expansion/outlet",
+          "scope": "first-pass user report"
+        },
+        "apparatus_topology": {
+          "tank_count": 2,
+          "valves_per_tank": 2,
+          "outlets_per_valve": 1
+        }
+      },
+      "pressure_interpretation_and_modeling_decision": {
+        "user_supplied_gauge_or_absolute_convention": null,
+        "user_reply_verbatim": "idk, doesnt really matter",
+        "next_hydraulic_reference_pressure_bar_absolute": 12,
+        "next_hydraulic_sensitivity_pressure_bar_absolute": 13,
+        "primary_agent_rationale": "The 13 bar absolute sensitivity covers the reported 12 bar gauge interpretation approximately; these are chosen modeling scenarios, not a measured pressure convention or a conversion asserted by the user.",
+        "gas_charge_control_or_regulator": "Not reported; do not invent a regulator or pressure-control history.",
+        "charging_description": "Sealed/soda-can analogy and release only at the drop remain the reported operating description; gas composition is not confirmed by this follow-up. Earlier CO2 notes remain historical context."
+      },
+      "remaining_uncertainties": [
+        "Tank length, end-cap shape, wall thickness, internal supports, and actual internal capacity.",
+        "Exact tank-to-valve plumbing and whether/how the four valves open simultaneously or sequentially.",
+        "Valve-opening duration/law and individual valve timing; 5 s is discharge duration, not a confirmed opening duration.",
+        "Pressure gauge/absolute convention remains unspecified by the user; the next-case absolute-pressure pair above is the primary agent modeling decision.",
+        "Gas species, temperature, charge pressure history, regulator/control mechanism, and pressure at release.",
+        "Lamella orientation, dimensions, thickness, axial reference, and detailed spacing in hardware coordinates."
+      ],
+      "supersedes_prior_uncertainties": [
+        "tank versus valve assignment of 900/300 mm",
+        "1350 L per tank versus total-system interpretation",
+        "whether 20–25% means headspace relative to liquid volume"
+      ],
+      "case_change_status": "This update changes documentation only. No solver input, geometry, or live CFD job was modified."
+    }
+  ],
+  "history_snapshots": {
+    "pre_2026_10_25_confirmation_tentative_interpretations": {
+      "tank_diameter_m": {
+        "value": 0.9,
+        "status": "User clarified that 900 mm is a tank parameter and the STEP dimensions are inaccurate. Revised-model working interpretation is tank diameter, not overall assembly height; retain as maker-reported rather than a CAD measurement."
+      },
+      "feed_pipe_diameter_m": {
+        "value": 0.3,
+        "status": "User-reported 300mm cső; internal versus external/nominal diameter unconfirmed"
+      },
+      "exit_width_m": {
+        "value": 1.0,
+        "status": "User nominal; consistent with earlier description"
+      },
+      "exit_height_m": {
+        "value": 0.15,
+        "status": "User nominal; consistent with earlier description"
+      },
+      "valve_type": {
+        "value": "butterfly",
+        "status": "User-reported pillangószelep"
+      },
+      "pressure_bar": {
+        "value": 12,
+        "status": "User-reported internal pressure; gauge versus absolute unknown"
+      },
+      "time_s": {
+        "value": 5,
+        "status": "Valve opening time versus total discharge time unknown"
+      },
+      "volume_m3": {
+        "value": 1.35,
+        "status": "Tank capacity versus loaded liquid, per vessel versus whole apparatus unknown"
+      }
+    },
+    "pre_2026_10_25_confirmation_unresolved": [
+      "Meaning of +20-25% oldat; do not interpret as headspace or concentrate fraction without confirmation",
+      "Tank length L is not supplied",
+      "Meaning and units of bigger: 240",
+      "Interpretation of 15-60m+lombkorona és alatta, helicopter 30-60m/s and folfele megyunk; retain as aerial-operational notes, not current internal-flow boundaries",
+      "Number and connectivity of independent tanks, valves and outlets",
+      "Internal intake geometry, lamella dimensions and initial downstream fill"
+    ],
+    "pre_2026_10_25_confirmation_status": "User-reported hardware notes; interpretation pending, not a replacement for frozen simulation inputs"
+  },
+  "current_interpretation_precedence": "Use current_user_hardware_interpretation and the latest dated clarification when they conflict with the preserved raw notes or earlier tentative fields. Those earlier fields remain as history.",
+  "current_user_hardware_interpretation": {
+    "apparatus_topology": {
+      "tank_count": 2,
+      "valves_per_tank": 2,
+      "outlets_per_valve": 1
+    },
+    "tank_diameter_m": 0.9,
+    "valve_diameter_m": 0.3,
+    "liquid_volume_m3_per_tank": 1.35,
+    "gas_headspace_fraction_of_liquid": [
+      0.2,
+      0.25
+    ],
+    "total_liquid_payload_m3_across_two_tanks": 2.7,
+    "reported_pressure_bar": 12,
+    "pressure_convention": "unknown; user reply: \"idk, doesnt really matter\"",
+    "next_hydraulic_reference_and_sensitivity_bar_absolute": [
+      12,
+      13
+    ],
+    "pressure_scenarios_are": "primary-agent modeling choices, not user-confirmed conversion or measured pressure",
+    "gas_charge_control": "sealed/soda-can description; no regulator assumed; gas identity not confirmed by latest response",
+    "usual_discharge_duration_s_approx": 5,
+    "valve_opening_time_s": "unknown; a hypothetical prepared 1 s/5 s opening-time pair is an unlaunched low-priority numerical sensitivity only",
+    "lamellae": {
+      "count": 4,
+      "spacing": "equally spaced",
+      "start_location": "about halfway through expansion/outlet",
+      "scope": "first pass"
+    },
+    "provenance": "User-reported, not measured or verified against supplied CAD."
+  }
+}

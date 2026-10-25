@@ -1,0 +1,18 @@
+{
+  "status": "pending geometry-derived pressure regions; do not launch from uniform defaults",
+  "tank_pressure_abs_Pa": 1200000,
+  "ambient_pressure_abs_Pa": 100000,
+  "ambient_temperature_K": 293.15,
+  "tank_free_surface_z_m": 1.48472525518957,
+  "tank_centers_y_m": [
+    -0.55,
+    0.55
+  ],
+  "tank_center_z_m": 1.25,
+  "water_hydrostatic": "p=p0+rho_water*9.81*(z_surface-z); p_rgh=p0+rho_water*9.81*z_surface",
+  "air_headspace_hydrostatic": "p=p0+rho_air*9.81*(z_surface-z), rho_air=p0*M_air/(R_u*T); p_rgh=p0+rho_air*9.81*z_surface",
+  "downstream_primed_line_hydrostatic": "ambient-reference pressure at each mouth center z (0.65m lower, 0.90m upper), with p_rgh=ambient+rho_water*9.81*z_mouth",
+  "valve_zone_initial_pressure": "linear p/p_rgh interpolation across each 0.30m valve loss zone, same as prior one-tank baseline methodology; adapt masks to four actual mesh zones",
+  "external_air": "1 bar absolute, 293.15 K",
+  "warning": "Fields must be initialized consistently with the final mesh and cell sets; uniform 1bar 0.org fields are templates only. Verify both per-tank water integrals equal 1.350 m3 before release."
+}

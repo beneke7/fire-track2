@@ -2,6 +2,26 @@
 
 ## Purpose and source of truth
 
+Current user direction (2026-10-23): this workstation now investigates the
+I4F internal pressure-driven discharge apparatus; aerial work continues
+separately on the server. Follow the internal-apparatus section added to the
+plan; `experiments/i4f_baseline.json` describes the earlier single-outlet
+reference, while later one-tank/two-outlet references and full two-tank/four-outlet
+runs carry their own immutable apparatus inputs. The latest user-confirmed
+hardware facts take precedence in `experiments/i4f_hardware_notes_20261024.json`;
+never apply them retroactively to historical cases. Preserve prior aerial evidence and
+do not resume old aerial queues automatically. Predict discharge from tank,
+gas headspace, valve, pipe and transition rather than prescribing an outlet
+history. The new objective permits suitable GPU use, including rendering,
+after inspecting unrelated workloads; avoid a GPU solver port before the
+first complete physical result. CPU OpenFOAM remains an acceptable route.
+The supplied, dimensionally approximate CAD and photo are preserved as
+`docs/bencz 3D model (1).step` and `docs/IMG_20180209_103212.jpg`; maker notes
+are in `experiments/i4f_hardware_notes_20261024.json`. Do not treat CAD
+dimensions or their provisional reconstruction as measurements. Always generate
+and inspect pictures of parameterized CAD/geometry for debugging, including
+connection/cross-section views; preserve the original models.
+
 Build the multiregion aerial-water-drop pipeline in
 `track2_aerial_drop_experiment_plan.md`. Read that plan before changing physics,
 metrics, validation order, or solver architecture. The root PDFs are reference
@@ -139,6 +159,9 @@ Use `make help` for commands. Python dependencies live in `pyproject.toml` and
 - Record revision and dirty state, code/input hashes, solver/dependency versions,
   seeds, mesh, time steps, resource use, mass errors, raw observables and the gate
   decision. Never overwrite an existing run or omit failed attempts.
+  Capture UTC timestamps from the clock automatically; a bundle-name time is
+  not an execution timestamp. Snapshot uncommitted source before a run, so a
+  recorded hash still identifies recoverable code after later edits.
 - Visuals use computed fields with consistent scales/cameras/times. Label
   computed, inferred subgrid, and footage content. Water-only inputs do not
   validate foam or the built pressurized device. No fire suppression or
@@ -161,6 +184,34 @@ separate review memos unless a hard decision needs one.
 - Use `scripts/run_local.py` for local jobs. Allocate a **shared total** CPU
   budget across workers, processes and MPI ranks; keep BLAS/OpenMP threads at
   one inside process-parallel sweeps. Avoid nested oversubscription.
+- Long workstation Docker runs, endpoint monitors and dispatchers must survive
+  agent-session exit. Use bounded user-systemd services with `run_local.py`,
+  and inspect Docker state plus solver End/checkpoints as the runtime authority.
+  A missing launcher PID does not mean its Docker solver stopped: reattach
+  supervision without relaunching it. Anchor deadlines to the original
+  container start, honor PAUSE, and expose the active controller through the
+  documented status/event paths while preserving prior attempts.
+  For a new Docker launch, hold the solver behind a GO sentinel until its
+  exact container ID/StartedAt and manifest exist and the guard is verified.
+  Source the OpenFOAM bashrc before enabling shell nounset/pipefail, then set
+  the case working directory explicitly. Check current CPU-tick deltas rather
+  than lifetime `ps` percentages when paused historical MPI ranks are visible.
+  Guard readiness is monotonic: a verified guard progressing to `running`
+  must not fail a check waiting for its earlier readiness status. Test parsers
+  against actual startup logs; `trapFpe`/`FOAM_SIGFPE` banners are not failures.
+  Terminal checks must use the branch's configured log path, not a fixed log
+  basename. A missing expected filename is not evidence that the solver failed.
+  Compare numerical dictionary values numerically, not by printed notation
+  (`1e-05` and `1e-5` are equal). Formatting or cosmetic labels must not block
+  an otherwise verified launch. If Docker exits before the guard records its
+  final checkpoint, a dispatcher must wait for capture until its bounded
+  deadline; pending metadata is not a failed solver or permission to relaunch.
+  Keep internal and external wall deadlines consistent, checkpoint before the
+  earliest limit, and guarantee an endpoint write independently of sparse output.
+  An agent-initiated resource pause must have a durable resume-or-save action
+  before that deadline; a read-only pause watcher is insufficient. A graceful
+  save requires the solver to run, so unfreeze operationally paused containers
+  before requesting the save. Never automatically resume a user-requested pause.
 - The orchestrator and workers share the compute schedule. Use all effective
   CPU capacity when the machine is idle; there is no fixed 18-core ceiling or
   two-core reserve. Allocations are initial estimates, not standing caps.

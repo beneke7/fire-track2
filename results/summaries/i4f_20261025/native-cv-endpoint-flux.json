@@ -1,0 +1,428 @@
+{
+  "title": "Exact native upstream control-volume boundary water-flux audit at saved endpoint",
+  "status": "read_only_completed_no_mesh_or_solver_changes",
+  "case": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z/case",
+  "time_field_s": "0.00502116666404",
+  "container": {
+    "id": "0b6d29bb43bcae30c87ee4a6061c7753598241c94d71dba8fde9417bbc3773ba",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "started_at_utc": "2026-10-25T11:16:42.344586457Z",
+    "finished_at_utc": "2026-10-25T11:35:20.363745337Z",
+    "exit_code": 0,
+    "state": "exited_cleanly",
+    "solver_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "solver_binary": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z/bin/compressibleInterFoamFrozenAlphaSourceV2NoPout"
+  },
+  "field": {
+    "path": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z/case/processors20/0.00502116666404/alphaPhi0.water",
+    "sha256": "3f0de429d210edefc948f23dda8e986ce0691308999d7d85089e7136549da562",
+    "class": "surfaceScalarField",
+    "object": "alphaPhi0.water",
+    "dimensions": "[0 3 -1 0 0 0 0] (volume/time)",
+    "phase": "water",
+    "semantics": "OpenFOAM 2512 MULES phase-1 water advective volume flux, cached/updated by alpha advection and written at the endpoint; boundary values are face-oriented, outward from local owner cell on processor patches."
+  },
+  "source_verification": {
+    "solver": "custom compressibleInterFoamFrozenAlphaSourceV2NoPout built against OpenFOAM 2512",
+    "source_paths_in_image": [
+      "/usr/lib/openfoam/openfoam2512/applications/solvers/multiphase/VoF/createAlphaFluxes.H",
+      "/usr/lib/openfoam/openfoam2512/applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/alphaEqn.H"
+    ],
+    "immutable_run_source_hashes": {
+      "source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/VoF/createAlphaFluxes.H": "77b142f1d144f09bbea41218c65c7e839e4745549853faf16fb4917351f09c5f",
+      "source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/alphaEqn.H": "d0c03361dcd5b2be240826221f4651bbf86c61df615e04b24713da917dff8bd8"
+    },
+    "copied_exact_source_hashes": {
+      "OpenFOAM2512_createAlphaFluxes.H": "77b142f1d144f09bbea41218c65c7e839e4745549853faf16fb4917351f09c5f",
+      "OpenFOAM2512_compressibleInterIsoFoam_alphaEqn.H": "d0c03361dcd5b2be240826221f4651bbf86c61df615e04b24713da917dff8bd8"
+    },
+    "basis": "createAlphaFluxes.H names alphaPhi0 from alpha1.group() with READ_IF_PRESENT and AUTO_WRITE; alphaEqn.H sets alphaPhi10=advector.alphaPhi() after advector.advect. Case thermophysicalProperties declares phases (water air), so alpha1/group is water. This run has nAlphaSubCycles=1. The endpoint field is the cached MULES water advective volume flux that appears in the discrete alpha transport, not a reconstructed U dot Sf estimate."
+  },
+  "cv_definition": "native cell membership union tankAZone + lineAInitialZone, and tankBZone + lineBInitialZone; outward flux positive from the union. Internal faces cut by owner/neighbour membership use owner-to-neighbour alphaPhi sign. Processor-boundary faces use the owner-outward patch value only for local owner cells in the CV; paired faces from two ranks are both included and cancel if both adjacent cells belong to the CV.",
+  "mesh_and_addressing": {
+    "processors": 20,
+    "per_rank_mesh_input_sha256": "8c3c0fc0ea2595bd12c9dc3c8fc80ebf85360d2435dc6c06339b48852252f73b",
+    "native_face_cut_method": "local native owner/neighbour plus decomposed processor patch boundaries; local cellZone labels identify CV membership",
+    "processor_patch_flux_pair_count": 49115,
+    "processor_patch_face_groups_with_non2_multiplicity": {},
+    "max_paired_processor_flux_sum_abs_m3_s": 1.1058862159352145e-17,
+    "max_paired_processor_flux_sum_relative": 1.0706318874310163e-08,
+    "physical_boundary_faces_touched_by_CV": {
+      "A": 96862,
+      "B": 96911
+    },
+    "physical_boundary_flux_contribution_m3_s": {
+      "A": 1.3121658077674802e-28,
+      "B": -3.4114902360424994e-28
+    },
+    "physical_boundary_patch_crosscheck": {
+      "ambientAnnulus": {
+        "native_boundary_array_sum_m3_s": 2.355369862885504e-05,
+        "functionObject_sum_m3_s": 2.35536986e-05,
+        "difference_m3_s": 2.885504132182394e-14
+      },
+      "externalSides": {
+        "native_boundary_array_sum_m3_s": 1.0380515490707846e-116,
+        "functionObject_sum_m3_s": 1.03805155e-116,
+        "difference_m3_s": -9.292154155029824e-126
+      },
+      "farOutlet": {
+        "native_boundary_array_sum_m3_s": 1.0744771458982216e-183,
+        "functionObject_sum_m3_s": 1.07447715e-183,
+        "difference_m3_s": -4.101778297981898e-192
+      }
+    }
+  },
+  "mouth_plane": {
+    "surface_file": "postProcessing/fourMouthPlaneAreaAlpha/surface/0.00502116666404/sampledSurface_fourMouthPlane.vtp",
+    "sampled_plane_x_m": 5.79,
+    "field_data_time_s": 0.005021166522055864,
+    "path_time_s": 0.00502116666404,
+    "field_data_minus_native_field_time_s": -1.419841353864082e-10,
+    "method": "triangulated sampledSurface cell fields with centroid-window masks and area weights; approximate U/alpha quadrature, no native alphaPhi field on this interior plane"
+  },
+  "independent_v2_comparisons_retained": {
+    "cfd_native_tank_withdrawal_rate_m3_s": 0.0871199992956,
+    "reduced_network_two_branch_Q_m3_s": 0.087273674354,
+    "network_minus_CFD_tank_withdrawal_m3_s": 0.00015367505844,
+    "network_minus_CFD_tank_withdrawal_percent_of_CFD": 0.17639469660528492,
+    "ODE_minus_CFD_dynamic_pressure_drop_Pa": 12.167342637,
+    "ODE_minus_CFD_dynamic_pressure_drop_percent_of_CFD": 0.766978269716
+  },
+  "per_tank": {
+    "A": {
+      "native_CV_boundary_outward_alphaPhi0_water_m3_s": 0.08713954842061211,
+      "internal_cut_face_outward_sum_m3_s": 0.08240424980326194,
+      "processor_patch_cut_face_outward_sum_m3_s": 0.004735298617350163,
+      "physical_boundary_face_outward_sum_m3_s": 1.3121658077674802e-28,
+      "internal_cut_face_count": 1820,
+      "processor_owner_inside_face_count": 9298,
+      "physical_boundary_faces_touched": 96862,
+      "finite_difference_inventory_outward_rate_m3_s": 0.08711999999988529,
+      "inventory": {
+        "t0_s": 0.00477116666404,
+        "t1_s": 0.00502116666404,
+        "dt_s": 0.00024999999999999935,
+        "water_inventory_t0_m3": 2.225699756,
+        "water_inventory_t1_m3": 2.225677976,
+        "d_inventory_dt_m3_s": -0.08711999999988529,
+        "outward_rate_from_inventory_m3_s": 0.08711999999988529,
+        "components": {
+          "tankAWaterVolume": {
+            "t0_m3": 1.34973205,
+            "t1_m3": 1.34971027
+          },
+          "lineAInitialWaterVolume": {
+            "t0_m3": 0.875967706,
+            "t1_m3": 0.875967706
+          }
+        }
+      },
+      "native_minus_inventory_m3_s": 1.9548420726822613e-05,
+      "native_vs_inventory_relative_percent": 0.02243849945689664,
+      "native_flux_implied_inventory_loss_over_step_m3": 2.178488710515297e-05,
+      "ledger_inventory_loss_over_step_m3": 2.1779999999971267e-05,
+      "native_implied_minus_logged_volume_loss_m3": 4.8871051817036746e-09,
+      "inventory_log_precision_note": "volFieldValue values are printed to roughly 8 significant digits; the observed native-flux versus finite-difference remainder is below the endpoint/t0 rounding bound for the volume differencing.",
+      "sampled_mouth_plane_water_Q_m3_s": 0.0680410622745975,
+      "native_minus_sampled_plane_m3_s": 0.019098486146014615,
+      "sampled_plane_under_native_flux_percent": 21.917127747585425,
+      "rank_contributions": [
+        {
+          "rank": 0,
+          "internal": 0.03492571940435639,
+          "processor": -0.03492554518202868,
+          "total": 1.7422232771041601e-07
+        },
+        {
+          "rank": 1,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 2,
+          "internal": 0.029272418475115088,
+          "processor": -0.029272321556775435,
+          "total": 9.691833965236318e-08
+        },
+        {
+          "rank": 3,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 4,
+          "internal": 0.018206111923790458,
+          "processor": -0.018206007392547158,
+          "total": 1.0453124330012109e-07
+        },
+        {
+          "rank": 5,
+          "internal": 0.0,
+          "processor": 0.005186895829486723,
+          "total": 0.005186895829486723
+        },
+        {
+          "rank": 6,
+          "internal": 0.0,
+          "processor": 0.08195066756577504,
+          "total": 0.08195066756577504
+        },
+        {
+          "rank": 7,
+          "internal": 0.0,
+          "processor": 1.318323343393879e-06,
+          "total": 1.318323343393879e-06
+        },
+        {
+          "rank": 8,
+          "internal": 0.0,
+          "processor": 7.388535035596222e-07,
+          "total": 7.388535035596222e-07
+        },
+        {
+          "rank": 9,
+          "internal": 0.0,
+          "processor": -4.4782340728050096e-07,
+          "total": -4.4782340728050096e-07
+        },
+        {
+          "rank": 10,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 11,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 12,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 13,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 14,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 15,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 16,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 17,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 18,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 19,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        }
+      ]
+    },
+    "B": {
+      "native_CV_boundary_outward_alphaPhi0_water_m3_s": 0.0871406941769135,
+      "internal_cut_face_outward_sum_m3_s": 0.08381778748061042,
+      "processor_patch_cut_face_outward_sum_m3_s": 0.003322906696303085,
+      "physical_boundary_face_outward_sum_m3_s": -3.4114902360424994e-28,
+      "internal_cut_face_count": 1841,
+      "processor_owner_inside_face_count": 10203,
+      "physical_boundary_faces_touched": 96911,
+      "finite_difference_inventory_outward_rate_m3_s": 0.08711999999988529,
+      "inventory": {
+        "t0_s": 0.00477116666404,
+        "t1_s": 0.00502116666404,
+        "dt_s": 0.00024999999999999935,
+        "water_inventory_t0_m3": 2.225750962,
+        "water_inventory_t1_m3": 2.2257291820000003,
+        "d_inventory_dt_m3_s": -0.08711999999988529,
+        "outward_rate_from_inventory_m3_s": 0.08711999999988529,
+        "components": {
+          "tankBWaterVolume": {
+            "t0_m3": 1.34973205,
+            "t1_m3": 1.34971027
+          },
+          "lineBInitialWaterVolume": {
+            "t0_m3": 0.876018912,
+            "t1_m3": 0.876018912
+          }
+        }
+      },
+      "native_minus_inventory_m3_s": 2.069417702821319e-05,
+      "native_vs_inventory_relative_percent": 0.02375364672663044,
+      "native_flux_implied_inventory_loss_over_step_m3": 2.178517354422832e-05,
+      "ledger_inventory_loss_over_step_m3": 2.1779999999971267e-05,
+      "native_implied_minus_logged_volume_loss_m3": 5.17354425705346e-09,
+      "inventory_log_precision_note": "volFieldValue values are printed to roughly 8 significant digits; the observed native-flux versus finite-difference remainder is below the endpoint/t0 rounding bound for the volume differencing.",
+      "sampled_mouth_plane_water_Q_m3_s": 0.06795657264657155,
+      "native_minus_sampled_plane_m3_s": 0.01918412153034195,
+      "sampled_plane_under_native_flux_percent": 22.015112125907837,
+      "rank_contributions": [
+        {
+          "rank": 0,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 1,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 2,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 3,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 4,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 5,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 6,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 7,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 8,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 9,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 10,
+          "internal": 0.011028639474903294,
+          "processor": -0.011028610470371616,
+          "total": 2.9004531677465084e-08
+        },
+        {
+          "rank": 11,
+          "internal": 0.017333896657817177,
+          "processor": -0.017333886277874494,
+          "total": 1.037994268315856e-08
+        },
+        {
+          "rank": 12,
+          "internal": 0.046532231749159866,
+          "processor": -0.04653211640664627,
+          "total": 1.1534251359579528e-07
+        },
+        {
+          "rank": 13,
+          "internal": 0.008923019598730077,
+          "processor": -0.008923019318687768,
+          "total": 2.800423087867543e-10
+        },
+        {
+          "rank": 14,
+          "internal": 0.0,
+          "processor": 0.0,
+          "total": 0.0
+        },
+        {
+          "rank": 15,
+          "internal": 0.0,
+          "processor": 3.3706932250215926e-07,
+          "total": 3.3706932250215926e-07
+        },
+        {
+          "rank": 16,
+          "internal": 0.0,
+          "processor": 4.855519281157794e-07,
+          "total": 4.855519281157794e-07
+        },
+        {
+          "rank": 17,
+          "internal": 0.0,
+          "processor": -9.554953052381965e-08,
+          "total": -9.554953052381965e-08
+        },
+        {
+          "rank": 18,
+          "internal": 0.0,
+          "processor": 0.009933929730997309,
+          "total": 0.009933929730997309
+        },
+        {
+          "rank": 19,
+          "internal": 0.0,
+          "processor": 0.07720588236716583,
+          "total": 0.07720588236716583
+        }
+      ]
+    }
+  },
+  "qualification": [
+    "This tests the exact native staircase CV boundary, not the sampled plane at x=5.79 m. The mouth plane and cellZone cut are distinct surfaces.",
+    "The CV flux and inventory derivative agree to within the printed volFieldValue inventory precision at the saved endpoint; that supports discrete balance for this exact native CV and step, not sampled-plane validity or a general convergence result.",
+    "The VTK plane Q remains an approximate sampled-surface alpha-weighted U quadrature, not native alphaPhi flux. The CV staircase boundary is geometrically distinct from x=5.79 m; the plane Q gap is unresolved.",
+    "Prior v2 observation that downstream line-mouth-zone inventory growth is similar in magnitude to the gap is correlation only. Do not add that entire zone storage to plane Q as a native control-volume closure; those zone cell centres lie downstream of the sampled plane."
+  ],
+  "sources": {
+    "v2_comparison_csv": "results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/updated-hardware-startup-comparison-v2/startup-inventory-flux-diagnostics.csv",
+    "v2_mouth_profile_json": "results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/updated-hardware-startup-comparison-v2/cfd-mouth-profile/four-mouth-observer-profile.json",
+    "postProcessing_root": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z/case/postProcessing",
+    "endpoint_field_hash_sha256": "3f0de429d210edefc948f23dda8e986ce0691308999d7d85089e7136549da562",
+    "launch_manifest": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z/launch-manifest.json",
+    "run_source_snapshot": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z/provenance/source-snapshot.json"
+  }
+}

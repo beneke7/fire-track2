@@ -199,29 +199,150 @@ stop decision. Keep full 3D fields sparse; routinely save compact flux and groun
 products. Follow the validation and stop conditions in the experiment plan before making
 any design or field-performance claim.
 
-## Cluster handoff for 16 October 2026
+## CPU-cluster scaffold
 
-The user expects about 1,300 CPU cores; Slurm is probable, but scheduler,
-node layout, memory, MPI and container support are unconfirmed. OpenFOAM is
-not expected to be preinstalled. No cluster installation or submission has
-been tested. Local Docker launchers are not a tested cluster backend.
+The cluster is reported to use Slurm and have OpenFOAM preinstalled. Its
+OpenFOAM release, compiler, MPI implementation/Slurm plugin, node layout,
+memory limits, scratch policy, wrapper conventions and checkpoint signal
+behavior are not confirmed. The expected allocation is about 1,300 CPU cores
+and 1–2 million CPU-hours. No cluster access, job submission, native MPI launch
+or case run has been tested. `scripts/run_local.py` is a workstation thread
+limiter, not a Slurm backend.
 
-1. Establish the site's supported way to supply the same OpenCFD v2512 solver:
-   an allowed container runtime or a build against the cluster environment.
-   Verify the solver version and a small MPI job before transferring a large case.
-2. Transfer the selected mesh/checkpoint with hashes, physical dictionaries,
-   parent ledger offsets and exact native history prefixes. Use project scratch
-   with known quotas; local `/dev/shm` state is not a transferable durable artifact.
-3. Run a bounded stability diagnostic with mass, timestep, turbulence and
-   no-progress checks. The workstation run stalled at 3.09428 s; the maxCo=1
-   pilot stopped at 3.08515 s, so increased core count is not an established fix.
-4. Measure short strong-scaling pilots from the same state, for example
-   20/40/80/160 ranks where the node allocation permits. Choose ranks from
-   measured physical-time throughput and cost. The current 2,733,120-cell mesh
-   would have only about 2,102 cells per rank at 1,300 ranks; useful scaling is
-   unmeasured. Allocate the remaining capacity to independent, declared
-   stability/mesh/transport comparisons rather than assuming a 65-fold speedup.
+The current Rouaix water diagnostic uses a **custom** `interIsoFoamTracePair`
+solver derived from OpenFOAM's interIsoFoam and a custom
+`traceNormalHeadPressure` boundary condition. It is not interchangeable with
+stock `interIsoFoam` or `prghTotalPressure`. The locally captured overlay is
+staged by `scripts/cluster/package_solver.py`; its manifest records the custom
+source files, local reference-binary hash, local OpenFOAM image identity and
+build/launch evidence. The local binary is provenance only; do not assume its
+ABI or MPI compatibility on the cluster. Build against a confirmed compatible
+site OpenFOAM API and MPI, then record the cluster-built binary hash in the job
+config. Stop if the site version requires code changes until those changes
+are diffed, hashed and tested; do not silently substitute a stock solver.
 
-Only after numerical stability is demonstrated should the larger allocation
-carry long runs and fragmentation-corridor refinement. Preserve failed trials
-and report the paper's fine-case comparison separately from the coarse pilot.
+The staged review bundle at
+`results/runs/cluster-solver-stage-20261020-provenance/` captured 49 source and
+Make input files. Its package-defined digest is
+`6f3e4d51333ff7cd0bec983f6f6f9aef90d74d0f09a3241ea5c01dd9368309ca`; the
+reference binary SHA-256 is
+`939c48415e54f222501a9c44abd23094d5e1e083ac93f5ed9870cdda61f2f739`, built in
+local image `sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b`.
+The manifest hashes each captured file and computes SHA-256 over sorted
+relative POSIX paths encoded as a 4-byte big-endian length plus UTF-8 path plus
+the raw 32-byte file SHA-256. It is the digest of this staged inventory, not a
+claim that every previous run used the same manifest algorithm or file set.
+
+Use the parameterized scaffolder only after replacing every site placeholder:
+
+```bash
+.venv/bin/python scripts/cluster/package_solver.py \
+  --source-root /path/to/diagnostic-source \
+  --binary /path/to/diagnostic-source/bin-replay/interIsoFoamTracePair \
+  --evidence-root /path/to/replay-run \
+  --local-image-id sha256:local-build-image-id \
+  --output /path/to/new/solver-stage
+.venv/bin/python scripts/cluster/slurm_scaffold.py validate \
+  --config /path/to/site-config.json
+.venv/bin/python scripts/cluster/slurm_scaffold.py render \
+  --config /path/to/site-config.json \
+  --output-dir /path/to/new/generated-jobs --dry-run
+```
+
+Copy `scripts/cluster/example-config.json` to a new site config and replace its
+placeholders. The example intentionally fails validation until a site version,
+partition, memory request and **site-built executable hash** are supplied.
+The generator writes reviewable `smoke`, `scaling` or `production` Slurm
+scripts and a resource-arithmetic manifest; it never calls `sbatch`. It
+requires one CPU per MPI task and checks ranks × nodes against the configured
+core allocation. It caps the sum of configured job CPU-hours at the conservative
+1-million-hour budget bound until the final allocation is confirmed.
+`site_wrapper_example.sh` documents the wrapper interface and
+checks the actual solver binary SHA-256, `foamVersion`, and every staged source
+file against the manifest before launch. The example's `srun --mpi` choice and
+checkpoint-stop adapter are site responsibilities, not verified defaults.
+
+For a configured smoke script, export its paths explicitly when submitting,
+for example:
+
+```bash
+sbatch --export=ALL,FIRETRACK2_CASE=/scratch/project/new-case,\
+FIRETRACK2_CLUSTER_WRAPPER=/scratch/project/site-wrapper,\
+FIRETRACK2_SOLVER_BIN=/scratch/project/solver/bin/interIsoFoamTracePair,\
+FIRETRACK2_STAGING_MANIFEST=/scratch/project/solver/staging-manifest.json,\
+FIRETRACK2_SLURM_MPI_TYPE=site-verified-plugin,\
+FIRETRACK2_CHECKPOINT_STOP_ADAPTER=/scratch/project/write-stop-adapter \
+/path/to/generated-jobs/rouaix-smoke.sbatch
+```
+
+Those names and the plugin token are interface examples, not site configuration.
+First check the site's `foamVersion`, compiler and MPI. Then run a one-rank
+startup and a small multi-rank smoke with the site's documented native MPI
+integration. Slurm `srun` and OpenFOAM MPI must agree on PMI/PMIx; Apptainer's
+MPI modes also require matching host/container MPI support ([Apptainer MPI
+guide](https://apptainer.org/docs/user/main/mpi.html)). The example wrapper
+requires a site-owned pre-timeout adapter. It must be tested to checkpoint all
+solver ranks and stop cleanly when the generated `USR1` warning arrives; the
+scaffold does not assume a portable OpenFOAM signal handler. Set each segment's
+end time at a known saved checkpoint, retain native OpenFOAM restart fields,
+and resume from the verified latest time in a new immutable case copy. Do not
+let an unhandled scheduler timeout be the checkpoint plan.
+
+After startup succeeds, measure same-checkpoint strong scaling at site-feasible
+rank counts, for example 20/40/80/160, recording simulated-time throughput,
+CPU time, `MaxRSS`, checkpoint and I/O cost. The present 2,733,120-cell mesh
+would average only about 2,100 cells per rank at 1,300 ranks, so full-allocation
+scaling is unknown and should not be assumed. Request memory per node from a
+smoke measurement, not a guessed workstation ratio. Use Slurm accounting when
+available:
+
+```bash
+sacct -j "$JOB_ID" --parsable2 --noheader \
+  --format=JobIDRaw,JobName,State,ExitCode,ElapsedRaw,AllocCPUS,TotalCPU,MaxRSS,ReqMem,AllocTRES
+```
+
+For the job row, allocated CPU-hours are `ElapsedRaw × AllocCPUS / 3600`; use
+`TotalCPU` separately as measured CPU consumption and `AllocTRES`/site billing
+fields when the scheduler exposes them. Do not sum the parent job and all
+step rows together. Preserve the selected native mesh, dictionaries, field
+prefix, exact source ledger offset and per-file hashes. Use `rsync` to a fresh
+incoming directory (no `--delete`), verify a relative-path SHA-256 inventory
+at both ends, and only then rename that directory to its immutable run name.
+Never transfer workstation `/dev/shm` paths as durable state.
+
+For example, from the workstation, build the checksum list relative to the
+bundle root and transfer only into a new cluster incoming path:
+
+```bash
+BUNDLE=/path/to/solver-and-case-bundle
+HOST=user@cluster
+INCOMING=/scratch/project/.incoming/rouaix-smoke-001
+FINAL=/scratch/project/runs/rouaix-smoke-001
+(cd "$BUNDLE" && find . -type f ! -name TRANSFER.sha256 ! -name TRANSFER.sha256.sha256 \
+  -print0 | sort -z | xargs -0 sha256sum > TRANSFER.sha256 && \
+  sha256sum TRANSFER.sha256 > TRANSFER.sha256.sha256)
+ssh "$HOST" "mkdir -p '$INCOMING' && test ! -e '$FINAL'"
+rsync -a --partial --info=progress2 "$BUNDLE/" "$HOST:$INCOMING/"
+ssh "$HOST" "cd '$INCOMING' && sha256sum -c TRANSFER.sha256.sha256 && \
+  sha256sum -c TRANSFER.sha256 && test ! -e '$FINAL' && mv '$INCOMING' '$FINAL'"
+```
+
+If interrupted, resume only into the same `.incoming` path; never sync over a
+completed run or use deletion flags. Regenerate and compare checksums after any
+intentional bundle edit.
+
+Native OpenFOAM decomposed fields and restart dictionaries remain authoritative.
+HDF5 is a heavy optional analytics/export format here; this scaffold neither
+installs HDF5 nor assumes OpenFOAM reads/writes it. Keep any HDF5 products
+derived, separately versioned and checked against native fields. W&B is not a
+dependency and no upload is performed; once the cluster project is configured,
+an optional offline tracker may store scalar metrics and pointers/hashes to
+large files rather than field payloads.
+
+Begin with a bounded stability smoke and the exact solver/source checks, then
+scale from the same checkpoint. A larger allocation is useful only after
+solver, restart, conservation and resource behavior are demonstrated; none of
+these exploratory cluster jobs is an E1 validation pass or field-performance
+claim. Slurm resource syntax is site-dependent; see the upstream
+[sbatch](https://slurm.schedmd.com/sbatch.html) and
+[sacct](https://slurm.schedmd.com/sacct.html) references.

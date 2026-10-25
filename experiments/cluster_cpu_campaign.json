@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-10-20",
+  "status": "prospective_exploratory_campaign_not_a_formal_gate_or_submission",
+  "objective": "Resolve numerical and source-comparison uncertainty in the Rouaix jet before spending the large allocation on aircraft and ground predictions.",
+  "compute": {
+    "user_reported_available_cpu_cores_approximately": 1300,
+    "user_reported_allocation_cpu_hours_range": [1000000, 2000000],
+    "scheduler": "slurm_confirmed_by_user",
+    "openfoam_installation": "preinstalled_by_site; version_compiler_and_MPI_unknown",
+    "gpu_jobs": false,
+    "first_campaign_planning_envelope_core_hours": 50000,
+    "planning_review_sub_envelopes_core_hours": {
+      "portability_restart_scaling_and_io": 5000,
+      "mesh_and_discriminating_short_tests": 10000,
+      "selected_longer_references_and_fine_extension": 35000
+    },
+    "envelope_is_a_planning_review_point_not_a_runtime_resource_cap": true,
+    "committed_cluster_core_hours": 0,
+    "site_billing_node_memory_interconnect_storage_and_access": "pending_site_documentation",
+    "data_tools": {
+      "transfer": "rsync of immutable input/checkpoint bundles, verified against hashes; no deletion mirroring by default",
+      "derived_arrays": "HDF5 for compact analysis products if site/toolchain support is confirmed; retain native OpenFOAM restart fields",
+      "tracking": "Weights & Biases for metrics, provenance and artifact paths/hashes; no external upload until project configuration is supplied",
+      "large_fields": "site scratch and durable archive with measured quotas and sparse full snapshots"
+    }
+  },
+  "reference": {
+    "source_record": "experiments/E1_ROUAIX_CASE1_SOURCE.md",
+    "paper": "Rouaix_28516.pdf",
+    "paper_mesh_and_duration": "PDF page 8 / article page 7, section 3.3; localized 70/50/30/16 mm meshes; about 5 s to stabilize penetration and width; exact ROI and statistical window unavailable",
+    "completed_higher_order_run": "results/runs/rouaix-linlv-pbicg-dilu-resume-20261020T141234Z",
+    "baseline_cells": 2733120,
+    "baseline_dt_s": 0.00025,
+    "baseline_source_polygon_area_m2": 0.1237068965517,
+    "source_polygon_area_is_not_ideal_circle_area": true,
+    "baseline_solver": "Pinned OpenCFD v2512 with diagnostic interIsoFoamTracePair overlay and normal-head side-pressure implementation; package source and rebuild against compatible cluster MPI",
+    "baseline_turbulence": "realizable k-epsilon",
+    "baseline_momentum_convection": "Gauss limitedLinearV 1",
+    "baseline_velocity_linear_solver": "PBiCGStab with DILU",
+    "baseline_turbulence_convection": "upwind",
+    "paper_comparison_status": "not validated; significant penetration discrepancy and width/observer uncertainties remain"
+  },
+  "invariants_for_matched_numerical_comparisons": [
+    "Exact source polygon, integrated source area, direction, imposed velocity and liquid volume flux",
+    "Fluid properties, surface tension, gravity, coordinate frame, turbulence inputs and physical boundaries",
+    "Observer definitions, x stations, normalization and physical-time comparison windows",
+    "Full diagnostic provenance including the side-pressure implementation",
+    "Only the declared numerical factor changes within each comparison"
+  ],
+  "stages": [
+    {
+      "name": "environment_and_restart",
+      "priority": 1,
+      "question": "Does the exact intended solver run and restart correctly on the supplied hardware?",
+      "runs": ["one-node MPI smoke", "two-node MPI smoke when supported", "matched short water restart", "write-stop-restart and ledger-offset check"],
+      "requirements": ["site-supported MPI and native build or compatible Apptainer route", "portable custom source overlay with hashes", "scratch and inode quotas measured", "checkpoint transfer hashes"],
+      "release_evidence": ["real advancing solver time on intended nodes", "finite bounded fields and converged linear solves", "restart ledger with offsets applied exactly once", "all required restart fields recovered"],
+      "notes": "Thread count one per MPI rank. Do not assume workstation Docker or an x86 binary is portable."
+    },
+    {
+      "name": "scaling_and_io",
+      "priority": 2,
+      "depends_on": ["environment_and_restart"],
+      "question": "Which rank count gives useful wall-time improvement at acceptable allocated core-hour cost?",
+      "coarse_example_rank_counts_not_site_requests": [32, 64, 128, 256],
+      "fine_example_rank_counts_not_site_requests": [64, 128, 256, 512],
+      "window": "Same immutable representative wet checkpoint and same physical interval; separate startup/warmup, timed steps and one real checkpoint write",
+      "measure": ["wall seconds per physical second", "allocated core-hours per physical second", "actual CPU utilization", "per-rank and per-node memory", "pressure and communication share where instrumented", "checkpoint seconds and bytes", "load imbalance"],
+      "rank_choice": "Choose from measured cost versus completion-time tradeoff using actual node billing; do not assume all 1300 ranks improve one job",
+      "stop_rule": "Do not double ranks again when the preceding trial shows no useful throughput gain; preserve measurements and choose the cheaper allocation",
+      "io": "Benchmark default file handler before collated/MPI-IO; sparse full fields and compact numerical observables; verify restart and visualization compatibility before adoption"
+    },
+    {
+      "name": "mesh_family_repair",
+      "priority": 2,
+      "question": "Can we construct a comparable refinement family without changing the source or introducing poor transitions?",
+      "failed_candidate": "results/runs/rouaix-static-conformal-mesh-20261020T141857Z",
+      "failed_candidate_cells": 24854720,
+      "failed_checks": {"low_interpolation_weight_faces": 80960, "under_determined_cells": 348},
+      "action": "Locate both failure sets, smooth the coarse/fine transitions and correct determinant failures; run the same full geometry/topology checks and integrated source checks again",
+      "family": "Coarse reference plus intermediate and fine corridor meshes sharing the physical ROI and source footprint; report actual directional sizes, not a single nominal label",
+      "fine_target": "Approximately 16 mm in every relevant direction in the selected breakup/comparison ROI, with ROI and limits explicitly declared; exact published ROI is unknown",
+      "restriction": "No solver launch on either preserved failed mesh; no quality-threshold relaxation to rename it valid",
+      "release_evidence": ["full mesh checks", "source area and oriented flux consistency", "actual ROI resolution distribution", "measured memory and storage feasibility"]
+    },
+    {
+      "name": "matched_transport_and_boundary_checks",
+      "priority": 3,
+      "depends_on": ["environment_and_restart"],
+      "question": "Which remaining changes materially affect the paper observables, rather than merely the image?",
+      "first_pair": "Completed upwind versus limitedLinearV/PBiCGStab branches at common saved times through 1 s; analyze existing fields before rerunning",
+      "conditional_short_pairs": ["fixed mesh and model with one halved timestep", "same source and observation ROI with moved side boundaries if local side influence is measurable", "limited turbulence convection or gradient reconstruction only if the field audit identifies a remaining defect"],
+      "observables": ["alpha=0.1 penetration and full-span width", "source-connected alpha=0.9 core extent", "liquid inventory and all boundary fluxes", "local velocity, k, epsilon and modeled viscosity near the interface", "breakup location and observer sensitivity"],
+      "restriction": "Do not combine a mesh, closure, inlet and transport change into one claimed causal comparison; do not fit inlet turbulence to match the paper"
+    },
+    {
+      "name": "rouaix_long_horizon_refinement",
+      "priority": 4,
+      "depends_on": ["scaling_and_io", "mesh_family_repair", "matched_transport_and_boundary_checks"],
+      "question": "Do stabilized penetration, width and core breakup approach a consistent result as resolution improves?",
+      "runs": "Start coarse and intermediate matched references toward approximately 5 s; start the fine mesh after its short pilot confirms stable evolution and measured affordability",
+      "initial_time": "Clean start for each changed mesh/model; a mapped restart requires its own declared transient and must not be called a clean reproduction",
+      "sampling": "Track time histories and compare multiple late windows. About 5 s is the paper's duration, not proof that our fields have stabilized",
+      "timestep_followup": "One halved-dt comparison on the most informative affordable mesh; do not conflate its effect with refinement",
+      "report": "Profiles and bias with digitization/observer uncertainty, grid/time sensitivities and remaining implementation gaps; no automatic E1 pass",
+      "cost_release": "Forecast total allocated core-hours, per-node peak RAM, output bytes and completion time from the wet pilot before extending each run"
+    },
+    {
+      "name": "model_sensitivity_then_aircraft",
+      "priority": 5,
+      "depends_on": ["rouaix_long_horizon_refinement"],
+      "first_model_pair": "Standard k-epsilon versus realizable k-epsilon with unchanged mesh, inlet k/epsilon and numerics, only if diagnosed behavior or source evidence selects this test after numerical uncertainty is characterized",
+      "next": "Choose a second Rouaix condition already reported in the source to test predictive transfer before a broad aircraft campaign",
+      "aircraft": "Return to the declared Dash-8 source-history problem and then measured Restas geometry/history; keep paper-input ambiguity separate from solver error",
+      "deferred": ["broad turbulence/intensity sweeps", "LES/DES campaign", "unverified HRIC port", "full domain centimetre-scale descent", "many long renders on compute nodes"],
+      "restriction": "Nearfield agreement alone does not validate parcels, ground maps, useful-strip scores, foam or the built device"
+    }
+  ],
+  "accounting_and_stop_policy": {
+    "cost_formula_simple_core_billing": "allocated CPU count * elapsed wall hours; verify site billing TRES and whole-node policy separately",
+    "simple_full_allocation_cost_per_24h_core_hours": 31200,
+    "one_million_core_hours_at_1300_cores_days": 32.0512820513,
+    "two_million_core_hours_at_1300_cores_days": 64.1025641026,
+    "collect": ["job ID and state", "allocated CPUs/nodes/TRES", "elapsed time", "TotalCPU", "per-task MaxRSS with task/node identity", "exit code", "mesh/input/code hashes", "physical progress", "ledger and solver diagnostics", "checkpoint bytes and duration"],
+    "stop": ["nonfinite fields or linear-solver divergence", "loss of physical-time progress", "unexpected boundary acceleration", "missing ledger data or unacceptable declared conservation error", "memory/scratch shortage", "forecast exceeds the declared useful-run budget without a new scientific decision"],
+    "thresholds": "Run-specific numerical and physical tolerances must be declared before launch with justification. This planning file creates no formal acceptance thresholds.",
+    "full_machine_use": "Use spare nodes for independent ready comparisons when this improves time to an answer; no requirement to fill cores with uninformative jobs"
+  }
+}

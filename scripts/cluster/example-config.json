@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "allocation": {
+    "cores": 1300,
+    "cpu_hours_budget_min": 1000000,
+    "cpu_hours_budget_max": 2000000
+  },
+  "solver": {
+    "name": "custom interIsoFoamTracePair with traceNormalHeadPressure",
+    "openfoam_version": "OPENFOAM_SITE_VERSION_UNCONFIRMED",
+    "binary_sha256": "REPLACE_WITH_SITE_BUILT_BINARY_SHA256",
+    "source_manifest_sha256": "6f3e4d51333ff7cd0bec983f6f6f9aef90d74d0f09a3241ea5c01dd9368309ca",
+    "custom_components": [
+      "interIsoFoamTracePair",
+      "traceNormalHeadPressure"
+    ],
+    "runtime_strategy": "site-wrapper"
+  },
+  "jobs": [
+    {
+      "name": "rouaix-smoke",
+      "profile": "smoke",
+      "nodes": 1,
+      "tasks_per_node": 4,
+      "cpus_per_task": 1,
+      "walltime": "00:10:00",
+      "signal_before_walltime_seconds": 300,
+      "memory_per_node": "SITE_MEMORY_REQUIRED",
+      "partition": "SITE_CPU_PARTITION_REQUIRED",
+      "account": null
+    }
+  ]
+}

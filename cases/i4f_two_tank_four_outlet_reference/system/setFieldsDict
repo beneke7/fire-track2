@@ -1,0 +1,16 @@
+FoamFile { version 2.0; format ascii; class dictionary; object setFieldsDict; }
+defaultFieldValues
+(
+    volScalarFieldValue alpha.water 0
+    volScalarFieldValue p 100000
+    volScalarFieldValue p_rgh 100000
+    volScalarFieldValue T 293.15
+    volVectorFieldValue U (0 0 0)
+);
+regions
+(
+    cellToCell { set lineACells; fieldValues (volScalarFieldValue alpha.water 1); }
+    cellToCell { set lineBCells; fieldValues (volScalarFieldValue alpha.water 1); }
+    cellToCell { set tankAWaterCells; fieldValues (volScalarFieldValue alpha.water 1); }
+    cellToCell { set tankBWaterCells; fieldValues (volScalarFieldValue alpha.water 1); }
+);

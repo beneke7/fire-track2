@@ -2,6 +2,45 @@
 
 **Working plan · 24 September 2026**
 
+## Workstation priority — 23 October 2026
+
+The user now assigns this workstation to the **I4F internal discharge system**;
+the aerial campaign continues separately on the server. Preserve the aerial
+architecture and prior evidence below, but do not automatically resume its
+workstation jobs. The original internal exploratory experiment is
+[`experiments/i4f_baseline.json`](experiments/i4f_baseline.json): a partially
+filled cylindrical pressurized tank, explicitly opening valve restriction,
+cylindrical pipe, circular-to-rectangular transition, nominal 1.0 × 0.15 m
+horizontal nozzle and short external air region. The updated hardware source is
+[`experiments/i4f_hardware_notes_20261024.json`](experiments/i4f_hardware_notes_20261024.json):
+25 October user confirmations establish two tanks, two valve/outlet branches per
+tank, .900 m tank diameter, .300 m valve diameter, 1.350 m3 liquid per tank and
+additional gas headspace equal to 20–25% of liquid volume. Use each new run's
+immutable input record; do not silently substitute these facts into historical
+cases. Predict the outlet conditions
+from the tank state; a prescribed uniform liquid inlet cannot replace this
+experiment. Unconfirmed geometry, valve opening, initial downstream fill and gas
+properties remain assumptions. The reported 12 bar has unknown pressure
+convention; use 12 bar absolute as the provisional reference and 13 bar absolute
+as a sensitivity. The approximate five seconds describes discharge duration,
+not a measured valve-opening time.
+
+Connect primary-source physical scaling, an inventory/inertia/loss-based reduced
+model, and gas-compressible water–gas CFD of the complete simplified apparatus.
+Start with one declared tank orientation and sealed blowdown; keep maintained
+pressure as a separate physical experiment. An air-headspace baseline can use
+the same gas phase as the exterior, but does not reproduce CO2 pressurization.
+Compare pressure, inventory, discharge and pressure losses before interpreting
+outlet uniformity, gas breakthrough and emerging sheet structure. A scalar
+valve loss does not resolve butterfly-disk wakes. Select the first engineering
+comparison from baseline evidence, with matched initial inventories and pressure.
+Use focused conservation, mesh/time and external-boundary checks needed for
+these claims. Existing aerial E0–E6 gates do not certify this new apparatus.
+
+The new user objective permits suitable GPU rendering/compute; use CPU
+OpenFOAM for the first credible complete calculation and do not start a GPU
+solver port. Inspect unrelated workloads before using either resource.
+
 ## Objective and first assumption
 
 Build a conservative, multiregion water–air simulation that predicts an aerial drop from outlet to ground. Use the **same exterior physics and scoring code** to compare a conventional release with the built Restás/i4f architecture. Deliver numerical comparisons, uncertainty ranges, and a scientifically labelled 3D animation.

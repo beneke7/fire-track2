@@ -1,0 +1,224 @@
+{
+  "schema": "i4f-pmin-paired-replay-endpoint-comparison/v1",
+  "captured_utc": "2026-10-25T10:56:42.578149+00:00",
+  "endpoint_time_s": 0.589617581493,
+  "source_schedule": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/schedule/timestep-schedule.csv",
+  "schedule_contract_tolerances": {
+    "printed_time_abs_tolerance_s": 1e-12,
+    "timestep_abs_tolerance_s": 2e-12,
+    "precision_basis": "Inherited pair-plan: original timePrecision=12; tolerances declared before launch.",
+    "printed_time_checks": {
+      "pmin-10k": {
+        "printed_time_count": 555,
+        "expected_time_count": 555,
+        "max_abs_time_difference_s": 0.0,
+        "time_tolerance_s": 1e-12,
+        "time_schedule_match": true,
+        "endpoint_printed": "0.589617581493",
+        "guard_completed_steps": 555,
+        "guard_endpoint_s": 0.589617581493,
+        "normal_End": true,
+        "complete_native8_checkpoint": true,
+        "hard_stop_reasons": [],
+        "persistent_final_floor_steps": 0,
+        "raw_pressure_contact_count": 12,
+        "postprocess_exit_code": 0,
+        "postprocess_fatal_seen": false
+      },
+      "pmin-5k": {
+        "printed_time_count": 555,
+        "expected_time_count": 555,
+        "max_abs_time_difference_s": 0.0,
+        "time_tolerance_s": 1e-12,
+        "time_schedule_match": true,
+        "endpoint_printed": "0.589617581493",
+        "guard_completed_steps": 555,
+        "guard_endpoint_s": 0.589617581493,
+        "normal_End": true,
+        "complete_native8_checkpoint": true,
+        "hard_stop_reasons": [],
+        "persistent_final_floor_steps": 0,
+        "raw_pressure_contact_count": 13,
+        "postprocess_exit_code": 0,
+        "postprocess_fatal_seen": false
+      }
+    }
+  },
+  "arm_endpoint_values": {
+    "pmin-10k": {
+      "tank_water_volume_m3": 0.9771909349380238,
+      "line_water_volume_m3": 0.8103950780972068,
+      "region_water_volume_m3": 2.199841853634554,
+      "nozzle_area_integral_U_m3_s": [
+        1.58266022945646,
+        -0.0008270214102396936,
+        -0.0287546289609697
+      ],
+      "nozzle_normal_volume_flux_m3_s": 1.582660229456466,
+      "nozzle_alpha_water_area_mean": 0.999999999999997,
+      "saved_min_T_K": 225.7191557370393,
+      "saved_max_T_K": 652.2453195124306,
+      "saved_min_p_pa": 21767.09813729949,
+      "saved_min_p_cell": 10522.0,
+      "saved_min_p_location_m": [
+        4.813803872119709,
+        -0.608873944180789,
+        0.8655872552006246
+      ],
+      "saved_max_p_pa": 485987.1517367138,
+      "saved_max_speed_m_s": 1489.929675483362,
+      "saved_max_speed_cell": 1787.0,
+      "saved_max_speed_location_m": [
+        5.805768793676343,
+        -0.01716351320212329,
+        0.8426774669564654
+      ],
+      "tank_gas_alpha_weighted_mean_p_pa": 480283.112886,
+      "tank_gas_alpha_weighted_mean_T_K": 262.01875088,
+      "tank_gas_volume_m3": 0.987774367331,
+      "tank_water_volume_postprocess_m3": 0.977190934938,
+      "tank_geometric_volume_m3": 1.96496530227
+    },
+    "pmin-5k": {
+      "tank_water_volume_m3": 0.9771909349304265,
+      "line_water_volume_m3": 0.8103950780978877,
+      "region_water_volume_m3": 2.199841851694919,
+      "nozzle_area_integral_U_m3_s": [
+        1.582660241280202,
+        -0.0008270214897135378,
+        -0.02875462897066997
+      ],
+      "nozzle_normal_volume_flux_m3_s": 1.582660241280208,
+      "nozzle_alpha_water_area_mean": 0.9999999999999969,
+      "saved_min_T_K": 225.711093938913,
+      "saved_max_T_K": 652.245316159416,
+      "saved_min_p_pa": 21766.83764588909,
+      "saved_min_p_cell": 10522.0,
+      "saved_min_p_location_m": [
+        4.813803872119709,
+        -0.608873944180789,
+        0.8655872552006246
+      ],
+      "saved_max_p_pa": 485987.1498184524,
+      "saved_max_speed_m_s": 1489.929329068756,
+      "saved_max_speed_cell": 1787.0,
+      "saved_max_speed_location_m": [
+        5.805768793676343,
+        -0.01716351320212329,
+        0.8426774669564654
+      ],
+      "tank_gas_alpha_weighted_mean_p_pa": 480283.112864,
+      "tank_gas_alpha_weighted_mean_T_K": 262.018750879,
+      "tank_gas_volume_m3": 0.987774367338,
+      "tank_water_volume_postprocess_m3": 0.97719093493,
+      "tank_geometric_volume_m3": 1.96496530227
+    }
+  },
+  "arm_terminal_and_event_status": {
+    "pmin-10k": {
+      "pMin_Pa": 10000.0,
+      "raw_pressure_contact_count": 12,
+      "persistent_final_floor_steps": 0,
+      "status": "normal_End_complete_native8_checkpoint",
+      "max_single_pass_affected_liquid_support_m3": 0.0002183130125202152,
+      "max_single_pass_affected_liquid_support_kg": 0.2179200490976788,
+      "first_event": {
+        "arm": "pmin-10k",
+        "configured_pMin_Pa": 10000,
+        "first_event_time_s": 0.589138142355,
+        "first_raw_cell_min_p_Pa": -42870.74610815993,
+        "minimum_raw_cell_p_over_event_passes_Pa": -123775.9156666105,
+        "maximum_raw_cell_p_over_event_passes_Pa": 1977349.174515642,
+        "first_contact_cells_below_pMin": 1,
+        "first_contact_affected_liquid_support_volume_m3": 0.0002183130125202152,
+        "first_contact_affected_liquid_support_mass_kg": 0.2179200490976788,
+        "guard_contact_count_by_endpoint": 12,
+        "maximum_single_pass_affected_liquid_support_volume_m3": 0.0002183130125202152,
+        "maximum_single_pass_affected_liquid_support_mass_kg": 0.2179200490976788,
+        "endpoint_saved_p_min_Pa": 21767.09813729949,
+        "endpoint_saved_p_min_location_m": [
+          4.813803872119709,
+          -0.608873944180789,
+          0.8655872552006246
+        ],
+        "endpoint_final_floor_contact_cells": 0,
+        "raw_clamp_cell_alpha_T_location_available": false
+      }
+    },
+    "pmin-5k": {
+      "pMin_Pa": 5000.0,
+      "raw_pressure_contact_count": 13,
+      "persistent_final_floor_steps": 0,
+      "status": "normal_End_complete_native8_checkpoint",
+      "max_single_pass_affected_liquid_support_m3": 0.0002183130125202152,
+      "max_single_pass_affected_liquid_support_kg": 0.2179200490976788,
+      "first_event": {
+        "arm": "pmin-5k",
+        "configured_pMin_Pa": 5000,
+        "first_event_time_s": 0.589138142355,
+        "first_raw_cell_min_p_Pa": -42870.74610815993,
+        "minimum_raw_cell_p_over_event_passes_Pa": -130976.086975157,
+        "maximum_raw_cell_p_over_event_passes_Pa": 3629351.181847103,
+        "first_contact_cells_below_pMin": 1,
+        "first_contact_affected_liquid_support_volume_m3": 0.0002183130125202152,
+        "first_contact_affected_liquid_support_mass_kg": 0.2179200490976788,
+        "guard_contact_count_by_endpoint": 13,
+        "maximum_single_pass_affected_liquid_support_volume_m3": 0.0002183130125202152,
+        "maximum_single_pass_affected_liquid_support_mass_kg": 0.2179200490976788,
+        "endpoint_saved_p_min_Pa": 21766.83764588909,
+        "endpoint_saved_p_min_location_m": [
+          4.813803872119709,
+          -0.608873944180789,
+          0.8655872552006246
+        ],
+        "endpoint_final_floor_contact_cells": 0,
+        "raw_clamp_cell_alpha_T_location_available": false
+      }
+    }
+  },
+  "interpretation": [
+    "Both floors reproduced the same first pressure-floor event at 0.589138142355 s: first raw minimum -42.870746 kPa and one support cell, with affected liquid support 0.000218313 m3 / 0.217920 kg in each arm.",
+    "Across the event's corrector passes, the lowest raw intermediate pressure differed: -123.776 kPa at 10 kPa versus -130.976 kPa at 5 kPa. This is an intermediate pressure-update difference, not a global energy/mass error estimate.",
+    "At the matched endpoint both final saved pressure fields had minima above their configured floors; the 5 kPa endpoint min(p) differed from 10 kPa by only the values recorded in the CSV. No persistent final-floor steps were recorded.",
+    "The endpoint bulk outputs (tank gas alpha.air-weighted p/T, phase volumes, and nozzle volume flux) are nearly identical. This supports local endpoint insensitivity for this replay interval only; it does not establish production floor independence, physical validation, or general robustness.",
+    "The pressure-floor logs contain aggregate/raw pressure records but no exact intermediate clamp-cell location, alpha.water, or T. Endpoint saved-field extrema locations must not be interpreted as the intermediate clamp cell. The reported affected support mass/volume is not mass removed; repeated corrector passes revisit cells and must not be summed."
+  ],
+  "phase_weighted_endpoint_methods": {
+    "alpha_air_definition": "alpha.air = 1 - alpha.water",
+    "gas_mean_pressure_temperature": "weightedAverage(tankZone) with weightField alpha.air from reconstructed native endpoint p and T; postProcess v2512",
+    "gas_and_water_volume": "volIntegrate of alpha.air and alpha.water over tankZone using reconstructed endpoint fields",
+    "geometric_tank_volume": "sum(V) over tankZone after writeCellVolumes",
+    "nozzle_flux": "terminal solver function-object areaNormalIntegrate(bothNozzleMouths) of U; the weightedAreaIntegrate vector is the area integral of U (m3/s)",
+    "saved_minimum_pressure": "terminal fieldMinMax on absolute p, separate from intermediate raw p_rgh pressure-matrix traces"
+  },
+  "artifacts": {
+    "matched_endpoint_csv": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/matched-endpoint.csv",
+    "pressure_floor_events_csv": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pressure-floor-events.csv",
+    "plot": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/matched-endpoint-comparison.png",
+    "comparison_script": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/compare.py",
+    "comparison_script_sha256": "e9638003485709e8d7de6aa6f84877d4d1953e63331ca2386ac09aafdf40bbc8"
+  },
+  "input_sha256": {
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pair-plan.json": "076c12ab39136c2c8b0be2091efff1b93e3c4e0f0319e65cc8a14c457dd610ad",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/first-pressure-floor-event.json": "d7cd00d8d1bbae1a14e737375a6f72c2183f095018282736aa17f9d8661f9a30",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/schedule/timestep-schedule.csv": "394c5f533adc46eae6ff5dde07b1d6ff51d49a636283b89e20d751b88cf9a7a6",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/schedule/setTimeStepFunctionObject.inc": "8d955a74e08d837741273bd26aa05d31da6c4ef7fcb148a4843da45e8ffa6cae",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/bin/instrumented/compressibleInterFoamFrozenAlphaSourceV2NoPout": "365632cc0065ee56e4efce2998ad596f6651745a95f8e9ab8661de4a5804329d",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/guardian-status.json": "5cf415fcd53e222c40103e7d84a8738340b3aaf927c71e9ae4b6d6cbfda5da51",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/case/log.pressure-floor-replay": "99bde52ca7e7e8fe67c736b7505efe81aad63ba8f6eec72c4e96f6d9d9b29ae0",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/run_postprocess.stdout.log": "5ac3503eb0938d5da49f21ac002ba3bd6912e7f158cc3677a1434d9b5437d8eb",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/guardian-status.json": "74d1bad7cb1f477a85a5a455df900543fd685858c4e99ef1474c2524bcdc0af2",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/case/log.pressure-floor-replay": "bd97f4a17aef49323d69c4193c51b90dd0b28bc156a5eac2d395b9ff27964d3b",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/run_postprocess.stdout.log": "a2bff63147764aa744411af6cb1de526e95113febc9b69419f2aa5aada130591"
+  },
+  "postprocess_execution": {
+    "pmin-10k": {
+      "exit_code": 0,
+      "stdout_log": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/run_postprocess-retry.stdout.log"
+    },
+    "pmin-5k": {
+      "exit_code": 0,
+      "stdout_log": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/run_postprocess.stdout.log"
+    }
+  }
+}

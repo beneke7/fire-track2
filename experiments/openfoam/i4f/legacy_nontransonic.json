@@ -1,0 +1,32 @@
+{
+  "schema": "openfoam-i4f-case-profile/v1",
+  "name": "baseline-nontransonic",
+  "description": "Original exploratory non-transonic cold start.",
+  "solver": {
+    "transonic": false,
+    "max_co": 0.5,
+    "max_alpha_co": 0.25,
+    "max_delta_t_s": 0.001,
+    "n_alpha_sub_cycles": 1,
+    "n_outer_correctors": 2,
+    "n_correctors": 2,
+    "pressure_solver": "GAMG",
+    "pressure_smoother": "DIC",
+    "pressure_tolerance": 1e-7,
+    "pressure_relative_tolerance": 0.01
+  },
+  "observer": {
+    "port_offset_from_tank_end_m": 0.2,
+    "nozzle_offset_upstream_m": 0.01,
+    "center_y_m": 0.0,
+    "normal_xyz": [1.0, 0.0, 0.0],
+    "write_interval_steps": 1
+  },
+  "event": {
+    "threshold_net_gas_fraction": 0.01,
+    "port_arming_consecutive_samples": 3,
+    "nozzle_liquid_confirmation_consecutive_samples": 3,
+    "nozzle_event_consecutive_samples": 3,
+    "stop_at": "writeNow"
+  }
+}
