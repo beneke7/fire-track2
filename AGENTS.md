@@ -219,6 +219,11 @@ separate review memos unless a hard decision needs one.
   before that deadline; a read-only pause watcher is insufficient. A graceful
   save requires the solver to run, so unfreeze operationally paused containers
   before requesting the save. Never automatically resume a user-requested pause.
+  Evaluate coupled-field diagnostics and `fvMatrix::residual()` on all MPI
+  ranks in identical order; restrict only local extraction/printing to selected
+  ranks. High CPU use without advancing `Time` can be an MPI communication
+  stall. Preserve and stop a confirmed stalled observer rather than waiting
+  for a writeNow checkpoint that its blocked solver cannot produce.
 - The orchestrator and workers share the compute schedule. Use all effective
   CPU capacity when the machine is idle; there is no fixed 18-core ceiling or
   two-core reserve. Allocations are initial estimates, not standing caps.

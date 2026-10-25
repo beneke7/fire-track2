@@ -120,6 +120,24 @@ fluxes or an explanation of the pressure difference. The historical
 describes the mixture-temperature formulation's boundedness motivation;
 that motivation does not validate its thermal accuracy for this apparatus.
 
+A targeted [sealed water–air withdrawal study](../results/summaries/i4f_20261025/gas-layer-grid-sensitivity.json)
+now demonstrates a numerical contribution in a controlled limit. A 1 m
+channel starts with 80 mL water and 20 mL air at 12 bar absolute; water-only
+withdrawal expands the gas by approximately 1.6345 over .4 s. Gravity and
+turbulence are disabled, and Pr=1e9 suppresses physical thermal diffusion.
+Uniform axial meshes with 3/6/12/24 cells initially across the gas layer give
+pressure errors against the adiabatic reference at native gas volume of
+6.66/4.45/2.92/1.92%. Gas-mass-weighted temperature errors follow the same
+trend. Gas-mass drift remains about .01%, while the gas energy/work remainder
+decreases from 3.58 to 1.04 J. Thus small inventory error alone does not rule
+out a substantial apparent thermal offset. The
+[figure](../results/summaries/i4f_20261025/gas-layer-grid-sensitivity.png)
+also shows the finest case's native temperature and phase-fraction profile.
+Both phases are refined together; this is not an isolated gas-only refinement.
+The study uses 2 outer iterations and 2 pressure corrections, versus 8 and 2
+in the apparatus, and its solver identity is recorded separately. It does
+not establish the cause or correction size in the turbulent apparatus.
+
 The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
 also shows how the initial agreement evolves. At that same time, CFD tank-A
 water is 2.480 L below the reduced model, while its pressure is 654.125 versus

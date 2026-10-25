@@ -1,5 +1,17 @@
 # I4F discharge: published results, 25 October 2026
 
+**New controlled thermal diagnostic:** uniform refinement in a sealed
+water–air withdrawal test reduces pressure error against adiabatic expansion
+from **6.66% to 1.92%**. Both phase meshes change together; thermal diffusion
+is suppressed and turbulence is disabled. This demonstrates numerical bias
+in that diagnostic without establishing the apparatus cause. The
+[analysis](gas-layer-grid-sensitivity.json),
+[summary](gas-layer-grid-summary.csv) and
+[figure provenance](gas-layer-grid-figure-provenance.json) record the
+different solver/numerical settings and exact native-field checks.
+
+![Gas-layer resolution sensitivity and native temperature profile](gas-layer-grid-sensitivity.png)
+
 [Watch corrected-source pipe filling through 0.443669 s, 10× slow](corrected-source-cutaway-through-0p443-10x.mp4)
 or the [all-four-branches outlet view](corrected-source-outlets-through-0p443-10x.mp4).
 The 4.874-second movies show ten actual saved states, including initialization,
