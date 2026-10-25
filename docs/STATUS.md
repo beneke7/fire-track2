@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 11:54 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 12:36 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -32,17 +32,26 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   cell has Co about .5004; gas speed exceeds 1000 m/s before the first floor
   intervention. Root inspected the comparison and extreme-field plots.
   Bundle: `results/runs/i4f-pmin-replay-pair-20261025T095211Z/`.
-- **Concrete boundary issue:** a bounded Astra source/data review found inward
-  Mach 4.34 flow at an ambientAnnulus face prescribed static 1 bar/293.15 K.
-  Endpoint incoming kinetic-energy flux is approximately 1.214 MW, not a closed
-  energy residual. The cause of onset remains to be isolated. Luna energy worker
-  owns a case-local compressible reservoir BC, analytical gas-only/reversal
-  checks and a controlled pre-onset replay. The gas-only checks passed; paired
-  eight-rank replays are now live as `2a4e82256f1b` / `81a4ab9138e7`, StartedAt
-  11:52:25 / 11:52:37 UTC, independently verified by root. Both matched their
-  first original timestep. A missing-schedule pre-GO attempt is preserved and
-  did not release solver ranks. Luna profile worker owns reproducible boundary
-  diagnostics and the early CFD/network comparison. No GPU solver port.
+- **Compressible reservoir boundary comparison completed** on the older
+  one-tank/two-outlet reference. Both eight-rank arms ended normally at
+  .588704120044 s with 373/373 matched steps, native checkpoints and no pressure
+  floor contacts. At matched pre-contact time .588511510680, the static
+  ambientAnnulus inflow reached Mach 2.57 with reconstructed mass-weighted
+  stagnation pressure 150.1 kPa; the 100 kPa/293.15 K compressible-reservoir
+  condition held it at 100 kPa with max inflow Mach .0122. Endpoint global
+  maximum speed changed 1162→67 m/s and global maximum temperature 495.5→293.3 K
+  (the latter maximum is gas in the static arm and liquid in the reservoir arm).
+  Tank-zone pressure, sampled mouth flow and phase-ledger defects stayed close
+  under the fixed original timestep schedule. The estimated 22.35× timestep
+  headroom is a Courant-based bound, not measured runtime speedup or proof of
+  global stability. This is boundary sensitivity evidence, not hardware
+  validation; shared-mixture temperature and ambient coupling remain
+  unresolved. Exact patch-only fragments for `ambientAnnulus`, `externalSides`
+  and `farOutlet`, plus source/hash provenance, are in
+  `experiments/openfoam/i4f/reservoir_bc_verification/tested-ambient-patches/`.
+  Pair outputs: `results/summaries/i4f_20261025/ambient-reservoir-pair-r2-*`.
+  The failed pre-GO schedule attempt remains preserved and released no solver
+  ranks. No GPU solver port.
 - **Geometry/init evidence:** the 1,779,258-cell divider mesh passes configured
   quality (max nonorthogonality 58.020 degrees); the no-wall variant remains
   held. Native initialization has exactly 1.350 m3 water and .301493 m3 gas per

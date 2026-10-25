@@ -1,0 +1,55 @@
+{
+  "schema": "i4f-native-restart-handoff-pointer/v1",
+  "created_utc": "2026-10-25T12:36:23Z",
+  "status": "verified locally; archive requires separate transfer",
+  "archive": {
+    "repository_relative_path": "results/runs/i4f-native-handoff-20261025T1216Z/handoff.tar.gz",
+    "size_bytes": 348927896,
+    "sha256": "0eb359921c626fb9097cebf35dd6fa68b176b36bab0aa1846bacc8c3d2cefc8c",
+    "checksum_sidecar": "results/runs/i4f-native-handoff-20261025T1216Z/handoff.tar.gz.sha256",
+    "ignored_by_git": true,
+    "included_in_git_or_uploaded": false,
+    "transfer_note": "The archive is under ignored results/runs and is not carried by this tracked pointer. Transfer the archive separately, then verify its SHA-256 before extraction."
+  },
+  "checkpoint": {
+    "time_s": 0.00502116666404426454,
+    "declared_stage_target_s": 0.005,
+    "endpoint_overshoot_s": 0.00002116666404426454,
+    "global_mesh_cells": 1779258,
+    "global_internal_faces": 5238373,
+    "global_restart_field_count": 14,
+    "fields": [
+      "T",
+      "T.air",
+      "T.water",
+      "U",
+      "alpha.water",
+      "alphaPhi0.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh",
+      "phi",
+      "rho"
+    ],
+    "uniform_time_and_function_object_state": true,
+    "archive_sha256_inventory_entries": 90,
+    "archive_extraction_verified": true,
+    "verification_record": "results/runs/i4f-native-handoff-20261025T1216Z/archive-verification.json",
+    "source_run": "results/runs/i4f-two-tank-four-mouth-fixed8-physical-continue-20261025T1110Z"
+  },
+  "ambient_boundary_scope": {
+    "archived_case": "Retains the static ambient pressure/temperature boundary control from the short startup case.",
+    "alternative_fragments_are_separate": true,
+    "alternative_fragments_applied_to_archive": false,
+    "older_case_only_verification": true,
+    "fragment_manifest": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/replay-prep/patch-only-tested-v2512/manifest.json",
+    "p_rgh_fragment": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/replay-prep/patch-only-tested-v2512/p_rgh.boundaryField.patch-only.inc",
+    "temperature_fragment": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/replay-prep/patch-only-tested-v2512/T.boundaryField.patch-only.inc",
+    "older_pair_evidence": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/analysis/evidence.json",
+    "qualification": "The fragments were checked in a v2512 tiny boundary-relation test and a bounded pair from an older native8 checkpoint (0.560717355465 to 0.588704120044 s). They are not verified on this archived two-tank/four-outlet 5 ms state and do not establish physical ambient coupling."
+  },
+  "restart_note": "The archive contains a global restart, not the original 20-rank partition. For MPI use, repartition from the global checkpoint; see the archive README for serial and MPI restart notes. This is an exploratory 5 ms prefix, not a full-discharge result or validation."
+}

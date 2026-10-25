@@ -1,0 +1,785 @@
+{
+  "artifacts": {
+    "endpoint_native_case_fields": "../static-control/case/processors8/0.588704120044 and ../compressible-reservoir/case/processors8/0.588704120044",
+    "matched_boundary_history": "matched-boundary-history.csv",
+    "matched_bulk_history": "matched-bulk-history.csv",
+    "postProcess_Co": "../static-control/case/0.588704120044/Co and ../compressible-reservoir/case/0.588704120044/Co",
+    "this_summary": "evidence.json"
+  },
+  "both_schedule_steps_verified": true,
+  "created_utc": "2026-10-25T12:28:07.478663+00:00",
+  "endpoint_metrics": {
+    "compressible-reservoir": {
+      "dt_growth_factor_alphaCo_limit": 22.348502619062558,
+      "dt_growth_factor_co_limit": 25.79821235467357,
+      "dt_growth_factor_maxDeltaT_limit": 39.89877839516261,
+      "dt_original_schedule_s": 6.265856e-06,
+      "estimated_dt_headroom_factor": 22.348502619062558,
+      "estimated_dt_headroom_s": 0.00014003249922666885,
+      "headroom_cap_active": "alphaCo",
+      "maxCo_location_phase": {
+        "Co": 0.019381187856197357,
+        "T_K": 279.3949279785156,
+        "alpha_water": 1.235045829162118e-06,
+        "index": 209570,
+        "p_abs_Pa": 468174.71875,
+        "phase": "gas",
+        "rho_kg_m3": 5.838839054107666,
+        "speed_m_s": 67.3627700805664,
+        "value": 0.019381187856197357,
+        "xyz": [
+          0.6433655917644501,
+          -0.7770531177520752,
+          0.8064395487308502
+        ]
+      },
+      "maxT_location_phase": {
+        "Co": 0.001046205055899918,
+        "T_K": 293.29022216796875,
+        "alpha_water": 1.0,
+        "index": 164199,
+        "p_abs_Pa": 91323.1875,
+        "phase": "liquid",
+        "rho_kg_m3": 998.2000122070312,
+        "speed_m_s": 2.1679189205169678,
+        "value": 293.29022216796875,
+        "xyz": [
+          4.330503797581826,
+          -0.29821907019612814,
+          1.0123755294265877
+        ]
+      },
+      "maxU_location_phase": {
+        "Co": 0.019381187856197357,
+        "T_K": 279.3949279785156,
+        "alpha_water": 1.235045829162118e-06,
+        "index": 209570,
+        "p_abs_Pa": 468174.71875,
+        "phase": "gas",
+        "rho_kg_m3": 5.838839054107666,
+        "speed_m_s": 67.3627700805664,
+        "value": 67.3627700805664,
+        "xyz": [
+          0.6433655917644501,
+          -0.7770531177520752,
+          0.8064395487308502
+        ]
+      },
+      "minP_location_phase": {
+        "Co": 0.003449520329013467,
+        "T_K": 293.2802429199219,
+        "alpha_water": 1.0,
+        "index": 163537,
+        "p_abs_Pa": 13334.8525390625,
+        "phase": "liquid",
+        "rho_kg_m3": 998.2000122070312,
+        "speed_m_s": 11.641592025756836,
+        "value": 13334.8525390625,
+        "xyz": [
+          4.813792288303375,
+          -0.5965268984436989,
+          0.8646847382187843
+        ]
+      },
+      "not_measured_throughput": true,
+      "saved_endpoint_postprocessed_maxCo": 0.019381187856197357,
+      "solver_reported_pre_endpoint_interfaceCo": 0.01118643178298478,
+      "solver_reported_pre_endpoint_maxCo": 0.01954056092655448
+    },
+    "static-control": {
+      "dt_growth_factor_alphaCo_limit": 22.356542838350055,
+      "dt_growth_factor_co_limit": 0.9915738877044766,
+      "dt_growth_factor_maxDeltaT_limit": 39.89877839516261,
+      "dt_original_schedule_s": 6.265856e-06,
+      "estimated_dt_headroom_factor": 0.9915738877044766,
+      "estimated_dt_headroom_s": 6.213059193716421e-06,
+      "headroom_cap_active": "Co",
+      "maxCo_location_phase": {
+        "Co": 0.504248857498169,
+        "T_K": 228.07887268066406,
+        "alpha_water": 8.292791330723407e-29,
+        "index": 41253,
+        "p_abs_Pa": 100277.3984375,
+        "phase": "gas",
+        "rho_kg_m3": 1.531665325164795,
+        "speed_m_s": 1162.3404541015625,
+        "value": 0.504248857498169,
+        "xyz": [
+          5.805915832519531,
+          -0.0029650038050021976,
+          0.8575446680188179
+        ]
+      },
+      "maxT_location_phase": {
+        "Co": 0.10598517209291458,
+        "T_K": 495.5277404785156,
+        "alpha_water": 9.08433010348049e-14,
+        "index": 40995,
+        "p_abs_Pa": 101852.1015625,
+        "phase": "gas",
+        "rho_kg_m3": 0.7160574197769165,
+        "speed_m_s": 589.1959228515625,
+        "value": 495.5277404785156,
+        "xyz": [
+          5.828896598919159,
+          0.00501974228599322,
+          0.8651524508232227
+        ]
+      },
+      "maxU_location_phase": {
+        "Co": 0.504248857498169,
+        "T_K": 228.07887268066406,
+        "alpha_water": 8.292791330723407e-29,
+        "index": 41253,
+        "p_abs_Pa": 100277.3984375,
+        "phase": "gas",
+        "rho_kg_m3": 1.531665325164795,
+        "speed_m_s": 1162.3404541015625,
+        "value": 1162.3404541015625,
+        "xyz": [
+          5.805915832519531,
+          -0.0029650038050021976,
+          0.8575446680188179
+        ]
+      },
+      "minP_location_phase": {
+        "Co": 0.0034494607243686914,
+        "T_K": 293.2802429199219,
+        "alpha_water": 1.0,
+        "index": 163537,
+        "p_abs_Pa": 13326.7294921875,
+        "phase": "liquid",
+        "rho_kg_m3": 998.2000122070312,
+        "speed_m_s": 11.641383171081543,
+        "value": 13326.7294921875,
+        "xyz": [
+          4.813792288303375,
+          -0.5965268984436989,
+          0.8646847382187843
+        ]
+      },
+      "not_measured_throughput": true,
+      "saved_endpoint_postprocessed_maxCo": 0.504248857498169,
+      "solver_reported_pre_endpoint_interfaceCo": 0.01118240873857983,
+      "solver_reported_pre_endpoint_maxCo": 0.5043271233019385
+    }
+  },
+  "endpoint_time_s": 0.588704120044,
+  "expected_physical_steps": 373,
+  "limitations": [
+    "T is the solver shared mixture temperature, not a separate conservative gas temperature.",
+    "Static-boundary supersonic gas extrema and reservoir-boundary Co reduction are numerical/BC sensitivity evidence; they do not establish the real hardware ambient inflow or validated transfer.",
+    "The forced original timestep table prevents measuring adaptive throughput; headroom is a simple Co/alphaCo/maxDeltaT estimate only.",
+    "Bulk pressure average includes water and gas cells; valid gas headspace pressure is also provided as a sparse point sample."
+  ],
+  "matched_event_snapshots": {
+    "0.587925001947": {
+      "compressible-reservoir": {
+        "global_incoming_mass_weighted_Mach": 0.009202441614781877,
+        "incoming_gas_mass_kg_s": 39.553474993260934,
+        "incoming_h0_power_W": 11653076.708072664,
+        "mass_weighted_reconstructed_p0_Pa": 99999.99999999999,
+        "max_incoming_Mach_any_patch": 0.01392735399723731,
+        "patches": {
+          "ambientAnnulus": {
+            "incoming_area_m2": 5.315883695534051,
+            "incoming_gas_mass_kg_s": 8.505122536528177,
+            "incoming_total_enthalpy_W": 2505743.055720343,
+            "mass_weighted_h0_J_kg": 294615.7500916144,
+            "mass_weighted_inlet_Mach": 0.007547387750260106,
+            "mass_weighted_reconstructed_p0_Pa": 100000.0,
+            "max_inlet_Mach": 0.01224590737833832,
+            "phi_UdotSf_RMS_relative": 0.0004327951075250621,
+            "signed_gas_mass_flux_kg_s": -6.120659960286133,
+            "signed_gas_total_enthalpy_flux_W": -1803154.690872778
+          },
+          "externalSides": {
+            "incoming_area_m2": 12.06433740529001,
+            "incoming_gas_mass_kg_s": 27.9744451893258,
+            "incoming_total_enthalpy_W": 8241712.157332418,
+            "mass_weighted_h0_J_kg": 294615.7502518479,
+            "mass_weighted_inlet_Mach": 0.01048339822293849,
+            "mass_weighted_reconstructed_p0_Pa": 99999.99999999997,
+            "max_inlet_Mach": 0.01392735399723731,
+            "phi_UdotSf_RMS_relative": 9.900483405695732e-05,
+            "signed_gas_mass_flux_kg_s": 9.521315631202887,
+            "signed_gas_total_enthalpy_flux_W": 2809422.98498849
+          },
+          "farOutlet": {
+            "incoming_area_m2": 4.292017389663158,
+            "incoming_gas_mass_kg_s": 3.073907267406961,
+            "incoming_total_enthalpy_W": 905621.4950199039,
+            "mass_weighted_h0_J_kg": 294615.750000765,
+            "mass_weighted_inlet_Mach": 0.002124279324992403,
+            "mass_weighted_reconstructed_p0_Pa": 100000.0,
+            "max_inlet_Mach": 0.003579396379451137,
+            "phi_UdotSf_RMS_relative": 0.0008619597676206462,
+            "signed_gas_mass_flux_kg_s": -1.763359806556995,
+            "signed_gas_total_enthalpy_flux_W": -519371.4902759494
+          }
+        },
+        "phi_UdotSf_RMS_relative_max_patch": 0.0008619597676206462,
+        "sample_time_s": 0.587925001947,
+        "signed_gas_mass_flux_kg_s": 1.6372958643597586
+      },
+      "static-control": {
+        "global_incoming_mass_weighted_Mach": 0.016632868382404676,
+        "incoming_gas_mass_kg_s": 40.73045621993898,
+        "incoming_h0_power_W": 12012448.121787556,
+        "mass_weighted_reconstructed_p0_Pa": 100492.48554179969,
+        "max_incoming_Mach_any_patch": 1.226608355011363,
+        "patches": {
+          "ambientAnnulus": {
+            "incoming_area_m2": 4.943696978298848,
+            "incoming_gas_mass_kg_s": 8.586240489984103,
+            "incoming_total_enthalpy_W": 2541932.164880017,
+            "mass_weighted_h0_J_kg": 296047.16614276,
+            "mass_weighted_inlet_Mach": 0.0341142447323484,
+            "mass_weighted_reconstructed_p0_Pa": 102291.3896638098,
+            "max_inlet_Mach": 1.226608355011363,
+            "phi_UdotSf_RMS_relative": 0.005944208562441162,
+            "signed_gas_mass_flux_kg_s": -5.632241362780857,
+            "signed_gas_total_enthalpy_flux_W": -1671534.94184656
+          },
+          "externalSides": {
+            "incoming_area_m2": 11.78111952770785,
+            "incoming_gas_mass_kg_s": 30.06881456588684,
+            "incoming_total_enthalpy_W": 8859069.794392815,
+            "mass_weighted_h0_J_kg": 294626.5066413179,
+            "mass_weighted_inlet_Mach": 0.01269067264102582,
+            "mass_weighted_reconstructed_p0_Pa": 100012.783712063,
+            "max_inlet_Mach": 0.0172948332019491,
+            "phi_UdotSf_RMS_relative": 9.437247546475871e-05,
+            "signed_gas_mass_flux_kg_s": 7.788619408520282,
+            "signed_gas_total_enthalpy_flux_W": 2297799.093938537
+          },
+          "farOutlet": {
+            "incoming_area_m2": 4.235346120578736,
+            "incoming_gas_mass_kg_s": 2.075401164068038,
+            "incoming_total_enthalpy_W": 611446.1625147238,
+            "mass_weighted_h0_J_kg": 294615.8907014465,
+            "mass_weighted_inlet_Mach": 0.001425134449788919,
+            "mass_weighted_reconstructed_p0_Pa": 100000.1672071936,
+            "max_inlet_Mach": 0.00272426300708708,
+            "phi_UdotSf_RMS_relative": 0.0008946764590806584,
+            "signed_gas_mass_flux_kg_s": -0.6596164077747875,
+            "signed_gas_total_enthalpy_flux_W": -194203.2464869991
+          }
+        },
+        "phi_UdotSf_RMS_relative_max_patch": 0.005944208562441162,
+        "sample_time_s": 0.587925001947,
+        "signed_gas_mass_flux_kg_s": 1.4967616379646373
+      }
+    },
+    "0.588511510680": {
+      "compressible-reservoir": {
+        "global_incoming_mass_weighted_Mach": 0.009170147080690607,
+        "incoming_gas_mass_kg_s": 39.55957244141317,
+        "incoming_h0_power_W": 11654873.112268709,
+        "mass_weighted_reconstructed_p0_Pa": 99999.99999999996,
+        "max_incoming_Mach_any_patch": 0.01389964837130217,
+        "patches": {
+          "ambientAnnulus": {
+            "incoming_area_m2": 5.330930859441359,
+            "incoming_gas_mass_kg_s": 8.520993813502322,
+            "incoming_total_enthalpy_W": 2510418.983906466,
+            "mass_weighted_h0_J_kg": 294615.7500934303,
+            "mass_weighted_inlet_Mach": 0.007532311171628576,
+            "mass_weighted_reconstructed_p0_Pa": 100000.0,
+            "max_inlet_Mach": 0.01222587589753635,
+            "phi_UdotSf_RMS_relative": 0.0003031343311086023,
+            "signed_gas_mass_flux_kg_s": -6.14459181797157,
+            "signed_gas_total_enthalpy_flux_W": -1810206.313144329
+          },
+          "externalSides": {
+            "incoming_area_m2": 12.05361431550969,
+            "incoming_gas_mass_kg_s": 27.94377428813958,
+            "incoming_total_enthalpy_W": 8232676.026694867,
+            "mass_weighted_h0_J_kg": 294615.7502492114,
+            "mass_weighted_inlet_Mach": 0.01044845162068905,
+            "mass_weighted_reconstructed_p0_Pa": 99999.99999999994,
+            "max_inlet_Mach": 0.01389964837130217,
+            "phi_UdotSf_RMS_relative": 6.580389377961268e-05,
+            "signed_gas_mass_flux_kg_s": 9.567333963716584,
+            "signed_gas_total_enthalpy_flux_W": 2822996.794656374
+          },
+          "farOutlet": {
+            "incoming_area_m2": 4.322370054990483,
+            "incoming_gas_mass_kg_s": 3.094804339771268,
+            "incoming_total_enthalpy_W": 911778.1016673748,
+            "mass_weighted_h0_J_kg": 294615.7500007781,
+            "mass_weighted_inlet_Mach": 0.002137500910180281,
+            "mass_weighted_reconstructed_p0_Pa": 100000.0,
+            "max_inlet_Mach": 0.003589090568001605,
+            "phi_UdotSf_RMS_relative": 0.0005827394961720982,
+            "signed_gas_mass_flux_kg_s": -1.782025793074214,
+            "signed_gas_total_enthalpy_flux_W": -524870.686367256
+          }
+        },
+        "phi_UdotSf_RMS_relative_max_patch": 0.0005827394961720982,
+        "sample_time_s": 0.5885115106800001,
+        "signed_gas_mass_flux_kg_s": 1.6407163526707997
+      },
+      "static-control": {
+        "global_incoming_mass_weighted_Mach": 0.034786392240622833,
+        "incoming_gas_mass_kg_s": 41.07163802196898,
+        "incoming_h0_power_W": 12216573.49138762,
+        "mass_weighted_reconstructed_p0_Pa": 110895.08600667417,
+        "max_incoming_Mach_any_patch": 2.567021751281221,
+        "patches": {
+          "ambientAnnulus": {
+            "incoming_area_m2": 4.937602812998562,
+            "incoming_gas_mass_kg_s": 8.921437385490794,
+            "incoming_total_enthalpy_W": 2744293.869849472,
+            "mass_weighted_h0_J_kg": 307606.6951176053,
+            "mass_weighted_inlet_Mach": 0.117010188214005,
+            "mass_weighted_reconstructed_p0_Pa": 150114.5472167334,
+            "max_inlet_Mach": 2.567021751281221,
+            "phi_UdotSf_RMS_relative": 0.009680303605376622,
+            "signed_gas_mass_flux_kg_s": -5.897030830324674,
+            "signed_gas_total_enthalpy_flux_W": -1853147.852461447
+          },
+          "externalSides": {
+            "incoming_area_m2": 11.79776324052048,
+            "incoming_gas_mass_kg_s": 30.07509399013848,
+            "incoming_total_enthalpy_W": 8860920.226190738,
+            "mass_weighted_h0_J_kg": 294626.5181780048,
+            "mass_weighted_inlet_Mach": 0.01269725610875836,
+            "mass_weighted_reconstructed_p0_Pa": 100012.7974237099,
+            "max_inlet_Mach": 0.01730845935209483,
+            "phi_UdotSf_RMS_relative": 6.284875039915741e-05,
+            "signed_gas_mass_flux_kg_s": 7.804749452969629,
+            "signed_gas_total_enthalpy_flux_W": 2302557.031173232
+          },
+          "farOutlet": {
+            "incoming_area_m2": 4.235081954001913,
+            "incoming_gas_mass_kg_s": 2.075106646339705,
+            "incoming_total_enthalpy_W": 611359.3953474099,
+            "mass_weighted_h0_J_kg": 294615.8918751433,
+            "mass_weighted_inlet_Mach": 0.001428298491941703,
+            "mass_weighted_reconstructed_p0_Pa": 100000.1686019974,
+            "max_inlet_Mach": 0.002745789398230289,
+            "phi_UdotSf_RMS_relative": 0.0005941187315211311,
+            "signed_gas_mass_flux_kg_s": -0.6549619903023878,
+            "signed_gas_total_enthalpy_flux_W": -192832.0377242881
+          }
+        },
+        "phi_UdotSf_RMS_relative_max_patch": 0.009680303605376622,
+        "sample_time_s": 0.5885115106800001,
+        "signed_gas_mass_flux_kg_s": 1.2527566323425674
+      }
+    },
+    "0.588704120044": {
+      "compressible-reservoir": {
+        "global_incoming_mass_weighted_Mach": 0.009159266703412666,
+        "incoming_gas_mass_kg_s": 39.56150166779964,
+        "incoming_h0_power_W": 11655441.49273399,
+        "mass_weighted_reconstructed_p0_Pa": 99999.99999999996,
+        "max_incoming_Mach_any_patch": 0.01389117483642473,
+        "patches": {
+          "ambientAnnulus": {
+            "incoming_area_m2": 5.327233075215059,
+            "incoming_gas_mass_kg_s": 8.52597860747413,
+            "incoming_total_enthalpy_W": 2511887.582734224,
+            "mass_weighted_h0_J_kg": 294615.750094919,
+            "mass_weighted_inlet_Mach": 0.00752665601699898,
+            "mass_weighted_reconstructed_p0_Pa": 100000.0,
+            "max_inlet_Mach": 0.01221983803353176,
+            "phi_UdotSf_RMS_relative": 0.0002662279245245073,
+            "signed_gas_mass_flux_kg_s": -6.152471219156253,
+            "signed_gas_total_enthalpy_flux_W": -1812528.074535775
+          },
+          "externalSides": {
+            "incoming_area_m2": 12.07066560299333,
+            "incoming_gas_mass_kg_s": 27.93369035381769,
+            "incoming_total_enthalpy_W": 8229705.140795007,
+            "mass_weighted_h0_J_kg": 294615.7502483468,
+            "mass_weighted_inlet_Mach": 0.01043680639685342,
+            "mass_weighted_reconstructed_p0_Pa": 99999.99999999993,
+            "max_inlet_Mach": 0.01389117483642473,
+            "phi_UdotSf_RMS_relative": 5.722068942241517e-05,
+            "signed_gas_mass_flux_kg_s": 9.58219705811965,
+            "signed_gas_total_enthalpy_flux_W": 2827381.40006023
+          },
+          "farOutlet": {
+            "incoming_area_m2": 4.320802165023139,
+            "incoming_gas_mass_kg_s": 3.101832706507823,
+            "incoming_total_enthalpy_W": 913848.7692047603,
+            "mass_weighted_h0_J_kg": 294615.7500007828,
+            "mass_weighted_inlet_Mach": 0.002141868769952057,
+            "mass_weighted_reconstructed_p0_Pa": 100000.0,
+            "max_inlet_Mach": 0.003593495444891085,
+            "phi_UdotSf_RMS_relative": 0.0005067124443950176,
+            "signed_gas_mass_flux_kg_s": -1.788331863022383,
+            "signed_gas_total_enthalpy_flux_W": -526728.6029331464
+          }
+        },
+        "phi_UdotSf_RMS_relative_max_patch": 0.0005067124443950176,
+        "sample_time_s": 0.5887041200440001,
+        "signed_gas_mass_flux_kg_s": 1.6413939759410139
+      },
+      "static-control": {
+        "global_incoming_mass_weighted_Mach": 0.05436684381126388,
+        "incoming_gas_mass_kg_s": 41.29717534259266,
+        "incoming_h0_power_W": 12452180.75042551,
+        "mass_weighted_reconstructed_p0_Pa": 150739.89598518616,
+        "max_incoming_Mach_any_patch": 3.386567199175146,
+        "patches": {
+          "ambientAnnulus": {
+            "incoming_area_m2": 4.92912620544354,
+            "incoming_gas_mass_kg_s": 9.145852522049868,
+            "incoming_total_enthalpy_W": 2979570.391115031,
+            "mass_weighted_h0_J_kg": 325783.7783773073,
+            "mass_weighted_inlet_Mach": 0.2034014876299851,
+            "mass_weighted_reconstructed_p0_Pa": 329068.7494195609,
+            "max_inlet_Mach": 3.386567199175146,
+            "phi_UdotSf_RMS_relative": 0.01220391460072074,
+            "signed_gas_mass_flux_kg_s": -6.080161392368145,
+            "signed_gas_total_enthalpy_flux_W": -2076257.76273934
+          },
+          "externalSides": {
+            "incoming_area_m2": 11.80169462515807,
+            "incoming_gas_mass_kg_s": 30.07641339188389,
+            "incoming_total_enthalpy_W": 8861309.066279806,
+            "mass_weighted_h0_J_kg": 294626.5218136358,
+            "mass_weighted_inlet_Mach": 0.01269933465074128,
+            "mass_weighted_reconstructed_p0_Pa": 100012.8017447574,
+            "max_inlet_Mach": 0.01731233096199497,
+            "phi_UdotSf_RMS_relative": 5.466797236531947e-05,
+            "signed_gas_mass_flux_kg_s": 7.811059788318568,
+            "signed_gas_total_enthalpy_flux_W": 2304418.844756581
+          },
+          "farOutlet": {
+            "incoming_area_m2": 4.235081954001913,
+            "incoming_gas_mass_kg_s": 2.0749094286589,
+            "incoming_total_enthalpy_W": 611301.2930306722,
+            "mass_weighted_h0_J_kg": 294615.8924275464,
+            "mass_weighted_inlet_Mach": 0.001429765689611916,
+            "mass_weighted_reconstructed_p0_Pa": 100000.1692584651,
+            "max_inlet_Mach": 0.002755919970944409,
+            "phi_UdotSf_RMS_relative": 0.0005129859994265953,
+            "signed_gas_mass_flux_kg_s": -0.6532297127189892,
+            "signed_gas_total_enthalpy_flux_W": -192321.7730033913
+          }
+        },
+        "phi_UdotSf_RMS_relative_max_patch": 0.01220391460072074,
+        "sample_time_s": 0.5887041200440001,
+        "signed_gas_mass_flux_kg_s": 1.0776686832314342
+      }
+    }
+  },
+  "observer_definition": {
+    "gas constants": {
+      "Cp_J_kg_K": 1005.0,
+      "R_J_kg_K": 287.047490982475,
+      "gamma": 1.399814036969217
+    },
+    "h0": "Cp_air*T + |U|^2/2; incoming power is incoming mass flux times mass-weighted h0",
+    "incoming gas mass": "sum alphaAir*p/(R_air*T)*phi over phi<0 faces, alphaAir=1-alpha.water",
+    "phi authority": "phi is used for signed flux; U dot Sf is only reported as closure"
+  },
+  "pair_contract": {
+    "only_physical_difference": "ambientAnnulus/externalSides/farOutlet pressure and shared-T boundary treatment: static pressure+fixed 293.15 K versus compressible p0=100kPa isentropic pressure conversion plus inletOutletTotalTemperature T0=293.15 K",
+    "pMin_Pa": 10000,
+    "r1_preGO_failure": "static r1 guard failed before GO because local schedule file was not staged; preserved and stopped, no solver ranks; r2 is new immutable attempt.",
+    "same_8_rank_collated_partition": true,
+    "same_binary_sha256": "365632cc0065ee56e4efce2998ad596f6651745a95f8e9ab8661de4a5804329d",
+    "same_native_checkpoint_time_s": 0.560717355465,
+    "startup_relative_outer_update_gate": "recorded advisory only in both diagnostic arms; no hard stop reasons"
+  },
+  "schema": "i4f-compressible-ambient-reservoir-replay-pair-results/v1",
+  "scope": "Private, fixed-time BC sensitivity diagnostic; no production validation claim.",
+  "source_hashes_sha256": {
+    "analysis/postProcess-controlDict": "0db5068cd7917c7e737a82b82a2de0558abba55ab60ea1ebbfef4553d89cff33",
+    "analysis/tankPressure-controlDict-v2": "4a43800fd14231eb0166ddce1d5c8accac186c6331a355fdb0ca15179b559098",
+    "compressible-reservoir/bin/compressibleInterFoamFrozenAlphaSourceV2NoPout": "365632cc0065ee56e4efce2998ad596f6651745a95f8e9ab8661de4a5804329d",
+    "compressible-reservoir/guard.py": "392ee64314e00bf5d19e896a0eb018242873555ca98efefbaa693afc6f2097f9",
+    "compressible-reservoir/input-freeze.json": "79c48d860b71b8ec54643fcce471859eebfc4b5c38e9675f5e5753e47ebb213b",
+    "compressible-reservoir/launch-manifest.json": "1963b1bb6aa419a7993597c548e62676d7dbf86f56eae2b7742d52b7dc7ded22",
+    "compressible-reservoir/run_in_container.sh": "0fff1b52e217d6a3d78f98ea61556f712e04bcb47e14b0aa247ed4eae543b3e2",
+    "compressible-reservoir/timestep-schedule.csv": "e023930be385915fcfad1148966adc6db6acc465680ac5657322c493aa690c58",
+    "static-control/bin/compressibleInterFoamFrozenAlphaSourceV2NoPout": "365632cc0065ee56e4efce2998ad596f6651745a95f8e9ab8661de4a5804329d",
+    "static-control/guard.py": "392ee64314e00bf5d19e896a0eb018242873555ca98efefbaa693afc6f2097f9",
+    "static-control/input-freeze.json": "75d46b9e3003b01aac0e0008994cfbf3b8328c434215d1e64a2cada56201d68f",
+    "static-control/launch-manifest.json": "11b0404417ca63c60567d5039759bd2bb855eaa3de0fbd9413dce2b8a287bd1a",
+    "static-control/run_in_container.sh": "0fff1b52e217d6a3d78f98ea61556f712e04bcb47e14b0aa247ed4eae543b3e2",
+    "static-control/timestep-schedule.csv": "e023930be385915fcfad1148966adc6db6acc465680ac5657322c493aa690c58"
+  },
+  "tank_geometry_and_ledger": {
+    "headspace_probe": "existing valid probes index0 at (1.55,-0.55,1.55); report only where alpha.water<0.01; invalid (1,0,1.3) probe excluded",
+    "mouth_Q": "sampled plane x=5.79, alpha-weighted integral of Ux; interpolation-based observer, not native alphaPhi on that internal plane",
+    "phase_ledger": "native per-step inventories/boundary mass flux and cumulative defect from the same trace-instrumented binary",
+    "pressure_mean": "OpenFOAM volAverage(p) over native tankZone (both liquid and gas volumes)",
+    "tankZone_volume_m3": {
+      "compressible-reservoir": 1.9649653,
+      "static-control": 1.9649653
+    },
+    "tank_gas_volume_estimate": "tankZone volume minus tankWaterVolume; assumes alpha.water+alpha.air=1 and no solid volume fraction in this zone",
+    "water_zone_integral": "OpenFOAM volIntegrate(alpha.water) over native cellZone tankZone"
+  },
+  "terminals": {
+    "compressible-reservoir": {
+      "arm": "compressible-reservoir",
+      "branch_status": "normal_End_complete_native8_checkpoint",
+      "completed_steps": 373,
+      "container_id": "81a4ab9138e7be9d007bfa63d566740f54331f5268f1de73be773b896d0d1882",
+      "container_name": "i4f-ambient-reservoir-r2-20261025T1152Z",
+      "diagnostic_errors": [],
+      "exit_code": 0,
+      "fatal_log": false,
+      "final_phase_mass": {
+        "gas_flux_kg_s": 1.655370437733537,
+        "gas_kg": 24.06019689487227,
+        "pass": 11936,
+        "time_s": 0.588704120044,
+        "water_flux_kg_s": 187.4672183603784,
+        "water_kg": 2196.055959812335
+      },
+      "gas_cumulative_defect_fraction_initial": null,
+      "gas_cumulative_defect_kg": 0.0002832167067756521,
+      "initial_gas_kg": 24.1052898529187,
+      "initial_water_kg": 2200.368844070951,
+      "last_time_s": "0.588704120044",
+      "log_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/compressible-reservoir/case/log.ambient-reservoir-bc",
+      "native_checkpoint": {
+        "complete": true,
+        "fields": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true,
+          "uniform/time": true
+        },
+        "missing": [],
+        "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/compressible-reservoir/case/processors8/0.588704120044",
+        "time_s": 0.588704120044
+      },
+      "normal_End": true,
+      "oom_killed": false,
+      "parser_errors": [],
+      "persistent_final_floor_steps": 0,
+      "raw_pressure_contact_count": 0,
+      "root_status": "solver_terminal",
+      "schedule_contract": {
+        "csv": "/home/v/proj/bene/fire-track2/results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/compressible-reservoir/timestep-schedule.csv",
+        "per_step_tolerance_s": 2e-12,
+        "rows_including_endpoint": 374,
+        "sha256": "e023930be385915fcfad1148966adc6db6acc465680ac5657322c493aa690c58",
+        "steps": 373
+      },
+      "schedule_steps_verified": 373,
+      "started_at": "2026-10-25T11:52:37.806174298Z",
+      "startup_gate": {
+        "advisory_gate_policy": "relative_outer_update_admission_is_advisory_for_this_bounded_ambient_BC_pair_only",
+        "advisory_reasons": [
+          "non-phi final PIMPLE outer updates did not contract relative to the preceding outer update"
+        ],
+        "advisory_recorded_utc": "2026-10-25T11:53:05.742505+00:00",
+        "cumulative_gas_defect_fraction_initial": 1.544456967385859e-05,
+        "cumulative_water_defect_fraction_initial": 4.114783148448658e-08,
+        "hard_stop_reasons": [],
+        "operational_screen_not_validation": true,
+        "outer_update_comparison": {
+          "max_abs_dT_K": {
+            "final": 0.0,
+            "passes": true,
+            "penultimate": 0.0,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 0.0001
+          },
+          "max_abs_dU_m_s": {
+            "final": 0.01096142057525264,
+            "passes": false,
+            "penultimate": 0.006270691516019162,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 0.0001
+          },
+          "max_abs_dalpha1": {
+            "final": 3.046055296884731e-08,
+            "passes": true,
+            "penultimate": 1.265785365411887e-09,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 1e-06
+          },
+          "max_abs_dp_Pa": {
+            "final": 1.061544599593617,
+            "passes": true,
+            "penultimate": 0.5583012993447483,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 5.0
+          },
+          "max_abs_drho2_kg_m3": {
+            "final": 1.261103060645752e-05,
+            "passes": true,
+            "penultimate": 6.632481763357845e-06,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 0.001
+          }
+        },
+        "raw_pressure_contact_count": 0,
+        "reasons": [
+          "non-phi final PIMPLE outer updates did not contract relative to the preceding outer update"
+        ],
+        "scaled_phi_update_comparison": {
+          "absolute_tolerance_m3_s": 1e-09,
+          "advisory_only": true,
+          "interpretation": "operational outer-update screen; fixed native internal-face scale from source gate, not a direct bound on mouth-Q error or validation tolerance",
+          "measured_delta_m3_s": 1.473064359610275e-05,
+          "passes": false,
+          "reference_max_abs_phi_m3_s": 0.0086811225,
+          "reference_time_s": 0.050021166664,
+          "relative_tolerance": 0.0001,
+          "threshold_m3_s": 8.691122499999999e-07,
+          "warning": "phi update exceeds fixed native-flux-scaled advisory screen; not a stop condition"
+        },
+        "status": "advisory_failed_continuing_bounded_ambient_BC_diagnostic",
+        "time_s": 0.560840582281
+      },
+      "wall_elapsed_s": 1742.645417,
+      "water_cumulative_defect_fraction_initial": null,
+      "water_cumulative_defect_kg": 0.015342195823200887
+    },
+    "static-control": {
+      "arm": "static-control",
+      "branch_status": "normal_End_complete_native8_checkpoint",
+      "completed_steps": 373,
+      "container_id": "2a4e82256f1b398fbfbb3914a6de32f8cbf06ed7d4a72af68a05f99dfd1aab8e",
+      "container_name": "i4f-ambient-static-control-r2-20261025T1152Z",
+      "diagnostic_errors": [],
+      "exit_code": 0,
+      "fatal_log": false,
+      "final_phase_mass": {
+        "gas_flux_kg_s": 1.077405769523556,
+        "gas_kg": 24.06089587452808,
+        "pass": 11936,
+        "time_s": 0.588704120044,
+        "water_flux_kg_s": 187.5812955299832,
+        "water_kg": 2196.054519192312
+      },
+      "gas_cumulative_defect_fraction_initial": null,
+      "gas_cumulative_defect_kg": 0.0002831143223392524,
+      "initial_gas_kg": 24.1052898529187,
+      "initial_water_kg": 2200.368844070951,
+      "last_time_s": "0.588704120044",
+      "log_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/static-control/case/log.ambient-reservoir-bc",
+      "native_checkpoint": {
+        "complete": true,
+        "fields": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true,
+          "uniform/time": true
+        },
+        "missing": [],
+        "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/static-control/case/processors8/0.588704120044",
+        "time_s": 0.588704120044
+      },
+      "normal_End": true,
+      "oom_killed": false,
+      "parser_errors": [],
+      "persistent_final_floor_steps": 0,
+      "raw_pressure_contact_count": 0,
+      "root_status": "solver_terminal",
+      "schedule_contract": {
+        "csv": "/home/v/proj/bene/fire-track2/results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/static-control/timestep-schedule.csv",
+        "per_step_tolerance_s": 2e-12,
+        "rows_including_endpoint": 374,
+        "sha256": "e023930be385915fcfad1148966adc6db6acc465680ac5657322c493aa690c58",
+        "steps": 373
+      },
+      "schedule_steps_verified": 373,
+      "started_at": "2026-10-25T11:52:25.839916438Z",
+      "startup_gate": {
+        "advisory_gate_policy": "relative_outer_update_admission_is_advisory_for_this_bounded_ambient_BC_pair_only",
+        "advisory_reasons": [
+          "non-phi final PIMPLE outer updates did not contract relative to the preceding outer update"
+        ],
+        "advisory_recorded_utc": "2026-10-25T11:52:43.681512+00:00",
+        "cumulative_gas_defect_fraction_initial": 1.5438544827335476e-05,
+        "cumulative_water_defect_fraction_initial": 4.1121820196450305e-08,
+        "hard_stop_reasons": [],
+        "operational_screen_not_validation": true,
+        "outer_update_comparison": {
+          "max_abs_dT_K": {
+            "final": 0.0,
+            "passes": true,
+            "penultimate": 0.0,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 0.0001
+          },
+          "max_abs_dU_m_s": {
+            "final": 0.01096579810285229,
+            "passes": false,
+            "penultimate": 0.006270716041111704,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 0.0001
+          },
+          "max_abs_dalpha1": {
+            "final": 2.300593882065272e-09,
+            "passes": true,
+            "penultimate": 3.2081652556748e-08,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 1e-06
+          },
+          "max_abs_dp_Pa": {
+            "final": 0.6653403634263668,
+            "passes": true,
+            "penultimate": 0.6341707134415628,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 5.0
+          },
+          "max_abs_drho2_kg_m3": {
+            "final": 7.904361438049179e-06,
+            "passes": true,
+            "penultimate": 7.533795992165082e-06,
+            "relative_allowance": 1.25,
+            "roundoff_allowance": 0.001
+          }
+        },
+        "raw_pressure_contact_count": 0,
+        "reasons": [
+          "non-phi final PIMPLE outer updates did not contract relative to the preceding outer update"
+        ],
+        "scaled_phi_update_comparison": {
+          "absolute_tolerance_m3_s": 1e-09,
+          "advisory_only": true,
+          "interpretation": "operational outer-update screen; fixed native internal-face scale from source gate, not a direct bound on mouth-Q error or validation tolerance",
+          "measured_delta_m3_s": 1.471467184110259e-05,
+          "passes": false,
+          "reference_max_abs_phi_m3_s": 0.0086811225,
+          "reference_time_s": 0.050021166664,
+          "relative_tolerance": 0.0001,
+          "threshold_m3_s": 8.691122499999999e-07,
+          "warning": "phi update exceeds fixed native-flux-scaled advisory screen; not a stop condition"
+        },
+        "status": "advisory_failed_continuing_bounded_ambient_BC_diagnostic",
+        "time_s": 0.560840582281
+      },
+      "wall_elapsed_s": 1752.532444,
+      "water_cumulative_defect_fraction_initial": null,
+      "water_cumulative_defect_kg": 0.015316678794341863
+    }
+  },
+  "timestep_tolerance_s": 2e-12
+}

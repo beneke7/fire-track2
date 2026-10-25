@@ -38,8 +38,14 @@ envelope. The corrected tank/line/exterior partition assigns every cell once;
 mouth-plane classification and field checks precede the short startup pilot.
 Fully water-filled downstream lines are still an explicit hypothesis and add
 about .88 m3 per tank beyond the reported tank payload. Their initial fill has
-not been confirmed by the user. No complete revised-hardware discharge has yet
-been computed.
+not been confirmed by the user and remains the highest-impact missing physical
+input. The 1,779,258-cell revised-hardware case has now completed startup through
+0.005021166664 s without a pressure-floor contact, but this is not a useful
+release interval or completed discharge. Its native tank-plus-line water
+inventory loss and native face flux agree at about .08714 m3/s per tank, while
+the sampled-mouth plane reports about .068 m3/s; that gap remains unresolved.
+A divider comparison must report outlet quality alongside this discrepancy
+before it can support a hardware interpretation.
 
 A three-step, 20-rank startup comparison now has complete restart fields through
 4.368e-5 s. Eight and sixteen outer iterations pass the declared tank-pressure,
@@ -2023,7 +2029,8 @@ hardware, the next physical comparison is the same corrected envelope with
 and without the four inferred dividers per mouth, reporting discharge and
 outlet quality together. The prior one-/five-second opening scenarios remain
 hypothetical sensitivities: the user has clarified five seconds as total
-discharge duration, not actuation. No revised-hardware CFD has yet executed.
+discharge duration, not actuation. The revised-mesh pilot has only completed
+0.005021166664 s of startup, so no useful release interval is yet available.
 
 For the earlier single-outlet primed water/air reference, the opening valve controls the
 early restriction, gas expansion reduces tank pressure, and line inertia
@@ -2050,8 +2057,8 @@ In the reference, about 40% of the endpoint upstream storage-loss budget is
 the **net decrease of line inventory**; this is not a tracer attribution of
 which original water crossed the nozzle. An open passage could retain much
 less liquid during the charging wait. Confirm that state, the real valve
-opening trace, intake submergence, and the five-lamella cross-section before
-interpreting a finer no-vane simulation as a design prediction. Earlier
+opening trace, intake submergence, and the four-lamella cross-section before
+interpreting a no-divider simulation as a design prediction. Earlier
 drained-passage trials had a localized startup pressure problem; their smaller
 step and first-order momentum experiments did not remove clipping. That is
 a distinct unresolved initial-state scenario, not the current primed-run queue.
@@ -2063,3 +2070,22 @@ outlet gas marker with substantial water remaining. A full mixed gas/water
 blowdown, any unreleased residual and actual CO2/retardant discharge require
 the next physical model and measured initial conditions. Extrapolating the
 present histories to a complete emptying time would not be defensible.
+
+## Current evidence update — 25 October 2026
+
+A matched boundary-condition replay of the older one-tank reference advanced
+373 physical steps from the shared 0.560717355465 s checkpoint to 0.588704120044 s.
+The compressible-reservoir arm reduced global maximum speed from 1162 to 67 m/s
+and maximum temperature from 495.5 to 293.3 K, while tank pressure, mouth flow
+and phase ledgers remained close. Its 22.35× Courant-based timestep headroom is
+an estimate, not measured throughput or speedup; this replay does not validate
+ambient coupling or the revised hardware. See the [pair evidence](../results/summaries/i4f_20261025/ambient-reservoir-pair-r2-evidence.json)
+and [plot](../results/summaries/i4f_20261025/ambient-reservoir-pair-r2.png).
+
+The separate pre-ingestion water-storage audit finds −292.545 kJ tank-water
+thermal excess against the prior +58.956 kJ gas-energy/work remainder through
+0.450021 s. The fields use one shared mixture temperature; this phase-weighted
+storage change does not measure heat transfer to gas or close the budget without
+boundary and transport fluxes. See the [reproducible private audit](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-storage-extension-20261025T123001Z/water_thermal_storage.json),
+[plot](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-storage-extension-20261025T123001Z/water_storage_vs_gas_remainder.png),
+and [analysis script](../results/runs/i4f-headspace-energy-audit-20261025T075514Z/analysis/water-storage-extension-20261025T123001Z/analyze_water_storage.py).
