@@ -35,6 +35,15 @@ The candidate record is
 [`experiments/i4f_shortened_downstream_candidate.json`](experiments/i4f_shortened_downstream_candidate.json).
 Do not substitute the revised CAD into existing runs or their renderings.
 
+25 October initial-state correction: the user confirms that the passages
+downstream of the valves initially contain air. New baseline runs must use
+that initial phase, with ambient downstream gas and a separately accounted
+wetted tank-to-valve passage. Preserve the earlier fully primed-line runs as
+conditional numerical/initial-state evidence; their extra downstream water
+does not describe the confirmed hardware startup. The distributed scalar valve
+requires an explicit effective initial interface plane; it remains an assumed
+representation rather than a resolved closed disk.
+
 Connect primary-source physical scaling, an inventory/inertia/loss-based reduced
 model, and gas-compressible water–gas CFD of the complete simplified apparatus.
 Start with one declared tank orientation and sealed blowdown; keep maintained

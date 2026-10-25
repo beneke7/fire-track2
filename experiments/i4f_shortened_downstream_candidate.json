@@ -1,7 +1,7 @@
 {
   "schema": "i4f-downstream-length-sensitivity.v2",
   "experiment": "I4F shortened post-rise transition-and-mouth geometry alternatives",
-  "status": "user-directed provisional geometry: SHORT1 is the primary layout and SHORT2 is the shorter sensitivity; no CFD case changed or run",
+  "status": "user-directed provisional geometry: SHORT1 is the primary layout; its separate exploratory CFD pilot started on 2026-10-25. SHORT2 remains a geometry-only alternative. Historical CFD cases are unchanged.",
   "comparison_bundle_path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/comparison-manifest.json",
   "cli_default": {
     "post_rise_straight_m": 0.0,
@@ -65,9 +65,57 @@
     "branch_layout": "fixed horizontal +X layout from the reviewed aligned-ruled-v4 geometry"
   },
   "inventory_note": "The BREP pipe-plus-transition fluid volume outside each tank is reported for all three geometries. If lines are fully primed, geometry changes the initially primed line-water inventory; this is separate from the 1.350 m3 tank payload and does not establish that downstream lines are fully primed.",
+  "exploratory_cfd_comparison": {
+    "declared_utc": "2026-10-25T15:39:38.507952+00:00",
+    "hypothesis": "Removing downstream length reduces geometric liquid inertance, while the steeper circular-to-rectangular transition can change separation and outlet nonuniformity. The scalar reduced model holds transition loss fixed and cannot predict the latter effect. Early discharge may remain dominated by the common valve restriction.",
+    "compact_bundle": "results/runs/i4f-short1-coldstart-pilot-20261025T152415Z",
+    "legacy_bundles": [
+      "results/runs/i4f-quality-limited-coldstart-20261025T1258Z",
+      "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z"
+    ],
+    "initial_stage_horizon_s": 0.05,
+    "next_stage_target_s": 0.8,
+    "physical_endpoint": "Continue beyond a numerical stage target where feasible until the approach of connected tank-headspace gas to an intake is established, or stop with a preserved numerical-failure diagnosis. A fixed 0.8 s horizon alone is not a complete discharge.",
+    "matched_conditions": "Same tank geometry and native initial tank inventories, 12 bar absolute ideal-air headspace, water properties, gravity, scalar valve law, solver binary and eight PIMPLE outer iterations. Each run retains its own immutable mesh and input record.",
+    "native_initial_primed_line_water_m3": {
+      "compact_tank_A": 0.6813566389157878,
+      "compact_tank_B": 0.6814073281733437,
+      "qualification": "Additional to 1.350 m3 of water per tank. Fully primed downstream pipes are an unconfirmed initial-state hypothesis; the shorter geometry reduces total initial line-water inventory."
+    },
+    "observables": [
+      "Tank pressure, liquid inventory and native water withdrawal rate",
+      "Native mouth control-volume flux and cumulative water balance; keep sampled-plane estimates separate",
+      "Same-observer outlet velocity distribution, direction, nonuniformity, reverse flow and momentum flux",
+      "Transition separation and minimum pressure with phase and location",
+      "Connected headspace-gas approach, separated from external-air entrainment",
+      "Computed emerging sheet extent and thickness only where resolved"
+    ],
+    "comparison_limitations": "Tank payload and initial pressure match, but total primed liquid inventory and downstream meshes differ. The old coarse mesh has two configured face-tet failures; the compact mesh passes the configured quality criteria. This is an exploratory geometric sensitivity, not a mesh-isolated effect or matched-total-payload engineering gain.",
+    "initial_fill_revision": {
+      "received_utc": "2026-10-25T15:48:32.617867+00:00",
+      "user_reply": "Initially contain air",
+      "new_primary": "Same compact geometry with air-filled downstream passages; initialize tank-to-valve wetted passage separately.",
+      "primed_case_role": "Retain short pilot as conditional initial-state sensitivity; do not extend it as hardware baseline. The legacy long primed run is being saved and stopped.",
+      "inventory_comparison": "The two cases intentionally differ in initial line-water inventory; this is not a matched-total-payload geometric design comparison."
+    },
+    "air_filled_primary": {
+      "bundle": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z",
+      "container_id": "c49fa7487931eac8c63733618f6d7538b2e1020e644e2f07fb6ac1255c43fca1",
+      "docker_started_at": "2026-10-25T15:58:24.037034808Z",
+      "native_initial_tank_water_m3_each": 1.35,
+      "native_additional_upstream_feed_water_m3": {
+        "A": 0.25105684381198295,
+        "B": 0.2511091492240681
+      },
+      "effective_valve_plane_x_m_assumed": 2.25,
+      "initial_downstream_air_pressure_absolute_Pa": 100000,
+      "initial_temperature_K": 293.15,
+      "status": "Exploratory ten-rank cold-start pilot; exact identity, release and first steps verified, not physical validation."
+    }
+  },
   "scope_limitations": [
     "The 1.0 m and 0.8 m lengths are provisional options, not dimensions measured from the photograph or hardware.",
-    "This comparison does not rerun or change CFD, pressure histories, valve behavior, or solver inputs.",
+    "The published CAD comparison alone establishes no flow result. The new compact CFD is a separate immutable run and does not modify any historical case.",
     "No hydraulic performance, pressure-loss, mesh-quality, or discharge-time improvement is inferred from compactness alone.",
     "Exact BREP volume differences are geometry inventory estimates; any later CFD cell-zone initialization still requires native mesh reconciliation."
   ]

@@ -14,6 +14,17 @@ the new hardware case includes both tanks and all four outlets.
 
 ## Current scientific result
 
+The latest user confirmation changes the physical baseline: the passages
+downstream of the valves initially contain air. Earlier liquid-filled-line
+calculations below are conditional initial-state/numerical evidence, not the
+confirmed hardware startup. A new compact case initializes downstream air at
+ambient pressure, while accounting separately for tank water and the wetted
+tank-to-valve passages. The effective initial valve plane remains an assumed
+representation of the distributed scalar restriction. The existing fully
+wetted reduced model does not describe this line-filling transient or predict
+its first water arrival; that model's intake-crown time is not a dry-start
+endpoint prediction.
+
 User clarification on 25 October establishes two tanks, two valves/outlets per
 tank, .900 m tank diameter, .300 m valve diameter, and 1.350 m3 liquid per tank.
 Additional gas headspace is .20–.25 times liquid volume, giving nominal vessel
@@ -29,16 +40,28 @@ no-lamella inputs and must not be presented as this revised hardware case.
 
 The current 12-bar, two-tank/four-outlet run uses a 303,108-cell mesh with two
 recorded face-tet quality failures. It completed .05 s and has continued beyond
-.3 s; this remains exploratory. A matched .05 s halved-timestep trial changes
+.5 s; this remains exploratory. A matched .05 s halved-timestep trial changes
 probe pressure by 103 Pa, sampled flow by about .2% and maximum speed by 4.1%,
-at about twice the wall cost. A separate 1,779,258-cell reservoir-boundary case
-is running from the initial state to assess numerical sensitivity. At .2 s,
+at about twice the wall cost. The separate 1,779,258-cell reservoir-boundary case
+completed .050021 s with a full restart and no pressure clipping. Compared at
+the same time, its headspace probe pressure differs by 403 Pa (0.034%), tank
+drawdown by -2.44%, and sampled mouth-plane mean water fraction is .944 versus
+.970 coarse. Native headspace capacities differ by about 1%; this is startup
+sensitivity, not formal convergence or a late-time sheet comparison. See the
+[matched metrics](../results/summaries/i4f_20261025/current-startup-grid-comparison.json).
+At .2 s on the coarse run,
 native gas mass remains nearly constant, while mass-weighted gas temperature is
 284.905 K versus 281.357 K at the gas probe; mixed cells contain 26.5% of the
 tank-zone gas volume. This is an interface-resolution and thermal-model
 question, not evidence of foam. See the [current results and diagnostic images](../results/summaries/i4f_20261025/README.md).
 The [portable geometry generator](../scripts/i4f_four_outlet_geometry/README.md)
 reproduces the approved horizontal layout in an isolated locked CAD environment.
+The user-directed compact revision removes the post-rise straight and uses a
+1 m transition/outlet assembly. Its separate 269,680-cell primed-line pilot
+completed .050021 s normally; configured mesh-quality checks pass. Fully primed compact lines contain another
+1.363 m3 of water across the apparatus, in addition to the 2.700 m3 tank load.
+Thus the compact/long comparison matches tank states but not total initial
+water inventory; no matched-payload performance gain follows from it.
 
 The corrected two-tank, four-mouth geometry has a 1,779,258-cell mesh. Its
 zero-thickness divider-wall variant passes all configured mesh-quality rows,
@@ -49,10 +72,10 @@ exclude wall-cut pipe cells, undercounting line volume by about 17%. Including
 those cells brings the internal native volume within 0.21% of the exact CAD
 envelope. The corrected tank/line/exterior partition assigns every cell once;
 mouth-plane classification and field checks precede the short startup pilot.
-Fully water-filled downstream lines are still an explicit hypothesis and add
-about .88 m3 per tank beyond the reported tank payload. Their initial fill has
-not been confirmed by the user and remains the highest-impact missing physical
-input. The 1,779,258-cell revised-hardware case has now completed startup through
+Fully water-filled historical lines add about .88 m3 per tank beyond the
+reported tank payload. The user has now rejected that downstream initial-fill
+hypothesis; the new air-filled case supersedes it as the physical baseline.
+The earlier 1,779,258-cell revised-hardware case completed startup through
 0.005021166664 s without a pressure-floor contact, but this is not a useful
 release interval or completed discharge. Its native tank-plus-line water
 inventory loss and native face flux agree at about .08714 m3/s per tank, while
@@ -638,10 +661,17 @@ and report discharge and uniformity tradeoffs together.
 - Transition inner surfaces, length and cross-sections, actual final opening,
   lip thickness and any internal guides. Preserve original CAD and identify
   uncertain dimensions instead of silently repairing them.
-- For the five reported lamellae: plate orientation, thickness, spacing and
+- For the four dividers in the latest user description: plate orientation,
+  thickness, spacing and
   angles, leading-edge locations relative to the transition, termination at
   or before the exit, and wall/tip clearances. Confirm whether they divide the
   1 m span or the 0.15 m height; these make different hydraulic passages.
+- Confirm the initial liquid interface at each valve seat, upstream wetted-pipe
+  inventory and any trapped liquid pockets. The user confirms initially
+  air-filled downstream passages. The older primed compact sensitivity adds
+  1.363 m3 of line water across both tanks; that does not describe the confirmed
+  startup. Keep all line inventories separate from the reported 2.700 m3 tank
+  payload.
 - Synchronized tank pressure, liquid inventory or discharged mass versus time,
   valve position, and pressure taps before/after the valve and transition.
 - Outlet velocity/flow-direction maps or calibrated high-speed images with

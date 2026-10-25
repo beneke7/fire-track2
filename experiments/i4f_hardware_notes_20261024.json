@@ -231,6 +231,14 @@
         "whether 20–25% means headspace relative to liquid volume"
       ],
       "case_change_status": "This update changes documentation only. No solver input, geometry, or live CFD job was modified."
+    },
+    {
+      "received_utc": "2026-10-25T15:48:32.617867+00:00",
+      "source": "User response to explicit initial-fill question in this thread",
+      "question": "Before opening the valves, are the pipes and rectangular outlets downstream of them already full of liquid, or do they initially contain air?",
+      "reply_verbatim": "Initially contain air",
+      "interpretation": "Downstream of each valve is initially air-filled. This supersedes the fully primed downstream-line hypothesis for new baseline runs. The tank-to-valve upstream passage remains wetted where connected below the tank free surface; its separate inventory and the effective plane of the distributed scalar valve require explicit geometric definition.",
+      "case_change_status": "Primary directed a new immutable compact air-filled-downstream case, graceful save of the old long primed-line run, and no long continuation of the compact primed pilot. Historical inputs/results are preserved."
     }
   ],
   "history_snapshots": {
@@ -309,6 +317,12 @@
       "start_location": "about halfway through expansion/outlet",
       "scope": "first pass"
     },
-    "provenance": "User-reported, not measured or verified against supplied CAD."
+    "provenance": "User-reported, not measured or verified against supplied CAD.",
+    "initial_downstream_fill": {
+      "phase": "air",
+      "scope": "Pipes, transitions and rectangular outlets downstream of the valves, before opening",
+      "status": "User-confirmed initial phase; upstream feed-pipe inventory remains separately geometry-derived.",
+      "source_received_utc": "2026-10-25T15:48:32.617867+00:00"
+    }
   }
 }

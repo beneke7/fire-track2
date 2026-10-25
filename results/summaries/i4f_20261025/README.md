@@ -1,5 +1,14 @@
 # I4F discharge: published results, 25 October 2026
 
+**Initial-state correction:** the user confirms that passages downstream of
+the valves initially contain air. The existing movies and liquid-full-line
+comparisons here preserve the earlier primed-line assumption. They do not show
+that confirmed startup. The new 269,680-cell air-filled compact baseline is
+running. Its [native initial-state image](current-air-filled-initial-state.png)
+shows 1.350 m3 in each tank, with another .25106/.25111 m3 in wetted upstream
+feeds and air downstream of the assumed x=2.25 m valve planes. The image shows
+initialization, not a discharge result. The rectangular mouths are at x=4.8 m.
+
 [Watch the 3D tank cutaway video, 10× slower](tank-cutaway-10x.mp4).
 [Alternate outlet-focused render, same computed sequence](outlet-reference-10x.mp4).
 
@@ -20,7 +29,7 @@ remain unchanged under `docs/`.
 [Updated tank cutaway](current-tank-cutaway.png) ·
 [User-reported hardware record](../../../experiments/i4f_hardware_notes_20261024.json)
 
-The new 1,779,258-cell CFD case completed **0.005021 s of startup** with a saved
+An earlier 1,779,258-cell CFD case completed **0.005021 s of startup** with a saved
 restart and no recorded pressure-floor contacts. This is not a useful discharge
 interval or hardware validation. See [startup summary](current-startup-summary.json)
 and [early model comparison](startup-model-comparison.png). Tank pressure
@@ -31,6 +40,25 @@ the sampled mouth plane reports about .068 m3/s. That distinct sampled-plane
 gap remains unresolved and must not be hidden by adding downstream storage.
 Both models use the same nominal valve-opening law and minimum
 opening; the discrepancy is not evidence of a different prescribed aperture.
+
+The later reservoir-boundary fine run completed **0.050021 s** normally, with
+all native restart fields and no pressure clipping. The matched
+[coarse/fine startup comparison](current-startup-grid-comparison.json),
+[metrics](current-startup-grid-comparison.csv) and
+[plot](current-startup-grid-comparison.png) show 403 Pa headspace-probe pressure
+difference (0.034%) and 2.44% less tank drawdown on the fine mesh. Sampled
+mouth-plane mean water fraction differs more: 0.944 fine versus 0.970 coarse.
+Native headspace capacities differ by about 1%, and the coarse mesh retains two
+quality failures; this is nominal-geometry startup sensitivity, not formal
+convergence or evidence of later sheet accuracy.
+The [native thermal comparison](current-startup-thermal-grid.json),
+[metrics](current-startup-thermal-grid.csv) and
+[plot](current-startup-thermal-grid.png) show that mixed cells carry 19.94% of
+coarse tank-gas volume versus 12.69% fine at .05 s. Some difference is already
+present in the initial interface representation (14.34% versus 11.37%).
+Gas-mass-weighted shared temperatures differ by only .055 K, but probe
+agreement alone does not establish the same interface partition or a separately
+conservative gas-energy calculation.
 
 The older [pressure-floor comparison](pressure-floor-comparison.png) found
 nearly identical endpoint bulk outputs at 10/5 kPa floors, but the
