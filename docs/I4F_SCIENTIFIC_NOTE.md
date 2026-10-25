@@ -69,14 +69,38 @@ the velocity update 4.54 m/s, despite positive pressure and no clipping.
 This is a diagnostic stop, not evidence of a converged discharge. A restart
 from the clean .400087 s checkpoint reproduced the condition at .443925 s;
 the 24-layer source-resolution comparison stopped at .442746 s. Both saved
-all restart fields with positive pressure and no clipping. A smaller-Courant
-trial and a cell-localized diagnostic trace are running with the original
-stop thresholds. No completed-discharge or late mesh-convergence claim follows.
+all restart fields with positive pressure and no clipping. The smaller-Courant
+trial instead encountered a raw intermediate pressure of 2698 Pa and saved
+at .410422 s; the final saved pressure does not replace that raw observation.
+Disabling the transonic pressure Jacobian and relaxing the pressure-component
+matrices by .5 also retained the alternating outer pressure updates, stopping
+near .443765 and .443685 s respectively without pressure clipping. These
+one-factor tests do not establish a remedy. A cell-localized trace places the
+later cycle in mixed transition cells; source-lag observations alone do not
+establish its cause. No completed-discharge or late mesh-convergence claim follows.
 The earlier air-filled original-source case saved at .392 s after a raw
 pressure-floor event. A short restart passed .395 s without reproducing it;
 original and diagnostic binaries produce identical short-restart results.
 The cause of that earlier event remains unresolved. Current execution belongs
 in [STATUS](STATUS.md), not in a completed-discharge claim.
+
+The next numerical comparisons separate two mechanisms. Repeated pressure
+solutions update the explicit non-orthogonal Laplacian correction, as described
+in the [OpenFOAM tutorial](https://www.openfoam.com/documentation/tutorial-guide/2-incompressible-flow/2.2-flow-around-a-cylinder).
+Momentum equation relaxation changes the iteration matrix and source; its
+effect must vanish at a converged fixed point before interpreting an unchanged
+governing equation. The [current OpenCFD explanation](https://doc.openfoam.com/2606/tools/processing/numerics/solvers/under-relaxation/)
+also distinguishes an absent relaxation entry from factor one, which can enforce
+diagonal equality. The installed v2512 source, rather than documentation for a
+different release, remains the execution authority. A separate finer-tank
+calculation retains the original numerical settings to isolate mesh sensitivity.
+The current [phase-source fork](../solvers/i4f_frozen_sp/applications/solvers/multiphase/VoF/alphaEqn.H)
+retains the stock predictor but uses its captured `Sp` in the MULES correction
+instead of recomputing that coefficient. Its earlier comparison used a primed
+one-tank case; no matched standard-update control exists for the current dry
+four-branch case. A flag-off diagnostic is therefore a separate necessary
+comparison before attributing the recurrence solely to the mesh or the stock
+OpenFOAM formulation. It does not retroactively change the prior trajectories.
 
 The saved .350114 and .400087 s corrected-source fields locate the coldest
 cells in tank gas, at 255.02 and 245.66 K. The lowest pressures instead occur
@@ -137,6 +161,23 @@ Both phases are refined together; this is not an isolated gas-only refinement.
 The study uses 2 outer iterations and 2 pressure corrections, versus 8 and 2
 in the apparatus, and its solver identity is recorded separately. It does
 not establish the cause or correction size in the turbulent apparatus.
+
+The apparatus's [first tank-interface refinement comparison](../results/summaries/i4f_20261025/tank-interface-startup-comparison.json)
+uses exact native states at .050021166664 s, with about 25 rather than 50 mm
+local tank spacing. The 299,248- and 456,954-cell cases retain identical
+physics and solution dictionaries; the latter uses the previously checked
+lean audit build. In both tanks, gas-mass-weighted temperature decreases
+from 291.886 to 291.797 K. Gas volume in cells with .01 < alpha_water < .99
+falls from 15.57% to 12.56% of total tank gas volume. Tank withdrawal differs
+by about .18 mL and native seat water flux by .014%; these are observed early
+differences, not established accuracy bounds. Initial tank water matches,
+but remeshing increases gas capacity by .883% and reduces total line water
+by 7.1 mL. The [figure](../results/summaries/i4f_20261025/tank-interface-startup-comparison.png)
+therefore normalizes pressure and gas volume to each mesh's own initial state.
+At those distinct observed expansion ratios, pressure exceeds the adiabatic
+reference by .179% and .143%, respectively. This single startup snapshot
+does not establish a convergence order, thermal mechanism or later behavior;
+the same-settings refined continuation is needed for the .4 s comparison.
 
 The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
 also shows how the initial agreement evolves. At that same time, CFD tank-A

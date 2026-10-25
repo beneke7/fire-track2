@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 23:11 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 23:29 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -8,13 +8,19 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 - **Live pressure-coupling diagnostic:** ten MPI ranks in Docker
   `dc9e1ff553ed`, StartedAt 2026-10-25T23:07:03.122833725Z, advance from the
-  clean .400086712911 s checkpoint. It reached .413553340104 s after
-  115 completed steps without raw pressure contacts. The only numerical change
+  clean .400086712911 s checkpoint. It reached .428793622666 s after
+  326 completed steps without raw pressure contacts (23:26 UTC check). The only numerical change
   is one non-orthogonal pressure correction instead of zero; all pressure and
   momentum relaxation entries are absent. The bounded serial dispatcher tests
   momentum relaxation only if this arm fails before a healthy .46 s endpoint.
   No guard threshold is relaxed. Bundle:
   `results/runs/i4f-pressure-nonorth1-20261025T2304Z/`.
+  A separate actual queue then tests the standard MULES source update only
+  if both numerical arms fail; it changes `i4fFrozenPredictorSp` to false
+  from the same clean seed. Earlier stock controls used a primed one-tank
+  case and do not answer this current comparison. The stock and long-result
+  waiters are bounded to 07:12:03 UTC on October 26, anchored to the first
+  arm's original Docker start. Individual arm guards remain two hours.
 - **Finer-tank cold start completed cleanly:** the 456,954-cell mesh reached
   .050021166664 s in 212 steps, normal End at 23:04:47 UTC, with all 14 restart
   fields, zero pressure-floor contacts and cumulative water/gas mass defects
@@ -25,11 +31,22 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   gas volume. The first continuation failed during preflight because a dictionary
   reader was incorrectly used on a collated binary field; that no-step attempt
   is preserved. Fresh continuation `09f65430a32a`, StartedAt
-  2026-10-25T23:10:37.351624880Z, now advances on ten ranks toward .4 s. Four
-  completed steps reached .051271166664 s without raw pressure contacts.
+  2026-10-25T23:10:37.351624880Z, now advances on ten ranks toward .4 s. At the 23:26 UTC check, 149
+  completed restart steps reached .087521166664 s without raw contacts; this
+  live log observation is not an additional saved checkpoint.
   Restart field hashes and uniform/time are exact; only the printed startTime
   metadata comparison uses numeric tolerance. Bundle:
   `results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/`.
+- **Exact-time tank-mesh comparison completed.** At .050021166664 s,
+  tank gas-mass-weighted temperature changes 291.886 to 291.797 K, mixed-cell
+  gas-volume share 15.57% to 12.56%, and native seat flux about -.014%.
+  Tank withdrawals differ by about .18 mL. Gas capacity is .883% larger on
+  the refined mesh; total initial line water is 7.1 mL lower. These are early
+  observed differences, not accuracy bounds or convergence. Root inspected
+  the figure and checked the weighted ideal-gas identity. The corrected v2
+  analysis uses installed R=287.0477481284761 J/kg/K; v1's approximate R and
+  its 35.7 ppm gas-mass offset are preserved privately. See the
+  [published comparison](../results/summaries/i4f_20261025/tank-interface-startup-comparison.json).
 - **The principal blocker remains a repeated pressure-coupling cycle near
   .44 s.** The original 299,248-cell run saved at .443669498426 s after sustained
   3.29 kPa final outer updates. A clean restart control and the 279,536-cell
@@ -77,6 +94,10 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   Current corrected-source movies stop at .443669 s before useful exterior
   liquid is resolved. The 881,431-cell downstream mesh is prepared but its
   conditional pilot remains held; it is not an executed refinement result.
+  A fresh downstream-refinement diagnostic is being prepared to launch only
+  after all three pressure/source arms fail and their ten ranks are free;
+  its refined region covers the localized pressure-cycle cells. Preparation
+  is not an executed mesh comparison.
   Legacy primed-line, one-tank and aerial runs are not resumed.
 
 A bounded Astra review found no obvious pressure-operator sign error and

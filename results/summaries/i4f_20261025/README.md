@@ -12,6 +12,15 @@ different solver/numerical settings and exact native-field checks.
 
 ![Gas-layer resolution sensitivity and native temperature profile](gas-layer-grid-sensitivity.png)
 
+**First apparatus tank-refinement comparison:** at the exact same .050021 s
+native state, local refinement from about 50 to 25 mm barely changes drainage
+and valve flow, while gas temperature is .089 K lower and mixed-cell gas-volume
+share falls from 15.57% to 12.56%. The meshes have .883% different initial gas
+capacities; this is one early snapshot, not convergence. See the
+[figure](tank-interface-startup-comparison.png),
+[native metrics](tank-interface-startup-comparison.csv), and
+[analysis with source hashes](tank-interface-startup-comparison.json).
+
 [Watch corrected-source pipe filling through 0.443669 s, 10× slow](corrected-source-cutaway-through-0p443-10x.mp4)
 or the [all-four-branches outlet view](corrected-source-outlets-through-0p443-10x.mp4).
 The 4.874-second movies show ten actual saved states, including initialization,
