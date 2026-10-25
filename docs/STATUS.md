@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 18:22 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 18:25 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -59,8 +59,11 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   `results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/`.
   Earlier missing-dictionary, parser/path/marker and dynamic-code-manifest
   failures are preserved; none reached a CFD step. No quality threshold was
-  relaxed. A post-pair comparison/conditional fine continuation is being
-  prepared separately; do not count it as armed yet. Prospective 2% source-flow accuracy
+  relaxed. Root verified active pair supervision and the separate
+  `i4f-short1-valve-band-axial-postpair-retry1d.service`: it waits for healthy
+  captures, checks common-time native seat fluxes, and only launches the
+  48-layer continuation toward 1.3 s if the predeclared 2% screen passes.
+  It honors PAUSE and bounded stage/campaign limits. Prospective 2% source-flow accuracy
   and apparatus mesh sensitivity are separate numerical targets, not hardware
   validation. Evidence: `results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/analysis/`
   and `results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/`.
@@ -77,8 +80,10 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   .00235%, with small tank-pressure spread. This is not a heat-transfer
   measurement or fitted input. Dense energy fluxes remain unmeasured; the
   common-temperature equation's net energy behavior is not established by
-  checking source selection alone. Fine worker prepares a separate logging-only
-  binary for actual raw pressure-contact cells, without changing equations.
+  checking source selection alone. A separate logging-only binary is built
+  (SHA `303f4d0e...5062579`) for actual raw pressure-contact cells, without
+  changing equations. Build/help checks passed; no numerical replay has run
+  and it is not substituted into the active pair or automatic continuation.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.
