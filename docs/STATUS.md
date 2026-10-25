@@ -1,13 +1,24 @@
 # Live project status
 
-Updated: 2026-10-25 18:25 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 18:45 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
+- **Two CPU runs are live, ten ranks each.** The 299,248-cell, 48-layer
+  exploratory continuation is Docker `ee2629b9f7b1`, StartedAt 18:45:08 UTC,
+  in `results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/`.
+  Root verified advancing steps and carried phase ledgers. Its 1.3 s limit
+  is an observation horizon, not emptying; the active campaign allows 4 h
+  stages with 3 h 40 saves under a 12 h bound. The separate original-case
+  logger replay is Docker `4f5645618b2f`, StartedAt 18:42:41 UTC, from the
+  clean .349939877967 s checkpoint toward .395 s, stopping/saving at the
+  first raw floor contact. It uses the explicitly recorded logging-only
+  binary; no equation or pressure-floor changes. Both exact-ID guards are
+  active. No aerial/HPC/GPU jobs were started.
 - **Air-filled baseline saved after a numerical pressure-floor event.**
-  User confirmed this directly. The compact cold start completed .050021 s
+  User confirmed downstream air directly. The compact cold start completed .050021 s
   normally with all restart fields. Its same-physics ten-rank continuation was
   Docker `42b79f4695fa`, StartedAt 16:09:55 UTC, in
   `results/runs/i4f-short1-dryline-continue-20261025T160951Z/`, targeting 1.3 s.
@@ -16,7 +27,9 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   reached -18.53 kPa in two cells; peak clipped liquid was .0264 kg. This is
   a diagnostic stop despite normal solver End. The wall-budget controller
   correctly holds with `held_validation_error_no_restart`. No child resumed.
-  Fine worker localizes the raw event; final saved minimum is a different
+  Localization found only post-floor minima near the rise bend; raw cell IDs
+  were not logged. The separate replay now targets that missing evidence.
+  Final saved minimum is a different
   observation and must not be substituted for the raw offending cell.
   Tank load is 2.700 m3 plus .502166 m3 of wetted upstream feed; the assumed
   effective valve plane is x=2.25 m. All downstream gas starts at 100 kPa and
@@ -50,20 +63,23 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   x=1.95–2.25 m, retaining Cd/opening and normalizing discrete source weights.
   Two axial-refinement meshes (279,536 and 299,248 cells) pass all nine
   configured checks. All 14 zones and initial fields were repaired/verified
-  through the refinement map. Both corrected cold starts are now launched in
-  parallel, ten ranks each, under exact-ID guards. Docker `0b27687ba66d`
+  through the refinement map. Both corrected cold starts completed .050021 s
+  normally with all 14 fields and no raw floor contact. Docker `0b27687ba66d`
   (12.5 mm, StartedAt 18:21:55 UTC) and `f7577b552a14` (6.25 mm, 18:22:18)
-  use the unchanged binary. Root verified their full IDs/start times/resource
-  caps and advancing CFD steps (.00477/.00127 s), with no guard errors or
-  pressure-floor contacts at this capture. Current bundle:
+  used the unchanged binary. Completed pair bundle:
   `results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/`.
   Earlier missing-dictionary, parser/path/marker and dynamic-code-manifest
   failures are preserved; none reached a CFD step. No quality threshold was
-  relaxed. Root verified active pair supervision and the separate
-  `i4f-short1-valve-band-axial-postpair-retry1d.service`: it waits for healthy
-  captures, checks common-time native seat fluxes, and only launches the
-  48-layer continuation toward 1.3 s if the predeclared 2% screen passes.
-  It honors PAUSE and bounded stage/campaign limits. Prospective 2% source-flow accuracy
+  relaxed. The unchanged 2% per-branch screen is **HOLD**, failing only the
+  first two rows (12 and 26.4 microseconds; worst relative difference 5.12%).
+  Final flux differences are about 1.50%; tank drawdown differs 69.7 mL
+  (4.66391 versus 4.59423 L for tank A). The finest result is close to the
+  reduced model's approximately 4.57 L, versus the old original's 6.547 L.
+  Root reviewed the complete histories and authorized the separately labeled
+  exploratory long continuation above; the failed screen is not relabeled.
+  The initial postpair wrapper treated comparator HOLD exit 2 as unavailable;
+  that status is preserved and later decision metadata states the real result.
+  Prospective 2% source-flow accuracy
   and apparatus mesh sensitivity are separate numerical targets, not hardware
   validation. Evidence: `results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/analysis/`
   and `results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/`.
@@ -82,8 +98,9 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   common-temperature equation's net energy behavior is not established by
   checking source selection alone. A separate logging-only binary is built
   (SHA `303f4d0e...5062579`) for actual raw pressure-contact cells, without
-  changing equations. Build/help checks passed; no numerical replay has run
-  and it is not substituted into the active pair or automatic continuation.
+  changing equations. Its isolated replay is now active; it is not substituted
+  into the matched pair or the long fine continuation. A passive energy
+  observer prototype is tested separately before any case integration.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.

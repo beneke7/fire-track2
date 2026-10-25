@@ -2242,8 +2242,20 @@ The resulting numerical action is a .30 m initially wetted source upstream
 of the seat, with local axial refinement and explicitly normalized weights.
 Prepared 279,536- and 299,248-cell meshes pass all nine configured quality
 criteria, preserving mapped initial phase inventories and all fourteen zones.
-Their forthcoming matched cold starts address source resolution; they do not
-resolve the butterfly-disk wake. A prospective 2% source-flow target against
+Their matched cold starts both completed .050021 s normally. The
+[native flux comparison](../results/summaries/i4f_20261025/air-filled-valve-band-axial-comparison.json)
+retains **HOLD** under the unchanged 2% pointwise target: only the first two
+rows, at 12 and 26.4 microseconds, fail, with maximum difference 5.12%.
+At the endpoint, per-branch flow differs about 1.50%; tank-A drawdown is
+4.66391 L on 12.5 mm axial cells and 4.59423 L on 6.25 mm cells, compared
+with approximately 4.57 L in the reduced model and 6.547 L in the original
+mixed-source case. The 69.7 mL tank-inventory difference agrees closely with
+the integrated native seat-flux difference. This supports a substantial
+numerical origin for the early mismatch without fitting Cd. It is a shared-
+assumption consistency result, not validation of the valve or thermal model.
+The separately labeled exploratory long fine run proceeds with this known
+sensitivity; the failed screen remains failed. These cases do not resolve
+the butterfly-disk wake. A prospective 2% source-flow target against
 the analytical duct and a 2% apparatus mesh-sensitivity target have different
 meanings. Neither is experimental validation. Horizontal and vertical vessel
 CAD now exist with inspected connection sections, but the provisional vertical

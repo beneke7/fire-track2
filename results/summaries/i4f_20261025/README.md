@@ -64,6 +64,15 @@ not ensure the correct flow rate. This all-water, gravity-free slip duct tests
 the scalar closure, not the real butterfly valve or apparatus. No fitted
 discharge-coefficient correction is applied.
 
+The [completed 12.5/6.25 mm apparatus comparison](air-filled-valve-band-axial-comparison.json)
+and [native histories](air-filled-valve-band-axial-comparison.csv) retain a
+strict **HOLD**: the first two timesteps exceed the 2% pointwise target.
+Endpoint flow differs about 1.50%, and tank-A withdrawal is 4.66391 versus
+4.59423 L, close to the reduced model's approximately 4.57 L. Both cases
+ended normally at .050021 s without pressure-floor contacts. The longer
+fine run is explicitly exploratory; this does not establish mesh independence
+or hardware validation.
+
 The [opening follow-up](valve-resistance-opening-comparison.json) and
 [table](valve-resistance-opening-comparison.csv) give analytical flow errors
 of .645%, .0162% and .00414% at constant opening fractions .02, .5 and 1,
