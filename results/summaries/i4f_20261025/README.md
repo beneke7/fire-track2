@@ -40,8 +40,28 @@ separate source-placement trial is testing that mechanism without fitting Cd.
 Its [first exact-time result](air-filled-valve-source-comparison.json) and
 [CSV](air-filled-valve-source-comparison.csv) show 12.1% less tank drawdown at
 .05 s with resistance wholly upstream of the initial front, preserving its
-fully wet integral. This explains part of the model/CFD gap; later sensitivity
-and a direct resistance benchmark remain pending.
+fully wet integral. This explains part of the model/CFD gap; later apparatus
+sensitivity is still running.
+
+The [direct resistance benchmark](valve-resistance-duct-results.json) and
+[case table](valve-resistance-duct-cases.csv) isolate a numerical contribution:
+for a .30 m scalar-resistance reach, reducing axial cell size from 25 to
+6.25 mm lowers analytical steady-flow error from 6.34% to 1.38%. A .10 m
+reach gives 27.66% and 5.02%, respectively. All four runs end normally with
+native inlet/outlet flux closure; matching the integrated force alone does
+not ensure the correct flow rate. This all-water, gravity-free slip duct tests
+the scalar closure, not the real butterfly valve or apparatus. No fitted
+discharge-coefficient correction is applied.
+
+The compact geometry generator now supports both
+[horizontal](compact-horizontal-tank-geometry.png) and
+[vertical](compact-vertical-tank-geometry.png) tank axes. Their
+[horizontal connection section](compact-horizontal-tank-connections.png) and
+[vertical connection section](compact-vertical-tank-connections.png) were
+inspected. The records ([horizontal](compact-horizontal-tank-geometry.json),
+[vertical](compact-vertical-tank-geometry.json)) state the provisional placement,
+equal vessel capacities and branch-intersection checks. These are geometry
+comparisons; no vertical-tank performance result is claimed.
 
 [Watch the 3D tank cutaway video, 10× slower](tank-cutaway-10x.mp4).
 [Alternate outlet-focused render, same computed sequence](outlet-reference-10x.mp4).

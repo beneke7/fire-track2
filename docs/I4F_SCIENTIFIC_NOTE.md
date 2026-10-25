@@ -2192,6 +2192,46 @@ present histories to a complete emptying time would not be defensible.
 
 ## Current evidence update — 25 October 2026
 
+The user's initial-state clarification now fixes the current reference:
+passages downstream of the valves initially contain air. The compact baseline
+has 1.350 m3 water per tank plus .25106/.25111 m3 in wetted tank-to-valve feeds,
+and ambient gas downstream of the assumed x=2.25 m seat planes. Earlier
+primed-line results below remain historical initial-state sensitivities.
+The [current movie](../results/summaries/i4f_20261025/current-air-filled-cutaway-10x.mp4)
+shows filling through .200021 s, without a resolved exterior sheet. The
+[portable moving-front model](../results/summaries/i4f_20261025/air-filled-moving-front-model.json)
+conditionally predicts first mouth water near .612/.620 s and intake-crown
+exposure near 1.127 s for one tank/two branches. A full-bore front, polytropic
+gas and incomplete downstream-air/transition treatment limit those predictions;
+they do not determine actual emptying time. Isothermal gas changes the crown
+event by about 14%. No complete corrected CFD discharge has yet finished.
+
+A [targeted all-water pressure-loss benchmark](../results/summaries/i4f_20261025/valve-resistance-duct-results.json)
+uses the executed scalar source, fixed static pressures of 1.2 and .1 MPa,
+gravity zero, equal-area end sections and slip sidewalls. With water density
+998.2 kg/m3, Cd=.7 and opening fraction .02, K=1/(Cd f)^2=5102.04 and
+the steady reference is Q=A sqrt(2 delta-p/(rho K))=.0464583 m3/s.
+All four cases end normally. The native flow error is +6.34% for a .30 m
+source on 25 mm axial cells, and +1.38% on 6.25 mm cells; the .10 m source
+gives +27.66% and +5.02%. Inlet/outlet flux closure is below 3e-11 relative
+and source-integrated force per area recovers the imposed pressure drop.
+Thus conservation and the correct integrated force do not establish that the
+discrete source delivers the intended pressure–flow relation. These errors
+must not be used as fitted correction factors for the multiphase apparatus.
+
+The resulting numerical action is a .30 m initially wetted source upstream
+of the seat, with local axial refinement and explicitly normalized weights.
+Prepared 279,536- and 299,248-cell meshes pass all nine configured quality
+criteria, preserving mapped initial phase inventories and all fourteen zones.
+Their forthcoming matched cold starts address source resolution; they do not
+resolve the butterfly-disk wake. A prospective 2% source-flow target against
+the analytical duct and a 2% apparatus mesh-sensitivity target have different
+meanings. Neither is experimental validation. Horizontal and vertical vessel
+CAD now exist with inspected connection sections, but the provisional vertical
+placement has no computed discharge-performance result yet.
+
+The remaining paragraphs in this update describe earlier reference cases.
+
 A matched boundary-condition replay of the older one-tank reference advanced
 373 physical steps from the shared 0.560717355465 s checkpoint to 0.588704120044 s.
 The compressible-reservoir arm reduced global maximum speed from 1162 to 67 m/s

@@ -57,6 +57,7 @@ from OCP.TopoDS import TopoDS, TopoDS_Compound
 # stated as user-confirmed in the project hardware notes.
 TANK_Y = (-0.550, 0.550)
 TANK_Z = 1.250
+PIPE_START_X_M = 0.250
 PIPE_ID_M = 0.300
 VALVE_D_M = 0.300
 PIPE_RUN_Z = 0.500
@@ -214,7 +215,7 @@ def branch_pipe(
     port_offset = branch["port_y_offset_m"]
     tank_r = tank_diameter_m / 2
     z_port = TANK_Z - math.sqrt(tank_r**2 - port_offset**2)
-    p0 = [0.250, y_tank + 0.30 * port_offset, TANK_Z - 0.100]
+    p0 = [PIPE_START_X_M, y_tank + 0.30 * port_offset, TANK_Z - 0.100]
     p1 = [0.550, y_tank + port_offset, z_port]
     p2 = [0.800, y_pipe, PIPE_RUN_Z]
     p3 = [1.300, y_pipe, PIPE_RUN_Z]
@@ -242,6 +243,68 @@ def branch_pipe(
     if not pipe.IsDone() or len(solids(pipe.Shape())) != 1:
         raise RuntimeError("Could not sweep a single connected branch pipe")
     return pipe.Shape(), y_pipe
+
+
+def make_tank(y_tank: float, radius: float, length: float, tank_axis: str):
+    """Build the same flat-ended vessel with an explicit provisional axis."""
+    if tank_axis == "horizontal":
+        base = gp_Pnt(0.0, y_tank, TANK_Z)
+        direction = gp_Dir(1, 0, 0)
+        axis_start = 0.0
+        placement = "base at x=0; +X axis through (y_tank,TANK_Z)"
+    elif tank_axis == "vertical":
+        base = gp_Pnt(PIPE_START_X_M, y_tank, TANK_Z - radius)
+        direction = gp_Dir(0, 0, 1)
+        axis_start = TANK_Z - radius
+        placement = (
+            "bottom at TANK_Z - tank radius; +Z axis through the existing internal pipe-start "
+            "x=0.250 m and tank center y"
+        )
+    else:
+        raise ValueError(f"Unsupported tank axis: {tank_axis}")
+    shape = BRepPrimAPI_MakeCylinder(gp_Ax2(base, direction), radius, length).Shape()
+    axis_end = axis_start + length
+    return shape, {
+        "axis_direction_xyz": [1, 0, 0] if tank_axis == "horizontal" else [0, 0, 1],
+        "axis_start_coordinate_m": axis_start,
+        "axis_end_coordinate_m": axis_end,
+        "base_center_xyz_m": [float(base.X()), float(base.Y()), float(base.Z())],
+        "placement_convention": placement,
+    }
+
+
+def pipe_start_section_clearance(
+    y_tank: float, branch: dict, tank_radius: float, tank_length: float, tank_axis: str
+) -> dict:
+    """Conservative check that the complete circular pipe start fits in its own tank."""
+    p0 = np.asarray(
+        [PIPE_START_X_M, y_tank + 0.30 * branch["port_y_offset_m"], TANK_Z - 0.100],
+        dtype=float,
+    )
+    pipe_radius = PIPE_ID_M / 2
+    if tank_axis == "horizontal":
+        radial_center = math.hypot(p0[1] - y_tank, p0[2] - TANK_Z)
+        axial_coordinate = p0[0]
+        axis_min, axis_max = 0.0, tank_length
+    else:
+        bottom = TANK_Z - tank_radius
+        radial_center = math.hypot(p0[0] - PIPE_START_X_M, p0[1] - y_tank)
+        axial_coordinate = p0[2]
+        axis_min, axis_max = bottom, bottom + tank_length
+    side_clearance = float(tank_radius - radial_center - pipe_radius)
+    negative_end_clearance = float(axial_coordinate - axis_min - pipe_radius)
+    positive_end_clearance = float(axis_max - axial_coordinate - pipe_radius)
+    minimum_clearance = float(min(side_clearance, negative_end_clearance, positive_end_clearance))
+    return {
+        "pipe_start_center_xyz_m": list(map(float, p0)),
+        "pipe_start_radius_m": pipe_radius,
+        "tank_radial_center_distance_m": radial_center,
+        "tank_side_clearance_m": side_clearance,
+        "negative_axis_end_clearance_m": negative_end_clearance,
+        "positive_axis_end_clearance_m": positive_end_clearance,
+        "minimum_conservative_full_start_clearance_m": minimum_clearance,
+        "entire_start_section_inside_own_tank": bool(minimum_clearance >= -1e-10),
+    }
 
 
 def aligned_ruled_transition(
@@ -395,7 +458,8 @@ def render_assembly(
     envelope_stl: Path,
     plates_stl: Path,
     output: Path,
-    mouth_x_m: float,
+    assembly_bounds: list[float],
+    tank_axis: str,
     divider_count: int,
     divider_thickness_m: float,
 ):
@@ -416,20 +480,79 @@ def render_assembly(
                 linewidth=0,
             )
         )
-    ax.set_xlim(0, mouth_x_m)
-    ax.set_ylim(-1.15, 1.15)
-    ax.set_zlim(0.25, 1.80)
-    ax.set_box_aspect((mouth_x_m, 2.30, 1.55))
-    ax.view_init(elev=28, azim=-57)
+    xmin, xmax, ymin, ymax, zmin, zmax = assembly_bounds
+    spans = (xmax - xmin, ymax - ymin, zmax - zmin)
+    pads = tuple(max(0.04, span * 0.04) for span in spans)
+    xmin, xmax = xmin - pads[0], xmax + pads[0]
+    ymin, ymax = ymin - pads[1], ymax + pads[1]
+    zmin, zmax = zmin - pads[2], zmax + pads[2]
+    ax.set_xlim(xmin, xmax)
+    ax.set_ylim(ymin, ymax)
+    ax.set_zlim(zmin, zmax)
+    ax.set_box_aspect((xmax - xmin, ymax - ymin, zmax - zmin))
+    ax.view_init(elev=25 if tank_axis == "vertical" else 28, azim=-57)
     ax.set_xlabel("X · discharge (+X), m")
     ax.set_ylabel("Y · tank columns / mouth width, m")
     ax.set_zlabel("Z · vertical, m")
     ax.set_title(
-        "Reconstructed two-tank / four-outlet fluid envelope\n"
+        f"Provisional {tank_axis}-axis two-tank / four-outlet envelope\n"
         f"Grey: envelope · amber: {divider_count} assumed "
         f"{1000 * divider_thickness_m:g} mm fitted divider solids"
     )
     ax.grid(False)
+    fig.tight_layout()
+    fig.savefig(output, facecolor="white")
+    plt.close(fig)
+
+
+def render_tank_connection_section(envelope_stl: Path, output: Path, tank_axis: str):
+    """Render an actual STL slice through tank cross-sections and pipe starts."""
+    fluid = pv.read(str(envelope_stl)).extract_surface().triangulate().clean()
+    if tank_axis == "horizontal":
+        origin = (PIPE_START_X_M, 0.0, 0.0)
+        normal = (1.0, 0.0, 0.0)
+        label = f"YZ section at x={PIPE_START_X_M:.3f} m (through pipe starts)"
+        view = "yz"
+        axis_labels = ("Y · tank columns, m", "Z · vertical, m")
+    else:
+        z_cut = TANK_Z - 0.100
+        origin = (0.0, 0.0, z_cut)
+        normal = (0.0, 0.0, 1.0)
+        label = f"XY section at z={z_cut:.3f} m (through pipe starts)"
+        view = "xy"
+        axis_labels = ("X · discharge, m", "Y · tank columns, m")
+    section = fluid.slice(normal=normal, origin=origin)
+    if section.n_cells == 0:
+        raise RuntimeError(f"Tank/connection STL section is empty for {tank_axis} axis")
+    points = np.asarray(section.points, dtype=float)
+    projected = points[:, [1, 2]] if view == "yz" else points[:, [0, 1]]
+    fig, ax = plt.subplots(figsize=(8, 7), dpi=160)
+    line_indices = np.asarray(section.lines, dtype=np.int64)
+    cursor = 0
+    segment_count = 0
+    while cursor < len(line_indices):
+        count = int(line_indices[cursor])
+        ids = line_indices[cursor + 1 : cursor + 1 + count]
+        if count >= 2:
+            ax.plot(projected[ids, 0], projected[ids, 1], color="#33495e", linewidth=1.25)
+            segment_count += 1
+        cursor += count + 1
+    if segment_count == 0:
+        plt.close(fig)
+        raise RuntimeError(
+            f"Tank/connection section has no drawable line segments for {tank_axis} axis"
+        )
+    xmin, ymin = np.min(projected, axis=0)
+    xmax, ymax = np.max(projected, axis=0)
+    padx = max(0.04, (xmax - xmin) * 0.06)
+    pady = max(0.04, (ymax - ymin) * 0.06)
+    ax.set_xlim(xmin - padx, xmax + padx)
+    ax.set_ylim(ymin - pady, ymax + pady)
+    ax.set_aspect("equal", adjustable="box")
+    ax.set_xlabel(axis_labels[0])
+    ax.set_ylabel(axis_labels[1])
+    ax.set_title(f"{tank_axis.capitalize()} tank-axis connection section\n{label}")
+    ax.grid(True, alpha=0.2)
     fig.tight_layout()
     fig.savefig(output, facecolor="white")
     plt.close(fig)
@@ -530,31 +653,46 @@ def generate(args) -> dict:
 
     envelope_components = []
     tank_records = []
+    tank_shapes = []
+    tank_placements = []
     transition_rows = []
     line_volume_records = []
+    connection_records = []
     plate_solids = []
     mid_faces = []
     divider_records = []
-    for tank_index, y_tank in enumerate(TANK_Y, start=1):
-        tank = BRepPrimAPI_MakeCylinder(
-            gp_Ax2(gp_Pnt(0.0, y_tank, TANK_Z), gp_Dir(1, 0, 0)),
-            tank_r,
-            tank_length,
-        ).Shape()
+    for y_tank in TANK_Y:
+        tank, placement = make_tank(y_tank, tank_r, tank_length, args.tank_axis)
         if not BRepCheck_Analyzer(tank).IsValid():
-            raise RuntimeError(f"Tank {tank_index} failed BREP validity")
+            raise RuntimeError(f"Tank at y={y_tank:g} m failed BREP validity")
+        tank_shapes.append(tank)
+        tank_placements.append(placement)
+    for tank_index, y_tank in enumerate(TANK_Y, start=1):
+        tank = tank_shapes[tank_index - 1]
+        placement = tank_placements[tank_index - 1]
         envelope_components.append(tank)
         tank_records.append(
             {
                 "tank_index": tank_index,
                 "center_y_m": y_tank,
+                "axis": args.tank_axis,
                 "volume_m3": volume(tank),
                 "length_m": tank_length,
                 "bounds_m": bounds(tank),
+                **placement,
             }
         )
         tank_line_volume = 0.0
+        other_tank = tank_shapes[1 - (tank_index - 1)]
         for branch in BRANCHES:
+            start_check = pipe_start_section_clearance(
+                y_tank, branch, tank_r, tank_length, args.tank_axis
+            )
+            if not start_check["entire_start_section_inside_own_tank"]:
+                raise RuntimeError(
+                    f"Pipe start is not fully inside own tank: tank{tank_index}/{branch['name']} "
+                    f"clearance={start_check['minimum_conservative_full_start_clearance_m']:.9g} m"
+                )
             branch_shape, y_pipe = branch_pipe(
                 y_tank, branch, args.tank_diameter_m, PIPE_ID_M, stations
             )
@@ -569,9 +707,29 @@ def generate(args) -> dict:
             pipe_inside_tank = require_common(branch_shape, tank)
             transition_inside_tank = require_common(transition, tank)
             overlap_inside_tank = require_common(pipe_transition_overlap, tank)
+            pipe_inside_other_tank = require_common(branch_shape, other_tank)
+            transition_inside_other_tank = require_common(transition, other_tank)
             pipe_volume = volume(branch_shape)
             transition_volume = volume(transition)
             overlap_volume = volume(pipe_transition_overlap)
+            own_tank_overlap_volume = volume(pipe_inside_tank)
+            other_tank_overlap_volume = volume(pipe_inside_other_tank) + volume(
+                transition_inside_other_tank
+            )
+            if own_tank_overlap_volume <= 1e-10:
+                raise RuntimeError(
+                    f"Branch has no positive overlap with own tank: tank{tank_index}/{branch['name']}"
+                )
+            if other_tank_overlap_volume > 1e-8:
+                raise RuntimeError(
+                    f"Branch connects the other tank: tank{tank_index}/{branch['name']} "
+                    f"overlap={other_tank_overlap_volume:.9g} m^3"
+                )
+            if overlap_volume <= 1e-10:
+                raise RuntimeError(
+                    f"Pipe and transition do not overlap through to the mouth: "
+                    f"tank{tank_index}/{branch['name']}"
+                )
             train_volume = pipe_volume + transition_volume - overlap_volume
             inside_tank_volume = (
                 volume(pipe_inside_tank)
@@ -584,6 +742,21 @@ def generate(args) -> dict:
                     f"No positive downstream line volume: tank{tank_index}/{branch['name']}"
                 )
             tank_line_volume += outside_tank_volume
+            connection_records.append(
+                {
+                    "tank_index": tank_index,
+                    "branch": branch["name"],
+                    "start_section_check": start_check,
+                    "pipe_overlap_own_tank_m3": own_tank_overlap_volume,
+                    "pipe_and_transition_overlap_m3": overlap_volume,
+                    "pipe_and_transition_overlap_other_tank_m3": other_tank_overlap_volume,
+                    "transition_connected_to_own_mouth_x_m": stations.mouth_x_m,
+                    "start_inside_own_tank": True,
+                    "positive_own_tank_overlap": True,
+                    "does_not_connect_other_tank": True,
+                    "connected_through_to_own_horizontal_mouth": True,
+                }
+            )
             line_volume_records.append(
                 {
                     "tank_index": tank_index,
@@ -722,14 +895,17 @@ def generate(args) -> dict:
     write_stl(finite_dividers, dividers_stl)
     assembly_png = figures_dir / "two_tank_four_outlet_assembly.png"
     sections_png = figures_dir / "transition_cross_sections.png"
+    tank_connection_png = figures_dir / f"tank_connection_section_{args.tank_axis}.png"
     render_assembly(
         envelope_stl,
         dividers_stl,
         assembly_png,
-        stations.mouth_x_m,
+        bounds(envelope),
+        args.tank_axis,
         args.lamella_count,
         args.lamella_thickness_m,
     )
+    render_tank_connection_section(envelope_stl, tank_connection_png, args.tank_axis)
     render_sections(
         sections_png,
         args.intermediate_width_m,
@@ -773,7 +949,16 @@ def generate(args) -> dict:
         "runtime": {"python": platform.python_version(), "packages": package_versions},
         "units": "SI metres; +X discharge; Y separates tanks and spans mouth width; +Z up",
         "assumptions": {
-            "tank_axis": "+X horizontal, flat-ended cylinder",
+            "tank_axis": args.tank_axis,
+            "tank_axis_direction_xyz": [1, 0, 0] if args.tank_axis == "horizontal" else [0, 0, 1],
+            "tank_placement_convention": (
+                "Horizontal: flat-ended cylinder base at x=0, axis through (y_tank,TANK_Z)."
+                if args.tank_axis == "horizontal"
+                else "Vertical: flat-ended cylinder bottom at TANK_Z - tank radius; its +Z axis "
+                "passes through the existing internal pipe-start x=0.250 m and each tank-center y. "
+                "This is a provisional placement convention, not a measured rotated installation. "
+                "Branch spines, valves, and outlets remain fixed, so wall intersections change."
+            ),
             "tank_diameter_m": args.tank_diameter_m,
             "water_volume_m3_per_tank": args.water_volume_m3,
             "headspace_to_water_volume_ratio": args.headspace_ratio,
@@ -828,6 +1013,7 @@ def generate(args) -> dict:
             ),
         },
         "topology": {
+            "tank_axis": args.tank_axis,
             "tank_count": len(TANK_Y),
             "mouth_count": len(transition_rows),
             "envelope_solid_count": envelope_check["solid_count"],
@@ -835,6 +1021,26 @@ def generate(args) -> dict:
             "divider_count": len(divider_records),
             "zero_thickness_segment_count": len(mid_faces),
             "passages_per_mouth": args.lamella_count + 1,
+        },
+        "tank_connection_checks": {
+            "method": (
+                "The pipe-start disk is conservatively bounded by a radius-r ball inside the own-tank "
+                "radial wall and flat ends; exact BREP common volumes verify positive own-tank overlap, "
+                "zero other-tank intersection, and positive pipe/transition overlap through the mouth."
+            ),
+            "records": connection_records,
+            "all_starts_inside_own_tanks": all(
+                item["start_inside_own_tank"] for item in connection_records
+            ),
+            "all_have_positive_own_tank_overlap": all(
+                item["positive_own_tank_overlap"] for item in connection_records
+            ),
+            "none_connects_other_tank": all(
+                item["does_not_connect_other_tank"] for item in connection_records
+            ),
+            "all_connect_through_own_mouth": all(
+                item["connected_through_to_own_horizontal_mouth"] for item in connection_records
+            ),
         },
         "area_metrics": {
             "pipe_area_m2": pipe_area,
@@ -851,6 +1057,7 @@ def generate(args) -> dict:
             "divider_index": mid_index.relative_to(output).as_posix(),
             "assembly_png": assembly_png.relative_to(output).as_posix(),
             "section_png": sections_png.relative_to(output).as_posix(),
+            "tank_connection_section_png": tank_connection_png.relative_to(output).as_posix(),
         },
         "roundtrip": {"envelope": envelope_check, "fitted_dividers": finite_check},
     }
@@ -869,6 +1076,12 @@ def parse_args():
         help="new output directory (never overwritten by this CLI)",
     )
     parser.add_argument("--tank-diameter-m", type=float, default=0.900)
+    parser.add_argument(
+        "--tank-axis",
+        choices=("horizontal", "vertical"),
+        default="horizontal",
+        help="vessel axis; vertical placement is provisional and documented in the geometry record",
+    )
     parser.add_argument("--water-volume-m3", type=float, default=1.350)
     parser.add_argument(
         "--headspace-ratio",
@@ -969,6 +1182,7 @@ def main():
             {
                 "output_dir": str(args.output_dir.resolve()),
                 "tank_capacity_each_m3": summary["tank_metrics"]["capacity_m3_each"],
+                "tank_axis": summary["assumptions"]["tank_axis"],
                 "tank_length_m": summary["tank_metrics"]["derived_flat_cylinder_length_m"],
                 "post_rise_straight_m": summary["assumptions"]["post_rise_straight_m_assumed"],
                 "transition_and_mouth_length_m": summary["assumptions"][

@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 17:06 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 17:53 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -11,7 +11,7 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   normally with all restart fields. Its same-physics ten-rank continuation is
   Docker `42b79f4695fa`, StartedAt 16:09:55 UTC, in
   `results/runs/i4f-short1-dryline-continue-20261025T160951Z/`, targeting 1.3 s.
-  Root verified progress through .27477 s without pressure contacts or guard
+  Root verified progress through .38884 s without pressure contacts or guard
   errors. Full states every .05 s; .8 s is an intermediate observation.
   An active exact-ID wall-budget controller allows only healthy wall-save
   continuations, with four-hour stages and a twelve-hour campaign bound.
@@ -26,7 +26,8 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
 - **Wet-side valve-source diagnostic continues on the other ten ranks.**
   Pilot Docker `b34ec61f05d6` completed .050021 s normally with all 14 fields,
   no pressure contacts and phase-ledger errors below 3e-7 of initial inventory.
-  Its ten-rank continuation `5a6bb983ac5a`, StartedAt 16:58:04 UTC, targets .3 s
+  Its ten-rank continuation `5a6bb983ac5a`, StartedAt 16:58:04 UTC, reached
+  .19477 s without pressure contacts or diagnostic errors and targets .3 s
   with two-hour hard / 1 h 40 save bounds. It uses the same native initial
   state and partition. Only the source support moves into an initially wetted
   upstream band, preserving fully wet integrated resistance. The original
@@ -35,6 +36,23 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   The exact-time .05 comparison reduces tank drawdown by 12.1% (6.547 to
   5.756 L), explaining part of the gap to the reduced model. Owner: coupling
   worker; `results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/`.
+- **Valve pressure–flow error isolated in an analytical limit.** Four all-water,
+  slip-wall duct cases ended normally. With the same integrated scalar loss,
+  native flow exceeds the analytical result by 6.34% for a .30 m support on
+  25 mm axial cells, versus 1.38% at 6.25 mm. A .10 m support gives 27.66%
+  and 5.02%, respectively. Flux conservation still closes: source resolution,
+  rather than missing water, is implicated. These errors are not apparatus
+  correction factors. The one-CPU component follow-up checks other openings.
+  One bounded Astra Warden pass selected a .30 m initially wetted support at
+  x=1.95–2.25 m, retaining Cd/opening and normalizing discrete source weights.
+  Two axial-refinement meshes (279,536 and 299,248 cells) pass all nine
+  configured checks. All 14 zones and initial fields were repaired/verified
+  through the refinement map. Coupling worker prepares fresh .05 s cold-start
+  pilots and a bounded follow-up queue after the thin-source job finishes;
+  preparation is not yet a launched pilot. Prospective 2% source-flow accuracy
+  and apparatus mesh sensitivity are separate numerical targets, not hardware
+  validation. Evidence: `results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/analysis/`
+  and `results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/`.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.
@@ -151,8 +169,9 @@ and gas headspace .20–.25 times liquid volume, with two tanks/two outlets each
 The next reference uses 12 bar absolute and 13 bar sensitivity. About five
 seconds is discharge duration, not opening time. Four dividers starting halfway
 through each transition are the first-pass layout; orientation/thickness and
-pipe ID remain inferred/assumed. Initial downstream fill is still a pending
-question; fully primed old lines hold approximately .88 m3 extra per tank.
+pipe ID remain inferred/assumed. Downstream passages initially contain air,
+confirmed by the user; tank-to-valve water is accounted separately. Fully
+primed old lines are a superseded initial-state assumption.
 
 Root inspected the corrected four-arc ruled envelope and fitted divider
 sections. Earlier CAD plate gaps and a .05904 m2 accidental throat are fixed in
@@ -160,13 +179,15 @@ sections. Earlier CAD plate gaps and a .05904 m2 accidental throat are fixed in
 about 1 ppm. This is not a proof of the continuous minimum or measured geometry.
 The [standalone generator](../scripts/i4f_four_outlet_geometry/README.md) uses
 an isolated locked CAD environment; the explicit legacy layout and new compact
-default were both checked. It supports the current horizontal layout;
-the revised four-outlet vertical layout is not implemented. A same-grid
+default were both checked. It now supports horizontal and vertical tank axes,
+with both assemblies and connection sections generated and inspected. The
+vertical arrangement preserves tank capacity and fixed branch spines under an
+explicit provisional placement convention; no discharge benefit is established.
+A same-grid
 no-divider preparation adds 308 faces above the configured nonorthogonality
 limit, so it remains held rather than a clean engineering comparison.
-Select the first physical comparison from the completed baseline. If line fill
-remains unknown, its extra ~1.75 m3 across the apparatus takes priority over a
-divider optimization. A primed/air-filled comparison would be an initial-state
+Select the first physical comparison from the completed baseline. A
+primed/air-filled comparison is an initial-state
 sensitivity with different total water inventories, not a matched design gain.
 The same-envelope divider/no-divider comparison remains a candidate; its
 no-wall mesh is currently held. The old 1/5 s opening pair remains hypothetical

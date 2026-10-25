@@ -19,7 +19,7 @@ additional gas headspace equal to 20–25% of liquid volume. Use each new run's
 immutable input record; do not silently substitute these facts into historical
 cases. Predict the outlet conditions
 from the tank state; a prescribed uniform liquid inlet cannot replace this
-experiment. Unconfirmed geometry, valve opening, initial downstream fill and gas
+experiment. Unconfirmed geometry, valve opening and gas
 properties remain assumptions. The reported 12 bar has unknown pressure
 convention; use 12 bar absolute as the provisional reference and 13 bar absolute
 as a sensitivity. The approximate five seconds describes discharge duration,

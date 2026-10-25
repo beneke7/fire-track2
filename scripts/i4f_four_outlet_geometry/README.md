@@ -21,6 +21,31 @@ routing are not measured hardware dimensions. The envelope is not a CFD mesh.
 Pass `--post-rise-straight-m 0.2 --transition-and-mouth-length-m 1.8` to
 reproduce the reviewed aligned-ruled-v4 reference stations (mouth x=5.800 m).
 
+Use `--tank-axis horizontal` (the default) or `--tank-axis vertical` to select
+the vessel orientation. The horizontal option retains the current +X tank axis
+and fixed two-column branch layout. The vertical option keeps every branch
+spine, valve and outlet in place, gives each tank the same derived length and
+capacity, and uses this explicit provisional placement: the tank bottom is at
+`TANK_Z - tank_radius`, and its +Z axis passes through the existing pipe-start
+coordinate `x=0.250 m` and the tank-center `y`. This is a construction
+convention for a geometry comparison; it is not a measured rotated
+installation. Because the branch spines stay fixed, the branch-to-vessel wall
+intersections change between orientations.
+
+For each branch, generation checks that the circular pipe start fits entirely
+inside its own vessel, computes a positive BREP overlap with that vessel, finds
+no volume intersection with the other vessel, and verifies a positive
+pipe/transition overlap through its own horizontal mouth. The geometry record
+contains the per-branch clearances and exact overlap volumes. Assembly render
+bounds come from the generated envelope so the vertical tanks remain fully in
+frame. `figures/tank_connection_section_<orientation>.png` is a slice through
+the vessel cross-sections and the four pipe starts; `figures/two_tank_four_outlet_assembly.png`
+shows the full assembly, and `figures/transition_cross_sections.png` shows the
+transition and lamella sections. Both orientations use the same default tank
+diameter, water/headspace volumes, branch geometry, and outlet geometry unless
+other CLI options are explicitly changed. The comparison describes geometry
+only and makes no orientation-performance claim.
+
 Two geometry-only shortening parameters are available:
 
 - `--post-rise-straight-m`: distance after the fixed rise-bend endpoint at
@@ -36,7 +61,9 @@ defines SHORT1 (user-directed provisional primary, zero straight and a 1.0 m
 train), SHORT2 (zero straight and a 0.8 m train), and the legacy 0.2 m / 1.8 m
 reference. The reference photograph is used only for visual proportions; it has
 no scale and supplies no measured length. The generated comparison reports exact BREP line-volume changes
-because shortening the line also changes the initially primed-water inventory.
+because shortening the line changes its storage and liquid-front transit. The
+current baseline starts with air downstream of the valves; the older
+fully primed comparison instead changes initial line-water inventory.
 It does not change or validate a CFD pressure history.
 
 For example, generate the current default primary into a new ignored path:
@@ -54,6 +81,9 @@ uv run --project scripts/i4f_four_outlet_geometry --frozen python scripts/i4f_fo
   --output-dir results/runs/NEW_IGNORED_PATH
 ```
 
-The current CLI implements only horizontal tanks on the fixed +X axis with the
-fixed two-column/lower-and-upper branch layout; a vertical four-outlet layout
-is not implemented.
+Generate the vertical-axis geometry into a separate fresh path with:
+
+```sh
+uv run --project scripts/i4f_four_outlet_geometry --frozen python scripts/i4f_four_outlet_geometry/generate.py \
+  --tank-axis vertical --output-dir results/runs/NEW_VERTICAL_ORIENTATION_PATH
+```
