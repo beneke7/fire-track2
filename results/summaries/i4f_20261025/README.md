@@ -41,7 +41,14 @@ Its [first exact-time result](air-filled-valve-source-comparison.json) and
 [CSV](air-filled-valve-source-comparison.csv) show 12.1% less tank drawdown at
 .05 s with resistance wholly upstream of the initial front, preserving its
 fully wet integral. This explains part of the model/CFD gap; later apparatus
-sensitivity is still running.
+sensitivity is still running. The [comparison through .200021 s](air-filled-source-history-comparison.json),
+[data](air-filled-source-history-comparison.csv) and
+[plot](air-filled-source-history-comparison.png) show a sign reversal:
+thin-source tank-A withdrawal changes from .79 L less at .05 s to 3.08 L
+more at .20 s. At .20 s its gas pressure is 11.85 kPa lower and its
+alpha-water >= .5 front is about .15 m farther along the pipe. The original
+source is already fully wetted by .15 s. Both fronts remain upstream of the
+transition; this does not establish a corrected physical valve model.
 
 The [direct resistance benchmark](valve-resistance-duct-results.json) and
 [case table](valve-resistance-duct-cases.csv) isolate a numerical contribution:
@@ -52,6 +59,17 @@ native inlet/outlet flux closure; matching the integrated force alone does
 not ensure the correct flow rate. This all-water, gravity-free slip duct tests
 the scalar closure, not the real butterfly valve or apparatus. No fitted
 discharge-coefficient correction is applied.
+
+The [opening follow-up](valve-resistance-opening-comparison.json) and
+[table](valve-resistance-opening-comparison.csv) give analytical flow errors
+of .645%, .0162% and .00414% at constant opening fractions .02, .5 and 1,
+using 3.125 mm axial cells in a shorter duct. The minimum-opening transfer
+changes both domain and resolution relative to the first benchmark. Smoothing
+the coarse source lowers its error to 3.13%, missing the working 2% target.
+The aggregate run hit its wall cap during the full-open arm; its saved fields
+and native flux plateau support the reported comparison, not completion of
+its original .25 s horizon. Declared versus executed output-interval differences
+are preserved in the JSON.
 
 The compact geometry generator now supports both
 [horizontal](compact-horizontal-tank-geometry.png) and

@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 17:53 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 18:08 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -47,12 +47,22 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   x=1.95–2.25 m, retaining Cd/opening and normalizing discrete source weights.
   Two axial-refinement meshes (279,536 and 299,248 cells) pass all nine
   configured checks. All 14 zones and initial fields were repaired/verified
-  through the refinement map. Coupling worker prepares fresh .05 s cold-start
-  pilots and a bounded follow-up queue after the thin-source job finishes;
-  preparation is not yet a launched pilot. Prospective 2% source-flow accuracy
+  through the refinement map. The actual user-systemd queue is active as
+  `i4f-short1-valve-band-axial-dispatcher.service`, restarted at 17:59:40 UTC
+  with a six-hour bound. It waits for the exact thin-source parent to finish
+  and capture before sequential ten-rank .05 s cold starts. No child is
+  launched yet. A post-pair comparison/conditional fine continuation is being
+  prepared separately; do not count it as armed yet. Prospective 2% source-flow accuracy
   and apparatus mesh sensitivity are separate numerical targets, not hardware
   validation. Evidence: `results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/analysis/`
   and `results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/`.
+- **Source-placement effect reverses by .20 s.** Exact common native states
+  show thin-source tank-A drawdown .79 L lower at .05 s, but 3.08 L higher
+  at .20 s, with gas pressure 11.85 kPa lower and the liquid front about
+  .15 m farther downstream. Original support is fully wetted by .15 s.
+  Both fronts remain upstream of the transition. Native inventory/field
+  mapping checks passed; the reduced model remains a consistency reference.
+  Published: `air-filled-source-history-comparison.{json,csv,png}`.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.

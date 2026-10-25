@@ -2200,8 +2200,8 @@ primed-line results below remain historical initial-state sensitivities.
 The [current movie](../results/summaries/i4f_20261025/current-air-filled-cutaway-10x.mp4)
 shows filling through .200021 s, without a resolved exterior sheet. The
 [portable moving-front model](../results/summaries/i4f_20261025/air-filled-moving-front-model.json)
-conditionally predicts first mouth water near .612/.620 s and intake-crown
-exposure near 1.127 s for one tank/two branches. A full-bore front, polytropic
+conditionally predicts first mouth water near .612/.620 s and a geometric
+intake-crown proxy near 1.127 s for one tank/two branches. A full-bore front, polytropic
 gas and incomplete downstream-air/transition treatment limit those predictions;
 they do not determine actual emptying time. Isothermal gas changes the crown
 event by about 14%. No complete corrected CFD discharge has yet finished.
@@ -2218,6 +2218,15 @@ and source-integrated force per area recovers the imposed pressure drop.
 Thus conservation and the correct integrated force do not establish that the
 discrete source delivers the intended pressure–flow relation. These errors
 must not be used as fitted correction factors for the multiphase apparatus.
+
+The [source-placement history](../results/summaries/i4f_20261025/air-filled-source-history-comparison.png)
+also prevents adopting a narrower upstream source as a simple fix. Its
+tank-A drawdown difference reverses from -.79 L at .050021 s to +3.08 L
+at .200021 s. At the latter checkpoint it has 11.85 kPa lower gas pressure
+and a roughly .15 m farther liquid front, even though the original source
+has already become fully wetted. Both fronts are upstream of the transition.
+Thus the initially mixed source and its discrete pressure–flow behavior must
+be separated; an early improvement alone does not identify the right closure.
 
 The resulting numerical action is a .30 m initially wetted source upstream
 of the seat, with local axial refinement and explicitly normalized weights.
