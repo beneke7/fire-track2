@@ -2238,6 +2238,18 @@ it does not identify physical heat transfer, close energy fluxes, or justify
 fitting the reduced model to CFD. The common-temperature equation and its
 interface transport still require appropriate energy accounting.
 
+The headspace range also affects the late pressure margin. In the simple
+sealed polytropic limit, replacing the tank's liquid volume entirely by gas
+gives p_final = p_initial [r/(1+r)]^n, where r is initial gas volume divided
+by tank liquid volume. With n=1.399814 and 12 bar absolute, r=.20/.225/.25
+gives .977/1.119/1.261 bar absolute. At 13 bar, the values are
+1.058/1.213/1.366 bar. The gas-only pressure margin against a 1 bar atmosphere
+vanishes at r=.2040 for 12 bar, within the reported range. This is a
+hypothetical tank-volume replacement scale: intake exposure, hydrostatic head,
+line losses, heat transfer and CO2 behavior affect the actual termination.
+It prioritizes measured headspace and pressure/temperature histories without
+turning the idealized calculation into an emptying prediction.
+
 The resulting numerical action is a .30 m initially wetted source upstream
 of the seat, with local axial refinement and explicitly normalized weights.
 Prepared 279,536- and 299,248-cell meshes pass all nine configured quality
@@ -2253,6 +2265,9 @@ mixed-source case. The 69.7 mL tank-inventory difference agrees closely with
 the integrated native seat-flux difference. This supports a substantial
 numerical origin for the early mismatch without fitting Cd. It is a shared-
 assumption consistency result, not validation of the valve or thermal model.
+The [source/grid comparison figure](../results/summaries/i4f_20261025/air-filled-drawdown-source-grid.png)
+shows all four matched-time CFD inventories against the bracket-interpolated
+model reference, including the .634% difference in initial wet-feed volume.
 The separately labeled exploratory long fine run proceeds with this known
 sensitivity; the failed screen remains failed. These cases do not resolve
 the butterfly-disk wake. A prospective 2% source-flow target against

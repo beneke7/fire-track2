@@ -73,6 +73,13 @@ ended normally at .050021 s without pressure-floor contacts. The longer
 fine run is explicitly exploratory; this does not establish mesh independence
 or hardware validation.
 
+![Matched-time tank drawdown across source and axial-grid choices](air-filled-drawdown-source-grid.png)
+
+The [figure data](air-filled-drawdown-source-grid.csv) and
+[source record](air-filled-drawdown-source-grid.json) preserve actual endpoint
+times and the bracket-interpolated model reference. The model's initial wet-feed
+volume is .634% larger than the native CFD value.
+
 The [opening follow-up](valve-resistance-opening-comparison.json) and
 [table](valve-resistance-opening-comparison.csv) give analytical flow errors
 of .645%, .0162% and .00414% at constant opening fractions .02, .5 and 1,

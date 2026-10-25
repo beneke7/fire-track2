@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-25 18:45 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 19:52 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -11,12 +11,28 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   in `results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/`.
   Root verified advancing steps and carried phase ledgers. Its 1.3 s limit
   is an observation horizon, not emptying; the active campaign allows 4 h
-  stages with 3 h 40 saves under a 12 h bound. The separate original-case
-  logger replay is Docker `4f5645618b2f`, StartedAt 18:42:41 UTC, from the
-  clean .349939877967 s checkpoint toward .395 s, stopping/saving at the
-  first raw floor contact. It uses the explicitly recorded logging-only
-  binary; no equation or pressure-floor changes. Both exact-ID guards are
-  active. No aerial/HPC/GPU jobs were started.
+  stages with 3 h 40 saves under a 12 h bound. The 279,536-cell, 24-layer
+  source-resolution comparison is Docker `24443dad8298`, StartedAt 19:35:26,
+  in `results/runs/i4f-short1-valve-band-12p5-continue-20261025T193504Z/`,
+  targeting .8 s with the same original binary/physics and a bounded campaign.
+  Root verified .37341 s / .10777 s respectively, both without raw pressure
+  contacts or guard errors. Both exact-ID guards/campaigns are active.
+  An optional 24-layer logging/performance/energy upgrade is being staged;
+  neither live run has been changed for it. No aerial/HPC/GPU jobs were started.
+- **The original-case logger replay did not reproduce the floor event.**
+  Docker `4f5645618b2f` ended normally at .395023685933 s, exit 0 at 19:07:26,
+  with all 14 fields and zero raw contacts. Original-binary and logger/full
+  short restart controls match all 14 fields, time metadata and 11-step
+  telemetry exactly. The uninterrupted parent's timestep differs from the
+  restarted trajectory by 4.326 ns at step 2. This supports restart-history
+  sensitivity in this segment; it neither identifies the old offending cells
+  nor establishes that the pressure defect is fixed.
+- **Read-only audit profiling:** full versus lean matrix-audit modes produced
+  bit-identical 14-field checkpoints, timestep sequences and mass/flux/outer
+  ledgers in an 11-step test. Median reported warm ExecutionTime decreased
+  3.41 to 2.91 s; one sequential sample under the long-run load, not a general
+  speedup claim. Guards, raw-cell logging and phase ledgers remain enabled.
+  The healthy 48-layer reference keeps its current binary for this stage.
 - **Air-filled baseline saved after a numerical pressure-floor event.**
   User confirmed downstream air directly. The compact cold start completed .050021 s
   normally with all restart fields. Its same-physics ten-rank continuation was
@@ -96,11 +112,25 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   .00235%, with small tank-pressure spread. This is not a heat-transfer
   measurement or fitted input. Dense energy fluxes remain unmeasured; the
   common-temperature equation's net energy behavior is not established by
-  checking source selection alone. A separate logging-only binary is built
-  (SHA `303f4d0e...5062579`) for actual raw pressure-contact cells, without
-  changing equations. Its isolated replay is now active; it is not substituted
-  into the matched pair or the long fine continuation. A passive energy
-  observer prototype is tested separately before any case integration.
+  checking source selection alone. A passive observer passed a two-rank
+  reduction test and a real one-step dry-line field-passivity comparison.
+  A 2.55 J air-energy reconstruction discrepancy was traced to the installed
+  gas constant (0.9 ppm difference from the modern-SI value), without fitting
+  an offset or changing tolerances. Source-R V2 compiled and linked, but its
+  passivity is not separately tested. Flux budgets remain partial; no full
+  energy-closure claim or live-case deployment follows from compilation.
+- **Native outlet analysis is prepared.** Historical compact primed-line
+  data recover a downstream volume balance within 14.32 mL (0.157% of
+  sparse-integrated mouth inflow). Five-channel native flux bins sum to
+  mouth flux to roundoff; interpolated velocity metrics remain secondary.
+  The confirmed air-filled .05 s state is dry at the mouths and suppresses
+  normalized outlet metrics. New tool evidence remains private until useful
+  current discharge fields exist.
+- **Full 3D downstream refinement needs remeshing.** Generic directional
+  cuts and the original-mesh hex-first route both produced open cells and
+  failed quality. Both failed branches are preserved and excluded from CFD.
+  Fine worker prepares a snappy-region route retaining height/span refinement;
+  an easier x-only mesh is not substituted for the outlet-resolution study.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.
@@ -108,7 +138,7 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   near .612/.620 s and intake-crown exposure near 1.127 s. It assumes a
   full-bore front and ambient air pressure; incomplete air/transition screens,
   geometry mismatch and strong adiabatic cooling prevent a validation claim.
-  Energy worker now verifies resistance in a small all-water plug-flow limit.
+  The separate all-water source-resistance benchmark is complete.
   A current air-filled cutaway movie through .200021 s is ready and inspected;
   no resolved exterior water appears in those sparse saved states. It is pipe
   filling, not a completed sheet-discharge movie.

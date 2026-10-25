@@ -1,0 +1,269 @@
+{
+  "analysis_script_sha256": "2898936af2639615994ad1b1bac066f9278d9f51cc03ecb4a8d6f383ac2131bb",
+  "cases": [
+    {
+      "checkpoint_time_s": 0.050021166664,
+      "difference_from_model_L": 1.9741198779406055,
+      "drawdown_L": 6.546987474153276,
+      "endpoint_gas_mass_kg_ideal_air": 4.256704263791949,
+      "endpoint_gas_mass_weighted_T_K": 291.35775095361936,
+      "endpoint_gas_volume_m3": 0.30504418788227283,
+      "endpoint_gas_volume_weighted_p_Pa": 1167054.2782644748,
+      "endpoint_water_m3": 1.3434530125258466,
+      "family": "Source-placement sensitivity on compact coarse mesh",
+      "initial_water_m3": 1.3499999999999999,
+      "input_freeze_sha256": "f0c4ff38732f01bfe7ec6392955f304a77ffa1ed6798ddcd052113515b06d838",
+      "key": "baseline",
+      "label": "Original support, coarse",
+      "mesh_cell_count": 269680,
+      "mesh_hashes": null,
+      "native_checkpoint_hashes": {
+        "0.050021166664/baseline/T.air": "4ff8cf0f7f258557c049d595039bc0866a72a043bb790409757d3c4c9848a0dc",
+        "0.050021166664/baseline/alpha.water": "0d35e1939d73fc38963c28f65a13ea13e6ea2159b609cd70dcdbcb7d425896e8",
+        "0.050021166664/baseline/p": "9fd542bcce13fc6400817ef789179b6fa3421ba04edf533c2728389bd537b46b",
+        "0.050021166664/baseline/uniform/time": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d"
+      },
+      "relative_difference_from_model_pct": 43.170282900287916,
+      "support_label": "0.30 m support; initially partly wet"
+    },
+    {
+      "checkpoint_time_s": 0.050021166664,
+      "difference_from_model_L": 1.183188937316615,
+      "drawdown_L": 5.756056533529286,
+      "endpoint_gas_mass_kg_ideal_air": 4.256704789351479,
+      "endpoint_gas_mass_weighted_T_K": 291.5689130206796,
+      "endpoint_gas_volume_m3": 0.30425325694164895,
+      "endpoint_gas_volume_weighted_p_Pa": 1170936.2983187626,
+      "endpoint_water_m3": 1.3442439434664706,
+      "family": "Source-placement sensitivity on compact coarse mesh",
+      "initial_water_m3": 1.3499999999999999,
+      "input_freeze_sha256": "f0c4ff38732f01bfe7ec6392955f304a77ffa1ed6798ddcd052113515b06d838",
+      "key": "thin_wet_side",
+      "label": "Wet-side support, coarse",
+      "mesh_cell_count": 269680,
+      "mesh_hashes": null,
+      "native_checkpoint_hashes": {
+        "0.050021166664/thin_wet_side/T.air": "620dc89b6e9786c90c2d87c6050032c3051cb6306b161ee0e50959a9ae6de4d1",
+        "0.050021166664/thin_wet_side/alpha.water": "be785d91e07f9f79e14ed8e0430c627dc956833bbaf24fcfea3000f7bb9224b9",
+        "0.050021166664/thin_wet_side/p": "08b8b435db1d6c73c64932fed6d25d64437ac945e6dd6eba0061fa16a05c3dbc",
+        "0.050021166664/thin_wet_side/uniform/time": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d"
+      },
+      "relative_difference_from_model_pct": 25.874113177835124,
+      "support_label": "0.10 m wet-side support"
+    },
+    {
+      "checkpoint_time_s": 0.050021166664,
+      "difference_from_model_L": 0.09104240611357284,
+      "drawdown_L": 4.663910002326244,
+      "endpoint_gas_mass_kg_ideal_air": null,
+      "endpoint_gas_mass_weighted_T_K": null,
+      "endpoint_gas_volume_m3": null,
+      "endpoint_gas_volume_weighted_p_Pa": null,
+      "endpoint_water_m3": 1.34533609,
+      "family": "Corrected fully wet source; axial sensitivity",
+      "initial_water_m3": 1.3500000000023262,
+      "input_freeze_sha256": "0400a25d7867e762f1d90632cc6daacfeeec9d32a0bf58055ce3420fe3991bd1",
+      "key": "axial_12p5mm",
+      "label": "Fully wet source, 12.5 mm",
+      "mapped_initial_audit": "results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/attempt-2x/mapped-initial-state/audit.json",
+      "mapped_initial_audit_sha256": "f54a1e72b4613e453ab6b2773b2942e9739e7532d1251def3eb02e0be3b4bdf2",
+      "mesh_cell_count": 279536,
+      "mesh_hashes": {
+        "boundary": "59b898961b585826dd04ec12ac535e6b9a08971b561a239823575c69ca774d2c",
+        "cellZones": "21023c5c58afc6be40734cbf65cb7ee6881ec060985b3939eded630d63ace20d",
+        "faceZones": "9c7a156a667af4da8b0e73e96f8509b41bf25f9c4addd2255c07a590d1473777",
+        "faces": "b2cb517326910d9d23b2468b978c69849a68d31a30a5a887f246f5d1fb88fef4",
+        "neighbour": "3f58e1d213a0fb2f7a7a0bc04c7f82dad142cb7bc5530e6ff71633c1269da3d9",
+        "owner": "be4be253d32a1d03dec77017c20d04b0afcf79949c5b7477d8b4e5d38ea83039",
+        "points": "dd1e6c99f6c09977f8f482671f17d696c5b5b82c203a9393ff54677e4d4b5c1d"
+      },
+      "native_checkpoint_hashes": null,
+      "relative_difference_from_model_pct": 1.9909259167918125,
+      "support_label": "0.30 m support relocated to [1.95, 2.25] m; axial 12.5 mm"
+    },
+    {
+      "checkpoint_time_s": 0.050021166664,
+      "difference_from_model_L": 0.021362406113611954,
+      "drawdown_L": 4.594230002326283,
+      "endpoint_gas_mass_kg_ideal_air": null,
+      "endpoint_gas_mass_weighted_T_K": null,
+      "endpoint_gas_volume_m3": null,
+      "endpoint_gas_volume_weighted_p_Pa": null,
+      "endpoint_water_m3": 1.34540577,
+      "family": "Corrected fully wet source; axial sensitivity",
+      "initial_water_m3": 1.3500000000023262,
+      "input_freeze_sha256": "9a46929519a9ab5fb57f99593b5011ceb99cf616dd1d6571bc8bec8216e187a7",
+      "key": "axial_6p25mm",
+      "label": "Fully wet source, 6.25 mm",
+      "mapped_initial_audit": "results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/attempt-4x/mapped-initial-state/audit.json",
+      "mapped_initial_audit_sha256": "690906f6b45f3d5fe947037d3ef98e94ec17f514fbfe4362219c800553d0a691",
+      "mesh_cell_count": 299248,
+      "mesh_hashes": {
+        "boundary": "db94e6760cd1a9a64f9a1d658cf028a80039296cb52ccc53c03b84389ceb953e",
+        "cellZones": "ec83612a238e4a4e29cedfd3d7b38f17fff724c4b8ed579fe7338508a77d679c",
+        "faceZones": "738f335ac2ab8439e2c051ac100cc5274f74125b9636863240fe9aadff11177b",
+        "faces": "5f294f6b4c3e3f0faaafac5ca58011457234007bff4272033ca6a46d5dcc9b04",
+        "neighbour": "f0b8e4bc09460897a029dab47bfcb47867ae36432ec61a2bb5d7dc24a0c53d8f",
+        "owner": "15c97d6ad6c3d1af79066d955b5b086dc4fede6ec1d74a9fccb90d8626b67f7d",
+        "points": "fcb7a11e370b4ae55207c47623ec25044edd216459f8717eb3ca0218e31ab8de"
+      },
+      "native_checkpoint_hashes": null,
+      "relative_difference_from_model_pct": 0.46715557938534397,
+      "support_label": "0.30 m support relocated to [1.95, 2.25] m; axial 6.25 mm"
+    }
+  ],
+  "common_endpoint": {
+    "interpretation": "The older moving-front model is a consistency reference, not experimental validation. Across the CFD bars both source support and/or axial resolution change: the original and thin wet-side runs share one coarse mesh, while the later fully wet source is relocated to x=[1.95,2.25] m and tested at 12.5/6.25 mm axial spacing. The strict axial screen remains HOLD; this figure is not a mesh-convergence claim. The model's initial wet-feed volume is 0.001592 m3 (0.634%) above the native CFD value, so the model comparison is a consistency reference with a recorded initial-geometry mismatch.",
+    "model_minus_native_initial_wet_feed_percent": 0.6339554631478715,
+    "model_minus_native_initial_wet_feed_volume_m3_per_tank": 0.001591588576952685,
+    "native_initial_wet_feed_volume_m3_per_tank": 0.25105684381198295,
+    "reduced_model_drawdown_L": 4.572867596212671,
+    "reduced_model_endpoint_tank_water_m3": 1.3454271324037868,
+    "reduced_model_history_sha256": "89a9363895f5c86d961bf3b47d3bfb4c7c940e08f7fe8275e1a1d6ca6e4f5fe7",
+    "reduced_model_initial_tank_water_m3": 1.3499999999999994,
+    "reduced_model_initial_wet_feed_volume_m3_per_tank": 0.25264843238893564,
+    "reduced_model_interpolation_fraction": 0.4233332799816071,
+    "reduced_model_method": "linear interpolation inside saved reduced-model history; no extrapolation",
+    "reduced_model_summary_sha256": "2d6028b5c032379e13ea6b4f8f8c8093ec0580018c6ea6351d7653f3f731ad29",
+    "reduced_model_time_bracket_s": [
+      0.05000000000000092,
+      0.05005000000000092
+    ],
+    "time_origin": "native field checkpoint time, no CFD field interpolation",
+    "time_s": 0.050021166664
+  },
+  "csv": "tankA-drawdown-source-grid.csv",
+  "environment": {
+    "matplotlib": "3.11.2",
+    "python": "3.12.3"
+  },
+  "generated_utc": "2026-10-25T18:56:59.011648+00:00",
+  "mesh_and_binary_provenance": {
+    "axial_resolution": {
+      "12.5_mm_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+      "12.5_mm_container_id": "0b27687ba66d0b8b52c936cfc3783b748abf4d91990d53907ade2ac34ae1037f",
+      "12.5_mm_mesh_hashes": {
+        "boundary": "59b898961b585826dd04ec12ac535e6b9a08971b561a239823575c69ca774d2c",
+        "cellZones": "21023c5c58afc6be40734cbf65cb7ee6881ec060985b3939eded630d63ace20d",
+        "faceZones": "9c7a156a667af4da8b0e73e96f8509b41bf25f9c4addd2255c07a590d1473777",
+        "faces": "b2cb517326910d9d23b2468b978c69849a68d31a30a5a887f246f5d1fb88fef4",
+        "neighbour": "3f58e1d213a0fb2f7a7a0bc04c7f82dad142cb7bc5530e6ff71633c1269da3d9",
+        "owner": "be4be253d32a1d03dec77017c20d04b0afcf79949c5b7477d8b4e5d38ea83039",
+        "points": "dd1e6c99f6c09977f8f482671f17d696c5b5b82c203a9393ff54677e4d4b5c1d"
+      },
+      "6.25_mm_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+      "6.25_mm_container_id": "f7577b552a149d96f8e4ca68b6105c769cf108a5e32281c4c6d66a35f6283489",
+      "6.25_mm_mesh_hashes": {
+        "boundary": "db94e6760cd1a9a64f9a1d658cf028a80039296cb52ccc53c03b84389ceb953e",
+        "cellZones": "ec83612a238e4a4e29cedfd3d7b38f17fff724c4b8ed579fe7338508a77d679c",
+        "faceZones": "738f335ac2ab8439e2c051ac100cc5274f74125b9636863240fe9aadff11177b",
+        "faces": "5f294f6b4c3e3f0faaafac5ca58011457234007bff4272033ca6a46d5dcc9b04",
+        "neighbour": "f0b8e4bc09460897a029dab47bfcb47867ae36432ec61a2bb5d7dc24a0c53d8f",
+        "owner": "15c97d6ad6c3d1af79066d955b5b086dc4fede6ec1d74a9fccb90d8626b67f7d",
+        "points": "fcb7a11e370b4ae55207c47623ec25044edd216459f8717eb3ca0218e31ab8de"
+      }
+    },
+    "source_placement": {
+      "container_ids": {
+        "baseline": "42b79f4695fa0648eacc6044191302cb68d9de8d76bb61b1a15ee395f9697a9e",
+        "thin_wet_side": "5a6bb983ac5a1dbab1e50cfc680c2049464dda03236b4c9cbf5276a7af6c76f3"
+      },
+      "mesh_cell_count": 269680,
+      "same_mesh_partition_binary_and_initial_native_fields": true,
+      "source_change": {
+        "baseline_case": "same-mesh compact air-filled dryline baseline; allFourValves source distributed over full nominal 0.30m source zone",
+        "baseline_support": {
+          "length_m": 0.3,
+          "x_approx_m": [
+            2.1,
+            2.4
+          ],
+          "zone": "allFourValves"
+        },
+        "first_sampled_time_original_source_volume_fraction_alpha_ge_0p99_reaches_0p99_s": 0.150021166664,
+        "latest_original_source_volume_fraction_alpha_ge_0p99": 1.0,
+        "qualifications": [
+          "The thin wet-side arm changes only the declared volumetric fvOptions source support/length normalization. This is not a modeled moving valve disc or a measured seat restriction.",
+          "Uniform-field K/L coefficient integral is algebraically preserved by V-band normalization; spatial phase, density, and velocity distributions are intentionally not identical.",
+          "The reduced network has a matched compact one-tank/two-branch geometry and downstream-air scope, but uses a centerline wet-feed volume that differs from the native initial line zone by the recorded amount; predictions are consistency comparisons, not validation.",
+          "The reduced network has no source-location degree of freedom, so its trajectory is common to both CFD arms and cannot explain their difference."
+        ],
+        "same_mesh_partition_binary_and_initial_native_fields": true,
+        "source_fully_wet_by_latest_checkpoint_at_alpha_ge_0p99": true,
+        "thin_support": {
+          "band_fraction_of_zone": 0.33333725841949624,
+          "baseline_zone": "allFourValves cellZone; x extent approximately [2.10,2.40] m",
+          "diagnostic_fvOptions_sha256": "5bdb56acb0176a49011910201de538eb85a30a135b0112a1b267c87bbfc5437f",
+          "diagnostic_mask": "cell-centre x >= 2.15 m and x < 2.25 m, applied within existing allFourValves selected cell list",
+          "initial_mask_phase": "alpha.water=1.0 in every selected band cell, verified against exact baseline initial field/partition",
+          "initial_source_zone_volume_m3": 0.08410397690444701,
+          "initial_wet_band_volume_m3": 0.028034989083504998,
+          "mask_units": "m, global x coordinate",
+          "native_mask_audit": "analysis/wetside-band-audit.json",
+          "native_mask_audit_sha256": "df810f4a81cc21f899677805855924b492fd9ccf494c7539730ae0bbfa1a45c2",
+          "normalization": "L_eff = 0.30 * V_band / V_zone, preserving the volume-integrated linear coefficient K/L for spatially uniform rho and velocity; no fitting to trajectory",
+          "normalized_effective_length_m": 0.10000117752584887,
+          "original_distributed_length_m": 0.3,
+          "other_parameters_unchanged": {
+            "Cd": 0.7,
+            "U_regularization_m_s": 0.1,
+            "loss_form": "diag -= 0.5*rho*(K/L)*max(|U|,0.10)*V",
+            "minimum_effective_open_fraction": 0.02,
+            "opening": "1 s smoothstep"
+          },
+          "per_cluster_geometry": [
+            {
+              "band_volume_m3": 0.007008640727276,
+              "cluster_y_center_m": -0.75,
+              "effective_length_m": 0.1000010553996589,
+              "zone_volume_m3": 0.021025700276659
+            },
+            {
+              "band_volume_m3": 0.007008853770666,
+              "cluster_y_center_m": -0.35,
+              "effective_length_m": 0.1000012999311871,
+              "zone_volume_m3": 0.021026287984723
+            },
+            {
+              "band_volume_m3": 0.007008640784856,
+              "cluster_y_center_m": 0.35,
+              "effective_length_m": 0.10000105685541733,
+              "zone_volume_m3": 0.021025700143317
+            },
+            {
+              "band_volume_m3": 0.007008853800707,
+              "cluster_y_center_m": 0.75,
+              "effective_length_m": 0.1000012979103421,
+              "zone_volume_m3": 0.021026288499748
+            }
+          ],
+          "qualification": "Exploratory numerical sensitivity of source placement/support, not a resolved valve or measured seat model. Uniform-flow equivalence is algebraic only; spatial density/velocity and phase weighting differ intentionally.",
+          "verifier_script": "scripts/verify_source_band.py",
+          "verifier_script_sha256": "b165b0d0786166770ef8ed9aa6355b88f615e37bab53e6ed9d3838958a6e6095"
+        },
+        "thin_wet_side_case": "matched source-support sensitivity: source restricted to fully wet cell-centre band x=[2.15,2.25)m in allFourValves with volume-normalized effective length"
+      }
+    }
+  },
+  "plot": "tankA-drawdown-source-grid.png",
+  "schema": "i4f-tankA-drawdown-source-grid-comparison/v1",
+  "source_artifacts": {
+    "results/runs/i4f-filling-network-20261025T161752.477231Z/history.csv": "89a9363895f5c86d961bf3b47d3bfb4c7c940e08f7fe8275e1a1d6ca6e4f5fe7",
+    "results/runs/i4f-filling-network-20261025T161752.477231Z/summary.json": "2d6028b5c032379e13ea6b4f8f8c8093ec0580018c6ea6351d7653f3f731ad29",
+    "results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/attempt-2x/mapped-initial-state/audit.json": "f54a1e72b4613e453ab6b2773b2942e9739e7532d1251def3eb02e0be3b4bdf2",
+    "results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/attempt-4x/mapped-initial-state/audit.json": "690906f6b45f3d5fe947037d3ef98e94ec17f514fbfe4362219c800553d0a691",
+    "results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/analysis/axial-native-comparison.json": "5981ff91588c04ca36fd7bc52ae89c1bcb5b8b4da56ffe09f53324ad30e83ef3",
+    "results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/cases-12p5/experiment.json": "b9335411fa329e8e711883326d497797dd00e1b9e6eafc9d59d5849d6665e673",
+    "results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/cases-12p5/input-freeze.json": "0400a25d7867e762f1d90632cc6daacfeeec9d32a0bf58055ce3420fe3991bd1",
+    "results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/cases-6p25/experiment.json": "55480b81829433ff065261417a3558011589732cbd9608a13eaf2a087ad5d30b",
+    "results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/cases-6p25/input-freeze.json": "9a46929519a9ab5fb57f99593b5011ceb99cf616dd1d6571bc8bec8216e187a7",
+    "results/runs/i4f-source-placement-persistence-20261025T1755Z/analysis/input-freeze.json": "f0c4ff38732f01bfe7ec6392955f304a77ffa1ed6798ddcd052113515b06d838",
+    "results/runs/i4f-source-placement-persistence-20261025T1755Z/source-placement-persistence.json": "3e5554005b7c52904b9a7bf1d6a33a683c5c25ce79417e96e15b9648be69bdca"
+  },
+  "source_axial_screen": {
+    "absolute_floor_m3_s": 1e-08,
+    "formula": "abs(Q12.5-Q6.25) <= max(1e-8 m3/s, 0.02*max(abs(Q12.5),abs(Q6.25),1e-7 m3/s)) at every common native face-flux time",
+    "qualification": "working axial mesh-sensitivity target only; not an error versus hardware truth",
+    "relative": 0.02
+  }
+}
