@@ -25,6 +25,16 @@ convention; use 12 bar absolute as the provisional reference and 13 bar absolute
 as a sensitivity. The approximate five seconds describes discharge duration,
 not a measured valve-opening time.
 
+25 October geometry revision: the user requests no added straight round pipe
+after the upward bend and an approximately 1 m transition/outlet assembly,
+with 0.8 m as a shorter alternative. Use 0 m post-rise straight and 1.0 m
+transition-plus-mouth as the provisional primary CAD layout; the photograph
+supports the compact arrangement but does not measure these lengths. Preserve
+the earlier 0.2 m straight plus 1.8 m outlet train as the frozen CFD reference.
+The candidate record is
+[`experiments/i4f_shortened_downstream_candidate.json`](experiments/i4f_shortened_downstream_candidate.json).
+Do not substitute the revised CAD into existing runs or their renderings.
+
 Connect primary-source physical scaling, an inventory/inertia/loss-based reduced
 model, and gas-compressible water–gas CFD of the complete simplified apparatus.
 Start with one declared tank orientation and sealed blowdown; keep maintained

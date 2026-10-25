@@ -1,0 +1,802 @@
+{
+  "alternate_layout": "SHORT2: zero post-rise straight, 0.8 m train, mouth x=4.6 m.",
+  "artifacts": {
+    "candidate_experiment_json": {
+      "bytes": 4570,
+      "path": "experiments/i4f_shortened_downstream_candidate.json",
+      "sha256": "f9e5e244e472ce3995a4fae3728357d3b89397404924e9322b1ad289bbca247d"
+    },
+    "comparison_plan": {
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/comparison-plan.json",
+      "bytes": 5203,
+      "sha256": "d13669d26bdd2ff8b4ccd7f6ba430719e50a8ee38c08bd2528b99cc5ed2d87c6"
+    },
+    "contact_audit_helper": {
+      "bytes": 7163,
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/audit_generated_step.py",
+      "sha256": "b5430a784457305d801c17a883dcef696f205258ded806759c93698259f624ba"
+    },
+    "divider_contact_audit": {
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/divider-contact-audit.json",
+      "bytes": 32983,
+      "sha256": "0f66b9d9e5f0083aaa7246ca5d1276c69839e4a8277c134b3194d190a1a4f09f"
+    },
+    "generator_source": {
+      "bytes": 39997,
+      "path": "scripts/i4f_four_outlet_geometry/generate.py",
+      "sha256": "f5e2252f9199bb8262bf95da519dcf9ece7105b15e4724dfc2270d2eb2458cd9"
+    },
+    "photo_reference": {
+      "bytes": 3007439,
+      "path": "docs/IMG_20180209_103212.jpg",
+      "sha256": "da72ffe43de9bfd8fbf3eb8fab30af6bfed4c27d035d5c97cedc121d837043e7"
+    },
+    "project_lock": {
+      "bytes": 62959,
+      "path": "scripts/i4f_four_outlet_geometry/uv.lock",
+      "sha256": "2e6454a5472a044aa3d28a052dc25a7b78a3f438da90baec2756e5cc2b857f45"
+    },
+    "project_pyproject": {
+      "bytes": 346,
+      "path": "scripts/i4f_four_outlet_geometry/pyproject.toml",
+      "sha256": "f9c17af8e41e3a6ee9ee78b0aa164cde56bfac7fa480b386ce908cd63ee17ad1"
+    },
+    "render_helper": {
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/render_comparison-v2.py",
+      "bytes": 3060,
+      "sha256": "f7d27d401cecc32560fc23c9c92b8a51b4631da85e8cbf9508888980822a18e9"
+    },
+    "side_by_side_top_side_png": {
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/top_side_comparison-v2.png",
+      "bytes": 251543,
+      "sha256": "8bf194e8cfa3a6e4f21772c0bb6239ea45d1977e1099266c7e469ed0e4e0f7f0"
+    },
+    "previous_render_helper": {
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/render_comparison.py",
+      "bytes": 2904,
+      "sha256": "6ac1a0ab83d78372ca7b38137b7d8b506352bac49b3c6348f07b777833b323c4"
+    },
+    "previous_side_by_side_top_side_png": {
+      "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/top_side_comparison.png",
+      "bytes": 248274,
+      "sha256": "d0e1236566e290a7ba387ccc4ccef8cd669e463c04ad3df083db8b6233deefab"
+    }
+  },
+  "computed_inventory_interpretation": "The reported downstream line volume is the exact BREP pipe-plus-transition union outside each tank. If lines are primed, the change is additional line-water inventory beyond the 1.350 m3 tank water per tank; full priming remains an assumption.",
+  "created_utc": "2026-10-25T14:51:16.017575+00:00",
+  "default_cli_smoke": {
+    "generator_sha256": "f5e2252f9199bb8262bf95da519dcf9ece7105b15e4724dfc2270d2eb2458cd9",
+    "mouth_x_m": 4.8,
+    "no_length_flags_used": true,
+    "numeric_match_to_explicit_SHORT1": true,
+    "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/default-cli-check/geometry_summary.json",
+    "post_rise_straight_m": 0.0,
+    "sha256": "56420a6389e32e63d0da78af3aa4967a0d7fc978677e7f40d32c7c4ab7b4a011",
+    "transition_and_mouth_length_m": 1.0
+  },
+  "fixed_assumptions": {
+    "axis": "+X horizontal",
+    "divider_thickness_m_assumed": 0.004,
+    "dividers_per_mouth": 4,
+    "headspace_ratio_to_liquid": 0.225,
+    "mouth_width_height_m": [
+      1.0,
+      0.15
+    ],
+    "pipe_id_m": 0.3,
+    "rise_bend_end_x_m": 3.8,
+    "tank_diameter_m": 0.9,
+    "water_m3_per_tank": 1.35
+  },
+  "legacy_default_numeric_reproduction": {
+    "approved_pipe_inlet_area_m2": 0.07068583470577036,
+    "approved_record": "results/runs/i4f-two-tank-four-mouth-lamella-geometry-20261025T084118Z/integrity-audit-aligned-ruled-v4/handoff-summary.json",
+    "approved_record_sha256": "530cfd37f8c9049ba8e785ff017afd792f1797cabc4a8eecd7651f8bcbe00fdf",
+    "max_abs_aligned_transition_volume_delta_m3": 0.0,
+    "max_abs_retained_pipe_shape_volume_delta_m3": 9.470202400052585e-14,
+    "max_abs_tank_capacity_delta_m3": 0.0,
+    "numeric_match_within_1e_9_m3_and_1e_9_m2": true,
+    "reference_explicit_parameters": {
+      "mouth_x_m": 5.8,
+      "post_rise_straight_m": 0.2,
+      "transition_and_mouth_length_m": 1.8
+    },
+    "regenerated_pipe_inlet_area_m2": 0.07068583470577036,
+    "tank_capacity_actual_m3_each": 1.65375,
+    "tank_capacity_expected_m3_each": 1.65375,
+    "warning": "STEP byte hashes differ; the comparison uses geometric volumes/stations/sections, not serialized STEP bytes."
+  },
+  "legacy_reference": "Reviewed aligned-ruled-v4 geometry reproduced by explicit 0.2 m straight and 1.8 m train flags, mouth x=5.8 m.",
+  "limitations": [
+    "These lengths are assumed geometry, not measured dimensions.",
+    "BREP section checks are discrete; continuous minimum area between sampled stations is not proven.",
+    "Mouth, divider and pipe geometry have not been meshed or simulated at these shortened dimensions.",
+    "No pressure-loss, flow, or discharge-time gain follows from the geometry comparison.",
+    "A future CFD case requires a new mesh and native volume reconciliation; no positive-coordinate mesh warp is claimed for the zero-straight candidates."
+  ],
+  "photo_note": "The repository photo was inspected for proportions only. It has no scale; no candidate length was measured or inferred from it.",
+  "preserved_attempts": [
+    "comparison-plan-v1-pre-volume-fix.json",
+    "comparison-plan-v2-before-user-length-update.json",
+    "comparison-plan-v3-final-lengths-before-overlap-note.json",
+    "comparison-plan-v4-pre-user-default.json",
+    "comparison-plan-v5-before-default-smoke.json",
+    "top_side_comparison-v1-overlay.png",
+    "top_side_comparison-v2-tick-overlap.png",
+    "top_side_comparison-v4-pre-default-smoke.png",
+    "divider-contact-audit-v1-pre-default-smoke.json",
+    "attempt1/reference (incomplete; auxiliary fuse-validity failure)"
+  ],
+  "scenarios": {
+    "REFERENCE": {
+      "artifacts": {
+        "assembly_png": {
+          "bytes": 404936,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/figures/two_tank_four_outlet_assembly.png",
+          "sha256": "dc581f6617b5d7cc0b28cf429bbaf4cfd017d1288059e85c2b315645c123027e"
+        },
+        "cross_sections_png": {
+          "bytes": 74942,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/figures/transition_cross_sections.png",
+          "sha256": "6d18aaab0c5646695c28489f4bbd5a0d898692e1c7bd7a5045feb6fe7e21c977"
+        },
+        "divider_index_json": {
+          "bytes": 11685,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/divider_index.json",
+          "sha256": "9b30cc1507610515a0bba29fef65924466dfc10ef26a39f1b89a5a63a5dec80c"
+        },
+        "envelope_step": {
+          "bytes": 377289,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/geometry/two_tank_four_outlet_aligned_ruled_envelope.step",
+          "sha256": "b0b343426455f0f22e8fa91cf1e0fc2f988ea95888ca115c8f98151db7bee5bd"
+        },
+        "fitted_dividers_step": {
+          "bytes": 920973,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/geometry/four_mouth_fitted_divider_solids.step",
+          "sha256": "c63290b94d63058af1ec744926f36a59503ee1b06101768c038a6d12ad07cfda"
+        },
+        "geometry_summary": {
+          "bytes": 8401,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/geometry_summary.json",
+          "sha256": "5a27f7404fa14876be613d7bfe2bfd450401cbd636acb8b89a2758c7765f55ea"
+        },
+        "transition_sections_csv": {
+          "bytes": 588,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/transition_sections.csv",
+          "sha256": "6ee8ccd387453a0e6721dde4252f1c1c88bce647467c95bd5d8fa4cba41a90b4"
+        },
+        "zero_thickness_surfaces_step": {
+          "bytes": 324837,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/attempt2/reference/geometry/four_mouth_zero_thickness_divider_surfaces.step",
+          "sha256": "b33a3a0e5571078f1c3d852ba5de6751921128d34c40bc7540877dac68fd84a1"
+        }
+      },
+      "branch_pipe_transition_overlap_volume_m3": [
+        0.013642832456221434,
+        0.013645877275814886,
+        0.01364283241075222,
+        0.013645877269176631
+      ],
+      "derived_flat_cylinder_length_m": 2.599530737167624,
+      "divider_contact_audit": {
+        "all_dividers_have_roof_and_floor_contact": true,
+        "fitted_divider_outside_remainder_max_m3": 0.0,
+        "fitted_divider_solid_count": 16,
+        "floor_contact_area_min_max_m2": [
+          0.004200497554897442,
+          0.004200893765000376
+        ],
+        "roof_contact_area_min_max_m2": [
+          0.004200497554897656,
+          0.004200893764999191
+        ]
+      },
+      "downstream_line_volume_m3_each": [
+        0.8805399694257832,
+        0.8805399694778886
+      ],
+      "downstream_line_volume_m3_total": 1.7610799389036718,
+      "generator_sha256": "30bbe78ea052142cecefc51846348b32bd7ec75b8ad5b03314ae5c56eb76ecea",
+      "inputs": {
+        "mouth_x_m": 5.8,
+        "post_rise_straight_m": 0.2,
+        "transition_and_mouth_length_m": 1.8
+      },
+      "role": "explicit legacy reference",
+      "runtime": {
+        "packages": {
+          "cadquery-ocp": "8.0.1.1.0",
+          "matplotlib": "3.11.2",
+          "numpy": "2.5.4",
+          "pyvista": "0.49.1",
+          "vtk": "9.6.2"
+        },
+        "python": "3.12.3"
+      },
+      "sampled_mouth_area_m2": 0.1499999999999999,
+      "sampled_mouth_divider_blockage_m2": 0.0024000000000000007,
+      "sampled_mouth_open_area_m2": 0.1475999999999999,
+      "sampled_pipe_inlet_area_m2": 0.07068583470577036,
+      "sampled_section_min_gross_area_m2": 0.07068583470577036,
+      "sections_discrete_only": [
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068999053579132,
+          "open_area_after_dividers_m2": 0.07068999053579132,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.0001
+        },
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068583470577036,
+          "open_area_after_dividers_m2": 0.07068583470577036,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.000001
+        },
+        {
+          "centerline_y_m": -0.7499971428571429,
+          "divider_blockage_area_m2": 0.0023682940012262213,
+          "gross_envelope_area_m2": 0.07840625591344179,
+          "open_area_after_dividers_m2": 0.07603796191221557,
+          "section_normal_xyz": [
+            1.0,
+            0.2857142857142856,
+            0.0
+          ],
+          "x_m": 4.800009999999999
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 5.50001
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 5.7999
+        }
+      ],
+      "stations_x_m": {
+        "divider_start": 4.75,
+        "mouth": 5.8,
+        "pipe_overlap_end": 4.2,
+        "rise_bend_end": 3.8,
+        "transition_end": 5.5,
+        "transition_inlet": 4.0,
+        "transition_intermediate": 4.8
+      },
+      "step_roundtrip": {
+        "envelope": {
+          "all_solids_valid": true,
+          "solid_count": 10,
+          "validity": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "fitted_dividers": {
+          "all_solids_valid": true,
+          "solid_count": 16,
+          "validity": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "tank_capacity_m3_each": 1.65375,
+      "tank_volume_m3_each": [
+        1.65375,
+        1.65375
+      ],
+      "topology": {
+        "divider_count": 16,
+        "divider_solid_count": 16,
+        "envelope_solid_count": 10,
+        "mouth_count": 4,
+        "passages_per_mouth": 5,
+        "tank_count": 2,
+        "zero_thickness_segment_count": 48
+      }
+    },
+    "SHORT1": {
+      "artifacts": {
+        "assembly_png": {
+          "bytes": 445310,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/figures/two_tank_four_outlet_assembly.png",
+          "sha256": "9d60350f541d9a8e71505bb43652c9ebc769999fe41ea90498215fb257d96887"
+        },
+        "cross_sections_png": {
+          "bytes": 74785,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/figures/transition_cross_sections.png",
+          "sha256": "0940e66546092d3e892639a407a419a1cce687f6487c2abda766dd94742988bd"
+        },
+        "divider_index_json": {
+          "bytes": 13029,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/divider_index.json",
+          "sha256": "dcbb293542dc71bd18efd5fbdd9f7b790526554742b39fb352b993163dcda772"
+        },
+        "envelope_step": {
+          "bytes": 381513,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/geometry/two_tank_four_outlet_aligned_ruled_envelope.step",
+          "sha256": "c0fdd2583cf0ccca9551ef286702f520ef0d9f4c1aef9d5cd14824b17f3eca35"
+        },
+        "fitted_dividers_step": {
+          "bytes": 938695,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/geometry/four_mouth_fitted_divider_solids.step",
+          "sha256": "87c24fdd736673485def0ecf6f8de1c62bd3b7f00abc532ec9e49b1fcc223fcf"
+        },
+        "geometry_summary": {
+          "bytes": 8591,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/geometry_summary.json",
+          "sha256": "7712570f95d1235d388a2a1d87899b63bdf8d821179ec762c653f4ea52fc86dc"
+        },
+        "transition_sections_csv": {
+          "bytes": 619,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/transition_sections.csv",
+          "sha256": "11ade9395722efcfcc9f48a8d7a22b3b58b84274cecaeabc97ae7945b53acb08"
+        },
+        "zero_thickness_surfaces_step": {
+          "bytes": 325842,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT1/geometry/four_mouth_zero_thickness_divider_surfaces.step",
+          "sha256": "e9ff38882714d36f3220aadf03a9c610e4fa4532602241a90c4bdbdd6ac90f1c"
+        }
+      },
+      "branch_pipe_transition_overlap_volume_m3": [
+        0.007600972495965044,
+        0.007601057094168352,
+        0.007600972492866771,
+        0.007601057089124212
+      ],
+      "derived_flat_cylinder_length_m": 2.599530737167624,
+      "divider_contact_audit": {
+        "all_dividers_have_roof_and_floor_contact": true,
+        "fitted_divider_outside_remainder_max_m3": 0.0,
+        "fitted_divider_solid_count": 16,
+        "floor_contact_area_min_max_m2": [
+          0.0023342171545161876,
+          0.002334844736536764
+        ],
+        "roof_contact_area_min_max_m2": [
+          0.002334217154516897,
+          0.00233484473653675
+        ]
+      },
+      "downstream_line_volume_m3_each": [
+        0.6864456960875336,
+        0.6864456960956736
+      ],
+      "downstream_line_volume_m3_total": 1.3728913921832073,
+      "generator_sha256": "3306c1fa690e63784b873befb971afec6c4a03323adf7be24fea23e4dadee0ad",
+      "inputs": {
+        "mouth_x_m": 4.8,
+        "post_rise_straight_m": 0.0,
+        "transition_and_mouth_length_m": 1.0
+      },
+      "line_volume_change_fraction_vs_reference": -0.2204264202578584,
+      "line_volume_change_if_fully_primed_vs_reference_m3_each": [
+        -0.19409427333824958,
+        -0.19409427338221497
+      ],
+      "line_volume_change_if_fully_primed_vs_reference_m3_total": -0.38818854672046443,
+      "role": "user-directed provisional primary",
+      "runtime": {
+        "packages": {
+          "cadquery-ocp": "8.0.1.1.0",
+          "matplotlib": "3.11.2",
+          "numpy": "2.5.4",
+          "pyvista": "0.49.1",
+          "vtk": "9.6.2"
+        },
+        "python": "3.12.3"
+      },
+      "sampled_mouth_area_m2": 0.1499999999999999,
+      "sampled_mouth_divider_blockage_m2": 0.0024000000000000007,
+      "sampled_mouth_open_area_m2": 0.1475999999999999,
+      "sampled_pipe_inlet_area_m2": 0.07068583470577036,
+      "sampled_section_min_gross_area_m2": 0.07068583470577036,
+      "sections_discrete_only": [
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068999053579164,
+          "open_area_after_dividers_m2": 0.07068999053579164,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.8000555555555553
+        },
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068583470577036,
+          "open_area_after_dividers_m2": 0.07068583470577036,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.800000555555555
+        },
+        {
+          "centerline_y_m": -0.749997142857143,
+          "divider_blockage_area_m2": 0.0017429981557909818,
+          "gross_envelope_area_m2": 0.08574094729138826,
+          "open_area_after_dividers_m2": 0.08399794913559727,
+          "section_normal_xyz": [
+            1.0,
+            0.5142857142857148,
+            0.0
+          ],
+          "x_m": 4.24445
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.633338888888888
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.799944444444444
+        }
+      ],
+      "stations_x_m": {
+        "divider_start": 4.216666666666667,
+        "mouth": 4.8,
+        "pipe_overlap_end": 3.911111111111111,
+        "rise_bend_end": 3.8,
+        "transition_end": 4.633333333333333,
+        "transition_inlet": 3.8,
+        "transition_intermediate": 4.2444444444444445
+      },
+      "step_roundtrip": {
+        "envelope": {
+          "all_solids_valid": true,
+          "solid_count": 10,
+          "validity": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "fitted_dividers": {
+          "all_solids_valid": true,
+          "solid_count": 16,
+          "validity": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "tank_capacity_m3_each": 1.65375,
+      "tank_volume_m3_each": [
+        1.65375,
+        1.65375
+      ],
+      "topology": {
+        "divider_count": 16,
+        "divider_solid_count": 16,
+        "envelope_solid_count": 10,
+        "mouth_count": 4,
+        "passages_per_mouth": 5,
+        "tank_count": 2,
+        "zero_thickness_segment_count": 48
+      }
+    },
+    "SHORT2": {
+      "artifacts": {
+        "assembly_png": {
+          "bytes": 461717,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/figures/two_tank_four_outlet_assembly.png",
+          "sha256": "f53a0e494c264953f30bd6c99b22140dd33b3a80bb8e13cd51a1bb46b597a530"
+        },
+        "cross_sections_png": {
+          "bytes": 75113,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/figures/transition_cross_sections.png",
+          "sha256": "ae213ab403ef355ed5655d21dd08623ea39f8e7cd2b1290f74569336a082c1ca"
+        },
+        "divider_index_json": {
+          "bytes": 12997,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/divider_index.json",
+          "sha256": "cee563b3c943e39e7d782fcee3a5863b3d11f3f055e231ad366d90755d8b62b6"
+        },
+        "envelope_step": {
+          "bytes": 381561,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/geometry/two_tank_four_outlet_aligned_ruled_envelope.step",
+          "sha256": "663ef776673c57061c20b760004c784d1979c9beb7e5c08a6fb4ec7db560f0b0"
+        },
+        "fitted_dividers_step": {
+          "bytes": 934701,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/geometry/four_mouth_fitted_divider_solids.step",
+          "sha256": "a5fb9cd4b795f12a54cb81e8154a9640e789ff6ebbc3a60b266a46954a24d8b1"
+        },
+        "geometry_summary": {
+          "bytes": 8601,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/geometry_summary.json",
+          "sha256": "f8b68116faf63609af2112dad7fcaf08d5b026eb6ae0f010b2d69a54aba34d59"
+        },
+        "transition_sections_csv": {
+          "bytes": 630,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/transition_sections.csv",
+          "sha256": "20d1ec75d600130fc62aff04249f980360a63867fbb5c4473c2aae084dbf3ac5"
+        },
+        "zero_thickness_surfaces_step": {
+          "bytes": 324506,
+          "path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/final/SHORT2/geometry/four_mouth_zero_thickness_divider_surfaces.step",
+          "sha256": "4519330a36fca1723c1124648f35de065eb23f4adbe5a3a685a34c6e1270b4d4"
+        }
+      },
+      "branch_pipe_transition_overlap_volume_m3": [
+        0.006095044377770129,
+        0.00609400602764471,
+        0.006095044383372193,
+        0.006094006032010943
+      ],
+      "derived_flat_cylinder_length_m": 2.599530737167624,
+      "divider_contact_audit": {
+        "all_dividers_have_roof_and_floor_contact": true,
+        "fitted_divider_outside_remainder_max_m3": 0.0,
+        "fitted_divider_solid_count": 16,
+        "floor_contact_area_min_max_m2": [
+          0.0018677678101743722,
+          0.001868548581342122
+        ],
+        "roof_contact_area_min_max_m2": [
+          0.0018677678101749386,
+          0.0018685485813428934
+        ]
+      },
+      "downstream_line_volume_m3_each": [
+        0.6449820203962798,
+        0.6449820203863093
+      ],
+      "downstream_line_volume_m3_total": 1.2899640407825892,
+      "generator_sha256": "3306c1fa690e63784b873befb971afec6c4a03323adf7be24fea23e4dadee0ad",
+      "inputs": {
+        "mouth_x_m": 4.6,
+        "post_rise_straight_m": 0.0,
+        "transition_and_mouth_length_m": 0.8
+      },
+      "line_volume_change_fraction_vs_reference": -0.2675153397149974,
+      "line_volume_change_if_fully_primed_vs_reference_m3_each": [
+        -0.23555794902950333,
+        -0.23555794909157934
+      ],
+      "line_volume_change_if_fully_primed_vs_reference_m3_total": -0.47111589812108257,
+      "role": "shorter provisional sensitivity",
+      "runtime": {
+        "packages": {
+          "cadquery-ocp": "8.0.1.1.0",
+          "matplotlib": "3.11.2",
+          "numpy": "2.5.4",
+          "pyvista": "0.49.1",
+          "vtk": "9.6.2"
+        },
+        "python": "3.12.3"
+      },
+      "sampled_mouth_area_m2": 0.1499999999999999,
+      "sampled_mouth_divider_blockage_m2": 0.0024000000000000007,
+      "sampled_mouth_open_area_m2": 0.1475999999999999,
+      "sampled_pipe_inlet_area_m2": 0.07068583470577036,
+      "sampled_section_min_gross_area_m2": 0.07068583470577036,
+      "sections_discrete_only": [
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068999053578981,
+          "open_area_after_dividers_m2": 0.07068999053578981,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.800044444444444
+        },
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068583470577036,
+          "open_area_after_dividers_m2": 0.07068583470577036,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.800000444444444
+        },
+        {
+          "centerline_y_m": -0.7499971428571428,
+          "divider_blockage_area_m2": 0.0014176495692429904,
+          "gross_envelope_area_m2": 0.09155056678907586,
+          "open_area_after_dividers_m2": 0.09013291721983287,
+          "section_normal_xyz": [
+            1.0,
+            0.6428571428571414,
+            0.0
+          ],
+          "x_m": 4.1555599999999995
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.466671111111111
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.599955555555555
+        }
+      ],
+      "stations_x_m": {
+        "divider_start": 4.133333333333333,
+        "mouth": 4.6,
+        "pipe_overlap_end": 3.888888888888889,
+        "rise_bend_end": 3.8,
+        "transition_end": 4.466666666666667,
+        "transition_inlet": 3.8,
+        "transition_intermediate": 4.155555555555555
+      },
+      "step_roundtrip": {
+        "envelope": {
+          "all_solids_valid": true,
+          "solid_count": 10,
+          "validity": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "fitted_dividers": {
+          "all_solids_valid": true,
+          "solid_count": 16,
+          "validity": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "tank_capacity_m3_each": 1.65375,
+      "tank_volume_m3_each": [
+        1.65375,
+        1.65375
+      ],
+      "topology": {
+        "divider_count": 16,
+        "divider_solid_count": 16,
+        "envelope_solid_count": 10,
+        "mouth_count": 4,
+        "passages_per_mouth": 5,
+        "tank_count": 2,
+        "zero_thickness_segment_count": 48
+      }
+    }
+  },
+  "schema": "i4f-downstream-length-comparison-manifest.v1",
+  "selected_layout": "SHORT1 is the current CLI default and provisional primary: zero post-rise straight, 1.0 m transition-and-mouth train, mouth x=4.8 m.",
+  "station_mapping": "x0=3.8+post-rise-straight; all original downstream offsets from x=4.0 scale by transition-and-mouth-length/1.8; the 0.2 m pipe overlap is internal BREP overlap into transition, not extra exposed length.",
+  "status": "User-directed provisional geometry comparison only; no CFD, mesh, or solver input changes.",
+  "updated_utc": "2026-10-25T14:58:27Z",
+  "render_labels": {
+    "REFERENCE": "Previous layout",
+    "SHORT1": "1.0 m proposed",
+    "SHORT2": "0.8 m alternative"
+  }
+}

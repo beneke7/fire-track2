@@ -15,6 +15,7 @@ import importlib.metadata
 import json
 import math
 import platform
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -61,11 +62,13 @@ VALVE_D_M = 0.300
 PIPE_RUN_Z = 0.500
 MOUTH_W_M = 1.000
 MOUTH_H_M = 0.150
-MOUTH_X_M = 5.800
-TRANSITION_X0_M = 4.000
-LAMELLA_START_X_M = 4.750
-TRANSITION_XMID_M = 4.800
-TRANSITION_X1_M = 5.500
+POST_RISE_STRAIGHT_DEFAULT_M = 0.000
+TRANSITION_AND_MOUTH_DEFAULT_M = 1.000
+REFERENCE_TRANSITION_AND_MOUTH_LENGTH_M = 1.800
+LAMELLA_START_OFFSET_M = 0.750
+TRANSITION_XMID_OFFSET_M = 0.800
+TRANSITION_X1_OFFSET_M = 1.500
+PIPE_OVERLAP_OFFSET_M = 0.200
 VALVE_X_M = (2.100, 2.400)
 BRANCHES = (
     {
@@ -77,6 +80,19 @@ BRANCHES = (
     {"name": "upper", "port_y_offset_m": 0.370, "pipe_lateral_offset_m": 0.200, "mouth_z_m": 0.900},
 )
 BEND_X_M = (2.600, 3.000, 3.400, 3.800)
+
+
+@dataclass(frozen=True)
+class DownstreamStations:
+    """Stations after the fixed rise bend, without mutating module globals."""
+
+    transition_inlet_x_m: float
+    lamella_start_x_m: float
+    transition_intermediate_x_m: float
+    transition_end_x_m: float
+    mouth_x_m: float
+    pipe_overlap_end_x_m: float
+    scale_from_default: float
 
 
 def sha256(path: Path) -> str:
@@ -143,6 +159,21 @@ def require_common(a, b):
     return operation.Shape()
 
 
+def downstream_stations(post_rise_straight_m: float, transition_and_mouth_length_m: float):
+    """Scale every original downstream station from the fixed bend endpoint."""
+    scale = transition_and_mouth_length_m / REFERENCE_TRANSITION_AND_MOUTH_LENGTH_M
+    inlet = BEND_X_M[-1] + post_rise_straight_m
+    return DownstreamStations(
+        transition_inlet_x_m=inlet,
+        lamella_start_x_m=inlet + LAMELLA_START_OFFSET_M * scale,
+        transition_intermediate_x_m=inlet + TRANSITION_XMID_OFFSET_M * scale,
+        transition_end_x_m=inlet + TRANSITION_X1_OFFSET_M * scale,
+        mouth_x_m=inlet + REFERENCE_TRANSITION_AND_MOUTH_LENGTH_M * scale,
+        pipe_overlap_end_x_m=inlet + PIPE_OVERLAP_OFFSET_M * scale,
+        scale_from_default=scale,
+    )
+
+
 def make_circle_wire(center, normal, radius: float):
     circle = gp_Circ(gp_Ax2(gp_Pnt(*center), gp_Dir(*normal)), radius)
     return BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(circle).Edge()).Wire()
@@ -170,7 +201,13 @@ def make_bezier_edge(points):
     return BRepBuilderAPI_MakeEdge(Geom_BezierCurve(poles)).Edge()
 
 
-def branch_pipe(y_tank: float, branch: dict, tank_diameter_m: float, pipe_diameter_m: float):
+def branch_pipe(
+    y_tank: float,
+    branch: dict,
+    tank_diameter_m: float,
+    pipe_diameter_m: float,
+    stations: DownstreamStations,
+):
     radius = pipe_diameter_m / 2
     y_pipe = y_tank + branch["pipe_lateral_offset_m"]
     z_out = branch["mouth_z_m"]
@@ -187,12 +224,15 @@ def branch_pipe(y_tank: float, branch: dict, tank_diameter_m: float, pipe_diamet
         [BEND_X_M[2], y_pipe, z_out],
         [BEND_X_M[3], y_pipe, z_out],
     ]
-    pipe_end = TRANSITION_X0_M + 0.200
     spine = BRepBuilderAPI_MakeWire()
     spine.Add(make_bezier_edge([p0, p1, p2, p3]))
     spine.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(*p3), gp_Pnt(*q0)).Edge())
     spine.Add(make_bezier_edge([q0, q1, q2, q3]))
-    spine.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(*q3), gp_Pnt(pipe_end, y_pipe, z_out)).Edge())
+    spine.Add(
+        BRepBuilderAPI_MakeEdge(
+            gp_Pnt(*q3), gp_Pnt(stations.pipe_overlap_end_x_m, y_pipe, z_out)
+        ).Edge()
+    )
     if not spine.IsDone():
         raise RuntimeError("Could not form connected branch centerline")
     tangent = np.asarray(p1, dtype=float) - np.asarray(p0, dtype=float)
@@ -204,10 +244,20 @@ def branch_pipe(y_tank: float, branch: dict, tank_diameter_m: float, pipe_diamet
     return pipe.Shape(), y_pipe
 
 
-def aligned_ruled_transition(y_pipe: float, y_mouth: float, z: float, intermediate_width_m: float):
+def aligned_ruled_transition(
+    y_pipe: float,
+    y_mouth: float,
+    z: float,
+    intermediate_width_m: float,
+    stations: DownstreamStations,
+):
     """Four-arc ruled circle-to-rectangle loft used by the approved geometry."""
     circle = gp_Circ(
-        gp_Ax2(gp_Pnt(TRANSITION_X0_M, y_pipe, z), gp_Dir(1, 0, 0), gp_Dir(0, 1, 0)),
+        gp_Ax2(
+            gp_Pnt(stations.transition_inlet_x_m, y_pipe, z),
+            gp_Dir(1, 0, 0),
+            gp_Dir(0, 1, 0),
+        ),
         0.150,
     )
     round_wire = BRepBuilderAPI_MakeWire()
@@ -218,9 +268,13 @@ def aligned_ruled_transition(y_pipe: float, y_mouth: float, z: float, intermedia
         raise RuntimeError("Could not construct four-arc round transition profile")
     loft = BRepOffsetAPI_ThruSections(True, True, 1e-5)
     loft.AddWire(round_wire.Wire())
-    loft.AddWire(make_rect_wire(TRANSITION_XMID_M, y_pipe, z, intermediate_width_m, MOUTH_H_M))
-    loft.AddWire(make_rect_wire(TRANSITION_X1_M, y_mouth, z, MOUTH_W_M, MOUTH_H_M))
-    loft.AddWire(make_rect_wire(MOUTH_X_M, y_mouth, z, MOUTH_W_M, MOUTH_H_M))
+    loft.AddWire(
+        make_rect_wire(
+            stations.transition_intermediate_x_m, y_pipe, z, intermediate_width_m, MOUTH_H_M
+        )
+    )
+    loft.AddWire(make_rect_wire(stations.transition_end_x_m, y_mouth, z, MOUTH_W_M, MOUTH_H_M))
+    loft.AddWire(make_rect_wire(stations.mouth_x_m, y_mouth, z, MOUTH_W_M, MOUTH_H_M))
     loft.Build()
     if not loft.IsDone() or len(solids(loft.Shape())) != 1:
         raise RuntimeError("Aligned ruled transition did not form one solid")
@@ -341,6 +395,7 @@ def render_assembly(
     envelope_stl: Path,
     plates_stl: Path,
     output: Path,
+    mouth_x_m: float,
     divider_count: int,
     divider_thickness_m: float,
 ):
@@ -361,10 +416,10 @@ def render_assembly(
                 linewidth=0,
             )
         )
-    ax.set_xlim(0, MOUTH_X_M)
+    ax.set_xlim(0, mouth_x_m)
     ax.set_ylim(-1.15, 1.15)
     ax.set_zlim(0.25, 1.80)
-    ax.set_box_aspect((MOUTH_X_M, 2.30, 1.55))
+    ax.set_box_aspect((mouth_x_m, 2.30, 1.55))
     ax.view_init(elev=28, azim=-57)
     ax.set_xlabel("X · discharge (+X), m")
     ax.set_ylabel("Y · tank columns / mouth width, m")
@@ -381,17 +436,36 @@ def render_assembly(
 
 
 def render_sections(
-    output: Path, intermediate_width_m: float, divider_count: int, divider_thickness_m: float
+    output: Path,
+    intermediate_width_m: float,
+    divider_count: int,
+    divider_thickness_m: float,
+    stations: DownstreamStations,
 ):
-    stations = [
-        ("Pipe inlet\nx=4.000 m", PIPE_ID_M, PIPE_ID_M, 0),
-        ("Divider start\nx=4.750 m", 0.485, 0.1535, 1),
-        ("Intermediate\nx=4.800 m", intermediate_width_m, MOUTH_H_M, 1),
-        ("Mouth\nx=5.800 m", MOUTH_W_M, MOUTH_H_M, 1),
+    section_stations = [
+        (
+            f"Pipe/transition inlet\nx={stations.transition_inlet_x_m:.3f} m",
+            PIPE_ID_M,
+            PIPE_ID_M,
+            0,
+        ),
+        (
+            f"Divider start\nx={stations.lamella_start_x_m:.3f} m",
+            0.485,
+            0.1535,
+            1,
+        ),
+        (
+            f"Intermediate\nx={stations.transition_intermediate_x_m:.3f} m",
+            intermediate_width_m,
+            MOUTH_H_M,
+            1,
+        ),
+        (f"Mouth\nx={stations.mouth_x_m:.3f} m", MOUTH_W_M, MOUTH_H_M, 1),
     ]
     fig, axes = plt.subplots(1, 4, figsize=(14, 5), dpi=150)
-    for ax, (label, width, height, has_dividers) in zip(axes, stations):
-        if "Pipe inlet" in label:
+    for ax, (label, width, height, has_dividers) in zip(axes, section_stations):
+        if "Pipe/transition inlet" in label:
             ax.add_patch(
                 Circle((0, 0), width / 2, facecolor="#d9e8f0", edgecolor="#263746", linewidth=1.4)
             )
@@ -435,6 +509,7 @@ def render_sections(
 
 
 def generate(args) -> dict:
+    stations = downstream_stations(args.post_rise_straight_m, args.transition_and_mouth_length_m)
     output = args.output_dir.resolve()
     geometry_dir = output / "geometry"
     divider_dir = geometry_dir / "mid_surfaces"
@@ -456,6 +531,7 @@ def generate(args) -> dict:
     envelope_components = []
     tank_records = []
     transition_rows = []
+    line_volume_records = []
     plate_solids = []
     mid_faces = []
     divider_records = []
@@ -477,17 +553,57 @@ def generate(args) -> dict:
                 "bounds_m": bounds(tank),
             }
         )
+        tank_line_volume = 0.0
         for branch in BRANCHES:
-            branch_shape, y_pipe = branch_pipe(y_tank, branch, args.tank_diameter_m, PIPE_ID_M)
+            branch_shape, y_pipe = branch_pipe(
+                y_tank, branch, args.tank_diameter_m, PIPE_ID_M, stations
+            )
             y_mouth = y_tank
             transition = aligned_ruled_transition(
-                y_pipe, y_mouth, branch["mouth_z_m"], args.intermediate_width_m
+                y_pipe, y_mouth, branch["mouth_z_m"], args.intermediate_width_m, stations
             )
             envelope_components.extend((branch_shape, transition))
             transition_rows.append((tank_index, branch, y_pipe, transition))
 
+            pipe_transition_overlap = require_common(branch_shape, transition)
+            pipe_inside_tank = require_common(branch_shape, tank)
+            transition_inside_tank = require_common(transition, tank)
+            overlap_inside_tank = require_common(pipe_transition_overlap, tank)
+            pipe_volume = volume(branch_shape)
+            transition_volume = volume(transition)
+            overlap_volume = volume(pipe_transition_overlap)
+            train_volume = pipe_volume + transition_volume - overlap_volume
+            inside_tank_volume = (
+                volume(pipe_inside_tank)
+                + volume(transition_inside_tank)
+                - volume(overlap_inside_tank)
+            )
+            outside_tank_volume = train_volume - inside_tank_volume
+            if train_volume <= 0 or inside_tank_volume < 0 or outside_tank_volume <= 0:
+                raise RuntimeError(
+                    f"No positive downstream line volume: tank{tank_index}/{branch['name']}"
+                )
+            tank_line_volume += outside_tank_volume
+            line_volume_records.append(
+                {
+                    "tank_index": tank_index,
+                    "branch": branch["name"],
+                    "branch_pipe_transition_union_volume_m3": train_volume,
+                    "branch_pipe_shape_volume_m3": pipe_volume,
+                    "transition_shape_volume_m3": transition_volume,
+                    "pipe_transition_overlap_volume_m3": overlap_volume,
+                    "union_volume_inside_tank_m3": inside_tank_volume,
+                    "line_volume_outside_tank_m3": outside_tank_volume,
+                }
+            )
+
             widths = (0.485, args.intermediate_width_m, MOUTH_W_M, MOUTH_W_M)
-            xs = (LAMELLA_START_X_M, TRANSITION_XMID_M, TRANSITION_X1_M, MOUTH_X_M)
+            xs = (
+                stations.lamella_start_x_m,
+                stations.transition_intermediate_x_m,
+                stations.transition_end_x_m,
+                stations.mouth_x_m,
+            )
             centerline_start = y_pipe - 0.0703 * (y_mouth - y_pipe)
             centers_by_station = []
             for width in widths:
@@ -533,6 +649,7 @@ def generate(args) -> dict:
                         "step": group_path.relative_to(output).as_posix(),
                     }
                 )
+        tank_records[-1]["downstream_line_volume_m3"] = tank_line_volume
 
     envelope = compound(envelope_components)
     finite_dividers = compound(plate_solids)
@@ -556,19 +673,30 @@ def generate(args) -> dict:
     y_pipe = transition_rows[0][2]
     y_mouth = TANK_Y[0]
     z_section = transition_rows[0][1]["mouth_z_m"]
-    centerline_slope = (y_mouth - y_pipe) / (TRANSITION_X1_M - TRANSITION_XMID_M)
-    sample_xs = (4.0001, 4.000001, 4.80001, 5.50001, 5.7999)
+    centerline_slope = (y_mouth - y_pipe) / (
+        stations.transition_end_x_m - stations.transition_intermediate_x_m
+    )
+    section_epsilon = min(
+        1e-4 * stations.scale_from_default, 1e-3 * args.transition_and_mouth_length_m
+    )
+    sample_xs = (
+        stations.transition_inlet_x_m + section_epsilon,
+        stations.transition_inlet_x_m + section_epsilon * 0.01,
+        stations.transition_intermediate_x_m + section_epsilon * 0.1,
+        stations.transition_end_x_m + section_epsilon * 0.1,
+        stations.mouth_x_m - section_epsilon,
+    )
     for x in sample_xs:
-        if x <= TRANSITION_XMID_M:
+        if x <= stations.transition_intermediate_x_m:
             y_center, tangent = y_pipe, (1.0, 0.0, 0.0)
-        elif x < TRANSITION_X1_M:
-            y_center = y_pipe + centerline_slope * (x - TRANSITION_XMID_M)
+        elif x < stations.transition_end_x_m:
+            y_center = y_pipe + centerline_slope * (x - stations.transition_intermediate_x_m)
             tangent = (1.0, centerline_slope, 0.0)
         else:
             y_center, tangent = y_mouth, (1.0, 0.0, 0.0)
         gross = section_area(representative, x, y_center, z_section, tangent)
         blocked = 0.0
-        if x >= LAMELLA_START_X_M:
+        if x >= stations.lamella_start_x_m:
             blocked = sum(
                 section_area(plate, x, y_center, z_section, tangent)
                 for plate in plate_solids[: args.lamella_count]
@@ -598,11 +726,16 @@ def generate(args) -> dict:
         envelope_stl,
         dividers_stl,
         assembly_png,
+        stations.mouth_x_m,
         args.lamella_count,
         args.lamella_thickness_m,
     )
     render_sections(
-        sections_png, args.intermediate_width_m, args.lamella_count, args.lamella_thickness_m
+        sections_png,
+        args.intermediate_width_m,
+        args.lamella_count,
+        args.lamella_thickness_m,
+        stations,
     )
 
     sections_path = output / "transition_sections.csv"
@@ -648,10 +781,27 @@ def generate(args) -> dict:
             "pipe_id_basis": "assumed equal to reported valve diameter",
             "mouth_width_m": MOUTH_W_M,
             "mouth_height_m": MOUTH_H_M,
+            "post_rise_straight_m_assumed": args.post_rise_straight_m,
+            "transition_and_mouth_length_m_assumed": args.transition_and_mouth_length_m,
+            "downstream_stations_x_m": {
+                "rise_bend_end": BEND_X_M[-1],
+                "transition_inlet": stations.transition_inlet_x_m,
+                "divider_start": stations.lamella_start_x_m,
+                "transition_intermediate": stations.transition_intermediate_x_m,
+                "transition_end": stations.transition_end_x_m,
+                "mouth": stations.mouth_x_m,
+                "pipe_overlap_end": stations.pipe_overlap_end_x_m,
+            },
+            "station_mapping": (
+                "Transition inlet = fixed rise-bend end + post-rise straight. All original downstream "
+                "offsets from x=4.0 m scale by transition_and_mouth_length/1.8 m; pipe overlap "
+                "offset 0.2 m scales by the same factor as an internal pipe/transition BREP overlap, "
+                "not as an additional exposed straight length."
+            ),
             "intermediate_width_m_assumed": args.intermediate_width_m,
             "divider_count_per_mouth": args.lamella_count,
             "divider_thickness_m_assumed_not_measured": args.lamella_thickness_m,
-            "divider_start_x_m_assumed": LAMELLA_START_X_M,
+            "divider_start_x_m_assumed": stations.lamella_start_x_m,
             "divider_geometry": (
                 f"{args.lamella_count} equally spaced plates fanned through the aligned ruled "
                 f"transition; {args.lamella_thickness_m:g} m thickness is assumed. "
@@ -663,6 +813,19 @@ def generate(args) -> dict:
             "capacity_m3_each": capacity,
             "derived_flat_cylinder_length_m": tank_length,
             "records": tank_records,
+            "downstream_line_volume_m3_each": [
+                item["downstream_line_volume_m3"] for item in tank_records
+            ],
+            "downstream_line_volume_total_m3": sum(
+                item["downstream_line_volume_m3"] for item in tank_records
+            ),
+            "branch_line_volume_records": line_volume_records,
+            "line_volume_definition": (
+                "For each branch, exact BREP inclusion-exclusion computes pipe plus transition minus "
+                "their overlap; the common part inside the tank is subtracted with the same inclusion-"
+                "exclusion rule. Branch line volumes are summed per tank; this is a geometry inventory "
+                "estimate, not a CFD zone-volume measurement."
+            ),
         },
         "topology": {
             "tank_count": len(TANK_Y),
@@ -716,6 +879,18 @@ def parse_args():
     parser.add_argument("--intermediate-width-m", type=float, default=0.500)
     parser.add_argument("--lamella-count", type=int, default=4)
     parser.add_argument("--lamella-thickness-m", type=float, default=0.004)
+    parser.add_argument(
+        "--post-rise-straight-m",
+        type=float,
+        default=POST_RISE_STRAIGHT_DEFAULT_M,
+        help="straight distance after the fixed rise-bend end at x=3.8 m",
+    )
+    parser.add_argument(
+        "--transition-and-mouth-length-m",
+        type=float,
+        default=TRANSITION_AND_MOUTH_DEFAULT_M,
+        help="distance from transition inlet to mouth; scales all downstream stations",
+    )
     args = parser.parse_args()
     errors = validate_inputs(args)
     if errors:
@@ -731,6 +906,7 @@ def validate_inputs(args) -> list[str]:
         ("--headspace-ratio", args.headspace_ratio),
         ("--intermediate-width-m", args.intermediate_width_m),
         ("--lamella-thickness-m", args.lamella_thickness_m),
+        ("--transition-and-mouth-length-m", args.transition_and_mouth_length_m),
     )
     errors = [
         f"{name} must be finite and greater than zero"
@@ -739,6 +915,30 @@ def validate_inputs(args) -> list[str]:
     ]
     if args.lamella_count < 1:
         errors.append("--lamella-count must be at least 1")
+    if not math.isfinite(args.post_rise_straight_m) or args.post_rise_straight_m < 0:
+        errors.append("--post-rise-straight-m must be finite and nonnegative")
+    if (
+        math.isfinite(args.post_rise_straight_m)
+        and args.post_rise_straight_m >= 0
+        and math.isfinite(args.transition_and_mouth_length_m)
+        and args.transition_and_mouth_length_m > 0
+    ):
+        stations = downstream_stations(
+            args.post_rise_straight_m, args.transition_and_mouth_length_m
+        )
+        ordered_x = (
+            stations.transition_inlet_x_m,
+            stations.lamella_start_x_m,
+            stations.transition_intermediate_x_m,
+            stations.transition_end_x_m,
+            stations.mouth_x_m,
+        )
+        if any(right <= left for left, right in zip(ordered_x, ordered_x[1:])):
+            errors.append("downstream stations must be finite and strictly increasing")
+        if stations.transition_inlet_x_m < BEND_X_M[-1]:
+            errors.append("transition inlet must not be upstream of the fixed rise-bend end")
+        if not (stations.transition_inlet_x_m < stations.pipe_overlap_end_x_m < stations.mouth_x_m):
+            errors.append("mapped pipe/transition overlap must lie between the inlet and mouth")
     if math.isfinite(args.tank_diameter_m) and args.tank_diameter_m > 0:
         if args.tank_diameter_m / 2 <= max(abs(branch["port_y_offset_m"]) for branch in BRANCHES):
             errors.append("--tank-diameter-m / 2 must exceed the fixed branch port offset 0.37 m")
@@ -770,6 +970,11 @@ def main():
                 "output_dir": str(args.output_dir.resolve()),
                 "tank_capacity_each_m3": summary["tank_metrics"]["capacity_m3_each"],
                 "tank_length_m": summary["tank_metrics"]["derived_flat_cylinder_length_m"],
+                "post_rise_straight_m": summary["assumptions"]["post_rise_straight_m_assumed"],
+                "transition_and_mouth_length_m": summary["assumptions"][
+                    "transition_and_mouth_length_m_assumed"
+                ],
+                "mouth_x_m": summary["assumptions"]["downstream_stations_x_m"]["mouth"],
                 "mouths": summary["topology"]["mouth_count"],
                 "dividers": summary["topology"]["divider_count"],
                 "section_samples": summary["area_metrics"][

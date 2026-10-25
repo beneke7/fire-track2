@@ -1,11 +1,17 @@
 # Live project status
 
-Updated: 2026-10-25 14:24 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 15:01 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
+- **User-directed compact geometry:** fresh CAD now defaults to zero straight
+  after the upward bend and a 1.0 m transition/outlet train; 0.8 m is the
+  alternative. The photo supplies proportions, not measured lengths. Geometry
+  generation, roof/floor contacts and common-scale comparison passed. Compact
+  meshing is being prepared; no compact CFD is running. Existing fields and
+  movies retain the frozen 0.2 m straight plus 1.8 m legacy train.
 - **Updated-apparatus continuation is running on ten MPI ranks.** Docker
   `715ddc276b6e`, StartedAt 2026-10-25 13:23:49 UTC, exact identity independently
   verified. The 303,108-cell pilot completed .050021166664 s in 506 seconds
@@ -16,14 +22,14 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   two configured face-tet checks fail; the other eight rows pass. It is not a
   passed mesh gate or hardware validation. Owner: Luna coupling worker; bundle
   `results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/`.
-  A .2 s native checkpoint is available; root verified progress through .31471 s
+  A .2 s native checkpoint is available; root verified progress through .42406 s
   with zero raw pressure-floor contacts.
 - **Fine 1,779,258-cell reservoir check is running on ten MPI ranks.** Docker
   `1b4d0094bba8`, StartedAt 2026-10-25 13:48:54 UTC, exact identity verified.
   It starts from the approved fine initial state with the tested ambient BCs,
   targeting .05 s under a four-hour bound. Source binary and nominal physics
   match the coarse run; native gas capacities differ by about 1% through mesh
-  volume discretization. The first complete .005 s checkpoint has zero raw
+  volume discretization. Progress through .03177 s has zero raw
   pressure-floor contacts; recent steps cost about 40 seconds on ten ranks.
   Owner: Luna energy worker;
   `results/runs/i4f-fine-reservoir-coldstart-20261025T134345Z/`.
@@ -97,9 +103,9 @@ Root inspected the corrected four-arc ruled envelope and fitted divider
 sections. Earlier CAD plate gaps and a .05904 m2 accidental throat are fixed in
 `integrity-audit-aligned-ruled-v4`; its sampled minimum is the pipe inlet within
 about 1 ppm. This is not a proof of the continuous minimum or measured geometry.
-The [standalone generator](../scripts/i4f_four_outlet_geometry/README.md) now
-reproduces its geometry with an isolated locked CAD environment; default BREP
-metrics and images were checked. It supports the current horizontal layout;
+The [standalone generator](../scripts/i4f_four_outlet_geometry/README.md) uses
+an isolated locked CAD environment; the explicit legacy layout and new compact
+default were both checked. It supports the current horizontal layout;
 the revised four-outlet vertical layout is not implemented. A same-grid
 no-divider preparation adds 308 faces above the configured nonorthogonality
 limit, so it remains held rather than a clean engineering comparison.
