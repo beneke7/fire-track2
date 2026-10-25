@@ -1,19 +1,36 @@
 # I4F discharge: published results, 25 October 2026
 
-[Watch the current air-filled compact startup, 10× slow](current-air-filled-cutaway-10x.mp4)
+The newer corrected-source case is shown below at **0.350114 s**, on its
+299,248-cell mesh. Blue marks native cells with water fraction at least .5;
+cyan is the spatially interpolated .5 display surface. The right view retains
+all four branches; the left uses labeled half-sections. At this saved time,
+the mouths contain no resolved water at that threshold: this shows pipe
+filling, not an exterior discharge sheet.
+
+![Corrected-source cutaway and all four branches at 0.350114 s](corrected-source-preview-0p350.png)
+
+The [native-field render record](corrected-source-preview-0p350.json) includes
+checkpoint hashes and cell-address mapping checks; the
+[backend record](corrected-source-preview-backend.json) verifies CPU/Mesa
+rendering. A longer movie is scheduled after a verified .8 s checkpoint.
+
+[Watch the earlier air-filled compact startup, 10× slow](current-air-filled-cutaway-10x.mp4)
 or its [outlet view](current-air-filled-outlet-10x.mp4). These show pipe filling
 through **0.200021 s**, with downstream air still present and no resolved sheet
 outside the mouths. Six saved states are held at their actual timing; the
 3-second clip includes a 1-second endpoint hold and no field interpolation.
 The [movie manifest](current-air-filled-movie-manifest.json) records the inputs.
+This uses the original partly wetted valve-source treatment. The corrected
+279,536/299,248-cell source-resolution cases are newer; their long-run movie is
+pending. Filenames are retained so existing links continue to work.
 
-![Current air-filled startup at 0.200021 s](current-air-filled-preview.png)
+![Earlier original-source air-filled startup at 0.200021 s](current-air-filled-preview.png)
 
 **Initial-state correction:** the user confirms that passages downstream of
-the valves initially contain air. The older movies and liquid-full-line
-comparisons here preserve the earlier primed-line assumption. They do not show
-that confirmed startup. The new 269,680-cell air-filled compact baseline is
-running. Its [native initial-state image](current-air-filled-initial-state.png)
+the valves initially contain air. The earlier tank-cutaway movies listed below
+and liquid-full-line comparisons preserve the primed-line assumption. Those
+primed results do not show the confirmed startup. The earlier 269,680-cell air-filled compact baseline
+established that startup. Its [native initial-state image](current-air-filled-initial-state.png)
 shows 1.350 m3 in each tank, with another .25106/.25111 m3 in wetted upstream
 feeds and air downstream of the assumed x=2.25 m valve planes. The image shows
 initialization, not a discharge result. The rectangular mouths are at x=4.8 m.
@@ -72,6 +89,22 @@ Endpoint flow differs about 1.50%, and tank-A withdrawal is 4.66391 versus
 ended normally at .050021 s without pressure-floor contacts. The longer
 fine run is explicitly exploratory; this does not establish mesh independence
 or hardware validation.
+
+The next downstream-resolution candidate has **881,431 cells**, retaining
+the fine valve band while refining the bend, mouth and adjacent exterior.
+The [native spacing comparison](downstream-refinement-resolution.json) and
+[data](downstream-refinement-resolution.csv) show approximately twofold
+refinement in all three directions at the mouths. The
+[preparation record](downstream-refinement-preparation.json) records all nine
+configured quality checks passing, alongside 11,521 concave cells reported
+by the separate optional geometry diagnostic. Remeshing changes line volume
+by about .45%; it is not an exact subdivision of the old mesh. This candidate
+has not yet supplied a CFD resolution comparison.
+
+![Native cell-center projection through the same mouth-region slab](downstream-refinement-mouth-centers.png)
+
+The image projects cell centers through a 50 mm axial slab, rather than
+showing an exact face section; color gives cube-root cell volume, not pitch.
 
 ![Matched-time tank drawdown across source and axial-grid choices](air-filled-drawdown-source-grid.png)
 

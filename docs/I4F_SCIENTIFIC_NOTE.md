@@ -5,7 +5,7 @@ no apparatus validation is claimed. Dimensions are distinguished as user-reporte
 derived or assumed below; the CAD is not a calibrated dimensional measurement.
 [The shared input](../experiments/i4f_baseline.json)
 describes the earlier frozen exploratory single-outlet CFD reference; the later
-two-outlet cases use their own immutable run inputs and geometry records.
+two- and four-outlet cases use their own immutable run inputs and geometry records.
 The later maker notes and original STEP/photo are preserved separately in
 `experiments/i4f_hardware_notes_20261024.json`; their provisional two-tank,
 four-mouth reconstruction must not be confused with the earlier single-outlet
@@ -20,10 +20,13 @@ calculations below are conditional initial-state/numerical evidence, not the
 confirmed hardware startup. A new compact case initializes downstream air at
 ambient pressure, while accounting separately for tank water and the wetted
 tank-to-valve passages. The effective initial valve plane remains an assumed
-representation of the distributed scalar restriction. The existing fully
-wetted reduced model does not describe this line-filling transient or predict
-its first water arrival; that model's intake-crown time is not a dry-start
-endpoint prediction.
+representation of the distributed scalar restriction. The earlier fully
+wetted reduced model does not describe this line-filling transient. The new
+[moving-front model](../results/summaries/i4f_20261025/air-filled-moving-front-model.json)
+includes liquid inertia and downstream filling, conditionally predicting mouth
+water near .612/.620 s and a geometric intake-crown proxy near 1.127 s. Its
+full-bore-front approximation and thermal assumptions limit those predictions;
+the crown proxy is not an emptying time.
 
 User clarification on 25 October establishes two tanks, two valves/outlets per
 tank, .900 m tank diameter, .300 m valve diameter, and 1.350 m3 liquid per tank.
@@ -35,12 +38,53 @@ hydraulic reference uses 12 bar absolute with 13 bar absolute sensitivity,
 because the user did not specify gauge versus absolute pressure. These are
 reported/derived inputs and declared scenarios, not new measurements. They are
 preserved in [the hardware record](../experiments/i4f_hardware_notes_20261024.json).
-Historical calculations below retain their original 9 bar, larger-headspace,
+Historical one-tank calculations retain their original 9 bar, larger-headspace,
 no-lamella inputs and must not be presented as this revised hardware case.
 
-The current 12-bar, two-tank/four-outlet run uses a 303,108-cell mesh with two
-recorded face-tet quality failures. It completed .05 s and has continued beyond
-.5 s; this remains exploratory. A matched .05 s halved-timestep trial changes
+The current compact air-filled CFD cases have 279,536 and 299,248 cells,
+with 12.5 and 6.25 mm axial spacing specifically through the .30 m valve-loss
+reach. These are local source refinements, not those spacings everywhere.
+All nine configured mesh-quality criteria pass. Each tank initially contains
+1.350 m3 water, with another .25106/.25111 m3 in its wetted upstream feeds;
+downstream air starts at 100 kPa. A scalar restriction predicts discharge
+rather than prescribing an outlet history. It does not resolve the butterfly
+disk wake or CO2/retardant behavior.
+
+At matched .050021 s, the finer corrected-source case withdraws 4.59423 L
+from tank A, compared with a bracket-interpolated moving-front result of
+4.57287 L and 6.54699 L in the original partly wetted-source case. The
+[comparison figure](../results/summaries/i4f_20261025/air-filled-drawdown-source-grid.png)
+and [native axial histories](../results/summaries/i4f_20261025/air-filled-valve-band-axial-comparison.json)
+support a substantial numerical contribution to the early mismatch without
+fitting Cd. The unchanged 2% pointwise axial screen remains HOLD: the first
+two timesteps differ by up to 5.12%, while endpoint flow differs about 1.50%.
+The reduced model has .634% more initial wet-feed volume, so even close early
+agreement is a consistency check rather than independent validation.
+
+Long continuations of both corrected-source meshes target the useful
+discharge interval; a complete verified discharge has not yet finished.
+The earlier air-filled original-source case saved at .392 s after a raw
+pressure-floor event. A short restart passed .395 s without reproducing it;
+original and diagnostic binaries produce identical short-restart results.
+The cause of that earlier event remains unresolved. Current execution belongs
+in [STATUS](STATUS.md), not in a completed-discharge claim.
+
+The parameterized CAD now supports horizontal and vertical tank axes with
+inspected connection sections. This is geometry capability; there is no
+current vertical-arrangement CFD performance result. The published air-filled
+movie through .200021 s still depicts the earlier original-source run, not
+the corrected-source long continuations. Its filename is retained for link
+stability. The [new corrected-source preview at .350114 s](../results/summaries/i4f_20261025/corrected-source-preview-0p350.png)
+shows all four branches in the outlet view, with no resolved exterior water
+at alpha >= .5 at that time. Its native mapping and CPU/Mesa backend are
+recorded alongside it. A later checkpoint movie is scheduled.
+
+### Earlier primed-line four-mouth context
+
+An earlier 12-bar, two-tank/four-outlet run used a 303,108-cell mesh with two
+recorded face-tet quality failures. It completed .05 s and was saved/stopped at
+.516777 s after the initial-fill correction; this remains exploratory.
+A matched .05 s halved-timestep trial changes
 probe pressure by 103 Pa, sampled flow by about .2% and maximum speed by 4.1%,
 at about twice the wall cost. The separate 1,779,258-cell reservoir-boundary case
 completed .050021 s with a full restart and no pressure clipping. Compared at

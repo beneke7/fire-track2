@@ -1,24 +1,27 @@
 # Live project status
 
-Updated: 2026-10-25 19:52 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-25 20:27 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
-- **Two CPU runs are live, ten ranks each.** The 299,248-cell, 48-layer
-  exploratory continuation is Docker `ee2629b9f7b1`, StartedAt 18:45:08 UTC,
-  in `results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/`.
-  Root verified advancing steps and carried phase ledgers. Its 1.3 s limit
-  is an observation horizon, not emptying; the active campaign allows 4 h
-  stages with 3 h 40 saves under a 12 h bound. The 279,536-cell, 24-layer
-  source-resolution comparison is Docker `24443dad8298`, StartedAt 19:35:26,
-  in `results/runs/i4f-short1-valve-band-12p5-continue-20261025T193504Z/`,
-  targeting .8 s with the same original binary/physics and a bounded campaign.
-  Root verified .37341 s / .10777 s respectively, both without raw pressure
-  contacts or guard errors. Both exact-ID guards/campaigns are active.
-  An optional 24-layer logging/performance/energy upgrade is being staged;
-  neither live run has been changed for it. No aerial/HPC/GPU jobs were started.
+- **Two CPU runs are live, ten ranks each.** Root checked Docker and
+  exact-ID guards at 20:26 UTC. The 299,248-cell, 48-layer reference
+  (`ee2629b9f7b1`, StartedAt 18:45:08 UTC) has reached about .437 s;
+  its 1.3 s limit is an observation horizon, not emptying. The 279,536-cell,
+  24-layer comparison is now the diagnostic-upgraded child
+  `74ad24071782`, StartedAt 20:14:12 UTC, in
+  `results/runs/i4f-short1-valve-band-12p5-continue-20261025T201408Z/`,
+  reaching about .200 s toward .8 s. Both report no guard diagnostic errors
+  or raw pressure clipping. The 24-layer parent saved all 14 fields normally
+  at .158521 s; a first upgraded child failed on missing observer flux-scheme
+  aliases before completing a step, and is preserved. The corrected child
+  has the aliases inside divSchemes and emits partial energy diagnostics.
+  The 48-layer reference remains unchanged. Both bounded campaigns are active;
+  their original deadlines remain 06:45 and 07:35 UTC on October 26.
+  A single CPU/Mesa watcher is armed to render the reference at a verified
+  checkpoint at or beyond .8 s. No aerial/HPC/GPU jobs were started.
 - **The original-case logger replay did not reproduce the floor event.**
   Docker `4f5645618b2f` ended normally at .395023685933 s, exit 0 at 19:07:26,
   with all 14 fields and zero raw contacts. Original-binary and logger/full
@@ -117,8 +120,9 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   A 2.55 J air-energy reconstruction discrepancy was traced to the installed
   gas constant (0.9 ppm difference from the modern-SI value), without fitting
   an offset or changing tolerances. Source-R V2 compiled and linked, but its
-  passivity is not separately tested. Flux budgets remain partial; no full
-  energy-closure claim or live-case deployment follows from compilation.
+  passivity is not separately tested. Flux budgets remain partial; V2 now
+  runs on the 24-layer diagnostic child,
+  without a separate V2 passivity or full energy-closure claim.
 - **Native outlet analysis is prepared.** Historical compact primed-line
   data recover a downstream volume balance within 14.32 mL (0.157% of
   sparse-integrated mouth inflow). Five-channel native flux bins sum to
@@ -126,11 +130,16 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   The confirmed air-filled .05 s state is dry at the mouths and suppresses
   normalized outlet metrics. New tool evidence remains private until useful
   current discharge fields exist.
-- **Full 3D downstream refinement needs remeshing.** Generic directional
-  cuts and the original-mesh hex-first route both produced open cells and
-  failed quality. Both failed branches are preserved and excluded from CFD.
-  Fine worker prepares a snappy-region route retaining height/span refinement;
-  an easier x-only mesh is not substituted for the outlet-resolution study.
+- **Full 3D downstream remeshing succeeded.** The canonical 881,431-cell
+  snappy-region mesh passes all nine configured checks; optional geometry
+  checks still identify concave cells. Native center-spacing comparisons
+  confirm roughly twofold refinement in the mouth and external corridor in
+  all three directions, with the 48-layer valve band retained. Cold phase
+  initialization retains the tank loads and dry downstream pipes. Earlier
+  generic-cut and intermediate meshes are preserved and excluded from CFD.
+  Luna fine worker is preparing one bounded ten-rank cold-start pilot, to
+  start after healthy .8 s completion/capture of the current 24-layer campaign.
+  Preparation is not yet an executed resolution comparison.
 - **Moving-front reduced model implemented and independently reviewed.**
   A portable frozen input packet supports execution without private history.
   Nineteen affected tests pass (eleven new, eight existing), plus Ruff checks.
