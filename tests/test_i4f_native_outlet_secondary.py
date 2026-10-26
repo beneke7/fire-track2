@@ -12,6 +12,8 @@ from aerial_drop.i4f_native_face_reader import (
     _openfoam_linear_weight,
     _orient_local_internal_flux,
     _parse_internal,
+    _read_water_density_model,
+    _water_density_from_pressure,
     read_native_mouth_snapshot,
 )
 
@@ -48,11 +50,9 @@ def test_adapter_preserves_signed_native_flux_and_reconstructed_momentum() -> No
     assert result["native_area_projected_x_m2"] == 0.3
     helper = result["secondary_metrics_helper_raw"]
     assert helper["outward_direction_mean_angle_deg_q_weighted"] == 53.13010235415599
-    assert helper["water_momentum_flux_net_reconstructed_N_xyz"] == [
-        998.2 * 3.8,
-        0.0,
-        998.2 * 4.8,
-    ]
+    assert helper["water_momentum_flux_net_reconstructed_N_xyz"] == pytest.approx(
+        [998.2 * 3.8, 0.0, 998.2 * 4.8]
+    )
 
 
 def test_adapter_suppresses_interpretation_of_dry_numerical_trace() -> None:
@@ -69,6 +69,26 @@ def test_adapter_suppresses_interpretation_of_dry_numerical_trace() -> None:
     )
     assert (
         result["secondary_metrics_helper_raw"]["outward_direction_mean_angle_deg_q_weighted"] == 0.0
+    )
+
+
+def test_adapter_passes_per_face_water_density_to_metrics() -> None:
+    result = ADAPTER.summarize_face_inputs(
+        {
+            "A_lower": [
+                _face(2.0, [1.0, 0.0, 0.0], 0.1, 1.0) | {"water_density_kg_m3": 1000.0},
+                _face(-1.0, [-2.0, 0.0, 0.0], 0.1, 1.0) | {"water_density_kg_m3": 500.0},
+            ]
+        },
+        time_s=0.5,
+        case_label="synthetic-per-face-density",
+    )[0]
+
+    helper = result["secondary_metrics_helper_raw"]
+    assert helper["water_density_model"] == "per_face"
+    assert helper["water_mass_flux_net_kg_s"] == pytest.approx(1500.0)
+    assert helper["water_momentum_flux_net_reconstructed_N_xyz"] == pytest.approx(
+        [3000.0, 0.0, 0.0]
     )
 
 
@@ -110,3 +130,65 @@ def test_native_reader_binary_scalar_and_cut_orientation_helpers() -> None:
 
     with pytest.raises(ValueError, match="scoped to 10-rank"):
         read_native_mouth_snapshot(Path("/not/a/case"), "0.5", nprocs=20)
+
+
+def test_water_density_eos_and_density_is_interpolated_after_cellwise_evaluation(
+    tmp_path: Path,
+) -> None:
+    water = tmp_path / "thermophysicalProperties.water"
+    water.write_text(
+        """
+        thermoType
+        {
+            type heRhoThermo;
+            equationOfState adiabaticPerfectFluid;
+        }
+        mixture
+        {
+            equationOfState
+            {
+                p0 100000;
+                rho0 998.2;
+                gamma 7.15;
+                B 306667767.13022316;
+            }
+        }
+        """
+    )
+    model = _read_water_density_model(water)
+    assert model["model"] == "adiabaticPerfectFluid"
+    assert model["source_sha256"]
+
+    cell_pressure = np.asarray([100_000.0, 1_300_000.0])
+    cell_density = _water_density_from_pressure(cell_pressure, model)
+    owner_weight = 0.75
+    face_density = _interpolate_owner_weighted(cell_density[0], cell_density[1], owner_weight)
+    interpolated_pressure = (
+        owner_weight * cell_pressure[0] + (1.0 - owner_weight) * cell_pressure[1]
+    )
+    eos_of_face_pressure = _water_density_from_pressure(np.asarray([interpolated_pressure]), model)[
+        0
+    ]
+
+    assert cell_density[0] == pytest.approx(998.2)
+    assert face_density == pytest.approx(
+        owner_weight * cell_density[0] + (1.0 - owner_weight) * cell_density[1]
+    )
+    assert abs(face_density - eos_of_face_pressure) > 1e-4
+
+
+def test_water_density_reader_supports_rho_const_and_rejects_unknown_eos(tmp_path: Path) -> None:
+    water = tmp_path / "thermophysicalProperties.water"
+    water.write_text(
+        "thermoType { equationOfState rhoConst; }\nmixture { equationOfState { rho 998.2; } }\n"
+    )
+    model = _read_water_density_model(water)
+    density = _water_density_from_pressure(np.asarray([100_000.0, 1_300_000.0]), model)
+    np.testing.assert_allclose(density, [998.2, 998.2])
+
+    water.write_text(
+        "thermoType { equationOfState unsupportedEOS; }\n"
+        "mixture { equationOfState { rho 998.2; } }\n"
+    )
+    with pytest.raises(ValueError, match="unsupported water equationOfState"):
+        _read_water_density_model(water)

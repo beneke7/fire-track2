@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 11529874,
+    "path": "results/archives/i4f-cold-log-i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "55f62bc7beed3bc233a497b979d1424c244432592cd7a22659840bb3de02c78c"
+  },
+  "created_utc": "2026-10-26T12:33:24.331135+00:00",
+  "members": [
+    {
+      "bytes": 155561547,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1793007950214614876,
+      "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/case/log.cold-coupled",
+      "run_bundle": "i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3",
+      "sha256": "a2c81f8a0cefdb6e94bbe50cd22034011f42ca07c44d00d86acb3395fd38f458",
+      "source_inode": {
+        "device": 66306,
+        "inode": 186273172
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 28745035776,
+    "free_before_archive_bytes": 28602621952,
+    "net_bytes_reclaimed": 142413824,
+    "removed_bytes": 155561547,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

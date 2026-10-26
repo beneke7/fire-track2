@@ -1,0 +1,132 @@
+{
+  "candidate_eos": {
+    "B_Pa": 306667767.13022316,
+    "B_formula": "rho0*c0^2/gamma - p0",
+    "c0_m_s": 1482.3443444561285,
+    "finite_difference_check": {
+      "central_difference_step_Pa": 1.0,
+      "maximum_relative_error": 3.5057451002431725e-07,
+      "pressure_range_Pa": [
+        100000.0,
+        1300000.0
+      ],
+      "quantity": "analytic psi=drho/dp against central difference of rho(p)",
+      "sample_count": 1001,
+      "scope": "analytic consistency check of the selected barotropic formula, not a validation against high-pressure water measurements"
+    },
+    "gamma_classification": "assumed provisional pressure-density exponent; not a measured value, not fitted for stability, and not Cp/Cv",
+    "gamma_exponent": 7.15,
+    "openfoam_model": "adiabaticPerfectFluid with hConst sensibleInternalEnergy",
+    "p0_Pa": 100000.0,
+    "psi_formula": "rho0/[gamma*(p0+B)]*((p+B)/(p0+B))^(1/gamma-1)",
+    "rho0_kg_m3": 998.2,
+    "rho_formula": "rho0*((p+B)/(p0+B))^(1/gamma); T is unused by the v2512 adiabaticPerfectFluid rho(p,T) implementation",
+    "thermo_interpretation": {
+      "Cp_dictionary_J_kgK": 4182.0,
+      "expected_Cp_over_Cv": 1.0,
+      "expected_Cv_J_kgK": 4182.0,
+      "source_hashes": {
+        "HtoEthermo.H": "0c6670e8559d529f31d6dc84a381451bed6ee069772f6ea3e1fe2ee30502a2a7",
+        "adiabaticPerfectFluidI.H": "12ceee1a61221d0d8c8f4b45a7e49c93218e5b600763f64f70942484402eb96c",
+        "hConstThermoI.H": "6438a21792404977118d839016536947c76b7d5fb1f3be3a4dcb7f3753778fcd"
+      },
+      "why_gamma_is_distinct": "In captured OpenCFD v2512 source, adiabaticPerfectFluid returns zero EOS Cp/CpMCv contributions; HtoEthermo computes Cv=Cp-EOS.CpMCv. The pressure exponent gamma therefore sets the barotropic rho(p) slope independently of the hConst Cp/Cv values."
+    }
+  },
+  "cold_input_effect": {
+    "all_other_copied_files_hash_identical_to_source": true,
+    "finiteEOS_minus_rhoConst_initial_water_mass_kg": 1.6062765103242782,
+    "initial_water_volumes_m3": {
+      "tankA": 1.3500000000021357,
+      "tankB": 1.3500000000005044,
+      "total_tank_and_wetted_feeds": 3.202165993106066,
+      "wetted_feedA": 0.2510568437958543,
+      "wetted_feedB": 0.2511091493075716
+    },
+    "mass_was_refit_to_rhoConst": false,
+    "native_cells": 299214,
+    "only_three_source_case_files_changed": [
+      {
+        "change": "replace water EOS dictionary with this overlay",
+        "path": "constant/thermophysicalProperties.water",
+        "source_rhoConst_sha256": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+        "target_exact20C_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+      },
+      {
+        "change": "recompute internalField from p-rhoMix*(g dot C), preserving header and boundary bytes",
+        "path": "0/p_rgh",
+        "source_rhoConst_sha256": "f252ce27cdd1a34efdd082071840080bc9462b3ceddc82a5d21fb39dcde82b58",
+        "target_exact20C_sha256": "5121a0df468dffe69672ee8743fb0900a4cd173634eda390435040a0f26120e3"
+      },
+      {
+        "change": "map new global internalField through unchanged bijective cellProcAddressing; exact rank-to-global equality verified",
+        "path": "processors10/0/p_rgh",
+        "source_rhoConst_sha256": "4257aacca2d3422e1e9a5832cb6900434f199fd27c05a28c6a969e6a5c08c285",
+        "target_exact20C_sha256": "278fc8400ed8493d8ff9f622c5e6c98622c00b5acc17f6db4726a33831f4ce5b"
+      }
+    ],
+    "solver_generated_fields_not_fabricated": [
+      "rho",
+      "psi",
+      "T.air",
+      "T.water",
+      "phi",
+      "alphaPhi0.water"
+    ],
+    "solver_launched": false,
+    "source_case": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+    "source_case_writes": false,
+    "source_readiness_sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de"
+  },
+  "derivation_script": "derive_iapws_sr6_sound_speed.py",
+  "derivation_script_sha256": "91e2e54a3503e6cf1cf7ea7fcf05938e79c25048e10f68616d471bf029b29f50",
+  "historical_proxy_not_selected": {
+    "bundle": "results/runs/i4f-finite-water-eos-cold-preparation-20261026T1036Z",
+    "c0_m_s": 1496.69922,
+    "included_in_this_packet": false,
+    "overlay_sha256": "7838b7bf487ad1bea3b8947290023d55d12eb06ffabb8f096f4cedda0de575b7",
+    "reference_temperature_K": 298.15,
+    "status": "preserved as a separate prior 25 C proxy; not selected by this packet"
+  },
+  "how_to_rederive": "python derive_iapws_sr6_sound_speed.py --source-pdf /path/to/IAPWS-LiquidWater.pdf --output /tmp/iapws-c0-check.json",
+  "material_reference": {
+    "candidate_rho0_kg_m3": 998.2,
+    "reference_pressure_Pa": 100000.0,
+    "reference_temperature_K": 293.15,
+    "rho0_note": "Retained from the selected cold rhoConst baseline, not reset to the correlation value. The difference is explicit and contributes to the EOS mass shift.",
+    "sound_speed_c0_m_s": 1482.3443444561285,
+    "source_derived_density_kg_m3": 998.2065464241152,
+    "source_uncertainty": "IAPWS reports 0.005% relative uncertainty for sound speed in the stable region, interpreted by the release as an expanded uncertainty with coverage factor k=2.",
+    "substance": "ordinary pure liquid water"
+  },
+  "overlay_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+  "packet_hashing": {
+    "hash_manifest": "SHA256SUMS",
+    "verification": "Run `sha256sum -c SHA256SUMS` from this directory."
+  },
+  "primary_source": {
+    "calculation": {
+      "cp0_J_kg_K": 4184.189078396928,
+      "formula": "w0=sqrt(-v0^2/(vp0 + T*vT0^2/cp0))",
+      "specific_volume_m3_kg": 0.0010017966758305778,
+      "vT0_m3_kg_K": 2.0718188337754393e-07,
+      "vp0_m3_kg_Pa": -4.597388435047518e-13
+    },
+    "calculation_locator": "Eqs. (2)-(3), Table 1 coefficients (PDF pp. 3-4); Table 2 cp0 and vT0 derivatives (p. 5); Table 3 speed-of-sound identity (p. 6). Direct evaluation at 293.15 K, not interpolation or a new fit.",
+    "downloaded_source_pdf_sha256": "fda79dde9f441a90da755477c6533e23065e4f90c7f59a505f64c394d775bd45",
+    "implementation_check_locator": "Table 8 (PDF p. 11): evaluating the same published equations at 298.15 K reproduces the table's 1496.69922 m/s within 2.0000066e-6 m/s.",
+    "pdf_bundled": false,
+    "pressure_temperature_scope": "The correlation is for 0.1 MPa and 253.15-383.15 K. Its limited pressure discussion does not validate this candidate EOS through the apparatus tank pressure (~1.21 MPa); do not claim that extrapolation is validated.",
+    "title": "IAPWS SR6-08(2011), Revised Supplementary Release on Properties of Liquid Water at 0.1 MPa",
+    "url": "https://iapws.org/technical-guidance/release/LiquidWater.download"
+  },
+  "qualifications": [
+    "This is a barotropic finite-compressibility sensitivity, not a complete IAPWS thermo package or production water EOS.",
+    "The exact 20 C sound-speed reference is low-pressure; the candidate gamma pressure law is not validated to the apparatus pressure.",
+    "Runtime registry values and the physical discharge response remain to be checked by the separately authorized cold-start trials."
+  ],
+  "runtime_validation_status": "not performed; preparation only",
+  "schema": "i4f-physical-water-eos-reference/v1",
+  "selected_overlay": "thermophysicalProperties.water",
+  "status": "selected provisional 20 C reference input; mechanical finite-compressibility sensitivity only"
+}

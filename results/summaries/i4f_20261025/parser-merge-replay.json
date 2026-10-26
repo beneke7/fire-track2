@@ -1,0 +1,86 @@
+{
+  "fix": {
+    "application_note": "Patch headers label the two illustrative guard files; apply the shown hunk to a copied future-stage guard so its BUNDLE path resolves to that stage.",
+    "candidate_guard_sha256": "e56daf6275d6e738d651f27fd17b557c2434e2a63715ce91e997b4bfddf52870",
+    "change": "Before existing prefix dispatch, extract a non-prefix embedded I4F_OUTER_STATE_DELTA suffix and pass it through the existing parser.",
+    "health_thresholds_or_solver_physics_changed": false,
+    "patch_path": "parser-merge-fix.patch",
+    "patch_sha256": "d1ed9e8d9f93ce74c52f1a294322c5bb20efcd66fe157ba13802d7ca518e5a06",
+    "validated_candidate_guard": "results/runs/i4f-flush-step-parser-recovery-20261026T094143Z/guard_candidate.py"
+  },
+  "parent_run": {
+    "bundle": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+    "clipped_liquid_mass_kg": 0.0,
+    "container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+    "docker_exit_code": 0,
+    "docker_finished_at": "2026-10-26T09:33:58.558978152Z",
+    "docker_started_at": "2026-10-26T06:44:49.045490597Z",
+    "guard_stop_reason": "missing terminal outer/phase mass/deltaT record for completed step (the merged outer record was present but not parsed)",
+    "native_checkpoint": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/processors10/0.413688544708",
+    "native_checkpoint_fields": [
+      "alpha.water",
+      "alphaPhi0.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh",
+      "phi",
+      "rho",
+      "T",
+      "T.air",
+      "T.water",
+      "U",
+      "uniform/time"
+    ],
+    "native_endpoint_final_max_abs_dp_Pa": 1.4202671,
+    "native_field_count": 14,
+    "normal_End_and_capture": true,
+    "operational_stop_time_s": 0.413688544708,
+    "raw_pressure_contacts": 0
+  },
+  "replay": {
+    "completed_steps": 1644,
+    "diagnostic_errors": 0,
+    "helper_path": "results/runs/i4f-flush-step-parser-recovery-20261026T094143Z/analysis/replay_actual_log.py",
+    "helper_sha256": "9732720bea553aa59bc01099632793de690721f39ee26a91963a585a1927bab1",
+    "normal_End_seen": true,
+    "original_guard_completed_steps_before_error": 1643,
+    "parser_errors": 0,
+    "persistent_final_floor_steps": 0,
+    "qualification": "Replay demonstrates parsing/completeness only. The affected 0.413513561489 step had a 3448.48 Pa final outer update; later isolated steps settled to 1.42027 Pa at the captured endpoint. This is not a claim that every step converged.",
+    "raw_pressure_contacts": 0,
+    "result_path": "results/runs/i4f-flush-step-parser-recovery-20261026T094143Z/analysis/actual-log-replay.json",
+    "result_sha256": "37a72edc5020e58da70a29804779860883eb6c34bbdf0293e60877ef3154ecb4",
+    "sustained_outer_pressure_update_steps": 0,
+    "write_now_requests": 0
+  },
+  "root_cause": {
+    "affected_log_line": 2252528,
+    "affected_physical_time_s": 0.413513561489,
+    "effect": "Only the required terminal record was missed. Phase inventory, deltaT, and other seven outer-state records were present.",
+    "raw_trigger_line": "parser-merge-trigger.txt",
+    "raw_trigger_line_sha256": "7062ce91a756803c7961b551dde1e1c618a0978e2d8dee1a28782839d4ed54e6",
+    "recovered_record": {
+      "max_abs_dU_m_s": 0.101772568833588,
+      "max_abs_dp_Pa": 3448.480330167265,
+      "max_abs_dphi_m3_s": 6.981330934899797e-05,
+      "max_rel_dp": 0.03798986058094361,
+      "outer_iteration": 13136
+    },
+    "source_log": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/log.cold-coupled",
+    "source_log_sha256": "f6a6e6a639b04ea468a6c6922ae041a38373b4b16fa038f13f7ad1c1edf3da37",
+    "summary": "The final master I4F_OUTER_STATE_DELTA record for the affected step was concatenated after a rank-7 I4F_OUTER_DP_CELL record on one stdout line. The old guard dispatched only lines beginning with the master-record prefix and therefore missed this required record.",
+    "trimmed_record_sha256_from_replay": "672fcb6ffbbb687780b02b6bab7cb78cbdb347025ee3206c0bc0a88896fcedf8"
+  },
+  "schema": "i4f-parser-merge-replay-publication/v1",
+  "scope": "Read-only parser diagnosis and full-log replay; no solver, case, or controller changes.",
+  "source_hashes": {
+    "fixed_candidate_guard_sha256": "e56daf6275d6e738d651f27fd17b557c2434e2a63715ce91e997b4bfddf52870",
+    "original_guard_sha256": "9b35da1b3fdd6deeb66f4677e22462b0bec2f3954b94b7a6830928aed5a477e8",
+    "replay_helper_sha256": "9732720bea553aa59bc01099632793de690721f39ee26a91963a585a1927bab1",
+    "replay_output_sha256": "37a72edc5020e58da70a29804779860883eb6c34bbdf0293e60877ef3154ecb4",
+    "source_log_sha256": "f6a6e6a639b04ea468a6c6922ae041a38373b4b16fa038f13f7ad1c1edf3da37"
+  }
+}

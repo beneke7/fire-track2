@@ -70,13 +70,21 @@ def summarize_face_inputs(
         u = np.asarray([row["velocity_face_xyz_m_s"] for row in rows], dtype=np.float64)
         area = np.asarray([row["outward_projected_area_m2"] for row in rows], dtype=np.float64)
         alpha = np.asarray([row["alpha_water_face_raw"] for row in rows], dtype=np.float64)
+        if any("water_density_kg_m3" in row for row in rows):
+            if not all("water_density_kg_m3" in row for row in rows):
+                raise ValueError(f"inconsistent face water densities for mouth {mouth}")
+            water_density = np.asarray(
+                [row["water_density_kg_m3"] for row in rows], dtype=np.float64
+            )
+        else:
+            water_density = RHO_WATER
         metrics = outlet_secondary_metrics(
             water_volume_flux_m3_s=q,
             velocity_face_xyz_m_s=u,
             projected_area_m2=area,
             outlet_normal_unit_xyz=NORMAL_X,
             alpha_water_face_raw=alpha,
-            water_density_kg_m3=RHO_WATER,
+            water_density_kg_m3=water_density,
             water_flux_stage_label="native saved alphaPhi0.water at selected checkpoint",
             velocity_stage_label="neighbor-cell U linearly reconstructed to native x<=4.8 m cut face",
         )
@@ -208,6 +216,7 @@ def run(
                     "native_polygon_area_m2": face.native_polygon_area_m2,
                     "velocity_face_xyz_m_s": face.reconstructed_velocity_xyz_m_s,
                     "alpha_water_face_raw": face.reconstructed_alpha_water_raw,
+                    "water_density_kg_m3": face.reconstructed_water_density_kg_m3,
                     "interpolation_weight": face.interpolation_weight,
                     "face_center_xyz_m": face.centroid_xyz_m,
                     "face_map_sign": face.face_map_sign,
@@ -257,6 +266,13 @@ def run(
                 "native_alphaPhi0_water_Q_absolute_m3_s": row[
                     "native_alphaPhi0_water_Q_absolute_m3_s"
                 ],
+                "reconstructed_water_mass_flux_net_kg_s": helper["water_mass_flux_net_kg_s"],
+                "reconstructed_water_density_face_min_kg_m3": helper[
+                    "water_density_face_min_kg_m3"
+                ],
+                "reconstructed_water_density_face_max_kg_m3": helper[
+                    "water_density_face_max_kg_m3"
+                ],
                 "flux_state": row["flux_state"],
                 "helper_raw_outward_direction_mean_angle_deg": helper[
                     "outward_direction_mean_angle_deg_q_weighted"
@@ -302,10 +318,18 @@ def run(
         },
         "method": {
             "primary_native_quantity": "saved alphaPhi0.water on the native internal cut face, oriented from x<=4.8 cell to x>4.8 cell; alpha is never inferred as alphaPhi0/phi",
+            "water_density_model": snapshot.water_density_metadata,
+            "water_mass_flux": (
+                "rhoConst cases use the selected scalar rhoConst to convert native signed q to mass. "
+                "For adiabaticPerfectFluid, cell rho_water is evaluated from each saved cell-centre "
+                "absolute p, then linearly interpolated to the face; multiplying that reconstructed "
+                "density by native alphaPhi0.water is secondary and may not equal the solver's same-stage "
+                "rho1*alphaPhi water mass flux."
+            ),
             "secondary_reconstruction": "saved cell U and alpha.water reconstructed to each native cut face with the checked OpenCFD basicFvGeometryScheme normal-distance linear weight",
             "helper_semantics": "aerial_drop.i4f_outlet_metrics.outlet_secondary_metrics; raw helper result retained per mouth",
             "dry_trace_rule": f"when sum(abs(native alphaPhi0.water)) <= {DRY_ABS_NATIVE_FLUX_THRESHOLD_M3_S:.1e} m3/s, direction and momentum are withheld from interpreted outputs; raw helper results remain available and are numerical-trace diagnostics only",
-            "limitations": "reconstructed face U and alpha are secondary and may represent a different solver stage from native alphaPhi0.water; reconstructed water momentum is not the solver's exact mixture momentum-convection flux",
+            "limitations": "reconstructed face U, alpha, and water density are secondary and may represent a different solver stage from native alphaPhi0.water; reconstructed water mass and momentum are not the solver's exact same-stage phase mass flux or mixture momentum-convection flux",
             "reconstruction_correction": "this version applies OpenFOAM's returned normal-distance factor as the owner weight, w*owner+(1-w)*neighbour, and applies signed faceProcAddressing to local-internal fluxes before the global cut orientation. Outputs in i4f-native-outlet-secondary-portable-20261026T053311Z used the reversed owner/neighbour interpolation coefficients; those secondary U/alpha metrics are superseded. Native alphaPhi0.water integrals were unchanged in the checked snapshots.",
         },
         "reader_extraction_provenance": list(READER_EXTRACTION_PROVENANCE),

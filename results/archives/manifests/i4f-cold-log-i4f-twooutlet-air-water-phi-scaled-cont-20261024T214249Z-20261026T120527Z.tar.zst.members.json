@@ -1,0 +1,47 @@
+{
+  "archive_bytes": 14666111,
+  "archive_helper_path": "results/runs/i4f-cold-log-retention-20261026T120527Z/archive_closed_logs.py",
+  "archive_helper_sha256": "09525f61a5040d9b56f900774a3ced97a6e0726ae78ccc3420575baf6c2e633a",
+  "archive_member_manifest_path": "results/archives/manifests/i4f-cold-log-i4f-twooutlet-air-water-phi-scaled-cont-20261024T214249Z-20261026T120527Z.tar.zst.members.json",
+  "archive_path": "results/archives/i4f-cold-log-i4f-twooutlet-air-water-phi-scaled-cont-20261024T214249Z-20261026T120527Z.tar.zst",
+  "archive_sha256": "64ddcdbc63c3c51ddbe2f9f76000e8461c9e7710ee1b0642d36d86ec0b094abf",
+  "created_utc": "2026-10-26T12:11:02.476013+00:00",
+  "inventory_path": "results/runs/i4f-cold-log-retention-20261026T120527Z/prearchive-inventory.json",
+  "inventory_sha256": "43787438e38f0b7603d5af022e8641c5541ba4d311f61ee2365e13ad8f46395f",
+  "members": [
+    {
+      "bytes": 208608877,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792879915948516256,
+      "path": "results/runs/i4f-twooutlet-air-water-phi-scaled-cont-20261024T214249Z/case/log.cold-coupled",
+      "sha256": "86e56e4235d2b2c2e09d3dd588970dcf387e659ef4781851fdab6998be216ff1",
+      "source_link_count": 1,
+      "uid": 1000
+    }
+  ],
+  "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-twooutlet-air-water-phi-scaled-cont-20261024T214249Z-20261026T120527Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+  "run_bundle": "i4f-twooutlet-air-water-phi-scaled-cont-20261024T214249Z",
+  "schema": "i4f-cold-coupled-log-retention-group/v1",
+  "source_bytes": 208608877,
+  "source_file_count": 1,
+  "source_files_removed_only_after_verified_archive": true,
+  "source_removal": {
+    "free_after_bytes": 29010960384,
+    "free_before_bytes": 28817211392,
+    "reclaimed_bytes": 193748992,
+    "removed_bytes": 208608877,
+    "removed_file_count": 1,
+    "status": "removed after decompressed SHA/size/metadata and source-stability verification"
+  },
+  "source_selection": "one closed inactive case/log.cold-coupled text file; no checkpoints, scalar histories, input dictionaries, source files or other outputs",
+  "source_unchanged_before_unlink": true,
+  "verification": {
+    "byte_count_and_sha256_match_original": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "regular_file_member": true,
+    "status": "passed",
+    "zstd_integrity": "passed"
+  }
+}

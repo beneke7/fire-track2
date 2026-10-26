@@ -23,6 +23,7 @@ runtime is contained in this module.
 
 from __future__ import annotations
 
+import hashlib
 import math
 import re
 from dataclasses import dataclass
@@ -87,6 +88,7 @@ class NativeMouthFace:
     native_alpha_phi_water_m3_s: float
     reconstructed_velocity_xyz_m_s: tuple[float, float, float]
     reconstructed_alpha_water_raw: float
+    reconstructed_water_density_kg_m3: float
     interpolation_weight: float
     face_map_sign: int
     record_kind: str
@@ -103,6 +105,7 @@ class NativeMouthSnapshot:
     mouth_faces: dict[str, tuple[NativeMouthFace, ...]]
     input_paths: tuple[Path, ...]
     selection_metadata: dict[str, Any]
+    water_density_metadata: dict[str, Any]
 
 
 def _parse_list_header(raw: bytes, path: Path) -> tuple[int, int]:
@@ -463,6 +466,88 @@ def _load_global_cell_field(
     return output
 
 
+def _read_water_density_model(path: Path) -> dict[str, Any]:
+    """Read the supported water EOS and lock its exact case dictionary bytes."""
+    raw = path.read_bytes()
+    text = raw.decode("utf-8")
+    text = re.sub(r"/\*.*?\*/", " ", text, flags=re.S)
+    text = re.sub(r"(?m)//.*$", " ", text)
+    thermo_type = re.search(r"\bthermoType\s*\{([^{}]*)\}", text, flags=re.S)
+    if thermo_type is None:
+        raise ValueError(f"water dictionary has no simple thermoType block: {path}")
+    eos_match = re.search(r"\bequationOfState\s+([A-Za-z][A-Za-z0-9_]*)\s*;", thermo_type.group(1))
+    if eos_match is None:
+        raise ValueError(f"water dictionary has no equationOfState selector: {path}")
+    eos_name = eos_match.group(1)
+    eos_block = re.search(r"\bequationOfState\s*\{([^{}]*)\}", text, flags=re.S)
+    if eos_block is None:
+        raise ValueError(f"water dictionary has no equationOfState parameter block: {path}")
+
+    def parameter(name: str) -> float:
+        match = re.search(
+            rf"(?m)^\s*{re.escape(name)}\s+([-+0-9.eE]+)\s*;",
+            eos_block.group(1),
+        )
+        if match is None:
+            raise ValueError(f"water EOS {eos_name} is missing scalar {name}: {path}")
+        value = float(match.group(1))
+        if not math.isfinite(value):
+            raise ValueError(f"water EOS parameter {name} is non-finite: {path}")
+        return value
+
+    if eos_name == "rhoConst":
+        parameters = {"rho_kg_m3": parameter("rho")}
+        if parameters["rho_kg_m3"] <= 0.0:
+            raise ValueError(f"rhoConst density must be positive: {path}")
+        equation = "rho_water(p,T)=rho"
+    elif eos_name == "adiabaticPerfectFluid":
+        parameters = {name: parameter(name) for name in ("p0", "rho0", "gamma", "B")}
+        if (
+            parameters["p0"] + parameters["B"] <= 0.0
+            or parameters["rho0"] <= 0.0
+            or parameters["gamma"] <= 0.0
+        ):
+            raise ValueError(f"invalid adiabaticPerfectFluid parameters: {path}")
+        equation = "rho0*((p+B)/(p0+B))**(1/gamma); p is absolute pressure"
+    else:
+        raise ValueError(f"unsupported water equationOfState {eos_name!r}: {path}")
+
+    return {
+        "model": eos_name,
+        "parameters": parameters,
+        "density_equation": equation,
+        "source_path": "constant/thermophysicalProperties.water",
+        "source_sha256": hashlib.sha256(raw).hexdigest(),
+    }
+
+
+def _water_density_from_pressure(pressure_pa: np.ndarray, model: dict[str, Any]) -> np.ndarray:
+    """Evaluate liquid density cellwise from absolute pressure and a supported EOS."""
+    pressure = np.asarray(pressure_pa, dtype=np.float64)
+    if not np.all(np.isfinite(pressure)):
+        raise ValueError("cell absolute pressure contains non-finite values")
+    eos_name = model["model"]
+    parameters = model["parameters"]
+    if eos_name == "rhoConst":
+        density = np.full(pressure.shape, float(parameters["rho_kg_m3"]), dtype=np.float64)
+    elif eos_name == "adiabaticPerfectFluid":
+        p0 = float(parameters["p0"])
+        rho0 = float(parameters["rho0"])
+        gamma = float(parameters["gamma"])
+        bulk_parameter = float(parameters["B"])
+        ratio = (pressure + bulk_parameter) / (p0 + bulk_parameter)
+        if not np.all(np.isfinite(ratio)) or np.any(ratio <= 0.0):
+            raise ValueError(
+                "absolute pressure is outside the adiabaticPerfectFluid density domain"
+            )
+        density = rho0 * np.power(ratio, 1.0 / gamma)
+    else:
+        raise ValueError(f"unsupported water equationOfState {eos_name!r}")
+    if not np.all(np.isfinite(density)) or np.any(density <= 0.0):
+        raise ValueError("water EOS produced non-finite or nonpositive density")
+    return density
+
+
 def _build_case_mesh(case: Path, nprocs: int) -> dict[str, Any]:
     mesh = case / "constant/polyMesh"
     points = _read_global_points(mesh / "points")
@@ -630,6 +715,7 @@ def _read_time_fields(
     float,
     list[Path],
     dict[str, Any],
+    dict[str, Any],
 ]:
     time_dir = case / f"processors{nprocs}/{time_name}"
     if not time_dir.is_dir():
@@ -683,6 +769,13 @@ def _read_time_fields(
     velocity_global = _load_global_cell_field(
         "U", time_dir, mesh_data["cell_maps"], len(centers), 3, nprocs
     )
+    pressure_global = _load_global_cell_field(
+        "p", time_dir, mesh_data["cell_maps"], len(centers), 1, nprocs
+    )
+    water_density_model = _read_water_density_model(
+        case / "constant/thermophysicalProperties.water"
+    )
+    water_density_global = _water_density_from_pressure(pressure_global, water_density_model)
     face_fluxes: dict[int, dict[str, Any]] = {}
     pair_errors: list[tuple[float, float, float, float]] = []
     inside = mesh_data["inside_mask"]
@@ -771,6 +864,9 @@ def _read_time_fields(
         alpha_face = _interpolate_owner_weighted(
             alpha_global[owner_inside], alpha_global[neighbour_outside], weight
         )
+        water_density_face = _interpolate_owner_weighted(
+            water_density_global[owner_inside], water_density_global[neighbour_outside], weight
+        )
         face_fluxes[gid] = {
             "phi": q_phi,
             "alpha_phi_water": q_alpha,
@@ -782,6 +878,7 @@ def _read_time_fields(
             "projected_area": projected_area,
             "u_face": u_face,
             "alpha_face": float(alpha_face),
+            "water_density_face": float(water_density_face),
             "interpolation_weight": weight,
         }
     if set(face_fluxes) != set(mesh_data["geometry"]):
@@ -800,7 +897,15 @@ def _read_time_fields(
         or pair_summary["max_alphaPhi_relative_pair_error"] > 1e-8
     ):
         raise ValueError(f"processor duplicate flux check failed: {pair_summary}")
-    return face_fluxes, alpha_global, velocity_global, time_value, native_paths, pair_summary
+    return (
+        face_fluxes,
+        alpha_global,
+        velocity_global,
+        time_value,
+        native_paths,
+        pair_summary,
+        water_density_model,
+    )
 
 
 def read_native_mouth_snapshot(
@@ -822,9 +927,15 @@ def read_native_mouth_snapshot(
     if not case.is_dir():
         raise FileNotFoundError(f"case directory does not exist: {case}")
     mesh_data = _build_case_mesh(case, nprocs)
-    face_fluxes, _alpha, _u, time_value, native_paths, pair_summary = _read_time_fields(
-        case, time_name, mesh_data, nprocs
-    )
+    (
+        face_fluxes,
+        _alpha,
+        _u,
+        time_value,
+        native_paths,
+        pair_summary,
+        water_density_model,
+    ) = _read_time_fields(case, time_name, mesh_data, nprocs)
     by_mouth: dict[str, list[NativeMouthFace]] = {name: [] for name in MOUTH_WINDOWS}
     for gid, geom in mesh_data["geometry"].items():
         flux = face_fluxes[gid]
@@ -839,6 +950,7 @@ def read_native_mouth_snapshot(
                 native_alpha_phi_water_m3_s=float(flux["alpha_phi_water"]),
                 reconstructed_velocity_xyz_m_s=tuple(float(value) for value in flux["u_face"]),
                 reconstructed_alpha_water_raw=float(flux["alpha_face"]),
+                reconstructed_water_density_kg_m3=float(flux["water_density_face"]),
                 interpolation_weight=float(flux["interpolation_weight"]),
                 face_map_sign=int(flux["face_map_sign"]),
                 record_kind=str(flux["record_kind"]),
@@ -863,6 +975,7 @@ def read_native_mouth_snapshot(
         processor_mesh / "owner",
         processor_mesh / "neighbour",
         processor_mesh / "boundary",
+        case / "constant/thermophysicalProperties.water",
         *native_paths,
     )
     area_by_mouth = {
@@ -893,5 +1006,16 @@ def read_native_mouth_snapshot(
             },
             "local_internal_flux_orientation": "local owner-to-neighbour phi is multiplied by signed faceProcAddressing orientation, then by the global owner inside/outside sign to orient across the x<=4.8 control-surface cut",
             "linear_face_reconstruction": "OpenFOAM owner weight = distance from face to neighbour divided by owner-to-face plus face-to-neighbour distances; reconstructed value = w*owner + (1-w)*neighbour",
+            "water_density_reconstruction": {
+                "model": water_density_model["model"],
+                "density_equation": water_density_model["density_equation"],
+                "source_path": water_density_model["source_path"],
+                "source_sha256": water_density_model["source_sha256"],
+                "pressure_field": f"processors{nprocs}/{time_name}/p",
+                "pressure_field_semantics": "mapped native cell-centre absolute p; evaluate rho_water(p_cell) in each cell, then linearly interpolate the two cell densities with the same owner weight used for U and alpha; do not evaluate EOS at interpolated p",
+                "native_pressure_field_is_in_input_hashes": True,
+                "qualification": "reconstructed water density combined with saved alphaPhi0.water is secondary and may not be the same-stage native rho1*alphaPhi mass flux",
+            },
         },
+        water_density_metadata=water_density_model,
     )

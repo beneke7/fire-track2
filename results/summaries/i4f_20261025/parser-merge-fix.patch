@@ -1,0 +1,15 @@
+--- original_guard.py
++++ guard_candidate.py
+@@ -254,6 +254,12 @@
+ 
+ 
+ def parse_log_line(branch: dict[str, Any], state: dict[str, Any], line: str) -> None:
++    # OpenMPI may concatenate rank-local DP_CELL output and the following
++    # master diagnostic onto one stdout line. The old prefix-only dispatch
++    # silently discarded the embedded terminal outer-state record.
++    embedded_outer = "I4F_OUTER_STATE_DELTA "
++    if not line.startswith(embedded_outer) and embedded_outer in line:
++        line = embedded_outer + line.split(embedded_outer, 1)[1]
+     if line.startswith("I4F_INITIAL_PHASE_MASS "):
+         values = kv(line)
+         water = num(values, "water_inventory_kg")

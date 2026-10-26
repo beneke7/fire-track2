@@ -5,3 +5,10 @@ experiments/i4f_filling_reference/inputs/*.csv -text whitespace=cr-at-eol
 # Preserve every hashed payload in the corrected-junction input packet.
 experiments/i4f_flush_filling_reference/inputs/* -text
 experiments/i4f_flush_filling_reference/inputs/*.csv whitespace=cr-at-eol
+experiments/i4f_physical_water_eos_reference/* -text
+results/summaries/i4f_20261025/parser-merge-* -text
+results/summaries/i4f_20261025/finite-water-runtime-audit.json -text
+# Raw unified-diff context lines contain intentional single spaces.
+results/summaries/i4f_20261025/parser-merge-fix.patch whitespace=-blank-at-eol
+results/summaries/i4f_20261025/pressure-filling-diagnostic-outcomes.json -text
+results/summaries/i4f_20261025/finite-water-floor-* -text

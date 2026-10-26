@@ -1,5 +1,39 @@
 # I4F discharge: published results, 25–26 October 2026
 
+**Latest finite-water outcome:** the first timestep setting encountered one
+pressure-floor contact near .4100 s and saved at .410223 s. Finite liquid
+compressibility alone did not establish stable discharge. A smaller-timestep
+cold test now runs; the runtime audit below verifies configuration and inventory
+only, not a successful complete simulation.
+The [cell/iteration review](finite-water-floor-review.json),
+[pressure-pass table](finite-water-floor-pressure-passes.csv),
+[contact cells](finite-water-floor-cells.csv), and
+[trace plot](finite-water-floor-pressure-passes.png) show the isolated last-pass
+undershoot and two subsequent positive-pressure steps. Small final corrections
+do not undo the pressure-floor operation.
+
+**26 October update:** the corrected-junction constant-density continuation
+stopped at .434224 s with negative intermediate pressure; geometry correction
+alone did not resolve the instability. One pressure corrector and tank-interface
+refinement also retained persistent outer updates. A new cold comparison tests
+physically scaled finite water compressibility against constant density;
+[the frozen material packet](../../../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json)
+records equations, primary-source locators, assumptions and initial-mass effects.
+This is an exploratory sensitivity, not a successful discharge or validation.
+The [four recent failed trials](pressure-filling-diagnostic-outcomes.json) and
+[comparison table](pressure-filling-diagnostic-outcomes.csv) retain actual stop
+conditions, saved endpoints and source-metadata hashes. Pressure-floor cell
+liquid support is not removed water mass.
+The [runtime audit](finite-water-runtime-audit.json) verifies model selection and
+density-weighted water inventory against the exact .05 s native checkpoint;
+its later live-stage observation is a time-stamped snapshot, not a final result.
+[Live status](../../../docs/STATUS.md) supersedes running-state statements below.
+
+The [parser repair and full-log replay](parser-merge-replay.json),
+[minimal patch](parser-merge-fix.patch), and [raw trigger](parser-merge-trigger.txt)
+preserve the earlier operational-stop explanation without changing numerical
+health thresholds. Successful parsing is distinct from convergence.
+
 **Early corrected-CFD comparison:** at .250021 s, mean water withdrawn per
 tank is 62.581 L versus 62.210 L in the adiabatic reduced model (+.597%);
 the two-valve flow sum per tank is .608803 versus .604200 m3/s (+.762%).
@@ -30,14 +64,14 @@ does not reach .46 s. The [14-cell review](stock-cold-pressure-contact-review.js
 [CSV](stock-cold-pressure-contact-review.csv) and
 [pressure-correction trace](stock-cold-pressure-contact-trace.png) distinguish
 that numerical event from the positive saved endpoint and from cavitation.
-The corrected-junction case has passed .05 s startup; its long-run result is pending.
+That first corrected-junction trajectory later failed; see the update above.
 
 **Pipe/transition junction:** a source-to-native-mesh audit found an exposed
 roughly 19 mm shoulder created by the old pipe overlap. The opt-in flush
 junction removes it at all four branches, preserving tank and feed geometry.
 The [geometry record](pipe-transition-join-summary.json) and
 [section areas](pipe-transition-join-areas.png) document the correction.
-Its effect on pressure stability and discharge remains untested.
+The correction did not prevent the later pressure failure; its effect on a complete discharge remains unestablished.
 
 ![Matched sections of the old and corrected junctions](pipe-transition-join-comparison.png)
 

@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 1040829,
+    "path": "results/archives/i4f-cold-log-i4f-pressure-urelax05-20261025T2304Z-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-pressure-urelax05-20261025T2304Z-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "e263ac64c8041900c09cd4cddc0c4b4ed01e4ce790ac0c843b6b028b5f9f82c3"
+  },
+  "created_utc": "2026-10-26T12:34:01.460336+00:00",
+  "members": [
+    {
+      "bytes": 12808205,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792972581483464947,
+      "path": "results/runs/i4f-pressure-urelax05-20261025T2304Z/case/log.cold-coupled",
+      "run_bundle": "i4f-pressure-urelax05-20261025T2304Z",
+      "sha256": "a18fc438bcd02ad1a211bbb5ac162462fa961a0bbc623b4a75ad4794c2ac1d74",
+      "source_inode": {
+        "device": 66306,
+        "inode": 186257745
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30560215040,
+    "free_before_archive_bytes": 30548574208,
+    "net_bytes_reclaimed": 11640832,
+    "removed_bytes": 12808205,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

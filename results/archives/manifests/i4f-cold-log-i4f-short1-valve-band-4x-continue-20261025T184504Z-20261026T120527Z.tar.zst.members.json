@@ -1,0 +1,47 @@
+{
+  "archive_bytes": 37297661,
+  "archive_helper_path": "results/runs/i4f-cold-log-retention-20261026T120527Z/archive_closed_logs.py",
+  "archive_helper_sha256": "09525f61a5040d9b56f900774a3ced97a6e0726ae78ccc3420575baf6c2e633a",
+  "archive_member_manifest_path": "results/archives/manifests/i4f-cold-log-i4f-short1-valve-band-4x-continue-20261025T184504Z-20261026T120527Z.tar.zst.members.json",
+  "archive_path": "results/archives/i4f-cold-log-i4f-short1-valve-band-4x-continue-20261025T184504Z-20261026T120527Z.tar.zst",
+  "archive_sha256": "5cb0eaf6f39befae2659c7ce94397b40fc4960c0de2f381e24485c89f6bcf5fb",
+  "created_utc": "2026-10-26T12:10:51.236950+00:00",
+  "inventory_path": "results/runs/i4f-cold-log-retention-20261026T120527Z/prearchive-inventory.json",
+  "inventory_sha256": "43787438e38f0b7603d5af022e8641c5541ba4d311f61ee2365e13ad8f46395f",
+  "members": [
+    {
+      "bytes": 522838833,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792960312082526792,
+      "path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/log.cold-coupled",
+      "sha256": "6ef5bb1ad5983984b93138f455daa2eda62c4bfa08a634866fcc120de3034f3d",
+      "source_link_count": 1,
+      "uid": 1000
+    }
+  ],
+  "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-short1-valve-band-4x-continue-20261025T184504Z-20261026T120527Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+  "run_bundle": "i4f-short1-valve-band-4x-continue-20261025T184504Z",
+  "schema": "i4f-cold-coupled-log-retention-group/v1",
+  "source_bytes": 522838833,
+  "source_file_count": 1,
+  "source_files_removed_only_after_verified_archive": true,
+  "source_removal": {
+    "free_after_bytes": 27277307904,
+    "free_before_bytes": 26792128512,
+    "reclaimed_bytes": 485179392,
+    "removed_bytes": 522838833,
+    "removed_file_count": 1,
+    "status": "removed after decompressed SHA/size/metadata and source-stability verification"
+  },
+  "source_selection": "one closed inactive case/log.cold-coupled text file; no checkpoints, scalar histories, input dictionaries, source files or other outputs",
+  "source_unchanged_before_unlink": true,
+  "verification": {
+    "byte_count_and_sha256_match_original": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "regular_file_member": true,
+    "status": "passed",
+    "zstd_integrity": "passed"
+  }
+}
