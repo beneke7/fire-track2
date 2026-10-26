@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-10-26T20:39:00+00:00",
+  "expected_differences": [
+    {
+      "instrumented_bytes": 96,
+      "instrumented_sha256": "d353db14a2a6d3729c9f6fd9fbd37b674277024d6d3f62cf22ad8c4a35e8e18a",
+      "parent_bytes": 97,
+      "parent_sha256": "3c53dee5d865a1f7c8ec90e451003ef6b54fd726b713ad361958630e55c0ce08",
+      "patch_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/Make-files.diff",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/files"
+    },
+    {
+      "instrumented_bytes": 27571,
+      "instrumented_sha256": "dd7b3d3e24f0c73c59948dd2d614f844a6c81deb41f55204049e5b23e98485cb",
+      "parent_bytes": 19457,
+      "parent_sha256": "e888ac0076937ddee347f273326ca61009d47e32238a1136de72b52e6b3a6d7b",
+      "patch_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/compressibleInterFoam.C.diff",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C"
+    }
+  ],
+  "manifest_file_count": 90,
+  "missing": [],
+  "parent_source_content_sha256": "09862c07aede283b1256c1f2e2465a113edd7cd567ec4869cad68b7f305e6747",
+  "parent_source_manifest_path": "results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/provenance/source-tree-sha256.json",
+  "parent_source_manifest_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "parent_source_tree_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "schema": "i4f-firststep-energy-source-copy-verification/v2",
+  "status": "verified_parent_bytes_except_two_declared_instrumentation_changes",
+  "unexpected_mismatches": [],
+  "verified_unmodified_file_count": 88
+}

@@ -66,6 +66,15 @@ or timestep sweep. A pressure-only frozen-operator probe now isolates the
 explicit pressure/face-flux update, alongside one exploratory pressure-Laplacian
 limiter comparison. Current runtime authorities belong in live status.
 
+The tighter frozen-pressure diagnostic completed without physical continuation.
+With 38 physical-field/coefficient checks unchanged, baseline pressure maps
+settled to the linear-solver residual floor. Centered responses along the
+measured outer-iteration disturbance had gains .03256 at 1 Pa and .03158
+at 10 Pa. Their normalized response vectors differ by 23.2%, so this is
+evidence of damping for the tested direction, not an exact derivative or
+a proof of global pressure-operator stability. It shifts the next test toward
+mechanical pressure/density/momentum feedback while holding water transport.
+
 The local startup balance can be checked directly from the
 [raw matrix packet](../results/summaries/i4f_20261025/firststep-energy/firststep-temperature-matrix-evidence.json).
 For this initially pure-air, zero-flux first outer iteration only, define
@@ -75,8 +84,12 @@ Then DeltaT = -DeltaK/Cv + Rdiff/D0 - Rfull/D0. At rank 0/local cell 5154:
 is volume-integrated kg/s and residual/source kg K/s; the original frozen
 metadata's per-volume label is corrected separately, without changing inputs.
 The enriched observer reproduces all fifteen fields and time byte-for-byte.
-The packet's source-closure reference identifies an ancestor; the immediate
-12d8 binary source and full CFD mesh remain separately required local inputs.
+The original packet's source-closure reference identifies an ancestor. The
+[exact immediate v8 parent source](../results/summaries/i4f_20261025/immediate-parent-source/README.md)
+is now released with its build script, 90-entry source inventory and pinned
+image/library identities. Root verified all 100 package artifacts. A fresh
+rebuild and one-step equivalence test remain pending; the executable and full
+CFD mesh remain separately required local inputs.
 
 The predictor/corrector equations explain the targeted numerical change.
 For this static Euler, single alpha-correction/subcycle configuration, let

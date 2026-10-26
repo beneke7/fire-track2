@@ -1,0 +1,71 @@
+{
+  "all_probed_files_are_binary": true,
+  "binary_header_probes": [
+    {
+      "bytes": 8749686,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/points",
+      "sha256": "d711d41b9bbe4488bfedfec882d03798c14be2fbf51c038f5f9c803d269ed848"
+    },
+    {
+      "bytes": 19409531,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/faces",
+      "sha256": "170afabd52d8e2a7bc0fe77f536a76bb6a476afb0029288d08e6dc20a69328fc"
+    },
+    {
+      "bytes": 3857583,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/owner",
+      "sha256": "186d04ef017781ed439ebfd76d740cff9ea56b3f73d4fdc6026b017d21f1cf5d"
+    },
+    {
+      "bytes": 3458170,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/neighbour",
+      "sha256": "350826866672fc1993a98c650837383a4ccf220971b86d9d2b9fedd9dc573845"
+    },
+    {
+      "bytes": 20539,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/boundary",
+      "sha256": "1c799044c050fa483cc429909f8d5f540e90c33297f587ff77419684bb59cf10"
+    },
+    {
+      "bytes": 1198298,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/cellProcAddressing",
+      "sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33"
+    },
+    {
+      "bytes": 3857443,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/faceProcAddressing",
+      "sha256": "fb05de70e01c04372c1263c8570d037912a6fa6641ed26df8b9bade17bd749bb"
+    },
+    {
+      "bytes": 1459488,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/pointProcAddressing",
+      "sha256": "a8a06a3cc8cacab9d21c1d73d1f0eff05effbdc051a575a20d4e9b96118a2634"
+    },
+    {
+      "bytes": 1769,
+      "format_binary_in_header": true,
+      "path": "processors10/constant/polyMesh/boundaryProcAddressing",
+      "sha256": "4b5fd30645d54cee3f250d6952066d3c908a4b4c7c4eacd05db0d404e1901b80"
+    }
+  ],
+  "command": "systemd-run --user --scope --quiet -p CPUQuota=50% -- nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python results/runs/i4f-staging-integration-20261026T2251Z/scripts/verify_binary_mesh.py",
+  "created_utc": "2026-10-26T22:54:40.504331+00:00",
+  "frozen_collated_mesh_and_addressing_files": 53,
+  "frozen_native_mesh_files": 50,
+  "mismatch_count": 0,
+  "schema": "i4f-staging-real-binary-mesh-verification/v1",
+  "solver_launched": false,
+  "source_freeze_path": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/input-freeze.json",
+  "source_freeze_sha256": "f68a154fa024182d36df573fa243557beaf5434a4b9aa010e4a9d848507504be",
+  "staging_manifest_path": "results/runs/i4f-staging-integration-20261026T2251Z/case/provenance/staging-manifest.json",
+  "staging_manifest_sha256": "9eeeb2ab866612a75d666e7d01e922222a529ad40d0b3d83a2530232718f3ebd",
+  "verified_mesh_file_mismatches": []
+}

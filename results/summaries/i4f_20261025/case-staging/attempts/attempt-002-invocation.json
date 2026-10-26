@@ -1,0 +1,22 @@
+{
+  "attempt": 2,
+  "created_utc": "2026-10-26T22:54:08Z",
+  "command": "systemd-run --user --scope --quiet -p CPUQuota=50% -- nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python results/runs/i4f-staging-integration-20261026T2251Z/scripts/stage_real_case.py",
+  "result": "successful hash-verified staging smoke; solver not launched",
+  "driver": "results/runs/i4f-staging-integration-20261026T2251Z/scripts/stage_real_case.py",
+  "driver_sha256": "d269230ee4cb2167c144c0ca1fe3772212405577d815277a04f007dd30b9d791",
+  "template_manifest_sha256": "2e423e14eb08585cc18a22e83b21d50db87bdfd4c62e4c321dac1bf763afba6c",
+  "staged_case_manifest_sha256": "9eeeb2ab866612a75d666e7d01e922222a529ad40d0b3d83a2530232718f3ebd",
+  "source_checkpoint_bundle": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+  "source_checkpoint_time": "0.390705595007",
+  "source_checkpoint_field_count": 15,
+  "source_checkpoint_aggregate_sha256": "5dde33893ab648d1fb80f63f244a68e12cf7367b7d163ffa3e02d0e183f74ffe",
+  "frozen_static_files_expected_and_staged": 158,
+  "native_poly_mesh_files_staged": 50,
+  "collated_poly_mesh_and_addressing_files_staged": 53,
+  "staged_data_bytes_excluding_manifests": 243615419,
+  "staged_case_bytes_including_provenance_manifest": 243675251,
+  "mismatch_count": 0,
+  "independent_writable_field_copies": 15,
+  "excluded_nonfield_checkpoint_file": "processors10/0.390705595007/uniform/functionObjects/functionObjectProperties"
+}

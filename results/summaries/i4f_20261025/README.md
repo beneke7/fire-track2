@@ -33,6 +33,13 @@ predictor near 713 m/s supplies about -354 K, offset by +73 K from implicit
 diffusion. The replay is field-identical to its observer control. This is local
 numerical evidence; the raw full case and immediate parent source remain local.
 The frozen metadata's matrix units are corrected in a separate record.
+The [exact immediate parent source](immediate-parent-source/README.md) now
+supplements the ancestor-only reference, including the pinned build environment
+and original script. A fresh rebuild has not yet been verified.
+The [real-apparatus staging evidence](case-staging/integration-report.json)
+shows rejection of mutated runtime phase caches and a successful hash-verified
+174-file stage from the immutable checkpoint. This is preparation evidence,
+not a physical restart execution.
 
 The new cold trajectory's [healthy .3907 s cutaway](cold-final-diagnostics/healthy-0391-cutaway.png)
 and [underconverged .484 s endpoint](cold-final-diagnostics/underconverged-0484-cutaway.png)

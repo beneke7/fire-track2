@@ -1,0 +1,122 @@
+{
+  "canonical_checkpoint_source_case": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case",
+  "created_utc": "2026-10-26T22:53:48.487738+00:00",
+  "driver": {
+    "path": "results/runs/i4f-staging-integration-20261026T2251Z/scripts/stage_real_case.py",
+    "sha256": "d269230ee4cb2167c144c0ca1fe3772212405577d815277a04f007dd30b9d791"
+  },
+  "frozen_static_file_count_expected": 158,
+  "frozen_static_file_count_staged": 158,
+  "mismatch_count": 0,
+  "omitted_nonfield_checkpoint_files_are_outside_stager_fields_time_contract": true,
+  "protected_control_dict": {
+    "frozen_sha256": "bf054d4ec7e23a1b62bb13d2d6be176f6cf828f15aa28a9f23acfd27a688c906",
+    "protected_copy": "results/runs/i4f-staging-integration-20261026T2251Z/provenance/controlDict.pre-GO",
+    "protected_copy_sha256": "bf054d4ec7e23a1b62bb13d2d6be176f6cf828f15aa28a9f23acfd27a688c906",
+    "source": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/case/system/controlDict"
+  },
+  "schema": "i4f-real-case-staging-integration/v1",
+  "solver_launched": false,
+  "source_bundle": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z",
+  "source_case": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/case",
+  "source_checkpoint": {
+    "field_aggregate_sha256": "5dde33893ab648d1fb80f63f244a68e12cf7367b7d163ffa3e02d0e183f74ffe",
+    "fields": [
+      "alpha.water",
+      "p",
+      "p_rgh",
+      "T",
+      "U",
+      "k",
+      "omega",
+      "nut",
+      "alphat",
+      "T.air",
+      "T.water",
+      "rho",
+      "phi",
+      "alphaPhi0.water",
+      "dgdt"
+    ],
+    "manifest_path": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/provenance/restart-checkpoint-fields.sha256",
+    "manifest_sha256": "cb73d181df383af96b17dc4e0a339480b91f24c85d38588f0a561cee0bdf6edc",
+    "omitted_nonfield_checkpoint_files": [
+      "processors10/0.390705595007/uniform/functionObjects/functionObjectProperties"
+    ],
+    "prefix": "processors10",
+    "source_bundle": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "source_field_bytes": 60257028,
+    "source_field_count": 15,
+    "time_name": "0.390705595007",
+    "time_value_s": 0.39070559500735114,
+    "uniform_time_sha256": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672"
+  },
+  "source_hash_mismatches": [],
+  "source_input_freeze": {
+    "frozen_utc": "2026-10-26T22:32:49.611319+00:00",
+    "path": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/input-freeze.json",
+    "sha256": "f68a154fa024182d36df573fa243557beaf5434a4b9aa010e4a9d848507504be"
+  },
+  "staged_case": {
+    "checkpoint_file_count": 16,
+    "collated_mesh_file_count": 9,
+    "collated_numeric_times": [
+      "0.390705595007"
+    ],
+    "data_bytes_excluding_manifests": 243615419,
+    "independent_writable_field_copies": {
+      "T": true,
+      "T.air": true,
+      "T.water": true,
+      "U": true,
+      "alpha.water": true,
+      "alphaPhi0.water": true,
+      "alphat": true,
+      "dgdt": true,
+      "k": true,
+      "nut": true,
+      "omega": true,
+      "p": true,
+      "p_rgh": true,
+      "phi": true,
+      "rho": true
+    },
+    "manifest": "results/runs/i4f-staging-integration-20261026T2251Z/case/provenance/staging-manifest.json",
+    "manifest_sha256": "9eeeb2ab866612a75d666e7d01e922222a529ad40d0b3d83a2530232718f3ebd",
+    "native_mesh_file_count": 5,
+    "path": "results/runs/i4f-staging-integration-20261026T2251Z/case",
+    "staged_file_hash_mismatches": 0,
+    "static_file_count": 158,
+    "total_bytes_including_provenance_manifest": 243675251
+  },
+  "template": {
+    "excluded_undeclared_dynamic_code": [],
+    "manifest_sha256": "2e423e14eb08585cc18a22e83b21d50db87bdfd4c62e4c321dac1bf763afba6c",
+    "mesh_inventory": {
+      "collated": {
+        "processors10": [
+          "processors10/constant/polyMesh/boundary",
+          "processors10/constant/polyMesh/boundaryProcAddressing",
+          "processors10/constant/polyMesh/cellProcAddressing",
+          "processors10/constant/polyMesh/faceProcAddressing",
+          "processors10/constant/polyMesh/faces",
+          "processors10/constant/polyMesh/neighbour",
+          "processors10/constant/polyMesh/owner",
+          "processors10/constant/polyMesh/pointProcAddressing",
+          "processors10/constant/polyMesh/points"
+        ]
+      },
+      "native": [
+        "constant/polyMesh/boundary",
+        "constant/polyMesh/faces",
+        "constant/polyMesh/neighbour",
+        "constant/polyMesh/owner",
+        "constant/polyMesh/points"
+      ]
+    },
+    "path": "results/runs/i4f-staging-integration-20261026T2251Z/template",
+    "static_data_bytes": 183357317,
+    "static_file_count": 158
+  },
+  "template_total_bytes_including_manifest": 183410607
+}

@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 22:51 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 23:01 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -18,10 +18,12 @@ No new scientific gate passed.
 No complete credible tank-to-nozzle trajectory exists yet. The latest
 completed discharge trials failed their numerical screens;
 failed fields are not restart inputs. A separate pressure-reconstruction trial
-has ended, and a tighter pressure-only diagnostic is live from the healthy
-.460048 s seed. A separate diagnostic continuation is live from the healthy
-.390706 s cold-derived checkpoint. The case-staging utility passed ten regression tests; a real-apparatus staging
-smoke and exact immediate-parent source recovery proceed independently.
+and tighter pressure-only diagnostic have ended. The latter damps the tested
+pressure disturbance with held physical fields; this does not establish global
+operator stability. A separate diagnostic continuation is live from the healthy
+.390706 s cold-derived checkpoint. The case-staging utility passed ten regression tests and the real-apparatus
+staging smoke; exact immediate-parent source recovery is complete. A source
+rebuild/one-step equivalence test and mechanical-feedback probe are preparing.
 
 | Latest test | Saved time (s) | Actual outcome |
 | --- | ---: | --- |
@@ -59,8 +61,18 @@ Current independent tasks:
   eight baseline and 1 Pa solves took zero iterations at the normal 1e-10
   tolerance; 10 Pa took one iteration and failed amplitude agreement. A new
   replay tightens only diagnostic maps to 1e-14, leaving the physical replay
-  unchanged. Docker `fa6d93ab0de6`, StartedAt 22:38:28.320884831 UTC, ten
-  MPI/ten CPU equivalents, is confirmed live with advancing log. This follows
+  unchanged. Docker `fa6d93ab0de6`, StartedAt 22:38:28.320884831 UTC, ended normally
+  at 22:53:25.623349021 UTC. Tight baseline solves took 6/3/3/2/1 iterations
+  before reaching the residual floor. Centered 1/10 Pa response gains are
+  .03256/.03158, with 23.2% relative vector-shape discrepancy; this supports
+  selected-direction damping but not a precise amplitude-independent derivative
+  or global stability. All 38 held-field checks match. The next discrimination
+  is mechanical pressure/density/momentum feedback with water transport held,
+  with the worker source-order sequence reviewed and authorized. The next
+  probe starts after the complete original pEqn/EOS/U update (a later stage
+  than the pressure-only capture), holds water/temperature/turbulence state,
+  preserves source ordering and old-time history, and stops censored on a
+  first raw pressure-floor contact. It writes no physical endpoint. This follows
   the focused Astra review;
   it is an algebraic test, not a discharge continuation. The measured source
   change largely cancels the changed alpha-times-flux divergence, making it
@@ -76,12 +88,15 @@ Current independent tasks:
   the nearest-time baseline. Final dp had recovered to 42.8 Pa after the
   stop request; the .505 target was not reached. This is not a remedy.
 - **Diagnostic continuation:** Docker `87c69f24d16d`, StartedAt
-  22:34:41.550545949 UTC, ten MPI/eight CPUs, uses the unchanged corrected
+  22:34:41.550545949 UTC, ten MPI/ten CPUs, uses the unchanged corrected
   pressure operator and exact .390705595007 cold checkpoint. Only the
   >100 Pa update stop ACTION becomes advisory with identical thresholds
   and a flushed event CSV. Raw floor/clipping, mass/phase, NaN, disk and wall
-  stops remain hard. Root reviewed that guard delta. At 22:51 UTC it is live
-  at .443140 s, zero floor contacts or advisory-stop events. Target .65 s; save 00:49 UTC,
+  stops remain hard. Root reviewed that guard delta. At 22:57 UTC it is live
+  at .468808 s, zero floor contacts or advisory-stop events. Its CPU quota
+  was raised from eight to ten after the pressure-only job ended, with exact
+  identity/StartedAt, memory and deadlines unchanged; adjustment provenance
+  remains in its private bundle. Target .65 s; save 00:49 UTC,
   hard 01:04 UTC on 27 October. Underconverged fields will not become a
   validation pass merely by finishing. Its launch had three preserved
   preparation attempts; the exact live ID/guard/seed hashes are recorded.
@@ -137,10 +152,16 @@ The restore smoke reproduced bytes and metadata and refused overwrite; the
 [manifest/helper](../results/archives/manifests/i4f-closed-log-retention-20261026T2240Z.json)
 and archive index preserve recovery. No unique fields/meshes were deleted.
 The immutable-template/canonical-checkpoint staging API passed Ruff, formatting
-and ten regression tests including the public channel packet. Luna now tests it
-on a healthy real-apparatus checkpoint; it changes no live solver or guard.
-Another Luna task recovers the exact immediate-parent source for the startup
-energy binary, since its published ancestor packet is not sufficient closure.
+and ten regression tests including the public channel packet. The real-apparatus
+staging smoke succeeded after rejecting a runtime-mutated T.air source; root
+independently verified all 174 staged files and independent checkpoint copies.
+One time-local functionObjectProperties file is intentionally outside the API
+contract; no physical restart was executed. It changes no live solver or guard.
+The [exact immediate-parent source](../results/summaries/i4f_20261025/immediate-parent-source/README.md)
+for the startup energy baseline is recovered, including original build recipe
+and pinned image/library identities. Root verified 100 artifacts. Luna prepares
+a bounded isolated rebuild and known one-step field comparison; bitwise rebuild
+repeatability remains unverified. The ancestor packet alone was insufficient.
 Unique fields and original source/CAD remain. Older outcomes and restorable
 archives are retained in the scientific note, published results index and
 [archive index](../results/archives/index.json). Thirteen focused tests passed

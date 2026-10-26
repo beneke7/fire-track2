@@ -1,0 +1,125 @@
+{
+  "binary": {
+    "name": "compressibleInterFoamI4FColdRestartConsistent",
+    "sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "verified_copies": {
+      "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/bin/compressibleInterFoamI4FColdRestartConsistent": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+      "results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/bin/compressibleInterFoamI4FColdRestartConsistent": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+      "results/runs/i4f-restart-consistent-apparatus-cold-20261026T1958Z/bin/compressibleInterFoamI4FColdRestartConsistent": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a"
+    }
+  },
+  "build": {
+    "build_scope": "The successful attempt-02 script invokes wmake for the solver and links the two custom-named shared libraries from the pinned image. The corresponding source and Make files are retained in the overlay; a separate library rebuild is not shown in this successful attempt.",
+    "build_script": "build_solver.sh",
+    "build_script_sha256": "35b7171d5d7d639bf1c0c17cd84a99baf5c31021ecfc52dbb7ca9af9d3a4829e",
+    "image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "platform": "linux/amd64",
+    "rebuild_assessment": "The source overlay and recipe are available with the exact pinned OpenFOAM image and resolved library identities. No rebuild was run, so bitwise rebuild repeatability remains unverified; the Git source packet alone is not the whole toolchain.",
+    "recorded_procedure": "OpenFOAM v2512 bashrc; recreate the two custom lnInclude directories; cd to compressibleInterFoam; wclean; wmake; sha256sum output executable.",
+    "resolved_custom_named_libraries": [
+      {
+        "bytes": 204024,
+        "container_path": "/usr/lib/openfoam/openfoam2512/platforms/linux64GccDPInt32Opt/lib/libtwoPhaseMixtureThermo.so",
+        "name": "libtwoPhaseMixtureThermo.so",
+        "sha256": "4041fb80f219a7b5229986846e6bea5196daa0c5ac8fabe376467d793d4ee528"
+      },
+      {
+        "bytes": 1212936,
+        "container_path": "/usr/lib/openfoam/openfoam2512/platforms/linux64GccDPInt32Opt/lib/libVoFphaseCompressibleTurbulenceModels.so",
+        "name": "libVoFphaseCompressibleTurbulenceModels.so",
+        "sha256": "a53d538ed6e685931ec2829e5836c63c436b4c2fd3667880c93da08227f4a36d"
+      }
+    ],
+    "successful_log": "provenance/parent-build-solver-attempt-02.log",
+    "successful_log_sha256": "5d96c8950f4cddb5a2679c79d4157f06bfccca009365dbb6e0ff8eba53f6ee6f"
+  },
+  "created_utc": "2026-10-26T22:59:08.287258+00:00",
+  "firststep_baseline": {
+    "complete_core_14": true,
+    "container_id": "f462b86a1d657c26a6215fdd5f773e78aacccc8f91667ff4337b342615346fb7",
+    "container_name": "i4f-firststep-energy-baseline-12d8-predictor-no-20261026t205819z",
+    "distinction": "The baseline arm uses 12d8. The separate energy-audit observer binary/source is not the source of this baseline executable.",
+    "docker_exit_code": 0,
+    "docker_finished_at": "2026-10-26T20:59:43.886126121Z",
+    "docker_started_at": "2026-10-26T20:58:19.8784497Z",
+    "endpoint_time": "1.2e-05",
+    "guard_status": "normal_End_complete_native_one_step",
+    "guardian_status_sha256": "1a20a83a03d2d6edfa9f2837b057e925bc2a65c48b23bc5bd33f99103b20ab2c",
+    "launch_manifest_sha256": "49d632a5cf681b59c81eec4703144b7876178d2189a711dca495f694c71554ab"
+  },
+  "purpose": "Exact source/build provenance for the uninstrumented first-step energy baseline binary.",
+  "schema": "i4f-immediate-parent-source-closure/v1",
+  "source": {
+    "ancestor_differences": [
+      {
+        "ancestor_sha256": "1b0b51ef0cbd9b53bd49aa3b097d3cb3e812f997b46e9ca94f0608a2fe0f17e3",
+        "kind": "content_changed",
+        "parent_sha256": "3c53dee5d865a1f7c8ec90e451003ef6b54fd726b713ad361958630e55c0ce08",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/files"
+      },
+      {
+        "ancestor_sha256": "68c1582665f39482c561b6e078bf54e41f6117d7c7fb587325da87411fdc44d8",
+        "kind": "content_changed",
+        "parent_sha256": "6c80631f20b706064b1ebb855720cff3aa376c782c823c08e88f75a4855aea44",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/compressibleInterFoam.o"
+      },
+      {
+        "ancestor_sha256": "88d2571e99db54b1e05ec1e2aaaab909a42d077c712f3de7f009bee52e58c291",
+        "kind": "content_changed",
+        "parent_sha256": "04b1222f2a3328ef9e98170639e63d242ef341f7ef15fbb6be9164a7827706f1",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/variables"
+      },
+      {
+        "ancestor_sha256": "cd02b090e57aa49a24d3255eb201ac14b66875f21ef1b179329acf9feb45a3e6",
+        "kind": "content_changed",
+        "parent_sha256": "e888ac0076937ddee347f273326ca61009d47e32238a1136de72b52e6b3a6d7b",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C"
+      },
+      {
+        "ancestor_sha256": "c8def77f6558fefe36e74ef4438d98be6232698179ccdb2d693bec16d303ec61",
+        "kind": "content_changed",
+        "parent_sha256": "572a41cf723c35928818d09a1e045ff64abf7ccd5bf08271378d708c0b06679e",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/createFields.H"
+      }
+    ],
+    "custom_library_sources_included": [
+      "applications/solvers/multiphase/compressibleInterFoam/twoPhaseMixtureThermo/",
+      "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/"
+    ],
+    "entry_count_including_lnInclude_symlinks": 90,
+    "input_freeze_sha256": "d72931f828061ea95318e1db2fd2ea5797ec48731e2c7738180bf46ce3db57c0",
+    "manifest_sha256": "31fbd531763fcfa6c8de5f01560598d643da6e960adc62dbf0c16e4ce43b3572",
+    "original_path": "results/runs/i4f-restart-consistent-apparatus-cold-20261026T1958Z/build/source/v8-restart-cold",
+    "packet_path": "build/source/v8-restart-cold",
+    "schema": "i4f-cold-dcec-source-tree/v1",
+    "verified_mismatches": 0
+  },
+  "verification": {
+    "actual_baseline_container_inspect": "f462b86a1d657c26a6215fdd5f773e78aacccc8f91667ff4337b342615346fb7 exited 0 2026-10-26T20:59:43.886126121Z sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "energy_copy_expected_differences": [
+      {
+        "instrumented_bytes": 96,
+        "instrumented_sha256": "d353db14a2a6d3729c9f6fd9fbd37b674277024d6d3f62cf22ad8c4a35e8e18a",
+        "parent_bytes": 97,
+        "parent_sha256": "3c53dee5d865a1f7c8ec90e451003ef6b54fd726b713ad361958630e55c0ce08",
+        "patch_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/Make-files.diff",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/files"
+      },
+      {
+        "instrumented_bytes": 27571,
+        "instrumented_sha256": "dd7b3d3e24f0c73c59948dd2d614f844a6c81deb41f55204049e5b23e98485cb",
+        "parent_bytes": 19457,
+        "parent_sha256": "e888ac0076937ddee347f273326ca61009d47e32238a1136de72b52e6b3a6d7b",
+        "patch_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/compressibleInterFoam.C.diff",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C"
+      }
+    ],
+    "energy_copy_status": "verified_parent_bytes_except_two_declared_instrumentation_changes",
+    "energy_copy_verified_unchanged_entries": 88,
+    "image_repo_digests": [
+      "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319"
+    ],
+    "parent_tree_verification": "all 90 manifest entries verified"
+  }
+}

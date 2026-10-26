@@ -1,0 +1,18 @@
+{
+  "attempt": 1,
+  "command": "systemd-run --user --scope --quiet -p CPUQuota=50% -- nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python results/runs/i4f-staging-integration-20261026T2251Z/scripts/stage_real_case.py",
+  "created_utc": "2026-10-26T22:53:32Z",
+  "outcome": "canonical checkpoint rejected before staged-case creation",
+  "exception_type": "ValueError",
+  "exception": "canonical checkpoint field T.air SHA256 mismatch: expected b8f596a64179db42419ade7e9f3a909512d7523302d8fe01ea924044a56ad3a0, got a0c893cb5fb86cd9bae19be0055862747001f93ddd4d706ce9eaa33e41c726c2",
+  "rejected_source": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/case/processors10/0.390705595007/T.air",
+  "checkpoint_manifest_expected_sha256": "b8f596a64179db42419ade7e9f3a909512d7523302d8fe01ea924044a56ad3a0",
+  "rejected_source_sha256": "a0c893cb5fb86cd9bae19be0055862747001f93ddd4d706ce9eaa33e41c726c2",
+  "source_input_freeze": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/input-freeze.json",
+  "source_input_freeze_sha256": "f68a154fa024182d36df573fa243557beaf5434a4b9aa010e4a9d848507504be",
+  "source_checkpoint_field_manifest": "results/runs/i4f-cold-pressure-advisory-continuation-20261026T2227Z/provenance/restart-checkpoint-fields.sha256",
+  "static_template": "results/runs/i4f-staging-integration-20261026T2251Z/template",
+  "static_template_manifest_sha256": "2e423e14eb08585cc18a22e83b21d50db87bdfd4c62e4c321dac1bf763afba6c",
+  "staged_case_created": false,
+  "solver_launched": false
+}
