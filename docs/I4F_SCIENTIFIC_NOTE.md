@@ -1,6 +1,6 @@
 # Pressure-driven I4F discharge: working scientific note
 
-23–25 October 2026 UTC. Working scientific note with executed exploratory results;
+23–26 October 2026 UTC. Working scientific note with executed exploratory results;
 no apparatus validation is claimed. Dimensions are distinguished as user-reported,
 derived or assumed below; the CAD is not a calibrated dimensional measurement.
 [The shared input](../experiments/i4f_baseline.json)
@@ -219,6 +219,23 @@ retain phase-fraction excursions: minimum alpha is about -1.08e-5, while the
 integrated equivalent negative-water mass is below .13 mg in each mesh.
 No alpha clipping is applied to those reductions. These two startup checkpoints
 do not isolate a thermal mechanism or establish convergence.
+
+The [native gas storage/work analysis](../results/summaries/i4f_20261025/headspace-pv-energy-proxy.json)
+checks `U_g* = sum(alpha_g p V)/(gamma-1)` against `sum(m_g Cv T)` and integrates
+gas-volume-weighted pressure against the saved gas volumes. For both tanks
+together through .400087 s, storage changes by -195.307 kJ while the
+trapezoidal pressure–volume work proxy is +332.626 kJ, leaving +137.319 kJ.
+The configured sensible-energy reference changes that remainder by only
+.099 kJ; coarsening the saved-state quadrature changes work by .844 kJ.
+The positive-gas-volume p05–p95 pressure spread at the endpoint is about 124 Pa.
+These checks make the calculation traceable, but do not turn the remainder
+into measured heat transfer or identify a numerical energy defect. Interface transport,
+thermal terms and other budget terms remain unresolved. The
+[figure](../results/summaries/i4f_20261025/headspace-pv-energy-proxy.png)
+also includes the refined trajectory through .284932 s; its different endpoint
+must not be interpreted as a paired mesh-error reduction. Domain gas inventory
+loss reflects an open, venting control volume and is distinct from a
+boundary-flux-balanced conservation residual.
 
 The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
 also shows how the initial agreement evolves. At that same time, CFD tank-A

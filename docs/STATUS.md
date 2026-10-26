@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 00:57 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-26 01:20 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -89,6 +89,14 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   model differ 7.67% in pressure and 2.480 L in tank-A water. None is hardware
   validation. Observer source-lag identities close to roundoff without proving
   the cause of the pressure cycle; no speculative equation patch was adopted.
+- **Current gas storage/work proxy is computed.** For both baseline tanks
+  through clean .400087 s, delta(U*)=-195.307 kJ and integral(pbar dV)=332.626 kJ,
+  leaving +137.319 kJ. The energy-reference correction is .099 kJ; work
+  coarsening changes .844 kJ. The refined curve currently ends at .284932 s,
+  so endpoint remainders are not a paired mesh comparison. Neither measured
+  heat nor a closed total-energy defect follows. Open-domain gas inventory
+  loss is not conservation error. See the
+  [analysis and plot](../results/summaries/i4f_20261025/headspace-pv-energy-proxy.json).
 
 The bounded Astra hard-blocker review selected two actions: continue the actual
 bend refinement and run stock source treatment from cold. Finite water

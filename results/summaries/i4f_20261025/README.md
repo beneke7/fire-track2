@@ -1,4 +1,4 @@
-# I4F discharge: published results, 25 October 2026
+# I4F discharge: published results, 25–26 October 2026
 
 **New controlled thermal diagnostic:** uniform refinement in a sealed
 water–air withdrawal test reduces pressure error against adiabatic expansion
@@ -32,6 +32,13 @@ restart. The [momentum-relaxation cells](u-relax-pressure-contact-cells.csv)
 and [stock-source cell](stock-alpha-pressure-contact-cells.csv) reconcile with
 global raw minima. Positive final saved pressure does not clear an earlier
 raw-floor contact; none of these tests establishes a complete discharge.
+
+**Gas energy accounting:** the [storage/work plot](headspace-pv-energy-proxy.png)
+and [analysis](headspace-pv-energy-proxy.json) quantify a +137.319 kJ two-tank
+`delta(U*) + integral(pbar dV)` remainder through .400087 s. This is a
+uniform-headspace work proxy, not measured heat or closed CFD energy balance.
+The refined curve ends earlier, at .284932 s. The [CSV](headspace-pv-energy-proxy.csv)
+labels gas inventory changes separately from conservation errors.
 
 [Watch corrected-source pipe filling through 0.443669 s, 10× slow](corrected-source-cutaway-through-0p443-10x.mp4)
 or the [all-four-branches outlet view](corrected-source-outlets-through-0p443-10x.mp4).
