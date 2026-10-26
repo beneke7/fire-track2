@@ -206,6 +206,9 @@ separate review memos unless a hard decision needs one.
   Guard readiness is monotonic: a verified guard progressing to `running`
   must not fail a check waiting for its earlier readiness status. Test parsers
   against actual startup logs; `trapFpe`/`FOAM_SIGFPE` banners are not failures.
+  Normalize MPI `[rank]` prefixes before matching Pout records, and search the
+  raw log before claiming a diagnostic is absent. A stage monitor must adopt
+  an existing manifest/GO rather than call its one-shot launcher a second time.
   Terminal checks must use the branch's configured log path, not a fixed log
   basename. A missing expected filename is not evidence that the solver failed.
   Compare numerical dictionary values numerically, not by printed notation

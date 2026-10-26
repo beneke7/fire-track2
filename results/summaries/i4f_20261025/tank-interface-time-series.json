@@ -1,0 +1,2935 @@
+{
+  "artifacts": {
+    "csv": {
+      "bytes": 6025,
+      "path": "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/output/native_time_series.csv",
+      "sha256": "4370d75d683ee4a0d138c2067aa9d6e76d56469bf80186250b918cb94ba74677"
+    },
+    "plot": {
+      "bytes": 331282,
+      "path": "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/output/tank_interface_native_time_series.png",
+      "sha256": "0a284031c503bdc72787dd1eb273e523aac4967e175dc3e3356d2515e611d592"
+    },
+    "summary_json": {
+      "path": "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/output/summary.json",
+      "self_sha256": "omitted because an embedded self-hash would be recursive; hash the final file externally"
+    }
+  },
+  "cases": {
+    "baseline_299248_original_numerics": {
+      "binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+      "bundle": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z",
+      "case": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case",
+      "cell_count": 299248,
+      "cell_zone_counts": {
+        "lineAZone": 66525,
+        "lineBZone": 66632,
+        "tankAHeadspaceZone": 2920,
+        "tankAZone": 21839,
+        "tankBHeadspaceZone": 2920,
+        "tankBZone": 21839
+      },
+      "checkpoint_hashes": {
+        "0.050021166664044305": {
+          "T": {
+            "bytes": 2648895,
+            "sha256": "fcdfce116f37f14aa5bb74a54fd81f657c5c5a6b2345cae13a234ca95df8880d"
+          },
+          "T.air": {
+            "bytes": 2648903,
+            "sha256": "ac7ea6687bd262bda56247aff6c34d6ac922d85d8de93136c00ea8ab3a91df87"
+          },
+          "T.water": {
+            "bytes": 2648907,
+            "sha256": "a43dd552c7c2368bb15859e99da8fe25ab2fdca1e845357a154cde775c39016d"
+          },
+          "U": {
+            "bytes": 7909659,
+            "sha256": "36a74dae61f653921835fe5abd60b8de0d28e6f6da5dd5fd11821333d48409e8"
+          },
+          "alpha.water": {
+            "bytes": 2641245,
+            "sha256": "315339149cf418442a981079bc10951237d25d13c540929e3cd218421b154674"
+          },
+          "alphaPhi0.water": {
+            "bytes": 7709346,
+            "sha256": "05e4cfdb0e59f585ee68ab77a1d911690ffcf2dc89fcfcb2801f2ea8e0274d0f"
+          },
+          "alphat": {
+            "bytes": 3198271,
+            "sha256": "383be921de340ff63dbca2df47d45a00441afc957a32b46098298adee973e2d1"
+          },
+          "k": {
+            "bytes": 3197108,
+            "sha256": "6341596365a6e6509abf89221306a54605d98c5c4cdf2411cadfa3806e6a97ca"
+          },
+          "nut": {
+            "bytes": 3196760,
+            "sha256": "1de977e8ea8a3e7fbd56af5e3778405a12112e06cd536eea45f41d6103f8e8e8"
+          },
+          "omega": {
+            "bytes": 3198978,
+            "sha256": "5e4c4a2962b80a9b493a9c159c22e2dad75c7c3f5234d87347b3ef578a765b1d"
+          },
+          "p": {
+            "bytes": 3197601,
+            "sha256": "d890175c0b93d26eb4a33a71c880e66b830bf01e65a2050c9be59c2bf25ad328"
+          },
+          "p_rgh": {
+            "bytes": 3787473,
+            "sha256": "0a68f2c8babc88c2755eb0b4ae84bc8967fad5d47d60875b1915932530b6c4df"
+          },
+          "phi": {
+            "bytes": 7722729,
+            "sha256": "6fe30c3cd7f670449367415dcb37184265c0993a0fbe131ce654d726169a9b9e"
+          },
+          "rho": {
+            "bytes": 3197595,
+            "sha256": "2dfc788c5936100589b8da785c7a41002a39735fb9731521b01f6863dc80a1df"
+          },
+          "uniform/time": {
+            "bytes": 1062,
+            "sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d"
+          }
+        },
+        "0.10002116666400004": {
+          "T": {
+            "bytes": 2648895,
+            "sha256": "953abdaaba65439853b7eca0a2ccc8c487ecd8d10add1fd2e3f8d6d5fbcb290b"
+          },
+          "T.air": {
+            "bytes": 2648903,
+            "sha256": "1f621b561520054c3b00b2d966239ac54fca4a38143ac840f2cd55db108b3ff6"
+          },
+          "T.water": {
+            "bytes": 2648907,
+            "sha256": "bad3ca67c16b6ebe22ba6e91cb43b5fe932a552d402e8a78d9c97a41514a49ef"
+          },
+          "U": {
+            "bytes": 7909659,
+            "sha256": "33ae360e67c0afe25f50f2d0d7541ceac4f376356b54734e3e73871d0dc11917"
+          },
+          "alpha.water": {
+            "bytes": 2641378,
+            "sha256": "d222498f3f5b6034c5cf01e836dc3427591048027f9ad2434a3203d418f29af0"
+          },
+          "alphaPhi0.water": {
+            "bytes": 7717856,
+            "sha256": "213f39bfcfec1b9ceb5e24d788a16a1afa848a2aa8bf6c1c2bf1a27700c084d4"
+          },
+          "alphat": {
+            "bytes": 3198271,
+            "sha256": "31f7b7c57f3fbfd1f476b743ce65d3e8029a0e53ef692193ef7448af76d7fb74"
+          },
+          "k": {
+            "bytes": 3197108,
+            "sha256": "c95c66a8a9e8aff2ab5b041778d8958c754f881306229278d085e0842564ffa2"
+          },
+          "nut": {
+            "bytes": 3196760,
+            "sha256": "2f6492c29b3395a6c3d8e153e6a9d85fa91c8e558583b9d1c1830dbde07acdc3"
+          },
+          "omega": {
+            "bytes": 3198978,
+            "sha256": "8b7107930e7650190e051a912268de5653c7af9d7ee4cf0d6b8cfa298519636f"
+          },
+          "p": {
+            "bytes": 3197601,
+            "sha256": "e6ce87ca269fabb7d98e548bae38fcb8a105541e0b598c591cb07bbeb37e379b"
+          },
+          "p_rgh": {
+            "bytes": 3787473,
+            "sha256": "9b397123752379ee116df8a77acfd293995ac93b5b189aeef4e5aeb05c3e8203"
+          },
+          "phi": {
+            "bytes": 7722729,
+            "sha256": "631762e51634dbf5350280a3e3bddf113695a74d693583fb6b31b3986fbd05e8"
+          },
+          "rho": {
+            "bytes": 3197595,
+            "sha256": "59da009da9640313cb41abbc12eed271a7bfa511bdadf004f3a53d9c5ab121b3"
+          },
+          "uniform/time": {
+            "bytes": 1061,
+            "sha256": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f"
+          }
+        }
+      },
+      "initial_metrics_t0": {
+        "global_max_alpha_cell": {
+          "alpha_water": 1.0,
+          "alpha_water_signed_mass_kg_rhoConst998p2": 0.009929656024250609,
+          "alpha_water_signed_volume_m3": 9.947561635193957e-06,
+          "cell_volume_m3": 9.947561635193957e-06,
+          "center_xyz_m": [
+            1.1108040464664901,
+            -0.8406528001306954,
+            0.407841822867039
+          ],
+          "global_cell_id": 7620,
+          "zone_membership": [
+            "lineAZone"
+          ]
+        },
+        "global_min_alpha_cell": {
+          "alpha_water": 0.0,
+          "alpha_water_signed_mass_kg_rhoConst998p2": 0.0,
+          "alpha_water_signed_volume_m3": 0.0,
+          "cell_volume_m3": 7.266550468726635e-05,
+          "center_xyz_m": [
+            4.83166654012228,
+            -2.0291068637138405,
+            -0.47358721944494236
+          ],
+          "global_cell_id": 0,
+          "zone_membership": []
+        },
+        "global_phase_bounds_and_outside_range": {
+          "alpha_dtype": "float64",
+          "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+          "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+          "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+          "alpha_gt1_water_excess_volume_m3": 0.0,
+          "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+          "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+          "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+          "alpha_lt0_water_signed_volume_m3": 0.0,
+          "alpha_max": 1.0,
+          "alpha_min": 0.0,
+          "count_alpha_gt1": 0,
+          "count_alpha_lt0": 0,
+          "excursion_beyond_1e-08": {
+            "affected_cell_volume_m3": 0.0,
+            "alpha_gt_one_plus_tolerance_count": 0,
+            "alpha_lt_negative_tolerance_count": 0,
+            "gas_complement_excursion_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "water_excursion_m3_signed": 0.0,
+            "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "excursion_beyond_1e-12": {
+            "affected_cell_volume_m3": 0.0,
+            "alpha_gt_one_plus_tolerance_count": 0,
+            "alpha_lt_negative_tolerance_count": 0,
+            "gas_complement_excursion_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "water_excursion_m3_signed": 0.0,
+            "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "gas_complement_excursion_integral_m3_signed": 0.0,
+          "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+          "out_of_bounds_cell_count": 0,
+          "out_of_bounds_cell_volume_m3": 0.0,
+          "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+          "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+          "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+          "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+          "water_fraction_excursion_integral_m3_signed": 0.0,
+          "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+        },
+        "mapped_alpha_dtype": "float64",
+        "mapped_center_array_cells": 299248,
+        "tankA": {
+          "alpha_water_bounds_and_out_of_bounds": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+            "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+            "alpha_gt1_water_excess_volume_m3": 0.0,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_lt0_water_signed_volume_m3": 0.0,
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "count_alpha_gt1": 0,
+            "count_alpha_lt0": 0,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "out_of_bounds_cell_count": 0,
+            "out_of_bounds_cell_volume_m3": 0.0,
+            "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "water_fraction_excursion_integral_m3_signed": 0.0,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199988.9920753166,
+          "gas_rich_cell_count_alpha_le_0p01": 2872,
+          "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.15,
+          "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199985.7243142794,
+          "headspace_zone_alpha_max": 0.29262323219213,
+          "headspace_zone_alpha_min": 0.0,
+          "line_zone_alpha_max": 1.0,
+          "line_zone_alpha_min": 0.0,
+          "mixed_cell_count_0p01_lt_alpha_lt_0p99": 864,
+          "mixed_cell_gas_mass_kg_EOS_signed": 0.6102739921890117,
+          "mixed_cell_gas_volume_m3_signed": 0.04279416622396985,
+          "mixed_gas_mass_share_percent": 14.336772062482751,
+          "mixed_gas_volume_share_percent": 14.336538555680194,
+          "native_tank_zone_volume_m3": 1.6484972004092866,
+          "raw_tank_gas_mass_kg_EOS_signed": 4.256704295285617,
+          "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.2984972004069604,
+          "raw_tank_water_mass_kg_rhoConst998p2": 1347.5700000023219,
+          "raw_tank_water_volume_m3_sum_alphaV": 1.350000000002326,
+          "tank_plus_line_water_volume_m3": 1.6010568438148636,
+          "upstream_line_water_volume_m3_sum_alphaV": 0.25105684381253746,
+          "water_rich_cell_count_alpha_ge_0p99": 18103
+        },
+        "tankB": {
+          "alpha_water_bounds_and_out_of_bounds": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+            "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+            "alpha_gt1_water_excess_volume_m3": 0.0,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_lt0_water_signed_volume_m3": 0.0,
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "count_alpha_gt1": 0,
+            "count_alpha_lt0": 0,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "out_of_bounds_cell_count": 0,
+            "out_of_bounds_cell_volume_m3": 0.0,
+            "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "water_fraction_excursion_integral_m3_signed": 0.0,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199988.9915951893,
+          "gas_rich_cell_count_alpha_le_0p01": 2872,
+          "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.1499999999999,
+          "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199985.7243673813,
+          "headspace_zone_alpha_max": 0.2926536044436,
+          "headspace_zone_alpha_min": 0.0,
+          "line_zone_alpha_max": 1.0,
+          "line_zone_alpha_min": 0.0,
+          "mixed_cell_count_0p01_lt_alpha_lt_0p99": 864,
+          "mixed_cell_gas_mass_kg_EOS_signed": 0.6102963234585739,
+          "mixed_cell_gas_volume_m3_signed": 0.04279573231907537,
+          "mixed_gas_mass_share_percent": 14.33731743530979,
+          "mixed_gas_volume_share_percent": 14.33708396826234,
+          "native_tank_zone_volume_m3": 1.6484967683325067,
+          "raw_tank_gas_mass_kg_EOS_signed": 4.256698132075549,
+          "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.29849676833734995,
+          "raw_tank_water_mass_kg_rhoConst998p2": 1347.5699999951655,
+          "raw_tank_water_volume_m3_sum_alphaV": 1.3499999999951566,
+          "tank_plus_line_water_volume_m3": 1.6011091492201892,
+          "upstream_line_water_volume_m3_sum_alphaV": 0.2511091492250325,
+          "water_rich_cell_count_alpha_ge_0p99": 18103
+        },
+        "whole_domain_alpha_water_max": 1.0,
+        "whole_domain_alpha_water_min": 0.0,
+        "whole_domain_raw_water_volume_m3": 3.2021659930350523
+      },
+      "native_geometry_hashes": {
+        "constant/C": "d87f4f95668ae24e3d26e70e382429188c211cc2195c1bc52dc9a5d8b0103f4a",
+        "constant/cellVolume": "e5a2c5798e0f089361a41d9f055dc021ce70dc886c8247a9d7efcc8dae0ca051",
+        "constant/polyMesh/cellZones": "f0a1ea7b20b4fabe268362fa454ee852f1ef963b1641f901ba6a3b726420bf51",
+        "constant/polyMesh/faces": "5f294f6b4c3e3f0faaafac5ca58011457234007bff4272033ca6a46d5dcc9b04",
+        "constant/polyMesh/neighbour": "f0b8e4bc09460897a029dab47bfcb47867ae36432ec61a2bb5d7dc24a0c53d8f",
+        "constant/polyMesh/owner": "15c97d6ad6c3d1af79066d955b5b086dc4fede6ec1d74a9fccb90d8626b67f7d",
+        "constant/polyMesh/points": "fcb7a11e370b4ae55207c47623ec25044edd216459f8717eb3ca0218e31ab8de",
+        "processors10/constant/polyMesh/cellProcAddressing": "fd0a39b03f0c28498ed63b60471f6b085c13920a693aac247630ee4bd09a7867"
+      },
+      "native_time_series": {
+        "0": {
+          "global_max_alpha_cell": {
+            "alpha_water": 1.0,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.009929656024250609,
+            "alpha_water_signed_volume_m3": 9.947561635193957e-06,
+            "cell_volume_m3": 9.947561635193957e-06,
+            "center_xyz_m": [
+              1.1108040464664901,
+              -0.8406528001306954,
+              0.407841822867039
+            ],
+            "global_cell_id": 7620,
+            "zone_membership": [
+              "lineAZone"
+            ]
+          },
+          "global_min_alpha_cell": {
+            "alpha_water": 0.0,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_water_signed_volume_m3": 0.0,
+            "cell_volume_m3": 7.266550468726635e-05,
+            "center_xyz_m": [
+              4.83166654012228,
+              -2.0291068637138405,
+              -0.47358721944494236
+            ],
+            "global_cell_id": 0,
+            "zone_membership": []
+          },
+          "global_phase_bounds_and_outside_range": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+            "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+            "alpha_gt1_water_excess_volume_m3": 0.0,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_lt0_water_signed_volume_m3": 0.0,
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "count_alpha_gt1": 0,
+            "count_alpha_lt0": 0,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "out_of_bounds_cell_count": 0,
+            "out_of_bounds_cell_volume_m3": 0.0,
+            "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "water_fraction_excursion_integral_m3_signed": 0.0,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "mapped_alpha_dtype": "float64",
+          "mapped_center_array_cells": 299248,
+          "tankA": {
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+              "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+              "alpha_gt1_water_excess_volume_m3": 0.0,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+              "alpha_lt0_water_signed_volume_m3": 0.0,
+              "alpha_max": 1.0,
+              "alpha_min": 0.0,
+              "count_alpha_gt1": 0,
+              "count_alpha_lt0": 0,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "out_of_bounds_cell_count": 0,
+              "out_of_bounds_cell_volume_m3": 0.0,
+              "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "water_fraction_excursion_integral_m3_signed": 0.0,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199988.9920753166,
+            "gas_rich_cell_count_alpha_le_0p01": 2872,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.15,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199985.7243142794,
+            "headspace_zone_alpha_max": 0.29262323219213,
+            "headspace_zone_alpha_min": 0.0,
+            "line_zone_alpha_max": 1.0,
+            "line_zone_alpha_min": 0.0,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 864,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.6102739921890117,
+            "mixed_cell_gas_volume_m3_signed": 0.04279416622396985,
+            "mixed_gas_mass_share_percent": 14.336772062482751,
+            "mixed_gas_volume_share_percent": 14.336538555680194,
+            "native_tank_zone_volume_m3": 1.6484972004092866,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.256704295285617,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.2984972004069604,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1347.5700000023219,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.350000000002326,
+            "tank_plus_line_water_volume_m3": 1.6010568438148636,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.25105684381253746,
+            "water_rich_cell_count_alpha_ge_0p99": 18103
+          },
+          "tankB": {
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+              "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+              "alpha_gt1_water_excess_volume_m3": 0.0,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+              "alpha_lt0_water_signed_volume_m3": 0.0,
+              "alpha_max": 1.0,
+              "alpha_min": 0.0,
+              "count_alpha_gt1": 0,
+              "count_alpha_lt0": 0,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "out_of_bounds_cell_count": 0,
+              "out_of_bounds_cell_volume_m3": 0.0,
+              "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "water_fraction_excursion_integral_m3_signed": 0.0,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199988.9915951893,
+            "gas_rich_cell_count_alpha_le_0p01": 2872,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.1499999999999,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199985.7243673813,
+            "headspace_zone_alpha_max": 0.2926536044436,
+            "headspace_zone_alpha_min": 0.0,
+            "line_zone_alpha_max": 1.0,
+            "line_zone_alpha_min": 0.0,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 864,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.6102963234585739,
+            "mixed_cell_gas_volume_m3_signed": 0.04279573231907537,
+            "mixed_gas_mass_share_percent": 14.33731743530979,
+            "mixed_gas_volume_share_percent": 14.33708396826234,
+            "native_tank_zone_volume_m3": 1.6484967683325067,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.256698132075549,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.29849676833734995,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1347.5699999951655,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3499999999951566,
+            "tank_plus_line_water_volume_m3": 1.6011091492201892,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.2511091492250325,
+            "water_rich_cell_count_alpha_ge_0p99": 18103
+          },
+          "whole_domain_alpha_water_max": 1.0,
+          "whole_domain_alpha_water_min": 0.0,
+          "whole_domain_raw_water_volume_m3": 3.2021659930350523
+        },
+        "0.050021166664": {
+          "global_max_alpha_cell": {
+            "alpha_water": 1.0000000000006213,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.004535634701593732,
+            "alpha_water_signed_volume_m3": 4.543813566012555e-06,
+            "cell_volume_m3": 4.5438135660097314e-06,
+            "center_xyz_m": [
+              2.2718751431619837,
+              0.736433679328726,
+              0.5405587398848823
+            ],
+            "global_cell_id": 289027,
+            "zone_membership": [
+              "lineBZone"
+            ]
+          },
+          "global_min_alpha_cell": {
+            "alpha_water": -1.1191774503677143e-16,
+            "alpha_water_signed_mass_kg_rhoConst998p2": -1.3198267832732e-17,
+            "alpha_water_signed_volume_m3": -1.3222067554329794e-20,
+            "cell_volume_m3": 0.00011814093958009591,
+            "center_xyz_m": [
+              0.022573001218128583,
+              -0.32332381644758285,
+              1.5262645766305736
+            ],
+            "global_cell_id": 20948,
+            "zone_membership": [
+              "tankAZone",
+              "tankAHeadspaceZone"
+            ]
+          },
+          "global_phase_bounds_and_outside_range": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -4.598014522434274e-14,
+            "alpha_gt1_gas_signed_volume_m3_negative": -3.3692147792497445e-15,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 3.363150192647095e-12,
+            "alpha_gt1_water_excess_volume_m3": 3.3692147792497445e-15,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 7.939673989045465e-19,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 5.650319974428047e-20,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -5.640149398474078e-17,
+            "alpha_lt0_water_signed_volume_m3": -5.650319974428047e-20,
+            "alpha_max": 1.0000000000006213,
+            "alpha_min": -1.1191774503677143e-16,
+            "count_alpha_gt1": 41635,
+            "count_alpha_lt0": 2421,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": -3.3691582760500003e-15,
+            "gas_complement_excursion_mass_kg_signed_EOS": -4.5979351256943836e-14,
+            "out_of_bounds_cell_count": 44056,
+            "out_of_bounds_cell_volume_m3": 1.2250328589101294,
+            "out_of_bounds_cell_volume_percent_of_zone": 4.8723414398471325,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.378101117978928,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.05169867968522168,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 1.1733341792249077,
+            "water_fraction_excursion_integral_m3_signed": 3.3691582760500003e-15,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 3.3630937911531104e-12
+          },
+          "mapped_alpha_dtype": "float64",
+          "mapped_center_array_cells": 299248,
+          "tankA": {
+            "adiabatic_pressure_difference_ratio": 0.001747431598195015,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9788462509596567,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -1.8311995090061284e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -1.3050132079514356e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 1.302664184177123e-12,
+              "alpha_gt1_water_excess_volume_m3": 1.3050132079514356e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 3.969941097294717e-19,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 2.825234603958466e-20,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -2.820149181671341e-17,
+              "alpha_lt0_water_signed_volume_m3": -2.825234603958466e-20,
+              "alpha_max": 1.000000000000023,
+              "alpha_min": -1.1191774503677143e-16,
+              "count_alpha_gt1": 7652,
+              "count_alpha_lt0": 168,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -1.304984955605396e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -1.8311598095951556e-14,
+              "out_of_bounds_cell_count": 7820,
+              "out_of_bounds_cell_volume_m3": 0.4612432878665592,
+              "out_of_bounds_cell_volume_percent_of_zone": 27.979622152348355,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.16956579517762782,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.012069017711071783,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.4491742701554874,
+              "water_fraction_excursion_integral_m3_signed": 1.304984955605396e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 1.3026359826853063e-12
+            },
+            "checkpoint_directory": "0.050021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9805936825578517,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176701.6247680194,
+            "gas_rich_cell_count_alpha_le_0p01": 2870,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 291.88554780642545,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9956866716917123,
+            "gas_volume_ratio_to_same_mesh_t0": 1.0153911918791874,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176679.789216023,
+            "headspace_zone_alpha_max": 0.3956372963062688,
+            "headspace_zone_alpha_min": -1.1191774503677143e-16,
+            "line_zone_alpha_max": 1.0000000000006204,
+            "line_zone_alpha_min": -7.864196158011463e-63,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 898,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.6602188699454554,
+            "mixed_cell_gas_volume_m3_signed": 0.04720355055974107,
+            "mixed_gas_mass_share_percent": 15.510102295536207,
+            "mixed_gas_volume_share_percent": 15.574030204882225,
+            "native_seat_flux_sum_m3_s": null,
+            "native_seat_fluxes": {
+              "1": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxA1/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              },
+              "2": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxA2/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              }
+            },
+            "native_tank_zone_volume_m3": 1.6484972004092866,
+            "pressure_departure_from_adiabat_percent": 0.17851951687835044,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.256702227782635,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.30309142809382417,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1342.9840419252948,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3454057723154627,
+            "tank_plus_line_water_volume_m3": 1.6010564729852934,
+            "time_s": 0.050021166664044305,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.2556507006698307,
+            "water_drawdown_m3_from_same_mesh_t0": 0.00459422768686335,
+            "water_drawdown_percent_of_same_mesh_t0": 0.34031316198929146,
+            "water_rich_cell_count_alpha_ge_0p99": 18071
+          },
+          "tankB": {
+            "adiabatic_pressure_difference_ratio": 0.0017474606138367932,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9788461625303427,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -1.7822538086232668e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -1.270106815308775e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 1.2678206230412192e-12,
+              "alpha_gt1_water_excess_volume_m3": 1.270106815308775e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 3.9697328917507474e-19,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 2.825085370469582e-20,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -2.820000216802737e-17,
+              "alpha_lt0_water_signed_volume_m3": -2.825085370469582e-20,
+              "alpha_max": 1.0000000000000202,
+              "alpha_min": -1.1178362922803497e-16,
+              "count_alpha_gt1": 7522,
+              "count_alpha_lt0": 167,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -1.2700785644550703e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -1.7822141112943494e-14,
+              "out_of_bounds_cell_count": 7689,
+              "out_of_bounds_cell_volume_m3": 0.4569966974128282,
+              "out_of_bounds_cell_volume_percent_of_zone": 27.722025677677923,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.17638627505701737,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.012554957046609114,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.4444417403662192,
+              "water_fraction_excursion_integral_m3_signed": 1.2700785644550703e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 1.2677924230390512e-12
+            },
+            "checkpoint_directory": "0.050021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9805936231441795,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176701.5530014571,
+            "gas_rich_cell_count_alpha_le_0p01": 2870,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 291.88554864981666,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.995686674568708,
+            "gas_volume_ratio_to_same_mesh_t0": 1.0153912574098711,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176679.7186277986,
+            "headspace_zone_alpha_max": 0.3956803232950027,
+            "headspace_zone_alpha_min": -1.1178362922803497e-16,
+            "line_zone_alpha_max": 1.0000000000006213,
+            "line_zone_alpha_min": -7.844527313464151e-63,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 898,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.6602395472282208,
+            "mixed_cell_gas_volume_m3_signed": 0.04720503166227905,
+            "mixed_gas_mass_share_percent": 15.510610494931855,
+            "mixed_gas_volume_share_percent": 15.574540408893053,
+            "native_seat_flux_sum_m3_s": null,
+            "native_seat_fluxes": {
+              "1": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxB1/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              },
+              "2": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxB2/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              }
+            },
+            "native_tank_zone_volume_m3": 1.6484967683325067,
+            "pressure_departure_from_adiabat_percent": 0.17852249727572378,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.256696069080945,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.30309100893484475,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1342.9840290307461,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3454057593976618,
+            "tank_plus_line_water_volume_m3": 1.6011087736954128,
+            "time_s": 0.050021166664044305,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.25570301429775105,
+            "water_drawdown_m3_from_same_mesh_t0": 0.004594240597494803,
+            "water_drawdown_percent_of_same_mesh_t0": 0.3403141183341693,
+            "water_rich_cell_count_alpha_ge_0p99": 18071
+          },
+          "whole_domain_alpha_water_max": 1.0000000000006213,
+          "whole_domain_alpha_water_min": -1.1191774503677143e-16,
+          "whole_domain_raw_water_volume_m3": 3.202165246680706
+        },
+        "0.100021166664": {
+          "global_max_alpha_cell": {
+            "alpha_water": 1.000000000004259,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.0027668762729146047,
+            "alpha_water_signed_volume_m3": 2.7718656310504955e-06,
+            "cell_volume_m3": 2.77186563103869e-06,
+            "center_xyz_m": [
+              2.284375024215745,
+              0.7620760371450932,
+              0.6397731526539234
+            ],
+            "global_cell_id": 284438,
+            "zone_membership": [
+              "lineBZone"
+            ]
+          },
+          "global_min_alpha_cell": {
+            "alpha_water": -1.0840468271875719e-05,
+            "alpha_water_signed_mass_kg_rhoConst998p2": -3.0001561568909635e-08,
+            "alpha_water_signed_volume_m3": -3.0055661760077776e-11,
+            "cell_volume_m3": 2.772542754269532e-06,
+            "center_xyz_m": [
+              2.3656252625489964,
+              0.7620869065926795,
+              0.36022699996309276
+            ],
+            "global_cell_id": 84860,
+            "zone_membership": [
+              "lineBZone"
+            ]
+          },
+          "global_phase_bounds_and_outside_range": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -6.061726134155711e-14,
+            "alpha_gt1_gas_signed_volume_m3_negative": -4.570984319380885e-15,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 4.562756547606e-12,
+            "alpha_gt1_water_excess_volume_m3": 4.570984319380885e-15,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 1.4298111450885359e-10,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 1.2028297169744957e-10,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -1.2006646234839417e-07,
+            "alpha_lt0_water_signed_volume_m3": -1.2028297169744957e-10,
+            "alpha_max": 1.000000000004259,
+            "alpha_min": -1.0840468271875719e-05,
+            "count_alpha_gt1": 33780,
+            "count_alpha_lt0": 42009,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 2.777996320457832e-05,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 8,
+              "gas_complement_excursion_m3_signed": 1.2001926872393088e-10,
+              "gas_complement_excursion_mass_kg_signed_EOS": 1.4266785716280996e-10,
+              "water_excursion_m3_signed": -1.2001926872393088e-10,
+              "water_excursion_mass_kg_signed_rhoConst998p2": -1.198032340402278e-07
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.00018289346860523125,
+              "alpha_gt_one_plus_tolerance_count": 14,
+              "alpha_lt_negative_tolerance_count": 32,
+              "gas_complement_excursion_m3_signed": 1.202828799218015e-10,
+              "gas_complement_excursion_mass_kg_signed_EOS": 1.4298100035706178e-10,
+              "water_excursion_m3_signed": -1.202828799218015e-10,
+              "water_excursion_mass_kg_signed_rhoConst998p2": -1.2006637073794225e-07
+            },
+            "gas_complement_excursion_integral_m3_signed": 1.202784007131302e-10,
+            "gas_complement_excursion_mass_kg_signed_EOS": 1.4292049724751206e-10,
+            "out_of_bounds_cell_count": 75789,
+            "out_of_bounds_cell_volume_m3": 1.737011419068648,
+            "out_of_bounds_cell_volume_percent_of_zone": 6.9086413944401235,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 1.420832971110933,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.6171503649474545,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 1.1198610541211935,
+            "water_fraction_excursion_integral_m3_signed": -1.202784007131302e-10,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": -1.2006189959184657e-07
+          },
+          "mapped_alpha_dtype": "float64",
+          "mapped_center_array_cells": 299248,
+          "tankA": {
+            "adiabatic_pressure_difference_ratio": 0.004269009527422041,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9572026917190913,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -2.4873187481324686e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -1.8083311385398336e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 1.805076142490462e-12,
+              "alpha_gt1_water_excess_volume_m3": 1.8083311385398336e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 2.6584493793953928e-18,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 1.9268916820517408e-19,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -1.9234232770240478e-16,
+              "alpha_lt0_water_signed_volume_m3": -1.9268916820517408e-19,
+              "alpha_max": 1.000000000000027,
+              "alpha_min": -3.1735004685390658e-15,
+              "count_alpha_gt1": 7575,
+              "count_alpha_lt0": 315,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -1.8081384493716282e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -2.487052903194529e-14,
+              "out_of_bounds_cell_count": 7890,
+              "out_of_bounds_cell_volume_m3": 0.471397059880626,
+              "out_of_bounds_cell_volume_percent_of_zone": 28.59556326596055,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.3813703590332596,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.02756898947880074,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.4438280704018253,
+              "water_fraction_excursion_integral_m3_signed": 1.8081384493716282e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 1.8048838001627593e-12
+            },
+            "checkpoint_directory": "0.100021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9614717012465134,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153755.4576877435,
+            "gas_rich_cell_count_alpha_le_0p01": 2862,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 290.7962596752811,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9919708670485454,
+            "gas_volume_ratio_to_same_mesh_t0": 1.0317403903988374,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153734.5725618035,
+            "headspace_zone_alpha_max": 0.5481962665130482,
+            "headspace_zone_alpha_min": -3.1735004685390658e-15,
+            "line_zone_alpha_max": 1.0000000000042528,
+            "line_zone_alpha_min": -1.0840225097252572e-05,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 1106,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.7158952100220068,
+            "mixed_cell_gas_volume_m3_signed": 0.05219286623125899,
+            "mixed_gas_mass_share_percent": 16.81775238008359,
+            "mixed_gas_volume_share_percent": 16.947297467378714,
+            "native_seat_flux_sum_m3_s": 0.1263836045,
+            "native_seat_fluxes": {
+              "1": {
+                "area_m2": 0.0700857244,
+                "signed_alphaPhi0_water_m3_s": 0.063187271,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxA1/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              },
+              "2": {
+                "area_m2": 0.0700877114,
+                "signed_alphaPhi0_water_m3_s": 0.0631963335,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxA2/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              }
+            },
+            "native_tank_zone_volume_m3": 1.6484972004092866,
+            "pressure_departure_from_adiabat_percent": 0.44598804039666096,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.25678291511656,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.3079716180808373,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1338.1126362802584,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3405255823284494,
+            "tank_plus_line_water_volume_m3": 1.6010566576366485,
+            "time_s": 0.10002116666400004,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.26053107530819897,
+            "water_drawdown_m3_from_same_mesh_t0": 0.009474417673876578,
+            "water_drawdown_percent_of_same_mesh_t0": 0.7018087165822411,
+            "water_rich_cell_count_alpha_ge_0p99": 17871
+          },
+          "tankB": {
+            "adiabatic_pressure_difference_ratio": 0.00426904901348657,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.957202547213537,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -2.4476352575157407e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -1.779459886555025e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 1.776256858759226e-12,
+              "alpha_gt1_water_excess_volume_m3": 1.779459886555025e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 2.6599913852313833e-18,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 1.9280106423974628e-19,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -1.9245402232411475e-16,
+              "alpha_lt0_water_signed_volume_m3": -1.9280106423974628e-19,
+              "alpha_max": 1.000000000000034,
+              "alpha_min": -3.181908295450431e-15,
+              "count_alpha_gt1": 7473,
+              "count_alpha_lt0": 302,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -1.7792670854907854e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -2.4473692583772175e-14,
+              "out_of_bounds_cell_count": 7775,
+              "out_of_bounds_cell_volume_m3": 0.4689926612246117,
+              "out_of_bounds_cell_volume_percent_of_zone": 28.449716750067324,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.3705069267854904,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.026783108620610115,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.4422095526040015,
+              "water_fraction_excursion_integral_m3_signed": 1.7792670854907854e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 1.776064404736902e-12
+            },
+            "checkpoint_directory": "0.100021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9614715962270236,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153755.331203883,
+            "gas_rich_cell_count_alpha_le_0p01": 2862,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 290.79625865800335,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9919708635783846,
+            "gas_volume_ratio_to_same_mesh_t0": 1.0317405016694856,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153734.4473137262,
+            "headspace_zone_alpha_max": 0.5482258023430862,
+            "headspace_zone_alpha_min": -3.181908295450431e-15,
+            "line_zone_alpha_max": 1.000000000004259,
+            "line_zone_alpha_min": -1.0840468271875719e-05,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 1106,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.7159146451501405,
+            "mixed_cell_gas_volume_m3_signed": 0.052194287719787805,
+            "mixed_gas_mass_share_percent": 16.8182332637577,
+            "mixed_gas_volume_share_percent": 16.94778173601265,
+            "native_seat_flux_sum_m3_s": 0.12638372679999998,
+            "native_seat_fluxes": {
+              "1": {
+                "area_m2": 0.0700857253,
+                "signed_alphaPhi0_water_m3_s": 0.0631874238,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxB1/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              },
+              "2": {
+                "area_m2": 0.0700877118,
+                "signed_alphaPhi0_water_m3_s": 0.063196303,
+                "source": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/postProcessing/seatFluxB2/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              }
+            },
+            "native_tank_zone_volume_m3": 1.6484967683325067,
+            "pressure_departure_from_adiabat_percent": 0.4459922328784005,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.25677676080813,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.3079712055110977,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1338.1126168083306,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.340525562821409,
+            "tank_plus_line_water_volume_m3": 1.60110895193524,
+            "time_s": 0.10002116666400004,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.26058338911383083,
+            "water_drawdown_m3_from_same_mesh_t0": 0.00947443717374763,
+            "water_drawdown_percent_of_same_mesh_t0": 0.7018101610208608,
+            "water_rich_cell_count_alpha_ge_0p99": 17871
+          },
+          "whole_domain_alpha_water_max": 1.000000000004259,
+          "whole_domain_alpha_water_min": -1.0840468271875719e-05,
+          "whole_domain_raw_water_volume_m3": 3.202165609571888
+        }
+      },
+      "own_cold_initialization_time": 0.0,
+      "own_initial_fields": {
+        "T": {
+          "bytes": 15616,
+          "sha256": "aaeb836e073a2b9b516a289ef837c41b78f46b53828ca308cc1e1a4a05e880a6"
+        },
+        "T.air": {
+          "bytes": 15611,
+          "sha256": "9021e15db36cd48ec096f7b944153d08a013116cf4d87ff8194432fcc5f045c0"
+        },
+        "T.water": {
+          "bytes": 15615,
+          "sha256": "b3e441123862504e156aed6330dcc4045621a2c9a93322d97950fce19b4e539e"
+        },
+        "U": {
+          "bytes": 12005,
+          "sha256": "e0fd4ded5781599926ccb9d6c240d6614706f143864f6072dc0c848b6bdeb3b6"
+        },
+        "alpha.water": {
+          "bytes": 966224,
+          "sha256": "0320d46da7e4bbeaa695a4310239e488a68be94f8f792729b8b57c4552960472"
+        },
+        "alphat": {
+          "bytes": 13146,
+          "sha256": "fc7542708c6a705568bbc7f8f6a4ad2131c9a39b234fa23d1deb56e4b7bbcc2f"
+        },
+        "k": {
+          "bytes": 14262,
+          "sha256": "5a56fe7a1e6d2bcfd059e598b1881d380f7ce75533bbe744a1baab6bbac367ee"
+        },
+        "nut": {
+          "bytes": 12650,
+          "sha256": "34f66b85a2599cb4899d3df4d1e786a1e6f67be2defdbe4f86ec3b984d7bd6aa"
+        },
+        "omega": {
+          "bytes": 14146,
+          "sha256": "1eac1a187a688e67f220f60ffdf05e62d1e62001dcfe1f50db30eccfa244cca8"
+        },
+        "p": {
+          "bytes": 973062,
+          "sha256": "293c662cc79a11781ac94923559cd249f4008680519025a0a70c6b02449734a0"
+        },
+        "p_rgh": {
+          "bytes": 3132904,
+          "sha256": "e48f44c6b7d61a9213f8f0789c35e1d22ebf94186631c45d63b851fea525489a"
+        }
+      },
+      "solver_identity": {
+        "binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+        "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z",
+        "container_id": "ee2629b9f7b10dd02d4677f0d4136fe13581a7aa1699989aac4397daec5e16f9",
+        "container_name": "i4f-short1-valve-band-4x-continue-20261025T184504Z",
+        "container_uid_gid": "1000:1000",
+        "created_utc": "2026-10-25T18:45:08.209614+00:00",
+        "docker_started_at": "2026-10-25T18:45:08.355947321Z",
+        "docker_state_at_launch": {
+          "ExitCode": 0,
+          "FinishedAt": "0001-01-01T00:00:00Z",
+          "Running": true,
+          "StartedAt": "2026-10-25T18:45:08.355947321Z",
+          "Status": "running"
+        },
+        "experiment_record_sha256": "eab80660b5651a060ef68f7b9d6c94c30113aea9bb1581456ea41d05028cc420",
+        "geometry_bundle": "i4f-short1-compact-mesh-20261025T150312Z",
+        "go_sha256": "208bc5023b0f6fac6e5c74492b8a8775b355d2b4263dde8e3abe980d15d076f1",
+        "guard_hard_wall_s_from_StartedAt": 14400,
+        "guard_sha256": "e02a85c29dfd0c4c114bd1b57217db069e9acc372a8a367e2f9f4f6118ed3223",
+        "guard_writeNow_s_from_StartedAt": 13200,
+        "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "image_id_and_digests": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+        "initial_field_contract_sha256": "7f3f7e6f86349f5367570f84b78dce12c0c34db46f70945b09ab33a3ed35971e",
+        "initial_mesh_source": "i4f-refineMesh-axial-feasibility-20261025T1731Z/attempt-4x/mapped-initial-state",
+        "inner_timeout_s": 14415,
+        "input_freeze_sha256": "958d0bdd4ee0757357fc9cbf1fc470f1355a2ec2e69723c47f3783bd88642a78",
+        "launcher_sha256": "dfa37c82b036a538a4646902a6e266adfe45f9938e1db48fb15f0384ea7d7c8a",
+        "log": "/home/v/proj/bene/fire-track2/results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/log.cold-coupled",
+        "mandatory_initial_fields": [
+          "alpha.water",
+          "p",
+          "p_rgh",
+          "T",
+          "U",
+          "k",
+          "omega",
+          "nut",
+          "alphat"
+        ],
+        "memory_limit_bytes": 34359738368,
+        "mesh_variant": "6.25 mm axial",
+        "pause_flags_prelaunch": [],
+        "pilot_first_write_s": 0.05,
+        "pilot_horizon_s": 1.3,
+        "preflight": {
+          "additional_wetted_feed_m3_each": {
+            "tankA_feed": 0.25105684381253746,
+            "tankB_feed": 0.2511091492250326
+          },
+          "configured_quality_rows": "all 9 unchanged rows PASS",
+          "initial_downstream_state": "dry air at 100 kPa, 293.15 K",
+          "mesh_cell_count": 299248,
+          "mesh_quality_summary_sha256": "07f020c8591b6cf61f0c9b17a4dd7c614e40c7da026356c3bf2fa6c5a66c69e0",
+          "native_initialization_sha256": "207b56f0b5d4bdbbcee9efbf045d2ca30e35d3a41c7c53d4517155ca087a0c4b",
+          "preflight_log_sha256": "a290fed1c4eb0bdffe8a110bf81616acc40d01f866b09a04f271644453717691",
+          "source_branch_metrics": [
+            {
+              "alpha_max": 1.0,
+              "alpha_min": 1.0,
+              "cell_count": 5376,
+              "index": 0,
+              "native_average_area_m2_V_over_L": 0.07008716500084619,
+              "native_vs_nominal_area_relative": -0.008469443806048527,
+              "nominal_area_m2": 0.07068583470577035,
+              "normalization_sum_wV_over_Anative": 1.0,
+              "source_fraction_of_total_mesh_volume": 0.0008362761764745742,
+              "volume_m3": 0.021026149500253857,
+              "water_volume_m3": 0.021026149500253857,
+              "weight_per_cell_m_inv": 3.3333333333333335,
+              "y_center_m": -0.75
+            },
+            {
+              "alpha_max": 1.0,
+              "alpha_min": 1.0,
+              "cell_count": 5376,
+              "index": 1,
+              "native_average_area_m2_V_over_L": 0.07008995186890024,
+              "native_vs_nominal_area_relative": -0.008430017688133229,
+              "nominal_area_m2": 0.07068583470577035,
+              "normalization_sum_wV_over_Anative": 1.0,
+              "source_fraction_of_total_mesh_volume": 0.0008363094292300616,
+              "volume_m3": 0.02102698556067007,
+              "water_volume_m3": 0.021026985560670074,
+              "weight_per_cell_m_inv": 3.3333333333333335,
+              "y_center_m": -0.35
+            },
+            {
+              "alpha_max": 1.0,
+              "alpha_min": 1.0,
+              "cell_count": 5376,
+              "index": 2,
+              "native_average_area_m2_V_over_L": 0.07008716529727611,
+              "native_vs_nominal_area_relative": -0.008469439612422969,
+              "nominal_area_m2": 0.07068583470577035,
+              "normalization_sum_wV_over_Anative": 0.9999999999999998,
+              "source_fraction_of_total_mesh_volume": 0.0008362761800115595,
+              "volume_m3": 0.021026149589182832,
+              "water_volume_m3": 0.02102614958918283,
+              "weight_per_cell_m_inv": 3.3333333333333335,
+              "y_center_m": 0.35
+            },
+            {
+              "alpha_max": 1.0,
+              "alpha_min": 1.0,
+              "cell_count": 5376,
+              "index": 3,
+              "native_average_area_m2_V_over_L": 0.07008995173025577,
+              "native_vs_nominal_area_relative": -0.008430019649551257,
+              "nominal_area_m2": 0.07068583470577035,
+              "normalization_sum_wV_over_Anative": 1.0000000000000002,
+              "source_fraction_of_total_mesh_volume": 0.0008363094275757635,
+              "volume_m3": 0.02102698551907673,
+              "water_volume_m3": 0.02102698551907673,
+              "weight_per_cell_m_inv": 3.3333333333333335,
+              "y_center_m": 0.75
+            }
+          ],
+          "source_support_m": [
+            1.95,
+            2.25
+          ],
+          "status": "passed_axial_mesh_native_input_and_dictionary_preflight",
+          "tank_water_m3_each": {
+            "tankA": 1.3500000000023262,
+            "tankB": 1.3499999999951564
+          }
+        },
+        "ranks": 10,
+        "release_resource_sample": {
+          "active_solver_process_count": 10,
+          "available_memory_bytes": 122743431168,
+          "effective_cpu_allocation": 20,
+          "fits_by_solver_rank_count": true,
+          "free_disk_bundle_bytes": 120793616384,
+          "progressing_solver_processes": [
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899101,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899102,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 899103,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899104,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899105,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 899106,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899107,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899108,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 899109,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899110,
+              "state": "R"
+            }
+          ],
+          "requested_mpi_ranks": 10,
+          "sampled_utc": "2026-10-25T18:45:11.023819+00:00"
+        },
+        "released_utc": "2026-10-25T18:45:11.023940+00:00",
+        "resource_sample_prelaunch": {
+          "active_solver_process_count": 10,
+          "available_memory_bytes": 122791870464,
+          "effective_cpu_allocation": 20,
+          "fits_by_solver_rank_count": true,
+          "free_disk_bundle_bytes": 120794329088,
+          "progressing_solver_processes": [
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899101,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 899102,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 899103,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899104,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 899105,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899106,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 202,
+              "pid": 899107,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 199,
+              "pid": 899108,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 899109,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-4f5645618b2f85646f1b78853d213be3ee07d2a3f26941c854d9187543785a9e.scope\n",
+              "cpu_tick_delta_2s": 202,
+              "pid": 899110,
+              "state": "R"
+            }
+          ],
+          "requested_mpi_ranks": 10,
+          "sampled_utc": "2026-10-25T18:45:08.057604+00:00"
+        },
+        "runner_sha256": "3da01038eb41640e1bcf8286e79d692b06469be87a39ab5fc9c065d8c053a271",
+        "schema": "i4f-short1-valve-band-6p25-launch/v1",
+        "static_case_tree_sha256": "ad95dbd2b7b1e6cfff319dcdce857ab123393d975f5ed78e753ac931d1406b3e",
+        "static_input_tree_sha256": "32748b340375a89e0a272a3ac52699af2cfd15b699f2b04148ff498634d51be0",
+        "status": "solver_released_under_exact_guard"
+      },
+      "source_dictionaries_sha256": {
+        "constant/fvOptions": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+        "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+        "system/controlDict": "87c7216c524273d89881c1505468516ca613524409097cb5ea809061c86bd18a",
+        "system/fvSchemes": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+        "system/fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+      }
+    },
+    "tank_refined_456954_original_numerics": {
+      "binary_sha256": "23743d676c20afaf80afaaa098237c9069fcd8d1e12dcd74955ca586a2c382ef",
+      "bundle": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2",
+      "case": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case",
+      "cell_count": 456954,
+      "cell_zone_counts": {
+        "lineAZone": 66525,
+        "lineBZone": 66632,
+        "tankAHeadspaceZone": 20800,
+        "tankAZone": 100692,
+        "tankBHeadspaceZone": 20800,
+        "tankBZone": 100692
+      },
+      "checkpoint_hashes": {
+        "0.050021166664044305": {
+          "T": {
+            "bytes": 3917781,
+            "sha256": "b93bf1ca26ca7860dcfc0267f4b748a50c84058474401c9d620e6eb61fc7cae2"
+          },
+          "T.air": {
+            "bytes": 3917789,
+            "sha256": "2e1b57ca3624f625ffd890e088e85183baadb1dd386e1da836c57971131e1f1c"
+          },
+          "T.water": {
+            "bytes": 3917793,
+            "sha256": "f4fe42fb93de873feeee6f6ff4c320e1bb55345cd1d670d97aeca0c9ec759b2f"
+          },
+          "U": {
+            "bytes": 11718223,
+            "sha256": "b70b5eee666c7ede792657d14b109979e94bbe78fc007593b38b3b726fd4e3c6"
+          },
+          "alpha.water": {
+            "bytes": 3914151,
+            "sha256": "1d89d6a27655b6cdf55aa9497aa4f28a95f57494672f629632f45e4a215394ce"
+          },
+          "alphaPhi0.water": {
+            "bytes": 11526548,
+            "sha256": "ee5dc4681d551c0796507bf64adce51c2f17363808af77ac03da922e7afc7e3c"
+          },
+          "alphat": {
+            "bytes": 4564492,
+            "sha256": "d0dc1a0a7f29de0cd3f78618a95e102df8dbdb440315f0b62a6f6cf00bbcac16"
+          },
+          "k": {
+            "bytes": 4564391,
+            "sha256": "d4564ee59a922cdc006a997416ee8aacf10bcffac794e8b699469749c74b24ed"
+          },
+          "nut": {
+            "bytes": 4563990,
+            "sha256": "d0113e32a75695482e405ec75026d9e3cd47e0be7040f8e7330fdef3fe424f73"
+          },
+          "omega": {
+            "bytes": 4566271,
+            "sha256": "b6479618de8ef2e80795e474b35e3819a063718f32ee74edf99b7b1f01fc8e5d"
+          },
+          "p": {
+            "bytes": 4563822,
+            "sha256": "63e5a5bd376d742733bfe449145c90e7da3d11f6be3de053c3875c3e17ea0b12"
+          },
+          "p_rgh": {
+            "bytes": 5251073,
+            "sha256": "a11e6b8a4d981c2614bad3acd2ee9a20953917bf539b1f4d68949891b1d44d02"
+          },
+          "phi": {
+            "bytes": 11527554,
+            "sha256": "80831671ef7af871a0f3d79b0a94884bd7f7092e961abc427852e64b235ac499"
+          },
+          "rho": {
+            "bytes": 4563816,
+            "sha256": "497f175cfc726a17cc1835c976e6d6a6c20100e487671c36c73c6dece25c82ae"
+          },
+          "uniform/time": {
+            "bytes": 1062,
+            "sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d"
+          }
+        },
+        "0.10002116666400004": {
+          "T": {
+            "bytes": 3917781,
+            "sha256": "1a958465f8d22f7d64a90e80610563c74dd6c39dfc225ee14702b2ce47fbe467"
+          },
+          "T.air": {
+            "bytes": 3917789,
+            "sha256": "1ba0f47293d23278d539141e71231673b99b51367d6e96e2a1e245ba8762e4b8"
+          },
+          "T.water": {
+            "bytes": 3917793,
+            "sha256": "f898c7ae4bfc7f5a57f186eb582105b34cb8a30a56cf8443da79c714494a06f6"
+          },
+          "U": {
+            "bytes": 11718223,
+            "sha256": "4d4eab2cb8d913272611f79046d47aac4e04feb358ff80f615927acc66c8c6a0"
+          },
+          "alpha.water": {
+            "bytes": 3914151,
+            "sha256": "c7e030c11ade251590aa8f67c0b44117c33df0d9925d24dc301c9306d602c3d6"
+          },
+          "alphaPhi0.water": {
+            "bytes": 11526548,
+            "sha256": "8daa509f0da92b65f9146104f718c8d303d8806f0a6ea7597643c21e87a9dcb8"
+          },
+          "alphat": {
+            "bytes": 4564492,
+            "sha256": "66e48e89df5f5fcbacf6ae81ef0003f65a41deff5baceb9a6b08841a0bbebb8c"
+          },
+          "k": {
+            "bytes": 4564391,
+            "sha256": "bd3043a7f1a0f59966e376ef7482ef1535e6387deca335ed7138d27e7342e452"
+          },
+          "nut": {
+            "bytes": 4563990,
+            "sha256": "9c03097b738a6474c13ce772704a4d5b4990d54d64013cd999a503c721f06981"
+          },
+          "omega": {
+            "bytes": 4566271,
+            "sha256": "1a626d5468f9868b53632b947f4602f9c150dd3678c3ec46c3251c7d8ce363cb"
+          },
+          "p": {
+            "bytes": 4563822,
+            "sha256": "95c5dd23fd140b4b08de851080208a607c986871c5a1f7d15768d05d902b614e"
+          },
+          "p_rgh": {
+            "bytes": 5251073,
+            "sha256": "6932f0c192c1d66b50f34dd40e29b361ecd987f0b0add16e43a4694a665abefd"
+          },
+          "phi": {
+            "bytes": 11527554,
+            "sha256": "84d0cd34b71fc76dbf9655501ccbc8b236ce9ec6fb748e2ec8f4fa48804dce2d"
+          },
+          "rho": {
+            "bytes": 4563816,
+            "sha256": "07f7d9bf07fa51b7fc4debe4a782194dc7687e28521e58a4a7ba89d5209fbbef"
+          },
+          "uniform/time": {
+            "bytes": 1061,
+            "sha256": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f"
+          }
+        }
+      },
+      "initial_metrics_t0": {
+        "global_max_alpha_cell": {
+          "alpha_water": 1.0,
+          "alpha_water_signed_mass_kg_rhoConst998p2": 0.009929656024250609,
+          "alpha_water_signed_volume_m3": 9.947561635193957e-06,
+          "cell_volume_m3": 9.947561635193957e-06,
+          "center_xyz_m": [
+            1.1108040464664901,
+            -0.8406528001306954,
+            0.407841822867039
+          ],
+          "global_cell_id": 7620,
+          "zone_membership": [
+            "lineAZone"
+          ]
+        },
+        "global_min_alpha_cell": {
+          "alpha_water": 0.0,
+          "alpha_water_signed_mass_kg_rhoConst998p2": 0.0,
+          "alpha_water_signed_volume_m3": 0.0,
+          "cell_volume_m3": 7.266550468726635e-05,
+          "center_xyz_m": [
+            4.83166654012228,
+            -2.0291068637138405,
+            -0.47358721944494236
+          ],
+          "global_cell_id": 0,
+          "zone_membership": []
+        },
+        "global_phase_bounds_and_outside_range": {
+          "alpha_dtype": "float64",
+          "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+          "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+          "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+          "alpha_gt1_water_excess_volume_m3": 0.0,
+          "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+          "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+          "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+          "alpha_lt0_water_signed_volume_m3": 0.0,
+          "alpha_max": 1.0,
+          "alpha_min": 0.0,
+          "count_alpha_gt1": 0,
+          "count_alpha_lt0": 0,
+          "excursion_beyond_1e-08": {
+            "affected_cell_volume_m3": 0.0,
+            "alpha_gt_one_plus_tolerance_count": 0,
+            "alpha_lt_negative_tolerance_count": 0,
+            "gas_complement_excursion_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "water_excursion_m3_signed": 0.0,
+            "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "excursion_beyond_1e-12": {
+            "affected_cell_volume_m3": 0.0,
+            "alpha_gt_one_plus_tolerance_count": 0,
+            "alpha_lt_negative_tolerance_count": 0,
+            "gas_complement_excursion_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "water_excursion_m3_signed": 0.0,
+            "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "gas_complement_excursion_integral_m3_signed": 0.0,
+          "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+          "out_of_bounds_cell_count": 0,
+          "out_of_bounds_cell_volume_m3": 0.0,
+          "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+          "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+          "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+          "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+          "water_fraction_excursion_integral_m3_signed": 0.0,
+          "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+        },
+        "mapped_alpha_dtype": "float64",
+        "mapped_center_array_cells": 456954,
+        "tankA": {
+          "alpha_water_bounds_and_out_of_bounds": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+            "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+            "alpha_gt1_water_excess_volume_m3": 0.0,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_lt0_water_signed_volume_m3": 0.0,
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "count_alpha_gt1": 0,
+            "count_alpha_lt0": 0,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "out_of_bounds_cell_count": 0,
+            "out_of_bounds_cell_volume_m3": 0.0,
+            "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "water_fraction_excursion_integral_m3_signed": 0.0,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2203533784,
+          "gas_rich_cell_count_alpha_le_0p01": 17680,
+          "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.15,
+          "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2203533784,
+          "headspace_zone_alpha_max": 0.42261098067113,
+          "headspace_zone_alpha_min": 0.0,
+          "line_zone_alpha_max": 1.0,
+          "line_zone_alpha_min": 0.0,
+          "mixed_cell_count_0p01_lt_alpha_lt_0p99": 3120,
+          "mixed_cell_gas_mass_kg_EOS_signed": 0.48337579608468884,
+          "mixed_cell_gas_volume_m3_signed": 0.03389635660409635,
+          "mixed_gas_mass_share_percent": 11.256289726284507,
+          "mixed_gas_volume_share_percent": 11.256298432860788,
+          "native_tank_zone_volume_m3": 1.6511323554210495,
+          "raw_tank_gas_mass_kg_EOS_signed": 4.294272871779059,
+          "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.3011323554210493,
+          "raw_tank_water_mass_kg_rhoConst998p2": 1347.5700000000002,
+          "raw_tank_water_volume_m3_sum_alphaV": 1.35,
+          "tank_plus_line_water_volume_m3": 1.601053814115828,
+          "upstream_line_water_volume_m3_sum_alphaV": 0.2510538141158277,
+          "water_rich_cell_count_alpha_ge_0p99": 79892
+        },
+        "tankB": {
+          "alpha_water_bounds_and_out_of_bounds": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+            "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+            "alpha_gt1_water_excess_volume_m3": 0.0,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_lt0_water_signed_volume_m3": 0.0,
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "count_alpha_gt1": 0,
+            "count_alpha_lt0": 0,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "out_of_bounds_cell_count": 0,
+            "out_of_bounds_cell_volume_m3": 0.0,
+            "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "water_fraction_excursion_integral_m3_signed": 0.0,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2202829213,
+          "gas_rich_cell_count_alpha_le_0p01": 17680,
+          "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.15,
+          "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2202829213,
+          "headspace_zone_alpha_max": 0.42259948566008,
+          "headspace_zone_alpha_min": 0.0,
+          "line_zone_alpha_max": 1.0,
+          "line_zone_alpha_min": 0.0,
+          "mixed_cell_count_0p01_lt_alpha_lt_0p99": 3120,
+          "mixed_cell_gas_mass_kg_EOS_signed": 0.48338298374144595,
+          "mixed_cell_gas_volume_m3_signed": 0.03389686064196338,
+          "mixed_gas_mass_share_percent": 11.25643572862497,
+          "mixed_gas_volume_share_percent": 11.256444437627039,
+          "native_tank_zone_volume_m3": 1.651132927273696,
+          "raw_tank_gas_mass_kg_EOS_signed": 4.294281026383949,
+          "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.30113292727369556,
+          "raw_tank_water_mass_kg_rhoConst998p2": 1347.5700000000004,
+          "raw_tank_water_volume_m3_sum_alphaV": 1.3500000000000003,
+          "tank_plus_line_water_volume_m3": 1.6011050651568643,
+          "upstream_line_water_volume_m3_sum_alphaV": 0.25110506515686404,
+          "water_rich_cell_count_alpha_ge_0p99": 79892
+        },
+        "whole_domain_alpha_water_max": 1.0,
+        "whole_domain_alpha_water_min": 0.0,
+        "whole_domain_raw_water_volume_m3": 3.2021588792726927
+      },
+      "native_geometry_hashes": {
+        "constant/C": "7743fdb811a586a08c656425468cd0798d35e4d7c178e661ba1ba350205795ea",
+        "constant/cellVolume": "96b0dda1e5a3cec8a6a3c758240ed06be97c2cb7c16ea47ab025816bcc2c7282",
+        "constant/polyMesh/cellZones": "665db324aaeac32201d425690002b53a94cc0e85417322c3e9658672043d0fec",
+        "constant/polyMesh/faces": "077f2b5be6d4391f456dfdc2aea77b9b5672f6a46e79714d1157ebf87eebc959",
+        "constant/polyMesh/neighbour": "70f8ff53cfaad676c90fddbf7e5087e8501bd4298dc1a6046f8266f486e3c99d",
+        "constant/polyMesh/owner": "8eb07e64a4ee4ab71d0070163b570e403ba832c422022dd00ca2801cc37469f8",
+        "constant/polyMesh/points": "aca3a5f31a663348a9584b74c9b28c970fded7e19c0599fab2f4974de78ebbf0",
+        "processors10/constant/polyMesh/cellProcAddressing": "47883c5279ed3c232449811706d5a7bea9f43b18f2f463ea1487e57b8b7f3eb7"
+      },
+      "native_time_series": {
+        "0": {
+          "global_max_alpha_cell": {
+            "alpha_water": 1.0,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.009929656024250609,
+            "alpha_water_signed_volume_m3": 9.947561635193957e-06,
+            "cell_volume_m3": 9.947561635193957e-06,
+            "center_xyz_m": [
+              1.1108040464664901,
+              -0.8406528001306954,
+              0.407841822867039
+            ],
+            "global_cell_id": 7620,
+            "zone_membership": [
+              "lineAZone"
+            ]
+          },
+          "global_min_alpha_cell": {
+            "alpha_water": 0.0,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_water_signed_volume_m3": 0.0,
+            "cell_volume_m3": 7.266550468726635e-05,
+            "center_xyz_m": [
+              4.83166654012228,
+              -2.0291068637138405,
+              -0.47358721944494236
+            ],
+            "global_cell_id": 0,
+            "zone_membership": []
+          },
+          "global_phase_bounds_and_outside_range": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+            "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+            "alpha_gt1_water_excess_volume_m3": 0.0,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+            "alpha_lt0_water_signed_volume_m3": 0.0,
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "count_alpha_gt1": 0,
+            "count_alpha_lt0": 0,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": 0.0,
+            "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+            "out_of_bounds_cell_count": 0,
+            "out_of_bounds_cell_volume_m3": 0.0,
+            "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+            "water_fraction_excursion_integral_m3_signed": 0.0,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+          },
+          "mapped_alpha_dtype": "float64",
+          "mapped_center_array_cells": 456954,
+          "tankA": {
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+              "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+              "alpha_gt1_water_excess_volume_m3": 0.0,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+              "alpha_lt0_water_signed_volume_m3": 0.0,
+              "alpha_max": 1.0,
+              "alpha_min": 0.0,
+              "count_alpha_gt1": 0,
+              "count_alpha_lt0": 0,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "out_of_bounds_cell_count": 0,
+              "out_of_bounds_cell_volume_m3": 0.0,
+              "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "water_fraction_excursion_integral_m3_signed": 0.0,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2203533784,
+            "gas_rich_cell_count_alpha_le_0p01": 17680,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.15,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2203533784,
+            "headspace_zone_alpha_max": 0.42261098067113,
+            "headspace_zone_alpha_min": 0.0,
+            "line_zone_alpha_max": 1.0,
+            "line_zone_alpha_min": 0.0,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 3120,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.48337579608468884,
+            "mixed_cell_gas_volume_m3_signed": 0.03389635660409635,
+            "mixed_gas_mass_share_percent": 11.256289726284507,
+            "mixed_gas_volume_share_percent": 11.256298432860788,
+            "native_tank_zone_volume_m3": 1.6511323554210495,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.294272871779059,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.3011323554210493,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1347.5700000000002,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.35,
+            "tank_plus_line_water_volume_m3": 1.601053814115828,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.2510538141158277,
+            "water_rich_cell_count_alpha_ge_0p99": 79892
+          },
+          "tankB": {
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": 0.0,
+              "alpha_gt1_gas_signed_volume_m3_negative": 0.0,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 0.0,
+              "alpha_gt1_water_excess_volume_m3": 0.0,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 0.0,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 0.0,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": 0.0,
+              "alpha_lt0_water_signed_volume_m3": 0.0,
+              "alpha_max": 1.0,
+              "alpha_min": 0.0,
+              "count_alpha_gt1": 0,
+              "count_alpha_lt0": 0,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "out_of_bounds_cell_count": 0,
+              "out_of_bounds_cell_volume_m3": 0.0,
+              "out_of_bounds_cell_volume_percent_of_zone": 0.0,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.0,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.0,
+              "water_fraction_excursion_integral_m3_signed": 0.0,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2202829213,
+            "gas_rich_cell_count_alpha_le_0p01": 17680,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 293.15,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1199986.2202829213,
+            "headspace_zone_alpha_max": 0.42259948566008,
+            "headspace_zone_alpha_min": 0.0,
+            "line_zone_alpha_max": 1.0,
+            "line_zone_alpha_min": 0.0,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 3120,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.48338298374144595,
+            "mixed_cell_gas_volume_m3_signed": 0.03389686064196338,
+            "mixed_gas_mass_share_percent": 11.25643572862497,
+            "mixed_gas_volume_share_percent": 11.256444437627039,
+            "native_tank_zone_volume_m3": 1.651132927273696,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.294281026383949,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.30113292727369556,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1347.5700000000004,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3500000000000003,
+            "tank_plus_line_water_volume_m3": 1.6011050651568643,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.25110506515686404,
+            "water_rich_cell_count_alpha_ge_0p99": 79892
+          },
+          "whole_domain_alpha_water_max": 1.0,
+          "whole_domain_alpha_water_min": 0.0,
+          "whole_domain_raw_water_volume_m3": 3.2021588792726927
+        },
+        "0.050021166664": {
+          "global_max_alpha_cell": {
+            "alpha_water": 1.0000000000005196,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.004535634631957151,
+            "alpha_water_signed_volume_m3": 4.543813496250401e-06,
+            "cell_volume_m3": 4.54381349624804e-06,
+            "center_xyz_m": [
+              2.271875142817162,
+              -0.36356632191174176,
+              0.5405587417461644
+            ],
+            "global_cell_id": 445669,
+            "zone_membership": [
+              "lineAZone"
+            ]
+          },
+          "global_min_alpha_cell": {
+            "alpha_water": -4.2142938444511557e-19,
+            "alpha_water_signed_mass_kg_rhoConst998p2": -6.833484698326002e-21,
+            "alpha_water_signed_volume_m3": -6.845807151198158e-24,
+            "cell_volume_m3": 1.6244256817098416e-05,
+            "center_xyz_m": [
+              2.3632888433626404,
+              0.41069246086110706,
+              1.516080625305904
+            ],
+            "global_cell_id": 260245,
+            "zone_membership": [
+              "tankBZone",
+              "tankBHeadspaceZone"
+            ]
+          },
+          "global_phase_bounds_and_outside_range": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -5.934726455713667e-14,
+            "alpha_gt1_gas_signed_volume_m3_negative": -4.323218085735652e-15,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 4.315436293181328e-12,
+            "alpha_gt1_water_excess_volume_m3": 4.323218085735652e-15,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 1.362380340171317e-21,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 1.3880205380433134e-22,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -1.3855221010748355e-19,
+            "alpha_lt0_water_signed_volume_m3": -1.3880205380433134e-22,
+            "alpha_max": 1.0000000000005196,
+            "alpha_min": -4.2142938444511557e-19,
+            "count_alpha_gt1": 91375,
+            "count_alpha_lt0": 193583,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.0,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 0,
+              "gas_complement_excursion_m3_signed": 0.0,
+              "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+              "water_excursion_m3_signed": 0.0,
+              "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+            },
+            "gas_complement_excursion_integral_m3_signed": -4.323217946933598e-15,
+            "gas_complement_excursion_mass_kg_signed_EOS": -5.934726319475633e-14,
+            "out_of_bounds_cell_count": 284958,
+            "out_of_bounds_cell_volume_m3": 13.810023732107556,
+            "out_of_bounds_cell_volume_percent_of_zone": 54.91531405792214,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 17.190007446202674,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 12.428315779149763,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 1.3817079529577905,
+            "water_fraction_excursion_integral_m3_signed": 4.323217946933598e-15,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 4.3154361546291174e-12
+          },
+          "mapped_alpha_dtype": "float64",
+          "mapped_center_array_cells": 456954,
+          "tankA": {
+            "adiabatic_pressure_difference_ratio": 0.0013978845900695092,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9790288325649623,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -2.458006483317845e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -1.7528076239795593e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 1.7496525702563963e-12,
+              "alpha_gt1_water_excess_volume_m3": 1.7528076239795593e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 5.593051324441644e-22,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 3.987817943989784e-23,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -3.980639871690603e-20,
+              "alpha_lt0_water_signed_volume_m3": -3.987817943989784e-23,
+              "alpha_max": 1.0000000000000238,
+              "alpha_min": -4.1080420315475765e-19,
+              "count_alpha_gt1": 32575,
+              "count_alpha_lt0": 7631,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -1.75280758410138e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -2.4580064273873317e-14,
+              "out_of_bounds_cell_count": 40206,
+              "out_of_bounds_cell_volume_m3": 0.6675985060848088,
+              "out_of_bounds_cell_volume_percent_of_zone": 40.43276748183926,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 1.6685630610047573,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.11874371579592809,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.5488547902888807,
+              "water_fraction_excursion_integral_m3_signed": 1.75280758410138e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 1.7496525304499976e-12
+            },
+            "checkpoint_directory": "0.050021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9804267171550318,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176498.5506523375,
+            "gas_rich_cell_count_alpha_le_0p01": 17680,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 291.7970042654476,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9953846299350081,
+            "gas_volume_ratio_to_same_mesh_t0": 1.0152559111303867,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176498.2038244435,
+            "headspace_zone_alpha_max": 0.4135855505861294,
+            "headspace_zone_alpha_min": -4.1080420315475765e-19,
+            "line_zone_alpha_max": 1.0000000000005196,
+            "line_zone_alpha_min": -1.296156946809646e-19,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 5088,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.5371161137052938,
+            "mixed_cell_gas_volume_m3_signed": 0.03840295954856871,
+            "mixed_gas_mass_share_percent": 12.507739001601067,
+            "mixed_gas_volume_share_percent": 12.56121782808669,
+            "native_seat_flux_sum_m3_s": null,
+            "native_seat_fluxes": {
+              "1": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxA1/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              },
+              "2": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxA2/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              }
+            },
+            "native_tank_zone_volume_m3": 1.6511323554210495,
+            "pressure_departure_from_adiabat_percent": 0.1427827806058879,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.294270240501018,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.30572640387383687,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1342.9842208344278,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3454059515472128,
+            "tank_plus_line_water_volume_m3": 1.601053492530148,
+            "time_s": 0.050021166664044305,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.2556475409829354,
+            "water_drawdown_m3_from_same_mesh_t0": 0.004594048452787325,
+            "water_drawdown_percent_of_same_mesh_t0": 0.3402998853916537,
+            "water_rich_cell_count_alpha_ge_0p99": 77924
+          },
+          "tankB": {
+            "adiabatic_pressure_difference_ratio": 0.001397874906817198,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9790288844311883,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -2.4605719860612966e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -1.7546183254077176e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 1.7514600124219838e-12,
+              "alpha_gt1_water_excess_volume_m3": 1.7546183254077176e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 7.4909847407084175e-22,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 5.340884172878949e-23,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -5.3312705813677675e-20,
+              "alpha_lt0_water_signed_volume_m3": -5.340884172878949e-23,
+              "alpha_max": 1.000000000000022,
+              "alpha_min": -4.2142938444511557e-19,
+              "count_alpha_gt1": 32432,
+              "count_alpha_lt0": 4503,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -1.754618271998876e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -2.460571911151449e-14,
+              "out_of_bounds_cell_count": 36935,
+              "out_of_bounds_cell_volume_m3": 0.619546070432875,
+              "out_of_bounds_cell_volume_percent_of_zone": 37.52248290849919,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 0.97634556958094,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.06950825264711663,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.5500378177857586,
+              "water_fraction_excursion_integral_m3_signed": 1.754618271998876e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 1.751459959109278e-12
+            },
+            "checkpoint_directory": "0.050021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9804267593380055,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176498.6012022465,
+            "gas_rich_cell_count_alpha_le_0p01": 17680,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 291.79700688866217,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9953846388833778,
+            "gas_volume_ratio_to_same_mesh_t0": 1.01525587270713,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1176498.2544062017,
+            "headspace_zone_alpha_max": 0.41357465777150304,
+            "headspace_zone_alpha_min": -4.2142938444511557e-19,
+            "line_zone_alpha_max": 1.0000000000005194,
+            "line_zone_alpha_min": -1.2889638201602632e-19,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 5088,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.5371231285161557,
+            "mixed_cell_gas_volume_m3_signed": 0.038403459133381584,
+            "mixed_gas_mass_share_percent": 12.507878650245525,
+            "mixed_gas_volume_share_percent": 12.561357858484273,
+            "native_seat_flux_sum_m3_s": null,
+            "native_seat_fluxes": {
+              "1": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxB1/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              },
+              "2": {
+                "nearest_row_time_s": 0.050271166664,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxB2/0.050021166664/surfaceFieldValue.dat",
+                "status": "no_exact_time_row_within_tolerance",
+                "time_offset_s": 0.0002499999999556954
+              }
+            },
+            "native_tank_zone_volume_m3": 1.651132927273696,
+            "pressure_departure_from_adiabat_percent": 0.14278178397457708,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.2942783787370065,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.30572697288010847,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1342.984223675679,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3454059543935875,
+            "tank_plus_line_water_volume_m3": 1.6011047557284972,
+            "time_s": 0.050021166664044305,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.25569880133490974,
+            "water_drawdown_m3_from_same_mesh_t0": 0.004594045606412855,
+            "water_drawdown_percent_of_same_mesh_t0": 0.3402996745491003,
+            "water_rich_cell_count_alpha_ge_0p99": 77924
+          },
+          "whole_domain_alpha_water_max": 1.0000000000005196,
+          "whole_domain_alpha_water_min": -4.2142938444511557e-19,
+          "whole_domain_raw_water_volume_m3": 3.2021582482586455
+        },
+        "0.100021166664": {
+          "global_max_alpha_cell": {
+            "alpha_water": 1.0000000000055964,
+            "alpha_water_signed_mass_kg_rhoConst998p2": 0.002766591925892517,
+            "alpha_water_signed_volume_m3": 2.771580771280822e-06,
+            "cell_volume_m3": 2.771580771265311e-06,
+            "center_xyz_m": [
+              2.2843750968894034,
+              0.7379106177274849,
+              0.6397708099295546
+            ],
+            "global_cell_id": 451930,
+            "zone_membership": [
+              "lineBZone"
+            ]
+          },
+          "global_min_alpha_cell": {
+            "alpha_water": -1.0797524030128801e-05,
+            "alpha_water_signed_mass_kg_rhoConst998p2": -2.9882818830653506e-08,
+            "alpha_water_signed_volume_m3": -2.993670489947255e-11,
+            "cell_volume_m3": 2.7725527459757315e-06,
+            "center_xyz_m": [
+              2.365625273928397,
+              -0.33791308083064325,
+              0.360226989649521
+            ],
+            "global_cell_id": 89944,
+            "zone_membership": [
+              "lineAZone"
+            ]
+          },
+          "global_phase_bounds_and_outside_range": {
+            "alpha_dtype": "float64",
+            "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -7.809482379719107e-14,
+            "alpha_gt1_gas_signed_volume_m3_negative": -5.8882699485706445e-15,
+            "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 5.877671062663217e-12,
+            "alpha_gt1_water_excess_volume_m3": 5.8882699485706445e-15,
+            "alpha_lt0_gas_excess_mass_kg_EOS": 1.2962139418840755e-10,
+            "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 1.0904057758511454e-10,
+            "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -1.0884430454546134e-07,
+            "alpha_lt0_water_signed_volume_m3": -1.0904057758511454e-10,
+            "alpha_max": 1.0000000000055964,
+            "alpha_min": -1.0797524030128801e-05,
+            "count_alpha_gt1": 82737,
+            "count_alpha_lt0": 193059,
+            "excursion_beyond_1e-08": {
+              "affected_cell_volume_m3": 2.777999405499049e-05,
+              "alpha_gt_one_plus_tolerance_count": 0,
+              "alpha_lt_negative_tolerance_count": 8,
+              "gas_complement_excursion_m3_signed": 1.0880138538563708e-10,
+              "gas_complement_excursion_mass_kg_signed_EOS": 1.293372473335791e-10,
+              "water_excursion_m3_signed": -1.0880138538563708e-10,
+              "water_excursion_mass_kg_signed_rhoConst998p2": -1.0860554289194293e-07
+            },
+            "excursion_beyond_1e-12": {
+              "affected_cell_volume_m3": 0.00023527293204401756,
+              "alpha_gt_one_plus_tolerance_count": 16,
+              "alpha_lt_negative_tolerance_count": 51,
+              "gas_complement_excursion_m3_signed": 1.0904042076581395e-10,
+              "gas_complement_excursion_mass_kg_signed_EOS": 1.2962120755476994e-10,
+              "water_excursion_m3_signed": -1.0904042076581395e-10,
+              "water_excursion_mass_kg_signed_rhoConst998p2": -1.0884414800843548e-07
+            },
+            "gas_complement_excursion_integral_m3_signed": 1.0903468931516597e-10,
+            "gas_complement_excursion_mass_kg_signed_EOS": 1.2954329936461035e-10,
+            "out_of_bounds_cell_count": 275796,
+            "out_of_bounds_cell_volume_m3": 14.66470182055523,
+            "out_of_bounds_cell_volume_percent_of_zone": 58.3139262946562,
+            "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 18.462730409862996,
+            "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 13.32947294632909,
+            "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 1.3352288742261396,
+            "water_fraction_excursion_integral_m3_signed": -1.0903468931516597e-10,
+            "water_fraction_excursion_mass_kg_signed_rhoConst998p2": -1.0883842687439867e-07
+          },
+          "mapped_alpha_dtype": "float64",
+          "mapped_center_array_cells": 456954,
+          "tankA": {
+            "adiabatic_pressure_difference_ratio": 0.003277374794229182,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9575685997781668,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -3.345458039567543e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -2.4348563764745745e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 2.4304736349969203e-12,
+              "alpha_gt1_water_excess_volume_m3": 2.4348563764745745e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 1.1823191199861683e-20,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 8.591676011922815e-22,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -8.576210995101354e-19,
+              "alpha_lt0_water_signed_volume_m3": -8.591676011922815e-22,
+              "alpha_max": 1.0000000000000402,
+              "alpha_min": -1.7646908240243065e-17,
+              "count_alpha_gt1": 32787,
+              "count_alpha_lt0": 7440,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -2.434855517306973e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -3.3454568572484225e-14,
+              "out_of_bounds_cell_count": 40227,
+              "out_of_bounds_cell_volume_m3": 0.6707929383075011,
+              "out_of_bounds_cell_volume_percent_of_zone": 40.62623666147251,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 1.60054898463692,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.1156585490652539,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.5551343892422471,
+              "water_fraction_excursion_integral_m3_signed": 2.434855517306973e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 2.430472777375821e-12
+            },
+            "checkpoint_directory": "0.100021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.960845974572396,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153001.9293688878,
+            "gas_rich_cell_count_alpha_le_0p01": 17712,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 290.52708815462887,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9910526629869654,
+            "gas_volume_ratio_to_same_mesh_t0": 1.031458730049043,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153001.4119976796,
+            "headspace_zone_alpha_max": 0.4027576691842747,
+            "headspace_zone_alpha_min": -1.7646908240243065e-17,
+            "line_zone_alpha_max": 1.0000000000055949,
+            "line_zone_alpha_min": -1.0797524030128801e-05,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 5578,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.5879395624569124,
+            "mixed_cell_gas_volume_m3_signed": 0.04287286587748808,
+            "mixed_gas_mass_share_percent": 13.690967806212322,
+            "mixed_gas_volume_share_percent": 13.802992059860234,
+            "native_seat_flux_sum_m3_s": 0.1263363569,
+            "native_seat_fluxes": {
+              "1": {
+                "area_m2": 0.0700857244,
+                "signed_alphaPhi0_water_m3_s": 0.0631635804,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxA1/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              },
+              "2": {
+                "area_m2": 0.0700877114,
+                "signed_alphaPhi0_water_m3_s": 0.0631727765,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxA2/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              }
+            },
+            "native_tank_zone_volume_m3": 1.6511323554210495,
+            "pressure_departure_from_adiabat_percent": 0.34226005269892834,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.294360857310123,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.3106055968992726,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1338.1138103564379,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.340526758521777,
+            "tank_plus_line_water_volume_m3": 1.6010536880390525,
+            "time_s": 0.10002116666400004,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.26052692951727535,
+            "water_drawdown_m3_from_same_mesh_t0": 0.009473241478223038,
+            "water_drawdown_percent_of_same_mesh_t0": 0.7017215909794843,
+            "water_rich_cell_count_alpha_ge_0p99": 77402
+          },
+          "tankB": {
+            "adiabatic_pressure_difference_ratio": 0.003277350873904239,
+            "adiabatic_pressure_ratio_at_observed_gas_volume": 0.9575686884737966,
+            "alpha_water_bounds_and_out_of_bounds": {
+              "alpha_dtype": "float64",
+              "alpha_gt1_gas_signed_mass_kg_EOS_negative_or_signed": -3.362265825318011e-14,
+              "alpha_gt1_gas_signed_volume_m3_negative": -2.447081739953216e-15,
+              "alpha_gt1_water_excess_mass_kg_rhoConst998p2": 2.4426769928213003e-12,
+              "alpha_gt1_water_excess_volume_m3": 2.447081739953216e-15,
+              "alpha_lt0_gas_excess_mass_kg_EOS": 1.1941310228030149e-20,
+              "alpha_lt0_gas_excess_volume_above_cell_volume_m3": 8.677452900238354e-22,
+              "alpha_lt0_water_signed_mass_kg_rhoConst998p2": -8.661833485017925e-19,
+              "alpha_lt0_water_signed_volume_m3": -8.677452900238354e-22,
+              "alpha_max": 1.0000000000000417,
+              "alpha_min": -1.775272637227765e-17,
+              "count_alpha_gt1": 32658,
+              "count_alpha_lt0": 5910,
+              "excursion_beyond_1e-08": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "excursion_beyond_1e-12": {
+                "affected_cell_volume_m3": 0.0,
+                "alpha_gt_one_plus_tolerance_count": 0,
+                "alpha_lt_negative_tolerance_count": 0,
+                "gas_complement_excursion_m3_signed": 0.0,
+                "gas_complement_excursion_mass_kg_signed_EOS": 0.0,
+                "water_excursion_m3_signed": 0.0,
+                "water_excursion_mass_kg_signed_rhoConst998p2": 0.0
+              },
+              "gas_complement_excursion_integral_m3_signed": -2.447080872207926e-15,
+              "gas_complement_excursion_mass_kg_signed_EOS": -3.362264631186988e-14,
+              "out_of_bounds_cell_count": 38568,
+              "out_of_bounds_cell_volume_m3": 0.6472821259447024,
+              "out_of_bounds_cell_volume_percent_of_zone": 39.202302567696734,
+              "raw_gas_EOS_mass_over_cells_classified_out_of_bounds_kg_signed": 1.2678481779165465,
+              "raw_gas_complement_integral_over_cells_classified_out_of_bounds_m3_signed": 0.09164844443993955,
+              "raw_water_integral_over_cells_classified_out_of_bounds_m3_signed": 0.5556336815047629,
+              "water_fraction_excursion_integral_m3_signed": 2.447080872207926e-15,
+              "water_fraction_excursion_mass_kg_signed_rhoConst998p2": 2.4426761266379517e-12
+            },
+            "checkpoint_directory": "0.100021166664",
+            "gas_pressure_ratio_to_same_mesh_t0": 0.9608460393477009,
+            "gas_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153002.0070306626,
+            "gas_rich_cell_count_alpha_le_0p01": 17712,
+            "gas_temperature_mass_weighted_K_signed_raw_phase_fraction": 290.5270894727157,
+            "gas_temperature_ratio_to_same_mesh_t0": 0.9910526674832534,
+            "gas_volume_ratio_to_same_mesh_t0": 1.0314586617973156,
+            "headspace_pressure_volume_weighted_Pa_signed_raw_phase_fraction": 1153001.4896644945,
+            "headspace_zone_alpha_max": 0.4027472218002692,
+            "headspace_zone_alpha_min": -1.775272637227765e-17,
+            "line_zone_alpha_max": 1.0000000000055964,
+            "line_zone_alpha_min": -1.0797025824640305e-05,
+            "mixed_cell_count_0p01_lt_alpha_lt_0p99": 5578,
+            "mixed_cell_gas_mass_kg_EOS_signed": 0.5879464196788617,
+            "mixed_cell_gas_volume_m3_signed": 0.0428733621635472,
+            "mixed_gas_mass_share_percent": 13.691101532268851,
+            "mixed_gas_volume_share_percent": 13.803126541113853,
+            "native_seat_flux_sum_m3_s": 0.1263364488,
+            "native_seat_fluxes": {
+              "1": {
+                "area_m2": 0.0700857253,
+                "signed_alphaPhi0_water_m3_s": 0.0631637195,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxB1/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              },
+              "2": {
+                "area_m2": 0.0700877118,
+                "signed_alphaPhi0_water_m3_s": 0.0631727293,
+                "source": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/postProcessing/seatFluxB2/0.050021166664/surfaceFieldValue.dat",
+                "status": "matched_scalar_row",
+                "time_offset_s": 4.163336342344337e-17,
+                "time_s": 0.100021166664
+              }
+            },
+            "native_tank_zone_volume_m3": 1.651132927273696,
+            "pressure_departure_from_adiabat_percent": 0.34225752296974665,
+            "raw_tank_gas_mass_kg_EOS_signed": 4.294368997944527,
+            "raw_tank_gas_volume_m3_sum_1minusAlphaV": 0.3106061661888344,
+            "raw_tank_water_mass_kg_rhoConst998p2": 1338.1138129149087,
+            "raw_tank_water_volume_m3_sum_alphaV": 1.3405267610848615,
+            "tank_plus_line_water_volume_m3": 1.6011046582844628,
+            "time_s": 0.10002116666400004,
+            "upstream_line_water_volume_m3_sum_alphaV": 0.26057789719960145,
+            "water_drawdown_m3_from_same_mesh_t0": 0.009473238915138849,
+            "water_drawdown_percent_of_same_mesh_t0": 0.701721401121396,
+            "water_rich_cell_count_alpha_ge_0p99": 77402
+          },
+          "whole_domain_alpha_water_max": 1.0000000000055964,
+          "whole_domain_alpha_water_min": -1.0797524030128801e-05,
+          "whole_domain_raw_water_volume_m3": 3.2021583463235155
+        }
+      },
+      "own_cold_initialization_time": 0.0,
+      "own_initial_fields": {
+        "T": {
+          "bytes": 14840,
+          "sha256": "f19cfb61bdf6991f2e15da10e49f26404d119d51a062bc1628d21c058d5bfd7d"
+        },
+        "T.air": {
+          "bytes": 14835,
+          "sha256": "4c812c315302df5f527ab444e122a64cec2d61e39f91c92fdf32318429583bfc"
+        },
+        "T.water": {
+          "bytes": 14839,
+          "sha256": "d6dc54261e961130f0bc561294ebf0aaef031afecc826714bcf3087df3e2d41e"
+        },
+        "U": {
+          "bytes": 11170,
+          "sha256": "9a91a8d34ce0809a14b084133e98850b277e31fc5aab60756c89088b713c7f00"
+        },
+        "alpha.water": {
+          "bytes": 2630776,
+          "sha256": "42defa3350db64183d3bdd557f5dbd2f1d8e6d15097db71b38a1fe1006402c7e"
+        },
+        "alphat": {
+          "bytes": 12387,
+          "sha256": "6cc214328cf180bb778590f9bb9ddcd48ecb2597960c31bff6995de6be82d953"
+        },
+        "k": {
+          "bytes": 13518,
+          "sha256": "f3d9b040148f50446390b6706dc55c0964031e248768636e68c55ecde685934f"
+        },
+        "nut": {
+          "bytes": 11890,
+          "sha256": "69ade126fef46670174710c17575751ff9099cafbb6e0220f8463c7b59e561b4"
+        },
+        "omega": {
+          "bytes": 13434,
+          "sha256": "2ff56bb12ed0b45416977cb2d69d8060aa2986a09ed2dbed0075c277c0181515"
+        },
+        "p": {
+          "bytes": 2633647,
+          "sha256": "8682e21e9b7b5810fe487fd99286901642799360a80bbeb5bae7189728790b2c"
+        },
+        "p_rgh": {
+          "bytes": 4502971,
+          "sha256": "2b450c580520a578027668954b309603451ba69ee60d36eb52999b5d9ed1d802"
+        }
+      },
+      "solver_identity": {
+        "binary_sha256": "23743d676c20afaf80afaaa098237c9069fcd8d1e12dcd74955ca586a2c382ef",
+        "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2",
+        "container_id": "09f65430a32a97713fd05f7cf92b510179ff11b41217425135b86058440e0255",
+        "container_name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt2",
+        "container_uid_gid": "1000:1000",
+        "created_utc": "2026-10-25T23:10:37.204890+00:00",
+        "docker_started_at": "2026-10-25T23:10:37.35162488Z",
+        "docker_state_at_launch": {
+          "ExitCode": 0,
+          "FinishedAt": "0001-01-01T00:00:00Z",
+          "Running": true,
+          "StartedAt": "2026-10-25T23:10:37.35162488Z",
+          "Status": "running"
+        },
+        "experiment_record_sha256": "fbaa04fdb67d5b07f2ce64303b36ee9098e2be78133468a06ee5f28bcf016a89",
+        "geometry_bundle": "i4f-tank-interface-refinement-prep-20261025T2202Z/attempt6",
+        "go_sha256": "80892baab16dac002de969d7cbbb5eb38516dbe7f058d2eca5ad862a6b0d0736",
+        "guard_hard_wall_s_from_StartedAt": 14400,
+        "guard_sha256": "c7593e4af2643735e192e30f06f2188b70af8383758d44a68a4ac95d35e75949",
+        "guard_writeNow_s_from_StartedAt": 13200,
+        "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "image_id_and_digests": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+        "initial_field_contract_sha256": "aefcfdec4e0d8b6980fac27ab8ed1234cf78337da931248a505dcc1c54354927",
+        "inner_timeout_s": 14445,
+        "input_freeze_sha256": "eacbea97beb650f650d285f1b8df270ae67687ed9ed4b741e6a2391fe42fc417",
+        "launcher_sha256": "5b8791f17bb0495152fbd065f80aacb713bf03a511fda739e69c347fd73b1b1c",
+        "log": "/home/v/proj/bene/fire-track2/results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/log.cold-coupled",
+        "mandatory_initial_fields": [
+          "alpha.water",
+          "p",
+          "p_rgh",
+          "T",
+          "U",
+          "k",
+          "omega",
+          "nut",
+          "alphat"
+        ],
+        "memory_limit_bytes": 51539607552,
+        "pause_flags_prelaunch": [],
+        "pilot_first_write_s": 0.05,
+        "pilot_horizon_s": 0.4,
+        "preflight": {
+          "cells": 456954,
+          "mesh_quality_sha256": "eae7f715f6253d34398304b5af41e70acedce8fb8b6f15cfd55fbbb8d6a26137",
+          "native_headspace_m3": {
+            "tankA": 0.30113235542104944,
+            "tankB": 0.3011329272736962
+          },
+          "native_initialization_sha256": "9b937a95d1be0d1b1317d63d24eeca91e9928e716a52d415d3f381a3a63c13b4",
+          "native_water_m3_each": {
+            "tankA": 1.35,
+            "tankB": 1.3499999999999999
+          },
+          "no_coarse_mass_seed": true,
+          "preflight_log_sha256": "373c3a349dbac259c8929cfe18c857aadf7b515181d229aa4d152f555a5070a4",
+          "status": "passed_tank_interface_mesh_initialization_and_dictionary_preflight"
+        },
+        "ranks": 10,
+        "release_resource_sample": {
+          "active_solver_process_count": 10,
+          "available_memory_bytes": 127518973952,
+          "effective_cpu_allocation": 20,
+          "fits_by_solver_rank_count": true,
+          "free_disk_bundle_bytes": 99303284736,
+          "progressing_solver_processes": [
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297543,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297544,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 202,
+              "pid": 1297545,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297546,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297547,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 202,
+              "pid": 1297548,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297549,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297550,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297551,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297552,
+              "state": "R"
+            }
+          ],
+          "requested_mpi_ranks": 10,
+          "sampled_utc": "2026-10-25T23:10:40.023262+00:00"
+        },
+        "released_utc": "2026-10-25T23:10:40.023361+00:00",
+        "resource_sample_prelaunch": {
+          "active_solver_process_count": 10,
+          "available_memory_bytes": 127602630656,
+          "effective_cpu_allocation": 20,
+          "fits_by_solver_rank_count": true,
+          "free_disk_bundle_bytes": 99303735296,
+          "progressing_solver_processes": [
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297543,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297544,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297545,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297546,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297547,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297548,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297549,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297550,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 201,
+              "pid": 1297551,
+              "state": "R"
+            },
+            {
+              "cgroup": "0::/system.slice/docker-dc9e1ff553edd07985635aaba7b2b95885d9c7c092fccee006c73698c7c9d1d2.scope\n",
+              "cpu_tick_delta_2s": 200,
+              "pid": 1297552,
+              "state": "R"
+            }
+          ],
+          "requested_mpi_ranks": 10,
+          "sampled_utc": "2026-10-25T23:10:36.996287+00:00"
+        },
+        "runner_sha256": "0a8ea633b37ce054051844305e209fd79e809340496f39627f7afef844122519",
+        "schema": "i4f-tank-interface-thermal-pilot-launch/v1",
+        "static_case_tree_sha256": "9ff92d388b40c230e7ab03e32391dce45cbe7614916ce0d433e20bd6116a89a9",
+        "static_input_tree_sha256": "68a3cd78997e663919ca5fd2f85c01f960982c1d107950e87b644a4befb0789e",
+        "status": "solver_released_under_exact_guard"
+      },
+      "source_dictionaries_sha256": {
+        "constant/fvOptions": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+        "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+        "system/controlDict": "6db8f2804750b696038bc157bef336cd3c1c6b95b8bbae5f6413d3d8217430e2",
+        "system/fvSchemes": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+        "system/fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+      }
+    }
+  },
+  "common_native_times": [
+    {
+      "absolute_time_mismatch_s": 0.0,
+      "baseline_directory": "0.050021166664",
+      "baseline_uniform_time_s": 0.050021166664044305,
+      "matched_within_s": 1e-10,
+      "refined_directory": "0.050021166664",
+      "refined_uniform_time_s": 0.050021166664044305
+    },
+    {
+      "absolute_time_mismatch_s": 0.0,
+      "baseline_directory": "0.100021166664",
+      "baseline_uniform_time_s": 0.10002116666400004,
+      "matched_within_s": 1e-10,
+      "refined_directory": "0.100021166664",
+      "refined_uniform_time_s": 0.10002116666400004
+    }
+  ],
+  "created_utc": "2026-10-25T23:49:33.070711+00:00",
+  "gas_eos_and_adiabat": {
+    "R_air_J_kg_K": 287.0477481284761,
+    "R_source": "results/runs/i4f-energy-observer-dryline-step-20261025T190159Z/analysis/openfoam-v2512-air-thermo-source-check.json",
+    "R_source_sha256": "cca00091374d9d7a6a2dfb841b998006e95c01aae26c62237211cdc1abf53d27",
+    "adiabatic_reference": "p/p0=(Vg/Vg0)^(-gamma), evaluated at each same-mesh observed raw Vg/Vg0; pressure departure percent=(measured ratio/reference - 1)*100; sensitivity reference, not fitted closure.",
+    "gamma_air": 1.3998145383348455,
+    "per_case_thermophysical_properties": {
+      "baseline_299248_original_numerics": {
+        "Cp_J_kg_K": 1005.0,
+        "Cv_J_kg_K": 717.9522518715239,
+        "R_J_kg_K": 287.0477481284761,
+        "gamma": 1.3998145383348455,
+        "molWeight_kg_per_kmol": 28.96546,
+        "thermophysicalProperties.air_sha256": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab"
+      },
+      "tank_refined_456954_original_numerics": {
+        "Cp_J_kg_K": 1005.0,
+        "Cv_J_kg_K": 717.9522518715239,
+        "R_J_kg_K": 287.0477481284761,
+        "gamma": 1.3998145383348455,
+        "molWeight_kg_per_kmol": 28.96546,
+        "thermophysicalProperties.air_sha256": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab"
+      }
+    }
+  },
+  "initial_capacity_comparison_by_tank": {
+    "A": {
+      "baseline_t0_gas_volume_m3": 0.2984972004069604,
+      "baseline_t0_line_water_m3": 0.25105684381253746,
+      "baseline_t0_water_volume_m3": 1.350000000002326,
+      "refined_minus_baseline_percent": 0.8828072794305086,
+      "refined_minus_baseline_t0_gas_volume_m3": 0.0026351550140889524,
+      "refined_t0_gas_volume_m3": 0.3011323554210493,
+      "refined_t0_line_water_m3": 0.2510538141158277,
+      "refined_t0_water_volume_m3": 1.35
+    },
+    "B": {
+      "baseline_t0_gas_volume_m3": 0.29849676833734995,
+      "baseline_t0_line_water_m3": 0.2511091492250325,
+      "baseline_t0_water_volume_m3": 1.3499999999951566,
+      "refined_minus_baseline_percent": 0.8831448832860911,
+      "refined_minus_baseline_t0_gas_volume_m3": 0.0026361589363456117,
+      "refined_t0_gas_volume_m3": 0.30113292727369556,
+      "refined_t0_line_water_m3": 0.25110506515686404,
+      "refined_t0_water_volume_m3": 1.3500000000000003
+    }
+  },
+  "methods_and_limits": {
+    "binary_difference": "The baseline and refined case binaries differ (original versus lean audit build); fvOptions, fvSchemes, fvSolution, and both thermo dictionaries are byte-identical. The refined controlDict adds i4fFullPressureAudit=false and changes only the operational endTime/stopAt values before .1 s. The lean binary disables expensive read-only audit work only; this comparison remains exploratory, not formal convergence evidence.",
+    "gas_mass_temperature": "rho_g=p/(R*T.air), then signed gas mass=(1-alpha)*rho_g*V and mass-weighted T.air; negative gas-phase weights caused by alpha>1 are reported rather than clipped.",
+    "gas_pressure": "TankZone gas-volume weighted absolute p with signed raw (1-alpha)V weights; headspace-only p is reported separately.",
+    "mixed_cells": "0.01 < raw alpha.water < 0.99; mixed-cell gas volume/mass shares are relative to signed raw tank gas inventories.",
+    "native_geometry": "Each case uses its own binary native C, cellVolume, cellZones, and bijective 10-rank cellProcAddressing map.",
+    "scope": "At most .10 s is a startup prefix with two mesh snapshots; no convergence order, thermal closure, or apparatus validation claim.",
+    "seat_flux": "Read existing native surfaceFieldValue sum(alphaPhi0.water) on oriented valveSeat faceZones at the matched scalar row time; row offset is preserved; sampled planes are not used.",
+    "seat_flux_time_qualification": "At .050021166664, the restart checkpoint has no corresponding function-object row; first available subsequent row is retained as an unmatched row and no .05 seat flux is substituted. Both cases have exact matched seat flux rows at .100021166664.",
+    "water_drawdown": "Raw sum(alpha.water*V) in each native tankZone relative to that mesh's own t=0; signed excursions remain included."
+  },
+  "normalization": "Each mesh and tank uses its own true native processor10/0 cold initial alpha.water, p and T.air fields. The .05 restart field is never substituted for t=0.",
+  "objective": "Extend the .05 s comparison through available exact common native checkpoints; report raw phase-fraction bounds without clipping.",
+  "phase_fraction_method": "All reductions use raw mapped alpha.water with no clipping; gas fraction is raw 1-alpha.water. Lower/upper excursions and their signed phase volumes/EOS masses are reported separately and remain in the normalized inventory reductions. Strict alpha<0 or alpha>1 counts include values at floating-point roundoff; nested \u00b11e-12 and \u00b11e-8 excursion summaries distinguish near-bound noise from material local undershoot/overshoot.",
+  "schema": "i4f-tank-interface-exact-time-series-native-comparison/v3",
+  "source": {
+    "analysis_script": "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/analysis/compare_native_time_series_v3.py",
+    "analysis_script_sha256": "0c9b64983de3323d3feda2c97b5c9185b47663ca4deb7c0ed28aecce7d7a3e03",
+    "helper_hashes": {
+      "results/runs/i4f-48layer-native-render-20261025T195620Z/analysis/render_native_cutaway.py": "1b34bf021a90722c853e453a80127b01a7c2b215b9e5a4f6ddf62791d680fd53",
+      "results/runs/i4f-48layer-native-render-20261025T195620Z/analysis/render_native_cutaway_v2.py": "3c8db896fbb21636fc1dc31a2f06738dfd97ecc87a29d1dab94c281397fd4960",
+      "results/runs/i4f-energy-observer-dryline-step-20261025T190159Z/analysis/openfoam-v2512-air-thermo-source-check.json": "cca00091374d9d7a6a2dfb841b998006e95c01aae26c62237211cdc1abf53d27",
+      "results/runs/i4f-phase-temperature-extrema-20261025T202725Z/analysis/audit_phase_temperature.py": "cdf4ac1f63d5fe701cc30c83f366d7e608a08577e4c05098b3934483df39476d",
+      "results/runs/i4f-tank-interface-resolution-prefix-compare-20261025T2314Z/output-v2/output/summary.json": "3f2f2b33b1a13169bec37730e9cad88c4f1b1c5ddc7fdc16d4b9cfb68280b780",
+      "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/analysis/compare_native_time_series_v3.py": "0c9b64983de3323d3feda2c97b5c9185b47663ca4deb7c0ed28aecce7d7a3e03",
+      "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/analysis/input-freeze.json": "ea383710cc51fe4cb0ab1453d0f4f8e66cf0eab12afeb0ebf633afde4a176e78"
+    },
+    "preexecution_freeze": "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/analysis/input-freeze.json",
+    "preexecution_freeze_sha256": "ea383710cc51fe4cb0ab1453d0f4f8e66cf0eab12afeb0ebf633afde4a176e78",
+    "previous_v2_summary": "results/runs/i4f-tank-interface-resolution-prefix-compare-20261025T2314Z/output-v2/output/summary.json",
+    "previous_v2_summary_sha256": "3f2f2b33b1a13169bec37730e9cad88c4f1b1c5ddc7fdc16d4b9cfb68280b780"
+  },
+  "time_join": {
+    "method": "Numeric join on each processor snapshot uniform/time; no field interpolation/extrapolation; max pairwise time mismatch 1e-10 s."
+  },
+  "publication_transform": {
+    "raw_source": "results/runs/i4f-tank-interface-resolution-time-series-20261025T234434Z/output/summary.json",
+    "raw_source_sha256": "bf6dbdeee6ccb898488d24ff4aa4569076e6a3cbdc35d9b79ee9507519ef6f04",
+    "removed_stale_self_reported_bytes": 155134,
+    "actual_raw_source_bytes": 155407,
+    "reason": "External publication manifest records the actual final payload size/hash. All physical observables and input hashes are unchanged; original analysis is preserved."
+  }
+}

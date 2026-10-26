@@ -1,122 +1,106 @@
 # Live project status
 
-Updated: 2026-10-25 23:37 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-26 00:35 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
-- **Live pressure-coupling diagnostic:** ten MPI ranks in Docker
-  `dc9e1ff553ed`, StartedAt 2026-10-25T23:07:03.122833725Z, advance from the
-  clean .400086712911 s checkpoint. It reached .428793622666 s after
-  326 completed steps without raw pressure contacts (23:26 UTC check). The only numerical change
-  is one non-orthogonal pressure correction instead of zero; all pressure and
-  momentum relaxation entries are absent. The bounded serial dispatcher tests
-  momentum relaxation only if this arm fails before a healthy .46 s endpoint.
-  No guard threshold is relaxed. Bundle:
-  `results/runs/i4f-pressure-nonorth1-20261025T2304Z/`.
-  A separate actual queue then tests the standard MULES source update only
-  if both numerical arms fail; it changes `i4fFrozenPredictorSp` to false
-  from the same clean seed. Earlier stock controls used a primed one-tank
-  case and do not answer this current comparison. The stock and long-result
-  waiters are bounded to 07:12:03 UTC on October 26, anchored to the first
-  arm's original Docker start. Individual arm guards remain two hours.
-- **Finer-tank cold start completed cleanly:** the 456,954-cell mesh reached
-  .050021166664 s in 212 steps, normal End at 23:04:47 UTC, with all 14 restart
-  fields, zero pressure-floor contacts and cumulative water/gas mass defects
-  below 2e-7 of their initial inventories. The last outer pressure update was
-  .00126 Pa. Local tank/interface spacing is about 25 mm rather than 50 mm;
-  the 48-layer valve bands are preserved. Native gas capacity differs by
-  approximately .88%, so comparisons must normalize by each mesh's own initial
-  gas volume. The first continuation failed during preflight because a dictionary
-  reader was incorrectly used on a collated binary field; that no-step attempt
-  is preserved. Fresh continuation `09f65430a32a`, StartedAt
-  2026-10-25T23:10:37.351624880Z, now advances on ten ranks toward .4 s. At the 23:26 UTC check, 149
-  completed restart steps reached .087521166664 s without raw contacts; this
-  live log observation is not an additional saved checkpoint.
-  Restart field hashes and uniform/time are exact; only the printed startTime
-  metadata comparison uses numeric tolerance. Bundle:
-  `results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/`.
-- **Exact-time tank-mesh comparison completed.** At .050021166664 s,
-  tank gas-mass-weighted temperature changes 291.886 to 291.797 K, mixed-cell
-  gas-volume share 15.57% to 12.56%, and native seat flux about -.014%.
-  Tank withdrawals differ by about .18 mL. Gas capacity is .883% larger on
-  the refined mesh; total initial line water is 7.1 mL lower. These are early
-  observed differences, not accuracy bounds or convergence. Root inspected
-  the figure and checked the weighted ideal-gas identity. The corrected v2
-  analysis uses installed R=287.0477481284761 J/kg/K; v1's approximate R and
-  its 35.7 ppm gas-mass offset are preserved privately. See the
-  [published comparison](../results/summaries/i4f_20261025/tank-interface-startup-comparison.json).
-- **The principal blocker remains a repeated pressure-coupling cycle near
-  .44 s.** The original 299,248-cell run saved at .443669498426 s after sustained
-  3.29 kPa final outer updates. A clean restart control and the 279,536-cell
-  source comparison reproduced the stop. Disabling the transonic pressure
-  Jacobian stopped at .443765288530 s, and pressure-component relaxation .5
-  stopped at .443684998512 s. Both retained alternating kPa-scale updates in
-  mixed transition cells without raw pressure clipping; neither is a fix.
-  The half-Courant trial instead encountered a raw intermediate pressure of
-  2698 Pa at .410317423204 s and saved at .410421862107 s. This is a numerical
-  diagnostic, not evidence of physical cavitation. All attempts and checkpoints
-  are preserved. A normal solver End after a guard save is not convergence.
-- **Localized source observers now execute correctly on MPI.** Two initial
-  attempts stalled because a coupled matrix residual was evaluated on only one
-  rank. They were stopped and preserved; diagnostics now evaluate coupled
-  operations on every rank and restrict only extraction/printing. The clean
-  observer completed .426970166588 s and the separate underconverged-state
-  probe saved at .445999359584 s. The source-lag balance identity closes to
-  roundoff, but finite lag is not established as the cause of the pressure
-  cycle. No unproven source-equation correction has been adopted.
-- **Controlled thermal mesh sensitivity is executed and published.** Four
-  water–air withdrawal cases with 3/6/12/24 initial gas-layer cells completed
-  .4 s. Pressure errors against adiabatic expansion at native gas volume are
-  6.66/4.45/2.92/1.92%; temperature follows the same trend, despite gas-mass
-  drift near .01%. Both phases are refined, turbulence is disabled and
-  thermal diffusion suppressed. This isolates a numerical contribution in
-  that limit, not the apparatus error or its correction. See the
-  [figure and data](../results/summaries/i4f_20261025/README.md).
-- **Current model comparison reaches .400087 s.** Tank-A pressure is
-  654.125 kPa versus the forward adiabatic model's 607.529 kPa; native water
-  inventory is 2.480 L lower. Temperature audits localize cooling to tank gas,
-  while water-rich cells remain above 292.799 K at .4 s. Turbulent thermal
-  diffusivity and mixed-interface resolution are material hypotheses;
-  coefficient/time-scale estimates do not measure interphase heat flux or
-  close total energy.
-- **Valve-source accuracy improved, without a full mesh pass.** A wetted
-  .30 m source at x=1.95–2.25 m replaces the old partly dry support. The
-  all-water analytical duct error drops from 6.34% on 25 mm axial cells to
-  1.38% on 6.25 mm cells. In the apparatus, 24/48-layer endpoint fluxes differ
-  about 1.50%, but the unchanged strict 2% pointwise startup screen remains
-  HOLD because of its first two microsteps. Later exploratory runs do not
-  relabel that result.
-- **No complete current sheet discharge yet.** The reduced full-bore-front
-  model predicts mouth arrival near .612/.620 s and intake-crown exposure
-  near 1.127 s; these are consistency predictions, not hardware validation.
-  Current corrected-source movies stop at .443669 s before useful exterior
-  liquid is resolved. The 881,431-cell downstream mesh is prepared but its
-  conditional pilot remains held; it is not an executed refinement result.
-  A fresh downstream-refinement diagnostic is being prepared to launch only
-  after all three pressure/source arms fail and their ten ranks are free;
-  its refined region covers the localized pressure-cycle cells. Preparation
-  is not an executed mesh comparison.
-  A low-priority CPU/Mesa render watcher is armed for a healthy, complete
-  selected long-run checkpoint at or beyond .65 s; no new movie exists yet.
-  Its 22-hour bound includes waiting, and it honors PAUSE. Status:
-  `results/runs/i4f-current-discharge-milestone-render-20261025T233209Z/milestone/watch-status.json`.
-  Legacy primed-line, one-tank and aerial runs are not resumed.
+- **Bend/outlet refinement is running from cold:** 881,431 cells, ten MPI
+  ranks, Docker `b5d05f19814c`, StartedAt 2026-10-26T00:00:42.212525743Z.
+  Exact-ID guard released GO at 00:00:45; the first 13 completed steps reached
+  .000710351079 s without raw pressure contacts. The pilot targets .05 s,
+  followed conditionally by the .7 s filling/sheet interval. Source bands stay
+  at 48 layers and tank resolution remains coarse; the refined region covers
+  the bend/transition failure cells. All nine configured quality rows pass;
+  optional concavity flags and approximately -.453% line-volume differences
+  remain explicit. Bundle:
+  `results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z/`.
+  The campaign wrapper initially called its one-shot launcher twice after
+  successful GO and recorded a false failure. That wrapper is repaired and
+  the existing pilot is adopted under the active campaign service; Docker, GO
+  and its original start are unchanged. Terminal capture is bounded to 300 s.
+  The rate-derived campaign deadline is 2026-10-27 16:25:42 UTC. Future child
+  runners record process-local MPI yielding; the live pilot was not changed.
+- **Tank/interface refinement is also running:** 456,954 cells, ten MPI
+  ranks, Docker `b31f9fc09916`, StartedAt 2026-10-25T23:59:36.593088248Z,
+  target .4 s with original physics/numerics. It resumes the complete native
+  .135021166664 s checkpoint, preserving time-zero mass ledgers. The preceding
+  healthy branch was saved at root's resource-priority request to free a short
+  diagnostic slot; this was neither user PAUSE nor numerical failure. Both
+  short diagnostics then ended, so the saved thermal run resumed immediately.
+  The latest worker check reached .178271 s with no raw contacts/clipping.
+  Failed no-solver preparation attempts and exact restart hashes are retained.
+  Bundle: `results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/`.
+- **Next allocation is armed: stock source treatment from the true cold state.**
+  A fresh 299,248-cell, 48-layer, initially air-filled case waits for the thermal
+  slot after its .4 s endpoint/capture or numerical stop.
+  Only the source-update flag changes physically; solver controls, initial
+  geometry/inventories and raw-pressure criteria remain the reference values.
+  A guarded .05 s pilot precedes the .46 s comparison and, if healthy, the
+  useful discharge interval. The switched .4 s restart below cannot substitute
+  for this independent trajectory. No stock-cold solver has launched yet.
+  Bundle: `results/runs/i4f-stock-from-cold-299248-20261026T002045Z-attempt2/`.
+  The active five-hour thermal waiter preserves its 05:27:22 UTC deadline;
+  the separate stock campaign has 24 h from its own pilot start. A prospective
+  half-terminal-step endpoint rule handles discrete solver End times without
+  changing pressure, mass or other scientific criteria.
+- **All recent short numerical variants stopped before .46 s.** The original
+  reference and restart controls develop a persistent kPa-scale pressure cycle
+  near .443 s. Transonic-off, pressure-component relaxation .5 and one added
+  non-orthogonal correction retain that cycle; the last saved at
+  .443765279816 s with a 3.56 kPa final update and zero raw pressure contacts.
+  Momentum relaxation .5 saved at .410704346663 s after three raw contacts
+  reaching -127.21 kPa. Stock-source switching from the same .400087 s seed
+  saved at .410533462436 s after one 6.380 kPa raw contact. The earlier
+  half-Courant case also contacted its 10 kPa floor. Positive final saved
+  pressures and normal End do not clear these intermediate events; no long
+  continuation was selected from any of these failed variants.
+- **Raw failure cells are now identified, without another simulation.** The
+  parser had missed `[rank]` prefixes. Corrected analysis reconciles all
+  affected-cell records, global minima and all ten rank summaries with no
+  omitted cells. U-relaxation's worst event is rank 0/cell 7902 at
+  (3.436916,.736759,.964727) m, alpha_water=.999706; the stock event is nearby
+  cell 7966, alpha_water=.9999999986. These are intermediate solves in the
+  rising bend, not demonstrated physical cavitation. Recorded liquid support
+  is not water mass removed by clipping. See the
+  [corrected raw data](../results/summaries/i4f_20261025/pressure-contact-review.json).
+- **Tank mesh sensitivity now has exact .05/.10 s native comparisons.** At
+  .1 s, gas-mass-weighted T is 290.796 versus 290.527 K and pressure departure
+  from each observed-volume adiabat is .446% versus .342%. Tank drawdown
+  differs 1.18 mL; seat water flow differs .0374%. Initial gas capacity is
+  .883% larger on the refined mesh, while total feed water is 7.1 mL lower.
+  Alpha minima near -1.08e-5 are retained without clipping; equivalent negative
+  water is below .13 mg. Root inspected the plot and independently checked
+  the gas weighted identity and reference formulas. This is startup sensitivity,
+  not convergence or heat-transfer attribution. See the
+  [trajectory comparison](../results/summaries/i4f_20261025/tank-interface-time-series.png).
+- **Earlier focused evidence remains qualified.** Suppressed-diffusion sealed
+  withdrawal mesh refinement reduces adiabatic pressure error 6.66 to 1.92%.
+  The all-water valve-source benchmark reduces flow error 6.34 to 1.38% with
+  source refinement; the separate strict 2% apparatus startup screen remains
+  HOLD at its first two microsteps. Through .4 s, current CFD and the reduced
+  model differ 7.67% in pressure and 2.480 L in tank-A water. None is hardware
+  validation. Observer source-lag identities close to roundoff without proving
+  the cause of the pressure cycle; no speculative equation patch was adopted.
 
-A bounded Astra review found no obvious pressure-operator sign error and
-recommended controlled numerical/source and interface-resolution diagnostics.
-Source tracing, the failed pressure-component trial and the live tank refinement
-implement those directions; no repeated routine review is required. Current
-runs use CPU only and leave unrelated GPU workloads untouched. Full logs and
-restart fields remain in ignored run bundles. The prior detailed status is
-preserved in `results/runs/i4f-status-consolidation-20261025T231009Z/previous-STATUS.md`; those historical jobs are not live.
+The bounded Astra hard-blocker review selected two actions: continue the actual
+bend refinement and run stock source treatment from cold. Finite water
+compressibility remains conditional: nearly pure-water pressure storage can
+change substantially despite small bulk density change, but an earlier Tait
+restart did not remove clipping. Physical pressure-margin interpretation needs
+settled native acceleration/curvature evidence. No scientific gate passed.
 
-At 23:35 UTC, doctor detected 20 effective CPUs, 101 GiB available RAM and
-86.6 GiB free disk. Unrelated CPU model work used approximately 4.7 cores in
-a two-second tick sample; the two ten-rank CFD jobs received roughly 13–15
-cores combined. Allocated MPI ranks therefore exceed delivered CPU capacity;
-wall-cost estimates must include this contention. Other workloads are untouched.
+The .65 s render watcher is active for the adopted 881k campaign. Native cell
+ordering, processor mapping and four mouth cuts (960 faces and .149999993 m2
+each) pass preflight. It uses this mesh's own cold states without a 299k prefix.
+The fixed renderer deadline is 2026-10-27 16:55:42 UTC, 30 min after the revised
+campaign bound; its resolved-water screen, CPU/Mesa backend and PAUSE policy
+remain in force. No new movie exists yet. Current corrected-source movies end at .443669 s
+before useful exterior liquid. A complete trustworthy discharge remains pending.
+Aerial and historical primed-line queues stay stopped; HPC belongs to another
+agent. Unrelated workloads are untouched. Two ten-rank jobs share the machine
+with unrelated CPU work, so delivered capacity is lower than the MPI count.
 
 ## Current inputs and scientific direction
 

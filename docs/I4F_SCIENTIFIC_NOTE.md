@@ -78,6 +78,13 @@ near .443765 and .443685 s respectively without pressure clipping. These
 one-factor tests do not establish a remedy. A cell-localized trace places the
 later cycle in mixed transition cells; source-lag observations alone do not
 establish its cause. No completed-discharge or late mesh-convergence claim follows.
+One non-orthogonal correction also stops at .443765 s with a persistent
+3.56 kPa update. Momentum equation relaxation .5 instead reaches raw negative
+pressures, as low as -127.21 kPa, and saves at .410704 s. Restoring the stock
+MULES source update from the common .400087 s restart encounters a raw 6.380 kPa
+cell and saves at .410533 s. These are separate failures, despite normal End
+and positive final saved pressures. The stock restart inherits the frozen-source
+trajectory; it does not test a stock calculation from the confirmed cold state.
 The earlier air-filled original-source case saved at .392 s after a raw
 pressure-floor event. A short restart passed .395 s without reproducing it;
 original and diagnostic binaries produce identical short-restart results.
@@ -97,10 +104,35 @@ calculation retains the original numerical settings to isolate mesh sensitivity.
 The current [phase-source fork](../solvers/i4f_frozen_sp/applications/solvers/multiphase/VoF/alphaEqn.H)
 retains the stock predictor but uses its captured `Sp` in the MULES correction
 instead of recomputing that coefficient. Its earlier comparison used a primed
-one-tank case; no matched standard-update control exists for the current dry
-four-branch case. A flag-off diagnostic is therefore a separate necessary
-comparison before attributing the recurrence solely to the mesh or the stock
-OpenFOAM formulation. It does not retroactively change the prior trajectories.
+one-tank case. The current flag-off restart above adds a matched-state source
+sensitivity, but no stock-source trajectory from the confirmed cold state has
+completed. It does not retroactively change the inherited frozen-source fields.
+Following independent review, the next comparisons keep the running bend-region
+refinement and queue that true stock-source cold start. No new production
+phase-source equation correction is adopted.
+
+The [corrected raw-contact analysis](../results/summaries/i4f_20261025/pressure-contact-review.json)
+recovers the actual rank-prefixed cell records already present in the logs;
+the earlier parser had missed them. Momentum relaxation's worst raw minimum
+is rank 0/cell 7902 at (3.436916, .736759, .964727) m with alpha_water=.999706.
+The stock-restart event is nearby cell 7966 with alpha_water=.9999999986.
+All affected-cell records reconcile with the global minima and printed counts;
+none were omitted. These are intermediate pressure solves, not evidence of
+physical cavitation. Their liquid-support mass is not mass removed by clipping.
+The CSV publication corrects the legacy psi column labels: OpenFOAM psi is
+d(rho)/dp in kg m^-3 Pa^-1; the storage coefficient alpha*psi/rho is in Pa^-1.
+Logged gas density and psi precede the EOS update and must not be recomputed
+from the raw negative pressure when interpreting that matrix.
+
+Small bulk liquid-density change alone cannot dismiss liquid compressibility
+in nearly pure-water cells. At the stock raw minimum, logged gas storage is
+5.30e-15 Pa^-1; an illustrative water sound speed of 1500 m/s would add
+4.45e-10 Pa^-1. That conditional model could affect the nearly pure-water
+event, while contributing very little to the later alpha_water~.69 cycle.
+The retained earlier Tait-type restart delayed but did not remove clipping;
+this is a hypothesis, not a demonstrated correction. A physical cavitation
+claim would require settled native pressure and acceleration/curvature evidence,
+rather than an alternating pressure-iteration minimum.
 
 The saved .350114 and .400087 s corrected-source fields locate the coldest
 cells in tank gas, at 255.02 and 245.66 K. The lowest pressures instead occur
@@ -178,6 +210,15 @@ At those distinct observed expansion ratios, pressure exceeds the adiabatic
 reference by .179% and .143%, respectively. This single startup snapshot
 does not establish a convergence order, thermal mechanism or later behavior;
 the same-settings refined continuation is needed for the .4 s comparison.
+The [extended exact-time comparison](../results/summaries/i4f_20261025/tank-interface-time-series.png)
+now includes .100021166664 s. Gas-mass-weighted temperature is 290.796 versus
+290.527 K, and pressure departure from each observed-volume adiabat is .446%
+versus .342%. Tank withdrawal differs by 1.18 mL and native seat flow by .0374%.
+The [raw data](../results/summaries/i4f_20261025/tank-interface-time-series.json)
+retain phase-fraction excursions: minimum alpha is about -1.08e-5, while the
+integrated equivalent negative-water mass is below .13 mg in each mesh.
+No alpha clipping is applied to those reductions. These two startup checkpoints
+do not isolate a thermal mechanism or establish convergence.
 
 The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
 also shows how the initial agreement evolves. At that same time, CFD tank-A

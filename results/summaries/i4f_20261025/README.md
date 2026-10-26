@@ -20,6 +20,18 @@ capacities; this is one early snapshot, not convergence. See the
 [figure](tank-interface-startup-comparison.png),
 [native metrics](tank-interface-startup-comparison.csv), and
 [analysis with source hashes](tank-interface-startup-comparison.json).
+The [extension through .100021 s](tank-interface-time-series.png) shows a .269 K
+gas-temperature difference with little flow/inventory change; its
+[data](tank-interface-time-series.json) include unmodified phase-fraction bounds
+and [CSV](tank-interface-time-series.csv). This remains startup sensitivity.
+
+**Pressure failures are localized:** the
+[corrected contact review](pressure-contact-review.json) recovers rank-prefixed
+raw cells in the rising bend for momentum relaxation and the stock-source
+restart. The [momentum-relaxation cells](u-relax-pressure-contact-cells.csv)
+and [stock-source cell](stock-alpha-pressure-contact-cells.csv) reconcile with
+global raw minima. Positive final saved pressure does not clear an earlier
+raw-floor contact; none of these tests establishes a complete discharge.
 
 [Watch corrected-source pipe filling through 0.443669 s, 10× slow](corrected-source-cutaway-through-0p443-10x.mp4)
 or the [all-four-branches outlet view](corrected-source-outlets-through-0p443-10x.mp4).
