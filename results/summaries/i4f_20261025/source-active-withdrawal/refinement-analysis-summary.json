@@ -1,0 +1,490 @@
+{
+  "analysis_helper_sha256": "593a929a5541d466077134abbf5e1849b61cf9d73f443f875f9244392a8b97e2",
+  "arms": [
+    {
+      "adiabatic_pressure_at_native_gas_volume_Pa": 603261.6283152407,
+      "adiabatic_temperature_at_native_gas_volume_K": 240.86976792896965,
+      "arm": "n0240-sp-only",
+      "completed_steps": 1600,
+      "container_id": "73d1bf49923e8152f7733e83777a68b20b86591e4fef04e252a1c85aa129879e",
+      "endpoint_field_hashes": {
+        "T": "2a687ee9e83a4384786e96285ed36fa53440d4362d4313238db26102c693e154",
+        "alpha.air": "87deab641ed5aa3bfc23d1bab4b3712a89c082ac62beb3a8e56131ee602c901c",
+        "alpha.water": "e97f6af095eac4f8596db3e905336c393c584e5933348dbcc0c4bf593c18f771",
+        "p": "8e8f39d1353c40b72ffe1a50bb881abc17d1a3eeee07157e3d68648bc78fef97",
+        "rho": "e574c872d3a6216226e18bc3e38594a0ce1e1675347d3a0a9a2b23840653094e"
+      },
+      "endpoint_time_s": 0.4,
+      "final_energy_balance_residual_J": 0.6902338627006994,
+      "final_energy_balance_residual_pct_initial_Ug": 1.1498563881614885,
+      "final_gas_mass_from_mixture_kg": 0.0002852384120770324,
+      "final_gas_pressure_volume_weighted_Pa": 610971.8742091,
+      "final_gas_temperature_mass_weighted_K": 243.9253850866318,
+      "final_native_gas_volume_m3": 3.268872152385541e-05,
+      "final_native_water_volume_m3": 6.731127847614458e-05,
+      "final_pressure_error_pct": 1.278093207319042,
+      "final_temperature_error_pct": 1.2685764527174737,
+      "final_total_phase_volume_m3": 9.999999999999999e-05,
+      "final_water_outflow_m3_s": 3.172675e-05,
+      "full_predictor_source_audit": null,
+      "gas_mass_drift_pct": 0.009397539381605924,
+      "grid_cells_x": 240,
+      "initial_gas_volume_m3": 2e-05,
+      "initial_water_volume_m3": 8e-05,
+      "integrated_water_outflow_m3": 1.2690699999999982e-05,
+      "log_sha256": "d0073f7ccc2d7112babe143da3b46c190a976697b5492a9846f18d3841934425",
+      "mode": "sp-only",
+      "native_gas_mass_EOS_kg": 0.0002852384120777593,
+      "native_gas_mass_EOS_minus_mixture_kg": 7.269033465429064e-16,
+      "native_mixture_rho_EOS_max_abs_error_kg_m3": 8.241158866439946e-10,
+      "pressure_floor_audit": {
+        "clock_time_s": 4.0,
+        "execution_time_s": 3.64,
+        "maximum_raw_cell_pressure_Pa": 1199836.71125893,
+        "minimum_raw_cell_pressure_Pa": 610969.722163485,
+        "pressure_floor_values_Pa": [
+          10000.0
+        ],
+        "qualification": "logged raw pressure/floor diagnostics; clipped fields are summed over pressure passes and are not a unique-cell removed-mass ledger",
+        "raw_pressure_records": 6400,
+        "sum_reported_cells_below_floor_across_pressure_passes": 0,
+        "sum_reported_clipped_water_mass_across_pressure_passes_kg": 0.0,
+        "sum_reported_clipped_water_volume_across_pressure_passes_m3": 0.0
+      },
+      "run_status_path": "results/runs/i4f-full-source-gas-withdrawal-refinement-20261026T185213Z/n0240-sp-only/run-status.json",
+      "source_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=false",
+      "started_at": "2026-10-26T18:53:45.098219108Z",
+      "status": "normal_end_complete_0p4",
+      "water_balance_residual_m3": 1.9784761445508302e-09
+    },
+    {
+      "adiabatic_pressure_at_native_gas_volume_Pa": 603210.5217597024,
+      "adiabatic_temperature_at_native_gas_volume_K": 240.86393946080884,
+      "arm": "n0240-full-source",
+      "completed_steps": 1600,
+      "container_id": "f6a17ee83eee5d45e7e4f8fdedb19e98cc3df19d12bf74762afc64d1c79c3eff",
+      "endpoint_field_hashes": {
+        "T": "eafb6ab61b196bfccabe896b58797e54b761b2adee6e78ff6e689ff84cec1a0f",
+        "alpha.air": "6dc8b8159aa3b1aaff41baf71629b3d080fc4facde46bf77691756f4768372c4",
+        "alpha.water": "989231ab94ad08be7aeca83f150b2eb7314cd7ea8d35aa9d323437532b3e88e7",
+        "p": "6db369b9386b8a5ccadd1b39060a1409ac9a6b31505f41eff9dc720e7d4d9ccf",
+        "rho": "512ad9d408b87cb25f8547af4582a48899b069dd29b86aeebd0b8f4cf8dafa05"
+      },
+      "endpoint_time_s": 0.4,
+      "final_energy_balance_residual_J": 0.6958013158724334,
+      "final_energy_balance_residual_pct_initial_Ug": 1.1591311744929789,
+      "final_gas_mass_from_mixture_kg": 0.00028525837097763407,
+      "final_gas_pressure_volume_weighted_Pa": 610981.7448881,
+      "final_gas_temperature_mass_weighted_K": 243.92702136569517,
+      "final_native_gas_volume_m3": 3.269069999574576e-05,
+      "final_native_water_volume_m3": 6.730930000425417e-05,
+      "final_pressure_error_pct": 1.2883102744506436,
+      "final_temperature_error_pct": 1.2717063051211674,
+      "final_total_phase_volume_m3": 9.999999999999994e-05,
+      "final_water_outflow_m3_s": 3.172675e-05,
+      "full_predictor_source_audit": {
+        "full_R_max_s-1_range": {
+          "maximum": 1.81149130999921e-12,
+          "minimum": 6.685167471114887e-13
+        },
+        "full_R_signed_volume_integral_m3_s_range": {
+          "maximum": 6.613163682239484e-18,
+          "minimum": -4.770781204177632e-18
+        },
+        "full_R_volume_L1_m3_s_range": {
+          "maximum": 1.816017509329109e-17,
+          "minimum": 8.398424575703884e-19
+        },
+        "min_rDeltaT_minus_C_s-1": 3923.855800006093,
+        "predicted_Sp_only_lag_max_s-1_range": {
+          "maximum": 0.0159139144599425,
+          "minimum": 0.0
+        },
+        "predicted_Sp_only_lag_volume_L1_m3_s_range": {
+          "maximum": 7.042596346786351e-09,
+          "minimum": 0.0
+        },
+        "qualification": "discrete local alpha-equation residual and predicted lag term; neither is a global continuity or pressure residual. R_P denotes the predictor-step alpha-equation residual, not a pressure-field residual; that separate diagnostic was measured only in the n=120 follow-up",
+        "record_count": 3200
+      },
+      "gas_mass_drift_pct": 0.01639546651976964,
+      "grid_cells_x": 240,
+      "initial_gas_volume_m3": 2e-05,
+      "initial_water_volume_m3": 8e-05,
+      "integrated_water_outflow_m3": 1.2690699999999982e-05,
+      "log_sha256": "fc890dd702159061e1138e836485d9a31e437bc492c2efbf0fd8afcf8b451d90",
+      "mode": "full-source",
+      "native_gas_mass_EOS_kg": 0.00028525837097941574,
+      "native_gas_mass_EOS_minus_mixture_kg": 1.7816694300454294e-15,
+      "native_mixture_rho_EOS_max_abs_error_kg_m3": 5.944684744463302e-10,
+      "pressure_floor_audit": {
+        "clock_time_s": 3.0,
+        "execution_time_s": 3.5,
+        "maximum_raw_cell_pressure_Pa": 1199836.71125893,
+        "minimum_raw_cell_pressure_Pa": 610980.2158081953,
+        "pressure_floor_values_Pa": [
+          10000.0
+        ],
+        "qualification": "logged raw pressure/floor diagnostics; clipped fields are summed over pressure passes and are not a unique-cell removed-mass ledger",
+        "raw_pressure_records": 6400,
+        "sum_reported_cells_below_floor_across_pressure_passes": 0,
+        "sum_reported_clipped_water_mass_across_pressure_passes_kg": 0.0,
+        "sum_reported_clipped_water_volume_across_pressure_passes_m3": 0.0
+      },
+      "run_status_path": "results/runs/i4f-full-source-gas-withdrawal-refinement-20261026T185213Z/n0240-full-source/run-status.json",
+      "source_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=true",
+      "started_at": "2026-10-26T18:53:50.073953169Z",
+      "status": "normal_end_complete_0p4",
+      "water_balance_residual_m3": 4.2541501327512596e-15
+    },
+    {
+      "adiabatic_pressure_at_native_gas_volume_Pa": 603269.833009849,
+      "adiabatic_temperature_at_native_gas_volume_K": 240.87070360388253,
+      "arm": "n0480-sp-only",
+      "completed_steps": 1600,
+      "container_id": "48db6dd365d4dbfaeb9e36c32a9a294b53a99c62d872d7827f99c89a51d22952",
+      "endpoint_field_hashes": {
+        "T": "e20056f2f5176e0a05264b9fc9d6d6ae24f6f09c497bcd427c558b3648b2f250",
+        "alpha.air": "6caee23d49f96cc1aea5f6aebd97f183cce64fde3521aa9b5499d2f82837458c",
+        "alpha.water": "d90863ad652c693319db12ebd9ae1eefcbfa90b27cb6f71e5b191ee7520e3bb0",
+        "p": "d7fa9dbb0b3439d75555b1990d4b9859b0b138019fab1d3a563a9d52a08e3fb2",
+        "rho": "edac6f805dcbe2f34e0a311523635a1b89de96d8ac7debbd9221bf8b7100e1ac"
+      },
+      "endpoint_time_s": 0.4,
+      "final_energy_balance_residual_J": 0.4678166890619604,
+      "final_energy_balance_residual_pct_initial_Ug": 0.7793329731776818,
+      "final_gas_mass_from_mixture_kg": 0.0002852367803552469,
+      "final_gas_pressure_volume_weighted_Pa": 608497.3568678,
+      "final_gas_temperature_mass_weighted_K": 242.93648422441348,
+      "final_native_gas_volume_m3": 3.268840392488116e-05,
+      "final_native_water_volume_m3": 6.731159607511874e-05,
+      "final_pressure_error_pct": 0.8665316201656781,
+      "final_temperature_error_pct": 0.8576305003568097,
+      "final_total_phase_volume_m3": 9.999999999999991e-05,
+      "final_water_outflow_m3_s": 3.172675e-05,
+      "full_predictor_source_audit": null,
+      "gas_mass_drift_pct": 0.008825430206238494,
+      "grid_cells_x": 480,
+      "initial_gas_volume_m3": 2e-05,
+      "initial_water_volume_m3": 8e-05,
+      "integrated_water_outflow_m3": 1.2690699999999982e-05,
+      "log_sha256": "251bfa60474856ea568252a92658ba5936b871364df1117ccc9f660269c52656",
+      "mode": "sp-only",
+      "native_gas_mass_EOS_kg": 0.0002852367803552874,
+      "native_gas_mass_EOS_minus_mixture_kg": 4.049495114233359e-17,
+      "native_mixture_rho_EOS_max_abs_error_kg_m3": 8.162714948412031e-10,
+      "pressure_floor_audit": {
+        "clock_time_s": 4.0,
+        "execution_time_s": 4.16,
+        "maximum_raw_cell_pressure_Pa": 1199840.780941016,
+        "minimum_raw_cell_pressure_Pa": 608496.8550361639,
+        "pressure_floor_values_Pa": [
+          10000.0
+        ],
+        "qualification": "logged raw pressure/floor diagnostics; clipped fields are summed over pressure passes and are not a unique-cell removed-mass ledger",
+        "raw_pressure_records": 6400,
+        "sum_reported_cells_below_floor_across_pressure_passes": 0,
+        "sum_reported_clipped_water_mass_across_pressure_passes_kg": 0.0,
+        "sum_reported_clipped_water_volume_across_pressure_passes_m3": 0.0
+      },
+      "run_status_path": "results/runs/i4f-full-source-gas-withdrawal-refinement-20261026T185213Z/n0480-sp-only/run-status.json",
+      "source_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=false",
+      "started_at": "2026-10-26T18:53:54.90341316Z",
+      "status": "normal_end_complete_0p4",
+      "water_balance_residual_m3": 2.2960751187161313e-09
+    },
+    {
+      "adiabatic_pressure_at_native_gas_volume_Pa": 603210.5216506829,
+      "adiabatic_temperature_at_native_gas_volume_K": 240.8639394483753,
+      "arm": "n0480-full-source",
+      "completed_steps": 1600,
+      "container_id": "adafe5ef8c41a4b6cf985de86674a48e4a3dd9bf05e930df80135596980e5f4b",
+      "endpoint_field_hashes": {
+        "T": "6506ad65f2da6b85ee34850a92748f45e3589dd0a8053ced6fdd9a2eb2d79811",
+        "alpha.air": "ec9d44a6d6e0807332ac7d0027b7ec4f62bd65eeb4c95507b182b939b854b4ed",
+        "alpha.water": "78f737a31693bbe2e33518604bfcd6fa9803b716641d041f11f44b114c44aa39",
+        "p": "9de0d5557b71f772e5ad55cae6eb8abcf8f9b5cb8c4ddf9e39543aa27a8e78bd",
+        "rho": "fde5cf6e3984d18a5367740b5b02d72907f8df9d362a81ae0f005260ebb0f97e"
+      },
+      "endpoint_time_s": 0.4,
+      "final_energy_balance_residual_J": 0.47429744957711684,
+      "final_energy_balance_residual_pct_initial_Ug": 0.79012923265029,
+      "final_gas_mass_from_mixture_kg": 0.0002852597757300873,
+      "final_gas_pressure_volume_weighted_Pa": 608509.4065992,
+      "final_gas_temperature_mass_weighted_K": 242.93877409743246,
+      "final_native_gas_volume_m3": 3.269069999996651e-05,
+      "final_native_water_volume_m3": 6.730930000003354e-05,
+      "final_pressure_error_pct": 0.8784470360392094,
+      "final_temperature_error_pct": 0.8614135656042743,
+      "final_total_phase_volume_m3": 0.00010000000000000005,
+      "final_water_outflow_m3_s": 3.172675e-05,
+      "full_predictor_source_audit": {
+        "full_R_max_s-1_range": {
+          "maximum": 1.700565115412828e-12,
+          "minimum": 3.110284856814964e-13
+        },
+        "full_R_signed_volume_integral_m3_s_range": {
+          "maximum": 5.70670737531552e-18,
+          "minimum": -4.948413231624912e-18
+        },
+        "full_R_volume_L1_m3_s_range": {
+          "maximum": 2.119278998369969e-17,
+          "minimum": 3.455573775485917e-19
+        },
+        "min_rDeltaT_minus_C_s-1": 3847.711599975637,
+        "predicted_Sp_only_lag_max_s-1_range": {
+          "maximum": 0.03726113611234549,
+          "minimum": 0.0
+        },
+        "predicted_Sp_only_lag_volume_L1_m3_s_range": {
+          "maximum": 8.13213154352575e-09,
+          "minimum": 0.0
+        },
+        "qualification": "discrete local alpha-equation residual and predicted lag term; neither is a global continuity or pressure residual. R_P denotes the predictor-step alpha-equation residual, not a pressure-field residual; that separate diagnostic was measured only in the n=120 follow-up",
+        "record_count": 3200
+      },
+      "gas_mass_drift_pct": 0.01688799641965666,
+      "grid_cells_x": 480,
+      "initial_gas_volume_m3": 2e-05,
+      "initial_water_volume_m3": 8e-05,
+      "integrated_water_outflow_m3": 1.2690699999999982e-05,
+      "log_sha256": "ba4e7a62c3322d891d89a777cf750fe9be4607c57ebae8d9bd2eb8f2813c06cc",
+      "mode": "full-source",
+      "native_gas_mass_EOS_kg": 0.0002852597757259365,
+      "native_gas_mass_EOS_minus_mixture_kg": -4.1508138072521295e-15,
+      "native_mixture_rho_EOS_max_abs_error_kg_m3": 6.501750249299221e-10,
+      "pressure_floor_audit": {
+        "clock_time_s": 5.0,
+        "execution_time_s": 4.45,
+        "maximum_raw_cell_pressure_Pa": 1199840.780941016,
+        "minimum_raw_cell_pressure_Pa": 608508.7985696883,
+        "pressure_floor_values_Pa": [
+          10000.0
+        ],
+        "qualification": "logged raw pressure/floor diagnostics; clipped fields are summed over pressure passes and are not a unique-cell removed-mass ledger",
+        "raw_pressure_records": 6400,
+        "sum_reported_cells_below_floor_across_pressure_passes": 0,
+        "sum_reported_clipped_water_mass_across_pressure_passes_kg": 0.0,
+        "sum_reported_clipped_water_volume_across_pressure_passes_m3": 0.0
+      },
+      "run_status_path": "results/runs/i4f-full-source-gas-withdrawal-refinement-20261026T185213Z/n0480-full-source/run-status.json",
+      "source_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=true",
+      "started_at": "2026-10-26T18:54:00.375200022Z",
+      "status": "normal_end_complete_0p4",
+      "water_balance_residual_m3": 3.351370559106365e-17
+    }
+  ],
+  "full_source_alphaEqn_H_sha256": "6503398a24f250b0459db1638dfa19d46c8bee3ccf9e6ef32a5ccc23ce95d86d",
+  "generated_utc": "2026-10-26T19:00:12.281285+00:00",
+  "historical_analysis": "results/runs/i4f-gas-expansion-interface-mesh-sensitivity-20261025T213324Z/analysis-summary.json",
+  "historical_analysis_sha256": "390b645a07437b203e4383744b52d93d09d2c18635525ca87d445173dbb5386c",
+  "paired_comparisons": [
+    {
+      "comparison_time_s": 0.4,
+      "full_minus_sp_final_p_Pa": 9.870678999926895,
+      "full_minus_sp_gas_mass_drift_percentage_points": 0.006997927138163718,
+      "full_minus_sp_native_gas_volume_m3": 1.9784718903532636e-09,
+      "full_minus_sp_pressure_error_percentage_points": 0.010217067131601532,
+      "full_minus_sp_temperature_error_percentage_points": 0.003129852403693789,
+      "full_minus_sp_water_outflow_m3": 0.0,
+      "grid_cells_x": 240,
+      "historical_sp_only_p_error_pct": null,
+      "new_sp_only_minus_historical_p_error_percentage_points": null
+    },
+    {
+      "comparison_time_s": 0.4,
+      "full_minus_sp_final_p_Pa": 12.049731399980374,
+      "full_minus_sp_gas_mass_drift_percentage_points": 0.008062566213418165,
+      "full_minus_sp_native_gas_volume_m3": 2.2960750853447272e-09,
+      "full_minus_sp_pressure_error_percentage_points": 0.011915415873531288,
+      "full_minus_sp_temperature_error_percentage_points": 0.0037830652474646342,
+      "full_minus_sp_water_outflow_m3": 0.0,
+      "grid_cells_x": 480,
+      "historical_sp_only_p_error_pct": null,
+      "new_sp_only_minus_historical_p_error_percentage_points": null
+    }
+  ],
+  "paired_history_max_abs_deltas": {
+    "240": {
+      "T_volume_error_pct": {
+        "max_abs_full_minus_sp": 0.003345909964935778,
+        "signed_at_max": 0.003345909964935778,
+        "time_of_max_s": 0.397
+      },
+      "gas_T_volume_weighted_K": {
+        "max_abs_full_minus_sp": 0.002167553499987207,
+        "signed_at_max": 0.002167553499987207,
+        "time_of_max_s": 0.397
+      },
+      "gas_mixture_mass_kg": {
+        "max_abs_full_minus_sp": 1.995890060169092e-08,
+        "signed_at_max": 1.995890060169092e-08,
+        "time_of_max_s": 0.4
+      },
+      "gas_p_volume_weighted_Pa": {
+        "max_abs_full_minus_sp": 10.891959800035693,
+        "signed_at_max": 10.891959800035693,
+        "time_of_max_s": 0.397
+      },
+      "gas_volume_m3": {
+        "max_abs_full_minus_sp": 1.978471890000898e-09,
+        "signed_at_max": 1.978471890000898e-09,
+        "time_of_max_s": 0.4
+      },
+      "integrated_water_outflow_m3": {
+        "max_abs_full_minus_sp": 0.0,
+        "signed_at_max": 0.0,
+        "time_of_max_s": 0.0
+      },
+      "p_error_pct": {
+        "max_abs_full_minus_sp": 0.010363000950075474,
+        "signed_at_max": 0.010363000950075474,
+        "time_of_max_s": 0.3975
+      },
+      "water_outflow_m3_s": {
+        "max_abs_full_minus_sp": 0.0,
+        "signed_at_max": 0.0,
+        "time_of_max_s": 0.0
+      },
+      "water_volume_m3": {
+        "max_abs_full_minus_sp": 1.978471890007674e-09,
+        "signed_at_max": -1.978471890007674e-09,
+        "time_of_max_s": 0.4
+      }
+    },
+    "480": {
+      "T_volume_error_pct": {
+        "max_abs_full_minus_sp": 0.003905943920368138,
+        "signed_at_max": 0.003905943920368138,
+        "time_of_max_s": 0.3955
+      },
+      "gas_T_volume_weighted_K": {
+        "max_abs_full_minus_sp": 0.0026252391000127773,
+        "signed_at_max": 0.0026252391000127773,
+        "time_of_max_s": 0.3955
+      },
+      "gas_mixture_mass_kg": {
+        "max_abs_full_minus_sp": 2.299537484040659e-08,
+        "signed_at_max": 2.299537484040659e-08,
+        "time_of_max_s": 0.4
+      },
+      "gas_p_volume_weighted_Pa": {
+        "max_abs_full_minus_sp": 12.452347900019959,
+        "signed_at_max": 12.452347900019959,
+        "time_of_max_s": 0.3955
+      },
+      "gas_volume_m3": {
+        "max_abs_full_minus_sp": 2.2960750900000203e-09,
+        "signed_at_max": 2.2960750900000203e-09,
+        "time_of_max_s": 0.4
+      },
+      "integrated_water_outflow_m3": {
+        "max_abs_full_minus_sp": 0.0,
+        "signed_at_max": 0.0,
+        "time_of_max_s": 0.0
+      },
+      "p_error_pct": {
+        "max_abs_full_minus_sp": 0.011915415893626324,
+        "signed_at_max": 0.011915415893626324,
+        "time_of_max_s": 0.4
+      },
+      "water_outflow_m3_s": {
+        "max_abs_full_minus_sp": 0.0,
+        "signed_at_max": 0.0,
+        "time_of_max_s": 0.0
+      },
+      "water_volume_m3": {
+        "max_abs_full_minus_sp": 2.2960750900000203e-09,
+        "signed_at_max": -2.2960750900000203e-09,
+        "time_of_max_s": 0.4
+      }
+    }
+  },
+  "paired_native_field_checkpoint_max_abs_deltas": {
+    "240": {
+      "T": {
+        "max_abs_difference": 0.05258147899996857,
+        "relative_to_sp_max_at_max": 0.00017936714651191736,
+        "rms_difference_at_max": 0.00538646414911213,
+        "time_of_max_s": 0.4
+      },
+      "alpha.air": {
+        "max_abs_difference": 0.00459815235300004,
+        "relative_to_sp_max_at_max": 0.00459815235300004,
+        "rms_difference_at_max": 0.00029696758627575107,
+        "time_of_max_s": 0.4
+      },
+      "alpha.water": {
+        "max_abs_difference": 0.004598152352999985,
+        "relative_to_sp_max_at_max": 0.004598152352999985,
+        "rms_difference_at_max": 0.00029696758627722846,
+        "time_of_max_s": 0.4
+      },
+      "p": {
+        "max_abs_difference": 10.503746999893337,
+        "relative_to_sp_max_at_max": 1.7191804702747825e-05,
+        "rms_difference_at_max": 10.303557162202907,
+        "time_of_max_s": 0.4
+      },
+      "rho": {
+        "max_abs_difference": 4.556374206999976,
+        "relative_to_sp_max_at_max": 0.004564590469845698,
+        "rms_difference_at_max": 0.29426943805007527,
+        "time_of_max_s": 0.4
+      }
+    },
+    "480": {
+      "T": {
+        "max_abs_difference": 0.10367880900003001,
+        "relative_to_sp_max_at_max": 0.00035367152993358357,
+        "rms_difference_at_max": 0.006918514677498518,
+        "time_of_max_s": 0.4
+      },
+      "alpha.air": {
+        "max_abs_difference": 0.006533259193999941,
+        "relative_to_sp_max_at_max": 0.006533259193999941,
+        "rms_difference_at_max": 0.00030810310926849296,
+        "time_of_max_s": 0.3
+      },
+      "alpha.water": {
+        "max_abs_difference": 0.006533259193999996,
+        "relative_to_sp_max_at_max": 0.006533259193999996,
+        "rms_difference_at_max": 0.0003081031092673543,
+        "time_of_max_s": 0.3
+      },
+      "p": {
+        "max_abs_difference": 12.138497999985702,
+        "relative_to_sp_max_at_max": 1.9948284155874462e-05,
+        "rms_difference_at_max": 12.106634153876142,
+        "time_of_max_s": 0.4
+      },
+      "rho": {
+        "max_abs_difference": 6.466959380999981,
+        "relative_to_sp_max_at_max": 0.006478620898617492,
+        "rms_difference_at_max": 0.30497670498676493,
+        "time_of_max_s": 0.3
+      }
+    }
+  },
+  "prototype_source_lock": "results/runs/i4f-full-source-gas-withdrawal-refinement-20261026T185213Z/source-lock.json",
+  "prototype_source_lock_sha256": "47b475bcb3e88cab020627f6d56086f1fd1f2b35d2d6f1f4f110325f7867554f",
+  "qualifications": [
+    "The comparison changes only i4fFrozenPredictorFullSource false versus true; Sp is true in both arms.",
+    "Water is rhoConst and turbulence is laminar, matching the historical sealed-channel diagnostic; these are not apparatus material/turbulence inputs.",
+    "The full-source branch is a private prototype, not a released solver change or formal validation result.",
+    "Historical solver data are shown as context; the exact predictor comparison is the new matched-bin pair at each resolution.",
+    "No interpretation attributes apparatus pressure-cycle behavior from this simplified sealed-channel test."
+  ],
+  "schema": "i4f-full-source-gas-withdrawal-analysis/v1",
+  "status": "four exact-endpoint native results analyzed; exploratory diagnostic only",
+  "study": "results/runs/i4f-full-source-gas-withdrawal-refinement-20261026T185213Z/experiment.json",
+  "study_sha256": "7b1c1b2ad9ae404fe694b1b3bfb164cb1647792fa17e2aedbfc7e2b132886225",
+  "thermodynamics": {
+    "Cp_air_J_kg_K": 1005.0,
+    "R_air_J_kg_K": 287.0477481284761,
+    "adiabatic_pressure_reference": "p0*(Vg0/Vg)^gamma at the native gas volume",
+    "adiabatic_temperature_reference": "T0*(Vg0/Vg)^(gamma-1) at the native gas volume",
+    "gamma_air": 1.3998145383348455,
+    "rho_water_kg_m3": 998.2
+  }
+}

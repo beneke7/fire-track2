@@ -1,0 +1,89 @@
+{
+  "RP_and_RF_minus_RP_ranges": {
+    "RF_minus_RP_max_s-1": {
+      "max": 9.207147349473557e-13,
+      "max_abs": 9.207147349473557e-13,
+      "min": 1.511035827071344e-13
+    },
+    "RF_minus_RP_signed_volume_integral_m3_s": {
+      "max": 1.172769183645503e-18,
+      "max_abs": 3.844476064575064e-18,
+      "min": -3.844476064575064e-18
+    },
+    "RF_minus_RP_volume_L1_m3_s": {
+      "max": 4.870144809959211e-18,
+      "max_abs": 4.870144809959211e-18,
+      "min": 5.016435638561781e-19
+    },
+    "RP_max_s-1": {
+      "max": 1.388873538935447e-12,
+      "max_abs": 1.388873538935447e-12,
+      "min": 3.513548941082744e-13
+    },
+    "RP_signed_volume_integral_m3_s": {
+      "max": 7.092114636090337e-18,
+      "max_abs": 7.092114636090337e-18,
+      "min": -4.908566261261204e-18
+    },
+    "RP_volume_L1_m3_s": {
+      "max": 1.816242648840734e-17,
+      "max_abs": 1.816242648840734e-17,
+      "min": 1.210088599063617e-18
+    }
+  },
+  "binary_sha256": "fa14d9da534b138600cc239ab89e113af75971f51e3e2030df106fb237a0f755",
+  "completed_steps": 1600,
+  "container_id": "e307cfbc9b7837776a970f6e804e71f800ff1335363cf9f7d700cb01d9cafde4",
+  "diagnostic_patch": "results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-on/provenance/rp-audit-build/provenance/rp-audit-diagnostic.patch",
+  "diagnostic_patch_sha256": "12c3a29ef2a3236e83465a3a994fac559f21fdcd5a70bf56456233fbec592621",
+  "endpoint_field_hashes": {
+    "T": "b5893d9c5b065d4cd5829a350447727676c58382ac035486489e9f28cecff59f",
+    "T.air": "351a0e5ce7341ad06373f12828fdab3fc3f29eb4823a73583d4905e0afa2c452",
+    "T.water": "0c9c4e6eaaad80408a7f1bd238c8305fd054af6ba38a9200dfdf6029ef9efd5a",
+    "U": "2b0496b88baf66ff6574e63ff27c5aaa8175fee771c03fba1844e7c386710b15",
+    "alpha.air": "7ee48ea04e90edac60f97cda469600583cf402fafe5bcfeff9d0f8954a4a3b74",
+    "alpha.water": "2ebfbd63a4c5f4b92ff55ea84c1f5287e5d82e60ee05b72327016de9e5f197f5",
+    "alphaPhi0.water": "a53c47c20e6e11b96794c0e4d60dafe8b95061f6ff9bf522a9e05f9447907bdc",
+    "p": "7a0f08c54ea957d15584cd38990dfb1f66d654c140f9c1f856c3e685df30bc03",
+    "p_rgh": "bf043c4c1130af2c231b54e3a793097e5cb4649597763ebd32665c6afec05ac4",
+    "phi": "8557770fd0635e4a55ea3aa5b7dc15b702bd4444c54c5fae7a1b3a2bd4521013",
+    "rho": "0ae552af2f35e923b7e6459bc325809d1c0b77322cde41e1e213faf8add7e850"
+  },
+  "endpoint_hashes_match_parent": true,
+  "full_source_R_ranges": {
+    "full_R_max_s-1": {
+      "max": 1.532571814530516e-12,
+      "max_abs": 1.532571814530516e-12,
+      "min": 3.954662759680394e-13
+    },
+    "full_R_signed_volume_integral_m3_s": {
+      "max": 5.701521493063868e-18,
+      "max_abs": 7.442035126369842e-18,
+      "min": -7.442035126369842e-18
+    },
+    "full_R_volume_L1_m3_s": {
+      "max": 1.830454613105189e-17,
+      "max_abs": 1.830454613105189e-17,
+      "min": 1.48092502495046e-18
+    }
+  },
+  "generated_utc": "2026-10-26T19:00:51.375705+00:00",
+  "interpretation": "RP is the logged discrete predictor-step alpha-equation residual; RF_minus_RP is the logged difference to the full predictor residual. These are local alpha-equation diagnostics, not pressure-field residuals, global continuity residuals, or independent validation. Exact endpoint hash identity and identical full-source summary records demonstrate passivity for this one n=120 replay only.",
+  "limitations": [
+    "One n=120 run, one solver build and one diagnostic window; passivity is not established for all inputs or grids.",
+    "R_P here names the predictor-step alpha-equation residual; it is not a pressure-field residual."
+  ],
+  "log_sha256": "355b92bdeca9f5c4c0687a964e69bcd78f9f39da5cc6e6a909752e6e3f48bd70",
+  "matched_parent_log_sha256": "9bd40f8752d126e7d329eb4585524881adbf1ce95d628c06ffab12b7b4dfd857",
+  "matched_parent_run": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0120-full-source",
+  "record_count": {
+    "RP_audit": 3200,
+    "full_source_summary": 3200
+  },
+  "run_status": "results/runs/i4f-full-source-rp-audit-n120-20261026T185556Z/n0120-full-source-rp-audit/run-status.json",
+  "run_status_sha256": "933a2bcd92c6aae365145e71f729d34e283de01f99231b5a0b0afcfa038c07b7",
+  "schema": "i4f-full-source-rp-audit-summary/v1",
+  "source_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=true",
+  "started_at": "2026-10-26T18:57:40.931367136Z",
+  "status": "exit-0 normal End at 0.4 s; exact native endpoint matches its full-source parent"
+}

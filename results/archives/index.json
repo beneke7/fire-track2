@@ -2334,5 +2334,20 @@
       "completed_utc": "2026-10-26T17:42:27.154242+00:00",
       "measured_free_change_bytes": 2821910528
     }
+  ],
+  "log_compressions": [
+    {
+      "manifest_path": "results/archives/manifests/i4f-terminal-log-compression-20261026T184320Z.json",
+      "manifest_sha256": "fe6a1c47a7d17a06de7b9582b7d2cb64651eed7830bff156eb52724ea88c4da5",
+      "source_type": "terminal_solver_text_logs",
+      "file_count": 12,
+      "payload_directory": "results/runs/i4f-terminal-log-compression-20261026T184320Z/payload",
+      "source_bytes_removed": 3296220099,
+      "archive_allocated_bytes": 477573120,
+      "net_allocated_bytes_released": 2818719744,
+      "status": "complete_with_lossless_archives",
+      "completed_utc": "2026-10-26T18:46:48.029028+00:00",
+      "restore_policy": "gzip decompression to a temporary sibling, compare the recorded original SHA-256 and byte count, then atomically rename to the original path"
+    }
   ]
 }

@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 18:42 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 19:17 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -27,6 +27,7 @@ saved normally, not that the requested horizon or numerical screen passed.
 | Tight temperature solve, same .460048 s seed | .481894 | Pressure cycle persists despite much tighter linear temperature residuals |
 | 25 microsecond maximum timestep, warm restart | .460523 | Twenty raw floor contacts; first at .460473 s; minimum -81.114 kPa |
 | Cached predictor Sp, same .460048 s seed | .494225 | Improved common-time mass residuals and pressure updates, then persistent-update stop; no floor contacts |
+| Cached full predictor Sp+divU, same .460048 s seed | .494130 | Pressure-update stop at 1261.902 Pa / 5.520 m/s; no floor contacts; conservation improvement did not cure cycle |
 
 The 100 Pa / three-step / final-to-penultimate ratio .9 screen is exploratory,
 not a formal nonlinear-convergence or validation tolerance. Liquid support in
@@ -64,11 +65,13 @@ Next work is bounded and parallel; no failed fields are restart inputs:
   improved the matched warm trajectory but did not cure it. A new default-off
   prototype also passed the ten-step bytewise comparison; root reviewed its
   full coefficient C=Sp+divU implementation. The .460048→.50 s exploratory
-  replay is running: Docker `d85f657cf1ae`, StartedAt 18:39:59.00363731 UTC,
+  replay is terminal: Docker `d85f657cf1ae`, StartedAt 18:39:59.00363731 UTC,
   ten MPI ranks/eight CPU equivalents, two-hour hard/100-minute save limit.
-  Root verified the exact container and active durable guard. At .462227 s/20
-  steps, there were no floor contacts or clipping and final outer dp was
-  .553 Pa; the previous cycle interval has not yet been reached. First-step
+  Docker FinishedAt 19:05:33.123553991 UTC, normal End/native checkpoint
+  .494130458572 s/316 steps. Root verified terminal identity and guard capture:
+  zero raw floor contacts, final outer dp 1261.902 Pa, dU 5.520 m/s and five
+  persistent-update steps. It failed in the same window as Sp-only .494225 s;
+  this source correction is not the pressure-cycle remedy. First-step
   full alpha-equation volume-L1 residual was about 3.24e-6 m3/s, versus a
   3.4e-4–5.0e-4 m3/s counterfactual omitted-divU term; the former also includes
   predictor solve error and is not a physical phase-mass closure. It requires
@@ -76,13 +79,28 @@ Next work is bounded and parallel; no failed fields are restart inputs:
   a globally positive correction denominator, and logs the discrete alpha
   equation residual using the actual corrected flux. Evidence lives under
   `results/runs/i4f-full-predictor-source-20261026T180031Z/`.
+  A matched near-.477208 s sample has water-continuity L1 .01288 versus
+  .38335 kg/s for Sp-only (times .226 microseconds apart); this is one point.
+  A .460048→.70 s candidate is now running with only alpha-predictor
+  tolerance tightened to 1e-12, using a passive RP/RF-RP diagnostic binary.
+  Its declared common comparison window is .46–.50 s; longer horizon avoids
+  another intermediate restart if healthy. Docker `c5ccf7a1e92a`, StartedAt
+  19:12:34.729904344 UTC; ten MPI/eight CPU equivalents, four-hour hard and
+  3 h 40 min save bound. Exact guard unit:
+  `i4f-full-predictor-source-alpha-tol-1e-12-20261026t1903z-guard.service`.
+  It uses the original healthy .460048 s seed, not failed .494 fields. At
+  .464021 s, corrected-minus-predictor alpha residual max is 2.25e-12 s^-1
+  while predictor residual max is .00119 s^-1; this directly separates the
+  remaining predictor-solve residual from correction inconsistency at this
+  instant. Stability through the old failure window remains untested.
+  [Terminal full-vs-Sp comparison](../results/summaries/i4f_20261025/full-source-apparatus/terminal-comparison.json).
 - **Continuous cold trajectory (performance worker):** running a true t=0
   finite-water-EOS/upwind/cached-Sp trial to .50 s, ten MPI ranks and ten CPU
   equivalents. Docker `0f8517608ad4`, StartedAt 18:26:13.097379609 UTC,
   verified running by root at 18:26:49 UTC; exact identity and GO are recorded
   in `results/runs/i4f-cold-finite-water-eos-upwind-frozenSp-target050-20261026T181955Z/`.
   Target .50 s; graceful save after 3 h 40, hard limit 4 h from container start.
-  At .118521 s/485 steps, no raw contacts or clipping were recorded; this
+  At .199521 s/809 steps (19:04 UTC), no raw contacts were recorded; this
   early startup does not exercise the previous failure interval. It preserves
   the nine prescribed initial fields; the solver
   creates the derived fields. This avoids interpreting warm-start sensitivity
@@ -106,11 +124,24 @@ Next work is bounded and parallel; no failed fields are restart inputs:
   snapshot hashes and rejection of a tampered copy; Ruff/shell checks pass.
   This provenance addition postdates the executed public smoke and does not
   change its equations or retroactively change its recorded controller hash.
-- **Source-active small verification (recovery worker):** preparing a paired
-  Sp-only/full-source gas-withdrawal comparison using the existing small
-  sealed-gas channel and two grids. It checks p(V), T(V), inventory and the
-  alpha residual under actual expansion; unlike the translating slab, it
-  exercises the compression source. No new result exists yet.
+- **Source-active small verification completed:** all eight paired
+  Sp-only/full-source gas-withdrawal cases (60/120/240/480 cells) reached
+  .4 s/1600 steps without floor contact. With full source, three-finest-grid
+  pressure-reference errors decrease 1.930→1.288→.878%, temperature errors
+  1.914→1.272→.861%; normalized water-volume balance is at most 5.32e-11.
+  Gas-mass drift is slightly worse with the full source, and thermal errors
+  remain. These rhoConst/laminar/Pr1e9 cases do not validate the apparatus.
+  A ninth n=120 diagnostic run reproduces native endpoint hashes exactly;
+  corrected-minus-predictor alpha residual is below 9.21e-13 s^-1. Root
+  inspected the figure, verified 34 artifact hashes and recalculated the
+  eight-row SI/normalization table. Public data:
+  `results/summaries/i4f_20261025/source-active-withdrawal/`.
+- **Restart fidelity (performance worker):** source inspection identifies the
+  pressure-derived dgdt as a candidate missing checkpoint state; rhoPhi and
+  alpha flux are regenerated before first use under current controls. A
+  separate minimal READ_IF_PRESENT/AUTO_WRITE probe is approved for build
+  and a small uninterrupted/legacy-restart/saved-dgdt comparison. No result
+  or sufficient-state claim exists yet. Current live cases remain unchanged.
 - **Rendering:** the earlier paired watcher has no healthy >=.65 s apparatus
   trajectory to render. No new milestone discharge movie exists. Its status
   is `results/runs/i4f-cold-pair-render-20261026T1553Z-attempt5/watch-status.json`.
@@ -120,10 +151,13 @@ jobs use fresh measured admission; no GPU or HPC job is launched here. The
 runtime save floor is 20 GiB. Two verified duplicate-only cleanups recovered
 about 4.29 GiB of measured duplicate payload from never-launched preparations;
 scripts, small inputs, errors and every executed run remain. Latest resource
-check reported about 22 GiB free. The cold run uses ten CPU equivalents and
-the full-source replay eight, sharing twenty effective CPUs with unrelated
-work. A bounded terminal-log compression task is investigating additional
-headroom; no additional reclamation is claimed until verified.
+check reported about 24 GiB free after lossless compression of twelve closed
+Oct24–25 solver logs (3.296 GB raw to .478 GB allocated gzip; 2.625 GiB net
+allocated space released). All streams passed decompression hash/size checks;
+root verified compressed hashes and the recovery manifest is indexed. The cold
+run uses ten CPU equivalents and the tighter-predictor trial eight. Twenty
+effective CPUs are shared with unrelated
+work. Current fields, inputs and active logs were not removed.
 [Archive and restore index](../results/archives/index.json).
 
 The earlier audit-output-only pair produced identical fourteen-field/time

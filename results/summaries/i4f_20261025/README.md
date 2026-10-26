@@ -21,6 +21,11 @@ completed .1 s/1000 steps with roundoff-level uniform p/U/T errors, but does not
 exercise the tank's compression sources. No complete credible discharge or validation result
 has been produced. See
 [live status](../../../docs/STATUS.md) for exact run identities and deadlines.
+The [source-active sealed-channel verification](source-active-withdrawal/README.md)
+and [grid figure](source-active-withdrawal/grid-trend.png) separate the improved
+water-volume balance from the remaining thermal/refinement error. All eight
+grid/source runs and one passive audit reached .4 s; these simplified cases
+do not validate the apparatus.
 The [cell/iteration review](finite-water-floor-review.json),
 [pressure-pass table](finite-water-floor-pressure-passes.csv),
 [contact cells](finite-water-floor-cells.csv), and

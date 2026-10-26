@@ -1,0 +1,119 @@
+{
+  "schema": "i4f-full-predictor-source-terminal-comparison/v1",
+  "classification": "exploratory numerical-method diagnostic; not validation or a hardware performance result",
+  "method": {
+    "change": "The full-source branch uses the frozen predictor compression C0 = Sp0 + div(U0) and MULES source Su = -C0*alphaP, with the native final phase flux in its all-cell alpha residual observer.",
+    "shared_case": "Corrected flush-at-inlet junction; 299214-cell native10 mesh; upwind momentum; Euler; one alpha corrector and subcycle; alphaApplyPrevCorr=false; 8 outer and 2 pressure correctors; same physical dictionaries and immutable warm checkpoint.",
+    "seed": {
+      "bundle": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z",
+      "checkpoint_time_s": 0.4600475152857613,
+      "water_inventory_kg": 3198.141666275171,
+      "qualification": "warm-restart history remains part of this exploratory comparison"
+    },
+    "default_full_source": {
+      "bundle": "results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-on",
+      "binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+      "source_patch": "results/summaries/i4f_20261025/source-active-withdrawal/full-source-prototype.patch",
+      "source_patch_sha256": "03ac8584344ccf545774a7d116ef2c841d803099a0b81f7152b5c2f366561f77",
+      "docker_container_id": "d85f657cf1aeb22c6b9f1b1af3db893708dcc39a188c6d29a72e0c1c9a81bd71",
+      "docker_started_at_utc": "2026-10-26T18:39:59.00363731Z",
+      "terminal_time_s": 0.494130458572,
+      "declared_target_s": 0.5,
+      "completed_steps": 316,
+      "normal_End": true,
+      "complete_native10_checkpoint": true,
+      "checkpoint_entries": "14 stored fields plus uniform/time",
+      "reached_target": false,
+      "terminal_reason": "The unchanged pressure-update guard requested writeNow after five settled steps with final-outer max |dp| above 100 Pa and final-to-penultimate ratio at least 0.9. The solver exited normally and the guard captured the complete checkpoint.",
+      "pressure_contacts": 0,
+      "terminal_final_outer_max_abs_dp_Pa": 1261.9024,
+      "terminal_final_outer_max_abs_dU_m_s": 5.5195575,
+      "terminal_pressure_update_ratio": 0.999999683018375,
+      "terminal_persistent_steps": 5,
+      "all_cell_alpha_residual": {
+        "max_abs_s-1": 0.040087825,
+        "volume_L1_m3_s": 7.2151919e-6,
+        "signed_volume_integral_m3_s": -1.8327311e-6,
+        "minimum_inverse_dt_minus_C_s-1": 10532.851
+      },
+      "predictor_algebraic_residual_caveat": "This 07fca run did not log RP or RF-RP. The reported RF is the discrete alpha residual; the Sp-only lag proxy is counterfactual and is not RP."
+    },
+    "sp_only_reference": {
+      "bundle": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z",
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "docker_container_id": "b1d9af592831f8c0ce73190f85e330d420cfdb898e86d828ae69a4d77a869f50",
+      "docker_started_at_utc": "2026-10-26T17:40:09.872094591Z",
+      "terminal_time_s": 0.494224620516,
+      "declared_target_s": 0.5,
+      "completed_steps": 317,
+      "reached_target": false,
+      "terminal_reason": "The same persistent pressure-update guard stopped the run before 0.50 s.",
+      "terminal_final_outer_max_abs_dp_Pa": 1102.0268,
+      "terminal_final_outer_max_abs_dU_m_s": 4.691527,
+      "terminal_pressure_update_ratio": 0.9999326740471155,
+      "terminal_persistent_steps": 6,
+      "pressure_contacts": 0
+    },
+    "matched_time_comparison": {
+      "full_source_time_s": 0.494130458572,
+      "sp_only_time_s": 0.494129775211,
+      "full_minus_sp_time_us": 0.683361,
+      "full_source_offset_from_seed_s": 0.034082943286238676,
+      "sp_only_offset_from_seed_s": 0.03408225992523867,
+      "water_inventory_kg": {
+        "full_source": 3198.1402,
+        "sp_only": 3198.148404236273,
+        "full_minus_sp": -0.00820423627328637
+      },
+      "checkpoint_relative_water_inventory_increment_kg": {
+        "full_source": -0.0014662751709693111,
+        "sp_only": 0.006737961102317058,
+        "full_minus_sp": -0.00820423627328637
+      },
+      "cumulative_water_ledger_defect_increment_from_seed_kg": {
+        "full_source": -0.0014527266253231141,
+        "sp_only": 0.0067515098605675505,
+        "full_minus_sp": -0.008204236485890665
+      },
+      "water_phase_continuity_L1_kg_s": {
+        "full_source": 0.082321006,
+        "sp_only": 0.8439173533695244
+      },
+      "pressure_update_at_matched_time": {
+        "full_source_final_outer_max_abs_dp_Pa": 1261.9024,
+        "sp_only_final_outer_max_abs_dp_Pa": 1262.880829954171,
+        "full_source_final_outer_max_abs_dU_m_s": 5.5195575,
+        "sp_only_final_outer_max_abs_dU_m_s": 5.524955058923726,
+        "full_source_persistent_steps": 5,
+        "sp_only_persistent_steps": 5
+      },
+      "interpretation": "The full-source water phase-continuity L1 is about ten times lower at this one near-coincident point. The checkpoint-relative water-inventory difference is 8.2 g out of about 3198 kg. These diagnostics measure different discrete balances; neither establishes greater physical accuracy. The pressure update remains persistent near 1.26 kPa in both branches."
+    },
+    "follow_up_audit": {
+      "bundle": "results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-alpha-tol-1e-12",
+      "status_at_packet_creation": "running past first solver step",
+      "single_numerical_delta_from_default_full_source": "alpha.water solver tolerance 1e-8 to 1e-12; relTol stays 0",
+      "declared_end_time_s": 0.7,
+      "binary_sha256": "fa14d9da534b138600cc239ab89e113af75971f51e3e2030df106fb237a0f755",
+      "binary_qualifier": "Separate read-only RP/RF-RP audit extension; not byte-identical to 07fca. A tiny 120-cell source identity check found the physical fields byte-identical to the prior binary.",
+      "diagnostic_source_patch": "results/summaries/i4f_20261025/source-active-withdrawal/rp-audit-diagnostic.patch",
+      "diagnostic_source_patch_sha256": "12c3a29ef2a3236e83465a3a994fac559f21fdcd5a70bf56456233fbec592621",
+      "docker_container_id": "c5ccf7a1e92ae18dd26a1e573a7c64ce511c63647f7af5161f318771378850dd",
+      "docker_started_at_utc": "2026-10-26T19:12:34.729904344Z",
+      "first_real_solver_time_s": 0.460145766545,
+      "guard_unit": "i4f-full-predictor-source-alpha-tol-1e-12-20261026t1903z-guard"
+    }
+  },
+  "limits": [
+    "This is a warm-fork, provisional-input internal-apparatus numerical diagnostic; it does not establish measured discharge, device performance, or validation.",
+    "The default full-source and Sp-only runs both stopped before the declared 0.50 s target under the same pressure-update health rule.",
+    "A lower water phase-continuity L1 is not itself proof of better phase-mass conservation or physical accuracy.",
+    "The measured full alpha RF is not the predictor linear-system algebraic residual. Actual RP and RF-RP are reserved for the separate tighter-tolerance audit run."
+  ],
+  "evidence": {
+    "full_source_analysis": "results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-on/analysis/default-full-source-terminal-and-matched-sp.json",
+    "full_source_step_health": "results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-on/step_health.csv",
+    "sp_only_terminal_analysis": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/analysis/terminal-diagnostic-v1.json",
+    "sp_only_step_health": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/step_health.csv"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "binary_path": "bin/compressibleInterFoamFrozenAlphaFullPredictorResidualAudit",
+  "binary_sha256": "fa14d9da534b138600cc239ab89e113af75971f51e3e2030df106fb237a0f755",
+  "binary_size_bytes": 1665544,
+  "build_finished_utc": "2026-10-26T18:50:38.276322Z",
+  "build_log": "logs/rp-audit-build.log",
+  "build_started_utc": "2026-10-26T18:49:04.887086Z",
+  "diagnostic_patch": "provenance/rp-audit-diagnostic.patch",
+  "duration_s": 93.389236,
+  "equations_or_run_case_modified": false,
+  "exit_code": 0,
+  "host_command": "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 900 -- docker run --rm --cpus=1 --memory=4g --cpu-shares=2 --user 1000:1000 --log-driver=none -v /home/v/proj/bene/fire-track2/results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-on/provenance/rp-audit-build:/pair opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319 bash --noprofile --norc /pair/scripts/build_full_predictor.sh",
+  "image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+  "intent": "provenance/rp-audit-build-intent.json",
+  "schema": "i4f-full-source-rp-audit-build-result/v1",
+  "status": "built_source_only_no_solver_started"
+}

@@ -16,7 +16,11 @@ the new hardware case includes both tanks and all four outlets.
 
 **Latest outcome:** no complete credible tank-to-nozzle discharge exists yet.
 The source-consistency investigation now provides a specific discrete error
-mechanism, with a limited improvement when one part is removed. The matched
+mechanism, but correcting it has not cured the pressure cycle. The complete
+Sp+divU warm trial stopped at .494130 s with 1261.902 Pa and 5.520 m/s final
+outer updates, zero raw floor contacts, and a complete checkpoint. The Sp-only
+trial stopped at .494225 s. These are effectively the same stopping window;
+better intermediate water balance did not supply a stable discharge. The matched
 warm upwind baseline stopped at .481894 s; caching its predictor Sp continued
 to .494225 s without floor contact, then also stopped on persistent pressure
 updates. At approximately .480 s, its post-EOS water-continuity volume-L1
@@ -66,6 +70,26 @@ contact; this is not a cold timestep-convergence result. A separate periodic
 p/U/T errors of 7.20e-9 Pa / 4.27e-12 m/s / 2.01e-11 K. Its public launcher
 reproduced that result. Uniform equilibrium does not excite the apparatus's
 compression sources, so this limited verification does not clear the tank.
+
+A separate [source-active sealed-channel study](../results/summaries/i4f_20261025/source-active-withdrawal/README.md)
+now compares cached Sp and cached Sp+divU on 60/120/240/480 axial cells.
+Each case starts with 80 mL water and 20 mL air at 1.2 MPa and 293.15 K,
+and completes .4 s/1600 fixed steps. Constant-density water, laminar flow and
+Pr=1e9 deliberately separate this test from the apparatus's finite-water EOS,
+SST and heat transport. With the full coefficient, same-volume adiabatic
+pressure errors decrease from 1.930% to 1.288% to .878% on the three finest
+meshes; temperature errors are 1.914%, 1.272% and .861%. These are refinement
+trends, not a demonstrated asymptotic order, GCI or apparatus validation.
+The source change leaves these thermal errors almost unchanged and slightly
+increases gas-mass drift, while reducing normalized water-volume balance error
+from roughly 2e-5 to at most 5.32e-11 of initial water volume in this study.
+Thus improved water balance does not establish a closed gas-energy model.
+An additional n=120 read-only audit reproduces identical native endpoint fields
+and finds corrected-minus-predictor alpha-equation residual below 9.21e-13 s^-1.
+The [inspected figure](../results/summaries/i4f_20261025/source-active-withdrawal/grid-trend.png)
+and SI data preserve both effects. The much larger alpha residual in the tank
+motivates the next controlled predictor linear-tolerance test; its outcome
+remains unknown.
 
 The earlier finite-water cold test contacted the pressure floor:
 one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields at
