@@ -28,6 +28,8 @@ reuse the recorded calibration.
 | Fluid properties and study ranges | PDF p. 5 / article p. 4, Table 2 | Water: `rho_j=997.6 kg/m^3`, `mu_j=8.89e-4 Pa s`; air: `rho_g=1.18 kg/m^3`, `mu_g=1.86e-5 Pa s`; `sigma=0.072 N/m`, `g=9.81 m/s^2`, `p_g=101325 Pa`, `T=300 K`. Study ranges: `d_j=0.2–0.6 m`, `v_j=5–15 m/s`, `u_g=50–90 m/s`; `q=4.3–39`, `We_g=(1.6–5.29)e4`, `We_j=(1.39–12.5)e5`, `Re_g=(0.89–2.66)e6`, `Re_j=(2.24–6.73)e6`, `Oh_j=(1.35–2.34)e-4`, `Bo_j=(0.54–4.89)e4`, density ratio 846, viscosity ratio 48, and inlet liquid turbulence intensity `I_j=0.01–0.2`. |
 | Exact reference row | PDF p. 5 / article p. 4, Table 3 | Case 1, legend `+` (green plus), mesh `Delta x=16 mm`, `I_j=0.01`, realizable `k-epsilon`, `d_j=40 cm`, `v_j=10 m/s`, `u_g=70 m/s`, `q=17.3`, `Re_j=4.9e6`, `Re_g=1.78e6`, `We_g=3.2e4`, `We_j=5.54e5`. These are the single-nozzle conditions. |
 | Solver and interface definitions | PDF p. 6 / article p. 5, Section 3.1 | Unsteady, incompressible, three-dimensional finite-volume STAR-CCM+ calculation; VOF liquid volume fraction `chi`, continuum surface force surface tension, realizable `k-epsilon` RANS with two-layer wall treatment (the paper also tested SST `k-omega`). HRIC second-order interface scheme, second-order-upwind convection, first-order implicit time integration, `Delta t=1e-3 s`; reported CFL is 3.2–5.7. The paper uses `chi=0.9` for the liquid core, `chi=0.1` for the lower cloud envelope, and `chi=0.5` for the interface. |
+| Coupling and gradient treatment | PDF p. 6 / article p. 5, Section 3.1; PDF p. 8 / article p. 7, Section 3.3 | Collocated arrangement with Rhie–Chow velocity–pressure interpolation and SIMPLE pressure correction. The paper selects SIMPLE for robust slow-transient, large-scale fragmentation calculations with relatively large timesteps. Gradients use a hybrid-Gauss LSQ method with the source-spelled “Vankatakrishnan” slope limiter. Internal iteration counts, exact convergence criteria and VOF substep counts are not supplied. |
+| Turbulence sensitivity and unpublished inputs | PDF p. 9 / article p. 8, Section 3.4 and Fig. 7; Table 3 on PDF p. 5 | Case 1 uses liquid-jet intensity 1% with realizable k–epsilon; Case 5 uses 20%, Case 6 no turbulence model, and Case 7 SST k–omega at 1%. The authors report little change in penetration/width across these cases, with slightly lower penetration without RANS. Air-side intensity, k/epsilon length scales, exact startup fields and interface damping are not specified. Text extraction: `results/runs/rouaix-diagnosis-20261026/paper-pdf-page9.txt`; no parameter is fitted from these comparisons. |
 | Geometry and boundary conditions | PDF p. 7 / article p. 6, Section 3.2 and Fig. 3 | Curved aircraft underside is a no-slip top wall. Top footprint is `50 d_j` streamwise by `17.5 d_j` spanwise; vertical height is about `25 d_j`, with a trapezoidal opening angle of 25 degrees; bottom footprint is `50 d_j` by `40 d_j`. Uniform crossflow enters `l=2.5 m` upstream of the nozzle center. A uniform liquid velocity is imposed at the nozzle exit. Other boundaries are outflow at atmospheric pressure. The paper says preliminary, unreported tests found no significant difference between the curved and a flat wall for jet evolution. |
 | Mesh and run duration | PDF p. 8 / article p. 7, Section 3.3 | Unstructured polyhedral mesh with five prism layers and 1.1 growth ratio. Mesh sizes studied: 70, 50, 30, and 16 mm; Case 1 uses the 16 mm fine mesh. The calculation runs for about 5 s to reach stabilized penetration and transverse width. This is simulated time, not a stated finite release duration or payload. |
 | Penetration and transverse width curves | PDF p. 13 / article p. 12, Fig. 13; definitions/fits at PDF p. 15 / article p. 14, Section 4.3, Eqs. (10)–(11) | Case 1 is the green `+` series; Case 12 is the darker-green right-point triangle. Axes are normalized by `d_j`: streamwise `x/d_j`, vertical penetration `y/d_j`, and transverse expansion `z/d_j`. The paper defines the cloud surface with `chi=0.1`. The accompanying fits are `y/d_j = 1.15 q^0.379 (x/d_j)^0.54` and `z/d_j = 2.1 q^0.171 (x/d_j)^0.49` for `z >= 0.25 d_j`; near the nozzle, Eq. (11) uses approximately `z=d_j` for `x/d_j<0.25`. These are reported multi-case fit relations, separate from the digitized points. |
@@ -37,6 +39,29 @@ Table 2 gives a `v_j` study range through 15 m/s, while the Section 2.2 prose
 describes a selected range through 10 m/s. Table 3 includes a Case 12 at 15
 m/s. This transcription follows the tables for the ranges and Case 1, while
 retaining the prose/table discrepancy rather than silently reconciling it.
+
+Source-consistency check, 25 October 2026: visual inspection of PDF p. 5
+confirms Table 2 mu_j=8.89e-4 Pa s and Table 3 Case 1 Re_j=4.9e6.
+The printed dimensional inputs instead give rho_j v_j D / mu_j = 4.48864e6.
+Keep both reported and calculated values; do not adjust viscosity or velocity
+to force the Reynolds numbers to agree. Table 3 Case 3 also prints a 50 mm
+mesh and u_g=30 m/s while repeating Case 1 dimensionless groups, although
+Cases 2–4 are described as a mesh study. The source does not resolve which
+entry is erroneous; do not silently treat that row as a matched grid test.
+The read-only extraction and page renders are retained in
+`results/runs/komondor-long-horizon-sizing-20261025/rouaix-paper/`.
+
+Mesh-image check, 25 October 2026: high-resolution inspection of Fig. 4
+(PDF p. 7 / article p. 6) shows a local 16 mm region and surrounding 50 mm
+region in Mesh1; Mesh2 similarly labels 30 mm and 50 mm regions. The four
+70/50/30/16 mm candidates therefore are not four prescribed bands in one
+mesh, but each fine candidate can contain multiple local spacings. Exact
+region coordinates, spanwise extents, transition widths and prism first-layer
+height are not published. Fig. 4 labels the vertical extent 11 m, whereas
+Section 3.2 describes about 25D=10 m; retain this source discrepancy. The
+400 dpi figure crop and explicitly inferred center-plane ROI are in
+`results/runs/rouaix-mesh-source-20261025/`; the case keeps the declared 10 m
+height rather than treating the figure label as a recovered geometry.
 
 ## Source model versus aircraft context
 
@@ -176,3 +201,14 @@ geometry, finite payload, ground deposition, useful-strip score, or field
 validity. This record does not set CFD tolerances, prescribe a run budget, or
 mark E1 ready. Freeze those only through the project review process after
 source review and acceptance-criterion review.
+
+
+Source-method clarification, 26 October: the coupling and gradient row above
+was rechecked in the preserved primary text (`source-text-pages4-8.txt`,
+lines 164–182 and 263–266) and independently reviewed. Both the paper and
+current OpenFOAM momentum/time scheme are first-order implicit; do not describe
+the discrepancy as an implicit paper solver versus a wholly explicit reproduction.
+The VOF advection, gradient limiting and pressure–velocity iteration structure
+differ. Nominal 14 mm versus 16 mm resolution alone changes the corresponding
+uniform-cell Courant scale by about 14%, not by a factor of ten. A 0.1 ms
+trial is a diagnostic candidate, not a demonstrated required production step.

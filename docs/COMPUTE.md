@@ -199,7 +199,97 @@ stop decision. Keep full 3D fields sparse; routinely save compact flux and groun
 products. Follow the validation and stop conditions in the experiment plan before making
 any design or field-performance claim.
 
-## Cluster handoff for 16 October 2026
+## Komondor access verified 24 October 2026
+
+SSH as `nk_memj@komondor.hpc.kifu.hu` is working. The CPU partition and native
+`OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH` module were inspected; the latter supplies
+`interIsoFoam` build `_87ed40d256-20251219` and stock tutorials. Load
+`openfoam` then the versioned module and follow the site's `source $FOAM_BASH`
+command (the variable contains source arguments). Use the native Cray MPICH
+environment and Slurm `srun`, not the workstation Docker launcher.
+
+The first bounded tutorial/scaling protocol is
+[`HPC_P0_KOMONDOR_TUTORIAL.md`](../experiments/HPC_P0_KOMONDOR_TUTORIAL.md).
+Recheck `squota`, `sbalance`, `squeue`, and association limits before launching.
+On 25 October the project inode quota blocked new files; the bounded native
+mesh check therefore uses explicitly checked scratch capacity. Neither
+filesystem is assumed to have quota headroom. Distinguish active MPI ranks from allocated/billed CPUs and
+leave unrelated account jobs untouched. Authentication may require interactive
+EduID acknowledgement; use a short-lived SSH control master for repeated
+inspection and `rsync`. Do not alter global SSH settings or copy credentials.
+
+Performance analysis uses `scripts/hpc_metrics.py --run LABEL=solver.log
+--ranks LABEL=N --launcher LABEL=launcher.log --sacct LABEL=job.sacct
+--output new-report.json`. Repeat the inputs for each run and add
+`--baseline n100` for the matched scaling sweep. The parser separates the
+high-resolution Slurm solver-step envelope, OpenFOAM's rounded `ClockTime`,
+full-job elapsed time, measured CPU time and allocated CPU-hours. Pressure
+iteration counts are not pressure timing. Per-step histories and scalar
+summaries can be sent to W&B with explicit `--wandb-project` and optional
+`--wandb-entity` after a destination and credentials exist; otherwise JSON
+generation is offline and requires no W&B dependency. The HPC default Python
+is 3.6.8; this parser requires Python 3.11, available via
+`module load cray-python/3.11.7`.
+
+The current v2512 case uses synchronous native collated files, with one writer
+group to minimize inodes. Installed v2512 binaries/source did not demonstrate
+HDF5 solver I/O; a system HDF5 library alone does not supply a compatible
+OpenFOAM file handler. More collated writer groups may reduce I/O gathering
+cost but increase file counts, so measure before changing the sparse-write
+test. [Upstream OpenCFD v2606 adds VTK-HDF export tools](https://www.openfoam.com/news/main-news/openfoam-v2606/plugins); they were not adopted
+for these v2512 runs. The local ParaView exporter was tested separately and
+has data-type and field-name limits documented in
+[`HPC_VISUALIZATION.md`](HPC_VISUALIZATION.md).
+
+Keep persistent HPC files packed: one input archive and one result archive per
+attempt, plus the batch script and scheduler log. Prefer verified node-local
+temporary storage for unpacked work; use a bounded scratch workspace only
+when local storage is unavailable or insufficient. Verify archive membership,
+gzip integrity and SHA-256 before deleting only the attempt's owned workspace.
+Keep failed attempts as compact archives. Count directories as well as files;
+aim below 100 persistent entries for this experiment. A running OpenFOAM case
+requires multiple files, so do not add a custom filesystem or solver format
+to force one inode. For longer runs, retain sparse collated checkpoints on
+durable storage because node-local data is lost with the allocation.
+On 25 October, closed historical metadata was reduced from 123 loose entries
+to one archive plus an index, with a verified local backup before removal.
+Project EDQUOT prevented even an archive inode, so this 713 kB archive and
+79 kB index remain in a dedicated HPC HOME backup directory. This tiny metadata
+exception does not place simulation fields in HOME. Total current owned HPC
+entries are 73 across project, scratch and that backup; see
+`results/runs/komondor-inode-pack-20261025/` for the exact inventory.
+
+## Choosing ranks for long VOF runs
+
+Choose ranks from representative post-startup physical-time throughput on the
+actual case. The 25 October 2.322M-cell, 50-step tutorial makes this distinction
+important: 64 ranks finished the entire job fastest, but steps 11–49 at 300
+ranks advanced about twice as fast as at 64. These rounded-clock, early-flow
+windows do not predict the 35.19M-cell Rouaix case. The raw window calculation
+and quantization bounds are in
+`results/runs/komondor-long-horizon-sizing-20261025/throughput-sizing.json`.
+
+For each rank count P, measure v(P) = physical seconds advanced / wall seconds
+in a matched, representative window. Estimate runtime as setup/startup +
+remaining physical horizon/v(P) + measured checkpoint/output costs + final
+processing. Add queue time separately for time-to-result; queue time is not
+billed as allocated compute. CPU cost is actual AllocCPUs times allocated job
+wall seconds / 3600, which can differ from active MPI ranks on full nodes.
+Use phase-specific rates when interface complexity, AMR, timestep or pressure
+iterations change. Keep numerical tolerances, timestep policy, transport mode,
+outputs, mesh and sampled physical windows matched; validate stability and
+source/ledger observables rather than optimizing a compromised solution.
+
+For the actual 35.19M mesh, 300–600 active ranks is a starting pilot bracket,
+not a selected optimum. Include the three-node 300/360-rank target and nearby
+node-aligned points; Komondor suggests 120 active ranks per full 128-core CPU
+node. Verify AllocTRES and memory before cost comparisons. The external
+[Pawsey heuristic](https://pawsey.atlassian.net/wiki/spaces/US/pages/51925980)
+of about 60k cells/rank is a starting estimate from another system, not a
+universal VOF rule. A one-node lower-rank memory qualification may precede
+the larger pilots. No new CFD jobs are armed by this sizing guidance.
+
+## Historical cluster handoff for 16 October 2026
 
 The user expects about 1,300 CPU cores; Slurm is probable, but scheduler,
 node layout, memory, MPI and container support are unconfirmed. OpenFOAM is

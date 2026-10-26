@@ -1,0 +1,13 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object controlDict;
+}
+
+application meshOnly;
+startFrom startTime; startTime 0; stopAt endTime; endTime 0; deltaT 1;
+writeControl timeStep; writeInterval 1; writeFormat binary; writeCompression off;
+writePrecision 16;
+runTimeModifiable false;

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the supported fixed-mesh Dash-8 interIsoFoam water ledger.
+"""Audit the supported fixed-mesh interIsoFoam water ledger.
 
 This is an exploratory diagnostic, not a conservation gate. ``alphaPhi_`` is
 treated as the interval-mean volumetric flux for one completed alpha step, so
@@ -81,6 +81,8 @@ class ParsedLog:
     complete_rows_total: int
     file_sha256: str
     file_byte_length: int
+    delta_t_source_mode: str
+    configured_delta_t_token: str | None
 
 
 def sha256_file(path: Path) -> str:
@@ -99,6 +101,50 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise AuditError(f"expected a JSON object in {path}")
     return data
+
+
+def _declared_ledger_patches(case_inputs: dict[str, Any]) -> tuple[str, tuple[str, ...]]:
+    """Read the explicit source/open patch contract from case metadata."""
+    sources = case_inputs.get("source_patches")
+    open_patches = case_inputs.get("open_patches")
+    if not isinstance(sources, list) or len(sources) != 1:
+        raise AuditError("case-inputs must explicitly declare exactly one source_patches entry")
+    if not isinstance(open_patches, list) or not open_patches:
+        raise AuditError("case-inputs must explicitly declare a nonempty open_patches list")
+    names = [*sources, *open_patches]
+    if any(
+        not isinstance(name, str) or re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name) is None
+        for name in names
+    ):
+        raise AuditError("declared source/open patch names must be OpenFOAM word identifiers")
+    source_patch = sources[0]
+    selected_open = tuple(open_patches)
+    if len(set(selected_open)) != len(selected_open):
+        raise AuditError("declared open_patches must not contain duplicate patch names")
+    if source_patch in selected_open:
+        raise AuditError("declared source_patches and open_patches must be disjoint")
+    reserved_series_names = {"source", "waterVolume", "solverLog"}
+    collisions = set(names) & reserved_series_names
+    if collisions:
+        raise AuditError(
+            f"declared patch names collide with ledger series names: {sorted(collisions)}"
+        )
+    return source_patch, selected_open
+
+
+def _series_file_inventory(
+    source_patch: str = SOURCE_PATCH,
+    open_patches: tuple[str, ...] = OPEN_PATCHES,
+) -> dict[str, tuple[str, str, int, str]]:
+    """Build local diagnostic names while retaining Dash-8 defaults."""
+    return {
+        "waterVolume": ("waterVolume", "volFieldValue", 1, "volintegrate(alpha.water)"),
+        source_patch: (f"{source_patch}Flux", "surfaceFieldValue", 2, "sum(alphaphi_)"),
+        **{
+            patch: (f"{patch}Flux", "surfaceFieldValue", 2, "sum(alphaphi_)")
+            for patch in open_patches
+        },
+    }
 
 
 def _find_case_root(run_dir: Path) -> Path:
@@ -259,14 +305,18 @@ def _foam_named_blocks(text: str) -> dict[str, str]:
     }
 
 
-def _function_object_bindings(control_text: str) -> dict[str, dict[str, Any]]:
+def _function_object_bindings(
+    control_text: str,
+    source_patch: str = SOURCE_PATCH,
+    open_patches: tuple[str, ...] = OPEN_PATCHES,
+) -> dict[str, dict[str, Any]]:
     """Verify that each output directory is bound to the intended patch/field."""
     blocks = _foam_named_blocks(control_text)
     expected: dict[str, tuple[str, str | None, str, tuple[str, ...]]] = {
         "waterVolume": ("volFieldValue", None, "volIntegrate", ("alpha.water",)),
         **{
             f"{patch}Flux": ("surfaceFieldValue", patch, "sum", ("phi", "alphaPhi_"))
-            for patch in (SOURCE_PATCH, *OPEN_PATCHES)
+            for patch in (source_patch, *open_patches)
         },
     }
     result: dict[str, dict[str, Any]] = {}
@@ -322,7 +372,11 @@ def _function_object_bindings(control_text: str) -> dict[str, dict[str, Any]]:
     return result
 
 
-def _verify_boundary_inventory(case_root: Path, case_inputs: dict[str, Any]) -> dict[str, Any]:
+def _verify_boundary_inventory(
+    case_root: Path,
+    source_patch: str,
+    open_patches: tuple[str, ...],
+) -> dict[str, Any]:
     boundary_path = case_root / "constant" / "polyMesh" / "boundary"
     velocity_path = case_root / "0" / "U"
     if not boundary_path.is_file() or not velocity_path.is_file():
@@ -367,14 +421,7 @@ def _verify_boundary_inventory(case_root: Path, case_inputs: dict[str, Any]) -> 
         if (match := re.search(r"\btype\s+(\w+)\s*;", body)) is not None
     }
 
-    declared_sources = case_inputs.get("source_patches")
-    declared_open = case_inputs.get("open_patches")
-    if declared_sources != [SOURCE_PATCH] or declared_open != list(OPEN_PATCHES):
-        raise AuditError(
-            "supported audit requires the declared Dash-8 source/open patch inventory "
-            f"{[SOURCE_PATCH]} + {list(OPEN_PATCHES)}"
-        )
-    accounted = {SOURCE_PATCH, *OPEN_PATCHES}
+    accounted = {source_patch, *open_patches}
     actual = set(boundary_types)
     missing = accounted - actual
     if missing:
@@ -407,8 +454,8 @@ def _verify_boundary_inventory(case_root: Path, case_inputs: dict[str, Any]) -> 
     return {
         "mesh_boundary_types": boundary_types,
         "velocity_boundary_types": velocity_types,
-        "ledger_source_patch": SOURCE_PATCH,
-        "ledger_open_patches": list(OPEN_PATCHES),
+        "ledger_source_patch": source_patch,
+        "ledger_open_patches": list(open_patches),
         "omitted_boundaries_verified_impermeable_walls": sorted(omitted),
         "mesh_boundary_file": str(boundary_path),
         "velocity_boundary_file": str(velocity_path),
@@ -786,7 +833,8 @@ def _check_supported_configuration(
     application = re.findall(r"\bapplication\s+(\w+)\s*;", control_text)
     if application != ["interIsoFoam"]:
         raise AuditError(f"controlDict must declare application interIsoFoam: {application}")
-    function_object_bindings = _function_object_bindings(control_text)
+    source_patch, open_patches = _declared_ledger_patches(case_inputs)
+    function_object_bindings = _function_object_bindings(control_text, source_patch, open_patches)
     fvsolution_text = fvsolution_path.read_text(encoding="utf-8", errors="replace")
     for path, text in (
         (control_path, control_text),
@@ -865,13 +913,15 @@ def _check_supported_configuration(
 
     # The density parser checks the actual case dictionary and any duplicate case declaration.
     rho = _water_density(transport_path, case_inputs)
-    boundary_inventory = _verify_boundary_inventory(case_root, case_inputs)
+    boundary_inventory = _verify_boundary_inventory(case_root, source_patch, open_patches)
     if dynamic_path.is_file():
         mesh_mode = "explicit staticFvMesh"
     else:
         mesh_mode = "fixed mesh; no dynamicFvMeshDict present"
     return {
         "solver": solver,
+        "source_patch": source_patch,
+        "open_patches": list(open_patches),
         "nAlphaSubCycles": subcycles,
         "nOuterCorrectors": outer,
         "water_density_kg_m3": rho,
@@ -946,6 +996,152 @@ def _verify_source_evidence(path: Path) -> dict[str, Any]:
     }
 
 
+NATIVE_SOLVER_IDENTITY_FIELDS = (
+    "module_name",
+    "version",
+    "build",
+    "wm_options",
+    "architecture",
+    "precision",
+    "label_size_bits",
+    "executable_path",
+    "executable_sha256",
+    "solver_banner_sha256",
+)
+
+
+def _validate_native_solver_identity(value: Any, *, label: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise AuditError(f"{label} must contain a native_solver object")
+    missing = set(NATIVE_SOLVER_IDENTITY_FIELDS) - set(value)
+    if missing:
+        raise AuditError(f"{label} native_solver is missing fields: {sorted(missing)}")
+    for key in (
+        "module_name",
+        "build",
+        "wm_options",
+        "architecture",
+        "executable_path",
+    ):
+        field_value = value.get(key)
+        if not isinstance(field_value, str) or not field_value.strip():
+            raise AuditError(f"{label} native_solver {key} must be a nonempty string")
+    if value.get("version") != "v2512":
+        raise AuditError(f"{label} native_solver version must be v2512")
+    if "DPInt32" not in value["wm_options"]:
+        raise AuditError(f"{label} native_solver WM_OPTIONS must identify a DPInt32 build")
+    if value.get("precision") != "DP":
+        raise AuditError(f"{label} native_solver precision must be DP")
+    label_bits = value.get("label_size_bits")
+    if isinstance(label_bits, bool) or label_bits != 32:
+        raise AuditError(f"{label} native_solver label_size_bits must be 32")
+    if not Path(value["executable_path"]).is_absolute():
+        raise AuditError(f"{label} native_solver executable_path must be absolute")
+    for key in ("executable_sha256", "solver_banner_sha256"):
+        digest = value.get(key)
+        if not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None:
+            raise AuditError(f"{label} native_solver {key} must be a lowercase SHA-256")
+    return {key: value[key] for key in NATIVE_SOLVER_IDENTITY_FIELDS}
+
+
+def _verify_native_source_evidence(path: Path) -> dict[str, Any]:
+    if path.is_symlink():
+        raise AuditError("native source evidence must not be a symbolic link")
+    path = path.resolve(strict=True)
+    evidence = _read_json(path)
+    if evidence.get("execution_backend") != "slurm-native":
+        raise AuditError("native source evidence must declare execution_backend slurm-native")
+    if evidence.get("source_reference_image_digest") != PINNED_IMAGE:
+        raise AuditError(
+            "native source evidence must identify the pinned source-hash reference image"
+        )
+    source_records = evidence.get("solver_source", {})
+    if not isinstance(source_records, dict):
+        raise AuditError("native source evidence lacks a solver_source map")
+    verified: dict[str, str] = {}
+    for name, expected in KNOWN_SOLVER_SOURCE_HASHES.items():
+        source_record = source_records.get(name)
+        source_hash = source_record.get("sha256") if isinstance(source_record, dict) else None
+        source_path = source_record.get("path") if isinstance(source_record, dict) else None
+        if source_hash != expected:
+            raise AuditError(f"native installed source hash mismatch for {name}")
+        if not isinstance(source_path, str) or not Path(source_path).is_absolute():
+            raise AuditError(f"native installed source path must be absolute for {name}")
+        verified[name] = expected
+    native_solver = _validate_native_solver_identity(
+        evidence.get("native_solver"), label="native source evidence"
+    )
+    return {
+        "path": str(path.resolve()),
+        "sha256": sha256_file(path),
+        "source_reference_image_digest": PINNED_IMAGE,
+        "verified_installed_source_hashes": verified,
+        "native_solver": native_solver,
+        "source_run": evidence.get("source_run"),
+    }
+
+
+def _verify_native_runtime(
+    case_inputs: dict[str, Any],
+    manifests: tuple[Path, ...],
+    source_evidence_path: Path | None,
+) -> dict[str, Any]:
+    if source_evidence_path is None:
+        raise AuditError(
+            "slurm-native execution requires --verified-source-evidence; a reference image digest is not runtime proof"
+        )
+    if case_inputs.get("solver_version") != "v2512":
+        raise AuditError("native case-inputs must declare solver_version v2512")
+    reference_digest = case_inputs.get("reference_image_digest")
+    if reference_digest is not None and reference_digest != PINNED_IMAGE:
+        raise AuditError("native case reference_image_digest does not match the source reference")
+    if _image_strings(case_inputs):
+        raise AuditError("slurm-native case-inputs must not claim a Docker image as its runtime")
+    source_evidence = _verify_native_source_evidence(source_evidence_path)
+    expected_identity = source_evidence["native_solver"]
+    if not manifests:
+        raise AuditError("slurm-native verification requires an actual run manifest")
+    for manifest_path in manifests:
+        manifest = _read_json(manifest_path)
+        if manifest.get("execution_backend") != "slurm-native":
+            raise AuditError(f"native run manifest must declare slurm-native: {manifest_path}")
+        if manifest.get("solver_version") != "v2512":
+            raise AuditError(f"native run manifest solver_version must be v2512: {manifest_path}")
+        if _image_strings(manifest):
+            raise AuditError(
+                f"native run manifest must not claim a Docker runtime: {manifest_path}"
+            )
+        if manifest.get("native_source_evidence_sha256") != source_evidence["sha256"]:
+            raise AuditError(
+                f"native run manifest must hash the supplied source evidence: {manifest_path}"
+            )
+        actual_identity = _validate_native_solver_identity(
+            manifest.get("native_solver"), label=f"run manifest {manifest_path}"
+        )
+        if actual_identity != expected_identity:
+            changed = [
+                field
+                for field in NATIVE_SOLVER_IDENTITY_FIELDS
+                if actual_identity[field] != expected_identity[field]
+            ]
+            raise AuditError(
+                "native run manifest runtime identity differs from installed-source evidence "
+                f"for {changed}: {manifest_path}"
+            )
+    return {
+        "verification_mode": "native-module-source-correspondence",
+        "execution_backend": "slurm-native",
+        "source_reference_image_digest": PINNED_IMAGE,
+        "source_evidence": source_evidence,
+        "native_solver": expected_identity,
+        "run_manifests": [str(path) for path in manifests],
+        "interpretation": (
+            "Trusted installed-source/runtime record matched the native run manifest; "
+            "this is not proof of reproducible or bit-for-bit binary construction."
+        ),
+    }
+
+
 def _run_manifest_paths(run_dir: Path, case_root: Path) -> tuple[Path, ...]:
     candidates = (run_dir / "manifest.json", case_root.parent / "manifest.json")
     return tuple(dict.fromkeys(path.resolve() for path in candidates if path.is_file()))
@@ -993,6 +1189,11 @@ def _verify_image(
     manifests: tuple[Path, ...],
     source_evidence: Path | None,
 ) -> dict[str, Any]:
+    backend = case_inputs.get("execution_backend")
+    if backend == "slurm-native":
+        return _verify_native_runtime(case_inputs, manifests, source_evidence)
+    if backend not in (None, "docker"):
+        raise AuditError(f"unsupported solver execution_backend {backend!r}")
     candidates = [("case-inputs", key, value) for key, value in _image_strings(case_inputs)]
     for manifest_path in manifests:
         manifest = _read_json(manifest_path)
@@ -1109,10 +1310,12 @@ def _parse_series(
     name: str,
     cutoff_s: float,
     *,
+    series_files: dict[str, tuple[str, str, int, str]] | None = None,
     paths: tuple[Path, ...] | None = None,
     contents: dict[Path, bytes] | None = None,
 ) -> ParsedTable:
-    function_name, file_stem, value_count, marker = SERIES_FILES[name]
+    inventory = SERIES_FILES if series_files is None else series_files
+    function_name, file_stem, value_count, marker = inventory[name]
     paths = paths or _series_paths(case_root, function_name, file_stem)
     all_rows: list[DataRow] = []
     trailing = 0
@@ -1206,6 +1409,357 @@ def _parse_solver_log(path: Path, cutoff_s: float, *, content: bytes | None = No
         len(rows),
         hashlib.sha256(raw).hexdigest(),
         len(raw),
+        "native-paired",
+        None,
+    )
+
+
+def _foam_top_level_declarations(text: str, key: str) -> list[str]:
+    clean = _strip_foam_comments(text)
+    declaration = re.compile(rf"\s*{re.escape(key)}\s+([^;{{}}]+)\s*;\s*")
+    values: list[str] = []
+    depth = 0
+    for line in clean.splitlines():
+        if depth == 0 and (match := declaration.fullmatch(line)) is not None:
+            values.append(match.group(1).strip())
+        quote: str | None = None
+        escaped = False
+        for char in line:
+            if quote is not None:
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == quote:
+                    quote = None
+            elif char in {"'", '"'}:
+                quote = char
+            elif char == "{":
+                depth += 1
+            elif char == "}":
+                depth -= 1
+                if depth < 0:
+                    raise AuditError("unbalanced braces in controlDict")
+    if depth != 0:
+        raise AuditError("unbalanced braces in controlDict")
+    return values
+
+
+def _flat_control_function_blocks(text: str) -> dict[str, str] | None:
+    clean = _strip_foam_comments(text)
+    matches = list(re.finditer(r"\bfunctions\s*\{", clean))
+    if len(matches) != 1:
+        return None
+    cursor = matches[0].end()
+    blocks: dict[str, str] = {}
+    while cursor < len(clean):
+        while cursor < len(clean) and (clean[cursor].isspace() or clean[cursor] == ";"):
+            cursor += 1
+        if cursor < len(clean) and clean[cursor] == "}":
+            return blocks
+        name_match = re.match(r"[A-Za-z_][A-Za-z0-9_.]*", clean[cursor:])
+        if name_match is None:
+            return None
+        name = name_match.group()
+        cursor += len(name)
+        while cursor < len(clean) and clean[cursor].isspace():
+            cursor += 1
+        if cursor >= len(clean) or clean[cursor] != "{":
+            return None
+        body_start = cursor + 1
+        cursor = body_start
+        while cursor < len(clean) and clean[cursor] != "}":
+            if clean[cursor] == "{":
+                return None
+            cursor += 1
+        if cursor >= len(clean) or name in blocks:
+            return None
+        blocks[name] = clean[body_start:cursor]
+        cursor += 1
+    return None
+
+
+def _fixed_control_delta_t_token(
+    case_root: Path,
+    control_text: str,
+    case_inputs: dict[str, Any],
+    control_path: Path,
+) -> str | None:
+    """Return fixed deltaT only for a frozen, nonprogrammable time-control dictionary."""
+    clean = _strip_foam_comments(control_text)
+    control_tokens = _strip_foam_comments_preserving_tokens(control_text)
+    if re.search(r"(?m)^\s*#|#\{|\$[({A-Za-z_]", control_tokens):
+        return None
+    if _foam_top_level_declarations(clean, "adjustTimeStep") != ["no"]:
+        return None
+    if _foam_top_level_declarations(clean, "runTimeModifiable") != ["false"]:
+        return None
+    if _foam_top_level_declarations(clean, "startFrom") != ["startTime"]:
+        return None
+    if _foam_top_level_declarations(clean, "stopAt") != ["endTime"]:
+        return None
+    if _foam_top_level_declarations(clean, "timeFormat") != ["fixed"]:
+        return None
+    precision_values = _foam_top_level_declarations(clean, "timePrecision")
+    if len(precision_values) != 1 or re.fullmatch(r"\d+", precision_values[0]) is None:
+        return None
+    if int(precision_values[0]) <= 0:
+        return None
+    start_values = _foam_top_level_declarations(clean, "startTime")
+    if (
+        len(start_values) != 1
+        or _decimal_value(start_values[0], context=f"{control_path} startTime") != 0
+    ):
+        return None
+    if _foam_top_level_declarations(clean, "writeControl") != ["runTime"]:
+        return None
+    write_intervals = _foam_top_level_declarations(clean, "writeInterval")
+    if len(write_intervals) != 1:
+        return None
+    write_interval = _decimal_value(write_intervals[0], context=f"{control_path} writeInterval")
+    if write_interval <= 0:
+        return None
+
+    delta_tokens = _foam_top_level_declarations(clean, "deltaT")
+    if len(delta_tokens) != 1:
+        return None
+    delta_token = delta_tokens[0]
+    if re.fullmatch(r"[+\-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+\-]?\d+)?", delta_token) is None:
+        return None
+    delta_value = _decimal_value(delta_token, context=f"{control_path} deltaT")
+    if delta_value <= 0:
+        return None
+
+    source_patch, open_patches = _declared_ledger_patches(case_inputs)
+    wall_patches = _verify_boundary_inventory(case_root, source_patch, open_patches)[
+        "omitted_boundaries_verified_impermeable_walls"
+    ]
+    wall_function_names = {f"{patch}Flux": patch for patch in wall_patches}
+    allowed_names = {
+        "waterVolume",
+        *(f"{patch}Flux" for patch in (source_patch, *open_patches)),
+        *wall_function_names,
+        "alphaExtrema",
+        "speedExtrema",
+        "failureLocations",
+    }
+    allowed_keys = {
+        "type",
+        "libs",
+        "fields",
+        "operation",
+        "regionType",
+        "name",
+        "writeFields",
+        "executeControl",
+        "executeInterval",
+        "writeControl",
+        "writeInterval",
+        "location",
+        "log",
+        "writePrecision",
+        "mode",
+    }
+    function_blocks = _flat_control_function_blocks(clean)
+    if function_blocks is None:
+        return None
+    all_types = re.findall(r"\btype\s+(\w+)\s*;", clean)
+    all_libraries = re.findall(r"\blibs\s*\(([^)]*)\)\s*;", clean)
+    if any(
+        value not in {"volFieldValue", "surfaceFieldValue", "fieldMinMax"} for value in all_types
+    ):
+        return None
+    if any(value != "fieldFunctionObjects" for value in all_libraries):
+        return None
+    if not set(function_blocks).issubset(allowed_names):
+        return None
+    for name, body in function_blocks.items():
+        keys = {
+            match.group(1)
+            for statement in body.split(";")
+            if (match := re.match(r"\s*([A-Za-z_]\w*)\b", statement)) is not None
+        }
+        if keys - allowed_keys:
+            return None
+        libraries = re.findall(r"\blibs\s*\(([^)]*)\)\s*;", body)
+        if libraries and libraries != ["fieldFunctionObjects"]:
+            return None
+        for key, expected in (
+            ("executeControl", "timeStep"),
+            ("executeInterval", "1"),
+            ("writeControl", "timeStep"),
+            ("writeInterval", "1"),
+        ):
+            if re.findall(rf"\b{key}\s+([^;]+)\s*;", body) != [expected]:
+                return None
+        if name in {"alphaExtrema", "speedExtrema"}:
+            if re.findall(r"\btype\s+(\w+)\s*;", body) != ["fieldMinMax"]:
+                return None
+            expected_field = "alpha.water" if name == "alphaExtrema" else "U"
+            field_values = re.findall(r"\bfields\s*\(([^)]*)\)\s*;", body)
+            if field_values != [expected_field]:
+                return None
+        if name == "failureLocations":
+            if re.findall(r"\btype\s+(\w+)\s*;", body) != ["fieldMinMax"]:
+                return None
+            if re.findall(r"\bmode\s+(\w+)\s*;", body) != ["magnitude"]:
+                return None
+            if re.findall(r"\bfields\s*\(([^)]*)\)\s*;", body) != ["U p_rgh k epsilon nut"]:
+                return None
+            if re.findall(r"\blocation\s+(\w+)\s*;", body) != ["true"]:
+                return None
+            if re.findall(r"\blog\s+(\w+)\s*;", body) != ["true"]:
+                return None
+            if re.findall(r"\bwritePrecision\s+(\d+)\s*;", body) != ["12"]:
+                return None
+        if name in wall_function_names:
+            wall_patch = wall_function_names[name]
+            if re.findall(r"\btype\s+(\w+)\s*;", body) != ["surfaceFieldValue"]:
+                return None
+            if re.findall(r"\bregionType\s+(\w+)\s*;", body) != ["patch"]:
+                return None
+            if re.findall(r"\bname\s+(\w+)\s*;", body) != [wall_patch]:
+                return None
+            if re.findall(r"\boperation\s+(\w+)\s*;", body) != ["sum"]:
+                return None
+            if re.findall(r"\bfields\s*\(([^)]*)\)\s*;", body) != ["phi alphaPhi_"]:
+                return None
+    for folder_name in ("0", "system", "constant"):
+        folder = case_root / folder_name
+        if not folder.is_dir():
+            continue
+        for path in folder.rglob("*"):
+            if path.is_symlink() or not path.is_file() or path.stat().st_size > 2_000_000:
+                continue
+            try:
+                text = path.read_text(encoding="utf-8")
+            except (UnicodeDecodeError, OSError):
+                continue
+            tokens = _strip_foam_comments_preserving_tokens(text)
+            if path.relative_to(case_root).as_posix() == "system/setExprFieldsDict":
+                # This one expression is evaluated by pre-solver setExprFields to
+                # initialize p_rgh; it is not a runtime function object or time control.
+                expressions = re.findall(r"#\{\s*(.*?)\s*#\}", tokens, flags=re.DOTALL)
+                if len(expressions) != 1 or expressions[0].strip() != "1.18*9.81*pos().y()":
+                    return None
+                tokens = re.sub(r"#\{\s*.*?\s*#\}", " ", tokens, flags=re.DOTALL)
+            if re.search(
+                r"(?m)^\s*#\s*(?:include\w*|codeStream)\b|#\{"
+                r"|\bcoded[A-Za-z0-9_]*\b|\b(?:systemCall|runTimeControl)\b",
+                tokens,
+            ):
+                return None
+    return delta_token
+
+
+def _require_prepared_fixed_time_hashes(case_root: Path, manifests: tuple[Path, ...]) -> None:
+    required = {"system/controlDict", "case-inputs.json"}
+    for manifest_path in manifests:
+        manifest = _read_json(manifest_path)
+        declared = manifest.get("prepared_case_sha256")
+        if not isinstance(declared, dict) or not required.issubset(declared):
+            continue
+        for relative in required:
+            expected = declared[relative]
+            actual = sha256_file(case_root / relative)
+            if actual != expected:
+                raise AuditError(
+                    f"prepared-case input hash mismatch for {relative}: "
+                    f"manifest={expected}, current={actual}"
+                )
+        return
+    raise AuditError(
+        "fixed-controlDict timestep fallback requires one prepared_case_sha256 map "
+        "that freezes both system/controlDict and case-inputs.json"
+    )
+
+
+def _validate_fixed_delta_t_metadata(
+    case_inputs: dict[str, Any], delta_t_token: str, control_path: Path
+) -> None:
+    time_controls = case_inputs.get("time_controls")
+    if not isinstance(time_controls, dict):
+        raise AuditError("fixed-controlDict timestep fallback requires case-inputs time_controls")
+    if time_controls.get("fixed_delta_t") is not True:
+        raise AuditError("case-inputs time_controls.fixed_delta_t must be true for fixed fallback")
+    if time_controls.get("adjust_time_step") is not False:
+        raise AuditError(
+            "case-inputs time_controls.adjust_time_step must be false for fixed fallback"
+        )
+    metadata_delta_t = time_controls.get("delta_t_s")
+    if isinstance(metadata_delta_t, bool) or not isinstance(metadata_delta_t, (str, int, float)):
+        raise AuditError("case-inputs time_controls.delta_t_s must be a finite positive number")
+    metadata_token = str(metadata_delta_t)
+    metadata_value = _decimal_value(metadata_token, context="case-inputs time_controls.delta_t_s")
+    control_value = _decimal_value(delta_t_token, context=f"{control_path} deltaT")
+    if metadata_value <= 0 or metadata_value != control_value:
+        raise AuditError(
+            "case-inputs time_controls.delta_t_s differs from the positive controlDict deltaT"
+        )
+
+
+def _parse_fixed_step_solver_log(
+    path: Path,
+    cutoff_s: float,
+    delta_t_token: str,
+    *,
+    content: bytes,
+) -> ParsedLog:
+    """Pair positive printed Time rows with immutable controlDict deltaT, without altering the log."""
+    raw = content
+    delta_t = _numeric_token(delta_t_token, context=f"{path} controlDict deltaT")
+    if delta_t <= 0:
+        raise AuditError(f"fixed controlDict deltaT must be positive in {path}")
+    rows: list[LogRow] = []
+    ignored_initial_times = 0
+    for line_number, line in enumerate(raw.decode("utf-8", errors="replace").splitlines(), 1):
+        if DELTA_RE.search(line):
+            raise AuditError(
+                f"fixed-controlDict fallback requires no native deltaT rows in {path}:{line_number}"
+            )
+        time_match = TIME_RE.search(line)
+        if not time_match:
+            continue
+        token = time_match.group(1)
+        time_s = _numeric_token(token, context=f"{path}:{line_number} Time")
+        if time_s == 0 and not rows:
+            ignored_initial_times += 1
+            continue
+        if time_s <= 0:
+            raise AuditError(
+                f"nonpositive solver Time after the initial time in {path}:{line_number}"
+            )
+        rows.append(LogRow(token, time_s, delta_t, delta_t_token, line_number))
+    dt_decimal = _decimal_value(delta_t_token, context=f"{path} controlDict deltaT")
+    for step_index, row in enumerate(rows, 1):
+        expected_time = dt_decimal * step_index
+        printed_time = _decimal_value(row.token, context=f"{path}:{row.line_number} Time")
+        allowed_time_error = _decimal_half_unit(row.token) + _fixed_time_accumulation_bound(
+            step_index, expected_time
+        )
+        if abs(expected_time - printed_time) > allowed_time_error:
+            raise AuditError(
+                f"fixed controlDict deltaT cumulative time differs from printed Time at "
+                f"{row.token}: {expected_time} vs {printed_time} s "
+                f"(allowed {allowed_time_error} s from printed-Time precision and IEEE accumulation)"
+            )
+    selected = [row for row in rows if row.time_s <= cutoff_s]
+    for previous, current in zip(selected, selected[1:]):
+        if current.time_s <= previous.time_s:
+            reason = "duplicate" if current.time_s == previous.time_s else "out-of-order"
+            raise AuditError(
+                f"{reason} solver-log Time records at {path}: {previous.token}, {current.token}"
+            )
+    if not selected:
+        raise AuditError(f"no positive solver Time rows at or before {cutoff_s:g} s in {path}")
+    return ParsedLog(
+        tuple(selected),
+        None,
+        len(rows),
+        hashlib.sha256(raw).hexdigest(),
+        len(raw),
+        "fixed-controlDict",
+        delta_t_token,
     )
 
 
@@ -1234,6 +1788,16 @@ def _decimal_half_unit(token: str) -> Decimal:
     value = _decimal_value(token, context="printed numeric token")
     exponent = value.as_tuple().exponent
     return Decimal("0.5").scaleb(exponent)
+
+
+def _fixed_time_accumulation_bound(step_index: int, expected_time: Decimal) -> Decimal:
+    """Standard gamma_n bound for repeated IEEE-754 time-step addition."""
+    unit_roundoff = Decimal(1) / Decimal(2**53)
+    scaled = Decimal(step_index) * unit_roundoff
+    if scaled >= 1:
+        raise AuditError("fixed-step log has too many Time rows for an IEEE accumulation bound")
+    gamma = scaled / (Decimal(1) - scaled)
+    return gamma * abs(expected_time)
 
 
 def _longest_common_prefix(streams: dict[str, tuple[Any, ...]]) -> int:
@@ -1287,8 +1851,10 @@ def _capture_data_snapshot(
     case_root: Path,
     original_paths: dict[str, tuple[Path, ...]],
     log_path: Path,
+    series_files: dict[str, tuple[str, str, int, str]] | None = None,
 ) -> tuple[dict[Path, bytes], dict[Path, tuple[int, int, int, int]]]:
     """Read each mutable diagnostic once and retain the exact bytes parsed."""
+    inventory = SERIES_FILES if series_files is None else series_files
     paths = {path for group in original_paths.values() for path in group}
     paths.add(log_path)
     contents: dict[Path, bytes] = {}
@@ -1307,7 +1873,7 @@ def _capture_data_snapshot(
         signatures[path] = after
         contents[path] = raw
     for name, original in original_paths.items():
-        function_name, file_stem, _, _ = SERIES_FILES[name]
+        function_name, file_stem, _, _ = inventory[name]
         if _series_paths(case_root, function_name, file_stem) != original:
             raise AuditError(
                 f"diagnostic file set changed while snapshotting {name}; retry from a frozen copy"
@@ -1332,6 +1898,8 @@ def audit_run(
     if not input_path.is_file():
         raise AuditError(f"case-inputs.json is missing from {case_root}")
     case_inputs = _read_json(input_path)
+    source_patch, open_patches = _declared_ledger_patches(case_inputs)
+    series_files = _series_file_inventory(source_patch, open_patches)
     control_path = _config_path(case_root, "system/controlDict", "controlDict")
     fvsolution_path = _config_path(case_root, "system/fvSolution", "fvSolution")
     transport_path = case_root / "constant" / "transportProperties"
@@ -1380,22 +1948,52 @@ def audit_run(
 
     log_path = _resolve_log_path(run_dir, case_root, solver_log)
     selected_series_paths = {
-        name: _series_paths(case_root, SERIES_FILES[name][0], SERIES_FILES[name][1])
-        for name in SERIES_FILES
+        name: _series_paths(case_root, series_files[name][0], series_files[name][1])
+        for name in series_files
     }
     data_contents, data_signatures = _capture_data_snapshot(
-        case_root, selected_series_paths, log_path
+        case_root, selected_series_paths, log_path, series_files
     )
     series: dict[str, ParsedTable] = {}
-    for name in SERIES_FILES:
+    for name in series_files:
         series[name] = _parse_series(
             case_root,
             name,
             target_end_s,
+            series_files=series_files,
             paths=selected_series_paths[name],
             contents=data_contents,
         )
-    log_rows = _parse_solver_log(log_path, target_end_s, content=data_contents[log_path])
+    raw_log = data_contents[log_path]
+    fixed_control_delta_t = _fixed_control_delta_t_token(
+        case_root, control_text, case_inputs, control_path
+    )
+    native_delta_matches = list(DELTA_RE.finditer(raw_log.decode("utf-8", errors="replace")))
+    if native_delta_matches and fixed_control_delta_t is not None:
+        configured_dt = _decimal_value(fixed_control_delta_t, context=f"{control_path} deltaT")
+        for match in native_delta_matches:
+            logged_dt = _decimal_value(match.group(1), context=f"{log_path} native deltaT")
+            if logged_dt != configured_dt:
+                raise AuditError(
+                    f"native solver log deltaT {match.group(1)} conflicts with frozen "
+                    f"controlDict deltaT {fixed_control_delta_t} in {log_path}"
+                )
+    if not native_delta_matches and fixed_control_delta_t is not None:
+        _validate_fixed_delta_t_metadata(case_inputs, fixed_control_delta_t, control_path)
+        _require_prepared_fixed_time_hashes(case_root, manifests)
+        log_rows = _parse_fixed_step_solver_log(
+            log_path,
+            target_end_s,
+            fixed_control_delta_t,
+            content=raw_log,
+        )
+    elif not native_delta_matches:
+        raise AuditError(
+            "solver log has no native deltaT rows and controlDict does not meet "
+            "fixed-controlDict fallback requirements"
+        )
+    else:
+        log_rows = _parse_solver_log(log_path, target_end_s, content=raw_log)
     streams: dict[str, tuple[Any, ...]] = {name: table.rows for name, table in series.items()}
     streams["solverLog"] = log_rows.rows
     common_count = _longest_common_prefix(streams)
@@ -1427,9 +2025,7 @@ def audit_run(
     printed_time_half_unit = Decimal("0.5").scaleb(-precision)
     volume_rows = streams["waterVolume"][:common_count]
     log_prefix = streams["solverLog"][:common_count]
-    flux_prefix = {
-        patch: streams[patch][:common_count] for patch in (*[SOURCE_PATCH], *OPEN_PATCHES)
-    }
+    flux_prefix = {patch: streams[patch][:common_count] for patch in (source_patch, *open_patches)}
     reconstructed_times: list[float] = []
     cumulative_delta_rounding_bounds: list[Decimal] = []
     max_reconstruction_error = 0.0
@@ -1439,11 +2035,21 @@ def audit_run(
     previous_printed_time = start_time_decimal
     cumulative_native_time = start_time_decimal
     cumulative_delta_rounding_bound = Decimal(0)
+    cumulative_ieee_time_bound = Decimal(0)
+    max_ieee_time_bound = Decimal(0)
     for index, row in enumerate(log_prefix):
         delta_t_decimal = _decimal_value(row.delta_t_token, context="solver log deltaT")
         cumulative_native_time += delta_t_decimal
-        cumulative_delta_rounding_bound += _decimal_half_unit(row.delta_t_token)
-        allowed_time_difference = printed_time_half_unit + cumulative_delta_rounding_bound
+        if log_rows.delta_t_source_mode == "native-paired":
+            cumulative_delta_rounding_bound += _decimal_half_unit(row.delta_t_token)
+        else:
+            cumulative_ieee_time_bound = _fixed_time_accumulation_bound(
+                index + 1, cumulative_native_time
+            )
+            max_ieee_time_bound = max(max_ieee_time_bound, cumulative_ieee_time_bound)
+        allowed_time_difference = (
+            printed_time_half_unit + cumulative_delta_rounding_bound + cumulative_ieee_time_bound
+        )
         reconstructed_times.append(float(cumulative_native_time))
         cumulative_delta_rounding_bounds.append(cumulative_delta_rounding_bound)
         max_allowed_time_difference = max(max_allowed_time_difference, allowed_time_difference)
@@ -1458,10 +2064,15 @@ def audit_run(
             float(abs(delta_t_decimal - rounded_interval)),
         )
         if error > allowed_time_difference:
+            source = (
+                "native deltaT"
+                if log_rows.delta_t_source_mode == "native-paired"
+                else "fixed controlDict deltaT"
+            )
             raise AuditError(
-                f"native deltaT cumulative time differs from printed Time at {row.token}: "
+                f"{source} cumulative time differs from printed Time at {row.token}: "
                 f"{cumulative_native_time} vs {printed_time} s "
-                f"(allowed {allowed_time_difference} s; includes accumulated printed deltaT precision)"
+                f"(allowed {allowed_time_difference} s from printed-Time precision and source-token rounding)"
             )
         previous_printed_time = printed_time
 
@@ -1476,10 +2087,10 @@ def audit_run(
         native = log_prefix[index]
         volume_m3 = volume_rows[index].values[0]
         dt = native.delta_t_s
-        source_flux = flux_prefix[SOURCE_PATCH][index].values[1]
+        source_flux = flux_prefix[source_patch][index].values[1]
         source_signed_step_kg = rho * source_flux * dt
         injected_step_kg = -source_signed_step_kg
-        open_flux_by_patch = {patch: flux_prefix[patch][index].values[1] for patch in OPEN_PATCHES}
+        open_flux_by_patch = {patch: flux_prefix[patch][index].values[1] for patch in open_patches}
         escape_step_kg = rho * sum(open_flux_by_patch.values()) * dt
         total_boundary_step_kg = source_signed_step_kg + escape_step_kg
         inventory_change_kg = rho * (volume_m3 - prior_volume_m3)
@@ -1494,7 +2105,13 @@ def audit_run(
             "step_index": index + 1,
             "printed_time_s": native.token,
             "reconstructed_time_s": f"{reconstructed_times[index]:.12g}",
-            "native_deltaT_s": f"{dt:.12g}",
+            "deltaT_source_mode": log_rows.delta_t_source_mode,
+            "interval_deltaT_s": f"{dt:.12g}",
+            "native_deltaT_s": (
+                f"{dt:.12g}" if log_rows.delta_t_source_mode == "native-paired" else ""
+            ),
+            "interval_start_s": f"{reconstructed_times[index] - dt:.12g}",
+            "interval_end_s": f"{reconstructed_times[index]:.12g}",
             "interval_start_native_s": f"{reconstructed_times[index] - dt:.12g}",
             "interval_end_native_s": f"{reconstructed_times[index]:.12g}",
             "native_inventory_m3": f"{volume_m3:.12g}",
@@ -1510,7 +2127,9 @@ def audit_run(
             "closure_residual_step_kg": f"{step_residual_kg:.12g}",
             "closure_residual_cumulative_kg": f"{cumulative_residual_kg:.12g}",
         }
-        for patch in OPEN_PATCHES:
+        row[f"{source_patch}_alphaPhi_m3_s"] = f"{source_flux:.12g}"
+        row[f"{source_patch}_signed_boundary_step_kg"] = f"{source_signed_step_kg:.12g}"
+        for patch in open_patches:
             signed_mass_step = rho * open_flux_by_patch[patch] * dt
             row[f"{patch}_alphaPhi_m3_s"] = f"{open_flux_by_patch[patch]:.12g}"
             row[f"{patch}_signed_boundary_step_kg"] = f"{signed_mass_step:.12g}"
@@ -1568,8 +2187,18 @@ def audit_run(
         data_input_hashes.update(parsed.file_sha256)
     row_counts["solverLog"] = {
         "source_file": str(log_path),
-        "complete_paired_rows_total": log_rows.complete_rows_total,
-        "paired_rows_at_or_before_requested_end": len(log_rows.rows),
+        "deltaT_source_mode": log_rows.delta_t_source_mode,
+        "configured_deltaT_token": log_rows.configured_delta_t_token,
+        "complete_interval_rows_total": log_rows.complete_rows_total,
+        "complete_paired_rows_total": (
+            log_rows.complete_rows_total
+            if log_rows.delta_t_source_mode == "native-paired"
+            else None
+        ),
+        "interval_rows_at_or_before_requested_end": len(log_rows.rows),
+        "paired_rows_at_or_before_requested_end": (
+            len(log_rows.rows) if log_rows.delta_t_source_mode == "native-paired" else None
+        ),
         "snapshot_byte_length": log_rows.file_byte_length,
         "snapshot_sha256": log_rows.file_sha256,
         "matched_common_prefix_rows": common_count,
@@ -1584,6 +2213,93 @@ def audit_run(
         if digest is None:
             digest = sha256_file(path)
         input_hashes[_relative_path(path, run_dir)] = digest
+
+    source_geometry = case_inputs.get("source_geometry")
+    if source_geometry is not None and not isinstance(source_geometry, dict):
+        raise AuditError("optional case-inputs source_geometry must be a JSON object")
+    integration = {
+        "method": "right rectangle on each completed physical interval: Q_k * interval deltaT_k",
+        "deltaT_source_mode": log_rows.delta_t_source_mode,
+        "configured_deltaT_token": log_rows.configured_delta_t_token,
+        "deltaT_provenance": (
+            "Exact positive deltaT token from the hash-verified, immutable controlDict; the native solver log contained no deltaT lines."
+            if log_rows.delta_t_source_mode == "fixed-controlDict"
+            else "Paired native solver-log deltaT and Time rows."
+        ),
+        "flux_interpretation": "sum(alphaPhi_) is the interval-mean water volumetric flux for the completed alpha-advection step; outward boundary sign is positive.",
+        "source_patch": source_patch,
+        "open_patches": list(open_patches),
+        "density_kg_m3": rho,
+        "initial_inventory_m3": initial_volume_m3,
+        "initial_inventory_kg": initial_inventory_kg,
+        "final_inventory_m3": volume_rows[-1].values[0],
+        "native_function_inventory_kg": rho * volume_rows[-1].values[0],
+        "injected_kg": cumulative_injected_kg,
+        "signed_net_escape_kg": cumulative_escape_kg,
+        "signed_total_boundary_mass_kg": cumulative_boundary_kg,
+        "closure_residual_kg": cumulative_residual_kg,
+        "max_abs_cumulative_closure_residual_kg": max_abs_residual,
+        "max_abs_per_step_closure_residual_kg": max(
+            abs(float(row["closure_residual_step_kg"])) for row in output_rows
+        ),
+        "rounding_diagnostic": {
+            "deltaT_source_mode": log_rows.delta_t_source_mode,
+            "time_precision_digits": precision,
+            "time_format": time_format,
+            "printed_time_half_unit_s": float(printed_time_half_unit),
+            "cumulative_deltaT_print_rounding_bound_s": float(cumulative_delta_rounding_bounds[-1]),
+            "cumulative_ieee_time_accumulation_bound_s": float(max_ieee_time_bound),
+            "max_allowed_reconstructed_time_vs_printed_time_s": float(max_allowed_time_difference),
+            "max_allowed_native_vs_printed_time_difference_s": (
+                float(max_allowed_time_difference)
+                if log_rows.delta_t_source_mode == "native-paired"
+                else None
+            ),
+            "first_interval_deltaT_s": log_prefix[0].delta_t_s,
+            "first_interval_deltaT_token": log_prefix[0].delta_t_token,
+            "first_native_deltaT_s": (
+                log_prefix[0].delta_t_s if log_rows.delta_t_source_mode == "native-paired" else None
+            ),
+            "first_native_deltaT_token": (
+                log_prefix[0].delta_t_token
+                if log_rows.delta_t_source_mode == "native-paired"
+                else None
+            ),
+            "first_printed_interval_s": float(first_printed_interval),
+            "first_source_deltaT_minus_printed_interval_s": float(
+                _decimal_value(log_prefix[0].delta_t_token, context="first deltaT")
+                - first_printed_interval
+            ),
+            "first_native_minus_printed_interval_s": (
+                float(
+                    _decimal_value(log_prefix[0].delta_t_token, context="first deltaT")
+                    - first_printed_interval
+                )
+                if log_rows.delta_t_source_mode == "native-paired"
+                else None
+            ),
+            "max_abs_source_deltaT_vs_rounded_interval_s": max_dt_rounded_interval_error,
+            "max_abs_native_deltaT_vs_rounded_interval_s": (
+                max_dt_rounded_interval_error
+                if log_rows.delta_t_source_mode == "native-paired"
+                else None
+            ),
+            "max_abs_reconstructed_time_vs_printed_time_s": max_reconstruction_error,
+            "max_abs_reconstructed_native_time_vs_printed_time_s": (
+                max_reconstruction_error
+                if log_rows.delta_t_source_mode == "native-paired"
+                else None
+            ),
+            "warning": (
+                "The exact declared controlDict deltaT is used for integration in fixed-controlDict mode; no native log line is fabricated. Rounded printed timestamp differences are diagnostic only."
+                if log_rows.delta_t_source_mode == "fixed-controlDict"
+                else "Paired native deltaT is used for integration. Rounded printed timestamp differences are diagnostic only."
+            ),
+        },
+        "known_closure_caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual.",
+    }
+    if source_geometry is not None:
+        integration["source_geometry"] = source_geometry
 
     columns = list(output_rows[0])
     summary: dict[str, Any] = {
@@ -1621,47 +2337,7 @@ def audit_run(
                 for path in sorted(data_contents)
             },
         },
-        "integration": {
-            "method": "right rectangle on each completed physical interval: Q_k * native deltaT_k",
-            "flux_interpretation": "sum(alphaPhi_) is the interval-mean water volumetric flux for the completed alpha-advection step; outward boundary sign is positive.",
-            "source_patch": SOURCE_PATCH,
-            "open_patches": list(OPEN_PATCHES),
-            "density_kg_m3": rho,
-            "initial_inventory_m3": initial_volume_m3,
-            "initial_inventory_kg": initial_inventory_kg,
-            "final_inventory_m3": volume_rows[-1].values[0],
-            "native_function_inventory_kg": rho * volume_rows[-1].values[0],
-            "injected_kg": cumulative_injected_kg,
-            "signed_net_escape_kg": cumulative_escape_kg,
-            "signed_total_boundary_mass_kg": cumulative_boundary_kg,
-            "closure_residual_kg": cumulative_residual_kg,
-            "max_abs_cumulative_closure_residual_kg": max_abs_residual,
-            "max_abs_per_step_closure_residual_kg": max(
-                abs(float(row["closure_residual_step_kg"])) for row in output_rows
-            ),
-            "rounding_diagnostic": {
-                "time_precision_digits": precision,
-                "time_format": time_format,
-                "printed_time_half_unit_s": float(printed_time_half_unit),
-                "cumulative_deltaT_print_rounding_bound_s": float(
-                    cumulative_delta_rounding_bounds[-1]
-                ),
-                "max_allowed_native_vs_printed_time_difference_s": float(
-                    max_allowed_time_difference
-                ),
-                "first_native_deltaT_s": log_prefix[0].delta_t_s,
-                "first_native_deltaT_token": log_prefix[0].delta_t_token,
-                "first_printed_interval_s": float(first_printed_interval),
-                "first_native_minus_printed_interval_s": float(
-                    _decimal_value(log_prefix[0].delta_t_token, context="first deltaT")
-                    - first_printed_interval
-                ),
-                "max_abs_native_deltaT_vs_rounded_interval_s": max_dt_rounded_interval_error,
-                "max_abs_reconstructed_native_time_vs_printed_time_s": max_reconstruction_error,
-                "warning": "Native deltaT is used for integration. Rounded printed timestamp differences are diagnostic only.",
-            },
-            "known_closure_caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual.",
-        },
+        "integration": integration,
         "supported_configuration": config,
         "prepared_input_hash_verification": prepared_hash_check,
         "solver_image_verification": image_check,
@@ -1673,7 +2349,7 @@ def audit_run(
             "This narrow audit supports the pinned interIsoFoam/isoAdvection implementation with nAlphaSubCycles=1, nOuterCorrectors=1, fixed mesh, constant water density, zero initial water, and no internal source, phase-change, or porosity model.",
             "It does not establish semantic support for other solvers, multiphase models, restart-only cumulative intervals, subcycling, moving meshes, or source/sink models.",
             "A small residual is a diagnostic result for this sampled prefix, not a solver validation or E0-E6 gate decision.",
-            "Fluxes are signed outward-positive at each patch; injected mass is the negative source-patch signed mass, while signed net escape sums the five open boundaries.",
+            "Fluxes are signed outward-positive at each patch; injected mass is the negative source-patch signed mass, while signed net escape sums all declared open boundaries.",
         ],
     }
 
@@ -1708,7 +2384,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--verified-source-evidence",
         type=Path,
-        help="evidence.json pinning the expected solver image and source hashes",
+        help="source evidence for the pinned Docker source or Slurm-native installed runtime",
     )
     return parser.parse_args(argv)
 

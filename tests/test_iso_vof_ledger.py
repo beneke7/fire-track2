@@ -12,11 +12,15 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.audit_iso_vof_ledger import PINNED_IMAGE, AuditError, audit_run  # noqa: E402
+from scripts.audit_iso_vof_ledger import (  # noqa: E402
+    KNOWN_SOLVER_SOURCE_HASHES,
+    PINNED_IMAGE,
+    AuditError,
+    audit_run,
+)
 
 SOURCE = "dash8Opening"
 OPEN = ("airInlet", "xOutlet", "yMin", "yMax", "zMin")
-ALL_PATCHES = (SOURCE, *OPEN)
 VALID_NUT_LIMITER = """FoamFile
 {
     version 2.0;
@@ -59,9 +63,14 @@ def _write_table(path: Path, header: str, rows: list[str]) -> None:
 def _make_run(
     root: Path,
     *,
+    source_patch: str = SOURCE,
+    open_patches: tuple[str, ...] = OPEN,
+    wall_patch: str = "plate",
+    wall_u_type: str = "slip",
     delta_ts: list[float] | None = None,
     source_fluxes: list[float] | None = None,
     open_fluxes: dict[str, list[float]] | None = None,
+    source_geometry: dict[str, object] | None = None,
     configured_end_s: float | None = None,
     n_alpha_subcycles: int = 1,
     dynamic_mesh: str | None = None,
@@ -69,8 +78,9 @@ def _make_run(
 ) -> Path:
     dt = delta_ts or [0.1, 0.2]
     source = source_fluxes or [-2.0, -3.0]
-    opens = open_fluxes or {patch: [0.0] * len(dt) for patch in OPEN}
+    opens = open_fluxes or {patch: [0.0] * len(dt) for patch in open_patches}
     assert len(dt) == len(source)
+    assert set(opens) == set(open_patches)
     assert all(len(values) == len(dt) for values in opens.values())
     end_s = configured_end_s or sum(dt)
     times: list[float] = []
@@ -80,7 +90,7 @@ def _make_run(
     for index, step_dt in enumerate(dt):
         clock += step_dt
         times.append(clock)
-        volume -= (source[index] + sum(opens[patch][index] for patch in OPEN)) * step_dt
+        volume -= (source[index] + sum(opens[patch][index] for patch in open_patches)) * step_dt
         volumes.append(volume)
 
     case = root / "case"
@@ -96,12 +106,14 @@ def _make_run(
         "openfoam_image_digest": PINNED_IMAGE,
         "horizon_s": end_s,
         "fluid_properties": {"water": {"rho_kg_m3": 1000.0}},
-        "source_patches": [SOURCE],
-        "open_patches": list(OPEN),
+        "source_patches": [source_patch],
+        "open_patches": list(open_patches),
     }
+    if source_geometry is not None:
+        case_inputs["source_geometry"] = source_geometry
     (case / "case-inputs.json").write_text(json.dumps(case_inputs), encoding="utf-8")
     flux_function_objects = []
-    for patch in ALL_PATCHES:
+    for patch in (source_patch, *open_patches):
         flux_function_objects.append(
             f"{patch}Flux {{ type surfaceFieldValue; regionType patch; name {patch}; "
             "operation sum; fields (phi alphaPhi_); executeControl timeStep; "
@@ -134,9 +146,9 @@ def _make_run(
     )
     mesh = constant / "polyMesh"
     mesh.mkdir()
-    boundary_entries = [f"{SOURCE} {{ type patch; }}"]
-    boundary_entries.extend(f"{patch} {{ type patch; }}" for patch in OPEN)
-    boundary_entries.append("plate { type wall; }")
+    boundary_entries = [f"{source_patch} {{ type patch; }}"]
+    boundary_entries.extend(f"{patch} {{ type patch; }}" for patch in open_patches)
+    boundary_entries.append(f"{wall_patch} {{ type wall; }}")
     (mesh / "boundary").write_text(
         f"{len(boundary_entries)}\n(\n" + "\n".join(boundary_entries) + "\n)\n",
         encoding="utf-8",
@@ -146,9 +158,11 @@ def _make_run(
             f"dynamicFvMesh {dynamic_mesh};\n", encoding="utf-8"
         )
     (zero / "alpha.water").write_text("internalField uniform 0;\n", encoding="utf-8")
-    velocity_conditions = [f"{SOURCE} {{ type uniformFixedValue; }}"]
-    velocity_conditions.extend(f"{patch} {{ type pressureInletOutletVelocity; }}" for patch in OPEN)
-    velocity_conditions.append("plate { type slip; }")
+    velocity_conditions = [f"{source_patch} {{ type uniformFixedValue; }}"]
+    velocity_conditions.extend(
+        f"{patch} {{ type pressureInletOutletVelocity; }}" for patch in open_patches
+    )
+    velocity_conditions.append(f"{wall_patch} {{ type {wall_u_type}; }}")
     (zero / "U").write_text(
         "boundaryField {\n" + "\n".join(velocity_conditions) + "\n}\n",
         encoding="utf-8",
@@ -165,8 +179,8 @@ def _make_run(
         volume_rows,
     )
 
-    for patch in ALL_PATCHES:
-        q_values = source if patch == SOURCE else opens[patch]
+    for patch in (source_patch, *open_patches):
+        q_values = source if patch == source_patch else opens[patch]
         rows = []
         for index, (time_s, q_value) in enumerate(zip(times, q_values)):
             if missing_row == (patch, index):
@@ -208,6 +222,176 @@ def _make_run(
     return case
 
 
+def _make_fixed_dt_run(
+    root: Path,
+    *,
+    include_rouaix_wall_flux: bool = False,
+    native_delta_t_tokens: tuple[str, ...] | None = None,
+    metadata_delta_t: float | None = None,
+) -> Path:
+    source_patch = "nozzle" if include_rouaix_wall_flux else SOURCE
+    open_patches = (
+        ("gasInlet", "downstreamOutlet", "bottomOutlet", "spanwiseMinus", "spanwisePlus")
+        if include_rouaix_wall_flux
+        else OPEN
+    )
+    case = _make_run(
+        root,
+        source_patch=source_patch,
+        open_patches=open_patches,
+        wall_patch="aircraftWall" if include_rouaix_wall_flux else "plate",
+        wall_u_type="noSlip" if include_rouaix_wall_flux else "slip",
+        delta_ts=[0.001, 0.001],
+        configured_end_s=0.05,
+    )
+    control_path = case / "system/controlDict"
+    control = control_path.read_text(encoding="utf-8").replace(
+        "timeFormat fixed;\ntimePrecision 6;",
+        "timeFormat fixed;\ntimePrecision 12;\n"
+        "deltaT 0.001;\nadjustTimeStep no;\nrunTimeModifiable false;\n"
+        "stopAt endTime;\n"
+        "writeControl runTime;\nwriteInterval 0.05;",
+    )
+    if include_rouaix_wall_flux:
+        before, closing = control.rsplit(" }", 1)
+        wall_object = (
+            " aircraftWallFlux { type surfaceFieldValue; libs (fieldFunctionObjects); "
+            "regionType patch; name aircraftWall; operation sum; fields (phi alphaPhi_); "
+            "writeFields false; executeControl timeStep; executeInterval 1; "
+            "writeControl timeStep; writeInterval 1; }"
+        )
+        extrema_objects = (
+            " alphaExtrema { type fieldMinMax; libs (fieldFunctionObjects); "
+            "fields (alpha.water); location false; log true; writePrecision 12; "
+            "executeControl timeStep; executeInterval 1; writeControl timeStep; "
+            "writeInterval 1; }"
+            " speedExtrema { type fieldMinMax; libs (fieldFunctionObjects); "
+            "mode magnitude; fields (U); location false; log true; writePrecision 12; "
+            "executeControl timeStep; executeInterval 1; writeControl timeStep; "
+            "writeInterval 1; }"
+        )
+        control = before + wall_object + extrema_objects + " }" + closing
+    control_path.write_text(control, encoding="utf-8")
+
+    inputs_path = case / "case-inputs.json"
+    case_inputs = json.loads(inputs_path.read_text(encoding="utf-8"))
+    case_inputs["time_controls"] = {
+        "adjust_time_step": False,
+        "delta_t_s": 0.001 if metadata_delta_t is None else metadata_delta_t,
+        "fixed_delta_t": True,
+    }
+    inputs_path.write_text(json.dumps(case_inputs), encoding="utf-8")
+    _refresh_prepared_hash(case, "system/controlDict")
+    _refresh_prepared_hash(case, "case-inputs.json")
+    for path in case.glob("postProcessing/*/0.000000/*.dat"):
+        text = path.read_text(encoding="utf-8")
+        path.write_text(
+            text.replace("0.001000\t", "0.001000000000\t").replace(
+                "0.002000\t", "0.002000000000\t"
+            ),
+            encoding="utf-8",
+        )
+
+    log_lines = ["OpenCFD OpenFOAM v2512", "Time = 0.000000000000"]
+    if native_delta_t_tokens is None:
+        log_lines.append("Time = 0.001000000000")
+    else:
+        log_lines.extend((f"deltaT = {native_delta_t_tokens[0]}", "Time = 0.001000000000"))
+    log_lines.extend(
+        (
+            "ExecutionTime = 48.3 s  ClockTime = 52 s",
+            "fieldMinMax speedExtrema write:",
+            "    min/max(mag(U)) = 0.000000000000e+00 9.267239048760e+07",
+            "Courant Number mean: 1.1986208009 max: 5964502.69592",
+        )
+    )
+    if native_delta_t_tokens is None:
+        log_lines.append("Time = 0.002000000000")
+    else:
+        log_lines.extend((f"deltaT = {native_delta_t_tokens[1]}", "Time = 0.002000000000"))
+    (case / "log.interIsoFoam").write_text("\n".join(log_lines) + "\n", encoding="utf-8")
+    return case
+
+
+def test_dash8_rouaix_dash8_patch_names_are_run_local(tmp_path: Path) -> None:
+    first_dash8 = _make_run(tmp_path / "first-dash8")
+    first_summary = audit_run(first_dash8, tmp_path / "first-dash8-ledger")
+
+    rouaix_open = (
+        "gasInlet",
+        "downstreamOutlet",
+        "bottomOutlet",
+        "spanwiseMinus",
+        "spanwisePlus",
+    )
+    source_geometry = {
+        "patch": "nozzle",
+        "measured_area_m2": 0.12546554934822965,
+        "analytic_circle_area_m2": 3.141592653589793 * 0.2**2,
+        "relative_area_deviation_fraction": -0.00157688,
+        "velocity_renormalized": False,
+    }
+    rouaix = _make_run(
+        tmp_path / "rouaix",
+        source_patch="nozzle",
+        open_patches=rouaix_open,
+        wall_patch="aircraftWall",
+        wall_u_type="noSlip",
+        open_fluxes={patch: [0.01, 0.02] for patch in rouaix_open},
+        source_geometry=source_geometry,
+    )
+    rouaix_summary = audit_run(rouaix, tmp_path / "rouaix-ledger")
+
+    second_dash8 = _make_run(tmp_path / "second-dash8")
+    second_summary = audit_run(second_dash8, tmp_path / "second-dash8-ledger")
+
+    assert first_summary["integration"]["source_patch"] == SOURCE
+    assert first_summary["integration"]["open_patches"] == list(OPEN)
+    assert second_summary["integration"]["source_patch"] == SOURCE
+    assert second_summary["integration"]["open_patches"] == list(OPEN)
+    integration = rouaix_summary["integration"]
+    assert integration["source_patch"] == "nozzle"
+    assert integration["open_patches"] == list(rouaix_open)
+    assert integration["injected_kg"] == pytest.approx(800.0)
+    assert integration["signed_net_escape_kg"] == pytest.approx(25.0)
+    assert integration["native_function_inventory_kg"] == pytest.approx(775.0)
+    assert integration["closure_residual_kg"] == pytest.approx(0.0, abs=1e-10)
+    assert integration["source_geometry"] == source_geometry
+    ledger_rows = _read_csv(tmp_path / "rouaix-ledger" / "ledger.csv")
+    assert ledger_rows[0]["source_alphaPhi_m3_s"] == "-2"
+    assert ledger_rows[0]["nozzle_alphaPhi_m3_s"] == "-2"
+    assert ledger_rows[0]["gasInlet_alphaPhi_m3_s"] == "0.01"
+    assert "dash8Opening_alphaPhi_m3_s" not in ledger_rows[0]
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("source_patches", None, "explicitly declare exactly one source"),
+        ("open_patches", None, "explicitly declare a nonempty open_patches"),
+        ("source_patches", ["xOutlet"], "source_patches and open_patches must be disjoint"),
+        ("open_patches", ["xOutlet", "xOutlet"], "must not contain duplicate"),
+        ("open_patches", ["bad/name"], "must be OpenFOAM word identifiers"),
+        ("open_patches", ["waterVolume"], "collide with ledger series names"),
+        ("open_patches", ["source"], "collide with ledger series names"),
+    ],
+)
+def test_case_must_explicitly_declare_valid_nonoverlapping_ledger_patches(
+    tmp_path: Path, field: str, value: object, message: str
+) -> None:
+    case = _make_run(tmp_path / field.replace("_", "-"))
+    inputs_path = case / "case-inputs.json"
+    case_inputs = json.loads(inputs_path.read_text(encoding="utf-8"))
+    if value is None:
+        case_inputs.pop(field)
+    else:
+        case_inputs[field] = value
+    inputs_path.write_text(json.dumps(case_inputs), encoding="utf-8")
+
+    with pytest.raises(AuditError, match=message):
+        audit_run(case, tmp_path / "ledger-out")
+
+
 def _refresh_prepared_hash(case: Path, relative: str) -> None:
     manifest_path = case.parent / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -215,6 +399,78 @@ def _refresh_prepared_hash(case: Path, relative: str) -> None:
         (case / relative).read_bytes()
     ).hexdigest()
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+
+def _native_solver_record() -> dict[str, object]:
+    return {
+        "module_name": "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH",
+        "version": "v2512",
+        "build": "OpenFOAM-v2512",
+        "wm_options": "linux64CrayDPInt32Opt",
+        "architecture": "x86_64",
+        "precision": "DP",
+        "label_size_bits": 32,
+        "executable_path": "/opt/openfoam/v2512/platforms/linux64CrayDPInt32Opt/bin/interIsoFoam",
+        "executable_sha256": "a" * 64,
+        "solver_banner_sha256": "b" * 64,
+    }
+
+
+def _write_native_source_evidence(path: Path) -> Path:
+    source_paths = {
+        "isoAdvectionTemplates.C": "src/transportModels/geometricVoF/advectionSchemes/isoAdvection/isoAdvectionTemplates.C",
+        "interIsoFoam_alphaEqnSubCycle.H": "applications/solvers/multiphase/interIsoFoam/alphaEqnSubCycle.H",
+        "interIsoFoam_alphaEqn.H": "applications/solvers/multiphase/interIsoFoam/alphaEqn.H",
+        "isoAdvection.H": "src/transportModels/geometricVoF/advectionSchemes/isoAdvection/isoAdvection.H",
+    }
+    source_records = {
+        name: {
+            "path": f"/opt/openfoam/v2512/{relative}",
+            "sha256": KNOWN_SOLVER_SOURCE_HASHES[name],
+        }
+        for name, relative in source_paths.items()
+    }
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "execution_backend": "slurm-native",
+                "source_reference_image_digest": PINNED_IMAGE,
+                "solver_source": source_records,
+                "native_solver": _native_solver_record(),
+            }
+        ),
+        encoding="utf-8",
+    )
+    return path
+
+
+def _configure_native_run(case: Path, evidence: Path) -> Path:
+    case_inputs_path = case / "case-inputs.json"
+    case_inputs = json.loads(case_inputs_path.read_text(encoding="utf-8"))
+    case_inputs.update(
+        execution_backend="slurm-native",
+        solver_version="v2512",
+        reference_image_digest=PINNED_IMAGE,
+    )
+    case_inputs.pop("openfoam_image", None)
+    case_inputs.pop("openfoam_image_digest", None)
+    case_inputs_path.write_text(json.dumps(case_inputs), encoding="utf-8")
+    _refresh_prepared_hash(case, "case-inputs.json")
+
+    manifest_path = case.parent / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest.pop("solver_image", None)
+    manifest.pop("solver_image_id", None)
+    manifest.update(
+        execution_backend="slurm-native",
+        solver_version="v2512",
+        native_solver=_native_solver_record(),
+        native_source_evidence_path=str(evidence.resolve()),
+        native_source_evidence_sha256=hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    )
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    return manifest_path
 
 
 def _install_fv_options(case: Path, text: str) -> Path:
@@ -260,6 +516,167 @@ def test_native_dt_step_average_closes_where_trapezoid_does_not(tmp_path: Path) 
     rows = _read_csv(output / "ledger.csv")
     assert len(rows) == 2
     assert float(rows[-1]["native_deltaT_s"]) == pytest.approx(0.2)
+    assert summary["integration"]["deltaT_source_mode"] == "native-paired"
+
+
+def test_fixed_control_dict_accepts_actual_n1_control_and_r2_log_format(
+    tmp_path: Path,
+) -> None:
+    case = _make_fixed_dt_run(tmp_path / "fixed-r2-format", include_rouaix_wall_flux=True)
+    # Exact frozen controlDict bytes from job 14647712's verified result archive
+    # (SHA-256 605cc684...7861); its own file hash is asserted below.
+    control_fixture = Path(__file__).parent / "fixtures/rouaix-n1-controlDict-14647712.txt"
+    fixture_bytes = control_fixture.read_bytes()
+    assert hashlib.sha256(fixture_bytes).hexdigest() == (
+        "70a17524ea3ac707d1f34d1b3e0efada04cc1d22ac1dc60874b2d4c10e10ab18"
+    )
+    (case / "system/controlDict").write_bytes(fixture_bytes)
+    inputs_path = case / "case-inputs.json"
+    case_inputs = json.loads(inputs_path.read_text(encoding="utf-8"))
+    case_inputs["horizon_s"] = 0.01
+    case_inputs["time_controls"].update(
+        max_delta_t_s=0.001,
+        full_field_write_times_s=[0.0, 0.01],
+        snapshot_interval_s=0.01,
+        startup_steps=10,
+    )
+    inputs_path.write_text(json.dumps(case_inputs), encoding="utf-8")
+    _refresh_prepared_hash(case, "system/controlDict")
+    _refresh_prepared_hash(case, "case-inputs.json")
+    log_path = case / "log.interIsoFoam"
+    raw_log = log_path.read_bytes()
+    assert b"deltaT =" not in raw_log
+    assert b"min/max(mag(U)) = 0.000000000000e+00 9.267239048760e+07" in raw_log
+
+    summary = audit_run(case, tmp_path / "fixed-r2-format-ledger")
+
+    integration = summary["integration"]
+    assert integration["deltaT_source_mode"] == "fixed-controlDict"
+    assert integration["configured_deltaT_token"] == "0.001"
+    assert integration["rounding_diagnostic"]["first_interval_deltaT_s"] == pytest.approx(0.001)
+    assert integration["rounding_diagnostic"]["cumulative_deltaT_print_rounding_bound_s"] == 0
+    assert integration["rounding_diagnostic"]["first_native_deltaT_s"] is None
+    assert "no native log line is fabricated" in integration["rounding_diagnostic"]["warning"]
+    log_row_counts = summary["row_coverage"]["solverLog"]
+    assert log_row_counts["deltaT_source_mode"] == "fixed-controlDict"
+    assert log_row_counts["complete_paired_rows_total"] is None
+    assert log_row_counts["snapshot_sha256"] == hashlib.sha256(raw_log).hexdigest()
+    rows = _read_csv(tmp_path / "fixed-r2-format-ledger" / "ledger.csv")
+    assert len(rows) == 2
+    assert rows[0]["interval_deltaT_s"] == "0.001"
+    assert rows[0]["native_deltaT_s"] == ""
+    assert rows[0]["deltaT_source_mode"] == "fixed-controlDict"
+    assert integration["source_patch"] == "nozzle"
+
+
+@pytest.mark.parametrize(
+    ("old_time", "new_time"),
+    [
+        ("Time = 0.001000000000", "Time = 0.002000000000"),
+        ("Time = 0.002000000000", "Time = 0.003000000000"),
+    ],
+)
+def test_fixed_control_dict_rejects_missing_or_skipped_time_even_at_unmatched_tail(
+    tmp_path: Path, old_time: str, new_time: str
+) -> None:
+    case = _make_fixed_dt_run(tmp_path / "fixed-time-gap")
+    log_path = case / "log.interIsoFoam"
+    log_path.write_text(
+        log_path.read_text(encoding="utf-8").replace(old_time, new_time, 1),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(AuditError, match="fixed controlDict deltaT cumulative time differs"):
+        audit_run(case, tmp_path / "fixed-time-gap-ledger")
+
+
+@pytest.mark.parametrize(
+    ("old_value", "new_value"),
+    [
+        ("runTimeModifiable false;", "runTimeModifiable true;"),
+        ("startFrom startTime;", "startFrom latestTime;"),
+        ("writeControl runTime;", "writeControl adjustableRunTime;"),
+    ],
+)
+def test_fixed_control_dict_requires_immutable_clean_time_controls(
+    tmp_path: Path, old_value: str, new_value: str
+) -> None:
+    case = _make_fixed_dt_run(tmp_path / "fixed-config-change")
+    control_path = case / "system/controlDict"
+    control_path.write_text(
+        control_path.read_text(encoding="utf-8").replace(old_value, new_value),
+        encoding="utf-8",
+    )
+    _refresh_prepared_hash(case, "system/controlDict")
+
+    with pytest.raises(AuditError, match="does not meet fixed-controlDict fallback requirements"):
+        audit_run(case, tmp_path / "fixed-config-change-ledger")
+
+
+def test_fixed_control_dict_requires_case_metadata_and_frozen_hashes(tmp_path: Path) -> None:
+    mismatch = _make_fixed_dt_run(tmp_path / "fixed-metadata-mismatch", metadata_delta_t=0.002)
+    with pytest.raises(AuditError, match="case-inputs time_controls.delta_t_s differs"):
+        audit_run(mismatch, tmp_path / "fixed-metadata-mismatch-ledger")
+
+    missing_hash = _make_fixed_dt_run(tmp_path / "fixed-missing-hash")
+    manifest_path = missing_hash.parent / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["prepared_case_sha256"].pop("system/controlDict")
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(AuditError, match="freezes both system/controlDict and case-inputs.json"):
+        audit_run(missing_hash, tmp_path / "fixed-missing-hash-ledger")
+
+
+def test_fixed_control_dict_rejects_conflicting_native_delta_t_line(tmp_path: Path) -> None:
+    case = _make_fixed_dt_run(
+        tmp_path / "fixed-native-conflict", native_delta_t_tokens=("0.002", "0.001")
+    )
+
+    with pytest.raises(AuditError, match="conflicts with frozen controlDict deltaT"):
+        audit_run(case, tmp_path / "fixed-native-conflict-ledger")
+
+
+def test_fixed_control_dict_rejects_modified_failure_locations_object(tmp_path: Path) -> None:
+    case = _make_fixed_dt_run(
+        tmp_path / "fixed-failure-locations-variation", include_rouaix_wall_flux=True
+    )
+    control_path = case / "system/controlDict"
+    fixture = Path(__file__).parent / "fixtures/rouaix-n1-controlDict-14647712.txt"
+    control = fixture.read_text(encoding="utf-8").replace(
+        "fields (U p_rgh k epsilon nut);", "fields (U p_rgh k epsilon nut Ux);"
+    )
+    control_path.write_text(control, encoding="utf-8")
+    _refresh_prepared_hash(case, "system/controlDict")
+
+    with pytest.raises(AuditError, match="does not meet fixed-controlDict fallback requirements"):
+        audit_run(case, tmp_path / "fixed-failure-locations-variation-ledger")
+
+
+@pytest.mark.parametrize("programmable_input", ["coded-boundary", "include"])
+def test_fixed_control_dict_rejects_programmable_time_or_boundary_inputs(
+    tmp_path: Path, programmable_input: str
+) -> None:
+    case = _make_fixed_dt_run(tmp_path / f"fixed-{programmable_input}")
+    if programmable_input == "coded-boundary":
+        velocity_path = case / "0/U"
+        velocity_path.write_text(
+            velocity_path.read_text(encoding="utf-8").replace(
+                f"{SOURCE} {{ type uniformFixedValue; }}",
+                f"{SOURCE} {{ type codedFixedValue; code #{{ operator==(value); #}} }}",
+            ),
+            encoding="utf-8",
+        )
+        _refresh_prepared_hash(case, "0/U")
+    else:
+        control_path = case / "system/controlDict"
+        control_path.write_text(
+            '#include "runtime-control"\n' + control_path.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        _refresh_prepared_hash(case, "system/controlDict")
+
+    with pytest.raises(AuditError, match="does not meet fixed-controlDict fallback requirements"):
+        audit_run(case, tmp_path / f"fixed-{programmable_input}-ledger")
 
 
 def test_nested_nut_limiter_passes_full_native_ledger_audit_and_is_hashed(
@@ -502,6 +919,118 @@ def test_run_manifest_image_digest_must_not_contradict_case_inputs(tmp_path: Pat
 
     with pytest.raises(AuditError, match="contradicts the pinned solver image"):
         audit_run(case, tmp_path / "image-out")
+
+
+def test_native_backend_rejects_pinned_image_digest_without_source_evidence(
+    tmp_path: Path,
+) -> None:
+    case = _make_run(tmp_path / "native-with-fake-image-run")
+    inputs_path = case / "case-inputs.json"
+    case_inputs = json.loads(inputs_path.read_text(encoding="utf-8"))
+    case_inputs.update(
+        execution_backend="slurm-native",
+        solver_version="v2512",
+        reference_image_digest=PINNED_IMAGE,
+        openfoam_image_digest=PINNED_IMAGE,
+    )
+    inputs_path.write_text(json.dumps(case_inputs), encoding="utf-8")
+
+    with pytest.raises(AuditError, match="requires --verified-source-evidence"):
+        audit_run(case, tmp_path / "native-fake-image-out")
+
+
+def test_native_backend_accepts_matching_installed_source_and_run_manifest(
+    tmp_path: Path,
+) -> None:
+    case = _make_run(tmp_path / "native-matching-run")
+    evidence = _write_native_source_evidence(tmp_path / "native-source-evidence.json")
+    _configure_native_run(case, evidence)
+
+    summary = audit_run(
+        case,
+        tmp_path / "native-matching-ledger",
+        verified_source_evidence=evidence,
+    )
+
+    verification = summary["solver_image_verification"]
+    assert verification["verification_mode"] == "native-module-source-correspondence"
+    assert verification["native_solver"]["executable_sha256"] == "a" * 64
+    assert (
+        "not proof of reproducible or bit-for-bit binary construction"
+        in verification["interpretation"]
+    )
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("executable_sha256", "c" * 64, "differs from installed-source evidence"),
+        ("version", "v2506", "version must be v2512"),
+        ("architecture", "aarch64", "differs from installed-source evidence"),
+    ],
+)
+def test_native_backend_rejects_run_manifest_identity_mismatch(
+    tmp_path: Path, field: str, value: object, message: str
+) -> None:
+    case = _make_run(tmp_path / field.replace("_", "-"))
+    evidence = _write_native_source_evidence(tmp_path / "native-source-evidence.json")
+    manifest_path = _configure_native_run(case, evidence)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["native_solver"][field] = value
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(AuditError, match=message):
+        audit_run(
+            case,
+            tmp_path / "native-mismatch-ledger",
+            verified_source_evidence=evidence,
+        )
+
+
+def test_native_backend_requires_runtime_identity_in_run_manifest(tmp_path: Path) -> None:
+    case = _make_run(tmp_path / "native-no-runtime-run")
+    evidence = _write_native_source_evidence(tmp_path / "native-source-evidence.json")
+    manifest_path = _configure_native_run(case, evidence)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest.pop("native_solver")
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(AuditError, match="must contain a native_solver object"):
+        audit_run(
+            case,
+            tmp_path / "native-no-runtime-ledger",
+            verified_source_evidence=evidence,
+        )
+
+
+def test_native_backend_checks_reference_source_hashes_and_evidence_binding(
+    tmp_path: Path,
+) -> None:
+    case = _make_run(tmp_path / "native-source-hash-run")
+    evidence = _write_native_source_evidence(tmp_path / "native-source-evidence.json")
+    manifest_path = _configure_native_run(case, evidence)
+
+    damaged_evidence = json.loads(evidence.read_text(encoding="utf-8"))
+    damaged_evidence["solver_source"]["isoAdvection.H"]["sha256"] = "0" * 64
+    evidence.write_text(json.dumps(damaged_evidence), encoding="utf-8")
+    with pytest.raises(AuditError, match="installed source hash mismatch for isoAdvection.H"):
+        audit_run(
+            case,
+            tmp_path / "native-source-hash-ledger",
+            verified_source_evidence=evidence,
+        )
+
+    evidence = _write_native_source_evidence(tmp_path / "native-source-evidence-2.json")
+    manifest_path = _configure_native_run(case, evidence)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["native_source_evidence_sha256"] = "0" * 64
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(AuditError, match="must hash the supplied source evidence"):
+        audit_run(
+            case,
+            tmp_path / "native-source-evidence-binding-ledger",
+            verified_source_evidence=evidence,
+        )
 
 
 def test_flux_function_object_must_be_bound_to_its_named_patch(tmp_path: Path) -> None:

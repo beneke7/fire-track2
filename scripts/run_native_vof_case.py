@@ -563,7 +563,7 @@ def mesh_check_command(run_dir: Path, case_dir: Path, image_id: str, memory_gib:
     shell = (
         "set +e +u; source /usr/lib/openfoam/openfoam2512/etc/bashrc; setup=$?; "
         "[ $setup -eq 0 ] || exit $setup; set -o pipefail; "
-        "foamVersion > log.openfoam-version 2>&1 || exit $?; "
+        "interIsoFoam -help > log.openfoam-version 2>&1 || exit $?; "
         "if checkMesh -allTopology -allGeometry > log.checkMesh 2>&1; then code=0; else code=$?; fi; cat log.checkMesh; "
         "printf 'NATIVE_VOF_STAGE_EXIT stage=checkMesh code=%s\\n' $code; exit $code"
     )
@@ -606,7 +606,7 @@ source /usr/lib/openfoam/openfoam2512/etc/bashrc
 setup=$?
 [ "$setup" -eq 0 ] || exit "$setup"
 set -eo pipefail
-foamVersion
+interIsoFoam -help
 run_stage() {{
   stage="$1"; shift
   if "$@" > "log.$stage" 2>&1; then

@@ -1,0 +1,73 @@
+{
+  "stage": "final",
+  "coordinate_frame": {
+    "x": "crossflow +",
+    "y": "upward +",
+    "z": "spanwise +"
+  },
+  "domain_m": {
+    "x": [
+      -2.5,
+      17.5
+    ],
+    "y": [
+      -10,
+      0
+    ],
+    "z_top": [
+      -3.5,
+      3.5
+    ],
+    "z_bottom": [
+      -8,
+      8
+    ]
+  },
+  "base_counts": [
+    179,
+    89,
+    90
+  ],
+  "base_spacing_m": [
+    0.11173184357541899,
+    0.11235955056179775,
+    0.07777777777777778
+  ],
+  "levels": {
+    "medium": 1,
+    "fine": 3,
+    "nozzle_audit": 3
+  },
+  "roi": {
+    "source": "Fig4 center-plane visual bounds; Fig13 lower cloud envelope with inferred upward offset and tail",
+    "fine_radius_m": 0.9,
+    "medium_radius_m": 1.73,
+    "path_length_m": 9.16332116903374,
+    "tail_m": [
+      6.5,
+      -6.0
+    ]
+  },
+  "nozzle": {
+    "diameter_m": 0.4,
+    "area_target_m2": 0.12566370614359174,
+    "normal_target": [
+      0,
+      1,
+      0
+    ]
+  },
+  "wall_layers": {
+    "paper_reported_count": 5,
+    "paper_reported_growth": 1.1,
+    "reproduced_count": 0,
+    "status": "not_reproduced",
+    "note": "The generated and selected Mac mesh is cast-only. Experimental layer trials are archived separately and rejected; no layer method is part of this case's default pipeline."
+  },
+  "polyMesh_write_format": "binary",
+  "paper": {
+    "doi": "10.1016/j.ijmultiphaseflow.2023.104419",
+    "source_pdf_sha256": "624efe9ee2aec11b85624e9c2ac5364802b12c42657711d211e625052cf28446"
+  },
+  "fig13_csv_sha256": "c55b7985adf584d1f8815d22d01c21cca6660f4c637da220009d9f44b5b719f7"
+}
