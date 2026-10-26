@@ -1,0 +1,12 @@
+.venv/bin/python scripts/doctor.py --output results/machine.json
+Compute doctor — Darwin arm64
+Python: CPython 3.12.13 (/Users/bene/fire-track2/.venv/bin/python)
+Packages: numpy 2.5.3, scipy missing, pytest 9.1.1, pyvista missing
+CPU: 10 effective of 10 logical; default 10 threads
+Memory: unknown available to this process
+Disk: 160.7 GiB free at /Users/bene/fire-track2
+GPU: no NVIDIA GPU detected through nvidia-smi
+VOF solver: none of the checked candidates found
+CUDA toolkit: nvcc missing
+Readiness: CPU VOF not_ready; GPU VOF pilot not_ready (solver support unverified)
+JSON report written to results/machine.json

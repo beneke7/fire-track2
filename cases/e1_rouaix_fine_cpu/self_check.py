@@ -4,6 +4,16 @@ from pathlib import Path
 
 from run_pilot import PATCHES, SOLVER_SHELL, docker, integrate_sample, replace_entry
 
+source = Path(__file__).with_name("run_pilot.py").read_text()
+capacity_wait = source[
+    source.index("    while True:\n        active = []") : source.index("    cmd = docker(")
+]
+assert (
+    capacity_wait.index('if (run / "PAUSE")')
+    < capacity_wait.index("if time.time() >= deadline:")
+    < capacity_wait.index("if not active and busy < 1:")
+)
+
 assert replace_entry("endTime 1;", "endTime", "0.002") == "endTime 0.002;"
 try:
     replace_entry("x 1;", "missing", "2")

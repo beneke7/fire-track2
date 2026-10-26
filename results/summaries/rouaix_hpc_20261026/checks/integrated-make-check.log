@@ -1,0 +1,25 @@
+.venv/bin/python -m ruff check src scripts tests
+All checks passed!
+.venv/bin/python -m ruff format --check src scripts tests
+159 files already formatted
+.venv/bin/python -m pytest -q
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_calbrix_dash8_breakup.py _____________
+ImportError while importing test module '/Users/bene/fire-track2/tests/test_calbrix_dash8_breakup.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_calbrix_dash8_breakup.py:8: in <module>
+    from scripts.digitize_calbrix_dash8_breakup import (
+scripts/digitize_calbrix_dash8_breakup.py:19: in <module>
+    import matplotlib
+E   ModuleNotFoundError: No module named 'matplotlib'
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_hnf_flux_history.py:10: could not import 'pyvista': No module named 'pyvista'
+ERROR tests/test_calbrix_dash8_breakup.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 skipped, 1 error in 0.60s
+make: *** [test] Error 2

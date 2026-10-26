@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-26",
+  "environment": {
+    "platform": "Darwin arm64",
+    "python": "CPython 3.12.13",
+    "effective_cpu_count": 10,
+    "threading": "CPU only; OMP/BLAS/NumExpr set to one for tests and E0",
+    "nvidia_gpu_detected": false
+  },
+  "overall_full_suite_status": "NOT GREEN",
+  "pre_remote_integration": {
+    "checks": [
+      {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 make check",
+        "exit_code": 2,
+        "result": "Ruff check and format passed (134 files formatted); pytest collection stopped because matplotlib is missing in tests/test_calbrix_dash8_breakup.py.",
+        "log": "make-check.log"
+      },
+      {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_hpc_metrics.py",
+        "exit_code": 0,
+        "result": "18 passed.",
+        "log": "hpc-metrics-test.log"
+      },
+      {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_rouaix_hpc_case.py tests/test_rouaix_hpc_queue.py tests/test_rouaix_hpc_runner.py tests/test_rouaix_matched_mesh.py tests/test_hpc_metrics.py tests/test_komondor_tutorial.py tests/test_iso_vof_ledger.py tests/test_native_vof_runner.py",
+        "exit_code": 0,
+        "result": "201 passed in 7.02s.",
+        "log": "assigned-suite.log"
+      },
+      {
+        "command": ".venv/bin/python -m ruff check cases",
+        "exit_code": 0,
+        "result": "All checks passed.",
+        "log": "ruff-cases.log"
+      },
+      {
+        "command": ".venv/bin/python -m ruff format --check cases",
+        "exit_code": 0,
+        "result": "32 files already formatted.",
+        "log": "ruff-cases.log"
+      },
+      {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 .venv/bin/python -m pytest -q --ignore=tests/test_calbrix_dash8_breakup.py",
+        "exit_code": 1,
+        "result": "19 failed, 775 passed, 6 skipped, 4 subtests passed in 79.48s.",
+        "log": "full-suite-excluding-matplotlib.log"
+      },
+      {
+        "command": "make doctor",
+        "exit_code": 0,
+        "result": "Darwin arm64, 10 effective CPUs; no NVIDIA GPU or checked VOF solver; scipy and pyvista missing.",
+        "log": "make-doctor.log"
+      },
+      {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 make e0",
+        "exit_code": 0,
+        "result": "Fresh E0 analytical bundle created; all 7 analytical checks passed. This is not CFD or field validation.",
+        "bundle": "results/runs/e0-20261026T124931.964440Z-c2926251",
+        "report": "results/runs/e0-20261026T124931.964440Z-c2926251/e0-report.json",
+        "log": "make-e0.log"
+      }
+    ],
+    "full_suite_failure_clusters": [
+      {
+        "count": 1,
+        "cause": "Platform: macOS lacks Linux renameat2 required by atomic no-replace publication.",
+        "tests": [
+          "tests/test_aerial_animation.py::test_output_path_rejects_dangling_symlinks_and_atomic_publish_never_overwrites"
+        ]
+      },
+      {
+        "count": 1,
+        "cause": "Retained digitizer CSV differs byte-for-byte (first mismatch at byte 369).",
+        "tests": [
+          "tests/test_calbrix_e3_velocity_independent.py::test_independent_digitizer_reproduces_the_retained_csv"
+        ]
+      },
+      {
+        "count": 1,
+        "cause": "Pillow is missing for PDF rerender.",
+        "tests": [
+          "tests/test_cl415_penetration_trace.py::test_one_page_pdf_rerender_reproduces_the_stored_curve"
+        ]
+      },
+      {
+        "count": 5,
+        "cause": "matplotlib is missing.",
+        "tests": [
+          "tests/test_dash8_count_comparison.py::test_repeatable_report_cli_writes_bundle_and_refuses_overwrite",
+          "tests/test_dash8_count_comparison.py::test_native_reports_with_same_parent_keep_separate_named_series",
+          "tests/test_native_cloud_pair.py::NativeCloudPairIntegrationTests::test_identical_alpha_velocity_arrays_are_valid_null_outcome",
+          "tests/test_native_cloud_pair.py::NativeCloudPairIntegrationTests::test_success_routes_two_distinct_variants_and_preserves_inputs",
+          "tests/test_native_cloud_pair.py::NativeCloudPairIntegrationTests::test_wait_processes_native_success_without_render_success"
+        ]
+      },
+      {
+        "count": 11,
+        "cause": "Ignored candidate receipt bundle is absent: results/runs/candidate6-oci-layout-20260928T1139Z.",
+        "test_files": [
+          "tests/test_flutas_dry_four_output_check.py (8 failures)",
+          "tests/test_prepare_flutas_dry_four.py (3 failures)"
+        ]
+      }
+    ],
+    "full_suite_skips": [
+      "pyvista missing (1)",
+      "Docker unavailable for dictionary parse (1)",
+      "opt-in Docker cgroup test not enabled (1)",
+      "drjit missing (2)",
+      "scipy missing (1)"
+    ],
+    "full_suite_result": "19 failed, 775 passed, 6 skipped, 4 subtests passed; this diagnostic was run before remote integration."
+  },
+  "post_remote_integration": {
+    "make_check": {
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 make check",
+      "exit_code": 2,
+      "ruff_check": {
+        "command": ".venv/bin/python -m ruff check src scripts tests",
+        "exit_code": 0,
+        "result": "All checks passed."
+      },
+      "ruff_format": {
+        "command": ".venv/bin/python -m ruff format --check src scripts tests",
+        "exit_code": 0,
+        "result": "159 files already formatted."
+      },
+      "pytest": {
+        "exit_code": 2,
+        "result": "Collection stopped: matplotlib is missing for tests/test_calbrix_dash8_breakup.py."
+      },
+      "log": "integrated-make-check.log"
+    },
+    "affected_suite": {
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_rouaix_hpc_case.py tests/test_rouaix_hpc_queue.py tests/test_rouaix_hpc_runner.py tests/test_rouaix_matched_mesh.py tests/test_hpc_metrics.py tests/test_komondor_tutorial.py tests/test_iso_vof_ledger.py tests/test_native_vof_runner.py",
+      "exit_code": 0,
+      "passed": 201,
+      "elapsed_seconds": 6.25,
+      "log": "integrated-affected-suite.log"
+    },
+    "ruff_cases": {
+      "directories": [
+        "cases/e1_rouaix_fine_cpu",
+        "cases/e1_rouaix_hpc",
+        "cases/e1_rouaix_matched_mesh"
+      ],
+      "ruff_check_exit_code": 0,
+      "ruff_format_check_exit_code": 0,
+      "result": "All checks passed; 9 files already formatted.",
+      "log": "integrated-ruff-cases.log",
+      "wrapper_attempt_note": "An initial zsh wrapper passed the directory list as one path (check exit 1, format exit 2); the explicit-path rerun passed. Attempt retained in integrated-ruff-cases-shell-attempt.log."
+    },
+    "full_suite": {
+      "rerun_post_integration": false,
+      "result": "Not rerun per instruction. The 19-failure/775-pass/6-skip diagnostic in pre_remote_integration is pre-merge only and is not a post-merge full-suite result."
+    },
+    "status": "NOT GREEN: integrated make check remains blocked at pytest collection by missing matplotlib; the affected 201-test suite and Ruff checks pass."
+  },
+  "last_updated_stage": "post remote integration"
+}

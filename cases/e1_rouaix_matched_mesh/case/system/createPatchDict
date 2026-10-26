@@ -1,0 +1,14 @@
+FoamFile
+{
+ version 2.0;
+ format ascii;
+ class dictionary;
+ object createPatchDict;
+}
+
+pointSync false;
+patches
+(
+    { name nozzle; patchInfo { type patch; inGroups (inlet); }
+      constructFrom set; set nozzleFaces; }
+);

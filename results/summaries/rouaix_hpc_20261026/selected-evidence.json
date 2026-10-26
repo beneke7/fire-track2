@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "classification": "Exploratory HPC and source-comparison evidence. E0 is the only passed project gate; no E1 validation or acceptance is established here.",
+  "sources": {
+    "matched_rank_scaling": "source-hashes.json#matched_rank_scaling",
+    "g1": "source-hashes.json#g1",
+    "t1": "source-hashes.json#t1",
+    "startup_comparison": "source-hashes.json#startup_comparison",
+    "startup_review": "source-hashes.json#startup_review",
+    "crossflow_research": "source-hashes.json#crossflow_research",
+    "crossflow_review": "source-hashes.json#crossflow_review"
+  },
+  "matched_rank_scaling": {
+    "shared_inputs": {
+      "solver": "interIsoFoam/OpenCFD v2512",
+      "mesh_cells": 10099265,
+      "fixed_deltaT_s": 0.0005,
+      "horizon_s": 0.05,
+      "steps": 100,
+      "variant": "original",
+      "same_case_note": "Physics and mesh hashes match; rank/node/decomposition and temporary provenance metadata differ; each run verified its prepared input hashes."
+    },
+    "matched_window": {
+      "clock_precision_s": 1,
+      "end_s": 0.049,
+      "intervals": 78,
+      "note": "Common interior window. OpenFOAM ClockTime quantizes these wall intervals to whole seconds.",
+      "physical_span_s": 0.039,
+      "samples": 79,
+      "start_s": 0.01
+    },
+    "measurements": [
+      {
+        "job_id": "14647793",
+        "ranks": 64,
+        "solver_wall_s": 896.2073310911655,
+        "matched_window_clock_elapsed_s": 672.0,
+        "matched_window_speedup_vs_64": 1.0,
+        "matched_window_parallel_efficiency_vs_64": 1.0,
+        "allocated_core_hours": 17.52888888888889,
+        "measured_solver_child_cpu_hours": 15.764166666666666
+      },
+      {
+        "job_id": "14647876",
+        "ranks": 120,
+        "solver_wall_s": 414.26361823710613,
+        "matched_window_clock_elapsed_s": 310.0,
+        "matched_window_speedup_vs_64": 2.167741935483871,
+        "matched_window_parallel_efficiency_vs_64": 1.1561290322580646,
+        "allocated_core_hours": 17.633333333333333,
+        "measured_solver_child_cpu_hours": 13.558055555555555
+      },
+      {
+        "job_id": "14648039",
+        "ranks": 240,
+        "solver_wall_s": 181.41450478509068,
+        "matched_window_clock_elapsed_s": 130.0,
+        "matched_window_speedup_vs_64": 5.1692307692307695,
+        "matched_window_parallel_efficiency_vs_64": 1.3784615384615386,
+        "allocated_core_hours": 22.266666666666666,
+        "measured_solver_child_cpu_hours": 11.523333333333333
+      },
+      {
+        "job_id": "14648312",
+        "ranks": 300,
+        "solver_wall_s": 142.21979626175016,
+        "matched_window_clock_elapsed_s": 99.0,
+        "matched_window_speedup_vs_64": 6.787878787878788,
+        "matched_window_parallel_efficiency_vs_64": 1.448080808080808,
+        "allocated_core_hours": 26.0,
+        "measured_solver_child_cpu_hours": 11.170555555555556
+      }
+    ],
+    "interpretation": "300 ranks was fastest in this sample. Apparent greater-than-linear speedup is conditional on these placements and short horizon, not a scaling law. Queue wait is reported separately.",
+    "limits": [
+      "No profiler: pressure seconds/share unknown. Iteration counts are not elapsed time.",
+      "Field writes scheduled at 0 and 0.05 s; actual write duration and retained checkpoint bytes missing. Archive size is compressed diagnostics/evidence, not a checkpoint.",
+      "Slurm solver MaxRSS is per task, .batch RSS is startup/preparation; no periodic RSS trace or whole-node memory sample.",
+      "Max-U differs sharply by decomposition (peak 904.736 m/s at 240 ranks); inspect field/peak coordinates before long physical-time conclusions.",
+      "0.5 s forecast exceeded remaining wall cutoff; no 0.5 s or 5 s continuation. 0.05 s does not show stabilized plume.",
+      "Exploratory only; cast mesh exception and zero-added-wall-layer difference from the paper remain."
+    ]
+  },
+  "g1_gradient_limiter_trial": {
+    "classification": "Exploratory stability/performance diagnostic; not E1 validation or a gate decision.",
+    "job_id": "14648417",
+    "baseline_job_id": "14648312",
+    "change": {
+      "declared_diagnostic": "Compare speed history and locations, bulk/interface Courant, intermediate and post-step alpha, ledger, residual/iteration counts, placement and runtime. No directional success claim or post hoc threshold was declared.",
+      "physical_solver_change": {
+        "file": "system/fvSchemes",
+        "from": "grad(U) Gauss linear;",
+        "meaning": "Limits reconstructed slopes; it does not cap stored velocity and is not the paper hybrid Gauss-LSQ/Venkatakrishnan treatment.",
+        "to": "grad(U) cellLimited Gauss linear 1;"
+      },
+      "purpose": "One-factor comparison of grad(U) cellLimited Gauss linear 1 against the frozen original-gradient 300-rank baseline 14648312."
+    },
+    "inputs": {
+      "solver": "interIsoFoam, OpenCFD v2512",
+      "mesh_cells": 10099265,
+      "fixed_deltaT_s": 0.0005,
+      "horizon_s": 0.05,
+      "requested_steps": 100,
+      "nAlphaSubCycles": 1,
+      "PIMPLE": {
+        "nCorrectors": 3,
+        "nOuterCorrectors": 1
+      },
+      "momentum_convection": "limitedLinearV 1"
+    },
+    "outcome": {
+      "run_state_status": "stopped_with_preserved_evidence",
+      "parent_Slurm_state": "FAILED",
+      "parent_exit_code": "1:0",
+      "stop_reason": "operational stop: max|U|=6975.25 m/s exceeds 1000 m/s",
+      "last_time_s": 0.0455,
+      "recorded_steps": 91,
+      "requested_steps": 100,
+      "coverage_fraction": 0.91,
+      "ledger_audit_exit_code": 0,
+      "meaning": "The solver child exited orderly with End after the safety stop; it did not reach .05 s. This is a 91-step partial result, not a completed horizon."
+    },
+    "diagnostics": {
+      "G1_convergence": "One failed record at final kFinal solve: 100 iterations; residual 1.37534453342e-6 vs tolerance 1e-8. Other recorded fields passed.",
+      "G1_intermediate_isoAdvection_alpha_min": -0.185681890574,
+      "G1_max_Courant_at_event": 195.062827844,
+      "G1_max_interface_Courant_at_event": 18.5129518419,
+      "G1_max_speed_event": {
+        "cell_id": 21892,
+        "magnitude_m_s": 6975.24790046,
+        "processor": 141,
+        "time_s": 0.0445,
+        "xyz_m": [
+          0.04888268156425,
+          -0.5688394389065,
+          0.1930174190615
+        ]
+      },
+      "G1_phase1_console_alpha_water_min": -4.27569652689e-06,
+      "G1_post_step_fieldMinMax_alpha_water_range": [
+        -4.955035676473e-14,
+        1.0
+      ],
+      "G1_to_baseline_full_run_max_U_ratio": 16.91,
+      "G1_to_baseline_same_time_U_ratio_at_0.0445": 53.76,
+      "baseline_U_at_0.0445_m_s": 129.748370781,
+      "baseline_max_speed_event": {
+        "cell_id": 27011,
+        "magnitude_m_s": 412.477403692,
+        "processor": 125,
+        "time_s": 0.0425,
+        "xyz_m": [
+          -0.090782122905,
+          -0.428422501188,
+          -0.220545584059
+        ]
+      },
+      "ledger_G1_partial": {
+        "closure_residual_kg": 0.006756098683403877,
+        "injected_kg": 56.94981657354277,
+        "max_abs_step_residual_kg": 0.00084227112515,
+        "native_inventory_kg": 56.95657267222617,
+        "net_escape_kg": 0,
+        "relative_residual": 0.0001186,
+        "source_deltaT_mode": "fixed-controlDict"
+      },
+      "ledger_baseline_at_matched_0.0455_residual_kg": 0.0109592051098
+    },
+    "matched_runtime_window": {
+      "start_s": 0.01,
+      "end_s": 0.0455,
+      "physical_span_s": 0.0355,
+      "samples": 72,
+      "intervals": 71,
+      "derived_runtime_change_G1_vs_baseline": 0.06259,
+      "derived_physical_throughput_change_G1_vs_baseline": -0.0589,
+      "comparison_limit": "Window is aligned in physical time, but placement and retention differ. G1 stopped at 91 steps; its whole-run solver wall must not be compared as a completed .05 s timing."
+    },
+    "limitations": [
+      "No pressure time, pressure/I/O share, checkpoint write duration, archive packing duration, periodic RSS, or aggregate node memory.",
+      "Slurm times are local strings without offsets; queue-wait conversion uses Europe/Budapest UTC+1 consistent with UTC runner timestamps.",
+      "No full-field snapshot at .0445 s, so event phase/mechanism unknown.",
+      "Mesh has a native exact concave-cell-set qualification exception (114008 cells); zero added wall layers vs five in the paper. No CFD/E1 validation.",
+      "Only one case per variant; node placement and retention differ, limiting runtime attribution."
+    ]
+  },
+  "t1_fixed_timestep_trial": {
+    "classification": "Completed exploratory diagnostic through its configured 0.05 s horizon; not a 5 s stability claim or validation.",
+    "job_id": "14649329",
+    "status": "solver_complete_exploratory",
+    "allocation": {
+      "delta_t_s": 0.0001,
+      "horizon_s": 0.05,
+      "memory_gib_per_node": 64,
+      "node": "x1000c7s4b1n1",
+      "nodes": 1,
+      "ranks": 120,
+      "steps": 500
+    },
+    "timing": {
+      "job_elapsed_seconds": 1817.0,
+      "solver_wall_s": 1617.7443404390942,
+      "solver_clock_time_s": 1611.0,
+      "solver_elapsed_s": 1595.438886764925
+    },
+    "diagnostics": {
+      "logged_steps": 500,
+      "physical_time_reached_s": 0.05,
+      "exact_global_field_max_mag_u": {
+        "cell": 38626,
+        "location_m": [
+          0.579608938547,
+          -0.0632562870647,
+          0.406751862567
+        ],
+        "mag_u_m_s": 103.293547802,
+        "processor": 66,
+        "time_s": 0.0497
+      },
+      "bulk_courant_global_max": {
+        "kind": "bulk",
+        "max": 1.12154115569,
+        "mean": 0.0691084487956,
+        "time_s": 0.0499
+      },
+      "interface_courant_global_max": {
+        "kind": "interface",
+        "max": 0.560172813445,
+        "mean": 5.2731872457e-07,
+        "time_s": 0.0489
+      },
+      "alpha_min_max": {
+        "alpha": {
+          "max": {
+            "last": 1.0,
+            "max": 1.0,
+            "min": 1.0
+          },
+          "min": {
+            "last": -2.16840434497e-19,
+            "max": 0.0,
+            "min": -6.43745364866e-14
+          }
+        },
+        "alpha.water": {
+          "max": {
+            "last": 1.0,
+            "max": 1.0,
+            "min": 1.0
+          },
+          "min": {
+            "last": 0.0,
+            "max": 0.0,
+            "min": -1.64978071246e-20
+          }
+        }
+      },
+      "linear_solve_audit": {
+        "all_converged": true,
+        "by_field": {
+          "Ux": {
+            "failed_count": 0,
+            "max_final_residual": 9.61862285419e-09,
+            "max_iterations": 4,
+            "solve_count": 500
+          },
+          "Uy": {
+            "failed_count": 0,
+            "max_final_residual": 9.99739634904e-09,
+            "max_iterations": 5,
+            "solve_count": 500
+          },
+          "Uz": {
+            "failed_count": 0,
+            "max_final_residual": 9.85319296519e-09,
+            "max_iterations": 5,
+            "solve_count": 500
+          },
+          "epsilon": {
+            "failed_count": 0,
+            "max_final_residual": 9.94765013324e-09,
+            "max_iterations": 8,
+            "solve_count": 500
+          },
+          "k": {
+            "failed_count": 0,
+            "max_final_residual": 9.94985829844e-09,
+            "max_iterations": 10,
+            "solve_count": 500
+          },
+          "p_rgh": {
+            "failed_count": 0,
+            "max_final_residual": 0.000290661812029,
+            "max_iterations": 19,
+            "solve_count": 1500
+          },
+          "pcorr": {
+            "failed_count": 0,
+            "max_final_residual": 9.77976034462e-11,
+            "max_iterations": 803,
+            "solve_count": 1
+          }
+        },
+        "failed_record_count": 0,
+        "record_count": 4001
+      },
+      "divergence_detected": false,
+      "fatal_errors": []
+    },
+    "ledger": {
+      "injected_kg": 62.582216014881666,
+      "final_inventory_kg": 62.58221601489213,
+      "closure_residual_kg": 1.0466294497746276e-11,
+      "maximum_abs_cumulative_residual_kg": 1.33013600134e-11,
+      "maximum_abs_per_step_residual_kg": 8.18498047117e-12,
+      "signed_net_escape_kg": 1.4339453032627544e-99,
+      "status": "raw_exploratory_ledger_written"
+    },
+    "comparison_with_120_rank_0p5ms_baseline": {
+      "baseline_job_id": "14647876",
+      "baseline_delta_t_s": 0.0005,
+      "baseline_steps": 100,
+      "baseline_final_time_s": 0.05,
+      "candidate_delta_t_s": 0.0001,
+      "candidate_steps": 500,
+      "candidate_final_time_s": 0.05,
+      "candidate_over_baseline_solver_wall_ratio": 3.90510841218301,
+      "hpc_metrics_comparison_eligible": false,
+      "hpc_metrics_comparison_reason": "logged step counts differ across runs",
+      "interpretation": "Same 120 ranks and 0.05 s final physical time but different dt and step count; this is a timestep throughput comparison, not strong scaling."
+    },
+    "archive_verification": {
+      "archive_bytes": 1719302994,
+      "sha256": "f710b5a78cfaf818a7def4c516110a8dc4f375f91c8ff61197a151d2dbdcd2e0",
+      "gzip_crc_and_full_stream_read": "passed via run_pilot.verify_result_archive",
+      "member_count": 129,
+      "member_file_sizes_match_run_state": true
+    }
+  },
+  "startup_snapshot_profile": {
+    "classification": "read-only descriptive startup comparison; not an E1 gate or formal Figure 13 curve comparison",
+    "case_id": "T1-ORIG-120-01MS-005",
+    "solver": "OpenCFD OpenFOAM v2512 interIsoFoam",
+    "stored_times_s": [
+      0.0,
+      0.05
+    ],
+    "selected_time_s": 0.05,
+    "geometry_method": {
+      "cloud": "whole-cell VTK Threshold of cell alpha.water >= 0.1, then independent normal-+x Slice plane intersections",
+      "paper_equivalence": false,
+      "paper_detector": "Rouaix Figure 13 uses the chi=0.1 cloud envelope; this whole-cell VTK proxy is not the exact paper surface detector",
+      "coordinates": {
+        "x": "streamwise positive crossflow, x=0 at nozzle center",
+        "y": "upward positive; source plane y0=0 m; penetration h=-y_low",
+        "z": "native signed spanwise coordinate",
+        "D_m": 0.4
+      },
+      "cell_scale_uncertainty_note": "Bounds are cell-threshold/plane-intersection envelopes on a mixed mesh nominally 14/56 mm; local extent uncertainty is of order the local cell pitch (~14 mm in the fine near-nozzle region) and varies with x/z. This is a resolution scale, not a statistical error bar.",
+      "station_policy": "Each requested plane is processed independently; empty planes remain null and no interpolation is made between stations.",
+      "width_interpretation": "Keep signed z_low/z_high, full span, and half of the full span; compare both span interpretations with the unchanged paper z/D because the paper does not define half-width versus full-width."
+    },
+    "global_alpha01_cloud": {
+      "threshold": "CELL alpha.water >= 0.1 and <= 1.0",
+      "cell_count": 33988,
+      "bounds_m": [
+        -0.1955307275056839,
+        0.25139665603637695,
+        -0.5899505019187927,
+        0.0,
+        -0.24723783135414124,
+        0.24723783135414124
+      ],
+      "bounds_x_over_D": [
+        -0.48882681876420975,
+        0.6284916400909424
+      ],
+      "penetration_h_m": 0.5899505019187927,
+      "penetration_h_over_D": 1.4748762547969818,
+      "z_low_m": -0.24723783135414124,
+      "z_high_m": 0.24723783135414124,
+      "full_span_m": 0.49447566270828247,
+      "half_span_m": 0.24723783135414124
+    },
+    "selected_stations": [
+      {
+        "x_m": 0.1,
+        "x_over_D": 0.25,
+        "slice_cut_cell_count": 2578,
+        "penetration_h_m": 0.505744993686676,
+        "penetration_h_over_D": 1.26436248421669,
+        "z_low_m": -0.21706686913967133,
+        "z_high_m": 0.21706686913967133,
+        "full_span_m": 0.43413373827934265,
+        "half_span_m": 0.21706686913967133,
+        "full_span_over_D": 1.0853343456983566,
+        "half_span_over_D": 0.5426671728491783,
+        "figure13_primary_reference": {
+          "penetration_h_over_D": {
+            "method": "primary vector-path digitization",
+            "value_over_D": 1.5,
+            "sigma_value_over_D": 0.07,
+            "sigma_x_over_D": 0.02
+          },
+          "reported_z_over_D": {
+            "method": "primary vector-path digitization",
+            "value_over_D": 1.071,
+            "sigma_value_over_D": 0.04,
+            "sigma_x_over_D": 0.01
+          }
+        },
+        "figure13_independent_raster_reference": {
+          "penetration_h_over_D": {
+            "method": "independent raster trace",
+            "value_over_D": 1.5417,
+            "sigma_value_over_D": 0.0419,
+            "source_value_over_D": 1.5,
+            "source_sigma_value_bound_over_D": 0.07,
+            "source_sigma_x_bound_over_D": 0.02
+          },
+          "reported_z_over_D": {
+            "method": "independent raster trace",
+            "value_over_D": 1.1593,
+            "sigma_value_over_D": 0.082,
+            "source_value_over_D": 1.071,
+            "source_sigma_value_bound_over_D": 0.04,
+            "source_sigma_x_bound_over_D": 0.01
+          }
+        },
+        "comparison_note": "digitized x/D values only; no interpolation/extrapolation"
+      },
+      {
+        "x_m": 0.2,
+        "x_over_D": 0.5,
+        "slice_cut_cell_count": 162,
+        "penetration_h_m": 0.4916682839393616,
+        "penetration_h_over_D": 1.229170709848404,
+        "z_low_m": -0.15504904091358185,
+        "z_high_m": 0.15504904091358185,
+        "full_span_m": 0.3100980818271637,
+        "half_span_m": 0.15504904091358185,
+        "full_span_over_D": 0.7752452045679092,
+        "half_span_over_D": 0.3876226022839546,
+        "figure13_primary_reference": {
+          "penetration_h_over_D": {
+            "method": "primary vector-path digitization",
+            "value_over_D": 2.275,
+            "sigma_value_over_D": 0.07,
+            "sigma_x_over_D": 0.02
+          },
+          "reported_z_over_D": {
+            "method": "primary vector-path digitization",
+            "value_over_D": 2.143,
+            "sigma_value_over_D": 0.04,
+            "sigma_x_over_D": 0.01
+          }
+        },
+        "figure13_independent_raster_reference": {
+          "penetration_h_over_D": {
+            "method": "independent raster trace",
+            "value_over_D": 2.3257,
+            "sigma_value_over_D": 0.0986,
+            "source_value_over_D": 2.275,
+            "source_sigma_value_bound_over_D": 0.07,
+            "source_sigma_x_bound_over_D": 0.02
+          },
+          "reported_z_over_D": {
+            "method": "independent raster trace",
+            "value_over_D": 2.1311,
+            "sigma_value_over_D": 0.025,
+            "source_value_over_D": 2.143,
+            "source_sigma_value_bound_over_D": 0.04,
+            "source_sigma_x_bound_over_D": 0.01
+          }
+        },
+        "comparison_note": "digitized x/D values only; no interpolation/extrapolation"
+      }
+    ],
+    "paper_sampling_context": "not stated; do not equate Figure 1's 4.5 s illustration or the paper's roughly 5 s run duration with the Figure 13 sampling time",
+    "independent_interpretation": {
+      "classification": "descriptive early-startup comparison only",
+      "strongest_claim": "The current alpha.water >= 0.1 cell-envelope has measurable near-nozzle penetration and span at x/D=0.25 and 0.5 that can be placed next to the Figure 13 Case 1 points as an explicitly early-time, non-equivalent diagnostic. At x/D=0.25, simulated full-span/D is numerically close to the plotted z/D only if the paper's z denotes full span. The penetration values and the x/D=0.5 span are smaller than the Figure 13 points.",
+      "claims_not_supported": [
+        "A quantitative Figure 13 match or mismatch score",
+        "That the current case underpredicts the stabilized Rouaix profile",
+        "That the t=0.05 s field represents a converged, stationary, or time-averaged plume",
+        "That the Figure 13 sample time equals either 4.5 s or the approximately 5 s total simulation duration",
+        "An interpretation of z/D as definitively half-width or full-width"
+      ],
+      "reason": "The paper says its cases ran for about 5 s to reach an established regime with stabilized penetration and transverse expansion, but it does not state the sampling or averaging time for Figure 13. The 4.5 s time belongs to the separate Figure 1 morphology illustration. The current 0.05 s snapshot is therefore not time-matched; any early-time shortfall is not evidence of steady-state underprediction."
+    },
+    "reporting_guidance": {
+      "allowed": "Report a small, clearly labelled t=0.05 s alpha>=0.1 near-nozzle profile proxy at x/D=0.25 and 0.5 next to the two Figure 13 digitizations, showing the current full-span and half-span z values and stating that the detector and time are not matched.",
+      "avoid": [
+        "Calling this a Figure 13 match, validation, E1 pass, or stabilized profile",
+        "Saying the solver underpredicts Rouaix based on the current early snapshot",
+        "Picking a full-width/half-width interpretation after seeing the plotted values",
+        "Treating vector/raster trace bounds as CFD tolerances"
+      ],
+      "next_evidence": "The declared five-second exploratory case remains the relevant next source-comparison evidence. If it completes, compare preselected t=4 and 5 s profiles only as descriptive snapshots; they are not a time average and do not supply a formal E1 decision."
+    },
+    "limits": [
+      "The current fields are a 0.05 s startup snapshot, not the paper's developed roughly five-second calculation; the Figure 13 sampling time is unspecified.",
+      "Only exact digitized x/D points are reported. No interpolation is made where a point is absent, including x/D=8 penetration and x/D=4,8 width.",
+      "At x/D=0, the plotted zero is a shared nozzle-axis digitizer convention and is not a time-zero match.",
+      "These measurements can show early geometry and order-of-magnitude source compatibility only; they cannot establish developed-cloud agreement, E1 acceptance, validation, or a solver success/failure decision.",
+      "No momentum closure, source-connected core, breakup location, or physical validation was computed."
+    ]
+  },
+  "crossflow_research_and_review": {
+    "research_answer": {
+      "strongest_successful_physical_analogue": "C1, Liu 2024 jetCrossFlow: published experimental trajectory evidence and public case data. Public defaults contain a failing scheme and the inlet profile differs from the printed paper.",
+      "strongest_current_fork_compatibility": "Current DLR TwoPhaseFlow supports OpenCFD v2406-v2606 including v2512. Exact Liu branch compatibility remains untested.",
+      "consequential_hypothesis": "Geometrically derived rhoPhi does not alone prove discrete mass-momentum consistency; temporal and momentum interpolation schemes must match geometric transport. This is a diagnostic hypothesis, not our established failure cause.",
+      "absence": "No verified public D=0.4 m, 70 m/s air, realizable k-epsilon, five-second OpenFOAM reproduction found."
+    },
+    "recommended_first_analogue": {
+      "id": "C1",
+      "title": "Liu et al. water jet in 65 m/s crossflow",
+      "category": "published physical validation; public research fixture",
+      "sources": [
+        {
+          "doi": "10.1016/j.compfluid.2024.106375",
+          "location": "Section 4.6, Figs 15-17; published PDF p13-15; arXiv v2 pp34-38"
+        },
+        {
+          "location": "v2 inspected, page35 equation visually checked"
+        },
+        {
+          "doi": "10.48328/tudatalib-1276"
+        },
+        {
+          "doi": "10.48328/tudatalib-1277"
+        }
+      ]
+    },
+    "review_verdict": {
+      "short": "The scheme mismatch is a credible contributor to test, not an established cause of the Rouaix velocity spikes.",
+      "supported": "Liu et al. derive a discrete consistency condition for geometrical VOF phase-volume flux, first-order Euler time integration, and the momentum face-velocity interpolation. In their analysis Euler + Gauss upwind is the consistent pairing; Euler + limitedLinearV is classified as not mass-flux-consistent. The current baseline uses Euler with a geometrically derived rhoPhi but momentum convection Gauss limitedLinearV 1, so it matches the paper's concerning scheme pairing by name and role.",
+      "qualified": "The paper demonstrates scheme-dependent global momentum error and catastrophic failure for some tested pairings while mass conservation can remain excellent. It also demonstrates that Euler + limitedLinearV may remain stable in its particular translating-drop and mixing-layer cases. Thus the finding supports a mechanism that can introduce momentum inconsistency or numerical acceleration; it does not predict that this current jet must fail or that limitedLinearV alone creates a 412/6975 m/s event.",
+      "not_supported": [
+        "A geometric rhoPhi formula alone proves consistency of the complete discretized momentum equation.",
+        "The paper's limitedLinearV evidence establishes a failure in the published 65 m/s crossflow case; that case's published results use Euler + upwind, and the paper does not report a limitedLinearV-versus-upwind crossflow comparison.",
+        "The current spikes are caused by limitedLinearV, rhoPhi, the pressure solver, alpha clipping, or any other single mechanism; the G1 event lacks an event-time field and phase classification.",
+        "The public jetCrossFlow repository default is the successful paper setup; the inspected default uses Euler + cubic, while the paper describes Euler + upwind for its published successful crossflow results."
+      ]
+    },
+    "minimum_discriminating_test": {
+      "purpose": "Test whether the current momentum face interpolation materially contributes to the late .04-.05 s spike on this same Rouaix mesh.",
+      "pair": "Use the hash-verified original-gradient r300 baseline job 14648312 as control. Start a fresh state at t=0 on the same 10,099,265-cell mesh with the same native v2512 binary, initial fields, boundaries, fluid properties, turbulence model, fixed dt=0.0005 s, horizon=0.05 s, nOuterCorrectors=1, nCorrectors=3, nAlphaSubCycles=1, original grad(U)=Gauss linear, rank count and decomposition. Change only `div(rhoPhi,U)` from `Gauss limitedLinearV 1` to `Gauss upwind` in fvSchemes.",
+      "why_this_is_minimal": "The paper's condition identifies Euler+upwind as the consistency control for a single geometric mass flux; Euler is already common to both arms. Keeping the original gradient and current mesh avoids mixing in G1's gradient paths, timestep, coupling, or grid changes. A fresh state avoids the corrupted-seed flaw of the older upwind retry.",
+      "interpretation": "If upwind materially reduces the spike and improves a complete momentum balance without erasing the jet trajectory, this strengthens scheme-pairing as a contributor but still does not establish E1 agreement or a global solver fix. If it suppresses the max while significantly changing jet shape, diffusion may be masking the issue. If the event remains comparable with verified momentum fluxes, lower this hypothesis and prioritize the independent alpha-stage, pressure-velocity, turbulence, mesh and startup checks.",
+      "not_a_gate": "This is an exploratory one-factor mechanism test, not a predeclared E1 acceptance comparison; no numeric pass tolerance is assigned here."
+    },
+    "review_result": "The research finding merits inclusion as a testable current-case hypothesis with explicit caveats. Do not promote it as the established explanation for the velocity spikes or as evidence that limitedLinearV always fails."
+  },
+  "queue_snapshot": {
+    "captured_utc": "2026-10-26T12:36:16.163842+00:00",
+    "returncode": 0,
+    "stdout": "             JOBID         NAME      STATE     CPUS  NODES         TIME NODELIST(REASON)\n          14650641       ml-vof    PENDING      120      1         0:00 (Priority)\n          14648472       ml-vof    PENDING      300      3         0:00 (Priority)\n\nJobID|State|Start|End|Elapsed|AllocCPUS|ExitCode\n14648472|PENDING|Unknown|Unknown|00:00:00|0|0:0\n14650641|PENDING|Unknown|Unknown|00:00:00|0|0:0\n\nNO_RUN_STATE 14650641\nNO_RUN_STATE 14648472\n",
+    "stderr": "",
+    "scope": "Direct scheduler capture only; it records both jobs pending at this instant and does not establish any later live status."
+  },
+  "preview": {
+    "path": "preview/rouaix-alpha001.png",
+    "field": "alpha.water",
+    "cell_threshold": ">= 0.01",
+    "time_s": 0.05,
+    "threshold_cell_count": 34800,
+    "visualization_sha256": "source-hashes.json#alpha001_preview"
+  }
+}

@@ -10,7 +10,9 @@ air (70,0,0) m/s and realizable k–epsilon. PDF p.6/§3.1 supplies first-order
 implicit time integration, second-order convection and HRIC; this OpenFOAM
 isoAdvector implementation is a different numerical method. PDF p.8/§3.3
 explicitly gives hybrid Gauss/LSQ gradients with a Venkatakrishnan limiter,
-locally refined 70/50/30/16 mm mesh regions and five prism layers. These are
+four locally refined mesh-study candidates (70/50/30/16 mm) and five prism
+layers with growth ratio 1.1. These sizes are separate mesh candidates, not
+four prescribed refinement bands within the final mesh. These are
 transcribed from the original local PDF with `pdftotext -f 6 -l 8 -layout`.
 
 Reuse Goblin's previously generated, checked mesh at
@@ -67,16 +69,17 @@ not a captured peak. The 20-rank clean-start case is preserved (12 GiB bundle).
 The preparation supervisor was stopped before it could launch a solver.
 
 The replacement durable service
-`fire-track2-rouaix-fine-capacity-20261024T2154Z.service` is an actual finite
-capacity watcher: up to 20 minutes, sampling host busy CPU and running
-unpaused Docker containers every ten seconds. It launches the declared
+`fire-track2-rouaix-fine-capacity-20261024T2154Z.service` was a finite capacity
+watcher capped at 20 minutes, sampling host busy CPU and running unpaused
+Docker containers every ten seconds. It launched the declared
 20-rank/20-CPU pilot only when unrelated containers have stopped and sampled
 CPU use is below one CPU equivalent; otherwise records
 `prepared_capacity_deferred`. It honors PAUSE while waiting. No competing
 work is stopped or throttled; no 20-rank result on a reduced quota is taken.
 `--resume-prepared` consumes only a successful completed decomposition and
 requires all twenty processor mesh boundaries. Old state, launcher and logs
-are preserved. The current watcher is independent of this tool session.
+are preserved. The watcher ran independently of this tool session and later
+ended with the startup failure documented below.
 
 ## Startup audit and correction, 25 October 2026
 
@@ -93,7 +96,11 @@ A one-CPU, 1 GiB, `interIsoFoam -help` probe in the same image exited 0 at
 2026-10-25 08:27:45 UTC and printed `Using: OpenFOAM-2512 (2512)`, build
 `_87ed40d2-20251219`, and `Arch: LSB;label=32;scalar=64`. The launcher now
 records this installed solver banner before `mpirun` with strict shell failure
-handling, so a failed help command cannot proceed into CFD. The original failed
-state and logs were not edited. A future retry needs a new run ID and a clean
-prepared attempt; reusing the failed container name/state would overwrite
-evidence or conflict with the preserved Docker container.
+handling, so a failed help command cannot proceed into CFD. The same
+substitution is applied to native VOF mesh-check and solver startup, with
+regression assertions for both command paths. The capacity wait also checks
+user PAUSE and its deadline before accepting available CPU, so paused or
+expired queued work cannot launch. The original failed state and logs were not
+edited. A future retry needs a new run ID and a clean prepared attempt; reusing
+the failed container name/state would overwrite evidence or conflict with the
+preserved Docker container.

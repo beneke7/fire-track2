@@ -1,8 +1,47 @@
 # Live project status
 
-Updated: 2026-10-26 13:00 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 13:05 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
+
+## HPC Rouaix work and GitHub evidence publication
+
+HPC readback **2026-10-26 12:36:16 UTC (13:36:16 CET)**: job **14650641**
+(one node, 120 ranks, fixed 0.1 ms toward 5 s, 72 h cap) and **14648472**
+(300 ranks, three nodes, short 0.1 ms trial) were PENDING/Priority with no
+allocation or start estimate. This timestamp is a snapshot, not live status.
+No unrelated account jobs were changed. W&B remains offline pending a destination.
+
+Short one-node T1 job **14649329** completed all 500 steps through 0.05 s;
+all 4,001 linear-solver records met their configured criteria. Peak speed
+103.29355 m/s, bulk/interface Co 1.12154/0.56017, mass residual 1.05e-11 kg.
+G1 gradient-limiter trial **14648417** failed its speed guard after a
+6,975.25 m/s peak and ended at 0.0455 s; it did not complete its target.
+The 64/120/240/300-rank original-scheme timing samples do not establish
+healthy long-time behavior or a universal optimum.
+
+ParaView CLI displays the 10,099,265-cell result using the requested
+cell alpha.water >= 0.01 threshold at 0.05 s. The early cloud comparison
+uses alpha >= 0.1; its time, detector and unresolved paper-width convention
+prevent a developed Rouaix agreement claim. Only analytical E0 has passed.
+
+The [published compact evidence bundle](../results/summaries/rouaix_hpc_20261026/README.md)
+contains selected measurements, hashes, preview, diagnostic source and check
+results. The [preserved HPC status snapshot](../results/summaries/rouaix_hpc_20261026/hpc-status-snapshot.md)
+retains the full prior history. Raw CFD archives/mesh remain in verified
+local/HPC storage, outside Git; this is a summary release, not a standalone
+raw-data reproduction package. Frozen queued-job source is unchanged by Git
+integration or the later local max-U metadata and accounting-parser fixes.
+
+Checks recorded by the HPC/Mac agent before this workstation merge: 201 affected tests and Ruff passed;
+all seven fresh E0 analytical checks passed. Full make check is not green:
+collection needs matplotlib; the pre-merge diagnostic excluding that module gave 775 passed,
+19 failed and 6 skipped, involving platform support, missing dependencies,
+missing ignored fixtures and a retained digitization mismatch. The compact
+check report preserves those commands and outcomes. This workstation then
+merged that history with the newer I4F work: its fresh Linux `make check` passed
+897 tests with two skips and four subtests, plus case Python/shell checks.
+The difference is environment/source availability, not a CFD acceptance pass.
 
 ## Current execution
 
@@ -150,8 +189,10 @@ retain exact checkpoints, stop reasons, ledger values and source hashes.
   weight; reconstructed mass/momentum may combine different solver stages and
   are labelled secondary. Dry traces, backflow and undefined directions remain
   explicit. Independent read-only review found no material defect. Latest
-  `make check`: **750 passed, one optional Docker test skipped, four subtests
-  passed**. Software checks do not validate the apparatus.
+  workstation `make check` after merging HPC commit `3c0ddaf`: **897 passed,
+  two optional/evidence-dependent tests skipped, four subtests passed**; Ruff
+  and case Python/shell checks passed. The earlier 750-test result preceded
+  this merge. Software checks do not validate the apparatus.
 
 ## Inputs, limits and next result
 

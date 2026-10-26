@@ -349,8 +349,13 @@ def test_lifecycle_commands_preserve_prebuilt_mesh_and_never_remesh(tmp_path: Pa
     before = runner.tree_hashes(case)
     shell = runner.solver_shell_script(2)
     check_command = runner.mesh_check_command(tmp_path / "trial", case, runner.PINNED_IMAGE_ID, 4)
+    check_shell = check_command[-1]
 
     assert "decomposePar" in shell and "interIsoFoam" in shell
+    assert "set -eo pipefail\ninterIsoFoam -help\nrun_stage()" in shell
+    assert "foamVersion" not in shell and "foamVersion" not in check_shell
+    assert "interIsoFoam -help > log.openfoam-version 2>&1 || exit $?" in check_shell
+    assert check_shell.index("interIsoFoam -help") < check_shell.index("checkMesh")
     assert "blockMesh" not in shell and "snappyHexMesh" not in shell
     assert "blockMesh" not in " ".join(check_command)
     assert "snappyHexMesh" not in " ".join(check_command)
