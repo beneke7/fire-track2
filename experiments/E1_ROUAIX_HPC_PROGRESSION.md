@@ -604,3 +604,217 @@ and required native-format adapter/resource work are in
 Eight existing reference/profile tests passed. No comparison has been run on
 future fields, no automatic postprocess dispatcher is armed, and no formal
 E1 tolerance or acceptance decision is declared by this preparation.
+
+## S1 one-node small-step scaling and matched upwind, declared 26 October
+
+User replaces the queued three-node diagnostic 14648472 with one-node starter
+scaling tests and a matched momentum-advection trial. That cancelled pending
+job already used 0.1 ms; the numerically compromised historical 0.5 ms scaling
+results are retained, not overwritten. Existing independent 5 s job 14650641
+keeps its declaration, frozen source and scheduler configuration.
+
+Declare four fresh-from-zero exploratory cases, in this sequential order:
+
+- **S1-ORIG-120-01MS-005:** original momentum scheme, 120 ranks, 45 min cap.
+- **S1-UPWIND-120-01MS-005:** momentum upwind, 120 ranks, 45 min cap.
+- **S1-ORIG-64-01MS-005:** original momentum scheme, 64 ranks, 75 min cap.
+- **S1-ORIG-96-01MS-005:** original momentum scheme, 96 ranks, 60 min cap.
+
+Every case requests one CPU node, one thread per MPI rank and 64 GiB, fixed
+deltaT=0.0001 s, endTime=0.05 s (500 steps), no adaptive stepping and full
+endpoint retention. The input is the same qualified 10,099,265-cell mesh
+archive, SHA-256
+8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787.
+Native OpenCFD v2512 interIsoFoam, Cray MPI, Euler time integration, original
+Gauss-linear gradients, realizable k-epsilon, source/initialization, material
+properties, boundaries, alpha subcycles and PIMPLE settings remain unchanged.
+The upwind case changes only `div(rhoPhi,U) Gauss limitedLinearV 1;` to
+`div(rhoPhi,U) Gauss upwind;`. Case dictionaries and difference must be
+hash-verified before release; do not combine gradient limiting with upwind.
+The per-case S1 record and this progression document are the active declaration;
+each attempt must preserve both or their hash-bound immutable source copies.
+The generic pilot experiment.md is retained as historical background and does
+not override the S1 timestep, horizon or numerical variant.
+The new 120-rank original supplies a current-source matched control; job
+14649329 remains an independent historical repeat, not the sole comparator.
+
+This campaign does not establish an optimum for developed flow. Compare the
+three original-scheme runs over the identical 0.0100--0.0499 s startup window,
+reporting the actual printed-clock interval and its rounding uncertainty.
+The 400 inclusive samples contain 399 endpoint intervals (0.0399 s); use
+that span with the first/last ClockTime difference, not 0.0400 s.
+Separate solver srun envelope, setup/decomposition, whole-job wall time,
+queue wait, measured TotalCPU, allocated core-hours, per-task RSS, node/task
+placement and I/O/packing bytes. Do not call pressure iteration counts time.
+Full 3D output is identical and sparse (initial/final); collect every-step
+extrema/locations, alpha bounds, Courant values, linear-solve criteria,
+turbulence records, water inventory and boundary-flux ledger. A faster case
+with failed diagnostics is not a qualified performance choice.
+
+Compare upwind with its 120-rank original at the same times and horizon using
+those diagnostics and the retained final fields. The transport-consistency
+research motivates this single-factor trial; a lower peak speed or bounded
+alpha cannot prove momentum conservation or correct breakup. Upwind numerical
+diffusion can change penetration, width and interface structure. Quantitative
+field/momentum observers require separately verified postprocessing; no
+unimplemented observer or formal E1 tolerance is claimed here.
+
+Submit four real Slurm jobs with an afterany dependency chain so at most one
+short campaign job can allocate at once. A failed case must remain preserved
+and is not automatically retried; the next distinct declared diagnostic may
+run. Do not create dependencies on the independent 5 s target. The sum of
+requested rank-times-wall caps is at most **356 allocated core-hours** if
+AllocCPUS equals requested ranks; record actual AllocTRES/billing if different.
+No idle reservations, automatic requeue or unrelated-job changes are allowed.
+
+Use a new immutable source root on /project and force the short-case expanded
+workspace onto that shared filesystem with
+`ROUAIX_REQUIRE_SHARED_WORKSPACE=1`; this avoids relying on ephemeral node
+storage if final packing fails. Reserve at least 24 GiB campaign headroom
+for four ~1.7 GiB result archives, the single active expanded case and packing;
+use the existing 12 GiB runtime free-space floor and inspect actual project
+quota as well as filesystem availability. Keep collated I/O and packed
+archives, verify CRC/hash/membership before removing only owned workspaces,
+and preserve all failed attempts. Existing nonfinite, speed>1000 m/s,
+no-progress, PAUSE, signal escalation and deadline/checkpoint guards remain.
+
+Execution owner: Luna one_node_queue; source support: Luna one_node_support;
+root owns declaration, staging review and interpretation. Per-case immutable
+records, source capsule, scheduler submission/cancellation/estimate receipts
+and later terminal evidence live under
+`results/runs/rouaix-one-node-campaign-20261026/`. These are exploratory
+operational tests, not an E1 gate or field-validation result.
+
+## P0 small-allocation native profiling pair, declared 26 October
+
+User requests per-core HPC optimization while the five S1/L1 jobs wait.
+Do not change those submitted jobs or their frozen source roots. Prepare
+two fresh-from-zero diagnostic jobs in a separate immutable source root:
+**P0-BASE-24-01MS-001** and **P0-PROFILE-24-01MS-001**, in that order with
+an afterany dependency. Both request one CPU node, 24 single-threaded MPI
+ranks, **48 GiB** memory, fixed deltaT=0.0001 s through 0.01 s/100 steps,
+60 min wall cap, initial/final full fields and every-step compact diagnostics.
+They use the same qualified 10,099,265-cell mesh/input SHA
+8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787,
+original limitedLinearV 1 momentum convection, original Gauss-linear gradients,
+Euler time integration, realizable k-epsilon, source, fields, boundaries and
+material properties. No adaptive stepping, clipping, solver tolerance change,
+new pressure algorithm, mesh change or boundary tuning is allowed in this pair.
+
+Memory is an operating budget informed by the completed T1 accounting, not a
+proved 24-rank peak: the sum of T1's per-task RSS high-water marks derived from
+120 * AveRSS is about 33.62 GiB; the separate batch-step maximum is 9.03 GiB.
+These are not simultaneous node-wide samples and shared pages can be counted
+more than once. 32 GiB is not qualified by this evidence; 48 GiB gives about
+43 percent headroom over the summed solver marks. Fewer ranks may reduce MPI
+overhead but can increase per-rank working sets. Record actual cgroup/Slurm
+peak data when available, and retain any OOM/guard failure rather than silently
+retrying with changed memory. Keep the shared /project workspace so partially
+written fields remain durable if a rank or packaging step fails.
+
+Before submission, check the cpu partition's actual MaxMemPerCPU and use
+Slurm test-only admission for 24 tasks/48 GiB. If the site allocates an extra
+CPU to satisfy its memory-per-CPU rule, record 24 active ranks versus actual
+AllocCPUS/billing; the maximum pair budget is 48 core-hours at 24 CPUs or
+50 at 25. Do not silently increase resources beyond 25 CPUs per job. If the
+request is rejected, preserve the rejection and resolve the concrete limit
+before submitting. Free cores and memory must fit on one node; currently
+observed fragments are not reserved or a start guarantee.
+
+The profiled case differs only by this native controlDict monitoring block:
+
+```foam
+profiling
+{
+    active true;
+    cpuInfo false;
+    memInfo false;
+    sysInfo false;
+}
+```
+
+Record the exact baseline/profile dictionary difference and source hashes.
+This is stock OpenCFD v2512 monitoring, not a patched solver. Preserve raw
+collated per-rank profiling objects in the result archive. Use the verified
+installed profilingSummary path only after checking its collated-reader/CLI
+requirements; otherwise analyze the preserved raw data later with an audited
+reader. A missing summary is not proof that CFD failed.
+
+Compare solver wall time and matched native ClockTime samples from 0.0020
+through 0.0099 s: 80 samples, 79 endpoint intervals/0.0079 s. Record rounding
+uncertainty. Keep startup, decomposition, output/packing, whole-job time, queue
+wait, measured CPU time, allocated CPU-hours, node/CPU model/NUMA topology and
+actual affinity separate. Report profile-overhead ratio only for numerically
+complete, converged runs with the same timestep/horizon and diagnostic checks.
+Different placements, co-tenants or hardware make that ratio observational.
+The historical 64-rank N2 0.1 ms/0.01 s diagnostic may be contextual evidence
+only until its full physical dictionaries/mesh/observables are matched.
+
+The native lduMatrix::solver.<field> profile scopes give linear-solver wall
+time/calls and per-rank imbalance. Inclusive parent and child times overlap;
+do not add them together. The objectRegistry::writeObject scope in this build
+only surrounds uniform/time output and cannot establish full field-I/O time.
+Do not infer pressure timing from iteration counts, total MPI wait from
+pressure scopes, or a complete I/O fraction from the native monitor. No new
+speedup, optimum rank count, momentum consistency or E1 accuracy is established
+by enabling instrumentation. Use measured bottlenecks to declare subsequent
+performance changes one factor at a time.
+
+P0 is independent of the S1 chain and L1 long target so a small allocation can
+make progress while those larger requests wait. At most one P0 job runs at a
+time; together the declared families can occupy at most three productive
+nodes, with no idle reservation or automatic requeue. Existing PAUSE,
+nonfinite, speed>1000 m/s, no-progress and deadline/checkpoint guards remain.
+Use collated I/O, one source capsule, a hardlink to the verified input archive,
+packed results, CRC/member/hash verification before owned-workspace cleanup,
+at least 16 GiB project-quota staging margin and the 12 GiB runtime disk floor.
+
+Execution owner: Luna one_node_queue; implementation: Luna hpc_perf_support;
+performance evidence: Luna hpc_perf_evidence. Root owns declaration and
+interpretation. Case records, source snapshot, test-only and real submission
+receipts, source/API inspection and later analysis are preserved under
+`results/runs/rouaix-percore-p0-20261026/`. The pair is exploratory, not an E1
+validation or a long-horizon performance qualification.
+
+### A1 scheduler-order amendment to S1, 26 October
+
+An observed 64-core free block at 14:40 UTC could not admit S1's 64-rank case
+because it depended on the still-pending 120-rank control/upwind pair. While
+all four S1 jobs remain pending, reorder only their scheduler dependencies
+to **64 -> 96 -> original 120 -> upwind 120**: clear 14651180's dependency
+and set 14651174 afterany 14651185; the other two links are unchanged.
+Verify exact job/user/workdir identity, briefly hold the 120-rank control
+during the update and release it after the new chain is verified. If a job
+has started, stop this amendment and preserve its existing scheduling state.
+Numerical inputs, immutable source and pre-submit records remain unchanged;
+the scheduler amendment receipt records the changed order without overwriting
+those historical declarations. The one-at-a-time S1 limit and independent
+5 s job remain. This improves admission opportunity, not priority or assured
+start time. Receipt: `results/runs/rouaix-one-node-campaign-20261026/scheduler-order-amendment.json`.
+
+### A2 P0 memory/admission amendment, 26 October
+
+The first real held P0 submission **14652491** requested 24 tasks/48 GiB,
+but Slurm reported 24 tasks, NumCPUs=48 and CPUs/Task=2. The cpu partition's
+MaxMemPerCPU is 2000 MiB; 48 GiB/24 = 2048 MiB per requested core exceeds it.
+Test-only admission had forecast 24 processors and did not expose this change.
+The worker cancelled 14652491 while held, with no allocation or CFD start;
+retain its complete v1 source/records and cancellation evidence. It is an
+admission failure, not a failed flow solution or performance sample.
+
+Supersede the P0 memory request with **46 GiB** for 24 single-threaded ranks:
+47104 MiB/24 = 1962.67 MiB per core, below 2000 MiB. This is about 37 percent
+above the prior 33.62 GiB summed solver-task peaks. It remains an informed
+operating budget, not a measured 24-rank peak or evidence of site enforcement.
+Use new case IDs **P0-BASE-24-46G-01MS-001** and
+**P0-PROFILE-24-46G-01MS-001**, a new immutable v2 source root, and refreshed
+source/declaration/case hashes. Keep all numerical inputs, profile-only
+difference, fixed 0.1 ms/0.01 s/100 steps, 60 min caps, full retention, guards
+and the baseline -> profile afterany relationship from P0 unchanged.
+
+Require actual held-job readback **NumTasks=24, NumCPUs=24, CPUs/Task=1,
+MinMemoryNode=46G, one node** before releasing either job. If Slurm again
+increases CPUs or changes the shape, cancel while pending and investigate;
+do not run an undeclared shape or weaken the runner's one-CPU/task check.
+The pair's maximum allocated CPU budget remains 48 core-hours. Source v1
+remains preserved; no original case or record is overwritten.

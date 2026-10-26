@@ -212,6 +212,9 @@ Archive-failure limit: if final packing/verification fails on node-local
 storage, the runner retains its workspace but has no durable fallback copy.
 That path can disappear at allocation teardown. All reported result archives
 were verified; future node-local runs need a durable failure-recovery path.
+The S1 short campaign sets `ROUAIX_REQUIRE_SHARED_WORKSPACE=1` with its
+verified /project source root, bypassing node-local selection. Existing frozen
+G1/T1/L1 sources retain their historical behavior.
 
 SSH as `nk_memj@komondor.hpc.kifu.hu` is working. The CPU partition and native
 `OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH` module were inspected; the latter supplies

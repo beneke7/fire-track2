@@ -39,14 +39,18 @@ trap record_bootstrap_failure EXIT
 [[ ${SLURM_JOB_NUM_NODES:-} =~ ^[0-9]+$ ]]
 (( SLURM_JOB_NUM_NODES >= 1 && SLURM_JOB_NUM_NODES <= 3 ))
 [[ ${SLURM_NTASKS:-} =~ ^[0-9]+$ ]]
-(( SLURM_NTASKS >= 64 ))
+(( SLURM_NTASKS >= 24 ))
 [[ ${SLURM_CPUS_PER_TASK:-} == 1 ]]
 [[ ${SLURM_CPUS_ON_NODE:-} =~ ^[0-9]+$ ]]
-(( SLURM_CPUS_ON_NODE >= 64 ))
+(( SLURM_CPUS_ON_NODE >= 24 ))
 [[ ${SLURM_MEM_PER_NODE:-} =~ ^[0-9]+$ ]]
-(( SLURM_MEM_PER_NODE >= 65536 ))
 RUNNER_RANKS=${ROUAIX_RANKS:-$SLURM_NTASKS}
 RUNNER_NODES=${ROUAIX_NODES:-$SLURM_JOB_NUM_NODES}
+RUNNER_MEMORY_GIB=${ROUAIX_MEMORY_GIB:-64}
+RUNNER_PROFILING=${ROUAIX_PROFILING:-0}
+[[ $RUNNER_MEMORY_GIB =~ ^(3[2-9]|[4-5][0-9]|6[0-4])$ ]]
+[[ $RUNNER_PROFILING == 0 || $RUNNER_PROFILING == 1 ]]
+(( SLURM_MEM_PER_NODE >= RUNNER_MEMORY_GIB * 1024 ))
 RUNNER_WALL_BUDGET_S=${ROUAIX_WALL_BUDGET_S:-1200}
 RUNNER_END_TIME_S=${ROUAIX_END_TIME_S:-0.05}
 RUNNER_DELTA_T_S=${ROUAIX_DELTA_T_S:-0.001}
@@ -101,6 +105,7 @@ module list > "$RUN_DIR/modules.log" 2>&1
   printf 'cpus_per_task=%s\n' "$SLURM_CPUS_PER_TASK"
   printf 'cpus_on_node=%s\n' "$SLURM_CPUS_ON_NODE"
   printf 'memory_mb=%s\n' "$SLURM_MEM_PER_NODE"
+  printf 'declared_memory_gib_per_node=%s\n' "$RUNNER_MEMORY_GIB"
   printf 'declared_runner_ranks=%s\n' "$RUNNER_RANKS"
   printf 'declared_runner_nodes=%s\n' "$RUNNER_NODES"
   printf 'declared_wall_budget_s=%s\n' "$RUNNER_WALL_BUDGET_S"
@@ -111,17 +116,24 @@ module list > "$RUN_DIR/modules.log" 2>&1
   printf 'declared_case_id=%s\n' "$RUNNER_CASE_ID"
   printf 'declared_retention_mode=%s\n' "$RUNNER_RETENTION_MODE"
   printf 'declared_minimum_free_disk_gib=%s\n' "$RUNNER_MINIMUM_FREE_DISK_GIB"
+  printf 'declared_profiling=%s\n' "$RUNNER_PROFILING"
   printf 'hard_deadline_utc=%s\n' "$ROUAIX_HARD_DEADLINE_UTC"
   printf 'WM_PROJECT_VERSION=%s\n' "$WM_PROJECT_VERSION"
   printf 'WM_LABEL_SIZE=%s\n' "$WM_LABEL_SIZE"
   printf 'WM_PRECISION_OPTION=%s\n' "$WM_PRECISION_OPTION"
   printf 'WM_OPTIONS=%s\n' "${WM_OPTIONS:-unset}"
+  printf '\n-- CPU topology --\n'
+  lscpu || true
+  lscpu -e=CPU,NODE,SOCKET,CORE || true
+  if command -v numactl >/dev/null 2>&1; then
+    numactl --hardware || true
+  fi
   printf '\n-- threads and file handler --\n'
   env | grep -E '^(OMP_NUM_THREADS|OPENBLAS_NUM_THREADS|MKL_NUM_THREADS|BLIS_NUM_THREADS|NUMEXPR_NUM_THREADS|VECLIB_MAXIMUM_THREADS|FOAM_IORANKS|FOAM_FILEHANDLER)=' | sort
 } > "$RUN_DIR/allocation.txt"
 
 STAGE=pilot
-exec python3 "$PROJECT_ROOT/cases/e1_rouaix_hpc/run_pilot.py" \
+PILOT_ARGS=( \
   --run-dir "$RUN_DIR" \
   --input-archive "$ROUAIX_INPUT_ARCHIVE" \
   --input-sha256 "$ROUAIX_INPUT_SHA256" \
@@ -134,4 +146,10 @@ exec python3 "$PROJECT_ROOT/cases/e1_rouaix_hpc/run_pilot.py" \
   --numerical-variant "$RUNNER_NUMERICAL_VARIANT" \
   --write-interval-s "$RUNNER_WRITE_INTERVAL_S" \
   --retention-mode "$RUNNER_RETENTION_MODE" \
-  --minimum-free-disk-gib "$RUNNER_MINIMUM_FREE_DISK_GIB"
+  --minimum-free-disk-gib "$RUNNER_MINIMUM_FREE_DISK_GIB" \
+  --memory-gib "$RUNNER_MEMORY_GIB"
+)
+if [[ $RUNNER_PROFILING == 1 ]]; then
+  PILOT_ARGS+=(--profiling)
+fi
+exec python3 "$PROJECT_ROOT/cases/e1_rouaix_hpc/run_pilot.py" "${PILOT_ARGS[@]}"

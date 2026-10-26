@@ -1,0 +1,57 @@
+{
+  "classification": "Exploratory submitted jobs; no CFD results yet",
+  "as_of_utc": "2026-10-26T14:11:20.437450+00:00",
+  "jobs": [
+    {
+      "job_id": 14651174,
+      "case_id": "S1-ORIG-120-01MS-005",
+      "ranks": 120,
+      "variant": "original",
+      "wall_cap_s": 2700,
+      "afterany": null
+    },
+    {
+      "job_id": 14651178,
+      "case_id": "S1-UPWIND-120-01MS-005",
+      "ranks": 120,
+      "variant": "upwind",
+      "wall_cap_s": 2700,
+      "afterany": 14651174
+    },
+    {
+      "job_id": 14651180,
+      "case_id": "S1-ORIG-64-01MS-005",
+      "ranks": 64,
+      "variant": "original",
+      "wall_cap_s": 4500,
+      "afterany": 14651178
+    },
+    {
+      "job_id": 14651185,
+      "case_id": "S1-ORIG-96-01MS-005",
+      "ranks": 96,
+      "variant": "original",
+      "wall_cap_s": 3600,
+      "afterany": 14651180
+    }
+  ],
+  "common": {
+    "nodes": 1,
+    "memory_gib": 64,
+    "threads_per_rank": 1,
+    "delta_t_s": 0.0001,
+    "horizon_s": 0.05,
+    "steps": 500,
+    "workspace": "shared /project Lustre",
+    "requeue": false
+  },
+  "maximum_requested_rank_core_hours": 356,
+  "cancelled_pending_job": 14648472,
+  "independent_unchanged_5s_job": 14650641,
+  "slurm_start_forecasts": "All N/A / Unknown at capture; first and long jobs priority-pending, other S1 jobs dependency-pending",
+  "tests": {
+    "affected_passed": 208,
+    "ruff": "passed",
+    "full_suite": "not repeated; known broader limitations documented in earlier 26 October bundle"
+  }
+}

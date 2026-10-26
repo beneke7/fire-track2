@@ -7,6 +7,10 @@ User reaffirms workstation scope: tank → valves → pipes → four nozzles.
 Rouaix/aerial experiments remain owned by the HPC thread; local outputs are
 tank pressure/inventory and per-nozzle discharge/velocity histories.
 
+HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
+At 14:11 UTC, the four new one-node pilots and 5 s target were pending with
+unknown start estimates; the 300-rank diagnostic was cancelled.
+
 ## Current execution
 
 - **Finite-compressibility water, first timestep setting: stopped numerically.**

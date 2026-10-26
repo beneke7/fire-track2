@@ -212,14 +212,45 @@ def test_completion_monitor_supports_half_second_half_ms_case() -> None:
     assert "End completion marker" in monitor.completion_fault()
 
 
+def test_cgroup_v2_memory_records_job_peak_and_postrun_current(tmp_path: Path) -> None:
+    root = tmp_path / "cgroup"
+    job = root / "slurm/uid_1000/job_45678"
+    job.mkdir(parents=True)
+    (job / "memory.peak").write_text("36000000000\n")
+    (job / "memory.current").write_text("1000000\n")
+    membership = tmp_path / "self.cgroup"
+    membership.write_text("0::/slurm/uid_1000/job_45678/step_batch\n")
+
+    record = run_pilot._cgroup_v2_memory("45678", membership_path=membership, cgroup_root=root)
+
+    assert record == {
+        "source": "cgroup-v2-job-scope",
+        "path": str(job.resolve()),
+        "memory_peak_bytes": 36_000_000_000,
+        "memory_current_bytes_after_solver": 1_000_000,
+    }
+
+
 def test_default_pilot_configuration_preserves_frozen_first_capsule() -> None:
     assert run_pilot.PilotConfig() == run_pilot.PilotConfig(
-        ranks=64, nodes=1, wall_budget_s=1200, horizon_s=0.05, delta_t_s=0.001
+        ranks=64,
+        nodes=1,
+        wall_budget_s=1200,
+        horizon_s=0.05,
+        delta_t_s=0.001,
+        memory_gib=64,
+        profiling=False,
     )
     assert (
         run_pilot.PilotConfig(numerical_variant="u_gradient_limited").validate().numerical_variant
         == "u_gradient_limited"
     )
+
+
+@pytest.mark.parametrize("memory_gib", [True, 31, 65, 32.0])
+def test_pilot_memory_declaration_requires_integer_32_through_64(memory_gib: object) -> None:
+    with pytest.raises(run_pilot.PilotError, match="integer from 32 through 64"):
+        run_pilot.PilotConfig(memory_gib=memory_gib).validate()  # type: ignore[arg-type]
 
 
 @pytest.mark.parametrize(
@@ -281,6 +312,8 @@ def test_prepared_gradient_variant_requires_exact_scheme_and_metadata_chain(
             "full_field_write_times_s": [0.0, 0.01],
         },
         "source_dictionary_provenance": {"system/fvSchemes": {"sha256": parent_sha}},
+        "resource_budget_provisional": {"memory_gib": 64},
+        "profiling": False,
         "parent_fvSchemes_sha256": parent_sha,
         "post_override_fvSchemes_sha256": post_sha,
         "solver_dictionary_sha256": {"system/fvSchemes": post_sha},
@@ -410,10 +443,26 @@ def test_absolute_hard_deadline_utc_takes_precedence_and_rejects_local_times() -
         )
 
 
-def test_supervisor_runs_120_rank_half_second_fixed_step_candidate(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize(
+    ("ranks", "horizon_s", "delta_t_s", "steps", "numerical_variant"),
+    [(120, 0.5, 0.001, 500, "original"), (96, 0.05, 0.0001, 500, "upwind")],
+)
+def test_supervisor_runs_declared_one_node_fixed_step_candidate(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    ranks: int,
+    horizon_s: float,
+    delta_t_s: float,
+    steps: int,
+    numerical_variant: str,
 ) -> None:
-    config = run_pilot.PilotConfig(ranks=120, nodes=1, horizon_s=0.5, delta_t_s=0.001)
+    config = run_pilot.PilotConfig(
+        ranks=ranks,
+        nodes=1,
+        horizon_s=horizon_s,
+        delta_t_s=delta_t_s,
+        numerical_variant=numerical_variant,
+    )
     case, attempt, run_dir = (tmp_path / name for name in ("case", "attempt", "run"))
     case.mkdir()
     attempt.mkdir()
@@ -438,10 +487,10 @@ def test_supervisor_runs_120_rank_half_second_fixed_step_candidate(
             lines = ["Time = 0\n"]
             lines.extend(
                 line
-                for step in range(1, 501)
+                for step in range(1, steps + 1)
                 for line in (
                     f"Time = {step * config.delta_t_s:.12g}\n",
-                    f"max(mag(U)) = {300 if step == 500 else 20}\n",
+                    f"max(mag(U)) = {300 if step == steps else 20}\n",
                 )
             )
             stdout.writelines([*lines, "End\n"])
@@ -474,23 +523,40 @@ def test_supervisor_runs_120_rank_half_second_fixed_step_candidate(
     )
 
     assert return_code == 0 and stop_reason is None and not paused
-    assert monitor.completion_fault() is None and len(monitor.rows) == 500
+    assert monitor.completion_fault() is None and len(monitor.rows) == steps
     assert state_snapshots
     assert state_snapshots[-1]["max_u_seen_m_s"] == pytest.approx(20)
-    assert monitor.rows[-1] == pytest.approx((0.5, 300))
+    assert monitor.rows[-1] == pytest.approx((horizon_s, 300))
     assert state["max_u_seen_m_s"] == pytest.approx(300)
     assert state["solver_max_u_m_s"] == pytest.approx(300)
     assert state["solver_wall_s"] >= 0
     assert (attempt / "solver.log").read_text(encoding="utf-8").rstrip().endswith("End")
-    assert (attempt / "max-speed.csv").read_text(encoding="utf-8").rstrip().endswith("0.5,300")
+    assert (
+        (attempt / "max-speed.csv")
+        .read_text(encoding="utf-8")
+        .rstrip()
+        .endswith(f"{horizon_s:g},300")
+    )
     assert "--nodes=1" in captured[0]
-    assert "--ntasks=120" in captured[0]
-    assert "--ntasks-per-node=120" in captured[0]
+    assert f"--ntasks={ranks}" in captured[0]
+    assert f"--ntasks-per-node={ranks}" in captured[0]
+    assert "Cpus_allowed_list" in (attempt / "solver-step.sh").read_text()
+    assert any(
+        item.startswith("--export=ALL,ROUAIX_STEP_IDENTITY=") and "ROUAIX_RANK0_AFFINITY=" in item
+        for item in captured[0]
+    )
 
 
 @pytest.mark.parametrize(
     ("ranks", "nodes", "tasks_per_node", "cpus_on_node"),
-    [(64, 1, "64", 64), (120, 1, "120", 120), (240, 2, "120(x2)", 120), (300, 3, "100(x3)", 100)],
+    [
+        (24, 1, "24", 24),
+        (64, 1, "64", 64),
+        (96, 1, "96", 96),
+        (120, 1, "120", 120),
+        (240, 2, "120(x2)", 120),
+        (300, 3, "100(x3)", 100),
+    ],
 )
 def test_allocation_matches_declared_placement_and_records_resources(
     ranks: int, nodes: int, tasks_per_node: str, cpus_on_node: int
@@ -529,6 +595,41 @@ def test_allocation_rejects_wrong_tasks_per_node_distribution() -> None:
     }
     with pytest.raises(run_pilot.PilotError, match="tasks per node"):
         run_pilot._validate_allocation(config, env)
+
+
+@pytest.mark.parametrize(
+    ("declared_memory_gib", "allocated_memory_mb", "accepted"),
+    [
+        (32, 32768, True),
+        (32, 32767, False),
+        (48, 49152, True),
+        (48, 49151, False),
+        (64, 32768, False),
+    ],
+)
+def test_allocation_enforces_declared_memory_floor_for_24_rank_placement(
+    declared_memory_gib: int, allocated_memory_mb: int, accepted: bool
+) -> None:
+    config = run_pilot.PilotConfig(
+        ranks=24, nodes=1, wall_budget_s=1800, memory_gib=declared_memory_gib
+    )
+    env = {
+        "SLURM_JOB_NAME": run_pilot.JOB_NAME,
+        "SLURM_JOB_ACCOUNT": "nk_meshapplied",
+        "SLURM_JOB_NUM_NODES": "1",
+        "SLURM_NTASKS": "24",
+        "SLURM_TASKS_PER_NODE": "24",
+        "SLURM_CPUS_PER_TASK": "1",
+        "SLURM_CPUS_ON_NODE": "24",
+        "SLURM_MEM_PER_NODE": str(allocated_memory_mb),
+    }
+    if accepted:
+        allocation = run_pilot._validate_allocation(config, env)
+        assert allocation["memory_gib_declared_per_node"] == declared_memory_gib
+        assert allocation["memory_gib_per_node"] == (allocated_memory_mb + 1023) // 1024
+    else:
+        with pytest.raises(run_pilot.PilotError, match="declared .* GiB per-node floor"):
+            run_pilot._validate_allocation(config, env)
 
 
 def test_multinode_workspace_uses_quota_checked_shared_scratch(
@@ -570,6 +671,82 @@ def test_multinode_workspace_rejects_shared_scratch_below_12_gib(
     )
     with pytest.raises(run_pilot.PilotError, match="shared project scratch"):
         run_pilot.create_workspace({"ROUAIX_PROJECT_ROOT": str(shared)}, "45678", nodes=2)
+
+
+def test_one_node_can_require_shared_workspace_and_records_storage_class(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    shared = tmp_path / "shared-project"
+    shared.mkdir()
+    sentinel = shared / "preserve-me"
+    sentinel.write_text("existing evidence", encoding="utf-8")
+    monkeypatch.setattr(
+        run_pilot,
+        "select_node_local_workspace",
+        lambda *_args, **_kwargs: pytest.fail(
+            "explicit shared mode must not use node-local storage"
+        ),
+    )
+    monkeypatch.setattr(
+        run_pilot.shutil,
+        "disk_usage",
+        lambda _path: SimpleNamespace(total=30 * 1024**3, used=10 * 1024**3, free=20 * 1024**3),
+    )
+    monkeypatch.setattr(run_pilot, "_filesystem_details", lambda _path: ("lustre", "project-fs"))
+
+    workspace, record = run_pilot.create_workspace(
+        {
+            "ROUAIX_PROJECT_ROOT": str(shared),
+            "ROUAIX_REQUIRE_SHARED_WORKSPACE": "1",
+        },
+        "45678",
+        nodes=1,
+    )
+
+    assert workspace.parent == shared
+    assert record["storage_class"] == "shared-project-scratch-required"
+    assert sentinel.read_text(encoding="utf-8") == "existing evidence"
+    run_pilot.clean_owned_workspace(workspace, shared, "45678")
+    assert sentinel.read_text(encoding="utf-8") == "existing evidence"
+
+
+def test_one_node_required_shared_workspace_rejects_invalid_setting_and_low_space(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    shared = tmp_path / "shared-project"
+    shared.mkdir()
+    sentinel = shared / "preserve-me"
+    sentinel.write_text("existing evidence", encoding="utf-8")
+    monkeypatch.setattr(
+        run_pilot,
+        "select_node_local_workspace",
+        lambda *_args, **_kwargs: pytest.fail(
+            "required shared mode must not fall back to node-local"
+        ),
+    )
+    with pytest.raises(run_pilot.PilotError, match="must be 0 or 1"):
+        run_pilot.create_workspace(
+            {"ROUAIX_PROJECT_ROOT": str(shared), "ROUAIX_REQUIRE_SHARED_WORKSPACE": "true"},
+            "45678",
+            nodes=1,
+        )
+
+    monkeypatch.setattr(
+        run_pilot.shutil,
+        "disk_usage",
+        lambda _path: SimpleNamespace(total=30 * 1024**3, used=19 * 1024**3, free=11 * 1024**3),
+    )
+    with pytest.raises(run_pilot.PilotError, match="required shared workspace"):
+        run_pilot.create_workspace(
+            {
+                "ROUAIX_PROJECT_ROOT": str(shared),
+                "ROUAIX_REQUIRE_SHARED_WORKSPACE": "1",
+            },
+            "45678",
+            nodes=1,
+        )
+    assert list(shared.iterdir()) == [sentinel]
+    assert sentinel.read_text(encoding="utf-8") == "existing evidence"
 
 
 def test_monitor_pause_no_progress_deadline_and_disk_guards() -> None:
@@ -803,11 +980,12 @@ def test_stop_signal_source_resolves_and_hashes_installed_cxx(
         "max_speed_line",
         "retention_mode",
         "numerical_variant",
+        "profiling",
     ),
     [
-        (50, True, "solver_complete_exploratory", 0, False, None, "full", "original"),
-        (25, False, "stopped_with_preserved_evidence", 1, False, None, "full", "original"),
-        (0, False, "failed_preserved", 1, True, None, "full", "original"),
+        (50, True, "solver_complete_exploratory", 0, False, None, "full", "original", False),
+        (25, False, "stopped_with_preserved_evidence", 1, False, None, "full", "original", False),
+        (0, False, "failed_preserved", 1, True, None, "full", "original", False),
         (
             1,
             False,
@@ -817,9 +995,21 @@ def test_stop_signal_source_resolves_and_hashes_installed_cxx(
             "fieldMinMax speedExtrema write: min/max(mag(U)) = 0 92672390.4876\n",
             "full",
             "original",
+            False,
         ),
-        (50, True, "solver_complete_exploratory", 0, False, None, "diagnostic", "original"),
-        (50, True, "solver_complete_exploratory", 0, False, None, "full", "u_gradient_limited"),
+        (50, True, "solver_complete_exploratory", 0, False, None, "diagnostic", "original", False),
+        (
+            50,
+            True,
+            "solver_complete_exploratory",
+            0,
+            False,
+            None,
+            "full",
+            "u_gradient_limited",
+            False,
+        ),
+        (50, True, "solver_complete_exploratory", 0, False, None, "full", "original", True),
     ],
 )
 def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
@@ -833,6 +1023,7 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
     max_speed_line: str | None,
     retention_mode: str,
     numerical_variant: str,
+    profiling: bool,
 ) -> None:
     project_root = tmp_path / "project"
     project_root.mkdir()
@@ -874,6 +1065,7 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
         lambda _path: SimpleNamespace(total=200 * 1024**3, used=1, free=100 * 1024**3),
     )
     monkeypatch.setattr(run_pilot, "_git_record", lambda: {"revision": "fixture", "dirty": False})
+    monkeypatch.setattr(run_pilot, "_cgroup_v2_memory", lambda _job_id: None)
 
     def fake_prepare_case(command, **_kwargs):
         assert "prepare_case.py" in command[1]
@@ -883,7 +1075,21 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
         assert command[command.index("--delta-t-s") + 1] == "0.001"
         assert command[command.index("--numerical-variant") + 1] == numerical_variant
         assert command[command.index("--write-interval-s") + 1] == "0.05"
+        assert command[command.index("--memory-gib") + 1] == "64"
+        assert ("--profiling" in command) is profiling
         case = Path(command[command.index("--output-dir") + 1])
+        attempt = case.parent
+        progression = attempt / "experiment-progression.md"
+        expected_progression = (
+            Path(run_pilot.ROOT) / "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+        ).read_bytes()
+        assert progression.read_bytes() == expected_progression
+        assert b"S1-ORIG-96-01MS-005" in expected_progression
+        staged_state = json.loads((run_dir / "run-state.json").read_text(encoding="utf-8"))
+        assert staged_state["primary_experiment_declaration"] == {
+            "path": "experiment-progression.md",
+            "sha256": hashlib.sha256(expected_progression).hexdigest(),
+        }
         (case / "system").mkdir(parents=True)
         template_path = Path(run_pilot.ROOT) / "cases/e1_rouaix_hpc/template/system/fvSchemes"
         parent_schemes = template_path.read_text(encoding="utf-8")
@@ -908,13 +1114,18 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
             if numerical_variant == "u_gradient_limited"
             else None
         )
-        (case / "system/controlDict").write_text(
+        control_text = (
             "application interIsoFoam; stopAt endTime; endTime 0.05; deltaT 0.001; "
             "adjustTimeStep no; runTimeModifiable false; writeNowSignal 10; "
             "fileHandler collated; maxThreadFileBufferSize 0; stopAtWriteNowSignal 12; "
-            "writeInterval 0.05; purgeWrite 0; speedExtrema fieldMinMax mode magnitude;\n",
-            encoding="utf-8",
+            "writeInterval 0.05; purgeWrite 0; speedExtrema fieldMinMax mode magnitude;\n"
         )
+        if profiling:
+            control_text += (
+                "profiling\n{\n    active true;\n    cpuInfo false;\n"
+                "    memInfo false;\n    sysInfo false;\n}\n"
+            )
+        (case / "system/controlDict").write_text(control_text, encoding="utf-8")
         (case / "system/fvSolution").write_text(
             "solvers\n{\n"
             "    U\n    {\n        solver PBiCGStab;\n        tolerance 1e-8;\n"
@@ -935,6 +1146,8 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
                     "node_count": 1,
                     "horizon_s": 0.05,
                     "numerical_variant": numerical_variant,
+                    "profiling": profiling,
+                    "resource_budget_provisional": {"memory_gib": 64},
                     "parent_fvSchemes_sha256": parent_sha,
                     "post_override_fvSchemes_sha256": schemes_sha,
                     "actual_momentum_convection": expected_momentum,
@@ -1092,7 +1305,9 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
             input_sha256=_tar_sha(archive),
             shared_pause=tmp_path / "shared-PAUSE",
             config=run_pilot.PilotConfig(
-                retention_mode=retention_mode, numerical_variant=numerical_variant
+                retention_mode=retention_mode,
+                numerical_variant=numerical_variant,
+                profiling=profiling,
             ),
         )
     finally:
@@ -1104,6 +1319,10 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
     assert state["status"] == expected_status
     assert state["attempt_archive_status"] == "verified_crc_hash_and_member_list"
     assert state["retention_mode"] == retention_mode
+    assert state["memory_gib"] == 64
+    assert state["profiling"] is profiling
+    if expected_status != "failed_preserved":
+        assert state["memory_measurement_source"] == "sacct MaxRSS fallback"
     if inject_unexpected_solver_error:
         assert active_solver[0].waited
         assert state["cleanup_stop_signals"] == ["12"]
@@ -1134,6 +1353,10 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
         manifest["prepared_case_sha256"]["system/controlDict"]
         == hashlib.sha256(control).hexdigest()
     )
+    assert manifest["prepared_case_sha256"]["case-inputs.json"]
+    assert manifest["memory_gib"] == 64
+    assert manifest["profiling"] is profiling
+    assert (b"profiling\n{" in control) is profiling
     if numerical_variant == "u_gradient_limited":
         assert manifest["numerical_variant"] == "u_gradient_limited"
         assert manifest["momentum_convection"] == "limitedLinearV 1"
