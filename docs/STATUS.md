@@ -1,47 +1,11 @@
 # Live project status
 
-Updated: 2026-10-26 13:05 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 13:24 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
-
-## HPC Rouaix work and GitHub evidence publication
-
-HPC readback **2026-10-26 12:36:16 UTC (13:36:16 CET)**: job **14650641**
-(one node, 120 ranks, fixed 0.1 ms toward 5 s, 72 h cap) and **14648472**
-(300 ranks, three nodes, short 0.1 ms trial) were PENDING/Priority with no
-allocation or start estimate. This timestamp is a snapshot, not live status.
-No unrelated account jobs were changed. W&B remains offline pending a destination.
-
-Short one-node T1 job **14649329** completed all 500 steps through 0.05 s;
-all 4,001 linear-solver records met their configured criteria. Peak speed
-103.29355 m/s, bulk/interface Co 1.12154/0.56017, mass residual 1.05e-11 kg.
-G1 gradient-limiter trial **14648417** failed its speed guard after a
-6,975.25 m/s peak and ended at 0.0455 s; it did not complete its target.
-The 64/120/240/300-rank original-scheme timing samples do not establish
-healthy long-time behavior or a universal optimum.
-
-ParaView CLI displays the 10,099,265-cell result using the requested
-cell alpha.water >= 0.01 threshold at 0.05 s. The early cloud comparison
-uses alpha >= 0.1; its time, detector and unresolved paper-width convention
-prevent a developed Rouaix agreement claim. Only analytical E0 has passed.
-
-The [published compact evidence bundle](../results/summaries/rouaix_hpc_20261026/README.md)
-contains selected measurements, hashes, preview, diagnostic source and check
-results. The [preserved HPC status snapshot](../results/summaries/rouaix_hpc_20261026/hpc-status-snapshot.md)
-retains the full prior history. Raw CFD archives/mesh remain in verified
-local/HPC storage, outside Git; this is a summary release, not a standalone
-raw-data reproduction package. Frozen queued-job source is unchanged by Git
-integration or the later local max-U metadata and accounting-parser fixes.
-
-Checks recorded by the HPC/Mac agent before this workstation merge: 201 affected tests and Ruff passed;
-all seven fresh E0 analytical checks passed. Full make check is not green:
-collection needs matplotlib; the pre-merge diagnostic excluding that module gave 775 passed,
-19 failed and 6 skipped, involving platform support, missing dependencies,
-missing ignored fixtures and a retained digitization mismatch. The compact
-check report preserves those commands and outcomes. This workstation then
-merged that history with the newer I4F work: its fresh Linux `make check` passed
-897 tests with two skips and four subtests, plus case Python/shell checks.
-The difference is environment/source availability, not a CFD acceptance pass.
+User reaffirms workstation scope: tank → valves → pipes → four nozzles.
+Rouaix/aerial experiments remain owned by the HPC thread; local outputs are
+tank pressure/inventory and per-nozzle discharge/velocity histories.
 
 ## Current execution
 
@@ -59,16 +23,18 @@ The difference is environment/source availability, not a CFD acceptance pass.
   pass, with a 32.54 kPa outer update and 5.014 m/s velocity update. Subsequent
   steps recovered. The affected nearly pure-water cells lie in the rising bend
   near x=3.437 m, z=.965 m; this does not establish a cause.
-- **Finite-water smaller-timestep cold test: running.** The conditional pilot
-  started only after that whole campaign exited, its controller became inactive
-  and its exact terminal fields were captured. Docker `13324c8bdc84`, StartedAt
-  2026-10-26T12:37:58.261453121Z, ten MPI / initial 8.7 CPU equivalents.
+- **Finite-water smaller-timestep cold test: running.** Pilot `13324c8bdc84`
+  completed normally at .050010583332 s. Its next preparation failed before GO
+  because a child-local output-policy record was missing; the failed attempt is
+  preserved. The repaired helper writes that record before freeze. The original
+  controller resumed the healthy pilot without repeating it; stage01 Docker
+  `4b8fa349b80d`, StartedAt 2026-10-26T13:18:45.043691461Z, ten MPI / 8.8 CPU
+  equivalents, has advanced beyond .050636 s with zero contacts/errors.
   Initial deltaT=5e-6 s, maxDeltaT=.000125 s, maxCo=.25 and maxAlphaCo=.125;
   the same EOS, mesh, partition, binary, source and turbulence are retained.
   This is adaptive time refinement, not a claim of exactly half every step.
-  Targets are .05, .46 and 1.3 s if healthy; the existing pressure/mass/capture
-  stop rules remain unchanged. Authority:
-  `results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/stock-campaign-status.json`;
+  Targets are .46 and 1.3 s if healthy; pressure/mass/capture stop rules remain.
+  Authority: `results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/stock-campaign-status.json`;
   controller `i4f-finite-water-eos-halfdt-conditional-20261026t122804z-campaign.service`.
   Original finish deadline **2026-10-27 06:23:53 UTC** (+300 s capture margin).
 - **Fresh constant-density cold control:** the .050021166664 s pilot completed
@@ -89,6 +55,17 @@ The difference is environment/source availability, not a CFD acceptance pass.
   and inactive controller, with PAUSE/unknown states failing closed. Normal
   .05 s pilot continuations occur in both arms; the new control specifically
   avoids the earlier parser-induced .413 s restart.
+- **Internal warm upwind probe: armed, waiting.** From the complete healthy
+  finite-EOS .400019820001 s checkpoint, change only momentum convection from
+  `linearUpwind grad(U)` to `upwind`, keeping the full-step time controls and
+  strict health rules. Targets .46 then .7 s if healthy. This tests a numerical
+  mechanism near the bend; its mixed-scheme history is not a cold uniform-scheme
+  verification or production adoption. It launches only after one current whole
+  family is terminal/captured, preserving the other's ten-CPU reservation,
+  actual capacity and PAUSE. No GO/solver exists yet. Authority:
+  `results/runs/i4f-upwind-momentum-warm-20261026T130013Z/conditional-status.json`;
+  service `i4f-upwind-momentum-warm-20261026t130013z-conditional.service`.
+  Original deadline remains **2026-10-27 06:23:53 UTC** (+300 s capture margin).
 - **Rendering:** a single serialized CPU/Mesa watcher follows the smaller-timestep
   EOS and constant-density families' separate native histories. It waits for a healthy complete state >=.65 s with resolved
   water, plus an optional normally completed 1.3 s endpoint. Cameras/scales match;
@@ -99,8 +76,8 @@ The difference is environment/source availability, not a CFD acceptance pass.
   fixed deadline **2026-10-27 06:53:53 UTC**.
 - **Resources and retention:** make doctor confirms twenty effective CPUs and
   about 118 GiB available RAM. Both ten-rank solvers are now running with a
-  shared CPU budget (18.7 allocated CPU equivalents, plus measured unrelated
-  work ~1.18). No GPU solver/rendering job was launched. Closed historical
+  shared CPU budget (18.8 allocated CPU equivalents, plus measured unrelated
+  work ~1.16). No GPU solver/rendering job was launched. Closed historical
   gas-boundary VTK exports were losslessly archived, recovering 2.05 GiB net;
   fifty-eight closed solver logs were also archived in two bounded passes,
   recovering another 6.09 GiB. Each file is hash/type/metadata verified before its uncompressed duplicate is removed;
@@ -219,3 +196,44 @@ queue or server case is resumed here.
 [published results index](../results/summaries/i4f_20261025/README.md) retain
 historical figures, failed trials and movies. Existing videos show earlier
 partial runs and geometry, not the current corrected cold-pair discharge.
+
+## HPC Rouaix work and GitHub evidence publication
+
+HPC readback **2026-10-26 12:36:16 UTC (13:36:16 CET)**: job **14650641**
+(one node, 120 ranks, fixed 0.1 ms toward 5 s, 72 h cap) and **14648472**
+(300 ranks, three nodes, short 0.1 ms trial) were PENDING/Priority with no
+allocation or start estimate. This timestamp is a snapshot, not live status.
+No unrelated account jobs were changed. W&B remains offline pending a destination.
+
+Short one-node T1 job **14649329** completed all 500 steps through 0.05 s;
+all 4,001 linear-solver records met their configured criteria. Peak speed
+103.29355 m/s, bulk/interface Co 1.12154/0.56017, mass residual 1.05e-11 kg.
+G1 gradient-limiter trial **14648417** failed its speed guard after a
+6,975.25 m/s peak and ended at 0.0455 s; it did not complete its target.
+The 64/120/240/300-rank original-scheme timing samples do not establish
+healthy long-time behavior or a universal optimum.
+
+ParaView CLI displays the 10,099,265-cell result using the requested
+cell alpha.water >= 0.01 threshold at 0.05 s. The early cloud comparison
+uses alpha >= 0.1; its time, detector and unresolved paper-width convention
+prevent a developed Rouaix agreement claim. Only analytical E0 has passed.
+
+The [published compact evidence bundle](../results/summaries/rouaix_hpc_20261026/README.md)
+contains selected measurements, hashes, preview, diagnostic source and check
+results. The [preserved HPC status snapshot](../results/summaries/rouaix_hpc_20261026/hpc-status-snapshot.md)
+retains the full prior history. Raw CFD archives/mesh remain in verified
+local/HPC storage, outside Git; this is a summary release, not a standalone
+raw-data reproduction package. Frozen queued-job source is unchanged by Git
+integration or the later local max-U metadata and accounting-parser fixes.
+
+Checks recorded by the HPC/Mac agent before this workstation merge: 201 affected tests and Ruff passed;
+all seven fresh E0 analytical checks passed. Full make check is not green:
+collection needs matplotlib; the pre-merge diagnostic excluding that module gave 775 passed,
+19 failed and 6 skipped, involving platform support, missing dependencies,
+missing ignored fixtures and a retained digitization mismatch. The compact
+check report preserves those commands and outcomes. This workstation then
+merged that history with the newer I4F work: its fresh Linux `make check` passed
+897 tests with two skips and four subtests, plus case Python/shell checks.
+These are different environment/source snapshots; neither software result is
+a CFD acceptance pass.
+
