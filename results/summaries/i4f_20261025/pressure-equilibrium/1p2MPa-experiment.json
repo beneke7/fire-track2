@@ -1,0 +1,145 @@
+{
+  "air_R_source_audit": {
+    "R_air_J_kg_K": 287.0477481284761,
+    "path": "results/runs/i4f-energy-observer-dryline-step-20261025T190159Z/analysis/openfoam-v2512-air-thermo-source-check.json",
+    "qualification": "Uses exact OpenFOAM v2512 gas constant for analytic initialization; no case dictionary value changed.",
+    "sha256": "cca00091374d9d7a6a2dfb841b998006e95c01aae26c62237211cdc1abf53d27"
+  },
+  "attempt": 4,
+  "bundle": "results/runs/i4f-pressure-equilibrium-periodic-attempt4-20261026T170933Z",
+  "case": "case",
+  "created_utc": "2026-10-26T17:10:13.397562+00:00",
+  "mesh": {
+    "cells": 6400,
+    "counts": [
+      100,
+      8,
+      8
+    ],
+    "domain_m": [
+      1.0,
+      0.08,
+      0.08
+    ],
+    "type": "blockMesh"
+  },
+  "numerical": {
+    "alpha_scheme": "vanLeer + MULES",
+    "audit": false,
+    "dt_s": 0.0001,
+    "gravity_m_s2": [
+      0,
+      0,
+      0
+    ],
+    "momentum_scheme": "Gauss linearUpwind grad(U)",
+    "nCorrectors": 2,
+    "nOuterCorrectors": 8,
+    "sigma_N_m": 0.0,
+    "target_s": 0.02,
+    "transonic": true,
+    "valve_or_body_source": "none"
+  },
+  "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "physical_scope": "Periodic translating water-air material contact at uniform p/T/U; not an apparatus replacement or formal gate.",
+  "preflight": {
+    "blockMesh_log_sha256": "e7784165535d436e14243241f994d505e46d86594fc5a90a2abca76526a17d5c",
+    "cell_volume_m3": 1e-06,
+    "checkMesh_log_sha256": "13e5aafd36fcff2bfab022ab5ba8e52e9d277ad46c65420d2deb888f5feb7923",
+    "commands": [
+      "blockMesh",
+      "setFields",
+      "checkMesh -allTopology -allGeometry",
+      "foamDictionary dictionary readback"
+    ],
+    "created_utc": "2026-10-26T16:51:00Z",
+    "dictionary_values_sha256": "316f5a3c1f87027ffa7b6f2666867e96313bbd9b13697ce1e45ae5ee9224b5fb",
+    "mesh_boundary_patches": {
+      "xMax": 64,
+      "xMin": 64,
+      "yMax": 800,
+      "yMin": 800,
+      "zMax": 800,
+      "zMin": 800
+    },
+    "mesh_cells": 6400,
+    "mesh_check": "Mesh OK",
+    "mesh_faces": 20864,
+    "mesh_internal_faces": 17536,
+    "mesh_points": 8181,
+    "mesh_volume_m3": 0.0064,
+    "repeat_checkMesh": "Mesh OK",
+    "repeat_checkMesh_log_sha256": "b81ba71483558121a951df055236856621c02d7e6d57d090dccac3923596b166",
+    "runtime_observer_writeFields": false,
+    "runtime_preflight_record": "results/runs/i4f-pressure-equilibrium-periodic-attempt4-20261026T170933Z/analysis/runtime-preflight.json",
+    "runtime_preflight_record_sha256": "c0b2990c8967ef59f62f84eed23255b399a04731903a607097a92296e2964ef2",
+    "setFields_log_sha256": "b5395c1d8e91e9e0946af3e2f2a6643d0be9bf94210e67ad749ce0e90f47d02b",
+    "setFields_water_cells": 3200,
+    "setFields_water_volume_m3": 0.0032
+  },
+  "prelaunch_resource_admission": {
+    "active_containers": [
+      {
+        "id": "2786cdd0a5d625ff59661448712e9a96675bca561e4a13e27abd74bfef3dac08",
+        "memory_limit_bytes": 34359738368,
+        "name": "i4f-pressure-cycle-full-replay-20261026T170340Z",
+        "quota_cpu": 8.0,
+        "running": true,
+        "started_at": "2026-10-26T17:08:51.803150235Z"
+      },
+      {
+        "id": "d868c7f2e6647a1627ed3aaccebe6954042587519ea5e26f9a45ff208cf0fd4b",
+        "memory_limit_bytes": 34359738368,
+        "name": "i4f-upwind-warm-t-tight-20261026t165605z",
+        "quota_cpu": 10.0,
+        "running": true,
+        "started_at": "2026-10-26T17:08:14.984434382Z"
+      }
+    ],
+    "candidate_cpu_quota": 1.0,
+    "effective_cpu_count": 20,
+    "free_disk_bytes": 22982414336,
+    "measured_docker_cpu_equiv": [
+      7.9847,
+      9.3588
+    ],
+    "name_collision_absent": true,
+    "pause_absent": true,
+    "prior_go_absent": true,
+    "projected_total_cpu_equiv": 19.345271794417005,
+    "record_path": "results/runs/i4f-pressure-equilibrium-periodic-attempt4-20261026T170933Z/analysis/prelaunch-resource-final.json",
+    "record_sha256": "b32a78776c9ed633e5610950a95e0ee6c8dc91d5938c81509bfdc1d81a54271f",
+    "sample_duration_s": 2.5155429750011535,
+    "sample_utc": "2026-10-26T17:10:49.458776+00:00",
+    "unrelated_cpu_equiv_estimate": 1.0017717944170064
+  },
+  "repair": {
+    "case_physics_mesh_eos_initial_fields_and_solver_binary": "unchanged; fresh original cold time-0 start",
+    "guard": "preserved attempt3 anchored fatal parser and target-qualified terminal policy",
+    "only_runner_change": "foamDictionary paths use case/system/controlDict after cd /pair"
+  },
+  "resource_plan": {
+    "container_memory_gib": 4,
+    "cpu_equivalents": 1,
+    "guard_hard_wall_s": 640,
+    "guard_save_request_after_s": 420,
+    "output": "native uncollated serial snapshots every 50 steps; compact extrema/integral function objects every 10 steps",
+    "run_local_timeout_s": 720,
+    "solver_timeout_s": 560,
+    "systemd_runtime_limit_s": 760
+  },
+  "retry_parent": {
+    "bundle": "results/runs/i4f-pressure-equilibrium-periodic-attempt3-20261026T170158Z",
+    "cause": "pre-GO runner path error; exact native manifest passed, but startFrom/stopAt foamDictionary queries used the wrong relative directory",
+    "container_id": "cacca3dd51d7dd3e3dcc970d2bc2b794f76e7dacf35d00b96e45e22f603631d1",
+    "exit_code": 1,
+    "physical_steps_completed": 0,
+    "solver_started": false,
+    "started_at": "2026-10-26T17:09:09.792219754Z"
+  },
+  "schema": "i4f-pressure-equilibrium-periodic-experiment/v1",
+  "solver": "compressibleInterFoamFrozenAlphaSourceV2NoPout",
+  "solver_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "source_run_lock": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/provenance/source-parent/run-source-lock.json",
+  "source_run_lock_sha256": "eabe562fa2994e46c76b402234b56c4d25008ef4da82f6184d71dec3bceea1da"
+}

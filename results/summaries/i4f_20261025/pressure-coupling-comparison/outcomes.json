@@ -1,0 +1,2138 @@
+{
+  "cases": [
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+      "completed_steps": 1608,
+      "container_id": "41ebc8ea6318513c66b14670dffd6198540600342ad97a170821a63d640b1a1e",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T12:37:43.460473+00:00",
+      "cpu_quota_equiv": null,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T12:37:33.312906725Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T11:24:24.947464278Z",
+      "final": {
+        "dP_final_outer_Pa": 0.1598114,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.0040682371,
+        "dalpha_final_outer": 1.914708e-08,
+        "final_field_min_p_Pa": 85499.466,
+        "gas_boundary_flux_kg_s": 2.560898,
+        "gas_cumulative_defect_fraction_initial": 1.2417585721578774e-05,
+        "gas_cumulative_defect_kg": -0.00042066516315560277,
+        "gas_inventory_kg": 33.400585,
+        "gas_step_defect_kg": 1.4915699591893858e-08,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/processors10/0.410222565383",
+        "pressure_update_ratio_final_to_penultimate": 0.46854661052404933,
+        "raw_corrector_min_pressure_Pa_this_step": 85486.293,
+        "time_s": 0.410222565383,
+        "water_boundary_flux_kg_s": -1.011604e-23,
+        "water_cumulative_defect_fraction_initial": 3.768882293068196e-05,
+        "water_cumulative_defect_kg": 0.12052917121900464,
+        "water_inventory_kg": 3198.1289,
+        "water_step_defect_kg": 0.00010370756899646949
+      },
+      "final_physical_time_s": 0.410222565383,
+      "first_raw_pressure_contact": {
+        "cells_strictly_below_pMin": 2,
+        "clipped_liquid_support_kg": 0.01926731709952916,
+        "clipped_liquid_support_volume_m3": 1.930013590994007e-05,
+        "first_cell": {
+          "T_K": 293.2891590420846,
+          "air_density_kg_m3": 4.04247393258678,
+          "alpha_air": 5.360006882781931e-10,
+          "alpha_water": 0.9999999994639993,
+          "local_cell": 8303,
+          "mixture_density_kg_m3": 998.3093934207432,
+          "native_cell_center_m": [
+            3.43691633892242,
+            -0.3632411156942843,
+            0.9647273685412191
+          ],
+          "native_cell_volume_m3": 9.663700945662352e-06,
+          "outer_iteration": 12848,
+          "pMin_Pa": 10000.0,
+          "p_rgh_Pa": 9139.706408833665,
+          "rank": 0,
+          "raw_pressure_Pa": -308.2692173341711,
+          "velocity_m_s": [
+            9.200411905885627,
+            -0.4179800903174469,
+            4.008859423587042
+          ],
+          "water_density_kg_m3": 998.3093939536709
+        },
+        "interpretation": "diagnostic support of the raw corrector floor operation, not mass removed from the inventory",
+        "pMin_Pa": 10000.0,
+        "pass": 25696,
+        "raw_min_pressure_Pa": -308.2692173341711,
+        "time_s": 0.40999807589
+      },
+      "group": "cold_start",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "cold_full_dt_linearupwind_n8",
+      "label": "cold finite-water EOS, full dt, linearUpwind, Nouter=8",
+      "log": {
+        "bytes": 383105259,
+        "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/log.cold-coupled",
+        "sha256": "f62debb78e52c8461fe9688ed7bf03d99c463ecef2980c0e371f4268817951f3"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.46,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 4250,
+          "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/experiment.json",
+          "sha256": "04b4480b3a98a423966dd4c8ced0dcd09b540a7acd84f835e8f833a2d8341f64"
+        },
+        "guardian-status.json": {
+          "bytes": 16453,
+          "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/guardian-status.json",
+          "sha256": "33e3d5bb503efff31b2dbd58ba27e5985967cd17f893cada5b1c83be09b74d98"
+        },
+        "input-freeze.json": {
+          "bytes": 46284,
+          "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/input-freeze.json",
+          "sha256": "2f66bd7826d0c8e8e22e82e06d4ca9eba40bd4d958a7a0ebd62029499e160456"
+        },
+        "launch-manifest.json": {
+          "bytes": 4290,
+          "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/launch-manifest.json",
+          "sha256": "e0af123146149cf89e0397d889096a0630c9467c4ce08830b38be302b5ab84bf"
+        },
+        "run-source-lock.json": {
+          "bytes": 4946,
+          "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/provenance/run-source-lock.json",
+          "sha256": "eabe562fa2994e46c76b402234b56c4d25008ef4da82f6184d71dec3bceea1da"
+        }
+      },
+      "raw_pressure_contact_count": 1,
+      "requested_end_time_s": "0.46",
+      "solver_log_profile": {
+        "clock_time_span_s": 4383.0,
+        "execution_time_span_s": 4184.150000000001,
+        "first_timing_record": {
+          "clock_time_s": 2.0,
+          "execution_time_s": 2.7,
+          "solver_iterations": {
+            "T": 6,
+            "Ux": 6,
+            "Uy": 3,
+            "Uz": 2,
+            "alpha.water": 8,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 41
+          },
+          "time_s": 0.050271166664
+        },
+        "last_timing_record": {
+          "clock_time_s": 4385.0,
+          "execution_time_s": 4186.85,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 3,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 9,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 27
+          },
+          "time_s": 0.410222565383
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 12864,
+            "iterations": 8887,
+            "mean_iterations_per_solve": 0.6908426616915423,
+            "zero_iteration_calls": 3977
+          },
+          "Ux": {
+            "calls": 12864,
+            "iterations": 7698,
+            "mean_iterations_per_solve": 0.5984141791044776,
+            "zero_iteration_calls": 6638
+          },
+          "Uy": {
+            "calls": 12864,
+            "iterations": 6894,
+            "mean_iterations_per_solve": 0.5359141791044776,
+            "zero_iteration_calls": 7440
+          },
+          "Uz": {
+            "calls": 12864,
+            "iterations": 5689,
+            "mean_iterations_per_solve": 0.44224191542288555,
+            "zero_iteration_calls": 8415
+          },
+          "alpha.water": {
+            "calls": 12864,
+            "iterations": 21990,
+            "mean_iterations_per_solve": 1.7094216417910448,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 1608,
+            "iterations": 3686,
+            "mean_iterations_per_solve": 2.29228855721393,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 1608,
+            "iterations": 3182,
+            "mean_iterations_per_solve": 1.978855721393035,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 25728,
+            "iterations": 89008,
+            "mean_iterations_per_solve": 3.459577114427861,
+            "zero_iteration_calls": 7357
+          }
+        },
+        "time_records": 1608
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "7c5afc9969b6e58d9e6f157f7f3ce09158f221fdf1d85defb23def2a152f53e1",
+          "fvSchemes": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+          "fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+        },
+        "i4fFullPressureAudit_explicit": null,
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.00025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss linearUpwind grad(U)",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.050271166664,
+      "step_health": {
+        "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/step_health.csv",
+        "rows": 1608,
+        "sha256": "034dce92df9a21ecfe3b16d0bff5839700234aa41cd0bb5f0e6278ad2a7d8b49"
+      },
+      "stop_reason": "first raw corrector pressure-floor contact; guarded writeNow and normal End"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+      "completed_steps": 2849,
+      "container_id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T16:13:35.643581+00:00",
+      "cpu_quota_equiv": 8.8,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T16:13:23.681902836Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T13:18:45.043691461Z",
+      "final": {
+        "dP_final_outer_Pa": 0.23571834,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.0021373863,
+        "dalpha_final_outer": 1.4758685e-07,
+        "final_field_min_p_Pa": 92944.357,
+        "gas_boundary_flux_kg_s": 2.407883,
+        "gas_cumulative_defect_fraction_initial": 5.109110299889127e-06,
+        "gas_cumulative_defect_kg": -0.00017307911264489968,
+        "gas_inventory_kg": 33.468124,
+        "gas_step_defect_kg": -3.7016070037455503e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/processors10/0.383069016333",
+        "pressure_update_ratio_final_to_penultimate": 0.3630328829529511,
+        "raw_corrector_min_pressure_Pa_this_step": 92912.086,
+        "time_s": 0.383069016333,
+        "water_boundary_flux_kg_s": 5.0977665e-23,
+        "water_cumulative_defect_fraction_initial": 1.404910994877689e-05,
+        "water_cumulative_defect_kg": 0.0449291712188824,
+        "water_inventory_kg": 3198.0533,
+        "water_step_defect_kg": 4.034098492411431e-05
+      },
+      "final_physical_time_s": 0.383069016333,
+      "first_raw_pressure_contact": {
+        "cells_strictly_below_pMin": 2,
+        "clipped_liquid_support_kg": 0.0273240858694355,
+        "clipped_liquid_support_volume_m3": 2.736947001866807e-05,
+        "first_cell": {
+          "T_K": 293.2993582169565,
+          "air_density_kg_m3": 5.485089748522422,
+          "alpha_air": 8.283312147305821e-09,
+          "alpha_water": 0.9999999917166879,
+          "local_cell": 8056,
+          "mixture_density_kg_m3": 998.364680600303,
+          "native_cell_center_m": [
+            3.234111618913672,
+            -0.3628691672343575,
+            0.8692914188244837
+          ],
+          "native_cell_volume_m3": 1.367344930895523e-05,
+          "outer_iteration": 22760,
+          "pMin_Pa": 10000.0,
+          "p_rgh_Pa": 9191.560583653521,
+          "rank": 0,
+          "raw_pressure_Pa": 677.7573580642475,
+          "velocity_m_s": [
+            7.307332100573726,
+            -0.349832832993036,
+            3.706071396581728
+          ],
+          "water_density_kg_m3": 998.3646888246346
+        },
+        "interpretation": "diagnostic support of the raw corrector floor operation, not mass removed from the inventory",
+        "pMin_Pa": 10000.0,
+        "pass": 45520,
+        "raw_min_pressure_Pa": 677.7573580642475,
+        "time_s": 0.382719448623
+      },
+      "group": "cold_start",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "cold_half_dt_linearupwind_n8",
+      "label": "cold finite-water EOS, half dt, linearUpwind, Nouter=8",
+      "log": {
+        "bytes": 676483419,
+        "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/log.cold-coupled",
+        "sha256": "308ace6ad956c06e6e7f2105ac5443527780ade9cd9fccce27db4162d60a173a"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.46,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 5828,
+          "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/experiment.json",
+          "sha256": "8cb10fc0a053f41457ac98a77b07ec03e159a5d78a0c1b087d392dce2b9bac4b"
+        },
+        "guardian-status.json": {
+          "bytes": 16490,
+          "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/guardian-status.json",
+          "sha256": "4d8f5ed31f7453d7cdfd1f17ead2fa061bbfc1a9133c87db0329569d06c6bf4a"
+        },
+        "input-freeze.json": {
+          "bytes": 47665,
+          "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/input-freeze.json",
+          "sha256": "0a1073345a59cc0b02eed9a8b1c273bcd0553776e870705191ac35faa2cf34e9"
+        },
+        "launch-manifest.json": {
+          "bytes": 37718,
+          "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/launch-manifest.json",
+          "sha256": "71063fdf64f0e8b2c576704d9a9c46a1c4a0d97b470eb21b208b2f38b66676bd"
+        },
+        "run-source-lock.json": {
+          "bytes": 6633,
+          "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/provenance/run-source-lock.json",
+          "sha256": "a23d510dd410ce491ac5d85c4868a8d0c993f6bb1ae129652cd550bf8027b724"
+        }
+      },
+      "raw_pressure_contact_count": 1,
+      "requested_end_time_s": "0.46",
+      "solver_log_profile": {
+        "clock_time_span_s": 10469.0,
+        "execution_time_span_s": 9439.79,
+        "first_timing_record": {
+          "clock_time_s": 6.0,
+          "execution_time_s": 5.33,
+          "solver_iterations": {
+            "T": 6,
+            "Ux": 3,
+            "Uy": 2,
+            "Uz": 2,
+            "alpha.water": 8,
+            "k": 2,
+            "omega": 1,
+            "p_rgh": 21
+          },
+          "time_s": 0.050135583332
+        },
+        "last_timing_record": {
+          "clock_time_s": 10475.0,
+          "execution_time_s": 9445.12,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 8,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 20
+          },
+          "time_s": 0.383069016333
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 22792,
+            "iterations": 12915,
+            "mean_iterations_per_solve": 0.5666461916461917,
+            "zero_iteration_calls": 9877
+          },
+          "Ux": {
+            "calls": 22792,
+            "iterations": 10526,
+            "mean_iterations_per_solve": 0.4618287118287118,
+            "zero_iteration_calls": 14117
+          },
+          "Uy": {
+            "calls": 22792,
+            "iterations": 9519,
+            "mean_iterations_per_solve": 0.41764654264654266,
+            "zero_iteration_calls": 14551
+          },
+          "Uz": {
+            "calls": 22792,
+            "iterations": 5430,
+            "mean_iterations_per_solve": 0.23824148824148825,
+            "zero_iteration_calls": 17362
+          },
+          "alpha.water": {
+            "calls": 22792,
+            "iterations": 22885,
+            "mean_iterations_per_solve": 1.0040803790803792,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 2849,
+            "iterations": 5698,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 2849,
+            "iterations": 5086,
+            "mean_iterations_per_solve": 1.785187785187785,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 45584,
+            "iterations": 66775,
+            "mean_iterations_per_solve": 1.4648780273780273,
+            "zero_iteration_calls": 20935
+          }
+        },
+        "time_records": 2849
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.000005",
+        "dictionary_hashes": {
+          "controlDict": "b8c96cb3f0dd2e35fd37bf666db0c1ea02503963fabbff5a5750d340cadb75ba",
+          "fvSchemes": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+          "fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+        },
+        "i4fFullPressureAudit_explicit": null,
+        "maxAlphaCo": "0.125",
+        "maxCo": "0.25",
+        "maxDeltaT_s": "0.000125",
+        "momentum_scheme_div_rhoPhi_U": "Gauss linearUpwind grad(U)",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.050135583332,
+      "step_health": {
+        "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/step_health.csv",
+        "rows": 2849,
+        "sha256": "a3069989d8aa302af5514d6305562f4f5c79be1e3beef184f2972b47454b52f3"
+      },
+      "stop_reason": "first raw corrector pressure-floor contact; guarded writeNow and normal End"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z",
+      "completed_steps": 86,
+      "container_id": "7e3c90ce369a0c2769884b2510f7969e058acff7015168536fcbf68d39aae737",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T16:36:39.404707+00:00",
+      "cpu_quota_equiv": 10.0,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T16:36:35.955232877Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T16:32:34.134837295Z",
+      "final": {
+        "dP_final_outer_Pa": 0.29694285,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.0080775332,
+        "dalpha_final_outer": 8.8668239e-08,
+        "final_field_min_p_Pa": 85452.93,
+        "gas_boundary_flux_kg_s": 2.5611487,
+        "gas_cumulative_defect_fraction_initial": 1.3219398715349253e-05,
+        "gas_cumulative_defect_kg": 0.0004478278340167029,
+        "gas_inventory_kg": 33.401438,
+        "gas_step_defect_kg": 1.3787024242151603e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/case/processors10/0.410227650445",
+        "pressure_update_ratio_final_to_penultimate": 0.7053511921137866,
+        "raw_corrector_min_pressure_Pa_this_step": 85439.831,
+        "time_s": 0.410227650445,
+        "water_boundary_flux_kg_s": -6.3312093e-23,
+        "water_cumulative_defect_fraction_initial": 3.7626284008744984e-05,
+        "water_cumulative_defect_kg": 0.12032917122314757,
+        "water_inventory_kg": 3198.1287,
+        "water_step_defect_kg": 6.297099935181905e-05
+      },
+      "final_physical_time_s": 0.410227650445,
+      "first_raw_pressure_contact": {
+        "cells_strictly_below_pMin": 2,
+        "clipped_liquid_support_kg": 0.01926706746163841,
+        "clipped_liquid_support_volume_m3": 1.930013590997512e-05,
+        "first_cell": {
+          "T_K": 293.2890300012278,
+          "air_density_kg_m3": 2.963452190833855,
+          "alpha_air": 5.253505408475689e-10,
+          "alpha_water": 0.9999999994746495,
+          "local_cell": 8303,
+          "mixture_density_kg_m3": 998.2680404769216,
+          "native_cell_center_m": [
+            3.43691633892242,
+            -0.3632411156942843,
+            0.9647273685412191
+          ],
+          "native_cell_volume_m3": 9.663700945662352e-06,
+          "outer_iteration": 672,
+          "pMin_Pa": 10000.0,
+          "p_rgh_Pa": 16510.6450402316,
+          "rank": 0,
+          "raw_pressure_Pa": 7063.060777310338,
+          "velocity_m_s": [
+            9.108696019620835,
+            -0.535582727631114,
+            4.092758793913323
+          ],
+          "water_density_kg_m3": 998.2680409998054
+        },
+        "interpretation": "diagnostic support of the raw corrector floor operation, not mass removed from the inventory",
+        "pMin_Pa": 10000.0,
+        "pass": 1344,
+        "raw_min_pressure_Pa": -14573.4965437225,
+        "time_s": 0.410002730191
+      },
+      "group": "warm_restart_0p4",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "warm_linearupwind_control_n8",
+      "label": "warm finite-water EOS, full dt, linearUpwind, Nouter=8",
+      "log": {
+        "bytes": 20381328,
+        "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/case/log.cold-coupled",
+        "sha256": "9a2c8ea0ebea37147d0f0cd53ee560f5752d83f66bb9efe0ad1ff99e4c9b9595"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.46,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 8100,
+          "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/experiment.json",
+          "sha256": "5575570cd0197454bf8c1b8cf07bc80d424dc3468f0d1b1c251c2c36ac5d80b2"
+        },
+        "guardian-status.json": {
+          "bytes": 13780,
+          "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/guardian-status.json",
+          "sha256": "f0921ddb9fadeaae7aad85276af81ec04b4e0816cb3bd7bb143cdbfc7b6e27b3"
+        },
+        "input-freeze.json": {
+          "bytes": 2602,
+          "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/input-freeze.json",
+          "sha256": "4206dd5840b7b47d200e081ee04d79aa8c642f207965554771981f9789269a7d"
+        },
+        "launch-manifest.json": {
+          "bytes": 4323,
+          "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/launch-manifest.json",
+          "sha256": "55d34cb5111306d0c01ca16c5c586a6a664a3f06347f59765d6678b800cf0e9d"
+        },
+        "resource-admission.json": {
+          "bytes": 573,
+          "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/resource-admission.json",
+          "sha256": "4583472687daa9a150bec56675aeb6f27173f7e05cb033aa05430c78d3d11172"
+        }
+      },
+      "raw_pressure_contact_count": 1,
+      "requested_end_time_s": "0.46",
+      "solver_log_profile": {
+        "clock_time_span_s": 236.0,
+        "execution_time_span_s": 228.81,
+        "first_timing_record": {
+          "clock_time_s": 2.0,
+          "execution_time_s": 2.49,
+          "solver_iterations": {
+            "T": 5,
+            "Ux": 3,
+            "Uy": 4,
+            "Uz": 3,
+            "alpha.water": 16,
+            "k": 3,
+            "omega": 2,
+            "p_rgh": 36
+          },
+          "time_s": 0.400164815554
+        },
+        "last_timing_record": {
+          "clock_time_s": 238.0,
+          "execution_time_s": 231.3,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 3,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 9,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 27
+          },
+          "time_s": 0.410227650445
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 688,
+            "iterations": 350,
+            "mean_iterations_per_solve": 0.5087209302325582,
+            "zero_iteration_calls": 338
+          },
+          "Ux": {
+            "calls": 688,
+            "iterations": 259,
+            "mean_iterations_per_solve": 0.376453488372093,
+            "zero_iteration_calls": 515
+          },
+          "Uy": {
+            "calls": 688,
+            "iterations": 355,
+            "mean_iterations_per_solve": 0.5159883720930233,
+            "zero_iteration_calls": 419
+          },
+          "Uz": {
+            "calls": 688,
+            "iterations": 204,
+            "mean_iterations_per_solve": 0.29651162790697677,
+            "zero_iteration_calls": 505
+          },
+          "alpha.water": {
+            "calls": 688,
+            "iterations": 1095,
+            "mean_iterations_per_solve": 1.5915697674418605,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 86,
+            "iterations": 190,
+            "mean_iterations_per_solve": 2.2093023255813953,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 86,
+            "iterations": 172,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 1376,
+            "iterations": 2388,
+            "mean_iterations_per_solve": 1.7354651162790697,
+            "zero_iteration_calls": 328
+          }
+        },
+        "time_records": 86
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "139fe6daecdca41fe74b339433d2eadc7ff39188038cf3402068614e85f2b284",
+          "fvSchemes": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+          "fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+        },
+        "i4fFullPressureAudit_explicit": null,
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.00025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss linearUpwind grad(U)",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.400164815554,
+      "step_health": {
+        "path": "results/runs/i4f-linearupwind-warm-control-20261026T162846Z/step_health.csv",
+        "rows": 86,
+        "sha256": "2d54c9e8fd8ef70e78b3bf7e1c7198a3486db85665190a99f5bacfcb206c88e2"
+      },
+      "stop_reason": "first raw corrector pressure-floor contact; guarded writeNow and normal End"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z",
+      "completed_steps": 688,
+      "container_id": "400939f169cc9bfd90f8f24461905255e6644871fec51abb0282a5ae04994f87",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T15:37:40.583344+00:00",
+      "cpu_quota_equiv": 7.7,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T15:37:35.752462389Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T14:44:50.083120753Z",
+      "final": {
+        "dP_final_outer_Pa": 21.26090507890331,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.2883894970072087,
+        "dalpha_final_outer": 0.0003666754401402841,
+        "final_field_min_p_Pa": 69222.48097228244,
+        "gas_boundary_flux_kg_s": 2.748993834026941,
+        "gas_cumulative_defect_fraction_initial": 1.1629722722302299e-05,
+        "gas_cumulative_defect_kg": 0.0003939750702046871,
+        "gas_inventory_kg": 33.26935685101726,
+        "gas_step_defect_kg": -1.7196085598281423e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/case/processors10/0.460047515286",
+        "pressure_update_ratio_final_to_penultimate": 1.0295091984357516,
+        "raw_corrector_min_pressure_Pa_this_step": 69233.71636513363,
+        "time_s": 0.460047515286,
+        "water_boundary_flux_kg_s": 0.0003269286423756904,
+        "water_cumulative_defect_fraction_initial": 4.168084842249596e-05,
+        "water_cumulative_defect_kg": 0.13329570215838768,
+        "water_inventory_kg": 3198.141666275168,
+        "water_step_defect_kg": 5.854955066710321e-05
+      },
+      "final_physical_time_s": 0.460047515286,
+      "first_raw_pressure_contact": null,
+      "group": "warm_restart_0p4",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "warm_upwind_pilot_n8",
+      "label": "warm finite-water EOS, full dt, upwind, Nouter=8",
+      "log": {
+        "bytes": 163247455,
+        "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/case/log.cold-coupled",
+        "sha256": "c90ebf33c5ddd85b9649be917993632008219d6c5aecf509ac57996dc4efd579"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.46,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 7941,
+          "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/experiment.json",
+          "sha256": "4d726acc4a8f248218de83e940afb7e19ee6940852bf9b262054ac07c652102b"
+        },
+        "guardian-status.json": {
+          "bytes": 13119,
+          "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/guardian-status.json",
+          "sha256": "e14aec179ceceda52bab4fcfb93b82ba24720d87f5729f9d7156cfb28211453a"
+        },
+        "input-freeze.json": {
+          "bytes": 1076,
+          "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/input-freeze.json",
+          "sha256": "c4f633be9b6beaf9ada8c70e80228a0792136750c4cc54dc10531ee376685b3c"
+        },
+        "launch-manifest.json": {
+          "bytes": 8590,
+          "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/launch-manifest.json",
+          "sha256": "a5fe7e968b0d68d17724dd5f1e4450e67e5956ad5f6f84fa1875c2334aede531"
+        },
+        "resource-admission.json": {
+          "bytes": 4515,
+          "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/resource-admission.json",
+          "sha256": "322de9c638d7ebdd85dd1cfb8ac99f4d48298e04eabd9a8d48e5d07eb96e6f2e"
+        }
+      },
+      "raw_pressure_contact_count": 0,
+      "requested_end_time_s": "0.46",
+      "solver_log_profile": {
+        "clock_time_span_s": 3156.0,
+        "execution_time_span_s": 2662.3599999999997,
+        "first_timing_record": {
+          "clock_time_s": 6.0,
+          "execution_time_s": 5.07,
+          "solver_iterations": {
+            "T": 5,
+            "Ux": 4,
+            "Uy": 5,
+            "Uz": 4,
+            "alpha.water": 16,
+            "k": 3,
+            "omega": 2,
+            "p_rgh": 42
+          },
+          "time_s": 0.400164815554
+        },
+        "last_timing_record": {
+          "clock_time_s": 3162.0,
+          "execution_time_s": 2667.43,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 16,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 26
+          },
+          "time_s": 0.460047515286
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 5504,
+            "iterations": 2332,
+            "mean_iterations_per_solve": 0.42369186046511625,
+            "zero_iteration_calls": 3172
+          },
+          "Ux": {
+            "calls": 5504,
+            "iterations": 1399,
+            "mean_iterations_per_solve": 0.25417877906976744,
+            "zero_iteration_calls": 4192
+          },
+          "Uy": {
+            "calls": 5504,
+            "iterations": 2350,
+            "mean_iterations_per_solve": 0.4269622093023256,
+            "zero_iteration_calls": 3842
+          },
+          "Uz": {
+            "calls": 5504,
+            "iterations": 1420,
+            "mean_iterations_per_solve": 0.25799418604651164,
+            "zero_iteration_calls": 4123
+          },
+          "alpha.water": {
+            "calls": 5504,
+            "iterations": 6762,
+            "mean_iterations_per_solve": 1.228561046511628,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 688,
+            "iterations": 1396,
+            "mean_iterations_per_solve": 2.0290697674418605,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 688,
+            "iterations": 1376,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 11008,
+            "iterations": 14401,
+            "mean_iterations_per_solve": 1.3082303779069768,
+            "zero_iteration_calls": 3144
+          }
+        },
+        "time_records": 688
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "29b4f8f4492d99584483e40c2bbdc030824dab44db8f56fabe01b23cd286d953",
+          "fvSchemes": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+          "fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+        },
+        "i4fFullPressureAudit_explicit": null,
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.00025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss upwind",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.400164815554,
+      "step_health": {
+        "path": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/step_health.csv",
+        "rows": 688,
+        "sha256": "8a9d7c6c7f2d162c1a47b4d1214e49bc86b35bd0c8b071d4ff4f763713eaf078"
+      },
+      "stop_reason": "declared end time 0.46 s reached; healthy native checkpoint saved"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z",
+      "completed_steps": 191,
+      "container_id": "9d04af8e39cbdbf0652a52221b66d80e45e6e8ce6578e63bb780a6e9a56ade27",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T15:58:18.221032+00:00",
+      "cpu_quota_equiv": 8.7,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T15:58:15.466204149Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T15:44:21.391905429Z",
+      "final": {
+        "dP_final_outer_Pa": 300.71921,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.013509775,
+        "dalpha_final_outer": 0.00057102013,
+        "final_field_min_p_Pa": 65745.009,
+        "gas_boundary_flux_kg_s": 2.8247202,
+        "gas_cumulative_defect_fraction_initial": 2.867998416756143e-05,
+        "gas_cumulative_defect_kg": 0.0009715793786051214,
+        "gas_inventory_kg": 33.209032,
+        "gas_step_defect_kg": -3.1372475167343837e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/processors10/0.48189409979",
+        "pressure_update_ratio_final_to_penultimate": 0.9997620272881359,
+        "raw_corrector_min_pressure_Pa_this_step": 65755.9,
+        "time_s": 0.48189409979,
+        "water_boundary_flux_kg_s": 0.00079743883,
+        "water_cumulative_defect_fraction_initial": 4.582136395042396e-05,
+        "water_cumulative_defect_kg": 0.14653710547624796,
+        "water_inventory_kg": 3198.1549,
+        "water_step_defect_kg": 8.279393864152297e-05
+      },
+      "final_physical_time_s": 0.48189409979,
+      "first_raw_pressure_contact": null,
+      "group": "warm_restart_0p46",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "warm_upwind_continuation_n8",
+      "label": "warm upwind, transonic, Nouter=8 continuation",
+      "log": {
+        "bytes": 23833730,
+        "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/log.cold-coupled",
+        "sha256": "201edb930ad01c0ec1e03c95c7b55ad115088ddc8bf5988e98e6be6b750090fa"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.7,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 9529,
+          "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/experiment.json",
+          "sha256": "057189955ed01c6dae87f53e62c1e4ca5db683bbabefe95095e51a93ab9b41f5"
+        },
+        "guardian-status.json": {
+          "bytes": 15396,
+          "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/guardian-status.json",
+          "sha256": "a9e3277393d9e56e4dad1677a1a64d6897fa1dfff36d21c55e9bafb2e928c0cc"
+        },
+        "input-freeze.json": {
+          "bytes": 46080,
+          "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/input-freeze.json",
+          "sha256": "48bf1322c6f6a68ed76848261320d99263d9a8a9284c9668e6a29675507e3d43"
+        },
+        "launch-manifest.json": {
+          "bytes": 8615,
+          "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/launch-manifest.json",
+          "sha256": "b9fe3dae963378f679ef870833fccd6e1a0a9014e27bcf853770fee9654428e0"
+        },
+        "resource-admission.json": {
+          "bytes": 1668,
+          "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/resource-admission.json",
+          "sha256": "e1c183b084c179a64545a16ff57a2ed29bb8278170ccdea132efb26f897ec9c1"
+        },
+        "run-source-lock.json": {
+          "bytes": 4879,
+          "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/provenance/run-source-lock.json",
+          "sha256": "d723e3d92a8ea9a4e41704fe0c1a6d8f193a2965df42220d8329e520deda865a"
+        }
+      },
+      "raw_pressure_contact_count": 0,
+      "requested_end_time_s": "0.7",
+      "solver_log_profile": {
+        "clock_time_span_s": 826.0,
+        "execution_time_span_s": 714.82,
+        "first_timing_record": {
+          "clock_time_s": 5.0,
+          "execution_time_s": 4.15,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 16,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 27
+          },
+          "time_s": 0.460145766545
+        },
+        "last_timing_record": {
+          "clock_time_s": 831.0,
+          "execution_time_s": 718.97,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 16,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 28
+          },
+          "time_s": 0.48189409979
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 1528,
+            "iterations": 764,
+            "mean_iterations_per_solve": 0.5,
+            "zero_iteration_calls": 764
+          },
+          "Ux": {
+            "calls": 1528,
+            "iterations": 520,
+            "mean_iterations_per_solve": 0.3403141361256545,
+            "zero_iteration_calls": 1146
+          },
+          "Uy": {
+            "calls": 1528,
+            "iterations": 764,
+            "mean_iterations_per_solve": 0.5,
+            "zero_iteration_calls": 955
+          },
+          "Uz": {
+            "calls": 1528,
+            "iterations": 436,
+            "mean_iterations_per_solve": 0.28534031413612565,
+            "zero_iteration_calls": 1146
+          },
+          "alpha.water": {
+            "calls": 1528,
+            "iterations": 3056,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 191,
+            "iterations": 382,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 191,
+            "iterations": 382,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 3056,
+            "iterations": 5615,
+            "mean_iterations_per_solve": 1.837369109947644,
+            "zero_iteration_calls": 668
+          }
+        },
+        "time_records": 191
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "bef0cd9a0a8b437f42259c54bb887b8a31003877c62613a29c9b68ce7c7179c5",
+          "fvSchemes": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+          "fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+        },
+        "i4fFullPressureAudit_explicit": "false",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.00025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss upwind",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.460145766545,
+      "step_health": {
+        "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/step_health.csv",
+        "rows": 191,
+        "sha256": "0d467a05cca14c5933e77632b81228d705e2a75a972b75bb6ef83c57173878c0"
+      },
+      "stop_reason": "persistent final-outer pressure-update screen; guarded writeNow and normal End"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z",
+      "completed_steps": 192,
+      "container_id": "946f81c95efbf1de9944b342ec05de42912d0d3e791f2320542233474cef27c6",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T16:26:15.883147+00:00",
+      "cpu_quota_equiv": 10.0,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T16:26:10.772535715Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T16:16:39.15037673Z",
+      "final": {
+        "dP_final_outer_Pa": 319.63759,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.010866933,
+        "dalpha_final_outer": 0.0006182794,
+        "final_field_min_p_Pa": 65407.673,
+        "gas_boundary_flux_kg_s": 2.8258391,
+        "gas_cumulative_defect_fraction_initial": 2.869062541292564e-05,
+        "gas_cumulative_defect_kg": 0.0009719398674567937,
+        "gas_inventory_kg": 33.208744,
+        "gas_step_defect_kg": 2.7631807292651314e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/case/processors10/0.481996156137",
+        "pressure_update_ratio_final_to_penultimate": 1.0,
+        "raw_corrector_min_pressure_Pa_this_step": 65416.888,
+        "time_s": 0.481996156137,
+        "water_boundary_flux_kg_s": 0.0007692831,
+        "water_cumulative_defect_fraction_initial": 4.585265783703464e-05,
+        "water_cumulative_defect_kg": 0.1466371835875847,
+        "water_inventory_kg": 3198.155,
+        "water_step_defect_kg": 6.77192583311447e-05
+      },
+      "final_physical_time_s": 0.481996156137,
+      "first_raw_pressure_contact": null,
+      "group": "warm_restart_0p46",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "warm_upwind_continuation_n16",
+      "label": "warm upwind, transonic, Nouter=16 continuation",
+      "log": {
+        "bytes": 46498571,
+        "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/case/log.cold-coupled",
+        "sha256": "489047b616b6ed2af70088d545079b97b4ab8e66a64a5cccde2e90790c0b266f"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.5,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 1644,
+          "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/experiment.json",
+          "sha256": "324f61a90307fc13c29f92a92b2f59a9ba56d4ceba8f254dcd62ada0d042fb91"
+        },
+        "guardian-status.json": {
+          "bytes": 15533,
+          "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/guardian-status.json",
+          "sha256": "4f54b9aa34ecb069cf82f01bd66cb18181c870b9635257c28121523d43771a57"
+        },
+        "input-freeze.json": {
+          "bytes": 43454,
+          "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/input-freeze.json",
+          "sha256": "5295d46434f20ade6ddc7fa58b4f38efb17afe3fe3f438b861244e4396148c16"
+        },
+        "launch-manifest.json": {
+          "bytes": 4341,
+          "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/launch-manifest.json",
+          "sha256": "d9fea491a5b61f95ba38b4938a1a9a4733ab4ef29687eacffd0449d3e993f3c6"
+        },
+        "resource-admission.json": {
+          "bytes": 896,
+          "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/resource-admission.json",
+          "sha256": "dfec4703fa9ea822105c82560545e38f3885cbe58253e9a863b5c1c8ce66fd70"
+        },
+        "run-source-lock.json": {
+          "bytes": 4879,
+          "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/provenance/run-source-lock.json",
+          "sha256": "d723e3d92a8ea9a4e41704fe0c1a6d8f193a2965df42220d8329e520deda865a"
+        }
+      },
+      "raw_pressure_contact_count": 0,
+      "requested_end_time_s": "0.50",
+      "solver_log_profile": {
+        "clock_time_span_s": 565.0,
+        "execution_time_span_s": 563.7,
+        "first_timing_record": {
+          "clock_time_s": 3.0,
+          "execution_time_s": 3.28,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 32,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 35
+          },
+          "time_s": 0.460145766545
+        },
+        "last_timing_record": {
+          "clock_time_s": 568.0,
+          "execution_time_s": 566.98,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 32,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 35
+          },
+          "time_s": 0.481996156137
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 3072,
+            "iterations": 768,
+            "mean_iterations_per_solve": 0.25,
+            "zero_iteration_calls": 2304
+          },
+          "Ux": {
+            "calls": 3072,
+            "iterations": 522,
+            "mean_iterations_per_solve": 0.169921875,
+            "zero_iteration_calls": 2688
+          },
+          "Uy": {
+            "calls": 3072,
+            "iterations": 768,
+            "mean_iterations_per_solve": 0.25,
+            "zero_iteration_calls": 2496
+          },
+          "Uz": {
+            "calls": 3072,
+            "iterations": 438,
+            "mean_iterations_per_solve": 0.142578125,
+            "zero_iteration_calls": 2688
+          },
+          "alpha.water": {
+            "calls": 3072,
+            "iterations": 6144,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 192,
+            "iterations": 384,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 192,
+            "iterations": 384,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 6144,
+            "iterations": 7152,
+            "mean_iterations_per_solve": 1.1640625,
+            "zero_iteration_calls": 2225
+          }
+        },
+        "time_records": 192
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "0bc02745a02000d4d6dabf155fe580083f7cfcac153877bdad6c15ff71b69908",
+          "fvSchemes": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+          "fvSolution": "30937293abdeb16f54cad4c800f0db2e0271a32bb5292f8e24961f0d6978e10f"
+        },
+        "i4fFullPressureAudit_explicit": "false",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.00025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss upwind",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "16",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.460145766545,
+      "step_health": {
+        "path": "results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/step_health.csv",
+        "rows": 192,
+        "sha256": "4345cf57d4c0b09b90317930c2230aeb0d8969b355cae1665d56d7cb6a7aa4ca"
+      },
+      "stop_reason": "persistent final-outer pressure-update screen; guarded writeNow and normal End"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z",
+      "completed_steps": 193,
+      "container_id": "7ff7ede117df5e455ff22988f8f4287b07e7ab38ea0c2f67ad87181f95399a6d",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T16:41:18.166477+00:00",
+      "cpu_quota_equiv": 8.8,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T16:41:16.186522636Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T16:34:22.424288519Z",
+      "final": {
+        "dP_final_outer_Pa": 335.73034,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.0067336017,
+        "dalpha_final_outer": 0.00066938592,
+        "final_field_min_p_Pa": 65206.411,
+        "gas_boundary_flux_kg_s": 2.826969,
+        "gas_cumulative_defect_fraction_initial": 2.8687490768263076e-05,
+        "gas_cumulative_defect_kg": 0.0009718336764597691,
+        "gas_inventory_kg": 33.208455,
+        "gas_step_defect_kg": 2.907799913647491e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/case/processors10/0.482098330568",
+        "pressure_update_ratio_final_to_penultimate": 0.9996927942062721,
+        "raw_corrector_min_pressure_Pa_this_step": 65214.734,
+        "time_s": 0.482098330568,
+        "water_boundary_flux_kg_s": 0.00072451812,
+        "water_cumulative_defect_fraction_initial": 4.5852681148153933e-05,
+        "water_cumulative_defect_kg": 0.14663725813673933,
+        "water_inventory_kg": 3198.155,
+        "water_step_defect_kg": 5.5347805819490417e-05
+      },
+      "final_physical_time_s": 0.482098330568,
+      "first_raw_pressure_contact": null,
+      "group": "warm_restart_0p46",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "warm_upwind_nontransonic_n8",
+      "label": "warm upwind, transonic=no, Nouter=8 continuation",
+      "log": {
+        "bytes": 24086124,
+        "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/case/log.cold-coupled",
+        "sha256": "29d44fde7a1a9e071728bed7ddc0a779763f60e01ab91fbfc02ceb0c35af99f3"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.5,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 5001,
+          "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/experiment.json",
+          "sha256": "562509de81e53b90fbe55d6904e3466a22ead4ebd7a7486cee77fdf2e14f9adb"
+        },
+        "guardian-status.json": {
+          "bytes": 15583,
+          "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/guardian-status.json",
+          "sha256": "c0cb118ab00dc2b30f404daaa391ff0615ba1b7427cfafa2a2d45a6ed53e04b1"
+        },
+        "input-freeze.json": {
+          "bytes": 43913,
+          "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/input-freeze.json",
+          "sha256": "d8ea534a22a1bf4792c951950d4771dfd0e596f90cf5c4d43f7ab8889d5b49bd"
+        },
+        "launch-manifest.json": {
+          "bytes": 8643,
+          "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/launch-manifest.json",
+          "sha256": "4e35c55bbfa59056111da9cf89b1c37205022fcadb172e9c8fa80a8d877687d1"
+        },
+        "resource-admission.json": {
+          "bytes": 5347,
+          "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/resource-admission.json",
+          "sha256": "23fac3db151b61d6dae9e7103119b71720eb5c50c10c84c64195ba626bb87f7f"
+        },
+        "run-source-lock.json": {
+          "bytes": 6021,
+          "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/provenance/run-source-lock.json",
+          "sha256": "2549ad18183a08cb9892858d030f41c2c09bcee12902ab5fc18b394275fccbed"
+        }
+      },
+      "raw_pressure_contact_count": 0,
+      "requested_end_time_s": "0.50",
+      "solver_log_profile": {
+        "clock_time_span_s": 406.0,
+        "execution_time_span_s": 358.51,
+        "first_timing_record": {
+          "clock_time_s": 5.0,
+          "execution_time_s": 3.43,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 16,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 23
+          },
+          "time_s": 0.460145766545
+        },
+        "last_timing_record": {
+          "clock_time_s": 411.0,
+          "execution_time_s": 361.94,
+          "solver_iterations": {
+            "T": 4,
+            "Ux": 2,
+            "Uy": 4,
+            "Uz": 2,
+            "alpha.water": 16,
+            "k": 2,
+            "omega": 2,
+            "p_rgh": 24
+          },
+          "time_s": 0.482098330568
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 1544,
+            "iterations": 772,
+            "mean_iterations_per_solve": 0.5,
+            "zero_iteration_calls": 772
+          },
+          "Ux": {
+            "calls": 1544,
+            "iterations": 524,
+            "mean_iterations_per_solve": 0.3393782383419689,
+            "zero_iteration_calls": 1158
+          },
+          "Uy": {
+            "calls": 1544,
+            "iterations": 772,
+            "mean_iterations_per_solve": 0.5,
+            "zero_iteration_calls": 965
+          },
+          "Uz": {
+            "calls": 1544,
+            "iterations": 440,
+            "mean_iterations_per_solve": 0.2849740932642487,
+            "zero_iteration_calls": 1158
+          },
+          "alpha.water": {
+            "calls": 1544,
+            "iterations": 3088,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 193,
+            "iterations": 386,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 193,
+            "iterations": 386,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 3088,
+            "iterations": 5035,
+            "mean_iterations_per_solve": 1.6305051813471503,
+            "zero_iteration_calls": 730
+          }
+        },
+        "time_records": 193
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "3fbf29235911c9ac8ff81dd615741047bb0a81240afab0ad04b6bf5def485b68",
+          "fvSchemes": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+          "fvSolution": "c8409ab1bb004db32116f307d9178ab0b1e4054df5e917343038b15d2fb3363d"
+        },
+        "i4fFullPressureAudit_explicit": "false",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.00025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss upwind",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "no"
+      },
+      "start_physical_time_s": 0.460145766545,
+      "step_health": {
+        "path": "results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/step_health.csv",
+        "rows": 193,
+        "sha256": "18a8dc9cb06c32bb58eaca4c322ad3c8e813fadff384fa2de9e56db5489c000b"
+      },
+      "stop_reason": "persistent final-outer pressure-update screen; guarded writeNow and normal End"
+    },
+    {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "bundle": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z",
+      "completed_steps": 19,
+      "container_id": "ebb953582ab579c21e6ebc3dfd5e8584eb9ae2dcf16a54dfdb195491587bfede",
+      "controller_campaign_status": "solver_terminal",
+      "controller_status_authority": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/guardian-status.json",
+      "controller_status_updated_utc": "2026-10-26T17:42:58.437026+00:00",
+      "cpu_quota_equiv": 8.7,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T17:42:53.587954984Z",
+      "docker_oom_killed": false,
+      "docker_started_at_utc": "2026-10-26T17:41:29.375206934Z",
+      "final": {
+        "dP_final_outer_Pa": 2076.6194,
+        "dT_final_outer_K": 0.0,
+        "dU_final_outer_m_s": 0.002161928,
+        "dalpha_final_outer": 6.7303852e-05,
+        "final_field_min_p_Pa": 46782.301,
+        "gas_boundary_flux_kg_s": 2.7479724,
+        "gas_cumulative_defect_fraction_initial": 1.625866838736246e-05,
+        "gas_cumulative_defect_kg": 0.000550787853872218,
+        "gas_inventory_kg": 33.268207,
+        "gas_step_defect_kg": -1.6719295001572e-07,
+        "initial_gas_inventory_kg": 33.87656607230728,
+        "initial_water_inventory_kg": 3198.008370828781,
+        "native_endpoint_complete": true,
+        "native_endpoint_fields_present": {
+          "T": true,
+          "T.air": true,
+          "T.water": true,
+          "U": true,
+          "alpha.water": true,
+          "alphaPhi0.water": true,
+          "alphat": true,
+          "k": true,
+          "nut": true,
+          "omega": true,
+          "p": true,
+          "p_rgh": true,
+          "phi": true,
+          "rho": true
+        },
+        "native_endpoint_time_path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/case/processors10/0.460522515286",
+        "pressure_update_ratio_final_to_penultimate": 2.12356830998122,
+        "raw_corrector_min_pressure_Pa_this_step": 46760.342,
+        "time_s": 0.460522515286,
+        "water_boundary_flux_kg_s": 0.00012651576,
+        "water_cumulative_defect_fraction_initial": 4.162887541021121e-05,
+        "water_cumulative_defect_kg": 0.13312949203004384,
+        "water_inventory_kg": 3198.1415,
+        "water_step_defect_kg": -1.794752584943997e-05
+      },
+      "final_physical_time_s": 0.460522515286,
+      "first_raw_pressure_contact": {
+        "cells_strictly_below_pMin": 1,
+        "clipped_liquid_support_kg": 0.003603481495540283,
+        "clipped_liquid_support_volume_m3": 3.609446970744898e-06,
+        "first_cell": {
+          "T_K": 293.2810146785333,
+          "air_density_kg_m3": 5.030742603737745,
+          "alpha_air": 7.493026822347204e-07,
+          "alpha_water": 0.9999992506973178,
+          "local_cell": 2797,
+          "mixture_density_kg_m3": 998.346516309742,
+          "native_cell_center_m": [
+            3.989934471276227,
+            0.1614834318949518,
+            0.6608913645536324
+          ],
+          "native_cell_volume_m3": 3.609449675315221e-06,
+          "outer_iteration": 133,
+          "pMin_Pa": 10000.0,
+          "p_rgh_Pa": -74641.25135019855,
+          "rank": 5,
+          "raw_pressure_Pa": -81113.87553243402,
+          "velocity_m_s": [
+            6.297084433734254,
+            -1.201531196534041,
+            -0.5144612906548235
+          ],
+          "water_density_kg_m3": 998.3472606044733
+        },
+        "interpretation": "diagnostic support of the raw corrector floor operation, not mass removed from the inventory",
+        "pMin_Pa": 10000.0,
+        "pass": 266,
+        "raw_min_pressure_Pa": -81113.87553243402,
+        "time_s": 0.460472515286
+      },
+      "group": "warm_restart_0p46_dt_sensitivity",
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "id": "warm_upwind_dt25us_n8",
+      "label": "warm upwind, maxDeltaT=25 microseconds, transonic, Nouter=8",
+      "log": {
+        "bytes": 2440121,
+        "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/case/log.cold-coupled",
+        "sha256": "5a12faf2af477b999513d0f960889dfb83761c9a9b8af96c5217ee8c2a0c4e11"
+      },
+      "mpi_ranks": 10,
+      "normal_End": true,
+      "pilot_horizon_s": 0.5,
+      "provenance_evidence_hashes": {
+        "experiment.json": {
+          "bytes": 5502,
+          "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/experiment.json",
+          "sha256": "aec5e565446ca863a9fb639fca4a333e5118383909af87e99d7e2ec53010ec12"
+        },
+        "guardian-status.json": {
+          "bytes": 16063,
+          "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/guardian-status.json",
+          "sha256": "934f7087b7ea94bebe85e0517fb7c0297ffa4d12791c750fa19c1d5473e85ae6"
+        },
+        "input-freeze.json": {
+          "bytes": 43907,
+          "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/input-freeze.json",
+          "sha256": "3b9b846686ae465516d90f44c6bc324a7e7d3edd7789736fd3da22f492c9143e"
+        },
+        "launch-manifest.json": {
+          "bytes": 10051,
+          "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/launch-manifest.json",
+          "sha256": "ae1f3df4a582d24ce1abaed95f43d2abadb28ef7f3f9e19c66d8c819678c3014"
+        },
+        "resource-admission.json": {
+          "bytes": 5556,
+          "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/resource-admission.json",
+          "sha256": "35a975a173e1caabb5504e38695cc9de7f52edf4baa0ad8437c3b2342059b0c9"
+        },
+        "run-source-lock.json": {
+          "bytes": 6176,
+          "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/provenance/run-source-lock.json",
+          "sha256": "6fcd585f099cd8c56bf45c528810cd7cb1a65a3289032770e70b07dec90857e2"
+        }
+      },
+      "raw_pressure_contact_count": 20,
+      "requested_end_time_s": "0.5",
+      "solver_log_profile": {
+        "clock_time_span_s": 76.0,
+        "execution_time_span_s": 65.71,
+        "first_timing_record": {
+          "clock_time_s": 5.0,
+          "execution_time_s": 4.37,
+          "solver_iterations": {
+            "T": 2,
+            "Ux": 2,
+            "Uy": 3,
+            "Uz": 2,
+            "alpha.water": 8,
+            "k": 2,
+            "omega": 1,
+            "p_rgh": 9
+          },
+          "time_s": 0.460072515286
+        },
+        "last_timing_record": {
+          "clock_time_s": 81.0,
+          "execution_time_s": 70.08,
+          "solver_iterations": {
+            "T": 2,
+            "Ux": 1,
+            "Uy": 2,
+            "Uz": 1,
+            "alpha.water": 8,
+            "k": 2,
+            "omega": 1,
+            "p_rgh": 17
+          },
+          "time_s": 0.460522515286
+        },
+        "rank_execution_clock_semantics": "No Iterations are linear solver iteration counters, not measured CPU or wall shares. OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time (integer seconds in these merged logs).",
+        "solver_iteration_counts_by_field": {
+          "T": {
+            "calls": 152,
+            "iterations": 38,
+            "mean_iterations_per_solve": 0.25,
+            "zero_iteration_calls": 114
+          },
+          "Ux": {
+            "calls": 152,
+            "iterations": 22,
+            "mean_iterations_per_solve": 0.14473684210526316,
+            "zero_iteration_calls": 130
+          },
+          "Uy": {
+            "calls": 152,
+            "iterations": 46,
+            "mean_iterations_per_solve": 0.3026315789473684,
+            "zero_iteration_calls": 106
+          },
+          "Uz": {
+            "calls": 152,
+            "iterations": 23,
+            "mean_iterations_per_solve": 0.1513157894736842,
+            "zero_iteration_calls": 129
+          },
+          "alpha.water": {
+            "calls": 152,
+            "iterations": 152,
+            "mean_iterations_per_solve": 1.0,
+            "zero_iteration_calls": 0
+          },
+          "k": {
+            "calls": 19,
+            "iterations": 38,
+            "mean_iterations_per_solve": 2.0,
+            "zero_iteration_calls": 0
+          },
+          "omega": {
+            "calls": 19,
+            "iterations": 19,
+            "mean_iterations_per_solve": 1.0,
+            "zero_iteration_calls": 0
+          },
+          "p_rgh": {
+            "calls": 304,
+            "iterations": 194,
+            "mean_iterations_per_solve": 0.6381578947368421,
+            "zero_iteration_calls": 158
+          }
+        },
+        "time_records": 19
+      },
+      "solver_settings": {
+        "TFinal_solver": {
+          "maxIter": null,
+          "relTol": "0.01",
+          "solver": null,
+          "tolerance": null
+        },
+        "TFinal_solver_raw": "$T; relTol 0.01;",
+        "T_solver": {
+          "maxIter": "200",
+          "relTol": "0.01",
+          "solver": "PBiCGStab",
+          "tolerance": "1e-8"
+        },
+        "deltaT_s": "0.00001",
+        "dictionary_hashes": {
+          "controlDict": "af5c42f5ce46818cb00ebf486600c6b44394e98221f0cb709cd46bed3d3a74a8",
+          "fvSchemes": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+          "fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+        },
+        "i4fFullPressureAudit_explicit": "false",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT_s": "0.000025",
+        "momentum_scheme_div_rhoPhi_U": "Gauss upwind",
+        "nCorrectors": "2",
+        "nOuterCorrectors": "8",
+        "transonic": "yes"
+      },
+      "start_physical_time_s": 0.460072515286,
+      "step_health": {
+        "path": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/step_health.csv",
+        "rows": 19,
+        "sha256": "42e27ab95026479fa5516a85fd726510672f14db28b27429d22081c7f77a5e42"
+      },
+      "stop_reason": "first raw corrector pressure-floor contact; guarded writeNow and normal End"
+    }
+  ],
+  "cases_are_separate_histories": true,
+  "classification": "Exploratory numerical sensitivities; no validation pass or engineering benefit claim.",
+  "created_utc": "2026-10-26T18:10:25.307002Z",
+  "diagnostic_definitions": {
+    "floor_contact": "The event records the raw pressure-corrector minimum and liquid support associated with applying pMin; it is not mass removed from the inventory. The final stored field minimum is separately recorded.",
+    "linear_iterations": "Counts in the private solver-log profile are linear-solver No Iterations counters, not CPU or wall shares.",
+    "mass_ledger": "Water/gas inventory and cumulative defects are reported separately; defect fractions use the run's initial inventory.",
+    "time_metrics": "OpenFOAM ExecutionTime is calling-rank process CPU time; ClockTime is elapsed wall time. Merged logs may include MPI prefixes and integer-second ClockTime values."
+  },
+  "history_note": "Cold-start-derived finite-water EOS runs that restart near 0.05 s, the warm .400019820001 scheme pair, and the warm .460047515286 continuations (including the maxDeltaT=25 microsecond branch) are separate histories. Do not read them as one converged trajectory.",
+  "input_snapshot": "results/runs/i4f-pressure-coupling-comparison-20261026T1645Z/private/input-snapshot.json",
+  "input_snapshot_check": {
+    "checked_immutable_records": 97,
+    "result": "pass"
+  },
+  "limitations": [
+    "Terminal states arise from distinct initial histories, numerical settings, and safety/diagnostic stops.",
+    "100 Pa pressure-update screens are exploratory guard criteria, not validation tolerances.",
+    "A raw pressure-floor contact is not the same as a final stored field below pMin.",
+    "Linear iteration counts do not measure time share; ClockTime is coarse in these logs.",
+    "The common-time N8/N16 comparison interpolates N16 health rows onto N8 physical timestamps.",
+    "dT=0 in the logged outer-state delta is not evidence of nonlinear energy closure.",
+    "The maxDeltaT=25 microsecond floor-contact case is a 0.475 ms warm-restart sensitivity; it is not evidence that a smaller timestep is less accurate or less stable on a cold-start trajectory."
+  ],
+  "matched_warm_scheme_control": {
+    "ambient_object_dictionary_hash_equal": true,
+    "ambient_writeFields_false_occurrences": 3,
+    "audit_setting_explicit_in_either_control": false,
+    "fvSchemes_equal_after_masking_only_div_rhoPhi_U": true,
+    "fvSolution_byte_identical": true,
+    "interpretation": "Matched warm-seed comparison; any scheme-only equivalence claim is conditional on the exact frozen dictionaries and does not establish a converged physical trajectory.",
+    "linear_scheme_value": "Gauss linearUpwind grad(U)",
+    "same_parent_seed_hashes": true,
+    "same_selected_seed_time": true,
+    "source_audit_default_true": true,
+    "upwind_scheme_value": "Gauss upwind"
+  },
+  "n8_n16_common_physical_time": {
+    "columns": [
+      "final_outer_max_abs_dp_Pa",
+      "final_outer_max_abs_dU_m_s",
+      "final_outer_max_abs_dalpha1",
+      "water_inventory_kg",
+      "gas_inventory_kg",
+      "water_cumulative_defect_fraction_initial",
+      "gas_cumulative_defect_fraction_initial"
+    ],
+    "common_time_end_s": 0.48189409979,
+    "common_time_start_s": 0.460145766545,
+    "interpretation": "This is a short warm-state sensitivity at matched physical times; the cases share the same pre-GO .460047515286 s seed but have different terminal times and guard stops.",
+    "max_abs_difference": {
+      "final_outer_max_abs_dU_m_s": 1.0050193461602757,
+      "final_outer_max_abs_dalpha1": 0.006576076699093779,
+      "final_outer_max_abs_dp_Pa": 474.55387691753305,
+      "gas_cumulative_defect_fraction_initial": 2.4890756030695094e-09,
+      "gas_inventory_kg": 1.1863694027169913e-07,
+      "water_cumulative_defect_fraction_initial": 2.4273670590588975e-08,
+      "water_inventory_kg": 7.762762879792717e-05
+    },
+    "method": "N8 native step-health timestamps; N16 linearly interpolated between its adjacent logged time samples.",
+    "rows": 191,
+    "values_at_common_time_end": {
+      "final_outer_max_abs_dU_m_s": {
+        "n16_interpolated": 0.011709882769501353,
+        "n16_minus_n8": -0.001799892230498647,
+        "n8": 0.013509775
+      },
+      "final_outer_max_abs_dalpha1": {
+        "n16_interpolated": 0.0005711135901555404,
+        "n16_minus_n8": 9.34601555403541e-08,
+        "n8": 0.00057102013
+      },
+      "final_outer_max_abs_dp_Pa": {
+        "n16_interpolated": 300.82907366395716,
+        "n16_minus_n8": 0.10986366395718505,
+        "n8": 300.71921
+      },
+      "gas_cumulative_defect_fraction_initial": {
+        "n16_interpolated": 2.86824732431645e-05,
+        "n16_minus_n8": 2.4890756030695094e-09,
+        "n8": 2.867998416756143e-05
+      },
+      "gas_inventory_kg": {
+        "n16_interpolated": 33.20903211863694,
+        "n16_minus_n8": 1.1863694027169913e-07,
+        "n8": 33.209032
+      },
+      "water_cumulative_defect_fraction_initial": {
+        "n16_interpolated": 4.5831493927253124e-05,
+        "n16_minus_n8": 1.0129976829166922e-08,
+        "n8": 4.582136395042396e-05
+      },
+      "water_inventory_kg": {
+        "n16_interpolated": 3198.15493239615,
+        "n16_minus_n8": 3.2396149890701054e-05,
+        "n8": 3198.1549
+      }
+    }
+  },
+  "native_endpoint_manifest": "native-endpoint-manifest.json",
+  "pre_go_seed_comparison": {
+    "control_time_s": 0.400019820001,
+    "differing_fields": [],
+    "identical_checkpoint_field_hash_maps": true,
+    "phase_temperature_scope": "Hashes are from the immutable pre-GO seed; DCEC startup may regenerate phase-specific T.air/T.water from common T after GO.",
+    "same_named_field_count": 15,
+    "upwind_time_s": 0.400019820001
+  },
+  "schema": "i4f-pressure-coupling-comparison/v1",
+  "source": {
+    "binary_hashes_all_equal": true,
+    "binary_sha256_common": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "git_revision_at_snapshot": "6a8e724e5bfaedd437d4b4fcf3ae291083c99666",
+    "git_status_short_at_snapshot": [
+      " M AGENTS.md",
+      " M docs/STATUS.md",
+      " M results/archives/index.json",
+      "?? cases/i4f_pressure_equilibrium_reference/",
+      "?? results/archives/manifests/i4f-never-launched-duplicate-payload-20261026T165538Z.json",
+      "?? results/archives/manifests/i4f-never-launched-duplicate-payload-20261026T174217Z.json",
+      "?? results/summaries/i4f_20261025/pressure-coupling-comparison/",
+      "?? results/summaries/i4f_20261025/pressure-equilibrium/"
+    ],
+    "pressure_equation_source": "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+    "pressure_equation_source_sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6",
+    "restart_dgdt_source_note": {
+      "alpha_source": "solvers/i4f_frozen_sp/applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H:25-36 builds Su/Sp from dgdt before the pressure equation updates it.",
+      "createFields": "solvers/i4f_frozen_sp/applications/solvers/multiphase/compressibleInterFoam/createFields.H:90 constructs dgdt from alpha1*fvc::div(phi) at solver initialization; dgdt is not loaded as a separately persisted restart field.",
+      "interpretation": "This is shared restart-startup behavior from the current restart phi. It may explain a small first-source-step reset, but does not by itself explain a later plateau or establish energy closure.",
+      "source_hashes": [
+        {
+          "bytes": 36829,
+          "path": "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+          "sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6"
+        },
+        {
+          "bytes": 14485,
+          "path": "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+          "sha256": "6be187ca00dbf8be0ce2974c203195bbc424483c54afc982d324209a01067165"
+        },
+        {
+          "bytes": 1904,
+          "path": "solvers/i4f_frozen_sp/applications/solvers/multiphase/compressibleInterFoam/createFields.H",
+          "sha256": "c8def77f6558fefe36e74ef4438d98be6232698179ccdb2d693bec16d303ec61"
+        },
+        {
+          "bytes": 2905,
+          "path": "solvers/i4f_frozen_sp/applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H",
+          "sha256": "fc1dce13303b83586d2b24b185bfa23e31843f640678cd2a1e78d5e4eaa455f3"
+        }
+      ]
+    },
+    "transonic_off_interpretation": "Source retains explicit phase continuity in both branches; transonic=false omits the implicit pressure-convection correction terms. It does not remove gas compressibility."
+  },
+  "warm_dt25us_restart_interpretation": {
+    "campaign_defect_delta_since_checkpoint_kg": {
+      "gas": 0.00015681278366753092,
+      "water": -0.00016621012834383553
+    },
+    "case_id": "warm_upwind_dt25us_n8",
+    "elapsed_physical_time_after_restart_s": 0.00047500000023870115,
+    "first_raw_pressure_contact": {
+      "cells_strictly_below_pMin": 1,
+      "clipped_liquid_support_kg": 0.003603481495540283,
+      "clipped_liquid_support_volume_m3": 3.609446970744898e-06,
+      "first_cell": {
+        "T_K": 293.2810146785333,
+        "air_density_kg_m3": 5.030742603737745,
+        "alpha_air": 7.493026822347204e-07,
+        "alpha_water": 0.9999992506973178,
+        "local_cell": 2797,
+        "mixture_density_kg_m3": 998.346516309742,
+        "native_cell_center_m": [
+          3.989934471276227,
+          0.1614834318949518,
+          0.6608913645536324
+        ],
+        "native_cell_volume_m3": 3.609449675315221e-06,
+        "outer_iteration": 133,
+        "pMin_Pa": 10000.0,
+        "p_rgh_Pa": -74641.25135019855,
+        "rank": 5,
+        "raw_pressure_Pa": -81113.87553243402,
+        "velocity_m_s": [
+          6.297084433734254,
+          -1.201531196534041,
+          -0.5144612906548235
+        ],
+        "water_density_kg_m3": 998.3472606044733
+      },
+      "interpretation": "diagnostic support of the raw corrector floor operation, not mass removed from the inventory",
+      "pMin_Pa": 10000.0,
+      "pass": 266,
+      "raw_min_pressure_Pa": -81113.87553243402,
+      "time_s": 0.460472515286
+    },
+    "interpretation": "This is a short warm-restart sensitivity that stopped at a raw pressure-floor contact within 0.475 ms of the checkpoint. It is not a cold-start time-convergence result and does not show that the smaller timestep cap makes the physics worse. DCEC restart initialization reconstructs dgdt and phase density/flux state from the stored checkpoint fields, so this short response is conditional on that warm-start reconstruction.",
+    "observed_first_step_dt_s": 2.5e-05,
+    "only_declared_governing_change": "maxDeltaT reduced from 0.00025 s to 0.000025 s; adjustTimeStep, deltaT, maxCo, maxAlphaCo and all other frozen inputs retained.",
+    "parent_seed_time_s": 0.4600475152857613,
+    "raw_pressure_contact_count_in_run": 20,
+    "terminal_status_at_handoff": {
+      "authoritative_guard_record": "results/runs/i4f-upwind-warm-dt25us-diagnostic-20261026T173401Z/guardian-status.json",
+      "branch_status": "normal_End_complete_native10_checkpoint",
+      "campaign_status": "solver_terminal",
+      "do_not_resume": true,
+      "docker_exit_code": 0,
+      "docker_finished_at_utc": "2026-10-26T17:42:53.587954984Z",
+      "docker_id": "ebb953582ab579c21e6ebc3dfd5e8584eb9ae2dcf16a54dfdb195491587bfede",
+      "status_updated_utc": "2026-10-26T17:42:58.437026+00:00"
+    }
+  },
+  "warm_n8_n16_outer_corrector_pair": {
+    "fvSchemes_byte_identical": true,
+    "fvSolution_equal_after_masking_nOuterCorrectors": true,
+    "only_declared_change": "PIMPLE.nOuterCorrectors 8 -> 16; common pre-GO .460047515286 seed, upwind, transonic yes, nCorrectors=2, water EOS, source, and audit=false.",
+    "same_pre_go_parent_checkpoint_hashes": true,
+    "same_seed_time_s": true
+  },
+  "warm_n8_transonic_linearization_pair": {
+    "fvSchemes_byte_identical": true,
+    "fvSolution_equal_after_masking_transonic": true,
+    "only_declared_change": "PIMPLE.transonic yes -> no; nOuterCorrectors=8, nCorrectors=2, upwind, and other matched warm inputs are retained.",
+    "same_pre_go_parent_checkpoint_hashes": true,
+    "same_seed_time_s": true
+  }
+}

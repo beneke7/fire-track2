@@ -219,6 +219,23 @@ separate review memos unless a hard decision needs one.
   Lint private/generated Python stage builders for undefined names as well as
   compiling syntax; exercise preparation against the actual saved parent before
   calling a continuation ready. This does not hold the initial diagnostic pilot.
+  Check the launcher's required freeze keys and actual helper dependencies in
+  that preparation; do not require copied helpers that nothing imports or uses.
+  Before GO, repair the same working preparation when possible: preserve each
+  failed script/configuration and error in numbered small attempt records,
+  then regenerate and recheck its unreleased manifests. Repeated preparation
+  errors do not require another full copy of unchanged mesh/checkpoint files.
+  Released runs remain immutable; preserve their executed inputs and failures.
+  In the current v2512 internal solver, the mixture-thermo constructor rewrites
+  `T.air` and `T.water` from common `T` after GO. These are derived startup
+  outputs, as documented in the corrected finite-water capsule. Verify the
+  original checkpoint and all manifests before GO; use the immutable parent
+  checkpoint for sibling trials. Do not repeatedly flag the expected live
+  phase-temperature rewrite as corruption or restore fields in a running case.
+  A changed common `T` or failed pre-GO hash remains a genuine discrepancy.
+  Matching the fourteen stored fields does not prove a bitwise continuation:
+  `createFields.H` reconstructs `dgdt` on restart. Use a matched same-scheme
+  restart control before attributing a warm-fork improvement to a scheme change.
   Terminal checks must use the branch's configured log path, not a fixed log
   basename. A missing expected filename is not evidence that the solver failed.
   Compare numerical dictionary values numerically, not by printed notation

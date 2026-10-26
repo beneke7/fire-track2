@@ -1,0 +1,282 @@
+{
+  "N8_control": {
+    "T_solver_work_through_T_tight_terminal_time": {
+      "calls": 1528,
+      "final_residual_max": 1.17183269405293e-08,
+      "initial_residual_max": 6.349545895287863e-05,
+      "iterations_max": 1,
+      "iterations_min": 0,
+      "iterations_total": 764,
+      "last_final_residual": 2.5221246e-09,
+      "last_initial_residual": 2.5221246e-09,
+      "last_iterations": 0,
+      "last_time_s": 0.48189409979,
+      "zero_iteration_calls": 764
+    },
+    "bundle": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z",
+    "container_id": "9d04af8e39cbdbf0652a52221b66d80e45e6e8ce6578e63bb780a6e9a56ade27",
+    "last_execution_clock_s_in_complete_N8_log": [
+      718.97,
+      831.0
+    ],
+    "p_rgh_solver_work_through_T_tight_terminal_time": {
+      "calls": 3056,
+      "final_residual_max": 9.999273518269027e-11,
+      "initial_residual_max": 8.116237594721648e-06,
+      "iterations_max": 7,
+      "iterations_min": 0,
+      "iterations_total": 5615,
+      "last_final_residual": 7.4272451e-11,
+      "last_initial_residual": 7.4272451e-11,
+      "last_iterations": 0,
+      "last_time_s": 0.48189409979,
+      "zero_iteration_calls": 668
+    },
+    "terminal_final_outer_dp_Pa": 300.71921,
+    "terminal_time_s": 0.48189409979
+  },
+  "T_tight_run": {
+    "bundle": "results/runs/i4f-upwind-warm-T-tight-diagnostic-20261026T165605Z",
+    "completed_steps": 191,
+    "container_id": "d868c7f2e6647a1627ed3aaccebe6954042587519ea5e26f9a45ff208cf0fd4b",
+    "cpu_quota_equiv": 10.0,
+    "docker_exit_code": 0,
+    "docker_finished_at_utc": "2026-10-26T17:18:57.17528012Z",
+    "docker_started_at_utc": "2026-10-26T17:08:14.984434382Z",
+    "final_outer": {
+      "dT_K": 0.0013706889,
+      "dU_m_s": 0.0082798502,
+      "dalpha": 0.00057093871,
+      "dp_Pa": 300.74346,
+      "dphi_m3_s": 1.6910831e-05,
+      "outer_iteration": 1528,
+      "time_s": 0.48189415333
+    },
+    "guard_branch_status": "normal_End_complete_native10_checkpoint",
+    "last_execution_clock_s": [
+      575.24,
+      638.0
+    ],
+    "minimum_field_pressure_Pa_at_terminal": 65744.791,
+    "mpi_ranks": 10,
+    "normal_End": true,
+    "observed_wall_span_s": 642.190846,
+    "oom_killed": false,
+    "persistent_pressure_update_steps": 5,
+    "phase_inventory_at_terminal": {
+      "gas_boundary_flux_kg_s": 2.824655,
+      "gas_cumulative_defect_fraction_initial": 2.8694289722490282e-05,
+      "gas_cumulative_defect_kg_from_t0": 0.0009720640016818696,
+      "gas_kg": 33.209033,
+      "water_boundary_flux_kg_s": 0.00079746604,
+      "water_cumulative_defect_fraction_initial": 4.5821363972749286e-05,
+      "water_cumulative_defect_kg_from_t0": 0.14653710554764454,
+      "water_kg": 3198.1549
+    },
+    "pressure_update_rule": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+    "raw_clipped_liquid_mass_peak_kg": 0.0,
+    "raw_pressure_contact_count": 0,
+    "raw_pressure_floor_contact": false,
+    "resource_admission": {
+      "effective_cpu_equivalents": 20.0,
+      "free_disk_bytes_at_admission": 23002054656,
+      "guard_release_sample": {
+        "active_i4f_containers": [
+          {
+            "id": "d868c7f2e6647a1627ed3aaccebe6954042587519ea5e26f9a45ff208cf0fd4b",
+            "name": "i4f-upwind-warm-t-tight-20261026t165605z",
+            "nano_cpus": 10000000000,
+            "quota_cpu_equiv": 10.0,
+            "started_at": "2026-10-26T17:08:14.984434382Z"
+          }
+        ],
+        "active_i4f_set_matches_resource_admission": true,
+        "active_solver_process_count": 0,
+        "available_memory_bytes": 126831984640,
+        "candidate_cpu_quota_equiv": 10.0,
+        "candidate_plus_active_and_unrelated_cpu_equiv": 11.79273377010125,
+        "current_i4f_reserved_quota_equiv": 10.0,
+        "effective_cpu_allocation": 20,
+        "fits_by_cpu_capacity": true,
+        "free_disk_bundle_bytes": 23001460736,
+        "measured_unrelated_cpu_use_equiv_from_fresh_admission": 1.792733770101251,
+        "progressing_solver_processes": [],
+        "sampled_utc": "2026-10-26T17:08:17.667488+00:00"
+      },
+      "measured_unrelated_cpu_use_equiv": 1.792733770101251,
+      "memory_available_bytes_at_admission": 126059802624,
+      "pre_GO_active_i4f_quota_equiv": 0,
+      "pre_GO_sample_set_stable": true,
+      "pre_GO_sample_utc": "2026-10-26T17:08:14.725273+00:00",
+      "selected_cpu_quota_equiv": 10.0
+    },
+    "solver_work": {
+      "T": {
+        "calls": 1528,
+        "final_residual_max": 9.978428153766813e-13,
+        "initial_residual_max": 6.349456213579408e-05,
+        "iterations_max": 2,
+        "iterations_min": 1,
+        "iterations_total": 1822,
+        "last_final_residual": 7.2076793e-14,
+        "last_initial_residual": 1.6457724e-10,
+        "last_iterations": 1,
+        "last_time_s": 0.48189415333,
+        "zero_iteration_calls": 0
+      },
+      "p_rgh": {
+        "calls": 3056,
+        "final_residual_max": 9.999293932926804e-11,
+        "initial_residual_max": 8.115855423502907e-06,
+        "iterations_max": 7,
+        "iterations_min": 0,
+        "iterations_total": 5912,
+        "last_final_residual": 4.2237389e-11,
+        "last_initial_residual": 4.2237389e-11,
+        "last_iterations": 0,
+        "last_time_s": 0.48189415333,
+        "zero_iteration_calls": 521
+      }
+    },
+    "start_time_s": 0.4600475152857613,
+    "status": "solver_terminal",
+    "stop_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+    "stop_time_utc": "2026-10-26T17:18:52.246683+00:00",
+    "terminal_log_bytes": 23850171,
+    "terminal_log_sha256": "37b70d5327a8fe469324b9c6c97303691a5a25898ec6756b0c714257d9cb5015",
+    "terminal_native14_plus_uniform_time": {
+      "T": {
+        "bytes": 2658641,
+        "sha256": "e680b3164eab7fa7c97643c527bba22b2b53f63ba673a5ee23c76ed80f6c37aa"
+      },
+      "T.air": {
+        "bytes": 2658649,
+        "sha256": "29bb3a5edde076c59f4e9a842d9d9b68f167d94af1f227fd1d21cc24501c6fb7"
+      },
+      "T.water": {
+        "bytes": 2658653,
+        "sha256": "17c248a0bc70150c6ff17a1793e056493feb3ea03a6f175596bdf0014697cb14"
+      },
+      "U": {
+        "bytes": 7938893,
+        "sha256": "0c68235c5b0fdadcc3c7360eaf05ceab59ae42b736afb5582f3659ddd869dbf9"
+      },
+      "alpha.water": {
+        "bytes": 2652297,
+        "sha256": "da8d2a735c3707bcee925da9375d5d30d6b44a5ec55a108b4816f0b6646028df"
+      },
+      "alphaPhi0.water": {
+        "bytes": 7722876,
+        "sha256": "5c662f6cb148de68093b2cda40f4aac217c12c53046dfc79bf348183e822075e"
+      },
+      "alphat": {
+        "bytes": 3207526,
+        "sha256": "a955ce6d9d2d87cd589771ba3c1aa918c08d2ef6b5fec7616b78df0cb025f828"
+      },
+      "k": {
+        "bytes": 3204682,
+        "sha256": "228638e8eaa1baa6199da391008d7b3ce1e1cf3cdfe298660632fd1a0bc673fc"
+      },
+      "nut": {
+        "bytes": 3208050,
+        "sha256": "3d4bfcd394704f82bb1321043d3be79c4fb57c8619cb28b29be3425b9d809eb4"
+      },
+      "omega": {
+        "bytes": 3206552,
+        "sha256": "2bea929d65821b8f28a06b0968e25f68bd86ae0b208dc45a4b51008a6f8a21c4"
+      },
+      "p": {
+        "bytes": 3206856,
+        "sha256": "13421a34137cdebcd01175cbf5883b73303143fd6df33795e9c7679baa4ee1b7"
+      },
+      "p_rgh": {
+        "bytes": 3796237,
+        "sha256": "b95fe106c8c1edfe726152d939fc2f0fabaf46b9aa29812a34c9c86b02f3b36f"
+      },
+      "phi": {
+        "bytes": 7726576,
+        "sha256": "a325bf59a768e81063f35be72e055a027440812f3235e8219df2fcbe997fb363"
+      },
+      "rho": {
+        "bytes": 3206850,
+        "sha256": "eaefe6d8d7b699d487ab409545891174fe4904f43528ea3c83349b569c0f55ef"
+      },
+      "uniform/time": {
+        "bytes": 1072,
+        "sha256": "234f0c253cb6ee725c0bcfd93a49b44dc3c2aa6e12bb508cec1e57e836679b2c"
+      }
+    },
+    "terminal_time_s": 0.48189415333
+  },
+  "created_utc": "2026-10-26T17:24:55.777346+00:00",
+  "interpretation": "T tightening forces additional temperature linear iterations and reduces the T linear residual, but the terminal pressure-update plateau is materially unchanged. This is a single warm numerical sensitivity, not a validation or convergence claim.",
+  "limitations": [
+    "The cases share the exact 15-file pre-GO restart and DCEC binary; the changed fvSolution entries are only T and TFinal linear tolerances.",
+    "Both runs are separate continuations from the same checkpoint, not one trajectory.",
+    "The pressure-update screen is exploratory; 100 Pa is not a validation tolerance.",
+    "A zero outer T delta in the baseline is not energy closure; no coupled energy closure is inferred from dT.",
+    "Calling-rank ExecutionTime is CPU time and ClockTime is wall time; differing concurrent loads prevent an isolated speedup claim.",
+    "Copied continuation-seed and guardian schema text retains an inherited Nouter16 diagnostic label; the stage record, frozen PIMPLE dictionary, pinned preflight, and live guard constant verify the actual Nouter8 T-tight case."
+  ],
+  "matched_inputs": {
+    "N8_case_endTime_s": 0.7,
+    "TFinal_standard": {
+      "inherits": "T",
+      "relTol": 0.01
+    },
+    "TFinal_tight": {
+      "inherits": "T",
+      "relTol": 0.0
+    },
+    "T_case_endTime_s": 0.483,
+    "T_standard": {
+      "maxIter": 200,
+      "preconditioner": "DILU",
+      "relTol": 0.01,
+      "solver": "PBiCGStab",
+      "tolerance": 1e-08
+    },
+    "T_tight": {
+      "maxIter": 200,
+      "preconditioner": "DILU",
+      "relTol": 0.0,
+      "solver": "PBiCGStab",
+      "tolerance": 1e-12
+    },
+    "all_restart_hashes_identical": true,
+    "audit_false_both": true,
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "fvSchemes_equal": true,
+    "momentum_advection": "Gauss upwind div(rhoPhi,U)",
+    "nCorrectors": 2,
+    "nOuterCorrectors": 8,
+    "pre_GO_restart_field_count_including_uniform_time": 15,
+    "time_controls_note": "The N8 horizon is longer; both runs stop on the pressure-update diagnostic before reaching endTime.",
+    "transonic": true
+  },
+  "pressure_history_comparison_at_common_physical_times": {
+    "csv_path": "results/summaries/i4f_20261025/pressure-coupling-comparison/t-tight-vs-n8/common-time.csv",
+    "max_abs_dp_difference_Pa": 92.69070651428582,
+    "median_abs_dp_difference_Pa": 0.1532541753440113,
+    "rows": 191,
+    "terminal_delta_t_s": 5.3540000044538516e-08,
+    "terminal_n8_interpolated_dp_Pa": 300.71921,
+    "terminal_tight_minus_n8_dp_Pa": 0.02425000000005184,
+    "time_end_s": 0.48189415333,
+    "time_start_s": 0.460145766545
+  },
+  "provenance_hashes": {
+    "N8_input_freeze_sha256": "48bf1322c6f6a68ed76848261320d99263d9a8a9284c9668e6a29675507e3d43",
+    "N8_terminal_log_sha256": "201edb930ad01c0ec1e03c95c7b55ad115088ddc8bf5988e98e6be6b750090fa",
+    "T_tight_GO_sha256": "bd6b9b8b1f4bf45a1aea8668108eae8d8d9169b36b280f4848de528aafa48241",
+    "T_tight_input_freeze_sha256": "413a027ed9ce348beb0bac238b404fd29550d3864713c7337ce72e192f0cb15f",
+    "T_tight_launch_manifest_sha256": "5bb97f883ff97f9bb32e5ad28c7b65809523978d7db22ca137ca049d9bfb3593",
+    "T_tight_resource_admission_sha256": "1fddf34f7203d9dfd4b8db7830cacb3166d1aed07bd66dd06c3f134bdb911c4c",
+    "T_tight_source_lock_sha256": "c93dde5b1f1983172a6efe760ba930538e1e1459b4a672057350a8ab7706b5e0",
+    "T_tight_terminal_log_sha256": "37b70d5327a8fe469324b9c6c97303691a5a25898ec6756b0c714257d9cb5015",
+    "git_revision": "6a8e724e5bfaedd437d4b4fcf3ae291083c99666",
+    "pEqn_source_sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6",
+    "workspace_dirty": true
+  },
+  "schema": "i4f-T-tight-vs-original-seed-N8-comparison/v1"
+}

@@ -1,0 +1,89 @@
+{
+  "case_bundle": "results/runs/i4f-pressure-equilibrium-periodic-attempt4-20261026T170933Z",
+  "cell_count": 6400,
+  "created_utc": "2026-10-26T17:19:46.737487+00:00",
+  "execution_log": {
+    "last_execution_time_record": "ExecutionTime = 426.19 s  ClockTime = 428 s",
+    "last_time_record_s": 0.0111,
+    "terminal_log_sha256": "2ada5f4c4834410d9e89b6a6d9c9882995648f4a83db0f986c9b7b1f5790fbac",
+    "time_records_count": 111
+  },
+  "field_errors": {
+    "T": {
+      "max_K": 293.15000000001095,
+      "max_abs_K": 1.0970779840135947e-11,
+      "mean_abs_K": 1.3169110246735727e-12,
+      "min_K": 293.14999999998935
+    },
+    "U": {
+      "max_abs_component_m_s": [
+        1.1954881529163686e-12,
+        5.075996434729618e-13,
+        5.709566521429104e-13
+      ],
+      "max_abs_vector_m_s": 1.2278213044528155e-12,
+      "max_component_m_s": [
+        10.00000000000053,
+        4.969034125403951e-13,
+        5.060345200379753e-13
+      ],
+      "mean_abs_component_m_s": [
+        1.2217754585819307e-13,
+        5.96937572370997e-14,
+        5.863513143831042e-14
+      ],
+      "min_component_m_s": [
+        9.999999999998805,
+        -5.075996434729618e-13,
+        -5.709566521429104e-13
+      ]
+    },
+    "p": {
+      "max_Pa": 1199999.9999999895,
+      "max_abs_Pa": 1.7462298274040222e-08,
+      "mean_abs_Pa": 1.2629825505428016e-08,
+      "min_Pa": 1199999.9999999825
+    }
+  },
+  "input_hashes": {
+    "T": "93dbd0ca8c9dac809d783d5b68b71edb1d470056428cda7cc38c496eec4e4c51",
+    "U": "90c5c45adfb55ca9509d93bbc6d299d5fdd6f92dfa2d08c41b0e723ed4540326",
+    "alpha.water": "d74931b30497819d1d4fe1529e8f5fce641fa8b3a7590a5b5e61edaf35d88c28",
+    "alphaPhi0.water": "73a797cee1706c1e4a553633d8ba5d17cc088001c1ef7c01ba16a1ab06349a7d",
+    "p": "f9a6bb5919ca1d53d15ef3a6f897cd576876e83cc1e877e03928a07533dd03f5",
+    "p_rgh": "5ab1673f572b24c24ab252abf799b532f8d00798ae79c9c6ab1ed96349393afc",
+    "phi": "ed1f41532b8ef6d1183b67f7fa08086ee88c9bc01aef177108b63733192134cd",
+    "rho": "692f76b408ded9ad61393785e400bc29cbf9eb8f21370ef2324940319577840c",
+    "uniform/time": "68524e7840ebb0f8caa70b6ce5fd6c1e08625431915e86ad761486bc05de083b"
+  },
+  "phase_and_inventory": {
+    "alpha_max": 1.0000000000000009,
+    "alpha_min": 5.6594834823976534e-39,
+    "expected_water_volume_m3": 0.0032,
+    "gas_mass_EOS_from_final_pT_kg": 0.04563385747259861,
+    "native_log_last_gas_inventory_kg": 0.04563385747,
+    "native_log_last_water_inventory_kg": 3.195839469,
+    "note": "EOS-integrated masses use saved p/T/alpha and equal structured-cell volume; logger figures shown are rounded to 11 significant digits.",
+    "water_mass_EOS_from_final_p_kg": 3.1958394685032907,
+    "water_volume_error_m3": -2.228262019343674e-17,
+    "water_volume_m3": 0.0031999999999999776
+  },
+  "qualification": "At the actual complete .0111 s native checkpoint after a bounded wall save, the exact translating solution is spatially uniform p/U/T and translated alpha slab. These field errors do not establish a formal solver validation or acoustic accuracy. Requested .02 s horizon was not reached.",
+  "reader_sources": {
+    "scalar": "scripts/analyze_native_turbulence.py::read_foam_scalar_internal",
+    "vector": "scripts/analyze_dash8_interface_growth.py::read_foam_vector_internal"
+  },
+  "reference": {
+    "T_K": 293.15,
+    "U_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "p_abs_Pa": 1200000.0,
+    "water_volume_fraction": 0.5
+  },
+  "schema": "i4f-periodic-pressure-equilibrium-field-error/v1",
+  "time_directory": "0.0111",
+  "uniform_time_value_s": 0.011099999999999988
+}

@@ -1,0 +1,413 @@
+{
+  "dcec_arm": {
+    "branch_status": "normal_End_complete_native10_checkpoint",
+    "bundle": "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-dcec-prefix",
+    "diagnostic_errors": [],
+    "docker": {
+      "exit_code": 0,
+      "finished_at": "2026-10-26T16:57:35.147634422Z",
+      "id": "eb0f89a926a8daac4b631a95742db7583faaf5fa01007a6361fcd2c7fc9220aa",
+      "memory_limit_bytes": 34359738368,
+      "name": "i4f-pressure-cycle-observer-20261026T163622Z-dcec-prefix",
+      "nano_cpus": 6000000000,
+      "oom_killed": false,
+      "started_at": "2026-10-26T16:57:02.713118492Z"
+    },
+    "endpoint_files": [
+      {
+        "bundle_relative_path": "processors10/0.461063954481/T",
+        "field_or_clock": "T",
+        "sha256": "1ca1ec419a1a198a50011e6cee5a4153e84227b98878d9f27520122efe38d5fb",
+        "size_bytes": 2658642
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/T.air",
+        "field_or_clock": "T.air",
+        "sha256": "720a069ff09e249cc11acfd1d75d2a664db4bebebd0428c390cf696ff511bf50",
+        "size_bytes": 2658650
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/T.water",
+        "field_or_clock": "T.water",
+        "sha256": "619b50d7f1c750ab9cb4d39adf6b232487f60ce1020dc76c90d7dd2ec42c1136",
+        "size_bytes": 2658654
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/U",
+        "field_or_clock": "U",
+        "sha256": "827c89cb6d138f8f92873b5183c64678244183ae4974c60fc68b16ca856be8e7",
+        "size_bytes": 7938894
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/alpha.water",
+        "field_or_clock": "alpha.water",
+        "sha256": "3a1d10b981d10aa1e42df2dff0c0777dea5f381bf8cd9b932f1831c6eb75c6ef",
+        "size_bytes": 2652125
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/alphaPhi0.water",
+        "field_or_clock": "alphaPhi0.water",
+        "sha256": "29994e66e9fe842bbcce29662619a68902edf3de4cafd7d44dcf7fe3f5562d53",
+        "size_bytes": 7722877
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/alphat",
+        "field_or_clock": "alphat",
+        "sha256": "abbc73340768cf90ffb1f8d19b6f43d3745d6fec5a002c4ea904bfcc81135f26",
+        "size_bytes": 3207527
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/k",
+        "field_or_clock": "k",
+        "sha256": "adefa2333e0ded2b60f9903920318679f8ca4badad8c9cd747e593b456fc1121",
+        "size_bytes": 3204683
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/nut",
+        "field_or_clock": "nut",
+        "sha256": "dee4734475f149d1624b0c15d21296266eadfb6b70df9217881a74833ffe99a3",
+        "size_bytes": 3208051
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/omega",
+        "field_or_clock": "omega",
+        "sha256": "4d85387a468f94a3c52de2fbd1d120119cac8a1158ae2ee9bdb6ee643dd77044",
+        "size_bytes": 3206553
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/p",
+        "field_or_clock": "p",
+        "sha256": "051baa4c8f43c1ac50f3622d7498d998ecd662a5694d900eb4546cb3b692b078",
+        "size_bytes": 3206857
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/p_rgh",
+        "field_or_clock": "p_rgh",
+        "sha256": "31f8964f00648eda5a47437a834ba96ff0b8fc641fd26ee295ee031e03de326a",
+        "size_bytes": 3796238
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/phi",
+        "field_or_clock": "phi",
+        "sha256": "09f45e62fdc1d04da78b9d23d6d915c8d8011c9f8fdc09269352137a9205b6ea",
+        "size_bytes": 7726577
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/rho",
+        "field_or_clock": "rho",
+        "sha256": "a8f0765477b017444db16ce003c7defa0b01a6c9e876dc3da9cf4b769105d055",
+        "size_bytes": 3206851
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/uniform/time",
+        "field_or_clock": "uniform/time",
+        "sha256": "3fa3d25db395121647bdd5b566c8af374cdc864073ef1b6c35acb4009e9f6604",
+        "size_bytes": 1074
+      }
+    ],
+    "guard_status": "solver_terminal",
+    "health_rows": 10,
+    "max_final_outer_dp_over_prefix_Pa": 290.253718993059,
+    "raw_pressure_contact_count": 0
+  },
+  "endpoint_comparison": {
+    "all_14_native_fields_plus_uniform_time_byte_identical": true,
+    "different_health_rows": [],
+    "health_row_count_equal": true,
+    "health_rows_exactly_equal": true,
+    "per_file": [
+      {
+        "byte_identical": true,
+        "dcec_sha256": "1ca1ec419a1a198a50011e6cee5a4153e84227b98878d9f27520122efe38d5fb",
+        "dcec_size_bytes": 2658642,
+        "field_or_clock": "T",
+        "observer_sha256": "1ca1ec419a1a198a50011e6cee5a4153e84227b98878d9f27520122efe38d5fb",
+        "observer_size_bytes": 2658642
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "720a069ff09e249cc11acfd1d75d2a664db4bebebd0428c390cf696ff511bf50",
+        "dcec_size_bytes": 2658650,
+        "field_or_clock": "T.air",
+        "observer_sha256": "720a069ff09e249cc11acfd1d75d2a664db4bebebd0428c390cf696ff511bf50",
+        "observer_size_bytes": 2658650
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "619b50d7f1c750ab9cb4d39adf6b232487f60ce1020dc76c90d7dd2ec42c1136",
+        "dcec_size_bytes": 2658654,
+        "field_or_clock": "T.water",
+        "observer_sha256": "619b50d7f1c750ab9cb4d39adf6b232487f60ce1020dc76c90d7dd2ec42c1136",
+        "observer_size_bytes": 2658654
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "827c89cb6d138f8f92873b5183c64678244183ae4974c60fc68b16ca856be8e7",
+        "dcec_size_bytes": 7938894,
+        "field_or_clock": "U",
+        "observer_sha256": "827c89cb6d138f8f92873b5183c64678244183ae4974c60fc68b16ca856be8e7",
+        "observer_size_bytes": 7938894
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "3a1d10b981d10aa1e42df2dff0c0777dea5f381bf8cd9b932f1831c6eb75c6ef",
+        "dcec_size_bytes": 2652125,
+        "field_or_clock": "alpha.water",
+        "observer_sha256": "3a1d10b981d10aa1e42df2dff0c0777dea5f381bf8cd9b932f1831c6eb75c6ef",
+        "observer_size_bytes": 2652125
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "29994e66e9fe842bbcce29662619a68902edf3de4cafd7d44dcf7fe3f5562d53",
+        "dcec_size_bytes": 7722877,
+        "field_or_clock": "alphaPhi0.water",
+        "observer_sha256": "29994e66e9fe842bbcce29662619a68902edf3de4cafd7d44dcf7fe3f5562d53",
+        "observer_size_bytes": 7722877
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "abbc73340768cf90ffb1f8d19b6f43d3745d6fec5a002c4ea904bfcc81135f26",
+        "dcec_size_bytes": 3207527,
+        "field_or_clock": "alphat",
+        "observer_sha256": "abbc73340768cf90ffb1f8d19b6f43d3745d6fec5a002c4ea904bfcc81135f26",
+        "observer_size_bytes": 3207527
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "adefa2333e0ded2b60f9903920318679f8ca4badad8c9cd747e593b456fc1121",
+        "dcec_size_bytes": 3204683,
+        "field_or_clock": "k",
+        "observer_sha256": "adefa2333e0ded2b60f9903920318679f8ca4badad8c9cd747e593b456fc1121",
+        "observer_size_bytes": 3204683
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "dee4734475f149d1624b0c15d21296266eadfb6b70df9217881a74833ffe99a3",
+        "dcec_size_bytes": 3208051,
+        "field_or_clock": "nut",
+        "observer_sha256": "dee4734475f149d1624b0c15d21296266eadfb6b70df9217881a74833ffe99a3",
+        "observer_size_bytes": 3208051
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "4d85387a468f94a3c52de2fbd1d120119cac8a1158ae2ee9bdb6ee643dd77044",
+        "dcec_size_bytes": 3206553,
+        "field_or_clock": "omega",
+        "observer_sha256": "4d85387a468f94a3c52de2fbd1d120119cac8a1158ae2ee9bdb6ee643dd77044",
+        "observer_size_bytes": 3206553
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "051baa4c8f43c1ac50f3622d7498d998ecd662a5694d900eb4546cb3b692b078",
+        "dcec_size_bytes": 3206857,
+        "field_or_clock": "p",
+        "observer_sha256": "051baa4c8f43c1ac50f3622d7498d998ecd662a5694d900eb4546cb3b692b078",
+        "observer_size_bytes": 3206857
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "31f8964f00648eda5a47437a834ba96ff0b8fc641fd26ee295ee031e03de326a",
+        "dcec_size_bytes": 3796238,
+        "field_or_clock": "p_rgh",
+        "observer_sha256": "31f8964f00648eda5a47437a834ba96ff0b8fc641fd26ee295ee031e03de326a",
+        "observer_size_bytes": 3796238
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "09f45e62fdc1d04da78b9d23d6d915c8d8011c9f8fdc09269352137a9205b6ea",
+        "dcec_size_bytes": 7726577,
+        "field_or_clock": "phi",
+        "observer_sha256": "09f45e62fdc1d04da78b9d23d6d915c8d8011c9f8fdc09269352137a9205b6ea",
+        "observer_size_bytes": 7726577
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "a8f0765477b017444db16ce003c7defa0b01a6c9e876dc3da9cf4b769105d055",
+        "dcec_size_bytes": 3206851,
+        "field_or_clock": "rho",
+        "observer_sha256": "a8f0765477b017444db16ce003c7defa0b01a6c9e876dc3da9cf4b769105d055",
+        "observer_size_bytes": 3206851
+      },
+      {
+        "byte_identical": true,
+        "dcec_sha256": "3fa3d25db395121647bdd5b566c8af374cdc864073ef1b6c35acb4009e9f6604",
+        "dcec_size_bytes": 1074,
+        "field_or_clock": "uniform/time",
+        "observer_sha256": "3fa3d25db395121647bdd5b566c8af374cdc864073ef1b6c35acb4009e9f6604",
+        "observer_size_bytes": 1074
+      }
+    ],
+    "same_native_time_s": true
+  },
+  "limitations": [
+    "Warm history from the .460047515286 checkpoint; not an uninterrupted cold-start reproduction.",
+    "Only the prefix through .461063954481 was compared; no claim on the later .478\u2013.4835 event window or solver validity.",
+    "Byte identity over this prefix supports passivity only for these exact inputs, binary builds, and 10 steps."
+  ],
+  "matched_configuration": {
+    "PIMPLE": {
+      "nCorrectors": 2,
+      "nNonOrthogonalCorrectors": 0,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "acceptance_window_s": 0.000125,
+    "cpu_quota_equivalent": 6,
+    "end_time_shortfall_s": 3.60455189999942e-05,
+    "guard": {
+      "consecutive_steps": 3,
+      "gas_step_cumulative_fraction": 0.01,
+      "persistent_final_pressure_update_Pa": 100,
+      "ratio_min": 0.9,
+      "raw_floor_Pa": 10000,
+      "water_step_cumulative_fraction": 0.001
+    },
+    "i4fFrozenPredictorSp": false,
+    "i4fFullPressureAudit": false,
+    "mesh_cells": 299248,
+    "mpi_ranks": 10,
+    "observed_end_time_s": 0.461063954481,
+    "start_time_s": 0.4600475152857613,
+    "target_end_time_s": 0.4611,
+    "time_controls": {
+      "maxAlphaCo": 0.25,
+      "maxCo": 0.5,
+      "maxDeltaT_s": 0.00025
+    }
+  },
+  "observer_arm": {
+    "branch_status": "normal_End_complete_native10_checkpoint",
+    "bundle": "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-observer-prefix",
+    "diagnostic_errors": [],
+    "docker": {
+      "exit_code": 0,
+      "finished_at": "2026-10-26T16:58:54.506191512Z",
+      "id": "25f9b82273eec136c87bf31932b0ca29a4af535ef73cc988bb03ba7267675928",
+      "memory_limit_bytes": 34359738368,
+      "name": "i4f-pressure-cycle-observer-20261026T163622Z-observer-prefix",
+      "nano_cpus": 6000000000,
+      "oom_killed": false,
+      "started_at": "2026-10-26T16:58:21.911175019Z"
+    },
+    "endpoint_files": [
+      {
+        "bundle_relative_path": "processors10/0.461063954481/T",
+        "field_or_clock": "T",
+        "sha256": "1ca1ec419a1a198a50011e6cee5a4153e84227b98878d9f27520122efe38d5fb",
+        "size_bytes": 2658642
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/T.air",
+        "field_or_clock": "T.air",
+        "sha256": "720a069ff09e249cc11acfd1d75d2a664db4bebebd0428c390cf696ff511bf50",
+        "size_bytes": 2658650
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/T.water",
+        "field_or_clock": "T.water",
+        "sha256": "619b50d7f1c750ab9cb4d39adf6b232487f60ce1020dc76c90d7dd2ec42c1136",
+        "size_bytes": 2658654
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/U",
+        "field_or_clock": "U",
+        "sha256": "827c89cb6d138f8f92873b5183c64678244183ae4974c60fc68b16ca856be8e7",
+        "size_bytes": 7938894
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/alpha.water",
+        "field_or_clock": "alpha.water",
+        "sha256": "3a1d10b981d10aa1e42df2dff0c0777dea5f381bf8cd9b932f1831c6eb75c6ef",
+        "size_bytes": 2652125
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/alphaPhi0.water",
+        "field_or_clock": "alphaPhi0.water",
+        "sha256": "29994e66e9fe842bbcce29662619a68902edf3de4cafd7d44dcf7fe3f5562d53",
+        "size_bytes": 7722877
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/alphat",
+        "field_or_clock": "alphat",
+        "sha256": "abbc73340768cf90ffb1f8d19b6f43d3745d6fec5a002c4ea904bfcc81135f26",
+        "size_bytes": 3207527
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/k",
+        "field_or_clock": "k",
+        "sha256": "adefa2333e0ded2b60f9903920318679f8ca4badad8c9cd747e593b456fc1121",
+        "size_bytes": 3204683
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/nut",
+        "field_or_clock": "nut",
+        "sha256": "dee4734475f149d1624b0c15d21296266eadfb6b70df9217881a74833ffe99a3",
+        "size_bytes": 3208051
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/omega",
+        "field_or_clock": "omega",
+        "sha256": "4d85387a468f94a3c52de2fbd1d120119cac8a1158ae2ee9bdb6ee643dd77044",
+        "size_bytes": 3206553
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/p",
+        "field_or_clock": "p",
+        "sha256": "051baa4c8f43c1ac50f3622d7498d998ecd662a5694d900eb4546cb3b692b078",
+        "size_bytes": 3206857
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/p_rgh",
+        "field_or_clock": "p_rgh",
+        "sha256": "31f8964f00648eda5a47437a834ba96ff0b8fc641fd26ee295ee031e03de326a",
+        "size_bytes": 3796238
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/phi",
+        "field_or_clock": "phi",
+        "sha256": "09f45e62fdc1d04da78b9d23d6d915c8d8011c9f8fdc09269352137a9205b6ea",
+        "size_bytes": 7726577
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/rho",
+        "field_or_clock": "rho",
+        "sha256": "a8f0765477b017444db16ce003c7defa0b01a6c9e876dc3da9cf4b769105d055",
+        "size_bytes": 3206851
+      },
+      {
+        "bundle_relative_path": "processors10/0.461063954481/uniform/time",
+        "field_or_clock": "uniform/time",
+        "sha256": "3fa3d25db395121647bdd5b566c8af374cdc864073ef1b6c35acb4009e9f6604",
+        "size_bytes": 1074
+      }
+    ],
+    "guard_status": "solver_terminal",
+    "health_rows": 10,
+    "observer_max_abs_selected_dp_Pa": 1873.826691836293,
+    "observer_record_time_range_s": [
+      0.460145766545,
+      0.461063954481
+    ],
+    "observer_row_count": 26,
+    "raw_pressure_contact_count": 0
+  },
+  "observer_record_scope": "MPI-rank-prefixed I4F_PRESSURE_CYCLE_CELL records after the global dp threshold was met; selected rank-local cells are paired to same-step/rank/local-cell I4F_OUTER_DP_CELL records for coordinates. Residuals are local discrete values, not global continuity proof or causality.",
+  "purpose": "Short warm-restart passivity prefix with the active observer threshold exercised; no full pressure-event replay.",
+  "qualification": "Diagnostic path executed without MPI stall and endpoint outputs were compared against a matched DCEC control. This does not validate the observer numerics or alter governing equations; it is scoped to 10 steps ending near 0.461064 s.",
+  "recorded_utc": "2026-10-26T16:59:56.280519+00:00",
+  "schema": "i4f-pressure-cycle-observer-passivity-result/v1",
+  "seed": {
+    "checkpoint_time_s": 0.4600475152857613,
+    "parent_bundle": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z",
+    "source_checkpoint_full_field_hashes": "see each arm continuation-seed.json; copied input trees have distinct inodes",
+    "uniform_time_sha256": "7ce0b4555d1fd98392ffc826a5809f5c948c7435b053819f3f5e1c32ca58030c"
+  },
+  "source_and_freeze": {
+    "constructor_rewrite_after_GO_is_treated_as_derived_output": true,
+    "dcec_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "dcec_input_freeze_sha256": "d0c9790ea90a984319fcaeaed37005fd1b02d555ee785968bcbb07fe84c41b92",
+    "observer_binary_sha256": "aeb9740f9df19a688b6a60f1844e13557a142e041b5bd37fdc051e1d609bf167",
+    "observer_input_freeze_sha256": "7a369e06a18bc2697813d544ca90db56f44cf48e73fb480333d5c35a7ee63154",
+    "pre_GO_Tair_Twater_hashes_are_saved_in_each_arm_seed": true
+  }
+}

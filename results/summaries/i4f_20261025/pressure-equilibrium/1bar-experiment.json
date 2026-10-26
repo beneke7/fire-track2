@@ -1,0 +1,75 @@
+{
+  "bundle": "results/runs/i4f-pressure-equilibrium-1bar-periodic-20261026T172125Z",
+  "case": "case",
+  "case_changes_from_parent": [
+    "p and p_rgh initial uniform values 1.2 MPa -> 0.1 MPa",
+    "pRefValue 1.2 MPa -> 0.1 MPa",
+    "p_rgh and p_rghFinal linear maxIter 25",
+    "U and UFinal linear maxIter 25",
+    "endTime 0.02 -> 0.1 s"
+  ],
+  "created_utc": "2026-10-26T17:23:23.016870+00:00",
+  "initial_state_path": "analysis/initial-state.json",
+  "mesh": {
+    "cells": 6400,
+    "counts": [
+      100,
+      8,
+      8
+    ],
+    "domain_m": [
+      1.0,
+      0.08,
+      0.08
+    ],
+    "type": "blockMesh"
+  },
+  "numerical": {
+    "U_linear_maxIter": 25,
+    "alpha_scheme": "vanLeer + MULES",
+    "audit": false,
+    "body_source": "none",
+    "cold_start": true,
+    "dt_s": 0.0001,
+    "gravity_m_s2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "momentum_scheme": "Gauss linearUpwind grad(U)",
+    "nCorrectors": 2,
+    "nOuterCorrectors": 8,
+    "p_rgh_linear_maxIter": 25,
+    "planned_checkpoints_s": [
+      0.005,
+      0.02,
+      0.1
+    ],
+    "pressure_Pa": 100000.0,
+    "surface_tension_N_m": 0.0,
+    "target_s": 0.1,
+    "temperature_K": 293.15,
+    "transonic": true,
+    "unchanged_linear_tolerances": true,
+    "velocity_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "write_every_time_steps": 50
+  },
+  "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "purpose": "Test constant-pressure/velocity/temperature preservation across a periodic moving water-air material contact at 1 bar, where the phase density ratio is about 840.",
+  "schema": "i4f-periodic-pressure-equilibrium-experiment/v2",
+  "scope": "Exploratory numerical pressure-equilibrium test; maxIter caps changed from the 1.2 MPa case and are not proposed for the apparatus solver.",
+  "solver": "compressibleInterFoamFrozenAlphaSourceV2NoPout",
+  "solver_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "source_lock": "results/runs/i4f-pressure-equilibrium-1bar-periodic-20261026T172125Z/provenance/source-run-lock.json",
+  "source_lock_sha256": "eabe562fa2994e46c76b402234b56c4d25008ef4da82f6184d71dec3bceea1da",
+  "source_parent_experiment": "results/runs/i4f-pressure-equilibrium-periodic-attempt3-20261026T170158Z/experiment.json",
+  "source_parent_input_freeze": {
+    "file_count": 52,
+    "path": "results/runs/i4f-pressure-equilibrium-periodic-attempt3-20261026T170158Z/provenance/input-freeze.json",
+    "sha256": "31158e77a4fd292b504dab9d87355e9180a141c00850291d3e8b4f60f90c1bec"
+  }
+}

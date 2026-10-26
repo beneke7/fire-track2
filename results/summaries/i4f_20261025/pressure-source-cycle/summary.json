@@ -1,0 +1,301 @@
+{
+  "created_utc": "2026-10-26T18:32:08Z",
+  "executed_code": {
+    "analysis_snapshot_manifest": "analysis-source/analysis-source-manifest.json",
+    "observer_source_manifest": {
+      "base_manifest_sha256": "076e431c942165ca2ca8c012173a0da9d04baf41365453f95c5a2c89ee567625",
+      "observer_variant_manifest_sha256": "cbb3b0c8e5b195c1666843bbf0316a0d1c0c0b46d61ea2a863246fa7ae42227e",
+      "patches": [
+        {
+          "path": "observer/patches/alphaEqn.H.diff",
+          "sha256": "842fb15c7375d617597f018acf517158e6e2310c461843efd0cb658bd54c0b1e"
+        },
+        {
+          "path": "observer/patches/compressibleInterFoam.C.diff",
+          "sha256": "d14fc65462570a9c66813cf705d1bc66f610996d21e027f085137a76bfd8e294"
+        },
+        {
+          "path": "observer/patches/files.diff",
+          "sha256": "7fb0b1c30ccdc755014e7db16bdaaba08c6bf382852a622eca5a8a6d3306fdfc"
+        }
+      ],
+      "path": "observer/source-manifest.json",
+      "qualification": "The 68-file manifest and small diffs identify the diagnostic observer source. The replay and observer used observer binary SHA aeb9740f9df19a688b6a60f1844e13557a142e041b5bd37fdc051e1d609bf167; the matched DCEC control and predictor-Sp trial used dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5.",
+      "sha256": "edeb96c895d083b1fbd929b09f21185023f8ba204acf029e5bb749ded55c6890",
+      "source_file_count": 68
+    }
+  },
+  "full_replay": {
+    "actual_native_time_s": 0.48199621213,
+    "completed_steps": 192,
+    "docker_id": "2786cdd0a5d625ff59661448712e9a96675bca561e4a13e27abd74bfef3dac08",
+    "event_plot_sha256": "a5dd02cda77ea90cdcc6f9927828262d93f762695cf0f8f9ccfad7a640b65a2d",
+    "events_csv_sha256": "9161b5f5c52a2ca74a50884698c099501a599511ffd2c1ab24e2fa1a29d347e7",
+    "exit_code": 0,
+    "final_outer": {
+      "max_abs_dT_K": 0.0,
+      "max_abs_dU_m_s": 0.0090619442,
+      "max_abs_dalpha1": 0.000618031,
+      "max_abs_dp_Pa": 319.4459,
+      "max_abs_dphi_m3_s": 1.9636587e-05,
+      "max_abs_drho1_kg_m3": 0.00014538994,
+      "max_abs_drho2_kg_m3": 0.0037947679,
+      "max_rel_dp": 0.0036568424,
+      "outer_iteration": 1536,
+      "time_s": 0.48199621213
+    },
+    "finished_at_utc": "2026-10-26T17:21:47.217062922Z",
+    "input_record": "full-replay/full-replay-input-verification.json",
+    "interpretation": "A warm-restart diagnostic replay of the pressure-update cycle. It had no raw pressure-floor contacts, but ended on the pressure-update guard. Local selected-cell observations are not a global residual or causal explanation.",
+    "max_abs_selected_cell_dp_Pa": 3049.238265505061,
+    "mesh_cells": 299214,
+    "mpi_ranks": 10,
+    "nominal_target_s": 0.483,
+    "observer_event_rows": 118,
+    "observer_rows_joined_to_exact_time_outer_rank_cell_rows": true,
+    "raw_pressure_contact_count": 0,
+    "seed_time_s": 0.4600475152857613,
+    "selected_cells_outside_valve_source_band": true,
+    "source_record": "full-replay/pressure-cycle-diagnostic-summary.json",
+    "source_record_mesh_cells_claimed": 299248,
+    "started_at_utc": "2026-10-26T17:08:51.803150235Z",
+    "stop_reason": "Unchanged guard requested writeNow after the declared persistent final-outer pressure-update criterion; the run stopped before its .483 s target.",
+    "terminal": "normal_End_complete_native10_checkpoint"
+  },
+  "key_artifacts": [
+    "full-replay/pressure-cycle-events.csv",
+    "full-replay/pressure-cycle-events.png",
+    "same-cell-final-six-outer-tail.csv",
+    "stage03-comparison/matched-times.csv",
+    "observer/patches/",
+    "observer/source-manifest.json"
+  ],
+  "limitations": [
+    "All solver evidence here is exploratory warm-restart evidence, not a validated cold-start or hardware result.",
+    "The selected-cell source arithmetic is a local post-EOS comparison, not a global mass/pressure equation closure and not proof of cause.",
+    "The observer passivity claim is limited to the matched 10-step prefix and exact saved inputs/builds.",
+    "The predictor-Sp trial and false sibling are separate runs. Targeted rows use nearest complete samples and actual time offsets; they are not interpolated.",
+    "The full replay and predictor-Sp trial stopped at their persistent pressure-update guard despite complete normal-End checkpoints; no pressure-floor contacts were recorded in those two cases."
+  ],
+  "local_source_term_comparison": {
+    "arithmetic": "D=(corrector Sp recomputed \u2212 predictor Sp)*(alpha after MULES \u2212 alpha after implicit predictor); compared rho_water*D with the same-row post-EOS local water phase-continuity value. These are local values with units kg m^-3 s^-1.",
+    "derived_record": "local-source-mismatch.json",
+    "featured_row": {
+      "D_per_s": 22.274353748214217,
+      "coordinate_m": [
+        4.2421781,
+        0.49459098,
+        0.60545195
+      ],
+      "outer_iteration": 1535,
+      "rank_local_cell": [
+        7,
+        1164
+      ],
+      "ratio": 1.0030369198284563,
+      "relative_difference_percent": 0.30369198284563304,
+      "rho_times_D_kg_m3_s": 22234.13183393338,
+      "time_s": 0.48199621213,
+      "water_postEOS_phase_continuity_kg_m3_s": 22166.813
+    },
+    "interpretation": "One selected row has a 0.3037% difference, while the recurrent-row ratios vary widely and change sign. This is descriptive local arithmetic, not a global conservation result or causal attribution.",
+    "recurrent_rows": {
+      "cell_count": 21,
+      "csv_recomputed_p90_method": "floor-index convention used by capture_compare.py; matches source summary",
+      "maximum_signed_ratio": 1.0579022489613474,
+      "median_absolute_ratio": 0.05287796619459262,
+      "median_signed_ratio": 0.03022760864173376,
+      "minimum_signed_ratio": -0.10577643024001267,
+      "negative_ratio_rows": 15,
+      "p90_absolute_ratio": 1.0039939328048293,
+      "row_count": 88,
+      "rows_with_ratio_between_0p9_and_1p1": 24
+    },
+    "same_cell_pressure_tail": "same-cell-final-six-outer-tail.csv",
+    "six_outer_signed_dp_Pa": [
+      326.40793,
+      -324.58104,
+      327.70404,
+      -319.10761,
+      319.52592,
+      -319.4459
+    ]
+  },
+  "mesh_resolution": {
+    "actual_global_cell_count": 299214,
+    "copied_run_record_mesh_cell_value": 299248,
+    "correction": "Inherited experiment metadata labels the mesh 299248 cells; the five executed mesh owner headers all report nCells=299214. The correction applies to this derived summary only; copied original records are unchanged.",
+    "identical_core_mesh_file_hashes_across_selected_cases": {
+      "faces": {
+        "sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460",
+        "source_paths": [
+          "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-dcec-prefix/case/constant/polyMesh/faces",
+          "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-observer-prefix/case/constant/polyMesh/faces",
+          "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/case/constant/polyMesh/faces",
+          "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/constant/polyMesh/faces",
+          "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/constant/polyMesh/faces"
+        ]
+      },
+      "owner": {
+        "sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "source_paths": [
+          "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-dcec-prefix/case/constant/polyMesh/owner",
+          "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-observer-prefix/case/constant/polyMesh/owner",
+          "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/case/constant/polyMesh/owner",
+          "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/constant/polyMesh/owner",
+          "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/constant/polyMesh/owner"
+        ]
+      },
+      "points": {
+        "sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779",
+        "source_paths": [
+          "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-dcec-prefix/case/constant/polyMesh/points",
+          "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-observer-prefix/case/constant/polyMesh/points",
+          "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/case/constant/polyMesh/points",
+          "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/constant/polyMesh/points",
+          "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/constant/polyMesh/points"
+        ]
+      }
+    },
+    "owner_header_checks": [
+      {
+        "nCells_header": 299214,
+        "owner_sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "path": "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-dcec-prefix/case/constant/polyMesh/owner"
+      },
+      {
+        "nCells_header": 299214,
+        "owner_sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "path": "results/runs/i4f-pressure-cycle-observer-20261026T163622Z-observer-prefix/case/constant/polyMesh/owner"
+      },
+      {
+        "nCells_header": 299214,
+        "owner_sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "path": "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/case/constant/polyMesh/owner"
+      },
+      {
+        "nCells_header": 299214,
+        "owner_sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/constant/polyMesh/owner"
+      },
+      {
+        "nCells_header": 299214,
+        "owner_sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/constant/polyMesh/owner"
+      }
+    ]
+  },
+  "observer_passivity_prefix": {
+    "all_14_fields_plus_uniform_time_byte_identical": true,
+    "configuration": {
+      "PIMPLE": {
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 8,
+        "transonic": true
+      },
+      "acceptance_window_s": 0.000125,
+      "cpu_quota_equivalent": 6,
+      "end_time_shortfall_s": 3.60455189999942e-05,
+      "guard": {
+        "consecutive_steps": 3,
+        "gas_step_cumulative_fraction": 0.01,
+        "persistent_final_pressure_update_Pa": 100,
+        "ratio_min": 0.9,
+        "raw_floor_Pa": 10000,
+        "water_step_cumulative_fraction": 0.001
+      },
+      "i4fFrozenPredictorSp": false,
+      "i4fFullPressureAudit": false,
+      "mesh_cells": 299214,
+      "mpi_ranks": 10,
+      "observed_end_time_s": 0.461063954481,
+      "source_record_mesh_cells_claimed": 299248,
+      "start_time_s": 0.4600475152857613,
+      "target_end_time_s": 0.4611,
+      "time_controls": {
+        "maxAlphaCo": 0.25,
+        "maxCo": 0.5,
+        "maxDeltaT_s": 0.00025
+      }
+    },
+    "control": {
+      "docker_id": "eb0f89a926a8daac4b631a95742db7583faaf5fa01007a6361fcd2c7fc9220aa",
+      "exit_code": 0,
+      "finished_at_utc": "2026-10-26T16:57:35.147634422Z",
+      "started_at_utc": "2026-10-26T16:57:02.713118492Z",
+      "terminal": "normal_End_complete_native10_checkpoint"
+    },
+    "endpoint_s": 0.461063954481,
+    "health_rows_identical": true,
+    "interpretation": "The observer executed without an MPI stall and was passive over this matched 10-step warm prefix. This does not validate its numerical interpretation or establish passivity later in the event window.",
+    "mesh_cells": 299214,
+    "mpi_ranks": 10,
+    "observer": {
+      "diagnostic_errors": [],
+      "docker_id": "25f9b82273eec136c87bf31932b0ca29a4af535ef73cc988bb03ba7267675928",
+      "exit_code": 0,
+      "finished_at_utc": "2026-10-26T16:58:54.506191512Z",
+      "max_abs_selected_cell_dp_Pa": 1873.826691836293,
+      "raw_pressure_contact_count": 0,
+      "selected_rows": 26,
+      "started_at_utc": "2026-10-26T16:58:21.911175019Z",
+      "terminal": "normal_End_complete_native10_checkpoint"
+    },
+    "pair_record": "observer/passivity-prefix-pair.json",
+    "seed_time_s": 0.4600475152857613,
+    "source_record": "observer/pressure-cycle-observer-passivity.json"
+  },
+  "predictor_sp_trial": {
+    "corrected_common_seed_record": "sp-terminal/common-seed-control-comparison-correction-v2.json",
+    "false_sibling_bundle": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z",
+    "false_sibling_id": "9d04af8e39cbdbf0652a52221b66d80e45e6e8ce6578e63bb780a6e9a56ade27",
+    "interpretation": "The same-seed false sibling exists and the 227-path input comparison differs only in case/system/controlDict (Sp flag plus requested endTime). Runs are separate executions; the true-flag run also stopped on the pressure-update guard. This does not establish a remedy.",
+    "matched_comparison_json": "stage03-comparison/comparison.json",
+    "matched_target_csv": "stage03-comparison/matched-times.csv",
+    "matched_time_policy": "Nearest complete saved sample for each target; CSV reports actual time, offset, and paired separation. No interpolation. The final .482 target row compares .48189409979 and .48199623008 s (separation 0.00010213029 s); do not call this an exact same-time comparison.",
+    "same_seed_input_audit": {
+      "all_seed_fields_same": "see frozen manifests; all 15 native seed hashes independently matched at GO",
+      "differing_paths_count": 1,
+      "identical_paths_count": 226,
+      "input_file_count_each": 227,
+      "only_changed_manifest_path": [
+        "case/system/controlDict"
+      ],
+      "same_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5"
+    },
+    "same_seed_time_s": 0.4600475152857613,
+    "source_terminal_record": "sp-terminal/terminal-diagnostic-v1.json",
+    "terminal_metrics": {
+      "final_outer_max_abs_dU_m_s": 4.691527,
+      "final_outer_max_abs_dp_Pa": 1102.0268,
+      "final_to_penultimate_dp_ratio": 0.9999326740471155,
+      "gas_inventory_kg": 33.173918,
+      "guard_consecutive_pressure_update_steps": 6,
+      "penultimate_outer_max_abs_dp_Pa": 1102.101,
+      "raw_corrector_min_p_Pa": 36324.044,
+      "water_inventory_kg": 3198.1484
+    },
+    "true_flag": true,
+    "true_run_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "true_run_endpoint_s": 0.494224620516,
+    "true_run_finished_at_utc": "2026-10-26T17:49:28.979908929Z",
+    "true_run_id": "b1d9af592831f8c0ce73190f85e330d420cfdb898e86d828ae69a4d77a869f50",
+    "true_run_phase_inventory_at_terminal": {
+      "gas_boundary_flux_kg_s": 2.8816076,
+      "gas_cumulative_defect_fraction_initial": 2.8514822852167397e-05,
+      "gas_cumulative_defect_kg": 0.0009659842803915863,
+      "gas_kg": 33.173918,
+      "water_boundary_flux_kg_s": 0.00035182935,
+      "water_cumulative_defect_fraction_initial": 4.379069498149979e-05,
+      "water_cumulative_defect_kg": 0.14004300911524623,
+      "water_kg": 3198.1484
+    },
+    "true_run_raw_pressure_contacts": 0,
+    "true_run_started_at_utc": "2026-10-26T17:40:09.872094591Z",
+    "true_run_stop_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+    "true_run_terminal": "normal_End_complete_native10_checkpoint"
+  },
+  "purpose": "Compact reproducible evidence for an active pressure-update cycle and diagnostic source-term comparisons in the I4F internal apparatus.",
+  "schema": "i4f-pressure-source-cycle-evidence/v1"
+}

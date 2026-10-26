@@ -1,0 +1,84 @@
+{
+  "bundle": "results/runs/i4f-pressure-equilibrium-1bar-periodic-20261026T172125Z",
+  "cell_count": 6400,
+  "created_utc": "2026-10-26T17:30:55.507525+00:00",
+  "field_errors": {
+    "T": {
+      "max_K": 293.15000000002004,
+      "max_abs_K": 2.006572685786523e-11,
+      "mean_abs_K": 2.331601578475784e-12,
+      "min_K": 293.1499999999805
+    },
+    "U": {
+      "max_abs_component_m_s": [
+        2.085442929455894e-12,
+        3.628876176858345e-12,
+        4.125646162356168e-12
+      ],
+      "max_abs_vector_m_s": 4.265067010771457e-12,
+      "max_component_m_s": [
+        10.000000000001476,
+        3.628876176858345e-12,
+        2.190615908068673e-12
+      ],
+      "mean_abs_component_m_s": [
+        2.1501911362520332e-13,
+        1.698558642684018e-13,
+        1.5909083825558833e-13
+      ],
+      "min_component_m_s": [
+        9.999999999997915,
+        -2.3706737743153297e-12,
+        -4.125646162356168e-12
+      ]
+    },
+    "p": {
+      "max_Pa": 99999.99999999684,
+      "max_abs_Pa": 7.203198038041592e-09,
+      "max_relative": 7.203198038041592e-14,
+      "mean_abs_Pa": 4.593325684254523e-09,
+      "min_Pa": 99999.9999999928
+    },
+    "p_rgh": {
+      "max_Pa": 99999.99999999684,
+      "max_abs_Pa": 7.203198038041592e-09,
+      "min_Pa": 99999.9999999928
+    }
+  },
+  "field_sha256": {
+    "T": "0bd1df89f6651cf3f07952c1ce95c446daa4238f8fa84c39fb5aec47a42f376b",
+    "U": "66455d971309cc38da6ef8107434c68e2cd0cbfacc45ba5e896d82b3a54f9865",
+    "alpha.water": "8a17579d7dc89752b2f453607b0f9d87fdc4e9a9b58846a550499492267702ad",
+    "alphaPhi0.water": "21d40b8f1bded80b7a2d2825652f231b42c0e1ba48ffffcb4ef3672adf2a46a1",
+    "p": "467692ba28b86bad348909b26569e60ef2f4a967fd1a87d504ee6ec25221e270",
+    "p_rgh": "2559d342d3b95ddd1242fca93cb3cbf0b213da8795a9047045feee035253772e",
+    "phi": "7ce9cc5ada945727792080cb9f737ef53cc8d532816bb8e49ec88df69be9f6d7",
+    "rho": "c86c8ab3874072a838c83a70f2f11da268bfbd831c100c9e999cdcdc1f629553",
+    "uniform/time": "dc2883b77c4ec6f86a886194e0e7c66c144770eaf3804196ea640013cfc317c1"
+  },
+  "phase_and_inventory": {
+    "alpha_max": 1.0000000000000002,
+    "alpha_min": 1.8618397871744182e-27,
+    "gas_mass_from_saved_EOS_kg": 0.003802821456049775,
+    "initial_gas_mass_kg": 0.003802821456049894,
+    "initial_water_mass_kg": 3.19424,
+    "water_mass_from_saved_EOS_kg": 3.194239999999975,
+    "water_volume_error_m3": -2.546585164964199e-17,
+    "water_volume_m3": 0.0031999999999999746
+  },
+  "qualification": "Native binary fields at the actual normal-End .1 s target checkpoint of the cold 1 bar cap-25 run. The material contact has translated one full box length; compare p/U/T with the exact uniform solution. This verifies only this periodic case and does not establish acoustic-wave accuracy or apparatus-model suitability.",
+  "reference": {
+    "T_K": 293.15,
+    "U_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "alpha_volume_fraction": 0.5,
+    "p_abs_Pa": 100000.0,
+    "p_rgh_Pa": 100000.0
+  },
+  "schema": "i4f-periodic-pressure-equilibrium-field-error/v1",
+  "time_directory": "0.1",
+  "uniform_time_s": 0.10000000000000184
+}

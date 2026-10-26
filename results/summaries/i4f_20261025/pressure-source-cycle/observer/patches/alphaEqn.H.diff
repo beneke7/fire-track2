@@ -1,0 +1,75 @@
+--- DCEC/applications/solvers/multiphase/VoF/alphaEqn.H
++++ observer/applications/solvers/multiphase/VoF/alphaEqn.H
+@@ -168,6 +168,19 @@
+         i4fDgdtPredictor = dgdt.internalField();
+         i4fAlphaBeforePredictor = alpha1.primitiveField();
+ 
++        if (i4fPressureCycleObserverWindow)
++        {
++            forAll(alpha1, celli)
++            {
++                i4fObsPredictorSp[celli] = i4fSpPredictor[celli];
++                i4fObsPredictorSu[celli] = i4fSuPredictor[celli];
++                i4fObsPredictorDivU[celli] = i4fDivUPredictor[celli];
++                i4fObsPredictorDgdt[celli] = i4fDgdtPredictor[celli];
++                i4fObsAlphaBeforePredictor[celli] =
++                    i4fAlphaBeforePredictor[celli];
++            }
++        }
++
+         fvScalarMatrix alpha1Eqn
+         (
+             (
+@@ -215,6 +228,13 @@
+         }
+ 
+         i4fAlphaPredictor = alpha1.primitiveField();
++        if (i4fPressureCycleObserverWindow)
++        {
++            forAll(alpha1, celli)
++            {
++                i4fObsAlphaAfterPredictor[celli] = alpha1[celli];
++            }
++        }
+ 
+         // Cache the upwind-flux
+         talphaPhi1Corr0 = talphaPhi1UD;
+@@ -228,6 +248,23 @@
+     for (int aCorr=0; aCorr<nAlphaCorr; aCorr++)
+     {
+         #include "alphaSuSp.H"
++
++        if (i4fPressureCycleObserverWindow)
++        {
++            forAll(alpha1, celli)
++            {
++                i4fObsCorrectorSp[celli] = Sp[celli];
++                i4fObsCorrectorSu[celli] = Su[celli];
++                i4fObsCorrectorDgdt[celli] = dgdt[celli];
++                i4fObsCorrectorDivU[celli] = divU[celli];
++                i4fObsCorrectorSpUsed[celli] =
++                    i4fFrozenPredictorSp
++                  ? i4fSpPredictor[celli]
++                  : Sp[celli];
++                i4fObsAlphaBeforeMules[celli] = alpha1[celli];
++                i4fObsCorrectorIndex[celli] = aCorr + 1;
++            }
++        }
+ 
+         surfaceScalarField phir(phic*mixture.nHatf());
+ 
+@@ -411,6 +448,14 @@
+             );
+         }
+ 
++        if (i4fPressureCycleObserverWindow)
++        {
++            forAll(alpha1, celli)
++            {
++                i4fObsAlphaAfterMules[celli] = alpha1[celli];
++            }
++        }
++
+         alpha2 = 1.0 - alpha1;
+ 
+         mixture.correct();

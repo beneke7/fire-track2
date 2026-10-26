@@ -1,0 +1,239 @@
+--- DCEC/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
++++ observer/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
+@@ -89,6 +89,33 @@
+         )
+     );
+ 
++    // Read-only pressure-cycle observer controls. Defaults leave the observer
++    // inactive and preserve the original DP_CELL threshold.
++    const Switch i4fPressureCycleObserver
++    (
++        runTime.controlDict().lookupOrDefault<Switch>
++        (
++            "i4fPressureCycleObserver",
++            false
++        )
++    );
++    const scalar i4fPressureCycleStartTime
++    (
++        runTime.controlDict().lookupOrDefault<scalar>
++        (
++            "i4fPressureCycleStartTime",
++            0.478
++        )
++    );
++    const scalar i4fPressureCycleEndTime
++    (
++        runTime.controlDict().lookupOrDefault<scalar>
++        (
++            "i4fPressureCycleEndTime",
++            0.4835
++        )
++    );
++
+     // Increase diagnostic stream precision only; solver state and equations
+     // are unchanged.
+     Info.stream().precision(16);
+@@ -146,6 +173,11 @@
+ 
+         Info<< "Time = " << runTime.timeName() << nl << endl;
+ 
++        const bool i4fPressureCycleObserverWindow =
++            i4fPressureCycleObserver
++         && runTime.value() >= i4fPressureCycleStartTime
++         && runTime.value() <= i4fPressureCycleEndTime;
++
+         // --- Pressure-velocity PIMPLE corrector loop
+         static label i4fOuterLoop = 0;
+         static label i4fAlphaSuSpCallIndex = 0;
+@@ -163,6 +195,48 @@
+             const scalarField i4fTOuterStart(T.primitiveField());
+             const scalarField i4fRho1OuterStart(rho1.primitiveField());
+             const scalarField i4fRho2OuterStart(rho2.primitiveField());
++
++            // Small local snapshots are allocated only inside the declared
++            // observer window. They copy the phase-source values actually
++            // assembled before the pressure update; no fields are registered
++            // or written and no solver coefficients are changed.
++            scalarField i4fObsPredictorSp;
++            scalarField i4fObsPredictorSu;
++            scalarField i4fObsPredictorDgdt;
++            scalarField i4fObsPredictorDivU;
++            scalarField i4fObsAlphaBeforePredictor;
++            scalarField i4fObsAlphaAfterPredictor;
++            scalarField i4fObsCorrectorSp;
++            scalarField i4fObsCorrectorSu;
++            scalarField i4fObsCorrectorDgdt;
++            scalarField i4fObsCorrectorDivU;
++            scalarField i4fObsCorrectorSpUsed;
++            scalarField i4fObsAlphaBeforeMules;
++            scalarField i4fObsAlphaAfterMules;
++            scalarField i4fObsCorrectorIndex;
++            if (i4fPressureCycleObserverWindow)
++            {
++                auto initializeObserverField =
++                [](scalarField& field, const label nCells)
++                {
++                    field.setSize(nCells);
++                    forAll(field, celli) field[celli] = Zero;
++                };
++                initializeObserverField(i4fObsPredictorSp, mesh.nCells());
++                initializeObserverField(i4fObsPredictorSu, mesh.nCells());
++                initializeObserverField(i4fObsPredictorDgdt, mesh.nCells());
++                initializeObserverField(i4fObsPredictorDivU, mesh.nCells());
++                initializeObserverField(i4fObsAlphaBeforePredictor, mesh.nCells());
++                initializeObserverField(i4fObsAlphaAfterPredictor, mesh.nCells());
++                initializeObserverField(i4fObsCorrectorSp, mesh.nCells());
++                initializeObserverField(i4fObsCorrectorSu, mesh.nCells());
++                initializeObserverField(i4fObsCorrectorDgdt, mesh.nCells());
++                initializeObserverField(i4fObsCorrectorDivU, mesh.nCells());
++                initializeObserverField(i4fObsCorrectorSpUsed, mesh.nCells());
++                initializeObserverField(i4fObsAlphaBeforeMules, mesh.nCells());
++                initializeObserverField(i4fObsAlphaAfterMules, mesh.nCells());
++                initializeObserverField(i4fObsCorrectorIndex, mesh.nCells());
++            }
+ 
+             #include "alphaControls.H"
+             #include "compressibleAlphaEqnSubCycle.H"
+@@ -275,7 +349,7 @@
+                 i4fDpLocalCell >= 0
+              && mag(i4fDpLocalMax - i4fDpMax) <= i4fDpTieTolerance;
+             const label i4fValveZoneId =
+-                mesh.cellZones().findZoneID("valveZone");
++                mesh.cellZones().findZoneID("valveSourceBand");
+ 
+             auto i4fWriteOuterCell =
+             [&]
+@@ -304,7 +378,7 @@
+                     << " global_max_update=" << globalMax
+                     << " C_m=" << mesh.C().primitiveField()[celli]
+                     << " nativeV_m3=" << mesh.V()[celli]
+-                    << " in_valve_zone=" << inValveZone
++                    << " in_valve_source_band=" << inValveZone
+                     << " p_before_Pa=" << i4fPOuterStart[celli]
+                     << " p_after_Pa=" << p[celli]
+                     << " signed_delta_p_Pa="
+@@ -345,9 +419,122 @@
+                 Pout<< "]" << nl;
+             };
+ 
+-            if (true && i4fDpMax > 1000 && i4fDpCellIsGlobal)
++            const scalar i4fDpTraceThreshold =
++                i4fPressureCycleObserverWindow ? 100.0 : 1000.0;
++            if (i4fDpMax > i4fDpTraceThreshold && i4fDpCellIsGlobal)
+             {
+                 i4fWriteOuterCell("DP_CELL", i4fDpLocalCell, i4fDpMax);
++            }
++
++            // The face-divergence operations below can communicate across
++            // processor boundaries. The condition is global (i4fDpMax was
++            // reduced above), so every rank evaluates both residuals in the
++            // same order before the controlling cell is printed.
++            if
++            (
++                i4fPressureCycleObserverWindow
++             && i4fDpMax > 100.0
++            )
++            {
++                tmp<volScalarField> tI4fWaterPostEosResidual
++                (
++                    fvc::ddt(alpha1, rho1)
++                  + fvc::div(alphaPhi1*fvc::interpolate(rho1))
++                );
++                tmp<volScalarField> tI4fGasPostEosResidual
++                (
++                    fvc::ddt(alpha2, rho2)
++                  + fvc::div(alphaPhi2*fvc::interpolate(rho2))
++                );
++                const volScalarField& i4fWaterPostEosResidual
++                (
++                    tI4fWaterPostEosResidual()
++                );
++                const volScalarField& i4fGasPostEosResidual
++                (
++                    tI4fGasPostEosResidual()
++                );
++
++                if (i4fDpCellIsGlobal)
++                {
++                    const label celli = i4fDpLocalCell;
++                    bool i4fCellInValveSourceBand = false;
++                    if (i4fValveZoneId >= 0)
++                    {
++                        const cellZone& valveSourceBand =
++                            mesh.cellZones()[i4fValveZoneId];
++                        forAll(valveSourceBand, zoneCelli)
++                        {
++                            if (valveSourceBand[zoneCelli] == celli)
++                            {
++                                i4fCellInValveSourceBand = true;
++                                break;
++                            }
++                        }
++                    }
++
++                    Pout<< "I4F_PRESSURE_CYCLE_CELL"
++                        << " stage=after_pressure_outer"
++                        << " time_s=" << runTime.timeName()
++                        << " time_index=" << runTime.timeIndex()
++                        << " outer_iteration=" << i4fOuterLoop
++                        << " rank=" << Pstream::myProcNo()
++                        << " local_cell=" << celli
++                        << " abs_outer_dp_Pa=" << i4fDpLocalMax
++                        << " signed_outer_dp_Pa="
++                        << p[celli] - i4fPOuterStart[celli]
++                        << " p_before_Pa=" << i4fPOuterStart[celli]
++                        << " p_after_Pa=" << p[celli]
++                        << " alpha_before_outer="
++                        << i4fAlphaOuterStart[celli]
++                        << " alpha_after_outer=" << alpha1[celli]
++                        << " alpha_before_predictor="
++                        << i4fObsAlphaBeforePredictor[celli]
++                        << " alpha_after_implicit_predictor="
++                        << i4fObsAlphaAfterPredictor[celli]
++                        << " alpha_before_MULES_corrector="
++                        << i4fObsAlphaBeforeMules[celli]
++                        << " alpha_after_MULES_corrector="
++                        << i4fObsAlphaAfterMules[celli]
++                        << " signed_delta_alpha_predictor="
++                        << i4fObsAlphaAfterPredictor[celli]
++                         - i4fObsAlphaBeforePredictor[celli]
++                        << " signed_delta_alpha_MULES="
++                        << i4fObsAlphaAfterMules[celli]
++                         - i4fObsAlphaBeforeMules[celli]
++                        << " predictor_Sp_per_s="
++                        << i4fObsPredictorSp[celli]
++                        << " predictor_Su_per_s="
++                        << i4fObsPredictorSu[celli]
++                        << " predictor_dgdt_per_s="
++                        << i4fObsPredictorDgdt[celli]
++                        << " predictor_divU_per_s="
++                        << i4fObsPredictorDivU[celli]
++                        << " corrector_Sp_recomputed_per_s="
++                        << i4fObsCorrectorSp[celli]
++                        << " corrector_Su_recomputed_per_s="
++                        << i4fObsCorrectorSu[celli]
++                        << " corrector_Sp_used_by_MULES_per_s="
++                        << i4fObsCorrectorSpUsed[celli]
++                        << " corrector_dgdt_per_s="
++                        << i4fObsCorrectorDgdt[celli]
++                        << " corrector_divU_per_s="
++                        << i4fObsCorrectorDivU[celli]
++                        << " alpha_corrector_index="
++                        << i4fObsCorrectorIndex[celli]
++                        << " frozen_predictor_Sp=" << i4fFrozenPredictorSp
++                        << " water_postEOS_phase_continuity_kg_m3_s="
++                        << i4fWaterPostEosResidual[celli]
++                        << " gas_postEOS_phase_continuity_kg_m3_s="
++                        << i4fGasPostEosResidual[celli]
++                        << " valve_cellZone=valveSourceBand"
++                        << " in_valve_source_band="
++                        << i4fCellInValveSourceBand
++                        << " residual_definition=ddt(alpha*rho)+div(alphaPhi*interp(rho))"
++                        << " residual_scope=local_discrete_value_at_outer_dp_cell"
++                        << " causality_claim=none"
++                        << nl;
++                }
+             }
+ 
+             const bool i4fDAlphaCellIsGlobal =

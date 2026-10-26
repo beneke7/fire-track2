@@ -1,0 +1,68 @@
+{
+  "bundle": "results/runs/i4f-pressure-equilibrium-1bar-periodic-20261026T172125Z",
+  "cell_count": 6400,
+  "created_utc": "2026-10-26T17:28:07.897426+00:00",
+  "field_errors": {
+    "T": {
+      "max_K": 293.1500000000126,
+      "max_abs_K": 1.261923898709938e-11,
+      "mean_abs_K": 1.5796164376524757e-12,
+      "min_K": 293.14999999998736
+    },
+    "U": {
+      "max_abs_component_m_s": [
+        1.191935439237568e-12,
+        9.24405098062937e-13,
+        8.094491108713979e-13
+      ],
+      "max_abs_vector_m_s": 1.198898075870912e-12,
+      "mean_abs_component_m_s": [
+        1.3257756004136922e-13,
+        9.481108495062821e-14,
+        9.386769530589237e-14
+      ]
+    },
+    "p": {
+      "max_Pa": 99999.99999999955,
+      "max_abs_Pa": 2.9103830456733704e-09,
+      "max_relative": 2.9103830456733704e-14,
+      "mean_abs_Pa": 1.588116447237553e-09,
+      "min_Pa": 99999.99999999709
+    }
+  },
+  "field_sha256": {
+    "T": "c8ad593c75aff22262b26ae3b0d48340d06fd0e74eceb32905120578d2cdab16",
+    "U": "343eb80657d61c8a8c0641da0e7187bd6d48d3be2323b20c05b6f59c4447aadb",
+    "alpha.water": "77e07542fcb5294b7db9154905005597c6de0e91e45c40b58eafce69d31f0260",
+    "alphaPhi0.water": "5b93f4bdedf0f5ac743622b6859b506264be21e7e2d897d7d96f780b2d1413bd",
+    "p": "b93c2e1b2778e7069288c3988c00293ec7d20d4dbedb6fc56e4843e83d5311a1",
+    "p_rgh": "f485f86873935abfb86359f9ef7faba5bdea998d51764e6dc29fe440e96f1bba",
+    "phi": "86c7b693d129bf725350dfb4087365e7de62aa18f5388cbf718ebe2c13e80fee",
+    "rho": "435e1c4eec626f576a1c49e787f3e5850f953f65c9e638c436887080c437ce30",
+    "uniform/time": "4e6fde218729c5ab74a879d06431068a9f6b90fad944783c4e2c80d427d18470"
+  },
+  "phase_and_inventory": {
+    "alpha_max": 1.0000000000000024,
+    "alpha_min": 5.085368043896524e-36,
+    "gas_mass_from_saved_EOS_kg": 0.0038028218136644835,
+    "initial_gas_mass_kg": 0.003802821456049894,
+    "initial_water_mass_kg": 3.19424,
+    "water_mass_from_saved_EOS_kg": 3.194239699615932,
+    "water_volume_error_m3": -3.0092573388174057e-10,
+    "water_volume_m3": 0.003199999699074266
+  },
+  "qualification": "Native binary 0.02 s checkpoint for the cold 1 bar cap-25 case. Uniform p/U/T and phase inventories are compared with the exact translating-contact solution. This is not acoustic-wave qualification or an apparatus solver setting.",
+  "reference": {
+    "T_K": 293.15,
+    "U_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "alpha_volume_fraction": 0.5,
+    "p_abs_Pa": 100000.0
+  },
+  "schema": "i4f-periodic-pressure-equilibrium-field-error/v1",
+  "time_directory": "0.02",
+  "uniform_time_s": 0.019999999999999934
+}

@@ -1,0 +1,75 @@
+{
+  "clock_time_s": 220.0,
+  "complete_checkpoint_14_fields": true,
+  "created_utc": "2026-10-26T17:31:14.940637+00:00",
+  "docker_exit_code": 0,
+  "docker_id": "4eb53fe8334f30e80766d88b11338e9079266f06afdd431e68d3405ebde96990",
+  "docker_started_at": "2026-10-26T17:26:49.873430651Z",
+  "execution_time_s": 220.27,
+  "field_error_json": "analysis/field-error-native-0p1.json",
+  "field_names": [
+    "alpha.water",
+    "alphaPhi0.water",
+    "alphat",
+    "k",
+    "nut",
+    "omega",
+    "p",
+    "p_rgh",
+    "phi",
+    "rho",
+    "T",
+    "T.air",
+    "T.water",
+    "U"
+  ],
+  "function_object_pressure_extrema": {
+    "max_p_rgh_Pa": 100000.0000000047,
+    "min_p_rgh_Pa": 99999.999999987
+  },
+  "guard_terminal_details": {
+    "complete_checkpoint": true,
+    "docker_exit_code": 0,
+    "latest_checkpoint": {
+      "all_14_fields_present": true,
+      "fields_present": [
+        "alpha.water",
+        "alphaPhi0.water",
+        "alphat",
+        "k",
+        "nut",
+        "omega",
+        "p",
+        "p_rgh",
+        "phi",
+        "rho",
+        "T",
+        "T.air",
+        "T.water",
+        "U"
+      ],
+      "path": "case/0.1",
+      "time_s": 0.1,
+      "uniform_time_present": true,
+      "uniform_time_sha256": "dc2883b77c4ec6f86a886194e0e7c66c144770eaf3804196ea640013cfc317c1"
+    },
+    "normal_openfoam_end_marker": true,
+    "target_reached_within_half_step": true
+  },
+  "guardian_status": "healthy_normal_end",
+  "physical_time_records": 1000,
+  "qualification": "Exact periodic uniform-contact case reached .1 s normally with all restart fields captured. This is a bounded exploratory numerical result, not acoustic-wave validation or apparatus qualification.",
+  "raw_pressure_floor": {
+    "maximum_raw_cell_pressure_Pa": 100000.0000000137,
+    "minimum_raw_cell_pressure_Pa": 99999.99999998407,
+    "pMin_Pa": 10000,
+    "records_with_nonzero_strict_below_pMin": 0,
+    "trace_record_count": 16000
+  },
+  "saved_time_s": 0.1,
+  "schema": "i4f-periodic-pressure-equilibrium-terminal-review/v2",
+  "solver_log_sha256": "549cfcb935461500b53f3eb1a963577db167f3c0e1d37c10b27e9234eacd021d",
+  "target_reached": true,
+  "target_s": 0.1,
+  "uniform_time_value_s": 0.10000000000000184
+}

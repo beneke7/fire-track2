@@ -1,0 +1,47 @@
+{
+  "captured_utc": "2026-10-26T18:25:21Z",
+  "copied_source_snapshots": [
+    {
+      "path": "analysis-source/analyze_pressure_cycle.py",
+      "sha256": "ab8edfbb2d3075e4712a590851e65d8f8d251ba3f643c12ea46ccd8f60ed9a7d",
+      "size_bytes": 21597,
+      "source_path": "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/analysis/analyze_pressure_cycle.py"
+    },
+    {
+      "path": "analysis-source/capture_compare.py",
+      "sha256": "a292a19c7ac2461177d78c37c0692acd20fc81ee326bef892c4f32610c4ed09b",
+      "size_bytes": 35538,
+      "source_path": "results/runs/i4f-sp-consistency-comparison-20261026T174705Z/capture_compare.py"
+    },
+    {
+      "path": "analysis-source/summarize_sp_outcome.py",
+      "sha256": "01286370b9201c7165eeaf36c9bd341e394b580eb0868788a8a6313065635ba6",
+      "size_bytes": 10972,
+      "source_path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/analysis/summarize_sp_outcome.py"
+    }
+  ],
+  "recalculation_helper": {
+    "command": ".venv/bin/python results/summaries/i4f_20261025/pressure-source-cycle/recalculate_pressure_cycle_evidence.py",
+    "dependencies": [
+      "Python standard library only"
+    ],
+    "path": "recalculate_pressure_cycle_evidence.py",
+    "python_version": "3.12.3",
+    "sha256": "834be5be2181c7d1e1de8f3c425cba96ccc06c5cf226029cb766564b43c7c32b"
+  },
+  "schema": "i4f-pressure-source-cycle-analysis-source-manifest/v1",
+  "source_snapshot_runtime_dependencies": {
+    "analyze_pressure_cycle.py": [
+      "Python standard library",
+      "matplotlib"
+    ],
+    "capture_compare.py": [
+      "Python standard library"
+    ],
+    "note": "This records direct imports from the preserved scripts. The copied plots and CSV/JSON are the actual executed outputs; source snapshots are provenance, not a claim these scripts were rerun from this packet.",
+    "summarize_sp_outcome.py": [
+      "Python standard library"
+    ],
+    "verified_matplotlib_version": "3.11.2"
+  }
+}
