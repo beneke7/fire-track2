@@ -2280,6 +2280,81 @@
         "net_free_bytes_recovered_this_batch": 209547264,
         "completed_utc": "2026-10-26T14:12:15.537586+00:00"
       }
+    },
+    {
+      "archive_path": "results/archives/i4f-terminal-log-i4f-finite-water-eos-halfdt-stage01-20261026T131840Z-20261026T195807Z.tar.zst",
+      "archive_sha256": "12b542b2d78179eb237dbc7751039754fa6c81c74e282378da920688fcbdff1e",
+      "archive_size_bytes": 46597190,
+      "manifest_path": "results/archives/manifests/i4f-terminal-log-i4f-finite-water-eos-halfdt-stage01-20261026T131840Z-20261026T195807Z.tar.zst.members.json",
+      "manifest_sha256": "c7e15ee9f8d72b2f78845cc13b042329f1039c127d578cc574e5d07d65faab7c",
+      "private_record_path": "results/runs/i4f-terminal-log-retention-20261026T195807Z/records/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z.json",
+      "private_record_sha256": "c7e15ee9f8d72b2f78845cc13b042329f1039c127d578cc574e5d07d65faab7c",
+      "restore_command": "zstd -dc results/archives/i4f-terminal-log-i4f-finite-water-eos-halfdt-stage01-20261026T131840Z-20261026T195807Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+      "source_log_path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/log.cold-coupled",
+      "source_removal": {
+        "archive_allocated_bytes": 46600192,
+        "file_restoration_is_lossless_and_original_path_is_preserved_in_tar": true,
+        "free_after_bytes": 22563577856,
+        "free_before_bytes": 21887275008,
+        "net_allocated_bytes_released": 629891072,
+        "removed_allocated_bytes": 676491264,
+        "removed_bytes": 676483419,
+        "removed_utc": "2026-10-26T20:01:34.949301+00:00",
+        "status": "source unlinked only after verified archive and unchanged-source checks"
+      },
+      "source_run_bundle": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+      "source_type": "closed_i4f_solver_log",
+      "uncompressed_input_bytes": 676483419
+    },
+    {
+      "archive_path": "results/archives/i4f-terminal-log-i4f-rhoconst-cold-control-stage02-20261026T121421Z-20261026T195807Z.tar.zst",
+      "archive_sha256": "3ee883d8005e5716d73f56b7de76d9ad6f24b864cc290b0df2144f5c4a75f87b",
+      "archive_size_bytes": 32208221,
+      "manifest_path": "results/archives/manifests/i4f-terminal-log-i4f-rhoconst-cold-control-stage02-20261026T121421Z-20261026T195807Z.tar.zst.members.json",
+      "manifest_sha256": "5845cfdff8fb8da772538be1afb567d5c07181d79ad600d63df0b03ff1daa522",
+      "private_record_path": "results/runs/i4f-terminal-log-retention-20261026T195807Z/records/i4f-rhoconst-cold-control-stage02-20261026T121421Z.json",
+      "private_record_sha256": "5845cfdff8fb8da772538be1afb567d5c07181d79ad600d63df0b03ff1daa522",
+      "restore_command": "zstd -dc results/archives/i4f-terminal-log-i4f-rhoconst-cold-control-stage02-20261026T121421Z-20261026T195807Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+      "source_log_path": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z/case/log.cold-coupled",
+      "source_removal": {
+        "archive_allocated_bytes": 32210944,
+        "file_restoration_is_lossless_and_original_path_is_preserved_in_tar": true,
+        "free_after_bytes": 22995517440,
+        "free_before_bytes": 22563487744,
+        "net_allocated_bytes_released": 432193536,
+        "removed_allocated_bytes": 464404480,
+        "removed_bytes": 464399695,
+        "removed_utc": "2026-10-26T20:01:37.668000+00:00",
+        "status": "source unlinked only after verified archive and unchanged-source checks"
+      },
+      "source_run_bundle": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+      "source_type": "closed_i4f_solver_log",
+      "uncompressed_input_bytes": 464399695
+    },
+    {
+      "archive_path": "results/archives/i4f-terminal-log-i4f-finite-water-eos-n2-stage01-20261026T112421Z-20261026T195807Z.tar.zst",
+      "archive_sha256": "7e0680ad603b7e01e9ca77e1c1f4be7c9da8003a8f89cf5f2631302bc8c10566",
+      "archive_size_bytes": 28560042,
+      "manifest_path": "results/archives/manifests/i4f-terminal-log-i4f-finite-water-eos-n2-stage01-20261026T112421Z-20261026T195807Z.tar.zst.members.json",
+      "manifest_sha256": "e2a7a40d2c2eea622560cbc6fb3ffd82463154e96e82be82536669cb1b00ea4d",
+      "private_record_path": "results/runs/i4f-terminal-log-retention-20261026T195807Z/records/i4f-finite-water-eos-n2-stage01-20261026T112421Z.json",
+      "private_record_sha256": "e2a7a40d2c2eea622560cbc6fb3ffd82463154e96e82be82536669cb1b00ea4d",
+      "restore_command": "zstd -dc results/archives/i4f-terminal-log-i4f-finite-water-eos-n2-stage01-20261026T112421Z-20261026T195807Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+      "source_log_path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/log.cold-coupled",
+      "source_removal": {
+        "archive_allocated_bytes": 28561408,
+        "file_restoration_is_lossless_and_original_path_is_preserved_in_tar": true,
+        "free_after_bytes": 23349833728,
+        "free_before_bytes": 22995447808,
+        "net_allocated_bytes_released": 354549760,
+        "removed_allocated_bytes": 383111168,
+        "removed_bytes": 383105259,
+        "removed_utc": "2026-10-26T20:01:40.041551+00:00",
+        "status": "source unlinked only after verified archive and unchanged-source checks"
+      },
+      "source_run_bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+      "source_type": "closed_i4f_solver_log",
+      "uncompressed_input_bytes": 383105259
     }
   ],
   "schema": "lossless-native-time-archives-index/v1",
@@ -2348,6 +2423,24 @@
       "status": "complete_with_lossless_archives",
       "completed_utc": "2026-10-26T18:46:48.029028+00:00",
       "restore_policy": "gzip decompression to a temporary sibling, compare the recorded original SHA-256 and byte count, then atomically rename to the original path"
+    },
+    {
+      "archive_allocated_bytes": 107372544,
+      "completed_utc": "2026-10-26T20:01:40.075728+00:00",
+      "file_count": 3,
+      "manifest_path": "results/runs/i4f-terminal-log-retention-20261026T195807Z/summary.json",
+      "net_allocated_bytes_released": 1416634368,
+      "payload_directory": "results/archives",
+      "restore_policy": "zstd stream-extract the single tar member to its recorded original relative path; SHA-256, size and metadata were verified before unlink.",
+      "source_bytes_removed": 1523988373,
+      "source_type": "terminal_solver_text_logs",
+      "status": "complete_with_lossless_archives",
+      "manifest_paths": [
+        "results/archives/manifests/i4f-terminal-log-i4f-finite-water-eos-halfdt-stage01-20261026T131840Z-20261026T195807Z.tar.zst.members.json",
+        "results/archives/manifests/i4f-terminal-log-i4f-rhoconst-cold-control-stage02-20261026T121421Z-20261026T195807Z.tar.zst.members.json",
+        "results/archives/manifests/i4f-terminal-log-i4f-finite-water-eos-n2-stage01-20261026T112421Z-20261026T195807Z.tar.zst.members.json"
+      ],
+      "manifest_path_scope": "private aggregate; tracked member records are listed in manifest_paths"
     }
   ]
 }

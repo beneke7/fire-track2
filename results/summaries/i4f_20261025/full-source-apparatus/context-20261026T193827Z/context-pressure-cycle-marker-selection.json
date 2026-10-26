@@ -1,0 +1,70 @@
+{
+  "schema": "i4f-pressure-cycle-marker-selection/v1",
+  "created_utc": "2026-10-26T19:40:13.775725+00:00",
+  "current_render_checkpoint_s": 0.494130458572,
+  "pressure_cycle_events_csv": "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/analysis/pressure-cycle-events.csv",
+  "pressure_cycle_events_csv_sha256": "9161b5f5c52a2ca74a50884698c099501a599511ffd2c1ab24e2fa1a29d347e7",
+  "current_mesh_case": "results/runs/i4f-full-predictor-source-20261026T180031Z/full-source-on/case",
+  "current_cell_proc_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+  "current_mesh_hashes": {
+    "points": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779",
+    "faces": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460",
+    "owner": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+    "neighbour": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8",
+    "boundary": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d"
+  },
+  "selected_cells": [
+    {
+      "label": "P1",
+      "processor_rank": 7,
+      "local_cell_id_zero_based": 1164,
+      "coordinate_m": [
+        4.24217805460347,
+        0.4945909835325025,
+        0.6054519482141562
+      ],
+      "coordinate_spread_in_event_log_m": [
+        4.5396530090613396e-08,
+        3.53250251272641e-09,
+        1.7858438061679749e-09
+      ],
+      "prior_replay_event_rows": 34,
+      "prior_replay_time_range_s": [
+        0.479327928169,
+        0.48199621213
+      ],
+      "prior_signed_outer_dp_range_Pa": [
+        -772.2740270201466,
+        759.306962032424
+      ],
+      "selection_scope": "recurrent pressure-cycle event cells from earlier same-mesh/map full replay; positional context only, not a pressure event at the rendered .494130458572 s checkpoint"
+    },
+    {
+      "label": "P2",
+      "processor_rank": 2,
+      "local_cell_id_zero_based": 1149,
+      "coordinate_m": [
+        4.241968229361013,
+        -0.6055630770356866,
+        0.6053889548703196
+      ],
+      "coordinate_spread_in_event_log_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prior_replay_event_rows": 9,
+      "prior_replay_time_range_s": [
+        0.479013897941,
+        0.481489784025
+      ],
+      "prior_signed_outer_dp_range_Pa": [
+        -861.6792376205849,
+        947.107042008909
+      ],
+      "selection_scope": "recurrent pressure-cycle event cells from earlier same-mesh/map full replay; positional context only, not a pressure event at the rendered .494130458572 s checkpoint"
+    }
+  ],
+  "qualification": "The event rows were measured in an earlier pressure-cycle replay. The new image places those same rank/local cells on a verified identical mesh and processor map, but does not assert a current-time pressure extremum or physical cavitation.",
+  "current_volume_centres_sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c"
+}

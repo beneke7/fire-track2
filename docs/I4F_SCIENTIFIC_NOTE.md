@@ -29,6 +29,25 @@ the common .460048 s seed fell from .01181 to .00463 kg. Actual sample times
 differ by .119 microseconds; these are nearest-sample comparisons, not
 identical-time fields or a proof of physical phase-mass conservation.
 
+A separate restart audit found a real field-history initialization defect.
+Saving the pressure-derived expansion source alone left a 127.824 Pa
+one-step restart discrepancy in the sealed channel. Allocating the accepted
+Euler histories before derived-field updates reduced the discrepancy to
+7.92e-9 Pa and 5.55e-13 m/s. This tests a grouped ten-field intervention,
+not the minimal necessary field set or all time schemes. The corresponding
+apparatus replay still stopped at .494129 s, so restart fidelity and the later
+nonlinear pressure cycle are distinct problems.
+
+The cold run with corrected initialization exposed an intermediate air state near
+12 K and 9.71 kPa with the optional momentum predictor enabled. The momentum
+solve changes kinetic energy before the first temperature solve and before
+pressure projection. That ordering supplies a specific energy-error hypothesis;
+a matched term-by-term audit is pending. A fresh trial disables only that
+optional predictor, retaining pressure-driven velocity/kinetic-energy updates
+and the 10 kPa floor. Early healthy evolution is not yet evidence of a complete
+remedy. A separate source-relaxation trial will measure the undamped fixed-point
+defect, rather than accepting smaller damped updates alone.
+
 The predictor/corrector equations explain the targeted numerical change.
 For this static Euler, single alpha-correction/subcycle configuration, let
 alphaP denote the implicit predictor, alphaF the corrected fraction, d0 its
@@ -87,9 +106,9 @@ Thus improved water balance does not establish a closed gas-energy model.
 An additional n=120 read-only audit reproduces identical native endpoint fields
 and finds corrected-minus-predictor alpha-equation residual below 9.21e-13 s^-1.
 The [inspected figure](../results/summaries/i4f_20261025/source-active-withdrawal/grid-trend.png)
-and SI data preserve both effects. The much larger alpha residual in the tank
-motivates the next controlled predictor linear-tolerance test; its outcome
-remains unknown.
+and SI data preserve both effects. The tighter predictor solve also stopped
+near .494128 s with a 1259.55 Pa outer pressure update. Its much smaller correction inconsistency did not
+eliminate the coupled pressure cycle.
 
 The earlier finite-water cold test contacted the pressure floor:
 one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields at

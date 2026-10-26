@@ -33,6 +33,19 @@ The [cell/iteration review](finite-water-floor-review.json),
 undershoot and two subsequent positive-pressure steps. Small final corrections
 do not undo the pressure-floor operation.
 
+The [new diagnostic cutaway](full-source-apparatus/context-20261026T193827Z/context-cutaway-preview.png)
+shows the guarded .494130 s endpoint on its actual 299,214-cell mesh. Dense
+water has not yet left the mouths; this is an incomplete, failed trajectory.
+Orange markers locate earlier replay cells, not the current pressure-update
+maximum. The [localization audit](full-source-apparatus/context-cell-localization-20261026T1954Z/context-cell-localization.json)
+explains why that current maximum cannot be recovered from the original logs.
+The [complete source patch and closure](full-source-apparatus/source-closure-20261026T2010Z/closure-manifest.json)
+reconstruct all 68 captured source files from the public DCEC snapshot,
+including the previously omitted diagnostic logger switch. Root independently
+reconstructed and checked all 68 hashes. This identifies source inputs; it
+does not promise a bitwise-identical rebuilt binary. The rendering command
+still requires its recorded local helper and raw fields.
+
 **26 October numerical update:** the corrected-junction restarted constant-density
 continuation stopped at .434224 s with negative intermediate pressure; geometry
 correction alone did not resolve the instability. One pressure corrector and
