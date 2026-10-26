@@ -1,5 +1,26 @@
 # I4F discharge: published results, 25–26 October 2026
 
+**Early corrected-CFD comparison:** at .250021 s, mean water withdrawn per
+tank is 62.581 L versus 62.210 L in the adiabatic reduced model (+.597%);
+the two-valve flow sum per tank is .608803 versus .604200 m3/s (+.762%).
+The [data and method](flush-early-cfd-model-comparison.json) and
+[CSV](flush-early-cfd-model-comparison.csv) distinguish local headspace probes
+from bulk model pressure and retain exact time-sampling conventions.
+This is startup consistency through .25 s, before predicted mouth discharge.
+
+![Early corrected-CFD pressure, drainage and flow comparison](flush-early-cfd-model-comparison.png)
+
+**Reduced model aligned to the corrected junction:** the
+[comparison](flush-filling-model-comparison.json) and
+[CSV](flush-filling-model-comparison.csv) use native tank/headspace inputs
+and direct compact centerlines. Assumed adiabatic/isothermal gas expansion
+gives mouth-water arrivals around .617–.625/.585–.591 s, respectively.
+The modeled mean-level intake-crown endpoint is not emptying or established
+gas breakthrough. Wet-feed/full-line volume differences of +.634/+2.081%
+remain explicit; no loss or gas-law parameter was fitted to CFD.
+
+![Reduced-model gas-law sensitivity](flush-filling-model-thermo-sensitivity.png)
+
 **Standard-source cold control:** bulk histories remain closely aligned with
 the frozen-source reference through .4 s; nearest-row valve flux differences
 are below .006%. The [comparison](stock-frozen-source-comparison.json) and

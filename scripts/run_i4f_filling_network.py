@@ -29,7 +29,10 @@ from aerial_drop.i4f_filling_network import (  # noqa: E402
     _air_diagnostics,
     simulate_filling,
 )
-from aerial_drop.i4f_reduced import tank_volume_at_level_m3  # noqa: E402
+from aerial_drop.i4f_reduced import (  # noqa: E402
+    R_AIR_J_KG_K,
+    tank_volume_at_level_m3,
+)
 from aerial_drop.i4f_reduced_network import (  # noqa: E402
     BranchParameters,
     GasProperties,
@@ -68,6 +71,30 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _read_input_packet(packet_dir: Path) -> tuple[dict[str, Any], dict[str, Path]]:
+    """Load and verify the immutable input files named by a packet manifest."""
+    packet_dir = packet_dir.resolve()
+    manifest_path = packet_dir / "inputs-manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    files: dict[str, Path] = {}
+    for entry in manifest.get("files", []):
+        relative = Path(entry["path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError(f"unsafe input path in packet manifest: {relative}")
+        path = packet_dir / relative
+        if not path.is_file():
+            raise FileNotFoundError(f"packet input is missing: {path}")
+        payload = path.read_bytes()
+        actual_hash = hashlib.sha256(payload).hexdigest()
+        if len(payload) != int(entry["bytes"]) or actual_hash != entry["sha256"]:
+            raise ValueError(f"packet input hash/size mismatch: {relative}")
+        key = relative.name
+        if key in files:
+            raise ValueError(f"packet has duplicate input basename {key!r}")
+        files[key] = path
+    return manifest, files
+
+
 def _git_info() -> dict[str, Any]:
     def git(*args: str) -> str | None:
         try:
@@ -85,8 +112,10 @@ def _git_info() -> dict[str, Any]:
     }
 
 
-def _read_geometry_rows(branch_name: str) -> list[dict[str, float]]:
-    with GEOMETRY_CSV.open(newline="", encoding="utf-8") as stream:
+def _read_geometry_rows(
+    branch_name: str, geometry_csv: Path = GEOMETRY_CSV
+) -> list[dict[str, float]]:
+    with geometry_csv.open(newline="", encoding="utf-8") as stream:
         return [
             {
                 "source_s": float(row["centerline_s_from_tank_wall_m"]),
@@ -110,19 +139,27 @@ def _map_x_to_compact(x_m: float) -> float:
     )
 
 
-def _mapped_centerline(rows: list[dict[str, float]]) -> list[dict[str, float]]:
-    """Apply the frozen x-only compact map, trim its exposed 0.2 m straight, and recompute s."""
+def _mapped_centerline(
+    rows: list[dict[str, float]], coordinate_map_mode: str = "legacy_x_only"
+) -> list[dict[str, float]]:
+    """Map legacy x-only rows or retain already compact CAD coordinates and recompute s."""
     raw_x = np.asarray([row["x"] for row in rows], dtype=float)
     if np.any(np.diff(raw_x) <= 0):
         raise ValueError("the source centerline x coordinate must increase strictly")
     mapped: list[dict[str, float]] = []
     for row in rows:
         old_x = row["x"]
-        if COMPACT_TRANSITION_START_X_M < old_x < LEGACY_TRANSITION_START_X_M:
-            continue
+        if coordinate_map_mode == "legacy_x_only":
+            if COMPACT_TRANSITION_START_X_M < old_x < LEGACY_TRANSITION_START_X_M:
+                continue
+            mapped_x = _map_x_to_compact(old_x)
+        elif coordinate_map_mode == "identity_compact":
+            mapped_x = old_x
+        else:
+            raise ValueError(f"unsupported centerline coordinate map {coordinate_map_mode!r}")
         point = {
             "source_x": old_x,
-            "x": _map_x_to_compact(old_x),
+            "x": mapped_x,
             "y": row["y"],
             "z": row["z"],
             "area": row["area"],
@@ -157,7 +194,10 @@ def _mapped_centerline(rows: list[dict[str, float]]) -> list[dict[str, float]]:
 
 
 def _station_at_source_x(
-    source_rows: list[dict[str, float]], mapped_rows: list[dict[str, float]], x_m: float
+    source_rows: list[dict[str, float]],
+    mapped_rows: list[dict[str, float]],
+    x_m: float,
+    coordinate_map_mode: str = "legacy_x_only",
 ) -> dict[str, float]:
     raw_x = np.asarray([row["x"] for row in source_rows], dtype=float)
     if x_m < raw_x[0] - 1e-9 or x_m > raw_x[-1] + 1e-9:
@@ -166,7 +206,7 @@ def _station_at_source_x(
         key: float(np.interp(x_m, raw_x, [row[key] for row in source_rows]))
         for key in ("y", "z", "area")
     }
-    compact_x = _map_x_to_compact(x_m)
+    compact_x = _map_x_to_compact(x_m) if coordinate_map_mode == "legacy_x_only" else x_m
     mapped_x = np.asarray([row["x"] for row in mapped_rows], dtype=float)
     point["x"] = compact_x
     point["source_x"] = x_m
@@ -174,7 +214,15 @@ def _station_at_source_x(
     return point
 
 
-def _hydraulic_diameter(x_m: float) -> float:
+def _hydraulic_diameter(
+    x_m: float,
+    *,
+    hydraulic_diameter_profile: dict[str, Any] | None = None,
+) -> float:
+    if hydraulic_diameter_profile is not None:
+        xs = np.asarray(hydraulic_diameter_profile["x_m"], dtype=float)
+        ds = np.asarray(hydraulic_diameter_profile["diameter_m"], dtype=float)
+        return float(np.interp(x_m, xs, ds))
     pipe_d = 0.30
     mid_d = 2.0 * 0.45 * 0.15 / (0.45 + 0.15)
     mouth_d = 2.0 * 1.0 * 0.15 / (1.0 + 0.15)
@@ -192,16 +240,41 @@ def _build_branch(
     valve_cd: float,
     valve_opening_time_s: float,
     air_minor_loss_k: float | None,
+    geometry_csv: Path = GEOMETRY_CSV,
+    profile_metadata: dict[str, Any] | None = None,
 ) -> FillingBranch:
-    source_rows = _read_geometry_rows(name)
+    profile_metadata = profile_metadata or {}
+    coordinate_map_mode = str(profile_metadata.get("coordinate_map_mode", "legacy_x_only"))
+    source_rows = _read_geometry_rows(name, geometry_csv)
     if not source_rows:
         raise ValueError(f"no centerline rows for branch {name}")
-    mapped_rows = _mapped_centerline(source_rows)
-    station_xs = [4.0 + 0.1 * index for index in range(16)]
-    transition = [_station_at_source_x(source_rows, mapped_rows, x) for x in station_xs]
-    mouth = _station_at_source_x(source_rows, mapped_rows, LEGACY_MOUTH_X_M)
-    seat = _station_at_source_x(source_rows, mapped_rows, VALVE_PLANE_X_M)
-    wall = _station_at_source_x(source_rows, mapped_rows, source_rows[0]["x"])
+    mapped_rows = _mapped_centerline(source_rows, coordinate_map_mode)
+    if coordinate_map_mode == "identity_compact":
+        station_xs = [float(x) for x in profile_metadata["hydraulic_transition_station_x_m"]]
+        mouth_x_m = float(profile_metadata["mouth_x_m"])
+        transition_start_x_m = float(profile_metadata["transition_start_x_m"])
+        transition_end_x_m = float(profile_metadata["transition_end_x_m"])
+        if abs(station_xs[0] - transition_start_x_m) > 1e-9:
+            raise ValueError("CAD transition station list does not begin at its declared inlet")
+        if abs(station_xs[-1] - transition_end_x_m) > 1e-9:
+            raise ValueError("CAD transition station list does not end at its declared outlet")
+        hydraulic_diameter_profile = profile_metadata["hydraulic_diameter_profile"]
+        terminal_channel_hydraulic_diameter_x_m = transition_end_x_m
+    else:
+        station_xs = [4.0 + 0.1 * index for index in range(16)]
+        mouth_x_m = LEGACY_MOUTH_X_M
+        transition_end_x_m = _map_x_to_compact(5.5)
+        hydraulic_diameter_profile = None
+        # Preserve the legacy helper's source-coordinate convention. 5.5 m
+        # intentionally selects the old rectangular mouth diameter; mapping
+        # this x before passing it to the legacy helper changes its result.
+        terminal_channel_hydraulic_diameter_x_m = 5.5
+    transition = [
+        _station_at_source_x(source_rows, mapped_rows, x, coordinate_map_mode) for x in station_xs
+    ]
+    mouth = _station_at_source_x(source_rows, mapped_rows, mouth_x_m, coordinate_map_mode)
+    seat = _station_at_source_x(source_rows, mapped_rows, VALVE_PLANE_X_M, coordinate_map_mode)
+    wall = _station_at_source_x(source_rows, mapped_rows, source_rows[0]["x"], coordinate_map_mode)
     if abs(wall["s"]) > 1e-12:
         raise ValueError("the compact centerline must begin at s=0 at the tank wall")
 
@@ -229,8 +302,12 @@ def _build_branch(
                 length_m=right["s"] - left["s"],
                 area_start_m2=left["area"],
                 area_end_m2=right["area"],
-                hydraulic_diameter_start_m=_hydraulic_diameter(x_left),
-                hydraulic_diameter_end_m=_hydraulic_diameter(x_right),
+                hydraulic_diameter_start_m=_hydraulic_diameter(
+                    x_left, hydraulic_diameter_profile=hydraulic_diameter_profile
+                ),
+                hydraulic_diameter_end_m=_hydraulic_diameter(
+                    x_right, hydraulic_diameter_profile=hydraulic_diameter_profile
+                ),
                 roughness_m=PIPE_ROUGHNESS_M,
             )
         )
@@ -242,8 +319,14 @@ def _build_branch(
             length_m=mouth["s"] - exit_station["s"],
             area_start_m2=exit_station["area"],
             area_end_m2=mouth["area"],
-            hydraulic_diameter_start_m=_hydraulic_diameter(5.5),
-            hydraulic_diameter_end_m=_hydraulic_diameter(5.5),
+            hydraulic_diameter_start_m=_hydraulic_diameter(
+                terminal_channel_hydraulic_diameter_x_m,
+                hydraulic_diameter_profile=hydraulic_diameter_profile,
+            ),
+            hydraulic_diameter_end_m=_hydraulic_diameter(
+                terminal_channel_hydraulic_diameter_x_m,
+                hydraulic_diameter_profile=hydraulic_diameter_profile,
+            ),
             roughness_m=PIPE_ROUGHNESS_M,
         )
     )
@@ -279,15 +362,37 @@ def _build_branch(
 
 
 def _build_parameters(
-    *, valve_cd: float, valve_opening_time_s: float, air_minor_loss_k: float | None
+    *,
+    valve_cd: float,
+    valve_opening_time_s: float,
+    air_minor_loss_k: float | None,
+    input_packet_dir: Path = INPUT_PACKET_DIR,
 ) -> tuple[FillingNetworkParameters, dict[str, Any]]:
-    geometry = json.loads(GEOMETRY_JSON.read_text(encoding="utf-8"))
-    preview = json.loads(PREVIEW_JSON.read_text(encoding="utf-8"))
-    native = json.loads(NATIVE_INIT_JSON.read_text(encoding="utf-8"))
-    compact_cad = json.loads(COMPACT_GEOMETRY_JSON.read_text(encoding="utf-8"))
-    compact_adapter = json.loads(COMPACT_ADAPTER_JSON.read_text(encoding="utf-8"))
-    thermo_text = AIR_THERMO.read_text(encoding="utf-8")
-    water_thermo_text = WATER_THERMO.read_text(encoding="utf-8")
+    input_packet_dir = input_packet_dir.resolve()
+    packet_manifest, packet_files = _read_input_packet(input_packet_dir)
+
+    def packet_file(name: str) -> Path:
+        try:
+            return packet_files[name]
+        except KeyError as error:
+            raise ValueError(f"input packet does not include required file {name!r}") from error
+
+    geometry_path = packet_file("branch-hydraulic-geometry.json")
+    geometry_csv = packet_file("branch-centerline-sections.csv")
+    preview_path = packet_file("preview-geometry.json")
+    native_path = packet_file("native-initialization-dryline.json")
+    compact_cad_path = packet_file("geometry_summary.json")
+    compact_adapter_path = packet_file("geometry-adapter-short1.json")
+    air_thermo_path = packet_file("thermophysicalProperties.air")
+    water_thermo_path = packet_file("thermophysicalProperties.water")
+
+    geometry = json.loads(geometry_path.read_text(encoding="utf-8"))
+    preview = json.loads(preview_path.read_text(encoding="utf-8"))
+    native = json.loads(native_path.read_text(encoding="utf-8"))
+    compact_cad = json.loads(compact_cad_path.read_text(encoding="utf-8"))
+    compact_adapter = json.loads(compact_adapter_path.read_text(encoding="utf-8"))
+    thermo_text = air_thermo_path.read_text(encoding="utf-8")
+    water_thermo_text = water_thermo_path.read_text(encoding="utf-8")
     cp_match = re.search(r"\bCp\s+([0-9.eE+-]+)\s*;", thermo_text)
     mol_weight_match = re.search(r"\bmolWeight\s+([0-9.eE+-]+)\s*;", thermo_text)
     water_density_match = re.search(r"\brho\s+([0-9.eE+-]+)\s*;", water_thermo_text)
@@ -301,7 +406,11 @@ def _build_parameters(
         raise ValueError("could not read required current CFD thermophysical properties")
     air_cp_j_kg_k = float(cp_match.group(1))
     air_mol_weight_g_mol = float(mol_weight_match.group(1))
-    air_specific_gas_constant = 8314.46261815324 / air_mol_weight_g_mol
+    air_specific_gas_constant = float(
+        native.get("assumptions", {}).get(
+            "air_R_J_kg_K_installed_v2512", 8314.46261815324 / air_mol_weight_g_mol
+        )
+    )
     air_gamma = air_cp_j_kg_k / (air_cp_j_kg_k - air_specific_gas_constant)
     tank_volume_m3 = float(native["native_partition"]["groups"]["tankA"]["volume_m3"])
     tank_water_m3 = float(native["native_tank_water_integrals_m3"]["tankA"])
@@ -327,6 +436,8 @@ def _build_parameters(
             valve_cd=valve_cd,
             valve_opening_time_s=valve_opening_time_s,
             air_minor_loss_k=air_minor_loss_k,
+            geometry_csv=geometry_csv,
+            profile_metadata=geometry.get("profile"),
         )
         for name in ("upper", "lower")
     )
@@ -370,9 +481,21 @@ def _build_parameters(
             )
     native_upstream_feed = float(native["additional_wetted_feed_water_m3"]["tankA_feed"])
     model_upstream_feed = sum(item.initial_wet_volume_m3 for item in branches)
-    native_downstream_water = float(
-        native["native_partition"]["groups"]["downstreamTrainA"]["water_volume_m3"]
-    )
+    native_groups = native["native_partition"]["groups"]
+    native_train_group_water = float(native_groups["downstreamTrainA"]["water_volume_m3"])
+    if {"upstreamFeedA", "upstreamFeedB"}.issubset(native_groups):
+        native_downstream_water = native_train_group_water
+        native_train_group_scope = "downstream-only; upstream feed is a separate native group"
+    elif native.get("schema") == "i4f-flush-native-initialization-adapter/v1":
+        native_downstream_water = native_train_group_water - native_upstream_feed
+        native_train_group_scope = (
+            "full Tank A line/train; includes wetted feed through assumed seat"
+        )
+    else:
+        raise ValueError(
+            "unsupported native line-water partition: cannot determine whether "
+            "downstreamTrainA includes the separately measured upstream feed"
+        )
     model_downstream_water = 0.0
     tank_water_initial = tank.tank_volume_m3 * tank.fill_fraction
     model_headspace_m3 = tank.tank_volume_m3 - tank_water_m3
@@ -449,17 +572,28 @@ def _build_parameters(
         compact_cad["tank_metrics"]["downstream_line_volume_m3_each"][0]
     )
     native_full_line_zone_volume = float(native["native_partition"]["lineA_native_zone_volume_m3"])
+    coordinate_map_mode = str(
+        geometry.get("profile", {}).get("coordinate_map_mode", "legacy_x_only")
+    )
     geometry_summary = {
-        "source_bundle": str(INPUT_PACKET_DIR.relative_to(ROOT)),
+        "source_bundle": str(input_packet_dir.relative_to(ROOT))
+        if input_packet_dir.is_relative_to(ROOT)
+        else str(input_packet_dir),
+        "input_packet_schema": packet_manifest.get("schema"),
         "model_scope": "current compact 1-tank / 2-branch equivalent line, downstream air, wetted feed through assumed valve plane",
-        "source_centerline_is_legacy_preview_x_only_remapped_to_compact_current_candidate": True,
-        "coordinate_map": {
-            "remove_exposed_round_straight_x3p8_to_4p0_m": True,
-            "legacy_x_at_or_below_3p8_unchanged": True,
-            "legacy_x_at_or_above_4p0_m": "x_compact=3.8+(x_legacy-4.0)/1.8",
-            "y_z_mapping": "retain legacy preview y,z; recompute 3D polyline arclength after x map",
-            "compact_mouth_x_m": COMPACT_MOUTH_X_M,
-        },
+        "source_centerline_is_legacy_preview_x_only_remapped_to_compact_current_candidate": coordinate_map_mode
+        == "legacy_x_only",
+        "coordinate_map": geometry.get(
+            "profile",
+            {
+                "coordinate_map_mode": "legacy_x_only",
+                "remove_exposed_round_straight_x3p8_to_4p0_m": True,
+                "legacy_x_at_or_below_3p8_unchanged": True,
+                "legacy_x_at_or_above_4p0_m": "x_compact=3.8+(x_legacy-4.0)/1.8",
+                "y_z_mapping": "retain legacy preview y,z; recompute 3D polyline arclength after x map",
+                "compact_mouth_x_m": COMPACT_MOUTH_X_M,
+            },
+        ),
         "seat_x_m_assumed": VALVE_PLANE_X_M,
         "tank_state_from_current_dryline_native_initialization": {
             "tank_identity": "tankA representative; tankB differs by sub-microlitre capacity",
@@ -471,7 +605,10 @@ def _build_parameters(
             "air_Cp_J_kg_K": air_cp_j_kg_k,
             "air_molecular_weight_g_mol": air_mol_weight_g_mol,
             "air_R_J_kg_K": air_specific_gas_constant,
-            "air_gamma_and_selected_polytropic_n": air_gamma,
+            "air_R_J_kg_K_for_gamma": air_specific_gas_constant,
+            "air_gamma_from_thermophysical_properties": air_gamma,
+            "default_polytropic_exponent_n": air_gamma,
+            "air_R_J_kg_K_in_air_mach_screen": R_AIR_J_KG_K,
             "water_density_kg_m3": water_density_kg_m3,
             "water_dynamic_viscosity_Pa_s": water_viscosity_pa_s,
             "tank_diameter_m": tank_diameter_m,
@@ -486,8 +623,15 @@ def _build_parameters(
             * (model_upstream_feed / native_upstream_feed - 1.0),
             "interpretation": "provisional 1-D centerline integral vs cell-zone volume, not normalized",
         },
+        "line_zone_water_partition": {
+            "native_downstream_train_group_water_m3": native_train_group_water,
+            "native_downstream_train_group_scope": native_train_group_scope,
+            "native_wetted_feed_water_m3": native_upstream_feed,
+            "inferred_downstream_water_m3": native_downstream_water,
+            "interpretation": "Native downstream inventory follows the group scope declared above.",
+        },
         "native_initialization_input_comparison": {
-            "source": str(NATIVE_INIT_JSON.relative_to(ROOT)),
+            "source": native_path.name,
             "all_direct_state_assertions_pass": input_assertions_pass,
             "assertions": input_comparison,
         },
@@ -498,7 +642,9 @@ def _build_parameters(
         ),
         "equivalent_minus_native_full_line_zone_percent": 100.0
         * (sum(item.full_wet_volume_m3 for item in branches) / native_full_line_zone_volume - 1.0),
-        "actual_compact_geometry_adapter": str(COMPACT_ADAPTER_JSON.relative_to(ROOT)),
+        "actual_compact_geometry_adapter": compact_adapter_path.name,
+        "profile_area_samples": geometry.get("profile", {}).get("transition_area_samples"),
+        "join_volume_change": geometry.get("join_volume_change"),
         "branches": {
             item.branch.name: {
                 "initial_front_s_m": item.initial_front_s_m,
@@ -525,8 +671,9 @@ def _build_parameters(
         ),
         "equivalent_minus_compact_cad_percent": 100.0
         * (sum(item.full_wet_volume_m3 for item in branches) / cad_line_volume_per_tank - 1.0),
-        "native_initialization_path": str(NATIVE_INIT_JSON.relative_to(ROOT)),
-        "compact_geometry_summary_path": str(COMPACT_GEOMETRY_JSON.relative_to(ROOT)),
+        "native_initialization_path": native_path.name,
+        "compact_geometry_summary_path": compact_cad_path.name,
+        "packet_source_hashes": packet_manifest.get("source_hashes", {}),
     }
     return parameters, geometry_summary
 
@@ -591,14 +738,20 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=__doc__,
         epilog=(
-            "Frozen input files and provenance are in "
-            "experiments/i4f_filling_reference/inputs/ and inputs-manifest.json. "
-            "Those inputs remain provisional; see the manifest for model limits."
+            "Choose an immutable packet with --input-packet. The default remains "
+            "experiments/i4f_filling_reference; each packet manifest records its inputs and limits."
         ),
     )
     parser.add_argument("--output-root", type=Path, default=ROOT / "results/runs")
+    parser.add_argument("--input-packet", type=Path, default=INPUT_PACKET_DIR)
     parser.add_argument("--time-step", type=float, default=5.0e-5)
     parser.add_argument("--max-time", type=float, default=0.05)
+    parser.add_argument(
+        "--polytropic-n",
+        type=float,
+        default=None,
+        help="optional gas exponent sensitivity; default uses the packet's dry-air gamma",
+    )
     parser.add_argument("--valve-cd", type=float, default=0.7)
     parser.add_argument("--valve-opening-time", type=float, default=1.0)
     parser.add_argument(
@@ -612,48 +765,63 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    input_packet_dir = args.input_packet.resolve()
+    packet_manifest, packet_files = _read_input_packet(input_packet_dir)
     parameters, geometry_summary = _build_parameters(
         valve_cd=args.valve_cd,
         valve_opening_time_s=args.valve_opening_time,
         air_minor_loss_k=args.air_minor_loss_k,
+        input_packet_dir=input_packet_dir,
     )
+    if args.polytropic_n is not None:
+        if not math.isfinite(args.polytropic_n) or args.polytropic_n <= 0:
+            raise ValueError("--polytropic-n must be finite and positive")
+        parameters = replace(
+            parameters,
+            network=replace(
+                parameters.network,
+                gas=replace(parameters.gas, polytropic_n=args.polytropic_n),
+            ),
+        )
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     run_dir = args.output_root.resolve() / f"i4f-filling-network-{stamp}"
     run_dir.mkdir(parents=True, exist_ok=False)
     (run_dir / "inputs").mkdir()
     (run_dir / "source_snapshot").mkdir()
-    input_paths = (
-        INPUT_MANIFEST,
-        GEOMETRY_JSON,
-        GEOMETRY_CSV,
-        PREVIEW_JSON,
-        NATIVE_INIT_JSON,
-        COMPACT_GEOMETRY_JSON,
-        COMPACT_ADAPTER_JSON,
-        AIR_THERMO,
-        WATER_THERMO,
-    )
+    input_manifest_path = input_packet_dir / "inputs-manifest.json"
+    input_paths = (input_manifest_path, *packet_files.values())
     for path in input_paths:
         (run_dir / "inputs" / path.name).write_bytes(path.read_bytes())
 
-    source_paths = (
-        ROOT / "src/aerial_drop/i4f_filling_network.py",
-        ROOT / "src/aerial_drop/i4f_reduced_network.py",
-        ROOT / "src/aerial_drop/i4f_reduced.py",
-        Path(__file__).resolve(),
-        INPUT_MANIFEST,
-        GEOMETRY_JSON,
-        GEOMETRY_CSV,
-        PREVIEW_JSON,
-        NATIVE_INIT_JSON,
-        COMPACT_GEOMETRY_JSON,
-        COMPACT_ADAPTER_JSON,
-        AIR_THERMO,
-        WATER_THERMO,
+    source_paths = list(
+        (
+            ROOT / "src/aerial_drop/i4f_filling_network.py",
+            ROOT / "src/aerial_drop/i4f_reduced_network.py",
+            ROOT / "src/aerial_drop/i4f_reduced.py",
+            Path(__file__).resolve(),
+            input_manifest_path,
+            *packet_files.values(),
+        )
     )
+    for relative in packet_manifest.get("source_hashes", {}):
+        source_relative = Path(relative)
+        if source_relative.is_absolute() or ".." in source_relative.parts:
+            continue
+        source_path = ROOT / source_relative
+        if source_path.is_file() and source_path not in source_paths:
+            source_paths.append(source_path)
+    source_paths = list(dict.fromkeys(path.resolve() for path in source_paths))
     source_hashes = {
         str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path): _sha256(path)
         for path in source_paths
+    }
+    packet_source_provenance = {
+        relative: {
+            "declared_sha256": declared,
+            "current_sha256": source_hashes.get(relative),
+            "matches": source_hashes.get(relative) == declared,
+        }
+        for relative, declared in packet_manifest.get("source_hashes", {}).items()
     }
     for path in source_paths:
         if path.is_relative_to(ROOT):
@@ -692,6 +860,8 @@ def main() -> int:
         "utc_simulation_started_at": simulation_started_at,
         "git": _git_info(),
         "source_sha256": source_hashes,
+        "packet_declared_source_sha256": packet_manifest.get("source_hashes", {}),
+        "packet_source_provenance": packet_source_provenance,
         "input_assumptions": {
             "initial_wet_upstream_line_water_m3": result.initial_wet_line_water_volume_m3,
             "case_scope": "current compact one-tank / two-branch candidate, 4.8 m mouth",
@@ -702,7 +872,11 @@ def main() -> int:
             "gas_initial_pressure_absolute_Pa": parameters.gas.initial_pressure_abs_Pa,
             "gas_initial_temperature_K": parameters.gas.initial_temperature_K,
             "gas_polytropic_n_assumed": parameters.gas.polytropic_n,
-            "air_gamma_from_current_thermophysicalProperties": parameters.gas.polytropic_n,
+            "air_gamma_from_packet_thermophysicalProperties": parameters.air_gamma,
+            "air_R_J_kg_K_for_gamma": geometry_summary[
+                "tank_state_from_current_dryline_native_initialization"
+            ]["air_R_J_kg_K"],
+            "air_R_J_kg_K_in_air_mach_screen": R_AIR_J_KG_K,
             "ambient_pressure_Pa": parameters.gas.ambient_pressure_Pa,
             "downstream_air_temperature_K": parameters.air_temperature_K,
             "front_pressure_model": "ambient static pressure; declared vented approximation",
@@ -734,7 +908,7 @@ def main() -> int:
             },
             "route_geometry": geometry_summary,
             "dimensions_and_centerlines_are_provisional_preview_not_measurements": True,
-            "native_initialization_source": str(NATIVE_INIT_JSON.relative_to(ROOT)),
+            "native_initialization_source": geometry_summary["native_initialization_path"],
             "actual_initial_wet_feed_reference_m3": geometry_summary["initial_wet_feed_comparison"][
                 "native_tankA_feed_zone_m3"
             ],
@@ -780,7 +954,12 @@ def main() -> int:
             "total_external_water_volume_m3": result.total_external_water_volume_m3,
         },
         "caveats": [
-            "legacy branch preview coordinates are transformed to the current 4.8 m compact candidate by the frozen x-only map; y/z are retained and 3D arclength is recomputed",
+            (
+                "current branch centerlines use the packet's direct compact CAD-generator coordinates"
+                if geometry_summary["coordinate_map"].get("coordinate_map_mode")
+                == "identity_compact"
+                else "legacy branch preview coordinates are transformed to the current 4.8 m compact candidate by the frozen x-only map; y/z are retained and 3D arclength is recomputed"
+            ),
             "current dry-line native initialization supplies tank capacity, water, pressure, temperature, air thermo and wetted upstream-feed reference; Tank A is modeled as representative",
             "compact line areas and transition losses remain an equivalent-line approximation; the network line volume is compared against current compact CAD and native zones",
             "single full-bore water front per branch; no stratification, slugs, or trapped pockets",

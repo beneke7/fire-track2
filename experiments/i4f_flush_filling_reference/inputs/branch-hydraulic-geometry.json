@@ -1,0 +1,219 @@
+{
+  "branches": [
+    {
+      "branch": "lower",
+      "exact_tank_wall_aperture_section": {
+        "qualification": "projected-section estimate retained from prior centerline audit; provisional, not measured intake crown",
+        "sampled_curve_crown_z_m": 0.9464149176201075
+      },
+      "mouth_center_xyz_m": [
+        4.8,
+        -0.55,
+        0.65
+      ],
+      "source": "current generator Bezier/straight centerline; current flush-at-inlet CAD transition",
+      "tank_index": 1,
+      "tank_sidewall_centerline_crossing_xyz_m": [
+        0.5647807006063451,
+        -0.7491998568178657,
+        0.8464911190026398
+      ],
+      "tank_sidewall_crossing_bezier_t": 0.35584094072063055,
+      "valve_seat_x_m_assumed": 2.25
+    },
+    {
+      "branch": "upper",
+      "exact_tank_wall_aperture_section": {
+        "qualification": "projected-section estimate retained from prior centerline audit; provisional, not measured intake crown",
+        "sampled_curve_crown_z_m": 1.0118300605414665
+      },
+      "mouth_center_xyz_m": [
+        4.8,
+        -0.55,
+        0.9
+      ],
+      "source": "current generator Bezier/straight centerline; current flush-at-inlet CAD transition",
+      "tank_index": 1,
+      "tank_sidewall_centerline_crossing_xyz_m": [
+        0.5801305723801888,
+        -0.29717258199178503,
+        0.8777389401195722
+      ],
+      "tank_sidewall_crossing_bezier_t": 0.3727058753514184,
+      "valve_seat_x_m_assumed": 2.25
+    }
+  ],
+  "caveats": [
+    "Native cell-zone tank volume is used instead of ideal CAD tank capacity; CAD capacity differs by ~5.25 L/tank.",
+    "The initial wet prefix is set by the assumed x=2.25 m seat; centerline-area integral is compared with native wetted-feed inventory and is not forced by rescaling.",
+    "Transition areas use sparse current CAD BREP normal-section samples at five discrete locations and piecewise linear interpolation. No continuous area profile/minimum is asserted.",
+    "The intermediate BREP section normal is oblique to the ruled loft station plane; hydraulic diameter is an equivalent 4A/P estimate for assumed rectangles, linearly interpolated.",
+    "Tank-side intake crown remains a projected-section estimate from the matching generated centerline, not a measured physical lip.",
+    "Branches use provisional CAD assumptions, not manufacturing measurements; moving-front assumes full-bore liquid and ambient front pressure."
+  ],
+  "centerline_integrals_by_branch": {
+    "lower": {
+      "full_area_integral_m3": 0.3478997429645903,
+      "full_inertance_integral_m_minus1": 57.969276196283985,
+      "initial_wet_feed_integral_m3": 0.12624000797083246,
+      "initial_wet_inertance_integral_m_minus1": 25.2657521592551,
+      "path_length_m": 4.395520751954957
+    },
+    "upper": {
+      "full_area_integral_m3": 0.35268830321820716,
+      "full_inertance_integral_m_minus1": 58.927661564855,
+      "initial_wet_feed_integral_m3": 0.12640831363615854,
+      "initial_wet_inertance_integral_m_minus1": 25.29943695772335,
+      "path_length_m": 4.4632650217022
+    }
+  },
+  "coordinate_frame": "SI; +X discharge, +Z up; Tank A y=-0.55 m; one tank / lower and upper branches.",
+  "join_volume_change": {
+    "current_flush_BREP_line_volume_outside_tank_total_m3": 1.3718795220108815,
+    "current_join_mode": "flush-at-inlet",
+    "flush_minus_legacy_total_L": -1.011870172325846,
+    "flush_minus_legacy_total_m3": -0.001011870172325846,
+    "legacy_join_mode": "legacy-overlap",
+    "legacy_overlap_BREP_line_volume_outside_tank_total_m3": 1.3728913921832073,
+    "per_tank_difference_L": -0.505935086162923,
+    "scope": "BREP outside-tank line volume; not a measured CFD inventory."
+  },
+  "model_scope": "One tank / two separate lower-upper branches represents tank A only; no exact two-tank/four-outlet coupling.",
+  "native_zone_and_reduced_profile_comparison": {
+    "limitations": "Native mesh zone volumes are available, but no native centerline integral of ds/A is asserted. The one-dimensional inertance values are derived from this sampled centerline and the packet area profile.",
+    "model_branch_geometric_inertance_integral_m_minus1": {
+      "lower": 57.96929085021658,
+      "upper": 58.92767621878763
+    },
+    "model_minus_current_flush_BREP_line_volume_per_tank_m3": 0.014648033505872737,
+    "model_minus_current_flush_BREP_line_volume_per_tank_percent": 2.1354693718879716,
+    "model_minus_tankA_native_full_line_zone_m3": 0.014279991812040871,
+    "model_minus_tankA_native_full_line_zone_percent": 2.0806978670324217,
+    "model_minus_tankA_native_initial_feed_m3": 0.0015914778111367212,
+    "model_minus_tankA_native_initial_feed_percent": 0.633911343373228,
+    "model_two_branch_full_area_integral_m3": 0.7005877945113135,
+    "model_two_branch_initial_wet_area_integral_m3": 0.252648321606991,
+    "tankA_full_line_zone_m3": 0.6863078026992726,
+    "tankA_wetted_feed_m3": 0.2510568437958543,
+    "tankB_wetted_feed_m3": 0.2511091493075715
+  },
+  "profile": {
+    "area_interpolation": "Linear in centerline arclength between sparse exact BREP section samples; pipe is analytic circular area before x=3.8.",
+    "centerline_samples": {
+      "coordinate_representation": "Direct current compact CAD-generator x,y,z coordinates; 3D polyline arclength is recomputed from rows.",
+      "interpretation": "A sampled provisional centerline, not a measured centerline or exact watertight CAD medial axis.",
+      "rows_per_branch": 350,
+      "source": "Current scripts/i4f_four_outlet_geometry/generate.py branch_pipe Bezier/straight centerline equations."
+    },
+    "coordinate_map_mode": "identity_compact",
+    "hydraulic_diameter_profile": {
+      "basis": "round pipe ID followed by 4A/P for assumed rectangular transition sections; linearly interpolated as an equivalent-loss diameter",
+      "diameter_m": [
+        0.3,
+        0.3,
+        0.23076923076923075,
+        0.2608695652173913,
+        0.2608695652173913
+      ],
+      "x_m": [
+        0.0,
+        3.8,
+        4.2444444444444445,
+        4.633333333333333,
+        4.8
+      ]
+    },
+    "hydraulic_transition_station_x_m": [
+      3.8,
+      3.8634920634920635,
+      3.926984126984127,
+      3.9904761904761905,
+      4.053968253968254,
+      4.117460317460317,
+      4.180952380952381,
+      4.2444444444444445,
+      4.3,
+      4.355555555555555,
+      4.4111111111111105,
+      4.466666666666667,
+      4.522222222222222,
+      4.5777777777777775,
+      4.633333333333333
+    ],
+    "lamella_treatment": {
+      "area_used_by_reduced_model": "Gross envelope section area, consistent with zero geometric-volume blockage.",
+      "current_CFD_patch_names": [
+        "lamellaMaster",
+        "lamellaSlave"
+      ],
+      "current_CFD_wall_model": "Zero-thickness wall mid-surfaces; finite 4 mm display solids are not used as flow blockage.",
+      "friction_limit": "The equivalent hydraulic-diameter profile is based on assumed rectangular sections and does not add the zero-thickness divider surfaces to wetted perimeter; downstream lamella friction is therefore not represented exactly."
+    },
+    "mouth_x_m": 4.8,
+    "transition_area_samples": [
+      {
+        "area_m2": 0.07068583470577035,
+        "x_m": 3.8
+      },
+      {
+        "area_m2": 0.07068583470577036,
+        "x_m": 3.800000555555555
+      },
+      {
+        "area_m2": 0.07068999053579164,
+        "x_m": 3.8000555555555553
+      },
+      {
+        "area_m2": 0.08574094729138826,
+        "x_m": 4.24445
+      },
+      {
+        "area_m2": 0.1499999999999999,
+        "x_m": 4.633338888888888
+      },
+      {
+        "area_m2": 0.1499999999999999,
+        "x_m": 4.799944444444444
+      }
+    ],
+    "transition_end_x_m": 4.633333333333333,
+    "transition_intermediate_x_m": 4.2444444444444445,
+    "transition_start_x_m": 3.8
+  },
+  "purpose": "Current flush-at-inlet geometry-derived 1-D reference inputs; no CFD-flow fitting.",
+  "qualification_additions": [
+    "The current CFD boundary contains zero-thickness lamellaMaster/lamellaSlave wall surfaces. Gross section areas are retained because these walls have no modeled solid thickness; finite 4 mm CAD display solids are not used for CFD blockage.",
+    "The reduced hydraulic-diameter estimate does not yet include added lamella wetted perimeter, so line friction through the divided transition is an equivalent-line approximation.",
+    "The model is one representative Tank A with its distinct lower and upper branches. It is not an exact symmetric two-tank/four-branch network."
+  ],
+  "schema": "i4f-flush-cad-hydraulic-profile/v1",
+  "source_centerline": "Current scripts/i4f_four_outlet_geometry/generate.py branch_pipe Bezier/straight spine sampled along arclength; transition centerline follows current ruled loft stations.",
+  "source_sha256": {
+    "experiments/i4f_filling_reference/inputs/branch-hydraulic-geometry.json": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+    "experiments/i4f_flush_filling_reference/inputs/legacy-branch-hydraulic-geometry.json": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+    "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/final-canonical-readiness-v4.json": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+    "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/geometry-adapter-short1.json": "82033634344db89f9d897aab3339b41594dc0791f8c23a2f2919e35369099d8e",
+    "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/geometry/four_pipe_transition_joined_branches.step": "d9728b4784d7daf96c77f58e2bb30f7edc2093d195804f489314fb434df54f85",
+    "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/geometry_summary.json": "53d9aac2e2f59a6228f7e8d2e6b2b123e8cff8d59bbb312f2ddcc6b279c31e6e",
+    "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/transition_sections.csv": "11ade9395722efcfcc9f48a8d7a22b3b58b84274cecaeabc97ae7945b53acb08",
+    "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/native-initialization-dryline.json": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+    "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+    "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "scripts/i4f_four_outlet_geometry/generate.py": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2"
+  },
+  "tank_native_state": {
+    "CAD_flat_cylinder_capacity_m3": 1.65375,
+    "assumed_initial_p_abs_Pa": 1200000.0,
+    "initial_T_K": 293.15,
+    "initial_tank_diameter_m": 0.9,
+    "model_effective_length_from_native_volume_m": 2.5912738579569825,
+    "native_feed_water_tankA_m3": 0.2510568437958543,
+    "native_minus_CAD_capacity_m3": -0.005252799591620061,
+    "tankA_gas_m3": 0.29849720040624456,
+    "tankA_volume_m3": 1.64849720040838,
+    "tankA_water_m3": 1.3500000000021357,
+    "tankB_gas_m3": 0.29849676832569794,
+    "tankB_volume_m3": 1.6484967683262028,
+    "tankB_water_m3": 1.3500000000005044
+  }
+}

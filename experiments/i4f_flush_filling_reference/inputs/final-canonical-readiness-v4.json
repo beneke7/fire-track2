@@ -1,0 +1,718 @@
+{
+  "active_valve_source": {
+    "fvOptions_cell_zone": "valveSourceBand",
+    "fvOptions_cell_zone_sha256": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+    "source_union_all_cells_fully_wet_by_alphaV": true,
+    "source_union_cells": 21504,
+    "source_union_total_volume_m3": 0.08410627022817294,
+    "source_union_water_m3": 0.08410627022817294,
+    "zone_name_note": "The inherited allFourValves cellZone is a mixed diagnostic mask and is not the active fvOptions source; stock fvOptions selects valveSourceBand."
+  },
+  "case": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+  "case_input_sha256": {
+    "constant/fvOptions": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+    "constant/g": "d804fb8237e3d43e2bc905c06f69010fd52d84592fc955b05cb415c10e3a7196",
+    "constant/thermophysicalProperties": "3834b3aa09f26cdc434a9fd0e81c5d6d43ae357a4d23f8e661f2320f8ce77ae0",
+    "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+    "constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "system/branchColdstartTopoSetDict": "a2cac55161779df8e82a125da86d56ecc57bb742975800ffb1e24f7c44cedc97",
+    "system/controlDict": "0d9037486fcbad2fddd45bda570a84c408e3258f637476493d6813fa98df2c1a",
+    "system/decomposeParDict": "21bc6540a2497b77cdde35c4be8609eb6bfcd2e38f6acf6e6824f1e7729355ba",
+    "system/fvSchemes": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+    "system/fvSolution": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+    "system/topoSetDict": "31934c932701efae8de467d840cd90cd35738f27cb53307220f3593b17c3afe5"
+  },
+  "cell_zones": {
+    "count": 19,
+    "counts_and_phase_volumes": {
+      "allFourValves": {
+        "V_m3": 0.08410397948276717,
+        "cells": 21504,
+        "gas_m3_(1-alpha)V": 0.04205132048912734,
+        "water_m3_alphaV": 0.04205265899363985
+      },
+      "externalAirZone": {
+        "V_m3": 20.472101059491724,
+        "cells": 122413,
+        "gas_m3_(1-alpha)V": 20.47210105949173,
+        "water_m3_alphaV": 0.0
+      },
+      "lineAInitialZone": {
+        "V_m3": 0.6809413901296786,
+        "cells": 66059,
+        "gas_m3_(1-alpha)V": 0.42988454633382456,
+        "water_m3_alphaV": 0.25105684379585436
+      },
+      "lineAMouthBoundaryZone": {
+        "V_m3": 0.005366412569594204,
+        "cells": 448,
+        "gas_m3_(1-alpha)V": 0.005366412569594204,
+        "water_m3_alphaV": 0.0
+      },
+      "lineAZone": {
+        "V_m3": 0.6863078026992726,
+        "cells": 66507,
+        "gas_m3_(1-alpha)V": 0.43525095890341886,
+        "water_m3_alphaV": 0.2510568437958543
+      },
+      "lineBInitialZone": {
+        "V_m3": 0.680997569720632,
+        "cells": 66168,
+        "gas_m3_(1-alpha)V": 0.4298884204130606,
+        "water_m3_alphaV": 0.25110914930757156
+      },
+      "lineBMouthBoundaryZone": {
+        "V_m3": 0.0053665182633839655,
+        "cells": 448,
+        "gas_m3_(1-alpha)V": 0.005366518263383965,
+        "water_m3_alphaV": 0.0
+      },
+      "lineBZone": {
+        "V_m3": 0.6863640879840159,
+        "cells": 66616,
+        "gas_m3_(1-alpha)V": 0.4352549386764445,
+        "water_m3_alphaV": 0.2511091493075716
+      },
+      "tankAHeadspaceZone": {
+        "V_m3": 0.2564288080107045,
+        "cells": 2920,
+        "gas_m3_(1-alpha)V": 0.25629570395191836,
+        "water_m3_alphaV": 0.0001331040587862157
+      },
+      "tankAWaterZone": {
+        "V_m3": 1.3920683923976753,
+        "cells": 18919,
+        "gas_m3_(1-alpha)V": 0.04220149645432626,
+        "water_m3_alphaV": 1.3498668959433495
+      },
+      "tankAZone": {
+        "V_m3": 1.64849720040838,
+        "cells": 21839,
+        "gas_m3_(1-alpha)V": 0.29849720040624456,
+        "water_m3_alphaV": 1.3500000000021357
+      },
+      "tankBHeadspaceZone": {
+        "V_m3": 0.25642680849465715,
+        "cells": 2920,
+        "gas_m3_(1-alpha)V": 0.25629367716469875,
+        "water_m3_alphaV": 0.00013313132995843979
+      },
+      "tankBWaterZone": {
+        "V_m3": 1.3920699598315458,
+        "cells": 18919,
+        "gas_m3_(1-alpha)V": 0.04220309116099922,
+        "water_m3_alphaV": 1.3498668686705462
+      },
+      "tankBZone": {
+        "V_m3": 1.6484967683262028,
+        "cells": 21839,
+        "gas_m3_(1-alpha)V": 0.29849676832569794,
+        "water_m3_alphaV": 1.3500000000005044
+      },
+      "valveBandA1": {
+        "V_m3": 0.02102614948303455,
+        "cells": 5376,
+        "gas_m3_(1-alpha)V": 0.0,
+        "water_m3_alphaV": 0.02102614948303455
+      },
+      "valveBandA2": {
+        "V_m3": 0.021026985560674186,
+        "cells": 5376,
+        "gas_m3_(1-alpha)V": 0.0,
+        "water_m3_alphaV": 0.021026985560674186
+      },
+      "valveBandB1": {
+        "V_m3": 0.021026149665387482,
+        "cells": 5376,
+        "gas_m3_(1-alpha)V": 0.0,
+        "water_m3_alphaV": 0.021026149665387482
+      },
+      "valveBandB2": {
+        "V_m3": 0.021026985519076724,
+        "cells": 5376,
+        "gas_m3_(1-alpha)V": 0.0,
+        "water_m3_alphaV": 0.021026985519076724
+      },
+      "valveSourceBand": {
+        "V_m3": 0.08410627022817294,
+        "cells": 21504,
+        "gas_m3_(1-alpha)V": 0.0,
+        "water_m3_alphaV": 0.08410627022817294
+      }
+    },
+    "expected_names_match": true,
+    "names": [
+      "tankAZone",
+      "tankBZone",
+      "lineAZone",
+      "lineBZone",
+      "tankAWaterZone",
+      "tankBWaterZone",
+      "tankAHeadspaceZone",
+      "tankBHeadspaceZone",
+      "lineAInitialZone",
+      "lineBInitialZone",
+      "lineAMouthBoundaryZone",
+      "lineBMouthBoundaryZone",
+      "externalAirZone",
+      "allFourValves",
+      "valveBandA1",
+      "valveBandA2",
+      "valveBandB1",
+      "valveBandB2",
+      "valveSourceBand"
+    ],
+    "source_bands": {
+      "all_four_branch_masks_pairwise_disjoint": true,
+      "per_branch_cells": {
+        "A1": 5376,
+        "A2": 5376,
+        "B1": 5376,
+        "B2": 5376
+      },
+      "source_union_volume_m3": 0.08410627022817294,
+      "source_union_water_m3": 0.08410627022817294,
+      "source_union_zone_cells": 21504,
+      "unique_union_cells": 21504
+    }
+  },
+  "created_utc": "2026-10-26T06:19:28.428759+00:00",
+  "dynamic_code_artifacts": [
+    {
+      "bytes": 42,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/Make/SHA1Digest",
+      "sha256": "405918baf7474446d6bd548f2981a1911daf0f5c6935ac293fda0c186d2c63e6"
+    },
+    {
+      "bytes": 229,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/Make/files",
+      "sha256": "c0897942630cd16c2508f17475b6dceba3ea6a0a826bcc99e4d1b0a78b9d3f9c"
+    },
+    {
+      "bytes": 454,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/Make/linux64GccDPInt32Opt/options",
+      "sha256": "69e2d6fdf1406a75165cef4b89bcc20d5616e60e877d095797a9e2f364e88cd9"
+    },
+    {
+      "bytes": 231,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/Make/options",
+      "sha256": "b939333a7c5e905462143438bfeac1acb2bae54b2af0586eccce6bd37e3e3255"
+    },
+    {
+      "bytes": 6861,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/fixedValueFvPatchFieldTemplate.C",
+      "sha256": "718d19b7b086e38a283ed1056fadec806f0259a7f5346c97ad56eb1d8451cd06"
+    },
+    {
+      "bytes": 5078,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/fixedValueFvPatchFieldTemplate.H",
+      "sha256": "829ac25a93dc7adb6eae8764a53fb067270ce21b1c6a8d48189168e7ca2db38d"
+    },
+    {
+      "bytes": 6861,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/lnInclude/fixedValueFvPatchFieldTemplate.C",
+      "sha256": "718d19b7b086e38a283ed1056fadec806f0259a7f5346c97ad56eb1d8451cd06"
+    },
+    {
+      "bytes": 5078,
+      "path": "dynamicCode/i4fCompressibleAmbientReservoirPRgh/lnInclude/fixedValueFvPatchFieldTemplate.H",
+      "sha256": "829ac25a93dc7adb6eae8764a53fb067270ce21b1c6a8d48189168e7ca2db38d"
+    },
+    {
+      "bytes": 2708160,
+      "path": "dynamicCode/platforms/linux64GccDPInt32Opt/lib/libi4fCompressibleAmbientReservoirPRgh_2acff838abf6b702bda12d8b07e539ed0b11c766.so",
+      "sha256": "28a38b3ab666c21864af6a449ee4b7a62a276e6c1c5ba976c32a8d59f20a90a2"
+    }
+  ],
+  "face_zones": {
+    "count": 10,
+    "names": [
+      "lamellaMidSurfaceZone",
+      "lamellae",
+      "sourceStartA1",
+      "valveSeatA1",
+      "sourceStartA2",
+      "valveSeatA2",
+      "sourceStartB1",
+      "valveSeatB1",
+      "sourceStartB2",
+      "valveSeatB2"
+    ],
+    "seat_face_ids_pairwise_disjoint": true,
+    "valve_seat_native_face_metrics": {
+      "valveSeatA1": {
+        "area_m2": 0.07008572441655037,
+        "area_ratio_to_pi_0p15_squared": 0.9915101760951407,
+        "downstream_face_adjacent_p_abs_area_mean_Pa": 100000.0,
+        "downstream_face_adjacent_p_abs_min_max_Pa": [
+          100000.0,
+          100000.0
+        ],
+        "face_area_min_max_m2": [
+          0.0002846484084519536,
+          0.000808518678734874
+        ],
+        "native_internal_faces": 112,
+        "oriented_area_vector_m2": [
+          0.07008572441641656,
+          -2.7397846658061553e-08,
+          -9.518646537642894e-09
+        ],
+        "upstream_face_adjacent_alpha_area_mean": 1.0,
+        "upstream_face_adjacent_p_abs_area_mean_Pa": 1209637.0225255166,
+        "upstream_face_adjacent_p_abs_min_max_Pa": [
+          1208268.2266782,
+          1211005.7673565
+        ]
+      },
+      "valveSeatA2": {
+        "area_m2": 0.07008771143938916,
+        "area_ratio_to_pi_0p15_squared": 0.9915382867179701,
+        "downstream_face_adjacent_p_abs_area_mean_Pa": 99999.99999999999,
+        "downstream_face_adjacent_p_abs_min_max_Pa": [
+          100000.0,
+          100000.0
+        ],
+        "face_area_min_max_m2": [
+          0.0002842707393967823,
+          0.0008079183172151662
+        ],
+        "native_internal_faces": 112,
+        "oriented_area_vector_m2": [
+          0.07008771143925906,
+          -1.798718979317826e-08,
+          2.4124454572893583e-08
+        ],
+        "upstream_face_adjacent_alpha_area_mean": 1.0,
+        "upstream_face_adjacent_p_abs_area_mean_Pa": 1209637.0726824244,
+        "upstream_face_adjacent_p_abs_min_max_Pa": [
+          1208268.3149218,
+          1211005.7921487
+        ]
+      },
+      "valveSeatB1": {
+        "area_m2": 0.07008572534663378,
+        "area_ratio_to_pi_0p15_squared": 0.9915101892531294,
+        "downstream_face_adjacent_p_abs_area_mean_Pa": 100000.00000000001,
+        "downstream_face_adjacent_p_abs_min_max_Pa": [
+          100000.0,
+          100000.0
+        ],
+        "face_area_min_max_m2": [
+          0.0002846484280869417,
+          0.0008085187562478258
+        ],
+        "native_internal_faces": 112,
+        "oriented_area_vector_m2": [
+          0.07008572534649928,
+          -2.7397846158461192e-08,
+          -9.518648980133548e-09
+        ],
+        "upstream_face_adjacent_alpha_area_mean": 1.0,
+        "upstream_face_adjacent_p_abs_area_mean_Pa": 1209637.0323837902,
+        "upstream_face_adjacent_p_abs_min_max_Pa": [
+          1208268.2365485,
+          1211005.7772053
+        ]
+      },
+      "valveSeatB2": {
+        "area_m2": 0.07008771184355816,
+        "area_ratio_to_pi_0p15_squared": 0.9915382924357918,
+        "downstream_face_adjacent_p_abs_area_mean_Pa": 99999.99999999999,
+        "downstream_face_adjacent_p_abs_min_max_Pa": [
+          100000.0,
+          100000.0
+        ],
+        "face_area_min_max_m2": [
+          0.0002842706941224286,
+          0.0008079183387034911
+        ],
+        "native_internal_faces": 112,
+        "oriented_area_vector_m2": [
+          0.07008771184342784,
+          -1.801082866181858e-08,
+          2.4117780106358566e-08
+        ],
+        "upstream_face_adjacent_alpha_area_mean": 1.0,
+        "upstream_face_adjacent_p_abs_area_mean_Pa": 1209637.0825399833,
+        "upstream_face_adjacent_p_abs_min_max_Pa": [
+          1208268.3247599,
+          1211005.8020171
+        ]
+      }
+    }
+  },
+  "global_initial_inventory": {
+    "all_four_valve_zone_m3": {
+      "V_m3": 0.08410397948276717,
+      "cells": 21504,
+      "gas_m3_(1-alpha)V": 0.04205132048912734,
+      "water_m3_alphaV": 0.04205265899363985
+    },
+    "feedA_m3": {
+      "V_m3": 0.6809413901296786,
+      "cells": 66059,
+      "gas_m3_(1-alpha)V": 0.42988454633382456,
+      "water_m3_alphaV": 0.25105684379585436
+    },
+    "feedB_m3": {
+      "V_m3": 0.680997569720632,
+      "cells": 66168,
+      "gas_m3_(1-alpha)V": 0.4298884204130606,
+      "water_m3_alphaV": 0.25110914930757156
+    },
+    "gas_m3_(1-alpha)V": 21.939600925803575,
+    "gravity_vector_m_s2": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "hydrostatic_relation": "OpenFOAM p_rgh = p - rho*gh, with gh=g dot C and g=(0,0,-9.81), so p_rgh = p + rho_mix*9.81*z. rho_mix=alpha*998.2+(1-alpha)*p/(287.0477481284761*293.15); evaluated at canonical mesh cell centres.",
+    "max_abs_p_rgh_hydrostatic_relation_residual_Pa": 0.36869071586988866,
+    "p_abs_min_max_Pa": [
+      100000.0,
+      1211011.7118868
+    ],
+    "rms_p_rgh_hydrostatic_relation_residual_Pa": 0.008955540959870077,
+    "tankA_m3": {
+      "V_m3": 1.64849720040838,
+      "cells": 21839,
+      "gas_m3_(1-alpha)V": 0.29849720040624456,
+      "water_m3_alphaV": 1.3500000000021357
+    },
+    "tankB_m3": {
+      "V_m3": 1.6484967683262028,
+      "cells": 21839,
+      "gas_m3_(1-alpha)V": 0.29849676832569794,
+      "water_m3_alphaV": 1.3500000000005044
+    },
+    "water_m3_alphaV": 3.202165993106066
+  },
+  "mesh_quality": {
+    "configured_nine_rows": "PASS; all nine failure counts are zero",
+    "configured_quality_rows_path": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/logs/final-canonical-case/configured-quality-rows.txt",
+    "optional_allGeometry_concave_cells": 6345,
+    "optional_allGeometry_is_not_part_of_configured_gate": true
+  },
+  "native_mesh_cells": 299214,
+  "native_mesh_hashes_sha256": {
+    "boundary": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d",
+    "cellZones": "2d4744095f2e9c9e47c3b8bb04fdaf4dd4a5a3f810581a4c9a3355a420436664",
+    "faceZones": "e9c928c629e5c257c8eb89b1d93a571fec697252a058e1299d72ef4babbc8177",
+    "faces": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460",
+    "neighbour": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8",
+    "owner": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+    "points": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779"
+  },
+  "native_mesh_section_figure": {
+    "bytes": 200003,
+    "path": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/figures/flush-final-mesh-sections-x3p800-x3p911.png",
+    "qualification": "Static x-normal intersections of the final native volume mesh at x=3.800 and 3.911 m; actual four disconnected train sections are labelled by source layout. No CAD surface, flow field or solver result is shown.",
+    "sha256": "e4c3a8dab38bacc8421a704b011fb1cdf427a226571a6d65ebc25cec65360891",
+    "stations": {
+      "3.800": {
+        "components": [
+          {
+            "branch_label_from_source_layout": "A2",
+            "centroid_yz_m": [
+              -0.3498920421756332,
+              0.9013290514381441
+            ],
+            "cut_cells": 162,
+            "cut_polygons": 162,
+            "region_id": 0
+          },
+          {
+            "branch_label_from_source_layout": "B1",
+            "centroid_yz_m": [
+              0.35011841426141593,
+              0.6500226400638438
+            ],
+            "cut_cells": 160,
+            "cut_polygons": 160,
+            "region_id": 1
+          },
+          {
+            "branch_label_from_source_layout": "A1",
+            "centroid_yz_m": [
+              -0.7497253585379411,
+              0.6501237545580213
+            ],
+            "cut_cells": 159,
+            "cut_polygons": 159,
+            "region_id": 2
+          },
+          {
+            "branch_label_from_source_layout": "B2",
+            "centroid_yz_m": [
+              0.7508272349414408,
+              0.8999903257544879
+            ],
+            "cut_cells": 158,
+            "cut_polygons": 158,
+            "region_id": 3
+          }
+        ],
+        "n_connected_components": 4,
+        "n_cut_cells": 639
+      },
+      "3.911": {
+        "components": [
+          {
+            "branch_label_from_source_layout": "B2",
+            "centroid_yz_m": [
+              0.7498443101843197,
+              0.8999865416620598
+            ],
+            "cut_cells": 122,
+            "cut_polygons": 122,
+            "region_id": 0
+          },
+          {
+            "branch_label_from_source_layout": "A2",
+            "centroid_yz_m": [
+              -0.34993889201127115,
+              0.9000862508279378
+            ],
+            "cut_cells": 122,
+            "cut_polygons": 122,
+            "region_id": 1
+          },
+          {
+            "branch_label_from_source_layout": "B1",
+            "centroid_yz_m": [
+              0.3499376233463567,
+              0.6499033621588691
+            ],
+            "cut_cells": 122,
+            "cut_polygons": 122,
+            "region_id": 2
+          },
+          {
+            "branch_label_from_source_layout": "A1",
+            "centroid_yz_m": [
+              -0.7497212217886591,
+              0.6498162735029647
+            ],
+            "cut_cells": 122,
+            "cut_polygons": 122,
+            "region_id": 3
+          }
+        ],
+        "n_connected_components": 4,
+        "n_cut_cells": 488
+      }
+    }
+  },
+  "required_time0_fields": {
+    "expected": [
+      "C",
+      "Cx",
+      "Cy",
+      "Cz",
+      "T",
+      "U",
+      "V",
+      "alpha.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh"
+    ],
+    "field_mode": {
+      "C": "nonuniform",
+      "Cx": "nonuniform",
+      "Cy": "nonuniform",
+      "Cz": "nonuniform",
+      "T": "uniform",
+      "U": "uniform",
+      "V": "nonuniform",
+      "alpha.water": "nonuniform",
+      "alphat": "uniform",
+      "k": "uniform",
+      "nut": "uniform",
+      "omega": "uniform",
+      "p": "nonuniform",
+      "p_rgh": "nonuniform"
+    },
+    "present": [
+      "C",
+      "Cx",
+      "Cy",
+      "Cz",
+      "T",
+      "U",
+      "V",
+      "alpha.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh"
+    ],
+    "sha256": {
+      "C": "8767505de81524c894fdcefad658fe20647a88a43114be04bd09967235eb9df6",
+      "Cx": "2d0991c707f9c5c43b97c18841af66d5a569c28706b71a615baed418d5b3af3f",
+      "Cy": "24239e2f00c26fbc17caac36fb5c93b2927fb5e50bc6bba6799a1004c909f5e5",
+      "Cz": "4ca497d757f15d7b482e31fef22a4e90d97955a29a72add39c1d73912b489353",
+      "T": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+      "U": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+      "V": "24c098347c58fceebbea5be59d756ebabee2b70d999cb242e510280e637d8fc2",
+      "alpha.water": "8cd4bb09ef5a5bffad6cbe1bda7eb98b3fe43644d8c573046709debe93652277",
+      "alphat": "8e515a1618970553e6e1058db4b58cbd822167460a3cbac59ecc887b5a9cd455",
+      "k": "ef644b4f58c25b669c64b5cbe83f2ccda43dc03e442bca2abaeadf0608c74247",
+      "nut": "2a443276542f6729f00ffbe12f40650f27678ba727c02996ddb8b0c5db458071",
+      "omega": "e6fc3fc82dd2af150c1a6be2a01e4c6de3583cd839f3b291e731c7fc21dd434d",
+      "p": "f4e820b90d9a9ef16c60ceac0ace0b8c1ba86f95b2eee9dd952278d8fb107710",
+      "p_rgh": "f252ce27cdd1a34efdd082071840080bc9462b3ceddc82a5d21fb39dcde82b58"
+    }
+  },
+  "schema": "i4f-flush-join-final-canonical-coldstart-readiness.v4",
+  "solver_launched": false,
+  "static_decomposition": {
+    "all_14_time0_field_files_present": true,
+    "cell_addressing_bijective": true,
+    "cell_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+    "cell_count_per_rank": [
+      29657,
+      29853,
+      29853,
+      30209,
+      29921,
+      29639,
+      29678,
+      30120,
+      30156,
+      30128
+    ],
+    "cell_count_total": 299214,
+    "cell_fields_bit_identical_after_global_addressing": {
+      "C": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "Cx": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "Cy": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "Cz": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "V": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "alpha.water": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "p": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      },
+      "p_rgh": {
+        "bit_identical_after_addressing": true,
+        "rank_cell_counts": [
+          29657,
+          29853,
+          29853,
+          30209,
+          29921,
+          29639,
+          29678,
+          30120,
+          30156,
+          30128
+        ]
+      }
+    },
+    "handler": "collated",
+    "n_ranks": 10,
+    "status": "PASS"
+  }
+}

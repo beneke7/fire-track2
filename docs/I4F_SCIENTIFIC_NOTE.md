@@ -22,11 +22,33 @@ ambient pressure, while accounting separately for tank water and the wetted
 tank-to-valve passages. The effective initial valve plane remains an assumed
 representation of the distributed scalar restriction. The earlier fully
 wetted reduced model does not describe this line-filling transient. The new
-[moving-front model](../results/summaries/i4f_20261025/air-filled-moving-front-model.json)
-includes liquid inertia and downstream filling, conditionally predicting mouth
-water near .612/.620 s and a geometric intake-crown proxy near 1.127 s. Its
-full-bore-front approximation and thermal assumptions limit those predictions;
-the crown proxy is not an emptying time.
+[earlier moving-front model](../results/summaries/i4f_20261025/air-filled-moving-front-model.json)
+includes liquid inertia and downstream filling. The
+[updated compact-geometry comparison](../results/summaries/i4f_20261025/flush-filling-model-comparison.json)
+uses the corrected junction's native tank/headspace state and direct compact
+centerlines. Adiabatic air gives mouth-water arrival near .617/.625 s; an
+isothermal assumption gives .585/.591 s. Their mean-level intake-crown endpoints
+are 1.127/.970 s, respectively, not emptying times or established gas breakthrough.
+Halving the adiabatic-model timestep changes arrivals by 25 microseconds. The
+model retains .634% more wet-feed volume and 2.081% more full-line volume than
+the native Tank-A zones; these differences are exposed rather than fitted away.
+The [thermal sensitivity plot](../results/summaries/i4f_20261025/flush-filling-model-thermo-sensitivity.png)
+shows assumed gas-law sensitivity, not measured heat transfer or CFD validation.
+The single full-bore front, ambient front pressure, approximate lamella friction
+and unknown dry-air minor losses remain material limitations.
+
+The [corrected-CFD startup comparison](../results/summaries/i4f_20261025/flush-early-cfd-model-comparison.json)
+uses complete native checkpoints through .250021 s. Mean tank withdrawal is
+62.581 L versus 62.210 L in the adiabatic reduced model (+.597%); mean per-tank
+two-valve flow is .608803 versus .604200 m3/s (+.762%). Mean local headspace
+probe pressure is 946.934 kPa versus bulk model 920.654 kPa, while the isothermal
+model gives 989.501 kPa. This is early consistency with distinct pressure
+observables and uncalibrated closures, not validation or a rigorous thermal
+envelope. Tank/line volumes and valve fluxes use exact saved scalar rows;
+probe p/T uses bracket interpolation with targets within about four nanoseconds
+of the upper printed sample. Model values are bracket-interpolated without
+extrapolation. The [plot](../results/summaries/i4f_20261025/flush-early-cfd-model-comparison.png)
+keeps each tank separate and shows the .10–.25 s window only.
 
 User clarification on 25 October establishes two tanks, two valves/outlets per
 tank, .900 m tank diameter, .300 m valve diameter, and 1.350 m3 liquid per tank.
@@ -41,7 +63,7 @@ preserved in [the hardware record](../experiments/i4f_hardware_notes_20261024.js
 Historical one-tank calculations retain their original 9 bar, larger-headspace,
 no-lamella inputs and must not be presented as this revised hardware case.
 
-The current compact air-filled CFD cases have 279,536 and 299,248 cells,
+The earlier compact air-filled CFD cases have 279,536 and 299,248 cells,
 with 12.5 and 6.25 mm axial spacing specifically through the .30 m valve-loss
 reach. These are local source refinements, not those spacings everywhere.
 All nine configured mesh-quality criteria pass. Each tank initially contains
@@ -51,7 +73,7 @@ rather than prescribing an outlet history. It does not resolve the butterfly
 disk wake or CO2/retardant behavior.
 
 The static wall audit found an approximately 18.5 mm shoulder near x=3.911 m
-in both current meshes. It originates in the generated pipe/transition union:
+in both older meshes. It originates in the generated pipe/transition union:
 the round pipe extends into the contracting loft. The opt-in flush junction
 removes this reconstruction artifact at all four branches while preserving
 the CAD tank capacity and feed intersections. The summed branch-volume change
@@ -59,7 +81,10 @@ is -1.012 L downstream of the valves; under the confirmed dry startup it changes
 ambient-air storage. The [matched geometry sections](../results/summaries/i4f_20261025/pipe-transition-join-comparison.png)
 and [record](../results/summaries/i4f_20261025/pipe-transition-join-summary.json)
 establish a geometry correction, not its role in the pressure failures or a CFD
-improvement. Existing running cases retain their original geometry.
+improvement. A separate 299,214-cell corrected-junction cold trajectory is
+running with the standard phase-source update. The 881,431-cell bend/outlet
+refinement retains the older geometry and frozen source; their differences
+must not be interpreted as a single-factor comparison.
 
 At matched .050021 s, the finer corrected-source case withdraws 4.59423 L
 from tank A, compared with a bracket-interpolated moving-front result of

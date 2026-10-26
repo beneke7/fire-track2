@@ -2,3 +2,6 @@
 results/summaries/i4f_20261025/*.csv -text whitespace=cr-at-eol
 # Frozen geometry input bytes are also covered by a source manifest.
 experiments/i4f_filling_reference/inputs/*.csv -text whitespace=cr-at-eol
+# Preserve every hashed payload in the corrected-junction input packet.
+experiments/i4f_flush_filling_reference/inputs/* -text
+experiments/i4f_flush_filling_reference/inputs/*.csv whitespace=cr-at-eol

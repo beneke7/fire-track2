@@ -1,0 +1,119 @@
+{
+  "created_utc": "2026-10-26T07:22:58Z",
+  "files": [
+    {
+      "bytes": 93460,
+      "path": "inputs/branch-centerline-sections.csv",
+      "sha256": "d43a82021a4221664d8f3038b9aed4b6c7e57993ca176be2ec8ebd7ef684e596"
+    },
+    {
+      "bytes": 11304,
+      "path": "inputs/branch-hydraulic-geometry.json",
+      "sha256": "4607c4a9de804c55a2d5ce0f5cab2976e3c7cbb35cbebd1b225fcef3f2d0ec7a"
+    },
+    {
+      "bytes": 22492,
+      "path": "inputs/final-canonical-readiness-v4.json",
+      "sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de"
+    },
+    {
+      "bytes": 22527,
+      "path": "inputs/geometry-adapter-short1.json",
+      "sha256": "82033634344db89f9d897aab3339b41594dc0791f8c23a2f2919e35369099d8e"
+    },
+    {
+      "bytes": 36063,
+      "path": "inputs/geometry_summary.json",
+      "sha256": "53d9aac2e2f59a6228f7e8d2e6b2b123e8cff8d59bbb312f2ddcc6b279c31e6e"
+    },
+    {
+      "bytes": 11660,
+      "path": "inputs/legacy-branch-hydraulic-geometry.json",
+      "sha256": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0"
+    },
+    {
+      "bytes": 3101,
+      "path": "inputs/native-initialization-dryline.json",
+      "sha256": "1f2d00899f87ded9a4ea23defe610283724db0009091a81da6ee530852fa3412"
+    },
+    {
+      "bytes": 3390,
+      "path": "inputs/native-initialization-source.json",
+      "sha256": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891"
+    },
+    {
+      "bytes": 565,
+      "path": "inputs/preview-geometry.json",
+      "sha256": "b527cf0c57a46bc1bd5fcec1df91fea2f2a8ae410ff018bee13e7992e898a4b6"
+    },
+    {
+      "bytes": 1104,
+      "path": "inputs/thermophysicalProperties.air",
+      "sha256": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab"
+    },
+    {
+      "bytes": 1137,
+      "path": "inputs/thermophysicalProperties.water",
+      "sha256": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be"
+    },
+    {
+      "bytes": 619,
+      "path": "inputs/transition_sections.csv",
+      "sha256": "11ade9395722efcfcc9f48a8d7a22b3b58b84274cecaeabc97ae7945b53acb08"
+    }
+  ],
+  "legacy_profile_source": {
+    "path": "inputs/legacy-branch-hydraulic-geometry.json",
+    "sha256": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+    "use": "Preserved source provenance only; not used by this current-geometry packet."
+  },
+  "native_model_comparison": {
+    "limitations": "Native mesh zone volumes are available, but no native centerline integral of ds/A is asserted. The one-dimensional inertance values are derived from this sampled centerline and the packet area profile.",
+    "model_branch_geometric_inertance_integral_m_minus1": {
+      "lower": 57.96929085021658,
+      "upper": 58.92767621878763
+    },
+    "model_minus_current_flush_BREP_line_volume_per_tank_m3": 0.014648033505872737,
+    "model_minus_current_flush_BREP_line_volume_per_tank_percent": 2.1354693718879716,
+    "model_minus_tankA_native_full_line_zone_m3": 0.014279991812040871,
+    "model_minus_tankA_native_full_line_zone_percent": 2.0806978670324217,
+    "model_minus_tankA_native_initial_feed_m3": 0.0015914778111367212,
+    "model_minus_tankA_native_initial_feed_percent": 0.633911343373228,
+    "model_two_branch_full_area_integral_m3": 0.7005877945113135,
+    "model_two_branch_initial_wet_area_integral_m3": 0.252648321606991,
+    "tankA_full_line_zone_m3": 0.6863078026992726,
+    "tankA_wetted_feed_m3": 0.2510568437958543,
+    "tankB_wetted_feed_m3": 0.2511091493075715
+  },
+  "purpose": "Tank/headspace-matched; line/feed volumes are compared against native zones, not forced.",
+  "qualifications": [
+    "Native cell-zone tank volume is used instead of ideal CAD tank capacity; CAD capacity differs by ~5.25 L/tank.",
+    "The initial wet prefix is set by the assumed x=2.25 m seat; centerline-area integral is compared with native wetted-feed inventory and is not forced by rescaling.",
+    "Transition areas use sparse current CAD BREP normal-section samples at five discrete locations and piecewise linear interpolation. No continuous area profile/minimum is asserted.",
+    "The intermediate BREP section normal is oblique to the ruled loft station plane; hydraulic diameter is an equivalent 4A/P estimate for assumed rectangles, linearly interpolated.",
+    "Tank-side intake crown remains a projected-section estimate from the matching generated centerline, not a measured physical lip.",
+    "Branches use provisional CAD assumptions, not manufacturing measurements; moving-front assumes full-bore liquid and ambient front pressure.",
+    "The current CFD boundary contains zero-thickness lamellaMaster/lamellaSlave wall surfaces. Gross section areas are retained because these walls have no modeled solid thickness; finite 4 mm CAD display solids are not used for CFD blockage.",
+    "The reduced hydraulic-diameter estimate does not yet include added lamella wetted perimeter, so line friction through the divided transition is an equivalent-line approximation.",
+    "The model is one representative Tank A with its distinct lower and upper branches. It is not an exact symmetric two-tank/four-branch network."
+  ],
+  "schema": "i4f-flush-filling-reference-input-packet/v1",
+  "source_hashes": {
+    "experiments/i4f_flush_filling_reference/inputs/legacy-branch-hydraulic-geometry.json": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+    "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/final-canonical-readiness-v4.json": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+    "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/geometry-adapter-short1.json": "82033634344db89f9d897aab3339b41594dc0791f8c23a2f2919e35369099d8e",
+    "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/geometry/four_pipe_transition_joined_branches.step": "d9728b4784d7daf96c77f58e2bb30f7edc2093d195804f489314fb434df54f85",
+    "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/geometry_summary.json": "53d9aac2e2f59a6228f7e8d2e6b2b123e8cff8d59bbb312f2ddcc6b279c31e6e",
+    "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/transition_sections.csv": "11ade9395722efcfcc9f48a8d7a22b3b58b84274cecaeabc97ae7945b53acb08",
+    "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/native-initialization-dryline.json": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+    "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+    "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "scripts/i4f_four_outlet_geometry/generate.py": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2"
+  },
+  "source_profiles": {
+    "centerline": "350 sampled rows per branch from current CAD generator Bezier/straight centerline equations; direct compact coordinates.",
+    "initial_inventories": "Native corrected 299214-cell initialization/readiness, Tank A represented in the reduced model.",
+    "thermophysical_properties": "Exact case thermophysicalProperties files from current corrected source case; installed v2512 air R is also recorded in native initialization assumptions.",
+    "transition_area": "Five exact BREP normal sections from current flush-at-inlet v6; piecewise linear interpolation. Gross area retained for zero-thickness CFD divider walls."
+  }
+}
