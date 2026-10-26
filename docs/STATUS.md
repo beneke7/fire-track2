@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 06:52 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 09:01 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 
@@ -9,7 +9,7 @@ current discharge, exterior sheet, hardware validation or scientific gate pass y
 - **Corrected-junction cold start, 299,214 cells / ten MPI ranks:** the pilot
   ended normally at exact .050021166664 s with all fourteen fields and zero
   raw contacts/errors. The first actual continuation is advancing at
-  0.071521 s toward .46 s, then 1.3 s if healthy. Docker
+  0.370794 s toward .46 s, then 1.3 s if healthy, with zero raw contacts/errors. Docker
   `23c2bb49e6e4`, StartedAt 2026-10-26T06:44:49.045490597Z; bundle
   `results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/`.
   Its four input manifests, exact GO/guard and completed steps are verified.
@@ -23,14 +23,16 @@ current discharge, exterior sheet, hardware validation or scientific gate pass y
   Stage01 hard/save limits are 4 h / 3 h 40, measured from its actual StartedAt.
 - **Older bend/outlet refinement, 881,431 cells / ten MPI ranks:** Docker
   `d1e8e2922f8e`, StartedAt 2026-10-26T05:42:41.284617235Z, remains running
-  at 0.316632 s with zero raw contacts/errors, target .7 s.
+  at 0.377900 s with zero raw contacts/errors, target .7 s.
   It retains the old overlapping-pipe geometry and frozen-source update.
   No priority save was needed: the failed standard-source case released the
   slot for the corrected cold run. Its current bundle is
   `results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/`.
   Authority: `results/runs/i4f-resource-save-recovery-v2-20261026T053959Z/881-campaign-recovery-v2-status.json`;
   unit `i4f-881k-outlet-bend-recovery-v2-campaign.service`.
-  Original outer deadline remains **2026-10-27 16:25:42 UTC**.
+  Original outer deadline remains **2026-10-27 16:25:42 UTC**; the controller
+  also retains an earlier inner deadline of **2026-10-26 12:25:55 UTC**.
+  Reaching .7 s before that earlier deadline is not established.
 - **Old standard-source cold trajectory failed numerically:** stage03 ended
   normally at .410269089521 s, but two intermediate pressure solves at
   .41005436428 s reached -9.095 and -80.959 kPa. All fourteen fields are saved;
@@ -43,15 +45,21 @@ current discharge, exterior sheet, hardware validation or scientific gate pass y
   disabled logging. Two old native volumes and selected Rouaix intermediates
   are losslessly archived. Verified duplicate snapshot copies were removed
   with explicit restore-prefix mappings; a symlink alias was preserved and
-  counted once. Latest free space is about 36 GiB. See the
+  counted once. Latest free space is about 34 GiB. See the
   [archive index](../results/archives/index.json). The runtime save trigger stays
   20 GiB; current inputs, checkpoints and phase ledgers remain recoverable.
 - **Conditional tank refinement:** the prepared 456,954-cell .399995-to-.46 s
-  trial is unlaunched, in an explicit root priority hold rather than user PAUSE.
-  The corrected cold case acquired the released slot. Its retained waiter
-  deadline is **2026-10-26 14:33:56 UTC**; rearming must respect both whole
-  campaigns' pending continuations, not steal a transient child-restart gap.
-  Prepared case/hold status: `results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T0332Z-attempt5-v2-20261026T055219Z/conditional-status.json`.
+  trial is unlaunched behind both priority campaigns. A durable attempt7 waiter
+  is active under `i4f-tank-interface-thermal-fallback-attempt7-v2-20261026t085430z.service`.
+  Each whole campaign reserves ten ranks through healthy restart gaps; launch
+  requires one reservation released by a verified terminal campaign and captured
+  checkpoint, actual spare capacity, disk >=25 GiB, and no PAUSE. Low desktop
+  noise is distinguished from sustained competing compute. The original old-stock
+  numerical stop is the trigger, not the physical comparison: this trial compares
+  tank-refined frozen-source fields with the older coarse frozen-source case.
+  Admission deadline remains **2026-10-26 14:33:56 UTC**. Attempts5/6 are stopped
+  and preserved. Authority:
+  `results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T0332Z-attempt7-20261026T085430Z/conditional-status.json`.
 - **Rendering:** the old 881 attempt4 watcher remains tied to that trajectory.
   Corrected-case attempt4 is separately active under
   `i4f-flush-stock-native-render-20261026t0646z.service`, following the exact
@@ -66,6 +74,24 @@ current discharge, exterior sheet, hardware validation or scientific gate pass y
 
 ## Current evidence and limits
 
+- **Reduced model aligned to corrected geometry:** a new immutable input packet
+  uses direct compact centerlines and native tank/headspace values. With no
+  fitting, adiabatic/isothermal gas laws predict first mouth water around
+  .617–.625/.585–.591 s and mean-level intake-crown endpoints 1.127/.970 s.
+  Crown crossing is not emptying or validated gas breakthrough. Halving the
+  adiabatic timestep changes arrival by 25 microseconds. Wet-feed/full-line
+  volumes differ +.634/+2.081% from native Tank-A zones, explicitly retained.
+  [Results and limits](../results/summaries/i4f_20261025/flush-filling-model-comparison.json),
+  [thermal sensitivity](../results/summaries/i4f_20261025/flush-filling-model-thermo-sensitivity.png).
+  The legacy input packet remains unchanged. Driver input integrity and both
+  packets' downstream-water semantics are tested; `make check`: 746 passed,
+  one optional Docker test skipped, four subtests passed. The
+  [early CFD comparison](../results/summaries/i4f_20261025/flush-early-cfd-model-comparison.png)
+  now covers complete .10–.25 s checkpoints. At .250021 s, mean tank withdrawal
+  is 62.581 L versus 62.210 L (+.597%); native two-seat flow per tank is
+  .608803 versus .604200 m3/s (+.762%). Local CFD gas-probe pressure is
+  946.934 kPa versus adiabatic-model bulk 920.654 kPa; the differing pressure
+  observables and thermal/geometry assumptions preclude a validation claim.
 - **Native-wall geometry audit:** a real ~18.5 mm roof shoulder at x=3.911 m
   lies about 4 cm downstream of the recorded mixed-cell pressure-cycle site.
   The pre-mesh surface and frozen generator show an exposed pipe/loft overlap,
