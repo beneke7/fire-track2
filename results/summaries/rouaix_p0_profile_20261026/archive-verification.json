@@ -1,0 +1,42 @@
+{
+  "verified_utc": "2026-10-26T20:30:29Z",
+  "remote_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz",
+  "remote_archive_bytes": 1577764722,
+  "remote_sha256": "bff461f5b4c9c99ff78f5de3f003635b25929c63040257b24a571aa1605a1a21",
+  "sidecar_sha256": "bff461f5b4c9c99ff78f5de3f003635b25929c63040257b24a571aa1605a1a21",
+  "run_state_sha256": "bff461f5b4c9c99ff78f5de3f003635b25929c63040257b24a571aa1605a1a21",
+  "sha256s_match": true,
+  "tar_member_count": 132,
+  "saved_inventory_count": 132,
+  "actual_inventory_matches_saved_after_stripping_directory_slashes": true,
+  "path_safety": {
+    "unsafe_names": [],
+    "absolute_or_dot_parent_paths": false
+  },
+  "tar_member_types": {
+    "nonregular_entries": [],
+    "all_members_regular_files_or_directories": true
+  },
+  "selected_files": {
+    "count": 17,
+    "bytes": 540120,
+    "all_regular": true,
+    "remote_local_sha256_match": true,
+    "allowlist": "results/runs/rouaix-p0-profile-inspection-20261026/archive/select-members.txt"
+  },
+  "full_result_archive_copied_locally": false,
+  "full_field_transfer": false,
+  "source_capsule": {
+    "sha256": "b43ba9d9768bd853b53876af47f2366af431113c9c3284cafc736771b2d85692",
+    "git_revision": "4c86f017ed1feb3a81620e82cc93766088acee01",
+    "progression_document_sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d"
+  },
+  "commands": [
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tvzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz'",
+    "tar --no-same-owner --no-same-permissions -xzf <remote result.tar.gz> -C /tmp/rouaix-p0-profile-inspection-20261026 <17 members in archive/select-members.txt>",
+    "rsync -avP --files-from=results/runs/rouaix-p0-profile-inspection-20261026/archive/select-members.txt -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' nk_memj@komondor.hpc.kifu.hu:/tmp/rouaix-p0-profile-inspection-20261026/ results/runs/rouaix-p0-profile-inspection-20261026/metrics/",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14652548 --format=JobID,JobIDRaw,JobName,State,ExitCode,AllocCPUS,Elapsed,TotalCPU,CPUTimeRAW,MaxRSS,AveRSS,ReqMem,Start,End,NodeList -P'"
+  ]
+}

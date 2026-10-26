@@ -8,10 +8,10 @@ Rouaix/aerial experiments remain owned by the HPC thread; local outputs are
 tank pressure/inventory and per-nozzle discharge/velocity histories.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-At 19:03 UTC, the 64-rank S1 and 24-rank P0 baseline have completed their
-declared short horizons; five CFD jobs remain pending. Historical finished
-attempts were reviewed and five dependent terminal auditors submitted; their
-one-CPU native smoke test is pending. No new scientific gate passed.
+At 20:39 UTC, S1 96-rank and P0 profiling trials have also completed; the
+120-rank original trial is running, with upwind/5 s cases queued. The repaired
+native terminal-audit smoke passed and three dependent inspectors are armed.
+No new scientific gate passed.
 
 ## Current execution
 

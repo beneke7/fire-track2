@@ -1,0 +1,259 @@
+{
+  "actual_momentum_convection": "limitedLinearV 1",
+  "actual_velocity_gradient_scheme": "grad(U) Gauss linear;",
+  "air_speed_m_s": 70.0,
+  "case_id": "rouaix-e1-case1-hpc-startup-pilot",
+  "coordinate_frame": {
+    "x": "crossflow +",
+    "y": "upward +",
+    "z": "spanwise +"
+  },
+  "diagnostics": {
+    "Courant_and_pressure_iteration_data": "native solver console log",
+    "IO_and_clock_time": "native solver console log; separate IO fraction not instrumented",
+    "alpha_and_speed_extrema_each_step": true,
+    "failure_localization_fields_each_step": [
+      "U",
+      "p_rgh",
+      "k",
+      "epsilon",
+      "nut"
+    ],
+    "file_handler": "collated",
+    "flux_patches_including_wall_leak_check": [
+      "nozzle",
+      "gasInlet",
+      "downstreamOutlet",
+      "bottomOutlet",
+      "spanwiseMinus",
+      "spanwisePlus",
+      "aircraftWall"
+    ],
+    "max_thread_file_buffer_size": 0,
+    "native_water_volume_and_alphaPhi_each_step": true,
+    "resource_sampling": "Slurm accounting and native-launcher samples; periodic samples are not a true peak"
+  },
+  "execution_backend": "slurm-native",
+  "fluid_properties": {
+    "air": {
+      "mu_pa_s": 1.86e-05,
+      "nu_m2_s": 1.5762711864406783e-05,
+      "rho_kg_m3": 1.18
+    },
+    "surface_tension_N_m": 0.072,
+    "water": {
+      "mu_pa_s": 0.000889,
+      "nu_m2_s": 8.911387329591019e-07,
+      "rho_kg_m3": 997.6
+    }
+  },
+  "formal_validation_decision": null,
+  "gravity_m_s2": [
+    0.0,
+    -9.81,
+    0.0
+  ],
+  "horizon_s": 0.01,
+  "initial_fields": {
+    "alpha.water": "fresh air-filled internalField uniform 0; source boundary is prescribed",
+    "fields_mapped_from_prior_run": false,
+    "p_rgh": "native v2512 setExprFields transform of uniform gauge-static p0, hRef=0 m"
+  },
+  "mesh_cells_expected": 10099265,
+  "mesh_files_sha256": {
+    "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+    "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+    "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+    "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+    "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d"
+  },
+  "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+  "mesh_source": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/mesh-manifest.json",
+  "mesh_type": "static polyhedral mesh imported from a native-v2512-qualified global mesh",
+  "native_qa": {
+    "log_path": "checkMesh.log",
+    "log_sha256": "b9b4d5fff4a508a8187fd934fd8a2cb3a0b09b7f8f58c076f52e4a835fac6660",
+    "qualification_exception": {
+      "path": "native-qualification-exception.json",
+      "sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f"
+    },
+    "status": "qualified",
+    "version": "v2512"
+  },
+  "native_qualification_exception": {
+    "audit_tool_helper_sha256": "27f6066ebaee878c403c3e86ad97b2165b81fd9849218ebd800479c632d208e8",
+    "audit_tool_sha256": "c5e73491e2438dfd3941181fab29a1400aa27cf7de4447f96e2b7aa2e8e5d1a8",
+    "independent_audit_sha256": "b8194ee0f417483c54a284d29efc40d33e272fd64c04db179ead20bb712b1ca1",
+    "mesh_files_sha256": {
+      "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+      "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+      "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+      "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+      "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d"
+    },
+    "native_failure": {
+      "category": "concaveCells",
+      "count": 114008,
+      "failed_check_count": 1
+    },
+    "native_ids_sha256": "0f34f801aca5ac5f96e39a8b0da39afee46bb3904fac26aba4c0f81ae1c23d8e",
+    "native_log_sha256": "b9b4d5fff4a508a8187fd934fd8a2cb3a0b09b7f8f58c076f52e4a835fac6660",
+    "native_set_sha256": "19712510e392fe38d4a8c059a5729b7b059e347543011a78fdc8c78b15c3f87c",
+    "receipt_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/native-qualification-exception.json",
+    "receipt_sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f",
+    "reference_ids_sha256": "0f34f801aca5ac5f96e39a8b0da39afee46bb3904fac26aba4c0f81ae1c23d8e",
+    "reference_set_sha256": "9bf7323f4438d0bcde9999e6c9332a2d0d0a8e52bce614ab5a49f33710190299",
+    "review_sha256": "2a62cf45a19ce21550829d2b3ae0aa742919930bcc2a0a43239d6884c725ff83",
+    "schema_version": 1,
+    "status": "qualified_with_exact_concave_set_exception",
+    "support_files": [
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/native-concave-ids.txt",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/reference-concave-ids.txt",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/native-concaveCells",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/reference-concaveCells",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/independent-audit.json",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/native-v2512-review.md",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/audit_binary_mesh.py",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/extract/mesh-input/audit_concavity.py"
+    ]
+  },
+  "node_count": 1,
+  "nozzle_audit_sha256": "9ed9c2bef8c816a463b4e486f6830a4a84ab05e23164671f26e271ac2455dea1",
+  "numerical_assumptions": {
+    "interface_method": "OpenCFD v2512 interIsoFoam isoAdvector; not paper HRIC",
+    "kFinal_history": "current fine-case fvSolution already has minIter 1; an older minIter 0 diagnostic printed zero kFinal iterations and is not this input",
+    "kFinal_minIter": 1,
+    "momentum_convection": "limitedLinearV 1",
+    "momentum_solver": "PBiCGStab/DILU",
+    "numerical_variant": "original",
+    "paper_numerics_difference": "Rouaix Table 1 uses HRIC and second-order-upwind convection; these inherited pilot choices are diagnostic assumptions, not an E1 match",
+    "parent_fvSchemes_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+    "post_override_fvSchemes_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+    "source": "current fine-mesh dictionaries bound by parent and post-override SHA-256",
+    "turbulence_convection": "upwind",
+    "velocity_gradient_diagnostic_note": null,
+    "velocity_gradient_limiter_scope": "no velocity-gradient limiter override",
+    "velocity_gradient_scheme": "grad(U) Gauss linear;"
+  },
+  "numerical_variant": "original",
+  "open_patches": [
+    "gasInlet",
+    "downstreamOutlet",
+    "bottomOutlet",
+    "spanwiseMinus",
+    "spanwisePlus"
+  ],
+  "parent_fvSchemes_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+  "post_override_fvSchemes_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+  "profiling": true,
+  "ranks": 24,
+  "reference_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+  "resource_budget_provisional": {
+    "memory_gib": 46,
+    "threads_per_rank": 1,
+    "wall_time_s": 3600.0
+  },
+  "solver": "interIsoFoam",
+  "solver_dictionary_sha256": {
+    "constant/transportProperties": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f",
+    "system/fvSchemes": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+    "system/fvSolution": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+  },
+  "solver_runtime_provenance": "Native Komondor module and executable must be captured by the Slurm job and matched to verified-source-evidence; reference_image_digest is reference provenance only.",
+  "solver_version": "v2512",
+  "source_dictionary_provenance": {
+    "constant/transportProperties": {
+      "declared_choices": "water rho 997.6 kg/m3, nu 8.91138772955092e-7 m2/s; air rho 1.18 kg/m3, nu 1.57627118644068e-5 m2/s; sigma 0.072 N/m",
+      "sha256": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f"
+    },
+    "system/fvSchemes": {
+      "declared_choices": "Euler; Gauss-linear gradients; limitedLinearV 1 momentum convection; upwind k and epsilon convection",
+      "sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13"
+    },
+    "system/fvSolution": {
+      "declared_choices": "OpenCFD v2512 isoAlpha, nAlphaSubCycles 1, nOuterCorrectors 1, PBiCGStab/DILU U, realizable k-epsilon; kFinal minIter 1 is already present in this current dictionary",
+      "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+    }
+  },
+  "source_flow_from_measured_area_m3_s": 1.254655493482296,
+  "source_geometry": {
+    "analytic_circle_area_m2": 0.12566370614359174,
+    "area_deviation_limit_fraction": 0.005,
+    "mass_flow_from_measured_area_kg_s": 1251.6443202979385,
+    "measured_area_m2": 0.1254655493482296,
+    "measured_outward_area_vector_m2": [
+      0.0,
+      0.1254655493482296,
+      0.0
+    ],
+    "momentum_influx_from_measured_area_N": [
+      0.0,
+      -12516.443202979384,
+      0.0
+    ],
+    "patch": "nozzle",
+    "relative_area_deviation_fraction": -0.0015768816744566871,
+    "velocity_m_s": [
+      0.0,
+      -10.0,
+      0.0
+    ],
+    "velocity_renormalized": false,
+    "volume_flow_from_measured_area_m3_s": 1.254655493482296
+  },
+  "source_geometry_deviation_fraction": -0.0015768816744566871,
+  "source_mass_flow_from_measured_area_kg_s": 1251.6443202979385,
+  "source_momentum_influx_from_measured_area_N": [
+    0.0,
+    -12516.443202979384,
+    0.0
+  ],
+  "source_patch_area_vector_m2": {
+    "nozzle": [
+      0.0,
+      0.1254655493482296,
+      0.0
+    ]
+  },
+  "source_patch_areas_m2": {
+    "nozzle": 0.1254655493482296
+  },
+  "source_patch_face_counts": {
+    "nozzle": 924
+  },
+  "source_patches": [
+    "nozzle"
+  ],
+  "source_velocity_m_s": [
+    0.0,
+    -10.0,
+    0.0
+  ],
+  "time_controls": {
+    "adjust_time_step": false,
+    "checkpoint_policy": {
+      "preserve_initial_global_t0": true,
+      "retain_all_per_step_metrics": true,
+      "retained_positive_checkpoint_limit": null,
+      "scheduled_field_write_times_s": [
+        0.0,
+        0.01
+      ]
+    },
+    "delta_t_s": 0.0001,
+    "fixed_delta_t": true,
+    "full_field_write_times_s": [
+      0.0,
+      0.01
+    ],
+    "max_delta_t_s": 0.0001,
+    "nAlphaSubCycles": 1,
+    "purge_write": 0,
+    "snapshot_interval_s": 0.01,
+    "startup_steps": 100
+  },
+  "turbulence_model": "realizable k-epsilon RANS",
+  "wall_patches": [
+    "aircraftWall"
+  ]
+}

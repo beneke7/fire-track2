@@ -1,0 +1,22 @@
+{
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_hpc_finished_audit.py tests/test_hpc_metrics.py tests/test_rouaix_hpc_runner.py",
+      "result": "97 passed in 2.08s"
+    },
+    {
+      "command": ".venv/bin/ruff check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/ruff format --check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "result": "passed"
+    },
+    {
+      "command": "bash -n scripts/hpc_finished_audit.sbatch",
+      "exit_code": 0
+    }
+  ],
+  "native_smoke": "14656128 COMPLETED0:0; 36s,34.733CPUseconds,156136KiBbatchMaxRSS; bundleSHAverifiedlocally,100steps801linearrecords,ledgerclosure-2.13e-14kg; accountingunavailableexplicit",
+  "scope": "No full repository suite or formal CFD gate claim"
+}

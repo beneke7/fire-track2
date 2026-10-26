@@ -66,6 +66,17 @@ def _accounting(job_id: str, state: str = "COMPLETED", cpu: str = "01:00:00") ->
     }
 
 
+def _sacct_persist_connection_refused(_job_id: str) -> dict[str, Any]:
+    raise RuntimeError(
+        "sacct exit 1: _open_persist_conn: failed to open persistent connection "
+        "to host:localhost:6819: Connection refused"
+    )
+
+
+def _scontrol_parent_purged(_job_id: str) -> dict[str, Any]:
+    raise RuntimeError("scontrol exit 1: Invalid job id specified")
+
+
 def test_terminal_states_and_parent_step_accounting() -> None:
     for state in (
         "COMPLETED",
@@ -298,6 +309,75 @@ def test_native_afterany_audits_real_s1_compact_data_once(
     assert AUDITOR.run_one(job_id, manifest, manifest_path, output) == 0
     assert list((output / "jobs" / job_id).iterdir()) == first_versions
 
+    monkeypatch.setattr(AUDITOR, "local_sacct", _sacct_persist_connection_refused)
+    monkeypatch.setattr(AUDITOR, "local_scontrol_parent", _scontrol_parent_purged)
+    unknown_output = tmp_path / "audit-accounting-unavailable" / job_id
+    assert AUDITOR.run_one(job_id, manifest, manifest_path, unknown_output) == 0
+    unknown_row = json.loads((unknown_output / "status.json").read_text())["jobs"][job_id]
+    assert unknown_row["phase"] == "captured"
+    assert unknown_row["scheduler_accounting"]["status"] == "unavailable"
+    assert (
+        "localhost:6819: Connection refused" in unknown_row["scheduler_accounting"]["sacct_error"]
+    )
+    unknown_audit = json.loads(Path(unknown_row["audit_path"]).read_text())
+    assert unknown_audit["metrics"]["classification"] == "scheduler_state_unavailable"
+    assert unknown_audit["metrics"]["scheduler_state_available"] is False
+    assert unknown_audit["metrics"]["slurm_state"] == "UNKNOWN"
+    assert unknown_audit["metrics"]["cpu_accounting"]["parent"] is None
+    assert unknown_audit["slurm"]["parent"] is None
+
+    wrong_raw = _manifest(
+        str(campaign),
+        job_id,
+        expected_ranks=63,
+        horizon_s=0.05,
+        delta_t_s=0.0001,
+        case_id=attempt_manifest["case_id"],
+    )
+    wrong_manifest_path = tmp_path / "jobs-wrong-input.json"
+    wrong_manifest_path.write_text(json.dumps(wrong_raw), encoding="utf-8")
+    wrong_manifest = AUDITOR.validate_manifest(wrong_raw)
+    wrong_output = tmp_path / "audit-wrong-input" / job_id
+    assert AUDITOR.run_one(job_id, wrong_manifest, wrong_manifest_path, wrong_output) == 0
+    wrong_row = json.loads((wrong_output / "status.json").read_text())["jobs"][job_id]
+    wrong_audit = json.loads(Path(wrong_row["audit_path"]).read_text())
+    assert wrong_audit["metrics"]["expected_inputs_match"] is False
+    assert wrong_audit["metrics"]["classification"] == (
+        "captured_attempt_inputs_differ_from_manifest"
+    )
+
+    def retained_scontrol_parent(_job_id: str) -> dict[str, Any]:
+        accounting = _accounting(job_id)
+        accounting["accounting_source"] = "scontrol"
+        accounting["parent"]["total_cpu"] = "Unknown"
+        accounting["parent"]["max_rss"] = "Unknown"
+        return accounting
+
+    monkeypatch.setattr(AUDITOR, "local_scontrol_parent", retained_scontrol_parent)
+    scontrol_output = tmp_path / "audit-scontrol-fallback" / job_id
+    assert AUDITOR.run_one(job_id, manifest, manifest_path, scontrol_output) == 0
+    scontrol_row = json.loads((scontrol_output / "status.json").read_text())["jobs"][job_id]
+    scontrol_audit = json.loads(Path(scontrol_row["audit_path"]).read_text())
+    assert scontrol_row["scheduler_accounting"]["status"] == "partial"
+    assert scontrol_audit["metrics"]["classification"] == (
+        "completed_horizon_converged_exploratory_only"
+    )
+    assert scontrol_audit["slurm"]["parent"]["total_cpu"] == "Unknown"
+    assert "CPU totals" in scontrol_audit["metrics"]["cpu_accounting"]["note"]
+
+    monkeypatch.setattr(AUDITOR, "local_scontrol_parent", _scontrol_parent_purged)
+    unknown_audit_path = Path(unknown_row["audit_path"])
+    monkeypatch.setattr(AUDITOR, "local_sacct", lambda _job: _accounting(job_id))
+    assert AUDITOR.run_one(job_id, manifest, manifest_path, unknown_output) == 0
+    recovered_row = json.loads((unknown_output / "status.json").read_text())["jobs"][job_id]
+    assert recovered_row["phase"] == "captured"
+    assert recovered_row["audit_path"] != str(unknown_audit_path)
+    recovered_audit = json.loads(Path(recovered_row["audit_path"]).read_text())
+    assert recovered_audit["metrics"]["classification"] == (
+        "completed_horizon_converged_exploratory_only"
+    )
+    assert recovered_audit["scheduler_accounting"]["status"] == "available"
+
 
 def test_zero_cpu_cancel_and_missing_archive_are_not_solver_failures(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -340,6 +420,47 @@ def test_terminal_missing_artifact_is_reported_without_a_physical_failure_claim(
     assert "not a physical solver verdict" in record["reason"]
 
 
+def test_unavailable_accounting_and_purged_parent_with_no_archive_is_not_zero_cpu(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    campaign = tmp_path / "campaign"
+    run_dir = campaign / "rouaix-e1-hpc-pilot-14651185"
+    run_dir.mkdir(parents=True)
+    raw = _manifest(str(campaign))
+    manifest_path = tmp_path / "jobs.json"
+    manifest_path.write_text(json.dumps(raw), encoding="utf-8")
+    monkeypatch.setattr(AUDITOR, "HOST_ROOTS", (str(tmp_path),))
+    manifest = AUDITOR.validate_manifest(raw)
+    monkeypatch.setattr(AUDITOR, "local_sacct", _sacct_persist_connection_refused)
+    monkeypatch.setattr(AUDITOR, "local_scontrol_parent", _scontrol_parent_purged)
+
+    output = tmp_path / "audit"
+    assert AUDITOR.run_one("14651185", manifest, manifest_path, output) == 0
+    record = json.loads((output / "status.json").read_text())["jobs"]["14651185"]
+    assert record["phase"] == "inspected_no_archive"
+    assert record["classification"] == "accounting_unavailable_no_archive"
+    assert record["parent_cpu_seconds"] is None
+    assert record["scheduler_state"] == "UNKNOWN"
+    assert record["scheduler_accounting"]["status"] == "unavailable"
+    assert record["sacct"]["parent"] is None
+    assert "not a physical solver verdict" in record["reason"]
+
+    def scontrol_completed_without_cpu(job_id: str) -> dict[str, Any]:
+        accounting = _accounting(job_id)
+        accounting["accounting_source"] = "scontrol"
+        accounting["parent"]["total_cpu"] = "Unknown"
+        accounting["parent"]["max_rss"] = "Unknown"
+        return accounting
+
+    monkeypatch.setattr(AUDITOR, "local_scontrol_parent", scontrol_completed_without_cpu)
+    scontrol_output = tmp_path / "scontrol-audit"
+    assert AUDITOR.run_one("14651185", manifest, manifest_path, scontrol_output) == 0
+    scontrol_record = json.loads((scontrol_output / "status.json").read_text())["jobs"]["14651185"]
+    assert scontrol_record["classification"] == "terminal_no_archive_cpu_unavailable"
+    assert scontrol_record["parent_cpu_seconds"] is None
+    assert scontrol_record["scheduler_accounting"]["source"] == "scontrol"
+
+
 def test_sacct_queries_only_the_explicit_parent_job(monkeypatch: pytest.MonkeyPatch) -> None:
     captured: dict[str, Any] = {}
 
@@ -357,4 +478,32 @@ def test_sacct_queries_only_the_explicit_parent_job(monkeypatch: pytest.MonkeyPa
     assert AUDITOR.local_sacct("14651185")["parent"]["state"] == "COMPLETED"
     assert "--jobs=14651185" in captured["command"]
     assert not any("--jobs=all" in argument for argument in captured["command"])
+    assert captured["env"]["TZ"] == "UTC"
+
+
+def test_scontrol_fallback_reads_state_without_fabricating_cpu(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, Any] = {}
+
+    class Result:
+        returncode = 0
+        stdout = (
+            "JobId=14651185 JobName=rouaix JobState=COMPLETED ExitCode=0:0 "
+            "RunTime=00:39:32 NumCPUs=24 NodeList=x1000c0s4b1n1\n"
+        )
+        stderr = ""
+
+    def fake_run(command: list[str], **kwargs: Any) -> Result:
+        captured["command"] = command
+        captured["env"] = kwargs["env"]
+        return Result()
+
+    monkeypatch.setattr(AUDITOR.subprocess, "run", fake_run)
+    result = AUDITOR.local_scontrol_parent("14651185")
+    assert result["parent"]["state"] == "COMPLETED"
+    assert result["parent"]["total_cpu"] == "Unknown"
+    assert result["parent"]["max_rss"] == "Unknown"
+    assert result["accounting_source"] == "scontrol"
+    assert captured["command"] == ["scontrol", "show", "job", "14651185", "--oneliner"]
     assert captured["env"]["TZ"] == "UTC"

@@ -1,0 +1,847 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-26T20:34:00Z",
+  "case_id": "S1-ORIG-96-01MS-005",
+  "job_id": 14651185,
+  "status": "COMPLETED exploratory terminal audit; no E1 decision",
+  "purpose": "Hash-bound short-horizon audit of original 96-rank Rouaix S1 run; no solver launch or full archive transfer.",
+  "terminal": {
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_s": 2339.0,
+    "elapsed_raw": "00:38:59",
+    "allocated_cpus": 96,
+    "memory_request": "64G",
+    "node": "x1000c4s5b1n0",
+    "slurm_start_end_raw_local_cluster_CET": {
+      "start": "2026-10-26T20:48:22",
+      "end": "2026-10-26T21:27:21"
+    },
+    "run_state_utc": {
+      "started": "2026-10-26T19:48:29.418978+00:00",
+      "solver_started": "2026-10-26T19:50:12.342647+00:00",
+      "updated_after_archive": "2026-10-26T20:27:21.232304+00:00"
+    },
+    "time_basis": "sacct Start/End are cluster-local CET (+0100); run-state UTC fields are retained as UTC.",
+    "solver_step": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:35:40",
+      "elapsed_s": 2140.0,
+      "solver_wall_s_run_state": 2140.7075303061865,
+      "solver_clock_s_from_log": 2135.0,
+      "logged_physical_time_s": 0.05,
+      "steps": 500
+    },
+    "archive_status": "verified_crc_hash_and_member_list"
+  },
+  "case": {
+    "rank_count": 96,
+    "nodes": 1,
+    "cpus_per_task": 1,
+    "memory_gib_per_node": 64,
+    "partition": "cpu",
+    "gpu_allocation": false,
+    "solver": "interIsoFoam OpenCFD v2512",
+    "solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "solver_build": "_87ed40d256-20251219",
+    "mpi": "Cray MPICH",
+    "mesh_cells": 10099265,
+    "mesh_input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "mesh_files_sha256": {
+      "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+      "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+      "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+      "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+      "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d"
+    },
+    "numerical_variant": "original",
+    "delta_t_s": 0.0001,
+    "fixed_delta_t": true,
+    "steps": 500,
+    "requested_and_reached_horizon_s": 0.05,
+    "full_field_write_times_s": [
+      0.0,
+      0.05
+    ],
+    "turbulence_model": "realizable k-epsilon RANS",
+    "coordinate_frame": {
+      "x": "crossflow +",
+      "y": "upward +",
+      "z": "spanwise +"
+    },
+    "source_velocity_m_s": [
+      0.0,
+      -10.0,
+      0.0
+    ],
+    "air_speed_m_s": 70.0,
+    "source_fresh_start": {
+      "alpha.water": "fresh air-filled internalField uniform 0; source boundary is prescribed",
+      "fields_mapped_from_prior_run": false,
+      "p_rgh": "native v2512 setExprFields transform of uniform gauge-static p0, hRef=0 m"
+    },
+    "same_10m_mesh_as_s1_64": true,
+    "experiment_record_mismatch": "Archived attempt/experiment.md introduction still describes an older 1 ms/50-step case; frozen S1-96 record, manifest, controlDict, run-state and solver log show 0.1 ms/500 steps to 0.05 s.",
+    "node": "x1000c4s5b1n0",
+    "physical_node_cpu_count": 128,
+    "physical_node_cpu_basis": {
+      "scontrol_CPUTot": 128,
+      "scontrol_CPUEfctv": 128,
+      "partition": "cpu",
+      "capture_utc": "2026-10-26T20:43:04Z",
+      "raw_capture_path": "results/runs/rouaix-s1-96-terminal-20261026/scontrol-node-x1000c4s5b1n0.raw.txt",
+      "raw_capture_sha256": "d2927a2c39da4bdafdb10f52ae96163f190f6bd115aea50f6c9ba58f38569960",
+      "interpretation": "Current scheduler-reported host capacity; the historical job allocation remains 96 ranks/CPUs."
+    }
+  },
+  "diagnostics": {
+    "speed": {
+      "max_speed_m_s": 103.323474473,
+      "peak_time_s": 0.0499,
+      "peak_location_m": [
+        0.5796089385475,
+        -0.0632562870647,
+        -0.4067518625671
+      ],
+      "peak_processor": 28,
+      "endpoint_speed_m_s": 103.2811413584,
+      "endpoint_speed_location_m": [
+        0.5796089385475,
+        -0.03518897230391,
+        -0.4150707864901
+      ],
+      "full_field_at_peak_time_retained": false,
+      "full_fields_retained_at_s": [
+        0.0,
+        0.05
+      ]
+    },
+    "courant": {
+      "bulk_max": 1.13120910423,
+      "bulk_max_time_s": 0.0499,
+      "interface_max": 0.533645774819,
+      "interface_max_time_s": 0.049
+    },
+    "alpha": {
+      "fieldMinMax_function_object_samples": 500,
+      "alpha_water_fieldMinMax_min": 0.0,
+      "alpha_water_fieldMinMax_max": 1.0,
+      "solver_log_parser_alpha_min": -9.6581270158e-14,
+      "solver_log_parser_alpha_water_min": -2.06544503722e-12,
+      "solver_log_parser_alpha_water_max": 1.0,
+      "interpretation": "Separate diagnostics: the saved per-step fieldMinMax file reports [0,1]; the current console parser also finds tiny negative roundoff values in logged alpha fields."
+    },
+    "linear_solve_convergence": {
+      "all_converged": true,
+      "by_field": {
+        "Ux": {
+          "failed_count": 0,
+          "max_final_residual": 9.92199097021e-09,
+          "max_iterations": 4,
+          "solve_count": 500
+        },
+        "Uy": {
+          "failed_count": 0,
+          "max_final_residual": 9.9451058664e-09,
+          "max_iterations": 4,
+          "solve_count": 500
+        },
+        "Uz": {
+          "failed_count": 0,
+          "max_final_residual": 9.99026844716e-09,
+          "max_iterations": 5,
+          "solve_count": 500
+        },
+        "epsilon": {
+          "failed_count": 0,
+          "max_final_residual": 9.99832935186e-09,
+          "max_iterations": 10,
+          "solve_count": 500
+        },
+        "k": {
+          "failed_count": 0,
+          "max_final_residual": 9.98507199436e-09,
+          "max_iterations": 10,
+          "solve_count": 500
+        },
+        "p_rgh": {
+          "failed_count": 0,
+          "max_final_residual": 0.000314725579321,
+          "max_iterations": 19,
+          "solve_count": 1500
+        },
+        "pcorr": {
+          "failed_count": 0,
+          "max_final_residual": 9.75026759806e-11,
+          "max_iterations": 801,
+          "solve_count": 1
+        }
+      },
+      "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+      "failed_record_count": 0,
+      "failure_examples": [],
+      "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "pimple": {
+        "nCorrectors": 3,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 1
+      },
+      "schema_version": 1,
+      "solver_record_count": 4001
+    },
+    "mass_ledger": {
+      "status": "configured_horizon_reached_exploratory_only",
+      "rows": 500,
+      "horizon_reached": true,
+      "horizon_s": 0.05,
+      "initial_inventory_kg": 0.0,
+      "injected_kg": 62.582216014881666,
+      "final_inventory_kg": 62.58221601489213,
+      "final_inventory_m3": 0.06273277467411,
+      "closure_residual_kg": 1.0466294497746276e-11,
+      "max_abs_per_step_closure_residual_kg": 8.18498047117e-12,
+      "max_abs_cumulative_closure_residual_kg": 1.78417280949e-11,
+      "signed_net_escape_kg": 1.433624700307978e-99,
+      "source_mass_flow_kg_s": 1251.6443202979385,
+      "source_momentum_flux_N": [
+        0.0,
+        -12516.443202979384,
+        0.0
+      ],
+      "method": "right rectangle on each completed physical interval: Q_k * interval deltaT_k",
+      "caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual.",
+      "cumulative_continuity_error_dimensionless": 2.08941286195e-09
+    },
+    "momentum_budget": {
+      "status": "not computed; no closed momentum balance",
+      "available_source_term_only": [
+        0.0,
+        -12516.443202979384,
+        0.0
+      ],
+      "available_boundary_outputs": "Configured surfaceFieldValue objects sum phi and alphaPhi_ on 7 patches; no rho*U*phi momentum flux, pressure-force integral, or control-volume momentum inventory is stored.",
+      "patches": [
+        "aircraftWallFlux",
+        "bottomOutletFlux",
+        "downstreamOutletFlux",
+        "gasInletFlux",
+        "nozzleFlux",
+        "spanwiseMinusFlux",
+        "spanwisePlusFlux"
+      ]
+    },
+    "turbulence_extrema": {
+      "k_TKE_m2_s2": {
+        "minimum": {
+          "time_s": 0.05,
+          "min": 0.0065535779413,
+          "min_location_m": [
+            0.02094972067039,
+            -0.3722644579623,
+            -0.1884766526797
+          ],
+          "min_processor": 29,
+          "max": 787.5109629071,
+          "max_location_m": [
+            0.3840782122905,
+            -0.0913348769905,
+            0.2508211081056
+          ],
+          "max_processor": 27
+        },
+        "maximum": {
+          "time_s": 0.0254,
+          "min": 0.01140785734392,
+          "min_location_m": [
+            0.006983240223464,
+            -0.1475474376249,
+            0.1832800728422
+          ],
+          "min_processor": 34,
+          "max": 1072.415667278,
+          "max_location_m": [
+            0.3840782122905,
+            -0.231750692317,
+            0.005008937142547
+          ],
+          "max_processor": 28
+        },
+        "samples": 500,
+        "endpoint": {
+          "time_s": 0.05,
+          "min": 0.0065535779413,
+          "min_location_m": [
+            0.02094972067039,
+            -0.3722644579623,
+            -0.1884766526797
+          ],
+          "min_processor": 29,
+          "max": 787.5109629071,
+          "max_location_m": [
+            0.3840782122905,
+            -0.0913348769905,
+            0.2508211081056
+          ],
+          "max_processor": 27
+        }
+      },
+      "epsilon_m2_s3": {
+        "minimum": {
+          "time_s": 0.05,
+          "min": 0.01066872618288,
+          "min_location_m": [
+            0.0768156424581,
+            -0.1474921917649,
+            -0.08420792356152
+          ],
+          "min_processor": 28,
+          "max": 291606.1508825,
+          "max_location_m": [
+            0.1606145251397,
+            -0.1053575162927,
+            0.2611269593747
+          ],
+          "max_processor": 34
+        },
+        "maximum": {
+          "time_s": 0.043,
+          "min": 0.01068334401902,
+          "min_location_m": [
+            0.06284916201117,
+            -0.105346348812,
+            -0.08375521525924
+          ],
+          "min_processor": 28,
+          "max": 320810.7937744,
+          "max_location_m": [
+            0.3840782122905,
+            -0.04924128817667,
+            0.2592729967068
+          ],
+          "max_processor": 27
+        },
+        "samples": 500,
+        "endpoint": {
+          "time_s": 0.05,
+          "min": 0.01066872618288,
+          "min_location_m": [
+            0.0768156424581,
+            -0.1474921917649,
+            -0.08420792356152
+          ],
+          "min_processor": 28,
+          "max": 291606.1508825,
+          "max_location_m": [
+            0.1606145251397,
+            -0.1053575162927,
+            0.2611269593747
+          ],
+          "max_processor": 34
+        }
+      },
+      "nut_m2_s": {
+        "minimum": {
+          "time_s": 0.0001,
+          "min": 0.0,
+          "min_location_m": [
+            -2.444134078212,
+            -9.943820224719,
+            7.974719101124
+          ],
+          "min_processor": 48,
+          "max": 0.03652025090189,
+          "max_location_m": [
+            17.33240223464,
+            -9.606802089847,
+            5.649988456978
+          ],
+          "max_processor": 57
+        },
+        "maximum": {
+          "time_s": 0.0326,
+          "min": 0.0,
+          "min_location_m": [
+            -2.444134078212,
+            -3.988764044944,
+            5.294943820225
+          ],
+          "min_processor": 36,
+          "max": 0.9762615131756,
+          "max_location_m": [
+            0.3282122905028,
+            -0.1193912714696,
+            -0.004938712527957
+          ],
+          "max_processor": 28
+        },
+        "samples": 500,
+        "endpoint": {
+          "time_s": 0.05,
+          "min": 0.0,
+          "min_location_m": [
+            -2.444134078212,
+            -3.988764044944,
+            5.294943820225
+          ],
+          "min_processor": 36,
+          "max": 0.3491730863233,
+          "max_location_m": [
+            0.286312849162,
+            -0.2317615939735,
+            0.1852224938758
+          ],
+          "max_processor": 27
+        }
+      },
+      "note": "Per-step extrema/locations only; k, epsilon and nut maxima occur at different times and cells. No 3D peak-time field is retained."
+    },
+    "reduced_pressure": {
+      "field": "p_rgh",
+      "dimensions": "[1 -1 -2 0 0 0 0]",
+      "units": "Pa",
+      "run_minimum": {
+        "time_s": 0.0015,
+        "min": -20488.40534749,
+        "min_location_m": [
+          -0.1466480446927,
+          -0.007031854365581,
+          0.004868487916388
+        ],
+        "min_processor": 31,
+        "max": 10803.7228994,
+        "max_location_m": [
+          0.1326815642458,
+          0.0,
+          0.1118055555556
+        ],
+        "max_processor": 34
+      },
+      "run_maximum": {
+        "time_s": 0.0001,
+        "min": -4565.485190871,
+        "min_location_m": [
+          0.1885474860335,
+          -0.007031854365581,
+          0.004868487916388
+        ],
+        "min_processor": 28,
+        "max": 30443.76320854,
+        "max_location_m": [
+          -0.1885474860335,
+          0.0,
+          -0.004861111111111
+        ],
+        "max_processor": 31
+      },
+      "endpoint": {
+        "time_s": 0.05,
+        "min": -10863.94090753,
+        "min_location_m": [
+          -0.006983240223464,
+          -0.5126598291081,
+          -0.1606272349629
+        ],
+        "min_processor": 29,
+        "max": 3047.656914811,
+        "max_location_m": [
+          -0.2025139664804,
+          -0.1474921917649,
+          -0.004955223866096
+        ],
+        "max_processor": 31
+      },
+      "is_absolute_pressure": false,
+      "note": "p_rgh is reduced pressure, not absolute pressure. No absolute pressure reconstruction or physical interpretation is established."
+    }
+  },
+  "resource_accounting": {
+    "parent_job": {
+      "allocated_cpus": 96,
+      "elapsed_s": 2339.0,
+      "allocated_core_hours": 62.373333333333335,
+      "total_cpu_seconds": 203867.0,
+      "total_cpu_core_hours": 56.62972222222222,
+      "busy_fraction_estimate": 0.9079155978338321,
+      "maxrss": null,
+      "cpuraw_allocated_seconds": 224544
+    },
+    "batch_step": {
+      "elapsed": "00:38:59",
+      "total_cpu": "03:42.252",
+      "maxrss": "9446824K",
+      "scope": "batch step only; not parent aggregate RSS"
+    },
+    "solver_step": {
+      "elapsed": "00:35:40",
+      "allocated_cpus": 96,
+      "allocated_core_hours": 57.06666666666667,
+      "total_cpu": "2-08:34:05",
+      "total_cpu_seconds": 203645.0,
+      "total_cpu_core_hours": 56.56805555555555,
+      "busy_fraction_estimate": 0.9912626557632399,
+      "maxrss": "1469532K",
+      "maxrss_scope": "Slurm solver-step maximum per task, not node aggregate",
+      "solver_wall_s_run_state": 2140.7075303061865,
+      "solver_clock_s": 2135.0,
+      "clock_wall_note": "sacct solver step elapsed rounds to 2140 s; run-state solver wall is 2140.708 s; native OpenFOAM ClockTime is 2135 s."
+    },
+    "memory_note": "Requested node memory was 64 GiB. Parent MaxRSS is blank; batch and solver-step MaxRSS values have separate step/per-task scopes. No periodic peak-memory time series was recovered."
+  },
+  "comparisons": {
+    "S1_64": {
+      "job_id": 14651180,
+      "ranks": 64,
+      "node": "x1001c2s3b0n0",
+      "gpu_allocated": false,
+      "peak_speed_m_s": 103.502606784,
+      "peak_time_s": 0.0495,
+      "solver_wall_s": 3490.2026369050145,
+      "per_step_solver_wall_s": 6.980405273810029,
+      "parent_elapsed_s": 3681.0,
+      "allocated_core_hours": 65.44,
+      "total_cpu_core_hours": 61.569722222222225
+    },
+    "prior_T1_120": {
+      "job_id": "14649329",
+      "case_id": "T1-ORIG-120-01MS-005",
+      "ranks": 120,
+      "node_profile": "CPU128 host, per the existing S1-64 comparison record",
+      "horizon_s": 0.05,
+      "delta_t_s": 0.0001,
+      "steps": 500,
+      "peak_speed_m_s": 103.293547802,
+      "peak_time_s": 0.0497,
+      "solver_wall_s": 1617.7443404390942,
+      "per_step_solver_wall_s": 3.2354886808781886,
+      "parent_elapsed_s": 1817,
+      "allocated_core_hours": 60.5666666667
+    },
+    "current_96_vs_S1_64_peak_delta_m_s": -0.17913231099998939,
+    "current_96_vs_S1_64_peak_delta_percent": -0.17307033761364554,
+    "current_96_vs_prior_T1_120_peak_delta_m_s": 0.02992667099999835,
+    "current_96_vs_prior_T1_120_peak_delta_percent": 0.028972449525466182,
+    "caution": "All three are short 0.05 s, 500-step, 0.1 ms original cases on the same qualified mesh, but placements/rank counts differ (96-rank allocation on a CPU128 host, 64-rank GPU-capable CPU64 host without GPU allocation, prior 120-rank CPU128 host). Peak speed is one scalar, not field convergence; runtime differences are observational, not a controlled hardware scaling law."
+  },
+  "provenance": {
+    "run_manifest_revision": "unknown",
+    "run_manifest_dirty": null,
+    "runtime_source_revision": "unknown",
+    "pre_submit_source_capsule_sha256": "4d67729f3fee89aa888e9e8869952f1339ba0d02450b5e8528f1848b63d60420",
+    "source_capsule_git_revision": "3c0ddafe646daa6cc8a5d0d502f9e8c28183dea7",
+    "source_capsule_dirty_paths": [
+      " M cases/e1_rouaix_hpc/prepare_case.py",
+      " M cases/e1_rouaix_hpc/run_pilot.py",
+      " M experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    ],
+    "case_record_sha256": "6a8de57116b67ab03d182645893377803ee32baaa931acd573b180dbf1cea0d2",
+    "solver_log_sha256": "9904e5c35440dc747b7fd20cf1276d972d74c80c4cce8b1a8a7fb59e7d9cee7c",
+    "solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "archive_sha256": "1905b417b8cfddb71d622ce68b944ec96eea4b8a45ef45ce911e5ed45f68c70b"
+  },
+  "archive_verification": {
+    "verified_utc": "2026-10-26T20:33:17Z",
+    "archive_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1-hpc-pilot-14651185/result.tar.gz",
+    "archive_bytes": 1712051178,
+    "actual_remote_sha256": "1905b417b8cfddb71d622ce68b944ec96eea4b8a45ef45ce911e5ed45f68c70b",
+    "sidecar_sha256": "1905b417b8cfddb71d622ce68b944ec96eea4b8a45ef45ce911e5ed45f68c70b",
+    "run_state_sha256": "1905b417b8cfddb71d622ce68b944ec96eea4b8a45ef45ce911e5ed45f68c70b",
+    "archive_sha_matches_sidecar_and_run_state": true,
+    "remote_tar_tz_exit_code": 0,
+    "actual_tar_entry_count": 130,
+    "recorded_member_inventory_count": 130,
+    "run_state_member_count": 130,
+    "actual_member_names_match_recorded_inventory": true,
+    "archive_crc_readability": "remote tar -tzf completed with exit code 0; SHA also covers every archive byte",
+    "archive_member_names_sha256": "45558190ae0a2c6775e9fee92c3009af6e582d466e8e3b5c4204099a9af76637",
+    "recorded_member_inventory_sha256": "45558190ae0a2c6775e9fee92c3009af6e582d466e8e3b5c4204099a9af76637",
+    "full_archive_transferred_locally": false,
+    "compact_extract_will_exclude": [
+      "reconstructed and processor 3D fields",
+      "polyMesh points/faces/owner/neighbour",
+      "large per-rank fields"
+    ],
+    "remote_unpacked_workspace": "removed after verified archive; compact records streamed from the verified archive"
+  },
+  "limitations": [
+    "Exploratory short startup only; not an E1 gate or field-validity result.",
+    "No full 3D output exists at the recorded 0.0499 s speed peak; retained full fields are only t=0 and t=0.05 s.",
+    "No closed momentum budget; only source momentum flux and water/volume flux accounting are available.",
+    "Large TKE/reduced-pressure extrema are preserved as diagnostics and are not given a physical interpretation here.",
+    "Parent MaxRSS, node-aggregate RSS and memory time series are unavailable; do not use per-task or .batch RSS as node-wide memory.",
+    "The run-recorded Git revision is unknown; immutable pre-submit source capsule and exact dirty paths are hash-bound.",
+    "The archived attempt/experiment.md has a stale 1 ms/50-step introduction; the frozen S1-96 declaration/controlDict/log establish 0.1 ms/500 steps."
+  ],
+  "formal_validation_decision": null,
+  "evidence": [
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/run-state.json",
+      "exists": true,
+      "sha256": "c58308fa3a144d3050007340447a95d3193936417060a1754757dd2129aa4afd",
+      "bytes": 15858,
+      "purpose": "terminal run state, case horizon, archive identity"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/terminal-sacct.txt",
+      "exists": true,
+      "sha256": "39790d9edc2aabf696d306652fe460622b3b4166c5962670e85cac58744150f9",
+      "bytes": 545,
+      "purpose": "raw terminal Slurm parent/batch/extern/solver rows"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/terminal-sacct-resources.txt",
+      "exists": true,
+      "sha256": "bba212e9e34108497ed137f8d3c30f8fae2aebb6bc678e24f26d3f6049140159",
+      "bytes": 412,
+      "purpose": "scoped CPU/RSS accounting rows"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/allocation.txt",
+      "exists": true,
+      "sha256": "3b0ef90993988dcd913832f7c1721ab8213852a063e775e7d0c1b45c1358cb10",
+      "bytes": 789,
+      "purpose": "actual resource allocation and solver setup"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/archive-verification.json",
+      "exists": true,
+      "sha256": "a2f75a0abc76fe0f1e0aaa4cd3e0902b2aafed55da91ea11eacbb3d9a7fb4e54",
+      "bytes": 1389,
+      "purpose": "archive SHA/sidecar/member verification"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/result.tar.gz.sha256",
+      "exists": true,
+      "sha256": "d4920b8cae2262d1f1fc5e4c1de26cd2c3eed3763c46d64a4ffb3d57fd73dfa8",
+      "bytes": 80,
+      "purpose": "remote archive SHA sidecar"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/remote-archive-sha256.txt",
+      "exists": true,
+      "sha256": "0000d7679b8a38701e597efaa2b01bbc5eb8da820a6a18a1fe1457715bb9a0ad",
+      "bytes": 198,
+      "purpose": "fresh remote SHA-256 readback of entire archive"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/result-members.txt",
+      "exists": true,
+      "sha256": "45558190ae0a2c6775e9fee92c3009af6e582d466e8e3b5c4204099a9af76637",
+      "bytes": 5703,
+      "purpose": "saved exact archive member inventory"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/archive-members.actual.txt",
+      "exists": true,
+      "sha256": "687433d35ec4219d6bfd5d1d5fae1748c0649f3a4b90f02039a92575d6f18a0f",
+      "bytes": 5741,
+      "purpose": "actual remote tar -tzf listing"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/compact-extraction-manifest.json",
+      "exists": true,
+      "sha256": "690ecef3b5dccf5bb178a9291bbf66c66d1fc4f291ebeaaaa3cae38ab4060f82",
+      "bytes": 6378,
+      "purpose": "32-file allowlisted compact extraction and local hashes"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/manifest.json",
+      "exists": true,
+      "sha256": "ef170e6f74185c73b03fce954ddd7439ffe6c23595840298d0f031f2ce812913",
+      "bytes": 6653,
+      "purpose": "solver/runtime/input and mesh hashes"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/case-inputs.json",
+      "exists": true,
+      "sha256": "b56bfc0fb54f4587ca78c9f4dd68ce12d28344bf24502a95f608a489b0c1779b",
+      "bytes": 11427,
+      "purpose": "frozen physical inputs, coordinate frame and diagnostic declarations"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/solver.log",
+      "exists": true,
+      "sha256": "9904e5c35440dc747b7fd20cf1276d972d74c80c4cce8b1a8a7fb59e7d9cee7c",
+      "bytes": 2043758,
+      "purpose": "raw native solver log"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_96_20261026/hpc-metrics.json",
+      "exists": true,
+      "sha256": "250ac10dc2ebccd5eef54c7b1624b81e3a8f7b0a2ee98e2befd1e38e2bef7744",
+      "bytes": 330277,
+      "purpose": "current hpc_metrics.py log-reparse output"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/p_rgh-field-header.txt",
+      "exists": true,
+      "sha256": "6f08eb2af45617d7f5e8d83646020132379cc1d78a7a802544eff476b9fb2e25",
+      "bytes": 852,
+      "purpose": "header-only p_rgh field dimensions; no full 3D field data transferred"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/processors96/0.050000000000/uniform/cumulativeContErr",
+      "exists": true,
+      "sha256": "b79ca601b2134c49b47f0470c2c1e1a9553818643ffbfd5d6b9849b0016daac4",
+      "bytes": 1016,
+      "purpose": "endpoint global continuity-error scalar"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/solver-convergence.json",
+      "exists": true,
+      "sha256": "380129d23bf4557dddba7565c704783b45d0d4d6b58a7427559d5ce367ed1ffe",
+      "bytes": 1491,
+      "purpose": "independent 4001-record residual audit"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/ledger/summary.json",
+      "exists": true,
+      "sha256": "28499ea4d2463bdaacd16f20bbb6a001296f5bece20d3f8d605640e38175d393",
+      "bytes": 26458,
+      "purpose": "native water mass ledger, source geometry, residuals and caveats"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/ledger/ledger.csv",
+      "exists": true,
+      "sha256": "6e75a22d9e6390eaaf765883bc400abe417147600c77b4167f36a51563825ce6",
+      "bytes": 166852,
+      "purpose": "500-row mass/flux ledger"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/failureLocations/0.000000000000/fieldMinMax.dat",
+      "exists": true,
+      "sha256": "80f745dce204149ccdab00161c49398c048282871774ccf83260d3be788e1bc3",
+      "bytes": 519489,
+      "purpose": "per-step U, k, epsilon, nut and reduced-pressure extrema and locations"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat",
+      "exists": true,
+      "sha256": "a3e90e7283cf897440255f8335c374fedf003e64d1f6ee5b3514895efb4520be",
+      "bytes": 29589,
+      "purpose": "per-step alpha.water field bounds"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/aircraftWallFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "d3bb0fc1f134d36e5fad8803c1f18cd2fba0de90c69c9c075be939021f1f0cd0",
+      "bytes": 30144,
+      "purpose": "aircraft-wall phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/bottomOutletFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "281f43e7eabd3190e3d3fbaacf0f27b91f4c474246c9bffc8755f60bba0e45be",
+      "bytes": 29770,
+      "purpose": "bottom-outlet phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/downstreamOutletFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "dd0d8e8b713aea75931edd4beaa2912b672acf4537123c87bf3437cb4c9c4545",
+      "bytes": 29981,
+      "purpose": "downstream-outlet phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/gasInletFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "9ea973a4b0e3e174570a1a0322ef5cda7c37b1b2858a0211638d4e376230eaea",
+      "bytes": 30189,
+      "purpose": "gas-inlet phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/nozzleFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "9faf63cb1ef5685921974466da3b883db78bac552332f74b3c332af768e6cda2",
+      "bytes": 30686,
+      "purpose": "nozzle phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/spanwiseMinusFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "bcb147e0141e3a03e38d4821bcc5a0f899127e2c7e522eb1e7550d6dee96892f",
+      "bytes": 30192,
+      "purpose": "spanwise-minus phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/spanwisePlusFlux/0.000000000000/surfaceFieldValue.dat",
+      "exists": true,
+      "sha256": "7182f7eeca6bb8c6e45db1c6b8082104627acf325d82ac9c25b3f1a807c1d2b5",
+      "bytes": 30191,
+      "purpose": "spanwise-plus phi and alphaPhi_ time series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat",
+      "exists": true,
+      "sha256": "427c60c81e97c8033c792a4917805b2f32f3cfb1624092fc36c7fd71b38e580f",
+      "bytes": 29589,
+      "purpose": "per-step velocity-magnitude extrema"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/max-speed.csv",
+      "exists": true,
+      "sha256": "3bd6a4248e6ad5c61a99153576b91ef2ea78c0f8c70dfb4ef4f9c53f42b96d16",
+      "bytes": 10909,
+      "purpose": "500-row max speed series"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/case/system/controlDict",
+      "exists": true,
+      "sha256": "26c64f134d78a82de7dc5c51f1a5c775feb8875118e0374b1cf96fdb277b548c",
+      "bytes": 4340,
+      "purpose": "configured function objects; flux function objects sum phi and alphaPhi only"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/extracted/attempt/manifest.json",
+      "exists": true,
+      "sha256": "ef170e6f74185c73b03fce954ddd7439ffe6c23595840298d0f031f2ce812913",
+      "bytes": 6653,
+      "purpose": "runtime inputs, solver/build, executable hash and field write times"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_20261026/case-records/S1-ORIG-96-01MS-005.pre-submit.json",
+      "exists": true,
+      "sha256": "6a8de57116b67ab03d182645893377803ee32baaa931acd573b180dbf1cea0d2",
+      "bytes": 8429,
+      "purpose": "frozen pre-submit declaration and case source capsule identity"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_64_20261026/analysis.json",
+      "exists": true,
+      "sha256": "f9761effaa4a449c7d4e9af84bf578eaccc44ad0dca3ae15da466edfa443aada",
+      "bytes": 12780,
+      "purpose": "independent 64-rank S1 and prior T1-120 comparator"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_64_20261026/README.md",
+      "exists": true,
+      "sha256": "177520b1de7f04d01b0639fe0327d38d36e13b5da58d33fa6835ad7c7ff01d44",
+      "bytes": 2486,
+      "purpose": "summary of prior S1-64 and T1-120 hardware/time-window cautions"
+    },
+    {
+      "path": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+      "exists": true,
+      "sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d",
+      "bytes": 54653,
+      "purpose": "declared experiment sequence and T1-120 comparator provenance"
+    },
+    {
+      "path": "scripts/hpc_metrics.py",
+      "exists": true,
+      "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b",
+      "bytes": 37319,
+      "purpose": "current log parser used to produce hpc-metrics.json"
+    },
+    {
+      "path": "results/runs/rouaix-s1-96-terminal-20261026/scontrol-node-x1000c4s5b1n0.raw.txt",
+      "exists": true,
+      "sha256": "d2927a2c39da4bdafdb10f52ae96163f190f6bd115aea50f6c9ba58f38569960",
+      "bytes": 702,
+      "purpose": "read-only Slurm node capacity query; CPUTot/CPUEfctv establish CPU128 host profile"
+    }
+  ]
+}

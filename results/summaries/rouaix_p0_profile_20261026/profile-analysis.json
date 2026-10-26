@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-26T20:36:28Z",
+  "case_id": "P0-PROFILE-24-46G-01MS-001",
+  "job_id": "14652548",
+  "purpose": "Terminal audit and exploratory paired native-profiling comparison for the 24-rank Rouaix P0 startup case; no E1 gate decision.",
+  "terminal": {
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "whole_job_elapsed_s": 2409,
+    "solver_step_elapsed_s": 2223,
+    "scheduler_start_local": "2026-10-26T20:49:32",
+    "scheduler_end_local": "2026-10-26T21:29:41",
+    "scheduler_timezone": "CET +0100; UTC equivalents are 19:49:32 and 20:29:41.",
+    "scheduler_started_utc": "2026-10-26T19:49:32Z",
+    "scheduler_ended_utc": "2026-10-26T20:29:41Z",
+    "run_state_started_utc": "2026-10-26T19:49:49.256138+00:00",
+    "solver_started_utc": "2026-10-26T19:51:10.411900+00:00",
+    "run_state_updated_utc": "2026-10-26T20:29:45.925779+00:00",
+    "run_state_updated_is_scheduler_end": false,
+    "solver_status": "solver_complete_exploratory",
+    "solver_exit_code": 0,
+    "End_marker": true,
+    "solver_time_s": 0.01,
+    "steps": 100,
+    "delta_t_s": 0.0001,
+    "horizon_s": 0.01,
+    "run_state_solver_wall_s": 2221.9591675121337,
+    "run_state_solver_elapsed_s": 2200.519953455776,
+    "last_log_execution_time_s": 2201.86,
+    "last_log_clock_time_s": 2220.0,
+    "slurm_solver_step_elapsed_s": 2223,
+    "solver_wall_delta_vs_baseline_s": 30.541761896107346,
+    "solver_wall_delta_vs_baseline_percent": 1.3936989739077932,
+    "whole_job_elapsed_delta_vs_baseline_s": 37,
+    "whole_job_elapsed_delta_vs_baseline_percent": 1.5598650927487352,
+    "comparison_caveat": "The paired jobs ran on different actual nodes (profile x1000c6s0b0n1; baseline x1000c6s1b1n0). The observed wall-time difference is not an isolated causal estimate of profiler overhead.",
+    "baseline_solver_elapsed_s": 2168.697047112044,
+    "baseline_solver_elapsed_s_status": "Stale run-state value; baseline solver_wall_s and Slurm solver-step elapsed are timing evidence."
+  },
+  "case": {
+    "solver": "interIsoFoam",
+    "solver_version": "v2512",
+    "solver_build": "_87ed40d256-20251219",
+    "mesh_cells": 10099265,
+    "ranks": 24,
+    "nodes": 1,
+    "node": "x1000c6s0b0n1",
+    "memory_gib_per_node": 46,
+    "mesh_input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "primary_experiment_declaration_sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d",
+    "numerical_variant": "original",
+    "full_field_write_times_s": [
+      0.0,
+      0.01
+    ],
+    "nAlphaSubCycles": 1,
+    "fixed_delta_t": true,
+    "controlDict_profile_block": {
+      "active": true,
+      "cpuInfo": false,
+      "memInfo": false,
+      "sysInfo": false
+    },
+    "baseline_node": "x1000c6s1b1n0",
+    "baseline_solver_wall_s": 2191.4174056160264,
+    "controlled_input_check": {
+      "same_mesh_archive_and_mesh_manifest": true,
+      "same_fvSchemes_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+      "same_fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "prepared_case_hashes_that_differ": [
+        "case-inputs.json",
+        "setExprFields.log",
+        "system/controlDict"
+      ],
+      "differences_interpretation": "case-inputs.json differs by the explicit profiling flag and run-specific paths; setExprFields.log contains run-specific paths; controlDict has only the appended native profiling block. All other prepared-case file hashes match.",
+      "controlDict_baseline_sha256": "a8940544a7e4e30261f948d6aa5bf6b52c504847a2276ca11abef7e3100f99e6",
+      "controlDict_profile_sha256": "60cd7a173da8ee61b0ac7f641b9649e7025a6c6d6180e3eb2e0174ddd04eeb23",
+      "controlDict_diff": "controlDict-profiler-only.diff"
+    },
+    "provenance": {
+      "source_capsule_sha256": "b43ba9d9768bd853b53876af47f2366af431113c9c3284cafc736771b2d85692",
+      "source_capsule_git_revision": "4c86f017ed1feb3a81620e82cc93766088acee01",
+      "run_manifest_revision": "unknown",
+      "run_manifest_dirty": null,
+      "solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+      "formal_validation_decision": null
+    }
+  },
+  "numerics": {
+    "time_lines": 100,
+    "time_first_s": 0.0001,
+    "time_last_s": 0.01,
+    "End_markers": 1,
+    "linear_solve_audit": {
+      "all_converged": true,
+      "solver_record_count": 801,
+      "failed_record_count": 0,
+      "by_field": {
+        "Ux": {
+          "solve_count": 100,
+          "failed_count": 0,
+          "max_final_residual": 9.99444296411e-09,
+          "max_iterations": 4
+        },
+        "Uy": {
+          "solve_count": 100,
+          "failed_count": 0,
+          "max_final_residual": 9.98486043515e-09,
+          "max_iterations": 5
+        },
+        "Uz": {
+          "solve_count": 100,
+          "failed_count": 0,
+          "max_final_residual": 9.97735754291e-09,
+          "max_iterations": 4
+        },
+        "epsilon": {
+          "solve_count": 100,
+          "failed_count": 0,
+          "max_final_residual": 5.4215752995e-09,
+          "max_iterations": 6
+        },
+        "k": {
+          "solve_count": 100,
+          "failed_count": 0,
+          "max_final_residual": 9.72864852801e-09,
+          "max_iterations": 8
+        },
+        "p_rgh": {
+          "solve_count": 300,
+          "failed_count": 0,
+          "max_final_residual": 0.000302821240515,
+          "max_iterations": 19
+        },
+        "pcorr": {
+          "solve_count": 1,
+          "failed_count": 0,
+          "max_final_residual": 9.65725161774e-11,
+          "max_iterations": 806
+        }
+      },
+      "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied"
+    },
+    "bulk_courant": {
+      "records": 101,
+      "peak_max": 0.95744784315,
+      "peak_time_s": 0.0099
+    },
+    "interface_courant": {
+      "records": 100,
+      "peak_max": 0.420123275152,
+      "peak_time_s": 0.0076
+    },
+    "phase1_volume_fraction": {
+      "records": 100,
+      "first": 5.45502388471e-08,
+      "last": 5.45502388471e-06,
+      "max": 5.45502388471e-06
+    },
+    "alpha_extrema_after_conservative_bounding": {
+      "records": 100,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "peak_speed_csv": {
+      "rows": 100,
+      "time_s": 0.01,
+      "max_magnitude_U_m_s": 91.2425591071,
+      "baseline_output_hash_identical": true
+    },
+    "native_field_extrema_over_steps": {
+      "p_rgh": {
+        "min_Pa": -20488.3926849,
+        "max_Pa": 30443.8183271,
+        "interpretation": "reduced pressure in Pa, not absolute pressure"
+      },
+      "k_max_m2_s2": 193.716231576,
+      "epsilon_max_m2_s3": 32454.4209965
+    },
+    "mass_ledger": {
+      "matched_rows": 100,
+      "horizon_reached": true,
+      "injected_kg": 12.516443202976454,
+      "final_inventory_kg": 12.516443202976433,
+      "final_inventory_m3": 0.01254655493482,
+      "signed_net_escape_kg": 0.0,
+      "final_closure_residual_kg": -2.1316282072803006e-14,
+      "max_abs_per_step_residual_kg": 8.18153877979e-12,
+      "max_abs_cumulative_residual_kg": 7.36299909931e-12,
+      "ledger_csv_hash_identical_to_baseline": true,
+      "caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual."
+    },
+    "matched_clock_samples": {
+      "physical_time_start_s": 0.002,
+      "physical_time_end_s": 0.0099,
+      "samples_per_run": 80,
+      "intervals": 79,
+      "baseline_clock_elapsed_between_samples_s": 1671.0,
+      "profile_clock_elapsed_between_samples_s": 1694.0,
+      "baseline_mean_clock_interval_s": 21.151898734177216,
+      "profile_mean_clock_interval_s": 21.443037974683545,
+      "baseline_execution_elapsed_between_samples_s": 1661.33,
+      "profile_execution_elapsed_between_samples_s": 1679.4,
+      "baseline_mean_execution_interval_s": 21.029493670886076,
+      "profile_mean_execution_interval_s": 21.258227848101267,
+      "clock_time_resolution_note": "ClockTime is logged as integer seconds; these are coarse paired samples, not a timing distribution."
+    },
+    "cross_case_diagnostic_identity": {
+      "ledger_csv_sha256": "7cfe570959be10c4d791e2058e7d7ad580f7616da6d8ed6d758cee6d7e42f944",
+      "max_speed_csv_sha256": "e1f227430ba37439ef0c6078a8e35b31319e71bcfecd4373a0749dd42f58e014",
+      "solver_convergence_sha256": "25478ec7045f2c81e0757f866f6dee7a2140430feae11963f2e98bed00e90d52",
+      "all_three_hashes_match_baseline": true
+    }
+  },
+  "resources": {
+    "job_total_cpu": "14:45:58",
+    "job_total_cpu_seconds": 53158,
+    "job_total_cpu_core_hours": 14.766111111111112,
+    "solver_step_total_cpu": "14:42:54",
+    "solver_step_total_cpu_seconds": 52974,
+    "solver_step_total_cpu_core_hours": 14.715,
+    "batch_total_cpu": "00:03:04.802",
+    "batch_maxrss_raw": "9632440K",
+    "solver_step_maxrss_raw": "2264104K",
+    "baseline_job_total_cpu": "14:33:33",
+    "baseline_job_total_cpu_core_hours": 14.559166666666666,
+    "baseline_solver_step_total_cpu": "14:30:29",
+    "baseline_solver_step_total_cpu_core_hours": 14.508055555555556,
+    "job_total_cpu_delta_s_vs_baseline": 745,
+    "solver_step_total_cpu_delta_s_vs_baseline": 745,
+    "rss_reporting_note": "Preserve Slurm scope and raw unit strings. Job-level MaxRSS is blank; .batch MaxRSS is batch scope and .0 MaxRSS is solver-step scope. .0 AveRSS is retained as printed without a unit suffix. No aggregate node RSS is available.",
+    "cgroup_v2_job_memory": null,
+    "cgroup_memory_time_series_available": false,
+    "profiling_enabled": true,
+    "profiling_summary_utility_used": false,
+    "pressure_solver_timing": "One archived rank-0 native profile object exists; see native_profile. No all-rank max/average/min pressure timing is available.",
+    "separate_io_fraction_measured": false,
+    "full_field_write_time_measured": false,
+    "solver_clock_samples_from_launcher": 100,
+    "solver_clock_windows_from_launcher": {},
+    "job_MaxRSS_raw": "",
+    "solver_step_AveRSS_raw": "1358081194"
+  },
+  "native_profile": {
+    "raw_container_path": "native-profiling-container.txt",
+    "archive_member": "attempt/case/processors24/0.010000000000/uniform/profiling",
+    "archive_member_count_matching_profiling": 1,
+    "container_sha256": "3a8cee27fd64d1f56edb6457e1651d332d6d0b2d5892b45d884bde09bba0811d",
+    "container_bytes": 17761,
+    "trigger_count": 61,
+    "scope": "The only archived object identifies `time.run() caseprocessor0`; this is reported as the raw rank-0 scope. The archive has no postProcessing/profiling summary and no other profiling path.",
+    "selected_scopes": [
+      {
+        "id": 0,
+        "parent_id": null,
+        "description": "application::main",
+        "calls": 1,
+        "total_time_s": 2218.74139681,
+        "child_time_s": 2215.92797811,
+        "active": true
+      },
+      {
+        "id": 17,
+        "parent_id": 0,
+        "description": "time.run() caseprocessor0",
+        "calls": 100,
+        "total_time_s": 2154.20581913,
+        "child_time_s": 1122.27706359,
+        "active": true
+      },
+      {
+        "id": 27,
+        "parent_id": 17,
+        "description": "fvMatrix::solve.p_rgh",
+        "calls": 300,
+        "total_time_s": 854.379917453,
+        "child_time_s": 850.221668015,
+        "active": false
+      },
+      {
+        "id": 28,
+        "parent_id": 27,
+        "description": "lduMatrix::solver.p_rgh",
+        "calls": 300,
+        "total_time_s": 850.221668015,
+        "child_time_s": 833.158529452,
+        "active": false
+      },
+      {
+        "id": 29,
+        "parent_id": 28,
+        "description": "lduMatrix::solver.coarsestLevelCorr",
+        "calls": 300,
+        "total_time_s": 833.158529452,
+        "child_time_s": 0.0,
+        "active": false
+      },
+      {
+        "id": 23,
+        "parent_id": 17,
+        "description": "fvMatrix::solve.U",
+        "calls": 100,
+        "total_time_s": 153.553138378,
+        "child_time_s": 142.544766081,
+        "active": false
+      },
+      {
+        "id": 24,
+        "parent_id": 23,
+        "description": "lduMatrix::solver.Ux",
+        "calls": 100,
+        "total_time_s": 43.049434649,
+        "child_time_s": 0.0,
+        "active": false
+      },
+      {
+        "id": 25,
+        "parent_id": 23,
+        "description": "lduMatrix::solver.Uy",
+        "calls": 100,
+        "total_time_s": 43.943388677,
+        "child_time_s": 0.0,
+        "active": false
+      },
+      {
+        "id": 26,
+        "parent_id": 23,
+        "description": "lduMatrix::solver.Uz",
+        "calls": 100,
+        "total_time_s": 55.551942755,
+        "child_time_s": 0.0,
+        "active": false
+      },
+      {
+        "id": 2,
+        "parent_id": 0,
+        "description": "fvMatrix::solve.pcorr",
+        "calls": 1,
+        "total_time_s": 54.294181484,
+        "child_time_s": 54.280174805,
+        "active": false
+      },
+      {
+        "id": 3,
+        "parent_id": 2,
+        "description": "lduMatrix::solver.pcorr",
+        "calls": 1,
+        "total_time_s": 54.280174805,
+        "child_time_s": 0.0,
+        "active": false
+      },
+      {
+        "id": 33,
+        "parent_id": 17,
+        "description": "fvMatrix::solve.k",
+        "calls": 100,
+        "total_time_s": 39.872614491,
+        "child_time_s": 38.461099099,
+        "active": false
+      },
+      {
+        "id": 34,
+        "parent_id": 33,
+        "description": "lduMatrix::solver.k",
+        "calls": 100,
+        "total_time_s": 38.461099099,
+        "child_time_s": 28.468572423,
+        "active": false
+      },
+      {
+        "id": 30,
+        "parent_id": 17,
+        "description": "fvMatrix::solve.epsilon",
+        "calls": 100,
+        "total_time_s": 39.037788778,
+        "child_time_s": 37.630686623,
+        "active": false
+      },
+      {
+        "id": 31,
+        "parent_id": 30,
+        "description": "lduMatrix::solver.epsilon",
+        "calls": 100,
+        "total_time_s": 37.630686623,
+        "child_time_s": 26.104771091,
+        "active": false
+      },
+      {
+        "id": 36,
+        "parent_id": 0,
+        "description": "functionObjects.execute()",
+        "calls": 99,
+        "total_time_s": 6.28502618,
+        "child_time_s": 6.283058238,
+        "active": false
+      },
+      {
+        "id": 60,
+        "parent_id": 17,
+        "description": "objectRegistry::writeObject",
+        "calls": 1,
+        "total_time_s": 0.038705333,
+        "child_time_s": 0.0,
+        "active": false
+      }
+    ],
+    "interpretation": "Use each scope independently. totalTime is inclusive and childTime is nested work; do not sum the nested values. lduMatrix::solver.p_rgh is a single-process measurement, not slowest-rank/all-rank pressure timing.",
+    "io_limit": "objectRegistry::writeObject (0.038705333 s) times the small uniform/time dictionary write, not the full field registry writes; this profile does not measure full checkpoint duration or separate I/O share.",
+    "source_note": "Native scope semantics follow docs/HPC_RUN_METRICS.md and results/runs/rouaix-hpc-metrics-20261025/native-profile-inspection.json."
+  },
+  "archive": {
+    "remote_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz",
+    "remote_archive_bytes": 1577764722,
+    "sha256": "bff461f5b4c9c99ff78f5de3f003635b25929c63040257b24a571aa1605a1a21",
+    "sidecar_sha256": "bff461f5b4c9c99ff78f5de3f003635b25929c63040257b24a571aa1605a1a21",
+    "tar_member_count": 132,
+    "saved_inventory_count": 132,
+    "actual_inventory_matches_saved_after_stripping_directory_slashes": true,
+    "unsafe_names": [],
+    "nonregular_entries": [],
+    "selected_files_count": 17,
+    "selected_files_bytes": 540120,
+    "selected_remote_local_sha256_match": true,
+    "full_result_archive_copied_locally": false,
+    "full_field_transfer": false,
+    "commands": [
+      "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz'",
+      "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz'",
+      "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tvzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/result.tar.gz'",
+      "tar --no-same-owner --no-same-permissions -xzf <remote result.tar.gz> -C /tmp/rouaix-p0-profile-inspection-20261026 <17 members in archive/select-members.txt>",
+      "rsync -avP --files-from=results/runs/rouaix-p0-profile-inspection-20261026/archive/select-members.txt -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' nk_memj@komondor.hpc.kifu.hu:/tmp/rouaix-p0-profile-inspection-20261026/ results/runs/rouaix-p0-profile-inspection-20261026/metrics/",
+      "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14652548 --format=JobID,JobIDRaw,JobName,State,ExitCode,AllocCPUS,Elapsed,TotalCPU,CPUTimeRAW,MaxRSS,AveRSS,ReqMem,Start,End,NodeList -P'"
+    ]
+  },
+  "remaining_limits": [
+    "Observed profiled wall time is 1.394% above the unprofiled baseline, but jobs ran on different nodes; this is not an isolated profiler overhead estimate.",
+    "Only one rank-0 native profiling container was archived. No all-rank max/average/min profile summary is present; pressure timings must not be generalized to all 24 ranks.",
+    "The built-in objectRegistry::writeObject timer covers a small uniform/time dictionary write, not full field output. Separate I/O fraction and full checkpoint write duration remain unmeasured.",
+    "No cgroup-v2 time series or aggregate node RSS was available. Slurm MaxRSS values are retained only at their reported scopes.",
+    "The 0.01 s, 100-step startup is exploratory and does not compare Rouaix penetration, expansion, or breakup; it is not E1 acceptance or field validation.",
+    "Large k, epsilon, and reduced p_rgh extrema have unresolved physical/numerical interpretation; p_rgh is reduced pressure in Pa, not absolute pressure.",
+    "Mass closure is numerical bookkeeping for this short startup; the ledger notes that post-flux alpha snap/clipping can appear in the residual."
+  ]
+}

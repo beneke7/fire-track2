@@ -347,17 +347,19 @@ profiling
 ```
 
 `Time::setMonitoring()` constructs `uniform/profiling` as a registered
-`AUTO_WRITE` object. The run's regular write at its manifest-declared final
-time therefore records one cumulative profile per rank at that time.
+`AUTO_WRITE` object. Verify the retained rank coverage in each actual output:
+P0 job 14652548 retained one collated-path object labeled `caseprocessor0`,
+so only rank-zero timings are established by that archive.
 `profilingSummary -latestTime`
 reads processor-local profile entries and writes max/average/min values under
 `postProcessing/profiling/<time>/profiling`. With the pilot's
-`FOAM_FILEHANDLER=collated`, the installed collated handler stores rank
-`regIOobject`s in a container under `processors<N>/`; the profile object
-explicitly writes on each process. The generated pilot `controlDict` sets
+`FOAM_FILEHANDLER=collated`, processor output appears under `processors<N>/`.
+In the completed P0 archive the profiling object is an ordinary `dictionary`
+under that path, with rank-zero content only. The generated `controlDict` sets
 `maxThreadFileBufferSize 0`, so the collated writer uses the unthreaded,
-synchronous path. This is one collated profile container per write time, not
-one uncollated file tree per rank.
+synchronous path. The observed P0 output is one profiling file at the final
+write time. A collated pathname alone does not prove all-rank content; the
+completed P0 archive contains no max/average/min summary.
 
 The `lduMatrix::solver.<field>` scope measures wall-clock time and calls for
 each pressure linear solver on each rank; `profilingSummary` retains the
@@ -384,7 +386,22 @@ decision.
 
 The exact remote source paths and SHA-256 values are preserved in
 [`native-profile-inspection.json`](../results/runs/rouaix-hpc-metrics-20261025/native-profile-inspection.json).
-No profiling trial was launched during this inspection.
+No profiling trial was launched during that source inspection. The subsequent
+[P0 profiling trial](../results/summaries/rouaix_p0_profile_20261026/README.md)
+completed 100 fixed 0.1 ms steps through 0.01 s. Its rank-zero pressure scope
+was 850.222 s/300 calls. Solver wall was 2221.959 s versus baseline 2191.417 s
+on another node; the +1.394% difference does not isolate profiler overhead.
+
+### Compute-node accounting limitation
+
+Native audit smoke 14654156 failed in two seconds because compute-node
+`sacct` could not reach configured `localhost:6819`; login-node accounting
+worked. The repaired auditor uses retained `scontrol` state when available,
+or preserves hash-verified solver/ledger diagnostics with scheduler state
+`UNKNOWN` and CPU accounting unavailable. It does not infer zero CPU. Fetch
+actual parent/step CPU and RSS through the login node separately.
+[Repaired native smoke](../results/summaries/rouaix_audit_repair_20261026/README.md)
+14656128 passed in 36 s with 156136 KiB batch MaxRSS and 34.733 CPU-seconds.
 
 ## Matched rank measurements: 64–300 ranks
 

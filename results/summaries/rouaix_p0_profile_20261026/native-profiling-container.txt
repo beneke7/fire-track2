@@ -1,0 +1,693 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       dictionary;
+    location    "0.010000000000/uniform";
+    object      profiling;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+profiling
+{
+    trigger0
+    {
+        id              0;
+        description     "application::main";
+        calls           1;
+        totalTime       2218.74139681;
+        childTime       2215.92797811;
+        active          true;
+    }
+
+    trigger17
+    {
+        id              17;
+        parentId        0;
+        description     "time.run() caseprocessor0";
+        calls           100;
+        totalTime       2154.20581913;
+        childTime       1122.27706359;
+        active          true;
+    }
+
+    trigger1
+    {
+        id              1;
+        parentId        0;
+        description     "virtual void Foam::reconstruction::isoAlpha::reconstruct(bool)";
+        calls           1;
+        totalTime       0.85128566;
+        childTime       0;
+        active          false;
+    }
+
+    trigger2
+    {
+        id              2;
+        parentId        0;
+        description     "fvMatrix::solve.pcorr";
+        calls           1;
+        totalTime       54.294181484;
+        childTime       54.280174805;
+        active          false;
+    }
+
+    trigger3
+    {
+        id              3;
+        parentId        2;
+        description     "lduMatrix::solver.pcorr";
+        calls           1;
+        totalTime       54.280174805;
+        childTime       0;
+        active          false;
+    }
+
+    trigger4
+    {
+        id              4;
+        parentId        0;
+        description     "functionObjects.start()";
+        calls           1;
+        totalTime       0.291665655;
+        childTime       0.291111607;
+        active          false;
+    }
+
+    trigger5
+    {
+        id              5;
+        parentId        4;
+        description     "functionObjects::read";
+        calls           1;
+        totalTime       0.291111607;
+        childTime       0.29034089;
+        active          false;
+    }
+
+    trigger6
+    {
+        id              6;
+        parentId        5;
+        description     "functionObject::waterVolume::new";
+        calls           1;
+        totalTime       0.276895412;
+        childTime       0;
+        active          false;
+    }
+
+    trigger7
+    {
+        id              7;
+        parentId        5;
+        description     "functionObject::nozzleFlux::new";
+        calls           1;
+        totalTime       0.001199282;
+        childTime       0;
+        active          false;
+    }
+
+    trigger8
+    {
+        id              8;
+        parentId        5;
+        description     "functionObject::gasInletFlux::new";
+        calls           1;
+        totalTime       0.001511989;
+        childTime       0;
+        active          false;
+    }
+
+    trigger9
+    {
+        id              9;
+        parentId        5;
+        description     "functionObject::downstreamOutletFlux::new";
+        calls           1;
+        totalTime       0.0013326;
+        childTime       0;
+        active          false;
+    }
+
+    trigger10
+    {
+        id              10;
+        parentId        5;
+        description     "functionObject::bottomOutletFlux::new";
+        calls           1;
+        totalTime       0.001295568;
+        childTime       0;
+        active          false;
+    }
+
+    trigger11
+    {
+        id              11;
+        parentId        5;
+        description     "functionObject::spanwiseMinusFlux::new";
+        calls           1;
+        totalTime       0.001266562;
+        childTime       0;
+        active          false;
+    }
+
+    trigger12
+    {
+        id              12;
+        parentId        5;
+        description     "functionObject::spanwisePlusFlux::new";
+        calls           1;
+        totalTime       0.001350987;
+        childTime       0;
+        active          false;
+    }
+
+    trigger13
+    {
+        id              13;
+        parentId        5;
+        description     "functionObject::aircraftWallFlux::new";
+        calls           1;
+        totalTime       0.001354704;
+        childTime       0;
+        active          false;
+    }
+
+    trigger14
+    {
+        id              14;
+        parentId        5;
+        description     "functionObject::alphaExtrema::new";
+        calls           1;
+        totalTime       0.00150214;
+        childTime       0;
+        active          false;
+    }
+
+    trigger15
+    {
+        id              15;
+        parentId        5;
+        description     "functionObject::speedExtrema::new";
+        calls           1;
+        totalTime       0.001289697;
+        childTime       0;
+        active          false;
+    }
+
+    trigger16
+    {
+        id              16;
+        parentId        5;
+        description     "functionObject::failureLocations::new";
+        calls           1;
+        totalTime       0.001341949;
+        childTime       0;
+        active          false;
+    }
+
+    trigger18
+    {
+        id              18;
+        parentId        17;
+        description     "void Foam::isoAdvection::advect(const SpType&, const SuType&) [with SpType = Foam::zeroField; SuType = Foam::zeroField]";
+        calls           100;
+        totalTime       35.394899154;
+        childTime       19.267485313;
+        active          false;
+    }
+
+    trigger19
+    {
+        id              19;
+        parentId        18;
+        description     "virtual void Foam::reconstruction::isoAlpha::reconstruct(bool)";
+        calls           100;
+        totalTime       6.451063115;
+        childTime       0;
+        active          false;
+    }
+
+    trigger20
+    {
+        id              20;
+        parentId        18;
+        description     "void Foam::isoAdvection::timeIntegratedFlux()";
+        calls           100;
+        totalTime       9.229636872;
+        childTime       0;
+        active          false;
+    }
+
+    trigger21
+    {
+        id              21;
+        parentId        18;
+        description     "void Foam::isoAdvection::limitFluxes(const SpType&, const SuType&) [with SpType = Foam::zeroField; SuType = Foam::zeroField]";
+        calls           100;
+        totalTime       3.387507785;
+        childTime       0.004484905;
+        active          false;
+    }
+
+    trigger22
+    {
+        id              22;
+        parentId        18;
+        description     "void Foam::isoAdvection::applyBruteForceBounding()";
+        calls           100;
+        totalTime       0.199277541;
+        childTime       0;
+        active          false;
+    }
+
+    trigger23
+    {
+        id              23;
+        parentId        17;
+        description     "fvMatrix::solve.U";
+        calls           100;
+        totalTime       153.553138378;
+        childTime       142.544766081;
+        active          false;
+    }
+
+    trigger24
+    {
+        id              24;
+        parentId        23;
+        description     "lduMatrix::solver.Ux";
+        calls           100;
+        totalTime       43.049434649;
+        childTime       0;
+        active          false;
+    }
+
+    trigger25
+    {
+        id              25;
+        parentId        23;
+        description     "lduMatrix::solver.Uy";
+        calls           100;
+        totalTime       43.943388677;
+        childTime       0;
+        active          false;
+    }
+
+    trigger26
+    {
+        id              26;
+        parentId        23;
+        description     "lduMatrix::solver.Uz";
+        calls           100;
+        totalTime       55.551942755;
+        childTime       0;
+        active          false;
+    }
+
+    trigger27
+    {
+        id              27;
+        parentId        17;
+        description     "fvMatrix::solve.p_rgh";
+        calls           300;
+        totalTime       854.379917453;
+        childTime       850.221668015;
+        active          false;
+    }
+
+    trigger28
+    {
+        id              28;
+        parentId        27;
+        description     "lduMatrix::solver.p_rgh";
+        calls           300;
+        totalTime       850.221668015;
+        childTime       833.158529452;
+        active          false;
+    }
+
+    trigger29
+    {
+        id              29;
+        parentId        28;
+        description     "lduMatrix::solver.coarsestLevelCorr";
+        calls           300;
+        totalTime       833.158529452;
+        childTime       0;
+        active          false;
+    }
+
+    trigger30
+    {
+        id              30;
+        parentId        17;
+        description     "fvMatrix::solve.epsilon";
+        calls           100;
+        totalTime       39.037788778;
+        childTime       37.630686623;
+        active          false;
+    }
+
+    trigger31
+    {
+        id              31;
+        parentId        30;
+        description     "lduMatrix::solver.epsilon";
+        calls           100;
+        totalTime       37.630686623;
+        childTime       26.104771091;
+        active          false;
+    }
+
+    trigger32
+    {
+        id              32;
+        parentId        31;
+        description     "lduMatrix::smoother.epsilon";
+        calls           100;
+        totalTime       26.104771091;
+        childTime       0;
+        active          false;
+    }
+
+    trigger33
+    {
+        id              33;
+        parentId        17;
+        description     "fvMatrix::solve.k";
+        calls           100;
+        totalTime       39.872614491;
+        childTime       38.461099099;
+        active          false;
+    }
+
+    trigger34
+    {
+        id              34;
+        parentId        33;
+        description     "lduMatrix::solver.k";
+        calls           100;
+        totalTime       38.461099099;
+        childTime       28.468572423;
+        active          false;
+    }
+
+    trigger35
+    {
+        id              35;
+        parentId        34;
+        description     "lduMatrix::smoother.k";
+        calls           100;
+        totalTime       28.468572423;
+        childTime       0;
+        active          false;
+    }
+
+    trigger36
+    {
+        id              36;
+        parentId        0;
+        description     "functionObjects.execute()";
+        calls           99;
+        totalTime       6.28502618;
+        childTime       6.283058238;
+        active          false;
+    }
+
+    trigger37
+    {
+        id              37;
+        parentId        36;
+        description     "functionObject::waterVolume::execute";
+        calls           99;
+        totalTime       0.001103642;
+        childTime       0;
+        active          false;
+    }
+
+    trigger38
+    {
+        id              38;
+        parentId        36;
+        description     "functionObject::waterVolume:write";
+        calls           99;
+        totalTime       1.495919081;
+        childTime       0;
+        active          false;
+    }
+
+    trigger39
+    {
+        id              39;
+        parentId        36;
+        description     "functionObject::nozzleFlux::execute";
+        calls           99;
+        totalTime       0.000135286;
+        childTime       0;
+        active          false;
+    }
+
+    trigger40
+    {
+        id              40;
+        parentId        36;
+        description     "functionObject::nozzleFlux:write";
+        calls           99;
+        totalTime       0.018251512;
+        childTime       0;
+        active          false;
+    }
+
+    trigger41
+    {
+        id              41;
+        parentId        36;
+        description     "functionObject::gasInletFlux::execute";
+        calls           99;
+        totalTime       5.1556e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger42
+    {
+        id              42;
+        parentId        36;
+        description     "functionObject::gasInletFlux:write";
+        calls           99;
+        totalTime       0.012264445;
+        childTime       0;
+        active          false;
+    }
+
+    trigger43
+    {
+        id              43;
+        parentId        36;
+        description     "functionObject::downstreamOutletFlux::execute";
+        calls           99;
+        totalTime       3.9198e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger44
+    {
+        id              44;
+        parentId        36;
+        description     "functionObject::downstreamOutletFlux:write";
+        calls           99;
+        totalTime       0.014529449;
+        childTime       0;
+        active          false;
+    }
+
+    trigger45
+    {
+        id              45;
+        parentId        36;
+        description     "functionObject::bottomOutletFlux::execute";
+        calls           99;
+        totalTime       3.7917e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger46
+    {
+        id              46;
+        parentId        36;
+        description     "functionObject::bottomOutletFlux:write";
+        calls           99;
+        totalTime       0.011162073;
+        childTime       0;
+        active          false;
+    }
+
+    trigger47
+    {
+        id              47;
+        parentId        36;
+        description     "functionObject::spanwiseMinusFlux::execute";
+        calls           99;
+        totalTime       3.4904e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger48
+    {
+        id              48;
+        parentId        36;
+        description     "functionObject::spanwiseMinusFlux:write";
+        calls           99;
+        totalTime       2.107763443;
+        childTime       0;
+        active          false;
+    }
+
+    trigger49
+    {
+        id              49;
+        parentId        36;
+        description     "functionObject::spanwisePlusFlux::execute";
+        calls           99;
+        totalTime       4.5185e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger50
+    {
+        id              50;
+        parentId        36;
+        description     "functionObject::spanwisePlusFlux:write";
+        calls           99;
+        totalTime       0.01135939;
+        childTime       0;
+        active          false;
+    }
+
+    trigger51
+    {
+        id              51;
+        parentId        36;
+        description     "functionObject::aircraftWallFlux::execute";
+        calls           99;
+        totalTime       4.1222e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger52
+    {
+        id              52;
+        parentId        36;
+        description     "functionObject::aircraftWallFlux:write";
+        calls           99;
+        totalTime       0.014554967;
+        childTime       0;
+        active          false;
+    }
+
+    trigger53
+    {
+        id              53;
+        parentId        36;
+        description     "functionObject::alphaExtrema::execute";
+        calls           99;
+        totalTime       0.001080727;
+        childTime       0;
+        active          false;
+    }
+
+    trigger54
+    {
+        id              54;
+        parentId        36;
+        description     "functionObject::alphaExtrema:write";
+        calls           99;
+        totalTime       0.202204286;
+        childTime       0;
+        active          false;
+    }
+
+    trigger55
+    {
+        id              55;
+        parentId        36;
+        description     "functionObject::speedExtrema::execute";
+        calls           99;
+        totalTime       4.9699e-05;
+        childTime       0;
+        active          false;
+    }
+
+    trigger56
+    {
+        id              56;
+        parentId        36;
+        description     "functionObject::speedExtrema:write";
+        calls           99;
+        totalTime       0.915977242;
+        childTime       0;
+        active          false;
+    }
+
+    trigger57
+    {
+        id              57;
+        parentId        36;
+        description     "functionObject::failureLocations::execute";
+        calls           99;
+        totalTime       0.00012529;
+        childTime       0;
+        active          false;
+    }
+
+    trigger58
+    {
+        id              58;
+        parentId        36;
+        description     "functionObject::failureLocations:write";
+        calls           99;
+        totalTime       1.476327724;
+        childTime       0;
+        active          false;
+    }
+
+    trigger59
+    {
+        id              59;
+        parentId        21;
+        description     "void Foam::isoAdvection::boundFlux(const Foam::bitSet&, Foam::surfaceScalarField&, Foam::DynamicList<int>&, const SpType&, const SuType&) [with SpType = Foam::zeroField; SuType = Foam::zeroField; Foam::surfaceScalarField = Foam::GeometricField<double, Foam::fvsPatchField, Foam::surfaceMesh>]";
+        calls           196;
+        totalTime       0.004484905;
+        childTime       0;
+        active          false;
+    }
+
+    trigger60
+    {
+        id              60;
+        parentId        17;
+        description     "objectRegistry::writeObject";
+        calls           1;
+        totalTime       0.038705333;
+        childTime       0;
+        active          false;
+    }
+}
+
+
+// ************************************************************************* //
