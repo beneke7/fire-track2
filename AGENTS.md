@@ -29,6 +29,13 @@ sensitivities, not the confirmed startup. The current provisional outlet train
 has no added post-rise straight and a 1 m transition/mouth assembly; preserve
 historical geometries and fields rather than changing them in place.
 
+26 October reconstruction correction: the scaled pipe overlap creates an
+unintended exposed shoulder inside the transition. New corrected-junction
+candidates use `--pipe-transition-join flush-at-inlet`; `legacy-overlap` remains
+available for historical reproduction. The corrected native mesh is being
+tested with the standard phase-source update. Its effect on numerical stability
+or hardware performance is not established.
+
 Build the multiregion aerial-water-drop pipeline in
 `track2_aerial_drop_experiment_plan.md`. Read that plan before changing physics,
 metrics, validation order, or solver architecture. The root PDFs are reference

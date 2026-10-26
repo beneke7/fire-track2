@@ -116,11 +116,23 @@ The current [phase-source fork](../solvers/i4f_frozen_sp/applications/solvers/mu
 retains the stock predictor but uses its captured `Sp` in the MULES correction
 instead of recomputing that coefficient. Its earlier comparison used a primed
 one-tank case. The current flag-off restart above adds a matched-state source
-sensitivity, but no stock-source trajectory from the confirmed cold state has
-completed. It does not retroactively change the inherited frozen-source fields.
-Following independent review, the next comparisons keep the running bend-region
-refinement and queue that true stock-source cold start. No new production
-phase-source equation correction is adopted.
+sensitivity; a separate true-cold standard-source trajectory now supplies the
+[comparison through .4 s](../results/summaries/i4f_20261025/stock-frozen-source-comparison.json).
+Nearest scalar rows differ by 3.0 and 34.5 microseconds at the .35/.4 s targets.
+Valve-seat water fluxes differ by at most .00531%/.00236%, and headspace probe
+pressure by about 131/164 Pa. Initial fields and mesh match; diagnostic binaries
+differ. No interpolation or exact-common-time error claim is made.
+
+That true-cold case also stops numerically: at .41005436428 s, two intermediate
+pressure solves reach -9.095 and -80.959 kPa in nearly pure-water cells around
+x=3.436904 m. The [contact review](../results/summaries/i4f_20261025/stock-cold-pressure-contact-review.json)
+reconciles all fourteen affected-cell records. Its saved .410269 s endpoint is
+complete, but the .46 s target is unachieved; the later positive pressure does
+not erase those contacts. Changing the source update alone has not removed the
+problem. The corrected 299,214-cell flush-junction case has completed clean
+.05 s startup and is continuing toward .46/1.3 s, while the older bend-refinement
+case remains active. Neither supplies a complete verified discharge yet.
+No new production phase-source equation correction is adopted.
 
 The [corrected raw-contact analysis](../results/summaries/i4f_20261025/pressure-contact-review.json)
 recovers the actual rank-prefixed cell records already present in the logs;

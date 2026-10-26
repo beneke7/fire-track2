@@ -1,0 +1,257 @@
+{
+  "all_candidate_members_rechecked_against_sha_and_mode_uid_gid_mtime_before_unlink": true,
+  "archive_path": "results/archives/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.tar.zst",
+  "archive_sha256": "a153451774cdb5e6792b603fb7a8a1dcc70dc4cedda7703bdebf9374f1f803d7",
+  "authorization": "root GO for all four candidate roots; third root was proven a symlink alias of the second and was preserved",
+  "completed_utc": "2026-10-26T06:34:31+00:00",
+  "df_delta_bytes": 5485617152,
+  "df_free_after_all_target_unlinks": 38695133184,
+  "df_free_before_fourth_target_unlink": 33209516032,
+  "df_latest_verification": {
+    "available_bytes": 38623600640,
+    "filesystem": "ext4",
+    "measured_utc": "2026-10-26T06:36:21.522982+00:00"
+  },
+  "duplicate_alias_path_count_not_double_counted": 1760,
+  "duplicate_audit_path": "results/runs/i4f-lossless-archive-20261026T061740Z/duplicate-candidate-audit.json",
+  "duplicate_audit_sha256": "6499768f2d5489060f84e2cd93015042680dda777fce7b19fdbe0b7b55c54f4c",
+  "files_by_source_manifest_prefix": "for each independent target, target_path = target_prefix + (archive manifest member path with source_prefix removed); manifest SHA above includes per-file SHA/size/mode/uid/gid/mtime. Partial path list limits restore to its exact 1232 files.",
+  "manifest_path": "results/archives/manifests/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.members.json",
+  "manifest_sha256": "f1e9bfdf19ae347306233629a6d51b2745050da344929158289cf058305256aa",
+  "preserved_nonselected_samples": [
+    {
+      "case_root": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "numeric_times_processor0": [
+        "0.4",
+        "1.5000193048",
+        "1.750234439187"
+      ]
+    },
+    {
+      "case_root": "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case",
+      "numeric_times_processor0": [
+        "0.4",
+        "1.5000193048"
+      ]
+    },
+    {
+      "case_root": "results/runs/rouaix-checkpoint-audit-recovery-20261012T085240Z/case",
+      "numeric_times_processor0": [
+        "0.4",
+        "1.5000193048",
+        "1.750234439187"
+      ]
+    },
+    {
+      "case_root": "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01",
+      "numeric_times_processor0": [
+        "0.4",
+        "1.5000193048"
+      ]
+    }
+  ],
+  "prior_scopes": "partial and retry01 files were immediately rehashed/re-statted before each unlink; checkpoint-audit path was a symlink alias to retry01 and thus lost visibility through the same backing-path deletion; unique unlink paths: 1232 partial + 1760 retry01 backing tree + 1760 independent reconstruction; checkpoint-audit symlink alias contributes zero additional unlink paths",
+  "protected_checkpoint_and_alias_verification": {
+    "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case": {
+      "case_root_is_symlink": false,
+      "endpoint_1p5000193048_processors_present": 16,
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "seed_0p4_processors_present": 16,
+      "selected_archive_field_members_still_present": 0
+    },
+    "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case": {
+      "case_root_is_symlink": false,
+      "endpoint_1p5000193048_processors_present": 16,
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case",
+      "seed_0p4_processors_present": 16,
+      "selected_archive_field_members_still_present": 0
+    },
+    "results/runs/rouaix-checkpoint-audit-recovery-20261012T085240Z/case": {
+      "case_root_is_symlink": true,
+      "endpoint_1p5000193048_processors_present": 16,
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "seed_0p4_processors_present": 16,
+      "selected_archive_field_members_still_present": 0,
+      "symlink_target": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case"
+    },
+    "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01": {
+      "case_root_is_symlink": false,
+      "endpoint_1p5000193048_processors_present": 16,
+      "real_case_path": "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01",
+      "seed_0p4_processors_present": 16,
+      "selected_archive_field_members_still_present": 0
+    }
+  },
+  "protected_checkpoint_verification": {
+    "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case": {
+      "all_16_seed_and_endpoint_dirs_present": true,
+      "case_root_is_symlink": false,
+      "endpoint_1p5000193048_processors_present": 16,
+      "nonselected_numeric_times_processor0": [
+        "0.4",
+        "1.5000193048",
+        "1.750234439187"
+      ],
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "seed_0p4_processors_present": 16,
+      "symlink_target": null
+    },
+    "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case": {
+      "all_16_seed_and_endpoint_dirs_present": true,
+      "case_root_is_symlink": false,
+      "endpoint_1p5000193048_processors_present": 16,
+      "nonselected_numeric_times_processor0": [
+        "0.4",
+        "1.5000193048"
+      ],
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case",
+      "seed_0p4_processors_present": 16,
+      "symlink_target": null
+    },
+    "results/runs/rouaix-checkpoint-audit-recovery-20261012T085240Z/case": {
+      "all_16_seed_and_endpoint_dirs_present": true,
+      "case_root_is_symlink": true,
+      "endpoint_1p5000193048_processors_present": 16,
+      "nonselected_numeric_times_processor0": [
+        "0.4",
+        "1.5000193048",
+        "1.750234439187"
+      ],
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "seed_0p4_processors_present": 16,
+      "symlink_target": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case"
+    },
+    "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01": {
+      "all_16_seed_and_endpoint_dirs_present": true,
+      "case_root_is_symlink": false,
+      "endpoint_1p5000193048_processors_present": 16,
+      "nonselected_numeric_times_processor0": [
+        "0.4",
+        "1.5000193048"
+      ],
+      "real_case_path": "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01",
+      "seed_0p4_processors_present": 16,
+      "symlink_target": null
+    }
+  },
+  "protected_data": "all .4 seeds and 1.5000193048 endpoints where present, unselected times, non-time files, logs, dictionaries, meshes, code, and directories were preserved; no directories were removed",
+  "removed_duplicate_logical_bytes": 14806125823,
+  "removed_independent_file_path_count": 4752,
+  "restore_command_validation": {
+    "checkpoint_audit_alias": "restore retry01 backing case only; preserve symlink; do not extract through alias path",
+    "full_retry01": {
+      "archive_members_listed": 2240,
+      "exit_status": "tar=0,zstd=0",
+      "first": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case/processor0/0.49989058/",
+      "last": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case/processor15/1.3999269276/nut",
+      "method": "zstd stream piped to tar -t with same --transform; no extraction"
+    },
+    "partial_continue5s": {
+      "archive_members_listed": 1232,
+      "exit_status": "tar=0,zstd=0",
+      "first": "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case/processor0/0.80007068/uniform/time",
+      "last": "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case/processor15/1.3999269276/nut",
+      "member_list_sha256": "0dde282638c86047318e992a3c0e934e2771fd19660cee69a2ad0b136c63d51b",
+      "method": "zstd stream piped to tar -t with exact -T member list and same --transform; no extraction"
+    }
+  },
+  "schema": "lossless-archive-duplicate-copy-prune/v1",
+  "targets": {
+    "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case": {
+      "archive_source_prefix": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/",
+      "preunlink_link_count_histogram_from_full_duplicate_audit": {
+        "1": 1760
+      },
+      "restore_command": "zstd -dc results/archives/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.tar.zst | tar --numeric-owner --same-owner --same-permissions -x -f - -C /home/v/proj/bene/fire-track2 --transform='s#^results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/#results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case/#'",
+      "selected_times": [
+        "0.49989058",
+        "0.59995942",
+        "0.69993523",
+        "0.80007068",
+        "0.90011602",
+        "1.00015191",
+        "1.10021183",
+        "1.200145389",
+        "1.299888041",
+        "1.3999269276"
+      ],
+      "source_manifest_path_and_sha_are_mapping_authority": "results/archives/manifests/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.members.json",
+      "status": "removed exact verified full selected set",
+      "target_prefix": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case/",
+      "unique_logical_bytes": 5483578716,
+      "unlink_count": 1760
+    },
+    "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case": {
+      "archive_source_prefix": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/",
+      "preunlink_link_count_histogram_from_full_duplicate_audit": {
+        "1": 1232
+      },
+      "restore_command": "zstd -dc results/archives/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.tar.zst | tar --numeric-owner --same-owner --same-permissions -x -f - -C /home/v/proj/bene/fire-track2 --transform='s#^results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/#results/runs/rouaix-c4-continue-5s-20261007T153256Z/case/#' -T results/archives/manifests/rouaix-c4-adaptive-1p5-20261026T061740Z-to-rouaix-c4-continue-5s-20261007T153256Z-partial-restore-members.txt",
+      "restore_member_list": "results/archives/manifests/rouaix-c4-adaptive-1p5-20261026T061740Z-to-rouaix-c4-continue-5s-20261007T153256Z-partial-restore-members.txt",
+      "restore_member_list_sha256": "0dde282638c86047318e992a3c0e934e2771fd19660cee69a2ad0b136c63d51b",
+      "selected_times": [
+        "0.80007068",
+        "0.90011602",
+        "1.00015191",
+        "1.10021183",
+        "1.200145389",
+        "1.299888041",
+        "1.3999269276"
+      ],
+      "source_manifest_path_and_sha_are_mapping_authority": "results/archives/manifests/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.members.json",
+      "status": "removed exact verified subset",
+      "target_prefix": "results/runs/rouaix-c4-continue-5s-20261007T153256Z/case/",
+      "unique_logical_bytes": 3838968391,
+      "unlink_count": 1232
+    },
+    "results/runs/rouaix-checkpoint-audit-recovery-20261012T085240Z/case": {
+      "alias_target": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "real_case_path": "results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case",
+      "restore_command": "zstd -dc results/archives/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.tar.zst | tar --numeric-owner --same-owner --same-permissions -x -f - -C /home/v/proj/bene/fire-track2 --transform='s#^results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/#results/runs/rouaix-c4-continue-5s-20261007T153256Z-retry01/case/#'",
+      "restore_rule": "Extract only to the retry01 backing case using its prefix transform; preserve this symlink and never extract to or replace the symlink path.",
+      "selected_times_visible_through_alias": [
+        "0.49989058",
+        "0.59995942",
+        "0.69993523",
+        "0.80007068",
+        "0.90011602",
+        "1.00015191",
+        "1.10021183",
+        "1.200145389",
+        "1.299888041",
+        "1.3999269276"
+      ],
+      "status": "symlink alias of retry01 case; no additional inode/files removed",
+      "unlink_count": 0
+    },
+    "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01": {
+      "allocated_bytes_at_current_preunlink_check": 5487583232,
+      "archive_source_prefix": "results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/",
+      "nlink_histogram_at_current_preunlink_check": {
+        "1": 1760
+      },
+      "restore_command": "zstd -dc results/archives/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.tar.zst | tar --numeric-owner --same-owner --same-permissions -x -f - -C /home/v/proj/bene/fire-track2 --transform='s#^results/runs/rouaix-c4-adaptive-1p5-20261006T1049Z/case/#results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01/#'",
+      "selected_times": [
+        "0.49989058",
+        "0.59995942",
+        "0.69993523",
+        "0.80007068",
+        "0.90011602",
+        "1.00015191",
+        "1.10021183",
+        "1.200145389",
+        "1.299888041",
+        "1.3999269276"
+      ],
+      "source_manifest_path_and_sha_are_mapping_authority": "results/archives/manifests/rouaix-c4-adaptive-1p5-20261006T1049Z-intermediate-0p49989058-1p3999269276-20261026T061740Z.members.json",
+      "status": "removed exact verified full selected set",
+      "target_prefix": "results/runs/rouaix-results-cpu-20261007T153625Z/reconstruction-case-retry01/",
+      "unique_logical_bytes": 5483578716,
+      "unlink_count": 1760
+    }
+  },
+  "third_case_root_explanation": "checkpoint-audit-recovery/case is a symlink alias to the retry01 case; it is preserved and not counted as an independent copy",
+  "third_case_root_independent_copy_count": 0,
+  "unique_case_file_inode_count_at_preunlink": 4752,
+  "unique_unlink_path_count": 4752
+}

@@ -1,5 +1,16 @@
 # I4F discharge: published results, 25–26 October 2026
 
+**Standard-source cold control:** bulk histories remain closely aligned with
+the frozen-source reference through .4 s; nearest-row valve flux differences
+are below .006%. The [comparison](stock-frozen-source-comparison.json) and
+[CSV](stock-frozen-source-comparison.csv) retain exact time offsets and limits.
+The control still encounters negative intermediate pressures near .410 s and
+does not reach .46 s. The [14-cell review](stock-cold-pressure-contact-review.json),
+[CSV](stock-cold-pressure-contact-review.csv) and
+[pressure-correction trace](stock-cold-pressure-contact-trace.png) distinguish
+that numerical event from the positive saved endpoint and from cavitation.
+The corrected-junction case has passed .05 s startup; its long-run result is pending.
+
 **Pipe/transition junction:** a source-to-native-mesh audit found an exposed
 roughly 19 mm shoulder created by the old pipe overlap. The opt-in flush
 junction removes it at all four branches, preserving tank and feed geometry.

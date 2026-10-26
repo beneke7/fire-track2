@@ -1,64 +1,68 @@
 # Live project status
 
-Updated: 2026-10-26 05:56 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 06:52 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 
 ## Current execution
 
-- **Standard phase-source update, 299,248 cells / ten MPI ranks:** Docker
-  `7a4508c7f1fe`, StartedAt 2026-10-26T05:43:15.899063019Z. Latest native
-  observation: 0.370422 s, zero raw contacts/errors. Target .46 s,
-  then 1.3 s if healthy. It continues exact .341377415807 s from stage02.
-  Current bundle: `results/runs/i4f-stock-cold-299248-stage03-20261026T054311Z/`.
-  Authority: `results/runs/i4f-resource-save-recovery-v2-20261026T053959Z/stock-campaign-recovery-v2-status.json`;
-  unit `i4f-stock-cold-299248-recovery-v2-campaign.service`.
-  Original campaign deadline remains **2026-10-27 02:10:45 UTC**.
-  The diagnostic binary uses the standard MULES corrector source update;
-  its physical inputs and other numerical controls match the coarse reference.
-- **Bend/outlet refinement, 881,431 cells / ten MPI ranks:** Docker
-  `d1e8e2922f8e`, StartedAt 2026-10-26T05:42:41.284617235Z. Latest observation:
-  0.266271 s, zero raw contacts/errors. Target .7 s; exact native
-  parent .253271166664 s. Tanks stay coarse; the valve source retains 48 bands.
-  Current bundle: `results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/`.
+- **Corrected-junction cold start, 299,214 cells / ten MPI ranks:** the pilot
+  ended normally at exact .050021166664 s with all fourteen fields and zero
+  raw contacts/errors. The first actual continuation is advancing at
+  0.071521 s toward .46 s, then 1.3 s if healthy. Docker
+  `23c2bb49e6e4`, StartedAt 2026-10-26T06:44:49.045490597Z; bundle
+  `results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/`.
+  Its four input manifests, exact GO/guard and completed steps are verified.
+  The same standard phase-source update, water/ideal-air physics, SST, scalar
+  valve and numerical settings match the old coarse standard-source case;
+  the pipe/transition join and native mesh differ. Cold input begins with dry
+  downstream passages; no failed fields are inherited. Authority:
+  `results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/stock-campaign-status.json`;
+  unit `i4f-flush-stock-cold-campaign-20261026t060440z-campaign.service`.
+  Original new-campaign clock ends **2026-10-27 06:23:53 UTC**.
+  Stage01 hard/save limits are 4 h / 3 h 40, measured from its actual StartedAt.
+- **Older bend/outlet refinement, 881,431 cells / ten MPI ranks:** Docker
+  `d1e8e2922f8e`, StartedAt 2026-10-26T05:42:41.284617235Z, remains running
+  at 0.316632 s with zero raw contacts/errors, target .7 s.
+  It retains the old overlapping-pipe geometry and frozen-source update.
+  No priority save was needed: the failed standard-source case released the
+  slot for the corrected cold run. Its current bundle is
+  `results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/`.
   Authority: `results/runs/i4f-resource-save-recovery-v2-20261026T053959Z/881-campaign-recovery-v2-status.json`;
   unit `i4f-881k-outlet-bend-recovery-v2-campaign.service`.
   Original outer deadline remains **2026-10-27 16:25:42 UTC**.
-- **Storage and recovery:** at 05:34 both preceding children saved normally,
-  all fourteen fields, after a project archive helper's default Docker JSON
-  logger recorded its binary export stream and crossed the unchanged 20 GiB
-  guard. That helper/log was removed; the safe retry used verified logging
-  disabled. Two inactive aerial volumes are now losslessly archived with all
-  2,192 file hashes and metadata checked by worker and root before removal.
-  The archives save about 3.9 GB net and have restore commands in the
-  [index](../results/archives/index.json). Free space was about 26 GiB after
-  relaunch. An earlier purported 04:49 disk sample was not corroborated.
-  New controller admission is 25 GiB, based on measured incremental .46/.7 s
-  storage of about 3.1 GB plus the later stock-stage budget; runtime save stays
-  at 20 GiB. Original campaign clocks, numerical settings, binaries, meshes,
-  partitioning and t=0 phase ledgers are preserved. Old controller statuses
-  remain evidence and are not current runtime authorities.
-- **Conditional tank-refinement continuation:** prepared 456,954-cell case,
-  .399995 to .46 s, remains unlaunched. Gate
-  `i4f-thermal-stock-fallback-attempt5-v2-waiter.service` follows the exact V2
-  stock chain, waits for a captured numerical failure and released ranks,
-  requires 25 GiB and shared project ranks <=20, and honors PAUSE.
-  It never triggers on healthy resource saves. Deadline: **2026-10-26 14:33:56 UTC**.
-  Authority: `results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T0332Z-attempt5-v2-20261026T055219Z/conditional-status.json`.
-  Its scientific comparison is refined-tank frozen-source versus the original
-  coarse frozen-source failure; stock failure is only the resource trigger.
-- **Rendering:** attempt4 is active under
-  `i4f-current-discharge-milestone-render-attempt4.service`, following the exact
-  V2 fine-mesh chain. It waits for a healthy complete state >=.65 s with
-  resolved water, fixed camera/scales, CPU/Mesa and actual-state holds.
-  Deadline remains **2026-10-27 16:55:42 UTC**. No new discharge movie exists.
-  Authority: `results/runs/i4f-current-discharge-milestone-render-20261025T233209Z/attempts/watcher-attempt4-20261026T0546Z/milestone/watch-status.json`.
-- **Geometry preparation:** the opt-in flush pipe/transition junction has
-  inspected four-branch sections and valid connected CAD solids. A worker is
-  preparing its native mesh and cold initial state with the existing source
-  refinement and standard phase-source treatment. This uses bounded one-CPU
-  preparation and tmpfs staging alongside the twenty project MPI ranks;
-  no corrected-geometry CFD run has launched. Unrelated workloads stay untouched.
+- **Old standard-source cold trajectory failed numerically:** stage03 ended
+  normally at .410269089521 s, but two intermediate pressure solves at
+  .41005436428 s reached -9.095 and -80.959 kPa. All fourteen fields are saved;
+  its .46 s target was not reached. The 0.08947 kg figure is liquid support
+  associated with below-floor cells, not removed mass. The terminal saved
+  minimum is positive and does not erase the raw events. No automatic restart.
+  [Pressure/contact evidence](../results/summaries/i4f_20261025/stock-cold-pressure-contact-review.json).
+- **Storage:** a temporary binary-export Docker log caused the earlier 05:34
+  healthy resource saves; that helper/log was removed and subsequent exports
+  disabled logging. Two old native volumes and selected Rouaix intermediates
+  are losslessly archived. Verified duplicate snapshot copies were removed
+  with explicit restore-prefix mappings; a symlink alias was preserved and
+  counted once. Latest free space is about 36 GiB. See the
+  [archive index](../results/archives/index.json). The runtime save trigger stays
+  20 GiB; current inputs, checkpoints and phase ledgers remain recoverable.
+- **Conditional tank refinement:** the prepared 456,954-cell .399995-to-.46 s
+  trial is unlaunched, in an explicit root priority hold rather than user PAUSE.
+  The corrected cold case acquired the released slot. Its retained waiter
+  deadline is **2026-10-26 14:33:56 UTC**; rearming must respect both whole
+  campaigns' pending continuations, not steal a transient child-restart gap.
+  Prepared case/hold status: `results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T0332Z-attempt5-v2-20261026T055219Z/conditional-status.json`.
+- **Rendering:** the old 881 attempt4 watcher remains tied to that trajectory.
+  Corrected-case attempt4 is separately active under
+  `i4f-flush-stock-native-render-20261026t0646z.service`, following the exact
+  corrected stage01 identity and its own cold prefix. It waits for a healthy
+  complete state >=.65 s with resolved outlet/exterior water; CPU/Mesa, fixed
+  camera/scales and actual-state 10x holds. No new discharge movie exists.
+  Deadline: **2026-10-27 06:53:53 UTC**. Authority:
+  `results/runs/i4f-flush-stock-native-milestone-render-20261026T0646Z-attempt4/milestone/watch-status.json`.
+- **Compute:** twenty project MPI ranks are active alongside unrelated work.
+  Routine archive/analysis work uses bounded one-CPU jobs. No GPU solver or
+  GPU rendering was launched; unrelated workloads remain untouched.
 
 ## Current evidence and limits
 
@@ -68,7 +72,10 @@ current discharge, exterior sheet, hardware validation or scientific gate pass y
   not a meshing artifact or confirmed hardware feature. The opt-in flush
   junction removes it at all four branches; CAD tank/feed geometry is unchanged,
   and summed downstream branch storage changes -1.012 L. Root inspected the
-  matched sections, area plots and assembly. Its CFD effect is untested.
+  matched sections, area plots and assembly. The corrected native mesh has
+  299,214 cells, valid four-branch sections,
+  and all nine configured quality rows pass; the optional all-geometry check
+  reports 6,345 concave cells. Its effect on pressure stability is untested.
   [Geometry proof](../results/summaries/i4f_20261025/pipe-transition-join-summary.json).
 - **Tank refinement finished near .4 s.** Coarse/refined native endpoints differ
   by 91.4 microseconds; no interpolation is used. Tank-A gas temperature is
@@ -89,7 +96,8 @@ current discharge, exterior sheet, hardware validation or scientific gate pass y
   persistent kPa-scale outer updates near .443 s. Transonic-off, pressure-component
   relaxation .5 and nonOrth1 did not remove it; U relaxation .5 and half-Courant
   produced raw floor contacts earlier. Switching the source treatment only at
-  .4 s also failed; it does not replace the current true-cold trajectory.
+  .4 s also failed. The separate true-cold old-geometry control now reaches raw
+  contacts near .410 s; the corrected-junction cold trajectory is running.
   Corrected rank-prefixed logs locate raw contacts in nearly pure water in the
   rising bend; these intermediate solves do not demonstrate physical cavitation.
   [Raw review](../results/summaries/i4f_20261025/pressure-contact-review.json).
