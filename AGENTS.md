@@ -209,6 +209,9 @@ separate review memos unless a hard decision needs one.
   Normalize MPI `[rank]` prefixes before matching Pout records, and search the
   raw log before claiming a diagnostic is absent. A stage monitor must adopt
   an existing manifest/GO rather than call its one-shot launcher a second time.
+  Lint private/generated Python stage builders for undefined names as well as
+  compiling syntax; exercise preparation against the actual saved parent before
+  calling a continuation ready. This does not hold the initial diagnostic pilot.
   Terminal checks must use the branch's configured log path, not a fixed log
   basename. A missing expected filename is not evidence that the solver failed.
   Compare numerical dictionary values numerically, not by printed notation

@@ -1,16 +1,18 @@
 # Live project status
 
-Updated: 2026-10-26 00:35 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-26 00:57 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
 ## Current execution
 
-- **Bend/outlet refinement is running from cold:** 881,431 cells, ten MPI
-  ranks, Docker `b5d05f19814c`, StartedAt 2026-10-26T00:00:42.212525743Z.
-  Exact-ID guard released GO at 00:00:45; the first 13 completed steps reached
-  .000710351079 s without raw pressure contacts. The pilot targets .05 s,
-  followed conditionally by the .7 s filling/sheet interval. Source bands stay
+- **Bend/outlet refinement completed its cold pilot and is continuing:**
+  881,431 cells, ten MPI ranks. Pilot `b5d05f19814c` ended normally at
+  .050021166664 s after 212 steps, with all 14 restart fields and no raw
+  pressure contacts. Child `212925cc3be6`, StartedAt
+  2026-10-26T00:54:50.781946359Z, is advancing from that checkpoint toward
+  the .7 s filling/sheet interval; its first completed steps are healthy.
+  Source bands stay
   at 48 layers and tank resolution remains coarse; the refined region covers
   the bend/transition failure cells. All nine configured quality rows pass;
   optional concavity flags and approximately -.453% line-volume differences
@@ -22,6 +24,10 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   and its original start are unchanged. Terminal capture is bounded to 300 s.
   The rate-derived campaign deadline is 2026-10-27 16:25:42 UTC. Future child
   runners record process-local MPI yielding; the live pilot was not changed.
+  First child preparation also exposed an undefined Python name. Failed
+  no-launch child attempts are preserved; stage04 passed undefined-name lint,
+  actual checkpoint preparation, four checksum checks and exact-ID GO.
+  The continuation is real, rather than a prepared but unstarted queue.
 - **Tank/interface refinement is also running:** 456,954 cells, ten MPI
   ranks, Docker `b31f9fc09916`, StartedAt 2026-10-25T23:59:36.593088248Z,
   target .4 s with original physics/numerics. It resumes the complete native
