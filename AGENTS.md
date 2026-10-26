@@ -257,6 +257,9 @@ separate review memos unless a hard decision needs one.
 - Keep full 3D snapshots sparse; routinely save compact flux, impact, ledger,
   and scoring data. Checkpoint expensive jobs; measure CPU/MPI scaling before
   requesting cluster resources. Stop failed or unaffordable runs with evidence.
+  Docker helpers that stream binary archives must use `--log-driver=none`,
+  verified before export; the default JSON logger can exhaust disk by recording
+  the binary stream. Verify lossless archives before removing their sources.
 
 ## Completion and autonomy
 

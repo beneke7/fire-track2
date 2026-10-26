@@ -1,5 +1,14 @@
 # I4F discharge: published results, 25–26 October 2026
 
+**Pipe/transition junction:** a source-to-native-mesh audit found an exposed
+roughly 19 mm shoulder created by the old pipe overlap. The opt-in flush
+junction removes it at all four branches, preserving tank and feed geometry.
+The [geometry record](pipe-transition-join-summary.json) and
+[section areas](pipe-transition-join-areas.png) document the correction.
+Its effect on pressure stability and discharge remains untested.
+
+![Matched sections of the old and corrected junctions](pipe-transition-join-comparison.png)
+
 **Tank refinement now reaches .4 s:** the 456,954-cell case ends normally at
 .399995 s, compared with the clean 299,248-cell state at .400087 s. Tank-A
 gas-mass-weighted temperature changes from 261.207 to 254.920 K and pressure

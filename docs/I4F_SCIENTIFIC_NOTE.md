@@ -50,6 +50,17 @@ downstream air starts at 100 kPa. A scalar restriction predicts discharge
 rather than prescribing an outlet history. It does not resolve the butterfly
 disk wake or CO2/retardant behavior.
 
+The static wall audit found an approximately 18.5 mm shoulder near x=3.911 m
+in both current meshes. It originates in the generated pipe/transition union:
+the round pipe extends into the contracting loft. The opt-in flush junction
+removes this reconstruction artifact at all four branches while preserving
+the CAD tank capacity and feed intersections. The summed branch-volume change
+is -1.012 L downstream of the valves; under the confirmed dry startup it changes
+ambient-air storage. The [matched geometry sections](../results/summaries/i4f_20261025/pipe-transition-join-comparison.png)
+and [record](../results/summaries/i4f_20261025/pipe-transition-join-summary.json)
+establish a geometry correction, not its role in the pressure failures or a CFD
+improvement. Existing running cases retain their original geometry.
+
 At matched .050021 s, the finer corrected-source case withdraws 4.59423 L
 from tank A, compared with a bracket-interpolated moving-front result of
 4.57287 L and 6.54699 L in the original partly wetted-source case. The

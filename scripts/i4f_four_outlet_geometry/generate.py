@@ -28,7 +28,7 @@ import pyvista as pv
 from matplotlib.patches import Circle, Rectangle
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from OCP.Bnd import Bnd_Box
-from OCP.BRepAlgoAPI import BRepAlgoAPI_Common, BRepAlgoAPI_Section
+from OCP.BRepAlgoAPI import BRepAlgoAPI_Common, BRepAlgoAPI_Fuse, BRepAlgoAPI_Section
 from OCP.BRepBndLib import BRepBndLib
 from OCP.BRepBuilderAPI import (
     BRepBuilderAPI_MakeEdge,
@@ -70,6 +70,8 @@ LAMELLA_START_OFFSET_M = 0.750
 TRANSITION_XMID_OFFSET_M = 0.800
 TRANSITION_X1_OFFSET_M = 1.500
 PIPE_OVERLAP_OFFSET_M = 0.200
+PIPE_TRANSITION_JOIN_MODES = ("legacy-overlap", "flush-at-inlet")
+BREP_UNION_VOLUME_REL_TOLERANCE = 1e-5
 VALVE_X_M = (2.100, 2.400)
 BRANCHES = (
     {
@@ -160,6 +162,21 @@ def require_common(a, b):
     return operation.Shape()
 
 
+def require_fuse(a, b):
+    """Fuse touching/overlapping BREP solids and require one valid fluid solid."""
+    operation = BRepAlgoAPI_Fuse(a, b)
+    operation.Build()
+    if not operation.IsDone():
+        raise RuntimeError("OpenCascade BREP pipe/transition union failed")
+    shape = operation.Shape()
+    if len(solids(shape)) != 1 or not BRepCheck_Analyzer(shape).IsValid():
+        raise RuntimeError(
+            "Pipe/transition union is not one valid connected solid: "
+            f"solids={len(solids(shape))}, valid={BRepCheck_Analyzer(shape).IsValid()}"
+        )
+    return shape
+
+
 def downstream_stations(post_rise_straight_m: float, transition_and_mouth_length_m: float):
     """Scale every original downstream station from the fixed bend endpoint."""
     scale = transition_and_mouth_length_m / REFERENCE_TRANSITION_AND_MOUTH_LENGTH_M
@@ -208,6 +225,7 @@ def branch_pipe(
     tank_diameter_m: float,
     pipe_diameter_m: float,
     stations: DownstreamStations,
+    pipe_transition_join: str,
 ):
     radius = pipe_diameter_m / 2
     y_pipe = y_tank + branch["pipe_lateral_offset_m"]
@@ -229,11 +247,16 @@ def branch_pipe(
     spine.Add(make_bezier_edge([p0, p1, p2, p3]))
     spine.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(*p3), gp_Pnt(*q0)).Edge())
     spine.Add(make_bezier_edge([q0, q1, q2, q3]))
-    spine.Add(
-        BRepBuilderAPI_MakeEdge(
-            gp_Pnt(*q3), gp_Pnt(stations.pipe_overlap_end_x_m, y_pipe, z_out)
-        ).Edge()
-    )
+    if pipe_transition_join == "legacy-overlap":
+        pipe_end_x = stations.pipe_overlap_end_x_m
+    elif pipe_transition_join == "flush-at-inlet":
+        pipe_end_x = stations.transition_inlet_x_m
+    else:
+        raise ValueError(f"Unsupported pipe/transition join mode: {pipe_transition_join}")
+    if pipe_end_x > q3[0] + 1e-12:
+        spine.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(*q3), gp_Pnt(pipe_end_x, y_pipe, z_out)).Edge())
+    elif pipe_end_x < q3[0] - 1e-12:
+        raise ValueError("Pipe end must not lie upstream of the fixed rise-bend endpoint")
     if not spine.IsDone():
         raise RuntimeError("Could not form connected branch centerline")
     tangent = np.asarray(p1, dtype=float) - np.asarray(p0, dtype=float)
@@ -313,6 +336,7 @@ def aligned_ruled_transition(
     z: float,
     intermediate_width_m: float,
     stations: DownstreamStations,
+    pipe_diameter_m: float,
 ):
     """Four-arc ruled circle-to-rectangle loft used by the approved geometry."""
     circle = gp_Circ(
@@ -321,7 +345,7 @@ def aligned_ruled_transition(
             gp_Dir(1, 0, 0),
             gp_Dir(0, 1, 0),
         ),
-        0.150,
+        pipe_diameter_m / 2,
     )
     round_wire = BRepBuilderAPI_MakeWire()
     angles = (-3 * math.pi / 4, -math.pi / 4, math.pi / 4, 3 * math.pi / 4, 5 * math.pi / 4)
@@ -411,8 +435,8 @@ def step_readback(path: Path) -> dict:
     }
 
 
-def write_stl(shape, path: Path):
-    BRepMesh_IncrementalMesh(shape, 0.004, False, 0.15, True).Perform()
+def write_stl(shape, path: Path, linear_deflection_m: float = 0.004):
+    BRepMesh_IncrementalMesh(shape, linear_deflection_m, False, 0.15, True).Perform()
     writer = StlAPI_Writer()
     if not writer.Write(shape, str(path)):
         raise RuntimeError(f"STL export failed for {path}")
@@ -462,6 +486,7 @@ def render_assembly(
     tank_axis: str,
     divider_count: int,
     divider_thickness_m: float,
+    pipe_transition_join: str,
 ):
     fig = plt.figure(figsize=(13, 8), dpi=150)
     ax = fig.add_subplot(111, projection="3d")
@@ -496,10 +521,78 @@ def render_assembly(
     ax.set_zlabel("Z · vertical, m")
     ax.set_title(
         f"Provisional {tank_axis}-axis two-tank / four-outlet envelope\n"
+        f"Pipe/transition join: {pipe_transition_join}\n"
         f"Grey: envelope · amber: {divider_count} assumed "
         f"{1000 * divider_thickness_m:g} mm fitted divider solids"
     )
     ax.grid(False)
+    fig.tight_layout()
+    fig.savefig(output, facecolor="white")
+    plt.close(fig)
+
+
+def render_branch_join_sections(
+    envelope_stl: Path,
+    output: Path,
+    join_mode: str,
+    post_rise_straight_m: float,
+    transition_and_mouth_length_m: float,
+):
+    """Render true STL longitudinal sections through all four pipe/loft joins."""
+    mesh = pv.read(str(envelope_stl)).extract_surface().triangulate().clean()
+    stations = downstream_stations(post_rise_straight_m, transition_and_mouth_length_m)
+    pipe_end = (
+        stations.pipe_overlap_end_x_m
+        if join_mode == "legacy-overlap"
+        else stations.transition_inlet_x_m
+    )
+    x_min = stations.transition_inlet_x_m - 0.08
+    x_max = max(pipe_end, stations.transition_inlet_x_m) + 0.10
+    fig, axes = plt.subplots(2, 2, figsize=(12, 7), dpi=160, sharex=True, sharey=True)
+    axes = axes.ravel()
+    all_mouth_z = [branch["mouth_z_m"] for branch in BRANCHES]
+    section_z_limits = (min(all_mouth_z) - 0.18, max(all_mouth_z) + 0.18)
+    for index, (y_tank, branch) in enumerate(
+        ((y_tank, branch) for y_tank in TANK_Y for branch in BRANCHES)
+    ):
+        y_pipe = y_tank + branch["pipe_lateral_offset_m"]
+        section = mesh.slice(normal=(0.0, 1.0, 0.0), origin=(0.0, y_pipe, 0.0))
+        if section.n_cells == 0:
+            raise RuntimeError(
+                f"Empty longitudinal section for tank y={y_tank:g}, {branch['name']}"
+            )
+        points = np.asarray(section.points, dtype=float)
+        ids = np.asarray(section.lines, dtype=np.int64)
+        cursor = 0
+        line_count = 0
+        ax = axes[index]
+        while cursor < len(ids):
+            count = int(ids[cursor])
+            point_ids = ids[cursor + 1 : cursor + 1 + count]
+            if count >= 2:
+                line = points[point_ids]
+                keep = (line[:, 0] >= x_min - 1e-8) & (line[:, 0] <= x_max + 1e-8)
+                if np.count_nonzero(keep) >= 2:
+                    ax.plot(line[keep, 0], line[keep, 2], color="#2d526c", linewidth=1.15)
+                    line_count += 1
+            cursor += count + 1
+        if line_count == 0:
+            raise RuntimeError(
+                f"No longitudinal outline in ROI for tank y={y_tank:g}, {branch['name']}"
+            )
+        ax.axvline(stations.transition_inlet_x_m, color="#2b8a3e", linestyle="--", linewidth=0.9)
+        ax.axvline(pipe_end, color="#c92a2a", linestyle=":", linewidth=0.9)
+        ax.set_xlim(x_min, x_max)
+        ax.set_title(f"Tank {index // 2 + 1} · {branch['name']} · y={y_pipe:.3f} m")
+        ax.set_xlabel("X, m")
+        ax.set_ylabel("Z, m")
+        ax.grid(True, alpha=0.2)
+    for ax in axes:
+        ax.set_ylim(*section_z_limits)
+    fig.suptitle(
+        f"Actual STL longitudinal sections at all four joins · {join_mode}\n"
+        "Green: transition inlet · red: pipe end; section plane normal +Y"
+    )
     fig.tight_layout()
     fig.savefig(output, facecolor="white")
     plt.close(fig)
@@ -656,6 +749,8 @@ def generate(args) -> dict:
     tank_shapes = []
     tank_placements = []
     transition_rows = []
+    joined_branch_shapes = []
+    branch_join_records = []
     line_volume_records = []
     connection_records = []
     plate_solids = []
@@ -694,16 +789,28 @@ def generate(args) -> dict:
                     f"clearance={start_check['minimum_conservative_full_start_clearance_m']:.9g} m"
                 )
             branch_shape, y_pipe = branch_pipe(
-                y_tank, branch, args.tank_diameter_m, PIPE_ID_M, stations
+                y_tank,
+                branch,
+                args.tank_diameter_m,
+                PIPE_ID_M,
+                stations,
+                args.pipe_transition_join,
             )
             y_mouth = y_tank
             transition = aligned_ruled_transition(
-                y_pipe, y_mouth, branch["mouth_z_m"], args.intermediate_width_m, stations
+                y_pipe,
+                y_mouth,
+                branch["mouth_z_m"],
+                args.intermediate_width_m,
+                stations,
+                PIPE_ID_M,
             )
             envelope_components.extend((branch_shape, transition))
             transition_rows.append((tank_index, branch, y_pipe, transition))
 
             pipe_transition_overlap = require_common(branch_shape, transition)
+            joined_branch = require_fuse(branch_shape, transition)
+            joined_branch_shapes.append(joined_branch)
             pipe_inside_tank = require_common(branch_shape, tank)
             transition_inside_tank = require_common(transition, tank)
             overlap_inside_tank = require_common(pipe_transition_overlap, tank)
@@ -712,6 +819,7 @@ def generate(args) -> dict:
             pipe_volume = volume(branch_shape)
             transition_volume = volume(transition)
             overlap_volume = volume(pipe_transition_overlap)
+            overlap_common_area = surface_area(pipe_transition_overlap)
             own_tank_overlap_volume = volume(pipe_inside_tank)
             other_tank_overlap_volume = volume(pipe_inside_other_tank) + volume(
                 transition_inside_other_tank
@@ -725,11 +833,103 @@ def generate(args) -> dict:
                     f"Branch connects the other tank: tank{tank_index}/{branch['name']} "
                     f"overlap={other_tank_overlap_volume:.9g} m^3"
                 )
-            if overlap_volume <= 1e-10:
-                raise RuntimeError(
-                    f"Pipe and transition do not overlap through to the mouth: "
-                    f"tank{tank_index}/{branch['name']}"
+            pipe_interface_area = None
+            transition_interface_area = None
+            if args.pipe_transition_join == "legacy-overlap":
+                if overlap_volume <= 1e-10:
+                    raise RuntimeError(
+                        f"Pipe and transition do not overlap through to the mouth: "
+                        f"tank{tank_index}/{branch['name']}"
+                    )
+            elif args.pipe_transition_join == "flush-at-inlet":
+                expected_joint_area = math.pi * (PIPE_ID_M / 2) ** 2
+                pipe_interface_area = section_area(
+                    branch_shape,
+                    stations.transition_inlet_x_m,
+                    y_pipe,
+                    branch["mouth_z_m"],
+                    (1, 0, 0),
                 )
+                transition_interface_area = section_area(
+                    transition,
+                    stations.transition_inlet_x_m,
+                    y_pipe,
+                    branch["mouth_z_m"],
+                    (1, 0, 0),
+                )
+                if (
+                    overlap_volume > 1e-9
+                    or abs(pipe_interface_area - expected_joint_area) > 2e-5
+                    or abs(transition_interface_area - expected_joint_area) > 2e-5
+                ):
+                    raise RuntimeError(
+                        f"Flush pipe/transition interface is not a single circular joint for "
+                        f"tank{tank_index}/{branch['name']}: common volume={overlap_volume:.9g} "
+                        f"m^3, BREP common area={overlap_common_area:.9g} m^2, "
+                        f"pipe-plane area={pipe_interface_area:.9g} m^2, "
+                        f"transition-plane area={transition_interface_area:.9g} m^2, "
+                        f"expected each={expected_joint_area:.9g} m^2"
+                    )
+            joined_volume_error = abs(
+                volume(joined_branch) - (pipe_volume + transition_volume - overlap_volume)
+            )
+            joined_volume_relative_error = joined_volume_error / max(volume(joined_branch), 1e-12)
+            if joined_volume_relative_error > BREP_UNION_VOLUME_REL_TOLERANCE:
+                raise RuntimeError(
+                    f"Union volume does not match BREP inclusion-exclusion for "
+                    f"tank{tank_index}/{branch['name']}: union={volume(joined_branch):.12g} m^3, "
+                    f"pipe={pipe_volume:.12g} m^3, transition={transition_volume:.12g} m^3, "
+                    f"common={overlap_volume:.12g} m^3, error={joined_volume_error:.12g} m^3 "
+                    f"({joined_volume_relative_error:.6g} relative)"
+                )
+            pipe_end_x = (
+                stations.pipe_overlap_end_x_m
+                if args.pipe_transition_join == "legacy-overlap"
+                else stations.transition_inlet_x_m
+            )
+            section_offsets = tuple(np.round(np.arange(-0.020, 0.241, 0.010), 9)) + (
+                -0.010,
+                -0.001,
+                0.001,
+                0.010,
+                0.050,
+                pipe_end_x - stations.transition_inlet_x_m - 0.001,
+                pipe_end_x - stations.transition_inlet_x_m + 0.001,
+            )
+            section_samples = []
+            for offset in dict.fromkeys(section_offsets):
+                sample_x = stations.transition_inlet_x_m + offset
+                if sample_x <= stations.mouth_x_m:
+                    section_samples.append(
+                        {
+                            "x_m": sample_x,
+                            "offset_from_transition_inlet_m": offset,
+                            "area_m2": section_area(
+                                joined_branch, sample_x, y_pipe, branch["mouth_z_m"], (1, 0, 0)
+                            ),
+                        }
+                    )
+            branch_join_records.append(
+                {
+                    "tank_index": tank_index,
+                    "branch": branch["name"],
+                    "join_mode": args.pipe_transition_join,
+                    "pipe_end_x_m": pipe_end_x,
+                    "transition_inlet_x_m": stations.transition_inlet_x_m,
+                    "interface_common_volume_m3": overlap_volume,
+                    "interface_common_surface_area_m2": overlap_common_area,
+                    "expected_circular_interface_area_m2": math.pi * (PIPE_ID_M / 2) ** 2,
+                    "pipe_interface_plane_section_area_m2": pipe_interface_area,
+                    "transition_interface_plane_section_area_m2": transition_interface_area,
+                    "joined_brep_valid": BRepCheck_Analyzer(joined_branch).IsValid(),
+                    "joined_brep_solid_count": len(solids(joined_branch)),
+                    "joined_volume_m3": volume(joined_branch),
+                    "inclusion_exclusion_volume_error_m3": joined_volume_error,
+                    "inclusion_exclusion_volume_relative_error": joined_volume_relative_error,
+                    "inclusion_exclusion_volume_relative_tolerance": BREP_UNION_VOLUME_REL_TOLERANCE,
+                    "x_normal_section_samples": section_samples,
+                }
+            )
             train_volume = pipe_volume + transition_volume - overlap_volume
             inside_tank_volume = (
                 volume(pipe_inside_tank)
@@ -825,18 +1025,24 @@ def generate(args) -> dict:
         tank_records[-1]["downstream_line_volume_m3"] = tank_line_volume
 
     envelope = compound(envelope_components)
+    joined_branches = compound(joined_branch_shapes)
     finite_dividers = compound(plate_solids)
     zero_thickness = compound(mid_faces)
     envelope_step = geometry_dir / "two_tank_four_outlet_aligned_ruled_envelope.step"
+    joined_branches_step = geometry_dir / "four_pipe_transition_joined_branches.step"
     finite_step = geometry_dir / "four_mouth_fitted_divider_solids.step"
     mid_step = geometry_dir / "four_mouth_zero_thickness_divider_surfaces.step"
     write_step(envelope, envelope_step)
+    write_step(joined_branches, joined_branches_step)
     write_step(finite_dividers, finite_step)
     write_step(zero_thickness, mid_step)
     envelope_check = step_readback(envelope_step)
+    joined_branches_check = step_readback(joined_branches_step)
     finite_check = step_readback(finite_step)
     if envelope_check["solid_count"] != 10 or not envelope_check["all_solids_valid"]:
         raise RuntimeError(f"Envelope STEP round-trip failed: {envelope_check}")
+    if joined_branches_check["solid_count"] != 4 or not joined_branches_check["all_solids_valid"]:
+        raise RuntimeError(f"Joined branch STEP round-trip failed: {joined_branches_check}")
     expected_plate_count = len(transition_rows) * args.lamella_count
     if finite_check["solid_count"] != expected_plate_count or not finite_check["all_solids_valid"]:
         raise RuntimeError(f"Divider STEP round-trip failed: {finite_check}")
@@ -890,12 +1096,17 @@ def generate(args) -> dict:
     pipe_opening_ratio = sections[1]["gross_envelope_area_m2"] / pipe_area
 
     envelope_stl = stl_dir / "envelope.stl"
+    joined_branches_stl = stl_dir / "four_pipe_transition_joined_branches.stl"
     dividers_stl = stl_dir / "fitted_dividers.stl"
     write_stl(envelope, envelope_stl)
+    write_stl(joined_branches, joined_branches_stl, linear_deflection_m=0.00075)
     write_stl(finite_dividers, dividers_stl)
     assembly_png = figures_dir / "two_tank_four_outlet_assembly.png"
     sections_png = figures_dir / "transition_cross_sections.png"
     tank_connection_png = figures_dir / f"tank_connection_section_{args.tank_axis}.png"
+    branch_join_png = (
+        figures_dir / f"four_pipe_transition_join_sections_{args.pipe_transition_join}.png"
+    )
     render_assembly(
         envelope_stl,
         dividers_stl,
@@ -904,8 +1115,16 @@ def generate(args) -> dict:
         args.tank_axis,
         args.lamella_count,
         args.lamella_thickness_m,
+        args.pipe_transition_join,
     )
     render_tank_connection_section(envelope_stl, tank_connection_png, args.tank_axis)
+    render_branch_join_sections(
+        joined_branches_stl,
+        branch_join_png,
+        args.pipe_transition_join,
+        args.post_rise_straight_m,
+        args.transition_and_mouth_length_m,
+    )
     render_sections(
         sections_png,
         args.intermediate_width_m,
@@ -968,6 +1187,18 @@ def generate(args) -> dict:
             "mouth_height_m": MOUTH_H_M,
             "post_rise_straight_m_assumed": args.post_rise_straight_m,
             "transition_and_mouth_length_m_assumed": args.transition_and_mouth_length_m,
+            "pipe_transition_join_mode": args.pipe_transition_join,
+            "pipe_transition_join_interpretation": (
+                "Legacy reproducibility mode: pipe extends 0.2 m (scaled with train length) "
+                "past the transition inlet, then its lateral overlap with the loft is Boolean-"
+                "unioned by downstream mesh preparation. This creates an exposed shoulder where "
+                "the pipe ends if the loft has already narrowed."
+                if args.pipe_transition_join == "legacy-overlap"
+                else "Opt-in flush mode: constant-bore pipe terminates at the transition inlet "
+                "plane; the circular pipe end and transition inlet share one nominal disk, with "
+                "no added exposed straight or volumetric overlap. The two solids must fuse to "
+                "one valid solid with a circular shared interface."
+            ),
             "downstream_stations_x_m": {
                 "rise_bend_end": BEND_X_M[-1],
                 "transition_inlet": stations.transition_inlet_x_m,
@@ -979,9 +1210,9 @@ def generate(args) -> dict:
             },
             "station_mapping": (
                 "Transition inlet = fixed rise-bend end + post-rise straight. All original downstream "
-                "offsets from x=4.0 m scale by transition_and_mouth_length/1.8 m; pipe overlap "
-                "offset 0.2 m scales by the same factor as an internal pipe/transition BREP overlap, "
-                "not as an additional exposed straight length."
+                "offsets from x=4.0 m scale by transition_and_mouth_length/1.8 m. The legacy overlap "
+                "station at 0.2 m after the inlet scales by the same factor and is used only in "
+                "legacy-overlap mode; flush-at-inlet terminates the pipe at the inlet."
             ),
             "intermediate_width_m_assumed": args.intermediate_width_m,
             "divider_count_per_mouth": args.lamella_count,
@@ -1017,6 +1248,7 @@ def generate(args) -> dict:
             "tank_count": len(TANK_Y),
             "mouth_count": len(transition_rows),
             "envelope_solid_count": envelope_check["solid_count"],
+            "joined_pipe_transition_solid_count": joined_branches_check["solid_count"],
             "divider_solid_count": finite_check["solid_count"],
             "divider_count": len(divider_records),
             "zero_thickness_segment_count": len(mid_faces),
@@ -1026,7 +1258,8 @@ def generate(args) -> dict:
             "method": (
                 "The pipe-start disk is conservatively bounded by a radius-r ball inside the own-tank "
                 "radial wall and flat ends; exact BREP common volumes verify positive own-tank overlap, "
-                "zero other-tank intersection, and positive pipe/transition overlap through the mouth."
+                "zero other-tank intersection, and a valid single-solid pipe/transition union through "
+                "the mouth. Join-specific shared volume/area is recorded separately."
             ),
             "records": connection_records,
             "all_starts_inside_own_tanks": all(
@@ -1042,6 +1275,16 @@ def generate(args) -> dict:
                 item["connected_through_to_own_horizontal_mouth"] for item in connection_records
             ),
         },
+        "pipe_transition_join_checks": {
+            "mode": args.pipe_transition_join,
+            "records": branch_join_records,
+            "all_four_joined_solids_valid": all(
+                item["joined_brep_valid"] and item["joined_brep_solid_count"] == 1
+                for item in branch_join_records
+            ),
+            "shared_disk_area_expected_m2": math.pi * (PIPE_ID_M / 2) ** 2,
+            "station_section_values_are_discrete": True,
+        },
         "area_metrics": {
             "pipe_area_m2": pipe_area,
             "gross_mouth_area_m2_each": mouth_area,
@@ -1052,14 +1295,20 @@ def generate(args) -> dict:
         },
         "artifacts": {
             "envelope_step": envelope_step.relative_to(output).as_posix(),
+            "joined_pipe_transition_step": joined_branches_step.relative_to(output).as_posix(),
             "fitted_dividers_step": finite_step.relative_to(output).as_posix(),
             "zero_thickness_surfaces_step": mid_step.relative_to(output).as_posix(),
             "divider_index": mid_index.relative_to(output).as_posix(),
             "assembly_png": assembly_png.relative_to(output).as_posix(),
             "section_png": sections_png.relative_to(output).as_posix(),
             "tank_connection_section_png": tank_connection_png.relative_to(output).as_posix(),
+            "four_join_longitudinal_section_png": branch_join_png.relative_to(output).as_posix(),
         },
-        "roundtrip": {"envelope": envelope_check, "fitted_dividers": finite_check},
+        "roundtrip": {
+            "envelope": envelope_check,
+            "joined_pipe_transitions": joined_branches_check,
+            "fitted_dividers": finite_check,
+        },
     }
     (output / "geometry_summary.json").write_text(
         json.dumps(summary, indent=2) + "\n", encoding="utf-8"
@@ -1103,6 +1352,15 @@ def parse_args():
         type=float,
         default=TRANSITION_AND_MOUTH_DEFAULT_M,
         help="distance from transition inlet to mouth; scales all downstream stations",
+    )
+    parser.add_argument(
+        "--pipe-transition-join",
+        choices=PIPE_TRANSITION_JOIN_MODES,
+        default="legacy-overlap",
+        help=(
+            "legacy-overlap preserves the historical pipe tail; flush-at-inlet makes the pipe "
+            "terminate at the circular transition inlet"
+        ),
     )
     args = parser.parse_args()
     errors = validate_inputs(args)
@@ -1150,7 +1408,9 @@ def validate_inputs(args) -> list[str]:
             errors.append("downstream stations must be finite and strictly increasing")
         if stations.transition_inlet_x_m < BEND_X_M[-1]:
             errors.append("transition inlet must not be upstream of the fixed rise-bend end")
-        if not (stations.transition_inlet_x_m < stations.pipe_overlap_end_x_m < stations.mouth_x_m):
+        if args.pipe_transition_join == "legacy-overlap" and not (
+            stations.transition_inlet_x_m < stations.pipe_overlap_end_x_m < stations.mouth_x_m
+        ):
             errors.append("mapped pipe/transition overlap must lie between the inlet and mouth")
     if math.isfinite(args.tank_diameter_m) and args.tank_diameter_m > 0:
         if args.tank_diameter_m / 2 <= max(abs(branch["port_y_offset_m"]) for branch in BRANCHES):

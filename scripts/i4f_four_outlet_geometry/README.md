@@ -35,7 +35,8 @@ intersections change between orientations.
 For each branch, generation checks that the circular pipe start fits entirely
 inside its own vessel, computes a positive BREP overlap with that vessel, finds
 no volume intersection with the other vessel, and verifies a positive
-pipe/transition overlap through its own horizontal mouth. The geometry record
+pipe/transition overlap in legacy mode or a shared circular interface in flush
+mode. Each joined branch must be one valid solid. The geometry record
 contains the per-branch clearances and exact overlap volumes. Assembly render
 bounds come from the generated envelope so the vertical tanks remain fully in
 frame. `figures/tank_connection_section_<orientation>.png` is a slice through
@@ -46,15 +47,18 @@ diameter, water/headspace volumes, branch geometry, and outlet geometry unless
 other CLI options are explicitly changed. The comparison describes geometry
 only and makes no orientation-performance claim.
 
-Two geometry-only shortening parameters are available:
+The downstream geometry options are:
 
 - `--post-rise-straight-m`: distance after the fixed rise-bend endpoint at
   x=3.800 m to the transition inlet. Default: 0 m; zero is allowed.
 - `--transition-and-mouth-length-m`: distance from transition inlet to mouth.
   This scales the existing divider-start, intermediate, transition-end, and
-  mouth offsets together; the 0.200 m pipe overlap into the transition scales
-  with it as a BREP construction overlap, not extra exposed straight. Default:
-  1.000 m.
+  mouth offsets together. Default: 1.000 m.
+- `--pipe-transition-join`: `legacy-overlap` (default) preserves the old pipe
+  extension, scaled from 0.200 m to 0.1111 m for the compact train. Its union
+  with the contracting loft creates an exposed shoulder. `flush-at-inlet`
+  ends the round pipe at the loft's circular inlet and removes that shoulder.
+  This is an opt-in reconstruction correction; its CFD effect is untested.
 
 The candidate record [i4f_shortened_downstream_candidate.json](../../experiments/i4f_shortened_downstream_candidate.json)
 defines SHORT1 (user-directed provisional primary, zero straight and a 1.0 m
@@ -72,6 +76,10 @@ For example, generate the current default primary into a new ignored path:
 uv run --project scripts/i4f_four_outlet_geometry --frozen python scripts/i4f_four_outlet_geometry/generate.py \
   --output-dir results/runs/NEW_IGNORED_PATH
 ```
+
+Add `--pipe-transition-join flush-at-inlet` for the corrected junction. The
+generated joined-branch STEP and longitudinal section figures expose all four
+connections; inspect them before preparing a new CFD mesh.
 
 To regenerate the legacy reference, pass its explicit lengths:
 
