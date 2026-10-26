@@ -1,0 +1,4718 @@
+{
+  "case_attempts": [
+    {
+      "audit_status": "Failed archive was verified; no numerical audit applicable.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641229",
+      "numerical_or_mesh_verdict": "No physical case result; bootstrap stopped before solver.",
+      "project": "komondor_tutorial",
+      "purpose": "Stock damBreak smoke bootstrap; no solver banner/step.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641229",
+          "ml-io-s08",
+          "FAILED",
+          "1:0",
+          "00:00:04",
+          "8",
+          "2026-10-24T22:46:07",
+          "2026-10-24T22:46:11",
+          "x1000c0s0b1n1"
+        ],
+        "allocated_cpus": 8,
+        "elapsed": "00:00:04",
+        "end_raw": "2026-10-24T22:46:11",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s0b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T22:46:07",
+        "state": "FAILED"
+      },
+      "role": "tutorial bootstrap failed",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-s08-20261024T204700Z",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Failure cause recorded; no numerical case audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641236",
+      "numerical_or_mesh_verdict": "No verified physical horizon; OpenFOAM 2512 writeFields dictionary/API mismatch was reported after preprocessing.",
+      "project": "komondor_tutorial",
+      "purpose": "Retry smoke after initial setup repair.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641236",
+          "ml-io-s08-r1",
+          "FAILED",
+          "127:0",
+          "00:00:25",
+          "8",
+          "2026-10-24T22:48:10",
+          "2026-10-24T22:48:35",
+          "x1000c0s0b1n1"
+        ],
+        "allocated_cpus": 8,
+        "elapsed": "00:00:25",
+        "end_raw": "2026-10-24T22:48:35",
+        "exit_code": "127:0",
+        "node_list": "x1000c0s0b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T22:48:10",
+        "state": "FAILED"
+      },
+      "role": "tutorial configuration/bootstrap failure",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-s08-r1-source-20261024T204900Z",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Parser-only postprocess failure established; solver log reparsed through declared end time. Endpoint diagnostics are available, conservation audit is not.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/hpc-metrics-smokes-14641244-14641254-launcher.json",
+          "sha256": "1590f62130e3ca48af5632dee19b9c3cf37159ac624861b0c82a5384b0fd23fb"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/sacct.parsable",
+          "sha256": "73c90fd35f39a7112331e62282ca5a839af4dcfab2a873d324232e33cb9efed0"
+        },
+        {
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/hpc-metrics-14641244-reparsed.json",
+          "exists": true,
+          "sha256": "20113c23fb3832d06f5e1921ba02a2a6cfcf2231b1fbd35b94013bac3251daff"
+        },
+        {
+          "path": "scripts/hpc_metrics.py",
+          "exists": true,
+          "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/interIsoFoam.log",
+          "exists": true,
+          "sha256": "20c8fdee4e487f76a4486939659b361dc8c5124d54bd1af9c12bf0ea3b9d4add"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/manifest.txt",
+          "exists": true,
+          "sha256": "ccb9399b525d69f15944fed5528f94c71ef5fae734226ce98d16ec1cf8d9cb4d"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/system/controlDict",
+          "exists": true,
+          "sha256": "d90ebb6a5bae2301132be82ccc584792ab5728800e8a3f02d53e5d048f40bf4c"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/postProcessing/alphaBounds/0/fieldMinMax.dat",
+          "exists": true,
+          "sha256": "a56aacf7be074cfb62f27d47b3af3d25fcb899edf4baba12de7d9a9b4bbcbfa6"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/postProcessing/waterVolume/0/volFieldValue.dat",
+          "exists": true,
+          "sha256": "4b4569b77275f05220dcd5c0ed95af73345dfd48d0a6924de283ccc13c3a15eb"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/0.1/uniform/cumulativeContErr",
+          "exists": true,
+          "sha256": "0673cdd04af5eafc8ffd8d2fe64df2f6c6578cbdfefadeab448504dc3dfda3d6"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/launcher.log",
+          "exists": true,
+          "sha256": "22a37fc125bf2fe52b4cae326340207fdf9ae8ba1d90c6042dc91b70f5555a8c"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/reconstructPar.log",
+          "exists": true,
+          "sha256": "f41725f49a0979334cba6a5740e2ac43fe6c06495fd6aa7ddcc8b4194fd10729"
+        }
+      ],
+      "job_id": "14641244",
+      "numerical_or_mesh_verdict": "Slurm parent FAILED 1:0 because its wrapper expected the older fieldMinMax.dat row layout. The saved solver log reparses with scripts/hpc_metrics.py as 100 steps from 0.001 to 0.1 s, reaching the declared 0.1 s endpoint, with no parsed fatal/divergence marker; alpha.water bounds are [0,1], peak bulk Co 0.438229 and peak interface Co 0.427342. The endpoint water volume is 6.191778e-4 m3 in a 4.962599e-3 m3 domain. No initial water inventory or phase flux is recorded, so mass closure and momentum closure are unavailable.",
+      "project": "komondor_tutorial",
+      "purpose": "8-rank 100-step 0.1 s smoke with changed fieldMinMax parser assumptions.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641244",
+          "ml-io-s08-r2",
+          "FAILED",
+          "1:0",
+          "00:00:11",
+          "8",
+          "2026-10-24T22:50:14",
+          "2026-10-24T22:50:25",
+          "x1000c0s0b1n1"
+        ],
+        "allocated_cpus": 8,
+        "elapsed": "00:00:11",
+        "end_raw": "2026-10-24T22:50:25",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s0b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T22:50:14",
+        "state": "FAILED"
+      },
+      "role": "tutorial parser/postprocess failure",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-s08-r2-volfix-20261024T205200Z",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md",
+      "prior_audit_status": "Needs recovered numerical metrics audit before using as a complete diagnostic; parser failure alone does not invalidate or validate fields.",
+      "prior_numerical_or_mesh_verdict": "All 100 solver steps and reconstruction reportedly completed; parent Slurm job failed only after parser expected older fieldMinMax.dat layout. No validation/conservation finding.",
+      "parser_rerun": {
+        "command": ".venv/bin/python scripts/hpc_metrics.py --run r2=results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/interIsoFoam.log --ranks r2=8 --output results/runs/rouaix-active-inspection-20261026/inventory/hpc-metrics-14641244-reparsed.json",
+        "parser_sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b",
+        "output_sha256": "20113c23fb3832d06f5e1921ba02a2a6cfcf2231b1fbd35b94013bac3251daff",
+        "steps": 100,
+        "start_time_s": 0.001,
+        "end_time_s": 0.1,
+        "declared_end_time_s": 0.1,
+        "alpha_water_min": 0.0,
+        "alpha_water_max": 1.0,
+        "max_bulk_courant": 0.438229,
+        "max_interface_courant": 0.427342,
+        "endpoint_water_volume_m3": 0.0006191778,
+        "domain_volume_m3": 0.004962599,
+        "endpoint_only_volume_record": true,
+        "no_mass_or_momentum_budget": true
+      },
+      "conservation_audit": {
+        "status": "unavailable_from_retained_sources",
+        "reason": "controlDict records volIntegrate(alpha.water) only at write time 0.1 s; the retained volume file has no initial sample, and no phase-specific surface-flux or momentum-flux/force records are configured."
+      }
+    },
+    {
+      "audit_status": "Archive SHA/CRC verified; operational checks present; no scientific validation or conservation gate.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/smoke-14641254/sacct.parsable",
+          "sha256": "f0c393fb33f535a740561396ef12819464dc2b028a157f37f4776e4859cbead8"
+        }
+      ],
+      "job_id": "14641254",
+      "numerical_or_mesh_verdict": "Slurm COMPLETED; operational metrics recorded (9072 cells; max Co 0.438229; water-volume integral 0.0006191778 m3). Tutorial smoke only.",
+      "project": "komondor_tutorial",
+      "purpose": "8-rank operational smoke, 100 steps to 0.1 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641254",
+          "ml-io-s08-r3",
+          "COMPLETED",
+          "0:0",
+          "00:00:11",
+          "8",
+          "2026-10-24T22:51:46",
+          "2026-10-24T22:51:57",
+          "x1000c0s0b1n1"
+        ],
+        "allocated_cpus": 8,
+        "elapsed": "00:00:11",
+        "end_raw": "2026-10-24T22:51:57",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s0b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T22:51:46",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial smoke completed",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-s08-r3-minmax-20261024T205116Z",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641238",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled because predecessor 14641236 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "First 100/500/1000/1200-rank chain; 100 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641238",
+          "ml-io-100",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T22:48:35",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T22:48:35",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by failed dependency",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641239",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled because predecessor 14641236 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "First 100/500/1000/1200-rank chain; 500 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641239",
+          "ml-io-500",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T22:48:35",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T22:48:35",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by failed dependency",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641240",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled because predecessor 14641236 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "First 100/500/1000/1200-rank chain; 1000 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641240",
+          "ml-io-1000",
+          "CANCELLED",
+          "0:0",
+          "1-21:48:54",
+          "0",
+          "2026-10-24T22:48:37",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "1-21:48:54",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T22:48:37",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by failed dependency",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641241",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled because predecessor 14641236 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "First 100/500/1000/1200-rank chain; 1200 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641241",
+          "ml-io-1200",
+          "CANCELLED",
+          "0:0",
+          "1-21:48:52",
+          "0",
+          "2026-10-24T22:48:39",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "1-21:48:52",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T22:48:39",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by failed dependency",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641246",
+      "numerical_or_mesh_verdict": "No allocation or CFD; afterok predecessor 14641244 had parent parser failure.",
+      "project": "komondor_tutorial",
+      "purpose": "Second 100/500/1000/1200-rank chain; 100 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641246",
+          "ml-io-100",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T22:50:25",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T22:50:25",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by invalid afterok",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641247",
+      "numerical_or_mesh_verdict": "No allocation or CFD; afterok predecessor 14641244 had parent parser failure.",
+      "project": "komondor_tutorial",
+      "purpose": "Second 100/500/1000/1200-rank chain; 500 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641247",
+          "ml-io-500",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T22:50:25",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T22:50:25",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by invalid afterok",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641248",
+      "numerical_or_mesh_verdict": "No allocation or CFD; afterok predecessor 14641244 had parent parser failure.",
+      "project": "komondor_tutorial",
+      "purpose": "Second 100/500/1000/1200-rank chain; 1000 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641248",
+          "ml-io-1000",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T22:50:25",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T22:50:25",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by invalid afterok",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/queue_submission.json",
+          "sha256": "2dacdcde0b83e207d1e3ffecfe7412f19a3bebc3a8812d3c57360bb1aba8a881"
+        }
+      ],
+      "job_id": "14641249",
+      "numerical_or_mesh_verdict": "No allocation or CFD; afterok predecessor 14641244 had parent parser failure.",
+      "project": "komondor_tutorial",
+      "purpose": "Second 100/500/1000/1200-rank chain; 1200 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641249",
+          "ml-io-1200",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T22:50:25",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T22:50:25",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled by invalid afterok",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641255",
+      "numerical_or_mesh_verdict": "No allocation or CFD; root cancelled 100-rank job while pending, descendants auto-cancelled.",
+      "project": "komondor_tutorial",
+      "purpose": "Superseded 100/500/1000/1200-rank chain; 100 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641255",
+          "ml-io-100",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:19:57",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:19:57",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "tutorial scale job cancelled while pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641257",
+      "numerical_or_mesh_verdict": "No allocation or CFD; root cancelled 100-rank job while pending, descendants auto-cancelled.",
+      "project": "komondor_tutorial",
+      "purpose": "Superseded 100/500/1000/1200-rank chain; 500 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641257",
+          "ml-io-500",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:20:01",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:20:01",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled while pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641258",
+      "numerical_or_mesh_verdict": "No allocation or CFD; root cancelled 100-rank job while pending, descendants auto-cancelled.",
+      "project": "komondor_tutorial",
+      "purpose": "Superseded 100/500/1000/1200-rank chain; 1000 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641258",
+          "ml-io-1000",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:20:01",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:20:01",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled while pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641259",
+      "numerical_or_mesh_verdict": "No allocation or CFD; root cancelled 100-rank job while pending, descendants auto-cancelled.",
+      "project": "komondor_tutorial",
+      "purpose": "Superseded 100/500/1000/1200-rank chain; 1200 requested ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641259",
+          "ml-io-1200",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:20:01",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:20:01",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "tutorial scale job cancelled while pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Batch stdout identifies pre-solver RUN_DIR guard refusal; exact path operands and runroot remain unknown.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        },
+        {
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/14641346-stdout.txt",
+          "exists": true,
+          "sha256": "1b2804415cd021c3e6357153ed77c05be22a7254958f8421bbf9b21fea6f891e"
+        }
+      ],
+      "job_id": "14641346",
+      "numerical_or_mesh_verdict": "FAILED 1:0 after 3 s; batch stdout reports RUN_DIR must be directly beneath the project HPC root. No useful solver timestep or physical result.",
+      "project": "komondor_tutorial",
+      "purpose": "Finite-deadline 100/500/1000/1200-rank scaling chain; 100 ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641346",
+          "ml-io-100",
+          "FAILED",
+          "1:0",
+          "00:00:03",
+          "100",
+          "2026-10-24T23:55:07",
+          "2026-10-24T23:55:10",
+          "x1000c7s4b1n0"
+        ],
+        "allocated_cpus": 100,
+        "elapsed": "00:00:03",
+        "end_raw": "2026-10-24T23:55:10",
+        "exit_code": "1:0",
+        "node_list": "x1000c7s4b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T23:55:07",
+        "state": "FAILED"
+      },
+      "role": "deadline-replacement tutorial scale chain",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "note": "planned remote runroot recorded in deadline-replacement.json; no completed case root",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "komondor_tutorial",
+      "prior_audit_status": "Root-cause/log audit gap; no physical numerical result.",
+      "failure_stage": "batch wrapper RUN_DIR preflight guard; before solver",
+      "observed_stdout": {
+        "path": "results/runs/rouaix-active-inspection-20261026/inventory/14641346-stdout.txt",
+        "sha256": "1b2804415cd021c3e6357153ed77c05be22a7254958f8421bbf9b21fea6f891e",
+        "declared_remote_stdout_path": "/project/nk_meshapplied/bene/fire-track2-hpc/slurm-ml-io-100-14641346.log",
+        "text": "ERROR: RUN_DIR must be directly beneath /project/nk_meshapplied/bene/fire-track2-hpc",
+        "limitation": "The guard does not print the interpolated RUN_DIR value; why the parent-directory test failed is not recoverable."
+      }
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641347",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled as invalid afterok descendants after 14641346 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "Finite-deadline 100/500/1000/1200-rank scaling chain; 500 ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641347",
+          "ml-io-500",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:55:10",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:55:10",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "deadline-replacement tutorial scale chain",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "note": "planned remote runroot recorded in deadline-replacement.json; no completed case root",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "komondor_tutorial"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641348",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled as invalid afterok descendants after 14641346 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "Finite-deadline 100/500/1000/1200-rank scaling chain; 1000 ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641348",
+          "ml-io-1000",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:55:10",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:55:10",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "deadline-replacement tutorial scale chain",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "note": "planned remote runroot recorded in deadline-replacement.json; no completed case root",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "komondor_tutorial"
+    },
+    {
+      "audit_status": "Scheduler-only evidence; zero CPU, no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        }
+      ],
+      "job_id": "14641349",
+      "numerical_or_mesh_verdict": "No allocation or CFD; cancelled as invalid afterok descendants after 14641346 failed.",
+      "project": "komondor_tutorial",
+      "purpose": "Finite-deadline 100/500/1000/1200-rank scaling chain; 1200 ranks.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641349",
+          "ml-io-1200",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:55:10",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:55:10",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "deadline-replacement tutorial scale chain",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "note": "planned remote runroot recorded in deadline-replacement.json; no completed case root",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "komondor_tutorial"
+    },
+    {
+      "audit_status": "Failure audited in flex100-outcome.json/accounting; no flow result.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/flex100-outcome.json",
+          "sha256": "004417b9ab042375be2f2a3a8c6d44b9334134384327a21f401bb4068e2166e1"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/flex100-step-accounting.raw.txt",
+          "sha256": "4d986df17a0f1f667ed0df595c0f23173349d520158fb9ca7958c90ba3baacbb"
+        }
+      ],
+      "job_id": "14641412",
+      "numerical_or_mesh_verdict": "BlockMesh step ended OUT_OF_MEMORY (exit 0:125); solver did not start/useful CFD time.",
+      "project": "komondor_tutorial",
+      "purpose": "100-rank flexible-placement damBreak trial.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641412",
+          "ml-io-flex",
+          "FAILED",
+          "1:0",
+          "00:00:40",
+          "100",
+          "2026-10-24T23:46:50",
+          "2026-10-24T23:47:30",
+          "x1000c0s0b1n1,x1000c0s3b0n[0-1],x1000c1s2b1n0,x1000c2s1b1n1,x1000c5s0b1n0,x1000c7s0b0n1,x1000c7s4b1n0"
+        ],
+        "allocated_cpus": 100,
+        "elapsed": "00:00:40",
+        "end_raw": "2026-10-24T23:47:30",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s0b1n1,x1000c0s3b0n[0-1],x1000c1s2b1n0,x1000c2s1b1n1,x1000c5s0b1n0,x1000c7s0b0n1,x1000c7s4b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T23:46:50",
+        "state": "FAILED"
+      },
+      "role": "tutorial flexible 100-rank setup failure",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-flex-20261024T214313Z",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Metrics and accounting parsed; comparable with matched tutorial siblings only.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-n8-14641430-metrics.json",
+          "sha256": "2e56680010d0d8d9c75a413ee7d1cdffea988eea0cb17bbf54d48a40f9572e2a"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-n8-sacct-14641430.parsable",
+          "sha256": "5944a18aa873b18dcf808b07c931e1efb79e1c7b1264ff7d59883928569f38ee"
+        }
+      ],
+      "job_id": "14641430",
+      "numerical_or_mesh_verdict": "Completed; low-Courant operational tutorial result (solver wall 182.480876 s; max Co 0.0119116). Not a Rouaix/E1 result.",
+      "project": "komondor_tutorial",
+      "purpose": "8 ranks, 50 steps to 0.001 s, fixed dt 2e-5 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641430",
+          "ml-io-8",
+          "COMPLETED",
+          "0:0",
+          "00:05:41",
+          "8",
+          "2026-10-24T23:54:35",
+          "2026-10-25T00:00:16",
+          "x1000c0s0b0n0"
+        ],
+        "allocated_cpus": 8,
+        "elapsed": "00:05:41",
+        "end_raw": "2026-10-25T00:00:16",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s0b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T23:54:35",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/komondor-discovery-20261024T203716Z/ml-io-8-20261024T215320Z",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Matched input and raw accounting evidence retained; solver metrics available.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-scaling-n8-n16-final-14641430-14641431.json",
+          "sha256": "f9cf36a7834793652de4ab3efc50adbc4f8cc1bbc7b269fe71d35fc4963aa170"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-n16-sacct-final-14641431.parsable",
+          "sha256": "b6f95be5d94bb0f5c6ac18d32b360bcb9df9a923513b493ab4e5aa98394786e6"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-n8-n16-matched-input-check.txt",
+          "sha256": "270dba908546829123a9ac75a6e38ca964e4d2f1e4fc1ad50bd04b21b79cde68"
+        }
+      ],
+      "job_id": "14641431",
+      "numerical_or_mesh_verdict": "Completed; solver wall 144.379802 s; max Co ~0.0119. Not a Rouaix/E1 result.",
+      "project": "komondor_tutorial",
+      "purpose": "16 ranks, 50 steps to 0.001 s, fixed dt 2e-5 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641431",
+          "ml-io-16",
+          "COMPLETED",
+          "0:0",
+          "00:05:01",
+          "16",
+          "2026-10-25T00:00:18",
+          "2026-10-25T00:05:19",
+          "x1000c2s1b1n1"
+        ],
+        "allocated_cpus": 16,
+        "elapsed": "00:05:01",
+        "end_raw": "2026-10-25T00:05:19",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s1b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T00:00:18",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/normal-sweep/16",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Metrics/logs/accounting retained; matched tutorial inputs checked for adjacent runs.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-scaling-n8-n16-n32-final.json",
+          "sha256": "8a644f55a4860a0c649f3ed5a172e65a692a5e532a3e126ee1c79f8c9620d531"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/normal-sweep/32/sacct.tsv",
+          "sha256": "fa76ce51ae8a299cfe30c7b7bd1906db4b074f3f3a0f71caff50bf03534e3551"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-n8-n16-matched-input-check.txt",
+          "sha256": "270dba908546829123a9ac75a6e38ca964e4d2f1e4fc1ad50bd04b21b79cde68"
+        }
+      ],
+      "job_id": "14641432",
+      "numerical_or_mesh_verdict": "Completed; solver wall 60.653313 s; max Co ~0.0119. Not a Rouaix/E1 result.",
+      "project": "komondor_tutorial",
+      "purpose": "32 ranks, 50 steps to 0.001 s, fixed dt 2e-5 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641432",
+          "ml-io-32",
+          "COMPLETED",
+          "0:0",
+          "00:03:22",
+          "32",
+          "2026-10-25T00:06:02",
+          "2026-10-25T00:09:24",
+          "x1000c2s1b1n1"
+        ],
+        "allocated_cpus": 32,
+        "elapsed": "00:03:22",
+        "end_raw": "2026-10-25T00:09:24",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s1b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T00:06:02",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/normal-sweep/32",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Solver-only audit exists; current batch query supplies parent accounting; no scientific validation.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-scaling-n8-n16-n32-n64-solver.json",
+          "sha256": "cdcea2535ddc1b3a30148463da57e55a8d043161dd8da726652ed88fc27bde6f"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/normal-sweep/64/sacct.tsv",
+          "sha256": "5a8bf146a69c98fb5adc6821343730b3f15c0bdcfbc404ed77006a84b66c2b50"
+        }
+      ],
+      "job_id": "14641434",
+      "numerical_or_mesh_verdict": "Completed; solver wall 29.057098 s; max Co ~0.0119. End-to-end scaling incomplete in earlier summary due missing accounting row there; current batch sacct confirms completed.",
+      "project": "komondor_tutorial",
+      "purpose": "64 ranks, 50 steps to 0.001 s, fixed dt 2e-5 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641434",
+          "ml-io-64",
+          "COMPLETED",
+          "0:0",
+          "00:02:45",
+          "64",
+          "2026-10-25T00:10:43",
+          "2026-10-25T00:13:28",
+          "x1000c2s1b1n1"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:02:45",
+        "end_raw": "2026-10-25T00:13:28",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s1b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T00:10:43",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/komondor-discovery-20261024T203716Z/outside-utilization/normal-sweep/64",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Hash-bound metrics/input-match audit in wide collector; not a field-validation result.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642569/scaling-normal-8-100-plus-300-n100-final.json",
+          "sha256": "1287a276d4cb5ef9f20e2beaa41a67d88a90d06ab9ffb913a600a43e2719f416"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642569/input-match-normal-8-100.json",
+          "sha256": "c264358af5ec8b1a14e63e6a3b0faca7a77a622a8bfdae6552412abacd658b1f"
+        }
+      ],
+      "job_id": "14641435",
+      "numerical_or_mesh_verdict": "Completed; solver envelope 27.833033 s; metrics used as n100 baseline for later matched tutorial rank comparisons.",
+      "project": "komondor_tutorial",
+      "purpose": "Flexible 100-rank damBreak baseline, 50 steps to 0.001 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641435",
+          "ml-io-flex",
+          "COMPLETED",
+          "0:0",
+          "00:03:45",
+          "100",
+          "2026-10-25T00:13:50",
+          "2026-10-25T00:17:35",
+          "x1000c0s0b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c2s1b1n1,x1000c3s1b0n0,x1000c6s1b1n0,x1000c6s3b1n0"
+        ],
+        "allocated_cpus": 100,
+        "elapsed": "00:03:45",
+        "end_raw": "2026-10-25T00:17:35",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s0b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c2s1b1n1,x1000c3s1b0n0,x1000c6s1b1n0,x1000c6s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T00:13:50",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial flexible 100-rank CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "note": "runroot unknown; local audit under results/runs/komondor-wide-20261025/collector/live-14642569",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Zero-CPU cancellation receipts; no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-pre-cancel-snapshot.txt",
+          "sha256": "9cdf72072401347b71c3ca8b9f9a57ee184e44f64bc0f754c03288fa8481c12a"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-cancel-correction.txt",
+          "sha256": "7ab587fe718eeb62d263381b9bf38af780c434727c659bc17bd9a6d8e5228f35"
+        }
+      ],
+      "job_id": "14642556",
+      "numerical_or_mesh_verdict": "No compute or CFD; cancelled before allocation because incorrect per-node minimum.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide tutorial 300-rank attempt in flex1 chain.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642556",
+          "ml-io-300f",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T10:11:06",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T10:11:06",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "superseded flex1 tutorial submission cancelled before allocation",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Zero-CPU cancellation receipts; no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-pre-cancel-snapshot.txt",
+          "sha256": "9cdf72072401347b71c3ca8b9f9a57ee184e44f64bc0f754c03288fa8481c12a"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-cancel-correction.txt",
+          "sha256": "7ab587fe718eeb62d263381b9bf38af780c434727c659bc17bd9a6d8e5228f35"
+        }
+      ],
+      "job_id": "14642558",
+      "numerical_or_mesh_verdict": "No compute or CFD; cancelled before allocation because incorrect per-node minimum.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide tutorial 500-rank attempt in flex1 chain.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642558",
+          "ml-io-500f",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T10:11:06",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T10:11:06",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "superseded flex1 tutorial submission cancelled before allocation",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Zero-CPU cancellation receipts; no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-pre-cancel-snapshot.txt",
+          "sha256": "9cdf72072401347b71c3ca8b9f9a57ee184e44f64bc0f754c03288fa8481c12a"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-cancel-correction.txt",
+          "sha256": "7ab587fe718eeb62d263381b9bf38af780c434727c659bc17bd9a6d8e5228f35"
+        }
+      ],
+      "job_id": "14642559",
+      "numerical_or_mesh_verdict": "No compute or CFD; cancelled before allocation because incorrect per-node minimum.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide tutorial 1000-rank attempt in flex1 chain.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642559",
+          "ml-io-1000f",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T10:11:06",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T10:11:06",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "superseded flex1 tutorial submission cancelled before allocation",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Zero-CPU cancellation receipts; no numerical audit.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-pre-cancel-snapshot.txt",
+          "sha256": "9cdf72072401347b71c3ca8b9f9a57ee184e44f64bc0f754c03288fa8481c12a"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/launch/flex-cancel-correction.txt",
+          "sha256": "7ab587fe718eeb62d263381b9bf38af780c434727c659bc17bd9a6d8e5228f35"
+        }
+      ],
+      "job_id": "14642560",
+      "numerical_or_mesh_verdict": "No compute or CFD; cancelled before allocation because incorrect per-node minimum.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide tutorial 1200-rank attempt in flex1 chain.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642560",
+          "ml-io-1200f",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T10:11:06",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T10:11:06",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "superseded flex1 tutorial submission cancelled before allocation",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Existing archive and hash-bound metrics; collector stage timing has an unrepresented wall interval, not a solver validity issue.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642569/hpc-metrics-n300.json",
+          "sha256": "89a5b29af3e90fe2a31b1f7cb73f3d0a7b38431dc22e2a74f25e74cf1b93c395"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642569/stage-spans-n300.json",
+          "sha256": "4c595233f4113aafeb2e4d5e67b66d46b2c44cd148cc428075ddcf41297fd460"
+        }
+      ],
+      "job_id": "14642569",
+      "numerical_or_mesh_verdict": "Completed 50 steps to 0.001 s; mesh 2,322,432 cells; no fatal error; operational scale result only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide damBreak flexible placement, 300 ranks, 50 steps to 0.001 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642569",
+          "ml-io-300f",
+          "COMPLETED",
+          "0:0",
+          "00:04:50",
+          "300",
+          "2026-10-25T10:12:48",
+          "2026-10-25T10:17:38",
+          "x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s2b1n1,x1000c4s2b0n0,x1000c6s0b1n1,x1000c6s1b1n0,x1000c7s2b1n1"
+        ],
+        "allocated_cpus": 300,
+        "elapsed": "00:04:50",
+        "end_raw": "2026-10-25T10:17:38",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s2b1n1,x1000c4s2b0n0,x1000c6s0b1n1,x1000c6s1b1n0,x1000c7s2b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:12:48",
+        "state": "COMPLETED"
+      },
+      "role": "wide tutorial CFD attempt",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-300f-wide-flex2-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Existing archive and hash-bound metrics; no validation claim.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642572/hpc-metrics-n500-solver.json",
+          "sha256": "f51eb993805211049520cb053230f760ff14d75b7f365d692bea8e00d2da64f4"
+        }
+      ],
+      "job_id": "14642572",
+      "numerical_or_mesh_verdict": "Completed 50 steps to 0.001 s; no fatal error; operational scale result only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide damBreak flexible placement, 500 ranks, 50 steps to 0.001 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642572",
+          "ml-io-500f",
+          "COMPLETED",
+          "0:0",
+          "00:04:42",
+          "500",
+          "2026-10-25T10:17:52",
+          "2026-10-25T10:22:34",
+          "x1000c0s0b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c6s0b1n1,x1000c6s1b1n0,x1000c6s2b0n1,x1000c6s2b1n[0-1]"
+        ],
+        "allocated_cpus": 500,
+        "elapsed": "00:04:42",
+        "end_raw": "2026-10-25T10:22:34",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s0b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c6s0b1n1,x1000c6s1b1n0,x1000c6s2b0n1,x1000c6s2b1n[0-1]",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:17:52",
+        "state": "COMPLETED"
+      },
+      "role": "wide tutorial CFD attempt",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-500f-wide-flex2-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Failure logs/manifest retained; no field result; cause isolated to MPI/OFI startup in recorded handoff.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642573/hpc-metrics-n1000-failure-log.json",
+          "sha256": "40dc534ae03c2bcd478896195e606cc62f2db1e0ca48e8443ae26284c7b8e17f"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642573/interIsoFoam.log",
+          "sha256": "3d0213673e16352ad7bdad0dea3bcab4937c0bbd5f5f7ad7c818f895933c2b71"
+        }
+      ],
+      "job_id": "14642573",
+      "numerical_or_mesh_verdict": "Slurm FAILED exit 15:0; zero parsed CFD steps/horizon. MPI/OFI transport/bootstrap failure, not evidence of CFD instability.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide damBreak flexible placement, 1000 ranks, 50 steps to 0.001 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642573",
+          "ml-io-1000f",
+          "FAILED",
+          "15:0",
+          "00:03:23",
+          "1000",
+          "2026-10-25T10:22:57",
+          "2026-10-25T10:26:20",
+          "x1000c0s0b1n1,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c2s0b1n1,x1000c2s1b0n0,x1000c4s2b0n0,x1000c4s3b0n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c6s3b1n[0-1],x1000c6s4b0n[0-1]"
+        ],
+        "allocated_cpus": 1000,
+        "elapsed": "00:03:23",
+        "end_raw": "2026-10-25T10:26:20",
+        "exit_code": "15:0",
+        "node_list": "x1000c0s0b1n1,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c2s0b1n1,x1000c2s1b0n0,x1000c4s2b0n0,x1000c4s3b0n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c6s3b1n[0-1],x1000c6s4b0n[0-1]",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:22:57",
+        "state": "FAILED"
+      },
+      "role": "wide tutorial CFD attempt",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-1000f-wide-flex2-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "No runroot/archive; scheduler-only cancellation.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        }
+      ],
+      "job_id": "14642574",
+      "numerical_or_mesh_verdict": "Cancelled by invalid dependency after 14642573 failed; no allocation/solver.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Wide damBreak flexible placement, 1200 ranks, 50 steps to 0.001 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642574",
+          "ml-io-1200f",
+          "CANCELLED",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T10:26:22",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T10:26:22",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED"
+      },
+      "role": "wide tutorial CFD attempt",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-1200f-wide-flex2-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Diagnostic only; software-mode conditional gate is separate.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/mpi-diagnostic/diagnostic-handoff.json",
+          "sha256": "9572786a2c0b69c67521dbf41a8101f07d38b40b3c09e51a8490297eb47f18e2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/mpi-diagnostic/baseline.log",
+          "sha256": "9cc2c1d2ca5e87c16914c611c951a714d285205485d3db07e2e7def985b81ce8"
+        }
+      ],
+      "job_id": "14642602",
+      "numerical_or_mesh_verdict": "Diagnostic job COMPLETED but its mpi_startup_probe step was cancelled with 0:15 after default transport PMPI_Init_thread error; it did not run OpenFOAM.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "1000-rank MPI/OFI probe to separate launch transport from solver.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642602",
+          "mpi-diag-1000",
+          "COMPLETED",
+          "0:0",
+          "00:01:13",
+          "1000",
+          "2026-10-25T10:38:11",
+          "2026-10-25T10:39:24",
+          "x1000c0s0b1n0,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c4s2b0n0,x1000c4s3b0n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n[0-1],x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c7s2b0n1"
+        ],
+        "allocated_cpus": 1000,
+        "elapsed": "00:01:13",
+        "end_raw": "2026-10-25T10:39:24",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s0b1n0,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c4s2b0n0,x1000c4s3b0n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n[0-1],x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c7s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:38:11",
+        "state": "COMPLETED"
+      },
+      "role": "MPI startup diagnostic (not CFD)",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/mpi-diagnostic-1000-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Archive SHA and matched software transport metrics retained; operational only.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-collector/software-collector-handoff.json",
+          "sha256": "734746f63e6de41ef7f71988d76da8609881af1b77a460ebe415d30f5c7d5a4c"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-collector/live-14642611/hpc-metrics-software1000-final-fulljob.json",
+          "sha256": "0145de8097516892976e66b2535dcb07f37e89f9aa085d549291174cfe0dca86"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-collector/live-14642611/input-and-transport-match-default-1000.json",
+          "sha256": "559cc0fe0b751172434dd18263fba4fc1229d1ddba674019972ae951ab325149"
+        }
+      ],
+      "job_id": "14642611",
+      "numerical_or_mesh_verdict": "Completed with 81.311145 s solver srun envelope; alpha bounds and no fatal/divergence recorded. Conditional transport-mode result; do not pool with default transport arm.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "1000 ranks with FI_CXI_RX_MATCH_MODE=software; 50 steps to 0.001 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642611",
+          "ml-io-1000f",
+          "COMPLETED",
+          "0:0",
+          "00:06:56",
+          "1000",
+          "2026-10-25T10:43:15",
+          "2026-10-25T10:50:11",
+          "x1000c0s0b1n0,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c2s2b0n1,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n0,x1000c6s2b0n1,x1000c6s2b1n[0-1]"
+        ],
+        "allocated_cpus": 1000,
+        "elapsed": "00:06:56",
+        "end_raw": "2026-10-25T10:50:11",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s0b1n0,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c2s2b0n1,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n0,x1000c6s2b0n1,x1000c6s2b1n[0-1]",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:43:15",
+        "state": "COMPLETED"
+      },
+      "role": "software-MPI wide tutorial CFD completed",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-1000f-wide-software-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "Preflight logs/status retained; no solver result.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-collector/live-14642612/software1200-preflight-failure.json",
+          "sha256": "5544a9eccd47924adf36cb67f532d6d7e0f3fb6c4a2c029afa1a167a889216b2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-collector/live-14642612/preflight-14642612-ml-io-1200f.log",
+          "sha256": "88b1feb253aed95fa379997bf1b7351ea26c685af5ac0147fa3ab05605be0f6c"
+        }
+      ],
+      "job_id": "14642612",
+      "numerical_or_mesh_verdict": "Failed PMPI_Init_thread/OFI preflight before mesh/solver; zero CFD horizon.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "1200-rank software mode continuation after 1000-rank control.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642612",
+          "ml-io-1200f",
+          "FAILED",
+          "1:0",
+          "00:00:44",
+          "1200",
+          "2026-10-25T10:50:22",
+          "2026-10-25T10:51:06",
+          "x1000c0s0b1n0,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c2s1b0n0,x1000c2s2b0n1,x1000c2s3b1n0,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c5s4b1n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n0,x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c6s3b1n[0-1],x1000c6s4b0n0,x1000c7s0b0n1,x1000c7s3b0n1"
+        ],
+        "allocated_cpus": 1200,
+        "elapsed": "00:00:44",
+        "end_raw": "2026-10-25T10:51:06",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s0b1n0,x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b1n1,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c2s1b0n0,x1000c2s2b0n1,x1000c2s3b1n0,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c5s4b1n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n0,x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c6s3b1n[0-1],x1000c6s4b0n0,x1000c7s0b0n1,x1000c7s3b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:50:22",
+        "state": "FAILED"
+      },
+      "role": "software-MPI 1200-rank preflight failure",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "planned_root": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-1200f-wide-software-20261025",
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "No numerical performance point; logs/preflight/source receipts preserved.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-ex1-collector/software-ex1-collector-handoff.json",
+          "sha256": "a5a4de47f872ea1380238597b5040ae309218507e42e148a3c812b8625c1913e"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-ex1-collector/provenance-supplement-14642633.json",
+          "sha256": "69e62efc09b188e4202222bfeafad12730bb64da70cfe86d92f27cc6d3a01f91"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-ex1-collector/terminal-sacct-software1000-software1200ex1.parsable",
+          "sha256": "22670f17ba1cfad5456438187166a3dc3e7065a8e9e5d3aa18ce661a97971a09"
+        }
+      ],
+      "job_id": "14642633",
+      "numerical_or_mesh_verdict": "MPI allocation-level preflight passed, but Slurm solver step later cancelled 0:15 with no physical timestep/horizon; setup/decompose were reached.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Software mode 1200-rank continuation excluding one node.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642633",
+          "ml-io-1200f",
+          "FAILED",
+          "15:0",
+          "00:08:29",
+          "1200",
+          "2026-10-25T10:54:56",
+          "2026-10-25T11:03:25",
+          "x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b0n0,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c2s0b1n1,x1000c2s2b0n1,x1000c2s3b1n0,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c5s4b1n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n[0-1],x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c6s3b1n[0-1],x1000c6s4b0n0,x1000c7s0b0n1,x1000c7s3b0n1"
+        ],
+        "allocated_cpus": 1200,
+        "elapsed": "00:08:29",
+        "end_raw": "2026-10-25T11:03:25",
+        "exit_code": "15:0",
+        "node_list": "x1000c0s1b1n[0-1],x1000c0s2b0n0,x1000c0s3b0n[0-1],x1000c0s3b1n0,x1000c0s4b0n0,x1000c0s5b1n[0-1],x1000c1s0b0n0,x1000c1s0b1n[0-1],x1000c1s5b0n1,x1000c2s0b1n1,x1000c2s2b0n1,x1000c2s3b1n0,x1000c3s1b0n0,x1000c4s0b1n1,x1000c4s2b0n0,x1000c5s4b1n0,x1000c6s0b0n1,x1000c6s0b1n1,x1000c6s1b1n[0-1],x1000c6s2b0n1,x1000c6s2b1n[0-1],x1000c6s3b1n[0-1],x1000c6s4b0n0,x1000c7s0b0n1,x1000c7s3b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:54:56",
+        "state": "FAILED"
+      },
+      "role": "software-MPI 1200-rank excluded-node attempt",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/ml-io-1200f-wide-software-ex1-20261025",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md"
+    },
+    {
+      "audit_status": "No mesh conclusion; run setup failure.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643825/terminal-accounting.txt",
+          "sha256": "5b611eb1b917a5dd91cbae96de2fd28421d31f2d1f1d563f6be19bcfb392135c"
+        }
+      ],
+      "job_id": "14643825",
+      "numerical_or_mesh_verdict": "Failed bootstrap guard before workspace/archive/module/checkMesh; no mesh diagnostics.",
+      "project": "rouaix_native_mesh_qa",
+      "purpose": "Native checkMesh on provisional Rouaix 10,099,265-cell geometry; job 14643825.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14643825",
+          "ml-mesh",
+          "FAILED",
+          "1:0",
+          "00:00:03",
+          "12",
+          "2026-10-25T16:20:17",
+          "2026-10-25T16:20:20",
+          "x1000c0s5b0n0"
+        ],
+        "allocated_cpus": 12,
+        "elapsed": "00:00:03",
+        "end_raw": "2026-10-25T16:20:20",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s5b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T16:20:17",
+        "state": "FAILED"
+      },
+      "role": "native mesh check (not CFD)",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643825",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Input/configuration failure; no mesh acceptance.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/attempt-14643832.json",
+          "sha256": "b26eb081645bac1e16ddcd398cea84cf40599245630bc3cf9677289611d5fcc2"
+        }
+      ],
+      "job_id": "14643832",
+      "numerical_or_mesh_verdict": "checkMesh step failed because input archive lacked system/fvSchemes; no geometry conclusion.",
+      "project": "rouaix_native_mesh_qa",
+      "purpose": "Native checkMesh on provisional Rouaix 10,099,265-cell geometry; job 14643832.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14643832",
+          "ml-mesh",
+          "FAILED",
+          "1:0",
+          "00:00:39",
+          "12",
+          "2026-10-25T16:26:49",
+          "2026-10-25T16:27:28",
+          "x1000c0s1b1n0"
+        ],
+        "allocated_cpus": 12,
+        "elapsed": "00:00:39",
+        "end_raw": "2026-10-25T16:27:28",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s1b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T16:26:49",
+        "state": "FAILED"
+      },
+      "role": "native mesh check (not CFD)",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643832",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Mesh identity and existing flagged-set evidence reconciled for the exact 10,099,265-cell final cast-only mesh. Raw native checkMesh failure remains; no new gate decision.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643854/qa-summary.json",
+          "exists": true,
+          "sha256": "a8d03769b8f335570d5ad4a7a0459e5546a08ca57aed3cf06f59278434e786b7"
+        },
+        {
+          "path": "results/runs/rouaix-mesh-convexity-20261025/finecast-binary-plane-audit.json",
+          "exists": true,
+          "sha256": "b8194ee0f417483c54a284d29efc40d33e272fd64c04db179ead20bb712b1ca1"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/mesh-manifest.json",
+          "exists": true,
+          "sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-qualification-exception.json",
+          "exists": true,
+          "sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-v2512-review.md",
+          "exists": true,
+          "sha256": "2a62cf45a19ce21550829d2b3ae0aa742919930bcc2a0a43239d6884c725ff83"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/concave-membership-comparison.json",
+          "exists": true,
+          "sha256": "920b2d5005ede69691de1ada659129a96ef1485540933753e5e33656c9c8ac91"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/extracted/checkMesh.log",
+          "exists": true,
+          "sha256": "b9b4d5fff4a508a8187fd934fd8a2cb3a0b09b7f8f58c076f52e4a835fac6660"
+        }
+      ],
+      "job_id": "14643854",
+      "numerical_or_mesh_verdict": "Native v2512 checkMesh step exited 0:0 but reported one failed concavity category, 114,008 cells, and no Mesh OK marker; batch wrapper FAILED 1:0. Its five core mesh hashes match the qualified 10,099,265-cell final-cast-only mesh and job 14643873 input. The retained exact per-cell membership capture is from 14643873 on those identical bytes, not a separate 14643854 set capture. The existing flagged-cell geometry screen covers only those 114,008 IDs and does not erase the native check or qualify E1.",
+      "project": "rouaix_native_mesh_qa",
+      "purpose": "Native checkMesh on provisional Rouaix 10,099,265-cell geometry; job 14643854.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14643854",
+          "ml-mesh",
+          "FAILED",
+          "1:0",
+          "00:02:41",
+          "12",
+          "2026-10-25T16:39:58",
+          "2026-10-25T16:42:39",
+          "x1000c0s5b0n0"
+        ],
+        "allocated_cpus": 12,
+        "elapsed": "00:02:41",
+        "end_raw": "2026-10-25T16:42:39",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s5b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T16:39:58",
+        "state": "FAILED"
+      },
+      "role": "native mesh check (not CFD)",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643854",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+      "prior_audit_status": "Contradictory native-vs-external checks require root scientific review; external geometry audit does not erase native checkMesh failure.",
+      "mesh_identity": {
+        "cell_count": 10099265,
+        "input_archive_sha256": "15e9220fc27ae04e4f86188697974e1d77614ec00142d40ced69d0f459729de1",
+        "polyMesh_core_file_sha256": {
+          "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+          "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+          "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+          "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+          "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+        },
+        "same_exact_core_mesh_as_qualified_final_cast_only_input": true,
+        "qualified_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+        "scope": "CAST_ONLY_NO_WALL_LAYERS exploratory import; no E1 pass"
+      }
+    },
+    {
+      "audit_status": "Mesh identity and existing flagged-set evidence reconciled for the exact 10,099,265-cell final cast-only mesh. Raw native checkMesh failure remains; no new gate decision.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/concave-membership-comparison.json",
+          "exists": true,
+          "sha256": "920b2d5005ede69691de1ada659129a96ef1485540933753e5e33656c9c8ac91"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/terminal-accounting.txt",
+          "exists": true,
+          "sha256": "8c5d6e68f563ed82ad7ff6eb056a6b2cd6bfa289915ff8a8d88dcb1380c50ee3"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/native-concave-ids.txt",
+          "exists": true,
+          "sha256": "0f34f801aca5ac5f96e39a8b0da39afee46bb3904fac26aba4c0f81ae1c23d8e"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/mesh-manifest.json",
+          "exists": true,
+          "sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-qualification-exception.json",
+          "exists": true,
+          "sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-v2512-review.md",
+          "exists": true,
+          "sha256": "2a62cf45a19ce21550829d2b3ae0aa742919930bcc2a0a43239d6884c725ff83"
+        },
+        {
+          "path": "results/runs/rouaix-mesh-convexity-20261025/finecast-binary-plane-audit.json",
+          "exists": true,
+          "sha256": "b8194ee0f417483c54a284d29efc40d33e272fd64c04db179ead20bb712b1ca1"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/extracted/checkMesh.log",
+          "exists": true,
+          "sha256": "b9b4d5fff4a508a8187fd934fd8a2cb3a0b09b7f8f58c076f52e4a835fac6660"
+        }
+      ],
+      "job_id": "14643873",
+      "numerical_or_mesh_verdict": "Native v2512 checkMesh step exited 0:0 but reported one failed concavity category and no Mesh OK marker; batch wrapper FAILED 1:0. On the exact 10,099,265-cell final-cast-only input, the captured native concave ID set (114,008) exactly matches the Foundation reference set (symmetric difference 0). The existing geometry screen reports flagged cells within its stored numerical bound; it audits only the flagged set. Native failure remains; no E1 decision.",
+      "project": "rouaix_native_mesh_qa",
+      "purpose": "Native checkMesh on provisional Rouaix 10,099,265-cell geometry; job 14643873.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14643873",
+          "ml-mesh",
+          "FAILED",
+          "1:0",
+          "00:02:16",
+          "12",
+          "2026-10-25T16:53:57",
+          "2026-10-25T16:56:13",
+          "x1000c0s1b1n0"
+        ],
+        "allocated_cpus": 12,
+        "elapsed": "00:02:16",
+        "end_raw": "2026-10-25T16:56:13",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s1b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T16:53:57",
+        "state": "FAILED"
+      },
+      "role": "native mesh check (not CFD)",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+      "prior_audit_status": "No gate decision; root interpretation required. Existing local audit exists; compare exact mesh/audit hashes.",
+      "mesh_identity": {
+        "cell_count": 10099265,
+        "input_archive_sha256": "15e9220fc27ae04e4f86188697974e1d77614ec00142d40ced69d0f459729de1",
+        "polyMesh_core_file_sha256": {
+          "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+          "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+          "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+          "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+          "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+        },
+        "same_exact_core_mesh_as_qualified_final_cast_only_input": true,
+        "qualified_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+        "scope": "CAST_ONLY_NO_WALL_LAYERS exploratory import; no E1 pass"
+      }
+    },
+    {
+      "audit_status": "Source-path failure audited; no CFD result.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/pilot-run-metrics.json",
+          "sha256": "4c530cb6fee04186fcad0dc8a1292a5778ddf042296b50551ffe19474f2544c8"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647683/archive-verification.json",
+          "sha256": "e7c14515328fb3e6a07936613c44722607a474213503ac8eb3cf9e420effb5ae"
+        }
+      ],
+      "job_id": "14647683",
+      "numerical_or_mesh_verdict": "Failed before solver execution because guard searched sigStopAtWriteNow.C while installed source uses sigStopAtWriteNow.cxx.",
+      "project": "rouaix_e1",
+      "purpose": "64-rank fixed 1 ms, 50-step startup pilot.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647683",
+          "ml-vof",
+          "FAILED",
+          "1:0",
+          "00:00:57",
+          "64",
+          "2026-10-25T21:13:10",
+          "2026-10-25T21:14:07",
+          "x1000c7s2b1n1"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:00:57",
+        "end_raw": "2026-10-25T21:14:07",
+        "exit_code": "1:0",
+        "node_list": "x1000c7s2b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T21:13:10",
+        "state": "FAILED"
+      },
+      "role": "native solver bootstrap failed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647683",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Failure audit exists; parser discrepancy also recorded (nonzero native max-speed missed by CSV).",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/pilot-run-metrics.json",
+          "sha256": "4c530cb6fee04186fcad0dc8a1292a5778ddf042296b50551ffe19474f2544c8"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647686/solver.log.raw-extract",
+          "sha256": "9a2b2a7000596405d53fc265ac82979fc4b5d50d7e5e9195539a0e95527369d4"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647686/result.tar.gz.sha256",
+          "sha256": "d71f5213964ed9da3eef42c8f017e57fc9f15742573fa965e2b4d2d6dc216c37"
+        }
+      ],
+      "job_id": "14647686",
+      "numerical_or_mesh_verdict": "Only one completed step to 0.001 s; max |U| 92,672,390.4876 m/s and Co 5,964,502.69592 before FPE in GAMGSolver::scale at t=0.002; solver not horizon-complete.",
+      "project": "rouaix_e1",
+      "purpose": "64-rank source-path retry, dt=0.001 s, horizon request 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647686",
+          "ml-vof",
+          "FAILED",
+          "1:0",
+          "00:03:52",
+          "64",
+          "2026-10-25T21:20:02",
+          "2026-10-25T21:23:54",
+          "x1000c5s4b1n1"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:03:52",
+        "end_raw": "2026-10-25T21:23:54",
+        "exit_code": "1:0",
+        "node_list": "x1000c5s4b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T21:20:02",
+        "state": "FAILED"
+      },
+      "role": "native solver numerical failure",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647686",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Operational failure; no field or checkpoint.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647709/remote-readback.txt",
+          "sha256": "d755dc641809b01e588046d3e5f4e4e569754ee0ff3a7eb88fc91cfc128384af"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647709/output.sha256",
+          "sha256": "422823680acf20a1956241e87cf8dbfb0602d479b5fd33f02b9c84e2f078af73"
+        }
+      ],
+      "job_id": "14647709",
+      "numerical_or_mesh_verdict": "Stopped before solver because batch environment did not expose input archive in versioned project root.",
+      "project": "rouaix_e1",
+      "purpose": "First N diagnostic input attempt.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647709",
+          "ml-vof",
+          "FAILED",
+          "1:0",
+          "00:00:02",
+          "64",
+          "2026-10-25T21:59:42",
+          "2026-10-25T21:59:44",
+          "x1000c2s3b1n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:00:02",
+        "end_raw": "2026-10-25T21:59:44",
+        "exit_code": "1:0",
+        "node_list": "x1000c2s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T21:59:42",
+        "state": "FAILED"
+      },
+      "role": "bootstrap input-staging failure",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14647709",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Operational failure; no CFD result.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/attempt-14647710/remote-terminal-readback.txt",
+          "sha256": "4e75d92ae85482641fc94d03d45aa0bc1abf485ae1dfffeebcc8789b3c17f302"
+        }
+      ],
+      "job_id": "14647710",
+      "numerical_or_mesh_verdict": "Stopped before solver; batch input archive still unavailable in the expected source location.",
+      "project": "rouaix_e1",
+      "purpose": "Second N diagnostic input attempt.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647710",
+          "ml-vof",
+          "FAILED",
+          "2:0",
+          "00:00:05",
+          "64",
+          "2026-10-25T22:01:21",
+          "2026-10-25T22:01:26",
+          "x1000c2s3b1n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:00:05",
+        "end_raw": "2026-10-25T22:01:26",
+        "exit_code": "2:0",
+        "node_list": "x1000c2s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T22:01:21",
+        "state": "FAILED"
+      },
+      "role": "bootstrap input-staging failure",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-native-mesh-qa-20261025/outputs/attempt-14647710",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Numerical audit recovered and hash-bound by supplemental ledger audit; preserve raw parent FAILED separately.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647712/supplemental/ledger-fixed-controlDict/summary.json",
+          "sha256": "e24e02feee56f50550b03af18cc1aeadcd855adde93075e4715d91b48f071248"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647712/supplemental/receipt.json",
+          "sha256": "56f66c6dc25f24ea543bcc900c5bb10d03d737609f3f02777277feab614a488e"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647712/run-state.json",
+          "sha256": "03196f0e7903a0c072ad19db193ea47a7e9cf01bd62e9455f4d1b7d9e75c2b63"
+        }
+      ],
+      "job_id": "14647712",
+      "numerical_or_mesh_verdict": "All requested short steps completed; solver parent returned exit 1 because fixed-controlDict mode was omitted from first postprocess parser. Supplemental audit records 10/10 or 100/100 ledger rows, closure -1.8386e-8 kg; not a validation result.",
+      "project": "rouaix_e1",
+      "purpose": "N1: upwind schemes, dt=0.001 s, 10 steps to 0.01 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647712",
+          "ml-vof",
+          "FAILED",
+          "1:0",
+          "00:04:48",
+          "64",
+          "2026-10-25T22:04:05",
+          "2026-10-25T22:08:53",
+          "x1000c2s3b1n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:04:48",
+        "end_raw": "2026-10-25T22:08:53",
+        "exit_code": "1:0",
+        "node_list": "x1000c2s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T22:04:05",
+        "state": "FAILED"
+      },
+      "role": "N1 short CFD diagnostic; batch parser failure",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/seeds/14647712",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Numerical audit recovered and hash-bound by supplemental ledger audit; preserve raw parent FAILED separately.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647714/supplemental/ledger-fixed-controlDict/summary.json",
+          "sha256": "a59ab9984eb6e3ad36e46e0b9cff34b1bf068dd4a86cc20c0500ab42a1e3c2e1"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647714/supplemental/receipt.json",
+          "sha256": "2be15c374889651cff9415da67118a0bca5ea9aead3b25398d5c2740e0a595e9"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647714/run-state.json",
+          "sha256": "bb354823628dc308cc27ca22230ca32995e6f1df0fe47ec227cccb863012fdeb"
+        }
+      ],
+      "job_id": "14647714",
+      "numerical_or_mesh_verdict": "All requested short steps completed; solver parent returned exit 1 because fixed-controlDict mode was omitted from first postprocess parser. Supplemental audit records 10/10 or 100/100 ledger rows, closure -2.1316e-14 kg; not a validation result.",
+      "project": "rouaix_e1",
+      "purpose": "N2: original schemes, dt=0.0001 s, 100 steps to 0.01 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647714",
+          "ml-vof",
+          "FAILED",
+          "1:0",
+          "00:14:40",
+          "64",
+          "2026-10-25T22:09:36",
+          "2026-10-25T22:24:16",
+          "x1000c2s3b1n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:14:40",
+        "end_raw": "2026-10-25T22:24:16",
+        "exit_code": "1:0",
+        "node_list": "x1000c2s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T22:09:36",
+        "state": "FAILED"
+      },
+      "role": "N2 short CFD diagnostic; batch parser failure",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/seeds/14647714",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Hash-bound terminal accounting and audit; not E1 validation.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647739/terminal-accounting.json",
+          "sha256": "225460bb1da18d7f1d21c47e8bb2d98ca490ce5aa5a3ae89a7742187df980144"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647739/run-state.json",
+          "sha256": "e042b52ee9198766073c84472d69727a1da14f06311aead47b64f344263f92d8"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/seeds/14647739/archive-verification.json",
+          "sha256": "5f5f267d291c3825ef30e482827932d2885e8d6ae9b88c0d9ebdd0876907b05b"
+        }
+      ],
+      "job_id": "14647739",
+      "numerical_or_mesh_verdict": "COMPLETED; 20/20 rows, 161 linear solves, ledger closure -2.6935e-10 kg; max speed 104.1425 m/s; short diagnostic only.",
+      "project": "rouaix_e1",
+      "purpose": "Original scheme, dt=0.0005 s, 20 steps to 0.01 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647739",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:06:19",
+          "64",
+          "2026-10-25T22:39:54",
+          "2026-10-25T22:46:13",
+          "x1000c2s3b1n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:06:19",
+        "end_raw": "2026-10-25T22:46:13",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T22:39:54",
+        "state": "COMPLETED"
+      },
+      "role": "N3 short CFD diagnostic completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/seeds/14647739",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Individual per-run extracted convergence, accounting, source hashes and aggregate scaling audit exist.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14647793/solver-convergence.json",
+          "sha256": "86648b96b91461ea22c585f3d2907c523cf32bd9813071c61aea72ba64c53579"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/selected-evidence.json",
+          "sha256": "1c3eb38a89a88f85ca49889a5daaff21df3587ba54652e047886f6c6d1780a46"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/source-hashes.json",
+          "sha256": "0eef30686a9e539e10a5511ac91029bb7fc9ef79f77fa20b50aab160adb7918d"
+        }
+      ],
+      "job_id": "14647793",
+      "numerical_or_mesh_verdict": "All four cases completed the declared 0.05-s horizon and compact audits/ledger passed. Peak speeds differ materially across decompositions; this is numerical exploratory evidence only, not a validation/gate result.",
+      "project": "rouaix_e1",
+      "purpose": "64-rank Rouaix original-gradient baseline; fixed dt=0.0005 s, 100 steps to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647793",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:16:26",
+          "64",
+          "2026-10-25T23:15:34",
+          "2026-10-25T23:32:00",
+          "x1000c2s3b1n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "00:16:26",
+        "end_raw": "2026-10-25T23:32:00",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T23:15:34",
+        "state": "COMPLETED"
+      },
+      "role": "matched-mesh rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14647793",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Individual per-run extracted convergence, accounting, source hashes and aggregate scaling audit exist.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14647876/solver-convergence.json",
+          "sha256": "0076a97787aea32a07786aa832ab285942d6ea603464b8657deb15cee84ff3fd"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/selected-evidence.json",
+          "sha256": "1c3eb38a89a88f85ca49889a5daaff21df3587ba54652e047886f6c6d1780a46"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/source-hashes.json",
+          "sha256": "0eef30686a9e539e10a5511ac91029bb7fc9ef79f77fa20b50aab160adb7918d"
+        }
+      ],
+      "job_id": "14647876",
+      "numerical_or_mesh_verdict": "All four cases completed the declared 0.05-s horizon and compact audits/ledger passed. Peak speeds differ materially across decompositions; this is numerical exploratory evidence only, not a validation/gate result.",
+      "project": "rouaix_e1",
+      "purpose": "120-rank Rouaix original-gradient baseline; fixed dt=0.0005 s, 100 steps to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647876",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:08:49",
+          "120",
+          "2026-10-26T00:59:10",
+          "2026-10-26T01:07:59",
+          "x1000c6s4b0n0"
+        ],
+        "allocated_cpus": 120,
+        "elapsed": "00:08:49",
+        "end_raw": "2026-10-26T01:07:59",
+        "exit_code": "0:0",
+        "node_list": "x1000c6s4b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T00:59:10",
+        "state": "COMPLETED"
+      },
+      "role": "matched-mesh rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14647876",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Individual per-run extracted convergence, accounting, source hashes and aggregate scaling audit exist.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14648039/solver-convergence.json",
+          "sha256": "a9a7d0773b1a61a3a93c20481affd44b6864db8f655fb90a28949d506d768130"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/selected-evidence.json",
+          "sha256": "1c3eb38a89a88f85ca49889a5daaff21df3587ba54652e047886f6c6d1780a46"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/source-hashes.json",
+          "sha256": "0eef30686a9e539e10a5511ac91029bb7fc9ef79f77fa20b50aab160adb7918d"
+        }
+      ],
+      "job_id": "14648039",
+      "numerical_or_mesh_verdict": "All four cases completed the declared 0.05-s horizon and compact audits/ledger passed. Peak speeds differ materially across decompositions; this is numerical exploratory evidence only, not a validation/gate result.",
+      "project": "rouaix_e1",
+      "purpose": "240-rank Rouaix original-gradient baseline; fixed dt=0.0005 s, 100 steps to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14648039",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:05:34",
+          "240",
+          "2026-10-26T04:29:25",
+          "2026-10-26T04:34:59",
+          "x1000c5s2b0n1,x1000c5s4b0n1"
+        ],
+        "allocated_cpus": 240,
+        "elapsed": "00:05:34",
+        "end_raw": "2026-10-26T04:34:59",
+        "exit_code": "0:0",
+        "node_list": "x1000c5s2b0n1,x1000c5s4b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T04:29:25",
+        "state": "COMPLETED"
+      },
+      "role": "matched-mesh rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14648039",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Individual per-run extracted convergence, accounting, source hashes and aggregate scaling audit exist.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14648312/solver-convergence.json",
+          "sha256": "54cbfe43d5abf0605a61d38d84fd951dbf12a2d09947bfca90fd47d13331b88a"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/selected-evidence.json",
+          "sha256": "1c3eb38a89a88f85ca49889a5daaff21df3587ba54652e047886f6c6d1780a46"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/source-hashes.json",
+          "sha256": "0eef30686a9e539e10a5511ac91029bb7fc9ef79f77fa20b50aab160adb7918d"
+        }
+      ],
+      "job_id": "14648312",
+      "numerical_or_mesh_verdict": "All four cases completed the declared 0.05-s horizon and compact audits/ledger passed. Peak speeds differ materially across decompositions; this is numerical exploratory evidence only, not a validation/gate result.",
+      "project": "rouaix_e1",
+      "purpose": "300-rank Rouaix original-gradient baseline; fixed dt=0.0005 s, 100 steps to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14648312",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:05:12",
+          "300",
+          "2026-10-26T06:01:34",
+          "2026-10-26T06:06:46",
+          "x1000c5s2b0n1,x1000c5s4b0n1,x1000c5s5b0n1"
+        ],
+        "allocated_cpus": 300,
+        "elapsed": "00:05:12",
+        "end_raw": "2026-10-26T06:06:46",
+        "exit_code": "0:0",
+        "node_list": "x1000c5s2b0n1,x1000c5s4b0n1,x1000c5s5b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T06:01:34",
+        "state": "COMPLETED"
+      },
+      "role": "matched-mesh rank-scaling CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/analysis/extracted/14648312",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Failure preserved and summarized; use exact G1 analysis and do not infer the cause from max-speed alone.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/selected-evidence.json",
+          "sha256": "1c3eb38a89a88f85ca49889a5daaff21df3587ba54652e047886f6c6d1780a46"
+        },
+        {
+          "exists": true,
+          "path": "docs/HPC_RUN_METRICS.md",
+          "sha256": "c19b9671896b7b8b754b7d385af3210855ac3e60707b3a06c14027c7878503d6"
+        }
+      ],
+      "job_id": "14648417",
+      "numerical_or_mesh_verdict": "Stopped at 91/100 steps (~0.0455 s) when speed reached 6975.25 m/s; one final k solve failed configured tolerance; not horizon-complete.",
+      "project": "rouaix_e1",
+      "purpose": "300-rank one-factor limiter variant against baseline 14648312.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14648417",
+          "ml-vof",
+          "FAILED",
+          "1:0",
+          "00:06:37",
+          "300",
+          "2026-10-26T08:54:42",
+          "2026-10-26T09:01:19",
+          "x1000c0s1b1n1,x1000c7s2b1n1,x1000c7s3b1n0"
+        ],
+        "allocated_cpus": 300,
+        "elapsed": "00:06:37",
+        "end_raw": "2026-10-26T09:01:19",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s1b1n1,x1000c7s2b1n1,x1000c7s3b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T08:54:42",
+        "state": "FAILED"
+      },
+      "role": "G1 velocity-gradient limiter diagnostic failed guard",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-hpc-morning-20261026/analysis",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Zero-allocation scheduler-only outcome.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/cancel/job-14648472-cancel-receipt.txt",
+          "sha256": "9d1aed91a21babc027e83ddb1917b8a90470f83bda972469a0366e31d2e94e61"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/cancel/job-14648472-pre-cancel-capture.txt",
+          "sha256": "cf951cc4415c6707b44a078323b7cad5e30419a982c821168241645309533e50"
+        }
+      ],
+      "job_id": "14648472",
+      "numerical_or_mesh_verdict": "CANCELLED before allocation; no solver/CFD.",
+      "project": "rouaix_e1",
+      "purpose": "Three-node 300-rank fixed 0.1 ms T1 comparator.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14648472",
+          "ml-vof",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-26T14:05:11",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-26T14:05:11",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "T1 300-rank diagnostic cancelled while pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Full archive SHA/CRC/member verification and terminal-analysis bundle exist; no E1 validation.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-t1-20261026/analysis-terminal-20261026T102840Z/terminal-analysis.json",
+          "sha256": "56b16b6bc9c52d37c141433a750647e4c0a587ed6435257a22003cbc804111cc"
+        },
+        {
+          "exists": true,
+          "path": "docs/HPC_RUN_METRICS.md",
+          "sha256": "c19b9671896b7b8b754b7d385af3210855ac3e60707b3a06c14027c7878503d6"
+        }
+      ],
+      "job_id": "14649329",
+      "numerical_or_mesh_verdict": "Completed 500 steps; ledger closure about 1.05e-11 kg; max speed 103.29355 m/s; exploratory only.",
+      "project": "rouaix_e1",
+      "purpose": "120 ranks; fixed dt=0.0001 s, 500 steps to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14649329",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:30:17",
+          "120",
+          "2026-10-26T11:01:24",
+          "2026-10-26T11:31:41",
+          "x1000c7s4b1n1"
+        ],
+        "allocated_cpus": 120,
+        "elapsed": "00:30:17",
+        "end_raw": "2026-10-26T11:31:41",
+        "exit_code": "0:0",
+        "node_list": "x1000c7s4b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T11:01:24",
+        "state": "COMPLETED"
+      },
+      "role": "T1 one-node short CFD completed",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": "results/runs/rouaix-one-node-t1-20261026/analysis-terminal-20261026T102840Z",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "No audit yet; live queue only.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+          "sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/initial-status.json",
+          "sha256": "634110c61f678e888d4df43724316d5e25ddff06e28c32846e33d97d35127bdf"
+        }
+      ],
+      "job_id": "14650641",
+      "numerical_or_mesh_verdict": "Current exact squeue status PENDING/Priority; no run has started.",
+      "project": "rouaix_e1",
+      "purpose": "Independent 120-rank 5-s declared long-horizon Rouaix target.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14650641",
+          "ml-vof",
+          "PENDING",
+          "0:0",
+          "00:00:00",
+          "0",
+          "Unknown",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "Unknown",
+        "state": "PENDING"
+      },
+      "role": "L1 5-second target pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "No run/audit yet; live queue and frozen case record only.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/case-records/S1-ORIG-120-01MS-005.pre-submit.json",
+          "sha256": "9710d0b910c97e74b9202c7d0d4a32f8b23bfe1a46bfcc85e137fa56af0df1f0"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/submission/S1-ORIG-120-01MS-005/submit-receipt.txt",
+          "sha256": "2bf8c03eb0ba047b42a03b6b191ef899c1a677c4cd242a4ea49263082b5551ff"
+        }
+      ],
+      "job_id": "14651174",
+      "numerical_or_mesh_verdict": "Current exact squeue status PENDING; no allocation/run.",
+      "project": "rouaix_e1",
+      "purpose": "S1-ORIG-120-01MS-005: 120 ranks, original; fixed 0.1 ms to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14651174",
+          "ml-vof",
+          "PENDING",
+          "0:0",
+          "00:00:00",
+          "0",
+          "Unknown",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "Unknown",
+        "state": "PENDING"
+      },
+      "role": "S1 one-node rank/scheme pilot",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026"
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "No run/audit yet; live queue and frozen case record only.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/case-records/S1-UPWIND-120-01MS-005.pre-submit.json",
+          "sha256": "a582f9817c2b873ce4629c1f0e81aee8aed47bccebb4ecffcda94428545d0626"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/submission/S1-UPWIND-120-01MS-005/submit-receipt.txt",
+          "sha256": "8b57e86036f5f47b2ea598942d8af1928304995e51026c5d3d96a1e2f6d0c1e7"
+        }
+      ],
+      "job_id": "14651178",
+      "numerical_or_mesh_verdict": "Current exact squeue status PENDING; no allocation/run.",
+      "project": "rouaix_e1",
+      "purpose": "S1-UPWIND-120-01MS-005: 120 ranks, upwind; fixed 0.1 ms to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14651178",
+          "ml-vof",
+          "PENDING",
+          "0:0",
+          "00:00:00",
+          "0",
+          "Unknown",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "Unknown",
+        "state": "PENDING"
+      },
+      "role": "S1 one-node rank/scheme pilot",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026"
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Compact independent run analysis and raw log binding exist; no gate claim.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/case-records/S1-ORIG-64-01MS-005.pre-submit.json",
+          "sha256": "baeb3042892e2347b3553c04f2c236126e26edfe3e3419c14fbdbf32a0e36f17"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/submission/S1-ORIG-64-01MS-005/submit-receipt.txt",
+          "sha256": "ec0a7b94815456dc684d469a66a690964c5f182c43157769cdcdab3c98829600"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_s1_64_20261026/README.md",
+          "sha256": "177520b1de7f04d01b0639fe0327d38d36e13b5da58d33fa6835ad7c7ff01d44"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_s1_64_20261026/analysis.json",
+          "sha256": "f9761effaa4a449c7d4e9af84bf578eaccc44ad0dca3ae15da466edfa443aada"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_s1_64_20261026/hpc-metrics.json",
+          "sha256": "6b7b04a135dd1d696ede9217eb2eae2c1ee946493525301c29082230668c28b4"
+        }
+      ],
+      "job_id": "14651180",
+      "numerical_or_mesh_verdict": "Completed 500 steps to 0.05 s; convergence and ledger checks pass, exploratory only.",
+      "project": "rouaix_e1",
+      "purpose": "S1-ORIG-64-01MS-005: 64 ranks, original; fixed 0.1 ms to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14651180",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "01:01:21",
+          "64",
+          "2026-10-26T16:43:16",
+          "2026-10-26T17:44:37",
+          "x1001c2s3b0n0"
+        ],
+        "allocated_cpus": 64,
+        "elapsed": "01:01:21",
+        "end_raw": "2026-10-26T17:44:37",
+        "exit_code": "0:0",
+        "node_list": "x1001c2s3b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T16:43:16",
+        "state": "COMPLETED"
+      },
+      "role": "S1 one-node rank/scheme pilot",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026"
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "No run/audit yet; live queue and frozen case record only.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/case-records/S1-ORIG-96-01MS-005.pre-submit.json",
+          "sha256": "6a8de57116b67ab03d182645893377803ee32baaa931acd573b180dbf1cea0d2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-one-node-campaign-20261026/submission/S1-ORIG-96-01MS-005/submit-receipt.txt",
+          "sha256": "de339e7c7a110d96ba07b9fcbd8ffe4e397405909a88be3e90b7b311afefaec8"
+        }
+      ],
+      "job_id": "14651185",
+      "numerical_or_mesh_verdict": "Current exact squeue status PENDING; no allocation/run.",
+      "project": "rouaix_e1",
+      "purpose": "S1-ORIG-96-01MS-005: 96 ranks, original; fixed 0.1 ms to 0.05 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14651185",
+          "ml-vof",
+          "PENDING",
+          "0:0",
+          "00:00:00",
+          "0",
+          "Unknown",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "Unknown",
+        "state": "PENDING"
+      },
+      "role": "S1 one-node rank/scheme pilot",
+      "runroot": {
+        "hpc_runroot": "unknown",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026"
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Admission-only failure; zero run/CPU; evidence retained.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-percore-p0-20261026/submission/baseline-cancelled-overallocation.txt",
+          "sha256": "f6c1cc7fe18bc789c3d3ef003f14fa10608bfc3713a967b72b8ad1b2af68648a"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-percore-p0-20261026/case-records/P0-BASE-24-01MS-001.pre-submit.json",
+          "sha256": "ce3bce463c4f819d7e1d17516f3ec49773edd8f7e1c06675a2b57c2249b8d791"
+        }
+      ],
+      "job_id": "14652491",
+      "numerical_or_mesh_verdict": "Cancelled before allocation after Slurm transformed request to 48 CPUs / 2 CPUs per task; no CFD.",
+      "project": "rouaix_e1",
+      "purpose": "First 24-task 48-GiB held request.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14652491",
+          "ml-vof",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-26T16:03:16",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-26T16:03:16",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "P0 memory admission cancelled before allocation",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": "unknown; admission-only attempt"
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    },
+    {
+      "audit_status": "Terminal numerical audit captured and hash-bound; exploratory only. Remaining limits are listed below.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-percore-p0-20261026/case-records/P0-BASE-24-46G-01MS-001.pre-submit.json",
+          "sha256": "a96dae4dcba6679e7b03db3644484d56c2c6f54f32b851e8f97af93dcdb4e86f"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/squeue-exact-active-candidates.txt",
+          "sha256": "fae54df7b554d29a267aba27d872990b3f038a35748155368d47ee7a35d50add"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/baseline-analysis.json",
+          "exists": true,
+          "sha256": "fc2a4d42a9f24664b3d969b244217515126c5cc297d78c228693f0c12a0bad6a"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver.log",
+          "exists": true,
+          "sha256": "5703f0690f59f5e6767177b5cbb12313b5b86723e6c2baa7986995579d3db406"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver-convergence.json",
+          "exists": true,
+          "sha256": "25478ec7045f2c81e0757f866f6dee7a2140430feae11963f2e98bed00e90d52"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/summary.json",
+          "exists": true,
+          "sha256": "c32db03eb19e966e1444df58535d817c1dda24bb680875f27d063b034038a1ba"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/ledger.csv",
+          "exists": true,
+          "sha256": "7cfe570959be10c4d791e2058e7d7ad580f7616da6d8ed6d758cee6d7e42f944"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/run-state.json",
+          "exists": true,
+          "sha256": "b43251bb6b0276225aa10cc4978a3a82f11e34db7f02d08bde4bff1893a7b837"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/terminal-sacct.txt",
+          "exists": true,
+          "sha256": "b1394aa4c20e6fac3bcc31c6a4c98ee5cca2d4c5a12a2457d71379225ebb68da"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/archive-verification.json",
+          "exists": true,
+          "sha256": "6dc8405d96c851ab1a0b8a8a29dfc562c08a3f21949d0e690f66bb7217772e07"
+        }
+      ],
+      "job_id": "14652546",
+      "numerical_or_mesh_verdict": "Completed exploratory 0.01 s baseline: 100 solver steps and 801 linear-solver records meet their configured residual criteria. The mass ledger has 100 matched rows, injected 12.516443202976454 kg, final inventory 12.516443202976433 kg, and final closure residual -2.1316282072803006e-14 kg (maximum absolute per-step residual 8.18153877979e-12 kg). This does not establish a momentum budget, physical validity of the short transient, or an E1 gate pass.",
+      "project": "rouaix_e1",
+      "purpose": "v2 baseline, 24 ranks/24 CPUs, 46 GiB, dt=0.0001 s, 100 steps to 0.01 s.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14652546",
+          "ml-vof",
+          "COMPLETED",
+          "0:0",
+          "00:39:32",
+          "24",
+          "2026-10-26T18:49:48",
+          "2026-10-26T19:29:20",
+          "x1000c6s1b1n0"
+        ],
+        "allocated_cpus": 24,
+        "elapsed": "00:39:32",
+        "end_raw": "2026-10-26T19:29:20",
+        "exit_code": "0:0",
+        "node_list": "x1000c6s1b1n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T18:49:48",
+        "state": "COMPLETED"
+      },
+      "role": "P0 24-rank baseline reported completed; audit pending",
+      "runroot": {
+        "hpc_runroot": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652546.jy6p_bzq/attempt/case",
+        "local_audit_root": "results/runs/rouaix-p0-terminal-inspection-20261026",
+        "note": "Exact CFD runroot recovered from hash-bound terminal inspection bundle; source root recorded separately.",
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+      "prior_audit_status": "High priority audit gap: no hash-bound terminal artifact/metrics/archive is present in local P0 tree at inspection time; leave completion operational until watcher/handoff captures and audits.",
+      "prior_numerical_or_mesh_verdict": "Fresh sacct batch reports COMPLETED 0:0 with 24 allocated CPUs; exact squeue excludes it. This supersedes local 18:23 snapshot marked RUNNING. Numerical fields/steps/ledger not locally audited yet.",
+      "terminal_audit": {
+        "analysis_path": "results/runs/rouaix-p0-terminal-inspection-20261026/baseline-analysis.json",
+        "analysis_sha256": "fc2a4d42a9f24664b3d969b244217515126c5cc297d78c228693f0c12a0bad6a",
+        "solver_log_sha256": "5703f0690f59f5e6767177b5cbb12313b5b86723e6c2baa7986995579d3db406",
+        "solver_convergence_sha256": "25478ec7045f2c81e0757f866f6dee7a2140430feae11963f2e98bed00e90d52",
+        "ledger_summary_sha256": "c32db03eb19e966e1444df58535d817c1dda24bb680875f27d063b034038a1ba",
+        "ledger_csv_sha256": "7cfe570959be10c4d791e2058e7d7ad580f7616da6d8ed6d758cee6d7e42f944",
+        "run_state_sha256": "b43251bb6b0276225aa10cc4978a3a82f11e34db7f02d08bde4bff1893a7b837",
+        "terminal_sacct_sha256": "b1394aa4c20e6fac3bcc31c6a4c98ee5cca2d4c5a12a2457d71379225ebb68da",
+        "resource_limits": [
+          "No cgroup memory time series was archived.",
+          "Pressure-solver wall time and separate I/O fraction were not measured.",
+          "No independent momentum balance or physical interpretation of extreme turbulence/pressure extrema is established."
+        ]
+      }
+    },
+    {
+      "audit_status": "No audit yet; live queue plus frozen profile case record.",
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-percore-p0-20261026/case-records/P0-PROFILE-24-46G-01MS-001.pre-submit.json",
+          "sha256": "6ad9eba04b04eb6d487460b6221359338ce0e2895ada7ffc3326feeec66de05e"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-percore-p0-20261026/submission/v2-profile-held-readback.txt",
+          "sha256": "6f3de00b02c7eac250bb099361f5f4bfcba2b81145cd965cfa1501d92c471b3d"
+        }
+      ],
+      "job_id": "14652548",
+      "numerical_or_mesh_verdict": "Current exact squeue status PENDING/Priority; no allocation/run.",
+      "project": "rouaix_e1",
+      "purpose": "v2 native profiling run afterany 14652546.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14652548",
+          "ml-vof",
+          "PENDING",
+          "0:0",
+          "00:00:00",
+          "0",
+          "Unknown",
+          "Unknown",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "Unknown",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "Unknown",
+        "state": "PENDING"
+      },
+      "role": "P0 native-profile baseline pair member pending",
+      "runroot": {
+        "hpc_runroot": "not created",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      },
+      "source_or_case": "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    }
+  ],
+  "classification": "Operational HPC attempt inventory. E0 remains the only passed project gate; no E1 acceptance or scientific gate is declared.",
+  "control_support_attempts": [
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/collector-job-status-14641301.txt",
+          "sha256": "66c1f9b6793deb4bd43a5a7267b6ba7ce83e10df9395a281eb7df22a7013ea6f"
+        }
+      ],
+      "job_id": "14641301",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_tutorial",
+      "purpose": "Superseded tutorial collector, pending cancellation.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641301",
+          "ml-io-collect",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-24T23:19:51",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-24T23:19:51",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "tutorial collector cancelled",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/collector-job-status-14641352.txt",
+          "sha256": "77c9f98ad7b8b5af23b192d2c34df4285753163aed10c0a781148bbacda1143b"
+        }
+      ],
+      "job_id": "14641352",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_tutorial",
+      "purpose": "Metadata/metrics collection only.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641352",
+          "ml-io-collect",
+          "COMPLETED",
+          "0:0",
+          "00:00:06",
+          "1",
+          "2026-10-24T23:55:38",
+          "2026-10-24T23:55:44",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:06",
+        "end_raw": "2026-10-24T23:55:44",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-24T23:55:38",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial collector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-collector-job-status-14641446.txt",
+          "sha256": "c489b36c8ac8047c113fdf6cc1162e5000ca9ee7a8415730c8ce33a7a55621bb"
+        }
+      ],
+      "job_id": "14641446",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_tutorial",
+      "purpose": "Superseded normal-sweep collector.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641446",
+          "ml-io-opt",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T00:03:50",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T00:03:50",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "tutorial collector cancelled",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-discovery-20261024T203716Z/normal-collector-job-status-14641457.txt",
+          "sha256": "a515b585ed45e916f4968818a9ed667131229e4988b25fdbedcd8c4d3693bea4"
+        }
+      ],
+      "job_id": "14641457",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_tutorial",
+      "purpose": "Normal-sweep post-run collector, not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14641457",
+          "ml-io-opt",
+          "COMPLETED",
+          "0:0",
+          "00:01:20",
+          "1",
+          "2026-10-25T00:17:58",
+          "2026-10-25T00:19:18",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:01:20",
+        "end_raw": "2026-10-25T00:19:18",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T00:17:58",
+        "state": "COMPLETED"
+      },
+      "role": "tutorial collector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        }
+      ],
+      "job_id": "14642564",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Superseded collector submission, no result.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642564",
+          "wide-collector",
+          "CANCELLED by 16018",
+          "0:0",
+          "00:00:00",
+          "0",
+          "None",
+          "2026-10-25T10:10:52",
+          "None assigned"
+        ],
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T10:10:52",
+        "exit_code": "0:0",
+        "node_list": "None assigned",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "None",
+        "state": "CANCELLED by 16018"
+      },
+      "role": "wide collector cancelled",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/collector/collector-handoff.json",
+          "sha256": "f78e5241ffc33b39771a049c3411d00834a719af374f85659693858402078fa2"
+        }
+      ],
+      "job_id": "14642578",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Collected existing 300/500/1000/1200 job evidence; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642578",
+          "wide-collector",
+          "COMPLETED",
+          "0:0",
+          "00:01:02",
+          "1",
+          "2026-10-25T10:26:30",
+          "2026-10-25T10:27:32",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:01:02",
+        "end_raw": "2026-10-25T10:27:32",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:26:30",
+        "state": "COMPLETED"
+      },
+      "role": "wide collector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-collector/software-collector-handoff.json",
+          "sha256": "734746f63e6de41ef7f71988d76da8609881af1b77a460ebe415d30f5c7d5a4c"
+        }
+      ],
+      "job_id": "14642614",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Collected conditional software-MPI evidence; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642614",
+          "software-collector",
+          "COMPLETED",
+          "0:0",
+          "00:00:19",
+          "1",
+          "2026-10-25T10:51:23",
+          "2026-10-25T10:51:42",
+          "x1000c2s3b0n0"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:19",
+        "end_raw": "2026-10-25T10:51:42",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s3b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T10:51:23",
+        "state": "COMPLETED"
+      },
+      "role": "software-mode collector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/software-ex1-collector/software-ex1-collector-handoff.json",
+          "sha256": "a5a4de47f872ea1380238597b5040ae309218507e42e148a3c812b8625c1913e"
+        }
+      ],
+      "job_id": "14642641",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Collected software ex1 evidence; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642641",
+          "software-ex1-collector",
+          "COMPLETED",
+          "0:0",
+          "00:00:18",
+          "1",
+          "2026-10-25T11:03:34",
+          "2026-10-25T11:03:52",
+          "x1000c2s3b0n0"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:18",
+        "end_raw": "2026-10-25T11:03:52",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s3b0n0",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T11:03:34",
+        "state": "COMPLETED"
+      },
+      "role": "software-ex1 collector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/cleanup/job-terminal-14642663.txt",
+          "sha256": "a04969671ac7bb17561918f7a19e960a046bebdb6f58d129a209adf7e7641203"
+        }
+      ],
+      "job_id": "14642656",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Cleanup/evidence preservation helper; not a CFD solver.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642656",
+          "preserve-failed-runs",
+          "FAILED",
+          "1:0",
+          "00:00:01",
+          "1",
+          "2026-10-25T11:12:43",
+          "2026-10-25T11:12:44",
+          "x1000c0s4b1n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:01",
+        "end_raw": "2026-10-25T11:12:44",
+        "exit_code": "1:0",
+        "node_list": "x1000c0s4b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T11:12:43",
+        "state": "FAILED"
+      },
+      "role": "failed-run retention helper failed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/komondor-wide-20261025/cleanup/completed-readback-14642663.txt",
+          "sha256": "c4f20eb440eb9b4af05237951a14fa89851c56f7891ff543df65ebd55f81ca5b"
+        }
+      ],
+      "job_id": "14642663",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "komondor_wide_tutorial",
+      "purpose": "Cleanup/evidence preservation helper; not a CFD solver.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14642663",
+          "preserve-failed-runs",
+          "COMPLETED",
+          "0:0",
+          "00:03:10",
+          "1",
+          "2026-10-25T11:21:21",
+          "2026-10-25T11:24:31",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:03:10",
+        "end_raw": "2026-10-25T11:24:31",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T11:21:21",
+        "state": "COMPLETED"
+      },
+      "role": "failed-run retention helper completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/dispatcher-canary-20261025/parent-submission-receipt.json",
+          "sha256": "71c94e36e3d745edd7f3d6352985f28748b44bc469b2221976683c5a4fbc4464"
+        }
+      ],
+      "job_id": "14647696",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "One-second queue/submit control canary; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647696",
+          "ml-qs",
+          "COMPLETED",
+          "0:0",
+          "00:00:01",
+          "1",
+          "2026-10-25T21:43:13",
+          "2026-10-25T21:43:14",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:01",
+        "end_raw": "2026-10-25T21:43:14",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T21:43:13",
+        "state": "COMPLETED"
+      },
+      "role": "dispatcher canary completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/dispatcher-canary-20261025/parent-submission-receipt.json",
+          "sha256": "71c94e36e3d745edd7f3d6352985f28748b44bc469b2221976683c5a4fbc4464"
+        }
+      ],
+      "job_id": "14647699",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Control canary; no CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647699",
+          "ml-qc",
+          "COMPLETED",
+          "0:0",
+          "00:00:00",
+          "1",
+          "2026-10-25T21:43:46",
+          "2026-10-25T21:43:46",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:00",
+        "end_raw": "2026-10-25T21:43:46",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T21:43:46",
+        "state": "COMPLETED"
+      },
+      "role": "dispatcher canary child completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/root-capture-20261026/selectors/14647791/rouaix-e1-hpc-selector-14647791.log",
+          "sha256": "a8170a03e30c4d7e32f9562fd73762063424c6de5606e940d101f4f938f31fe2"
+        }
+      ],
+      "job_id": "14647791",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Queue selector/preparation for 64-rank run; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647791",
+          "ml-vof-select",
+          "COMPLETED",
+          "0:0",
+          "00:00:14",
+          "1",
+          "2026-10-25T23:14:28",
+          "2026-10-25T23:14:42",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:14",
+        "end_raw": "2026-10-25T23:14:42",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T23:14:28",
+        "state": "COMPLETED"
+      },
+      "role": "Rouaix selector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/root-capture-20261026/selectors/14647794/rouaix-e1-hpc-selector-14647794.log",
+          "sha256": "72bc1ff1dbaa24a84f97962af245c5afa8ba1d97d92a900a713af7d2b77a1bc0"
+        }
+      ],
+      "job_id": "14647794",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Selector before next rank pilot; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647794",
+          "ml-vof-select",
+          "COMPLETED",
+          "0:0",
+          "00:00:05",
+          "1",
+          "2026-10-25T23:33:13",
+          "2026-10-25T23:33:18",
+          "x1000c7s0b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:05",
+        "end_raw": "2026-10-25T23:33:18",
+        "exit_code": "0:0",
+        "node_list": "x1000c7s0b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T23:33:13",
+        "state": "COMPLETED"
+      },
+      "role": "Rouaix selector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/root-capture-20261026/selectors/14647877/rouaix-e1-hpc-selector-14647877.log",
+          "sha256": "bd2ac19e5489495071e26b58e2a90cb23a50d7849e8a92325bc50e6079691b29"
+        }
+      ],
+      "job_id": "14647877",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Selector/preparation after 120-rank baseline; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647877",
+          "ml-vof-select",
+          "COMPLETED",
+          "0:0",
+          "00:00:05",
+          "1",
+          "2026-10-26T01:08:07",
+          "2026-10-26T01:08:12",
+          "x1000c7s0b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:05",
+        "end_raw": "2026-10-26T01:08:12",
+        "exit_code": "0:0",
+        "node_list": "x1000c7s0b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T01:08:07",
+        "state": "COMPLETED"
+      },
+      "role": "Rouaix selector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/root-capture-20261026/selectors/14648040/rouaix-e1-hpc-selector-14648040.log",
+          "sha256": "9d5543a20d41076a2c9c2545634524f92f57e4e78ca708a792980d991786fb28"
+        }
+      ],
+      "job_id": "14648040",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Selector/preparation after 240-rank baseline; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14648040",
+          "ml-vof-select",
+          "COMPLETED",
+          "0:0",
+          "00:00:06",
+          "1",
+          "2026-10-26T04:35:24",
+          "2026-10-26T04:35:30",
+          "x1000c0s4b1n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:06",
+        "end_raw": "2026-10-26T04:35:30",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s4b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T04:35:24",
+        "state": "COMPLETED"
+      },
+      "role": "Rouaix selector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-hpc-morning-20261026/root-capture-20261026/selectors/14648313/rouaix-e1-hpc-selector-14648313.log",
+          "sha256": "e5b24a9da4a346ecf18eb53f49f4090ef6968dec195b661fbdc94891e4f7e53b"
+        }
+      ],
+      "job_id": "14648313",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Selector declined longer stage after baseline; not CFD.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14648313",
+          "ml-vof-select",
+          "COMPLETED",
+          "0:0",
+          "00:00:06",
+          "1",
+          "2026-10-26T06:06:51",
+          "2026-10-26T06:06:57",
+          "x1000c0s4b1n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:06",
+        "end_raw": "2026-10-26T06:06:57",
+        "exit_code": "0:0",
+        "node_list": "x1000c0s4b1n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-26T06:06:51",
+        "state": "COMPLETED"
+      },
+      "role": "Rouaix selector completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/summaries/rouaix_hpc_20261026/hpc-status-snapshot.md",
+          "sha256": "b742f542f12318de3a8ca9b65db9fffc308806c70f1c8af8b12fa3f706c50f3b"
+        }
+      ],
+      "job_id": "14650644",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Redundant native postprocess attempt cancelled pending; no CPUs.",
+      "raw_scheduler_outcome": {
+        "allocated_cpus": 0,
+        "elapsed": "00:00:00",
+        "exit_code": "0:0",
+        "source": "docs/HPC status snapshot; not in exact-ID sacct batch",
+        "state": "CANCELLED while PENDING"
+      },
+      "role": "native postprocess job cancelled",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    },
+    {
+      "evidence": [
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/launch/bootstrap-canary-20261025/launch-receipt.json",
+          "sha256": "0be2e8d8eb6d6128092775dd21ad95739b44130c426e0982360a06c2374fe4ae"
+        },
+        {
+          "exists": true,
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/launch/bootstrap-canary-20261025/remote-bootstrap-canary-14647723.out",
+          "sha256": "84f94ca80f167cec296c6f6292b6b9a46d033d9b1087c2ccd59969ffa244985b"
+        }
+      ],
+      "job_id": "14647723",
+      "numerical_verdict": "No CFD result; control/support job only.",
+      "project": "rouaix_e1",
+      "purpose": "Checks that job batch environment and source root work after failed input staging.",
+      "raw_scheduler_outcome": {
+        "accounting_parent_row": [
+          "14647723",
+          "ml-qb",
+          "COMPLETED",
+          "0:0",
+          "00:00:07",
+          "1",
+          "2026-10-25T22:23:22",
+          "2026-10-25T22:23:29",
+          "x1000c2s2b0n1"
+        ],
+        "allocated_cpus": 1,
+        "elapsed": "00:00:07",
+        "end_raw": "2026-10-25T22:23:29",
+        "exit_code": "0:0",
+        "node_list": "x1000c2s2b0n1",
+        "source": "sacct batch exact-ID query; raw row retained without timezone normalization",
+        "start_raw": "2026-10-25T22:23:22",
+        "state": "COMPLETED"
+      },
+      "role": "batch bootstrap canary completed",
+      "runroot": {
+        "hpc_runroot": "not applicable",
+        "local_audit_root": null,
+        "planned_root": null,
+        "source_root": null
+      }
+    }
+  ],
+  "counts": {
+    "case_attempts": 64,
+    "case_job_states": {
+      "CANCELLED": 15,
+      "CANCELLED by 16018": 7,
+      "COMPLETED": 18,
+      "FAILED": 19,
+      "PENDING": 5
+    },
+    "control_job_states": {
+      "CANCELLED by 16018": 3,
+      "CANCELLED while PENDING": 1,
+      "COMPLETED": 14,
+      "FAILED": 1
+    },
+    "control_support_attempts": 19,
+    "currently_pending_in_exact_squeue": [
+      "14650641",
+      "14651174",
+      "14651178",
+      "14651185",
+      "14652548"
+    ],
+    "not_scientific_gate_pass_count": 0
+  },
+  "created_utc": "2026-10-26T18:36:50Z (clock tool; local filesystem UTC independently read 18:37:20; remote Slurm capture below)",
+  "known_limits": [
+    "No paper parameter extraction was performed in this operational inventory; source provenance is experiment records, run manifests, output hashes, and scheduler receipts rather than paper page/equation/figure values.",
+    "HPC run roots remain explicitly unknown where receipts do not contain an exact path; local audit roots are identified separately. In particular, 14641346 has no recovered case root.",
+    "P0 14652546 is now hash-bound through terminal solver/convergence and mass-ledger outputs. It is an exploratory 0.01 s transient; no momentum balance, physical field interpretation, pressure-solve wall-time attribution, separate I/O fraction, or cgroup memory time series is established.",
+    "Tutorial 14641244 reaches its declared 0.1 s solver endpoint according to the reparsed log, but only one endpoint water-volume sample is retained; mass closure and momentum closure cannot be computed.",
+    "Mesh jobs 14643854/14643873 use the exact same 10,099,265-cell core mesh as the final cast-only qualified input. Exact flagged-ID membership was captured in 14643873; it does not establish results for a separate historical ~35M geometry or erase native checkMesh failures."
+  ],
+  "raw_scheduler_files": [
+    {
+      "job_ids_queried": [
+        "14641229",
+        "14641236",
+        "14641238",
+        "14641239",
+        "14641240",
+        "14641241",
+        "14641244",
+        "14641246",
+        "14641247",
+        "14641248",
+        "14641249",
+        "14641254",
+        "14641255",
+        "14641257",
+        "14641258",
+        "14641259",
+        "14641301",
+        "14641346",
+        "14641347",
+        "14641348",
+        "14641349",
+        "14641352",
+        "14641412",
+        "14641430",
+        "14641431",
+        "14641432",
+        "14641434",
+        "14641435",
+        "14641446",
+        "14641457",
+        "14642501",
+        "14642502",
+        "14642556",
+        "14642558",
+        "14642559",
+        "14642560",
+        "14642564",
+        "14642569",
+        "14642572",
+        "14642573",
+        "14642574",
+        "14642578",
+        "14642602",
+        "14642611",
+        "14642612",
+        "14642614",
+        "14642633",
+        "14642641",
+        "14642656",
+        "14642663",
+        "14643825",
+        "14643832",
+        "14643854",
+        "14643873",
+        "14647683",
+        "14647686",
+        "14647696",
+        "14647699",
+        "14647709",
+        "14647710",
+        "14647712",
+        "14647714",
+        "14647723",
+        "14647739",
+        "14647791",
+        "14647793",
+        "14647794",
+        "14647876",
+        "14647877",
+        "14648039",
+        "14648040",
+        "14648312",
+        "14648313",
+        "14648417",
+        "14648472",
+        "14649329",
+        "14650641",
+        "14651174",
+        "14651178",
+        "14651180",
+        "14651185",
+        "14652491",
+        "14652546",
+        "14652548"
+      ],
+      "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+      "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+    },
+    {
+      "job_ids_queried": [
+        "14650641",
+        "14651174",
+        "14651178",
+        "14651185",
+        "14652548"
+      ],
+      "path": "results/runs/rouaix-active-inspection-20261026/inventory/squeue-exact-active-candidates.txt",
+      "sha256": "fae54df7b554d29a267aba27d872990b3f038a35748155368d47ee7a35d50add"
+    }
+  ],
+  "remote_scheduler_capture_utc": "2026-10-26T18:37:31Z (remote date -u in the captured file)",
+  "scheduler_source": "One exact-ID sacct batch was taken over SSH; a second exact active-candidate squeue query only checked current project run IDs. No full-account queue scan. sacct raw times are preserved as returned; check site-local timezone before comparing wall timestamps.",
+  "schema_version": 1,
+  "scope": "Project Komondor damBreak tutorial, Rouaix mesh checks, Rouaix bootstrap/CFD and directly related selector/collector/retention jobs on 2026-10-24 through 2026-10-26.",
+  "scope_exclusions": [
+    {
+      "candidate_id": "14642543",
+      "reason": "local receipt shows this was the printed sbatch --test-only estimate, not an accepted job/submission; no scheduler job identity."
+    },
+    {
+      "candidate_ids": [
+        "14642501",
+        "14642502"
+      ],
+      "reason": "exact sacct read returned job names autoresearch; excluded from project inventory and not further inspected."
+    },
+    {
+      "candidate_ids": [
+        "14648045",
+        "14649536",
+        "14650669",
+        "14653780",
+        "14653967",
+        "14653968",
+        "14653969"
+      ],
+      "reason": "separate autoresearch/continual-learning jobs visible only in historical queue snapshots; not queried or inspected."
+    },
+    {
+      "candidate_id": "360-rank tutorial",
+      "reason": "No exact 360-rank tutorial job/receipt found in project records searched; do not infer a job ID from planning tables or the Rouaix 360-rank sizing discussion."
+    }
+  ],
+  "source_documents": [
+    {
+      "exists": true,
+      "path": "experiments/HPC_P0_KOMONDOR_TUTORIAL.md",
+      "sha256": "6e337634dac65307fe4a9d00500d75ce7e36857ccc181e1ba509d8632c2ad235"
+    },
+    {
+      "exists": true,
+      "path": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+      "sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d"
+    },
+    {
+      "exists": true,
+      "path": "docs/HPC_RUN_METRICS.md",
+      "sha256": "c19b9671896b7b8b754b7d385af3210855ac3e60707b3a06c14027c7878503d6"
+    },
+    {
+      "exists": true,
+      "path": "docs/HPC_STATUS.md",
+      "sha256": "a46b27807f8902d95dae553d160ae8507921521f234f9e8974cd12d0c228dfb0"
+    },
+    {
+      "exists": true,
+      "path": "results/runs/rouaix-active-inspection-20261026/initial-status.json",
+      "sha256": "634110c61f678e888d4df43724316d5e25ddff06e28c32846e33d97d35127bdf"
+    },
+    {
+      "exists": true,
+      "path": "results/summaries/rouaix_hpc_20261026/README.md",
+      "sha256": "0f70f64a7d2bd5367620cc4a9631a8ca7b306511c3bf214a7cab43b210b91e4d"
+    },
+    {
+      "exists": true,
+      "path": "results/summaries/rouaix_hpc_20261026/selected-evidence.json",
+      "sha256": "1c3eb38a89a88f85ca49889a5daaff21df3587ba54652e047886f6c6d1780a46"
+    },
+    {
+      "exists": true,
+      "path": "results/summaries/rouaix_hpc_20261026/source-hashes.json",
+      "sha256": "0eef30686a9e539e10a5511ac91029bb7fc9ef79f77fa20b50aab160adb7918d"
+    },
+    {
+      "exists": true,
+      "path": "results/summaries/rouaix_s1_64_20261026/README.md",
+      "sha256": "177520b1de7f04d01b0639fe0327d38d36e13b5da58d33fa6835ad7c7ff01d44"
+    },
+    {
+      "exists": true,
+      "path": "results/summaries/rouaix_percore_p0_20261026/README.md",
+      "sha256": "6b181793651eb93f18ca3677917e18f0c755789d6eff426e498154b34781d459"
+    },
+    {
+      "exists": true,
+      "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+      "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+    },
+    {
+      "exists": true,
+      "path": "results/runs/rouaix-active-inspection-20261026/inventory/squeue-exact-active-candidates.txt",
+      "sha256": "fae54df7b554d29a267aba27d872990b3f038a35748155368d47ee7a35d50add"
+    }
+  ],
+  "followup_updated_utc": "2026-10-26T18:52:30Z",
+  "evidence_followup": {
+    "updated_utc": "2026-10-26T18:52:30Z",
+    "scope": "Only the owned inventory directory; read-only job output recovery and local evidence analysis.",
+    "raw_sacct_capture_unchanged": true,
+    "historical_gap_findings_preserved_in_audit_gaps": true,
+    "scientific_gate_decision": "none; this inventory does not pass E0-E6 gates"
+  }
+}

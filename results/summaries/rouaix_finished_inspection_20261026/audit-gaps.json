@@ -1,0 +1,373 @@
+{
+  "created_utc": "2026-10-26T18:36:50Z (clock tool; local filesystem UTC independently read 18:37:20; remote Slurm capture below)",
+  "decision_boundary": "This is evidence triage for the primary agent. It does not pass or fail a scientific E0-E6 gate.",
+  "gaps": [
+    {
+      "evidence": [
+        {
+          "path": "results/runs/rouaix-percore-p0-20261026/case-records/P0-BASE-24-46G-01MS-001.pre-submit.json",
+          "exists": true,
+          "sha256": "a96dae4dcba6679e7b03db3644484d56c2c6f54f32b851e8f97af93dcdb4e86f"
+        },
+        {
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+          "exists": true,
+          "sha256": "26301b29f8a48d724051dd349be27a2aa0869fd9f136d272096376ad16eaa6a2"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/baseline-analysis.json",
+          "exists": true,
+          "sha256": "fc2a4d42a9f24664b3d969b244217515126c5cc297d78c228693f0c12a0bad6a"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver.log",
+          "exists": true,
+          "sha256": "5703f0690f59f5e6767177b5cbb12313b5b86723e6c2baa7986995579d3db406"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver-convergence.json",
+          "exists": true,
+          "sha256": "25478ec7045f2c81e0757f866f6dee7a2140430feae11963f2e98bed00e90d52"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/summary.json",
+          "exists": true,
+          "sha256": "c32db03eb19e966e1444df58535d817c1dda24bb680875f27d063b034038a1ba"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/ledger.csv",
+          "exists": true,
+          "sha256": "7cfe570959be10c4d791e2058e7d7ad580f7616da6d8ed6d758cee6d7e42f944"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/run-state.json",
+          "exists": true,
+          "sha256": "b43251bb6b0276225aa10cc4978a3a82f11e34db7f02d08bde4bff1893a7b837"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/terminal-sacct.txt",
+          "exists": true,
+          "sha256": "b1394aa4c20e6fac3bcc31c6a4c98ee5cca2d4c5a12a2457d71379225ebb68da"
+        },
+        {
+          "path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/archive-verification.json",
+          "exists": true,
+          "sha256": "6dc8405d96c851ab1a0b8a8a29dfc562c08a3f21949d0e690f66bb7217772e07"
+        }
+      ],
+      "gap": "No independent momentum closure; short 0.01 s transient; unresolved turbulence and reduced-pressure extrema; no formal gate decision.",
+      "job_id": "14652546",
+      "owner_hint": "primary watcher/collector",
+      "paths": [
+        "results/runs/rouaix-percore-p0-20261026/case-records/P0-BASE-24-46G-01MS-001.pre-submit.json",
+        "results/runs/rouaix-active-inspection-20261026/inventory/sacct-batch-exact-jobids.parsable",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/baseline-analysis.json",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver.log",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver-convergence.json",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/summary.json",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/ledger.csv",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/archive/run-state.json",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/archive/terminal-sacct.txt",
+        "results/runs/rouaix-p0-terminal-inspection-20261026/archive/archive-verification.json"
+      ],
+      "severity": "high",
+      "original_finding": "Slurm sacct reports COMPLETED 0:0, but no local terminal archive, metrics, per-step convergence, ledger, mass/momentum audit, or GPU/CPU usage audit was found in the P0 result roots. Numerical result remains unknown.",
+      "resolution_status": "audit_captured_with_remaining_limits",
+      "resolution": "Terminal analysis and compact outputs were recovered in results/runs/rouaix-p0-terminal-inspection-20261026. Hash-bound baseline-analysis.json reports 100 steps, 801 linear solve records within configured criteria, and a 100-row mass ledger closing at -2.1316282072803006e-14 kg. This resolves the missing-terminal-audit finding. It remains an exploratory short baseline: no momentum budget, no independent physical interpretation of extreme field extrema, and no E1 decision.",
+      "remaining_issue": "No independent momentum closure; short 0.01 s transient; unresolved turbulence and reduced-pressure extrema; no formal gate decision."
+    },
+    {
+      "evidence": [
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/hpc-metrics-smokes-14641244-14641254-launcher.json",
+          "exists": true,
+          "sha256": "1590f62130e3ca48af5632dee19b9c3cf37159ac624861b0c82a5384b0fd23fb"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/sacct.parsable",
+          "exists": true,
+          "sha256": "73c90fd35f39a7112331e62282ca5a839af4dcfab2a873d324232e33cb9efed0"
+        },
+        {
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/hpc-metrics-14641244-reparsed.json",
+          "exists": true,
+          "sha256": "20113c23fb3832d06f5e1921ba02a2a6cfcf2231b1fbd35b94013bac3251daff"
+        },
+        {
+          "path": "scripts/hpc_metrics.py",
+          "exists": true,
+          "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/interIsoFoam.log",
+          "exists": true,
+          "sha256": "20c8fdee4e487f76a4486939659b361dc8c5124d54bd1af9c12bf0ea3b9d4add"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/manifest.txt",
+          "exists": true,
+          "sha256": "ccb9399b525d69f15944fed5528f94c71ef5fae734226ce98d16ec1cf8d9cb4d"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/system/controlDict",
+          "exists": true,
+          "sha256": "d90ebb6a5bae2301132be82ccc584792ab5728800e8a3f02d53e5d048f40bf4c"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/postProcessing/alphaBounds/0/fieldMinMax.dat",
+          "exists": true,
+          "sha256": "a56aacf7be074cfb62f27d47b3af3d25fcb899edf4baba12de7d9a9b4bbcbfa6"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/postProcessing/waterVolume/0/volFieldValue.dat",
+          "exists": true,
+          "sha256": "4b4569b77275f05220dcd5c0ed95af73345dfd48d0a6924de283ccc13c3a15eb"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/launcher.log",
+          "exists": true,
+          "sha256": "22a37fc125bf2fe52b4cae326340207fdf9ae8ba1d90c6042dc91b70f5555a8c"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/reconstructPar.log",
+          "exists": true,
+          "sha256": "f41725f49a0979334cba6a5740e2ac43fe6c06495fd6aa7ddcc8b4194fd10729"
+        }
+      ],
+      "gap": "No initial phase inventory or phase-specific boundary flux is stored; mass closure and momentum closure cannot be evaluated.",
+      "job_id": "14641244",
+      "paths": [
+        "results/runs/komondor-discovery-20261024T203716Z/hpc-metrics-smokes-14641244-14641254-launcher.json",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/sacct.parsable",
+        "results/runs/rouaix-active-inspection-20261026/inventory/hpc-metrics-14641244-reparsed.json",
+        "scripts/hpc_metrics.py",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/interIsoFoam.log",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/manifest.txt",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/system/controlDict",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/postProcessing/alphaBounds/0/fieldMinMax.dat",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/damBreak/postProcessing/waterVolume/0/volFieldValue.dat",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/launcher.log",
+        "results/runs/komondor-discovery-20261024T203716Z/r2-smoke-14641244/extracted/ml-io-s08-r2-volfix-20261024T205200Z/reconstructPar.log"
+      ],
+      "severity": "medium",
+      "original_finding": "All 100 steps/reconstruction completed but job is FAILED only because of parser layout expectation. Existing compact launcher metrics records parser failure; independent numerical metrics/conservation audit is still needed before classifying the case as usefully audited.",
+      "resolution_status": "parser_failure_classified; partial numerical audit; conservation unavailable",
+      "resolution": "Current hpc_metrics.py reparsed the saved solver log and found all 100 recorded steps through the declared 0.1 s horizon, without parsed fatal or divergence markers. The original wrapper failed only because it searched fieldMinMax rows for an alpha.water column, while v2512 emits time/min/max columns. The retained water-volume function object has only one endpoint sample and no phase-flux/momentum budget.",
+      "remaining_issue": "No initial phase inventory or phase-specific boundary flux is stored; mass closure and momentum closure cannot be evaluated."
+    },
+    {
+      "evidence": [
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+          "exists": true,
+          "sha256": "fed9d22fa13fec94ef8865c2ddb8613442c333a9b3e19ded8f1c41506451c72b"
+        },
+        {
+          "path": "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement-job-readback.raw.txt",
+          "exists": true,
+          "sha256": "83d57c21b6c2cd110dedad05987b3fcaf4d738a3935adebd43fb7fe8ec0b2da6"
+        },
+        {
+          "path": "results/runs/rouaix-active-inspection-20261026/inventory/14641346-stdout.txt",
+          "exists": true,
+          "sha256": "1b2804415cd021c3e6357153ed77c05be22a7254958f8421bbf9b21fea6f891e"
+        }
+      ],
+      "gap": "The exact interpolated RUN_DIR and why it failed the parent-directory check are not logged; exact runroot remains unknown.",
+      "job_id": "14641346",
+      "paths": [
+        "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement.json",
+        "results/runs/komondor-discovery-20261024T203716Z/deadline-replacement-job-readback.raw.txt",
+        "results/runs/rouaix-active-inspection-20261026/inventory/14641346-stdout.txt"
+      ],
+      "severity": "medium",
+      "original_finding": "100-rank deadline-replacement job failed after 3 seconds before useful timestep; exact underlying failure cause and full runroot are not recoverable from local deadline receipt.",
+      "resolution_status": "failure_stage_identified; guard operand mismatch unresolved",
+      "resolution": "The exact Slurm StdOut file was retrieved read-only and contains the RUN_DIR parent guard error. This identifies a wrapper/preflight refusal before solver startup; it is not a numerical failure.",
+      "remaining_issue": "The exact interpolated RUN_DIR and why it failed the parent-directory check are not logged; exact runroot remains unknown."
+    },
+    {
+      "evidence": [
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643854/qa-summary.json",
+          "exists": true,
+          "sha256": "a8d03769b8f335570d5ad4a7a0459e5546a08ca57aed3cf06f59278434e786b7"
+        },
+        {
+          "path": "results/runs/rouaix-mesh-convexity-20261025/finecast-binary-plane-audit.json",
+          "exists": true,
+          "sha256": "b8194ee0f417483c54a284d29efc40d33e272fd64c04db179ead20bb712b1ca1"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/concave-membership-comparison.json",
+          "exists": true,
+          "sha256": "920b2d5005ede69691de1ada659129a96ef1485540933753e5e33656c9c8ac91"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/extracted/checkMesh.log",
+          "exists": true,
+          "sha256": "b9b4d5fff4a508a8187fd934fd8a2cb3a0b09b7f8f58c076f52e4a835fac6660"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/native-concave-ids.txt",
+          "exists": true,
+          "sha256": "0f34f801aca5ac5f96e39a8b0da39afee46bb3904fac26aba4c0f81ae1c23d8e"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/mesh-manifest.json",
+          "exists": true,
+          "sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-qualification-exception.json",
+          "exists": true,
+          "sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f"
+        },
+        {
+          "path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-v2512-review.md",
+          "exists": true,
+          "sha256": "2a62cf45a19ce21550829d2b3ae0aa742919930bcc2a0a43239d6884c725ff83"
+        }
+      ],
+      "gap": "A separate historical ~35M geometry was not hash-matched in this scoped evidence; do not transfer the 10M finding to it. Raw native concavity failure remains and no E1 decision is made.",
+      "job_ids": [
+        "14643854",
+        "14643873"
+      ],
+      "paths": [
+        "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643854/qa-summary.json",
+        "results/runs/rouaix-mesh-convexity-20261025/finecast-binary-plane-audit.json",
+        "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/concave-membership-comparison.json",
+        "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/extracted/checkMesh.log",
+        "results/runs/rouaix-native-mesh-qa-20261025/outputs/failed-14643873/native-concave-ids.txt",
+        "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/mesh-manifest.json",
+        "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-qualification-exception.json",
+        "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input/native-v2512-review.md"
+      ],
+      "severity": "high",
+      "original_finding": "Native checkMesh reports concave cells and wrapper failure, while 14643854 external binary-plane audit says the measured vertex-plane excursion is below tolerance. These are contradictory diagnostics, not a passed mesh gate; root scientific interpretation needed. 14643873 exact corresponding independent audit should be bound by its hash if not already present in summary.",
+      "resolution_status": "same_10m_mesh_identity_and_flagged_set_reconciled; native checkMesh failure remains",
+      "resolution": "Both attempts use the same 10,099,265-cell core mesh byte hashes as the qualified final-cast-only mesh; the 14643873 capture stores the native concave IDs and proves exact membership equality with the Foundation reference set (114,008 IDs; symmetric difference 0). The finecast-binary-plane-audit is explicitly for case_id rouaix-matched-mesh-mac-20261025/final-cast-only and has the same 10M core hashes, so it is not evidence about a separate historical ~35M mesh. Its flagged-cell-only geometry screen uses its recorded 1e-11 m numeric bound. Native v2512 checkMesh still reports the concavity category failed/no Mesh OK; the existing exploratory exception and screen do not create a new E1 pass.",
+      "remaining_issue": "A separate historical ~35M geometry was not hash-matched in this scoped evidence; do not transfer the 10M finding to it. Raw native concavity failure remains and no E1 decision is made."
+    },
+    {
+      "gap": "Exact squeue query reports these project jobs PENDING (Priority/Dependency); no run roots or numerical outputs exist yet. Current queue is a snapshot, not a future result.",
+      "job_ids": [
+        "14650641",
+        "14651174",
+        "14651178",
+        "14651185",
+        "14652548"
+      ],
+      "severity": "status",
+      "evidence": []
+    },
+    {
+      "evidence": [
+        {
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642573/hpc-metrics-n1000-failure-log.json",
+          "exists": true,
+          "sha256": "40dc534ae03c2bcd478896195e606cc62f2db1e0ca48e8443ae26284c7b8e17f"
+        },
+        {
+          "path": "results/runs/komondor-wide-20261025/collector/live-14642573/interIsoFoam.log",
+          "exists": true,
+          "sha256": "3d0213673e16352ad7bdad0dea3bcab4937c0bbd5f5f7ad7c818f895933c2b71"
+        }
+      ],
+      "gap": "Default transport 1000-rank attempt failed before any physical step; preserve as MPI/OFI failure, do not include in solver throughput or infer CFD instability.",
+      "job_id": "14642573",
+      "paths": [
+        "results/runs/komondor-wide-20261025/collector/live-14642573/hpc-metrics-n1000-failure-log.json",
+        "results/runs/komondor-wide-20261025/collector/live-14642573/interIsoFoam.log"
+      ],
+      "severity": "medium"
+    },
+    {
+      "evidence": [
+        {
+          "path": "results/runs/komondor-wide-20261025/software-ex1-collector/provenance-supplement-14642633.json",
+          "exists": true,
+          "sha256": "69e62efc09b188e4202222bfeafad12730bb64da70cfe86d92f27cc6d3a01f91"
+        },
+        {
+          "path": "results/runs/komondor-wide-20261025/software-ex1-collector/terminal-sacct-software1000-software1200ex1.parsable",
+          "exists": true,
+          "sha256": "22670f17ba1cfad5456438187166a3dc3e7065a8e9e5d3aa18ce661a97971a09"
+        }
+      ],
+      "gap": "Software MPI excluded-node 1200-rank attempt failed/cancelled with no physical timestep after setup/decompose; no solver result or scaling point.",
+      "job_id": "14642633",
+      "paths": [
+        "results/runs/komondor-wide-20261025/software-ex1-collector/provenance-supplement-14642633.json",
+        "results/runs/komondor-wide-20261025/software-ex1-collector/terminal-sacct-software1000-software1200ex1.parsable"
+      ],
+      "severity": "medium"
+    },
+    {
+      "gap": "All are zero-allocation pending cancellations/dependency cancellations or admission cancellation. Scheduler terminal outcome is complete for the attempt; no numerical result is applicable.",
+      "job_ids": [
+        "14641238",
+        "14641239",
+        "14641240",
+        "14641241",
+        "14641246",
+        "14641247",
+        "14641248",
+        "14641249",
+        "14641255",
+        "14641257",
+        "14641258",
+        "14641259",
+        "14641347",
+        "14641348",
+        "14641349",
+        "14642556",
+        "14642558",
+        "14642559",
+        "14642560",
+        "14642574",
+        "14648472",
+        "14652491"
+      ],
+      "severity": "closed_no_cfd",
+      "evidence": []
+    },
+    {
+      "gap": "No 360-rank tutorial submission/job ID was found. Keep missing/unlocated unless another receipt supplies it; do not convert 360-rank planning sizing into an actual run.",
+      "severity": "unknown",
+      "topic": "360-rank tutorial scaling",
+      "evidence": []
+    },
+    {
+      "gap": "The first 100/500/1000/1200 chains were dependency-cancelled, replaced chain 14641346 failed before useful timestep, and wide arms are separately categorized. There is no completed 500/1000/1200 result for the 24 Oct baseline chain.",
+      "severity": "audit",
+      "topic": "old 24-25 Oct 500/1000/1200 tutorial chains",
+      "evidence": []
+    },
+    {
+      "gap": "Rouaix 14647686 has extreme speed/Co and native SIGFPE; G1 14648417 stopped on 6975 m/s guard at 91/100 steps with failed k residual. These are failure diagnostics, not acceptable completed cases; do not use them for physical output claims.",
+      "severity": "scientific",
+      "topic": "nonphysical velocity spikes",
+      "evidence": []
+    },
+    {
+      "gap": "All summarized runs remain exploratory; no independent scientific gate pass is declared by this inventory.",
+      "severity": "gate",
+      "topic": "E1 acceptance",
+      "evidence": []
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Audit completeness and unresolved classifications for the associated HPC attempt inventory.",
+  "total_gaps": 12,
+  "followup_updated_utc": "2026-10-26T18:52:30Z",
+  "raw_scheduler_files_unchanged": true,
+  "evidence_path_audit": {
+    "method": "Each evidence file path referenced in this audit-gaps.json was checked for local file existence and SHA-256 at followup update time.",
+    "referenced_file_count": 36,
+    "missing_file_count": 0,
+    "missing_paths": [],
+    "raw_scheduler_capture_preserved": true
+  }
+}

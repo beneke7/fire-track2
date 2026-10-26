@@ -1,0 +1,41 @@
+{
+  "created_utc": "2026-10-26T19:00:47Z",
+  "scope": "Local checks for the Komondor Slurm afterany auditor, including explicit gaps for absent or uninterpreted diagnostics.",
+  "commands": [
+    {
+      "command": "python3 -m py_compile scripts/hpc_finished_audit.py",
+      "outcome": "passed"
+    },
+    {
+      "command": ".venv/bin/ruff check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "outcome": "passed"
+    },
+    {
+      "command": ".venv/bin/ruff format --check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "outcome": "passed"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_hpc_finished_audit.py",
+      "outcome": "passed",
+      "detail": "11 passed in 0.40s, including the tracked real S1 afterany audit and a compact-archive check that captures native collated/postProcessing profiling files, including .gz, while excluding 3D fields and similarly named files."
+    },
+    {
+      "command": "python3 scripts/hpc_finished_audit.py --help",
+      "outcome": "passed",
+      "detail": "Shows --manifest, --job-id, and --output CLI."
+    },
+    {
+      "command": "git ls-files --error-unmatch results/summaries/rouaix_s1_64_20261026/solver.log.gz results/summaries/rouaix_s1_64_20261026/files.sha256.json results/summaries/rouaix_s1_64_20261026/metrics/attempt/ledger/ledger.csv",
+      "outcome": "passed",
+      "detail": "All real S1 log and ledger sources used by the test are tracked."
+    },
+    {
+      "command": "python3 -m py_compile scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "outcome": "passed"
+    }
+  ],
+  "not_run": [
+    "No live Komondor afterany auditor was submitted; the primary owns the HPC smoke test and launch.",
+    "No full repository make check was run; no shared application callers were changed."
+  ]
+}
