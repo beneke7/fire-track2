@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 1711351,
+    "path": "results/archives/i4f-cold-log-i4f-short1-courant-pressure-pair-20261025T204743Z__half-courant-retry2-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-short1-courant-pressure-pair-20261025T204743Z__half-courant-retry2-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "c93ed6c2269e30ea5d340e5a26478bfc5eb1d2bae256c9adcf455b92b8b78734"
+  },
+  "created_utc": "2026-10-26T12:33:58.955201+00:00",
+  "members": [
+    {
+      "bytes": 24566471,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792964071064496638,
+      "path": "results/runs/i4f-short1-courant-pressure-pair-20261025T204743Z/half-courant-retry2/case/log.cold-coupled",
+      "run_bundle": "i4f-short1-courant-pressure-pair-20261025T204743Z/half-courant-retry2",
+      "sha256": "c2c5c0f4ff6969e5368e26ddde47c886a489069b3c994248e8a9458300864c45",
+      "source_inode": {
+        "device": 66306,
+        "inode": 186020823
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30518120448,
+    "free_before_archive_bytes": 30495301632,
+    "net_bytes_reclaimed": 22818816,
+    "removed_bytes": 24566471,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

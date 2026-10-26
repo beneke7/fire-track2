@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 2723555,
+    "path": "results/archives/i4f-cold-log-i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "ebafec7c96280cb14e0c69bd614819cd72ff2568bad733fbc1aa78b6e677b380"
+  },
+  "created_utc": "2026-10-26T12:33:54.814003+00:00",
+  "members": [
+    {
+      "bytes": 36412558,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792992863800736883,
+      "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3/case/log.cold-coupled",
+      "run_bundle": "i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3",
+      "sha256": "f864db70fcffe5ffa1afac5d6067b1a535a952689e6199805ca6b6954f9b62be",
+      "source_inode": {
+        "device": 66306,
+        "inode": 186269824
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30406144000,
+    "free_before_archive_bytes": 30372573184,
+    "net_bytes_reclaimed": 33570816,
+    "removed_bytes": 36412558,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

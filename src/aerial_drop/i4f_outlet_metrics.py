@@ -29,7 +29,7 @@ def outlet_secondary_metrics(
     projected_area_m2: np.ndarray,
     outlet_normal_unit_xyz: np.ndarray,
     alpha_water_face_raw: np.ndarray | None = None,
-    water_density_kg_m3: float = 998.2,
+    water_density_kg_m3: float | np.ndarray = 998.2,
     water_flux_stage_label: str = "native saved water phase-volume flux",
     velocity_stage_label: str = "reconstructed face velocity from saved U",
 ) -> dict[str, Any]:
@@ -42,8 +42,10 @@ def outlet_secondary_metrics(
     ``sum(A*(1-alpha_water))/sum(A)``. Thresholded area fractions are descriptive
     only, not acceptance gates.
 
-    The momentum vectors are ``rho_water*sum(q_f*U_f)``. Since saved q and
-    reconstructed U can represent different stages, they are estimates rather
+    The momentum vectors are ``sum(rho_water,f*q_f*U_f)``. Density may be one
+    positive scalar (the historical/default behavior) or a positive per-face
+    array. Since saved q and reconstructed U can represent different stages,
+    they are estimates rather
     than the solver's exact ``fvm::div(rhoPhi,U)`` contribution. Outflow direction
     statistics use positive q weights; zero-speed outflow is accounted as
     undefined direction. Initial air at a mouth is not evidence of breakthrough.
@@ -71,8 +73,19 @@ def outlet_secondary_metrics(
         raise ValueError("face velocity must be finite")
     if not np.all(np.isfinite(area)) or np.any(area <= 0.0):
         raise ValueError("projected face areas must be finite and positive")
-    if not math.isfinite(water_density_kg_m3) or water_density_kg_m3 <= 0.0:
-        raise ValueError("water density must be finite and positive")
+    density_input = np.asarray(water_density_kg_m3, dtype=float)
+    density_is_scalar = density_input.ndim == 0
+    if density_is_scalar:
+        density_scalar = float(density_input)
+        if not math.isfinite(density_scalar) or density_scalar <= 0.0:
+            raise ValueError("water density must be finite and positive")
+        density = np.full(n_faces, density_scalar, dtype=float)
+    else:
+        if density_input.shape != (n_faces,):
+            raise ValueError("per-face water density must have shape (n_faces,)")
+        density = density_input
+        if not np.all(np.isfinite(density)) or np.any(density <= 0.0):
+            raise ValueError("water density must be finite and positive")
     if not water_flux_stage_label.strip() or not velocity_stage_label.strip():
         raise ValueError("field stage labels must be nonempty")
 
@@ -125,11 +138,11 @@ def outlet_secondary_metrics(
                 np.degrees(np.arccos(np.clip(float(resultant_direction @ normal), -1.0, 1.0)))
             )
 
-    momentum_net = water_density_kg_m3 * np.sum(q[:, None] * velocity, axis=0)
-    momentum_out = water_density_kg_m3 * np.sum(q_out[:, None] * velocity, axis=0)
-    momentum_reverse = water_density_kg_m3 * np.sum(q_reverse[:, None] * velocity, axis=0)
+    momentum_net = np.sum((density * q)[:, None] * velocity, axis=0)
+    momentum_out = np.sum((density * q_out)[:, None] * velocity, axis=0)
+    momentum_reverse = np.sum((density * q_reverse)[:, None] * velocity, axis=0)
     momentum_out_norm = float(np.linalg.norm(momentum_out))
-    momentum_out_scale = float(water_density_kg_m3 * np.sum(q_out * speed))
+    momentum_out_scale = float(np.sum(density * q_out * speed))
     momentum_out_strength = (
         momentum_out_norm / momentum_out_scale if momentum_out_scale > 0.0 else None
     )
@@ -163,9 +176,15 @@ def outlet_secondary_metrics(
         "water_volume_flux_net_m3_s": float(np.sum(q)),
         "water_volume_flux_outward_m3_s": q_out_total,
         "water_volume_flux_reverse_magnitude_m3_s": q_reverse_magnitude,
-        "water_mass_flux_net_kg_s": float(water_density_kg_m3 * np.sum(q)),
-        "water_mass_flux_outward_kg_s": float(water_density_kg_m3 * q_out_total),
-        "water_mass_flux_reverse_magnitude_kg_s": float(water_density_kg_m3 * q_reverse_magnitude),
+        "water_density_model": "scalar" if density_is_scalar else "per_face",
+        "water_density_face_min_kg_m3": float(np.min(density)) if n_faces else None,
+        "water_density_face_max_kg_m3": float(np.max(density)) if n_faces else None,
+        "water_density_face_area_weighted_mean_kg_m3": (
+            float(np.dot(area, density) / np.sum(area)) if n_faces else None
+        ),
+        "water_mass_flux_net_kg_s": float(np.dot(density, q)),
+        "water_mass_flux_outward_kg_s": float(np.dot(density, q_out)),
+        "water_mass_flux_reverse_magnitude_kg_s": float(-np.dot(density, q_reverse)),
         "water_momentum_flux_net_reconstructed_N_xyz": [float(v) for v in momentum_net],
         "water_momentum_flux_outward_reconstructed_N_xyz": [float(v) for v in momentum_out],
         "water_momentum_flux_outward_resultant_norm_reconstructed_N": momentum_out_norm,
@@ -174,8 +193,8 @@ def outlet_secondary_metrics(
         "water_momentum_flux_outward_resultant_strength_fraction": momentum_out_strength,
         "water_momentum_flux_outward_resultant_direction_defined": momentum_out_unit is not None,
         "water_momentum_flux_outward_resultant_definition": (
-            "rho_water*sum(q_positive*U_face); direction angle is relative to outlet normal; "
-            "undefined when vector cancellation is within 1e-12 of sum(rho_water*q_positive*|U_face|)"
+            "sum(rho_water_face*q_positive*U_face); direction angle is relative to outlet normal; "
+            "undefined when vector cancellation is within 1e-12 of sum(rho_water_face*q_positive*|U_face|)"
         ),
         "water_momentum_flux_reverse_signed_reconstructed_N_xyz": [
             float(v) for v in momentum_reverse

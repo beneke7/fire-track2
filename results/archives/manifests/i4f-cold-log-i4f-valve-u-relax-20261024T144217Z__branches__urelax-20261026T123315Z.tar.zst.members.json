@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 1548840,
+    "path": "results/archives/i4f-cold-log-i4f-valve-u-relax-20261024T144217Z__branches__urelax-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-valve-u-relax-20261024T144217Z__branches__urelax-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "619734bfe0ab13bb1fd76db34aaf21ff99f406a4996cedcc5d8302b3cfad65c1"
+  },
+  "created_utc": "2026-10-26T12:34:03.005502+00:00",
+  "members": [
+    {
+      "bytes": 9248928,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792853151285254196,
+      "path": "results/runs/i4f-valve-u-relax-20261024T144217Z/branches/urelax/case/log.cold-coupled",
+      "run_bundle": "i4f-valve-u-relax-20261024T144217Z/branches/urelax",
+      "sha256": "af0de4433e83e5a2d0c504e4d0d159a45c40bd3897020be05e242aa17a5fe127",
+      "source_inode": {
+        "device": 66306,
+        "inode": 185502623
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30577774592,
+    "free_before_archive_bytes": 30570160128,
+    "net_bytes_reclaimed": 7614464,
+    "removed_bytes": 9248928,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

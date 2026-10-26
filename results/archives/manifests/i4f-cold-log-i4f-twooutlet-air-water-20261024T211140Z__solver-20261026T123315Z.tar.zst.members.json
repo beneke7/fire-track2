@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 3102828,
+    "path": "results/archives/i4f-cold-log-i4f-twooutlet-air-water-20261024T211140Z__solver-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-twooutlet-air-water-20261024T211140Z__solver-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "3cb41fff45ac0722641c90b1e6d755216e5fe9444a4fa715cd839dba9df4111d"
+  },
+  "created_utc": "2026-10-26T12:33:52.640104+00:00",
+  "members": [
+    {
+      "bytes": 45193038,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792877846538385119,
+      "path": "results/runs/i4f-twooutlet-air-water-20261024T211140Z/solver/case/log.cold-coupled",
+      "run_bundle": "i4f-twooutlet-air-water-20261024T211140Z/solver",
+      "sha256": "158b4c2142f225d88ef77fb0a956722ebbfb140b87448e586ee5dec5fa776cdf",
+      "source_inode": {
+        "device": 66306,
+        "inode": 185862814
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30336491520,
+    "free_before_archive_bytes": 30294482944,
+    "net_bytes_reclaimed": 42008576,
+    "removed_bytes": 45193038,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

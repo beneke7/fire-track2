@@ -1,0 +1,914 @@
+{
+  "schema": "i4f-pressure-filling-diagnostic-outcomes",
+  "schema_version": "1.0.0",
+  "units": {
+    "time": "s",
+    "pressure": "Pa absolute except explicitly named pressure-update delta Pa",
+    "velocity": "m/s",
+    "mass": "kg",
+    "cell_count": "cells"
+  },
+  "scope": {
+    "case_count": 4,
+    "selection": "Four closed saved guard/terminal/native metadata records named in this bundle; no live cases were changed.",
+    "shared_interpretation": "All are checkpoint restarts from earlier t=0 cold campaigns, not fresh t=0 runs. All ended with normal solver End and complete 14-field native checkpoints, but each failed its numerical diagnostic stop gate. No physical cavitation or discharge validation claim is made.",
+    "phase_ledger": "Cumulative water/gas ledger defects are retained in kilograms and qualified as diagnostics, not tolerances.",
+    "pressure_floor": "Raw pressure-floor contact counts and selected guardian event records are retained. Guardian fields named clipped_liquid_mass_kg/clipped_liquid_volume_m3 mean liquid support in cells where pressure was floored, not water removed from the solution. A run-wide minimum over every raw contact is null unless the guardian saved that reduction; terminal-step raw minimum and selected event values are separate."
+  },
+  "schema_contract": {
+    "format": "Strict UTF-8 JSON; non-finite numbers are forbidden.",
+    "required_top_level_fields": [
+      "schema",
+      "schema_version",
+      "units",
+      "scope",
+      "schema_contract",
+      "records"
+    ],
+    "additional_top_level_fields_allowed": false,
+    "required_record_fields": [
+      "run_key",
+      "run_label",
+      "bundle",
+      "container",
+      "start",
+      "case",
+      "endpoint",
+      "pressure_floor_diagnostic",
+      "outer_iteration_updates",
+      "phase_mass_ledger",
+      "interpretation",
+      "provenance"
+    ],
+    "additional_record_fields_allowed": false,
+    "null_policy": "Unknown or unretained values are null with a paired reason; they are never replaced with zero. Raw guardian event fields retain their original names and have explicit semantics."
+  },
+  "records": [
+    {
+      "run_key": "corrected_flush_rhoConst_two_pressure_correctors_recovery2",
+      "run_label": "Corrected flush, standard alpha source, N2, recovery attempt 2",
+      "bundle": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2",
+      "container": {
+        "id": "7ee5e26848562bf669643fc57d673d94f36be608073532e382830b2785551804",
+        "name": "i4f-flush-operational-recovery-20261026T095237Z-attempt2",
+        "started_at_utc": "2026-10-26T09:54:21.926955442Z",
+        "finished_at_utc": "2026-10-26T10:05:53.808060664Z",
+        "exit_code": 0,
+        "oom_killed": false,
+        "status": "exited",
+        "normal_solver_end_and_complete_checkpoint": true
+      },
+      "start": {
+        "kind": "checkpoint_restart",
+        "restart_checkpoint_time_s": 0.413688544708,
+        "parent_bundle": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+        "parent_container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+        "parent_checkpoint_path": "case/processors10/0.413688544708",
+        "parent_checkpoint_field_sha256": {
+          "T": "28cf614a4fa0626d466d75404376793b86aab46411668cb26f6ae3eba27f64d5",
+          "T.air": "2c36953cd274cf666e3e554d58f9369c3b9fb30d70aa1a279d7f138920aa095b",
+          "T.water": "d585919be6ca85fa0619b76b8ffacf23273459ef901a32f0aed61096d8f9bcd7",
+          "U": "9e5b59c6d94a0d799e5e494e2b695376b60a5d16615bfaef4117a776601b899b",
+          "alpha.water": "fb5bdcb3b4849966e2220a69422cfc30bc0b2110ed685043b91a2c1b2ff8d308",
+          "alphaPhi0.water": "bfd29cdf51cf07b6f9f2f78d33b4ab29eb9c4539a0ace4aa4de1de26824bfd7c",
+          "alphat": "5de010055cbcb837a7e74ef1f2e699295afed394a6705cd52e6562004f086cac",
+          "k": "b31829fe51b5f835578645833568017342d45c2c83e94ae8bfd859a064093698",
+          "nut": "d7fcfa5ed6ab168834350b9b8f32c7b678db5a4adb7e0e4ff14df618c7a3cb43",
+          "omega": "4857ad8c82f2e463f19a0a9afe764c86f62b208ba80546da85663176912055c1",
+          "p": "876d6b5d5b79def547bf2028eee3c7433de842b741e23d9e64e19dac00e140a8",
+          "p_rgh": "63ecf6ece55c5b6bbd54e527cf2940c85e88abd85bcf9c41bec9972cb6f2a07f",
+          "phi": "70a9d161bbafe740eb73e7b1c218e7d466bceecaac77d4acf61a880940fc47ee",
+          "rho": "bed130ccd962bb00430a9484210a086ffa38c901fd176e3c5765924f82b668ef",
+          "uniform/time": "b81cce4cbc8a21d8af1fed93438b4ac4520b7e6bc73c8a47584a4fc8fa4bcb13"
+        },
+        "campaign_originated_at_t0": true,
+        "campaign_initial_time_s": 0.0,
+        "clarification": "Warm continuation from the stopped corrected-flush stock stage; not a new t=0 start."
+      },
+      "case": {
+        "mesh_cells": 299214,
+        "geometry_family": "299214-cell corrected flush-at-inlet four-outlet mesh",
+        "transition_join_mode": "flush-at-inlet",
+        "join_mode_source_or_qualification": "The experiment identifies the corrected feed-to-flush junction; the mesh-preparation wall comparison names the new 299214-cell mesh as flush-at-inlet.",
+        "alpha_source": "standard source (i4fFrozenPredictorSp=false)",
+        "i4fFrozenPredictorSp": false,
+        "i4fFullPressureAudit": null,
+        "nOuterCorrectors": 8,
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "transonic": true,
+        "binary_sha256_recorded_in_launch": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+        "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "initial_state_description": "Original campaign t=0 state was documented as a genuine cold start. This stage itself starts from the complete native checkpoint identified in start; it is a checkpoint restart, not a fresh cold start."
+      },
+      "endpoint": {
+        "time_s": 0.434224203921,
+        "completed_steps": 299,
+        "guard_status": "normal_End_complete_native10_checkpoint",
+        "guard_write_now_reason": "raw pressure update contacted the configured 10 kPa floor",
+        "stop_class": "raw_pressure_floor_contact",
+        "native_checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/case/processors10/0.434224203921",
+        "native_checkpoint_complete": true,
+        "native_checkpoint_fields": [
+          "T",
+          "T.air",
+          "T.water",
+          "U",
+          "alpha.water",
+          "alphaPhi0.water",
+          "alphat",
+          "k",
+          "nut",
+          "omega",
+          "p",
+          "p_rgh",
+          "phi",
+          "rho"
+        ],
+        "normal_solver_End": true
+      },
+      "pressure_floor_diagnostic": {
+        "configured_floor_Pa": 10000.0,
+        "raw_contact_count": 19,
+        "first_raw_contact": {
+          "cells_strictly_below_pMin": 1,
+          "clipped_liquid_mass_kg": 0.003140005662926758,
+          "clipped_liquid_volume_m3": 3.145667865083909e-06,
+          "pMin_Pa": 10000.0,
+          "pass": 4732,
+          "raw_p_min_Pa": -4636.43802193389,
+          "time_s": 0.43406497567
+        },
+        "maximum_clipped_liquid_event": {
+          "cells_strictly_below_pMin": 2,
+          "clipped_liquid_mass_kg": 0.006117985372714208,
+          "clipped_liquid_volume_m3": 6.129017604402131e-06,
+          "pMin_Pa": 10000.0,
+          "pass": 4736,
+          "raw_p_min_Pa": -330889.0646725072,
+          "time_s": 0.43406497567
+        },
+        "runwide_minimum_raw_contact_pressure_Pa": null,
+        "runwide_minimum_raw_contact_pressure_unavailable_reason": "The saved guardian records contact count and selected first/maximum-clipping events, not a min reduction over every raw-contact pass. Do not treat an event minimum as run-wide.",
+        "terminal_step_raw_minimum_pressure_Pa": 76476.987,
+        "terminal_saved_field_minimum_pressure_Pa": 77010.771,
+        "liquid_support_in_pressure_contact_cells_kg": 0.006117985372714208,
+        "liquid_support_mass_source_field_name": "maximum_clipped_liquid_mass_kg",
+        "liquid_support_semantics": "Liquid support mass/volume in cells whose raw pressure was at or below the configured floor. This is not water removed, clipped from alpha, or a phase-ledger loss.",
+        "first_raw_contact_semantics": {
+          "source_fields_preserved_verbatim": [
+            "clipped_liquid_mass_kg",
+            "clipped_liquid_volume_m3"
+          ],
+          "interpretation": "Liquid support mass/volume in cells whose raw pressure was at or below the configured floor. This is not water removed, clipped from alpha, or a phase-ledger loss."
+        },
+        "maximum_clipped_liquid_event_semantics": {
+          "source_fields_preserved_verbatim": [
+            "clipped_liquid_mass_kg",
+            "clipped_liquid_volume_m3"
+          ],
+          "interpretation": "Liquid support mass/volume in cells whose raw pressure was at or below the configured floor. This is not water removed, clipped from alpha, or a phase-ledger loss."
+        }
+      },
+      "outer_iteration_updates": {
+        "final": {
+          "time_s": 0.434224203921,
+          "max_abs_dp_Pa": 32.785681,
+          "max_abs_dU_m_s": 0.016249118,
+          "outer_iteration": 2392
+        },
+        "penultimate": {
+          "time_s": 0.434224203921,
+          "max_abs_dp_Pa": 66.701885,
+          "max_abs_dU_m_s": 0.035418676,
+          "outer_iteration": 2391
+        },
+        "interpretation": "Guard-observed outer-to-outer changes; a stop diagnostic, not a complete nonlinear residual or validation metric."
+      },
+      "phase_mass_ledger": {
+        "initial_water_mass_kg": 3196.402094318484,
+        "initial_gas_mass_kg": 33.87656607230728,
+        "cumulative_water_defect_kg": 0.1265033208519526,
+        "cumulative_gas_defect_kg": -0.00012385766079197542,
+        "water_defect_fraction_of_initial": 3.957678574820381e-05,
+        "gas_defect_fraction_of_initial": -3.6561456827592705e-06,
+        "qualification": "Cumulative phase-ledger diagnostics carried from the campaign t=0 seed; not acceptance tolerances or proof of local conservation.",
+        "initial_inventory_difference_vs_corrected_flush_reference": {
+          "reference_run_key": "corrected_flush_rhoConst_two_pressure_correctors_recovery2",
+          "water_mass_delta_kg": 0.0,
+          "gas_mass_delta_kg": 0.0,
+          "qualification": "Reference inventory for cross-run initial-mass context."
+        }
+      },
+      "interpretation": {
+        "diagnostic_gate": "failed",
+        "diagnostic_gate_reason": "raw_pressure_floor_contact",
+        "physical_cavitation_claim": false,
+        "physical_discharge_validation_claim": false,
+        "qualification": "Exploratory numerical outcomes only. A negative raw pressure before floor clipping is a solver-floor diagnostic, not evidence of physical cavitation."
+      },
+      "provenance": {
+        "input_freeze_sha256_recorded_in_launch": "005e4ea93881f389d0a44125a926606f1f1b967ec9660c29778510794b8e73eb",
+        "static_case_tree_sha256_recorded_in_launch": "f6b704ab27ecfff189231015310c3c65d94cee204e4c4d7051126b3315f89351",
+        "static_input_tree_sha256_recorded_in_launch": "04ac03c2443510466ce3bfcc0794a86a74c9b0824f89e38dc2c3a5f71bbe647f",
+        "guard_source_sha256_recorded_in_launch": "97c3524404d5b4ba81cc82fee8b6387ee1e4105e26c85b6411a519266b755e51",
+        "binary_sha256_recorded_in_launch": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+        "mesh_metadata_reference": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/final-canonical-readiness.json",
+        "source_metadata_hashes": [
+          {
+            "path": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/native-apparatus-wall-y0p76188-legacy-vs-flush.json",
+            "sha256": "04f71a55e714be2fbc12ef972619f7d1cfc7b13962ee5c4ec3fe4f9f3b1b111f",
+            "bytes": 7410
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/case/system/controlDict",
+            "sha256": "611c1bfad6820db551ccb46d963537099f98334d190383ddfc5d09cae2f82aad",
+            "bytes": 743
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/case/system/fvSolution",
+            "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+            "bytes": 1920
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/case/system/meshPreparationProvenance.json",
+            "sha256": "f89703fc9449e5fc6b2618e251f3cb6a68ec5ff8135cb86b0cf8af0b399c0e4b",
+            "bytes": 2083
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/experiment.json",
+            "sha256": "6a2b8f9de6e3f991881bbcff010a639ddbc2f7cc2a12d9f4b51ea0243e27d9c7",
+            "bytes": 11355
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/guard.py",
+            "sha256": "97c3524404d5b4ba81cc82fee8b6387ee1e4105e26c85b6411a519266b755e51",
+            "bytes": 37525
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/guardian-status.json",
+            "sha256": "ea38f29e519b6ee83159c2af4e04eccca0704fe44a5aa04c7a8d386b524aa0cb",
+            "bytes": 16623
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/input-freeze.json",
+            "sha256": "005e4ea93881f389d0a44125a926606f1f1b967ec9660c29778510794b8e73eb",
+            "bytes": 47402
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/launch-manifest.json",
+            "sha256": "b1a2beb969329e22e8003bbc93fbb2c19aa0df33b0b14c50ef723dcd3256beeb",
+            "bytes": 5132
+          },
+          {
+            "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/operational-recovery-campaign-status.json",
+            "sha256": "d8e77eda119a1672120f4885aaef493124e1134c2a75647155d35f03679ff76c",
+            "bytes": 2738
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/final-canonical-readiness.json",
+            "sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+            "bytes": 22492
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/experiment.json",
+            "sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+            "bytes": 9131
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/guardian-status.json",
+            "sha256": "c9bece1002e28c9bebfa36777e7519dfde130b0cd81f17a77523ede7ec11fd1b",
+            "bytes": 16125
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/launch-manifest.json",
+            "sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+            "bytes": 9391
+          }
+        ],
+        "solver_log_not_rehashed": {
+          "path": "results/runs/i4f-flush-operational-recovery-20261026T095237Z-attempt2/case/log.cold-coupled",
+          "reason": "The compact outcome is sourced from the saved guardian, terminal, experiment, case-dictionary, and mesh metadata; the large solver log was not rescanned for this table."
+        }
+      }
+    },
+    {
+      "run_key": "corrected_flush_standard_source_one_pressure_corrector_retry1",
+      "run_label": "Corrected flush, standard alpha source, one pressure corrector retry 1",
+      "bundle": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z",
+      "container": {
+        "id": "94a0cb88d69b9be4876e4293ba518f63729f54e4ff143deb2485ee0ead4de89e",
+        "name": "i4f-flush-one-pressure-corrector-retry1-20261026T103608Z",
+        "started_at_utc": "2026-10-26T10:40:37.375248485Z",
+        "finished_at_utc": "2026-10-26T10:52:47.069096928Z",
+        "exit_code": 0,
+        "oom_killed": false,
+        "status": "exited",
+        "normal_solver_end_and_complete_checkpoint": true
+      },
+      "start": {
+        "kind": "checkpoint_restart",
+        "restart_checkpoint_time_s": 0.413688544708,
+        "parent_bundle": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+        "parent_container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+        "parent_checkpoint_path": "processors10/0.413688544708",
+        "parent_checkpoint_field_sha256": {
+          "T": "28cf614a4fa0626d466d75404376793b86aab46411668cb26f6ae3eba27f64d5",
+          "T.air": "2c36953cd274cf666e3e554d58f9369c3b9fb30d70aa1a279d7f138920aa095b",
+          "T.water": "d585919be6ca85fa0619b76b8ffacf23273459ef901a32f0aed61096d8f9bcd7",
+          "U": "9e5b59c6d94a0d799e5e494e2b695376b60a5d16615bfaef4117a776601b899b",
+          "alpha.water": "fb5bdcb3b4849966e2220a69422cfc30bc0b2110ed685043b91a2c1b2ff8d308",
+          "alphaPhi0.water": "bfd29cdf51cf07b6f9f2f78d33b4ab29eb9c4539a0ace4aa4de1de26824bfd7c",
+          "alphat": "5de010055cbcb837a7e74ef1f2e699295afed394a6705cd52e6562004f086cac",
+          "k": "b31829fe51b5f835578645833568017342d45c2c83e94ae8bfd859a064093698",
+          "nut": "d7fcfa5ed6ab168834350b9b8f32c7b678db5a4adb7e0e4ff14df618c7a3cb43",
+          "omega": "4857ad8c82f2e463f19a0a9afe764c86f62b208ba80546da85663176912055c1",
+          "p": "876d6b5d5b79def547bf2028eee3c7433de842b741e23d9e64e19dac00e140a8",
+          "p_rgh": "63ecf6ece55c5b6bbd54e527cf2940c85e88abd85bcf9c41bec9972cb6f2a07f",
+          "phi": "70a9d161bbafe740eb73e7b1c218e7d466bceecaac77d4acf61a880940fc47ee",
+          "rho": "bed130ccd962bb00430a9484210a086ffa38c901fd176e3c5765924f82b668ef",
+          "uniform/time": "b81cce4cbc8a21d8af1fed93438b4ac4520b7e6bc73c8a47584a4fc8fa4bcb13"
+        },
+        "campaign_originated_at_t0": true,
+        "campaign_initial_time_s": 0.0,
+        "clarification": "One-corrector sensitivity restarted from the same stopped corrected-flush checkpoint as recovery attempt 2; not a new t=0 start."
+      },
+      "case": {
+        "mesh_cells": 299214,
+        "geometry_family": "299214-cell corrected flush-at-inlet four-outlet mesh",
+        "transition_join_mode": "flush-at-inlet",
+        "join_mode_source_or_qualification": "The experiment identifies the corrected feed-to-flush junction; the mesh-preparation wall comparison names the new 299214-cell mesh as flush-at-inlet.",
+        "alpha_source": "standard source (i4fFrozenPredictorSp=false)",
+        "i4fFrozenPredictorSp": false,
+        "i4fFullPressureAudit": null,
+        "nOuterCorrectors": 8,
+        "nCorrectors": 1,
+        "nNonOrthogonalCorrectors": 0,
+        "transonic": true,
+        "binary_sha256_recorded_in_launch": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+        "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "initial_state_description": "Original campaign t=0 state was documented as a genuine cold start. This stage itself starts from the complete native checkpoint identified in start; it is a checkpoint restart, not a fresh cold start."
+      },
+      "endpoint": {
+        "time_s": 0.440685508369,
+        "completed_steps": 392,
+        "guard_status": "normal_End_complete_native10_checkpoint",
+        "guard_write_now_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+        "stop_class": "persistent_final_outer_pressure_update",
+        "native_checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/processors10/0.440685508369",
+        "native_checkpoint_complete": true,
+        "native_checkpoint_fields": [
+          "T",
+          "T.air",
+          "T.water",
+          "U",
+          "alpha.water",
+          "alphaPhi0.water",
+          "alphat",
+          "k",
+          "nut",
+          "omega",
+          "p",
+          "p_rgh",
+          "phi",
+          "rho"
+        ],
+        "normal_solver_End": true
+      },
+      "pressure_floor_diagnostic": {
+        "configured_floor_Pa": 10000.0,
+        "raw_contact_count": 0,
+        "first_raw_contact": null,
+        "maximum_clipped_liquid_event": null,
+        "runwide_minimum_raw_contact_pressure_Pa": null,
+        "runwide_minimum_raw_contact_pressure_unavailable_reason": "No raw pressure-floor contacts were recorded; there is no contact-event minimum.",
+        "terminal_step_raw_minimum_pressure_Pa": 85241.274,
+        "terminal_saved_field_minimum_pressure_Pa": 85264.048,
+        "liquid_support_in_pressure_contact_cells_kg": 0.0,
+        "liquid_support_mass_source_field_name": "maximum_clipped_liquid_mass_kg",
+        "liquid_support_semantics": "Liquid support mass/volume in cells whose raw pressure was at or below the configured floor. This is not water removed, clipped from alpha, or a phase-ledger loss."
+      },
+      "outer_iteration_updates": {
+        "final": {
+          "time_s": 0.440685508369,
+          "max_abs_dp_Pa": 7778.1392,
+          "max_abs_dU_m_s": 8.0954545,
+          "outer_iteration": 3136
+        },
+        "penultimate": {
+          "time_s": 0.440685508369,
+          "max_abs_dp_Pa": 7778.1442,
+          "max_abs_dU_m_s": 8.0954579,
+          "outer_iteration": 3135
+        },
+        "interpretation": "Guard-observed outer-to-outer changes; a stop diagnostic, not a complete nonlinear residual or validation metric."
+      },
+      "phase_mass_ledger": {
+        "initial_water_mass_kg": 3196.402094318484,
+        "initial_gas_mass_kg": 33.87656607230728,
+        "cumulative_water_defect_kg": 0.12800332085874094,
+        "cumulative_gas_defect_kg": -0.0001273344129200877,
+        "water_defect_fraction_of_initial": 4.004606338053128e-05,
+        "gas_defect_fraction_of_initial": -3.7587756872494354e-06,
+        "qualification": "Cumulative phase-ledger diagnostics carried from the campaign t=0 seed; not acceptance tolerances or proof of local conservation.",
+        "initial_inventory_difference_vs_corrected_flush_reference": {
+          "reference_run_key": "corrected_flush_rhoConst_two_pressure_correctors_recovery2",
+          "water_mass_delta_kg": 0.0,
+          "gas_mass_delta_kg": 0.0,
+          "qualification": "Difference from the corrected 299214-cell flush reference's t=0 campaign inventory. For other meshes this is a discretization/state difference, not a conservation defect."
+        }
+      },
+      "interpretation": {
+        "diagnostic_gate": "failed",
+        "diagnostic_gate_reason": "persistent_final_outer_pressure_update",
+        "physical_cavitation_claim": false,
+        "physical_discharge_validation_claim": false,
+        "qualification": "Exploratory numerical outcomes only. A negative raw pressure before floor clipping is a solver-floor diagnostic, not evidence of physical cavitation."
+      },
+      "provenance": {
+        "input_freeze_sha256_recorded_in_launch": "cb413eeab98c9ddf12d598501c581a2251fcdf2455e389d873224525cd1418f4",
+        "static_case_tree_sha256_recorded_in_launch": "c1725ec86e8ce7ee70dfc6dec357d4402f75e4593c8e89a5bb4db2667763b7e6",
+        "static_input_tree_sha256_recorded_in_launch": "502adfa117224f95f379031f436ce2d0bc2220653cce2346a4503fe44fbf3ee7",
+        "guard_source_sha256_recorded_in_launch": "c8007f4087244f486e7a19ed8382d2634c03485bcab8aca8c2ccd50445967b30",
+        "binary_sha256_recorded_in_launch": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+        "mesh_metadata_reference": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/final-canonical-readiness.json",
+        "source_metadata_hashes": [
+          {
+            "path": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/native-apparatus-wall-y0p76188-legacy-vs-flush.json",
+            "sha256": "04f71a55e714be2fbc12ef972619f7d1cfc7b13962ee5c4ec3fe4f9f3b1b111f",
+            "bytes": 7410
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/system/controlDict",
+            "sha256": "611c1bfad6820db551ccb46d963537099f98334d190383ddfc5d09cae2f82aad",
+            "bytes": 743
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/system/fvSolution",
+            "sha256": "9cc682b979ecadfcbf52c487f3c0478836e2f6e00e0db852d24a8cacd484a134",
+            "bytes": 1920
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/system/meshPreparationProvenance.json",
+            "sha256": "f89703fc9449e5fc6b2618e251f3cb6a68ec5ff8135cb86b0cf8af0b399c0e4b",
+            "bytes": 2083
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/experiment.json",
+            "sha256": "eb60b289319e5be2d7e3ba9a966b8d178b4b5b72a0293fe09021742b005b2d93",
+            "bytes": 11058
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/guard.py",
+            "sha256": "c8007f4087244f486e7a19ed8382d2634c03485bcab8aca8c2ccd50445967b30",
+            "bytes": 37559
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/guardian-status.json",
+            "sha256": "ccd618b09fb5faa4f13296ffc55c6438945df6d374f089fb85a838ceb09b267e",
+            "bytes": 15678
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/input-freeze.json",
+            "sha256": "cb413eeab98c9ddf12d598501c581a2251fcdf2455e389d873224525cd1418f4",
+            "bytes": 46353
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/launch-manifest.json",
+            "sha256": "2fbfd3771dd56348aabf50f25cf3b03d3d090d32b912d1c3e796a81d4406bbe2",
+            "bytes": 9424
+          },
+          {
+            "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/one-corrector-campaign-status.json",
+            "sha256": "8dd831dc1a2ec4b19a5e59097be0d08ad71bd82ec51a92def5bca8d2b6dcd76c",
+            "bytes": 2723
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/final-canonical-readiness.json",
+            "sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+            "bytes": 22492
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/experiment.json",
+            "sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+            "bytes": 9131
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/guardian-status.json",
+            "sha256": "c9bece1002e28c9bebfa36777e7519dfde130b0cd81f17a77523ede7ec11fd1b",
+            "bytes": 16125
+          },
+          {
+            "path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/launch-manifest.json",
+            "sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+            "bytes": 9391
+          }
+        ],
+        "solver_log_not_rehashed": {
+          "path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/log.cold-coupled",
+          "reason": "The compact outcome is sourced from the saved guardian, terminal, experiment, case-dictionary, and mesh metadata; the large solver log was not rescanned for this table."
+        }
+      }
+    },
+    {
+      "run_key": "tank_interface_refined_frozen_source_fallback_attempt6",
+      "run_label": "Tank/interface-refined mesh, frozen predictor-Sp source, fallback attempt 6",
+      "bundle": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6",
+      "container": {
+        "id": "8d6c42fa84e22e1fdb1e07d2ca6127d703fe3d2f9ba7f50401ec45feb3e4a38f",
+        "name": "i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6",
+        "started_at_utc": "2026-10-26T10:18:03.21616364Z",
+        "finished_at_utc": "2026-10-26T10:46:14.080836224Z",
+        "exit_code": 0,
+        "oom_killed": false,
+        "status": "exited",
+        "normal_solver_end_and_complete_checkpoint": true
+      },
+      "start": {
+        "kind": "checkpoint_restart",
+        "restart_checkpoint_time_s": 0.399995294759,
+        "parent_bundle": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5",
+        "parent_container_id": "b31f9fc09916204c611f17f48643717508d31740df31f696bf9b4c737ae7ded2",
+        "parent_checkpoint_path": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/case/processors10/0.399995294759",
+        "parent_checkpoint_field_sha256": null,
+        "campaign_originated_at_t0": true,
+        "campaign_initial_time_s": 0.0,
+        "clarification": "Warm restart from the earlier tank/interface-refinement continuation; mesh-dependent initial headspace differs from corrected flush."
+      },
+      "case": {
+        "mesh_cells": 456954,
+        "geometry_family": "456954-cell tank/interface-refined historical geometry",
+        "transition_join_mode": null,
+        "join_mode_source_or_qualification": "not stated in this stage's run record; do not infer from the bundle name",
+        "alpha_source": "frozen predictor-Sp source (i4fFrozenPredictorSp=true)",
+        "i4fFrozenPredictorSp": true,
+        "i4fFullPressureAudit": false,
+        "nOuterCorrectors": 8,
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "transonic": true,
+        "binary_sha256_recorded_in_launch": "23743d676c20afaf80afaaa098237c9069fcd8d1e12dcd74955ca586a2c382ef",
+        "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "initial_state_description": "Original t=0 initialization details are not restated in this fallback stage record. This stage itself starts from the complete native checkpoint identified in start; it is a checkpoint restart, not a fresh cold start."
+      },
+      "endpoint": {
+        "time_s": 0.44530099196,
+        "completed_steps": 558,
+        "guard_status": "normal_End_complete_native10_checkpoint",
+        "guard_write_now_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+        "stop_class": "persistent_final_outer_pressure_update",
+        "native_checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/case/processors10/0.44530099196",
+        "native_checkpoint_complete": true,
+        "native_checkpoint_fields": [
+          "T",
+          "T.air",
+          "T.water",
+          "U",
+          "alpha.water",
+          "alphaPhi0.water",
+          "alphat",
+          "k",
+          "nut",
+          "omega",
+          "p",
+          "p_rgh",
+          "phi",
+          "rho"
+        ],
+        "normal_solver_End": true
+      },
+      "pressure_floor_diagnostic": {
+        "configured_floor_Pa": 10000.0,
+        "raw_contact_count": 0,
+        "first_raw_contact": null,
+        "maximum_clipped_liquid_event": null,
+        "runwide_minimum_raw_contact_pressure_Pa": null,
+        "runwide_minimum_raw_contact_pressure_unavailable_reason": "No raw pressure-floor contacts were recorded; there is no contact-event minimum.",
+        "terminal_step_raw_minimum_pressure_Pa": 84089.673,
+        "terminal_saved_field_minimum_pressure_Pa": 84103.481,
+        "liquid_support_in_pressure_contact_cells_kg": 0.0,
+        "liquid_support_mass_source_field_name": "maximum_clipped_liquid_mass_kg",
+        "liquid_support_semantics": "Liquid support mass/volume in cells whose raw pressure was at or below the configured floor. This is not water removed, clipped from alpha, or a phase-ledger loss."
+      },
+      "outer_iteration_updates": {
+        "final": {
+          "time_s": 0.44530099196,
+          "max_abs_dp_Pa": 3000.8898,
+          "max_abs_dU_m_s": 4.5804437,
+          "outer_iteration": 4464
+        },
+        "penultimate": {
+          "time_s": 0.44530099196,
+          "max_abs_dp_Pa": 3000.8899,
+          "max_abs_dU_m_s": 4.5804441,
+          "outer_iteration": 4463
+        },
+        "interpretation": "Guard-observed outer-to-outer changes; a stop diagnostic, not a complete nonlinear residual or validation metric."
+      },
+      "phase_mass_ledger": {
+        "initial_water_mass_kg": 3196.394993290003,
+        "initial_gas_mass_kg": 33.95269701792878,
+        "cumulative_water_defect_kg": 0.05132875824060289,
+        "cumulative_gas_defect_kg": 0.0012242621448188412,
+        "water_defect_fraction_of_initial": 1.6058327693653074e-05,
+        "gas_defect_fraction_of_initial": 3.605787617320555e-05,
+        "qualification": "Cumulative phase-ledger diagnostics carried from the campaign t=0 seed; not acceptance tolerances or proof of local conservation.",
+        "initial_inventory_difference_vs_corrected_flush_reference": {
+          "reference_run_key": "corrected_flush_rhoConst_two_pressure_correctors_recovery2",
+          "water_mass_delta_kg": -0.007101028480974492,
+          "gas_mass_delta_kg": 0.07613094562150025,
+          "qualification": "Difference from the corrected 299214-cell flush reference's t=0 campaign inventory. For other meshes this is a discretization/state difference, not a conservation defect."
+        }
+      },
+      "interpretation": {
+        "diagnostic_gate": "failed",
+        "diagnostic_gate_reason": "persistent_final_outer_pressure_update",
+        "physical_cavitation_claim": false,
+        "physical_discharge_validation_claim": false,
+        "qualification": "Exploratory numerical outcomes only. A negative raw pressure before floor clipping is a solver-floor diagnostic, not evidence of physical cavitation."
+      },
+      "provenance": {
+        "input_freeze_sha256_recorded_in_launch": "80848487a2269419312921ca986caff78588364984cb2321db4b24a7bef5ef83",
+        "static_case_tree_sha256_recorded_in_launch": "810d4c0c1751875f4fa5540dd9aa4508edf5234bb06e986cceb8a8231d74f0b8",
+        "static_input_tree_sha256_recorded_in_launch": "3ce6a3f204e2400200b4c242352bc358d8b4799593118183d55f003ebe3dd828",
+        "guard_source_sha256_recorded_in_launch": "d40de80306c49f3d2f5663551a1af904c9be6013acb96110da3a04414ec5628b",
+        "binary_sha256_recorded_in_launch": "23743d676c20afaf80afaaa098237c9069fcd8d1e12dcd74955ca586a2c382ef",
+        "mesh_metadata_reference": "results/runs/i4f-tank-interface-refinement-prep-20261025T2202Z/attempt6/analysis/tank-interface-mesh-audit.json",
+        "source_metadata_hashes": [
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/experiment.json",
+            "sha256": "5db45b04f759234dd70e875b058a16b4d95fa9f854bf5cd958ce444740c7d0ce",
+            "bytes": 10454
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/launch-manifest.json",
+            "sha256": "0a7af32b31f1008924eaf38b13d04fec3cfc8ef01560579b0ae7111e2110ced8",
+            "bytes": 7097
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/guardian-status.json",
+            "sha256": "fc57a3a98461a98a1d396c1195f8403416e1d1e70a221b23dc2514f9bee91d0b",
+            "bytes": 12845
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/guard.py",
+            "sha256": "d40de80306c49f3d2f5663551a1af904c9be6013acb96110da3a04414ec5628b",
+            "bytes": 37559
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/input-freeze.json",
+            "sha256": "80848487a2269419312921ca986caff78588364984cb2321db4b24a7bef5ef83",
+            "bytes": 47684
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/case/system/controlDict",
+            "sha256": "374984d363861912ea8884e070985efd94bac7b64675f3ffcf9365a159942497",
+            "bytes": 770
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/case/system/fvSolution",
+            "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+            "bytes": 1920
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-refinement-prep-20261025T2202Z/attempt6/analysis/tank-interface-mesh-audit.json",
+            "sha256": "9eef530151fe1d71f7c65a9ef09b46b929441f76fc2e98e9c7daa212db685822",
+            "bytes": 29458
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/experiment.json",
+            "sha256": "d1241135b3559f04f46888d2258140741f313f03355d71c3099fdc5332274aad",
+            "bytes": 7707
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/launch-manifest.json",
+            "sha256": "885017cf95e9b352d4a57784dbedaa793e5e6ff0186a237c6d86eef097289d12",
+            "bytes": 8424
+          },
+          {
+            "path": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/guardian-status.json",
+            "sha256": "d85902dd16500445d790834da0cf1044f8ca45644f8d59f574d323cbb99245ff",
+            "bytes": 12978
+          }
+        ],
+        "solver_log_not_rehashed": {
+          "path": "results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T100845Z-attempt6/case/log.cold-coupled",
+          "reason": "The compact outcome is sourced from the saved guardian, terminal, experiment, case-dictionary, and mesh metadata; the large solver log was not rescanned for this table."
+        }
+      }
+    },
+    {
+      "run_key": "881k_outlet_bend_refined_frozen_source_stage06",
+      "run_label": "881431-cell outlet/bend-refined mesh, frozen predictor-Sp, stage 06",
+      "bundle": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3",
+      "container": {
+        "id": "d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5",
+        "name": "i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3",
+        "started_at_utc": "2026-10-26T05:42:41.284617235Z",
+        "finished_at_utc": "2026-10-26T09:45:50.316883867Z",
+        "exit_code": 0,
+        "oom_killed": false,
+        "status": "exited",
+        "normal_solver_end_and_complete_checkpoint": true
+      },
+      "start": {
+        "kind": "checkpoint_restart",
+        "restart_checkpoint_time_s": 0.253271166664,
+        "parent_bundle": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3",
+        "parent_container_id": "bc850309e648c1d110c61bdba3a279bca81c0abfd340ccd22fee91a60f85406e",
+        "parent_checkpoint_path": null,
+        "parent_checkpoint_field_sha256": {
+          "T": "094f9cdcfc71b48e0d0bf6b6a2fedfa8f3db2ca7adfeba106531b4ef40702e87",
+          "T.air": "977fade96c5a8f61fa384e7cb735970bceb6e86565f5c602241a3ce125aef646",
+          "T.water": "da63ae1e60a26c56766c623d2bf5b42c700f6fb3ce3c1dec88f696bbb4299f5b",
+          "U": "d70f8c78db391a4dc43f11c9ef25ef87e7f32fb890de993e7bdab62c7c097782",
+          "alpha.water": "8b931c49f4679646d7a8fb662f6a9955e24ed4e9d05338fbf9d84d1fb4fb814d",
+          "alphaPhi0.water": "0a1d33121b50811b819e0da1b4e4e71472f8a9807c8ee66b748c70fb89ed7426",
+          "alphat": "5d1401163d0d2e05102c81be54841275dfb7925fba0ad4ac4668da89a03a710c",
+          "k": "e0364989a4805c1f2b4a08e4c672cd5f6fa8b4cef8cc1e8d96af0a57eb7f0232",
+          "nut": "d3004c308b74a99ac49784418dc792bb6cfade6fe145c7d5bac85273b13d85bb",
+          "omega": "b6f98f6c5cc1386c766f89715dd08ea722c9444b619fbfbe44187ca81484c471",
+          "p": "c1415d61be9a521ef70cf02c14b21a36f417bc7af52cc8cceb7890cd1e464afc",
+          "p_rgh": "be5abbdbbda71cd148545cb56405a689c663427b0cf52f9f416b9f0178462f6a",
+          "phi": "01fdaa22ec7a798b0516852b7d07fcde4cadbd758dac71e6f9f2bb1e9b3fcde4",
+          "rho": "5f868b26a382ee312c0d66a642e2d49788d6ef04b1d398f52e4ba1f7501b64b2",
+          "uniform/time": "45468683f1341f7807d6336735694f269853041531f60170334b5e51f1fe59ef"
+        },
+        "campaign_originated_at_t0": true,
+        "campaign_initial_time_s": 0.0,
+        "clarification": "Warm restart from the prior 881k stage at 0.253271166664 s; old outlet/bend mesh, not corrected flush."
+      },
+      "case": {
+        "mesh_cells": 881431,
+        "geometry_family": "881431-cell outlet/bend-refined historical mesh",
+        "transition_join_mode": null,
+        "join_mode_source_or_qualification": "not stated in this stage's run record; do not infer a transition join mode",
+        "alpha_source": "frozen predictor-Sp source (i4fFrozenPredictorSp=true)",
+        "i4fFrozenPredictorSp": true,
+        "i4fFullPressureAudit": false,
+        "nOuterCorrectors": 8,
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "transonic": true,
+        "binary_sha256_recorded_in_launch": "23743d676c20afaf80afaaa098237c9069fcd8d1e12dcd74955ca586a2c382ef",
+        "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "initial_state_description": "Original campaign t=0 state used 1.35 m3 water per tank and initially air-filled downstream passages. This stage itself starts from the complete native checkpoint identified in start; it is a checkpoint restart, not a fresh cold start."
+      },
+      "endpoint": {
+        "time_s": 0.396174757798,
+        "completed_steps": 1094,
+        "guard_status": "normal_End_complete_native10_checkpoint",
+        "guard_write_now_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+        "stop_class": "persistent_final_outer_pressure_update",
+        "native_checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/case/processors10/0.396174757798",
+        "native_checkpoint_complete": true,
+        "native_checkpoint_fields": [
+          "T",
+          "T.air",
+          "T.water",
+          "U",
+          "alpha.water",
+          "alphaPhi0.water",
+          "alphat",
+          "k",
+          "nut",
+          "omega",
+          "p",
+          "p_rgh",
+          "phi",
+          "rho"
+        ],
+        "normal_solver_End": true
+      },
+      "pressure_floor_diagnostic": {
+        "configured_floor_Pa": 10000.0,
+        "raw_contact_count": 0,
+        "first_raw_contact": null,
+        "maximum_clipped_liquid_event": null,
+        "runwide_minimum_raw_contact_pressure_Pa": null,
+        "runwide_minimum_raw_contact_pressure_unavailable_reason": "No raw pressure-floor contacts were recorded; there is no contact-event minimum.",
+        "terminal_step_raw_minimum_pressure_Pa": 91736.149,
+        "terminal_saved_field_minimum_pressure_Pa": 91787.434,
+        "liquid_support_in_pressure_contact_cells_kg": 0.0,
+        "liquid_support_mass_source_field_name": "maximum_clipped_liquid_mass_kg",
+        "liquid_support_semantics": "Liquid support mass/volume in cells whose raw pressure was at or below the configured floor. This is not water removed, clipped from alpha, or a phase-ledger loss."
+      },
+      "outer_iteration_updates": {
+        "final": {
+          "time_s": 0.396174757798,
+          "max_abs_dp_Pa": 100.23827,
+          "max_abs_dU_m_s": 0.41703258,
+          "outer_iteration": 8752
+        },
+        "penultimate": {
+          "time_s": 0.396174757798,
+          "max_abs_dp_Pa": 103.07702,
+          "max_abs_dU_m_s": 0.42879251,
+          "outer_iteration": 8751
+        },
+        "interpretation": "Guard-observed outer-to-outer changes; a stop diagnostic, not a complete nonlinear residual or validation metric."
+      },
+      "phase_mass_ledger": {
+        "initial_water_mass_kg": 3196.402097034156,
+        "initial_gas_mass_kg": 33.8803714735504,
+        "cumulative_water_defect_kg": 0.036240614951566386,
+        "cumulative_gas_defect_kg": 0.0015036709331032647,
+        "water_defect_fraction_of_initial": 1.133793992476508e-05,
+        "gas_defect_fraction_of_initial": 4.438177232729414e-05,
+        "qualification": "Cumulative phase-ledger diagnostics carried from the campaign t=0 seed; not acceptance tolerances or proof of local conservation.",
+        "initial_inventory_difference_vs_corrected_flush_reference": {
+          "reference_run_key": "corrected_flush_rhoConst_two_pressure_correctors_recovery2",
+          "water_mass_delta_kg": 2.7156720534549095e-06,
+          "gas_mass_delta_kg": 0.0038054012431203432,
+          "qualification": "Difference from the corrected 299214-cell flush reference's t=0 campaign inventory. For other meshes this is a discretization/state difference, not a conservation defect."
+        }
+      },
+      "interpretation": {
+        "diagnostic_gate": "failed",
+        "diagnostic_gate_reason": "persistent_final_outer_pressure_update",
+        "physical_cavitation_claim": false,
+        "physical_discharge_validation_claim": false,
+        "qualification": "Exploratory numerical outcomes only. A negative raw pressure before floor clipping is a solver-floor diagnostic, not evidence of physical cavitation."
+      },
+      "provenance": {
+        "input_freeze_sha256_recorded_in_launch": "95e3028e8803f734f91d19dc4e356aff0b9d5d0df6b33560fe5460a02a68d906",
+        "static_case_tree_sha256_recorded_in_launch": "266d773d1b855f2b722c80fab639df117cfb230eb442c0dd5fc9875cfea25d45",
+        "static_input_tree_sha256_recorded_in_launch": "2feb55d0329610ca3b8543010b2117883060bcd19b7eace489b9ce8a407f4349",
+        "guard_source_sha256_recorded_in_launch": "c96a8e8c086029003edbd5e6ae7eb32f118f7a4b9b6756437a427f529ac54707",
+        "binary_sha256_recorded_in_launch": "23743d676c20afaf80afaaa098237c9069fcd8d1e12dcd74955ca586a2c382ef",
+        "mesh_metadata_reference": "results/runs/i4f-local2x-outlet-bend-prep-20261025T193425Z/attempt-snappy-region-x4/canonical/analysis/final-canonical-mesh-audit.json",
+        "source_metadata_hashes": [
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/experiment.json",
+            "sha256": "f6dfb0f65010b8cb2ba8e481f9752e6953119be7f0ecfaa585bf652e1d1b20bc",
+            "bytes": 5041
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/launch-manifest.json",
+            "sha256": "c35410210d57803fd8b58976e0a6b02944c0aa6558627fb41b9d9dbe17c88a09",
+            "bytes": 6522
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/guardian-status.json",
+            "sha256": "8e9c6e7c77ef7cba57ba614a3a996188af014107134350c52d1913efd22d5e4f",
+            "bytes": 12348
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/guard.py",
+            "sha256": "c96a8e8c086029003edbd5e6ae7eb32f118f7a4b9b6756437a427f529ac54707",
+            "bytes": 38887
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/input-freeze.json",
+            "sha256": "95e3028e8803f734f91d19dc4e356aff0b9d5d0df6b33560fe5460a02a68d906",
+            "bytes": 24216
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/case/system/controlDict",
+            "sha256": "c90e25ee44604dcec0dee2822e661a72bfd58b4a6df410211f472e6f235fda93",
+            "bytes": 769
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/case/system/fvSolution",
+            "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+            "bytes": 1920
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/stage.json",
+            "sha256": "adeb4f2aa4694803be5a383b6271f506cd496b6e670f97415d9326ca9ab8a0ea",
+            "bytes": 4466
+          },
+          {
+            "path": "results/runs/i4f-local2x-outlet-bend-prep-20261025T193425Z/attempt-snappy-region-x4/canonical/analysis/final-canonical-mesh-audit.json",
+            "sha256": "a697a2063bd50270d00bbb25109727838a86717eada9cf34ba21578e48a9b918",
+            "bytes": 14398
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3/experiment.json",
+            "sha256": "2a74b14861388abfdcc063e6a4aa614b0133f05805cd4f165f1b0237c0e771cd",
+            "bytes": 5018
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3/launch-manifest.json",
+            "sha256": "f9272631dd22a14fd7cb9873f19670826989b5818db3a0d8437abf7a9f7fa047",
+            "bytes": 14446
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3/guardian-status.json",
+            "sha256": "c1b0e8317107b139155e6cdaeeb2f8a8408e7cd692cf6f68fed99f63a6975b58",
+            "bytes": 12174
+          },
+          {
+            "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3/stage.json",
+            "sha256": "5d65f546374998f520e3031230085ef7ce659d4be526d4b321f72d7a522c88b5",
+            "bytes": 4445
+          }
+        ],
+        "solver_log_not_rehashed": {
+          "path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage06-resource-save-recovery3/case/log.cold-coupled",
+          "reason": "The compact outcome is sourced from the saved guardian, terminal, experiment, case-dictionary, and mesh metadata; the large solver log was not rescanned for this table."
+        }
+      }
+    }
+  ]
+}

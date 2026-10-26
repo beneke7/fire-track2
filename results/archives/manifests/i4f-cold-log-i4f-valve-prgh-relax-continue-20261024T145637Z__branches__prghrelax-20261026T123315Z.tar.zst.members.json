@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 408054,
+    "path": "results/archives/i4f-cold-log-i4f-valve-prgh-relax-continue-20261024T145637Z__branches__prghrelax-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-valve-prgh-relax-continue-20261024T145637Z__branches__prghrelax-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "e1d0b63f575d593a8bbc70b93013f4843888fb83d91661900ff6c59e848d6e4c"
+  },
+  "created_utc": "2026-10-26T12:34:04.837374+00:00",
+  "members": [
+    {
+      "bytes": 5391718,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792853993349337726,
+      "path": "results/runs/i4f-valve-prgh-relax-continue-20261024T145637Z/branches/prghrelax/case/log.cold-coupled",
+      "run_bundle": "i4f-valve-prgh-relax-continue-20261024T145637Z/branches/prghrelax",
+      "sha256": "b46e49b1e94f4b11efa90eb29ae3f886f3eaa4964fc5d237ce04317179db6830",
+      "source_inode": {
+        "device": 66306,
+        "inode": 185599489
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30589353984,
+    "free_before_archive_bytes": 30584422400,
+    "net_bytes_reclaimed": 4931584,
+    "removed_bytes": 5391718,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

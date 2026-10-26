@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 3617160,
+    "path": "results/archives/i4f-cold-log-i4f-short1-valve-wetside-source-20261025T1636Z-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-short1-valve-wetside-source-20261025T1636Z-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "4d2d8ad75f881ee6c19034031047731583e8bd638f20c9648effd6ee7facdf29"
+  },
+  "created_utc": "2026-10-26T12:33:47.126001+00:00",
+  "members": [
+    {
+      "bytes": 53319944,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792947359359116035,
+      "path": "results/runs/i4f-short1-valve-wetside-source-20261025T1636Z/case/log.cold-coupled",
+      "run_bundle": "i4f-short1-valve-wetside-source-20261025T1636Z",
+      "sha256": "bd89137efc9c0ff00934e36a15324218db17e929039f0d54dda7abcc1fa6a2e9",
+      "source_inode": {
+        "device": 66306,
+        "inode": 186002565
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30103302144,
+    "free_before_archive_bytes": 30053715968,
+    "net_bytes_reclaimed": 49586176,
+    "removed_bytes": 53319944,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

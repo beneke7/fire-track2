@@ -1,0 +1,45 @@
+{
+  "archive": {
+    "bytes": 2714322,
+    "path": "results/archives/i4f-cold-log-i4f-slow-pulse-outer-pair-20261024T123127Z__branches__outer8-20261026T123315Z.tar.zst",
+    "restore_command": "zstd -dc results/archives/i4f-cold-log-i4f-slow-pulse-outer-pair-20261024T123127Z__branches__outer8-20261026T123315Z.tar.zst | tar -x -C /home/v/proj/bene/fire-track2",
+    "sha256": "7a9a4643df2aaffc7e5a809b7e113ba6d2f127d6bbdc08b9e010a1f8149e2564"
+  },
+  "created_utc": "2026-10-26T12:33:53.644266+00:00",
+  "members": [
+    {
+      "bytes": 38902517,
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1792845839414217577,
+      "path": "results/runs/i4f-slow-pulse-outer-pair-20261024T123127Z/branches/outer8/case/log.cold-coupled",
+      "run_bundle": "i4f-slow-pulse-outer-pair-20261024T123127Z/branches/outer8",
+      "sha256": "4a1a1b73e0529ba0dc7a761ce430c058eb43cb654f66c3028bb35150411f7d22",
+      "source_inode": {
+        "device": 66306,
+        "inode": 185500219
+      },
+      "source_link_count": 1,
+      "type": "regular file",
+      "uid": 1000
+    }
+  ],
+  "schema": "i4f-cold-coupled-log-archive-members/v1",
+  "scope_note": "No native checkpoints, scalar histories, dictionaries, solver source, new EOS/control/HALFDT families, active/current source/predecessor/ancestor logs, or other projects were included.",
+  "source_removal": {
+    "free_after_source_removal_bytes": 30372577280,
+    "free_before_archive_bytes": 30336475136,
+    "net_bytes_reclaimed": 36102144,
+    "removed_bytes": 38902517,
+    "removed_file_count": 1,
+    "status": "removed only after decompressed archive and source-stability verification"
+  },
+  "source_type": "closed inactive case/log.cold-coupled text file",
+  "verification": {
+    "decompressed_byte_count_and_sha256_match": true,
+    "member_count": 1,
+    "mode_uid_gid_mtime_match": true,
+    "single_regular_member": true,
+    "zstd_integrity_check": "passed"
+  }
+}

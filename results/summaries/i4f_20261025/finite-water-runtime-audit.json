@@ -1,0 +1,368 @@
+{
+  "analysis_script_sha256": "84877b47686233a0e1560c08d4ecde0e7ebd834d83ac99530f95f20b8f29fc67",
+  "created_utc": "2026-10-26T12:14:42.183835+00:00",
+  "definition": {
+    "air_R_J_kgK": 287.047490982475,
+    "alpha_clipped": false,
+    "gas_mass": "sum((1-alpha.water) * p/(R_air*T.air) * native cellVolume), raw alpha retained",
+    "mixture_rho_check": "compare saved rho to alpha*rho_water+(1-alpha)*rho_air",
+    "water_density": "rho0*((p+B)/(p0+B))^(1/gamma), exact audited adiabaticPerfectFluid law",
+    "water_mass": "sum(alpha.water * rho_water(p) * native cellVolume), raw alpha retained; p is absolute solver p",
+    "water_psi": "rho0/[gamma*(p0+B)]*((p+B)/(p0+B))^(1/gamma-1), kg m^-3 Pa^-1"
+  },
+  "guard_phase_ledger": {
+    "finite_eos": {
+      "completed_steps": 212,
+      "container_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+      "cumulative_defect_fraction_initial": {
+        "gas": -9.3024567442968e-08,
+        "water": 5.0145757670229977e-08
+      },
+      "cumulative_gas_defect_kg": -3.1513529053295095e-06,
+      "cumulative_water_defect_kg": 0.00016036655279094703,
+      "diagnostic_errors": [],
+      "docker_started_at": "2026-10-26T11:16:19.903650119Z",
+      "final_min_pressure_Pa": 98602.5339303528,
+      "gas_boundary_flux_kg_s": 0.2551549328882722,
+      "gas_inventory_kg": 33.86470741715688,
+      "initial_gas_kg": 33.87656607230728,
+      "initial_water_kg": 3198.008370828781,
+      "last_step_min_T_K": 291.5159445536468,
+      "maximum_clipped_liquid_mass_kg": 0.0,
+      "native_checkpoint": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/0.050021166664",
+      "native_minus_guard_inventory_kg": {
+        "gas": 3.033705045396573e-05,
+        "water": 2.0463630789890885e-11
+      },
+      "raw_pressure_contact_count": 0,
+      "status": "normal_End_complete_native10_checkpoint",
+      "time_s": 0.050021166664,
+      "water_boundary_flux_kg_s": 3.847538932791018e-23,
+      "water_inventory_kg": 3198.008531195334
+    },
+    "rho_const": {
+      "completed_steps": 212,
+      "container_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+      "cumulative_defect_fraction_initial": {
+        "gas": -8.324041829711268e-08,
+        "water": -1.8238835358637821e-07
+      },
+      "cumulative_gas_defect_kg": -2.819899530328633e-06,
+      "cumulative_water_defect_kg": -0.0005829865153827996,
+      "diagnostic_errors": [],
+      "docker_started_at": "2026-10-26T11:36:57.278019383Z",
+      "final_min_pressure_Pa": 98636.26157558628,
+      "gas_boundary_flux_kg_s": 0.209989769080659,
+      "gas_inventory_kg": 33.86475150624078,
+      "initial_gas_kg": 33.87656607230728,
+      "initial_water_kg": 3196.402094318484,
+      "last_step_min_T_K": 291.5094204946203,
+      "maximum_clipped_liquid_mass_kg": 0.0,
+      "native_checkpoint": "/home/v/proj/bene/fire-track2/results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/case/processors10/0.050021166664",
+      "native_minus_guard_inventory_kg": {
+        "gas": 3.0337089988563548e-05,
+        "water": -1.0459189070388675e-11
+      },
+      "raw_pressure_contact_count": 0,
+      "status": "normal_End_complete_native10_checkpoint",
+      "time_s": 0.050021166664,
+      "water_boundary_flux_kg_s": 7.566637656586638e-23,
+      "water_inventory_kg": 3196.401511331969
+    }
+  },
+  "input_model": {
+    "control_container_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+    "finite_eos_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "finite_eos_parameters": {
+      "B_Pa": 306667767.13022316,
+      "Cp_J_kgK": 4182.0,
+      "Cp_over_Cv_expected": 1.0,
+      "Cv_expected_J_kgK": 4182.0,
+      "gamma_exponent": 7.15,
+      "p0_Pa": 100000.0,
+      "qualification": "Cp is configured; Cv and ratio are the hConst sensibleInternalEnergy expectation recorded in EOS application audit, not separately printed by solver.",
+      "rho0_kg_m3": 998.2
+    },
+    "finite_eos_runtime_selection_log": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/log.cold-coupled; Selecting thermodynamics package: heRhoThermo, pureMixture, hConst, adiabaticPerfectFluid, sensibleInternalEnergy",
+    "finite_eos_water_dictionary_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+    "frozen_provenance_hashes": {
+      "eos_application_audit_sha256": "bf69b4d828b2d4b4680808e33d9271512c3a205b328509bcec07a22c3bf24e83",
+      "input_freeze_sha256": "45f97e138be339e262c911361800f124f5ff30f7029e5437a7ecf2f3e5f46d41",
+      "run_source_lock_sha256": "0dab6880e271b3054ac53405171908a6f590f00680beb6596d946ec11d4fab9f",
+      "startup_log_path": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/log.cold-coupled"
+    },
+    "openfoam_image_digest": "sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "pilot_container_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+    "readiness_record_sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+    "rho_const_runtime_selection_log": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/case/log.cold-coupled; same model with rhoConst water EOS",
+    "rho_const_water_dictionary_sha256": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "runtime_selection_excerpt": {
+      "finite_eos": [
+        "Selecting thermodynamics package",
+        "{",
+        "    type            heRhoThermo;",
+        "    mixture         pureMixture;",
+        "    transport       const;",
+        "    thermo          hConst;",
+        "    equationOfState adiabaticPerfectFluid;",
+        "    specie          specie;",
+        "    energy          sensibleInternalEnergy;",
+        "}",
+        "Selecting thermodynamics package",
+        "{",
+        "    type            heRhoThermo;",
+        "    mixture         pureMixture;",
+        "    transport       const;",
+        "    thermo          hConst;",
+        "    equationOfState perfectGas;",
+        "    specie          specie;",
+        "    energy          sensibleInternalEnergy;",
+        "}"
+      ],
+      "rho_const": [
+        "Selecting thermodynamics package",
+        "{",
+        "    type            heRhoThermo;",
+        "    mixture         pureMixture;",
+        "    transport       const;",
+        "    thermo          hConst;",
+        "    equationOfState rhoConst;",
+        "    specie          specie;",
+        "    energy          sensibleInternalEnergy;",
+        "}",
+        "Selecting thermodynamics package",
+        "{",
+        "    type            heRhoThermo;",
+        "    mixture         pureMixture;",
+        "    transport       const;",
+        "    thermo          hConst;",
+        "    equationOfState perfectGas;",
+        "    specie          specie;",
+        "    energy          sensibleInternalEnergy;",
+        "}"
+      ]
+    }
+  },
+  "limitations": [
+    "Runtime selection is established by OpenFOAM startup log package selection; EOS and mixture inventories are independently recomputed from saved p, alpha, T.air, and native V, not from a saved psi field.",
+    "The diagnostic is not validation of this provisional barotropic liquid model or full water thermodynamics.",
+    "The rhoConst continuation did not launch successfully; comparison uses its completed uninterrupted cold pilot at exactly the same saved time, not matched longer trajectories.",
+    "The EOS stage01 is still live; the included guardian status is a read-only snapshot at the stated current time."
+  ],
+  "live_stage01_guard_read": {
+    "actual_docker_inspect": "running true 2026-10-26T11:24:24.947464278Z",
+    "completed_steps": 1209,
+    "container_id": "41ebc8ea6318513c66b14670dffd6198540600342ad97a170821a63d640b1a1e",
+    "cumulative_defect_fraction_initial": {
+      "gas": -6.117729996154608e-06,
+      "water": 1.64442181773007e-05
+    },
+    "cumulative_gas_defect_kg": -0.0002072476844272677,
+    "cumulative_water_defect_kg": 0.05258874738274244,
+    "current_deltaT_s": 0.0001958813641125727,
+    "current_time_s": 0.343480820489,
+    "diagnostic_errors": [],
+    "docker_started_at": "2026-10-26T11:24:24.947464278Z",
+    "guardian_status_sha256": "8d242eaad9944941c472ff15c8c754deaf17ceddda6adb6cd21fa560340d836f",
+    "initial_gas_kg": 33.87656607230728,
+    "initial_water_kg": 3198.008370828781,
+    "latest_phase_mass": {
+      "gas_flux_kg_s": 2.161339424620839,
+      "gas_kg": 33.5581940495986,
+      "pass": 19346,
+      "time_s": 0.343480820489,
+      "water_flux_kg_s": 7.732210666906765e-23,
+      "water_kg": 3198.060964384931
+    },
+    "maximum_clipped_liquid_mass_kg": 0.0,
+    "qualification": "Read-only guardian-status.json at audit time; not an endpoint and no mutable newest fields read.",
+    "raw_pressure_contact_count": 0,
+    "runtime_selection_excerpt": [
+      "Selecting thermodynamics package",
+      "{",
+      "    type            heRhoThermo;",
+      "    mixture         pureMixture;",
+      "    transport       const;",
+      "    thermo          hConst;",
+      "    equationOfState adiabaticPerfectFluid;",
+      "    specie          specie;",
+      "    energy          sensibleInternalEnergy;",
+      "}",
+      "Selecting thermodynamics package",
+      "{",
+      "    type            heRhoThermo;",
+      "    mixture         pureMixture;",
+      "    transport       const;",
+      "    thermo          hConst;",
+      "    equationOfState perfectGas;",
+      "    specie          specie;",
+      "    energy          sensibleInternalEnergy;",
+      "}"
+    ],
+    "status": "running",
+    "water_thermo_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+  },
+  "matched_comparison": {
+    "finite_eos": {
+      "case": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case",
+      "cell_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+      "cell_count": 299214,
+      "computed_phase_density_kg_m3": {
+        "air_max": 14.11689183859223,
+        "air_min": 1.1731265901957384,
+        "water_max": 998.6943473157284,
+        "water_min": 998.1994204545696
+      },
+      "global_volume_sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+      "initial_thermo_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+      "mixture_density_formula_note": "rho field is solver-written; formula reconstructed from logged thermophysical selection and native p/T/alpha.",
+      "native_T_K": {
+        "air_T_max": 293.6514958555018,
+        "air_T_min": 291.51594455364676,
+        "common_T_max": 293.6514958555018,
+        "common_T_min": 291.51594455364676,
+        "max_abs_T_minus_Tair_K": 5.684341886080802e-14
+      },
+      "native_checkpoint_complete_fields": [
+        "T",
+        "T.air",
+        "T.water",
+        "U",
+        "alpha.water",
+        "alphaPhi0.water",
+        "alphat",
+        "k",
+        "nut",
+        "omega",
+        "p",
+        "p_rgh",
+        "phi",
+        "rho"
+      ],
+      "native_p_Pa": {
+        "max": 1187907.0966953675,
+        "min": 98726.54116128282
+      },
+      "native_rho_kg_m3": {
+        "max": 998.694347315726,
+        "min": 1.1838085256099042
+      },
+      "native_rho_vs_phase_mixture": {
+        "max_abs_kg_m3": 1.259804563069622e-05,
+        "volume_weighted_rms_kg_m3": 2.115884865025323e-06
+      },
+      "native_total_cell_volume_m3": 25.141766918909596,
+      "raw_alpha": {
+        "max": 1.0000000000000788,
+        "min": -9.405590195576932e-14,
+        "outside_unit_interval_cells": 162727
+      },
+      "reconstructed_inventory_kg": {
+        "gas": 33.86473775420733,
+        "water": 3198.0085311953544
+      },
+      "time_field_sha256": {
+        "T": "88f40800a5b57f0493fe508ceffd9de6a27c3c9f4b732e2cee2e374f5c9ff49e",
+        "T.air": "e4984170180aebac2930eb06a1ce64d2251c647416e736c6949b4910d930f9b5",
+        "alpha.water": "fa732f764ef5b9bbecd3ad606201540c56ec118f6387424abc748e9a74458133",
+        "p": "2ea51239f7d33e32c001906b458bf542ab4dc78c16c3a5d4c46531936d9971b2",
+        "rho": "9fa5282a93efa1643ed758ef4e04042d23a5114b8d2872ed62020a2b5f2d520a"
+      },
+      "uniform_time": {
+        "sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+        "value_s": 0.050021166664044305
+      },
+      "water_psi_kg_m3_Pa": {
+        "all_finite_positive": true,
+        "max": 4.5509634667806446e-07,
+        "min": 4.5371108212919736e-07
+      }
+    },
+    "rho_const": {
+      "case": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/case",
+      "cell_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+      "cell_count": 299214,
+      "computed_phase_density_kg_m3": {
+        "air_max": 14.115707417448453,
+        "air_min": 1.1735306547044115,
+        "water_max": 998.2,
+        "water_min": 998.2
+      },
+      "global_volume_sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+      "initial_thermo_sha256": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+      "mixture_density_formula_note": "rho field is solver-written; formula reconstructed from logged thermophysical selection and native p/T/alpha.",
+      "native_T_K": {
+        "air_T_max": 296.1975593886482,
+        "air_T_min": 291.50942049462026,
+        "common_T_max": 296.1975593886482,
+        "common_T_min": 291.50942049462026,
+        "max_abs_T_minus_Tair_K": 5.684341886080802e-14
+      },
+      "native_checkpoint_complete_fields": [
+        "T",
+        "T.air",
+        "T.water",
+        "U",
+        "alpha.water",
+        "alphaPhi0.water",
+        "alphat",
+        "k",
+        "nut",
+        "omega",
+        "p",
+        "p_rgh",
+        "phi",
+        "rho"
+      ],
+      "native_p_Pa": {
+        "max": 1187807.3978204979,
+        "min": 98760.47355395241
+      },
+      "native_rho_kg_m3": {
+        "max": 998.2000000006155,
+        "min": 1.1742699025653651
+      },
+      "native_rho_vs_phase_mixture": {
+        "max_abs_kg_m3": 1.2597343502562808e-05,
+        "volume_weighted_rms_kg_m3": 2.115843142085317e-06
+      },
+      "native_total_cell_volume_m3": 25.141766918909596,
+      "raw_alpha": {
+        "max": 1.0000000000006173,
+        "min": -7.088790166843792e-14,
+        "outside_unit_interval_cells": 42594
+      },
+      "reconstructed_inventory_kg": {
+        "gas": 33.86478184333077,
+        "water": 3196.4015113319583
+      },
+      "time_field_sha256": {
+        "T": "4689d1d17e1ff6da1b540a63214bbfa0925c9ee56099ad98ca752160212ea4ef",
+        "T.air": "fec3bad1ecd6607ca3e01f42da8838d5105048afcff4cfa56f1f14c48bed0e2d",
+        "alpha.water": "70cec22678e68f35a6485c8e92b798e7982b2ee3fac382eade95cbfc6925e7ac",
+        "p": "7e76bd2943584efe31d270dec818c029d24d6b422d7ee45e9e33e693ba47839a",
+        "rho": "4b267310edd355f6878010e0b5d3d1753ef84f5cd5fc406c57d4a1e0ed0d4529"
+      },
+      "uniform_time": {
+        "sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+        "value_s": 0.050021166664044305
+      },
+      "water_psi_kg_m3_Pa": null
+    }
+  },
+  "matched_comparison_summary": {
+    "native_gas_mass_difference_finiteEOS_minus_rhoConst_kg": -4.4089123434787325e-05,
+    "native_rho_reconstruction_max_abs_kg_m3": {
+      "finite_eos": 1.259804563069622e-05,
+      "rho_const": 1.2597343502562808e-05
+    },
+    "native_water_mass_difference_finiteEOS_minus_rhoConst_kg": 1.60701986339609,
+    "same_exact_saved_time": true,
+    "same_mesh_addressing": true,
+    "same_native_volume_hash": true,
+    "time_offset_s": 0.0,
+    "water_inventory_difference_reconstruction_vs_guard_max_abs_kg": 2.0463630789890885e-11
+  },
+  "schema": "i4f-eos-runtime-audit/v1",
+  "snapshot_time_s": 0.050021166664
+}

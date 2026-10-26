@@ -54,6 +54,36 @@ def test_oblique_direction_angle_and_momentum_are_analytic() -> None:
     assert metrics["outward_direction_resultant_angle_deg"] == pytest.approx(60.0)
 
 
+def test_per_face_density_weights_mass_and_reconstructed_momentum() -> None:
+    metrics = outlet_secondary_metrics(
+        water_volume_flux_m3_s=np.asarray([2.0, -1.0]),
+        velocity_face_xyz_m_s=np.asarray([[1.0, 0.0, 0.0], [-2.0, 0.0, 0.0]]),
+        projected_area_m2=np.asarray([1.0, 3.0]),
+        outlet_normal_unit_xyz=np.asarray([1.0, 0.0, 0.0]),
+        water_density_kg_m3=np.asarray([1000.0, 500.0]),
+    )
+
+    assert metrics["water_density_model"] == "per_face"
+    assert metrics["water_density_face_min_kg_m3"] == 500.0
+    assert metrics["water_density_face_max_kg_m3"] == 1000.0
+    assert metrics["water_density_face_area_weighted_mean_kg_m3"] == pytest.approx(625.0)
+    assert metrics["water_mass_flux_net_kg_s"] == pytest.approx(1500.0)
+    assert metrics["water_mass_flux_outward_kg_s"] == pytest.approx(2000.0)
+    assert metrics["water_mass_flux_reverse_magnitude_kg_s"] == pytest.approx(500.0)
+    assert metrics["water_momentum_flux_net_reconstructed_N_xyz"] == pytest.approx(
+        [3000.0, 0.0, 0.0]
+    )
+    assert metrics["water_momentum_flux_outward_reconstructed_N_xyz"] == pytest.approx(
+        [2000.0, 0.0, 0.0]
+    )
+    assert metrics["water_momentum_flux_reverse_signed_reconstructed_N_xyz"] == pytest.approx(
+        [1000.0, 0.0, 0.0]
+    )
+    # Direction statistics remain weighted by native positive liquid q,
+    # independent of the density variation.
+    assert metrics["outward_direction_mean_angle_deg_q_weighted"] == pytest.approx(0.0)
+
+
 def test_momentum_resultant_is_speed_weighted_and_differs_from_direction_statistics() -> None:
     metrics = outlet_secondary_metrics(
         water_volume_flux_m3_s=np.asarray([1.0, 1.0]),
@@ -256,4 +286,20 @@ def test_empty_and_invalid_inputs() -> None:
             projected_area_m2=np.ones(1),
             outlet_normal_unit_xyz=np.asarray([1.0, 0.0, 0.0]),
             alpha_water_face_raw=np.asarray([np.inf]),
+        )
+    with pytest.raises(ValueError, match="per-face water density must have shape"):
+        outlet_secondary_metrics(
+            water_volume_flux_m3_s=np.asarray([1.0, 1.0]),
+            velocity_face_xyz_m_s=np.zeros((2, 3)),
+            projected_area_m2=np.ones(2),
+            outlet_normal_unit_xyz=np.asarray([1.0, 0.0, 0.0]),
+            water_density_kg_m3=np.asarray([998.2]),
+        )
+    with pytest.raises(ValueError, match="water density must be finite and positive"):
+        outlet_secondary_metrics(
+            water_volume_flux_m3_s=np.asarray([1.0]),
+            velocity_face_xyz_m_s=np.zeros((1, 3)),
+            projected_area_m2=np.ones(1),
+            outlet_normal_unit_xyz=np.asarray([1.0, 0.0, 0.0]),
+            water_density_kg_m3=np.asarray([0.0]),
         )

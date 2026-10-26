@@ -14,6 +14,50 @@ the new hardware case includes both tanks and all four outlets.
 
 ## Current scientific result
 
+**Latest outcome:** the finite-water cold test also contacted the pressure
+floor: one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields
+at .410223 s; final minimum pressure recovered to 85.499 kPa and the pressure
+update to .160 Pa, but this does not undo the floor event. Liquid support in
+the affected cells was .019267 kg, not removed water mass. The hypothesis that
+finite water pressure storage alone would resolve the failure is therefore
+unsupported. The smaller-timestep cold test is now running alongside the new
+constant-density control. A first complete credible discharge remains pending.
+
+As of 26 October, the corrected-junction constant-density cold trajectory
+reached a raw pressure-floor failure at .434224 s after an operational restart
+from .413689 s. Two intermediate pressure corrections alternated between
+positive pressure and negative pressure down to -330.889 kPa. Reducing the
+pressure correctors from two to one avoided floor contact in that short trial
+but stopped at .440686 s with persistent 7.78 kPa pressure and 8.10 m/s velocity
+updates. The tank-interface-refined case similarly stopped at .445301 s with
+3.00 kPa pressure updates. These are unresolved numerical failures, not physical
+cavitation or trustworthy discharge results.
+
+The next controlled comparison starts both cases from their own cold initial
+state on the same corrected 299,214-cell mesh. One retains constant-density
+water; the other uses the explicitly provisional
+[finite-compressibility water packet](../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json).
+Its reference sound speed is 1482.344 m/s at 293.15 K and 0.1 MPa, evaluated
+from the linked IAPWS release. The pressure exponent 7.15 is assumed; this
+barotropic water law with constant heat capacity is not a full IAPWS thermal
+model or a validated high-pressure material description. The cold initial
+water volumes match, while the EOS changes total initial water mass by
++1.6063 kg; pressure relative to hydrostatic head is initialized consistently.
+Both use two pressure correctors, eight outer iterations and the same solver
+binary, turbulence and phase-source treatment. Normal .05 s pilot continuations
+are planned for both; the new control avoids the earlier parser-induced .413 s
+restart. See [live status](STATUS.md) for actual execution rather than treating
+this frozen preparation packet as a runtime report.
+
+The [guard-parser repair evidence](../results/summaries/i4f_20261025/parser-merge-replay.json)
+recovers an MPI-interleaved terminal record without changing the equations or
+health thresholds. Its full-log replay parses all 1,644 completed steps.
+One recovered step still had a 3.45 kPa outer update, so successful parsing does
+not establish nonlinear convergence. Native outlet postprocessing now supports
+phase-water density from either selected EOS; native water-volume flux remains
+primary, while mass and momentum reconstructed from separately saved fields
+retain their stage-matching qualification.
+
 The latest user confirmation changes the physical baseline: the passages
 downstream of the valves initially contain air. Earlier liquid-filled-line
 calculations below are conditional initial-state/numerical evidence, not the
@@ -81,9 +125,10 @@ is -1.012 L downstream of the valves; under the confirmed dry startup it changes
 ambient-air storage. The [matched geometry sections](../results/summaries/i4f_20261025/pipe-transition-join-comparison.png)
 and [record](../results/summaries/i4f_20261025/pipe-transition-join-summary.json)
 establish a geometry correction, not its role in the pressure failures or a CFD
-improvement. A separate 299,214-cell corrected-junction cold trajectory is
-running with the standard phase-source update. The 881,431-cell bend/outlet
-refinement retains the older geometry and frozen source; their differences
+improvement. The earlier 299,214-cell corrected-junction cold trajectory used the standard
+phase-source update and subsequently failed as described above. The older
+881,431-cell bend/outlet refinement retained the overlapping geometry and frozen
+source; it stopped at .396175 s on the persistent-update screen. These cases
 must not be interpreted as a single-factor comparison.
 
 At matched .050021 s, the finer corrected-source case withdraws 4.59423 L

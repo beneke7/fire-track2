@@ -1,0 +1,571 @@
+{
+  "schema": "i4f-finite-eos-raw-pressure-floor-event-review/v1",
+  "created_utc": "2026-10-26T12:49:40.406746+00:00",
+  "classification": "one final pressure-corrector raw-pressure floor contact during the last outer iteration of a single physical step; pressure floor was applied to two almost-pure-water cells; following physical steps and saved endpoint are positive-pressure/no-contact, but the event is a real clamped algorithm state update and health remains failed",
+  "run": {
+    "bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+    "docker_id": "41ebc8ea6318513c66b14670dffd6198540600342ad97a170821a63d640b1a1e",
+    "docker_started_at": "2026-10-26T11:24:24.947464278Z",
+    "docker_finished_at": "2026-10-26T12:37:33.312906725Z",
+    "exit_code": 0,
+    "terminal_guard_status": "normal_End_complete_native10_checkpoint",
+    "raw_pressure_contact_count_guard": 1,
+    "writeNow_reason": "raw pressure update contacted the configured 10 kPa floor",
+    "target_end_s": 0.46,
+    "actual_endpoint_s": 0.410222565383,
+    "complete_native_checkpoint": "case/processors10/0.410222565383",
+    "completed_steps": 1608,
+    "terminal_step_final_outer": {
+      "max_abs_dT_K": 0.0,
+      "max_abs_dU_m_s": 0.0040682371,
+      "max_abs_dalpha1": 1.914708e-08,
+      "max_abs_dp_Pa": 0.1598114,
+      "max_abs_dphi_m3_s": 1.650008e-05,
+      "max_abs_drho1_kg_m3": 7.2729335e-08,
+      "max_abs_drho2_kg_m3": 1.8992144e-06,
+      "max_rel_dp": 1.5981242e-06,
+      "outer_iteration": 12864,
+      "time_s": 0.410222565383
+    },
+    "terminal_last_step_health": {
+      "coldstart_age_s": 0.3602013987189557,
+      "deltaT_from_printed_times_s": 0.00011232664799998293,
+      "deltaT_logged_s": 0.00011232665,
+      "final_field_min_T_K": 243.79945,
+      "final_field_min_p_Pa": 85499.466,
+      "final_field_min_rho_kg_m3": 1.1818079,
+      "final_min_p_cell": 7440,
+      "final_min_p_location": "4.220497 0.71860126 0.97706896",
+      "final_outer_max_abs_dT_K": 0.0,
+      "final_outer_max_abs_dU_m_s": 0.0040682371,
+      "final_outer_max_abs_dalpha1": 1.914708e-08,
+      "final_outer_max_abs_dp_Pa": 0.1598114,
+      "final_outer_max_abs_dphi_m3_s": 1.650008e-05,
+      "final_outer_max_abs_drho2_kg_m3": 1.8992144e-06,
+      "gas_boundary_flux_kg_s": 2.560898,
+      "gas_cumulative_defect_fraction_initial": 1.2417585721578774e-05,
+      "gas_cumulative_defect_kg": -0.00042066516315560277,
+      "gas_inventory_kg": 33.400585,
+      "gas_step_defect_fraction_initial": 4.402954998466282e-10,
+      "gas_step_defect_kg": 1.4915699591893858e-08,
+      "outer_iteration": 8,
+      "penultimate_outer_max_abs_dT_K": 0.0,
+      "penultimate_outer_max_abs_dU_m_s": 0.0085029399,
+      "penultimate_outer_max_abs_dalpha1": 5.7540934e-08,
+      "penultimate_outer_max_abs_dp_Pa": 0.34107898,
+      "penultimate_outer_max_abs_dphi_m3_s": 1.8331667e-05,
+      "penultimate_outer_max_abs_drho2_kg_m3": 4.0533902e-06,
+      "phase_mass_pass": 25728,
+      "phi_scaled_screen_advisory_pass": null,
+      "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+      "phi_scaled_screen_threshold_m3_s": null,
+      "pressure_update_consecutive_steps": 0,
+      "pressure_update_final_to_penultimate_ratio": 0.46854661052404933,
+      "pressure_update_persistent_condition": false,
+      "pressure_update_ratio_threshold": 0.9,
+      "pressure_update_settled": true,
+      "pressure_update_stop_after_steps": 3,
+      "pressure_update_threshold_Pa": 100.0,
+      "raw_clip_cells_at_peak_single_pass": 0,
+      "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+      "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+      "raw_corrector_min_pressure_Pa_this_step": 85486.293,
+      "time_s": 0.410222565383,
+      "water_boundary_flux_kg_s": -1.011604e-23,
+      "water_cumulative_defect_fraction_initial": 3.768882293068196e-05,
+      "water_cumulative_defect_kg": 0.12052917121900464,
+      "water_inventory_kg": 3198.1289,
+      "water_step_defect_fraction_initial": 3.2428798480472114e-08,
+      "water_step_defect_kg": 0.00010370756899646949
+    }
+  },
+  "event": {
+    "time_s": 0.40999807589,
+    "step_deltaT_s": 0.0001120220986817997,
+    "outer_iteration": 12848,
+    "pressure_pass": 25696,
+    "pass_number_identity": "pass=16*physical_step_index (last of 16 pressure passes at this time)",
+    "precontact_pressure_pass": {
+      "line": 2202782,
+      "time_s_token": "0.40999807589",
+      "time_s": 0.40999807589,
+      "outer": 12848,
+      "pass": 25695,
+      "p_min_Pa": 85906.72278721863,
+      "p_max_Pa": 644238.9081359796,
+      "p_floor_Pa": 10000.0,
+      "below_count": 0,
+      "support_volume_m3": 0.0,
+      "support_mass_kg": 0.0,
+      "local_count_rank0": 0
+    },
+    "contact_pressure_pass": {
+      "line": 2202853,
+      "time_s_token": "0.40999807589",
+      "time_s": 0.40999807589,
+      "outer": 12848,
+      "pass": 25696,
+      "p_min_Pa": -308.2692173341711,
+      "p_max_Pa": 644238.9081346953,
+      "p_floor_Pa": 10000.0,
+      "below_count": 2,
+      "support_volume_m3": 1.930013590994007e-05,
+      "support_mass_kg": 0.01926731709952916,
+      "local_count_rank0": 2
+    },
+    "first_following_pressure_pass": {
+      "line": 2203128,
+      "time_s_token": "0.410110238735",
+      "time_s": 0.410110238735,
+      "outer": 12849,
+      "pass": 25697,
+      "p_min_Pa": 85717.26621679819,
+      "p_max_Pa": 644050.2376479355,
+      "p_floor_Pa": 10000.0,
+      "below_count": 0,
+      "support_volume_m3": 0.0,
+      "support_mass_kg": 0.0,
+      "local_count_rank0": 0
+    },
+    "contact_cells": [
+      {
+        "line": 2202855,
+        "rank_prefix": 0,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 0,
+        "local_cell": 8303,
+        "p_raw_Pa": -308.2692173341711,
+        "p_rgh_Pa": 9139.706408833665,
+        "pMin_Pa": 10000.0,
+        "C_m": [
+          3.43691633892242,
+          -0.3632411156942843,
+          0.9647273685412191
+        ],
+        "V_m3": 9.663700945662352e-06,
+        "alpha_water": 0.9999999994639993,
+        "alpha_air": 5.360006882781931e-10,
+        "T_K": 293.2891590420846,
+        "rho_mix_kg_m3": 998.3093934207432,
+        "rho_water_solver_kg_m3": 998.3093939536709,
+        "rho_air_solver_kg_m3": 4.04247393258678,
+        "U_m_s": [
+          9.200411905885627,
+          -0.4179800903174469,
+          4.008859423587042
+        ],
+        "psi_water_kg_m3_Pa_inv": 4.551757839847882e-07,
+        "psi_air_kg_m3_Pa_inv": 1.187817844898017e-05,
+        "global_cell": 99942,
+        "mapped_global_mesh": {
+          "C_m": [
+            3.4369163389224195,
+            -0.3632411156942843,
+            0.9647273685412191
+          ],
+          "V_m3": 9.663700945662352e-06,
+          "center_abs_diff_m": 4.440892098500626e-16,
+          "volume_abs_diff_m3": 0.0
+        },
+        "saved_endpoint": {
+          "p": 102187.841911917,
+          "p_rgh": 111634.79165780064,
+          "rho": 998.2009949696082,
+          "alpha.water": 0.9999999992952329,
+          "T": 293.2900691620455,
+          "U": [
+            8.800968362148742,
+            -0.01980242585795796,
+            4.074906550460897
+          ],
+          "T.air": 293.2900691620455,
+          "T.water": 293.2900691620455
+        },
+        "floor_pressure_adjustment_Pa": 10308.269217334171,
+        "saved_endpoint_eos_reconstruction": {
+          "rho_water_kg_m3": 998.2009959969257,
+          "psi_water_kg_m3_Pa_inv": 4.552403280632632e-07,
+          "rho_water_law": "rho0*(1+(p-p0)/B)^(1/gamma); p is saved absolute pressure",
+          "rho0_kg_m3": 998.2,
+          "p0_Pa": 100000.0,
+          "B_Pa": 306667767.13022316,
+          "gamma": 7.15,
+          "saved_p_used_Pa": 102187.841911917,
+          "saved_mixture_rho_minus_water_EOS_rho_kg_m3": -1.0273174666508567e-06
+        }
+      },
+      {
+        "line": 2202856,
+        "rank_prefix": 0,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 0,
+        "local_cell": 8402,
+        "p_raw_Pa": 8034.362638879238,
+        "p_rgh_Pa": 17482.84859275339,
+        "pMin_Pa": 10000.0,
+        "C_m": [
+          3.436903971722051,
+          -0.3368483938008978,
+          0.964798521127654
+        ],
+        "V_m3": 9.636434974301912e-06,
+        "alpha_water": 0.9999999994972787,
+        "alpha_air": 5.027213090258442e-10,
+        "T_K": 293.2889950645302,
+        "rho_mix_kg_m3": 998.2896886615938,
+        "rho_water_solver_kg_m3": 998.2896891616815,
+        "rho_air_solver_kg_m3": 3.528315465112155,
+        "U_m_s": [
+          9.155718954266282,
+          0.5521994925762381,
+          4.034223639263831
+        ],
+        "psi_water_kg_m3_Pa_inv": 4.551680512465674e-07,
+        "psi_air_kg_m3_Pa_inv": 1.187818509005667e-05,
+        "global_cell": 100125,
+        "mapped_global_mesh": {
+          "C_m": [
+            3.4369039717220513,
+            -0.33684839380089776,
+            0.964798521127654
+          ],
+          "V_m3": 9.636434974301912e-06,
+          "center_abs_diff_m": 4.440892098500626e-16,
+          "volume_abs_diff_m3": 0.0
+        },
+        "saved_endpoint": {
+          "p": 102085.12264946708,
+          "p_rgh": 111532.7687044004,
+          "rho": 998.200948258501,
+          "alpha.water": 0.9999999993309481,
+          "T": 293.28988405708,
+          "U": [
+            8.786695797315652,
+            0.03213593606289967,
+            4.070874248777079
+          ],
+          "T.air": 293.28988405708,
+          "T.water": 293.28988405708
+        },
+        "floor_pressure_adjustment_Pa": 1965.6373611207619,
+        "saved_endpoint_eos_reconstruction": {
+          "rho_water_kg_m3": 998.2009492349683,
+          "psi_water_kg_m3_Pa_inv": 4.552404592199992e-07,
+          "rho_water_law": "rho0*(1+(p-p0)/B)^(1/gamma); p is saved absolute pressure",
+          "rho0_kg_m3": 998.2,
+          "p0_Pa": 100000.0,
+          "B_Pa": 306667767.13022316,
+          "gamma": 7.15,
+          "saved_p_used_Pa": 102085.12264946708,
+          "saved_mixture_rho_minus_water_EOS_rho_kg_m3": -9.764673905010568e-07
+        }
+      }
+    ],
+    "rank_summaries": [
+      {
+        "line": 2202861,
+        "rank_prefix": 0,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 0,
+        "below": 2,
+        "printed": 2,
+        "omitted": 0
+      },
+      {
+        "line": 2202862,
+        "rank_prefix": 1,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 1,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202863,
+        "rank_prefix": 2,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 2,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202864,
+        "rank_prefix": 3,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 3,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202865,
+        "rank_prefix": 4,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 4,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202866,
+        "rank_prefix": 5,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 5,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202867,
+        "rank_prefix": 6,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 6,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202868,
+        "rank_prefix": 7,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 7,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202857,
+        "rank_prefix": 8,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 8,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      },
+      {
+        "line": 2202858,
+        "rank_prefix": 9,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "rank": 9,
+        "below": 0,
+        "printed": 0,
+        "omitted": 0
+      }
+    ],
+    "global_summary_rows": [
+      {
+        "line": 2202859,
+        "time_s": 0.40999807589,
+        "outer": 12848,
+        "pass": 25696,
+        "below": 2,
+        "printed": 2,
+        "omitted": 0
+      }
+    ],
+    "rank_reconciliation": {
+      "expected_mpi_ranks": 10,
+      "rank_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rank_summary_count": 10,
+      "cell_rows": 2,
+      "global_below": 2,
+      "summed_rank_below": 2,
+      "global_printed": 2,
+      "summed_rank_printed": 2,
+      "global_omitted": 0,
+      "summed_rank_omitted": 0,
+      "all_records_same_explicit_event_key": true,
+      "reconciled": true
+    },
+    "pressure_floor_support_not_removed_mass": {
+      "affected_cell_count": 2,
+      "support_water_volume_m3_from_logged_alpha_rhoV": 1.9300135909940073e-05,
+      "support_liquid_mass_kg_from_logged_alpha_rhoV": 0.019267317099529162,
+      "reported_global_water_volume_m3": 1.930013590994007e-05,
+      "reported_global_water_mass_kg": 0.01926731709952916,
+      "definition": "sum(alpha.water*rho.water*cellVolume) over cells whose raw absolute pressure is below pMin at this corrector; phase amount inside affected cells, not water deleted or clipped from the mesh inventory"
+    },
+    "outer_convergence_context": {
+      "event_outer_update": {
+        "line": 2202930,
+        "time_s": 0.40999807589,
+        "time_s_token": "0.40999807589",
+        "outer": 12848,
+        "max_abs_dp_Pa": 32543.09921733277,
+        "max_abs_dU_m_s": 5.013828139564494,
+        "max_abs_dalpha1": 0.003030276968022272,
+        "max_abs_dT_K": 0.1706096971867055,
+        "max_abs_drho1_kg_m3": 0.01481309695907385,
+        "max_abs_drho2_kg_m3": 0.3865534360925962
+      },
+      "next_saved_step_outer_deltas": [
+        {
+          "line": 2204333,
+          "time_s": 0.410110238735,
+          "time_s_token": "0.410110238735",
+          "outer": 12856,
+          "max_abs_dp_Pa": 0.2873312905721832,
+          "max_abs_dU_m_s": 0.008062376203949886,
+          "max_abs_dalpha1": 3.241980743862172e-07,
+          "max_abs_dT_K": 0.0,
+          "max_abs_drho1_kg_m3": 1.307629418079159e-07,
+          "max_abs_drho2_kg_m3": 3.414650784794304e-06
+        },
+        {
+          "line": 2205700,
+          "time_s": 0.410222565383,
+          "time_s_token": "0.410222565383",
+          "outer": 12864,
+          "max_abs_dp_Pa": 0.1598114,
+          "max_abs_dU_m_s": 0.0040682371,
+          "max_abs_dalpha1": 1.914708e-08,
+          "max_abs_dT_K": 0.0,
+          "max_abs_drho1_kg_m3": 7.2729335e-08,
+          "max_abs_drho2_kg_m3": 1.8992144e-06
+        }
+      ],
+      "reported_terminal_step_and_final_outer_are_later_than_event": true,
+      "interpretation": "the contact occurred on the eighth/last outer iteration of its physical timestep; its outer state delta is still reported separately, while subsequent steps return to positive raw pressure and small terminal outer updates. A small terminal delta does not erase or bound the influence of the earlier clamped update."
+    }
+  },
+  "source_semantics": {
+    "file": "results/runs/i4f-pressure-audit-dpcell-source-prep-20261025T210520Z/source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+    "sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6",
+    "raw_pressure_definition": "p_rgh + (alpha1*rho1 + alpha2*rho2)*gh, computed after the final non-orthogonal pressure solve, before the stock pMin operation",
+    "actual_state_operation": "p = max(raw absolute pressure, pMin); then p_rgh is reconstructed from floored p and hydrostatic term",
+    "equation_source_ranges": {
+      "pre-floor trace": "pEqn.H lines 165-175",
+      "floor and p_rgh reconstruction": "pEqn.H lines 459-461"
+    },
+    "consequence": "this is not a log-only raw diagnostic: at this pressure pass the computed p was floored to 10 kPa and p_rgh updated. It does not directly remove alpha.water or liquid inventory; the logged water mass is affected-cell support. The effect on later coupled updates is not zeroed by the final endpoint settling.",
+    "per_cell_floor_increase_Pa": {
+      "8303": 10308.269217334171,
+      "8402": 1965.6373611207619
+    },
+    "trace_thermo_caveat": "rho1/psi1/rho2/psi2 in CLAMP_TRACE_CELL are the solver coefficients at the trace point, not a separately recomputed EOS evaluation at p_raw. For this solver psi=d(rho)/dp has units kg m^-3 Pa^-1; the trace key's `PaInv` suffix is only a name. The saved endpoint EOS reconstruction is separately evaluated at its actual saved p."
+  },
+  "numerical_scheme_context": {
+    "current_fvSchemes": {
+      "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/system/fvSchemes",
+      "sha256": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+      "div_rhoPhi_U": "Gauss linearUpwind grad(U)",
+      "default_gradient": "Gauss linear (unlimited)",
+      "qualification": "convective momentum interpolation uses linearUpwind with an unlimited linear gradient; this is a plausible numerical sensitivity, not a demonstrated cause of the event"
+    },
+    "existing_upwind_U_trials": [
+      {
+        "bundle": "results/runs/i4f-convection-gradient-pair-20261024T094505Z",
+        "report": "results/runs/i4f-convection-gradient-pair-20261024T094505Z/analysis/pair_metrics.json",
+        "report_sha256": "bf4628748c92cf0ab575b71f2f08c4a487395db48ed0dad049e563fb87067a21",
+        "change": "cell-limit only the grad(U) selector used by div(rhoPhi,U), from a shared 0.31593593 s restart; 146354 cells, 4 ranks, 16 outer correctors",
+        "finding": "the limiter delayed first raw sub-pMin contact by about 0.112 ms (~4 steps) but both branches reached the same clipped-water support stop; the common-time scalar differences were small. This was a different coarse/restarted trajectory, not a direct test of the present cold finite-EOS case"
+      },
+      {
+        "bundle": "results/runs/i4f-transport-order-final-comparison-20261024T035856Z",
+        "report": "results/runs/i4f-transport-order-final-comparison-20261024T035856Z/transport-order-report.json",
+        "report_sha256": "e1f778d5fb6a06bf72477f0ea770ca937e352dbffeb9483f510be4a107aee240",
+        "change": "div(rhoPhi,U) only, linearUpwind to upwind, on a 146354-cell four-rank drained-start case with paired restarts at 0.03 s",
+        "finding": "the scheme arm changed the recorded floor event, but the same-scheme restart control also reached the floor; not the present 299214-cell finite-water-EOS cold-start case"
+      },
+      {
+        "bundle": "results/runs/i4f-postmarker-upwind-native4-20261024T052100Z",
+        "report": "results/runs/i4f-postmarker-upwind-native4-20261024T052100Z/postrun-analysis.json",
+        "report_sha256": "03ae35f29f0408a2b27fd1091ab2ebafb0bae38b7d92753232787d4863aac79f",
+        "change": "four-rank old apparatus upwind restart from 0.41108189 s; upwind floor endpoint at 0.41130064 s, field minimum 10 kPa at (3.11206645,-0.013513506,0.609337065) m",
+        "finding": "floor onset/location is scheme-sensitive in that distinct older case; it does not answer the current cold-start finite-EOS event"
+      }
+    ],
+    "bounded_interpretation": "a one-factor Gauss-upwind div(rhoPhi,U) replay from a clean matched pre-contact checkpoint could test whether this trajectory is scheme-sensitive. Existing upwind evidence is from a different mesh/initialization and is not a direct replication. Such a replay would remain exploratory and would not validate or remove the recorded current floor contact."
+  },
+  "comparisons": {
+    "legacy_299248_rhoConst_around_0p410": {
+      "bundle": "results/runs/i4f-stock-cold-contact-review-20261026T062512Z/analysis/stock-cold-stage03-contact-review.json",
+      "times_s": [
+        0.41005436428
+      ],
+      "raw_minima_Pa": [
+        -9094.778758767421,
+        -80958.65
+      ],
+      "max_single_pass_support_kg": 0.0894731,
+      "qualification": "different mesh/trajectory and rhoConst water; location near x=3.437m line, not matched EOS control"
+    },
+    "corrected_flush_0p434": {
+      "bundle": "results/runs/i4f-flush-0434-floor-review-20261026T101528Z/analysis/floor-event-review-v3.json",
+      "time_s": 0.43406497567,
+      "raw_min_first_pass_Pa": -4636.438,
+      "max_single_pass_support_kg": 0.006117985,
+      "first_event_location_m": [
+        3.815007606,
+        0.486535022,
+        0.710889439
+      ],
+      "qualification": "different stage/trajectory, different event location; descriptive only"
+    }
+  },
+  "limits": [
+    "This is a postmortem of a clamped finite-EOS stock-alpha trajectory, not a no-floor counterfactual, validation, or evidence that the chosen liquid EOS is physical water.",
+    "The current event is near the earlier .410 line location but is not a matched trajectory against the 299248-cell rhoConst case or the .434 different-geometry/source event.",
+    "Cell support mass is not an amount of water removed; no mass deletion is established.",
+    "The preceding pressure scheme trials change mesh/initialization and cannot assign the current contact to the linearUpwind choice; no same-case upwind replay is part of this analysis."
+  ],
+  "provenance": {
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "log_sha256": "f62debb78e52c8461fe9688ed7bf03d99c463ecef2980c0e371f4268817951f3",
+    "guard_sha256": "d79448180c604ce0e520df1915d0ca547db94c8cb3ac315e3818d1191f1e3102",
+    "guardian_sha256": "33e3d5bb503efff31b2dbd58ba27e5985967cd17f893cada5b1c83be09b74d98",
+    "run_source_lock_sha256": "eabe562fa2994e46c76b402234b56c4d25008ef4da82f6184d71dec3bceea1da",
+    "input_freeze_sha256": "2f66bd7826d0c8e8e22e82e06d4ca9eba40bd4d958a7a0ebd62029499e160456",
+    "control_dict_sha256": "7c5afc9969b6e58d9e6f157f7f3ce09158f221fdf1d85defb23def2a152f53e1",
+    "mesh_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+    "saved_field_sha256": {
+      "p": "187954da4c44d8c5e0288f048d3ddda60c0b9e936eb61972c4885dca761dfd46",
+      "p_rgh": "5c323dc34698355839087e85c5786e11a5ea89c40e7e133bdc220271ec21f1e6",
+      "rho": "f9090426bac2b61364b5f0a804e48beeb31d1aa17fd57be4ad2da69d4561cf65",
+      "alpha.water": "3ec8850d45e4aa87fc52c0878748c0160a3fb4e8c99347329c78e75139197683",
+      "T": "9237641ac7e321c225f7b2e785a8941f7f864a4b1f971d47452fbda68330271f",
+      "U": "0607d2fa9130a0285f931e550fd6c1dd9cd57c23b3a7b74f23f9ca733de7deae",
+      "T.air": "25f7b7272a229a1318861e736e7ba6e0cc2afd8d708660774da60b582f2f4016",
+      "T.water": "26d66b05bf81adf2103ee5e9c5a99a814a8462059c0fbc98508f68d60081c1c6"
+    },
+    "pEqn_source_sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6",
+    "current_fvSchemes_sha256": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+    "saved_time_uniform_sha256": "9efea4f62bc493f501a41c3f33553c73fc347c90b6095cf6eea67895ad5f2cc0"
+  }
+}
