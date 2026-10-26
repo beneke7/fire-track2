@@ -7,12 +7,14 @@ import numpy as np
 import pytest
 
 from aerial_drop.i4f_native_face_reader import (
+    TARGET_X_M,
     _interpolate_owner_weighted,
     _local_face_cells_in_global_cut_order,
     _openfoam_linear_weight,
     _orient_local_internal_flux,
     _parse_internal,
     _read_water_density_model,
+    _select_native_mouth_cut,
     _water_density_from_pressure,
     read_native_mouth_snapshot,
 )
@@ -130,6 +132,105 @@ def test_native_reader_binary_scalar_and_cut_orientation_helpers() -> None:
 
     with pytest.raises(ValueError, match="scoped to 10-rank"):
         read_native_mouth_snapshot(Path("/not/a/case"), "0.5", nprocs=20)
+
+
+def test_native_mouth_x_moves_cut_and_preserves_signed_fluxes() -> None:
+    # Four independent three-cell rows straddle the same fixed mouth windows.
+    # Their two internal face planes are at x=4.6 and x=4.8 m.
+    mouth_yz = ((-0.55, 0.65), (-0.55, 0.90), (0.55, 0.65), (0.55, 0.90))
+    centers = []
+    owners = []
+    neighbours = []
+    points = []
+    face_offsets = [0]
+    face_labels = []
+    for mouth_index, (y, z) in enumerate(mouth_yz):
+        cell_start = 3 * mouth_index
+        centers.extend(([4.5, y, z], [4.7, y, z], [4.9, y, z]))
+        for offset, x in enumerate((4.6, 4.8)):
+            owners.append(cell_start + offset)
+            neighbours.append(cell_start + offset + 1)
+            vertex_start = len(points)
+            half_width = 0.04
+            points.extend(
+                (
+                    [x, y - half_width, z - half_width],
+                    [x, y + half_width, z - half_width],
+                    [x, y + half_width, z + half_width],
+                    [x, y - half_width, z + half_width],
+                )
+            )
+            face_labels.extend(range(vertex_start, vertex_start + 4))
+            face_offsets.append(len(face_labels))
+
+    centers = np.asarray(centers, dtype=np.float64)
+    owners = np.asarray(owners, dtype=np.int64)
+    neighbours = np.asarray(neighbours, dtype=np.int64)
+    points = np.asarray(points, dtype=np.float64)
+    face_offsets = np.asarray(face_offsets, dtype=np.int64)
+    face_labels = np.asarray(face_labels, dtype=np.int64)
+
+    inside_46, faces_46 = _select_native_mouth_cut(
+        centers, owners, neighbours, face_offsets, face_labels, points, 4.6
+    )
+    inside_48, faces_48 = _select_native_mouth_cut(
+        centers, owners, neighbours, face_offsets, face_labels, points, 4.8
+    )
+
+    assert TARGET_X_M == pytest.approx(4.8)  # the public default is unchanged
+    assert set(faces_46) == {0, 2, 4, 6}
+    assert set(faces_48) == {1, 3, 5, 7}
+    assert {face["mouth"] for face in faces_46.values()} == {
+        "A_lower",
+        "A_upper",
+        "B_lower",
+        "B_upper",
+    }
+    assert {face["mouth"] for face in faces_48.values()} == {
+        "A_lower",
+        "A_upper",
+        "B_lower",
+        "B_upper",
+    }
+
+    # Exercise the production signed-face orientation on the faces selected at
+    # each cut. Opposite local map signs and reverse-flow values must remain
+    # signed, and the cut must switch from the x=4.6 face to x=4.8 face.
+    local_phi = {0: 1.0, 1: 5.0, 2: -2.0, 3: -6.0, 4: -3.0, 5: -7.0, 6: 4.0, 7: 8.0}
+    face_map_sign = {0: 1, 1: 1, 2: -1, 3: -1, 4: 1, 5: 1, 6: -1, 7: -1}
+
+    def mouth_q(inside: np.ndarray, selected: dict[int, dict[str, object]]) -> dict[str, float]:
+        result = {}
+        for face_id, geometry in selected.items():
+            owner_inside = bool(inside[owners[face_id]])
+            assert owner_inside
+            mouth = str(geometry["mouth"])
+            result[mouth] = _orient_local_internal_flux(
+                local_phi[face_id], face_map_sign[face_id], owner_inside
+            )
+        return result
+
+    assert mouth_q(inside_46, faces_46) == {
+        "A_lower": 1.0,
+        "A_upper": 2.0,
+        "B_lower": -3.0,
+        "B_upper": -4.0,
+    }
+    assert mouth_q(inside_48, faces_48) == {
+        "A_lower": 5.0,
+        "A_upper": 6.0,
+        "B_lower": -7.0,
+        "B_upper": -8.0,
+    }
+
+    with pytest.raises(ValueError, match="mouth_x_m must be a finite number"):
+        _select_native_mouth_cut(
+            centers, owners, neighbours, face_offsets, face_labels, points, np.nan
+        )
+    with pytest.raises(ValueError, match="no native internal faces straddle"):
+        _select_native_mouth_cut(
+            centers, owners, neighbours, face_offsets, face_labels, points, 10.0
+        )
 
 
 def test_water_density_eos_and_density_is_interpolated_after_cellwise_evaluation(

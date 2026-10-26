@@ -1,10 +1,10 @@
 """Native cell-centre cut reader for the compact four-mouth I4F mesh.
 
 This is a deliberately narrow reader for ten-rank collated OpenFOAM cases. It
-selects native internal faces crossing the x=4.8 m cell-centre cut, assigns
-them to the four fixed mouth windows, recovers signed native surface fluxes,
-and reconstructs cell U/alpha at those faces. It is not a general OpenFOAM
-reader.
+selects native internal faces crossing a requested cell-centre x cut (4.8 m by
+default), assigns them to the four fixed mouth windows, recovers signed native
+surface fluxes, and reconstructs cell U/alpha at those faces. It is not a
+general OpenFOAM reader.
 
 The binary parsing, processor-pair sign check, face-centre interpolation, and
 cut orientation were extracted from these audited private readers (not imported
@@ -443,6 +443,59 @@ def _mouth_for_center(center: np.ndarray) -> str | None:
     return matches[0] if matches else None
 
 
+def _validated_mouth_x(mouth_x_m: float) -> float:
+    try:
+        target = float(mouth_x_m)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("mouth_x_m must be a finite number") from exc
+    if not math.isfinite(target):
+        raise ValueError("mouth_x_m must be a finite number")
+    return target
+
+
+def _select_native_mouth_cut(
+    centers: np.ndarray,
+    owner: np.ndarray,
+    neighbour: np.ndarray,
+    offsets: np.ndarray,
+    labels: np.ndarray,
+    points: np.ndarray,
+    mouth_x_m: float,
+) -> tuple[np.ndarray, dict[int, dict[str, Any]]]:
+    """Select the native global faces that straddle a requested x control cut."""
+    target_x = _validated_mouth_x(mouth_x_m)
+    inside = centers[:, 0] <= target_x
+    crossing = np.flatnonzero(inside[owner[: len(neighbour)]] != inside[neighbour])
+    if crossing.size == 0:
+        raise ValueError(f"no native internal faces straddle the requested mouth x={target_x:g} m")
+
+    geometry: dict[int, dict[str, Any]] = {}
+    for gid_raw in crossing:
+        gid = int(gid_raw)
+        sf, centroid, polygon_area = _face_geometry(gid, offsets, labels, points)
+        mouth = _mouth_for_center(centroid)
+        if mouth is not None:
+            geometry[gid] = {
+                "mouth": mouth,
+                "centroid": centroid,
+                "sf": sf,
+                "polygon_area": polygon_area,
+            }
+    if not geometry:
+        raise ValueError(
+            f"native faces straddle x={target_x:g} m, but none fall within the four fixed mouth windows"
+        )
+    expected_mouths = set(MOUTH_WINDOWS)
+    seen_mouths = {item["mouth"] for item in geometry.values()}
+    if seen_mouths != expected_mouths:
+        missing = sorted(expected_mouths - seen_mouths)
+        raise ValueError(
+            f"native cut at x={target_x:g} m did not cover all four fixed mouths; "
+            f"missing {missing} (selected {sorted(seen_mouths)})"
+        )
+    return inside, geometry
+
+
 def _load_global_cell_field(
     field: str,
     time_dir: Path,
@@ -548,7 +601,8 @@ def _water_density_from_pressure(pressure_pa: np.ndarray, model: dict[str, Any])
     return density
 
 
-def _build_case_mesh(case: Path, nprocs: int) -> dict[str, Any]:
+def _build_case_mesh(case: Path, nprocs: int, mouth_x_m: float) -> dict[str, Any]:
+    target_x = _validated_mouth_x(mouth_x_m)
     mesh = case / "constant/polyMesh"
     points = _read_global_points(mesh / "points")
     offsets, labels = _read_global_faces(mesh / "faces")
@@ -566,26 +620,9 @@ def _build_case_mesh(case: Path, nprocs: int) -> dict[str, Any]:
         or np.any(neighbour >= len(centers))
     ):
         raise ValueError("global owner/neighbour contains an out-of-range cell label")
-    inside = centers[:, 0] <= TARGET_X_M
-    crossing = np.flatnonzero(inside[owner[: len(neighbour)]] != inside[neighbour])
-    geometry: dict[int, dict[str, Any]] = {}
-    for gid_raw in crossing:
-        gid = int(gid_raw)
-        sf, centroid, polygon_area = _face_geometry(gid, offsets, labels, points)
-        mouth = _mouth_for_center(centroid)
-        if mouth is not None:
-            geometry[gid] = {
-                "mouth": mouth,
-                "centroid": centroid,
-                "sf": sf,
-                "polygon_area": polygon_area,
-            }
-    expected_mouths = set(MOUTH_WINDOWS)
-    seen_mouths = {item["mouth"] for item in geometry.values()}
-    if seen_mouths != expected_mouths:
-        raise ValueError(f"native cut did not cover all four fixed mouths: {sorted(seen_mouths)}")
-    if len(geometry) == 0:
-        raise ValueError("no native mouth faces cross the configured cell-centre cut")
+    inside, geometry = _select_native_mouth_cut(
+        centers, owner, neighbour, offsets, labels, points, target_x
+    )
 
     proc_mesh = case / f"processors{nprocs}/constant/polyMesh"
     cell_maps: list[np.ndarray] = []
@@ -845,7 +882,7 @@ def _read_time_fields(
         if geom["mouth"] not in MOUTH_WINDOWS:
             raise ValueError(f"face {gid} assigned to unknown mouth {geom['mouth']}")
         # The global face area vector is owner-to-neighbour. Orient it outward
-        # from the x<=4.8 control region, independent of rank face-map signs.
+        # from the selected x-cut control region, independent of rank signs.
         if not inside[int(mesh_data["global_owner"][gid])]:
             sf_out = -sf_out
         projected_area = float(sf_out[0])
@@ -913,9 +950,11 @@ def read_native_mouth_snapshot(
     time_name: str,
     *,
     nprocs: int = NPROCS,
+    mouth_x_m: float = TARGET_X_M,
 ) -> NativeMouthSnapshot:
-    """Read a complete collated checkpoint and reconstruct the fixed four mouths."""
+    """Read a collated checkpoint at the requested x cut and four fixed mouths."""
     case = case_path.resolve()
+    target_x = _validated_mouth_x(mouth_x_m)
     if nprocs != NPROCS:
         raise ValueError(f"this reader is scoped to {NPROCS}-rank collated cases, got {nprocs}")
     if not time_name or Path(time_name).name != time_name:
@@ -926,7 +965,7 @@ def read_native_mouth_snapshot(
         raise ValueError(f"time directory name is not numeric: {time_name}") from exc
     if not case.is_dir():
         raise FileNotFoundError(f"case directory does not exist: {case}")
-    mesh_data = _build_case_mesh(case, nprocs)
+    mesh_data = _build_case_mesh(case, nprocs, target_x)
     (
         face_fluxes,
         _alpha,
@@ -992,11 +1031,18 @@ def read_native_mouth_snapshot(
         mouth_faces={mouth: tuple(faces) for mouth, faces in by_mouth.items()},
         input_paths=tuple(input_paths),
         selection_metadata={
-            "target_x_cell_center_m": TARGET_X_M,
+            "target_x_cell_center_m": target_x,
             "mouth_windows_m": MOUTH_WINDOWS,
             "mouth_projected_area_m2": area_by_mouth,
-            "orientation": "global face area vector oriented from x<=4.8 m cell to x>4.8 m cell; outward projected Sf.x must be positive",
-            "selection": "native global internal faces whose owner/neighbour cell centres straddle x<=4.8 m, assigned by actual triangulation-weighted face centroid to one fixed y/z mouth window",
+            "orientation": (
+                f"global face area vector oriented from x<={target_x:g} m cell to "
+                f"x>{target_x:g} m cell; outward projected Sf.x must be positive"
+            ),
+            "selection": (
+                "native global internal faces whose owner/neighbour cell centres straddle "
+                f"x<={target_x:g} m, assigned by actual triangulation-weighted face centroid "
+                "to one fixed y/z mouth window"
+            ),
             "selected_faceProcAddressing_sign_counts": {
                 "local_internal_faces": mesh_data["selected_internal_face_map_sign_counts"],
                 "processor_patch_representations": mesh_data[
@@ -1004,7 +1050,11 @@ def read_native_mouth_snapshot(
                 ],
                 "processor_pair_rule": "the two processor representations of each selected global face must have opposite signed faceProcAddressing entries; processor-patch flux is read from the inside-side owner and is already oriented outward from that rank",
             },
-            "local_internal_flux_orientation": "local owner-to-neighbour phi is multiplied by signed faceProcAddressing orientation, then by the global owner inside/outside sign to orient across the x<=4.8 control-surface cut",
+            "local_internal_flux_orientation": (
+                "local owner-to-neighbour phi is multiplied by signed faceProcAddressing "
+                "orientation, then by the global owner inside/outside sign to orient across "
+                f"the x<={target_x:g} control-surface cut"
+            ),
             "linear_face_reconstruction": "OpenFOAM owner weight = distance from face to neighbour divided by owner-to-face plus face-to-neighbour distances; reconstructed value = w*owner + (1-w)*neighbour",
             "water_density_reconstruction": {
                 "model": water_density_model["model"],

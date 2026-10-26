@@ -1,6 +1,6 @@
 # Pressure-driven I4F discharge: working scientific note
 
-23–26 October 2026 UTC. Working scientific note with executed exploratory results;
+26 October 2026 UTC. Working scientific note with executed exploratory results;
 no apparatus validation is claimed. Dimensions are distinguished as user-reported,
 derived or assumed below; the CAD is not a calibrated dimensional measurement.
 [The shared input](../experiments/i4f_baseline.json)
@@ -14,14 +14,18 @@ the new hardware case includes both tanks and all four outlets.
 
 ## Current scientific result
 
-**Latest outcome:** the finite-water cold test also contacted the pressure
-floor: one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields
-at .410223 s; final minimum pressure recovered to 85.499 kPa and the pressure
+**Latest outcome:** the finite-water cold test contacted the pressure floor:
+one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields at
+.410223 s; final minimum pressure recovered to 85.499 kPa and the pressure
 update to .160 Pa, but this does not undo the floor event. Liquid support in
-the affected cells was .019267 kg, not removed water mass. The hypothesis that
-finite water pressure storage alone would resolve the failure is therefore
-unsupported. The smaller-timestep cold test is now running alongside the new
-constant-density control. A first complete credible discharge remains pending.
+the affected cells was .019267 kg, not removed water mass. The uninterrupted
+standard-source constant-density cold control ended at .434532 s after eighteen
+raw pressure-floor contacts. A smaller-timestep finite-water case is now at
+.302981 s with no raw contacts at the latest guard sample. A warm upwind fork
+from a .400020 s state saved .460048 s with no pressure-floor contacts, but its
+next-child preparation failed before GO on a `divSchemes/div(rhoPhi,U)`
+dictionary preflight. The warm fork is not a complete cold-history test. No
+complete credible discharge has been established.
 
 As of 26 October, the corrected-junction constant-density cold trajectory
 reached a raw pressure-floor failure at .434224 s after an operational restart
@@ -33,21 +37,17 @@ updates. The tank-interface-refined case similarly stopped at .445301 s with
 3.00 kPa pressure updates. These are unresolved numerical failures, not physical
 cavitation or trustworthy discharge results.
 
-The next controlled comparison starts both cases from their own cold initial
-state on the same corrected 299,214-cell mesh. One retains constant-density
-water; the other uses the explicitly provisional
+The finite-water case uses the explicitly provisional
 [finite-compressibility water packet](../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json).
 Its reference sound speed is 1482.344 m/s at 293.15 K and 0.1 MPa, evaluated
-from the linked IAPWS release. The pressure exponent 7.15 is assumed; this
-barotropic water law with constant heat capacity is not a full IAPWS thermal
-model or a validated high-pressure material description. The cold initial
-water volumes match, while the EOS changes total initial water mass by
-+1.6063 kg; pressure relative to hydrostatic head is initialized consistently.
-Both use two pressure correctors, eight outer iterations and the same solver
-binary, turbulence and phase-source treatment. Normal .05 s pilot continuations
-are planned for both; the new control avoids the earlier parser-induced .413 s
-restart. See [live status](STATUS.md) for actual execution rather than treating
-this frozen preparation packet as a runtime report.
+from the linked IAPWS release. The assumed pressure exponent 7.15 is not Cp/Cv;
+the barotropic water law with constant heat capacity is neither full IAPWS
+thermodynamics nor a validated high-pressure material description. The EOS
+increases initial water mass by 1.6063 kg at the matched volume. Its first
+timestep setting did not resolve the floor event. The smaller-timestep run
+continues from its complete .0500106 s cold pilot, while the stock-upwind probe
+is a separate warm-start sensitivity. Current execution and deadlines are in
+[live status](STATUS.md); do not conflate these paths or call either a validation.
 
 The [guard-parser repair evidence](../results/summaries/i4f_20261025/parser-merge-replay.json)
 recovers an MPI-interleaved terminal record without changing the equations or
@@ -57,6 +57,16 @@ not establish nonlinear convergence. Native outlet postprocessing now supports
 phase-water density from either selected EOS; native water-volume flux remains
 primary, while mass and momentum reconstructed from separately saved fields
 retain their stage-matching qualification.
+
+A matched **audit-output-only** pair ended at .401007658722 s after seven steps.
+All fourteen native fields plus `uniform/time` and the step-health rows were
+byte-identical with `i4fFullPressureAudit` on/off; the outputs are separate
+files. Solver ClockTime was 51 s on and 42 s off in this one sequential pair.
+That is a single short timing observation, not a general speedup or physics
+result. The [exact-byte proof](../results/summaries/i4f_20261025/pressure-audit-toggle/exact-byte-proof.json)
+and [captured profile](../results/summaries/i4f_20261025/pressure-audit-toggle/profile-window-result-v2.json)
+retain both run identities and hashes. Future child helpers disable only this
+detailed audit stream; existing live cases were not changed.
 
 The latest user confirmation changes the physical baseline: the passages
 downstream of the valves initially contain air. Earlier liquid-filled-line
@@ -93,6 +103,25 @@ probe p/T uses bracket interpolation with targets within about four nanoseconds
 of the upper printed sample. Model values are bracket-interpolated without
 extrapolation. The [plot](../results/summaries/i4f_20261025/flush-early-cfd-model-comparison.png)
 keeps each tank separate and shows the .10–.25 s window only.
+
+The [sealed-gas tank-to-nozzle reference](../results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.json)
+provides a conditional quasistatic pressure scale for the 1.0 m and 0.8 m
+transition variants. With 12 bar absolute, 22.5% headspace and n=1.4, full-bore
+priming leaves about 3.478/3.771 bar absolute. The ideal sealed-gas relation
+then reaches the 1 bar back pressure after approximately 1.056/1.098 m3 of
+nozzle-delivered water per tank. These are pressure-equalization volumes, not
+maximum delivery or emptying predictions: inertia and elevation can sustain
+flow, while valve/pipe losses and initial-air purge dynamics are not resolved.
+At the nominal .225 headspace, the n=1 isothermal limit stays above 1 bar over
+the listed liquid inventory. The
+0.8 m geometry reduces initial downstream gas storage by 41.335 L per tank,
+but no CFD discharge advantage has been shown. Headspace sensitivity holds
+water fixed, so tank capacity also varies; pressure and gas-law inputs are
+assumptions, not values inferred from a CFD probe. The
+[plot](../results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.png)
+shows the below-back-pressure formula extension separately from its
+pressure-supported part; the [recoverable source snapshot and hashes](../results/summaries/i4f_20261025/sealed-gas-pressure-budget/provenance/publication-package.json)
+record the generated reference inputs.
 
 User clarification on 25 October establishes two tanks, two valves/outlets per
 tank, .900 m tank diameter, .300 m valve diameter, and 1.350 m3 liquid per tank.
@@ -2552,7 +2581,7 @@ blowdown, any unreleased residual and actual CO2/retardant discharge require
 the next physical model and measured initial conditions. Extrapolating the
 present histories to a complete emptying time would not be defensible.
 
-## Current evidence update — 25 October 2026
+## Current evidence update — 25–26 October 2026
 
 The user's initial-state clarification now fixes the current reference:
 passages downstream of the valves initially contain air. The compact baseline

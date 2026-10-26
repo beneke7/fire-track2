@@ -56,6 +56,31 @@ comparison from baseline evidence, with matched initial inventories and pressure
 Use focused conservation, mesh/time and external-boundary checks needed for
 these claims. Existing aerial E0–E6 gates do not certify this new apparatus.
 
+26 October analytical addition: use the sealed ideal-gas pressure–volume
+reference in
+[`sealed-gas-pressure-budget`](results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.json)
+to rank provisional dry-line/headspace combinations before interpreting a
+trajectory. At 12 bar absolute, 22.5% headspace and n=1.4, the 1.0/0.8 m train
+requires 0.4320/0.3907 m3 of displacement for full-bore priming, after which
+the ideal sealed gas reaches 1 bar at about 1.056/1.098 m3 nozzle delivery per
+tank. This is a quasistatic pressure-equalization reference, not a maximum
+delivery or emptying-time estimate: inertia/elevation may sustain flow and the
+model assumes complete purge of the initially air-filled downstream line for
+its post-priming gas calculation, but does not model purge dynamics, losses,
+gas venting, heat-transfer rates, CO2 or foam. The 0.8 m candidate changes
+downstream air capacity by 41.335 L per tank while preserving the provisional
+tank/feed inputs; no CFD performance benefit is established. The .20–.25 headspace sweep holds water
+volume fixed and therefore changes assumed vessel capacity, while 12/13 bar
+remain absolute-pressure scenarios rather than measured or CFD-inferred values.
+The first useful engineering report should prioritize per-tank pressure and
+water inventory plus the four individual nozzle flux histories, with gas
+ingestion and sheet formation as later observations rather than prescribed
+outlet histories. A publishable flow comparison still requires a healthy
+complete provisional startup/outlet trajectory, selected mesh/time checks, and
+a matched 1.0 m versus 0.8 m geometry comparison with initial inventories and
+boundary conditions held fixed; this pressure-budget reference alone is not
+that result.
+
 The new user objective permits suitable GPU rendering/compute; use CPU
 OpenFOAM for the first credible complete calculation and do not start a GPU
 solver port. Inspect unrelated workloads before using either resource.

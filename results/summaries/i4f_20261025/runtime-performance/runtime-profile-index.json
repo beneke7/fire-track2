@@ -1,0 +1,290 @@
+{
+  "created_utc": "2026-10-26T15:37:53.257880+00:00",
+  "files": [
+    {
+      "bytes": 36429,
+      "file": "profile-summary.json",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/profile-summary.json",
+      "sha256": "e53a3b9ec9aa52cac99e9abdc48cae34ab603fb4e100dd9fb96afedd24c6bb5c",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/profile-summary.json"
+    },
+    {
+      "bytes": 16942,
+      "file": "performance-findings.json",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/performance-findings.json",
+      "sha256": "36a1f532b1c916a3798db09e412df45151193ffd5d000f6216a2ed22013ab13e",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/performance-findings.json"
+    },
+    {
+      "bytes": 93923,
+      "file": "resource-quota-event.json",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/resource-quota-event.json",
+      "sha256": "762ae32ea121f30b17979df5ad45523642ace7bf929749e71e9e6f10e7a95300",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/resource-quota-event.json"
+    },
+    {
+      "bytes": 1142393,
+      "file": "532c1541-steps.csv",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/532c1541-steps.csv",
+      "sha256": "05a5998c43af524c6df1b37680ef84bcf2c82da0d456a9bbd52215108d555b59",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/532c1541-steps.csv"
+    },
+    {
+      "bytes": 291745,
+      "file": "761c1ca9-steps.csv",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/761c1ca9-steps.csv",
+      "sha256": "0ff27bbf74c5ee828897eb155ec6aa192d87bb404c9e9a661f255672ecf4b372",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/761c1ca9-steps.csv"
+    },
+    {
+      "bytes": 856286,
+      "file": "b00622ce-steps.csv",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/b00622ce-steps.csv",
+      "sha256": "c338b385d88770e04740a3c641ad545e559a571a83d3a7fb12314e3ebfca5141",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/b00622ce-steps.csv"
+    },
+    {
+      "bytes": 1385523,
+      "file": "b2c9790f-steps.csv",
+      "public_copy": "results/summaries/i4f_20261025/runtime-performance/b2c9790f-steps.csv",
+      "sha256": "8317dec5c5c6c731ee979df372fb3e849b73780db8ab5ed82ca454c68bb1bdbd",
+      "source": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/b2c9790f-steps.csv"
+    }
+  ],
+  "limits": [
+    "Performance evidence only; historical cases are not promoted to physical acceptance.",
+    "No affinity speedup was measured by this packet.",
+    "No separate per-function-object I/O timer was available."
+  ],
+  "observed_profiles": [
+    {
+      "case_bundle": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+      "case_log": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z/case/log.cold-coupled",
+      "case_log_bytes_sampled": 464399695,
+      "case_log_sha256": "5214002abcc071be764501c3d5624b87791245a78fc97491da0da55a379002a4",
+      "clock_time_wall_intervals_s": {
+        "count": 1948,
+        "max": 10.0,
+        "mean": 4.181211498973306,
+        "median": 4.0,
+        "min": 1.0,
+        "p90": 5.0
+      },
+      "execution_time_calling_process_cpu_intervals_s": {
+        "count": 1948,
+        "max": 6.230000000000018,
+        "mean": 3.8207289527720736,
+        "median": 3.869999999999891,
+        "min": 1.7799999999997453,
+        "p90": 4.769999999999982
+      },
+      "file_size_changed_during_profile": false,
+      "linear_iterations_by_solver_field": {
+        "DILUPBiCGStab:T": 9982,
+        "GAMG:p_rgh": 133379,
+        "smoothSolver:Ux": 7934,
+        "smoothSolver:Uy": 8218,
+        "smoothSolver:Uz": 6529,
+        "smoothSolver:alpha.water": 24720,
+        "smoothSolver:k": 4364,
+        "smoothSolver:omega": 3863
+      },
+      "linear_solve_calls_by_solver_field": {
+        "DILUPBiCGStab:T": 15592,
+        "GAMG:p_rgh": 31184,
+        "smoothSolver:Ux": 15592,
+        "smoothSolver:Uy": 15592,
+        "smoothSolver:Uz": 15592,
+        "smoothSolver:alpha.water": 15592,
+        "smoothSolver:k": 1949,
+        "smoothSolver:omega": 1949
+      },
+      "physical_time_span_s": 0.384260758428,
+      "step_count": 1949,
+      "steps_csv": "b2c9790f-steps.csv",
+      "time_marker_count": 1949
+    },
+    {
+      "case_bundle": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+      "case_log": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/log.cold-coupled",
+      "case_log_bytes_sampled": 286939791,
+      "case_log_sha256": "e3aac5856f24cb120a7a0174a8ad65345e8bc9f07cce42844e004f2ec462122c",
+      "clock_time_wall_intervals_s": {
+        "count": 1207,
+        "max": 8.0,
+        "mean": 4.406793703396851,
+        "median": 5.0,
+        "min": 1.0,
+        "p90": 6.0
+      },
+      "execution_time_calling_process_cpu_intervals_s": {
+        "count": 1207,
+        "max": 6.360000000000127,
+        "mean": 3.8583927091963544,
+        "median": 4.3799999999999955,
+        "min": 1.6700000000000728,
+        "p90": 4.919999999999936
+      },
+      "file_size_changed_during_profile": true,
+      "linear_iterations_by_solver_field": {
+        "DILUPBiCGStab:T": 6168,
+        "GAMG:p_rgh": 32712,
+        "smoothSolver:Ux": 5478,
+        "smoothSolver:Uy": 3486,
+        "smoothSolver:Uz": 2145,
+        "smoothSolver:alpha.water": 9668,
+        "smoothSolver:k": 2416,
+        "smoothSolver:omega": 1804
+      },
+      "linear_solve_calls_by_solver_field": {
+        "DILUPBiCGStab:T": 9667,
+        "GAMG:p_rgh": 19334,
+        "smoothSolver:Ux": 9668,
+        "smoothSolver:Uy": 9668,
+        "smoothSolver:Uz": 9668,
+        "smoothSolver:alpha.water": 9668,
+        "smoothSolver:k": 1208,
+        "smoothSolver:omega": 1208
+      },
+      "physical_time_span_s": 0.151,
+      "step_count": 1209,
+      "steps_csv": "b00622ce-steps.csv",
+      "time_marker_count": 1209
+    },
+    {
+      "case_bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+      "case_log": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/log.cold-coupled",
+      "case_log_bytes_sampled": 383105259,
+      "case_log_sha256": "f62debb78e52c8461fe9688ed7bf03d99c463ecef2980c0e371f4268817951f3",
+      "clock_time_wall_intervals_s": {
+        "count": 1607,
+        "max": 14.0,
+        "mean": 2.72744243932794,
+        "median": 2.0,
+        "min": 1.0,
+        "p90": 4.0
+      },
+      "execution_time_calling_process_cpu_intervals_s": {
+        "count": 1607,
+        "max": 8.589999999999918,
+        "mean": 2.603702551337897,
+        "median": 2.0900000000000034,
+        "min": 1.699999999999818,
+        "p90": 3.8640000000000336
+      },
+      "file_size_changed_during_profile": false,
+      "linear_iterations_by_solver_field": {
+        "DILUPBiCGStab:T": 8887,
+        "GAMG:p_rgh": 89008,
+        "smoothSolver:Ux": 7698,
+        "smoothSolver:Uy": 6894,
+        "smoothSolver:Uz": 5689,
+        "smoothSolver:alpha.water": 21990,
+        "smoothSolver:k": 3686,
+        "smoothSolver:omega": 3182
+      },
+      "linear_solve_calls_by_solver_field": {
+        "DILUPBiCGStab:T": 12864,
+        "GAMG:p_rgh": 25728,
+        "smoothSolver:Ux": 12864,
+        "smoothSolver:Uy": 12864,
+        "smoothSolver:Uz": 12864,
+        "smoothSolver:alpha.water": 12864,
+        "smoothSolver:k": 1608,
+        "smoothSolver:omega": 1608
+      },
+      "physical_time_span_s": 0.359951398719,
+      "step_count": 1608,
+      "steps_csv": "532c1541-steps.csv",
+      "time_marker_count": 1608
+    },
+    {
+      "case_bundle": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z",
+      "case_log": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/case/log.cold-coupled",
+      "case_log_bytes_sampled": 97579047,
+      "case_log_sha256": "d0db4d3a5d63f4686eaae2683068ffb2a3436049165ee62f2e110f3a8da6115c",
+      "clock_time_wall_intervals_s": {
+        "count": 411,
+        "max": 8.0,
+        "mean": 5.017031630170316,
+        "median": 5.0,
+        "min": 4.0,
+        "p90": 6.0
+      },
+      "execution_time_calling_process_cpu_intervals_s": {
+        "count": 411,
+        "max": 6.039999999999964,
+        "mean": 4.3043309002433086,
+        "median": 4.319999999999936,
+        "min": 3.160000000000002,
+        "p90": 4.790000000000191
+      },
+      "file_size_changed_during_profile": false,
+      "linear_iterations_by_solver_field": {
+        "DILUPBiCGStab:T": 2373,
+        "GAMG:p_rgh": 10042,
+        "smoothSolver:Ux": 1677,
+        "smoothSolver:Uy": 1104,
+        "smoothSolver:Uz": 779,
+        "smoothSolver:alpha.water": 3224,
+        "smoothSolver:k": 824,
+        "smoothSolver:omega": 412
+      },
+      "linear_solve_calls_by_solver_field": {
+        "DILUPBiCGStab:T": 3296,
+        "GAMG:p_rgh": 6592,
+        "smoothSolver:Ux": 3296,
+        "smoothSolver:Uy": 3296,
+        "smoothSolver:Uz": 3296,
+        "smoothSolver:alpha.water": 3296,
+        "smoothSolver:k": 412,
+        "smoothSolver:omega": 412
+      },
+      "physical_time_span_s": 0.050004583332,
+      "step_count": 412,
+      "steps_csv": "761c1ca9-steps.csv",
+      "time_marker_count": 412
+    }
+  ],
+  "quota_event": {
+    "artifact": "resource-quota-event.json",
+    "event_utc": "2026-10-26T15:10:48.122628+00:00",
+    "external_load_volatile": true,
+    "halfdt_quota_equiv": {
+      "after": 10.0,
+      "before": 8.8
+    },
+    "nonproject_cpu_equiv_last_sample": 0.132,
+    "preexisting_temperature_input_freeze_mismatch_recorded": true,
+    "warm_quota_equiv": {
+      "after": 9.8,
+      "before": 7.7
+    }
+  },
+  "ranked_candidates": [
+    {
+      "candidate": "Bind the existing 10 MPI ranks to core IDs on the hybrid CPU.",
+      "evidence": "10 ranks under 8.8 CPU-equivalent quota; measured 874.54% CPU; all ranks allowed on CPUs 0-19 spanning two capacity classes, with no rank binding.",
+      "rank": 1,
+      "test": "Same 10-rank binary/decomposition/checkpoint and 8.8 quota; compare current unbound command with --map-by core --bind-to core --report-bindings. Verify actual rank map.",
+      "uncertainty": "No speedup measured yet; concurrent unrelated load and Open MPI mapping must be controlled/documented."
+    },
+    {
+      "candidate": "Separate four-mouth scalar observation cadence from sampled-plane VTK field cadence.",
+      "evidence": "The half-dt stage wrote 152 four-mouth VTP files (~38.0 MB) at the current 0.001 s cadence; ambient VTPs are already disabled in that future stage.",
+      "rank": 2,
+      "test": "Preserve high-frequency scalar outlet metrics and selected map times; test a lower field-export cadence such as 0.01 s.",
+      "uncertainty": "Requires outlet-map temporal adequacy check; bytes do not give measured runtime share."
+    }
+  ],
+  "revision": "06a41f19d19aa58154428a2d3fa607a15c590804",
+  "schema": "i4f-public-runtime-profile/v1",
+  "scope": "I4F internal tank-to-valves-to-pipes-to-four-nozzles CPU OpenFOAM performance evidence only",
+  "source_run": "results/runs/i4f-performance-runtime-profile-20261026T144715Z",
+  "timing_definitions": {
+    "ClockTime": "OpenFOAM wall-clock time for a step interval.",
+    "ExecutionTime": "Calling process CPU time for the step interval; for this MPI log it is one calling rank/process timer, not the sum across ranks.",
+    "filesystem_bytes": "File sizes are sampled from filesystem metadata. A growing file can change during profiling; its sampled size does not measure contemporaneous I/O duration or wall-time share.",
+    "linear_iterations": "Solver iterations counted from log lines. This is work volume only, not a measured CPU or wall-time share."
+  }
+}

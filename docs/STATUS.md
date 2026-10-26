@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 13:24 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 15:41 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -28,8 +28,8 @@ tank pressure/inventory and per-nozzle discharge/velocity histories.
   because a child-local output-policy record was missing; the failed attempt is
   preserved. The repaired helper writes that record before freeze. The original
   controller resumed the healthy pilot without repeating it; stage01 Docker
-  `4b8fa349b80d`, StartedAt 2026-10-26T13:18:45.043691461Z, ten MPI / 8.8 CPU
-  equivalents, has advanced beyond .050636 s with zero contacts/errors.
+  `4b8fa349b80d`, StartedAt 2026-10-26T13:18:45.043691461Z, ten MPI / 10 CPU
+  equivalents, is at .302981 s with zero raw contacts at the latest guard sample.
   Initial deltaT=5e-6 s, maxDeltaT=.000125 s, maxCo=.25 and maxAlphaCo=.125;
   the same EOS, mesh, partition, binary, source and turbulence are retained.
   This is adaptive time refinement, not a claim of exactly half every step.
@@ -37,52 +37,50 @@ tank pressure/inventory and per-nozzle discharge/velocity histories.
   Authority: `results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/stock-campaign-status.json`;
   controller `i4f-finite-water-eos-halfdt-conditional-20261026t122804z-campaign.service`.
   Original finish deadline **2026-10-27 06:23:53 UTC** (+300 s capture margin).
-- **Fresh constant-density cold control:** the .050021166664 s pilot completed
-  normally with all fourteen checkpoint fields. After a preserved launcher
-  packaging failure before GO, stage02 resumed that healthy pilot; Docker
-  `efd36809073d`, StartedAt 2026-10-26T12:18:00.051165253Z, ten MPI ranks / 8.8
-  CPU equivalents initially, increased to 10 after a fresh capacity sample;
-  ten MPI ranks remain unchanged. Target .46 s and then 1.3 s if healthy.
-  No pilot was repeated.
-  Controller `i4f-rhoconst-cold-control-recovery-v2-20261026t1217z.service`.
-  Authority: `results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/stock-campaign-status.json`.
-  Both current arms retain the same ten-rank partition, binary, eight outer
-  iterations, two pressure correctors, SST and standard phase-source treatment;
-  their time controls differ by the declared refinement above.
-  Admission respects unrelated work; EOS reservation remains protected during
-  healthy child-restart gaps and pending terminal capture. Future children may
-  reclaim its reservation only after authoritative whole-campaign completion
-  and inactive controller, with PAUSE/unknown states failing closed. Normal
-  .05 s pilot continuations occur in both arms; the new control specifically
-  avoids the earlier parser-induced .413 s restart.
-- **Internal warm upwind probe: armed, waiting.** From the complete healthy
-  finite-EOS .400019820001 s checkpoint, change only momentum convection from
-  `linearUpwind grad(U)` to `upwind`, keeping the full-step time controls and
-  strict health rules. Targets .46 then .7 s if healthy. This tests a numerical
-  mechanism near the bend; its mixed-scheme history is not a cold uniform-scheme
-  verification or production adoption. It launches only after one current whole
-  family is terminal/captured, preserving the other's ten-CPU reservation,
-  actual capacity and PAUSE. No GO/solver exists yet. Authority:
-  `results/runs/i4f-upwind-momentum-warm-20261026T130013Z/conditional-status.json`;
-  service `i4f-upwind-momentum-warm-20261026t130013z-conditional.service`.
-  Original deadline remains **2026-10-27 06:23:53 UTC** (+300 s capture margin).
-- **Rendering:** a single serialized CPU/Mesa watcher follows the smaller-timestep
-  EOS and constant-density families' separate native histories. It waits for a healthy complete state >=.65 s with resolved
-  water, plus an optional normally completed 1.3 s endpoint. Cameras/scales match;
-  10x playback holds actual saved states without temporal interpolation.
-  No new discharge movie exists. Authority:
+- **Constant-density true-cold control: stopped after floor contacts.** The
+  .050021166664 s pilot completed and the uninterrupted standard-source
+  trajectory ended at .434531925092 s with eighteen raw pressure-floor contacts
+  and a complete terminal checkpoint. Exit 0 means the guard saved normally;
+  the trajectory is not healthy and has no automatic restart. Docker
+  `efd36809073d`, StartedAt 2026-10-26T12:18:00.051165253Z. Authority:
+  `results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/stock-campaign-status.json`;
+  cell review `../results/summaries/i4f_20261025/stock-cold-pressure-contact-review.json`.
+- **Warm upwind numerical probe: saved at .460047515286 s.** It changed momentum
+  convection from `linearUpwind grad(U)` to `upwind` from the complete
+  .400019820001 s finite-EOS checkpoint, retaining the adaptive controls and
+  strict health rules. Docker `400939f169cc`, StartedAt
+  2026-10-26T14:44:50.083120753Z, ended normally after 688 steps with a complete
+  checkpoint and no pressure-floor contacts. Its next child failed preflight
+  before GO because the helper expected two `divSchemes/div(rhoPhi,U)` entries
+  that did not match the copied dictionary; there is no child solver to resume.
+  This is a warm fork, not a complete cold-history remedy. Authority:
+  `results/runs/i4f-upwind-momentum-warm-20261026T130013Z/stock-campaign-status.json`;
+  service `i4f-upwind-warm-reservation-fix-20261026t1444z.service`.
+- **Audit-output toggle:** the matched `i4fFullPressureAudit` true/false pair
+  ended at the same .401007658722 s checkpoint after seven steps. All fourteen
+  native fields and `uniform/time` were byte-identical in distinct output files;
+  step-health rows also matched. Solver ClockTime was 51 s with audit on and
+  42 s off in this single sequential pair, a descriptive sample, not a general
+  speedup claim. Future child helpers turn off only this detailed audit stream;
+  the live long cases do not explicitly set the switch and retain the source
+  default. See the [exact-byte evidence](../results/summaries/i4f_20261025/pressure-audit-toggle/exact-byte-proof.json).
+- **Rendering:** the prior serialized CPU/Mesa watcher is terminal and produced
+  no new milestone discharge movie; current runs have not reached its healthy
+  >=.65 s target. No replacement watcher is verified active yet. Cameras/scales
+  remain matched and playback holds actual states.
+  Authority:
   `results/runs/i4f-cold-pair-render-20261026T1247Z-attempt3/watch-status.json`;
   service `i4f-cold-pair-render-20261026t1247z-attempt3.service`;
   fixed deadline **2026-10-27 06:53:53 UTC**.
-- **Resources and retention:** make doctor confirms twenty effective CPUs and
-  about 118 GiB available RAM. Both ten-rank solvers are now running with a
-  shared CPU budget (18.8 allocated CPU equivalents, plus measured unrelated
-  work ~1.16). No GPU solver/rendering job was launched. Closed historical
+- **Resources and retention:** twenty effective CPUs; one ten-rank solver is
+  active at a 10-CPU quota. The other recent numerical trials are terminal. No
+  GPU solver/rendering job was launched. About 118 GiB available RAM and 27 GiB
+  free disk were measured at 15:35 UTC. Closed historical
   gas-boundary VTK exports were losslessly archived, recovering 2.05 GiB net;
   fifty-eight closed solver logs were also archived in two bounded passes,
   recovering another 6.09 GiB. Each file is hash/type/metadata verified before its uncompressed duplicate is removed;
   current family histories, native checkpoints and scalar ledgers are excluded.
-  Free space is about 28.5 GiB after these passes. The runtime save
+  Free space is about 27 GiB after these passes. The runtime save
   floor is **20 GiB**; 25 GiB is a bulk-staging planning target, not a general
   write ban. Future continuation stages retain scalar diagnostics,
   four-mouth data and native .05 s snapshots while disabling only the three
@@ -102,6 +100,10 @@ retain exact checkpoints, stop reasons, ledger values and source hashes.
   not removed water mass. Alternation of pressure and gas density across
   corrections within one timestep motivates testing physical liquid pressure
   storage; it is not a resolved pressure pulse or evidence of cavitation.
+- **The uninterrupted cold constant-density path also contacted the pressure
+  floor.** It saved a complete checkpoint at .434531925092 s after eighteen
+  raw contacts. This is separate from the earlier operationally restarted
+  .413689→.434224 s path; do not combine their pressure histories.
 - **Fewer pressure correctors did not supply a converged discharge.** From the
   clean .413689 s checkpoint, one corrector stopped at .440685508369 s with
   persistent 7.78 kPa pressure and 8.10 m/s velocity updates, despite no floor
@@ -153,6 +155,17 @@ retain exact checkpoints, stop reasons, ledger values and source hashes.
   The single full-bore front predicts mouth arrival .617–.625 s adiabatic or
   .585–.591 s isothermal, while CFD admits bottom filling with gas above. These
   are uncalibrated model predictions, not measured arrival or thermal bounds.
+- **A sealed-gas pressure budget narrows the provisional design question.** The
+  [per-tank analysis](../results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.json)
+  and [plot](../results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.png)
+  use 12 bar absolute nominal pressure, with 13 bar sensitivity, 1.35 m3 tank
+  water, 22.5% headspace and corrected 1.0/0.8 m downstream volumes. For the
+  n=1.4 reference, full-bore priming leaves 3.478/3.771 bar; the sealed-gas
+  formula reaches 1 bar after about 1.056/1.098 m3 nozzle delivery per tank.
+  This is a pressure-equalization reference, not a delivery maximum: inertia and
+  elevation can sustain flow, while valve/pipe losses and initial-air purge
+  dynamics, heat-transfer rates, CO2 and foam are not modeled. The headspace
+  sweep holds water fixed, so it also changes assumed total vessel capacity.
 - **Gas energy and pressure observers retain qualifications.** Near .4 s,
   uniform-headspace delta(U*)+integral(pbar dV) is +137.319 kJ coarse / +92.225 kJ
   refined; it is not measured heat or a closed energy defect. A separate
@@ -165,11 +178,12 @@ retain exact checkpoints, stop reasons, ledger values and source hashes.
   supplies phase-water density, interpolated to faces with the checked owner
   weight; reconstructed mass/momentum may combine different solver stages and
   are labelled secondary. Dry traces, backflow and undefined directions remain
-  explicit. Independent read-only review found no material defect. Latest
-  workstation `make check` after merging HPC commit `3c0ddaf`: **897 passed,
-  two optional/evidence-dependent tests skipped, four subtests passed**; Ruff
-  and case Python/shell checks passed. The earlier 750-test result preceded
-  this merge. Software checks do not validate the apparatus.
+  explicit. Independent read-only review found no material defect. Full
+  workstation `make check` at 15:35:25 UTC on commit `06a41f1` plus the then-dirty
+  source tree reported **920 passed, two skipped, four subtests**; Ruff checked
+  166 files and formatting was clean. That check does not include the later
+  fetched, unmerged `43cb951` HPC updates. Software checks do not validate the
+  apparatus.
 
 ## Inputs, limits and next result
 

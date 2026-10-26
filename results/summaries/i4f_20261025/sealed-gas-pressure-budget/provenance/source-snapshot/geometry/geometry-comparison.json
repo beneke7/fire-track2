@@ -1,0 +1,357 @@
+{
+  "artifacts": {
+    "area_csv": "analysis/transition-area-profile.csv",
+    "area_plot": "figures/transition-area-profile.png",
+    "flush_junction_section_comparison": "figures/flush-junction-section-comparison.png",
+    "overall_assembly_comparison": "figures/overall-assembly-comparison.png",
+    "shared_world_bounds_m": [
+      0.0,
+      4.800000190734863,
+      -1.0499999523162842,
+      1.0499999523162842,
+      0.3500228524208069,
+      1.7000000476837158
+    ],
+    "source_views": {
+      "train_0p8m": {
+        "assembly": "candidate_0p8_flush/figures/two_tank_four_outlet_assembly_shared_world_bounds.png",
+        "join_section": "candidate_0p8_flush/figures/four_pipe_transition_join_sections_flush-at-inlet.png",
+        "tank_connection": "candidate_0p8_flush/figures/tank_connection_section_horizontal.png",
+        "transition_sections": "candidate_0p8_flush/figures/transition_cross_sections.png"
+      },
+      "train_1p0m_reference": {
+        "assembly": "reference_1p0_flush/figures/two_tank_four_outlet_assembly_shared_world_bounds.png",
+        "join_section": "reference_1p0_flush/figures/four_pipe_transition_join_sections_flush-at-inlet.png",
+        "tank_connection": "reference_1p0_flush/figures/tank_connection_section_horizontal.png",
+        "transition_sections": "reference_1p0_flush/figures/transition_cross_sections.png"
+      }
+    },
+    "summary": "analysis/geometry-comparison.json",
+    "tank_connection_section_comparison": "figures/tank-connection-section-comparison.png",
+    "transition_station_cross_section_comparison": "figures/transition-station-cross-section-comparison.png"
+  },
+  "created_utc": "2026-10-26T13:52:38.349228+00:00",
+  "difference_short0p8_minus_reference1p0": {
+    "post_valve_air_line_volume_m3_each": [
+      -0.04133506221194305,
+      -0.04133506221194305
+    ],
+    "total_line_volume_outside_tank_m3_each": [
+      -0.04133506221194305,
+      -0.04133506221194305
+    ],
+    "water_feed_volume_m3_each": [
+      0.0,
+      0.0
+    ]
+  },
+  "geometry": {
+    "train_0p8m": {
+      "area_sampling": {
+        "limitation": "Discrete section sampling does not establish a continuous minimum or CFD-mesh open area.",
+        "method": "Exact BREP section face area in 81 discrete global X-normal planes through the branch centerline; four 4-mm assumed fitted divider intersections subtracted where present.",
+        "sample_count": 81
+      },
+      "divider_start_fraction_of_train": 0.4166666666666663,
+      "divider_start_x_m": 4.133333333333333,
+      "feed_volume_outside_tank_to_assumed_valve_plane_x2p25_m3_each": [
+        0.2539360223582692,
+        0.2539360223582672
+      ],
+      "generator_sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+      "geometry_summary_path": "results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush/geometry_summary.json",
+      "intermediate_x_m": 4.155555555555555,
+      "mouth_x_m": 4.6,
+      "per_branch_feed_volume_m3": {
+        "tank1_lower": 0.12682275001994933,
+        "tank1_upper": 0.12711327233831987,
+        "tank2_lower": 0.12682275001994187,
+        "tank2_upper": 0.12711327233832534
+      },
+      "per_branch_total_line_volume_outside_tank_m3": {
+        "tank1_lower": 0.3198466653660519,
+        "tank1_upper": 0.3247580334274471,
+        "tank2_lower": 0.3198466653660445,
+        "tank2_upper": 0.3247580334274519
+      },
+      "post_rise_straight_m": 0.0,
+      "post_valve_air_line_volume_m3_each_initial_assumption": [
+        0.39066867643522984,
+        0.3906686764352292
+      ],
+      "tank_capacity_brep_m3_each": 1.65375,
+      "tank_derived_flat_ended_length_m": 2.599530737167624,
+      "tank_headspace_volume_assumed_m3_each": 0.30374999999999996,
+      "tank_water_volume_assumed_m3_each": 1.35,
+      "total_line_volume_outside_tank_m3_each": [
+        0.644604698793499,
+        0.6446046987934964
+      ],
+      "transition_end_x_m": 4.466666666666667,
+      "transition_train_length_m": 0.8,
+      "x_normal_brep_sampled_min_gross_area_m2": 0.07068654034661194,
+      "x_normal_brep_sampled_min_open_area_after_assumed_dividers_m2": 0.07068654034661194,
+      "x_normal_brep_sampled_minimum_location_m": {
+        "gross": 3.80001,
+        "open": 3.80001
+      }
+    },
+    "train_1p0m_reference": {
+      "area_sampling": {
+        "limitation": "Discrete section sampling does not establish a continuous minimum or CFD-mesh open area.",
+        "method": "Exact BREP section face area in 81 discrete global X-normal planes through the branch centerline; four 4-mm assumed fitted divider intersections subtracted where present.",
+        "sample_count": 81
+      },
+      "divider_start_fraction_of_train": 0.41666666666666696,
+      "divider_start_x_m": 4.216666666666667,
+      "feed_volume_outside_tank_to_assumed_valve_plane_x2p25_m3_each": [
+        0.2539360223582692,
+        0.2539360223582672
+      ],
+      "generator_sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+      "geometry_summary_path": "results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush/geometry_summary.json",
+      "intermediate_x_m": 4.2444444444444445,
+      "mouth_x_m": 4.8,
+      "per_branch_feed_volume_m3": {
+        "tank1_lower": 0.12682275001994933,
+        "tank1_upper": 0.12711327233831987,
+        "tank2_lower": 0.12682275001994187,
+        "tank2_upper": 0.12711327233832534
+      },
+      "per_branch_total_line_volume_outside_tank_m3": {
+        "tank1_lower": 0.3405141964720234,
+        "tank1_upper": 0.3454255645334186,
+        "tank2_lower": 0.34051419647201603,
+        "tank2_upper": 0.3454255645334234
+      },
+      "post_rise_straight_m": 0.0,
+      "post_valve_air_line_volume_m3_each_initial_assumption": [
+        0.4320037386471729,
+        0.43200373864717223
+      ],
+      "tank_capacity_brep_m3_each": 1.65375,
+      "tank_derived_flat_ended_length_m": 2.599530737167624,
+      "tank_headspace_volume_assumed_m3_each": 0.30374999999999996,
+      "tank_water_volume_assumed_m3_each": 1.35,
+      "total_line_volume_outside_tank_m3_each": [
+        0.6859397610054421,
+        0.6859397610054394
+      ],
+      "transition_end_x_m": 4.633333333333333,
+      "transition_train_length_m": 1.0,
+      "x_normal_brep_sampled_min_gross_area_m2": 0.07068634802982632,
+      "x_normal_brep_sampled_min_open_area_after_assumed_dividers_m2": 0.07068634802982632,
+      "x_normal_brep_sampled_minimum_location_m": {
+        "gross": 3.80001,
+        "open": 3.80001
+      }
+    }
+  },
+  "inputs": {
+    "coordinate_frame": "stationary apparatus; +X horizontal discharge; Y tank columns/mouth width; +Z upward; SI metres",
+    "divider_flow": "Four equally spaced divider centerlines are placed from the generator's assumed divider-start station and fan with the expanding transition; four divider solids create five passages. Finite thickness is visualization/assumption, not measured hardware.",
+    "shared_generator_defaults": {
+      "headspace_ratio_to_water_volume": 0.225,
+      "intermediate_width_m": 0.5,
+      "lamella_count_per_mouth": 4,
+      "lamella_thickness_m_assumed_not_measured": 0.004,
+      "mouth_height_m": 0.15,
+      "mouth_width_m": 1.0,
+      "pipe_diameter_m_assumed_equal_to_valve_diameter": 0.3,
+      "pipe_transition_join": "flush-at-inlet",
+      "post_rise_straight_m": 0.0,
+      "tank_axis": "horizontal",
+      "tank_diameter_m": 0.9,
+      "water_volume_m3_per_tank": 1.35
+    },
+    "source_classification": {
+      "assumed_or_reconstructed": [
+        "0.8 m and 1.0 m transition-plus-mouth lengths are provisional choices, not measured",
+        "flat-ended 0.900 m cylindrical tanks and 22.5% central headspace ratio",
+        "0.300 m pipe ID equals valve diameter only as an assumption",
+        "0.500 m intermediate width, four equal-gap divider paths, 4 mm visualization solids, and reconstructed branch/transition geometry",
+        "flush-at-inlet is a corrected BREP construction option; its physical equivalence and CFD effect are untested"
+      ],
+      "photo": "Qualitative only; no dimensions were measured from the unscaled photo.",
+      "reported_user_hardware": [
+        "two tanks; two valves/outlets per tank",
+        "1.350 m3 liquid per tank",
+        "downstream of valves initially air"
+      ]
+    },
+    "valve_plane": {
+      "classification": "assumed valve/source plane from current short1 case geometry",
+      "feed_definition": "BREP branch-fluid volume outside tank and upstream of x=2.25 m; post-valve air line volume is total outside-tank line minus this feed volume.",
+      "x_m_assumed": 2.25
+    },
+    "variants": {
+      "train_0p8m": {
+        "mouth_x_m": 4.6,
+        "post_rise_straight_m": 0.0,
+        "transition_and_mouth_length_m": 0.8
+      },
+      "train_1p0m_reference": {
+        "mouth_x_m": 4.8,
+        "post_rise_straight_m": 0.0,
+        "transition_and_mouth_length_m": 1.0
+      }
+    }
+  },
+  "limitations": [
+    "No physical flow, pressure, valve performance, mesh quality, or CFD result is established.",
+    "Shortening the train changes both storage and the transition's axial growth profile/centerline fan; this is not a pure friction-length perturbation.",
+    "Exact BREP line volumes and discrete section areas are geometric estimates; later CFD native cell-zone inventories require separate reconciliation."
+  ],
+  "schema": "i4f-corrected-flush-transition-length-geometry-comparison/v1",
+  "source": {
+    "generator": "scripts/i4f_four_outlet_geometry/generate.py",
+    "generator_sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+    "helper": "results/runs/i4f-corrected-transition-08-20261026T1343Z/analysis/compare_geometry.py",
+    "helper_sha256": "f32bbcdd34ca6a0110888496cc3eb7950921e03c160a59b10aa3ca3db61137e4"
+  },
+  "status": "geometry-only BREP comparison; no mesh or CFD",
+  "topology_and_throat_checks": {
+    "train_0p8m": {
+      "all_connections_own_tank_to_own_mouth": true,
+      "all_envelope_solids_valid": true,
+      "all_joined_branches_valid": true,
+      "brep_discrete_area_minimum_caveat": "No continuous-minimum proof; use the sampled x-normal area table and per-generator discrete station check only.",
+      "envelope_solid_count": 10,
+      "flush_shared_disk_expected_area_m2": 0.07068583470577035,
+      "generator_discrete_station_samples": [
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068999053578981,
+          "open_area_after_dividers_m2": 0.07068999053578981,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.800044444444444
+        },
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068583470577036,
+          "open_area_after_dividers_m2": 0.07068583470577036,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.800000444444444
+        },
+        {
+          "centerline_y_m": -0.7499971428571428,
+          "divider_blockage_area_m2": 0.0014176495692429904,
+          "gross_envelope_area_m2": 0.09155056678907586,
+          "open_area_after_dividers_m2": 0.09013291721983287,
+          "section_normal_xyz": [
+            1.0,
+            0.6428571428571414,
+            0.0
+          ],
+          "x_m": 4.1555599999999995
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.466671111111111
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.599955555555555
+        }
+      ],
+      "joined_branch_solid_count": 4
+    },
+    "train_1p0m_reference": {
+      "all_connections_own_tank_to_own_mouth": true,
+      "all_envelope_solids_valid": true,
+      "all_joined_branches_valid": true,
+      "brep_discrete_area_minimum_caveat": "No continuous-minimum proof; use the sampled x-normal area table and per-generator discrete station check only.",
+      "envelope_solid_count": 10,
+      "flush_shared_disk_expected_area_m2": 0.07068583470577035,
+      "generator_discrete_station_samples": [
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068999053579164,
+          "open_area_after_dividers_m2": 0.07068999053579164,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.8000555555555553
+        },
+        {
+          "centerline_y_m": -0.75,
+          "divider_blockage_area_m2": 0.0,
+          "gross_envelope_area_m2": 0.07068583470577036,
+          "open_area_after_dividers_m2": 0.07068583470577036,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 3.800000555555555
+        },
+        {
+          "centerline_y_m": -0.749997142857143,
+          "divider_blockage_area_m2": 0.0017429981557909818,
+          "gross_envelope_area_m2": 0.08574094729138826,
+          "open_area_after_dividers_m2": 0.08399794913559727,
+          "section_normal_xyz": [
+            1.0,
+            0.5142857142857148,
+            0.0
+          ],
+          "x_m": 4.24445
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.633338888888888
+        },
+        {
+          "centerline_y_m": -0.55,
+          "divider_blockage_area_m2": 0.0024000000000000007,
+          "gross_envelope_area_m2": 0.1499999999999999,
+          "open_area_after_dividers_m2": 0.1475999999999999,
+          "section_normal_xyz": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "x_m": 4.799944444444444
+        }
+      ],
+      "joined_branch_solid_count": 4
+    }
+  }
+}

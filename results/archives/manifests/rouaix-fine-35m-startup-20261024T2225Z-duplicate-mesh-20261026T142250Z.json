@@ -1,0 +1,331 @@
+{
+  "schema": "verified-native-mesh-duplicate-pruning/v1",
+  "created_utc": "2026-10-26T14:22:50.207717+00:00",
+  "status": "duplicate_paths_removed_canonical_retained",
+  "source_failed_startup_case": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case",
+  "duplicate_source_root": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh",
+  "retained_canonical_root": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh",
+  "source_run_status": {
+    "status": "failed_solver_before_any_CFD_sample",
+    "exit_code": 127,
+    "failed_stage": "foamVersion",
+    "started_utc": "2026-10-24T21:51:55.751863+00:00",
+    "finished_utc": "2026-10-24T22:12:09.630293+00:00",
+    "rank_count": 20,
+    "run_state_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/run-state.json"
+  },
+  "dependency_review": {
+    "active_docker_mount_or_process_for_duplicate_source": false,
+    "open_fd_targets_before": [],
+    "active_docker_names": [
+      "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a i4f-finite-water-eos-halfdt-stage01-20261026T131840Z Up About an hour",
+      "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3 i4f-rhoconst-cold-control-stage02-20261026T121421Z Up 2 hours"
+    ],
+    "hpc_source_provenance_points_to_retained_canonical_case": true,
+    "hpc_source_reference_files": [
+      "cases/e1_rouaix_hpc/source-provenance.json",
+      "cases/e1_rouaix_fine_cpu/run_pilot.py"
+    ],
+    "current_hpc_mesh_is_distinct_10p1M_mesh_per_root_instruction": true,
+    "scheduler_cli_squeue_available": false,
+    "local_code_references_to_duplicate_failed_case": [
+      "failed-run-local metadata/scripts only; repository code/HPC source point to canonical static case"
+    ]
+  },
+  "canonical_mesh_quality": {
+    "cells": 35190080,
+    "role": "static quality candidate, no CFD/validation",
+    "status": "passed topology and geometry checks",
+    "source_metadata_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/mesh-family-compatibility.json"
+  },
+  "filesystem": {
+    "type": "ext4",
+    "hardlinks_refused_and_absent": true,
+    "duplicate_and_canonical_file_inodes_are_distinct": true,
+    "mesh_directory_original_metadata": {
+      "type": "directory",
+      "size_bytes": 4096,
+      "mode": 493,
+      "uid": 1000,
+      "gid": 1000,
+      "mtime_ns": 1792526033627438113,
+      "inode": 185864493,
+      "nlink": 2,
+      "allocated_bytes": 4096
+    }
+  },
+  "file_count": 8,
+  "logical_duplicate_bytes": 7460431028,
+  "allocated_duplicate_bytes": 7460466688,
+  "files": [
+    {
+      "name": "boundary",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/boundary",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/boundary",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 1869,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033627438113,
+        "inode": 185864496,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "e5b3050006f91f90fba02d2ca86df23af99c0428ccbfe8021a3da18a93f33a92"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 1869,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033627438113,
+        "inode": 185102064,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "e5b3050006f91f90fba02d2ca86df23af99c0428ccbfe8021a3da18a93f33a92"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "cellZones",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/cellZones",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/cellZones",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 918,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033627438113,
+        "inode": 185864499,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "7492c853093852aca1649ee727a9820a3d51d6b46af5e949c2b204e1f4528b9b"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 918,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033627438113,
+        "inode": 185102069,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "7492c853093852aca1649ee727a9820a3d51d6b46af5e949c2b204e1f4528b9b"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "faceZones",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/faceZones",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/faceZones",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 918,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526030941436176,
+        "inode": 185864497,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "cab5017850e5e8489a0ba951996b5b5f2da3abec0bf2a36dadb48978b7e0a657"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 918,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526030941436176,
+        "inode": 185102068,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "cab5017850e5e8489a0ba951996b5b5f2da3abec0bf2a36dadb48978b7e0a657"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "faces",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/faces",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/faces",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 3997851051,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526030195435638,
+        "inode": 185864494,
+        "nlink": 1,
+        "allocated_bytes": 3997855744,
+        "sha256": "7bbd41f0272e4e568f305eb6bf3067b3097891146d22ab085a9c16a5f72fd5b4"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 3997851051,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526030195435638,
+        "inode": 185102062,
+        "nlink": 1,
+        "allocated_bytes": 3997855744,
+        "sha256": "7bbd41f0272e4e568f305eb6bf3067b3097891146d22ab085a9c16a5f72fd5b4"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "neighbour",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/neighbour",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/neighbour",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 914143177,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526012978423267,
+        "inode": 185864475,
+        "nlink": 1,
+        "allocated_bytes": 914149376,
+        "sha256": "2ba7d11964231e9c72214baaf0f2874f04cc63081863e8131d12d41fe7250866"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 914143177,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526012978423267,
+        "inode": 185102058,
+        "nlink": 1,
+        "allocated_bytes": 914149376,
+        "sha256": "2ba7d11964231e9c72214baaf0f2874f04cc63081863e8131d12d41fe7250866"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "owner",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/owner",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/owner",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 919456529,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033473438002,
+        "inode": 185864501,
+        "nlink": 1,
+        "allocated_bytes": 919461888,
+        "sha256": "3f0d4eca6d86be0a95f9c0fff34d63e2f660f72802d8942d62d96257b4e6efa4"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 919456529,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033473438002,
+        "inode": 185102063,
+        "nlink": 1,
+        "allocated_bytes": 919461888,
+        "sha256": "3f0d4eca6d86be0a95f9c0fff34d63e2f660f72802d8942d62d96257b4e6efa4"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "pointZones",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/pointZones",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/pointZones",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 919,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033627438113,
+        "inode": 185864500,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "8ffdbad415c7b456d93007f19889360bbacc3a99ea0ee211ef08b8501120a93f"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 919,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526033627438113,
+        "inode": 185102071,
+        "nlink": 1,
+        "allocated_bytes": 4096,
+        "sha256": "8ffdbad415c7b456d93007f19889360bbacc3a99ea0ee211ef08b8501120a93f"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    },
+    {
+      "name": "points",
+      "source_path": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/points",
+      "canonical_path": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/points",
+      "source": {
+        "type": "regular_file",
+        "size_bytes": 1628975647,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526008538420088,
+        "inode": 185864498,
+        "nlink": 1,
+        "allocated_bytes": 1628983296,
+        "sha256": "82d426c1af33cba159fad907ec90078af305603d34fe47d38c6190fb2ee81db3"
+      },
+      "canonical": {
+        "type": "regular_file",
+        "size_bytes": 1628975647,
+        "mode": 420,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1792526008538420088,
+        "inode": 185102060,
+        "nlink": 1,
+        "allocated_bytes": 1628983296,
+        "sha256": "82d426c1af33cba159fad907ec90078af305603d34fe47d38c6190fb2ee81db3"
+      },
+      "byte_identical": true,
+      "different_inodes": true
+    }
+  ],
+  "restore_commands": [
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/boundary' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/boundary'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/cellZones' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/cellZones'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/faceZones' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/faceZones'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/faces' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/faces'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/neighbour' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/neighbour'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/owner' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/owner'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/pointZones' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/pointZones'",
+    "cp --reflink=never --preserve=mode,ownership,timestamps 'results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh/points' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh/points'",
+    "touch -m -d '@1792526033.627438113' 'results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh'"
+  ],
+  "restore_note": "Restore only if needed: copy each retained canonical mesh file back to its duplicate failed-run path; file metadata currently matches exactly. Restore the recorded source directory mtime after all copies. Verify SHA-256 against this record. Canonical mesh is never removed or modified.",
+  "completed_utc": "2026-10-26T14:22:58.905569+00:00",
+  "pre_unlink_recheck_all_hashes_and_metadata": true,
+  "open_fd_targets_before": [],
+  "removed_source_paths": 8,
+  "source_paths_absent_after": true,
+  "canonical_hashes_verified_after": true,
+  "free_before_unlink_bytes": 26452877312,
+  "free_after_unlink_bytes": 33913028608,
+  "measured_free_recovered_bytes": 7460151296
+}
