@@ -51,7 +51,7 @@ FVSCHEMES_OVERRIDE_BY_VARIANT = {
     "upwind": ("div(rhoPhi,U) Gauss limitedLinearV 1;", "div(rhoPhi,U) Gauss upwind;"),
     "u_gradient_limited": ("grad(U) Gauss linear;", "grad(U) cellLimited Gauss linear 1;"),
 }
-SUPPORTED_PLACEMENTS = {64: 1, 120: 1, 240: 2, 300: 3}
+SUPPORTED_PLACEMENTS = {64: 1, 96: 1, 120: 1, 240: 2, 300: 3}
 RHO_WATER = 997.6
 RHO_AIR = 1.18
 MU_WATER = 8.89e-4
@@ -734,7 +734,7 @@ def prepare_case(
         or isinstance(nodes, bool)
         or nodes != SUPPORTED_PLACEMENTS[ranks]
     ):
-        raise ValueError("supported rank/node placements are 64/1, 120/1, 240/2, or 300/3")
+        raise ValueError("supported rank/node placements are 64/1, 96/1, 120/1, 240/2, or 300/3")
     if isinstance(memory_gib, bool) or memory_gib < 1:
         raise ValueError("memory_gib must be positive")
     if not math.isfinite(timeout_s) or timeout_s <= 0:

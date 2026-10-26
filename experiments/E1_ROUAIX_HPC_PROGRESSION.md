@@ -604,3 +604,83 @@ and required native-format adapter/resource work are in
 Eight existing reference/profile tests passed. No comparison has been run on
 future fields, no automatic postprocess dispatcher is armed, and no formal
 E1 tolerance or acceptance decision is declared by this preparation.
+
+## S1 one-node small-step scaling and matched upwind, declared 26 October
+
+User replaces the queued three-node diagnostic 14648472 with one-node starter
+scaling tests and a matched momentum-advection trial. That cancelled pending
+job already used 0.1 ms; the numerically compromised historical 0.5 ms scaling
+results are retained, not overwritten. Existing independent 5 s job 14650641
+keeps its declaration, frozen source and scheduler configuration.
+
+Declare four fresh-from-zero exploratory cases, in this sequential order:
+
+- **S1-ORIG-120-01MS-005:** original momentum scheme, 120 ranks, 45 min cap.
+- **S1-UPWIND-120-01MS-005:** momentum upwind, 120 ranks, 45 min cap.
+- **S1-ORIG-64-01MS-005:** original momentum scheme, 64 ranks, 75 min cap.
+- **S1-ORIG-96-01MS-005:** original momentum scheme, 96 ranks, 60 min cap.
+
+Every case requests one CPU node, one thread per MPI rank and 64 GiB, fixed
+deltaT=0.0001 s, endTime=0.05 s (500 steps), no adaptive stepping and full
+endpoint retention. The input is the same qualified 10,099,265-cell mesh
+archive, SHA-256
+8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787.
+Native OpenCFD v2512 interIsoFoam, Cray MPI, Euler time integration, original
+Gauss-linear gradients, realizable k-epsilon, source/initialization, material
+properties, boundaries, alpha subcycles and PIMPLE settings remain unchanged.
+The upwind case changes only `div(rhoPhi,U) Gauss limitedLinearV 1;` to
+`div(rhoPhi,U) Gauss upwind;`. Case dictionaries and difference must be
+hash-verified before release; do not combine gradient limiting with upwind.
+The per-case S1 record and this progression document are the active declaration;
+each attempt must preserve both or their hash-bound immutable source copies.
+The generic pilot experiment.md is retained as historical background and does
+not override the S1 timestep, horizon or numerical variant.
+The new 120-rank original supplies a current-source matched control; job
+14649329 remains an independent historical repeat, not the sole comparator.
+
+This campaign does not establish an optimum for developed flow. Compare the
+three original-scheme runs over the identical 0.0100--0.0499 s startup window,
+reporting the actual printed-clock interval and its rounding uncertainty.
+The 400 inclusive samples contain 399 endpoint intervals (0.0399 s); use
+that span with the first/last ClockTime difference, not 0.0400 s.
+Separate solver srun envelope, setup/decomposition, whole-job wall time,
+queue wait, measured TotalCPU, allocated core-hours, per-task RSS, node/task
+placement and I/O/packing bytes. Do not call pressure iteration counts time.
+Full 3D output is identical and sparse (initial/final); collect every-step
+extrema/locations, alpha bounds, Courant values, linear-solve criteria,
+turbulence records, water inventory and boundary-flux ledger. A faster case
+with failed diagnostics is not a qualified performance choice.
+
+Compare upwind with its 120-rank original at the same times and horizon using
+those diagnostics and the retained final fields. The transport-consistency
+research motivates this single-factor trial; a lower peak speed or bounded
+alpha cannot prove momentum conservation or correct breakup. Upwind numerical
+diffusion can change penetration, width and interface structure. Quantitative
+field/momentum observers require separately verified postprocessing; no
+unimplemented observer or formal E1 tolerance is claimed here.
+
+Submit four real Slurm jobs with an afterany dependency chain so at most one
+short campaign job can allocate at once. A failed case must remain preserved
+and is not automatically retried; the next distinct declared diagnostic may
+run. Do not create dependencies on the independent 5 s target. The sum of
+requested rank-times-wall caps is at most **356 allocated core-hours** if
+AllocCPUS equals requested ranks; record actual AllocTRES/billing if different.
+No idle reservations, automatic requeue or unrelated-job changes are allowed.
+
+Use a new immutable source root on /project and force the short-case expanded
+workspace onto that shared filesystem with
+`ROUAIX_REQUIRE_SHARED_WORKSPACE=1`; this avoids relying on ephemeral node
+storage if final packing fails. Reserve at least 24 GiB campaign headroom
+for four ~1.7 GiB result archives, the single active expanded case and packing;
+use the existing 12 GiB runtime free-space floor and inspect actual project
+quota as well as filesystem availability. Keep collated I/O and packed
+archives, verify CRC/hash/membership before removing only owned workspaces,
+and preserve all failed attempts. Existing nonfinite, speed>1000 m/s,
+no-progress, PAUSE, signal escalation and deadline/checkpoint guards remain.
+
+Execution owner: Luna one_node_queue; source support: Luna one_node_support;
+root owns declaration, staging review and interpretation. Per-case immutable
+records, source capsule, scheduler submission/cancellation/estimate receipts
+and later terminal evidence live under
+`results/runs/rouaix-one-node-campaign-20261026/`. These are exploratory
+operational tests, not an E1 gate or field-validation result.

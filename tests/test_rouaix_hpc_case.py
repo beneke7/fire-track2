@@ -310,7 +310,14 @@ def test_preparation_preserves_case1_inputs_and_builds_fixed_step_case(
 
 @pytest.mark.parametrize(
     ("ranks", "nodes", "end_time_s", "delta_t_s", "steps"),
-    [(120, 1, 0.5, 0.001, 500), (240, 2, 0.5, 0.0005, 1000), (300, 3, 0.5, 0.001, 500)],
+    [
+        (64, 1, 0.05, 0.0001, 500),
+        (96, 1, 0.05, 0.0001, 500),
+        (120, 1, 0.05, 0.0001, 500),
+        (120, 1, 0.5, 0.001, 500),
+        (240, 2, 0.5, 0.0005, 1000),
+        (300, 3, 0.5, 0.001, 500),
+    ],
 )
 def test_case_preparation_records_supported_scaling_and_fixed_horizons(
     tmp_path: Path,
@@ -355,6 +362,8 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
 @pytest.mark.parametrize(
     (
         "variant",
+        "ranks",
+        "end_time_s",
         "delta_t_s",
         "steps",
         "expected_momentum",
@@ -365,8 +374,10 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
     [
         (
             "upwind",
-            0.001,
-            10,
+            96,
+            0.05,
+            0.0001,
+            500,
             "upwind",
             "grad(U) Gauss linear;",
             "div(rhoPhi,U) Gauss limitedLinearV 1;",
@@ -374,6 +385,8 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
         ),
         (
             "original",
+            64,
+            0.01,
             0.0001,
             100,
             "limitedLinearV 1",
@@ -383,6 +396,8 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
         ),
         (
             "u_gradient_limited",
+            64,
+            0.01,
             0.0005,
             20,
             "limitedLinearV 1",
@@ -395,6 +410,8 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
 def test_diagnostic_variants_bind_exact_scheme_changes_and_fixed_short_horizon(
     tmp_path: Path,
     variant: str,
+    ranks: int,
+    end_time_s: float,
     delta_t_s: float,
     steps: int,
     expected_momentum: str,
@@ -409,8 +426,8 @@ def test_diagnostic_variants_bind_exact_scheme_changes_and_fixed_short_horizon(
         manifest,
         audit,
         output,
-        ranks=64,
-        end_time_s=0.01,
+        ranks=ranks,
+        end_time_s=end_time_s,
         delta_t_s=delta_t_s,
         numerical_variant=variant,
         set_expr_fields=str(_set_expr_fixture(tmp_path)),
@@ -439,8 +456,10 @@ def test_diagnostic_variants_bind_exact_scheme_changes_and_fixed_short_horizon(
     assert schemes.count("grad(k) Gauss linear;") == 1
     assert schemes.count("grad(epsilon) Gauss linear;") == 1
     assert metadata["time_controls"]["startup_steps"] == steps
-    assert metadata["time_controls"]["full_field_write_times_s"] == [0.0, 0.01]
-    assert "endTime 0.01;" in controls and f"deltaT {delta_t_s:g};" in controls
+    assert (metadata["ranks"], metadata["node_count"]) == (ranks, 1)
+    assert metadata["time_controls"]["delta_t_s"] == delta_t_s
+    assert metadata["time_controls"]["full_field_write_times_s"] == [0.0, end_time_s]
+    assert f"endTime {end_time_s:g};" in controls and f"deltaT {delta_t_s:g};" in controls
     assert "adjustTimeStep no;" in controls
     assert "failureLocations" in controls
     assert "fields (U p_rgh k epsilon nut);" in controls
@@ -461,8 +480,8 @@ def test_diagnostic_variants_bind_exact_scheme_changes_and_fixed_short_horizon(
             manifest,
             audit,
             original,
-            ranks=64,
-            end_time_s=0.01,
+            ranks=ranks,
+            end_time_s=end_time_s,
             delta_t_s=delta_t_s,
             numerical_variant="original",
             set_expr_fields=str(_set_expr_fixture(tmp_path)),
@@ -471,18 +490,13 @@ def test_diagnostic_variants_bind_exact_scheme_changes_and_fixed_short_horizon(
         assert original_scheme is not None and diagnostic_scheme is not None
         assert original_schemes.count(original_scheme) == 1
         assert original_schemes.replace(original_scheme, diagnostic_scheme, 1) == schemes
-        for relative in (
-            "0/U",
-            "0/alpha.water",
-            "0/p_rgh",
-            "0/k",
-            "0/epsilon",
-            "0/nut",
-            "system/fvSolution",
-            "constant/transportProperties",
-            "system/controlDict",
-        ):
-            assert (output / relative).read_bytes() == (original / relative).read_bytes()
+        for path in output.rglob("*"):
+            relative = path.relative_to(output)
+            if path.is_file() and relative.as_posix() not in {
+                "case-inputs.json",
+                "system/fvSchemes",
+            }:
+                assert (original / relative).read_bytes() == path.read_bytes()
         if variant == "u_gradient_limited":
             assert assumptions["velocity_gradient_limiter_scope"] == (
                 "cellLimited Gauss linear 1 on grad(U) only; grad(k) and grad(epsilon) unchanged"

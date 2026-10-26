@@ -54,6 +54,7 @@ FVSCHEMES_OVERRIDE_BY_VARIANT = {
 }
 SUPPORTED_PLACEMENTS = {
     64: (1, (64,)),
+    96: (1, (96,)),
     120: (1, (120,)),
     240: (2, (120, 120)),
     300: (3, (100, 100, 100)),
@@ -110,7 +111,9 @@ class PilotConfig:
     def validate(self) -> PilotConfig:
         placement = SUPPORTED_PLACEMENTS.get(self.ranks)
         if placement is None or self.nodes != placement[0]:
-            raise PilotError("supported rank/node placements are 64/1, 120/1, 240/2, or 300/3")
+            raise PilotError(
+                "supported rank/node placements are 64/1, 96/1, 120/1, 240/2, or 300/3"
+            )
         if self.delta_t_s not in SUPPORTED_DELTA_T_S:
             raise PilotError("fixed deltaT must be one of 0.001, 0.0005, or 0.0001 s")
         if self.horizon_s not in SUPPORTED_HORIZONS_S:
@@ -472,7 +475,10 @@ def create_workspace(
     nodes: int = 1,
     min_free_bytes: int = MIN_FREE_DISK_BYTES,
 ) -> tuple[Path, dict[str, Any]]:
-    if nodes == 1:
+    shared_choice = env.get("ROUAIX_REQUIRE_SHARED_WORKSPACE")
+    if shared_choice not in {None, "0", "1"}:
+        raise PilotError("ROUAIX_REQUIRE_SHARED_WORKSPACE must be 0 or 1")
+    if nodes == 1 and shared_choice != "1":
         try:
             base, record = select_node_local_workspace(env, min_free_bytes=min_free_bytes)
         except PilotError:
@@ -496,8 +502,9 @@ def create_workspace(
         base = Path(env.get("ROUAIX_PROJECT_ROOT", str(DEFAULT_PROJECT_ROOT))).resolve(strict=True)
         free = shutil.disk_usage(base).free
         if free < min_free_bytes:
+            label = "multi-node" if nodes > 1 else "required shared"
             raise PilotError(
-                "multi-node workspace is below the declared free-space floor on shared project scratch"
+                f"{label} workspace is below the declared free-space floor on shared project scratch"
             )
         fs_type, source = _filesystem_details(base)
         record = {
@@ -505,7 +512,11 @@ def create_workspace(
             "filesystem_type": fs_type,
             "filesystem_source": source,
             "free_bytes_at_selection": free,
-            "storage_class": "shared-project-scratch-required-for-multinode",
+            "storage_class": (
+                "shared-project-scratch-required-for-multinode"
+                if nodes > 1
+                else "shared-project-scratch-required"
+            ),
         }
     workspace = Path(tempfile.mkdtemp(prefix=f"rouaix-e1hpc-{job_id}.", dir=base))
     record["workspace"] = str(workspace.resolve())
@@ -1843,6 +1854,13 @@ def run_pilot(
         (attempt / "experiment.md").write_bytes(
             (ROOT / "experiments/E1_ROUAIX_HPC_PILOT.md").read_bytes()
         )
+        progression = ROOT / "experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+        progression_copy = attempt / "experiment-progression.md"
+        shutil.copy2(progression, progression_copy)
+        state["primary_experiment_declaration"] = {
+            "path": progression_copy.name,
+            "sha256": sha256_file(progression_copy),
+        }
         source_copy = attempt / "source"
         source_copy.mkdir()
         for source in (
