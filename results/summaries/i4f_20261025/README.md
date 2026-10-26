@@ -57,6 +57,12 @@ cold-derived CFD later stopped at .484006 s; this is not completed discharge.
 [New negative outcomes](gamma-outer-relaxation/gamma-outer-relaxation-negative-outcomes.json)
 retain the warm source/predictor comparisons and the failed smaller-timestep
 replay. Latest compute state belongs in live status.
+The [tight frozen-pressure map](tight-pressure-map/summary.json) settled its
+unperturbed solves and damped the selected outer-disturbance direction to
+about .032 of its input norm at both 1 and 10 Pa. Their response vectors
+still differ by 23.2%; no global stability or complete-discharge claim follows.
+The packet includes a source-reconstructible patch from the published channel
+v8 base, build inputs, scalar tables and hashed local raw-vector references.
 
 The [Euler restart-history packet](restart-history/README.md) includes the
 small A/C/D inputs, native split/end states and both source snapshots. Saving

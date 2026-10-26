@@ -1,0 +1,92 @@
+--- results/runs/i4f-frozen-pressure-operator-20261026T2200Z/build/source/v8-frozen-pressure-probe/applications/solvers/multiphase/compressibleInterFoam/Make/files
++++ results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/build/source/v8-frozen-pressure-tight-maps/applications/solvers/multiphase/compressibleInterFoam/Make/files
+@@ -1,3 +1,3 @@
+ compressibleInterFoam.C
+ 
+-EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamI4FFrozenPressureOperator
++EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamI4FFrozenPressureTightMap
+--- results/runs/i4f-frozen-pressure-operator-20261026T2200Z/build/source/v8-frozen-pressure-probe/applications/solvers/multiphase/compressibleInterFoam/i4fFrozenPressureProbe.H
++++ results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/build/source/v8-frozen-pressure-tight-maps/applications/solvers/multiphase/compressibleInterFoam/i4fFrozenPressureProbe.H
+@@ -246,18 +246,22 @@
+         << exit(FatalError);
+ }
+ 
+-Info<< "I4F_FROZEN_PRESSURE_PROBE_CAPTURE"
+-    << " time_s=" << runTime.timeName()
+-    << " time_index=" << runTime.timeIndex()
+-    << " deltaT_s=" << runTime.deltaTValue()
+-    << " rank_count=" << Pstream::nProcs()
+-    << " global_cell_31926_rank=7_local=1779"
+-    << " global_cell_62270_rank=7_local=3759"
+-    << " global_face_136938_rank=7_local=8995_raw_address=136939"
+-    << " face_owner_local=" << mesh.faceOwner()[i4fProbeFace]
+-    << " face_neighbour_local=" << mesh.faceNeighbour()[i4fProbeFace]
+-    << " processor_pressure_neighbours=live_each_solve"
+-    << nl;
++if (i4fProbeRank == 7)
++{
++    Pout<< "I4F_FROZEN_PRESSURE_PROBE_CAPTURE"
++        << " rank=" << i4fProbeRank
++        << " time_s=" << runTime.timeName()
++        << " time_index=" << runTime.timeIndex()
++        << " deltaT_s=" << runTime.deltaTValue()
++        << " rank_count=" << Pstream::nProcs()
++        << " global_cell_31926_local=1779"
++        << " global_cell_62270_local=3759"
++        << " global_face_136938_local=8995_raw_address=136939"
++        << " face_owner_local=" << mesh.faceOwner()[i4fProbeFace]
++        << " face_neighbour_local=" << mesh.faceNeighbour()[i4fProbeFace]
++        << " processor_pressure_neighbours=live_each_solve"
++        << nl;
++}
+ Info<< "I4F_FROZEN_PRESSURE_PROBE_MATRIX_DIMENSIONS"
+     << " comp1=" << p_rghEqnComp1().dimensions()
+     << " comp2=" << p_rghEqnComp2().dimensions()
+@@ -677,8 +681,31 @@
+         ++i4fHeldMismatchLocal;
+     }
+     fvScalarMatrix full(i4fFrozenComp1 + i4fFrozenComp2 + incomp);
++    dictionary i4fTightMapSolverControls
++    (
++        mesh.solverDict(p_rgh.select(pimple.finalInnerIter()))
++    );
++    i4fTightMapSolverControls.set("tolerance", scalar(1e-14));
++    i4fTightMapSolverControls.set("relTol", scalar(0));
++    i4fTightMapSolverControls.set("maxIter", label(1000));
++    i4fTightMapSolverControls.set("log", label(1));
++    if
++    (
++        phase == "baseline_iteration"
++     && sweep == 1
++     && Pstream::master()
++    )
++    {
++        Info<< "I4F_FROZEN_PRESSURE_MAP_SOLVER_CONTROLS"
++            << " selected_dictionary="
++            << p_rgh.select(pimple.finalInnerIter())
++            << " solver=GAMG"
++            << " tolerance=1e-14 relTol=0 maxIter=1000 log=1"
++            << " physical_fvSolution_unchanged=true"
++            << nl;
++    }
+     const solverPerformance performance =
+-        full.solve(p_rgh.select(pimple.finalInnerIter()));
++        full.solve(i4fTightMapSolverControls);
+ 
+     const scalarField solvedPrgh(p_rgh.primitiveField());
+     const std::string prefix
+--- results/runs/i4f-frozen-pressure-operator-20261026T2200Z/build/source/v8-frozen-pressure-probe/applications/solvers/multiphase/compressibleInterFoam/pEqn.H
++++ results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/build/source/v8-frozen-pressure-tight-maps/applications/solvers/multiphase/compressibleInterFoam/pEqn.H
+@@ -215,6 +215,12 @@
+                     << " baseline_unperturbed_maps=8"
+                     << " response_maps_per_sign_amplitude=1"
+                     << " amplitudes_Pa=1,10"
++                    << " diagnostic_map_solver=GAMG"
++                    << " diagnostic_map_tolerance=1e-14"
++                    << " diagnostic_map_relTol=0"
++                    << " diagnostic_map_maxIter=1000"
++                    << " physical_p_rgh_tolerance=1e-10"
++                    << " physical_fvSolution_unchanged=true"
+                     << " physical_checkpoint_written=false"
+                     << " continuation_after_probe=false"
+                     << nl << endl;

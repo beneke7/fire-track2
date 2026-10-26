@@ -1,0 +1,46 @@
+{
+  "base": {
+    "package_path": "results/summaries/i4f_20261025/restart-history/solver-source/v8",
+    "published_immediate_parent_binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "source_file_manifest_path": "results/summaries/i4f_20261025/restart-history/solver-source/v8-source-files.json",
+    "source_file_manifest_sha256": "5747f93c5be1f393c26a45c7779fbc80d84bfa3ecfe28ad173c9a475c3171531",
+    "source_manifest_entries": 70
+  },
+  "classification": "Portable source delta and exact source-manifest verification; case inputs and restart fields remain in the ignored run bundle.",
+  "created_utc": "2026-10-26T23:13:46.626427+00:00",
+  "delta": {
+    "changed_source_paths": [
+      "applications/solvers/multiphase/VoF/alphaEqn.H",
+      "applications/solvers/multiphase/compressibleInterFoam/Make/files",
+      "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "applications/solvers/multiphase/compressibleInterFoam/i4fFrozenPressureProbe.H",
+      "applications/solvers/multiphase/compressibleInterFoam/pEqn.H"
+    ],
+    "patch_path": "v8-published-to-tight-map.patch",
+    "patch_scope": "Four modified source/build-definition files and one added pressure-probe header; no generated lnInclude, object, dependency, binary or build-cache files.",
+    "patch_sha256": "02941b9a472031aada98bdc68dde29d315a69c751c13f200ec0a91b60a21cf03",
+    "verification_path": "source-lineage-verification.json",
+    "verification_sha256": "f86acc2dbedc78b55aceccb5e668468804e6b487ed02e4828a9600273e4545d5"
+  },
+  "historical_delta_artifact": {
+    "lineage": "This earlier diff is only the tight-map change relative to a private frozen-pressure-probe source tree; it is preserved as history and is not sufficient to reconstruct tight source from published v8 by itself.",
+    "path": "source.patch",
+    "sha256": "8edb357393a78d1c020d0397c55aa985eb59ef96c531b658e8a1648bb461c68a"
+  },
+  "output": {
+    "binary_bytes": 1796632,
+    "binary_sha256": "c3986247acdc1116c97aa9769bf3db4426a092dfe02ccf046cfe61e28b251cbf",
+    "build_log_sha256": "f80ca189c972cbbe16d6279906b41cfbe88abdb20650ccf5fa101e881384b449",
+    "build_script_path": "build_solver.sh",
+    "build_script_sha256": "1dc03081b20524b843bba6026fc1268ebf508c58b6d4922d9866efdf4ed27bed",
+    "declared_output_source_entries": 69,
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "pinned_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "private_source_tree_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/build/source/v8-frozen-pressure-tight-maps",
+    "solver_binary_name": "compressibleInterFoamI4FFrozenPressureTightMap",
+    "source_manifest_path": "tight-source-manifest.sha256",
+    "source_manifest_sha256": "be18678e2f4e76ed4eefb04a9359fe547347f1aa85f41f2bd204e96dc6fe5579"
+  },
+  "qualification": "The base is the restart-history channel-D published v8 source package, not the separate apparatus v8-restart-cold source overlay associated with the 12d8 apparatus binary. The published v8 package has two unchanged helper scripts (Allwclean/Allwmake) not included in the tight run\u2019s 69-entry source manifest. Applying this delta to the published v8 tree reproduces every declared tight source hash. It does not recreate the mesh, case dictionaries, restart fields, dynamicCode cache or exact build environment beyond the pinned image/build script.",
+  "schema": "i4f-tight-pressure-map-source-lineage/v1"
+}

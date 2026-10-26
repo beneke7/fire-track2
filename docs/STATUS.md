@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 23:01 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 23:14 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -22,8 +22,10 @@ and tighter pressure-only diagnostic have ended. The latter damps the tested
 pressure disturbance with held physical fields; this does not establish global
 operator stability. A separate diagnostic continuation is live from the healthy
 .390706 s cold-derived checkpoint. The case-staging utility passed ten regression tests and the real-apparatus
-staging smoke; exact immediate-parent source recovery is complete. A source
-rebuild/one-step equivalence test and mechanical-feedback probe are preparing.
+staging smoke; exact immediate-parent source recovery is complete. The source
+rebuild reproduced the exact baseline binary; a one-step equivalence test is
+preparing after a preserved MPI-user launch error. The mechanical-feedback
+probe is live under its exact-ID guard.
 
 | Latest test | Saved time (s) | Actual outcome |
 | --- | ---: | --- |
@@ -69,7 +71,9 @@ Current independent tasks:
   or global stability. All 38 held-field checks match. The next discrimination
   is mechanical pressure/density/momentum feedback with water transport held,
   with the worker source-order sequence reviewed and authorized. The next
-  probe starts after the complete original pEqn/EOS/U update (a later stage
+  probe Docker `7d24b34e1a23`, StartedAt 23:09:04.824336741 UTC, is
+  confirmed live with ten MPI/eight CPUs and 32 GiB. It starts after the complete
+  original pEqn/EOS/U update (a later stage
   than the pressure-only capture), holds water/temperature/turbulence state,
   preserves source ordering and old-time history, and stops censored on a
   first raw pressure-floor contact. It writes no physical endpoint. This follows
@@ -78,6 +82,10 @@ Current independent tasks:
   change largely cancels the changed alpha-times-flux divergence, making it
   a response to the pressure mode rather than an established driver. No more
   source-weight or timestep sweeps are queued.
+  [Tight-map evidence](../results/summaries/i4f_20261025/tight-pressure-map/summary.json)
+  includes scalar results and a portable source delta. Root applied it to a
+  clean published base and verified all 69 declared source hashes, plus 13
+  packet artifacts and 41 referenced local raw-vector artifacts.
 - **Completed reconstruction trial:** one named pressure-Laplacian
   `Gauss linear limited 0.5` comparison with other diffusion/gravity schemes
   unchanged was tested as a numerical hypothesis;
@@ -92,8 +100,11 @@ Current independent tasks:
   pressure operator and exact .390705595007 cold checkpoint. Only the
   >100 Pa update stop ACTION becomes advisory with identical thresholds
   and a flushed event CSV. Raw floor/clipping, mass/phase, NaN, disk and wall
-  stops remain hard. Root reviewed that guard delta. At 22:57 UTC it is live
-  at .468808 s, zero floor contacts or advisory-stop events. Its CPU quota
+  stops remain hard. Root reviewed that guard delta. At 23:02 UTC it had completed
+  641 steps through .490599 s with zero raw floor contacts, but 68 consecutive
+  pressure-update warnings and final updates about 1.34–1.60 kPa; no recovery
+  from that criterion was established. Luna is auditing a frozen completed-step
+  prefix for signed oscillations and engineering observables. Its CPU quota
   was raised from eight to ten after the pressure-only job ended, with exact
   identity/StartedAt, memory and deadlines unchanged; adjustment provenance
   remains in its private bundle. Target .65 s; save 00:49 UTC,
@@ -159,9 +170,11 @@ One time-local functionObjectProperties file is intentionally outside the API
 contract; no physical restart was executed. It changes no live solver or guard.
 The [exact immediate-parent source](../results/summaries/i4f_20261025/immediate-parent-source/README.md)
 for the startup energy baseline is recovered, including original build recipe
-and pinned image/library identities. Root verified 100 artifacts. Luna prepares
-a bounded isolated rebuild and known one-step field comparison; bitwise rebuild
-repeatability remains unverified. The ancestor packet alone was insufficient.
+and pinned image/library identities. Root verified 100 artifacts, also
+from a clean Git archive. A fresh isolated rebuild reproduced the exact 12d8
+baseline executable hash. The first one-step launch exited before stepping
+because MPI ran as root; its retry matches the original non-root user.
+The one-step native-field comparison remains pending. The ancestor packet alone was insufficient.
 Unique fields and original source/CAD remain. Older outcomes and restorable
 archives are retained in the scientific note, published results index and
 [archive index](../results/archives/index.json). Thirteen focused tests passed
