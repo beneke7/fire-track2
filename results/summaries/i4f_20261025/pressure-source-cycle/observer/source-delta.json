@@ -1,0 +1,30 @@
+{
+  "changed_files": {
+    "applications/solvers/multiphase/VoF/alphaEqn.H": {
+      "after_sha256": "806e3febb9d86104e89a1fa1c868e3a9d53df9574c0e41febac7c4ca95341a1b",
+      "before_sha256": "f2f10939f37b7765f8e4a1c032daab3140c5605533ac2bf955245925a425df7e"
+    },
+    "applications/solvers/multiphase/compressibleInterFoam/Make/files": {
+      "after_sha256": "12fe9723d14e16069e6fde8e480d968fc29ac00e27a03858e52e7a9257af76f9",
+      "before_sha256": "f756eb32e1e3c7d4e4d47aec8d9ebbf418e8f2664a06023f7e72218f77050cb0"
+    },
+    "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C": {
+      "after_sha256": "9124c5ded8e3b7a70e422918caf0b339e508f4bb35549f7f8e1175ee4c2129c8",
+      "before_sha256": "6be187ca00dbf8be0ce2974c203195bbc424483c54afc982d324209a01067165"
+    }
+  },
+  "created_utc": "2026-10-26T16:42:49.533220+00:00",
+  "diagnostic_only": true,
+  "diff_paths": [
+    "results/runs/i4f-pressure-cycle-observer-20261026T163622Z/provenance/patches/compressibleInterFoam.C.diff",
+    "results/runs/i4f-pressure-cycle-observer-20261026T163622Z/provenance/patches/alphaEqn.H.diff",
+    "results/runs/i4f-pressure-cycle-observer-20261026T163622Z/provenance/patches/files.diff"
+  ],
+  "equations_and_health_policy_changed": false,
+  "mpi_collective_rule": "Both post-EOS fvc::ddt/fvc::div expressions are evaluated by every rank under a globally identical condition; only local extraction/output uses the selected rank.",
+  "primary_diagnostic": "Inside the declared controlDict window, lower the existing global outer-update DP_CELL trigger from >1000 Pa to >100 Pa and log local alpha predictor/corrector Sp/Su/dgdt/divU and post-EOS phase continuity at the same controlling cell.",
+  "schema": "i4f-pressure-cycle-observer-source-delta/v1",
+  "status": "source prepared; binary build and runtime passivity pending",
+  "unchanged_source_files": 65,
+  "zone_name": "valveSourceBand"
+}

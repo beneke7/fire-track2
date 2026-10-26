@@ -1,0 +1,187 @@
+{
+  "case": {
+    "definition": "1.0 x 0.08 x 0.08 m periodic box; 100 x 8 x 8 cells; translating water slab; six cyclic boundaries",
+    "deltaT_s": 0.0001,
+    "initial_conditions": {
+      "T_K": 293.15,
+      "U_m_s": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "p_Pa": 100000.0,
+      "p_rgh_Pa": 100000.0,
+      "water_slab_x_m": [
+        0.25,
+        0.75
+      ]
+    },
+    "initial_water_volume_m3": 0.0032,
+    "mesh_cells": 6400,
+    "physics_and_controls": {
+      "PIMPLE": {
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 8,
+        "transonic": true
+      },
+      "air_eos": "perfect gas",
+      "binary_name": "compressibleInterFoamFrozenAlphaSourceV2NoPout",
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "frozen_predictor_sp": false,
+      "gravity_m_s2": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "linear_maxIter": {
+        "U": 25,
+        "UFinal": 25,
+        "p_rgh": 25,
+        "p_rghFinal": 25
+      },
+      "pressure_audit": false,
+      "source_manifest_sha256": "076e431c942165ca2ca8c012173a0da9d04baf41365453f95c5a2c89ee567625",
+      "source_variant": "public dcec source variant; 68 files verified, 2 declared overrides",
+      "surface_tension_N_m": 0.0,
+      "turbulence": "SST",
+      "variant_manifest_sha256": "cbb3b0c8e5b195c1666843bbf0316a0d1c0c0b46d61ea2a863246fa7ae42227e",
+      "water_eos": "adiabaticPerfectFluid, barotropic gamma=7.15 (not Cp/Cv)"
+    },
+    "solver": "compressibleInterFoamFrozenAlphaSourceV2NoPout",
+    "target_time_s": 0.1
+  },
+  "checks": {
+    "native_fields": {
+      "alpha_bounds": {
+        "max": 1.0000000000000002,
+        "min": 1.8618397871744182e-27,
+        "valid_with_1e-12_roundoff_allowance": true
+      },
+      "field_errors_vs_exact_uniform_state": {
+        "T_max_abs_error_K": 2.006572685786523e-11,
+        "U_max_abs_vector_error_m_s": 4.265067010771457e-12,
+        "p_max_abs_error_Pa": 7.203198038041592e-09,
+        "p_minus_p_rgh_max_abs_Pa": 0.0,
+        "p_rgh_max_abs_error_Pa": 7.203198038041592e-09
+      },
+      "finite_fields": {
+        "T": true,
+        "U": true,
+        "alpha.water": true,
+        "p": true,
+        "p_rgh": true
+      },
+      "pressure_bounds_Pa": {
+        "max": 99999.99999999684,
+        "min": 99999.9999999928,
+        "positive": true
+      },
+      "status": "native_fields_valid",
+      "water_inventory": {
+        "cell_volume_m3": 1e-06,
+        "difference_m3": -2.5587171270657905e-17,
+        "initial_volume_m3": 0.0032,
+        "volume_m3": 0.0031999999999999746
+      }
+    },
+    "preparation": {
+      "dcec_source_file_count": 68,
+      "dcec_source_overrides": 2,
+      "input_checksums_sha256": "074e4edaf6239fe2847e44d8ad90ded917e15fe49717d07b09a595914c88b7ea",
+      "input_manifest_sha256": "6a49d2c8537683c97051ee590a3a7d7f2b6e897e2e394b3cb48acc5ccbb5cbf3",
+      "mesh_check": "Mesh OK",
+      "prescribed_input_file_count": 20,
+      "solver_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "status": "prepared_mesh_ok_waiting_for_GO"
+    },
+    "raw_pressure_floor_trace": {
+      "configured_pMin_Pa": 10000.0,
+      "global_min_raw_cell_pressure_Pa": 99999.99999998407,
+      "maximum_below_count_in_any_record": 0,
+      "record_count": 16000,
+      "records_with_any_cells_strictly_below_pMin": 0
+    }
+  },
+  "created_utc": "2026-10-26T18:18:26+00:00",
+  "earlier_attempt": {
+    "bundle": "results/runs/i4f-pressure-equilibrium-repro-20261026T180951Z",
+    "cause": "The pinned OpenFOAM image has no python3 executable; its first attempted inline manifest parser exited 127. The corrected runner keeps Python/hash-manifest processing on the host and uses the in-container sha256sum utility. The controller/case mount path mismatch was also corrected before the successful retry.",
+    "classification": "pre-GO setup failure only; no solver step or physics result",
+    "container_id": "7d215a295ff99bae1bf17f9ac8fc9f09476042c31afcb572bd3f56c243b4e117",
+    "docker_oom_killed": false,
+    "exit_code": 127,
+    "finished_at_utc": "2026-10-26T18:09:54.372342046Z",
+    "go_released": false,
+    "started_at_utc": "2026-10-26T18:09:54.134881026Z",
+    "status": "controller_error"
+  },
+  "provenance": {
+    "allrun_sha256_at_execution": "e78c9c0a46805ceb07dcfb297a157fce38176eeb8496ac56ef044246f7ee8d9c",
+    "case_controller_sha256": "bd142da9b991ab4867b350d272a35a15b01f3f2f7a86041c35dfaa297e359d1c",
+    "code_snapshot_note": "Executed source tree, host builder, case wrappers, native verifier and reader dependencies are preserved/hash-identified in this run bundle. The controller and container-runner hashes also match the exact launch-manifest values.",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "input_source_freeze": {
+      "path": "results/runs/i4f-pressure-equilibrium-1bar-periodic-20261026T172125Z/provenance/input-freeze.json",
+      "sha256": "db4f0813ed34709d5ce4e99f077dc1c278791ca7be95d75098bd52917992345b"
+    },
+    "launch_manifest_sha256": "576f25f6da8642bf72cffe60f2e2f21a86aecb65a7933557485a14ea1ad51d5d",
+    "native_reader_dependencies": {
+      "scripts/analyze_dash8_interface_growth.py": "1cf10d9349faefcd0a9762ce9a6af07a18bcb77ced51badf270a0d6f2743d1c0",
+      "scripts/analyze_native_turbulence.py": "dd5e3c6b3306dd1205de28819f1be6e36f1e29e33dc9062de35b8aae39e3df0a"
+    },
+    "native_verifier_sha256": "8d79d3e4d04d0c25b2c9c8c84fa1f6c15307fbfd4e27d2e195f019a5d186e003",
+    "preparation_record_sha256": "19eabaf5a7e009cd214f45578608d4be4ba50f9e96174b253b30074a55166095",
+    "recoverable_launch_source_snapshot": {
+      "file_count": 11,
+      "path": "results/runs/i4f-pressure-equilibrium-repro-20261026T181252Z/provenance/launch-source-snapshot.json",
+      "sha256": "d8b1783adc3d0e8c7e881c47d088aa616c0fb32605d0605e00eb0c08224c9f34"
+    },
+    "run_in_container_sha256": "c7d32d8b9ae6d43e0374716211047312bf042caa2fadfe12c689f7d1761d81fb",
+    "run_request_sha256": "66795f68348be4c31eb669eb76ddb482bc88717979b47fefb1eb84cb956793c3",
+    "run_status_sha256": "9f0fc1fae71f7306dfc17a666271e76464519108efdcee8c7562296a65e8e828",
+    "source_input_freeze": "6a49d2c8537683c97051ee590a3a7d7f2b6e897e2e394b3cb48acc5ccbb5cbf3"
+  },
+  "qualification": "This reproduces the 1 bar uniform translating-interface reference only. It is not an apparatus calculation, acoustic-accuracy result, or formal solver validation gate.",
+  "result": "healthy_normal_end",
+  "run": {
+    "bundle": "results/runs/i4f-pressure-equilibrium-repro-20261026T181252Z",
+    "container_id": "1b6c4467eae33cb7451a65c54ac7568fa8be9fb1aa69da165141f2cab60b83ac",
+    "container_name": "i4f-pe-i4f-pressure-equilibrium-repro-20261-20261026T181255Z",
+    "controller_unit": "i4f-pe-i4f-pressure-equilibrium-repro-20261-20261026T181255Z.service",
+    "cpu_equivalents": 1.0,
+    "cpu_shares": 2,
+    "docker_exit_code": 0,
+    "docker_oom_killed": false,
+    "docker_wall_time_s": 253.944,
+    "execution_time_s": 232.13,
+    "finished_at_utc": "2026-10-26T18:17:09.231328834Z",
+    "first_time_s": 0.0001,
+    "last_time_s": 0.1,
+    "memory_limit_bytes": 4294967296,
+    "native_checkpoint_time_directory_s": 0.1,
+    "native_fields_present": [
+      "alpha.water",
+      "alphaPhi0.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh",
+      "phi",
+      "rho",
+      "T",
+      "T.air",
+      "T.water",
+      "U"
+    ],
+    "normal_openfoam_end": true,
+    "openfoam_end_marker_count": 1,
+    "physical_steps": 1000,
+    "started_at_utc": "2026-10-26T18:12:55.287230138Z",
+    "uniform_time_present": true,
+    "uniform_time_value_s": 0.10000000000000184
+  },
+  "schema": "i4f-pressure-equilibrium-public-reproduction-smoke/v1"
+}

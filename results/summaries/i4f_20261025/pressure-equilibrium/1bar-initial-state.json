@@ -1,0 +1,72 @@
+{
+  "analytic_initial": {
+    "acoustic_courant_proxy_c1482_dt1e4_dx01": 14.82,
+    "density_ratio_water_to_air": 839.9658087860781,
+    "domain_volume_m3": 0.0064,
+    "flow_courant_proxy_dt1e4_dx01": 0.1,
+    "gas_mass_kg": 0.003802821456049894,
+    "gas_volume_m3": 0.0032,
+    "rho_air_kg_m3": 1.1883817050155918,
+    "rho_water_kg_m3": 998.2,
+    "water_mass_kg": 3.19424,
+    "water_volume_m3": 0.0032
+  },
+  "created_utc": "2026-10-26T17:23:23.015860+00:00",
+  "qualifications": [
+    "This is a cold uniform 1 bar material-contact test, not an apparatus case or formal validation gate.",
+    "Water gamma is the declared barotropic EOS parameter; it is not Cp/Cv.",
+    "The acoustic Courant number is a diagnostic proxy; the run does not establish acoustic-wave accuracy.",
+    "Initial rho is generated from the EOS at the specified p/T and alpha; no stale rho field is copied in time 0."
+  ],
+  "schema": "i4f-periodic-pressure-equilibrium-initial-state/v2",
+  "source_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "source_parent": {
+    "file_count": 52,
+    "path": "results/runs/i4f-pressure-equilibrium-periodic-attempt3-20261026T170158Z/provenance/input-freeze.json",
+    "sha256": "31158e77a4fd292b504dab9d87355e9180a141c00850291d3e8b4f60f90c1bec"
+  },
+  "state": {
+    "cell_count": 6400,
+    "cell_counts": [
+      100,
+      8,
+      8
+    ],
+    "domain_m": [
+      1.0,
+      0.08,
+      0.08
+    ],
+    "gravity_m_s2": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "initial_water_volume_fraction": 0.5,
+    "p_rgh_Pa": 100000.0,
+    "pressure_Pa": 100000.0,
+    "surface_tension_N_m": 0.0,
+    "temperature_K": 293.15,
+    "velocity_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "water_slab_x_m": [
+      0.25,
+      0.75
+    ]
+  },
+  "thermo": {
+    "B_Pa": 306667767.13022316,
+    "R_air_J_kg_K": 287.0477481284761,
+    "air_R_source_sha256": "cca00091374d9d7a6a2dfb841b998006e95c01aae26c62237211cdc1abf53d27",
+    "air_equation": "rho=p/(R*T)",
+    "air_model": "perfectGas",
+    "gamma_barotropic": 7.15,
+    "p0_Pa": 100000.0,
+    "rho0_kg_m3": 998.2,
+    "water_equation": "rho=rho0*((p+B)/(p0+B))^(1/gamma)",
+    "water_model": "adiabaticPerfectFluid"
+  }
+}

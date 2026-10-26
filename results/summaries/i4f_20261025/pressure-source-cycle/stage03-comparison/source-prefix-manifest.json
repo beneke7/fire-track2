@@ -1,0 +1,204 @@
+{
+  "analysis_script_path": "results/runs/i4f-sp-consistency-comparison-20261026T174705Z/capture_compare.py",
+  "analysis_script_sha256": "a292a19c7ac2461177d78c37c0692acd20fc81ee326bef892c4f32610c4ed09b",
+  "captured_utc": "2026-10-26T17:52:01.950128+00:00",
+  "prefixes_are_bounded_by_size_at_capture": true,
+  "schema": "i4f-sp-consistency-source-prefix-snapshot/v1",
+  "source_files": {
+    "baseline_controlDict": {
+      "bytes_at_capture": 774,
+      "exists": true,
+      "mtime_ns_at_capture": 1793030287692303591,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/system/controlDict",
+      "sha256": "bef0cd9a0a8b437f42259c54bb887b8a31003877c62613a29c9b68ce7c7179c5"
+    },
+    "baseline_freeze": {
+      "bytes_at_capture": 46080,
+      "exists": true,
+      "mtime_ns_at_capture": 1793029360804924769,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/input-freeze.json",
+      "sha256": "48bf1322c6f6a68ed76848261320d99263d9a8a9284c9668e6a29675507e3d43"
+    },
+    "baseline_fvOptions": {
+      "bytes_at_capture": 1889,
+      "exists": true,
+      "mtime_ns_at_capture": 1792950628497018545,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/constant/fvOptions",
+      "sha256": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0"
+    },
+    "baseline_fvSchemes": {
+      "bytes_at_capture": 1405,
+      "exists": true,
+      "mtime_ns_at_capture": 1793019870992732286,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/system/fvSchemes",
+      "sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e"
+    },
+    "baseline_fvSolution": {
+      "bytes_at_capture": 1920,
+      "exists": true,
+      "mtime_ns_at_capture": 1792926103995583270,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/system/fvSolution",
+      "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+    },
+    "baseline_guard": {
+      "bytes_at_capture": 15396,
+      "exists": true,
+      "mtime_ns_at_capture": 1793030298221489424,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/guardian-status.json",
+      "sha256": "a9e3277393d9e56e4dad1677a1a64d6897fa1dfff36d21c55e9bafb2e928c0cc"
+    },
+    "baseline_launch": {
+      "bytes_at_capture": 8615,
+      "exists": true,
+      "mtime_ns_at_capture": 1793029464073863727,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/launch-manifest.json",
+      "sha256": "b9fe3dae963378f679ef870833fccd6e1a0a9014e27bcf853770fee9654428e0"
+    },
+    "baseline_log": {
+      "bytes_at_capture": 23833730,
+      "captured_prefix_bytes": 23833730,
+      "captured_prefix_sha256": "201edb930ad01c0ec1e03c95c7b55ad115088ddc8bf5988e98e6be6b750090fa",
+      "copied_into_bundle": false,
+      "exists": true,
+      "mtime_ns_at_capture": 1793030295358734786,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/log.cold-coupled"
+    },
+    "baseline_seed": {
+      "bytes_at_capture": 4774,
+      "exists": true,
+      "mtime_ns_at_capture": 1793029360525865266,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/continuation-seed.json",
+      "sha256": "8bbe51f2c3a76f4bd7367f0cfcb5c10384d38a2cafeef294552e9fd2459c5a19"
+    },
+    "baseline_step_health": {
+      "bytes_at_capture": 163084,
+      "exists": true,
+      "mtime_ns_at_capture": 1793030298221489424,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/step_health.csv",
+      "sha256": "0d467a05cca14c5933e77632b81228d705e2a75a972b75bb6ef83c57173878c0"
+    },
+    "baseline_water_thermo": {
+      "bytes_at_capture": 1240,
+      "exists": true,
+      "mtime_ns_at_capture": 1793012648502947095,
+      "path": "results/runs/i4f-upwind-momentum-warm-stage03-20261026T154240Z/case/constant/thermophysicalProperties.water",
+      "sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+    },
+    "common_defect_audit_H": {
+      "bytes_at_capture": 6423,
+      "exists": true,
+      "mtime_ns_at_capture": 1792828651171509449,
+      "path": "solvers/i4f_frozen_sp/applications/solvers/multiphase/compressibleInterFoam/i4fDefectAudit.H",
+      "sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85"
+    },
+    "dcec_pEqn": {
+      "bytes_at_capture": 36829,
+      "exists": true,
+      "mtime_ns_at_capture": 1793027938722097782,
+      "path": "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6"
+    },
+    "dcec_solver_C": {
+      "bytes_at_capture": 14485,
+      "exists": true,
+      "mtime_ns_at_capture": 1793027938721940505,
+      "path": "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "sha256": "6be187ca00dbf8be0ce2974c203195bbc424483c54afc982d324209a01067165"
+    },
+    "observer_event_csv": {
+      "bytes_at_capture": 114461,
+      "captured_prefix_bytes": 114461,
+      "captured_prefix_sha256": "9161b5f5c52a2ca74a50884698c099501a599511ffd2c1ab24e2fa1a29d347e7",
+      "copied_into_bundle": false,
+      "exists": true,
+      "mtime_ns_at_capture": 1793035445078431199,
+      "path": "results/runs/i4f-pressure-cycle-full-replay-20261026T170340Z/analysis/pressure-cycle-events.csv"
+    },
+    "sp_true_controlDict": {
+      "bytes_at_capture": 773,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036966144276948,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/system/controlDict",
+      "sha256": "9a74a75531d41a5635bedb470e38e3f16f1c7256e7390a131b6550df1bf0fdd3"
+    },
+    "sp_true_freeze": {
+      "bytes_at_capture": 47314,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036371250510337,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/input-freeze.json",
+      "sha256": "486a18699e99bb576011d8331c095b4bcad03bcff44ea4c1be2c74a312a28375"
+    },
+    "sp_true_fvOptions": {
+      "bytes_at_capture": 1889,
+      "exists": true,
+      "mtime_ns_at_capture": 1792950628497018545,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/constant/fvOptions",
+      "sha256": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0"
+    },
+    "sp_true_fvSchemes": {
+      "bytes_at_capture": 1405,
+      "exists": true,
+      "mtime_ns_at_capture": 1793019870992732286,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/system/fvSchemes",
+      "sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e"
+    },
+    "sp_true_fvSolution": {
+      "bytes_at_capture": 1920,
+      "exists": true,
+      "mtime_ns_at_capture": 1792926103995583270,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/system/fvSolution",
+      "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+    },
+    "sp_true_guard": {
+      "bytes_at_capture": 15390,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036971865427290,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/guardian-status.json",
+      "sha256": "433ca5f0ef942ce6e656d8a22096aa4a9b42ef243597b7137370e034757fbf63"
+    },
+    "sp_true_launch": {
+      "bytes_at_capture": 4481,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036412545438775,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/launch-manifest.json",
+      "sha256": "827e7f362f471afe9e4d07691f59fd62ebaa2408a0cd125f1c69f189275d6a39"
+    },
+    "sp_true_log": {
+      "bytes_at_capture": 45448661,
+      "captured_prefix_bytes": 45448661,
+      "captured_prefix_sha256": "de8cc27945169b7c94a330193d15c694db0a8221dd3a9e0f27040436b03d5759",
+      "copied_into_bundle": false,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036968909026173,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/log.cold-coupled"
+    },
+    "sp_true_seed": {
+      "bytes_at_capture": 4774,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036157774462052,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/continuation-seed.json",
+      "sha256": "8bbe51f2c3a76f4bd7367f0cfcb5c10384d38a2cafeef294552e9fd2459c5a19"
+    },
+    "sp_true_step_health": {
+      "bytes_at_capture": 269834,
+      "exists": true,
+      "mtime_ns_at_capture": 1793036971865427290,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/step_health.csv",
+      "sha256": "b3e5bd20e58d82bfefc64af883eb6f7635d2b87ba9e310c9a185e256fbe9e2f5"
+    },
+    "sp_true_water_thermo": {
+      "bytes_at_capture": 1240,
+      "exists": true,
+      "mtime_ns_at_capture": 1793012648502947095,
+      "path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/constant/thermophysicalProperties.water",
+      "sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+    },
+    "vof_alphaEqn_H": {
+      "bytes_at_capture": 15147,
+      "exists": true,
+      "mtime_ns_at_capture": 1792878873350019229,
+      "path": "solvers/i4f_frozen_sp/applications/solvers/multiphase/VoF/alphaEqn.H",
+      "sha256": "f2f10939f37b7765f8e4a1c032daab3140c5605533ac2bf955245925a425df7e"
+    }
+  }
+}

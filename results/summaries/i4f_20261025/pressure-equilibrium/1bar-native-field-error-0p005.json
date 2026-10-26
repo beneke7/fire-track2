@@ -1,0 +1,78 @@
+{
+  "bundle": "results/runs/i4f-pressure-equilibrium-1bar-periodic-20261026T172125Z",
+  "cell_count": 6400,
+  "created_utc": "2026-10-26T17:27:18.020109+00:00",
+  "field_errors": {
+    "T": {
+      "max_K": 293.1500000000087,
+      "max_abs_K": 9.322320693172514e-12,
+      "mean_abs_K": 1.0808243189330825e-12,
+      "min_K": 293.14999999999065
+    },
+    "U": {
+      "max_abs_component_m_s": [
+        1.000088900582341e-12,
+        5.960440502068098e-13,
+        6.677809122491839e-13
+      ],
+      "max_abs_vector_m_s": 1.0453475080489423e-12,
+      "max_component_m_s": [
+        10.000000000000648,
+        5.560431954616679e-13,
+        6.559344688885862e-13
+      ],
+      "mean_abs_component_m_s": [
+        1.1684125889033225e-13,
+        6.787912529358258e-14,
+        6.78952150312212e-14
+      ],
+      "min_component_m_s": [
+        9.999999999999,
+        -5.960440502068098e-13,
+        -6.677809122491839e-13
+      ]
+    },
+    "p": {
+      "max_Pa": 100000.00000000009,
+      "max_abs_Pa": 2.5029294192790985e-09,
+      "max_relative": 2.5029294192790984e-14,
+      "mean_abs_Pa": 6.57200871501118e-10,
+      "min_Pa": 99999.9999999975
+    }
+  },
+  "field_sha256": {
+    "T": "3619cbafb5ce3806d723b22d5454514fa16184194ccb4a2ee51613990983c499",
+    "U": "0b028b921e2208c152885e480b597761befd7ba8e10608a6141f9eedca488b89",
+    "alpha.water": "3f530dfdc977dedf16d82e81deb0e7c2a82e661b32325b35375f238687290161",
+    "alphaPhi0.water": "e4d1f9492bad5265104ded14b9dbe5616be9f01c4e4708bebb78ff158bad333e",
+    "p": "4a629741b64f1c731cbec361ca0599e5e1aa60eab3102460a309a28376fc5989",
+    "p_rgh": "6ae15b2f4b6da50be4395bf1ab4429133805b0790643bcd7c3133390d1100366",
+    "phi": "d1034fee040f26330aeca7b1651663c0ab84f92ac567af7d3a89a68fda54c115",
+    "rho": "c88564898c7dd82937ac9f93df111b4e7e8f5fc2c0f9702eb2253dc07fbe7963",
+    "uniform/time": "e2df5215d1d8d7d919964924b6f0b3f1387b7d6f076d2e980fea27fa0107733a"
+  },
+  "phase_and_inventory": {
+    "alpha_max": 1.0000000000000013,
+    "alpha_min": 8.44947768999908e-43,
+    "gas_mass_from_saved_EOS_kg": 0.0038028214560498846,
+    "initial_gas_mass_kg": 0.003802821456049894,
+    "initial_water_mass_kg": 3.19424,
+    "water_mass_from_saved_EOS_kg": 3.194239999999996,
+    "water_volume_error_m3": -4.092726157978177e-18,
+    "water_volume_m3": 0.003199999999999996
+  },
+  "qualification": "Native binary fields at the exact saved .005 s checkpoint. Values assess p/U/T preservation at the 1 bar density ratio with p/U linear maxIter=25; they do not establish acoustic accuracy or an apparatus-model setting. This is a short exploratory comparison, not a formal acceptance gate.",
+  "reference": {
+    "T_K": 293.15,
+    "U_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "alpha_volume_fraction": 0.5,
+    "p_abs_Pa": 100000.0
+  },
+  "schema": "i4f-periodic-pressure-equilibrium-field-error/v1",
+  "time_directory": "0.005",
+  "uniform_time_s": 0.005
+}

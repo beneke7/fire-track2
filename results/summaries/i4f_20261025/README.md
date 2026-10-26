@@ -3,11 +3,22 @@
 **26 October run state:** the finite-water first-step case contacted the
 pressure floor at .409998 s and saved at .410223 s. The uninterrupted
 constant-density cold control ended at .434532 s with eighteen raw contacts.
-The smaller-timestep finite-water comparison remains in progress. A warm-start
+The smaller-timestep finite-water comparison stopped at .383069 s after a raw
+minimum of +677.757 Pa, below the 10 kPa floor. A warm-start
 upwind fork saved a complete .460048 s checkpoint with no pressure-floor
 contacts, then stopped at .481894 s on persistent pressure updates without
 floor contacts. The warm fork does not establish a
-full cold-history remedy. No complete credible discharge or validation result
+full cold-history remedy. Caching the predictor Sp extended a matched warm
+replay to .494225 s before a pressure-update stop. More outer iterations,
+tighter temperature solves and the alternative pressure linearization did not
+cure the cycle; a 25-microsecond warm timestep trial contacted the floor almost
+immediately. [Controlled outcomes](pressure-coupling-comparison/outcomes.csv)
+retain the different histories and terminal reasons. The
+[source-cycle packet](pressure-source-cycle/summary.json) provides the actual
+alternating cell trace, source-coefficient comparison and its limitations. The
+[periodic interface verification](pressure-equilibrium/public-reproduction-smoke.json)
+completed .1 s/1000 steps with roundoff-level uniform p/U/T errors, but does not
+exercise the tank's compression sources. No complete credible discharge or validation result
 has been produced. See
 [live status](../../../docs/STATUS.md) for exact run identities and deadlines.
 The [cell/iteration review](finite-water-floor-review.json),
@@ -22,8 +33,8 @@ continuation stopped at .434224 s with negative intermediate pressure; geometry
 correction alone did not resolve the instability. One pressure corrector and
 tank-interface refinement also retained persistent outer updates. The separate
 uninterrupted true-cold standard-source control saved at .434532 s after eighteen
-raw pressure-floor contacts. A smaller-timestep finite-water cold comparison is
-under way; it is an exploratory sensitivity, not a successful discharge. The
+raw pressure-floor contacts. The smaller-timestep finite-water cold comparison
+also contacted the floor; it is an exploratory sensitivity, not a successful discharge. The
 [frozen material packet](../../../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json)
 records equations, primary-source locators, assumptions and initial-mass effects.
 The [corrected-flush finite-water input capsule](../../../cases/i4f_corrected_flush_finite_water_reference/README.md)

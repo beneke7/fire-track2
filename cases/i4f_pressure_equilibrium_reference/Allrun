@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat >&2 <<'EOF'
+Usage: Allrun NEW_OUTPUT_DIR [--prepare-only|--detach]
+
+Default: launch the bounded, exact-ID/GO-gated OpenFOAM run under a durable
+user-systemd controller and wait for its captured terminal status. --detach
+returns after the exact container has passed preparation and GO was released.
+--prepare-only builds the DCEC executable and prepares/checks the mesh without
+starting the solver. Output paths must be new.
+EOF
+}
+
+if [[ $# -lt 1 || $# -gt 2 ]]; then usage; exit 2; fi
+output_arg=$1
+mode=${2:-wait}
+if [[ "$mode" != wait && "$mode" != --detach && "$mode" != --prepare-only ]]; then
+  usage; exit 2
+fi
+
+case_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+repo_root=$(cd -- "$case_dir/../.." && pwd -P)
+output_dir=$(python3 - "$output_arg" <<'PY'
+from pathlib import Path
+import sys
+print(Path(sys.argv[1]).expanduser().resolve())
+PY
+)
+
+if [[ "$output_dir" == "$case_dir" || "$output_dir" == "$case_dir/"* || "$output_dir" == "$repo_root" ]]; then
+  echo "output must not overlap the tracked case/repository root: $output_dir" >&2
+  exit 2
+fi
+if [[ "$output_dir" == "$repo_root/"* && "$output_dir" != "$repo_root/results/runs/"* ]]; then
+  echo "in-repository output is restricted to ignored results/runs/: $output_dir" >&2
+  exit 2
+fi
+if [[ "$output_dir" == *','* || "$repo_root" == *','* ]]; then
+  echo "Docker bind-mount paths cannot contain commas: $output_dir" >&2
+  exit 2
+fi
+if [[ -e "$output_dir" || -L "$output_dir" ]]; then
+  echo "refusing to overwrite existing output path: $output_dir" >&2
+  exit 2
+fi
+
+verify_input_tree() {
+  python3 - "$1/input-manifest.json" "$1" <<'PY'
+import hashlib
+import json
+import pathlib
+import sys
+
+manifest_path = pathlib.Path(sys.argv[1])
+root = pathlib.Path(sys.argv[2]).resolve()
+manifest = json.loads(manifest_path.read_text())
+for item in manifest["case_files"]:
+    relative = pathlib.PurePosixPath(item["path"])
+    if relative.is_absolute() or ".." in relative.parts:
+        raise SystemExit(f"unsafe manifest path: {relative}")
+    path = (root / pathlib.Path(*relative.parts)).resolve(strict=True)
+    if root not in path.parents or not path.is_file():
+        raise SystemExit(f"manifest path escapes package or is not a file: {relative}")
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    if digest != item["sha256"]:
+        raise SystemExit(f"case input hash mismatch: {relative}")
+PY
+}
+
+verify_input_tree "$case_dir"
+mkdir -p -- "$(dirname -- "$output_dir")"
+mkdir -- "$output_dir"
+cp -a -- "$case_dir/0" "$case_dir/constant" "$case_dir/system" "$output_dir/"
+cp -- "$case_dir/input-manifest.json" "$output_dir/"
+verify_input_tree "$output_dir"
+mkdir -p "$output_dir/logs" "$output_dir/analysis"
+printf 'case input source: %s\n' "$case_dir" > "$output_dir/package-origin.txt"
+
+image='opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319'
+if [[ "$mode" == --prepare-only ]]; then
+  python="$repo_root/.venv/bin/python"
+  controller="$case_dir/case_controller.py"
+  if [[ ! -x "$python" || ! -f "$controller" ]]; then
+    echo "locked host Python or case controller is missing" >&2
+    exit 4
+  fi
+  "$python" "$controller" --repo-root "$repo_root" --output-dir "$output_dir" \
+    --prepare-host-inputs > "$output_dir/logs/host-preparation.json"
+  docker run --rm --log-driver=none --cpus=1 --cpu-shares=2 --memory=4g --network=none \
+    --mount "type=bind,src=$repo_root,dst=/repo,readonly" \
+    --mount "type=bind,src=$output_dir,dst=/case" \
+    --workdir /repo "$image" \
+    bash /repo/cases/i4f_pressure_equilibrium_reference/run_in_container.sh /case --prepare-only
+  exit $?
+fi
+
+if [[ -e "$repo_root/results/runs/PAUSE" || -e "$output_dir/PAUSE" ]]; then
+  echo "PAUSE sentinel present; refusing to launch" >&2
+  exit 3
+fi
+if ! command -v systemd-run >/dev/null 2>&1 || ! systemctl --user show-environment >/dev/null 2>&1; then
+  echo "a working user-systemd manager is required for the bounded solver run" >&2
+  exit 4
+fi
+
+stamp=$(date -u +%Y%m%dT%H%M%SZ)
+slug=$(basename -- "$output_dir" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9-' '-')
+slug=${slug:0:36}
+unit="i4f-pe-${slug}-${stamp}"
+controller="$case_dir/case_controller.py"
+local_runner="$repo_root/scripts/run_local.py"
+python="$repo_root/.venv/bin/python"
+if [[ ! -f "$controller" || ! -f "$local_runner" || ! -x "$python" ]]; then
+  echo "case controller, run_local.py, or locked Python environment is missing" >&2
+  exit 4
+fi
+
+python3 - "$output_dir/run-request.json" "$unit" "$repo_root" "$output_dir" <<'PY'
+import hashlib, json, pathlib, sys
+from datetime import datetime, timezone
+path=pathlib.Path(sys.argv[1])
+root=pathlib.Path(sys.argv[3])
+out=pathlib.Path(sys.argv[4])
+payload={"schema":"i4f-pressure-equilibrium-run-request/v1",
+         "requested_utc":datetime.now(timezone.utc).isoformat(),
+         "controller_unit":sys.argv[2],
+         "repo_root":str(root),"output_dir":str(out),
+         "input_manifest_sha256":hashlib.sha256((out/"input-manifest.json").read_bytes()).hexdigest()}
+path.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n")
+PY
+
+systemd-run --user --unit "$unit" --collect \
+  --property=RuntimeMaxSec=780s --property=TimeoutStopSec=60s \
+  --property=KillMode=control-group \
+  "$python" "$local_runner" --threads 1 --timeout 750 -- \
+  nice -n 19 "$python" "$controller" --repo-root "$repo_root" --output-dir "$output_dir" \
+  > "$output_dir/logs/systemd-run.txt"
+printf 'CONTROLLER_UNIT=%s\n' "$unit"
+
+wait_deadline=$((SECONDS + 815))
+while (( SECONDS < wait_deadline )); do
+  if [[ -f "$output_dir/run-status.json" ]]; then
+    status=$(python3 - "$output_dir/run-status.json" <<'PY'
+import json,sys
+try: print(json.load(open(sys.argv[1])).get("status",""))
+except (OSError,ValueError): print("")
+PY
+)
+    if [[ "$status" == running || "$status" == healthy_normal_end || "$status" == normal_end_before_target || "$status" == bounded_wall_save_before_target || "$status" == solver_failure_or_incomplete_capture || "$status" == held_by_pause_before_GO || "$status" == preparation_failed || "$status" == controller_error ]]; then
+      if [[ "$mode" == --detach && "$status" == running ]]; then
+        cat "$output_dir/run-status.json"
+        exit 0
+      fi
+      if [[ "$status" != running ]]; then
+        cat "$output_dir/run-status.json"
+        [[ "$status" == healthy_normal_end ]]
+        exit $?
+      fi
+    fi
+  fi
+  if ! systemctl --user is-active --quiet "$unit.service"; then
+    echo "controller stopped before writing a terminal status; inspect $output_dir/logs/systemd-run.txt and journalctl --user -u $unit.service" >&2
+    exit 5
+  fi
+  sleep 2
+done
+echo "outer wait ended; durable unit remains: $unit.service; status: $output_dir/run-status.json" >&2
+exit 6

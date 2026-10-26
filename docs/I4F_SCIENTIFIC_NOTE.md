@@ -14,7 +14,60 @@ the new hardware case includes both tanks and all four outlets.
 
 ## Current scientific result
 
-**Latest outcome:** the finite-water cold test contacted the pressure floor:
+**Latest outcome:** no complete credible tank-to-nozzle discharge exists yet.
+The source-consistency investigation now provides a specific discrete error
+mechanism, with a limited improvement when one part is removed. The matched
+warm upwind baseline stopped at .481894 s; caching its predictor Sp continued
+to .494225 s without floor contact, then also stopped on persistent pressure
+updates. At approximately .480 s, its post-EOS water-continuity volume-L1
+residual fell from 1.527 to .387 kg/s and its accumulated water defect since
+the common .460048 s seed fell from .01181 to .00463 kg. Actual sample times
+differ by .119 microseconds; these are nearest-sample comparisons, not
+identical-time fields or a proof of physical phase-mass conservation.
+
+The predictor/corrector equations explain the targeted numerical change.
+For this static Euler, single alpha-correction/subcycle configuration, let
+alphaP denote the implicit predictor, alphaF the corrected fraction, d0 its
+cached divU, Sp0/Su0 its cached source coefficients, and Spc the coefficient
+passed to MULES. Adding the two discrete equations gives
+
+```text
+D_t alphaF + div(PhiF)
+  = Su0 + Sp0*alphaF + d0*alphaP + (Spc-Sp0)*(alphaF-alphaP).
+```
+
+Here PhiF is the actual corrected phase-volume flux. In one recurrent cell
+on the positive half of the observed pressure cycle, the last term times
+water density predicts 22,234.13 kg/m3/s, versus a measured post-EOS local
+water residual of 22,166.81 kg/m3/s (0.304% relative difference). Other cells
+do not share this agreement: this is evidence for a particular local error
+contribution, not a global explanation or a fitted correction. Caching Sp0
+removes that term but leaves d0*(alphaP-alphaF) relative to a fully implicit
+cached source. The new exploratory prototype uses C0=Sp0+d0 in MULES, with
+Su=-C0*alphaP, and measures the resulting full discrete-alpha residual.
+It forbids previous-correction reuse and requires global min(1/dt-C0)>0;
+it does not clip coefficients. Independent equation review and a ten-step
+byte-identical default-off check support testing it, not adopting it as a
+validated solver. A separate uninterrupted cold upwind/cached-Sp candidate
+tests whether this combination survives without the intermediate restart;
+it changes both momentum transport and source handling relative to the original
+cold reference and is not a one-factor causal comparison. The
+[source-cycle evidence packet](../results/summaries/i4f_20261025/pressure-source-cycle/summary.json)
+includes the same-cell pressure trace, local arithmetic, full distribution of
+observed ratios, source patches and nearest-sample comparisons.
+Current execution and evidence paths belong in [live status](STATUS.md).
+
+Other completed discriminators narrow the next action. Sixteen rather than
+eight outer iterations, nontransonic pressure linearization, and a tighter
+temperature solve retained the warm pressure cycle. A 25-microsecond maximum
+timestep warm restart failed after only .425 ms with a raw pressure-floor
+contact; this is not a cold timestep-convergence result. A separate periodic
+6,400-cell translating water/air slab completed .1 s/1000 steps with uniform
+p/U/T errors of 7.20e-9 Pa / 4.27e-12 m/s / 2.01e-11 K. Its public launcher
+reproduced that result. Uniform equilibrium does not excite the apparatus's
+compression sources, so this limited verification does not clear the tank.
+
+The earlier finite-water cold test contacted the pressure floor:
 one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields at
 .410223 s; final minimum pressure recovered to 85.499 kPa and the pressure
 update to .160 Pa, but this does not undo the floor event. Liquid support in
@@ -24,9 +77,9 @@ raw pressure-floor contacts. A warm upwind fork from a .400020 s state saved
 .460048 s with no pressure-floor contacts, but its continuation stopped at
 .481894 s with a persistent 300.719 Pa pressure update and no floor contacts.
 This is evidence of sensitivity to momentum transport, not a remedy.
-The smaller-timestep finite-water comparison remains in progress; current
-execution belongs in [live status](STATUS.md). No complete credible discharge
-has been established.
+The smaller-timestep finite-water cold comparison also stopped, at .383069 s,
+after a +677.757 Pa raw minimum below the configured 10 kPa floor. Neither
+trajectory establishes a complete credible discharge.
 
 As of 26 October, the corrected-junction constant-density cold trajectory
 reached a raw pressure-floor failure at .434224 s after an operational restart
@@ -45,9 +98,9 @@ from the linked IAPWS release. The assumed pressure exponent 7.15 is not Cp/Cv;
 the barotropic water law with constant heat capacity is neither full IAPWS
 thermodynamics nor a validated high-pressure material description. The EOS
 increases initial water mass by 1.6063 kg at the matched volume. Its first
-timestep setting did not resolve the floor event. The smaller-timestep run
-continues from its complete .0500106 s cold pilot, while the stock-upwind probe
-is a separate warm-start sensitivity. Current execution and deadlines are in
+timestep setting did not resolve the floor event. The completed smaller-timestep
+run continued from its .0500106 s cold pilot, while the stock-upwind probe
+was a separate warm-start sensitivity. Current execution and deadlines are in
 [live status](STATUS.md); do not conflate these paths or call either a validation.
 
 The [guard-parser repair evidence](../results/summaries/i4f_20261025/parser-merge-replay.json)

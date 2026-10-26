@@ -1,0 +1,80 @@
+{
+  "event_csv": {
+    "event_rows": 118,
+    "formula_source_path": "stage03-comparison/local-source-term-ratio.json",
+    "formula_source_sha256": "605a414d8792833ab26a8e2c21b2eae25f609bb341cfb1195482e352efb86e6e",
+    "path": "full-replay/pressure-cycle-events.csv",
+    "sha256": "9161b5f5c52a2ca74a50884698c099501a599511ffd2c1ab24e2fa1a29d347e7"
+  },
+  "featured_row": {
+    "D_per_s": 22.274353748214217,
+    "alpha_after_MULES_corrector": 0.99992202,
+    "alpha_after_implicit_predictor": 0.99516864,
+    "alpha_before_outer": 0.9999208,
+    "comparison_to_existing_A_analysis": "matches the quoted row within 1e-10 ratio",
+    "coordinate_m": [
+      4.2421781,
+      0.49459098,
+      0.60545195
+    ],
+    "corrector_Sp_recomputed_per_s": -99.04133,
+    "delta_Sp_per_s": 4686.00317,
+    "delta_alpha_F_minus_P": 0.004753379999999918,
+    "local_cell": 1164,
+    "outer_iteration": 1535,
+    "predictor_Sp_per_s": -4785.0445,
+    "rank": 7,
+    "relative_difference_from_local_continuity_percent": 0.30369198284563304,
+    "rho_times_D_kg_m3_s": 22234.13183393338,
+    "rho_water_after_kg_m3": 998.19425,
+    "signed_ratio_rhoD_over_residual": 1.0030369198284563,
+    "time_s": 0.48199621213,
+    "water_postEOS_phase_continuity_kg_m3_s": 22166.813
+  },
+  "qualification": "D=(corrector Sp recomputed - predictor Sp)*(alpha after MULES - alpha after implicit predictor). rho_water*D and the same-row post-EOS local water continuity residual both have units kg m^-3 s^-1. The highlighted 0.3037% mismatch is one row only. Across all 88 recurrent event rows in 21 cells, ratios are widely distributed and often change sign; this is descriptive local arithmetic, not a global conservation result or a causal explanation of the pressure cycle.",
+  "recurrent_row_distribution": {
+    "all_valid_event_rows": 118,
+    "existing_A_summary": {
+      "max_signed_ratio": 1.0579022489613474,
+      "median_absolute_ratio": 0.05287796619459262,
+      "median_signed_ratio": 0.03022760864173376,
+      "min_signed_ratio": -0.10577643024001267,
+      "p90_absolute_ratio": 1.0039939328048293
+    },
+    "max_signed_ratio": 1.0579022489613474,
+    "median_absolute_ratio": 0.05287796619459262,
+    "median_signed_ratio": 0.03022760864173376,
+    "min_signed_ratio": -0.10577643024001267,
+    "negative_ratio_rows": 15,
+    "p10_absolute_ratio": 8.467870292866739e-05,
+    "p90_absolute_ratio": 1.0039939328048293,
+    "recurrent_cell_count": 21,
+    "recurrent_event_row_count": 88,
+    "rows_with_ratio_0p9_to_1p1": 24
+  },
+  "same_cell_six_outer_tail": {
+    "local_cell": 1164,
+    "outer_iterations": [
+      1531,
+      1532,
+      1533,
+      1534,
+      1535,
+      1536
+    ],
+    "path": "same-cell-final-six-outer-tail.csv",
+    "rank": 7,
+    "sha256": "c2e778ae5963060ab7f5d8f2ac20471cd04b53ba09169c6329d30fc5006610da",
+    "signed_pressure_updates_Pa": [
+      326.40793,
+      -324.58104,
+      327.70404,
+      -319.10761,
+      319.52592,
+      -319.4459
+    ],
+    "source_event_rows_match": true,
+    "time_s": 0.48199621213
+  },
+  "schema": "i4f-pressure-cycle-local-sp-arithmetic/v1"
+}
