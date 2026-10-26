@@ -1,0 +1,40 @@
+{
+  "execution_backend": "slurm-native",
+  "native_solver": {
+    "architecture": "x86_64",
+    "build": "_87ed40d256-20251219",
+    "executable_path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/platforms/linux64GccDPInt32Opt/bin/interIsoFoam",
+    "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "label_size_bits": 32,
+    "module_list_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652548/modules.log",
+    "module_list_sha256": "eedc0dca886cf7483f2b27acf8d0ee256efd07b7a83270880cda83994acb081e",
+    "module_name": "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH",
+    "precision": "DP",
+    "solver_banner_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1hpc-14652548.dsjvh9ls/attempt/native-source-evidence.solver-banner.log",
+    "solver_banner_sha256": "8b27dd2b6fc5b80a6ef959f82538beabca9d8efecc9a4b4291549498ce59ba67",
+    "version": "v2512",
+    "wm_options": "linux64GccDPInt32Opt",
+    "wm_project_dir": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512"
+  },
+  "runtime_record_limitation": "Installed-source and runtime metadata were collected in the active Slurm environment. This record is not proof of reproducible or bit-for-bit binary construction.",
+  "schema_version": 1,
+  "solver_source": {
+    "interIsoFoam_alphaEqn.H": {
+      "path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/applications/solvers/multiphase/interIsoFoam/alphaEqn.H",
+      "sha256": "cbb4348977388633b29f0aa1f612225249c3062e80755f548fddfb0760c7311f"
+    },
+    "interIsoFoam_alphaEqnSubCycle.H": {
+      "path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/applications/solvers/multiphase/interIsoFoam/alphaEqnSubCycle.H",
+      "sha256": "b5f9845d57cb3fc75577ef00ed338186f83d13a9261c67d4ef88e6f1ef419385"
+    },
+    "isoAdvection.H": {
+      "path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/src/transportModels/geometricVoF/advectionSchemes/isoAdvection/isoAdvection.H",
+      "sha256": "505239083111afb87204f76ec9c3d722eaa9c47f5ee5d44b6f2e0e0e762d0ce7"
+    },
+    "isoAdvectionTemplates.C": {
+      "path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/src/transportModels/geometricVoF/advectionSchemes/isoAdvection/isoAdvectionTemplates.C",
+      "sha256": "1d704aec280cffa4302f75cc3e15654db25dc75c6d1cb9e230ab8a4be64f1e90"
+    }
+  },
+  "source_reference_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+}

@@ -1,0 +1,99 @@
+{
+  "captured_utc": "2026-10-26T20:34:19Z",
+  "cause": "The audit process ran on a compute node where sacct tried AccountingStorageHost=localhost on port 6819 and received connection refused. Login-node sacct can reach its local slurmdbd; the login config shows SlurmctldHost=slurm. Parent job 14652546 had aged out of scontrol, so no controller state fallback existed for that smoke invocation.",
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_hpc_finished_audit.py",
+      "outcome": "13 passed in 1.85s"
+    },
+    {
+      "command": ".venv/bin/ruff check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "outcome": "passed"
+    },
+    {
+      "command": ".venv/bin/ruff format --check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "outcome": "passed"
+    },
+    {
+      "command": "python3 -m py_compile scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "outcome": "passed"
+    }
+  ],
+  "code_hashes": {
+    "scripts/hpc_finished_audit.py": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+    "tests/test_hpc_finished_audit.py": "c40dbffe0c562ee1826698cb24fd6bbb135e6df343fbac4b7666ebd208cb88ae"
+  },
+  "compute_node_readback": {
+    "method": "one BatchMode SSH attempt from login, 5 second connect timeout",
+    "node": "x1000c0s4b1n1",
+    "result": "connection timed out"
+  },
+  "evidence_sha256": {
+    "login-slurm-config.txt": "c0c96c188fc89a4663cb78190a24491a80c0e8727543f99279638cd7beec6e19",
+    "remote-status-14652546.json": "d0c13bc2d1f40bc2043f62f83d3681bf8accc35a9ba9581f1769934463182770",
+    "sacct-14654156.parsable": "08f57957cb81ac49ffacbe581dfcf4c144a52ff190069bcd3276760a56e7d9c0",
+    "scontrol-parent-14652546.txt": "e7cbc19b304ce7fb323ea1ccae489c74fbc1bdf5635781d0999740708566b8df",
+    "smoke-14654156.out": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "login_scontrol_config": [
+    "AccountingStorageHost   = localhost",
+    "AccountingStoragePort   = 6819",
+    "AccountingStorageType   = accounting_storage/slurmdbd",
+    "SlurmctldHost[0]        = slurm",
+    "SLURM_CONF              = /etc/slurm/slurm.conf",
+    "SLURM_VERSION           = 24.11.6"
+  ],
+  "login_slurm_environment": {
+    "SLURM_CLUSTERS": null,
+    "SLURM_CONF": null
+  },
+  "remote_report": {
+    "classification": "accounting_unavailable",
+    "job_id": "14652546",
+    "mode": "slurm-afterany",
+    "phase": "sacct_error",
+    "reason": "RuntimeError: sacct exit 1: sacct: error: _open_persist_conn: failed to open persistent connection to host:localhost:6819: Connection refused\nsacct: error: Sending PersistInit msg: Connection refused\nsacct: error: Problem talking to the database: Connection refused\n",
+    "updated_utc": "2026-10-26T19:49:34Z"
+  },
+  "remote_report_path": "/project/nk_meshapplied/bene/fire-track2-hpc/hpc-finished-audit-reports-v2-20261026/14652546/status.json",
+  "remote_side_effects": "none; only read-only status, sacct, scontrol, and config queries were issued.",
+  "repair": "Try local scontrol show job for retained parent state. If neither sacct nor scontrol has a parent row, preserve and analyze a hash-verified archive with scheduler_state_unavailable; without an archive, record accounting_unavailable_no_archive. Never infer TotalCPU=0.",
+  "retained_parent_readback": "slurm_load_jobs error: Invalid job id specified",
+  "smoke_job_id": "14654156",
+  "smoke_job_login_sacct_rows": [
+    {
+      "allocated_cpus": "1",
+      "elapsed": "2",
+      "exit_code": "1:0",
+      "job_id": "14654156",
+      "max_rss": "",
+      "node_list": "x1000c0s4b1n1",
+      "state": "FAILED",
+      "total_cpu": "00:01.317"
+    },
+    {
+      "allocated_cpus": "1",
+      "elapsed": "2",
+      "exit_code": "1:0",
+      "job_id": "14654156.batch",
+      "max_rss": "18476K",
+      "node_list": "x1000c0s4b1n1",
+      "state": "FAILED",
+      "total_cpu": "00:01.315"
+    },
+    {
+      "allocated_cpus": "1",
+      "elapsed": "2",
+      "exit_code": "0:0",
+      "job_id": "14654156.extern",
+      "max_rss": "284K",
+      "node_list": "x1000c0s4b1n1",
+      "state": "COMPLETED",
+      "total_cpu": "00:00.001"
+    }
+  ],
+  "smoke_stdout": {
+    "bytes": 0,
+    "path": "results/runs/rouaix-audit-repair-20261026/diagnosis/smoke-14654156.out"
+  }
+}

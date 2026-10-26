@@ -1,72 +1,79 @@
 # Komondor Rouaix status
 
-Updated 2026-10-26 19:03 UTC (20:03 CET). Analytical E0 is the only passed
-gate; these CFD runs and their inspections are exploratory.
+Updated 2026-10-26 20:39 UTC (21:39 CET). Analytical E0 remains the only
+passed gate; all CFD results below are exploratory.
 
-## Completed short-horizon results
+## Current compute and queue
 
-- **S1 original 64 ranks, 14651180:** 500 fixed 0.1 ms steps through 0.05 s;
-  all 4,001 recorded linear solves converged; peak speed 103.5026 m/s,
-  bulk/interface Co 1.1210/0.5402; ledger closure +1.05e-11 kg.
-  Solver wall 3490.203 s; whole job 3681 s, 65.44 allocated core-hours,
-  61.57 actual CPU-hours. It ran on a 64-CPU GPU-capable host without GPU
-  allocation, so runtime is not a controlled comparison with CPU128 nodes.
-  [Hash-verified terminal evidence](../results/summaries/rouaix_s1_64_20261026/README.md).
-- **P0 original 24 ranks, 14652546:** 100 fixed 0.1 ms steps through 0.01 s;
-  all 801 recorded linear solves converged; peak speed 91.2426 m/s,
-  bulk/interface Co .95745/.42012; ledger closure -2.13e-14 kg.
-  Solver wall 2191.417 s; whole job 2372 s (39m32), 15.813 allocated
-  core-hours and 14.559 actual CPU-hours. Final wall time supersedes a stale
-  periodic solver_elapsed value. Batch MaxRSS 9.21 GiB and solver MaxRSS
-  2.15 GiB per task are separate, not aggregate memory. No cgroup-v2 trace or
-  pressure/full-I/O profile exists for this baseline.
-  [Compact raw evidence](../results/summaries/rouaix_p0_base_20261026/README.md).
+**120-rank original trial 14651174 is RUNNING**, started 20:27:37 UTC on
+x1000c1s2b0n1. At 20:32 UTC it had reached .0043/.05 s with peak speed
+84.16 m/s and no recorded stop. It uses fixed .1 ms timesteps.
+Upwind 120-rank 14651178 remains afterany-dependent on that trial. Independent
+5 s target 14650641 remains pending on Priority; the latest provisional start
+forecast is 27 October 16:29:55 UTC (17:29:55 CET). Forecasts are not reservations.
+Our CFD allocation is 120 CPUs; pending requests are not allocated CPUs.
 
-Both archives and compact file hashes were independently checked; full 3D
-archives remain on the HPC. Large turbulence/reduced-pressure values and
-momentum balance remain unresolved. No Rouaix field-validation result follows
-from linear convergence or mass closure alone.
+## New terminal results
 
-## Live CFD queue
+- **96-rank original, 14651185:** 500 fixed .1 ms steps through .05 s;
+  all 4,001 recorded linear solves converged. Peak speed 103.3235 m/s,
+  bulk/interface Co 1.1312/.53365. Mass-ledger closure +1.0466e-11 kg.
+  Solver wall 2140.708 s (35m41); whole job 2339 s (38m59), 62.373 allocated
+  core-hours and 56.630 TotalCPU hours. It used 96 ranks on a 128-CPU node,
+  not a 96-CPU machine. Parent MaxRSS is absent; batch MaxRSS 9446824 KiB
+  and solver-task MaxRSS 1469532 KiB are separate, not node aggregate.
+  [Verified raw/compact audit](../results/summaries/rouaix_s1_96_20261026/README.md).
+- **24-rank profiling, 14652548:** 100 fixed .1 ms steps through .01 s,
+  all 801 linear solves converged. Ledger, peak-speed and convergence outputs
+  match the unprofiled baseline's hashes. Peak speed 91.242559 m/s, mass
+  closure -2.13e-14 kg. Solver wall 2221.959 s; whole job 2409 s (40m09),
+  16.060 allocated core-hours and 14.766 TotalCPU hours. Solver wall is
+  +1.394% versus baseline on another node, an uncontrolled timing difference.
+  [Profile audit and raw object](../results/summaries/rouaix_p0_profile_20261026/README.md).
 
-At 19:03 UTC all five have **zero allocation**:
+The profile contains one ordinary dictionary under a collated processor path,
+with `caseprocessor0` scope; no all-rank max/average/min summary was retained.
+Rank-zero pressure linear-solver scope is 850.222 s/300 calls. The .0387 s
+`objectRegistry::writeObject` scope covers only `uniform/time`, not full field
+I/O. No aggregate node memory/cgroup trace or full checkpoint timing exists.
 
-- S1 original 96 ranks **14651185**, Priority; .05 s target.
-- S1 original 120 ranks **14651174**, afterany 14651185; .05 s target.
-- S1 upwind 120 ranks **14651178**, afterany 14651174; .05 s target.
-- P0 profile 24 ranks **14652548**, Priority; .01 s target.
-- L1 original 120 ranks **14650641**, Priority; 5 s target.
+Both full result archives were hash/member checked remotely and compact
+payloads rsynced with matching hashes. Full 3D archives remain on Komondor.
+Mass closure and linear convergence do not establish momentum closure or
+physical fidelity; large turbulence extrema remain unresolved.
 
-All use fixed .1 ms timesteps. Latest start estimates are N/A and may change.
-P0 baseline/profile requests were verified as 24 CPUs/CPT1, one node, 46 GiB.
-The prior 48 GiB request inflated to 48 CPUs and was cancelled unallocated;
-2000 MiB/core is the partition limit. Frozen CFD source roots are unchanged.
-[Submission/provenance proof](../results/summaries/rouaix_percore_p0_20261026/README.md).
+## Earlier terminal references
 
-## Active terminal inspections
+[S1 64-rank 14651180](../results/summaries/rouaix_s1_64_20261026/README.md)
+reached .05 s/500 steps, all 4001 solves converged, peak speed 103.5026 m/s,
+solver wall 3490.203 s, whole job 3681 s. It ran on a GPU-capable 64-CPU
+host without GPU allocation. The new 96-rank case was faster and used fewer
+allocated core-hours, but different hosts prevent a controlled scaling claim.
+[P0 baseline 14652546](../results/summaries/rouaix_p0_base_20261026/README.md)
+reached .01 s/100 steps, solver wall 2191.417 s and whole job 2372 s.
+Native v2512 mesh use still carries the documented exact-mesh concavity
+exception, not an unconditional native checkMesh pass.
 
-The historical review covers **59 finished case attempts plus 19 finished
-support jobs**, and records the five pending cases separately. It recovered
-parser-only and preflight failures while preserving missing conservation data
-and the exact-mesh native concavity exception. All 36 gap-evidence references
-and hashes were checked; some raw bundles are retained outside Git.
+## Active terminal inspection
 
-Six one-CPU post-processing jobs are released: smoke **14654156**, then
-**14654159–14654163**, each requiring the successful smoke AND its explicit
-CFD parent's termination. Each requests 1800 MiB/10 minutes, no requeue/GPU;
-all held shapes and dependencies were verified. At this capture the smoke is
-pending; native execution is unverified. Failed smoke cancels dependents.
-V1 smoke 14654148 was cancelled before allocation for a profiling-selection
-fix; its source and zero-CPU record remain preserved.
+V2 smoke 14654156 failed after two seconds: compute-node sacct could not
+reach localhost:6819. Its five dependent auditors cancelled with zero CPUs.
+The failed source/status/accounting evidence is preserved; CFD jobs were
+unaffected. Login-node sacct remains usable.
 
-[Inspection registry, exact audit-parent mapping and deployment evidence](../results/summaries/rouaix_finished_inspection_20261026/README.md).
-Auditors preserve hashes, compact diagnostics, convergence/ledger/accounting
-and explicit diagnostic gaps. They do not restart jobs, interpret raw native
-profiles, publish dashboards, or modify unrelated shared-account work.
-95 affected auditor/metrics/runner tests, Ruff and shell syntax passed.
+**Repaired native smoke 14656128 passed** in 36 s, 34.733 CPU-seconds and
+156136 KiB batch MaxRSS. It verified the baseline archive, 100 steps, all
+801 solves and ledger. Missing sacct/purged controller state are explicit
+UNKNOWN/null accounting gaps; no CPU or scheduler state is fabricated.
+The three remaining parents have released dependent inspectors:
+14656217 -> original 120-rank 14651174; 14656218 -> upwind 14651178;
+14656219 -> 5 s 14650641. Smoke success is satisfied; each waits for its
+own parent's termination. Completed 96-rank/profile runs were audited directly.
+Each inspector is bounded to one CPU, 1800 MiB, ten minutes, no requeue/GPU.
+[Native proof, source hashes and repaired deployment](../results/summaries/rouaix_audit_repair_20261026/README.md).
 
-Root owns integration/interpretation. Completed workers are not running CFD
-processes. Earlier campaign snapshots and measured results remain in
-[the 26 October bundle](../results/summaries/rouaix_hpc_20261026/README.md),
-[the S1 submission bundle](../results/summaries/rouaix_s1_20261026/README.md)
-and the inspection bundle's previous-hpc-status.md.
+97 affected auditor/metrics/runner tests, Ruff and shell syntax passed.
+Root owns integration; workers completed inspection, not separate CFD jobs.
+[Historical attempt registry](../results/summaries/rouaix_finished_inspection_20261026/README.md)
+preserves the earlier 59 terminal cases/19 support jobs plus its five-pending
+snapshot; the two new terminal audits above supplement that frozen inventory.

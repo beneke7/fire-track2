@@ -1,0 +1,196 @@
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    object controlDict;
+}
+application interIsoFoam;
+startFrom startTime;
+startTime 0;
+stopAt endTime;
+endTime 0.01;
+deltaT 0.0001;
+adjustTimeStep no;
+maxCo 5;
+maxAlphaCo 5;
+maxDeltaT 0.0001;
+writeControl runTime;
+writeInterval 0.01;
+purgeWrite 0;
+writeFormat binary;
+writePrecision 12;
+writeCompression off;
+timeFormat fixed;
+timePrecision 12;
+runTimeModifiable false;
+OptimisationSwitches
+{
+    fileHandler collated;
+    maxThreadFileBufferSize 0;
+    writeNowSignal 10;
+    stopAtWriteNowSignal 12;
+}
+functions
+{
+    waterVolume
+    {
+        type volFieldValue;
+        libs (fieldFunctionObjects);
+        fields (alpha.water);
+        operation volIntegrate;
+        regionType all;
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    nozzleFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name nozzle;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    gasInletFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name gasInlet;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    downstreamOutletFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name downstreamOutlet;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    bottomOutletFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name bottomOutlet;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    spanwiseMinusFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name spanwiseMinus;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    spanwisePlusFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name spanwisePlus;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    aircraftWallFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name aircraftWall;
+        operation sum;
+        fields (phi alphaPhi_);
+        writeFields false;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    alphaExtrema
+    {
+        type fieldMinMax;
+        libs (fieldFunctionObjects);
+        fields (alpha.water);
+        location false;
+        log true;
+        writePrecision 12;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    speedExtrema
+    {
+        type fieldMinMax;
+        libs (fieldFunctionObjects);
+        mode magnitude;
+        fields (U);
+        location false;
+        log true;
+        writePrecision 12;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+    failureLocations
+    {
+        type fieldMinMax;
+        libs (fieldFunctionObjects);
+        mode magnitude;
+        fields (U p_rgh k epsilon nut);
+        location true;
+        log true;
+        writePrecision 12;
+        executeControl timeStep;
+        executeInterval 1;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+}
+
+profiling
+{
+    active true;
+    cpuInfo false;
+    memInfo false;
+    sysInfo false;
+}

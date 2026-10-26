@@ -261,6 +261,36 @@ def local_sacct(job_id: str) -> dict[str, Any]:
     return parse_sacct(result.stdout, job_id)
 
 
+def local_scontrol_parent(job_id: str) -> dict[str, Any]:
+    """Read retained controller job state when compute-node sacct cannot reach slurmdbd."""
+    result = subprocess.run(
+        ["scontrol", "show", "job", job_id, "--oneliner"],
+        capture_output=True,
+        text=True,
+        timeout=SACCT_TIMEOUT_S,
+        env=dict(os.environ, TZ="UTC"),
+        check=False,
+    )
+    if result.returncode:
+        raise RuntimeError(f"scontrol exit {result.returncode}: {result.stderr[-1000:]}")
+    fields = dict(re.findall(r"([A-Za-z][A-Za-z0-9_]*)=([^\s]+)", result.stdout))
+    if fields.get("JobId") != job_id or not fields.get("JobState"):
+        raise ValueError("scontrol did not return the requested retained parent job")
+    return {
+        "parent": {
+            "job_id": job_id,
+            "state": fields["JobState"],
+            "exit_code": fields.get("ExitCode", "Unknown"),
+            "elapsed_raw": fields.get("RunTime", "Unknown"),
+            "total_cpu": "Unknown",
+            "allocated_cpus": fields.get("NumCPUs", "Unknown"),
+            "max_rss": "Unknown",
+        },
+        "steps": [],
+        "accounting_source": "scontrol",
+    }
+
+
 def safe_member_name(name: str) -> str:
     raw = name.rstrip("/")
     if (
@@ -484,10 +514,11 @@ def diagnostic_gaps(
     profiles = sorted(name for name in files if "profil" in name.casefold())
     summary_present = "attempt/ledger/summary.json" in files
     audit_log_present = "attempt/ledger-audit.log" in files
-    parent = sacct.get("parent", {})
+    parent = sacct.get("parent") or {}
     step_memory = [
         {"job_id": row.get("job_id"), "max_rss": row.get("max_rss")}
         for row in sacct.get("steps", [])
+        if isinstance(row, dict)
         if row.get("max_rss")
     ]
     return {
@@ -534,33 +565,36 @@ def summarize(
             "classification": "terminal_attempt_without_solver_log",
             "diagnostic_gaps": gaps,
         }
-    sacct_text = io.StringIO()
-    writer = csv.writer(sacct_text, delimiter="|")
-    writer.writerow(
-        ["JobIDRaw", "State", "ExitCode", "ElapsedRaw", "TotalCPU", "AllocCPUS", "MaxRSS"]
-    )
-    parent = sacct.get("parent", {})
-    writer.writerow(
-        [
-            parent.get(key, "")
-            for key in (
-                "job_id",
-                "state",
-                "exit_code",
-                "elapsed_raw",
-                "total_cpu",
-                "allocated_cpus",
-                "max_rss",
-            )
-        ]
-    )
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as stream:
-        stream.write(sacct_text.getvalue())
-        sacct_path = Path(stream.name)
+    parent = sacct.get("parent") or {}
+    sacct_path = None
+    if parent:
+        sacct_text = io.StringIO()
+        writer = csv.writer(sacct_text, delimiter="|")
+        writer.writerow(
+            ["JobIDRaw", "State", "ExitCode", "ElapsedRaw", "TotalCPU", "AllocCPUS", "MaxRSS"]
+        )
+        writer.writerow(
+            [
+                parent.get(key, "")
+                for key in (
+                    "job_id",
+                    "state",
+                    "exit_code",
+                    "elapsed_raw",
+                    "total_cpu",
+                    "allocated_cpus",
+                    "max_rss",
+                )
+            ]
+        )
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as stream:
+            stream.write(sacct_text.getvalue())
+            sacct_path = Path(stream.name)
     try:
         parsed = hpc_metrics.summarize_run(job["case_id"], log, job["expected_ranks"], sacct_path)
     finally:
-        sacct_path.unlink(missing_ok=True)
+        if sacct_path is not None:
+            sacct_path.unlink(missing_ok=True)
 
     fv_solution = files.get("attempt/case/system/fvSolution")
     convergence = (
@@ -604,14 +638,34 @@ def summarize(
         convergence.get("all_converged") is True and convergence.get("failed_record_count", 0) == 0
     )
     slurm_state = str(parent.get("state", "UNKNOWN")).split()[0].rstrip("+").upper()
-    classification = classify_result(
-        slurm_state,
-        parsed["completion_status"],
-        state.get("solver_exit_code"),
-        horizon_reached,
-        convergence_ok,
-        same,
+    classification = (
+        classify_result(
+            slurm_state,
+            parsed["completion_status"],
+            state.get("solver_exit_code"),
+            horizon_reached,
+            convergence_ok,
+            same,
+        )
+        if parent
+        else (
+            "captured_attempt_inputs_differ_from_manifest"
+            if not same
+            else "scheduler_state_unavailable"
+        )
     )
+
+    accounting_source = sacct.get("accounting_source", "sacct")
+    if accounting_source == "sacct":
+        accounting_note = (
+            "Parent and step CPU rows are separate; step CPU is not added to parent CPU."
+        )
+    elif accounting_source == "scontrol":
+        accounting_note = "scontrol provided parent state only; CPU totals, memory and step accounting are unavailable."
+    else:
+        accounting_note = (
+            "No retained scheduler row was available; no CPU or memory value was inferred."
+        )
 
     integration = ledger.get("integration", {}) if isinstance(ledger, dict) else {}
     return {
@@ -621,7 +675,9 @@ def summarize(
         "expected_inputs": expected,
         "attempt_manifest_inputs": actual,
         "expected_inputs_match": same,
-        "slurm_state": slurm_state,
+        "slurm_state": slurm_state if parent else "UNKNOWN",
+        "scheduler_state_available": bool(parent),
+        "scheduler_accounting_source": accounting_source,
         "solver_log_status": parsed["completion_status"],
         "solver_exit_code": state.get("solver_exit_code"),
         "expected_horizon_s": job["horizon_s"],
@@ -660,9 +716,9 @@ def summarize(
         if isinstance(ledger, dict)
         else None,
         "cpu_accounting": {
-            "parent": parent,
+            "parent": parent or None,
             "steps": sacct.get("steps", []),
-            "note": "Parent and step CPU rows are separate; step CPU is not added to parent CPU.",
+            "note": accounting_note,
         },
         "diagnostic_gaps": gaps,
         "timing_scope": "OpenFOAM ClockTime and launcher wall time only; no full I/O timing is inferred.",
@@ -676,10 +732,15 @@ def valid_capture(directory: Path, archive_hash: str) -> bool:
         bundle = directory / "audit-bundle.tar.gz"
     except (OSError, ValueError, IndexError, json.JSONDecodeError):
         return False
+    scheduler_accounting = report.get("scheduler_accounting")
+    accounting_complete = scheduler_accounting is None or (
+        isinstance(scheduler_accounting, dict) and scheduler_accounting.get("status") == "available"
+    )
     return (
         report.get("archive_sha256") == archive_hash
         and report.get("capture_status") == "verified"
         and report.get("analysis_complete") is True
+        and accounting_complete
         and SHA256_RE.fullmatch(sidecar) is not None
         and bundle.is_file()
         and sha256_file(bundle) == sidecar
@@ -752,27 +813,45 @@ def run_one(job_id: str, manifest: dict[str, Any], manifest_path: Path, output_p
     output = Output(output_path)
     record: dict[str, Any] = {"job_id": job_id, "mode": "slurm-afterany", "updated_utc": utc_now()}
     try:
+        sacct_error = None
         try:
             sacct = local_sacct(job_id)
+            if not isinstance(sacct.get("parent"), dict):
+                raise ValueError("sacct returned no top-level parent row")
+            sacct["accounting_source"] = "sacct"
         except Exception as error:
-            record.update(
-                {
-                    "phase": "sacct_error",
-                    "classification": "accounting_unavailable",
-                    "reason": f"{type(error).__name__}: {error}"[:1000],
+            sacct_error = f"{type(error).__name__}: {error}"[:1000]
+            try:
+                sacct = local_scontrol_parent(job_id)
+                accounting_record = {
+                    "status": "partial",
+                    "source": "scontrol",
+                    "sacct_error": sacct_error,
+                    "cpu_accounting": "unavailable",
                 }
-            )
-            output.save(job_id, record, "sacct_error")
-            return 1
+            except Exception as control_error:
+                sacct = {
+                    "parent": None,
+                    "steps": [],
+                    "accounting_source": "unavailable",
+                }
+                accounting_record = {
+                    "status": "unavailable",
+                    "source": None,
+                    "sacct_error": sacct_error,
+                    "scontrol_error": f"{type(control_error).__name__}: {control_error}"[:1000],
+                    "cpu_accounting": "unavailable",
+                }
+        else:
+            accounting_record = {
+                "status": "available",
+                "source": "sacct",
+                "cpu_accounting": "available",
+            }
         record["sacct"] = sacct
+        record["scheduler_accounting"] = accounting_record
         parent = sacct.get("parent")
-        if not parent:
-            record.update(
-                {"phase": "missing_from_sacct", "classification": "sacct_parent_row_missing"}
-            )
-            output.save(job_id, record, "missing_from_sacct")
-            return 1
-        if not is_terminal_state(parent["state"]):
+        if parent is not None and not is_terminal_state(parent["state"]):
             record.update({"phase": "not_terminal", "classification": "parent_job_not_terminal"})
             output.save(job_id, record, "not_terminal")
             return 1
@@ -798,12 +877,22 @@ def run_one(job_id: str, manifest: dict[str, Any], manifest_path: Path, output_p
             output.save(job_id, record, "capture_error")
             return 1
         if state is None or not archive_path.is_file():
-            cpu_s = hpc_metrics._slurm_seconds(parent.get("total_cpu", ""))
-            slurm_state = parent["state"].split()[0].rstrip("+").upper()
+            cpu_s = (
+                hpc_metrics._slurm_seconds(parent.get("total_cpu", ""))
+                if parent and sacct.get("accounting_source") == "sacct"
+                else None
+            )
+            slurm_state = parent["state"].split()[0].rstrip("+").upper() if parent else "UNKNOWN"
             if state and state.get("status") == "bootstrap_failed":
                 classification = "bootstrap_failure_no_archive"
             elif slurm_state.startswith("CANCELLED") and cpu_s == 0:
                 classification = "cancelled_zero_cpu_no_archive"
+            elif slurm_state.startswith("CANCELLED") and cpu_s is None:
+                classification = "cancelled_no_archive_cpu_unavailable"
+            elif parent is None:
+                classification = "accounting_unavailable_no_archive"
+            elif sacct.get("accounting_source") == "scontrol" and cpu_s is None:
+                classification = "terminal_no_archive_cpu_unavailable"
             elif cpu_s == 0:
                 classification = "admission_or_bootstrap_failure_no_archive"
             elif state and str(state.get("attempt_archive_status", "")).startswith(
@@ -819,8 +908,9 @@ def run_one(job_id: str, manifest: dict[str, Any], manifest_path: Path, output_p
                     "phase": "inspected_no_archive",
                     "classification": classification,
                     "parent_cpu_seconds": cpu_s,
+                    "scheduler_state": parent.get("state") if parent else "UNKNOWN",
                     "reason": state_error
-                    or "No archive was visible at afterany start; artifact status is not a physical solver verdict.",
+                    or "No archive was visible at this afterany invocation; this is not a physical solver verdict.",
                     "bootstrap_diagnostics": bootstrap_diagnostics(job, run_dir),
                     "diagnostic_gaps": diagnostic_gaps({}, {}, sacct),
                 }
@@ -910,6 +1000,7 @@ def run_one(job_id: str, manifest: dict[str, Any], manifest_path: Path, output_p
                 "selected_files": selection["selected_files"],
                 "run_state": state,
                 "slurm": sacct,
+                "scheduler_accounting": accounting_record,
                 "capture_status": "verified",
                 "analysis_status": metrics["analysis_status"],
                 "analysis_complete": True,

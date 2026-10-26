@@ -6,9 +6,9 @@
     "cpus_per_job": 1,
     "memory_mib": 1800,
     "wall_limit_s": 600,
-    "maximum_jobs": 6,
-    "maximum_allocated_core_hours": 1,
-    "launch_order": "Completed baseline smoke first; after success, one afterany auditor per remaining parent.",
+    "maximum_jobs": 5,
+    "maximum_allocated_core_hours": 0.68,
+    "launch_order": "Preserve failed v2 smoke; submit repaired v3 baseline smoke. Gate three remaining-parent auditors on smoke success and afterany parent completion. Newly completed 96-rank and profiling runs receive direct terminal audits, avoiding duplicate postprocessing.",
     "stop_conditions": "10 minute Slurm cap; no requeue; integrity/parser errors preserve evidence and fail the audit. No CFD parent mutation, full-field download, or external dashboard upload."
   },
   "observables": [
@@ -84,5 +84,32 @@
     "maximum_submissions_including_cancelled": 7,
     "maximum_executing_jobs": 6,
     "future_dependencies": "afterok:v2-smoke AND afterany:CFD-parent; failed smoke cancels dependent auditors."
+  },
+  "accounting_repair_amendment": {
+    "utc": "2026-10-26T20:30:00Z",
+    "failed_auditor_job_id": "14654156",
+    "elapsed_s": 2,
+    "allocated_cpus": 1,
+    "reason": "Compute-node sacct cannot reach configured localhost:6819; login-node sacct works. Missing accounting must not block verified artifact capture or become fabricated CPU/state values.",
+    "cancelled_dependent_auditors": [
+      "14654159",
+      "14654160",
+      "14654161",
+      "14654162",
+      "14654163"
+    ],
+    "cancelled_dependents_allocated_cpus": 0,
+    "maximum_submissions_including_prior_cancelled": 11,
+    "maximum_executing_jobs_including_failed_v2": 5,
+    "scope": "No CFD input/request/dependency changes; accounting gaps explicit. Login-node accounting captures supplement completed-run audits.",
+    "replacement_parent_ids": [
+      "14651174",
+      "14651178",
+      "14650641"
+    ],
+    "direct_terminal_audit_parent_ids": [
+      "14651185",
+      "14652548"
+    ]
   }
 }
