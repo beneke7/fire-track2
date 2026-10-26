@@ -15,6 +15,34 @@ The executed application is only:
 applications/solvers/multiphase/compressibleInterFoam
 ```
 
+## Captured DCEC diagnostic variant
+
+The source snapshot above remains the historical `d3daff...` reference. The
+later captured DCEC diagnostic build is represented additively under
+[`variants/dcec`](variants/dcec/variant-manifest.json); its manifest locks the
+two source overrides and all 68 output-file hashes. Reconstruct a clean source
+tree without changing this base snapshot with:
+
+```bash
+python scripts/prepare_i4f_dcec_source.py --output-dir /tmp/i4f-dcec-source
+```
+
+The preparer verifies the base manifest and each source hash, refuses an
+existing output directory, and copies only the manifest-listed source files.
+The captured build used OpenCFD OpenFOAM v2512 image
+`sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319`;
+the recorded DCEC executable SHA256 is in the variant manifest. A rebuild on
+another compiler, library set, or build path is not promised to be bitwise
+identical.
+
+This variant enables the existing `DP_CELL` diagnostic writer; it does not
+change the pressure or phase equations. `i4fFullPressureAudit` defaults to
+`true`. Setting it explicitly to `false` suppresses the expensive pressure
+residual/operator diagnostics while retaining the pressure solve and raw-floor
+health records; use that case setting only after a matched audit-on/off check
+for the intended inputs. The existing base snapshot and its reference binary
+remain unchanged.
+
 After loading a compatible site OpenFOAM v2512 and its MPI environment, build
 that application with its matching installed libraries:
 

@@ -1,0 +1,130 @@
+{
+  "apparatus": {
+    "geometry": "corrected flush pipe-to-transition join, compact 299214-cell mesh",
+    "initial_downstream": "air at ambient initial condition",
+    "mpi_ranks": 10,
+    "partition": "exact frozen processors10 source partition, no redecomposition",
+    "turbulence": "SST",
+    "valve": "same Cd/opening law and fvOptions as finite-water-EOS N2 source"
+  },
+  "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case",
+  "conditional_admission": {
+    "candidate_quota_cpu_equiv": "measured available capacity, capped 10, minimum 6, after preserving every nonterminal family reservation and measured unrelated CPU",
+    "mpi_rank_count_remains": 10,
+    "must_wait_until_at_least_one_current_whole_campaign_is_authoritatively_terminal": "EOS N2 and rhoConst cold-control families",
+    "no_launch_while_both_campaigns_nonterminal": true,
+    "pause_policy": "any global/family/stage PAUSE holds; no auto-resume",
+    "remaining_family_reservation_cpu_equiv": 10
+  },
+  "created_utc": "2026-10-26T13:18:40.740240+00:00",
+  "horizon": {
+    "absolute_campaign_deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+    "continuation": "continue only after complete healthy native14 endpoint; preserve original health/PAUSE/capture stops",
+    "milestones_s": [
+      0.46,
+      1.3
+    ],
+    "pilot_end_s": 0.05,
+    "stage_hard_wall_s": 14400,
+    "stage_writeNow_s": 13200
+  },
+  "initialization": {
+    "air_model": "ideal gas",
+    "mode": "true cold t=0, no warm state",
+    "source_case": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/case",
+    "tank_pressure": "12 bar absolute with source hydrostatic p_rgh",
+    "tank_water_m3_each": 1.35,
+    "water_model": "finite-pressure-density 20 C water EOS"
+  },
+  "objective": "Exploratory cold-start timestep sensitivity against the concurrently authorized original-step finite-water-EOS campaign; no validation or convergence-order claim.",
+  "observables": "Tank pressure/water inventory, native phase ledgers and seat flux, gas state, timestep history and physical time per step; compare exact saved physical times/interpolate only scalar diagnostics if needed and label offsets.",
+  "output_policy": {
+    "external_patch_vtk": {
+      "changes": [
+        {
+          "after": "false",
+          "already_applied": true,
+          "before": "false",
+          "object": "ambientAnnulusAmbientGasDiagnostics"
+        },
+        {
+          "after": "false",
+          "already_applied": true,
+          "before": "false",
+          "object": "externalSidesAmbientGasDiagnostics"
+        },
+        {
+          "after": "false",
+          "already_applied": true,
+          "before": "false",
+          "object": "farOutletAmbientGasDiagnostics"
+        }
+      ],
+      "dictionary": "system/i4fNumericalHealthObjects",
+      "dictionary_sha256_after": "de7c86913896337d41e53743cd77c6a55c90fa4c44f8b354049d1afbbbc18386",
+      "dictionary_sha256_before": "de7c86913896337d41e53743cd77c6a55c90fa4c44f8b354049d1afbbbc18386",
+      "output_only": true,
+      "preserved": [
+        "per-step scalar function-object outputs",
+        "four-mouth VTK output",
+        "native field snapshots",
+        "all solver physics"
+      ],
+      "schema": "i4f-external-patch-vtk-output-policy/v1",
+      "scope": "copied future continuation child only; physics and scalar/native output remain unchanged"
+    },
+    "type": "output-only; no equation or boundary change"
+  },
+  "parent": {
+    "bundle": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z",
+    "checkpoint_time_s": 0.05001058333202217,
+    "container_id": "13324c8bdc8489ffe9c9fa8e058bb8a9105507a253b3a2b375aa1ed081656057",
+    "docker_started_at": "2026-10-26T12:37:58.261453121Z"
+  },
+  "pilot": {
+    "full_field_write_interval_s": 0.05,
+    "graceful_writeNow_s": 13200,
+    "hard_wall_s": 14400,
+    "mpi_ranks": 10,
+    "note": "Restart preserves stock-alpha i4fFrozenPredictorSp=false from t=0; mesh/source/thermo/EOS/Cd/BC/numerics unchanged; only stage time bounds and sparse full-field cadence differ.",
+    "restart_time_s": 0.05001058333202217,
+    "runtime_environment": {
+      "OMPI_MCA_mpi_yield_when_idle": "1",
+      "scope": "container-local runtime fairness setting; no host/global MPI configuration changed"
+    },
+    "startFrom": "latestTime",
+    "target_end_s": 0.46
+  },
+  "qualification": "Exploratory finite-water EOS cold-start timestep-sensitivity trajectory; not a validation/convergence pass. Target milestones are .05 s, .46 s, and 1.3 s; 1.3 s is not an emptying claim.",
+  "schema": "i4f-finite-water-eos-n2-continuation/v1",
+  "solver": {
+    "PIMPLE": {
+      "nCorrectors": 2,
+      "nNonOrthogonalCorrectors": 0,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "Sp_mode": "standard source update",
+    "application": "compressibleInterFoam v2512",
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "i4fFrozenPredictorSp": false
+  },
+  "status": "prepared_from_exact_healthy_native10_checkpoint",
+  "time_controls": {
+    "baseline": {
+      "deltaT_initial_s": 1e-05,
+      "full_field_writeInterval_s": 0.05,
+      "maxAlphaCo": 0.25,
+      "maxCo": 0.5,
+      "maxDeltaT_s": 0.00025
+    },
+    "changes": "four time/Courant controls are halved from t=0 (initial deltaT, maxDeltaT, maxCo, maxAlphaCo); runtime full-field cadence remains 0.05 s. External-boundary VTK field export is disabled for the three ambient diagnostics to limit output; scalar function-object records, native snapshots, and four-mouth observer remain.",
+    "half_step": {
+      "deltaT_initial_s": 5e-06,
+      "full_field_writeInterval_s": 0.05,
+      "maxAlphaCo": 0.125,
+      "maxCo": 0.25,
+      "maxDeltaT_s": 0.000125
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "command": "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 900 -- make check",
+  "coverage_boundary": "Executed on local HEAD 06a41f19d19aa58154428a2d3fa607a15c590804 plus the exact dirty snapshot recorded in run-metadata.json. Parent later reported a remote advancement to 43cb951 with HPC runner/tests; that revision was not the local HEAD during this run and is left for targeted follow-up.",
+  "dirty_source_snapshot_sha256": "1d39b7973b4635cfaf45578bee487ec51ce4f53a4bcd425c0effdbbb93897d57",
+  "exact_copied_files": {
+    "check-result.json": {
+      "bytes": 5273,
+      "sha256": "4fa0fc475d1a8cd3fc8252013adf68c67deb7848118cf233dc67764ee4f95e6d"
+    },
+    "make-check.log": {
+      "bytes": 1632,
+      "sha256": "ace17ea84b2c4355dd99703ad81c311ff515bc6c8fb26673165d35e7a90cb333"
+    }
+  },
+  "finished_utc": "2026-10-26T15:35:25.183590774Z",
+  "git_head": "06a41f19d19aa58154428a2d3fa607a15c590804",
+  "observed_utc": "2026-10-26 15:49:50 UTC",
+  "phases": {
+    "pytest": "passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed"
+  },
+  "pytest_duration_s": 64.91,
+  "pytest_summary": "920 passed, 2 skipped, 4 subtests passed in 64.91s (0:01:04)",
+  "result": "passed",
+  "returncode": 0,
+  "run_id": "i4f-runtime-check-20261026T153334Z",
+  "schema": "i4f-runtime-public-check-packet/v1",
+  "skip_reasons": [
+    "tests/test_flutas_source_supervisor.py:473: set FLUTAS_RUN_DOCKER_CGROUP_TEST=1 for harmless real Docker smoke",
+    "tests/test_rouaix_hpc_case.py:559: native qualified mesh evidence bundle is local ignored run data"
+  ],
+  "source_run_metadata": {
+    "full_source_snapshot_copied": false,
+    "path": "results/runs/i4f-runtime-check-20261026T153334Z/run-metadata.json",
+    "sha256": "5bfffe9bca6c606c44ce26599d0fc5560c66efd87b06e543503106eb54109919"
+  },
+  "started_utc": "2026-10-26T15:34:19.451581827Z",
+  "tracked_patch_sha256": "9418393a5b607dfac593d8e9f5ebf44dbacc6483c827775a001e3191aac2889f",
+  "untracked_source_file_count_in_snapshot": 23
+}

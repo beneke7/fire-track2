@@ -1,0 +1,107 @@
+{
+  "active_i4f_containers_after_check": [
+    {
+      "cpu_quota_equiv": 10.0,
+      "id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+      "name": "i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+      "paused": false,
+      "running": true,
+      "started_at": "2026-10-26T13:18:45.043691461Z"
+    },
+    {
+      "cpu_quota_equiv": 9.8,
+      "id": "400939f169cc9bfd90f8f24461905255e6644871fec51abb0282a5ae04994f87",
+      "name": "i4f-upwind-momentum-warm-20261026T130013Z",
+      "paused": false,
+      "running": true,
+      "started_at": "2026-10-26T14:44:50.083120753Z"
+    }
+  ],
+  "command": "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 900 -- make check",
+  "coverage_boundary": "Executed on local HEAD 06a41f19d19aa58154428a2d3fa607a15c590804 plus the exact dirty snapshot recorded in run-metadata.json. Parent later reported a remote advancement to 43cb951 with HPC runner/tests; that revision was not the local HEAD during this run and is left for targeted follow-up.",
+  "finished_utc_from_final_log_write": "2026-10-26T15:35:25.183590774Z",
+  "git_head": "06a41f19d19aa58154428a2d3fa607a15c590804",
+  "log": "logs/make-check.log",
+  "log_bytes": 1632,
+  "log_sha256": "ace17ea84b2c4355dd99703ad81c311ff515bc6c8fb26673165d35e7a90cb333",
+  "make_check_phases": {
+    "pytest": "passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed"
+  },
+  "post_check_non_source_workspace_changes": [
+    "docs/I4F_SCIENTIFIC_NOTE.md",
+    "docs/STATUS.md",
+    "results/summaries/i4f_20261025/README.md",
+    "track2_aerial_drop_experiment_plan.md",
+    "results/summaries/i4f_20261025/pressure-audit-toggle/",
+    "results/summaries/i4f_20261025/sealed-gas-pressure-budget/"
+  ],
+  "post_check_status_lines": [
+    " M .gitattributes",
+    " M .gitignore",
+    " M results/archives/index.json",
+    " M scripts/analyze_i4f_native_outlet_secondary.py",
+    " M solvers/i4f_frozen_sp/README.md",
+    " M src/aerial_drop/i4f_native_face_reader.py",
+    " M tests/test_i4f_native_outlet_secondary.py",
+    "?? results/archives/manifests/i4f-fine-postmarker-restart-20261024T0434Z-batch01-0p41277429-0p41301521-20261026T141047Z.tar.zst.files.json",
+    "?? results/archives/manifests/rouaix-fine-35m-startup-20261024T2225Z-duplicate-initial-fields-20261026T142407Z.json",
+    "?? results/archives/manifests/rouaix-fine-35m-startup-20261024T2225Z-duplicate-mesh-20261026T142250Z.json",
+    "?? results/summaries/i4f_20261025/pressure-audit-toggle/",
+    "?? results/summaries/i4f_20261025/sealed-gas-pressure-budget/",
+    "?? results/summaries/i4f_20261025/transition-length-comparison/",
+    "?? scripts/analyze_i4f_pressure_budget.py",
+    "?? scripts/prepare_i4f_dcec_source.py",
+    "?? scripts/profile_i4f_runtime.py",
+    "?? solvers/i4f_frozen_sp/variants/",
+    "?? src/aerial_drop/i4f_pressure_budget.py",
+    "?? tests/test_i4f_pressure_budget.py",
+    "?? tests/test_i4f_runtime_profile.py",
+    "?? tests/test_prepare_i4f_dcec_source.py"
+  ],
+  "pytest_duration_s": 64.91,
+  "pytest_skip_reasons": [
+    "tests/test_flutas_source_supervisor.py:473: set FLUTAS_RUN_DOCKER_CGROUP_TEST=1 for harmless real Docker smoke",
+    "tests/test_rouaix_hpc_case.py:559: native qualified mesh evidence bundle is local ignored run data"
+  ],
+  "pytest_summary": "920 passed, 2 skipped, 4 subtests passed in 64.91s (0:01:04)",
+  "result": "passed",
+  "returncode": 0,
+  "schema": "i4f-full-check-result/v1",
+  "source_code_scope_unchanged_after_check": true,
+  "source_snapshot_comparison": {
+    "new_or_changed_non_source_paths_after_check": [
+      "docs/I4F_SCIENTIFIC_NOTE.md",
+      "docs/STATUS.md",
+      "results/summaries/i4f_20261025/README.md",
+      "track2_aerial_drop_experiment_plan.md",
+      "results/summaries/i4f_20261025/pressure-audit-toggle/",
+      "results/summaries/i4f_20261025/sealed-gas-pressure-budget/"
+    ],
+    "tracked_source_diff_chunks_unchanged": true,
+    "tracked_source_paths": {
+      "scripts/analyze_i4f_native_outlet_secondary.py": true,
+      "solvers/i4f_frozen_sp/README.md": true,
+      "src/aerial_drop/i4f_native_face_reader.py": true,
+      "tests/test_i4f_native_outlet_secondary.py": true
+    },
+    "untracked_source_files_unchanged": true,
+    "untracked_source_paths": {
+      "scripts/analyze_i4f_pressure_budget.py": true,
+      "scripts/prepare_i4f_dcec_source.py": true,
+      "scripts/profile_i4f_runtime.py": true,
+      "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C": true,
+      "solvers/i4f_frozen_sp/variants/dcec/overrides/applications/solvers/multiphase/compressibleInterFoam/pEqn.H": true,
+      "solvers/i4f_frozen_sp/variants/dcec/variant-manifest.json": true,
+      "src/aerial_drop/i4f_pressure_budget.py": true,
+      "tests/test_i4f_pressure_budget.py": true,
+      "tests/test_i4f_runtime_profile.py": true,
+      "tests/test_prepare_i4f_dcec_source.py": true
+    }
+  },
+  "source_snapshot_digest_before_check": "1d39b7973b4635cfaf45578bee487ec51ce4f53a4bcd425c0effdbbb93897d57",
+  "source_state_unchanged_after_check": false,
+  "started_utc_from_log_birth": "2026-10-26T15:34:19.451581827Z",
+  "workspace_source_files_unchanged_after_check": true
+}

@@ -1,0 +1,47 @@
+FoamFile { version 2.0; format ascii; class dictionary; object fvOptions; }
+valveLoss
+{
+    type vectorCodedSource;
+    active true;
+    name i4fFourValveWettedBandCd07Smooth1_v2;
+    vectorCodedSourceCoeffs
+    {
+        selectionMode cellZone;
+        cellZone valveSourceBand;
+        fields (U);
+        codeCorrect #{ #};
+        codeConstrain #{ #};
+        codeAddSup #{ #};
+        codeAddSupRho
+        #{
+            const scalar t = mesh_.time().value();
+            const scalar openingTime = 1.0;
+            const scalar Cd = 0.7;
+            const scalar minOpenFraction = 0.02;
+            const scalar s = min(max(t/openingTime, scalar(0)), scalar(1));
+            const scalar opening = max(sqr(s)*(3.0 - 2.0*s), minOpenFraction);
+            const scalar K = 1.0/sqr(Cd*opening);
+            const scalar uRegularization = 0.10;
+            const scalar wA1 = 3.3333333333333335; // A_native/V_band, m^-1
+            const scalar wA2 = 3.3333333333333335;
+            const scalar wB1 = 3.3333333333333335;
+            const scalar wB2 = 3.3333333333333335;
+            const vectorField& C = mesh_.C().primitiveField();
+            const vectorField& U = mesh_.lookupObject<volVectorField>("U").primitiveField();
+            const scalarField& rhoCells = rho.primitiveField();
+            const scalarField& V = mesh_.V();
+            scalarField& diag = eqn.diag();
+            forAll(cells_, i)
+            {
+                const label celli = cells_[i];
+                const scalar y = C[celli].y();
+                scalar w = wA1;
+                if (y >= -0.55 && y < 0.0) w = wA2;
+                else if (y >= 0.0 && y < 0.55) w = wB1;
+                else if (y >= 0.55) w = wB2;
+                const scalar speed = max(mag(U[celli]), uRegularization);
+                diag[celli] -= 0.5*rhoCells[celli]*K*w*speed*V[celli];
+            }
+        #};
+    }
+}

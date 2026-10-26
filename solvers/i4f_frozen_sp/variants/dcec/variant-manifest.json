@@ -1,0 +1,333 @@
+{
+  "base_snapshot": {
+    "file_count": 68,
+    "manifest_path": "solvers/i4f_frozen_sp/source-manifest.json",
+    "manifest_sha256": "076e431c942165ca2ca8c012173a0da9d04baf41365453f95c5a2c89ee567625",
+    "path": "solvers/i4f_frozen_sp",
+    "reference_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "source_origin": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont2-20261024T2357Z-attempt3/source/v7-frozen-sp-v2-nopout"
+  },
+  "canonical_file_manifest_sha256": "e8f0b3c95742c5f2736bbc92ac3e423ce68d2e9b52ba98fe04744bfcd87382e0",
+  "captured_execution": {
+    "binary_name": "compressibleInterFoamFrozenAlphaSourceV2NoPout",
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "only_nonbase_build_file_differences": "The captured build tree included generated helper/lnInclude and build products. The published source variant reconstructs the 68 manifest-listed source files only.",
+    "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "published_source_file_count": 68,
+    "run_source_lock": "results/runs/i4f-pressure-dp-cell-trace-20261025T2128Z/provenance/run-source-lock.json",
+    "run_source_lock_sha256": "81711d793f5cee6a8bb346d3f89d3273c20ab3d3350d6478e70598cd72c8ba58",
+    "source_file_count_in_captured_build_tree": 84,
+    "source_freeze_record": "results/runs/i4f-pressure-dp-cell-trace-20261025T2128Z/provenance/source-freeze.json",
+    "source_freeze_sha256": "fe93a3ef521ce29fac6ce9235d2afb8aeb47fee09ce40657e4ad83877f8e11f2",
+    "source_path": "results/runs/i4f-pressure-audit-dpcell-source-prep-20261025T210520Z/source/v7-frozen-sp-v2-nopout"
+  },
+  "created_utc": "2026-10-26T15:14:37Z",
+  "files": [
+    {
+      "path": "applications/solvers/multiphase/VoF/alphaCourantNo.H",
+      "sha256": "efc35048731c6ad07f209530e654cc1790ddb01be227cbded7de9b6922d6bfb9"
+    },
+    {
+      "path": "applications/solvers/multiphase/VoF/alphaEqn.H",
+      "sha256": "f2f10939f37b7765f8e4a1c032daab3140c5605533ac2bf955245925a425df7e"
+    },
+    {
+      "path": "applications/solvers/multiphase/VoF/alphaEqnSubCycle.H",
+      "sha256": "18876f2adbfd288f2733653c64fbb38b3d971143d3d8a82b6a7524914f6982e4"
+    },
+    {
+      "path": "applications/solvers/multiphase/VoF/createAlphaFluxes.H",
+      "sha256": "77b142f1d144f09bbea41218c65c7e839e4745549853faf16fb4917351f09c5f"
+    },
+    {
+      "path": "applications/solvers/multiphase/VoF/setDeltaT.H",
+      "sha256": "43792b990dba883408ae6e23da9109767a837c7cbd4207a7a3d1852f2131634d"
+    },
+    {
+      "path": "applications/solvers/multiphase/VoF/setRDeltaT.H",
+      "sha256": "3e60e5fa14ca4b4ccf7ba4a51c7fb510d5ec6a74145b602ba5e39b29cf4fb122"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/files",
+      "sha256": "f756eb32e1e3c7d4e4d47aec8d9ebbf418e8f2664a06023f7e72218f77050cb0"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/options",
+      "sha256": "d1b0e877c327c9caec0218f4b3914c523ee0e6cebaf316b6d7a940ac8bc4142b"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/TEqn.H",
+      "sha256": "248be8cedf663cc162ab57e23ea0cbe69d00207a91fb98f3021900846e7a6542"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/UEqn.H",
+      "sha256": "a18c62a6ffc03cdf6c7ee4cfcf52d146da9af282058996a72c0afd66906427a8"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/Make/files",
+      "sha256": "cc256795200402b17a8167c2cff14bbb6fab100123e2aeee5f048446aeebe42c"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/Make/options",
+      "sha256": "618f0dc178a6dc777f47228c3e40a442e26561794d925fbb71c3377e69574b4a"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/VoFphaseCompressibleTurbulenceModel.H",
+      "sha256": "4505311bc908cf5caa4cb89f50e20b28dc65fa9d263283297866bb8f84baf9b2"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/VoFphaseCompressibleTurbulenceModelFwd.H",
+      "sha256": "1819f38cd3595151169ae80580028752edf7ebfbfc55deb8eed963fc94587fac"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/VoFphaseCompressibleTurbulenceModels.C",
+      "sha256": "43d69f6502f67a267de8d54af49e8305ce737044628cfbad5272446ec3ec2a53"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/compressibleInterPhaseTransportModel.C",
+      "sha256": "12f696fd1f0d2f32c715f14b96a3f4b54b2553bf2f5d701d73b4c182b4620c2d"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/VoFphaseCompressibleTurbulenceModels/compressibleInterPhaseTransportModel.H",
+      "sha256": "6cdd5ca5be2750edaa03f6b9234aa0cbdea51439b3503afc55c058edd44452d5"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H",
+      "sha256": "fc1dce13303b83586d2b24b185bfa23e31843f640678cd2a1e78d5e4eaa455f3"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleAlphaEqnSubCycle.H",
+      "sha256": "f27b8106439708174d7690f3bad2d23b5ce322278d50908b3acc5d07b9cc331f"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterDyMFoam/Make/files",
+      "sha256": "47c031b3b231965db17fd6a4938a5ca7ea3d39e1b918ce91c1f7066997c82b3e"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterDyMFoam/Make/options",
+      "sha256": "caf80b9469456379e7f6fcf260ce1f2ddad33d3bc2ff6d4ebf47095685e8ad9f"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterDyMFoam/alphaSuSp.H",
+      "sha256": "14fbfd922a2aef60ca7e72da844e5219313e4cfb859b3cf52a0102a88f9cb4d4"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterDyMFoam/compressibleInterDyMFoam.C",
+      "sha256": "5f46c0cea3056e19506c316398578c865c96f25179ad4ce60b08d9a310665f74"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterDyMFoam/correctPhi.H",
+      "sha256": "abddc8d80806ecee1c749437e5764ffa7299624a215ee7d68c5a97a833f72c00"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterDyMFoam/pEqn.H",
+      "sha256": "584de58c9b85596129f48f66b2cf4b91a45b4fac0528d26747888be741627444"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/Make/files",
+      "sha256": "398e7477632a60b3e0f6bb9b6ac2a308539496ec96bb2152664d55af7f15817c"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/Make/options",
+      "sha256": "49c77df9f308fe5cf6c66033d0f8f34f278a738f673ec303250e74d9e8588cb7"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/TEqn.H",
+      "sha256": "5c4b41ce4e6cf013827eed5060d7e4c9a186431983b54d4b0fd0dc1e3c6e7b91"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/VoFPatchTransfer/VoFPatchTransfer.C",
+      "sha256": "ae3aeb1c4ddcfcb6f77056ecde25e4c38c244b814a28f3b7455f48aa8a3ddbe8"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/VoFPatchTransfer/VoFPatchTransfer.H",
+      "sha256": "d4db4e15b035ae71492eb39ea8311583a1e61b07771a105d3cb132d074bc7991"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/VoFSolidificationMeltingSource/VoFSolidificationMeltingSource.C",
+      "sha256": "560463789b94c801f1cf852113bba17c327aad293abca2de6f83a5cb92fbe8a0"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/VoFSolidificationMeltingSource/VoFSolidificationMeltingSource.H",
+      "sha256": "6024fc5a586449a929ca1273deac9d4402b780b8323bcf3858c10cc9e173c989"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/VoFSolidificationMeltingSource/VoFSolidificationMeltingSourceIO.C",
+      "sha256": "92bed1a84db74d7f6d265eadaec5cefc1c75f6c8032e4b3181fdd38df57ed451"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/VoFSolidificationMeltingSource/VoFSolidificationMeltingSourceTemplates.C",
+      "sha256": "d5209ccaa2429bf428cb53b22af52fb4c6785d800368169951540da8af612b32"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/compressibleInterFilmFoam.C",
+      "sha256": "b916c6d93535a3659bdb2e472ed7c1e7159a8397a598cee28a78c6fa346a70e7"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/createSurfaceFilmModel.H",
+      "sha256": "a37f916b03fd418cfd54de827aec4fbe08ec780862ff4cf06d89a69aa5e7eec6"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFilmFoam/pEqn.H",
+      "sha256": "3bfece5c65f202d97f225ac7c6c16fa895d5eab7ebbdb174f2bbbcbe549303bd"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "sha256": "6be187ca00dbf8be0ce2974c203195bbc424483c54afc982d324209a01067165"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/Make/files",
+      "sha256": "026965f76a63452d1642ddc05e7b80010b0a142da7990da3d84d14115d3ccede"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/Make/options",
+      "sha256": "7ba03976f5e35ae10cae8da035537a0fd16e1a65bf347544060cdeb22a1cc1e1"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/alphaControls.H",
+      "sha256": "a66ad72324f526c0194f99fa7f64712da966e1bd7118c357217993069c763004"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/alphaEqn.H",
+      "sha256": "d0c03361dcd5b2be240826221f4651bbf86c61df615e04b24713da917dff8bd8"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/alphaSuSp.H",
+      "sha256": "f26960973a4ff5ad572ce7f096eade9b08aa1cb2fa82f76fec607220f7adf47d"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/compressibleAlphaEqnSubCycle.H",
+      "sha256": "607576b4c417f781e87949e9fabae78ec4ba5df3e3ba6467073465957f2f0567"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/compressibleInterIsoFoam.C",
+      "sha256": "05a3e6c82d5ae12b1bc8fa2240fc931f43d55e1f9a6107ae0ae59190e9b28a82"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/correctPhi.H",
+      "sha256": "abddc8d80806ecee1c749437e5764ffa7299624a215ee7d68c5a97a833f72c00"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/createFields.H",
+      "sha256": "7ee6ba492504c1f9a221507b25cc7ae24aeb6fef6e36f858ed1161502d33e48d"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterIsoFoam/pEqn.H",
+      "sha256": "b56c36bd1ac53e401a27a708c35bd4615905143de86e6b2f3ea9357773c3e7f7"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/createFields.H",
+      "sha256": "c8def77f6558fefe36e74ef4438d98be6232698179ccdb2d693bec16d303ec61"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/i4fDefectAudit.H",
+      "sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/Make/files",
+      "sha256": "eba6c869db8bcb56db915d975867e7103499b2c89101181aca368d75e88b6741"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/Make/options",
+      "sha256": "7a4b7a4b24e4c6c71f1d4f2d1fcc6dd6e933a56be3db40b79de7ed59959ef91d"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/TEqn.H",
+      "sha256": "248be8cedf663cc162ab57e23ea0cbe69d00207a91fb98f3021900846e7a6542"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/UEqn.H",
+      "sha256": "10ef9a6b74985148b8b3f8cf78f573ed750239f02563253c5a6121e9d32d4ffe"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/alphaSuSp.H",
+      "sha256": "f26960973a4ff5ad572ce7f096eade9b08aa1cb2fa82f76fec607220f7adf47d"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/createFields.H",
+      "sha256": "733ad9dd9f5febadd110118cd1ef1a32b1506fa2f6fb262f2fc19817aa5b1ab2"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/overCompressibleInterDyMFoam.C",
+      "sha256": "5c72d2fd1c4f1100fc69584f823aab08cf1a505034998ce38b864440673b5f3b"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/overCompressibleInterDyMFoam/pEqn.H",
+      "sha256": "b60c8445075498fa4bfe42c44ffc46d93b989f8c288f46b0a47e43b1a776bd33"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/rhofs.H",
+      "sha256": "c70fa097e9a3b0208c873d1168d6387118b7514e1bdb67a29996f02f89bfc92a"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/Make/files",
+      "sha256": "fa39b6b088745dc5c4e1d80d5b535b28d5d24468552eb5f257e1954260f8b170"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/Make/options",
+      "sha256": "a7dd63b32ec2d5083a288848fff270cbfccfc3928cc67311ae9529cbf845845c"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/liquidProperties/liquidPropertiesSurfaceTension.C",
+      "sha256": "4b9fe8eefadd991f8772e42a399703fbd3ab8dda87a36c1f1b11790df1f49e7c"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/liquidProperties/liquidPropertiesSurfaceTension.H",
+      "sha256": "be5345973522de2c075afd1e81a64925ea886cc37751293163e4543ba2747a9a"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/twoPhaseMixtureThermo/Make/files",
+      "sha256": "a6bff0e6cb8a1825d2feb80c55ce739335e3fa64d8fdaa36ce5b93bbb34c647c"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/twoPhaseMixtureThermo/Make/options",
+      "sha256": "a5c6a0579f4c75e440a2cbde35f57bf782a1e47b9022c7a7f84dadebf61f793d"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/twoPhaseMixtureThermo/twoPhaseMixtureThermo.C",
+      "sha256": "b4925d6a4a25e7a4c9acd4942dcfe5f23a592e8155e540550e034739cb9c2e73"
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/twoPhaseMixtureThermo/twoPhaseMixtureThermo.H",
+      "sha256": "731868939880fd7d284d804275f0d5b3e0b48ffde4761e11bafa23e859f5db06"
+    }
+  ],
+  "overrides": [
+    {
+      "base_sha256": "fa5f33ba89ed73c1615dfcdb0b1d8ac3e6577fe6414332af7085c72e1faf7078",
+      "captured_source_path": "results/runs/i4f-pressure-audit-dpcell-source-prep-20261025T210520Z/source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "effect": "DP_CELL writer enabled (existing diagnostic writer only; ALPHA_CELL remains disabled).",
+      "override_file": "overrides/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "target_sha256": "6be187ca00dbf8be0ce2974c203195bbc424483c54afc982d324209a01067165"
+    },
+    {
+      "base_sha256": "63e340d710120a61b74c98c8b41731feecc6fe641f4d3f17363c040d07c63d2f",
+      "captured_source_path": "results/runs/i4f-pressure-audit-dpcell-source-prep-20261025T210520Z/source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "effect": "Adds i4fFullPressureAudit default-true diagnostic switch and raw pressure-floor cell summaries; no pressure equation, floor, phase-source, or state-update change.",
+      "override_file": "overrides/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "target_sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6"
+    }
+  ],
+  "rebuild_limit": "This identifies the captured source inputs and recorded binary. A rebuild under another compiler, library set, build path, or site environment is not promised to be bitwise identical.",
+  "schema": "i4f-executed-dcec-source-variant/v1",
+  "semantics": {
+    "alpha_cell_diagnostic_enabled": false,
+    "dp_cell_diagnostic_enabled": true,
+    "equations_changed": false,
+    "i4fFullPressureAudit_default": true,
+    "i4fFullPressureAudit_false_scope": "Diagnostic residual/operator-defect work only; use an explicit case setting only after a matched audit-on/off comparison for the intended inputs. Do not infer a default-off production setting.",
+    "license": "OpenFOAM GPL headers and source credits are retained in both overrides; see solvers/i4f_frozen_sp/COPYING.",
+    "phase_source_thermo_and_state_updates_unchanged": true,
+    "pressure_matrix_and_stock_floor_unchanged": true,
+    "source_audit_record": "results/runs/i4f-pressure-audit-lean-prototype-20261025T185425Z/analysis/source-audit.json",
+    "source_audit_sha256": "c4246ac3109dc88ee731b58b59e9d0f23566bfa0fc824d334b678d1372f882f5"
+  },
+  "title": "Captured I4F DCEC diagnostic solver source variant",
+  "variant": "dcec"
+}

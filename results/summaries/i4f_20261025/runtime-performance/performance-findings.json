@@ -1,0 +1,420 @@
+{
+  "created_utc": "2026-10-26T14:52:04+00:00",
+  "execution": "Read-only. No solver launch, pause, resume, input mutation, or GPU work.",
+  "hardware_observation": {
+    "captured_utc": "2026-10-26T14:50:16+00:00",
+    "cpu_model": "Intel Core Ultra 7 265K",
+    "higher_capacity_cpu_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "higher_capacity_sysfs_cpu_capacity": "1012-1024",
+    "live_container": {
+      "cpu_quota_equivalents": 8.8,
+      "id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+      "memory_limit_gib": 32,
+      "other_workload": "unrelated Python process at approximately 105% CPU",
+      "rank_affinity": "All 10 MPI solver PIDs 2254945-2254954 have Cpus_allowed_list 0-19; no rank pinning.",
+      "rank_affinity_pid_list": [
+        2254945,
+        2254946,
+        2254947,
+        2254948,
+        2254949,
+        2254950,
+        2254951,
+        2254952,
+        2254953,
+        2254954
+      ],
+      "ranks": 10,
+      "sampled_cpu_percent": 874.54
+    },
+    "lower_capacity_cpu_ids": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "lower_capacity_sysfs_cpu_capacity": 756,
+    "make_doctor": {
+      "disk_free_gib": 29.6,
+      "effective_cpus": 20,
+      "ram_available_gib": 116.3
+    },
+    "rank_affinity_snapshot_utc": "2026-10-26T14:53:15+00:00"
+  },
+  "health_context": {
+    "finite_eos_halfdt_live": {
+      "note": "Still running at the latest campaign observation; profiled log was read as an initial-size byte snapshot and grew during reading.",
+      "observation": {
+        "branch_status": "running",
+        "bundle": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+        "completed_steps": 1265,
+        "container_id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+        "docker_status": "running",
+        "guard_status": "solver_released_after_exact_identity_guard",
+        "physical_time_s": 0.208260583332,
+        "updated_utc": "2026-10-26T14:51:46.219087+00:00"
+      },
+      "status": "monitoring_stock_stage"
+    },
+    "finite_eos_n2": {
+      "last_time_s": "0.410222565383",
+      "note": "Guard stopped after a pressure-floor contact; not a completed 0.46 s trajectory or validation pass.",
+      "raw_pressure_contact_count": 1,
+      "status": "solver_terminal"
+    },
+    "rhoconst_campaign": {
+      "clipped_liquid_mass_kg": 0.003128072614429754,
+      "note": "Not a numerically accepted physical result; performance evidence only.",
+      "raw_pressure_contacts": 18,
+      "status": "terminal_numerical_or_capture_failure_no_restart"
+    }
+  },
+  "measured_results": {
+    "fixed_per_step_solver_work_observed_in_logs": {
+      "GAMG_p_rgh_solve_calls": 16,
+      "Ux_Uy_Uz_T_alpha_water_solve_calls_each": 8,
+      "configured_pimple": {
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 8,
+        "transonic": true
+      },
+      "interpretation": "8 outer PIMPLE work is repeated each step; p_rgh is solved twice per outer. These counts show work volume, not wall time per equation.",
+      "k_omega_solve_calls_each": 1,
+      "source_lines": {
+        "main_loop": "solvers/i4f_frozen_sp/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C:130",
+        "outer_loop": ".../compressibleInterFoam.C:152",
+        "pEqn": ".../compressibleInterFoam.C:177",
+        "turbCorr": ".../compressibleInterFoam.C:182"
+      }
+    },
+    "log_and_function_object_io": {
+      "finite_eos_halfdt_stage01": {
+        "fourMouthPlaneAreaAlpha_vtp_bytes": 38035084,
+        "fourMouthPlaneAreaAlpha_vtp_files": 152,
+        "note": "This stage has the other worker\u2019s output-only patch: ambient field writes off; high-frequency scalar outputs and four-mouth VTK retained.",
+        "postProcessing_bytes": 40509961,
+        "postProcessing_vtp_files": 152,
+        "three_ambient_patch_vtp_files": 0
+      },
+      "rhoconst_stage02": {
+        "combined_bytes": 199494640,
+        "fourMouthPlaneAreaAlpha_vtp_bytes": 96087916,
+        "log_bytes": 464399695,
+        "operator_defect_bytes": 81068762,
+        "postProcessing_bytes": 552757975,
+        "postProcessing_vtp_files": 1536,
+        "pressure_residual_bytes": 118425878,
+        "three_ambient_patch_vtp_bytes": 451578889
+      },
+      "wall_time_limit": "I/O bytes are measured, but no per-object or per-write wall timer exists in these logs. No I/O speedup is claimed."
+    },
+    "pout_and_terminal_parse": {
+      "NoPout_solver_name_misclassified": false,
+      "foam_fatal_lines_per_log": 0,
+      "pout_records_in_all_four_raw_logs": 0,
+      "trapfpe_banner_lines_per_log": 1
+    },
+    "profiled_logs": [
+      {
+        "clock_wall_interval_s": {
+          "count": 1948,
+          "max": 10.0,
+          "mean": 4.181211498973306,
+          "median": 4.0,
+          "min": 1.0,
+          "p90": 5.0
+        },
+        "execution_cpu_interval_s": {
+          "count": 1948,
+          "max": 6.230000000000018,
+          "mean": 3.8207289527720736,
+          "median": 3.869999999999891,
+          "min": 1.7799999999997453,
+          "p90": 4.769999999999982
+        },
+        "log_bytes": 464399695,
+        "log_sha256": "5214002abcc071be764501c3d5624b87791245a78fc97491da0da55a379002a4",
+        "outer_iterations_per_step": {
+          "count": 1949,
+          "max": 8.0,
+          "mean": 7.9979476654694714,
+          "median": 8.0,
+          "min": 7.0,
+          "p90": 8.0
+        },
+        "p_rgh_iterations_per_step": {
+          "count": 1949,
+          "max": 140.0,
+          "mean": 68.4345818368394,
+          "median": 63.0,
+          "min": 16.0,
+          "p90": 124.0
+        },
+        "p_rgh_solves_per_step": {
+          "count": 1949,
+          "max": 16.0,
+          "mean": 16.0,
+          "median": 16.0,
+          "min": 16.0,
+          "p90": 16.0
+        },
+        "path": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z/case/log.cold-coupled",
+        "run": "rhoconst-stage02",
+        "steps": 1949
+      },
+      {
+        "clock_wall_interval_s": {
+          "count": 1607,
+          "max": 14.0,
+          "mean": 2.72744243932794,
+          "median": 2.0,
+          "min": 1.0,
+          "p90": 4.0
+        },
+        "execution_cpu_interval_s": {
+          "count": 1607,
+          "max": 8.589999999999918,
+          "mean": 2.603702551337897,
+          "median": 2.0900000000000034,
+          "min": 1.699999999999818,
+          "p90": 3.8640000000000336
+        },
+        "log_bytes": 383105259,
+        "log_sha256": "f62debb78e52c8461fe9688ed7bf03d99c463ecef2980c0e371f4268817951f3",
+        "outer_iterations_per_step": {
+          "count": 1608,
+          "max": 8.0,
+          "mean": 7.999378109452737,
+          "median": 8.0,
+          "min": 7.0,
+          "p90": 8.0
+        },
+        "p_rgh_iterations_per_step": {
+          "count": 1608,
+          "max": 91.0,
+          "mean": 55.353233830845774,
+          "median": 60.0,
+          "min": 25.0,
+          "p90": 71.0
+        },
+        "p_rgh_solves_per_step": {
+          "count": 1608,
+          "max": 16.0,
+          "mean": 16.0,
+          "median": 16.0,
+          "min": 16.0,
+          "p90": 16.0
+        },
+        "path": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/log.cold-coupled",
+        "run": "finite-eos-n2-stage01",
+        "steps": 1608
+      },
+      {
+        "clock_wall_interval_s": {
+          "count": 1207,
+          "max": 8.0,
+          "mean": 4.406793703396851,
+          "median": 5.0,
+          "min": 1.0,
+          "p90": 6.0
+        },
+        "execution_cpu_interval_s": {
+          "count": 1207,
+          "max": 6.360000000000127,
+          "mean": 3.8583927091963544,
+          "median": 4.3799999999999955,
+          "min": 1.6700000000000728,
+          "p90": 4.919999999999936
+        },
+        "file_changed_during_profile": true,
+        "outer_iterations_per_step": {
+          "count": 1209,
+          "max": 8.0,
+          "mean": 7.996691480562449,
+          "median": 8.0,
+          "min": 4.0,
+          "p90": 8.0
+        },
+        "p_rgh_iterations_per_step": {
+          "count": 1209,
+          "max": 31.0,
+          "mean": 27.057071960297765,
+          "median": 29.0,
+          "min": 19.0,
+          "p90": 31.0
+        },
+        "p_rgh_solves_per_step": {
+          "count": 1209,
+          "max": 16.0,
+          "mean": 15.991728701406121,
+          "median": 16.0,
+          "min": 6.0,
+          "p90": 16.0
+        },
+        "path": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/log.cold-coupled",
+        "run": "finite-eos-halfdt-stage01-live-snapshot",
+        "snapshot_bytes": 286939791,
+        "snapshot_sha256": "e3aac5856f24cb120a7a0174a8ad65345e8bc9f07cce42844e004f2ec462122c",
+        "time_markers": 1209
+      },
+      {
+        "clock_wall_interval_s": {
+          "count": 411,
+          "max": 8.0,
+          "mean": 5.017031630170316,
+          "median": 5.0,
+          "min": 4.0,
+          "p90": 6.0
+        },
+        "execution_cpu_interval_s": {
+          "count": 411,
+          "max": 6.039999999999964,
+          "mean": 4.3043309002433086,
+          "median": 4.319999999999936,
+          "min": 3.160000000000002,
+          "p90": 4.790000000000191
+        },
+        "log_bytes": 97579047,
+        "log_sha256": "d0db4d3a5d63f4686eaae2683068ffb2a3436049165ee62f2e110f3a8da6115c",
+        "p_rgh_iterations_per_step": {
+          "count": 412,
+          "max": 74.0,
+          "mean": 24.37378640776699,
+          "median": 21.0,
+          "min": 10.0,
+          "p90": 37.0
+        },
+        "path": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/case/log.cold-coupled",
+        "run": "finite-eos-halfdt-parent-pilot",
+        "steps": 412
+      }
+    ]
+  },
+  "prepared_affinity_experiment": {
+    "arms": {
+      "candidate": "mpirun --map-by core --bind-to core --report-bindings -np 10 /pair/bin/compressibleInterFoamFrozenAlphaSourceV2NoPout -parallel -fileHandler collated",
+      "control": "mpirun -np 10 /pair/bin/compressibleInterFoamFrozenAlphaSourceV2NoPout -parallel -fileHandler collated"
+    },
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "bounded_window": {
+      "end_time_s": 0.05688558333202217,
+      "nominal_steps_at_max_deltaT": 55,
+      "start_time_s": 0.05001058333202217,
+      "timed_steps_target": 50,
+      "wall_cap_s_per_arm": 900,
+      "warmup_steps": 5
+    },
+    "checkpoint": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/case/processors10/0.050010583332",
+    "checkpoint_time_s": 0.05001058333202217,
+    "common_resources": {
+      "allowed_cpus": "0-19",
+      "cpu_quota_equivalents": 8.8,
+      "memory_limit_gib": 32,
+      "mpi_ranks": 10,
+      "threads_per_rank": 1
+    },
+    "decision": "Exploratory one-pair data only; no guessed speedup or new acceptance threshold. Do not change linear tolerances or outer/corrector counts from iteration counts alone.",
+    "id": "i4f-affinity-10rank-55step-pair",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "input_freeze_sha256": "0a1073345a59cc0b02eed9a8b1c273bcd0553776e870705191ac35faa2cf34e9",
+    "launch_condition": "Use replacement plan only after root refreshes exact resource admission following the warm pressure probe.",
+    "measure": [
+      "per-step process CPU and wall timers",
+      "container CPU, memory, BlockIO, and exact rank masks",
+      "linear solve and iteration counts by field",
+      "existing health/inventory/outlet-flow records",
+      "output bytes and endpoint checkpoint time"
+    ],
+    "mesh_cells": 299214,
+    "only_arm_difference": "Open MPI rank mapping/binding flags. Clone the common checkpoint and case twice; never modify the live case or the source checkpoint.",
+    "replacement": "results/runs/i4f-performance-affinity-pair-20261026T151220Z/affinity-pair-plan.json",
+    "same_physics_configuration": {
+      "change_for_both_arms": "endTime only, to bound this profiling window",
+      "controlDict_base_sha256": "a57639ed851a3fd8fdf605451137d2bf5e0eef22c0690dfe9ae5bc50de727bc8",
+      "fourMouthObserverObjects_sha256": "2c88c864cbc07ef56efa8689ad51aefdfa91a27f264a605830c4cca1e147ca06",
+      "fvSolution_sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+      "i4fNumericalHealthObjects_sha256": "de7c86913896337d41e53743cd77c6a55c90fa4c44f8b354049d1afbbbc18386",
+      "pimple": {
+        "nCorrectors": 2,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 8,
+        "transonic": true
+      },
+      "time_controls": {
+        "deltaT": 5e-06,
+        "maxAlphaCo": 0.125,
+        "maxCo": 0.25,
+        "maxDeltaT": 0.000125,
+        "writeInterval": 0.05
+      }
+    },
+    "source_case_static_tree_sha256": "a4589eb8f0d9c09f4bb4f0755b6409375da02fda4d1cfea72efe26f803e13ca0",
+    "status": "superseded_before_launch",
+    "superseded_reason": "A concrete audit-false matched pair now uses the proved guard/case template and restores the immutable common 14-field parent checkpoint before freeze verification.",
+    "unchanged_criteria": "Same mesh, fields, fvSolution, phase EOS, source, schemes, time controls, output objects, numerical-health monitors, and quality stop rules. Set only endTime for this short window."
+  },
+  "profile_summary": "results/runs/i4f-performance-runtime-profile-20261026T144715Z/profile-summary.json",
+  "profile_summary_sha256": "e53a3b9ec9aa52cac99e9abdc48cae34ab603fb4e100dd9fb96afedd24c6bb5c",
+  "provenance": {
+    "binary_parent_lock": {
+      "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+      "diagnostic_patch_sha256": "a9b18936d48281c64fbb1d1e9e73c87923806cf35fbb1d49765fa9a874e44c31",
+      "equations_changed": false,
+      "i4fFullPressureAudit_runtime_switch": false,
+      "path": "results/runs/i4f-pressure-dp-cell-trace-20261025T2128Z/provenance/run-source-lock.json",
+      "source_file_sha256": "6be187ca00dbf8be0ce2974c203195bbc424483c54afc982d324209a01067165"
+    },
+    "compiled_binary_run_lock": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/provenance/run-source-lock.json",
+    "compiled_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "runtime_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "source_snapshot": {
+      "all_manifest_files_rehashed_match": true,
+      "entries": 68,
+      "manifest": "solvers/i4f_frozen_sp/source-manifest.json",
+      "manifest_sha256": "076e431c942165ca2ca8c012173a0da9d04baf41365453f95c5a2c89ee567625",
+      "note": "The source-manifest reference executable differs from the compiled binary hash. The current run-source-lock hash and diagnostic-only patch are the binary provenance authority; no old dpEqn binary hash is substituted.",
+      "reference_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1"
+    },
+    "timer_source": {
+      "TimeIO.C_sha256": "8dff209c75331a4a5956d9520d839f4b451f5f4f1c4badce5428402bb39e6fe8",
+      "cpuTimePosix.C_sha256": "58fd38e7d9992d70ccc2018444d2107eefda644cec8bff02063f6e9cfcbe6279",
+      "meaning": "ExecutionTime is calling-process CPU time (not summed over MPI ranks); ClockTime is wall time. ClockTime is printed at whole-second resolution in these logs."
+    }
+  },
+  "ranked_candidates": [
+    {
+      "candidate": "Bind the existing 10 MPI ranks to core IDs on the hybrid CPU.",
+      "evidence": "10 ranks under 8.8 CPU-equivalent quota; measured 874.54% CPU; all ranks allowed on CPUs 0-19 spanning two capacity classes, with no rank binding.",
+      "rank": 1,
+      "test": "Same 10-rank binary/decomposition/checkpoint and 8.8 quota; compare current unbound command with --map-by core --bind-to core --report-bindings. Verify actual rank map.",
+      "uncertainty": "No speedup measured yet; concurrent unrelated load and Open MPI mapping must be controlled/documented."
+    },
+    {
+      "candidate": "Separate four-mouth scalar observation cadence from sampled-plane VTK field cadence.",
+      "evidence": "The half-dt stage wrote 152 four-mouth VTP files (~38.0 MB) at the current 0.001 s cadence; ambient VTPs are already disabled in that future stage.",
+      "rank": 2,
+      "test": "Preserve high-frequency scalar outlet metrics and selected map times; test a lower field-export cadence such as 0.01 s.",
+      "uncertainty": "Requires outlet-map temporal adequacy check; bytes do not give measured runtime share."
+    }
+  ],
+  "schema": "i4f-performance-findings/v1",
+  "scope": "CPU OpenFOAM I4F internal apparatus only"
+}

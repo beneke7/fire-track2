@@ -1,0 +1,125 @@
+// Native oriented face-zone fluxes and area-mean pressure; normals point +x.
+seatFluxA1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatA1;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+seatPressureA1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatA1;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+seatFluxA2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatA2;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+seatPressureA2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatA2;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+seatFluxB1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatB1;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+seatPressureB1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatB1;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+seatFluxB2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatB2;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+seatPressureB2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name valveSeatB2;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartFluxA1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartA1;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartFluxA2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartA2;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartFluxB1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartB1;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartFluxB2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartB2;
+    operation sum; fields (alphaPhi0.water);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+// Pressure and plane area at the upstream edge of the distributed loss band.
+sourceStartPressureA1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartA1;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartPressureA2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartA2;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartPressureB1
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartB1;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}
+
+sourceStartPressureB2
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects);
+    regionType faceZone; name sourceStartB2;
+    operation areaAverage; fields (p p_rgh);
+    writeControl timeStep; writeInterval 1; writeFields false; log true; writeArea true;
+}

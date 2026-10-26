@@ -2232,7 +2232,87 @@
       "source_run_bundle": "i4f-two-tank-four-mouth-coldstart-pilot-20261025T1035Z-attempt2",
       "source_type": "cold_coupled_solver_log",
       "uncompressed_input_bytes": 1886431
+    },
+    {
+      "archive_path": "results/archives/i4f-fine-postmarker-restart-20261024T0434Z-batch01-0p41277429-0p41301521-20261026T141047Z.tar.zst",
+      "archive_sha256": "c7f33ad43b601b2fbddead6f50037b1c1818793de36ec87dbbd5dae89cb8e076",
+      "archive_size_bytes": 1499017732,
+      "manifest_path": "results/archives/manifests/i4f-fine-postmarker-restart-20261024T0434Z-batch01-0p41277429-0p41301521-20261026T141047Z.tar.zst.files.json",
+      "manifest_sha256": "7b1cba340b04d6ab3dc115614dc545a7a405e046e61024f5be56adbc5dbc4c4e",
+      "private_record_path": "results/runs/i4f-retention-inventory-20261026T1355Z/batch01-0p41277429-0p41301521.record.json",
+      "source_type": "native_time_directories",
+      "source_bundle": "results/runs/i4f-fine-postmarker-restart-20261024T0434Z",
+      "source_time_paths": [
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41277429",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.4127916",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41280893",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41282534",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41284187",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41285851",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41287526",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41289213",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41290877",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41292553",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41294278",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41296083",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41297891",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41299704",
+        "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/processors12/0.41301521"
+      ],
+      "uncompressed_input_bytes": 1719996764,
+      "regular_file_count": 240,
+      "member_count": 285,
+      "restore_command": "zstd -dc results/archives/i4f-fine-postmarker-restart-20261024T0434Z-batch01-0p41277429-0p41301521-20261026T141047Z.tar.zst | tar --numeric-owner --same-owner --same-permissions -xf - -C /home/v/proj/bene/fire-track2",
+      "verification": {
+        "member_count": 285,
+        "file_count": 240,
+        "file_bytes": 1719996764,
+        "zstd_integrity": "pass",
+        "originals_rehashed_unchanged_before_removal": true
+      },
+      "source_removal": {
+        "status": "removed after per-file SHA/metadata and archive verification",
+        "removed_regular_file_count": 240,
+        "removed_empty_directory_count": 15,
+        "free_before_copy_bytes": 26343456768,
+        "free_after_copy_bytes": 24844099584,
+        "free_after_unlink_bytes": 26553004032,
+        "net_free_bytes_recovered_this_batch": 209547264,
+        "completed_utc": "2026-10-26T14:12:15.537586+00:00"
+      }
     }
   ],
-  "schema": "lossless-native-time-archives-index/v1"
+  "schema": "lossless-native-time-archives-index/v1",
+  "deduplications": [
+    {
+      "deduplication_path": "results/archives/manifests/rouaix-fine-35m-startup-20261024T2225Z-duplicate-mesh-20261026T142250Z.json",
+      "deduplication_sha256": "9493377e5ee12b5e6515c97dcfaa1b0f153dabb6937633db6ab889f916eed157",
+      "source_type": "exact_duplicate_static_mesh_files",
+      "duplicate_source_root": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/constant/polyMesh",
+      "retained_canonical_root": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/constant/polyMesh",
+      "file_count": 8,
+      "logical_bytes": 7460431028,
+      "allocated_bytes_before_unlink": 7460466688,
+      "status": "duplicate_paths_removed_canonical_retained",
+      "completed_utc": "2026-10-26T14:22:58.905569+00:00",
+      "free_before_unlink_bytes": 26452877312,
+      "free_after_unlink_bytes": 33913028608,
+      "measured_free_recovered_bytes": 7460151296
+    },
+    {
+      "deduplication_path": "results/archives/manifests/rouaix-fine-35m-startup-20261024T2225Z-duplicate-initial-fields-20261026T142407Z.json",
+      "deduplication_sha256": "16128522f0760774ffdb6d270087fd8f8d807645cb89eb2022bb20eebbff8208",
+      "source_type": "exact_duplicate_initial_fields",
+      "duplicate_source_root": "results/runs/rouaix-fine-35m-startup-20261024T2225Z/case/0",
+      "retained_canonical_root": "results/runs/rouaix-static-mesh-quality-full-20261020T1949Z/candidate/case/0",
+      "file_count": 6,
+      "logical_bytes": 524439487,
+      "allocated_bytes_before_unlink": 524455936,
+      "status": "duplicate_paths_removed_canonical_retained",
+      "completed_utc": "2026-10-26T14:24:08.454427+00:00",
+      "free_before_unlink_bytes": 33902964736,
+      "free_after_unlink_bytes": 34427392000,
+      "measured_free_recovered_bytes": 524427264
+    }
+  ]
 }

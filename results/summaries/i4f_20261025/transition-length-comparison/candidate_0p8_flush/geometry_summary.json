@@ -1,0 +1,1087 @@
+{
+  "status": "reproducible provisional geometry source smoke generation; no mesh or CFD",
+  "created_utc": "2026-10-26T13:45:40.656333+00:00",
+  "generator": "generate.py",
+  "generator_sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+  "runtime": {
+    "python": "3.12.3",
+    "packages": {
+      "cadquery-ocp": "8.0.1.1.0",
+      "numpy": "2.5.4",
+      "matplotlib": "3.11.2",
+      "pyvista": "0.49.1",
+      "vtk": "9.6.2"
+    }
+  },
+  "units": "SI metres; +X discharge; Y separates tanks and spans mouth width; +Z up",
+  "assumptions": {
+    "tank_axis": "horizontal",
+    "tank_axis_direction_xyz": [
+      1,
+      0,
+      0
+    ],
+    "tank_placement_convention": "Horizontal: flat-ended cylinder base at x=0, axis through (y_tank,TANK_Z).",
+    "tank_diameter_m": 0.9,
+    "water_volume_m3_per_tank": 1.35,
+    "headspace_to_water_volume_ratio": 0.225,
+    "valve_and_pipe_id_m": 0.3,
+    "pipe_id_basis": "assumed equal to reported valve diameter",
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15,
+    "post_rise_straight_m_assumed": 0.0,
+    "transition_and_mouth_length_m_assumed": 0.8,
+    "pipe_transition_join_mode": "flush-at-inlet",
+    "pipe_transition_join_interpretation": "Opt-in flush mode: constant-bore pipe terminates at the transition inlet plane; the circular pipe end and transition inlet share one nominal disk, with no added exposed straight or volumetric overlap. The two solids must fuse to one valid solid with a circular shared interface.",
+    "downstream_stations_x_m": {
+      "rise_bend_end": 3.8,
+      "transition_inlet": 3.8,
+      "divider_start": 4.133333333333333,
+      "transition_intermediate": 4.155555555555555,
+      "transition_end": 4.466666666666667,
+      "mouth": 4.6,
+      "pipe_overlap_end": 3.888888888888889
+    },
+    "station_mapping": "Transition inlet = fixed rise-bend end + post-rise straight. All original downstream offsets from x=4.0 m scale by transition_and_mouth_length/1.8 m. The legacy overlap station at 0.2 m after the inlet scales by the same factor and is used only in legacy-overlap mode; flush-at-inlet terminates the pipe at the inlet.",
+    "intermediate_width_m_assumed": 0.5,
+    "divider_count_per_mouth": 4,
+    "divider_thickness_m_assumed_not_measured": 0.004,
+    "divider_start_x_m_assumed": 4.133333333333333,
+    "divider_geometry": "4 equally spaced plates fanned through the aligned ruled transition; 0.004 m thickness is assumed. Zero-thickness candidates are separate from fitted display solids.",
+    "tank_length": "capacity divided by circular cross-sectional area; ideal flat-ended length, no end-cap correction"
+  },
+  "tank_metrics": {
+    "capacity_m3_each": 1.65375,
+    "derived_flat_cylinder_length_m": 2.599530737167624,
+    "records": [
+      {
+        "tank_index": 1,
+        "center_y_m": -0.55,
+        "axis": "horizontal",
+        "volume_m3": 1.65375,
+        "length_m": 2.599530737167624,
+        "bounds_m": [
+          0.0,
+          2.599530737167624,
+          -1.0,
+          -0.10000000000000003,
+          0.8,
+          1.7
+        ],
+        "axis_direction_xyz": [
+          1,
+          0,
+          0
+        ],
+        "axis_start_coordinate_m": 0.0,
+        "axis_end_coordinate_m": 2.599530737167624,
+        "base_center_xyz_m": [
+          0.0,
+          -0.55,
+          1.25
+        ],
+        "placement_convention": "base at x=0; +X axis through (y_tank,TANK_Z)",
+        "downstream_line_volume_m3": 0.644604698793499
+      },
+      {
+        "tank_index": 2,
+        "center_y_m": 0.55,
+        "axis": "horizontal",
+        "volume_m3": 1.65375,
+        "length_m": 2.599530737167624,
+        "bounds_m": [
+          0.0,
+          2.599530737167624,
+          0.10000000000000003,
+          1.0,
+          0.8,
+          1.7
+        ],
+        "axis_direction_xyz": [
+          1,
+          0,
+          0
+        ],
+        "axis_start_coordinate_m": 0.0,
+        "axis_end_coordinate_m": 2.599530737167624,
+        "base_center_xyz_m": [
+          0.0,
+          0.55,
+          1.25
+        ],
+        "placement_convention": "base at x=0; +X axis through (y_tank,TANK_Z)",
+        "downstream_line_volume_m3": 0.6446046987934964
+      }
+    ],
+    "downstream_line_volume_m3_each": [
+      0.644604698793499,
+      0.6446046987934964
+    ],
+    "downstream_line_volume_total_m3": 1.2892093975869954,
+    "branch_line_volume_records": [
+      {
+        "tank_index": 1,
+        "branch": "lower",
+        "branch_pipe_transition_union_volume_m3": 0.3514387741180245,
+        "branch_pipe_shape_volume_m3": 0.2687686496941385,
+        "transition_shape_volume_m3": 0.082670124423886,
+        "pipe_transition_overlap_volume_m3": 0.0,
+        "union_volume_inside_tank_m3": 0.03159210875197258,
+        "line_volume_outside_tank_m3": 0.3198466653660519
+      },
+      {
+        "tank_index": 1,
+        "branch": "upper",
+        "branch_pipe_transition_union_volume_m3": 0.356529878564134,
+        "branch_pipe_shape_volume_m3": 0.273859754140248,
+        "transition_shape_volume_m3": 0.08267012442388602,
+        "pipe_transition_overlap_volume_m3": 0.0,
+        "union_volume_inside_tank_m3": 0.03177184513668692,
+        "line_volume_outside_tank_m3": 0.3247580334274471
+      },
+      {
+        "tank_index": 2,
+        "branch": "lower",
+        "branch_pipe_transition_union_volume_m3": 0.35143877411802465,
+        "branch_pipe_shape_volume_m3": 0.26876864969413866,
+        "transition_shape_volume_m3": 0.082670124423886,
+        "pipe_transition_overlap_volume_m3": 0.0,
+        "union_volume_inside_tank_m3": 0.03159210875198015,
+        "line_volume_outside_tank_m3": 0.3198466653660445
+      },
+      {
+        "tank_index": 2,
+        "branch": "upper",
+        "branch_pipe_transition_union_volume_m3": 0.35652987856413343,
+        "branch_pipe_shape_volume_m3": 0.2738597541402474,
+        "transition_shape_volume_m3": 0.08267012442388602,
+        "pipe_transition_overlap_volume_m3": 0.0,
+        "union_volume_inside_tank_m3": 0.03177184513668152,
+        "line_volume_outside_tank_m3": 0.3247580334274519
+      }
+    ],
+    "line_volume_definition": "For each branch, exact BREP inclusion-exclusion computes pipe plus transition minus their overlap; the common part inside the tank is subtracted with the same inclusion-exclusion rule. Branch line volumes are summed per tank; this is a geometry inventory estimate, not a CFD zone-volume measurement."
+  },
+  "topology": {
+    "tank_axis": "horizontal",
+    "tank_count": 2,
+    "mouth_count": 4,
+    "envelope_solid_count": 10,
+    "joined_pipe_transition_solid_count": 4,
+    "divider_solid_count": 16,
+    "divider_count": 16,
+    "zero_thickness_segment_count": 48,
+    "passages_per_mouth": 5
+  },
+  "tank_connection_checks": {
+    "method": "The pipe-start disk is conservatively bounded by a radius-r ball inside the own-tank radial wall and flat ends; exact BREP common volumes verify positive own-tank overlap, zero other-tank intersection, and a valid single-solid pipe/transition union through the mouth. Join-specific shared volume/area is recorded separately.",
+    "records": [
+      {
+        "tank_index": 1,
+        "branch": "lower",
+        "start_section_check": {
+          "pipe_start_center_xyz_m": [
+            0.25,
+            -0.631,
+            1.15
+          ],
+          "pipe_start_radius_m": 0.15,
+          "tank_radial_center_distance_m": 0.12868954891520917,
+          "tank_side_clearance_m": 0.17131045108479084,
+          "negative_axis_end_clearance_m": 0.1,
+          "positive_axis_end_clearance_m": 2.199530737167624,
+          "minimum_conservative_full_start_clearance_m": 0.1,
+          "entire_start_section_inside_own_tank": true
+        },
+        "pipe_overlap_own_tank_m3": 0.03159210875197258,
+        "pipe_and_transition_overlap_m3": 0.0,
+        "pipe_and_transition_overlap_other_tank_m3": 0.0,
+        "transition_connected_to_own_mouth_x_m": 4.6,
+        "start_inside_own_tank": true,
+        "positive_own_tank_overlap": true,
+        "does_not_connect_other_tank": true,
+        "connected_through_to_own_horizontal_mouth": true
+      },
+      {
+        "tank_index": 1,
+        "branch": "upper",
+        "start_section_check": {
+          "pipe_start_center_xyz_m": [
+            0.25,
+            -0.43900000000000006,
+            1.15
+          ],
+          "pipe_start_radius_m": 0.15,
+          "tank_radial_center_distance_m": 0.14940214188558348,
+          "tank_side_clearance_m": 0.15059785811441653,
+          "negative_axis_end_clearance_m": 0.1,
+          "positive_axis_end_clearance_m": 2.199530737167624,
+          "minimum_conservative_full_start_clearance_m": 0.1,
+          "entire_start_section_inside_own_tank": true
+        },
+        "pipe_overlap_own_tank_m3": 0.03177184513668692,
+        "pipe_and_transition_overlap_m3": 0.0,
+        "pipe_and_transition_overlap_other_tank_m3": 0.0,
+        "transition_connected_to_own_mouth_x_m": 4.6,
+        "start_inside_own_tank": true,
+        "positive_own_tank_overlap": true,
+        "does_not_connect_other_tank": true,
+        "connected_through_to_own_horizontal_mouth": true
+      },
+      {
+        "tank_index": 2,
+        "branch": "lower",
+        "start_section_check": {
+          "pipe_start_center_xyz_m": [
+            0.25,
+            0.46900000000000003,
+            1.15
+          ],
+          "pipe_start_radius_m": 0.15,
+          "tank_radial_center_distance_m": 0.1286895489152092,
+          "tank_side_clearance_m": 0.17131045108479084,
+          "negative_axis_end_clearance_m": 0.1,
+          "positive_axis_end_clearance_m": 2.199530737167624,
+          "minimum_conservative_full_start_clearance_m": 0.1,
+          "entire_start_section_inside_own_tank": true
+        },
+        "pipe_overlap_own_tank_m3": 0.03159210875198015,
+        "pipe_and_transition_overlap_m3": 0.0,
+        "pipe_and_transition_overlap_other_tank_m3": 0.0,
+        "transition_connected_to_own_mouth_x_m": 4.6,
+        "start_inside_own_tank": true,
+        "positive_own_tank_overlap": true,
+        "does_not_connect_other_tank": true,
+        "connected_through_to_own_horizontal_mouth": true
+      },
+      {
+        "tank_index": 2,
+        "branch": "upper",
+        "start_section_check": {
+          "pipe_start_center_xyz_m": [
+            0.25,
+            0.661,
+            1.15
+          ],
+          "pipe_start_radius_m": 0.15,
+          "tank_radial_center_distance_m": 0.14940214188558348,
+          "tank_side_clearance_m": 0.15059785811441653,
+          "negative_axis_end_clearance_m": 0.1,
+          "positive_axis_end_clearance_m": 2.199530737167624,
+          "minimum_conservative_full_start_clearance_m": 0.1,
+          "entire_start_section_inside_own_tank": true
+        },
+        "pipe_overlap_own_tank_m3": 0.03177184513668152,
+        "pipe_and_transition_overlap_m3": 0.0,
+        "pipe_and_transition_overlap_other_tank_m3": 0.0,
+        "transition_connected_to_own_mouth_x_m": 4.6,
+        "start_inside_own_tank": true,
+        "positive_own_tank_overlap": true,
+        "does_not_connect_other_tank": true,
+        "connected_through_to_own_horizontal_mouth": true
+      }
+    ],
+    "all_starts_inside_own_tanks": true,
+    "all_have_positive_own_tank_overlap": true,
+    "none_connects_other_tank": true,
+    "all_connect_through_own_mouth": true
+  },
+  "pipe_transition_join_checks": {
+    "mode": "flush-at-inlet",
+    "records": [
+      {
+        "tank_index": 1,
+        "branch": "lower",
+        "join_mode": "flush-at-inlet",
+        "pipe_end_x_m": 3.8,
+        "transition_inlet_x_m": 3.8,
+        "interface_common_volume_m3": 0.0,
+        "interface_common_surface_area_m2": 0.0,
+        "expected_circular_interface_area_m2": 0.07068583470577035,
+        "pipe_interface_plane_section_area_m2": 0.07068583469515674,
+        "transition_interface_plane_section_area_m2": 0.07068583470577036,
+        "joined_brep_valid": true,
+        "joined_brep_solid_count": 1,
+        "joined_volume_m3": 0.35143878290543656,
+        "inclusion_exclusion_volume_error_m3": 8.787412075772494e-09,
+        "inclusion_exclusion_volume_relative_error": 2.5004104564455447e-08,
+        "inclusion_exclusion_volume_relative_tolerance": 1e-05,
+        "x_normal_section_samples": [
+          {
+            "x_m": 3.78,
+            "offset_from_transition_inlet_m": -0.02,
+            "area_m2": 0.07090689239049353
+          },
+          {
+            "x_m": 3.79,
+            "offset_from_transition_inlet_m": -0.01,
+            "area_m2": 0.0709028653186677
+          },
+          {
+            "x_m": 3.8,
+            "offset_from_transition_inlet_m": 0.0,
+            "area_m2": 0.07068583470577033
+          },
+          {
+            "x_m": 3.8099999999999996,
+            "offset_from_transition_inlet_m": 0.01,
+            "area_m2": 0.07162368518177434
+          },
+          {
+            "x_m": 3.82,
+            "offset_from_transition_inlet_m": 0.02,
+            "area_m2": 0.07251438845326703
+          },
+          {
+            "x_m": 3.8299999999999996,
+            "offset_from_transition_inlet_m": 0.03,
+            "area_m2": 0.07335782703796398
+          },
+          {
+            "x_m": 3.84,
+            "offset_from_transition_inlet_m": 0.04,
+            "area_m2": 0.07414094232511537
+          },
+          {
+            "x_m": 3.8499999999999996,
+            "offset_from_transition_inlet_m": 0.05,
+            "area_m2": 0.07488978604494595
+          },
+          {
+            "x_m": 3.86,
+            "offset_from_transition_inlet_m": 0.06,
+            "area_m2": 0.0755913686865192
+          },
+          {
+            "x_m": 3.8699999999999997,
+            "offset_from_transition_inlet_m": 0.07,
+            "area_m2": 0.07624569024983138
+          },
+          {
+            "x_m": 3.88,
+            "offset_from_transition_inlet_m": 0.08,
+            "area_m2": 0.07685275073488494
+          },
+          {
+            "x_m": 3.8899999999999997,
+            "offset_from_transition_inlet_m": 0.09,
+            "area_m2": 0.07741255014168166
+          },
+          {
+            "x_m": 3.9,
+            "offset_from_transition_inlet_m": 0.1,
+            "area_m2": 0.07792508847021491
+          },
+          {
+            "x_m": 3.9099999999999997,
+            "offset_from_transition_inlet_m": 0.11,
+            "area_m2": 0.07839036572049154
+          },
+          {
+            "x_m": 3.92,
+            "offset_from_transition_inlet_m": 0.12,
+            "area_m2": 0.07880838189251131
+          },
+          {
+            "x_m": 3.9299999999999997,
+            "offset_from_transition_inlet_m": 0.13,
+            "area_m2": 0.07917913698626713
+          },
+          {
+            "x_m": 3.94,
+            "offset_from_transition_inlet_m": 0.14,
+            "area_m2": 0.07950263100176577
+          },
+          {
+            "x_m": 3.9499999999999997,
+            "offset_from_transition_inlet_m": 0.15,
+            "area_m2": 0.07977886393900577
+          },
+          {
+            "x_m": 3.96,
+            "offset_from_transition_inlet_m": 0.16,
+            "area_m2": 0.08000783579798547
+          },
+          {
+            "x_m": 3.9699999999999998,
+            "offset_from_transition_inlet_m": 0.17,
+            "area_m2": 0.08018954657870758
+          },
+          {
+            "x_m": 3.98,
+            "offset_from_transition_inlet_m": 0.18,
+            "area_m2": 0.08058555085753352
+          },
+          {
+            "x_m": 3.9899999999999998,
+            "offset_from_transition_inlet_m": 0.19,
+            "area_m2": 0.08044103121674664
+          },
+          {
+            "x_m": 4.0,
+            "offset_from_transition_inlet_m": 0.2,
+            "area_m2": 0.08046452642387107
+          },
+          {
+            "x_m": 4.01,
+            "offset_from_transition_inlet_m": 0.21,
+            "area_m2": 0.0804572123281418
+          },
+          {
+            "x_m": 4.02,
+            "offset_from_transition_inlet_m": 0.22,
+            "area_m2": 0.08040263423244286
+          },
+          {
+            "x_m": 4.03,
+            "offset_from_transition_inlet_m": 0.23,
+            "area_m2": 0.08030079213677588
+          },
+          {
+            "x_m": 4.04,
+            "offset_from_transition_inlet_m": 0.24,
+            "area_m2": 0.08008785288228318
+          },
+          {
+            "x_m": 3.799,
+            "offset_from_transition_inlet_m": -0.001,
+            "area_m2": 0.0709015004927888
+          },
+          {
+            "x_m": 3.8009999999999997,
+            "offset_from_transition_inlet_m": 0.001,
+            "area_m2": 0.07078164093021969
+          }
+        ]
+      },
+      {
+        "tank_index": 1,
+        "branch": "upper",
+        "join_mode": "flush-at-inlet",
+        "pipe_end_x_m": 3.8,
+        "transition_inlet_x_m": 3.8,
+        "interface_common_volume_m3": 0.0,
+        "interface_common_surface_area_m2": 0.0,
+        "expected_circular_interface_area_m2": 0.07068583470577035,
+        "pipe_interface_plane_section_area_m2": 0.07068583469515716,
+        "transition_interface_plane_section_area_m2": 0.07068583470577033,
+        "joined_brep_valid": true,
+        "joined_brep_solid_count": 1,
+        "joined_volume_m3": 0.3565298738190868,
+        "inclusion_exclusion_volume_error_m3": 4.745047188503548e-09,
+        "inclusion_exclusion_volume_relative_error": 1.3308975031111468e-08,
+        "inclusion_exclusion_volume_relative_tolerance": 1e-05,
+        "x_normal_section_samples": [
+          {
+            "x_m": 3.78,
+            "offset_from_transition_inlet_m": -0.02,
+            "area_m2": 0.07163807797800731
+          },
+          {
+            "x_m": 3.79,
+            "offset_from_transition_inlet_m": -0.01,
+            "area_m2": 0.07160799642350867
+          },
+          {
+            "x_m": 3.8,
+            "offset_from_transition_inlet_m": 0.0,
+            "area_m2": 0.07068583470577042
+          },
+          {
+            "x_m": 3.8099999999999996,
+            "offset_from_transition_inlet_m": 0.01,
+            "area_m2": 0.07162368518177585
+          },
+          {
+            "x_m": 3.82,
+            "offset_from_transition_inlet_m": 0.02,
+            "area_m2": 0.07251438845327002
+          },
+          {
+            "x_m": 3.8299999999999996,
+            "offset_from_transition_inlet_m": 0.03,
+            "area_m2": 0.07335782703796453
+          },
+          {
+            "x_m": 3.84,
+            "offset_from_transition_inlet_m": 0.04,
+            "area_m2": 0.07414094232511706
+          },
+          {
+            "x_m": 3.8499999999999996,
+            "offset_from_transition_inlet_m": 0.05,
+            "area_m2": 0.07488978604494888
+          },
+          {
+            "x_m": 3.86,
+            "offset_from_transition_inlet_m": 0.06,
+            "area_m2": 0.07559136868652176
+          },
+          {
+            "x_m": 3.8699999999999997,
+            "offset_from_transition_inlet_m": 0.07,
+            "area_m2": 0.07624569024983396
+          },
+          {
+            "x_m": 3.88,
+            "offset_from_transition_inlet_m": 0.08,
+            "area_m2": 0.07685275073488744
+          },
+          {
+            "x_m": 3.8899999999999997,
+            "offset_from_transition_inlet_m": 0.09,
+            "area_m2": 0.0774125501416826
+          },
+          {
+            "x_m": 3.9,
+            "offset_from_transition_inlet_m": 0.1,
+            "area_m2": 0.07792508847021719
+          },
+          {
+            "x_m": 3.9099999999999997,
+            "offset_from_transition_inlet_m": 0.11,
+            "area_m2": 0.07839036572049536
+          },
+          {
+            "x_m": 3.92,
+            "offset_from_transition_inlet_m": 0.12,
+            "area_m2": 0.07880838189251256
+          },
+          {
+            "x_m": 3.9299999999999997,
+            "offset_from_transition_inlet_m": 0.13,
+            "area_m2": 0.07917913698626963
+          },
+          {
+            "x_m": 3.94,
+            "offset_from_transition_inlet_m": 0.14,
+            "area_m2": 0.0795026310017695
+          },
+          {
+            "x_m": 3.9499999999999997,
+            "offset_from_transition_inlet_m": 0.15,
+            "area_m2": 0.0797788639390078
+          },
+          {
+            "x_m": 3.96,
+            "offset_from_transition_inlet_m": 0.16,
+            "area_m2": 0.08000783579798822
+          },
+          {
+            "x_m": 3.9699999999999998,
+            "offset_from_transition_inlet_m": 0.17,
+            "area_m2": 0.08018954657870922
+          },
+          {
+            "x_m": 3.98,
+            "offset_from_transition_inlet_m": 0.18,
+            "area_m2": 0.08058555085753402
+          },
+          {
+            "x_m": 3.9899999999999998,
+            "offset_from_transition_inlet_m": 0.19,
+            "area_m2": 0.08044103121674687
+          },
+          {
+            "x_m": 4.0,
+            "offset_from_transition_inlet_m": 0.2,
+            "area_m2": 0.08046452642387178
+          },
+          {
+            "x_m": 4.01,
+            "offset_from_transition_inlet_m": 0.21,
+            "area_m2": 0.08045721232814258
+          },
+          {
+            "x_m": 4.02,
+            "offset_from_transition_inlet_m": 0.22,
+            "area_m2": 0.08040263423244379
+          },
+          {
+            "x_m": 4.03,
+            "offset_from_transition_inlet_m": 0.23,
+            "area_m2": 0.08030079213677639
+          },
+          {
+            "x_m": 4.04,
+            "offset_from_transition_inlet_m": 0.24,
+            "area_m2": 0.08008785288228372
+          },
+          {
+            "x_m": 3.799,
+            "offset_from_transition_inlet_m": -0.001,
+            "area_m2": 0.07159782680748566
+          },
+          {
+            "x_m": 3.8009999999999997,
+            "offset_from_transition_inlet_m": 0.001,
+            "area_m2": 0.07078164093022203
+          }
+        ]
+      },
+      {
+        "tank_index": 2,
+        "branch": "lower",
+        "join_mode": "flush-at-inlet",
+        "pipe_end_x_m": 3.8,
+        "transition_inlet_x_m": 3.8,
+        "interface_common_volume_m3": 0.0,
+        "interface_common_surface_area_m2": 0.0,
+        "expected_circular_interface_area_m2": 0.07068583470577035,
+        "pipe_interface_plane_section_area_m2": 0.07068583469515687,
+        "transition_interface_plane_section_area_m2": 0.0706858347057703,
+        "joined_brep_valid": true,
+        "joined_brep_solid_count": 1,
+        "joined_volume_m3": 0.3514387829054369,
+        "inclusion_exclusion_volume_error_m3": 8.787412242305948e-09,
+        "inclusion_exclusion_volume_relative_error": 2.5004105038317336e-08,
+        "inclusion_exclusion_volume_relative_tolerance": 1e-05,
+        "x_normal_section_samples": [
+          {
+            "x_m": 3.78,
+            "offset_from_transition_inlet_m": -0.02,
+            "area_m2": 0.07071935895517438
+          },
+          {
+            "x_m": 3.79,
+            "offset_from_transition_inlet_m": -0.01,
+            "area_m2": 0.07085692429796665
+          },
+          {
+            "x_m": 3.8,
+            "offset_from_transition_inlet_m": 0.0,
+            "area_m2": 0.07068583470577038
+          },
+          {
+            "x_m": 3.8099999999999996,
+            "offset_from_transition_inlet_m": 0.01,
+            "area_m2": 0.07162368518177617
+          },
+          {
+            "x_m": 3.82,
+            "offset_from_transition_inlet_m": 0.02,
+            "area_m2": 0.07251438845326832
+          },
+          {
+            "x_m": 3.8299999999999996,
+            "offset_from_transition_inlet_m": 0.03,
+            "area_m2": 0.07335782703796546
+          },
+          {
+            "x_m": 3.84,
+            "offset_from_transition_inlet_m": 0.04,
+            "area_m2": 0.07414094232511541
+          },
+          {
+            "x_m": 3.8499999999999996,
+            "offset_from_transition_inlet_m": 0.05,
+            "area_m2": 0.074889786044947
+          },
+          {
+            "x_m": 3.86,
+            "offset_from_transition_inlet_m": 0.06,
+            "area_m2": 0.07559136868652018
+          },
+          {
+            "x_m": 3.8699999999999997,
+            "offset_from_transition_inlet_m": 0.07,
+            "area_m2": 0.07624569024983367
+          },
+          {
+            "x_m": 3.88,
+            "offset_from_transition_inlet_m": 0.08,
+            "area_m2": 0.07685275073488715
+          },
+          {
+            "x_m": 3.8899999999999997,
+            "offset_from_transition_inlet_m": 0.09,
+            "area_m2": 0.07741255014168172
+          },
+          {
+            "x_m": 3.9,
+            "offset_from_transition_inlet_m": 0.1,
+            "area_m2": 0.07792508847021601
+          },
+          {
+            "x_m": 3.9099999999999997,
+            "offset_from_transition_inlet_m": 0.11,
+            "area_m2": 0.07839036572049345
+          },
+          {
+            "x_m": 3.92,
+            "offset_from_transition_inlet_m": 0.12,
+            "area_m2": 0.07880838189251187
+          },
+          {
+            "x_m": 3.9299999999999997,
+            "offset_from_transition_inlet_m": 0.13,
+            "area_m2": 0.07917913698626886
+          },
+          {
+            "x_m": 3.94,
+            "offset_from_transition_inlet_m": 0.14,
+            "area_m2": 0.07950263100176679
+          },
+          {
+            "x_m": 3.9499999999999997,
+            "offset_from_transition_inlet_m": 0.15,
+            "area_m2": 0.07977886393900678
+          },
+          {
+            "x_m": 3.96,
+            "offset_from_transition_inlet_m": 0.16,
+            "area_m2": 0.08000783579798759
+          },
+          {
+            "x_m": 3.9699999999999998,
+            "offset_from_transition_inlet_m": 0.17,
+            "area_m2": 0.08018954657870883
+          },
+          {
+            "x_m": 3.98,
+            "offset_from_transition_inlet_m": 0.18,
+            "area_m2": 0.080585550857533
+          },
+          {
+            "x_m": 3.9899999999999998,
+            "offset_from_transition_inlet_m": 0.19,
+            "area_m2": 0.08044103121674726
+          },
+          {
+            "x_m": 4.0,
+            "offset_from_transition_inlet_m": 0.2,
+            "area_m2": 0.0804645264238715
+          },
+          {
+            "x_m": 4.01,
+            "offset_from_transition_inlet_m": 0.21,
+            "area_m2": 0.08045721232814232
+          },
+          {
+            "x_m": 4.02,
+            "offset_from_transition_inlet_m": 0.22,
+            "area_m2": 0.08040263423244345
+          },
+          {
+            "x_m": 4.03,
+            "offset_from_transition_inlet_m": 0.23,
+            "area_m2": 0.08030079213677646
+          },
+          {
+            "x_m": 4.04,
+            "offset_from_transition_inlet_m": 0.24,
+            "area_m2": 0.08008785288228316
+          },
+          {
+            "x_m": 3.799,
+            "offset_from_transition_inlet_m": -0.001,
+            "area_m2": 0.07085554508422177
+          },
+          {
+            "x_m": 3.8009999999999997,
+            "offset_from_transition_inlet_m": 0.001,
+            "area_m2": 0.0707816409302217
+          }
+        ]
+      },
+      {
+        "tank_index": 2,
+        "branch": "upper",
+        "join_mode": "flush-at-inlet",
+        "pipe_end_x_m": 3.8,
+        "transition_inlet_x_m": 3.8,
+        "interface_common_volume_m3": 0.0,
+        "interface_common_surface_area_m2": 0.0,
+        "expected_circular_interface_area_m2": 0.07068583470577035,
+        "pipe_interface_plane_section_area_m2": 0.07068583469515681,
+        "transition_interface_plane_section_area_m2": 0.07068583470577036,
+        "joined_brep_valid": true,
+        "joined_brep_solid_count": 1,
+        "joined_volume_m3": 0.35652987381908674,
+        "inclusion_exclusion_volume_error_m3": 4.745046688903187e-09,
+        "inclusion_exclusion_volume_relative_error": 1.3308973629825357e-08,
+        "inclusion_exclusion_volume_relative_tolerance": 1e-05,
+        "x_normal_section_samples": [
+          {
+            "x_m": 3.78,
+            "offset_from_transition_inlet_m": -0.02,
+            "area_m2": 0.07113599901979747
+          },
+          {
+            "x_m": 3.79,
+            "offset_from_transition_inlet_m": -0.01,
+            "area_m2": 0.07110613530245939
+          },
+          {
+            "x_m": 3.8,
+            "offset_from_transition_inlet_m": 0.0,
+            "area_m2": 0.07068583470577035
+          },
+          {
+            "x_m": 3.8099999999999996,
+            "offset_from_transition_inlet_m": 0.01,
+            "area_m2": 0.07162368518177498
+          },
+          {
+            "x_m": 3.82,
+            "offset_from_transition_inlet_m": 0.02,
+            "area_m2": 0.07251438845326792
+          },
+          {
+            "x_m": 3.8299999999999996,
+            "offset_from_transition_inlet_m": 0.03,
+            "area_m2": 0.07335782703796373
+          },
+          {
+            "x_m": 3.84,
+            "offset_from_transition_inlet_m": 0.04,
+            "area_m2": 0.0741409423251162
+          },
+          {
+            "x_m": 3.8499999999999996,
+            "offset_from_transition_inlet_m": 0.05,
+            "area_m2": 0.07488978604494716
+          },
+          {
+            "x_m": 3.86,
+            "offset_from_transition_inlet_m": 0.06,
+            "area_m2": 0.07559136868652076
+          },
+          {
+            "x_m": 3.8699999999999997,
+            "offset_from_transition_inlet_m": 0.07,
+            "area_m2": 0.07624569024983334
+          },
+          {
+            "x_m": 3.88,
+            "offset_from_transition_inlet_m": 0.08,
+            "area_m2": 0.07685275073488738
+          },
+          {
+            "x_m": 3.8899999999999997,
+            "offset_from_transition_inlet_m": 0.09,
+            "area_m2": 0.07741255014168219
+          },
+          {
+            "x_m": 3.9,
+            "offset_from_transition_inlet_m": 0.1,
+            "area_m2": 0.07792508847021723
+          },
+          {
+            "x_m": 3.9099999999999997,
+            "offset_from_transition_inlet_m": 0.11,
+            "area_m2": 0.07839036572049435
+          },
+          {
+            "x_m": 3.92,
+            "offset_from_transition_inlet_m": 0.12,
+            "area_m2": 0.07880838189251059
+          },
+          {
+            "x_m": 3.9299999999999997,
+            "offset_from_transition_inlet_m": 0.13,
+            "area_m2": 0.07917913698626958
+          },
+          {
+            "x_m": 3.94,
+            "offset_from_transition_inlet_m": 0.14,
+            "area_m2": 0.07950263100176767
+          },
+          {
+            "x_m": 3.9499999999999997,
+            "offset_from_transition_inlet_m": 0.15,
+            "area_m2": 0.07977886393900649
+          },
+          {
+            "x_m": 3.96,
+            "offset_from_transition_inlet_m": 0.16,
+            "area_m2": 0.0800078357979869
+          },
+          {
+            "x_m": 3.9699999999999998,
+            "offset_from_transition_inlet_m": 0.17,
+            "area_m2": 0.08018954657870926
+          },
+          {
+            "x_m": 3.98,
+            "offset_from_transition_inlet_m": 0.18,
+            "area_m2": 0.08058555085753369
+          },
+          {
+            "x_m": 3.9899999999999998,
+            "offset_from_transition_inlet_m": 0.19,
+            "area_m2": 0.08044103121674809
+          },
+          {
+            "x_m": 4.0,
+            "offset_from_transition_inlet_m": 0.2,
+            "area_m2": 0.08046452642387102
+          },
+          {
+            "x_m": 4.01,
+            "offset_from_transition_inlet_m": 0.21,
+            "area_m2": 0.08045721232814201
+          },
+          {
+            "x_m": 4.02,
+            "offset_from_transition_inlet_m": 0.22,
+            "area_m2": 0.08040263423244301
+          },
+          {
+            "x_m": 4.03,
+            "offset_from_transition_inlet_m": 0.23,
+            "area_m2": 0.08030079213677534
+          },
+          {
+            "x_m": 4.04,
+            "offset_from_transition_inlet_m": 0.24,
+            "area_m2": 0.08008785288228412
+          },
+          {
+            "x_m": 3.799,
+            "offset_from_transition_inlet_m": -0.001,
+            "area_m2": 0.07109603878730372
+          },
+          {
+            "x_m": 3.8009999999999997,
+            "offset_from_transition_inlet_m": 0.001,
+            "area_m2": 0.07078164093022198
+          }
+        ]
+      }
+    ],
+    "all_four_joined_solids_valid": true,
+    "shared_disk_area_expected_m2": 0.07068583470577035,
+    "station_section_values_are_discrete": true
+  },
+  "area_metrics": {
+    "pipe_area_m2": 0.07068583470577035,
+    "gross_mouth_area_m2_each": 0.15,
+    "nominal_divider_open_mouth_area_m2_each": 0.14759999999999998,
+    "section_samples_one_transition_only_m2": [
+      {
+        "x_m": 3.800044444444444,
+        "centerline_y_m": -0.75,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07068999053578981,
+        "divider_blockage_area_m2": 0.0,
+        "open_area_after_dividers_m2": 0.07068999053578981
+      },
+      {
+        "x_m": 3.800000444444444,
+        "centerline_y_m": -0.75,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07068583470577036,
+        "divider_blockage_area_m2": 0.0,
+        "open_area_after_dividers_m2": 0.07068583470577036
+      },
+      {
+        "x_m": 4.1555599999999995,
+        "centerline_y_m": -0.7499971428571428,
+        "section_normal_xyz": [
+          1.0,
+          0.6428571428571414,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.09155056678907586,
+        "divider_blockage_area_m2": 0.0014176495692429904,
+        "open_area_after_dividers_m2": 0.09013291721983287
+      },
+      {
+        "x_m": 4.466671111111111,
+        "centerline_y_m": -0.55,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.1499999999999999,
+        "divider_blockage_area_m2": 0.0024000000000000007,
+        "open_area_after_dividers_m2": 0.1475999999999999
+      },
+      {
+        "x_m": 4.599955555555555,
+        "centerline_y_m": -0.55,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.1499999999999999,
+        "divider_blockage_area_m2": 0.0024000000000000007,
+        "open_area_after_dividers_m2": 0.1475999999999999
+      }
+    ],
+    "endpoint_probe_to_pipe_area_ratio": 1.0000000000000002,
+    "continuous_minimum_area": "not proven; section values are discrete BREP slab samples"
+  },
+  "artifacts": {
+    "envelope_step": "geometry/two_tank_four_outlet_aligned_ruled_envelope.step",
+    "joined_pipe_transition_step": "geometry/four_pipe_transition_joined_branches.step",
+    "fitted_dividers_step": "geometry/four_mouth_fitted_divider_solids.step",
+    "zero_thickness_surfaces_step": "geometry/four_mouth_zero_thickness_divider_surfaces.step",
+    "divider_index": "divider_index.json",
+    "assembly_png": "figures/two_tank_four_outlet_assembly.png",
+    "section_png": "figures/transition_cross_sections.png",
+    "tank_connection_section_png": "figures/tank_connection_section_horizontal.png",
+    "four_join_longitudinal_section_png": "figures/four_pipe_transition_join_sections_flush-at-inlet.png"
+  },
+  "roundtrip": {
+    "envelope": {
+      "solid_count": 10,
+      "validity": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    },
+    "joined_pipe_transitions": {
+      "solid_count": 4,
+      "validity": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    },
+    "fitted_dividers": {
+      "solid_count": 16,
+      "validity": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    }
+  }
+}

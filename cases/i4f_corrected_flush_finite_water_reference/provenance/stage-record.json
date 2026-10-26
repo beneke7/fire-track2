@@ -1,0 +1,116 @@
+{
+  "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "case_static_tree_sha256": "a4589eb8f0d9c09f4bb4f0755b6409375da02fda4d1cfea72efe26f803e13ca0",
+  "checkpoint_field_sha256": {
+    "T": "194cb346529dbd719dd8163ac125ca520f97242b8958e3206639aa69fe0340fb",
+    "T.air": "1f9c8fe1a80a83da4d7f10b11a7e0def1bd56a310f333dff1b1ea01aa34c686a",
+    "T.water": "d39453ff58cdf8e4923a8d9ec59115ca219b4f1ae91288cec9598404c4a667bc",
+    "U": "3e47b09072dc0d2a339bd75bf7ec3365d6dc88a69f9c41f43fcc6e9a85f29404",
+    "alpha.water": "8c449c1fa8c191ea5f60229e27051733ccdbbd2c7ce4e221f0bf26168e49ba80",
+    "alphaPhi0.water": "b401fbcc9591e0ad4ce8d8e6172e569b38f94feb1bd7ad9ee23644ebfa548e2e",
+    "alphat": "b22e963dd5797f7abbf741b66b52fbf23ff850aad6cc0acbe86c9edcc3252b75",
+    "k": "a38ea569ca155dcc3c295f511b398feb522a806a6a5354e5c4c3d983eca4f438",
+    "nut": "19e341ae5c6e3df8e2fe64c1bea2e82bfa2e863802865b18019d8e2ca17f8b32",
+    "omega": "d415957ccd967cb559d4ec5e73fe30d4e2a16ee4d5405860fb8913f4b83073bb",
+    "p": "09c2080ed28f48e824831e6b609652d949e9024cbb62d631b6a0231971003aa2",
+    "p_rgh": "7e6ac2249cca442b97abeb72c5e46390ea43a8ba5f3d56c7cee5e366188f38b3",
+    "phi": "d000be623988fe648515a1151ae3c52428344785b5d9faf01af0a69709cc902b",
+    "rho": "d5486d11bc7497caf00a16ba28e36ce6b8dfc6b06934d47e82730ba339946dd4",
+    "uniform/time": "f5fbc49bec547df290f94a0df3643bc36fd7a66bb5eda238cd7e389c6788c170"
+  },
+  "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/case/processors10/0.050010583332",
+  "checkpoint_time_s": 0.05001058333202217,
+  "created_utc": "2026-10-26T13:18:40.740513+00:00",
+  "graceful_writeNow_s": 13200,
+  "guard_sha256": "0ccc68dace8033c67bbd6c8dcaa581239fd1295cc1a0a6969d22727bd5958189",
+  "hard_wall_s": 14400,
+  "input_freeze_sha256": "0a1073345a59cc0b02eed9a8b1c273bcd0553776e870705191ac35faa2cf34e9",
+  "launcher_sha256": "33b47b642d6e5e7325396ed15c5eacbec3272ffd306e6be642ca27b0f878e3c5",
+  "output_only_policy": {
+    "changes": [
+      {
+        "after": "false",
+        "already_applied": true,
+        "before": "false",
+        "object": "ambientAnnulusAmbientGasDiagnostics"
+      },
+      {
+        "after": "false",
+        "already_applied": true,
+        "before": "false",
+        "object": "externalSidesAmbientGasDiagnostics"
+      },
+      {
+        "after": "false",
+        "already_applied": true,
+        "before": "false",
+        "object": "farOutletAmbientGasDiagnostics"
+      }
+    ],
+    "dictionary": "system/i4fNumericalHealthObjects",
+    "dictionary_sha256_after": "de7c86913896337d41e53743cd77c6a55c90fa4c44f8b354049d1afbbbc18386",
+    "dictionary_sha256_before": "de7c86913896337d41e53743cd77c6a55c90fa4c44f8b354049d1afbbbc18386",
+    "output_only": true,
+    "preserved": [
+      "per-step scalar function-object outputs",
+      "four-mouth VTK output",
+      "native field snapshots",
+      "all solver physics"
+    ],
+    "schema": "i4f-external-patch-vtk-output-policy/v1",
+    "scope": "copied future continuation child only; physics and scalar/native output remain unchanged"
+  },
+  "parent_bundle": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z",
+  "parent_container_id": "13324c8bdc8489ffe9c9fa8e058bb8a9105507a253b3a2b375aa1ed081656057",
+  "parent_endpoint_rule_evidence": {
+    "acceptance_tolerance_s": 6.25000005000005e-05,
+    "canonical_time_s": 0.05001058333202217,
+    "cap_s": 6.25e-05,
+    "effective_last_deltaT_s": 0.000125,
+    "guard_deltaT_sources_s": {
+      "guard_deltaT_from_printed_times_s_s": 0.0001250000000000001,
+      "guard_deltaT_logged_s_s": 0.000125,
+      "terminal_log_deltaT_s": 0.000125
+    },
+    "half_step_allowance_s": 6.25e-05,
+    "last_log_Time_token": "0.050010583332",
+    "last_logged_deltaT_s": 0.000125,
+    "last_logged_deltaT_token": "0.000125",
+    "log_matches_uniform_time_within_existing_health_tolerance": true,
+    "maxDeltaT_s": 0.000125,
+    "roundoff_allowance_s": 5.000005e-13,
+    "rule": "reached iff actual native uniform/time >= target - (0.5*min(actual last completed dt, maxDeltaT) + printed-time roundoff); no time interpolation/extrapolation",
+    "uniform_time_token": "0.050010583332022171"
+  },
+  "parent_started_at": "2026-10-26T12:37:58.261453121Z",
+  "preflight": {
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "dictionary_preflight_sha256": "36d8d0e40bd6b456b2a1cc49c3ebb87f061aea53542c8b162c71af5066c4a4ea",
+    "endTime": "0.46",
+    "half_step_controls": {
+      "deltaT": "0.000005",
+      "maxAlphaCo": "0.125",
+      "maxCo": "0.25",
+      "maxDeltaT": "0.000125"
+    },
+    "mesh_cells": 299214,
+    "mesh_load_preflight_sha256": "f6b69faeced5733303c68c672dcafe278a27a32dd5adc8fa0d300eacf127b98c",
+    "output_only_policy_sha256": "fcc2deeb00f3ec15307e331dbfb276e1a0b2e03ae017646e78ca85264eb666fd",
+    "pimple": {
+      "nCorrectors": 2,
+      "nNonOrthogonalCorrectors": 0,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "startFrom": "latestTime",
+    "startTime": "0.0500105833320222",
+    "status": "passed_true_cold_finite_water_eos_halfdt_preflight",
+    "water_overlay_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+    "writeInterval": "0.05"
+  },
+  "ready_for_exact_id_go": true,
+  "runner_sha256": "789b0982ff8a103ccd132578d393a14d4e3477b21acc08579e6b4faed4419691",
+  "schema": "i4f-finite-water-eos-halfdt-stage/v1",
+  "stage_number": 1,
+  "target_end_s": 0.46
+}

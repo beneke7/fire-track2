@@ -1,10 +1,15 @@
 # I4F discharge: published results, 25–26 October 2026
 
-**Latest finite-water outcome:** the first timestep setting encountered one
-pressure-floor contact near .4100 s and saved at .410223 s. Finite liquid
-compressibility alone did not establish stable discharge. A smaller-timestep
-cold test now runs; the runtime audit below verifies configuration and inventory
-only, not a successful complete simulation.
+**26 October run state:** the finite-water first-step case contacted the
+pressure floor at .409998 s and saved at .410223 s. The uninterrupted
+constant-density cold control ended at .434532 s with eighteen raw contacts.
+The smaller-timestep finite-water comparison remains in progress. A warm-start
+upwind fork saved a complete .460048 s checkpoint with no pressure-floor
+contacts, then stopped at .481894 s on persistent pressure updates without
+floor contacts. The warm fork does not establish a
+full cold-history remedy. No complete credible discharge or validation result
+has been produced. See
+[live status](../../../docs/STATUS.md) for exact run identities and deadlines.
 The [cell/iteration review](finite-water-floor-review.json),
 [pressure-pass table](finite-water-floor-pressure-passes.csv),
 [contact cells](finite-water-floor-cells.csv), and
@@ -12,14 +17,18 @@ The [cell/iteration review](finite-water-floor-review.json),
 undershoot and two subsequent positive-pressure steps. Small final corrections
 do not undo the pressure-floor operation.
 
-**26 October update:** the corrected-junction constant-density continuation
-stopped at .434224 s with negative intermediate pressure; geometry correction
-alone did not resolve the instability. One pressure corrector and tank-interface
-refinement also retained persistent outer updates. A new cold comparison tests
-physically scaled finite water compressibility against constant density;
-[the frozen material packet](../../../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json)
+**26 October numerical update:** the corrected-junction restarted constant-density
+continuation stopped at .434224 s with negative intermediate pressure; geometry
+correction alone did not resolve the instability. One pressure corrector and
+tank-interface refinement also retained persistent outer updates. The separate
+uninterrupted true-cold standard-source control saved at .434532 s after eighteen
+raw pressure-floor contacts. A smaller-timestep finite-water cold comparison is
+under way; it is an exploratory sensitivity, not a successful discharge. The
+[frozen material packet](../../../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json)
 records equations, primary-source locators, assumptions and initial-mass effects.
-This is an exploratory sensitivity, not a successful discharge or validation.
+The [corrected-flush finite-water input capsule](../../../cases/i4f_corrected_flush_finite_water_reference/README.md)
+publishes the actual smaller-timestep dictionaries and their pre-launch hashes;
+the native mesh and restart fields remain separate required inputs.
 The [four recent failed trials](pressure-filling-diagnostic-outcomes.json) and
 [comparison table](pressure-filling-diagnostic-outcomes.csv) retain actual stop
 conditions, saved endpoints and source-metadata hashes. Pressure-floor cell
@@ -33,6 +42,39 @@ The [parser repair and full-log replay](parser-merge-replay.json),
 [minimal patch](parser-merge-fix.patch), and [raw trigger](parser-merge-trigger.txt)
 preserve the earlier operational-stop explanation without changing numerical
 health thresholds. Successful parsing is distinct from convergence.
+
+**Sealed-gas tank-to-nozzle pressure reference:** the
+[per-tank JSON](sealed-gas-pressure-budget/pressure-budget.json),
+[24-row CSV](sealed-gas-pressure-budget/pressure-budget.csv), and
+[figure](sealed-gas-pressure-budget/pressure-budget.png) use the corrected
+1.0/0.8 m geometry packet and explicit 12/13 bar absolute scenarios. For
+12 bar, 22.5% headspace and n=1.4, full-bore priming leaves 3.478/3.771 bar;
+the quasistatic sealed-gas relation reaches 1 bar after about 1.056/1.098 m3
+nozzle-delivered volume per tank. This is not a maximum delivery or emptying
+prediction. The n=1 case is an isothermal limit, n=1.4 an adiabatic-air
+reference; neither is fitted. The .20–.25 headspace sweep holds tank water at
+1.35 m3 and changes total assumed capacity from 1.620 to 1.6875 m3. The 0.8 m
+variant reduces provisional downstream air storage by 41.335 L per tank, but
+no CFD performance benefit has been established. The model assumes complete
+purge of the initially air-filled downstream line for its post-priming gas
+calculation, but does not model purge dynamics, losses, inertia, gravity,
+venting, CO2, foam or heat-transfer rates; no value is identified with a CFD
+probe. The package includes
+[source/input snapshots and hashes](sealed-gas-pressure-budget/provenance/publication-package.json).
+
+**Audit-output profile:** the matched
+[exact-byte proof](pressure-audit-toggle/exact-byte-proof.json) and
+[captured v2 record](pressure-audit-toggle/profile-window-result-v2.json)
+show identical fourteen native fields plus `uniform/time` at .401007658722 s for
+audit output on/off, in distinct files, after seven steps. The one sequential
+pair used 51/42 solver ClockTime seconds. This is not a universal performance
+claim. Future child helpers disable only detailed audit logging; the completed
+warm continuation used this setting. The
+[runtime profile](runtime-performance/runtime-profile-index.json) separates
+wall time, calling-process CPU time, iteration counts and sampled output sizes.
+The [full software check](runtime-performance/checks/make-check-20261026T153334Z/check-result.json)
+and [post-merge checks](runtime-performance/checks/postmerge-20261026T154602Z/check-record.json)
+record their distinct revisions and coverage.
 
 **Early corrected-CFD comparison:** at .250021 s, mean water withdrawn per
 tank is 62.581 L versus 62.210 L in the adiabatic reduced model (+.597%);
@@ -59,8 +101,8 @@ remain explicit; no loss or gas-law parameter was fitted to CFD.
 the frozen-source reference through .4 s; nearest-row valve flux differences
 are below .006%. The [comparison](stock-frozen-source-comparison.json) and
 [CSV](stock-frozen-source-comparison.csv) retain exact time offsets and limits.
-The control still encounters negative intermediate pressures near .410 s and
-does not reach .46 s. The [14-cell review](stock-cold-pressure-contact-review.json),
+The uninterrupted true-cold trajectory ended at .434532 s with eighteen raw
+pressure-floor contacts, before .46 s. The [14-cell review](stock-cold-pressure-contact-review.json),
 [CSV](stock-cold-pressure-contact-review.csv) and
 [pressure-correction trace](stock-cold-pressure-contact-trace.png) distinguish
 that numerical event from the positive saved endpoint and from cavitation.

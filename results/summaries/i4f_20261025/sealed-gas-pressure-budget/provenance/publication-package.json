@@ -1,0 +1,56 @@
+{
+  "schema": "i4f_pressure_budget_public_package_v1",
+  "published_copy_created_utc": "2026-10-26T15:35:18.508952+00:00",
+  "run_bundle": "results/runs/i4f-pressure-budget-20261026T152617Z",
+  "run_json_created_utc": "2026-10-26T15:26:18.261891+00:00",
+  "run_json_sha256": "9b196ab0a8a7f8f2d5dd6a4dd1dc726b1c1a3708bd53e048c6051606498a2e81",
+  "original_source_snapshot_manifest_sha256": "7f49c87a6703eb5e8dd95c93ae7e3f3d2a04aa7cbdffe66ba4fd8391a02d2733",
+  "public_source_snapshot_manifest": "provenance/source-snapshot/snapshot-manifest.json",
+  "source_snapshot_capture_started_utc": "2026-10-26T15:26:17.687800+00:00",
+  "source_snapshot_capture_completed_utc": "2026-10-26T15:26:17.689187+00:00",
+  "source_snapshot_files": {
+    "module": {
+      "public_path": "provenance/source-snapshot/src/aerial_drop/i4f_pressure_budget.py",
+      "sha256": "2150a6fec97c269cddbb6c153b9d75cd06d677284c9c58326d35c7784ba1e559",
+      "size_bytes": 7664
+    },
+    "script": {
+      "public_path": "provenance/source-snapshot/scripts/analyze_i4f_pressure_budget.py",
+      "sha256": "b4962f75339630b88fd5f8586f2b84a32e7693a00b0a0fc1f3555e89065f1ee4",
+      "size_bytes": 23606
+    },
+    "tests": {
+      "public_path": "provenance/source-snapshot/tests/test_i4f_pressure_budget.py",
+      "sha256": "b8d58e272d93db3b5524b8b45cd288a3963031e3d43eb52653bbc724af14a5fb",
+      "size_bytes": 8200
+    },
+    "geometry_packet": {
+      "public_path": "provenance/source-snapshot/geometry/geometry-comparison.json",
+      "sha256": "f589419655c9d1688e5f604d56445fda5485959871a13755c985057d194afabc",
+      "size_bytes": 14624
+    },
+    "geometry_generator": {
+      "public_path": "provenance/source-snapshot/scripts/i4f_four_outlet_geometry/generate.py",
+      "sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+      "size_bytes": 63432
+    }
+  },
+  "published_artifacts": {
+    "pressure-budget.json": {
+      "path": "results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.json",
+      "sha256": "9b196ab0a8a7f8f2d5dd6a4dd1dc726b1c1a3708bd53e048c6051606498a2e81",
+      "size_bytes": 39069
+    },
+    "pressure-budget.csv": {
+      "path": "results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.csv",
+      "sha256": "17995cba3e0385607568a444e1455e363c6b41040f3ddb750d049ac4060ac9e9",
+      "size_bytes": 7193
+    },
+    "pressure-budget.png": {
+      "path": "results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.png",
+      "sha256": "580adb94451a0044f14856721f7b80011d03ef0c635d4c330050c2ccad963c02",
+      "size_bytes": 269894
+    }
+  },
+  "qualification": "Per-tank sealed-gas quasistatic pressure reference only; no transient flow, actual emptying time or validation claim."
+}

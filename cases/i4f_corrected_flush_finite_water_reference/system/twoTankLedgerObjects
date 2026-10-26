@@ -1,0 +1,57 @@
+// Native cellZone inventories. lineAInitialZone/lineBInitialZone use the includeCut=true branch masks,
+// trimmed at the declared SHORT1 x=4.8m mouth-plane cell-centre split; mouth slabs are reported separately.
+tankAWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name tankAZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+tankBWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name tankBZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+lineAInitialWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name lineAInitialZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+lineBInitialWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name lineBInitialZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+lineAMouthBoundaryWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name lineAMouthBoundaryZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+lineBMouthBoundaryWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name lineBMouthBoundaryZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+externalAirWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType cellZone; name externalAirZone;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+totalWaterVolume
+{
+    type volFieldValue; libs (fieldFunctionObjects); regionType all;
+    operation volIntegrate; fields (alpha.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+ambientAnnulusWaterPhaseFlux
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects); regionType patch; name ambientAnnulus;
+    operation sum; fields (alphaPhi0.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+externalSidesWaterPhaseFlux
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects); regionType patch; name externalSides;
+    operation sum; fields (alphaPhi0.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}
+farOutletWaterPhaseFlux
+{
+    type surfaceFieldValue; libs (fieldFunctionObjects); regionType patch; name farOutlet;
+    operation sum; fields (alphaPhi0.water); writeControl timeStep; writeInterval 1; writeFields false; log true;
+}

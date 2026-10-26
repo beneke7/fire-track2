@@ -33,6 +33,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from aerial_drop.i4f_native_face_reader import (  # noqa: E402
     MOUTH_WINDOWS,
     READER_EXTRACTION_PROVENANCE,
+    TARGET_X_M,
     read_native_mouth_snapshot,
 )
 from aerial_drop.i4f_outlet_metrics import outlet_secondary_metrics  # noqa: E402
@@ -59,6 +60,7 @@ def summarize_face_inputs(
     *,
     time_s: float,
     case_label: str,
+    mouth_x_m: float = TARGET_X_M,
 ) -> list[dict[str, Any]]:
     """Call the canonical secondary metric helper for each mouth partition."""
     output = []
@@ -86,7 +88,9 @@ def summarize_face_inputs(
             alpha_water_face_raw=alpha,
             water_density_kg_m3=water_density,
             water_flux_stage_label="native saved alphaPhi0.water at selected checkpoint",
-            velocity_stage_label="neighbor-cell U linearly reconstructed to native x<=4.8 m cut face",
+            velocity_stage_label=(
+                f"neighbor-cell U linearly reconstructed to native x<={mouth_x_m:g} m cut face"
+            ),
         )
         total_abs_q = float(np.sum(np.abs(q)))
         dry = total_abs_q <= DRY_ABS_NATIVE_FLUX_THRESHOLD_M3_S
@@ -113,6 +117,7 @@ def summarize_face_inputs(
             {
                 "case_label": case_label,
                 "time_s": time_s,
+                "mouth_cut_x_m": mouth_x_m,
                 "mouth": mouth,
                 "native_face_count": len(rows),
                 "native_alphaPhi0_water_Q_net_m3_s": float(np.sum(q)),
@@ -188,6 +193,7 @@ def run(
     time_name: str,
     output_dir: Path,
     reference_v2_summary: Path | None = None,
+    mouth_x_m: float = TARGET_X_M,
 ) -> tuple[Path, Path]:
     case_bundle = case_bundle.resolve()
     case = case_bundle / "case"
@@ -196,7 +202,7 @@ def run(
     if output_dir.exists():
         raise FileExistsError(f"refusing to overwrite existing output directory: {output_dir}")
 
-    snapshot = read_native_mouth_snapshot(case, time_name, nprocs=NPROCS)
+    snapshot = read_native_mouth_snapshot(case, time_name, nprocs=NPROCS, mouth_x_m=mouth_x_m)
     faces_by_mouth: dict[str, list[dict[str, Any]]] = {name: [] for name in MOUTH_WINDOWS}
     orientation_counts = {"outward_positive_projected_area": 0, "nonpositive_projected_area": 0}
     for mouth, faces in snapshot.mouth_faces.items():
@@ -224,7 +230,10 @@ def run(
                 }
             )
     mouth_rows = summarize_face_inputs(
-        faces_by_mouth, time_s=snapshot.time_value_s, case_label=case_bundle.name
+        faces_by_mouth,
+        time_s=snapshot.time_value_s,
+        case_label=case_bundle.name,
+        mouth_x_m=float(snapshot.selection_metadata["target_x_cell_center_m"]),
     )
     reference_check = _optional_reference_comparison(
         reference_v2_summary.resolve() if reference_v2_summary else None,
@@ -259,6 +268,7 @@ def run(
             {
                 "case_label": row["case_label"],
                 "time_s": row["time_s"],
+                "mouth_cut_x_m": row["mouth_cut_x_m"],
                 "mouth": row["mouth"],
                 "native_face_count": row["native_face_count"],
                 "projected_area_m2": row["native_area_projected_x_m2"],
@@ -317,7 +327,12 @@ def run(
             "processor_pair_check": snapshot.processor_pair_summary,
         },
         "method": {
-            "primary_native_quantity": "saved alphaPhi0.water on the native internal cut face, oriented from x<=4.8 cell to x>4.8 cell; alpha is never inferred as alphaPhi0/phi",
+            "primary_native_quantity": (
+                "saved alphaPhi0.water on the native internal cut face, oriented from "
+                f"x<={snapshot.selection_metadata['target_x_cell_center_m']:g} cell to "
+                f"x>{snapshot.selection_metadata['target_x_cell_center_m']:g} cell; "
+                "alpha is never inferred as alphaPhi0/phi"
+            ),
             "water_density_model": snapshot.water_density_metadata,
             "water_mass_flux": (
                 "rhoConst cases use the selected scalar rhoConst to convert native signed q to mass. "
@@ -352,6 +367,12 @@ def main() -> None:
     )
     parser.add_argument("--time", required=True, help="exact processors10 time-directory name")
     parser.add_argument(
+        "--mouth-x-m",
+        type=float,
+        default=TARGET_X_M,
+        help=f"native mouth-cut x coordinate in metres (default: {TARGET_X_M:g})",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         required=True,
@@ -369,7 +390,7 @@ def main() -> None:
     if reference is not None and not reference.is_absolute():
         reference = ROOT / reference
     try:
-        json_path, csv_path = run(bundle, args.time, out_dir, reference)
+        json_path, csv_path = run(bundle, args.time, out_dir, reference, args.mouth_x_m)
     except Exception as exc:
         parser.exit(2, f"error: {exc}\n")
     print(json.dumps({"json": str(json_path), "csv": str(csv_path)}, indent=2))

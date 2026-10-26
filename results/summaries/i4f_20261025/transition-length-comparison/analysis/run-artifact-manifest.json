@@ -1,0 +1,31 @@
+{
+  "commands": [
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 900 -- env MPLBACKEND=Agg uv run --project scripts/i4f_four_outlet_geometry --frozen python scripts/i4f_four_outlet_geometry/generate.py --post-rise-straight-m 0 --transition-and-mouth-length-m 0.8 --pipe-transition-join flush-at-inlet --output-dir results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush",
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 900 -- env MPLBACKEND=Agg uv run --project scripts/i4f_four_outlet_geometry --frozen python scripts/i4f_four_outlet_geometry/generate.py --post-rise-straight-m 0 --transition-and-mouth-length-m 1.0 --pipe-transition-join flush-at-inlet --output-dir results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush",
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 900 -- env MPLBACKEND=Agg uv run --project scripts/i4f_four_outlet_geometry --frozen python results/runs/i4f-corrected-transition-08-20261026T1343Z/analysis/compare_geometry.py"
+  ],
+  "created_utc": "2026-10-26T13:53:25.259053+00:00",
+  "file_sha256": {
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/analysis/compare_geometry.py": "f32bbcdd34ca6a0110888496cc3eb7950921e03c160a59b10aa3ca3db61137e4",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/analysis/geometry-comparison.json": "f589419655c9d1688e5f604d56445fda5485959871a13755c985057d194afabc",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/analysis/transition-area-profile.csv": "92bb7445bcc57a7e2523825b3eae597a5192eb04c806ef70e108f25e2209bb3b",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush/geometry/four_mouth_fitted_divider_solids.step": "1df2a707840f79e54c01302071156951ae34df7b36e12454256f5de5d6e177b9",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush/geometry/two_tank_four_outlet_aligned_ruled_envelope.step": "03af6f901d8864f53d83cd42154af55b00260d4ef0550db98097d458584e2a0d",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush/geometry_summary.json": "875b7454c1e774cc85c8aa30a1d26d806b4d6f0d82fa7784c103b173fbddbcab",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush/stl/envelope.stl": "910013f0f7535ebc09e1b0ccad0e95c941780cc1b420372a351af8c172690331",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/candidate_0p8_flush/stl/fitted_dividers.stl": "33cdf92e25d1e8c803ce1246c9b59cd621bac5a12f4fab54a6ebe37e91a45373",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/figures/flush-junction-section-comparison.png": "44a922f6177377ee33092fc094ff3d54f334889d4448282d7ded376ba64f4ac1",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/figures/overall-assembly-comparison.png": "a8022787815f40ef37dfe8522c84d2165863566bc45616bd46abed08b835bae3",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/figures/tank-connection-section-comparison.png": "b4552ccd2f28518ea648e466188f20d6961aa89952d9074fab45136f306a0feb",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/figures/transition-area-profile.png": "f70de099b94ec27681766ffa975ebd6685f0cb629571d0bb75e2bcc560220edd",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/figures/transition-station-cross-section-comparison.png": "6376819b0722f99d0fc988c6e5cc3ef0dd4a24a1165bd89abc1b1c9b6f3b4077",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush/geometry/four_mouth_fitted_divider_solids.step": "848abdfe36838632fc71066b10c08d7a590cfd5d7595c4770df4f8d254e87384",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush/geometry/two_tank_four_outlet_aligned_ruled_envelope.step": "83ed862b3ea78220ba743840d24ca5b2c0bc3da77616fb8bbc6830a7472487ff",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush/geometry_summary.json": "a40aaa12f188af82582b2cc660e4458222bc0aec91f55f692ae58047652aadeb",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush/stl/envelope.stl": "a593e35484fc1fa8d6e05eecf0e75777aef1e06c2e863e9b8ad057900c503725",
+    "results/runs/i4f-corrected-transition-08-20261026T1343Z/reference_1p0_flush/stl/fitted_dividers.stl": "855446f005ddb37c3ad388999d6c8f0ddb974ce67a6d10ddd6e48a0eed29e5bd",
+    "scripts/i4f_four_outlet_geometry/generate.py": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2"
+  },
+  "resource_note": "Geometry generation and rendering used one low-priority CPU thread with Matplotlib Agg; no CFD or mesh generation.",
+  "schema": "i4f-corrected-flush-transition-geometry-artifact-manifest/v1"
+}

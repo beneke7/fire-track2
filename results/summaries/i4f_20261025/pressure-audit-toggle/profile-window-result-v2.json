@@ -1,0 +1,876 @@
+{
+  "arms": [
+    {
+      "arm": "audit_true",
+      "audit_switch": true,
+      "background_quota_state": [
+        {
+          "id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+          "name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+          "quota": 6.0,
+          "started_at": "2026-10-26T12:18:00.051165253Z"
+        },
+        {
+          "id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+          "name": "i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+          "quota": 6.8,
+          "started_at": "2026-10-26T13:18:45.043691461Z"
+        }
+      ],
+      "checkpoint": {
+        "complete": true,
+        "field_sha256": {
+          "T": "762ca8cce1097ec0b21bb86a9753336b0a737ee2910f4423c7252398d69d1140",
+          "T.air": "92d66c433f8fe4859f115c9e759e7b12e83664047a9a45d04a4385a63a9587a9",
+          "T.water": "631395d0b33346af6df79a830bcca3c62e70f115858439b75f237b97d0ac84be",
+          "U": "e2af5992e290f18225ac90bbbee210bee61d257279f4ed9c8c27e37cb03a88cd",
+          "alpha.water": "ef5501ed5ce7f1be19742d3e5ef18d223f522cf3bef452b81e49a6884525162e",
+          "alphaPhi0.water": "7705ddf36376414368c21bfbffb0b149f7d82f64ce012eacc5a250c186e848e2",
+          "alphat": "b6371d3aa0916b0c5823fc326b876cf7f2415dc50e5250aad4e3e28bb7b87a51",
+          "k": "8779e9ab3dfd3a09350a67905af97ad646ae852f88057a87a59c9e2c8466295d",
+          "nut": "910243f47ffca178ef0db62c6c90fed9cbd6e4622029c08e04a45d4afdfd16fd",
+          "omega": "e3550b2832d2a7e3626a69b539b4207d63b5ac2ce55f5af67aef54d2518f071d",
+          "p": "423ffba83e68232d4e14d2df451339db898525d034bba2e1cc875c43c7b5a674",
+          "p_rgh": "5db783457c6bae79075707ece7e1422ea0b85a0a9ef79238a48f5fafd31954e2",
+          "phi": "29e2fc3e571b491030cc4544098685e01b221669c8813ae6615eca955a29265f",
+          "rho": "f35c62e262b93187ad941061d38c0ca6680aa2fbdf240ebcf69ea2c3ffc67126",
+          "uniform/time": "e6dcde3c535f1d8b438198b6d4f3e809cbde60e79c4fb825f68761cea9a4fdc9"
+        },
+        "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/audit_true/case/processors10/0.401007658722",
+        "time_s": 0.401007658722
+      },
+      "container": {
+        "ExitCode": 0,
+        "FinishedAt": "2026-10-26T14:06:41.642746319Z",
+        "OOMKilled": false,
+        "StartedAt": "2026-10-26T14:05:37.713760844Z",
+        "Status": "exited",
+        "_id": "d957fe40873377c9a9a03b00dd7eeb704f14e4089f3e033d810b27c1d6664cbe",
+        "_name": "i4f-pressure-audit-toggle-20261026T134018Z-audit_true"
+      },
+      "docker_wall_seconds": 63.928986,
+      "end_time_control_dict_sha256": "aa7f468b03bd2ff9db0547d1709325e0dccb7fa11005b5973f7f4fbb5515a340",
+      "execution_clock_delta_s": [
+        30.189999999999998,
+        51.0
+      ],
+      "field_list": [
+        "alpha.water",
+        "alphaPhi0.water",
+        "alphat",
+        "k",
+        "nut",
+        "omega",
+        "p",
+        "p_rgh",
+        "phi",
+        "rho",
+        "T",
+        "T.air",
+        "T.water",
+        "U"
+      ],
+      "first_last_execution_clock_s": [
+        [
+          6.42,
+          9.0
+        ],
+        [
+          36.61,
+          60.0
+        ]
+      ],
+      "first_last_log_time_s": [
+        0.400164815554,
+        0.401007658722
+      ],
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "guardian_status_sha256": "ee25e897b73b441fb68890307b93aebd65acff2f367ff4458150b621cc4114a7",
+      "input_freeze_sha256": "3058222589c4ce75a0954b9773dfad461925966989b91cfa674cdf4f92a38509",
+      "latest_health": {
+        "coldstart_age_s": 0.0009878387210000006,
+        "deltaT_from_printed_times_s": 0.00013716009199998824,
+        "deltaT_logged_s": 0.0001371600916117966,
+        "final_field_min_T_K": 245.5436550395617,
+        "final_field_min_p_Pa": 92465.58250304463,
+        "final_field_min_rho_kg_m3": 1.187176649693235,
+        "final_min_p_cell": 7718,
+        "final_min_p_location": "3.660195175480664 -0.3618962479868332 0.7370413110198586",
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_dU_m_s": 0.004339496695183046,
+        "final_outer_max_abs_dalpha1": 4.785256119133052e-07,
+        "final_outer_max_abs_dp_Pa": 0.1688221364165656,
+        "final_outer_max_abs_dphi_m3_s": 1.747390529868373e-05,
+        "final_outer_max_abs_drho2_kg_m3": 2.006291663025905e-06,
+        "gas_boundary_flux_kg_s": 2.48798568845531,
+        "gas_cumulative_defect_fraction_initial": 1.4024996731101094e-05,
+        "gas_cumulative_defect_kg": 0.0004751187284250398,
+        "gas_inventory_kg": 33.42464907406489,
+        "gas_step_defect_fraction_initial": 9.928906454557196e-09,
+        "gas_step_defect_kg": -3.3635725553356503e-07,
+        "outer_iteration": 8,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_dU_m_s": 0.006959142197071694,
+        "penultimate_outer_max_abs_dalpha1": 1.751197512334102e-06,
+        "penultimate_outer_max_abs_dp_Pa": 0.2840905527264113,
+        "penultimate_outer_max_abs_dphi_m3_s": 1.537129233888587e-05,
+        "penultimate_outer_max_abs_drho2_kg_m3": 3.376137930999334e-06,
+        "phase_mass_pass": 112,
+        "phi_scaled_screen_advisory_pass": null,
+        "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+        "phi_scaled_screen_threshold_m3_s": null,
+        "pressure_update_consecutive_steps": 0,
+        "pressure_update_final_to_penultimate_ratio": 0.5942546656211654,
+        "pressure_update_persistent_condition": false,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_settled": false,
+        "pressure_update_stop_after_steps": 3,
+        "pressure_update_threshold_Pa": 100.0,
+        "raw_clip_cells_at_peak_single_pass": 0,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 92458.02375143471,
+        "time_s": 0.401007658722,
+        "water_boundary_flux_kg_s": -1.615489627140951e-23,
+        "water_cumulative_defect_fraction_initial": 3.530893896429642e-05,
+        "water_cumulative_defect_kg": 0.11291828237290247,
+        "water_inventory_kg": 3198.12128911115,
+        "water_step_defect_fraction_initial": 3.4061135703734385e-08,
+        "water_step_defect_kg": 0.00010892779710047762
+      },
+      "latest_phase_mass": {
+        "gas_flux_kg_s": 2.48798568845531,
+        "gas_kg": 33.42464907406489,
+        "pass": 112,
+        "time_s": 0.401007658722,
+        "water_flux_kg_s": -1.615489627140951e-23,
+        "water_kg": 3198.12128911115
+      },
+      "log_sha256": "7685585ac90a6a0167bcd08a4ad477007fee7eb7529f9d635b00365249d43c69",
+      "phase_mass_csv_exists": false,
+      "phase_mass_csv_rows": null,
+      "phase_mass_log_record_count": 224,
+      "prelaunch_capacity": {
+        "available_memory_bytes": 124961984512,
+        "combined_cpu_quota_and_external_core_equiv": 19.915,
+        "effective_cpu_budget": 20.0,
+        "exact_background_containers": [
+          {
+            "cpu_quota": 6.0,
+            "id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+            "name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "started_at": "2026-10-26T12:18:00.051165253Z"
+          },
+          {
+            "cpu_quota": 6.8,
+            "id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+            "name": "i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+            "started_at": "2026-10-26T13:18:45.043691461Z"
+          }
+        ],
+        "external_cpu_core_equiv_2s": 1.115,
+        "external_cpu_processes": [
+          {
+            "cgroup": "0::/user.slice/user-1001.slice/session-2395.scope",
+            "command": "/home/router/lfm-venv/bin/python gmk.py /home/router/models/gguf/orca/OrcaCyber-Nano-1.0-AI-Defense-Mix-15.7G.gguf --prompt-ids 814,20139,1092,264,4011,16000,36",
+            "cpu_core_equiv": 1.02,
+            "task": "2304482:2304482"
+          },
+          {
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/tmux-spawn-c6aae85e-1bac-4b07-85b1-9080e1127ce4.scope",
+            "command": "codex resume",
+            "cpu_core_equiv": 0.04,
+            "task": "7402:7403"
+          },
+          {
+            "cgroup": "0::/init.scope",
+            "command": "/usr/sbin/plymouthd --mode=boot --attach-to-session --pid-file=/run/plymouth/pid",
+            "cpu_core_equiv": 0.035,
+            "task": "380:380"
+          },
+          {
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/i4f-full-pressure-audit-toggle-window-attempt2-20261026t1404z.service",
+            "command": "/home/v/proj/bene/fire-track2/.venv/bin/python /home/v/proj/bene/fire-track2/results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/window-at",
+            "cpu_core_equiv": 0.02,
+            "task": "2304636:2304636"
+          }
+        ],
+        "fits_by_cpu_quota": true,
+        "free_disk_bundle_bytes": 26510721024,
+        "profile_cpu_quota": 6.0,
+        "progressing_solver_process_count": 20,
+        "progressing_solver_processes": [
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 119,
+            "pid": 2174788,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 110,
+            "pid": 2174789,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 127,
+            "pid": 2174790,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 135,
+            "pid": 2174791,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 141,
+            "pid": 2174792,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 133,
+            "pid": 2174793,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 112,
+            "pid": 2174794,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 130,
+            "pid": 2174795,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 119,
+            "pid": 2174796,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 108,
+            "pid": 2174797,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 145,
+            "pid": 2254945,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 119,
+            "pid": 2254946,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 134,
+            "pid": 2254947,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 146,
+            "pid": 2254948,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 121,
+            "pid": 2254949,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 140,
+            "pid": 2254950,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 152,
+            "pid": 2254951,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 142,
+            "pid": 2254952,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 155,
+            "pid": 2254953,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 130,
+            "pid": 2254954,
+            "state": "R"
+          }
+        ],
+        "sampled_utc": "2026-10-26T14:05:35.080133+00:00",
+        "status": "quota_capacity_pass"
+      },
+      "raw_guard_audit_counts": {
+        "clamp_cell": 0,
+        "clamp_raw": 112,
+        "dp_cell": 2,
+        "matrix_audit": 112,
+        "outer_state": 56,
+        "phase_mass": 224,
+        "pressure_residual": 1344
+      },
+      "runner_manifest_sha256": "29cde3d4031557e152169d7a94cb3e01994174ad299baeebed081d237baa24ed",
+      "step_count_from_log": 7,
+      "step_health_rows": 7
+    },
+    {
+      "arm": "audit_false",
+      "audit_switch": false,
+      "background_quota_state": [
+        {
+          "id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+          "name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+          "quota": 6.0,
+          "started_at": "2026-10-26T12:18:00.051165253Z"
+        },
+        {
+          "id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+          "name": "i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+          "quota": 6.8,
+          "started_at": "2026-10-26T13:18:45.043691461Z"
+        }
+      ],
+      "checkpoint": {
+        "complete": true,
+        "field_sha256": {
+          "T": "762ca8cce1097ec0b21bb86a9753336b0a737ee2910f4423c7252398d69d1140",
+          "T.air": "92d66c433f8fe4859f115c9e759e7b12e83664047a9a45d04a4385a63a9587a9",
+          "T.water": "631395d0b33346af6df79a830bcca3c62e70f115858439b75f237b97d0ac84be",
+          "U": "e2af5992e290f18225ac90bbbee210bee61d257279f4ed9c8c27e37cb03a88cd",
+          "alpha.water": "ef5501ed5ce7f1be19742d3e5ef18d223f522cf3bef452b81e49a6884525162e",
+          "alphaPhi0.water": "7705ddf36376414368c21bfbffb0b149f7d82f64ce012eacc5a250c186e848e2",
+          "alphat": "b6371d3aa0916b0c5823fc326b876cf7f2415dc50e5250aad4e3e28bb7b87a51",
+          "k": "8779e9ab3dfd3a09350a67905af97ad646ae852f88057a87a59c9e2c8466295d",
+          "nut": "910243f47ffca178ef0db62c6c90fed9cbd6e4622029c08e04a45d4afdfd16fd",
+          "omega": "e3550b2832d2a7e3626a69b539b4207d63b5ac2ce55f5af67aef54d2518f071d",
+          "p": "423ffba83e68232d4e14d2df451339db898525d034bba2e1cc875c43c7b5a674",
+          "p_rgh": "5db783457c6bae79075707ece7e1422ea0b85a0a9ef79238a48f5fafd31954e2",
+          "phi": "29e2fc3e571b491030cc4544098685e01b221669c8813ae6615eca955a29265f",
+          "rho": "f35c62e262b93187ad941061d38c0ca6680aa2fbdf240ebcf69ea2c3ffc67126",
+          "uniform/time": "e6dcde3c535f1d8b438198b6d4f3e809cbde60e79c4fb825f68761cea9a4fdc9"
+        },
+        "path": "/home/v/proj/bene/fire-track2/results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/audit_false/case/processors10/0.401007658722",
+        "time_s": 0.401007658722
+      },
+      "container": {
+        "ExitCode": 0,
+        "FinishedAt": "2026-10-26T14:07:45.982928121Z",
+        "OOMKilled": false,
+        "StartedAt": "2026-10-26T14:06:51.702862402Z",
+        "Status": "exited",
+        "_id": "a15092ad432181cb098920a259803d684786db8a6d25211aa03b29691498c834",
+        "_name": "i4f-pressure-audit-toggle-20261026T134018Z-audit_false"
+      },
+      "docker_wall_seconds": 54.280066,
+      "end_time_control_dict_sha256": "8bc1aedf424eb86de5f5457fc3310b9572bb60279d3bdac161a89705be342be6",
+      "execution_clock_delta_s": [
+        26.540000000000003,
+        42.0
+      ],
+      "field_list": [
+        "alpha.water",
+        "alphaPhi0.water",
+        "alphat",
+        "k",
+        "nut",
+        "omega",
+        "p",
+        "p_rgh",
+        "phi",
+        "rho",
+        "T",
+        "T.air",
+        "T.water",
+        "U"
+      ],
+      "first_last_execution_clock_s": [
+        [
+          4.63,
+          8.0
+        ],
+        [
+          31.17,
+          50.0
+        ]
+      ],
+      "first_last_log_time_s": [
+        0.400164815554,
+        0.401007658722
+      ],
+      "guard_status": "normal_End_complete_native10_checkpoint",
+      "guardian_status_sha256": "38819fd8e1b218b0fe12650ec98f507e9e54bda2d9c74a5b0ab646aa13220d33",
+      "input_freeze_sha256": "fe42da6aa9c55eaaadf014d85dc504a36fe21a989dd66afdafdc01c2b5dba2bf",
+      "latest_health": {
+        "coldstart_age_s": 0.0009878387210000006,
+        "deltaT_from_printed_times_s": 0.00013716009199998824,
+        "deltaT_logged_s": 0.0001371600916117966,
+        "final_field_min_T_K": 245.5436550395617,
+        "final_field_min_p_Pa": 92465.58250304463,
+        "final_field_min_rho_kg_m3": 1.187176649693235,
+        "final_min_p_cell": 7718,
+        "final_min_p_location": "3.660195175480664 -0.3618962479868332 0.7370413110198586",
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_dU_m_s": 0.004339496695183046,
+        "final_outer_max_abs_dalpha1": 4.785256119133052e-07,
+        "final_outer_max_abs_dp_Pa": 0.1688221364165656,
+        "final_outer_max_abs_dphi_m3_s": 1.747390529868373e-05,
+        "final_outer_max_abs_drho2_kg_m3": 2.006291663025905e-06,
+        "gas_boundary_flux_kg_s": 2.48798568845531,
+        "gas_cumulative_defect_fraction_initial": 1.4024996731101094e-05,
+        "gas_cumulative_defect_kg": 0.0004751187284250398,
+        "gas_inventory_kg": 33.42464907406489,
+        "gas_step_defect_fraction_initial": 9.928906454557196e-09,
+        "gas_step_defect_kg": -3.3635725553356503e-07,
+        "outer_iteration": 8,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_dU_m_s": 0.006959142197071694,
+        "penultimate_outer_max_abs_dalpha1": 1.751197512334102e-06,
+        "penultimate_outer_max_abs_dp_Pa": 0.2840905527264113,
+        "penultimate_outer_max_abs_dphi_m3_s": 1.537129233888587e-05,
+        "penultimate_outer_max_abs_drho2_kg_m3": 3.376137930999334e-06,
+        "phase_mass_pass": 112,
+        "phi_scaled_screen_advisory_pass": null,
+        "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+        "phi_scaled_screen_threshold_m3_s": null,
+        "pressure_update_consecutive_steps": 0,
+        "pressure_update_final_to_penultimate_ratio": 0.5942546656211654,
+        "pressure_update_persistent_condition": false,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_settled": false,
+        "pressure_update_stop_after_steps": 3,
+        "pressure_update_threshold_Pa": 100.0,
+        "raw_clip_cells_at_peak_single_pass": 0,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 92458.02375143471,
+        "time_s": 0.401007658722,
+        "water_boundary_flux_kg_s": -1.615489627140951e-23,
+        "water_cumulative_defect_fraction_initial": 3.530893896429642e-05,
+        "water_cumulative_defect_kg": 0.11291828237290247,
+        "water_inventory_kg": 3198.12128911115,
+        "water_step_defect_fraction_initial": 3.4061135703734385e-08,
+        "water_step_defect_kg": 0.00010892779710047762
+      },
+      "latest_phase_mass": {
+        "gas_flux_kg_s": 2.48798568845531,
+        "gas_kg": 33.42464907406489,
+        "pass": 112,
+        "time_s": 0.401007658722,
+        "water_flux_kg_s": -1.615489627140951e-23,
+        "water_kg": 3198.12128911115
+      },
+      "log_sha256": "f55095d348e5d3887bbc090b20af21c87f5a156ac7ce2c53f3d00d5f1ec72f89",
+      "phase_mass_csv_exists": false,
+      "phase_mass_csv_rows": null,
+      "phase_mass_log_record_count": 224,
+      "prelaunch_capacity": {
+        "available_memory_bytes": 124534333440,
+        "combined_cpu_quota_and_external_core_equiv": 19.915,
+        "effective_cpu_budget": 20.0,
+        "exact_background_containers": [
+          {
+            "cpu_quota": 6.0,
+            "id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+            "name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "started_at": "2026-10-26T12:18:00.051165253Z"
+          },
+          {
+            "cpu_quota": 6.8,
+            "id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+            "name": "i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+            "started_at": "2026-10-26T13:18:45.043691461Z"
+          }
+        ],
+        "external_cpu_core_equiv_2s": 1.115,
+        "external_cpu_processes": [
+          {
+            "cgroup": "0::/user.slice/user-1001.slice/session-2395.scope",
+            "command": "/home/router/lfm-venv/bin/python gmk.py /home/router/models/gguf/orca/OrcaCyber-Nano-1.0-AI-Defense-Mix-15.7G.gguf --prompt-ids 814,20139,1092,264,4011,16000,36",
+            "cpu_core_equiv": 1.02,
+            "task": "2307943:2307943"
+          },
+          {
+            "cgroup": "0::/init.scope",
+            "command": "/usr/sbin/plymouthd --mode=boot --attach-to-session --pid-file=/run/plymouth/pid",
+            "cpu_core_equiv": 0.035,
+            "task": "380:380"
+          },
+          {
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/tmux-spawn-c6aae85e-1bac-4b07-85b1-9080e1127ce4.scope",
+            "command": "codex resume",
+            "cpu_core_equiv": 0.035,
+            "task": "7402:7403"
+          },
+          {
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/i4f-full-pressure-audit-toggle-window-attempt2-20261026t1404z.service",
+            "command": "/home/v/proj/bene/fire-track2/.venv/bin/python /home/v/proj/bene/fire-track2/results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/window-at",
+            "cpu_core_equiv": 0.025,
+            "task": "2304636:2304636"
+          }
+        ],
+        "fits_by_cpu_quota": true,
+        "free_disk_bundle_bytes": 26441904128,
+        "profile_cpu_quota": 6.0,
+        "progressing_solver_process_count": 20,
+        "progressing_solver_processes": [
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 129,
+            "pid": 2174788,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 115,
+            "pid": 2174789,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 122,
+            "pid": 2174790,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 99,
+            "pid": 2174791,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 116,
+            "pid": 2174792,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 115,
+            "pid": 2174793,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 133,
+            "pid": 2174794,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 128,
+            "pid": 2174795,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 139,
+            "pid": 2174796,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3.scope\n",
+            "cpu_tick_delta_2s": 138,
+            "pid": 2174797,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 134,
+            "pid": 2254945,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 127,
+            "pid": 2254946,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 133,
+            "pid": 2254947,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 123,
+            "pid": 2254948,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 142,
+            "pid": 2254949,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 154,
+            "pid": 2254950,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 131,
+            "pid": 2254951,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 154,
+            "pid": 2254952,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 150,
+            "pid": 2254953,
+            "state": "R"
+          },
+          {
+            "cgroup": "0::/system.slice/docker-4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a.scope\n",
+            "cpu_tick_delta_2s": 134,
+            "pid": 2254954,
+            "state": "R"
+          }
+        ],
+        "sampled_utc": "2026-10-26T14:06:49.095652+00:00",
+        "status": "quota_capacity_pass"
+      },
+      "raw_guard_audit_counts": {
+        "clamp_cell": 0,
+        "clamp_raw": 112,
+        "dp_cell": 2,
+        "matrix_audit": 0,
+        "outer_state": 56,
+        "phase_mass": 224,
+        "pressure_residual": 0
+      },
+      "runner_manifest_sha256": "bea70ffea3db8fbfefea993a5b99a6f233bed8f0c39ae2b2e5bbe33098b35dab",
+      "step_count_from_log": 7,
+      "step_health_rows": 7
+    }
+  ],
+  "background_container_ids": [
+    "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+    "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a"
+  ],
+  "cleanup_verification": {
+    "cleanup_events": "results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/window-attempt2-20261026T1404Z/cleanup-events.jsonl",
+    "original_background_quotas_restored": {
+      "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a": 8.8,
+      "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3": 10.0
+    },
+    "resource_window_state": "results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/window-attempt2-20261026T1404Z/resource-window-state.json",
+    "status": "cleanup_complete",
+    "waiter_service_active": "i4f-upwind-momentum-warm-20261026t130013z-conditional.service"
+  },
+  "comparison": {
+    "all_14_fields_and_time_byte_equal": true,
+    "endpoint_runtime_seconds": {
+      "false_solver_execution_clock_delta": [
+        26.540000000000003,
+        42.0
+      ],
+      "false_wall": "2026-10-26T14:07:45.982928121Z",
+      "true_solver_execution_clock_delta": [
+        30.189999999999998,
+        51.0
+      ],
+      "true_wall": "2026-10-26T14:06:41.642746319Z"
+    },
+    "false_checkpoint_time_s": 0.401007658722,
+    "field_byte_equal": {
+      "T": true,
+      "T.air": true,
+      "T.water": true,
+      "U": true,
+      "alpha.water": true,
+      "alphaPhi0.water": true,
+      "alphat": true,
+      "k": true,
+      "nut": true,
+      "omega": true,
+      "p": true,
+      "p_rgh": true,
+      "phi": true,
+      "rho": true,
+      "uniform/time": true
+    },
+    "full_pressure_audit_records_present_false": {
+      "CLAMP_TRACE_MATRIX": false,
+      "I4F_PRESSURE_RESIDUAL": false
+    },
+    "full_pressure_audit_records_present_true": {
+      "CLAMP_TRACE_MATRIX": true,
+      "I4F_PRESSURE_RESIDUAL": true
+    },
+    "guard_health_record_counts": {
+      "false_phase_mass_csv_exists": false,
+      "false_phase_mass_log_records": 224,
+      "false_phase_mass_rows": null,
+      "false_step_health_csv_rows": 7,
+      "true_phase_mass_csv_exists": false,
+      "true_phase_mass_log_records": 224,
+      "true_phase_mass_rows": null,
+      "true_step_health_csv_rows": 7
+    },
+    "interpretation": "This is a matched short-window audit-output toggle, not a formal performance or solver-validity result. Exact native field equality is reported if present; no post-result tolerance is introduced.",
+    "normalized_common_diagnostic_record_comparison": {
+      "CLAMP_TRACE_CELL": {
+        "false_count": 0,
+        "false_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "normalized_payload_equal": true,
+        "true_count": 0,
+        "true_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "CLAMP_TRACE_RAW": {
+        "false_count": 112,
+        "false_sha256": "34be068393c399542d0a6dc05b2034c590eb6e7d6c622958d8b78aef2f24d49c",
+        "normalized_payload_equal": true,
+        "true_count": 112,
+        "true_sha256": "34be068393c399542d0a6dc05b2034c590eb6e7d6c622958d8b78aef2f24d49c"
+      },
+      "DP_CELL": {
+        "false_count": 2,
+        "false_sha256": "03b03ca6dfd3b160102d6079bc2ad4886d5bfac5a1bf59d806aa6742d4ac052c",
+        "normalized_payload_equal": true,
+        "true_count": 2,
+        "true_sha256": "03b03ca6dfd3b160102d6079bc2ad4886d5bfac5a1bf59d806aa6742d4ac052c"
+      },
+      "I4F_OUTER_STATE_DELTA": {
+        "false_count": 56,
+        "false_sha256": "bf1277feca4b98c849f38b326c64840ecf0849cd592a1bb6cf157b853f8cdb2b",
+        "normalized_payload_equal": true,
+        "true_count": 56,
+        "true_sha256": "bf1277feca4b98c849f38b326c64840ecf0849cd592a1bb6cf157b853f8cdb2b"
+      },
+      "I4F_PHASE_MASS_STATE": {
+        "false_count": 224,
+        "false_sha256": "08e4b4fce7537175e2e65752591248c70dd264b6169b56824ed2715eb5934088",
+        "normalized_payload_equal": true,
+        "true_count": 224,
+        "true_sha256": "08e4b4fce7537175e2e65752591248c70dd264b6169b56824ed2715eb5934088"
+      }
+    },
+    "record_count_differences_true_minus_false": {
+      "clamp_cell": 0,
+      "clamp_raw": 0,
+      "dp_cell": 0,
+      "matrix_audit": 112,
+      "outer_state": 0,
+      "phase_mass": 0,
+      "pressure_residual": 1344
+    },
+    "same_actual_checkpoint_time": true,
+    "step_health_csv_comparison": {
+      "exact_rows": true,
+      "false_rows": 7,
+      "false_sha256": "0c13a0b5b44c122c5e8a40f9f7094e50f63348196d2bd0cbcde24db670e1cc99",
+      "first_differing_rows": [],
+      "max_abs_numeric_difference_by_column": {},
+      "true_rows": 7,
+      "true_sha256": "0c13a0b5b44c122c5e8a40f9f7094e50f63348196d2bd0cbcde24db670e1cc99"
+    },
+    "true_checkpoint_time_s": 0.401007658722
+  },
+  "external_cpu_sample": {
+    "core_equiv": 1.106638580549656,
+    "duration_s": 3.000076138996519,
+    "rows": [
+      {
+        "cgroup": "0::/user.slice/user-1001.slice/session-2395.scope",
+        "command": "/home/router/lfm-venv/bin/python gmk.py /home/router/models/gguf/orca/OrcaCyber-Nano-1.0-AI-Defense-Mix-15.7G.gguf --prompt-ids 814,20139,1092,264,4011,16000,369,13 --gen 64",
+        "cpu_core_equiv": 1.0033078697152,
+        "thread": "2304482:2304482"
+      },
+      {
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/tmux-spawn-c6aae85e-1bac-4b07-85b1-9080e1127ce4.scope",
+        "command": "codex resume",
+        "cpu_core_equiv": 0.039998984839144186,
+        "thread": "7402:7403"
+      },
+      {
+        "cgroup": "0::/init.scope",
+        "command": "/usr/sbin/plymouthd --mode=boot --attach-to-session --pid-file=/run/plymouth/pid",
+        "cpu_core_equiv": 0.03666573610254884,
+        "thread": "380:380"
+      },
+      {
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/tmux-spawn-c6aae85e-1bac-4b07-85b1-9080e1127ce4.scope",
+        "command": "/home/v/.codex/packages/app-server-daemon/releases/0.164.0-x86_64-unknown-linux-musl/bin/codex app-server --listen unix:// --analytics-default-enabled --managed-daemon",
+        "cpu_core_equiv": 0.013332994946381396,
+        "thread": "7483:1823026"
+      },
+      {
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/i4f-full-pressure-audit-toggle-window-attempt2-20261026t1404z.service",
+        "command": "/home/v/proj/bene/fire-track2/.venv/bin/python /home/v/proj/bene/fire-track2/results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/window-attempt2-20261026T1404",
+        "cpu_core_equiv": 0.013332994946381396,
+        "thread": "2304636:2304636"
+      }
+    ]
+  },
+  "limitations": [
+    "Short diagnostic profiling window only.",
+    "Quota allocation differs from the uncontrolled long cases and is recorded.",
+    "A true/false difference in exact endpoint hashes would be reported as observed; no acceptance tolerance is created after seeing output."
+  ],
+  "planned_physical_interval_s": [
+    0.400019820001,
+    0.401019820001
+  ],
+  "quota_plan": {
+    "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a": 6.8,
+    "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3": 6.0
+  },
+  "schema": "i4f-full-pressure-audit-toggle-matched-profile/v2",
+  "source_scope": {
+    "input_freeze_false_sha256": "fe42da6aa9c55eaaadf014d85dc504a36fe21a989dd66afdafdc01c2b5dba2bf",
+    "input_freeze_true_sha256": "3058222589c4ce75a0954b9773dfad461925966989b91cfa674cdf4f92a38509",
+    "mesh_sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779",
+    "solver_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5"
+  },
+  "status": "both_arms_captured_and_compared",
+  "summary_correction": {
+    "corrections": [
+      "phase_mass_csv_rows is null because no phase_mass.csv exists; phase_mass_log_record_count is reported from guarded raw log records.",
+      "latest_health now references guardian-status.json branches.fourmouth_coldstart.last_step_health.",
+      "The v1 artifact is preserved unchanged."
+    ],
+    "input_sha256": {
+      "audit_false_captured_summary": "0f61edce65e79795c4c92367f2a00908a4073fe672fca77e8c69e1079022a4a1",
+      "audit_false_guardian_status": "38819fd8e1b218b0fe12650ec98f507e9e54bda2d9c74a5b0ab646aa13220d33",
+      "audit_true_captured_summary": "2ebd2df0b891e109d73bbf9736bb5b4a2f90c3dae03fc445a1ec43656e727cd6",
+      "audit_true_guardian_status": "ee25e897b73b441fb68890307b93aebd65acff2f367ff4458150b621cc4114a7",
+      "profile_window_result_v1": "a25763232f6c18c6e6810026a6086dcdb70b9b3f3de575d0a90b344522b9eb4e"
+    },
+    "reason": "The v1 summary used a nonexistent phase_mass.csv path and looked up latest_health instead of guardian branch last_step_health. Phase-mass observations are present in the guarded solver log; step-health rows are in step_health.csv.",
+    "supersedes": "results/runs/i4f-full-pressure-audit-toggle-profile-prep-20261026T134018Z/window-attempt2-20261026T1404Z/profile-window-result.json"
+  },
+  "window_finished_utc": "2026-10-26T14:07:50.475750+00:00",
+  "window_started_utc": "2026-10-26T14:05:28.697855+00:00"
+}
