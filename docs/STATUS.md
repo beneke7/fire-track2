@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 19:17 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 19:32 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -143,9 +143,19 @@ Next work is bounded and parallel; no failed fields are restart inputs:
 - **Restart fidelity (performance worker):** source inspection identifies the
   pressure-derived dgdt as a candidate missing checkpoint state; rhoPhi and
   alpha flux are regenerated before first use under current controls. A
-  separate minimal READ_IF_PRESENT/AUTO_WRITE probe is approved for build
-  and a small uninterrupted/legacy-restart/saved-dgdt comparison. No result
-  or sufficient-state claim exists yet. Current live cases remain unchanged.
+  minimal READ_IF_PRESENT/AUTO_WRITE probe is cold-compatible with eleven
+  common native fields byte-identical after one step, but saving dgdt alone
+  did not restore the uninterrupted channel trajectory: maximum pressure
+  difference after one restarted step is 127.824 Pa. The constructor's derived
+  phase-temperature rewrite is not supported as its cause in this test.
+  Pinned-source inspection instead identifies lazy oldTime allocation after
+  derived-field mutation as a concrete hypothesis; a controlled initialization
+  audit is in progress. No serialization fix is adopted. Evidence:
+  `results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/provenance/restart-comparison.json`.
+  Current live cases remain unchanged.
+  After merging HPC commit e5c4d92, the added terminal-audit module passed all
+  eleven focused tests; Ruff and batch-shell syntax checks passed. No HPC job
+  was launched from this workstation.
 - **Rendering:** the earlier paired watcher has no healthy >=.65 s apparatus
   trajectory to render. No new milestone discharge movie exists. Its status
   is `results/runs/i4f-cold-pair-render-20261026T1553Z-attempt5/watch-status.json`.
