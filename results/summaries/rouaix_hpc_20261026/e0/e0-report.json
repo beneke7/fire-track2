@@ -1,0 +1,190 @@
+{
+  "artifact_sha256": {
+    "ground-map.npz": "2da0c8623ed74923ee7069eecfbabf23ef974b12a0287436053374286111a1bf"
+  },
+  "checks": {
+    "ballistic_trajectory": {
+      "expected_flight_time_s": 4.47213595499958,
+      "expected_impact_position_m": [
+        84.7213595499958,
+        16.94427190999916,
+        0.0
+      ],
+      "expected_impact_time_s": 8.47213595499958,
+      "flight_time_s": 4.47213595499958,
+      "impact_position_m": [
+        84.7213595499958,
+        16.94427190999916,
+        0.0
+      ],
+      "impact_time_s": 8.47213595499958,
+      "passed": true
+    },
+    "constant_inlet_mass": {
+      "expected_mass_kg": 1200.0,
+      "mass_for_normal_velocity_kg": 1200.0,
+      "mass_with_changed_tangential_velocity_kg": 1200.0,
+      "passed": true
+    },
+    "continuous_strip_scoring": {
+      "actual_mass_inside_strip_kg": 35.625,
+      "expected_actual_mass_inside_strip_kg": 35.625,
+      "expected_l95_m": 5.0,
+      "expected_mass_elsewhere_on_ground_kg": 164.375,
+      "expected_useful_credit_mass_kg": 28.5,
+      "expected_useful_fraction": 0.114,
+      "l95_m": 5.0,
+      "mass_elsewhere_on_ground_kg": 164.375,
+      "passed": true,
+      "strip_cell_indices_start_stop": [
+        0,
+        2
+      ],
+      "strip_x_m": [
+        0.0,
+        5.0
+      ],
+      "synthetic_map": true,
+      "useful_credit_mass_kg": 28.5,
+      "useful_fraction": 0.114
+    },
+    "ellipse_rectangle_illustration": {
+      "comparison": "full-width geometry; not the map-based 95% L95 metric",
+      "ellipse_area_m2": 549.7787143782139,
+      "full_width_ellipse_length_m": 38.29930462415574,
+      "passed": true,
+      "rectangle_to_ellipse_length_ratio": 1.5949773610582394,
+      "same_area_rectangle_length_m": 61.08652381980154,
+      "semi_axes_m": [
+        25.0,
+        7.0
+      ],
+      "target_width_m": 9.0
+    },
+    "handoff_momentum_check": {
+      "passed": true,
+      "residual_kg_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "residual_norm_kg_m_s": 0.0,
+      "scope": "algebraic check only; no VOF or parcel handoff is implemented",
+      "tolerance_kg_m_s": 3.7516573867739414e-10
+    },
+    "weighted_deposition_and_ledger": {
+      "airborne_parcel_mass_kg": 0.0,
+      "airborne_vof_mass_kg": 0.0,
+      "deposited_mass_kg": 11.0,
+      "escaped_mass_kg": 0.0,
+      "impact_locations_xy_m": [
+        [
+          1.25,
+          1.0
+        ],
+        [
+          4.0,
+          1.0
+        ]
+      ],
+      "impact_masses_kg": [
+        8.0,
+        3.0
+      ],
+      "in_map_mass_kg": 8.0,
+      "input_impact_mass_kg": 11.0,
+      "ledger_residual_kg": 0.0,
+      "outside_map_mass_kg": 3.0,
+      "passed": true
+    },
+    "zero_control_gain": {
+      "gain": null,
+      "passed": true
+    }
+  },
+  "experiment": "E0 analytical verification",
+  "generated_at_utc": "2026-10-26T12:49:31.997835+00:00",
+  "input_config": {
+    "ballistic_aircraft_speed_m_s": [
+      10.0,
+      2.0,
+      0.0
+    ],
+    "ballistic_gravity_m_s2": -10.0,
+    "ballistic_initial_height_m": 100.0,
+    "ballistic_release_time_s": 4.0,
+    "ellipse_example": {
+      "semi_major_axis_m": 25.0,
+      "semi_minor_axis_m": 7.0,
+      "source": "Restas (2023), Examining_the_Effectiveness_of_Aerial_Firefighting.pdf, pp. 10-12 / Table 1",
+      "target_width_m": 9.0
+    },
+    "release_area_m2": 0.12,
+    "release_density_kg_m3": 1000.0,
+    "release_duration_s": 2.0,
+    "release_normal_velocity_m_s": 5.0,
+    "release_tangential_velocity_cases_m_s": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        -12.0,
+        3.0
+      ]
+    ],
+    "scoring_map": "synthetic nonuniform grid with a gap and equal-length valid runs",
+    "scoring_released_mass_kg": 250.0,
+    "scoring_required_width_fraction": 0.95,
+    "scoring_target_width_m": 2.5,
+    "scoring_threshold_kg_m2": 2.4,
+    "weighted_deposition_impacts": {
+      "interpretation": "outside-map points landed on ground outside map extent",
+      "locations_xy_m": [
+        [
+          1.25,
+          1.0
+        ],
+        [
+          4.0,
+          1.0
+        ]
+      ],
+      "masses_kg": [
+        8.0,
+        3.0
+      ]
+    }
+  },
+  "input_config_sha256": "2711b629c1d1b43210cb385fc045007e63522affb92ac00a1028f8f308c07995",
+  "provenance": {
+    "code_sha256": {
+      "experiments/E0.md": "9b8a086052797d4e5804f55d91d38845ed7c456cbf094349de507dc59290d4fb",
+      "pyproject.toml": "fd983aa29d4318ab28dc2269f5f4adf694932f8d6a80df3050803f8b2fa28546",
+      "src/aerial_drop/__init__.py": "900382be61a5f7a3e5a08cccac0cd37eb391215b0b55474a361bf5520866a1a9",
+      "src/aerial_drop/e0.py": "ce3be0e055c682def58db9df22195f2f93112cf1ec27e65234858b0891f2a9ac",
+      "src/aerial_drop/e2_source_uncertainty.py": "5579d1d1e3327d281223e7e0e24cf2443f0b4d3ceb18beecf91d5b745b23841a",
+      "src/aerial_drop/flutas_source_analyzer.py": "9be9de9d6cf5f1a63196cd706ad657a48ea4344b7d720a07280ae1dfb46f8e37",
+      "src/aerial_drop/interface_stability.py": "257ee30327d156589f1ca78e46206cd462691012859b1ad25b72c23ed0381687",
+      "src/aerial_drop/parcel_motion.py": "345992ee500e1aa47d1c480a50c36c87931febe0373869eed5187e90cd55a1a2",
+      "src/aerial_drop/structure_counts.py": "59fc1ce40d473547f1bbf3d8236442df6de931a6431dad5d6fe90771aef93eeb",
+      "tests/test_e0.py": "142525bf291256332267edc694d7b1c34eaf8157f26b5937180eb772c8c2932e",
+      "uv.lock": "c8c34223c94f0fc60ab2daaa13c1354dd80c11697fc6083b66d0b1cabb300206"
+    },
+    "dirty": true,
+    "package_versions": {
+      "fire-track2": "0.1.0",
+      "numpy": "2.5.3",
+      "python": "3.12.13"
+    },
+    "revision": "e5d81158f62ece94b27a8dd0b4d9500424763678"
+  },
+  "resource_use": {
+    "peak_rss_bytes": 32751616,
+    "scope": "E0 analytical checks and NPZ serialization; excludes JSON manifest write",
+    "wall_time_to_map_write_s": 0.03708983300020918
+  },
+  "scope": "analytical checks only; no CFD, VOF, breakup, drag, wind transport, or field validation",
+  "seed": 0,
+  "seed_note": "No stochastic operation is used in E0; seed is recorded for run-schema consistency."
+}

@@ -1,5 +1,8 @@
 # Rouaix HPC measurement contract
 
+Compact published measurements, hashes and preview: [26 October evidence bundle](../results/summaries/rouaix_hpc_20261026/README.md).
+Raw fields and archives referenced below remain outside Git.
+
 Use this record with the prepared exploratory Rouaix Case 1 jobs in
 [`E1_ROUAIX_HPC_PILOT.md`](../experiments/E1_ROUAIX_HPC_PILOT.md). It is an
 operational measurement record, not an E1 gate or a CFD validation result. Keep

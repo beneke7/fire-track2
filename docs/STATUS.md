@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 09:01 UTC. Priority: **I4F internal pressure-driven discharge**.
+I4F snapshot: 2026-10-26 09:01 UTC. Workstation priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 
@@ -33,9 +33,9 @@ local/HPC storage, outside Git; this is a summary release, not a standalone
 raw-data reproduction package. Frozen queued-job source is unchanged by Git
 integration or the later local max-U metadata and accounting-parser fixes.
 
-Publication checks before integration: 201 affected tests and Ruff passed;
+Publication checks on the integrated tree: 201 affected tests and Ruff passed;
 all seven fresh E0 analytical checks passed. Full make check is not green:
-collection needs matplotlib; excluding that module gives 775 passed,
+collection needs matplotlib; the pre-merge diagnostic excluding that module gave 775 passed,
 19 failed and 6 skipped, involving platform support, missing dependencies,
 missing ignored fixtures and a retained digitization mismatch. The compact
 check report preserves exact commands and outcomes.

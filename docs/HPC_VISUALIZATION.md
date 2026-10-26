@@ -1,5 +1,8 @@
 # ParaView view for an OpenFOAM VOF tutorial
 
+Compact published measurements, hashes and preview: [26 October evidence bundle](../results/summaries/rouaix_hpc_20261026/README.md).
+Raw fields and archives referenced below remain outside Git.
+
 ## Current Rouaix case: simple alpha display
 
 The user-preferred view is

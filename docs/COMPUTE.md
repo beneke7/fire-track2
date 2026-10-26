@@ -213,7 +213,6 @@ storage, the runner retains its workspace but has no durable fallback copy.
 That path can disappear at allocation teardown. All reported result archives
 were verified; future node-local runs need a durable failure-recovery path.
 
-
 SSH as `nk_memj@komondor.hpc.kifu.hu` is working. The CPU partition and native
 `OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH` module were inspected; the latter supplies
 `interIsoFoam` build `_87ed40d256-20251219` and stock tutorials. Load
