@@ -1,0 +1,35 @@
+{
+  "created_utc": "2026-10-26T21:35:19.738959+00:00",
+  "energy_packet": {
+    "immediate_parent_binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "referenced_ancestor_closure": {
+      "captured_parent_source_tree_manifest_sha256": "3bc689e01f393bf153c1fe626fd5117ce629a3dd2720a1670f3e8bf754b1219c",
+      "manifest_path": "results/summaries/i4f_20261025/full-source-apparatus/source-closure-20261026T2010Z/closure-manifest.json",
+      "manifest_sha256": "e89dc3c6a080208cb6b31cc24cc52f86c0f2713d06ed609eeca5b88ebcd1e8f3",
+      "patch_path": "results/summaries/i4f_20261025/full-source-apparatus/source-closure-20261026T2010Z/dcec-to-captured-full-source-07.patch",
+      "patch_sha256": "bb5c160a51e5d80eeaa8e2dfb6e045d64a7f3489bcc0c4704b96b6b5925a35e2",
+      "purpose": "Public closure record for the captured DCEC standard-source parent lineage; not evidence that this read-only observer patch alters equations."
+    },
+    "summary_path": "results/summaries/i4f_20261025/firststep-energy/firststep-energy-evidence.json",
+    "summary_sha256": "2c2e0f7f956a9b735657d82d4f26c3d753b413c5dc45d48abe49d9884dae7efa"
+  },
+  "immediate_parent_source_reference": {
+    "binary_bundle": "results/runs/i4f-restart-consistent-apparatus-cold-20261026T1958Z",
+    "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "reused_binary_build_reference_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/provenance/reused-binary-build-reference.json",
+    "reused_binary_build_reference_sha256": "235d872a1efeab2d94502d3d74570892a718d020c1339ee47f943b83f920ce9b",
+    "source_content_matches_parent": true,
+    "source_content_sha256": "09862c07aede283b1256c1f2e2465a113edd7cd567ec4869cad68b7f305e6747",
+    "source_tree_hash_matches_parent": false,
+    "source_tree_manifest_file_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+    "source_tree_manifest_path": "results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/provenance/source-tree-sha256.json",
+    "source_tree_sha256_recorded": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83"
+  },
+  "qualification": {
+    "bridge_status": "deferred; no rebuild, solver run, or source reconstruction was performed for this qualification.",
+    "exact_12d8_closure_bridge_included": false,
+    "frozen_energy_json_changed": false,
+    "statement": "The public closure record cited by the first-step energy packet describes the 07 ancestor lineage. It is not an exact, verified source closure of the immediate 12d8 binary parent. The 12d8 run has its own frozen source-tree and reused-binary records, but this packet does not include a complete patch/diff chain from the 07 closure to every compiled 12d8 source path."
+  },
+  "schema": "i4f-immediate-parent-source-closure-qualification/v1"
+}

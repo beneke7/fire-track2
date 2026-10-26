@@ -26,6 +26,31 @@ and [grid figure](source-active-withdrawal/grid-trend.png) separate the improved
 water-volume balance from the remaining thermal/refinement error. All eight
 grid/source runs and one passive audit reached .4 s; these simplified cases
 do not validate the apparatus.
+The [startup field/energy data](firststep-energy/firststep-energy-evidence.json)
+and [local matrix addendum](firststep-energy/firststep-temperature-matrix-evidence.json)
+resolve the two selected first-step temperature balances: an unprojected air
+predictor near 713 m/s supplies about -354 K, offset by +73 K from implicit
+diffusion. The replay is field-identical to its observer control. This is local
+numerical evidence; the raw full case and immediate parent source remain local.
+The frozen metadata's matrix units are corrected in a separate record.
+
+The new cold trajectory's [healthy .3907 s cutaway](cold-final-diagnostics/healthy-0391-cutaway.png)
+and [underconverged .484 s endpoint](cold-final-diagnostics/underconverged-0484-cutaway.png)
+use the same camera and native 299,214-cell mesh. Neither shows dense water
+outside the mouths. The [diagnostics](cold-final-diagnostics/cold-final-diagnostics.json)
+separate the pressure-update controller from the minimum-pressure cell.
+
+The [current early hydraulic figure](current-cold-hydraulics/current-cold-hydraulics-prefix.png)
+and [matched table](current-cold-hydraulics/matched-time-comparison.csv)
+cover a frozen prefix through .294771 s, with exact comparison samples through
+.250021 s. Mean flow at .2 s is .432743 m3/s per tank, .462% above the
+adiabatic reduced model. Local probe pressure and model bulk pressure differ
+by 1.749%. These shared-assumption comparisons are descriptive. The underlying
+cold-derived CFD later stopped at .484006 s; this is not completed discharge.
+[New negative outcomes](gamma-outer-relaxation/gamma-outer-relaxation-negative-outcomes.json)
+retain the warm source/predictor comparisons and the failed smaller-timestep
+replay. Latest compute state belongs in live status.
+
 The [Euler restart-history packet](restart-history/README.md) includes the
 small A/C/D inputs, native split/end states and both source snapshots. Saving
 the expansion source alone did not restore the uninterrupted step; initializing

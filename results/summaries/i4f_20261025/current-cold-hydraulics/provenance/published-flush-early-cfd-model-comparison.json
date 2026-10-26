@@ -1,0 +1,1121 @@
+{
+  "cfd": {
+    "analysis_used_full_native_fields": false,
+    "binary_sha256_from_launch_manifest": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "bundle": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+    "checkpoint_times_compared_s": [
+      0.10002116666400004,
+      0.1500211666640001,
+      0.20002116666400013,
+      0.25002116666400015
+    ],
+    "completed_steps_at_capture": 1036,
+    "container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+    "docker_started_at": "2026-10-26T06:44:49.045490597Z",
+    "guard_observed_time_s": 0.307382809573,
+    "horizon_note": "The case was live at capture (guard time 0.307382809573 s); only complete .100/.150/.200/.250 native checkpoints are compared. No later CFD time is used.",
+    "initial_gas_volume_m3": {
+      "tankA": 0.29849720040624456,
+      "tankB": 0.298496768325698
+    },
+    "native_initial_tank_water_m3": {
+      "tankA": 1.3500000000021355,
+      "tankB": 1.350000000000505
+    },
+    "native_zone_volumes_m3": {
+      "tankA": 1.64849720040838,
+      "tankB": 1.6484967683262028
+    },
+    "scalar_history_last_complete_time_s": 0.307382809573,
+    "scalar_sources": {
+      "external_water": "volIntegrate(alpha.water) over externalAirZone; reported separately from line water",
+      "line_water": "volIntegrate(alpha.water) over native lineAInitialZone/lineBInitialZone cellZones",
+      "pressure": "point probe p at (1.25,-0.55,1.60) and (1.25,0.55,1.60) m; these are local probes, not volume-weighted headspace means",
+      "seat_flux": "sum(alphaPhi0.water) over native valveSeatA1/A2/B1/B2 faceZones; the configured face-zone normal points +x",
+      "seat_pressure": "areaAverage(p,p_rgh) over those same native valve seat faceZones; p is absolute",
+      "tank_water": "volIntegrate(alpha.water) over native tankAZone/tankBZone cellZones"
+    }
+  },
+  "created_utc": "2026-10-26T08:21:17.914039+00:00",
+  "files": {
+    "comparison_csv": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/analysis/comparison.csv",
+    "trajectory_plot": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/analysis/early-cfd-reduced-model.png",
+    "trajectory_plot_sha256": "34fccc20bfb1734f6f81e8e876eea93e6f3317f11968dfcde96288cc951fff99"
+  },
+  "geometry_and_initial_state_gaps": {
+    "additional_model_limitations": [
+      "The direct compact CAD centerline changes both branches' elevation/profile from the preserved legacy x-only packet; no measured path was available.",
+      "The 1-D integrated full line volume is about 2.08% above the native Tank A full line-zone volume; the initial wet-prefix area integral is about 0.634% above the separately measured native feed inventory. Neither value was rescaled.",
+      "The 1-D geometric inertance integrals are model profile values; the native mesh does not provide a matching centerline integral of ds/A, so no native inertance equality is claimed.",
+      "Current CFD uses zero-thickness lamella walls; gross area is retained, while the reduced profile does not add their wetted perimeter to friction.",
+      "The isothermal limit predicts earlier outlet arrival and materially different pressure/withdrawal than n=gamma. This is a model heat-transfer assumption sensitivity, not a fitted exponent or measured heat transfer.",
+      "Halving dt leaves first outlet arrival and crown-stop time nearly unchanged for this explicit ODE; this is time-step sensitivity only, not validation of full-bore front kinematics.",
+      "Air front pressure remains the ambient-pressure approximation. The dry-path air screen is incomplete because no air minor-loss K is supplied; its low early Mach diagnostic does not establish late-time gas-pressure uniformity.",
+      "The run stops at the highest intake-crown condition; it does not represent full tank emptying or validated gas ingestion."
+    ],
+    "full_line_model_minus_native_percent": 2.0806978670324217,
+    "full_line_model_per_tank_m3": 0.7005877945113135,
+    "full_line_native_zone_per_tank_m3": 0.6863078026992726,
+    "headspace_initial_m3_model": 0.2984972004062443,
+    "headspace_initial_m3_native_A": 0.29849720040624456,
+    "initial_feed_model_minus_native_L": 1.5914778111367212,
+    "initial_feed_model_minus_native_percent": 0.633911343373228,
+    "initial_feed_model_two_branch_m3": 0.252648321606991,
+    "initial_feed_native_tankA_m3": 0.2510568437958543,
+    "line_profile_note": "Model is one representative tank/two-branch compact centerline; it is compared separately with each CFD tank. The centerline/inertance and transition/friction profile are provisional and not an exact native mesh path match.",
+    "tank_capacity_matches": true
+  },
+  "interpretation": {
+    "flow": "For each CFD tank, the two native valve-seat alphaPhi0.water face-zone sums are added to give total two-branch flow; the reported CFD Q is the mean of those per-tank totals, not mean individual-branch flow. These native fluxes are exact saved scalar samples, not sampled mouth-plane interpolation Q.",
+    "outlet": "Model first outlet-water arrival is ~0.6170 s lower / ~0.6252 s upper for n=gamma and ~0.5846 s lower / ~0.5915 s upper for n=1. The n=1 arm arrives earlier; both arms remain later than this 0.10-0.25 s comparison window. The model is a provisional filling analysis, not a validated front predictor.",
+    "pressure": "Reduced-model bulk tank pressure is compared with local CFD headspace point probes. CFD tank/line/external inventories and native seat flux/pressure are exact function-object rows at each native checkpoint. Printed probe p/T histories are linearly interpolated between rows spaced about 0.25 ms apart because their timestamp text is less precise; each target is within about 4 ns of the upper row. No volume-weighted CFD headspace pressure was computed from full fields.",
+    "scope": "early line-filling prefix only; not outlet-discharge validation or a formal mesh/physics comparison",
+    "state": "Both CFD tanks are reported separately; reduced model is a one-tank representative. Differences may include line-profile/initial-feed geometry, solver/interface behavior, and model closure; no parameter is fitted."
+  },
+  "provenance": {
+    "analysis_helper_sha256": "dd371210ece0891b7e001e31a1e916cadd224a0f8727b34d790e824b94a2e804",
+    "captured_output_csv_sha256": "f5248a235c9e3d1c264bdd4671077bfc35125fe113cd853941a86c6b5a561a83",
+    "cfd_guard_sha256": "faf4765007f337cd0e0d74e97156f7c56f53556c5c1da1421f269c2cac501090",
+    "continuation_seed_sha256": "b5d99d8c5a003cf99ee211b9000255b74e6cf171d60ea974673745bf9b2e0780",
+    "launch_manifest_sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+    "machine_doctor_sha256": "dc2756e562a1ff80d9b73960fee8e1406bc50f9f3d18e48ae455ccd6f80e61d7",
+    "model_comparison_json_sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+    "native_initialization_sha256": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+    "plotting_helper_sha256": "f1d07896e0733a8fa91f8c4158414cd68d4868ca3c49a893b97e33825f1814b8"
+  },
+  "reduced_model": {
+    "air_gamma": 1.3998145383348455,
+    "comparison_bundle": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z",
+    "gamma_arm": {
+      "first_outlet_water_arrival_s_by_branch": {
+        "lower": 0.6169999999999403,
+        "upper": 0.6251999999999394
+      },
+      "max_abs_branch_volume_balance_residual_m3": 3.191891195797325e-15,
+      "max_abs_volume_balance_residual_m3": 1.199040866595169e-14,
+      "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z",
+      "polytropic_n": 1.3998145383348455,
+      "stop": {
+        "reason": "tank_intake_crown_reached",
+        "time_s": 1.1265521234050802
+      },
+      "summary_files": {
+        "history.csv": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/history.csv",
+          "sha256": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e"
+        },
+        "summary.json": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/summary.json",
+          "sha256": "8827aa49e201459823e8be4ea8fa5c297aaf9e1db87b74cab8a5881100429f16"
+        }
+      },
+      "time_step_s": 5e-05,
+      "total_external_water_volume_m3_at_stop": 0.6061104547305122
+    },
+    "isothermal_arm": {
+      "first_outlet_water_arrival_s_by_branch": {
+        "lower": 0.5845999999999438,
+        "upper": 0.5914499999999431
+      },
+      "max_abs_branch_volume_balance_residual_m3": 4.413136522884997e-15,
+      "max_abs_volume_balance_residual_m3": 9.992007221626409e-15,
+      "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z",
+      "polytropic_n": 1.0,
+      "stop": {
+        "reason": "tank_intake_crown_reached",
+        "time_s": 0.9697910060343804
+      },
+      "summary_files": {
+        "history.csv": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/history.csv",
+          "sha256": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f"
+        },
+        "summary.json": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/summary.json",
+          "sha256": "b762d73ae9ae78626c3e02a5ea3c64404a738423cb026f1cf5b936c43da472e6"
+        }
+      },
+      "time_step_s": 5e-05,
+      "total_external_water_volume_m3_at_stop": 0.6061104547305166
+    },
+    "limitation": "The n=gamma and n=1 curves are assumptions/sensitivities in the existing reduced model, not measured thermal bounds or validation envelopes.",
+    "model_scope": "current compact 1-tank / 2-branch equivalent line, downstream air, wetted feed through assumed valve plane",
+    "polytropic_exponents": {
+      "gamma_arm": 1.3998145383348455,
+      "isothermal_arm": 1.0
+    },
+    "sampling": "Linear interpolation bracketed by saved model-history rows at each exact CFD checkpoint time; no extrapolation/fitting."
+  },
+  "samples": [
+    {
+      "cfd_checkpoint_time_s": 0.10002116666400004,
+      "cfd_external_water_volume_m3": -2.50893826e-182,
+      "cfd_mean_tank_total_native_seat_alphaPhi0_m3_s": 0.12638439735,
+      "cfd_minus_n1_pressure_probe_mean_Pa": -9436.128178243991,
+      "cfd_minus_n1_seatQ_mean_m3_s": -0.00020240348896771732,
+      "cfd_minus_n_gamma_pressure_probe_mean_Pa": 4805.907946087187,
+      "cfd_minus_n_gamma_seatQ_mean_m3_s": 0.0006443118639162249,
+      "cfd_minus_n_gamma_withdrawal_mean_L": 0.05461041411802903,
+      "cfd_tankA_gas_volume_m3": 0.30797162040838,
+      "cfd_tankA_headspace_probe_T_K": 289.9057601379753,
+      "cfd_tankA_headspace_probe_p_abs_Pa": 1153734.3019548727,
+      "cfd_tankA_native_line_water_volume_m3": 0.260531089,
+      "cfd_tankA_native_seat_alphaPhi0_sum_m3_s": 0.1263842851,
+      "cfd_tankA_seat_p_abs_mean_Pa": 101485.3375,
+      "cfd_tankA_water_volume_m3": 1.34052558,
+      "cfd_tankA_withdrawal_L": 9.474420002135497,
+      "cfd_tankB_gas_volume_m3": 0.30797118832620285,
+      "cfd_tankB_headspace_probe_T_K": 289.90572013797527,
+      "cfd_tankB_headspace_probe_p_abs_Pa": 1153734.301953538,
+      "cfd_tankB_native_line_water_volume_m3": 0.260583516,
+      "cfd_tankB_native_seat_alphaPhi0_sum_m3_s": 0.1263845096,
+      "cfd_tankB_seat_p_abs_mean_Pa": 101485.2935,
+      "cfd_tankB_water_volume_m3": 1.34052558,
+      "cfd_tankB_withdrawal_L": 9.474420000505024,
+      "cfd_time_offset_from_nominal_0p05_grid_s": 2.1166664000038526e-05,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 1163170.4301324494,
+      "ode_n1_external_water_volume_m3": 0.0,
+      "ode_n1_gas_volume_m3": 0.30794854412147504,
+      "ode_n1_outlet_flow_total_m3_s": 0.0,
+      "ode_n1_tank_water_volume_m3": 1.340548656286905,
+      "ode_n1_total_branch_flow_m3_s": 0.12658680083896773,
+      "ode_n1_wet_line_water_volume_m3": 0.262099665322222,
+      "ode_n1_withdrawal_L": 9.451343713095195,
+      "ode_n_gamma_bulk_gas_pressure_abs_Pa": 1148928.3940081182,
+      "ode_n_gamma_external_water_volume_m3": 0.0,
+      "ode_n_gamma_gas_volume_m3": 0.3079170099955821,
+      "ode_n_gamma_outlet_flow_total_m3_s": 0.0,
+      "ode_n_gamma_tank_water_volume_m3": 1.3405801904127979,
+      "ode_n_gamma_total_branch_flow_m3_s": 0.12574008548608379,
+      "ode_n_gamma_wet_line_water_volume_m3": 0.2620681311963283,
+      "ode_n_gamma_withdrawal_L": 9.419809587202232
+    },
+    {
+      "cfd_checkpoint_time_s": 0.1500211666640001,
+      "cfd_external_water_volume_m3": -2.43721285e-131,
+      "cfd_mean_tank_total_native_seat_alphaPhi0_m3_s": 0.265351322,
+      "cfd_minus_n1_pressure_probe_mean_Pa": -17399.55559057463,
+      "cfd_minus_n1_seatQ_mean_m3_s": -0.002589607773078928,
+      "cfd_minus_n_gamma_pressure_probe_mean_Pa": 9663.338689489057,
+      "cfd_minus_n_gamma_seatQ_mean_m3_s": 0.0009181453272102402,
+      "cfd_minus_n_gamma_withdrawal_mean_L": 0.11012440412883251,
+      "cfd_tankA_gas_volume_m3": 0.3176246204083799,
+      "cfd_tankA_headspace_probe_T_K": 286.77393028275935,
+      "cfd_tankA_headspace_probe_p_abs_Pa": 1110273.8038524128,
+      "cfd_tankA_native_line_water_volume_m3": 0.270186541,
+      "cfd_tankA_native_seat_alphaPhi0_sum_m3_s": 0.265351047,
+      "cfd_tankA_seat_p_abs_mean_Pa": 103848.737,
+      "cfd_tankA_water_volume_m3": 1.33087258,
+      "cfd_tankA_withdrawal_L": 19.12742000213541,
+      "cfd_tankB_gas_volume_m3": 0.3176242183262028,
+      "cfd_tankB_headspace_probe_T_K": 286.77379028275936,
+      "cfd_tankB_headspace_probe_p_abs_Pa": 1110273.5038537472,
+      "cfd_tankB_native_line_water_volume_m3": 0.270237973,
+      "cfd_tankB_native_seat_alphaPhi0_sum_m3_s": 0.265351597,
+      "cfd_tankB_seat_p_abs_mean_Pa": 103848.52,
+      "cfd_tankB_water_volume_m3": 1.33087255,
+      "cfd_tankB_withdrawal_L": 19.127450000504975,
+      "cfd_time_offset_from_nominal_0p05_grid_s": 2.1166664000066282e-05,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 1127673.2094436546,
+      "ode_n1_external_water_volume_m3": 0.0,
+      "ode_n1_gas_volume_m3": 0.3176422368141346,
+      "ode_n1_outlet_flow_total_m3_s": 0.0,
+      "ode_n1_tank_water_volume_m3": 1.3308549635942453,
+      "ode_n1_total_branch_flow_m3_s": 0.26794092977307893,
+      "ode_n1_wet_line_water_volume_m3": 0.2717933580148827,
+      "ode_n1_withdrawal_L": 19.145036405754823,
+      "ode_n_gamma_bulk_gas_pressure_abs_Pa": 1100610.315163591,
+      "ode_n_gamma_external_water_volume_m3": 0.0,
+      "ode_n_gamma_gas_volume_m3": 0.3175145110055713,
+      "ode_n_gamma_outlet_flow_total_m3_s": 0.0,
+      "ode_n_gamma_tank_water_volume_m3": 1.3309826894028087,
+      "ode_n_gamma_total_branch_flow_m3_s": 0.26443317667278976,
+      "ode_n_gamma_wet_line_water_volume_m3": 0.2716656322063178,
+      "ode_n_gamma_withdrawal_L": 19.01731059719136
+    },
+    {
+      "cfd_checkpoint_time_s": 0.20002116666400013,
+      "cfd_external_water_volume_m3": -5.21867585e-93,
+      "cfd_mean_tank_total_native_seat_alphaPhi0_m3_s": 0.43268600700000004,
+      "cfd_minus_n1_pressure_probe_mean_Pa": -29171.716538748704,
+      "cfd_minus_n1_seatQ_mean_m3_s": -0.008587984999001763,
+      "cfd_minus_n_gamma_pressure_probe_mean_Pa": 17385.54038689891,
+      "cfd_minus_n_gamma_seatQ_mean_m3_s": 0.0019336921715730204,
+      "cfd_minus_n_gamma_withdrawal_mean_L": 0.1952103982847433,
+      "cfd_tankA_gas_volume_m3": 0.33501721040837995,
+      "cfd_tankA_headspace_probe_T_K": 281.4172904282089,
+      "cfd_tankA_headspace_probe_p_abs_Pa": 1039188.9055390942,
+      "cfd_tankA_native_line_water_volume_m3": 0.287582949,
+      "cfd_tankA_native_seat_alphaPhi0_sum_m3_s": 0.432685426,
+      "cfd_tankA_seat_p_abs_mean_Pa": 107515.1005,
+      "cfd_tankA_water_volume_m3": 1.31347999,
+      "cfd_tankA_withdrawal_L": 36.52001000213545,
+      "cfd_tankB_gas_volume_m3": 0.3350168683262029,
+      "cfd_tankB_headspace_probe_T_K": 281.4169704282089,
+      "cfd_tankB_headspace_probe_p_abs_Pa": 1039188.3055390943,
+      "cfd_tankB_native_line_water_volume_m3": 0.287634422,
+      "cfd_tankB_native_seat_alphaPhi0_sum_m3_s": 0.43268658800000004,
+      "cfd_tankB_seat_p_abs_mean_Pa": 107515.1525,
+      "cfd_tankB_water_volume_m3": 1.3134799,
+      "cfd_tankB_withdrawal_L": 36.520100000505096,
+      "cfd_time_offset_from_nominal_0p05_grid_s": 2.1166664000121793e-05,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 1068360.322077843,
+      "ode_n1_external_water_volume_m3": 0.0,
+      "ode_n1_gas_volume_m3": 0.3352769973425683,
+      "ode_n1_outlet_flow_total_m3_s": 0.0,
+      "ode_n1_tank_water_volume_m3": 1.3132202030658118,
+      "ode_n1_total_branch_flow_m3_s": 0.4412739919990018,
+      "ode_n1_wet_line_water_volume_m3": 0.2894281185433156,
+      "ode_n1_withdrawal_L": 36.77979693418831,
+      "ode_n_gamma_bulk_gas_pressure_abs_Pa": 1021803.0651521953,
+      "ode_n_gamma_external_water_volume_m3": 0.0,
+      "ode_n_gamma_gas_volume_m3": 0.33482204501141544,
+      "ode_n_gamma_outlet_flow_total_m3_s": 0.0,
+      "ode_n_gamma_tank_water_volume_m3": 1.3136751553969646,
+      "ode_n_gamma_total_branch_flow_m3_s": 0.430752314828427,
+      "ode_n_gamma_wet_line_water_volume_m3": 0.2889731662121594,
+      "ode_n_gamma_withdrawal_L": 36.32484460303553
+    },
+    {
+      "cfd_checkpoint_time_s": 0.25002116666400015,
+      "cfd_external_water_volume_m3": -4.44300492e-67,
+      "cfd_mean_tank_total_native_seat_alphaPhi0_m3_s": 0.6088028189999999,
+      "cfd_minus_n1_pressure_probe_mean_Pa": -42566.78618670313,
+      "cfd_minus_n1_seatQ_mean_m3_s": -0.019497865620872634,
+      "cfd_minus_n_gamma_pressure_probe_mean_Pa": 26280.082475503325,
+      "cfd_minus_n_gamma_seatQ_mean_m3_s": 0.004602368069534513,
+      "cfd_minus_n_gamma_withdrawal_mean_L": 0.37148045544476815,
+      "cfd_tankA_gas_volume_m3": 0.36107832040838006,
+      "cfd_tankA_headspace_probe_T_K": 274.0367105488387,
+      "cfd_tankA_headspace_probe_p_abs_Pa": 946934.9666294323,
+      "cfd_tankA_native_line_water_volume_m3": 0.313647045,
+      "cfd_tankA_native_seat_alphaPhi0_sum_m3_s": 0.6088022719999999,
+      "cfd_tankA_seat_p_abs_mean_Pa": 113133.6885,
+      "cfd_tankA_water_volume_m3": 1.28741888,
+      "cfd_tankA_withdrawal_L": 62.58112000213556,
+      "cfd_tankB_gas_volume_m3": 0.3610780383262029,
+      "cfd_tankB_headspace_probe_T_K": 274.0361205489721,
+      "cfd_tankB_headspace_probe_p_abs_Pa": 946933.8866294323,
+      "cfd_tankB_native_line_water_volume_m3": 0.313696498,
+      "cfd_tankB_native_seat_alphaPhi0_sum_m3_s": 0.608803366,
+      "cfd_tankB_seat_p_abs_mean_Pa": 113131.889,
+      "cfd_tankB_water_volume_m3": 1.28741873,
+      "cfd_tankB_withdrawal_L": 62.581270000505064,
+      "cfd_time_offset_from_nominal_0p05_grid_s": 2.116666400014955e-05,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 989501.2128161354,
+      "ode_n1_external_water_volume_m3": 0.0,
+      "ode_n1_gas_volume_m3": 0.36199717242047513,
+      "ode_n1_outlet_flow_total_m3_s": 0.0,
+      "ode_n1_tank_water_volume_m3": 1.2865000279879049,
+      "ode_n1_total_branch_flow_m3_s": 0.6283006846208725,
+      "ode_n1_wet_line_water_volume_m3": 0.3161482936212186,
+      "ode_n1_withdrawal_L": 63.49997201209523,
+      "ode_n_gamma_bulk_gas_pressure_abs_Pa": 920654.3441539289,
+      "ode_n_gamma_external_water_volume_m3": 0.0,
+      "ode_n_gamma_gas_volume_m3": 0.3607069149542555,
+      "ode_n_gamma_outlet_flow_total_m3_s": 0.0,
+      "ode_n_gamma_tank_water_volume_m3": 1.2877902854541246,
+      "ode_n_gamma_total_branch_flow_m3_s": 0.6042004509304654,
+      "ode_n_gamma_wet_line_water_volume_m3": 0.31485803615499725,
+      "ode_n_gamma_withdrawal_L": 62.20971454587554
+    }
+  ],
+  "schema": "i4f-flush-early-cfd-reduced-model-comparison/v1",
+  "source_files": {
+    "cfd/checkpoints/0.100021166664-uniform-time": {
+      "bytes": 1061,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.100021166664-uniform-time",
+      "snapshot_sha256": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/processors10/0.100021166664/uniform/time",
+      "source_sha256_at_capture": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f"
+    },
+    "cfd/checkpoints/0.150021166664-uniform-time": {
+      "bytes": 1061,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.150021166664-uniform-time",
+      "snapshot_sha256": "9f3b1a92f2ff624477b934ef726167d03826fc083850e7982b198036ca4e5261",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/processors10/0.150021166664/uniform/time",
+      "source_sha256_at_capture": "9f3b1a92f2ff624477b934ef726167d03826fc083850e7982b198036ca4e5261"
+    },
+    "cfd/checkpoints/0.200021166664-uniform-time": {
+      "bytes": 1061,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.200021166664-uniform-time",
+      "snapshot_sha256": "ae3c057211b72becf39a534ff758ede1924d23bbde931400eb22bb54db88c514",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/processors10/0.200021166664/uniform/time",
+      "source_sha256_at_capture": "ae3c057211b72becf39a534ff758ede1924d23bbde931400eb22bb54db88c514"
+    },
+    "cfd/checkpoints/0.250021166664-uniform-time": {
+      "bytes": 1061,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.250021166664-uniform-time",
+      "snapshot_sha256": "c7b5d409bb2b24ea4a7cd81b3b7cb48424eb04919e164ea7c560533f21488b96",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/processors10/0.250021166664/uniform/time",
+      "source_sha256_at_capture": "c7b5d409bb2b24ea4a7cd81b3b7cb48424eb04919e164ea7c560533f21488b96"
+    },
+    "cfd/continuation-seed.json": {
+      "bytes": 4778,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/continuation-seed.json",
+      "snapshot_sha256": "b5d99d8c5a003cf99ee211b9000255b74e6cf171d60ea974673745bf9b2e0780",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/continuation-seed.json",
+      "source_sha256_at_capture": "b5d99d8c5a003cf99ee211b9000255b74e6cf171d60ea974673745bf9b2e0780"
+    },
+    "cfd/dictionaries/controlDict": {
+      "bytes": 746,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/dictionaries/controlDict",
+      "snapshot_sha256": "638906fc815a5aa06c5e6fc0b4d2d005a5e8f275999282b980d49798abf5329a",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/controlDict",
+      "source_sha256_at_capture": "638906fc815a5aa06c5e6fc0b4d2d005a5e8f275999282b980d49798abf5329a"
+    },
+    "cfd/dictionaries/fvOptions": {
+      "bytes": 1889,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/dictionaries/fvOptions",
+      "snapshot_sha256": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/constant/fvOptions",
+      "source_sha256_at_capture": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0"
+    },
+    "cfd/dictionaries/i4fNumericalHealthObjects": {
+      "bytes": 1827,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/dictionaries/i4fNumericalHealthObjects",
+      "snapshot_sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/i4fNumericalHealthObjects",
+      "source_sha256_at_capture": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f"
+    },
+    "cfd/dictionaries/twoTankLedgerObjects": {
+      "bytes": 2841,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/dictionaries/twoTankLedgerObjects",
+      "snapshot_sha256": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/twoTankLedgerObjects",
+      "source_sha256_at_capture": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf"
+    },
+    "cfd/dictionaries/valveBandFluxObjects": {
+      "bytes": 4255,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/dictionaries/valveBandFluxObjects",
+      "snapshot_sha256": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/valveBandFluxObjects",
+      "source_sha256_at_capture": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d"
+    },
+    "cfd/experiment.json": {
+      "bytes": 9131,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/experiment.json",
+      "snapshot_sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/experiment.json",
+      "source_sha256_at_capture": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446"
+    },
+    "cfd/guardian-status.json": {
+      "bytes": 13210,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/guardian-status.json",
+      "snapshot_sha256": "faf4765007f337cd0e0d74e97156f7c56f53556c5c1da1421f269c2cac501090",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/guardian-status.json",
+      "source_sha256_at_capture": "faf4765007f337cd0e0d74e97156f7c56f53556c5c1da1421f269c2cac501090"
+    },
+    "cfd/launch-manifest.json": {
+      "bytes": 9391,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/launch-manifest.json",
+      "snapshot_sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/launch-manifest.json",
+      "source_sha256_at_capture": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588"
+    },
+    "cfd/native-initialization-dryline.json": {
+      "bytes": 3390,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/native-initialization-dryline.json",
+      "snapshot_sha256": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+      "source_path": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/native-initialization-dryline.json",
+      "source_sha256_at_capture": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891"
+    },
+    "cfd/run-source-lock.json": {
+      "bytes": 3590,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/run-source-lock.json",
+      "snapshot_sha256": "94ec657c9d5d8dce3fff89be31a2493fc4998e7903b4f24bf52adb58ca9653e1",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/provenance/run-source-lock.json",
+      "source_sha256_at_capture": "94ec657c9d5d8dce3fff89be31a2493fc4998e7903b4f24bf52adb58ca9653e1"
+    },
+    "cfd/scalars/external_water.dat": {
+      "bytes": 34798,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/external_water.dat",
+      "snapshot_sha256": "bf645067a8aa0d29a77dbe2affbcb2adea080afe45828324d3d446ceb4644291",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+      "source_sha256_at_capture": "bf645067a8aa0d29a77dbe2affbcb2adea080afe45828324d3d446ceb4644291"
+    },
+    "cfd/scalars/lineA.dat": {
+      "bytes": 33328,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/lineA.dat",
+      "snapshot_sha256": "f9a6162cdd91709e26abf87bcc91090ad531ae262d1837496d4ab2eb5aa8b308",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+      "source_sha256_at_capture": "f9a6162cdd91709e26abf87bcc91090ad531ae262d1837496d4ab2eb5aa8b308"
+    },
+    "cfd/scalars/lineB.dat": {
+      "bytes": 33328,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/lineB.dat",
+      "snapshot_sha256": "68186e20801a36380c12ae4c3eab5da6991a91708fbed8f24e1ece8e7103ca3f",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+      "source_sha256_at_capture": "68186e20801a36380c12ae4c3eab5da6991a91708fbed8f24e1ece8e7103ca3f"
+    },
+    "cfd/scalars/probe_T.dat": {
+      "bytes": 49877,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/probe_T.dat",
+      "snapshot_sha256": "f6a9c87dce272a453b02f55016999e293222ee46441b888a16e60487089a8dfb",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/T",
+      "source_sha256_at_capture": "f6a9c87dce272a453b02f55016999e293222ee46441b888a16e60487089a8dfb"
+    },
+    "cfd/scalars/probe_p.dat": {
+      "bytes": 49877,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/probe_p.dat",
+      "snapshot_sha256": "82e61e679ef999f7eeb150ebb8f9ff74f1f28f1e209e5d798bf5ea4b61850c80",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/p",
+      "source_sha256_at_capture": "82e61e679ef999f7eeb150ebb8f9ff74f1f28f1e209e5d798bf5ea4b61850c80"
+    },
+    "cfd/scalars/seatFlux_A1.dat": {
+      "bytes": 48907,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatFlux_A1.dat",
+      "snapshot_sha256": "754fd4c5a4e533e86b1a95555b1b011f9b673a76040a216cd28e3d9411f7086d",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxA1/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "754fd4c5a4e533e86b1a95555b1b011f9b673a76040a216cd28e3d9411f7086d"
+    },
+    "cfd/scalars/seatFlux_A2.dat": {
+      "bytes": 48907,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatFlux_A2.dat",
+      "snapshot_sha256": "031e08e0b2cda29ce3b2dc97d1166ef79e92fbdfccf04dce6dc9a29cf808eecc",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxA2/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "031e08e0b2cda29ce3b2dc97d1166ef79e92fbdfccf04dce6dc9a29cf808eecc"
+    },
+    "cfd/scalars/seatFlux_B1.dat": {
+      "bytes": 48907,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatFlux_B1.dat",
+      "snapshot_sha256": "7aee67efa69612f915c5715440d609c114da9891c0367c26fe112a686602f407",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxB1/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "7aee67efa69612f915c5715440d609c114da9891c0367c26fe112a686602f407"
+    },
+    "cfd/scalars/seatFlux_B2.dat": {
+      "bytes": 48907,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatFlux_B2.dat",
+      "snapshot_sha256": "28bdc19efe4a49dcf74fcdff841a5959c83c790155a840fd28d5159410aa5fd5",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxB2/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "28bdc19efe4a49dcf74fcdff841a5959c83c790155a840fd28d5159410aa5fd5"
+    },
+    "cfd/scalars/seatPressure_A1.dat": {
+      "bytes": 64475,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatPressure_A1.dat",
+      "snapshot_sha256": "4eaf283a1b6f47728f5c717f7d07b081ff9c5745ac20d7ddde4730ab27aabbdb",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatPressureA1/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "4eaf283a1b6f47728f5c717f7d07b081ff9c5745ac20d7ddde4730ab27aabbdb"
+    },
+    "cfd/scalars/seatPressure_A2.dat": {
+      "bytes": 64475,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatPressure_A2.dat",
+      "snapshot_sha256": "68538b052a69e2452ca6c7594f47520f95af5a243d1c8050fc2403cd2587e97a",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatPressureA2/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "68538b052a69e2452ca6c7594f47520f95af5a243d1c8050fc2403cd2587e97a"
+    },
+    "cfd/scalars/seatPressure_B1.dat": {
+      "bytes": 64475,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatPressure_B1.dat",
+      "snapshot_sha256": "0cfe5e0a212ff202ab8f199cb35670a42b14b09d2e17b96b657c82cff2d200a5",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatPressureB1/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "0cfe5e0a212ff202ab8f199cb35670a42b14b09d2e17b96b657c82cff2d200a5"
+    },
+    "cfd/scalars/seatPressure_B2.dat": {
+      "bytes": 64475,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/seatPressure_B2.dat",
+      "snapshot_sha256": "3299a1d99dea4cf8b9cd76a2db4706ff2e01458019a86855bcb1f091765e2404",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatPressureB2/0.050021166664/surfaceFieldValue.dat",
+      "source_sha256_at_capture": "3299a1d99dea4cf8b9cd76a2db4706ff2e01458019a86855bcb1f091765e2404"
+    },
+    "cfd/scalars/tankA.dat": {
+      "bytes": 33321,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/tankA.dat",
+      "snapshot_sha256": "8d19841c5d7ea380559a409558fbc8cee7d63ed70f4898e17d6b3b5d2d568a7f",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+      "source_sha256_at_capture": "8d19841c5d7ea380559a409558fbc8cee7d63ed70f4898e17d6b3b5d2d568a7f"
+    },
+    "cfd/scalars/tankB.dat": {
+      "bytes": 33321,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/scalars/tankB.dat",
+      "snapshot_sha256": "4858be90dcf965f5a217623caa8a731d25a00f511a516681d8742a3aa4932680",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+      "source_sha256_at_capture": "4858be90dcf965f5a217623caa8a731d25a00f511a516681d8742a3aa4932680"
+    },
+    "model/comparison.json": {
+      "bytes": 46716,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/comparison.json",
+      "snapshot_sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+      "source_path": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z/comparison.json",
+      "source_sha256_at_capture": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab"
+    },
+    "model/n1_isothermal-history.csv": {
+      "bytes": 11039854,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/n1_isothermal-history.csv",
+      "snapshot_sha256": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f",
+      "source_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/history.csv",
+      "source_sha256_at_capture": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f"
+    },
+    "model/n1_isothermal-summary.json": {
+      "bytes": 26265,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/n1_isothermal-summary.json",
+      "snapshot_sha256": "b762d73ae9ae78626c3e02a5ea3c64404a738423cb026f1cf5b936c43da472e6",
+      "source_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/summary.json",
+      "source_sha256_at_capture": "b762d73ae9ae78626c3e02a5ea3c64404a738423cb026f1cf5b936c43da472e6"
+    },
+    "model/n_gamma-history.csv": {
+      "bytes": 13069324,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/n_gamma-history.csv",
+      "snapshot_sha256": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e",
+      "source_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/history.csv",
+      "source_sha256_at_capture": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e"
+    },
+    "model/n_gamma-summary.json": {
+      "bytes": 26272,
+      "snapshot_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/n_gamma-summary.json",
+      "snapshot_sha256": "8827aa49e201459823e8be4ea8fa5c297aaf9e1db87b74cab8a5881100429f16",
+      "source_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/summary.json",
+      "source_sha256_at_capture": "8827aa49e201459823e8be4ea8fa5c297aaf9e1db87b74cab8a5881100429f16"
+    }
+  },
+  "time_alignment": [
+    {
+      "cfd_checkpoint": {
+        "all_native14_fields_present": true,
+        "directory": "0.100021166664",
+        "field_count": 14,
+        "time_s": 0.10002116666400004,
+        "uniform_time_snapshot": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.100021166664-uniform-time"
+      },
+      "model_time_brackets": {
+        "n1_isothermal": {
+          "max_abs_offset_s": 2.8833335997097143e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.09999999999999715,
+          "t1_s": 0.10004999999999714
+        },
+        "n_gamma": {
+          "max_abs_offset_s": 2.8833335997097143e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.09999999999999715,
+          "t1_s": 0.10004999999999714
+        }
+      },
+      "native_face_zone_brackets": {
+        "A1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          }
+        },
+        "A2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          }
+        },
+        "B1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          }
+        },
+        "B2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 4.163336342344337e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.100021166664,
+            "t1_s": 0.100021166664
+          }
+        }
+      },
+      "series_time_brackets": {
+        "external_water": {
+          "max_abs_offset_s": 4.163336342344337e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.100021166664,
+          "t1_s": 0.100021166664
+        },
+        "lineA": {
+          "max_abs_offset_s": 4.163336342344337e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.100021166664,
+          "t1_s": 0.100021166664
+        },
+        "lineB": {
+          "max_abs_offset_s": 4.163336342344337e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.100021166664,
+          "t1_s": 0.100021166664
+        },
+        "probe_T_A": {
+          "max_abs_offset_s": 0.00024999966400005014,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.099771167,
+          "t1_s": 0.10002117
+        },
+        "probe_T_B": {
+          "max_abs_offset_s": 0.00024999966400005014,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.099771167,
+          "t1_s": 0.10002117
+        },
+        "probe_p_A": {
+          "max_abs_offset_s": 0.00024999966400005014,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.099771167,
+          "t1_s": 0.10002117
+        },
+        "probe_p_B": {
+          "max_abs_offset_s": 0.00024999966400005014,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.099771167,
+          "t1_s": 0.10002117
+        },
+        "tankA": {
+          "max_abs_offset_s": 4.163336342344337e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.100021166664,
+          "t1_s": 0.100021166664
+        },
+        "tankB": {
+          "max_abs_offset_s": 4.163336342344337e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.100021166664,
+          "t1_s": 0.100021166664
+        }
+      }
+    },
+    {
+      "cfd_checkpoint": {
+        "all_native14_fields_present": true,
+        "directory": "0.150021166664",
+        "field_count": 14,
+        "time_s": 0.1500211666640001,
+        "uniform_time_snapshot": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.150021166664-uniform-time"
+      },
+      "model_time_brackets": {
+        "n1_isothermal": {
+          "max_abs_offset_s": 2.8833335991546027e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.14999999999999164,
+          "t1_s": 0.15004999999999163
+        },
+        "n_gamma": {
+          "max_abs_offset_s": 2.8833335991546027e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.14999999999999164,
+          "t1_s": 0.15004999999999163
+        }
+      },
+      "native_face_zone_brackets": {
+        "A1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          }
+        },
+        "A2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          }
+        },
+        "B1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          }
+        },
+        "B2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 8.326672684688674e-17,
+            "method": "exact_saved_sample",
+            "t0_s": 0.150021166664,
+            "t1_s": 0.150021166664
+          }
+        }
+      },
+      "series_time_brackets": {
+        "external_water": {
+          "max_abs_offset_s": 8.326672684688674e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.150021166664,
+          "t1_s": 0.150021166664
+        },
+        "lineA": {
+          "max_abs_offset_s": 8.326672684688674e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.150021166664,
+          "t1_s": 0.150021166664
+        },
+        "lineB": {
+          "max_abs_offset_s": 8.326672684688674e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.150021166664,
+          "t1_s": 0.150021166664
+        },
+        "probe_T_A": {
+          "max_abs_offset_s": 0.00024999666400007947,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.14977117,
+          "t1_s": 0.15002117
+        },
+        "probe_T_B": {
+          "max_abs_offset_s": 0.00024999666400007947,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.14977117,
+          "t1_s": 0.15002117
+        },
+        "probe_p_A": {
+          "max_abs_offset_s": 0.00024999666400007947,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.14977117,
+          "t1_s": 0.15002117
+        },
+        "probe_p_B": {
+          "max_abs_offset_s": 0.00024999666400007947,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.14977117,
+          "t1_s": 0.15002117
+        },
+        "tankA": {
+          "max_abs_offset_s": 8.326672684688674e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.150021166664,
+          "t1_s": 0.150021166664
+        },
+        "tankB": {
+          "max_abs_offset_s": 8.326672684688674e-17,
+          "method": "exact_saved_sample",
+          "t0_s": 0.150021166664,
+          "t1_s": 0.150021166664
+        }
+      }
+    },
+    {
+      "cfd_checkpoint": {
+        "all_native14_fields_present": true,
+        "directory": "0.200021166664",
+        "field_count": 14,
+        "time_s": 0.20002116666400013,
+        "uniform_time_snapshot": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.200021166664-uniform-time"
+      },
+      "model_time_brackets": {
+        "n1_isothermal": {
+          "max_abs_offset_s": 2.8833335985994912e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.19999999999998613,
+          "t1_s": 0.20004999999998613
+        },
+        "n_gamma": {
+          "max_abs_offset_s": 2.8833335985994912e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.19999999999998613,
+          "t1_s": 0.20004999999998613
+        }
+      },
+      "native_face_zone_brackets": {
+        "A1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          }
+        },
+        "A2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          }
+        },
+        "B1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          }
+        },
+        "B2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.3877787807814457e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.200021166664,
+            "t1_s": 0.200021166664
+          }
+        }
+      },
+      "series_time_brackets": {
+        "external_water": {
+          "max_abs_offset_s": 1.3877787807814457e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.200021166664,
+          "t1_s": 0.200021166664
+        },
+        "lineA": {
+          "max_abs_offset_s": 1.3877787807814457e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.200021166664,
+          "t1_s": 0.200021166664
+        },
+        "lineB": {
+          "max_abs_offset_s": 1.3877787807814457e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.200021166664,
+          "t1_s": 0.200021166664
+        },
+        "probe_T_A": {
+          "max_abs_offset_s": 0.000249996664000135,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.19977117,
+          "t1_s": 0.20002117
+        },
+        "probe_T_B": {
+          "max_abs_offset_s": 0.000249996664000135,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.19977117,
+          "t1_s": 0.20002117
+        },
+        "probe_p_A": {
+          "max_abs_offset_s": 0.000249996664000135,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.19977117,
+          "t1_s": 0.20002117
+        },
+        "probe_p_B": {
+          "max_abs_offset_s": 0.000249996664000135,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.19977117,
+          "t1_s": 0.20002117
+        },
+        "tankA": {
+          "max_abs_offset_s": 1.3877787807814457e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.200021166664,
+          "t1_s": 0.200021166664
+        },
+        "tankB": {
+          "max_abs_offset_s": 1.3877787807814457e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.200021166664,
+          "t1_s": 0.200021166664
+        }
+      }
+    },
+    {
+      "cfd_checkpoint": {
+        "all_native14_fields_present": true,
+        "directory": "0.250021166664",
+        "field_count": 14,
+        "time_s": 0.25002116666400015,
+        "uniform_time_snapshot": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/cfd/checkpoints/0.250021166664-uniform-time"
+      },
+      "model_time_brackets": {
+        "n1_isothermal": {
+          "max_abs_offset_s": 2.8833335980471553e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.24999999999998063,
+          "t1_s": 0.2500499999999806
+        },
+        "n_gamma": {
+          "max_abs_offset_s": 2.8833335980471553e-05,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.24999999999998063,
+          "t1_s": 0.2500499999999806
+        }
+      },
+      "native_face_zone_brackets": {
+        "A1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          }
+        },
+        "A2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          }
+        },
+        "B1": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          }
+        },
+        "B2": {
+          "alphaPhi0_water_flux": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          },
+          "area_mean_pressure": {
+            "max_abs_offset_s": 1.6653345369377348e-16,
+            "method": "exact_saved_sample",
+            "t0_s": 0.250021166664,
+            "t1_s": 0.250021166664
+          }
+        }
+      },
+      "series_time_brackets": {
+        "external_water": {
+          "max_abs_offset_s": 1.6653345369377348e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.250021166664,
+          "t1_s": 0.250021166664
+        },
+        "lineA": {
+          "max_abs_offset_s": 1.6653345369377348e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.250021166664,
+          "t1_s": 0.250021166664
+        },
+        "lineB": {
+          "max_abs_offset_s": 1.6653345369377348e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.250021166664,
+          "t1_s": 0.250021166664
+        },
+        "probe_T_A": {
+          "max_abs_offset_s": 0.00024999666400016274,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.24977117,
+          "t1_s": 0.25002117
+        },
+        "probe_T_B": {
+          "max_abs_offset_s": 0.00024999666400016274,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.24977117,
+          "t1_s": 0.25002117
+        },
+        "probe_p_A": {
+          "max_abs_offset_s": 0.00024999666400016274,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.24977117,
+          "t1_s": 0.25002117
+        },
+        "probe_p_B": {
+          "max_abs_offset_s": 0.00024999666400016274,
+          "method": "linear_time_interpolation_bracketed_no_extrapolation",
+          "t0_s": 0.24977117,
+          "t1_s": 0.25002117
+        },
+        "tankA": {
+          "max_abs_offset_s": 1.6653345369377348e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.250021166664,
+          "t1_s": 0.250021166664
+        },
+        "tankB": {
+          "max_abs_offset_s": 1.6653345369377348e-16,
+          "method": "exact_saved_sample",
+          "t0_s": 0.250021166664,
+          "t1_s": 0.250021166664
+        }
+      }
+    }
+  ]
+}

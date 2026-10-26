@@ -1,0 +1,743 @@
+{
+  "evidence_scope": "Matched one-step predictor-on replay. Additional read-only FV matrix diagnostics resolve the prior selected-cell temperature-remainder; all original solver inputs and equations were unchanged.",
+  "input_match": {
+    "parent_case_static_tree_sha256": "409f570e56918b4931b5bacc1dc98ada6743818d42c95380b056be0958664a3b",
+    "replay_case_static_tree_sha256": "409f570e56918b4931b5bacc1dc98ada6743818d42c95380b056be0958664a3b",
+    "same_frozen_inputs": true
+  },
+  "interpretation": {
+    "rank0_numbers": {
+      "diffusion_equivalent_K": 72.9228370486624,
+      "diffusion_residual_kgK_s": 12.847913684373475,
+      "full_residual_kgK_s": 1.2970081568225596e-06,
+      "non_diffusion_residual_kgK_s": -12.84791238736532,
+      "prior_source_only_remainder_K": 72.92282968703802
+    },
+    "rank5_numbers": {
+      "diffusion_equivalent_K": 72.92400403653366,
+      "diffusion_residual_kgK_s": 12.84093341705429,
+      "full_residual_kgK_s": 1.296299309672122e-06,
+      "non_diffusion_residual_kgK_s": -12.84093212075498,
+      "prior_source_only_remainder_K": 72.92399667481521
+    },
+    "resolved_remainder": "At both selected initially pure-air cells in the first PIMPLE outer loop, the exact same-scheme implicit -laplacian residual at solved T is positive and balances the non-diffusion residual while the full TEqn residual is near zero. Dividing the local diffusion residual by (full FV D minus diffusion FV D) gives +72.922837 K and +72.924004 K, agreeing with the earlier source-only remainder +72.922830 K and +72.923997 K within 7.4e-6 K.",
+    "scope_limits": "This is a local FV matrix residual and diagonal-equivalent for two cells, one mesh, one first step and first PIMPLE outer loop. It closes the local matrix residual but is not a global energy conservation or validation result."
+  },
+  "metadata_units_correction": {
+    "corrected_interpretation": {
+      "basis": "The assembled TEqn begins with fvm::ddt(rho,T); in OpenFOAM FV matrices the cell-volume integral is represented in the matrix coefficients and source. Pinned OpenFOAM 2512 source shows fvMatrix::residual initializes from source and subtracts the diagonal product, then applies the LDU off-diagonal/interface contributions.",
+      "matrix_D": "kg/s per cell (the finite-volume matrix coefficient includes the cell volume)",
+      "matrix_residual": "kg*K/s per cell; `fvMatrix::residual()` is source - A*psi, including off-diagonal and coupled-interface terms",
+      "matrix_source": "kg*K/s per cell"
+    },
+    "created_utc": "2026-10-26T21:22:53.164027+00:00",
+    "frozen_experiment_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/experiment.json",
+    "frozen_experiment_sha256_at_GO": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c",
+    "frozen_experiment_sha256_current": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c",
+    "frozen_metadata_statement": "residual_units was written as kg*K/(m^3*s), and D as kg/(m^3*s).",
+    "pinned_source_excerpt_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/openfoam-matrix-api-source.txt",
+    "pinned_source_excerpt_sha256": "37babda3552b785d6353d6f2b154606fba05ca525a91a8519d14b7bafdc937f0",
+    "pinned_source_file_hash_lines": [
+      "9065053a1bde494de9c9d0f6959767c84eadce709c81c5673dbb46b676c557f3  /usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvMatrix/fvMatrixSolve.C",
+      "12b6c9dc4619844395278631903d374e1887203c94c59082dbaae0e7f037f129  /usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvMatrix/fvMatrix.H",
+      "e2f1fb9de03bfbd7454ae5d98f1bdf91a105465d98aabfb10809ef13efbbfcae  /usr/lib/openfoam/openfoam2512/src/OpenFOAM/matrices/lduMatrix/lduMatrix/lduMatrixATmul.C"
+    ],
+    "pinned_source_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "purpose": "Correct metadata interpretation only; retains frozen experiment bytes and does not change solver, dictionaries, or case fields.",
+    "schema": "i4f-fv-matrix-units-interpretation-correction/v1",
+    "solver_inputs_or_equations_changed_after_GO": false
+  },
+  "observer_passivity_vs_prior_predictor_on": {
+    "all_fields_byte_identical": true,
+    "fields": [
+      {
+        "byte_identical": true,
+        "bytes": 1209719,
+        "field": "alpha.water",
+        "parent_sha256": "99df66dc5e7194c8b95eedfd67f405b2d5460cac6facc1dcdac0cc27db4ce3d7",
+        "present_in_both": true,
+        "replay_sha256": "99df66dc5e7194c8b95eedfd67f405b2d5460cac6facc1dcdac0cc27db4ce3d7"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3198616,
+        "field": "p",
+        "parent_sha256": "b59545369df4af59c50da135455971ad9fdd70fe191da1f01624095ab2728db7",
+        "present_in_both": true,
+        "replay_sha256": "b59545369df4af59c50da135455971ad9fdd70fe191da1f01624095ab2728db7"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3796231,
+        "field": "p_rgh",
+        "parent_sha256": "73866916f2336e480ee7588abbcd4f68c85369f132668402718c5684f35f669d",
+        "present_in_both": true,
+        "replay_sha256": "73866916f2336e480ee7588abbcd4f68c85369f132668402718c5684f35f669d"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 2659079,
+        "field": "T",
+        "parent_sha256": "9f3567aa4bfd788f7af21b49a61db50bbda9b66a10e18fe29aaa5faa406e45e7",
+        "present_in_both": true,
+        "replay_sha256": "9f3567aa4bfd788f7af21b49a61db50bbda9b66a10e18fe29aaa5faa406e45e7"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 7938887,
+        "field": "U",
+        "parent_sha256": "907bef09df5a2d7a4ffa8353ac4655a104d8178c8fd0f7efd3e136b3f03c2b56",
+        "present_in_both": true,
+        "replay_sha256": "907bef09df5a2d7a4ffa8353ac4655a104d8178c8fd0f7efd3e136b3f03c2b56"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3207007,
+        "field": "k",
+        "parent_sha256": "fbafc6ce246853411420bbcfb3d1a3621e5418232e1b3ffaf7f979b055ee054c",
+        "present_in_both": true,
+        "replay_sha256": "fbafc6ce246853411420bbcfb3d1a3621e5418232e1b3ffaf7f979b055ee054c"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3208879,
+        "field": "omega",
+        "parent_sha256": "bfad73dfd8aa8c32eaa0cbfb990fa772c1a49be16bc8c430bcac760122d28a63",
+        "present_in_both": true,
+        "replay_sha256": "bfad73dfd8aa8c32eaa0cbfb990fa772c1a49be16bc8c430bcac760122d28a63"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3206658,
+        "field": "nut",
+        "parent_sha256": "4689b1d65174d55e3a2ea09d0325474a045674e3a5eeebb174cec1ed4d4800d6",
+        "present_in_both": true,
+        "replay_sha256": "4689b1d65174d55e3a2ea09d0325474a045674e3a5eeebb174cec1ed4d4800d6"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3207520,
+        "field": "alphat",
+        "parent_sha256": "8d921a876dc3e3712e2e69a8bbe827d090b799267ede12a7e4d387470820626c",
+        "present_in_both": true,
+        "replay_sha256": "8d921a876dc3e3712e2e69a8bbe827d090b799267ede12a7e4d387470820626c"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3198634,
+        "field": "rho",
+        "parent_sha256": "678277b64f9d0d6806f932a17f972d2434f580bc0dad766a02d17d3fa468487f",
+        "present_in_both": true,
+        "replay_sha256": "678277b64f9d0d6806f932a17f972d2434f580bc0dad766a02d17d3fa468487f"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 7726570,
+        "field": "phi",
+        "parent_sha256": "e13e61f5c536c1c2f4c6bc463939af5c6aa29fed1f2dbafd532b85bbf7f66267",
+        "present_in_both": true,
+        "replay_sha256": "e13e61f5c536c1c2f4c6bc463939af5c6aa29fed1f2dbafd532b85bbf7f66267"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3730384,
+        "field": "alphaPhi0.water",
+        "parent_sha256": "94c651e30ef545c4fa77c925c3ab18259f7d72d6a4dc93e2a13a3b578377a57b",
+        "present_in_both": true,
+        "replay_sha256": "94c651e30ef545c4fa77c925c3ab18259f7d72d6a4dc93e2a13a3b578377a57b"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 2562869,
+        "field": "T.air",
+        "parent_sha256": "72355265412ed4728975165a546dd33c8eaff71bf01720057f269ebb7126db8e",
+        "present_in_both": true,
+        "replay_sha256": "72355265412ed4728975165a546dd33c8eaff71bf01720057f269ebb7126db8e"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 2562873,
+        "field": "T.water",
+        "parent_sha256": "ff77696ece81bbe034a8d91a3af922e75f0adc048856fd6573a5305ce019265a",
+        "present_in_both": true,
+        "replay_sha256": "ff77696ece81bbe034a8d91a3af922e75f0adc048856fd6573a5305ce019265a"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 1538012,
+        "field": "dgdt",
+        "parent_sha256": "d2649269f2c44778537d385903349de7919e4ef9ac1c0d1b7fca9afae54e681e",
+        "present_in_both": true,
+        "replay_sha256": "d2649269f2c44778537d385903349de7919e4ef9ac1c0d1b7fca9afae54e681e"
+      }
+    ],
+    "interpretation": "The extra FV matrix/residual observer is passive for this matched one-step input if all hashes are identical; this is a one-case result.",
+    "parent_container_id": "ad8d58ebea082f856a9825cafbd854b22b2c26c82d08da794b6a53b6098d7c4e",
+    "uniform_time_byte_identical": true
+  },
+  "operator_source": {
+    "OpenFOAM": "v2512",
+    "diffusion_operator": "The diagnostic matrix is the exact same-scheme -fvm::laplacian(turbulence.alphaEff(), T) term, assembled separately after full TEqn assembly and before solve. It remains referenced to the solved T field.",
+    "equation_snapshot": "Original TEqn D/source/residual captured before relaxation, after relaxation, after fvOptions constrain/before solve, immediately after solve, after fvOptions.correct, and after thermo correction. All FV residual calls occur on every MPI rank in identical order; only selected local rows are written.",
+    "explicit_fvSolution_relaxationFactors_dictionary_present": false,
+    "fvSolution_sha256": "a5883d8e7b4520f6f2ee9572dbe614a557914e3d8e5016b0f65fa0be5b092f51",
+    "matrix_dimensions": {
+      "D": "kg/s per local cell (finite-volume integrated coefficient; fvMatrix::D including average boundary diagonal)",
+      "residual": "kg*K/s per local cell, including off-diagonal and coupled-interface terms",
+      "source": "kg*K/s per local cell (volume-integrated source)"
+    },
+    "residual_convention": "fvMatrix::residual is source minus A*psi; confirmed in pinned image source implementation.",
+    "source_excerpt_path": "provenance/openfoam-matrix-api-source.txt",
+    "source_excerpt_sha256": "37babda3552b785d6353d6f2b154606fba05ca525a91a8519d14b7bafdc937f0"
+  },
+  "private_run_bundle": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z",
+  "public_artifacts": {
+    "local_budget_csv": {
+      "bytes": 976,
+      "path": "results/summaries/i4f_20261025/firststep-energy/firststep-temperature-matrix-budget.csv",
+      "sha256": "4329b31fa03d8e9dd46deb5aa34a0c1a5e43e743d9a036d32d5d14fbe0868b8d",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/analysis/temperature-matrix-local-budget.csv",
+      "source_sha256": "4329b31fa03d8e9dd46deb5aa34a0c1a5e43e743d9a036d32d5d14fbe0868b8d"
+    },
+    "matrix_analysis_script": {
+      "bytes": 16758,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/analyze_temperature_matrix_replay.py",
+      "sha256": "a51020c7dd328ca7cec83541940b387ff44d0844891e2ea9cc08d7277d462d2e",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/scripts/analyze_temperature_matrix_replay.py",
+      "source_sha256": "a51020c7dd328ca7cec83541940b387ff44d0844891e2ea9cc08d7277d462d2e"
+    },
+    "matrix_api_source_excerpt": {
+      "bytes": 4527,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/openfoam-matrix-api-source.txt",
+      "sha256": "37babda3552b785d6353d6f2b154606fba05ca525a91a8519d14b7bafdc937f0",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/openfoam-matrix-api-source.txt",
+      "source_sha256": "37babda3552b785d6353d6f2b154606fba05ca525a91a8519d14b7bafdc937f0"
+    },
+    "matrix_case_freeze": {
+      "bytes": 40014,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/matrix-replay-case-freeze.json",
+      "sha256": "303c63b33c72351240ef6a05993364b3dfe0c3895c95d2f8e957f9d69853d51d",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/cases/predictor-yes-matrix/case-freeze.json",
+      "source_sha256": "303c63b33c72351240ef6a05993364b3dfe0c3895c95d2f8e957f9d69853d51d"
+    },
+    "matrix_executable_patch": {
+      "bytes": 658,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/Make-files.matrix.diff",
+      "sha256": "796cf22d3c83dc841ce5b273271f7f39adb9891d1bed5314fe520a4f90899185",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/Make-files.matrix.diff",
+      "source_sha256": "796cf22d3c83dc841ce5b273271f7f39adb9891d1bed5314fe520a4f90899185"
+    },
+    "matrix_experiment": {
+      "bytes": 3816,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/matrix-replay-experiment.json",
+      "sha256": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/experiment.json",
+      "source_sha256": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c"
+    },
+    "matrix_source_delta": {
+      "bytes": 4696,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/matrix-source-delta.json",
+      "sha256": "6ecafa75594db5384df98d2fb2ea6c78727ab0c4a7852a757f666fedb54dc0ec",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/instrumented-source-delta.json",
+      "source_sha256": "6ecafa75594db5384df98d2fb2ea6c78727ab0c4a7852a757f666fedb54dc0ec"
+    },
+    "matrix_source_main_patch": {
+      "bytes": 5169,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/compressibleInterFoam.C.matrix.diff",
+      "sha256": "46182a382d134f0774e53e08a594d1f3e4c5c889e7c9442cbff8e1b4f6425832",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/compressibleInterFoam.C.matrix.diff",
+      "source_sha256": "46182a382d134f0774e53e08a594d1f3e4c5c889e7c9442cbff8e1b4f6425832"
+    },
+    "matrix_source_manifest": {
+      "bytes": 21092,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/matrix-source-manifest.json",
+      "sha256": "775fcfb1a7d01ac07aed5cb5635fcaec2e0a3427997c7668abf1dfd89c685a1f",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/source-manifest.json",
+      "source_sha256": "775fcfb1a7d01ac07aed5cb5635fcaec2e0a3427997c7668abf1dfd89c685a1f"
+    },
+    "matrix_source_teqn_patch": {
+      "bytes": 1690,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/TEqn.H.matrix.diff",
+      "sha256": "d9080e5d74993e17fd1d0c0e16074b661dbed11ab19e8d479b2a0cc093033897",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/TEqn.H.matrix.diff",
+      "source_sha256": "d9080e5d74993e17fd1d0c0e16074b661dbed11ab19e8d479b2a0cc093033897"
+    },
+    "matrix_units_correction": {
+      "bytes": 2281,
+      "path": "results/summaries/i4f_20261025/firststep-energy/provenance/matrix-units-interpretation-correction.json",
+      "sha256": "63bae41f675d1d3c6830b9c097aa36f9fd78d9feb6cf5e31f1d86ff0c3103d37",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/analysis/matrix-units-interpretation-correction.json",
+      "source_sha256": "63bae41f675d1d3c6830b9c097aa36f9fd78d9feb6cf5e31f1d86ff0c3103d37"
+    },
+    "rank0_matrix_csv": {
+      "bytes": 19527,
+      "path": "results/summaries/i4f_20261025/firststep-energy/diagnostics/rank0-predictor-yes-temperature-matrix.csv",
+      "sha256": "829b90bf3a79753aff7327a6cb905c26571d73e2c0e9c8da8d24241f4c763bf6",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/cases/predictor-yes-matrix/case/i4f_firststep_temperature_matrix_rank0.csv",
+      "source_sha256": "829b90bf3a79753aff7327a6cb905c26571d73e2c0e9c8da8d24241f4c763bf6"
+    },
+    "rank5_matrix_csv": {
+      "bytes": 19419,
+      "path": "results/summaries/i4f_20261025/firststep-energy/diagnostics/rank5-predictor-yes-temperature-matrix.csv",
+      "sha256": "e6c2a428c0e5539e5ee49c594bcb57adc70620d481c8df9808386dd30a9dc183",
+      "source_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/cases/predictor-yes-matrix/case/i4f_firststep_temperature_matrix_rank5.csv",
+      "source_sha256": "e6c2a428c0e5539e5ee49c594bcb57adc70620d481c8df9808386dd30a9dc183"
+    }
+  },
+  "runtime": {
+    "GO_marker_sha256": "084652d621ba1836d834095facaf52a7feeff0b2a9d3023074a53a543c31239e",
+    "container_id": "ff7c579e82883a960123c578c94cd75fbdea73bfcf299874f6331ed1023ef3ec",
+    "container_name": "i4f-firststep-temp-matrix-predictor-yes-matrix-20261026t211852z",
+    "docker_cpu_quota_equivalents": 0.5,
+    "docker_exit_code": 0,
+    "docker_log_driver": "none (exact config checked before GO)",
+    "finished_at_utc": "2026-10-26T21:20:39.151176253Z",
+    "guardian_status_sha256": "9c065c388c603377b34aa165eca985b1d146e9f865609fa4ce8ea890144ad53a",
+    "hard_wall_seconds_from_StartedAt": 600,
+    "launch_manifest_sha256": "da03e6db46dc60877a112fdf2b6d81e0599382a2c874f0346360f11b5ceac0a7",
+    "log_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/cases/predictor-yes-matrix/case/log.temperature-matrix-audit",
+    "log_sha256": "7d2cfea2dcfc9e5d53d5bed54868c7f35908294cbf12f489f62b89d437757eac",
+    "mpi_ranks": 10,
+    "normal_End": true,
+    "pre_GO_resource_sample": {
+      "active_docker_containers": [
+        {
+          "cpu_equivalents": 0.5,
+          "id": "ff7c579e82883a960123c578c94cd75fbdea73bfcf299874f6331ed1023ef3ec",
+          "memory_bytes": 8589934592,
+          "name": "i4f-firststep-temp-matrix-predictor-yes-matrix-20261026t211852z",
+          "nano_cpus": 500000000,
+          "started_at": "2026-10-26T21:18:53.089062834Z",
+          "status": "running"
+        },
+        {
+          "cpu_equivalents": 8.0,
+          "id": "4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069",
+          "memory_bytes": 34359738368,
+          "name": "i4f-gamma-mpno-omega1-warm-20261026T2103Z",
+          "nano_cpus": 8000000000,
+          "started_at": "2026-10-26T21:06:10.557383444Z",
+          "status": "running"
+        },
+        {
+          "cpu_equivalents": 10.0,
+          "id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+          "memory_bytes": 34359738368,
+          "name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+          "nano_cpus": 10000000000,
+          "started_at": "2026-10-26T20:50:36.466720222Z",
+          "status": "running"
+        }
+      ],
+      "active_docker_quota_cpu_equivalents": 18.5,
+      "active_mpi_solver_process_count": 20,
+      "available_memory_bytes": 123269799936,
+      "candidate_quota_cpu_equivalents": 0.5,
+      "disk_floor_bytes": 21474836480,
+      "effective_cpus": 20.0,
+      "free_disk_bytes": 29952950272,
+      "host_cpu_equivalents_observed": 18.979818449269164,
+      "pause_flags": [],
+      "projected_host_cpu_with_candidate_quota": 19.479818449269164,
+      "sample_duration_s": 5.058531,
+      "sample_end_utc": "2026-10-26T21:19:00.121212+00:00",
+      "sample_start_utc": "2026-10-26T21:18:55.062681+00:00",
+      "top_process_cpu_ticks": [
+        {
+          "cgroup": "0::/user.slice/user-1001.slice/session-3305.scope",
+          "cmd": "/home/router/lfm-venv/bin/python gmk.py /home/router/models/gguf/orca/OrcaCyber-Nano-1.0-AI-Defense-Mix-15.7G.gguf --prompt-ids 814,20139,1092,264,4011,16000,369,13 --gen 64",
+          "comm": "python",
+          "cpu_equivalents": 0.9923829665173544,
+          "pid": 3015974,
+          "ticks_5s": 502
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9726143815269689,
+          "pid": 2966670,
+          "ticks_5s": 492
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9686606645288919,
+          "pid": 2966676,
+          "ticks_5s": 490
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9548226550356219,
+          "pid": 2966673,
+          "ticks_5s": 483
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9528457965365834,
+          "pid": 2966669,
+          "ticks_5s": 482
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9508689380375448,
+          "pid": 2966668,
+          "ticks_5s": 481
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9330772115461978,
+          "pid": 2966672,
+          "ticks_5s": 472
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9212160605519666,
+          "pid": 2966674,
+          "ticks_5s": 466
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.9172623435538894,
+          "pid": 2966671,
+          "ticks_5s": 464
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.8915631830663882,
+          "pid": 2966677,
+          "ticks_5s": 451
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.865864022578887,
+          "pid": 2993506,
+          "ticks_5s": 438
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.8579565885827327,
+          "pid": 2993505,
+          "ticks_5s": 434
+        },
+        {
+          "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.8460954375885015,
+          "pid": 2966675,
+          "ticks_5s": 428
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.8441185790894628,
+          "pid": 2993514,
+          "ticks_5s": 427
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.8421417205904242,
+          "pid": 2993508,
+          "ticks_5s": 426
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.8421417205904242,
+          "pid": 2993513,
+          "ticks_5s": 426
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.812488843104846,
+          "pid": 2993509,
+          "ticks_5s": 411
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.812488843104846,
+          "pid": 2993510,
+          "ticks_5s": 411
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.7551599466327279,
+          "pid": 2993511,
+          "ticks_5s": 382
+        },
+        {
+          "cgroup": "0::/system.slice/docker-4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069.scope",
+          "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+          "comm": "compressibleInt",
+          "cpu_equivalents": 0.7175996351509953,
+          "pid": 2993512,
+          "ticks_5s": 363
+        }
+      ]
+    },
+    "raw_pressure_contact_count": 1,
+    "raw_pressure_contacts": [
+      {
+        "cells_strictly_below_pMin": 282.0,
+        "clipped_water_mass_kg": 0.0,
+        "clipped_water_volume_m3": 0.0,
+        "pMin_Pa": 10000.0,
+        "pass": 2.0,
+        "raw_cell_p_min_Pa": 9712.383171746795,
+        "raw_line": "CLAMP_TRACE_RAW time_s=1.2e-05 outer=1 pass=2 pMin_Pa=10000 raw_cell_p_min_Pa=9712.383171746795 raw_cell_p_max_Pa=1211011.779398468 cells_strictly_below_pMin=282 clipped_water_volume_m3=0 clipped_water_mass_kg=0 local_cells_below_pMin=141",
+        "time_s": 1.2e-05
+      }
+    ],
+    "raw_pressure_record_count": 16,
+    "started_at_utc": "2026-10-26T21:18:53.089062834Z",
+    "terminal_capture_utc": "2026-10-26T21:20:39.353834+00:00",
+    "time_records_s": [
+      1.2e-05
+    ]
+  },
+  "schema": "i4f-firststep-temperature-matrix-public-evidence/v1",
+  "selected_cells": {
+    "0": {
+      "actual_T_change_K": -281.10886077902643,
+      "first_outer_matrix": {
+        "diffusion_D_kg_s": 0.045770999769016114,
+        "diffusion_equivalent_minus_prior_remainder_K": 7.361624383861454e-06,
+        "diffusion_residual_source_minus_Apsi_kgK_s": 12.847913684373475,
+        "diffusion_temperature_equivalent_using_non_diffusion_diagonal_K": 72.9228370486624,
+        "full_D_kg_s": 0.2219560496704604,
+        "full_residual_source_minus_Apsi_kgK_s": 1.2970081568225596e-06,
+        "matrix_D_source_and_residual_before_after_relax_options": {
+          "D_after_options_constrain_minus_after_relax": 0.0,
+          "D_after_relax_minus_assembled": 0.0,
+          "T_after_options_correct_minus_after_solve_K": 0.0,
+          "T_after_thermo_correct_minus_after_options_K": 0.0,
+          "source_after_options_constrain_minus_after_relax": 0.0,
+          "source_after_relax_minus_assembled": 0.0
+        },
+        "non_diffusion_D_kg_s": 0.1761850499014443,
+        "non_diffusion_residual_source_minus_Apsi_kgK_s": -12.84791238736532,
+        "residual_sum_check_kgK_s": 8.354590890630176e-16,
+        "stage_values": {
+          "after_options_correct_before_thermo": {
+            "T_K": 12.041139220973548,
+            "diffusion_D_including_boundary_average": 0.045770999769016114,
+            "diffusion_residual_source_minus_Apsi": 12.847913684373475,
+            "diffusion_source": 4.726451188222633e-19,
+            "full_D_including_boundary_average": 0.2219560496704604,
+            "full_residual_source_minus_Apsi": 1.2970081568225596e-06,
+            "full_source": -10.726443672847857,
+            "non_diffusive_residual_source_minus_Apsi": -12.84791238736532
+          },
+          "after_relax_before_options_constrain": {
+            "T_K": 293.15,
+            "diffusion_D_including_boundary_average": 0.045770999769016114,
+            "diffusion_residual_source_minus_Apsi": 2.624636619152909e-15,
+            "diffusion_source": 4.726451188222633e-19,
+            "full_D_including_boundary_average": 0.2219560496704604,
+            "full_residual_source_minus_Apsi": -62.37509105145625,
+            "full_source": -10.726443672847857,
+            "non_diffusive_residual_source_minus_Apsi": -62.37509105145625
+          },
+          "after_solve_before_options_correct": {
+            "T_K": 12.041139220973548,
+            "diffusion_D_including_boundary_average": 0.045770999769016114,
+            "diffusion_residual_source_minus_Apsi": 12.847913684373475,
+            "diffusion_source": 4.726451188222633e-19,
+            "full_D_including_boundary_average": 0.2219560496704604,
+            "full_residual_source_minus_Apsi": 1.2970081568225596e-06,
+            "full_source": -10.726443672847857,
+            "non_diffusive_residual_source_minus_Apsi": -12.84791238736532
+          },
+          "after_thermo_correct": {
+            "T_K": 12.041139220973548,
+            "diffusion_D_including_boundary_average": 0.045770999769016114,
+            "diffusion_residual_source_minus_Apsi": 12.847913684373475,
+            "diffusion_source": 4.726451188222633e-19,
+            "full_D_including_boundary_average": 0.2219560496704604,
+            "full_residual_source_minus_Apsi": 1.2970081568225596e-06,
+            "full_source": -10.726443672847857,
+            "non_diffusive_residual_source_minus_Apsi": -12.84791238736532
+          },
+          "assembled_before_relax": {
+            "T_K": 293.15,
+            "diffusion_D_including_boundary_average": 0.045770999769016114,
+            "diffusion_residual_source_minus_Apsi": 2.624636619152909e-15,
+            "diffusion_source": 4.726451188222633e-19,
+            "full_D_including_boundary_average": 0.2219560496704604,
+            "full_residual_source_minus_Apsi": -62.37509105145625,
+            "full_source": -10.726443672847857,
+            "non_diffusive_residual_source_minus_Apsi": -62.37509105145625
+          },
+          "before_solve_after_options_constrain": {
+            "T_K": 293.15,
+            "diffusion_D_including_boundary_average": 0.045770999769016114,
+            "diffusion_residual_source_minus_Apsi": 2.624636619152909e-15,
+            "diffusion_source": 4.726451188222633e-19,
+            "full_D_including_boundary_average": 0.2219560496704604,
+            "full_residual_source_minus_Apsi": -62.37509105145625,
+            "full_source": -10.726443672847857,
+            "non_diffusive_residual_source_minus_Apsi": -62.37509105145625
+          }
+        }
+      },
+      "local_cell": 5154,
+      "matrix_csv_path": "cases/predictor-yes-matrix/case/i4f_firststep_temperature_matrix_rank0.csv",
+      "matrix_csv_sha256": "829b90bf3a79753aff7327a6cb905c26571d73e2c0e9c8da8d24241f4c763bf6",
+      "matrix_rows": 48,
+      "native_C_m": [
+        2.2531251578440923,
+        -0.7860508002907803,
+        0.36086487255256816
+      ],
+      "prior_explicit_source_only_deltaT_K": -354.03169046606445,
+      "prior_positive_remainder_K": 72.92282968703802,
+      "temperature_after_TEqn_K": 12.041139220973548,
+      "temperature_before_TEqn_K": 293.15
+    },
+    "5": {
+      "actual_T_change_K": -281.11221219801695,
+      "first_outer_matrix": {
+        "diffusion_D_kg_s": 0.045745615128180206,
+        "diffusion_equivalent_minus_prior_remainder_K": 7.361718445508814e-06,
+        "diffusion_residual_source_minus_Apsi_kgK_s": 12.84093341705429,
+        "diffusion_temperature_equivalent_using_non_diffusion_diagonal_K": 72.92400403653366,
+        "full_D_kg_s": 0.22183212582802062,
+        "full_residual_source_minus_Apsi_kgK_s": 1.296299309672122e-06,
+        "matrix_D_source_and_residual_before_after_relax_options": {
+          "D_after_options_constrain_minus_after_relax": 0.0,
+          "D_after_relax_minus_assembled": 0.0,
+          "T_after_options_correct_minus_after_solve_K": 0.0,
+          "T_after_thermo_correct_minus_after_options_K": 0.0,
+          "source_after_options_constrain_minus_after_relax": 0.0,
+          "source_after_relax_minus_assembled": 0.0
+        },
+        "non_diffusion_D_kg_s": 0.1760865106998404,
+        "non_diffusion_residual_source_minus_Apsi_kgK_s": -12.84093212075498,
+        "residual_sum_check_kgK_s": 0.0,
+        "stage_values": {
+          "after_options_correct_before_thermo": {
+            "T_K": 12.03778780198303,
+            "diffusion_D_including_boundary_average": 0.045745615128180206,
+            "diffusion_residual_source_minus_Apsi": 12.84093341705429,
+            "diffusion_source": 5.469851634676566e-19,
+            "full_D_including_boundary_average": 0.22183212582802062,
+            "full_residual_source_minus_Apsi": 1.296299309672122e-06,
+            "full_source": -10.721240070158686,
+            "non_diffusive_residual_source_minus_Apsi": -12.84093212075498
+          },
+          "after_relax_before_options_constrain": {
+            "T_K": 293.15,
+            "diffusion_D_including_boundary_average": 0.045745615128180206,
+            "diffusion_residual_source_minus_Apsi": 0.0,
+            "diffusion_source": 5.469851634676566e-19,
+            "full_D_including_boundary_average": 0.22183212582802062,
+            "full_residual_source_minus_Apsi": -62.341000681816894,
+            "full_source": -10.721240070158686,
+            "non_diffusive_residual_source_minus_Apsi": -62.341000681816894
+          },
+          "after_solve_before_options_correct": {
+            "T_K": 12.03778780198303,
+            "diffusion_D_including_boundary_average": 0.045745615128180206,
+            "diffusion_residual_source_minus_Apsi": 12.84093341705429,
+            "diffusion_source": 5.469851634676566e-19,
+            "full_D_including_boundary_average": 0.22183212582802062,
+            "full_residual_source_minus_Apsi": 1.296299309672122e-06,
+            "full_source": -10.721240070158686,
+            "non_diffusive_residual_source_minus_Apsi": -12.84093212075498
+          },
+          "after_thermo_correct": {
+            "T_K": 12.03778780198303,
+            "diffusion_D_including_boundary_average": 0.045745615128180206,
+            "diffusion_residual_source_minus_Apsi": 12.84093341705429,
+            "diffusion_source": 5.469851634676566e-19,
+            "full_D_including_boundary_average": 0.22183212582802062,
+            "full_residual_source_minus_Apsi": 1.296299309672122e-06,
+            "full_source": -10.721240070158686,
+            "non_diffusive_residual_source_minus_Apsi": -12.84093212075498
+          },
+          "assembled_before_relax": {
+            "T_K": 293.15,
+            "diffusion_D_including_boundary_average": 0.045745615128180206,
+            "diffusion_residual_source_minus_Apsi": 0.0,
+            "diffusion_source": 5.469851634676566e-19,
+            "full_D_including_boundary_average": 0.22183212582802062,
+            "full_residual_source_minus_Apsi": -62.341000681816894,
+            "full_source": -10.721240070158686,
+            "non_diffusive_residual_source_minus_Apsi": -62.341000681816894
+          },
+          "before_solve_after_options_constrain": {
+            "T_K": 293.15,
+            "diffusion_D_including_boundary_average": 0.045745615128180206,
+            "diffusion_residual_source_minus_Apsi": 0.0,
+            "diffusion_source": 5.469851634676566e-19,
+            "full_D_including_boundary_average": 0.22183212582802062,
+            "full_residual_source_minus_Apsi": -62.341000681816894,
+            "full_source": -10.721240070158686,
+            "non_diffusive_residual_source_minus_Apsi": -62.341000681816894
+          }
+        }
+      },
+      "local_cell": 4440,
+      "matrix_csv_path": "cases/predictor-yes-matrix/case/i4f_firststep_temperature_matrix_rank5.csv",
+      "matrix_csv_sha256": "e6c2a428c0e5539e5ee49c594bcb57adc70620d481c8df9808386dd30a9dc183",
+      "matrix_rows": 48,
+      "native_C_m": [
+        2.2531251842343183,
+        0.7860320548022439,
+        0.3608467912323964
+      ],
+      "prior_explicit_source_only_deltaT_K": -354.03620887283216,
+      "prior_positive_remainder_K": 72.92399667481521,
+      "temperature_after_TEqn_K": 12.03778780198303,
+      "temperature_before_TEqn_K": 293.15
+    }
+  },
+  "source_parent_closure_reference": {
+    "captured_parent_source_tree_manifest_sha256": "3bc689e01f393bf153c1fe626fd5117ce629a3dd2720a1670f3e8bf754b1219c",
+    "manifest_path": "results/summaries/i4f_20261025/full-source-apparatus/source-closure-20261026T2010Z/closure-manifest.json",
+    "manifest_sha256": "e89dc3c6a080208cb6b31cc24cc52f86c0f2713d06ed609eeca5b88ebcd1e8f3",
+    "patch_path": "results/summaries/i4f_20261025/full-source-apparatus/source-closure-20261026T2010Z/dcec-to-captured-full-source-07.patch",
+    "patch_sha256": "bb5c160a51e5d80eeaa8e2dfb6e045d64a7f3489bcc0c4704b96b6b5925a35e2",
+    "purpose": "Public closure record for the captured DCEC standard-source parent lineage; not evidence that this read-only observer patch alters equations."
+  },
+  "source_provenance": {
+    "experiment_file_sha256_at_GO": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c",
+    "governing_equations_changed": false,
+    "matrix_TEqn_source_sha256": "d37f90c17ca2f5aca4bd7f577bd376a2f727d444e1247d83a681ebc14de06371",
+    "matrix_binary_sha256": "29185113610fba3f5a9a0cd66ad083c16bd6244860bad633efb65094f40f8da0",
+    "metadata_units_correction": "The frozen experiment.json used a per-volume label for matrix residual units. OpenFOAM FV matrices here are cell-volume integrated: D in kg/s, source and residual in kg*K/s. This post-run analysis corrects the interpretation without altering the frozen experiment or any solver input.",
+    "parent_closure_manifest_path": "results/summaries/i4f_20261025/full-source-apparatus/source-closure-20261026T2010Z/closure-manifest.json",
+    "source_delta_sha256": "6ecafa75594db5384df98d2fb2ea6c78727ab0c4a7852a757f666fedb54dc0ec",
+    "source_manifest_sha256": "775fcfb1a7d01ac07aed5cb5635fcaec2e0a3427997c7668abf1dfd89c685a1f"
+  }
+}

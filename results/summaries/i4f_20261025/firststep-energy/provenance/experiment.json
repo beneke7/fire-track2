@@ -1,0 +1,122 @@
+{
+  "branches": [
+    {
+      "case_path": "cases/predictor-yes/case",
+      "freeze_path": "cases/predictor-yes/case-freeze.json",
+      "freeze_sha256": "4a28d942910dc785de4bcc70d1177f26b2d47b0fba8829b9d7b95981318f6633",
+      "label": "predictor-yes",
+      "predictor": "yes",
+      "static_tree_sha256": "409f570e56918b4931b5bacc1dc98ada6743818d42c95380b056be0958664a3b"
+    },
+    {
+      "case_path": "cases/predictor-no/case",
+      "freeze_path": "cases/predictor-no/case-freeze.json",
+      "freeze_sha256": "15de5e9c8b9242ffcb87397b21ae09740fadb64bf5ccc8f1fb06348c387d975e",
+      "label": "predictor-no",
+      "predictor": "no",
+      "static_tree_sha256": "dbe58906c25db5af1665c75f794d3e62675539f119d0d96f8c371501bc494980"
+    }
+  ],
+  "build_result_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/build-result.json",
+  "build_result_sha256": "89af296b1a64636be99519457a6a9b9a9b9328543c985bca4be5f2c3f32c1718",
+  "canonical_t0_case": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/case",
+  "canonical_t0_case_file_count": 186,
+  "canonical_t0_case_static_tree_sha256": "28d0f0f4102f7242e5afdaa213ea6987c43091fdc2bae69bf0ee63e1c8f5569d",
+  "common_settings": {
+    "PIMPLE": {
+      "nCorrectors": 2,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "alpha_water_rel_tol": 0,
+    "alpha_water_tolerance": 1e-12,
+    "decomposition": "copied canonical collated processors10 native t0 state",
+    "frozen_predictor_sp": true,
+    "full_pressure_audit": false,
+    "full_source": true,
+    "gas_eos": "perfectGas air",
+    "mesh_cells": 299214,
+    "momentum_scheme": "Gauss upwind",
+    "mpi_ranks": 10,
+    "output_only_overrides": {
+      "endTime": 1.2e-05,
+      "timePrecision": 17,
+      "writeFormat": "binary (inherited)",
+      "writePrecision": 17
+    },
+    "pMin_Pa": 10000,
+    "target_end_time_s": 1.2e-05,
+    "time_step_control": "unchanged from the improved full-step stack; endTime clips at the observed initial 12 microseconds",
+    "turbulence": "SST",
+    "water_eos": "finite-water EOS"
+  },
+  "compiled_from_parent_binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "copied_solver_source": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/build/source/v8-energy-audit",
+  "diagnostic_cells": [
+    {
+      "local_cell": 5154,
+      "native_C_m": [
+        2.2531251578440923,
+        -0.7860508002907803,
+        0.36086487255256816
+      ],
+      "processor": 0,
+      "role": "air-side valve-adjacent pressure/temperature event cell; exact native field coordinate"
+    },
+    {
+      "local_cell": 4440,
+      "native_C_m": [
+        2.2531251842343183,
+        0.7860320548022439,
+        0.3608467912323964
+      ],
+      "processor": 5,
+      "role": "mirrored air-side valve-adjacent comparison cell; exact native field coordinate"
+    }
+  ],
+  "diagnostic_fields": [
+    "U, K, K_old, T, p, rho, rho_old, rho_water, rho_air, alpha_water, alpha_air, psi_air, Cv_water, Cv_air",
+    "divUp, ddt(rho,K), div(rhoPhi,K), contErr*K, their summed TEqn explicit energy source, source-only temperature-rate components",
+    "current-step storage estimate [rho*K-rho_old*K_old]/deltaT",
+    "collective internal min(T) and min(p) at each sampling stage"
+  ],
+  "equation_change": false,
+  "execution_policy": {
+    "arms_order": [
+      "baseline-12d8-predictor-no",
+      "predictor-no",
+      "predictor-yes"
+    ],
+    "concurrency": "one arm at a time",
+    "docker_cpu_quota_equivalents": 0.5,
+    "equations_changed": false,
+    "hard_wall_s_per_arm": 600,
+    "inside_container_solver_nice": 19,
+    "mpi_ranks": 10,
+    "pMin_and_mass_guards": "case inputs unchanged; raw CLAMP_TRACE_RAW contacts are recorded as diagnostic events, not treated as a successful health pass"
+  },
+  "independent_variable": "PIMPLE.momentumPredictor only (yes versus no)",
+  "instrumented_binary_sha256": "da21a07b013dd29fd94ff283a3449a053f999ac906a1992d120d2adc8c765f54",
+  "instrumented_source_delta_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/instrumented-source-delta.json",
+  "instrumented_source_delta_sha256": "f9c5c705704d5da9049bdad3741b2eaaaa01c1b17232d0d82dc6a3b5e5ade209",
+  "interpretation_limit": "Source-only T-rate components are not the full TEqn temperature update; no fit, stability conclusion, or production adoption is predeclared.",
+  "mpi_collective_order": "Each rank evaluates the same temporary finite-volume operators and min reductions before only ranks 0 and 5 write local-cell rows to distinct files.",
+  "parent_container_id": "8b086b299aee6b71b8a4826ab110db0989d8e92ca10ca142ee7acede0da551d5",
+  "parent_run": "results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z",
+  "parent_started_at": "2026-10-26T20:24:41.025680559Z",
+  "passivity_baseline": {
+    "binary_path": "bin/compressibleInterFoamI4FColdRestartConsistent",
+    "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "case_path": "cases/baseline-12d8-predictor-no/case",
+    "comparison": "Compare same one-step final native 10-way fields and uniform/time against the instrumented predictor-no arm to test observer passivity.",
+    "control": "PIMPLE.momentumPredictor=no; otherwise exact byte-copy of the frozen predictor-no diagnostic case",
+    "label": "baseline-12d8-predictor-no"
+  },
+  "prepared_utc": "2026-10-26T20:34:45.465053+00:00",
+  "purpose": "Measure local kinetic/pressure terms feeding TEqn before and after the optional momentum predictor during one true-cold 12 microsecond step.",
+  "schema": "i4f-cold-firststep-energy-audit/v1",
+  "solver_source_content_sha256": "09862c07aede283b1256c1f2e2465a113edd7cd567ec4869cad68b7f305e6747",
+  "solver_source_tree_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "source_manifest_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/source-manifest.json",
+  "source_manifest_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83"
+}

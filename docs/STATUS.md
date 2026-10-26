@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 21:10 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 22:51 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -15,169 +15,136 @@ No new scientific gate passed.
 
 ## Current execution
 
-The completed apparatus runs below are terminal and preserved. Exit 0 means the guard
-saved normally, not that the requested horizon or numerical screen passed.
+No complete credible tank-to-nozzle trajectory exists yet. The latest
+completed discharge trials failed their numerical screens;
+failed fields are not restart inputs. A separate pressure-reconstruction trial
+has ended, and a tighter pressure-only diagnostic is live from the healthy
+.460048 s seed. A separate diagnostic continuation is live from the healthy
+.390706 s cold-derived checkpoint. The case-staging utility passed ten regression tests; a real-apparatus staging
+smoke and exact immediate-parent source recovery proceed independently.
 
-| Test | Saved physical time (s) | Outcome |
+| Latest test | Saved time (s) | Actual outcome |
 | --- | ---: | --- |
-| Finite-water EOS, original timestep, linearUpwind | .410223 | One raw pressure-floor contact; minimum -308.269 Pa |
-| Finite-water EOS, smaller adaptive timestep | .383069 | One raw contact at .382719 s; minimum +677.757 Pa, below the 10 kPa floor |
-| Constant-density cold control, avoiding the .413 s restart | .434532 | Eighteen raw pressure-floor contacts |
-| Warm upwind, original .400020 s seed | .460048 | Completed this short target without floor contacts |
-| Warm upwind continuation, eight outer iterations | .481894 | Persistent pressure updates, final 300.719 Pa; no floor contact |
-| Same .460048 s seed, sixteen outer iterations | .481996 | Persistent pressure updates, final 319.638 Pa; no floor contact |
-| Same .460048 s seed, nontransonic pressure linearization | .482098 | Persistent pressure-update stop; no floor contact |
-| Matched linearUpwind warm restart at .400020 s | .410228 | Raw contact at .410003 s, minimum -14.5735 kPa |
-| Tight temperature solve, same .460048 s seed | .481894 | Pressure cycle persists despite much tighter linear temperature residuals |
-| 25 microsecond maximum timestep, warm restart | .460523 | Twenty raw floor contacts; first at .460473 s; minimum -81.114 kPa |
-| Cached predictor Sp, same .460048 s seed | .494225 | Improved common-time mass residuals and pressure updates, then persistent-update stop; no floor contacts |
-| Cached full predictor Sp+divU, same .460048 s seed | .494130 | Pressure-update stop at 1261.902 Pa / 5.520 m/s; no floor contacts; conservation improvement did not cure cycle |
+| Cold-derived predictor-off, full source, proper Euler history | .484006 | Persistent pressure updates, final 394.097 Pa / 2.493 m/s; no raw floor contact |
+| Same healthy warm seed, predictor off, source weight 1 | .494129 | Persistent pressure updates, final 1254.224 Pa; no raw floor contact |
+| Same warm seed, source relaxation weight .5 | .494130 | Same late failure window, final 1253.704 Pa; no raw floor contact |
+| Same warm seed, predictor off, maximum timestep 25 microseconds | .461923 | Two raw contacts at .461873 s: -2.671 and -62.001 kPa; one water-bearing cell |
 
-The 100 Pa / three-step / final-to-penultimate ratio .9 screen is exploratory,
-not a formal nonlinear-convergence or validation tolerance. Liquid support in
-floor-contact cells is not removed water mass. The smaller-timestep event
-contains .027324 kg support in two nearly pure-water cells at x=3.234 m,
-z=.869 m; its saved field minimum recovered to 92.944 kPa. More iterations and
-the alternative pressure linearization did not remove the later upwind
-plateau. Their targets of .50 s were not reached.
+The cold-derived run `f960b72b8049` finished at 21:59:19.36122318 UTC, normal
+End/native checkpoint .484006034892. Its 1.0 s target was not reached. The
+preceding cold startup had saved at .090771 s because of the 20 GiB disk guard;
+that operational split had all fifteen fields/time hash-checked and proper
+history initialization. It is not proven bitwise-equivalent to uninterrupted
+apparatus integration. The timestep trial `c3eedf2f3a2f` finished at
+21:47:03.684869702 UTC, after 75 steps. The .01563 kg in its contact cell is
+liquid support, not removed water mass. Its final recovered minimum of
+63.39 kPa and tiny final pressure update do not undo the raw negative pressure.
+The failed no-step launch before it is retained separately as a preparation
+error: cleanup removed the static collated mesh. The corrected launch checked
+all 53 mesh/addressing files before GO.
 
-The matched restart uses the same original fourteen checkpoint fields and
-`uniform/time`, audit default/on and ambient-output policy as the upwind fork;
-only momentum advection changes. It supports numerical transport sensitivity
-more cleanly than comparison to the uninterrupted parent history. Restart also
-reconstructs `dgdt` in `createFields.H`; matching saved fields is not proof of
-bitwise continuation.
+Runtime authorities and compact outcome data:
 
-Runtime authorities for the latest tests:
+- `results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/guardian-status.json`
+- `results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-retry01-on/guardian-status.json`
+- [Warm comparisons and timestep outcome](../results/summaries/i4f_20261025/gamma-outer-relaxation/gamma-outer-relaxation-negative-outcomes.json)
 
-- Sixteen-outer: `results/runs/i4f-upwind-warm-nouter16-diagnostic-20261026T161110Z/guardian-status.json`,
-  Docker `946f81c95efb`, StartedAt 2026-10-26T16:16:39.15037673Z.
-- Nontransonic: `results/runs/i4f-upwind-warm-nontransonic-diagnostic-20261026T162726Z/guardian-status.json`,
-  Docker `7ff7ede117df`, StartedAt 2026-10-26T16:34:22.424288519Z.
-- Matched restart: `results/runs/i4f-linearupwind-warm-control-20261026T162846Z/guardian-status.json`,
-  Docker `7e3c90ce369a`, StartedAt 2026-10-26T16:32:34.134837295Z.
-- Smaller timestep: `results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/stock-campaign-status.json`.
+Current independent tasks:
 
-Current work is bounded and parallel; no failed fields are restart inputs:
+- **Pressure-only operator probe:** Luna implements a replay to the failure
+  stencil, then freezes flow, phases, temperature, momentum/pressure
+  coefficients, sources and physical boundary gradients. Only pressure and
+  its explicit nonorthogonal correction iterate: eight sweeps plus centered
+  1/10 Pa perturbation responses. The first probe was inconclusive: its
+  eight baseline and 1 Pa solves took zero iterations at the normal 1e-10
+  tolerance; 10 Pa took one iteration and failed amplitude agreement. A new
+  replay tightens only diagnostic maps to 1e-14, leaving the physical replay
+  unchanged. Docker `fa6d93ab0de6`, StartedAt 22:38:28.320884831 UTC, ten
+  MPI/ten CPU equivalents, is confirmed live with advancing log. This follows
+  the focused Astra review;
+  it is an algebraic test, not a discharge continuation. The measured source
+  change largely cancels the changed alpha-times-flux divergence, making it
+  a response to the pressure mode rather than an established driver. No more
+  source-weight or timestep sweeps are queued.
+- **Completed reconstruction trial:** one named pressure-Laplacian
+  `Gauss linear limited 0.5` comparison with other diffusion/gravity schemes
+  unchanged was tested as a numerical hypothesis;
+  it is not an adopted method or cause proof. The possible pressure/gravity
+  discretization mismatch is declared. Docker `09366119582b` ended at
+  22:15:59 UTC, saving .474986 s after the unchanged pressure-update screen.
+  It had no raw floor contacts, but its coupled defects were worse than
+  the nearest-time baseline. Final dp had recovered to 42.8 Pa after the
+  stop request; the .505 target was not reached. This is not a remedy.
+- **Diagnostic continuation:** Docker `87c69f24d16d`, StartedAt
+  22:34:41.550545949 UTC, ten MPI/eight CPUs, uses the unchanged corrected
+  pressure operator and exact .390705595007 cold checkpoint. Only the
+  >100 Pa update stop ACTION becomes advisory with identical thresholds
+  and a flushed event CSV. Raw floor/clipping, mass/phase, NaN, disk and wall
+  stops remain hard. Root reviewed that guard delta. At 22:51 UTC it is live
+  at .443140 s, zero floor contacts or advisory-stop events. Target .65 s; save 00:49 UTC,
+  hard 01:04 UTC on 27 October. Underconverged fields will not become a
+  validation pass merely by finishing. Its launch had three preserved
+  preparation attempts; the exact live ID/guard/seed hashes are recorded.
+- **Mesh candidate:** the initialized 0.8 m base has 293,356 cells and
+  matching 48 axial valve layers at 6.25 mm, 5,376 cells per branch. Its nine
+  configured quality rows are zero, but four baffle-boundary faces fail
+  generic skewness (max 4.816); optional allGeometry flags 6,087 concave
+  cells. Three separately preserved mesh repairs did not clear the generic
+  check. The last, uninitialized 311,318-cell repair has one boundary face
+  at skewness 4.052 and 6,894 concave cells. The 1.0 m baseline has generic
+  Mesh OK/max skew 3.230, with 6,345 concave cells as a separate qualification.
+  No dimensions, dividers or thresholds changed, and no 0.8 m CFD has run.
+  Its corrected source-zone classification is complete; the baseline was
+  independently checked as fully classified and wetted: 21,504 source cells,
+  .0841063 m3. The earlier omission was confined to the new candidate's prep.
+- **Rendering completed:** Luna extracted the cold-terminal controller and created
+  matched native-field .3907/.484 s views and a stencil zoom. Root inspected
+  them; only the clear cutaways are selected for release. Underconverged
+  endpoints remain labelled. No complete discharge movie exists.
 
-- **Cold startup saved by disk guard:** Docker `8b086b299aee`, StartedAt
-  2026-10-26T20:24:41.025680559Z, ten MPI ranks/ten CPU equivalents,
-  had an uninterrupted target of 1.0 s. It saved normally at .090771166664 s
-  when free disk crossed the unchanged 20 GiB floor; FinishedAt
-  20:35:24.426198078Z. This was a storage stop, not a numerical failure.
-  Its 375 steps had zero raw floor contacts/clipping, final pressure minimum
-  99.516 kPa, T minimum 290.217 K and final outer dp .003365 Pa.
-  Water defect was +2.917e-5 kg on 3198 kg; gas defect -6.849e-7 kg.
-  Finite-water EOS, SST, upwind momentum, full cached predictor source,
-  alpha tolerance 1e-12 and corrected first-step history initialization were
-  retained. The intended control change from the failed cold startup was
-  `momentumPredictor no`; pressure correction still updates velocity and
-  kinetic energy. It has not tested the previous .48–.49 s coupling window.
-  A recorded continuation is now live: Docker `f960b72b8049`, StartedAt
-  20:50:36.466720222 UTC, ten MPI/ten CPU equivalents, target 1.0 s.
-  All fifteen checkpoint fields plus time were copied and hash-checked. Root
-  verified Docker and advancing guard at .098271 s/29 new steps with no raw
-  floor contact or parser error. The original campaign deadline is retained
-  (about 04:24 UTC, 27 October); this operational split is not claimed
-  bitwise-equivalent to uninterrupted apparatus integration. No n-1 time
-  directory requirement is inferred for Euler. Continuation authority:
-  `results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/guardian-status.json`.
-  Authority: `results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/guardian-status.json`.
-- **First-step energy audit (performance worker):** three one-step arms
-  reached 12 microseconds. The read-only predictor-off observer reproduces
-  the baseline's fifteen native fields and time byte-for-byte. With the
-  predictor enabled, the two selected pure-air cells reach about 713 m/s
-  before temperature is solved, with K about 254178 m2/s2 and preserved Kold=0.
-  The measured kinetic-energy source alone corresponds to -354.03 K; the
-  solved temperature falls by 281.11 K to about 12.04 K. The remaining
-  +72.92 K requires the implicit equation budget; it is not closed yet.
-  Predictor-off leaves those cells at 293.15 K at this stage. The enabled
-  trial has a raw 9.712 kPa pressure-floor contact (282 cells, no liquid
-  clipping); its later sampled pressure-field minimum is 21.834 kPa, a
-  different stage. Thus the unprojected predictor state is now measured,
-  not inferred from a pressure-corrected velocity. An enriched read-only
-  budget replay is assigned, with compact publication of the existing data.
-  Evidence: `results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/analysis/`.
-- **Source relaxation did not cure the late cycle:** weight .5, applied
-  once after both pressure correctors, stopped at .494129725325 s with
-  final dp 1253.704 Pa and dU 5.512 m/s. Docker `d353e078c78c` finished
-  21:01:34.746304627 UTC with normal End/complete native checkpoint after
-  the unchanged persistent-update screen, zero raw floor contacts/clipping.
-  At .493750 s the raw source fixed-point error stopped contracting and
-  grew from 3.62 to 3.98 s-1 over the later outer iterations. Smaller applied
-  updates therefore did not provide convergence. The default-weight four-step
-  identity test reproduced all twelve common laminar fields byte-for-byte.
-  Its cumulative water defect .134243 kg includes .133296 kg inherited
-  from the warm seed; compare only the new increment against other trials.
-  Native localization places the terminal maximum-update cell at global
-  31926 (rank 7 local 1779), a mixed cell owning a divider wall face, about
-  14.9 mm beyond its leading edge. This is a location, not proof of a mesh bug.
-  The conditional sixteen-outer run was withheld because this parent failed.
-  No failed .494 s fields are used for continuation.
-- **Matched warm predictor-off trial is live:** same healthy .460048 s
-  seed, full-source method, eight outer/two pressure corrections and source
-  weight 1; momentum predictor disabled. Docker `4b8ad3431709`, StartedAt
-  21:06:10.557383444 UTC, ten MPI/eight CPU equivalents, target .505 s.
-  Root verified exact Docker state and advancing guard at .464785 s/41
-  completed steps, zero floor contacts. It tests whether predictor ordering
-  matters in the late failure window, separately from cold startup.
-  Authority: `results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-on/guardian-status.json`.
-- **Restart finding:** saving the expansion source alone did not reproduce
-  uninterrupted evolution. Correctly initializing Euler field history before
-  derived-field mutation did: a source-active channel split/restart matches
-  the uninterrupted next step to 7.92e-9 Pa and 5.55e-13 m/s. This is a
-  controlled one-step proof, not a general restart or apparatus validation.
-  The corresponding warm apparatus replay still stopped at .494129 s,
-  dp 1257.83 Pa and dU 5.506 m/s, without floor contact. Correct restart
-  history therefore did not cure the later pressure cycle. Its guard's wrong
-  log path was repaired on the same running container, preserving the original
-  deadline and checkpoint; no solver relaunch occurred.
-  The [public restart packet](../results/summaries/i4f_20261025/restart-history/README.md)
-  contains both solver sources, inputs, split/end fields and comparison data.
-  Root verified 335 artifacts and independently checked A/C/D staging; the
-  new public rebuild recipe has not yet been exercised.
-- **Other newly terminal trials:** tightened alpha solve stopped at
-  .494128 s; the earlier uninterrupted Sp-only cold run stopped at .484302 s.
-  Its conditional continuation correctly refused the failed parent and
-  launched no child. Neither is live or awaiting automatic continuation.
-- **Small verification:** the 6,400-cell periodic equilibrium case reached
-  .1 s with terminal p/U/T errors 7.20e-9 Pa / 4.27e-12 m/s / 2.01e-11 K.
-  Eight source-active gas-withdrawal cases reached .4 s on 60–480 cells.
-  Full-source pressure error decreases to .878% on the finest grid;
-  normalized water balance is at most 5.32e-11, but gas drift and thermal
-  bias remain. These narrow checks do not validate the apparatus.
-  Public evidence is under `results/summaries/i4f_20261025/`.
-- **Rendering:** a new CPU cutaway of the failed .494 s endpoint was inspected.
-  Water remains inside the branches at the dense-liquid threshold; it is not
-  a complete discharge movie. Marked cells belong to an earlier pressure-cycle
-  replay, not the current maximum-update cell. Context and exact source-closure
-  evidence are in `full-source-apparatus/context-20261026T193827Z/` and
-  `full-source-apparatus/source-closure-20261026T2010Z/` under the summary root.
+New compact evidence is ready for inspection:
 
-Twenty effective CPUs are shared with unrelated workloads. At 21:10 UTC the
-eight-CPU warm predictor-off trial and ten-CPU cold-derived continuation
-are live. Their total declared quota is eighteen of twenty,
-with about 1.13 CPU equivalents of unrelated work measured at admission.
-Small diagnostics share admitted remaining capacity. No GPU or HPC
-job is launched here. The runtime save floor remains 20 GiB. Verified
-lossless archives preserve the old terminal logs, and duplicate-only cleanup
-preserved every executed run's unique fields and source. A further three
-closed logs were archived with about 1.32 GiB net allocated space recovered.
-A further exact static-mesh duplicate cleanup removed 2,228 redundant paths
-while retaining 401 canonical files; root checked every canonical SHA/size
-and the global canonical/deletion-set separation. Measured free-space gain
-was 9.36 GB during concurrent filesystem activity, with about 32 GB free
-afterward. Two files were restored for smoke checks; 21 candidates with
-permission failures remained untouched. Unique fields and source were not
-removed. The [public recovery map and helper](../results/archives/manifests/i4f-polymesh-dedup-20261026T2038Z/README.md)
-include atomic overwrite refusal and symlink checks, exercised with synthetic
-restore/race tests. Root verified all thirteen public artifact hashes.
-See the [archive and restore index](../results/archives/index.json).
+- [Startup energy audit](../results/summaries/i4f_20261025/firststep-energy/firststep-energy-evidence.json)
+  and [exact local matrix budget](../results/summaries/i4f_20261025/firststep-energy/firststep-temperature-matrix-evidence.json):
+  the predictor produces about 713 m/s in two pure-air cells before temperature
+  is solved. Kinetic energy gives -354.03 K; implicit diffusion contributes
+  +72.92 K, yielding the measured -281.11 K. Root recomputed both balances
+  from raw CSVs. All fifteen fields/time match in the observer passivity tests.
+  This closes two local first-outer equations, not global physical energy.
+  A separate metadata correction preserves the original experiment while
+  stating volume-integrated FV units (source/residual kg K/s, diagonal kg/s).
+- [Early hydraulic comparison](../results/summaries/i4f_20261025/current-cold-hydraulics/current-cold-hydraulics-prefix.png)
+  freezes the scalar prefix through .294771 s and compares four exact times
+  through .250021 s. At .2 s mean tank flow is .432743 m3/s, +.462% versus
+  the adiabatic reduced model; local headspace pressure is +1.749% versus
+  its bulk pressure. Common Cd/geometry inputs and different pressure
+  measurement support make this internal consistency, not validation.
+- [Restart packet](../results/summaries/i4f_20261025/restart-history/README.md):
+  proper Euler history reduces the channel's one-step restart error to
+  7.92e-9 Pa. Root verified 335 artifacts and A/C/D staging. Its new rebuild
+  recipe has not been exercised. A separate .1 s periodic equilibrium test
+  and eight source-active channel cases remain limited numerical evidence.
 
-After merging the shared HPC audit update 6d12db6, thirteen focused
-terminal-audit tests passed (3.06 s), with Ruff passing for its module/tests. This is software verification,
-not CFD acceptance. The earlier seven-step audit-output timing comparison
-(51/42 seconds) does not establish a universal performance gain.
+Twenty effective CPUs are shared with unrelated work. Allocations are measured
+at launch; there is no fixed reserve or reason to retain old small prep quotas
+when capacity becomes free. No GPU or HPC jobs are launched here. Disk guard
+remains 20 GiB. Verified duplicate-only cleanup recovered about 9.36 GB during
+concurrent filesystem activity; 2,228 removed paths have 401 retained canonical
+files and a tested [public recovery map/helper](../results/archives/manifests/i4f-polymesh-dedup-20261026T2038Z/README.md).
+An additional 60 closed text logs were losslessly compressed, with all archive
+hashes independently verified: about 1.83 GB measured free-space recovery.
+The restore smoke reproduced bytes and metadata and refused overwrite; the
+[manifest/helper](../results/archives/manifests/i4f-closed-log-retention-20261026T2240Z.json)
+and archive index preserve recovery. No unique fields/meshes were deleted.
+The immutable-template/canonical-checkpoint staging API passed Ruff, formatting
+and ten regression tests including the public channel packet. Luna now tests it
+on a healthy real-apparatus checkpoint; it changes no live solver or guard.
+Another Luna task recovers the exact immediate-parent source for the startup
+energy binary, since its published ancestor packet is not sufficient closure.
+Unique fields and original source/CAD remain. Older outcomes and restorable
+archives are retained in the scientific note, published results index and
+[archive index](../results/archives/index.json). Thirteen focused tests passed
+for the merged HPC audit module, plus Ruff; those checks do not certify CFD.
 
 ## Findings that determine the next experiment
 

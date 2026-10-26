@@ -1,0 +1,105 @@
+--- /home/v/proj/bene/fire-track2/results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/build/source/v8-energy-audit/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C	2026-10-26 21:39:42.720103724 +0100
++++ /home/v/proj/bene/fire-track2/results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/build/source/v8-energy-matrix-audit/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C	2026-10-26 22:14:28.879692788 +0100
+@@ -436,6 +436,102 @@
+                 }
+             };
+ 
++            // Read-only exact FV matrix capture around first-step TEqn.
++            // Every rank evaluates both fvMatrix residuals in the same order;
++            // only the two selected ranks write local CSV rows.
++            auto i4fCaptureTemperatureMatrix =
++            [&](const char* stage,
++                const fvScalarMatrix& fullEqn,
++                const fvScalarMatrix& diffusionEqn)
++            {
++                if (runTime.timeIndex() != 1)
++                {
++                    return;
++                }
++
++                const tmp<scalarField> tFullD(fullEqn.D());
++                const tmp<scalarField> tDiffusionD(diffusionEqn.D());
++                const tmp<scalarField> tFullResidual(fullEqn.residual());
++                const tmp<scalarField> tDiffusionResidual
++                (
++                    diffusionEqn.residual()
++                );
++
++                const label i4fSelectedCell =
++                    Pstream::myProcNo() == 0 ? 5154
++                  : Pstream::myProcNo() == 5 ? 4440
++                  : -1;
++                if
++                (
++                    i4fSelectedCell >= 0
++                 && i4fSelectedCell < mesh.nCells()
++                )
++                {
++                    const label celli = i4fSelectedCell;
++                    const scalar fullResidual = tFullResidual()[celli];
++                    const scalar diffusionResidual =
++                        tDiffusionResidual()[celli];
++                    const scalar fullDiag = tFullD()[celli];
++                    const scalar diffusionDiag = tDiffusionD()[celli];
++                    const scalar fullSource = fullEqn.source()[celli];
++                    const scalar diffusionSource =
++                        diffusionEqn.source()[celli];
++
++                    std::ostringstream fileName;
++                    fileName << "i4f_firststep_temperature_matrix_rank"
++                             << Pstream::myProcNo() << ".csv";
++                    std::ofstream matrixLog
++                    (
++                        fileName.str().c_str(),
++                        std::ios::app
++                    );
++                    if
++                    (
++                        matrixLog
++                     && matrixLog.tellp() == std::streampos(0)
++                    )
++                    {
++                        matrixLog
++                            << "time_s,deltaT_s,time_index,outer,stage,"
++                            << "rank,local_cell,x_m,y_m,z_m,T_K,rho_kg_m3,"
++                            << "alpha_water,alpha_air,K_m2_s2,"
++                            << "full_D_including_boundary_average,"
++                            << "full_source,full_residual_source_minus_Apsi,"
++                            << "full_diag_times_T_minus_source,"
++                            << "diffusion_D_including_boundary_average,"
++                            << "diffusion_source,"
++                            << "diffusion_residual_source_minus_Apsi,"
++                            << "diffusion_diag_times_T_minus_source,"
++                            << "non_diffusive_residual_source_minus_Apsi\n";
++                    }
++                    matrixLog << std::setprecision(17)
++                        << runTime.value() << ','
++                        << runTime.deltaTValue() << ','
++                        << runTime.timeIndex() << ','
++                        << i4fOuterLoop << ','
++                        << stage << ','
++                        << Pstream::myProcNo() << ','
++                        << celli << ','
++                        << mesh.C()[celli].x() << ','
++                        << mesh.C()[celli].y() << ','
++                        << mesh.C()[celli].z() << ','
++                        << T[celli] << ','
++                        << rho[celli] << ','
++                        << alpha1[celli] << ','
++                        << alpha2[celli] << ','
++                        << K[celli] << ','
++                        << fullDiag << ','
++                        << fullSource << ','
++                        << fullResidual << ','
++                        << fullDiag*T[celli] - fullSource << ','
++                        << diffusionDiag << ','
++                        << diffusionSource << ','
++                        << diffusionResidual << ','
++                        << diffusionDiag*T[celli] - diffusionSource << ','
++                        << fullResidual - diffusionResidual << '\n';
++                }
++            };
++
+             i4fCaptureFirstStepEnergy("before_UEqn", -1);
+ 
+             #include "UEqn.H"

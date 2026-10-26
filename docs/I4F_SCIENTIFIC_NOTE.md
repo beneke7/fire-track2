@@ -43,8 +43,10 @@ with the momentum predictor enabled, two initially pure-air cells reach about
 713 m/s and K=254178 m2/s2 before the first temperature solve. Preserved Kold
 is zero. The explicit kinetic-energy term corresponds to a -354.03 K change
 over 12 microseconds; the actual temperature drop is -281.11 K to about
-12.04 K. The +72.92 K remainder requires the implicit equation budget, which
-is not yet closed. Disabling that predictor leaves these cells at 293.15 K
+12.04 K. The exact frozen diffusion matrix now accounts for the +72.92 K remainder
+at both selected cells; the full local equation residual is about
+1.30e-6 kg K/s. This is a two-cell, first-outer result, not global energy
+closure. Disabling that predictor leaves these cells at 293.15 K
 at the same stage; a read-only observer reproduces all fifteen native fields
 and time exactly against its uninstrumented predictor-off baseline. Pressure
 correction still updates velocity and kinetic energy. This identifies the
@@ -55,10 +57,26 @@ the matched warm trial stopped at .494129725325 s, dp 1253.704 Pa, zero raw
 floor contacts, essentially the proper-history control's failure window.
 The raw source fixed-point defect stopped contracting in the later outer
 iterations. A smoother applied source is not proof of convergence; the
-conditional sixteen-outer run was withheld. A separate same-seed trial now
-disables the momentum predictor with source weight 1, leaving other numerical
-and physical controls unchanged. The longer cold-derived predictor-off run
-continues separately. Current runtime authorities belong in live status.
+conditional sixteen-outer run was withheld. The same-seed predictor-off
+trial also stopped at .494129418057 s with 1254.224 Pa final updates. The
+cold-derived trajectory stopped at .484006 s without floor contact. A clean
+25-microsecond warm replay instead encountered negative raw pressure early
+and saved at .461923 s. These outcomes do not support another source-weight
+or timestep sweep. A pressure-only frozen-operator probe now isolates the
+explicit pressure/face-flux update, alongside one exploratory pressure-Laplacian
+limiter comparison. Current runtime authorities belong in live status.
+
+The local startup balance can be checked directly from the
+[raw matrix packet](../results/summaries/i4f_20261025/firststep-energy/firststep-temperature-matrix-evidence.json).
+For this initially pure-air, zero-flux first outer iteration only, define
+R as matrix source minus A times T and D0 as the non-diffusion diagonal.
+Then DeltaT = -DeltaK/Cv + Rdiff/D0 - Rfull/D0. At rank 0/local cell 5154:
+-354.031690 + 72.922837 - .000007362 = -281.108861 K. The matrix diagonal
+is volume-integrated kg/s and residual/source kg K/s; the original frozen
+metadata's per-volume label is corrected separately, without changing inputs.
+The enriched observer reproduces all fifteen fields and time byte-for-byte.
+The packet's source-closure reference identifies an ancestor; the immediate
+12d8 binary source and full CFD mesh remain separately required local inputs.
 
 The predictor/corrector equations explain the targeted numerical change.
 For this static Euler, single alpha-correction/subcycle configuration, let

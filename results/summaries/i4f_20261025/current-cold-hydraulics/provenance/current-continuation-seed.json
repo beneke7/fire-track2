@@ -1,0 +1,125 @@
+{
+  "campaign_initial_gas_kg": 33.87656607230728,
+  "campaign_initial_time_s": 0.0,
+  "campaign_initial_water_kg": 3198.008370828781,
+  "checkpoint_field_sha256": "d7e6b2e3aad985821d8d21bb66ded54809d04e5b8f230ed446f07f9118c57ba1",
+  "checkpoint_fields": [
+    "alpha.water",
+    "p",
+    "p_rgh",
+    "T",
+    "U",
+    "k",
+    "omega",
+    "nut",
+    "alphat",
+    "T.air",
+    "T.water",
+    "rho",
+    "phi",
+    "alphaPhi0.water",
+    "dgdt"
+  ],
+  "checkpoint_file_records": [
+    {
+      "bytes": 2658642,
+      "path": "processors10/0.090771166664/T",
+      "sha256": "3eca17eeaca363b7b49be70de75320f7a9633a4fc25894cc7424baa0d9017f4b"
+    },
+    {
+      "bytes": 2562288,
+      "path": "processors10/0.090771166664/T.air",
+      "sha256": "eafb5cbc7f78f591df0c126aa668bf7bac26ba02b3031dcae6279987b0e615e9"
+    },
+    {
+      "bytes": 2562292,
+      "path": "processors10/0.090771166664/T.water",
+      "sha256": "b26fdf28f35b9c01bbd961ebc24490262f7fc256081b700273739470ad9af4ac"
+    },
+    {
+      "bytes": 7938894,
+      "path": "processors10/0.090771166664/U",
+      "sha256": "e386873a393238532776f20c151d2a5b8ef5db8bc65ee73ada1871bec63d6094"
+    },
+    {
+      "bytes": 2651952,
+      "path": "processors10/0.090771166664/alpha.water",
+      "sha256": "9f0ba5bfe588e271ffa654d8938cb38cc80a81acbf0cdc7326dcb191cd7d82db"
+    },
+    {
+      "bytes": 7722531,
+      "path": "processors10/0.090771166664/alphaPhi0.water",
+      "sha256": "db3a56af5d582287c6a4e39fbeebd325e4f73ab658534d83f70385129ebf2145"
+    },
+    {
+      "bytes": 3207527,
+      "path": "processors10/0.090771166664/alphat",
+      "sha256": "90c0debdba61f127278a03288bde066459977cde5e5ed5ed25a8d6ade26864a0"
+    },
+    {
+      "bytes": 3203503,
+      "path": "processors10/0.090771166664/dgdt",
+      "sha256": "f1819738f381b41545d1cd9949fa143d5ebc6e2ea22cf03813149e5a5909f86f"
+    },
+    {
+      "bytes": 3204683,
+      "path": "processors10/0.090771166664/k",
+      "sha256": "3bc68936f906bd6a5fdad8e5a083a5700fc2eccabea323165c6421233830fade"
+    },
+    {
+      "bytes": 3206665,
+      "path": "processors10/0.090771166664/nut",
+      "sha256": "a61e5a2ac41e6f75150958c9419d4a856678e5bd85c6134a51fb732d46578e00"
+    },
+    {
+      "bytes": 3206553,
+      "path": "processors10/0.090771166664/omega",
+      "sha256": "62753e57c58ea4daf157c46f190d63f3aab250f4d31cb1e2f4f0e48c73561c4c"
+    },
+    {
+      "bytes": 3206857,
+      "path": "processors10/0.090771166664/p",
+      "sha256": "beeb076589495c1e3eb7d03f0cece054906dc4d7885a8bcc8c426f01a0add7c2"
+    },
+    {
+      "bytes": 3796238,
+      "path": "processors10/0.090771166664/p_rgh",
+      "sha256": "efa50028945287f846eb28ac00b0479a12c62dc4546464f4939cd22dc81ece21"
+    },
+    {
+      "bytes": 7726577,
+      "path": "processors10/0.090771166664/phi",
+      "sha256": "b45e6679eedc93f719e1b01ae83c7fce82a939a482ad819c02aa406097333ec1"
+    },
+    {
+      "bytes": 3206851,
+      "path": "processors10/0.090771166664/rho",
+      "sha256": "5cc61278f2ee542f28231f51b4d76f8aa964d55fedfdef62fc5339e9cc81d6e8"
+    },
+    {
+      "bytes": 1062,
+      "path": "processors10/0.090771166664/uniform/time",
+      "sha256": "a6bc34114efbb4f60dab54da48e333c8669db1aa439e96680f190d009a6fa757"
+    }
+  ],
+  "checkpoint_gas_kg": 33.857289,
+  "checkpoint_path_in_parent": "case/processors10/0.090771166664",
+  "checkpoint_time_folder": "0.090771166664",
+  "checkpoint_time_s": 0.09077116666404433,
+  "checkpoint_water_kg": 3198.0084,
+  "cumulative_gas_defect_kg": -6.849366286012546e-07,
+  "cumulative_water_defect_kg": 2.9171219011914218e-05,
+  "parent_binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "parent_bundle": "results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z",
+  "parent_container_id": "8b086b299aee6b71b8a4826ab110db0989d8e92ca10ca142ee7acede0da551d5",
+  "parent_docker_started_at": "2026-10-26T20:24:41.025680559Z",
+  "parent_terminal_reason": "free disk below 20 GiB",
+  "parent_terminal_utc": "2026-10-26T20:35:24.426198078Z",
+  "restart_qualification": "Operational Euler restart from the accepted n checkpoint. The branch preserves 14 required fields plus dgdt and uniform/time; full-apparatus bitwise continuity is not claimed. Mixture construction regenerates T.air/T.water from common T after GO.",
+  "schema": "i4f-cold-operational-continuation-seed/v1",
+  "trajectory_deadlines": {
+    "graceful_save_deadline_utc": "2026-10-27T03:54:41.025680+00:00",
+    "hard_deadline_utc": "2026-10-27T04:24:41.025680+00:00",
+    "policy": "Carry the original cold campaign wall deadlines forward across this operational split."
+  }
+}

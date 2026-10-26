@@ -1,0 +1,160 @@
+{
+  "binary_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/bin/compressibleInterFoamI4FColdRestartConsistent",
+  "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "canonical_byte_comparison": {
+    "fvSolution_only_momentum_predictor_change": true,
+    "improved_stack_dictionary_comparison": [
+      {
+        "byte_identical": true,
+        "new_sha256": "5414a14650bebbf1b16ea535c20527e992c4407dd18529dc624c58ffa1662a90",
+        "parent_sha256": "5414a14650bebbf1b16ea535c20527e992c4407dd18529dc624c58ffa1662a90",
+        "path": "system/controlDict"
+      },
+      {
+        "byte_identical": false,
+        "new_sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff",
+        "parent_sha256": "a5883d8e7b4520f6f2ee9572dbe614a557914e3d8e5016b0f65fa0be5b092f51",
+        "path": "system/fvSolution"
+      },
+      {
+        "byte_identical": true,
+        "new_sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+        "parent_sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e",
+        "path": "system/fvSchemes"
+      },
+      {
+        "byte_identical": true,
+        "new_sha256": "c088f2fceca799aca871e7e764b81075225ee32f5413111dfae7b26e73a184f8",
+        "parent_sha256": "c088f2fceca799aca871e7e764b81075225ee32f5413111dfae7b26e73a184f8",
+        "path": "system/fourMouthObserverObjects"
+      }
+    ],
+    "mesh": {
+      "all_byte_identical": true,
+      "canonical_file_count": 50,
+      "case_file_count": 50,
+      "changed": [],
+      "extra": [],
+      "missing": []
+    },
+    "native10": {
+      "all_byte_identical": true,
+      "canonical_file_count": 67,
+      "case_file_count": 67,
+      "changed": [],
+      "extra": [],
+      "missing": []
+    },
+    "only_case_dictionary_files_differ_from_canonical": [
+      "system/controlDict",
+      "system/fourMouthObserverObjects",
+      "system/fvSchemes",
+      "system/fvSolution"
+    ],
+    "prescribed_fields": [
+      {
+        "byte_identical": true,
+        "canonical_sha256": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+        "case_sha256": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+        "field": "U"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "f4e820b90d9a9ef16c60ceac0ace0b8c1ba86f95b2eee9dd952278d8fb107710",
+        "case_sha256": "f4e820b90d9a9ef16c60ceac0ace0b8c1ba86f95b2eee9dd952278d8fb107710",
+        "field": "p"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "5121a0df468dffe69672ee8743fb0900a4cd173634eda390435040a0f26120e3",
+        "case_sha256": "5121a0df468dffe69672ee8743fb0900a4cd173634eda390435040a0f26120e3",
+        "field": "p_rgh"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+        "case_sha256": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+        "field": "T"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "8cd4bb09ef5a5bffad6cbe1bda7eb98b3fe43644d8c573046709debe93652277",
+        "case_sha256": "8cd4bb09ef5a5bffad6cbe1bda7eb98b3fe43644d8c573046709debe93652277",
+        "field": "alpha.water"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "8e515a1618970553e6e1058db4b58cbd822167460a3cbac59ecc887b5a9cd455",
+        "case_sha256": "8e515a1618970553e6e1058db4b58cbd822167460a3cbac59ecc887b5a9cd455",
+        "field": "alphat"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "ef644b4f58c25b669c64b5cbe83f2ccda43dc03e442bca2abaeadf0608c74247",
+        "case_sha256": "ef644b4f58c25b669c64b5cbe83f2ccda43dc03e442bca2abaeadf0608c74247",
+        "field": "k"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "2a443276542f6729f00ffbe12f40650f27678ba727c02996ddb8b0c5db458071",
+        "case_sha256": "2a443276542f6729f00ffbe12f40650f27678ba727c02996ddb8b0c5db458071",
+        "field": "nut"
+      },
+      {
+        "byte_identical": true,
+        "canonical_sha256": "e6fc3fc82dd2af150c1a6be2a01e4c6de3583cd839f3b291e731c7fc21dd434d",
+        "case_sha256": "e6fc3fc82dd2af150c1a6be2a01e4c6de3583cd839f3b291e731c7fc21dd434d",
+        "field": "omega"
+      }
+    ]
+  },
+  "canonical_source_case": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/case",
+  "case_static_tree_sha256": "88ad17ef9dd980bb18fb01e2a42c07988fcf359d352f3fe5ef3924aa81a47f89",
+  "created_utc": "2026-10-26T20:24:04.633941+00:00",
+  "git_dirty_snapshot_at_preparation": " M docs/STATUS.md\n",
+  "git_revision": "5dd83f5bdea19c3f05942ef4c27f71a7fdfee4ac",
+  "git_revision_at_preparation": "7f1ef8ce5d0a6f408ff3778f62d49f1be168f79c",
+  "git_status_snapshot": " M results/archives/index.json\n?? results/archives/manifests/i4f-terminal-log-i4f-finite-water-eos-halfdt-stage01-20261026T131840Z-20261026T195807Z.tar.zst.members.json\n?? results/archives/manifests/i4f-terminal-log-i4f-finite-water-eos-n2-stage01-20261026T112421Z-20261026T195807Z.tar.zst.members.json\n?? results/archives/manifests/i4f-terminal-log-i4f-rhoconst-cold-control-stage02-20261026T121421Z-20261026T195807Z.tar.zst.members.json\n?? results/summaries/i4f_20261025/full-source-apparatus/context-20261026T193827Z/\n?? results/summaries/i4f_20261025/full-source-apparatus/context-cell-localization-20261026T1954Z/\n?? results/summaries/i4f_20261025/full-source-apparatus/source-closure-20261026T2010Z/\n",
+  "matched_improved_stack": "results/runs/i4f-restart-consistent-apparatus-cold-20261026T1958Z",
+  "mesh_cells": 299214,
+  "mesh_points_sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779",
+  "parent_case_static_tree_sha256": "e782770c09df547df2aac06883a70e22e20024a9629ec20844200b8430976d33",
+  "parent_input_freeze_sha256": "e1786af8ad6ae94ab24df910e51273b2f0d828295cd5129590dd3bfa3484fd22",
+  "prescribed_t0_fields": [
+    "U",
+    "p",
+    "p_rgh",
+    "T",
+    "alpha.water",
+    "alphat",
+    "k",
+    "nut",
+    "omega"
+  ],
+  "processor_count": 10,
+  "restart_checkpoint_field_sha256": "d7e6b2e3aad985821d8d21bb66ded54809d04e5b8f230ed446f07f9118c57ba1",
+  "restart_checkpoint_folder": "0.090771166664",
+  "restart_checkpoint_manifest_sha256": "f6a5df8c618773d8c156c4d3d91a94accb8b0b037a3e0dd2bfb593cdd680210e",
+  "restart_checkpoint_time_s": 0.09077116666404433,
+  "restart_deadline_graceful_utc": "2026-10-27T03:54:41.025680+00:00",
+  "restart_deadline_hard_utc": "2026-10-27T04:24:41.025680+00:00",
+  "restart_parent_container_id": "8b086b299aee6b71b8a4826ab110db0989d8e92ca10ca142ee7acede0da551d5",
+  "restart_parent_started_at": "2026-10-26T20:24:41.025680559Z",
+  "schema": "i4f-cold-operational-continuation-freeze/v1",
+  "source_content_sha256": "09862c07aede283b1256c1f2e2465a113edd7cd567ec4869cad68b7f305e6747",
+  "source_file_count": 90,
+  "source_tree_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "static_input_tree_components": {
+    "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "dynamic_code_manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "eos_readiness_sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+    "input_byte_comparison_sha256": "d872658a7b5e9bd82a3fa8841d41fcb2c08f38842d364857cf54cd21089e3c63",
+    "mesh_load_preflight_sha256": "995477ebf96783f0b487fb166bf54714c6b5688cbf40b0e236be0900b89c4088",
+    "native_initial_fields_manifest_sha256": "5b3f2d60284ff083c3ff67072de3207abee9b17469ecff30e5e17a2f593b8e54",
+    "polyMesh_manifest_sha256": "2850d83392608ec944983ab4816bd14cb0a6f68a66ea9daba90fc1a1bea75cb6",
+    "processor_inputs_manifest_sha256": "62fcd88926e1fc5dc3391c0e670c2cf5ed6c434e59926b4b1979d1080151bb5a",
+    "source_content_sha256": "09862c07aede283b1256c1f2e2465a113edd7cd567ec4869cad68b7f305e6747",
+    "source_manifest_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83"
+  },
+  "static_input_tree_sha256": "d4e5b458bbd5581a265021704f3809b4689a1808b144dc7dcb631186c6ef604c"
+}
