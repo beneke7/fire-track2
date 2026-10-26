@@ -1,9 +1,30 @@
 # Komondor Rouaix status
 
-Updated from independent scheduler/accounting captures on 2026-10-26, latest 15:29 UTC.
+Updated from independent scheduler/accounting captures on 2026-10-26, latest 17:43 UTC.
 Analytical E0 is the only passed gate; current CFD work is exploratory.
 
 ## Current queue and per-core profiling
+
+**64-rank S1 completed:** job 14651180 ended 16:44:37 UTC (17:44:37 CET),
+all 500 fixed 0.1 ms steps through 0.05 s. All 4,001 linear solve records met
+their criteria. Peak speed 103.5026 m/s; bulk/interface Co 1.1210/0.5402;
+500-row mass-ledger residual +1.05e-11 kg. Solver srun wall 3490.203 s,
+whole job 3681 s/65.44 allocated core-hours; TotalCPU 61.57 core-hours.
+Native archive verification succeeded and root's terminal analyst separately
+matched remote SHA/member inventory and 16 compact files at both ends.
+[Terminal result](../results/summaries/rouaix_s1_64_20261026/README.md).
+
+It ran through Backfill/cpu-short on 64-CPU GPU-capable node x1001c2s3b0n0,
+with no GPU TRES allocated. Hardware differs from the 120-rank 128-CPU case;
+their peak-speed agreement (~0.2%) is a scalar check, not controlled scaling
+or field convergence. High turbulence values and physical fidelity remain
+unqualified. The full horizon is only 0.05 s; no E1 gate was assessed.
+
+At **17:43:58 UTC (18:43:58 CET)** the other six jobs had zero allocations:
+96-rank 14651185 and 24-rank 14652546 wait on Priority; 120-rank 14651174,
+upwind 14651178 and profile 14652548 wait on Dependency. L1 job 14650641
+waits on Priority, provisional forecast 28 October 02:48:48 UTC
+(03:48:48 CET); the other starts are N/A. The 64-rank node has been released.
 
 At **15:29:10 UTC (16:29:10 CET)** all seven owned CFD jobs remained
 PENDING with zero allocated CPUs. The shared account had **1 CPU allocated**

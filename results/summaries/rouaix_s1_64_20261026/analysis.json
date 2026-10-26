@@ -1,0 +1,252 @@
+{
+  "archive": {
+    "actual_tar_member_listing_matches_saved_inventory": true,
+    "member_count": 130,
+    "path_check": "relative names only; no dot/parent traversal; members regular files/directories only.",
+    "remote_bytes": 1697090733,
+    "selected_file_bytes": 2356142,
+    "selected_file_count": 16,
+    "sha256": "dfd541d13d7246030c45197f35b3557051852e994683a59621af4c7fa676d048",
+    "sidecar_and_run_state_match": true,
+    "status_reported_by_run_state": "verified_crc_hash_and_member_list",
+    "verification_boundary": "Remote tar member listing was read and matched the saved inventory. Run-state reports verified CRC/hash/member list. The full archive was not copied locally; remote SHA was matched to sidecar and run-state; the 16 selected compact files (2,356,142 bytes) were extracted remotely and local SHA-256 matched remote SHA-256 for all 16."
+  },
+  "artifact_directory": "results/runs/rouaix-s1-64-terminal-20261026",
+  "case": {
+    "alpha_subcycles": 1,
+    "delta_t_s": 0.0001,
+    "field_write_times_s": [
+      0.0,
+      0.05
+    ],
+    "gpus_allocated": false,
+    "horizon_s": 0.05,
+    "logged_steps": 500,
+    "mesh_cells": 10099265,
+    "nCorrectors": 3,
+    "nOuterCorrectors": 1,
+    "node": "x1001c2s3b0n0",
+    "nodes": 1,
+    "partition": "cpu-short",
+    "ranks": 64,
+    "solver": "v2512",
+    "tasks_per_node": [
+      64
+    ],
+    "turbulence_model": "realizable k-epsilon RANS",
+    "variant": "original"
+  },
+  "case_id": "S1-ORIG-64-01MS-005",
+  "command_errors": [
+    "sacct --utc is unsupported by this Slurm version; UTC interpretation uses the captured CET +0100 timezone and run-state UTC timestamps.",
+    "sacct ReqGRES field is removed; successful follow-up used ReqTRES,AllocTRES.",
+    "The archive-embedded sstat query failed because the persistent Slurm accounting connection was refused."
+  ],
+  "commands": [
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14651180 --format=JobID,JobIDRaw,JobName,State,ExitCode,AllocCPUS,Elapsed,TotalCPU,CPUTimeRAW,MaxRSS,AveRSS,ReqMem,Start,End,NodeList -P'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14651180 --format=JobID,ReqTRES,AllocTRES -P'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tzf <remote-result.tar.gz>' and 'tar -tvzf <remote-result.tar.gz>'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar --no-same-owner --no-same-permissions -xzf <remote-result.tar.gz> -C /tmp/rouaix-s1-64-terminal-20261026 <16 vetted selected members>'",
+    "rsync -avP --files-from=results/runs/rouaix-s1-64-terminal-20261026/archive/select-members.txt -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' nk_memj@komondor.hpc.kifu.hu:/tmp/rouaix-s1-64-terminal-20261026/ results/runs/rouaix-s1-64-terminal-20261026/metrics/",
+    ".venv/bin/python scripts/hpc_metrics.py --run s1=results/runs/rouaix-s1-64-terminal-20261026/metrics/attempt/solver.log --ranks s1=64 --launcher s1=results/runs/rouaix-s1-64-terminal-20261026/archive/run-state.json --sacct s1=results/runs/rouaix-s1-64-terminal-20261026/terminal-sacct-14651180.txt --output results/runs/rouaix-s1-64-terminal-20261026/metrics/hpc-metrics.json",
+    "Not run: tests. No solver or other compute job launched."
+  ],
+  "comparison_to_prior_T1_120": {
+    "interpretation": "Peak scalar differs by about 0.2%; this is one scalar comparison, not field convergence. Runtime is not a controlled scaling comparison: 64 ranks on a GPU-capable 64-CPU host without GPU allocation versus 120 ranks on a CPU128 host.",
+    "peak_speed_delta_m_s": 0.20905898199998774,
+    "peak_speed_delta_percent": 0.20239306950782243,
+    "per_step_solver_wall_s": 6.980405273810029,
+    "reference_allocated_core_hours": 60.5666666667,
+    "reference_case_id": "T1-ORIG-120-01MS-005",
+    "reference_job_elapsed_s": 1817,
+    "reference_job_id": "14649329",
+    "reference_peak_speed_m_s": 103.293547802,
+    "reference_peak_time_s": 0.0497,
+    "reference_per_step_solver_wall_s": 3.2354886808781886,
+    "reference_solver_wall_s": 1617.7443404390942
+  },
+  "diagnostics": {
+    "alpha": {
+      "endpoint_written_alpha_extrema": [
+        0.0,
+        1.0
+      ],
+      "intermediate_conservative_bound_samples": 500,
+      "max_alpha_after_conservative_bound": 1.0,
+      "min_alpha_after_conservative_bound": -7.28780754882e-14,
+      "phase1_max_alpha_water": 1.0,
+      "phase1_min_alpha_water": -7.87447127296e-09
+    },
+    "bulk_courant_max": 1.12101137393,
+    "bulk_courant_time_s": 0.0499,
+    "endpoint_field_max_speed_m_s": 103.502606784,
+    "endpoint_field_time_s": 0.05,
+    "endpoint_max_speed_cell": 110378,
+    "endpoint_max_speed_location_m": [
+      0.565642458101,
+      -0.0492114449671,
+      0.406027079461
+    ],
+    "endpoint_max_speed_processor": 26,
+    "endpoint_turbulence_extrema_at_0.05_s": {
+      "epsilon_max": 285263.162875,
+      "epsilon_min": 0.0106697564104,
+      "k_max": 756.609551374,
+      "k_min": 0.00656551646715,
+      "nut_max": 0.334590724335,
+      "nut_min": 0.0
+    },
+    "interface_courant_max": 0.540217113574,
+    "interface_courant_time_s": 0.0495,
+    "linear_solve_audit": {
+      "all_converged": true,
+      "by_field": {
+        "Ux": {
+          "failed_count": 0,
+          "max_final_residual": 9.97965203653e-09,
+          "max_iterations": 5,
+          "solve_count": 500
+        },
+        "Uy": {
+          "failed_count": 0,
+          "max_final_residual": 9.81480819484e-09,
+          "max_iterations": 4,
+          "solve_count": 500
+        },
+        "Uz": {
+          "failed_count": 0,
+          "max_final_residual": 9.9955965766e-09,
+          "max_iterations": 5,
+          "solve_count": 500
+        },
+        "epsilon": {
+          "failed_count": 0,
+          "max_final_residual": 9.83497802172e-09,
+          "max_iterations": 8,
+          "solve_count": 500
+        },
+        "k": {
+          "failed_count": 0,
+          "max_final_residual": 9.97639630499e-09,
+          "max_iterations": 10,
+          "solve_count": 500
+        },
+        "p_rgh": {
+          "failed_count": 0,
+          "max_final_residual": 0.000291769645133,
+          "max_iterations": 19,
+          "solve_count": 1500
+        },
+        "pcorr": {
+          "failed_count": 0,
+          "max_final_residual": 9.77823727375e-11,
+          "max_iterations": 799,
+          "solve_count": 1
+        }
+      },
+      "failed_records": 0,
+      "pcorr_initial_solve_max_iterations": 799,
+      "pressure_solver_wall_time": "not measured",
+      "records": 4001
+    },
+    "max_speed_csv_rows": 500,
+    "max_speed_csv_time_s": 0.0495,
+    "max_speed_m_s": 103.502606784,
+    "peak_time_location_phase": "unknown; the only retained full fields are 0 and 0.05 s, so the endpoint location must not be assigned to the earlier 0.0495 s CSV peak."
+  },
+  "interpretation_and_remaining_defects": [
+    "Exploratory startup only; not E1 gate acceptance or field validation. The run reaches only 0.05 s and does not compare penetration, expansion, or breakup against Rouaix curves.",
+    "No full field exists at the 0.0495 s peak; peak-time phase and exact location remain unknown.",
+    "Endpoint k, epsilon, nut maxima are large and are not temporally coincident with a retained peak-time field.",
+    "The archived attempt/experiment.md introduction still describes 0.001 s and 50 steps; the immutable S1 pre-submit record, run-state, manifest, controlDict, and log establish actual 0.0001 s and 500 steps. Preserve this documentation mismatch for follow-up.",
+    "Mass closure uses conservative alphaPhi_ flux integration; the audit explicitly cautions that later direct alpha snap/clipping may appear in residual. It is an exploratory mass check, not a momentum or validation proof.",
+    "Pressure solve time, node-aggregate RSS, and memory time series are unavailable. Embedded Slurm sstat failed with a persistent-connection refusal."
+  ],
+  "job_id": "14651180",
+  "mass_ledger": {
+    "audit_exit_code": 0,
+    "closure_residual_kg": 1.0466294497746276e-11,
+    "final_inventory_kg": 62.58221601489213,
+    "injected_kg": 62.582216014881666,
+    "limitation": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual.",
+    "max_abs_cumulative_closure_residual_kg": 1.72235559148e-11,
+    "max_abs_per_step_closure_residual_kg": 8.18498047117e-12,
+    "requested_horizon_reached": true,
+    "rows": 500,
+    "signed_net_escape_kg": 1.433640320698291e-99,
+    "status": "configured_horizon_reached_exploratory_only"
+  },
+  "schema_version": 1,
+  "scope": "Independent terminal analysis of completed exploratory S1 job; no solver launch, source edit, or formal E1 gate decision.",
+  "slurm_accounting": {
+    "batch": {
+      "elapsed": "01:01:21",
+      "max_rss": "9494100K",
+      "total_cpu": "03:31.483"
+    },
+    "parent": {
+      "alloc_cpus": 64,
+      "allocated_core_hours": 65.44,
+      "elapsed_s": 3681.0,
+      "exit_code": "0:0",
+      "max_rss": null,
+      "node": "x1001c2s3b0n0",
+      "req_mem": "64G",
+      "state": "COMPLETED",
+      "total_cpu_core_hours": 61.569722222222225,
+      "total_cpu_s": 221651.0,
+      "whole_job_busy_fraction": 0.9408576134202663
+    },
+    "rss_scope": "Parent MaxRSS absent. .batch MaxRSS is separate; solver-step MaxRSS is a per-task maximum, not node total. sstat time-series query failed because Slurm persistent accounting connection was refused.",
+    "solver_step": {
+      "allocated_solver_envelope_core_hours": 62.04804687831137,
+      "busy_fraction_estimate": 0.9913419749370739,
+      "elapsed": "00:58:10",
+      "elapsed_s": 3490.0,
+      "max_rss_per_task": "1652768K",
+      "ranks": 64,
+      "solver_wall_s": 3490.2026369050145,
+      "total_cpu": "2-13:30:39",
+      "total_cpu_core_hours": 61.51083333333333
+    }
+  },
+  "source_and_inputs": {
+    "case_inputs_sha256": "a4089539016e44d4547019ba76d46574838b449207c004bcfb2af112aae55d27",
+    "controlDict_sha256": "26c64f134d78a82de7dc5c51f1a5c775feb8875118e0374b1cf96fdb277b548c",
+    "frozen_case_record_sha256": "baeb3042892e2347b3553c04f2c236126e26edfe3e3419c14fbdbf32a0e36f17",
+    "fvSchemes_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+    "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+    "input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "max_speed_csv_sha256": "edbb95481ee909e728d26a45f1d1e3bcd7ab319aae68bacd4ce16db30230812b",
+    "mesh_files_sha256": {
+      "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+      "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+      "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+      "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+      "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d"
+    },
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "native_solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "runner_revision_status": "run-state/manifest revision is unknown; frozen source capsule identifies revision and exact dirty paths.",
+    "solver_log_sha256": "7dec61d5fd3c22154220aff7df6a3b9c9e828eab5cb2f643c3a378a81bb044f5",
+    "source_capsule_dirty_paths": [
+      " M cases/e1_rouaix_hpc/prepare_case.py",
+      " M cases/e1_rouaix_hpc/run_pilot.py",
+      " M experiments/E1_ROUAIX_HPC_PROGRESSION.md"
+    ],
+    "source_capsule_git_revision": "3c0ddafe646daa6cc8a5d0d502f9e8c28183dea7",
+    "source_capsule_members": 24,
+    "source_capsule_sha256": "4d67729f3fee89aa888e9e8869952f1339ba0d02450b5e8528f1848b63d60420"
+  },
+  "status": "solver_complete_exploratory",
+  "utc_timing": {
+    "runner_final_utc": "2026-10-26T16:44:37.579015+00:00",
+    "runner_started_utc": "2026-10-26T15:43:22.544494+00:00",
+    "slurm_parent_end_utc_derived_from_cluster_CET": "2026-10-26T16:44:37Z",
+    "slurm_parent_start_utc_derived_from_cluster_CET": "2026-10-26T15:43:16Z",
+    "slurm_solver_step_end_utc_derived_from_cluster_CET": "2026-10-26T16:43:09Z",
+    "slurm_solver_step_start_utc_derived_from_cluster_CET": "2026-10-26T15:44:59Z",
+    "solver_started_utc": "2026-10-26T15:45:00.064287+00:00",
+    "timezone_basis": "cluster sacct Start/End fields were local CET (+0100), confirmed by remote date output; run-state carries UTC timestamps. sacct --utc is unsupported."
+  }
+}

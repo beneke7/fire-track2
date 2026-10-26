@@ -15,3 +15,7 @@ results/summaries/i4f_20261025/finite-water-floor-* -text
 # Imported HPC evidence is hash-bound; raw test logs keep original whitespace.
 results/summaries/rouaix_hpc_20261026/** -text
 results/summaries/rouaix_hpc_20261026/checks/*.log whitespace=-blank-at-eol,-blank-at-eof
+
+# Preserve hash-bound S1 terminal diagnostics, including native CSV line endings.
+results/summaries/rouaix_s1_64_20261026/** -text
+results/summaries/rouaix_s1_64_20261026/**/*.csv whitespace=cr-at-eol
