@@ -1,0 +1,45 @@
+FoamFile { version 2.0; format ascii; class dictionary; location "system"; object topoSetDict; }
+actions
+(
+    { name setA1; type cellSet; action new; source zoneToCell; zone lineAInitialZone; }
+    { name setA1; type cellSet; action subset; source boxToCell; box (1.949999 -0.900001 0.349999) (2.250001 -0.599999 0.650001); }
+    { name valveBandA1; type cellZoneSet; action new; source setToCellZone; set setA1; }
+    { name upstreamA1; type cellSet; action new; source zoneToCell; zone lineAInitialZone; }
+    { name upstreamA1; type cellSet; action subset; source boxToCell; box (1.000000 -0.900001 0.349999) (1.949999 -0.599999 0.650001); }
+    { name facessourceStartA1; type faceSet; action new; source boxToFace; box (1.949999 -0.900001 0.349999) (1.950001 -0.599999 0.650001); }
+    { name sourceStartA1; type faceZoneSet; action new; source setsToFaceZone; faceSet facessourceStartA1; cellSet upstreamA1; }
+    { name facesvalveSeatA1; type faceSet; action new; source boxToFace; box (2.249999 -0.900001 0.349999) (2.250001 -0.599999 0.650001); }
+    { name valveSeatA1; type faceZoneSet; action new; source setsToFaceZone; faceSet facesvalveSeatA1; cellSet setA1; }
+    { name setA2; type cellSet; action new; source zoneToCell; zone lineAInitialZone; }
+    { name setA2; type cellSet; action subset; source boxToCell; box (1.949999 -0.500001 0.349999) (2.250001 -0.199999 0.650001); }
+    { name valveBandA2; type cellZoneSet; action new; source setToCellZone; set setA2; }
+    { name upstreamA2; type cellSet; action new; source zoneToCell; zone lineAInitialZone; }
+    { name upstreamA2; type cellSet; action subset; source boxToCell; box (1.000000 -0.500001 0.349999) (1.949999 -0.199999 0.650001); }
+    { name facessourceStartA2; type faceSet; action new; source boxToFace; box (1.949999 -0.500001 0.349999) (1.950001 -0.199999 0.650001); }
+    { name sourceStartA2; type faceZoneSet; action new; source setsToFaceZone; faceSet facessourceStartA2; cellSet upstreamA2; }
+    { name facesvalveSeatA2; type faceSet; action new; source boxToFace; box (2.249999 -0.500001 0.349999) (2.250001 -0.199999 0.650001); }
+    { name valveSeatA2; type faceZoneSet; action new; source setsToFaceZone; faceSet facesvalveSeatA2; cellSet setA2; }
+    { name setB1; type cellSet; action new; source zoneToCell; zone lineBInitialZone; }
+    { name setB1; type cellSet; action subset; source boxToCell; box (1.949999 0.199999 0.349999) (2.250001 0.500001 0.650001); }
+    { name valveBandB1; type cellZoneSet; action new; source setToCellZone; set setB1; }
+    { name upstreamB1; type cellSet; action new; source zoneToCell; zone lineBInitialZone; }
+    { name upstreamB1; type cellSet; action subset; source boxToCell; box (1.000000 0.199999 0.349999) (1.949999 0.500001 0.650001); }
+    { name facessourceStartB1; type faceSet; action new; source boxToFace; box (1.949999 0.199999 0.349999) (1.950001 0.500001 0.650001); }
+    { name sourceStartB1; type faceZoneSet; action new; source setsToFaceZone; faceSet facessourceStartB1; cellSet upstreamB1; }
+    { name facesvalveSeatB1; type faceSet; action new; source boxToFace; box (2.249999 0.199999 0.349999) (2.250001 0.500001 0.650001); }
+    { name valveSeatB1; type faceZoneSet; action new; source setsToFaceZone; faceSet facesvalveSeatB1; cellSet setB1; }
+    { name setB2; type cellSet; action new; source zoneToCell; zone lineBInitialZone; }
+    { name setB2; type cellSet; action subset; source boxToCell; box (1.949999 0.599999 0.349999) (2.250001 0.900001 0.650001); }
+    { name valveBandB2; type cellZoneSet; action new; source setToCellZone; set setB2; }
+    { name upstreamB2; type cellSet; action new; source zoneToCell; zone lineBInitialZone; }
+    { name upstreamB2; type cellSet; action subset; source boxToCell; box (1.000000 0.599999 0.349999) (1.949999 0.900001 0.650001); }
+    { name facessourceStartB2; type faceSet; action new; source boxToFace; box (1.949999 0.599999 0.349999) (1.950001 0.900001 0.650001); }
+    { name sourceStartB2; type faceZoneSet; action new; source setsToFaceZone; faceSet facessourceStartB2; cellSet upstreamB2; }
+    { name facesvalveSeatB2; type faceSet; action new; source boxToFace; box (2.249999 0.599999 0.349999) (2.250001 0.900001 0.650001); }
+    { name valveSeatB2; type faceZoneSet; action new; source setsToFaceZone; faceSet facesvalveSeatB2; cellSet setB2; }
+    { name valveSourceBandCells; type cellSet; action new; source cellToCell; set setA1; }
+    { name valveSourceBandCells; type cellSet; action add; source cellToCell; set setA2; }
+    { name valveSourceBandCells; type cellSet; action add; source cellToCell; set setB1; }
+    { name valveSourceBandCells; type cellSet; action add; source cellToCell; set setB2; }
+    { name valveSourceBand; type cellZoneSet; action new; source setToCellZone; set valveSourceBandCells; }
+);

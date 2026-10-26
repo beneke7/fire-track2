@@ -1,0 +1,47 @@
+{
+  "application_audit": {
+    "artifact_path": "provenance/eos-application-audit.json",
+    "same_sha256_in_t0_source_and_cold_pilot": true,
+    "sha256": "bf69b4d828b2d4b4680808e33d9271512c3a205b328509bcec07a22c3bf24e83"
+  },
+  "cold_t0_inventory": {
+    "absolute_pressure_range_Pa": [
+      100000.0,
+      1211011.7118868
+    ],
+    "interpretation": "The total water volume includes the two tank inventories and wetted tank-to-valve feed volumes. Downstream passages after valves begin as ambient air.",
+    "temperature_range_K": [
+      293.15,
+      293.15
+    ],
+    "water_mass_kg": 3198.008370828796,
+    "water_volume_total_tanks_and_wetted_feeds_m3": 3.202165993106066
+  },
+  "confirmed_cold_pilot": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+  "model": "OpenFOAM adiabaticPerfectFluid pressure-only rho(p), hConst sensibleInternalEnergy",
+  "observed_utc": "2026-10-26 15:49:50 UTC",
+  "qualification": "This records the verified source overlay and initial inventory metadata; it does not include t=0 fields or claim a complete or validated CFD run.",
+  "readiness_record": {
+    "artifact_path": "provenance/physical-water-eos-cold-input-readiness.json",
+    "same_sha256_in_t0_source_and_cold_pilot": true,
+    "sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c"
+  },
+  "reference_state": {
+    "B_Pa": 306667767.13022316,
+    "c0_m_s": 1482.3443444561285,
+    "gamma_exponent": 7.15,
+    "gamma_status": "assumed barotropic exponent; not Cp/Cv",
+    "pressure_Pa": 100000.0,
+    "rho0_kg_m3": 998.2,
+    "source_pdf_sha256": "fda79dde9f441a90da755477c6533e23065e4f90c7f59a505f64c394d775bd45",
+    "temperature_K": 293.15
+  },
+  "schema": "i4f-corrected-flush-finite-water-overlay-reference/v1",
+  "source_case": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z",
+  "stage_case": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+  "water_dictionary": {
+    "artifact_path": "constant/thermophysicalProperties.water",
+    "sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+    "source_dictionary_sha256_matches_t0_source_and_pilot": true
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "i4f_phase_temperature_startup_review_v1",
+  "created_utc": "2026-10-26T15:17:53.727006+00:00",
+  "scope": "Read-only provenance review; no live case or solver inputs modified.",
+  "runtime": {
+    "bundle": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+    "container_id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+    "started_at_utc": "2026-10-26T13:18:45.043691461Z",
+    "observed_at_utc": "2026-10-26T15:16:24Z",
+    "state": "running",
+    "release_utc": "2026-10-26T13:18:48Z",
+    "runner": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/run_in_container.sh",
+    "runner_sha256": "789b0982ff8a103ccd132578d393a14d4e3477b21acc08579e6b4faed4419691",
+    "input_freeze": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/input-freeze.json",
+    "input_freeze_sha256": "0a1073345a59cc0b02eed9a8b1c273bcd0553776e870705191ac35faa2cf34e9",
+    "source_lock": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/provenance/run-source-lock.json",
+    "source_lock_sha256": "a23d510dd410ce491ac5d85c4868a8d0c993f6bb1ae129652cd550bf8027b724",
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "runner_order": "Four manifests, including processor-inputs.sha256, are verified before GO; then RUN_RELEASED_UTC is written and mpirun is executed. Runner contains no T.air/T.water normalizer."
+  },
+  "seed": {
+    "restart_time_s": 0.050010583332,
+    "parent": "results/runs/i4f-finite-water-eos-halfdt-conditional-20261026T122804Z/case/processors10/0.050010583332",
+    "stage": "results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/processors10/0.050010583332",
+    "T": {
+      "size_bytes": 2658642,
+      "sha256": "194cb346529dbd719dd8163ac125ca520f97242b8958e3206639aa69fe0340fb",
+      "mtime_utc": "2026-10-26T13:12:46.711182804Z"
+    },
+    "phase_files": [
+      {
+        "name": "T.air",
+        "parent_size_bytes": 2562288,
+        "parent_sha256": "1f9c8fe1a80a83da4d7f10b11a7e0def1bd56a310f333dff1b1ea01aa34c686a",
+        "frozen_sha256": "1f9c8fe1a80a83da4d7f10b11a7e0def1bd56a310f333dff1b1ea01aa34c686a",
+        "stage_size_bytes": 2658650,
+        "stage_sha256": "988c3bb246c2c72a985a79730ed7a502348c66b2c4a6ec71d65f72fc2debef4d",
+        "stage_mtime_ctime_utc": "2026-10-26T13:18:48.693197370Z"
+      },
+      {
+        "name": "T.water",
+        "parent_size_bytes": 2562292,
+        "parent_sha256": "d39453ff58cdf8e4923a8d9ec59115ca219b4f1ae91288cec9598404c4a667bc",
+        "frozen_sha256": "d39453ff58cdf8e4923a8d9ec59115ca219b4f1ae91288cec9598404c4a667bc",
+        "stage_size_bytes": 2658654,
+        "stage_sha256": "95749c747ab3b4356bf270c403bffcd69e5366b30c268323cb89f8a588e57875",
+        "stage_mtime_ctime_utc": "2026-10-26T13:18:48.691197369Z"
+      }
+    ],
+    "comparison": "Parent seed exactly matches frozen phase-field hashes. Both stage files were overwritten about 0.69 s after release; common T kept its hash. This is post-GO solver activity, not a wrong initial copy or quota edit."
+  },
+  "array_checks": {
+    "scope": "Binary decomposedBlockData, all 10 processor pieces, 299214 internal cells and physical open-patch values.",
+    "internal_Tair_minus_T": {
+      "max_abs_K": 5.684341886080802e-14,
+      "mean_abs_K": 2.1866214518301292e-16,
+      "differing_cells": 1151
+    },
+    "internal_Twater_minus_T": {
+      "max_abs_K": 0.0,
+      "differing_cells": 0
+    },
+    "physical_open_patches": {
+      "ambientAnnulus": {
+        "faces": 7562,
+        "common_T_range_K": [
+          293.1479031767411,
+          293.15
+        ]
+      },
+      "externalSides": {
+        "faces": 3432,
+        "common_T_range_K": [
+          293.1497953615416,
+          293.15
+        ]
+      },
+      "farOutlet": {
+        "faces": 1025,
+        "common_T_range_K": [
+          293.1497937985363,
+          293.1499999999998
+        ]
+      }
+    },
+    "materialized_scalar64_values": 12019,
+    "boundary_payload_bytes": 96152,
+    "observed_growth_bytes_each_phase_file": 96362,
+    "interpretation": "After startup, both phase-field internal arrays equal common T to roundoff and their open-patch boundary arrays exactly equal common T. Before startup, these three physical patch lists were empty. The scalar64 payload accounts for nearly all growth; the remaining 210 bytes per file is file serialization/layout."
+  },
+  "source_trace": {
+    "file": "results/runs/i4f-pressure-audit-dpcell-source-prep-20261025T210520Z/source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/compressibleInterFoam/twoPhaseMixtureThermo/twoPhaseMixtureThermo.C",
+    "sha256": "b4925d6a4a25e7a4c9acd4942dcfe5f23a592e8155e540550e034739cb9c2e73",
+    "parent_source_freeze_sha256": "3332f8ee3093cd078b31a7f30d4348cfdcdf4c4412a42cb398d8b15c535c9048",
+    "lines": "57-76",
+    "operations": "Copies T_ into T1/T2 (T.air/T.water), writes both, flushes, constructs phase rhoThermo objects that read those files, then calls correct().",
+    "meaning": "The phase fields are solver-generated and computationally active startup derivatives of common T, not independently prescribed physical initial temperatures. This comparison does not claim behavior after subsequent timesteps."
+  },
+  "conclusion": {
+    "cause": "The frozen phase fields passed pre-GO checks and matched the immutable parent. The OpenFOAM twoPhaseMixtureThermo constructor rewrote them after GO from common T and materialized boundary values.",
+    "future_recording": "Keep pre-GO manifest immutable and valid; record constructor-generated hashes separately or label phase T as derived startup outputs. Do not add a shell normalizer. At later restarts, freeze the actual checkpoint files before the runner checks them.",
+    "not_done": [
+      "No live files restored or edited",
+      "No manifest/runner/source changed",
+      "No solver relaunched"
+    ]
+  }
+}

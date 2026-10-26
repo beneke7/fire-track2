@@ -20,12 +20,13 @@ one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields at
 update to .160 Pa, but this does not undo the floor event. Liquid support in
 the affected cells was .019267 kg, not removed water mass. The uninterrupted
 standard-source constant-density cold control ended at .434532 s after eighteen
-raw pressure-floor contacts. A smaller-timestep finite-water case is now at
-.302981 s with no raw contacts at the latest guard sample. A warm upwind fork
-from a .400020 s state saved .460048 s with no pressure-floor contacts, but its
-next-child preparation failed before GO on a `divSchemes/div(rhoPhi,U)`
-dictionary preflight. The warm fork is not a complete cold-history test. No
-complete credible discharge has been established.
+raw pressure-floor contacts. A warm upwind fork from a .400020 s state saved
+.460048 s with no pressure-floor contacts, but its continuation stopped at
+.481894 s with a persistent 300.719 Pa pressure update and no floor contacts.
+This is evidence of sensitivity to momentum transport, not a remedy.
+The smaller-timestep finite-water comparison remains in progress; current
+execution belongs in [live status](STATUS.md). No complete credible discharge
+has been established.
 
 As of 26 October, the corrected-junction constant-density cold trajectory
 reached a raw pressure-floor failure at .434224 s after an operational restart
@@ -66,7 +67,8 @@ That is a single short timing observation, not a general speedup or physics
 result. The [exact-byte proof](../results/summaries/i4f_20261025/pressure-audit-toggle/exact-byte-proof.json)
 and [captured profile](../results/summaries/i4f_20261025/pressure-audit-toggle/profile-window-result-v2.json)
 retain both run identities and hashes. Future child helpers disable only this
-detailed audit stream; existing live cases were not changed.
+detailed audit stream; the warm continuation used the setting. Earlier
+stages remain preserved with their original controls.
 
 The latest user confirmation changes the physical baseline: the passages
 downstream of the valves initially contain air. Earlier liquid-filled-line

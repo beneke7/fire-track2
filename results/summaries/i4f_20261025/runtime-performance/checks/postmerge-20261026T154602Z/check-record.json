@@ -1,0 +1,52 @@
+{
+  "schema": "i4f-postmerge-hpc-focused-check/v1",
+  "started_utc": "2026-10-26T15:46:16.187405+00:00",
+  "git_head": "7caf30665638c275f0baf7ae06a3c00b9312de8b",
+  "worktree_status": "",
+  "input_sha256": {
+    "cases/e1_rouaix_hpc/prepare_case.py": "5c0d1382e1f26a6ebd6101c50608fe83125c00e601180a29598200e8818de7f6",
+    "cases/e1_rouaix_hpc/run_pilot.py": "024483de8b2825f8c8842b5507602313ba310e1dbe2408d67270d17adfd3c96f",
+    "tests/test_rouaix_hpc_case.py": "4be63c8da10a9bb601dc5e42d863f831a8720a991167f4649e3fd9a59cba928f",
+    "tests/test_rouaix_hpc_runner.py": "a8d9bf8aa3e45e399a5500b21077c8d6d485ca7647dba0763a65438078dad54c",
+    "cases/e1_rouaix_hpc/pilot.sbatch": "dbccd06f8cfd4b8a5cd3da121e62c58ab13daad4be26af1abe61f21100cb570d"
+  },
+  "commands": [
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 1200 -- .venv/bin/python -m pytest -q tests/test_rouaix_hpc_case.py tests/test_rouaix_hpc_runner.py",
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 1200 -- .venv/bin/ruff check cases/e1_rouaix_hpc/prepare_case.py cases/e1_rouaix_hpc/run_pilot.py tests/test_rouaix_hpc_case.py tests/test_rouaix_hpc_runner.py",
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 1200 -- .venv/bin/ruff format --check cases/e1_rouaix_hpc/prepare_case.py cases/e1_rouaix_hpc/run_pilot.py tests/test_rouaix_hpc_case.py tests/test_rouaix_hpc_runner.py",
+    "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 1200 -- bash -n cases/e1_rouaix_hpc/pilot.sbatch"
+  ],
+  "result": "passed_with_one_evidence_dependent_skip",
+  "finished_utc": "2026-10-26T15:46:42.646557+00:00",
+  "git_head_after": "7caf30665638c275f0baf7ae06a3c00b9312de8b",
+  "worktree_status_after": "",
+  "checks": {
+    "pytest": {
+      "exit_code": 0,
+      "summary": "88 passed, 1 skipped in 1.67s; skip requires ignored local native mesh evidence"
+    },
+    "ruff_check": {
+      "exit_code": 0,
+      "summary": "All checks passed!"
+    },
+    "ruff_format": {
+      "exit_code": 0,
+      "summary": "4 files already formatted"
+    },
+    "bash_n_pilot_sbatch": {
+      "exit_code": 0,
+      "summary": "syntax accepted"
+    }
+  },
+  "log_sha256": {
+    "pytest.log": "74dd3cb4ec693490845575b985a63f34e8553fe03621dccb15e786a5cbb273e0",
+    "ruff-check.log": "317c095bc3bc5130d54dffd109c42852b050919d307707e1430206bd93041233",
+    "ruff-format.log": "c8b8a44629a0ec8ca3905d3987f421a920e2d256974d803b440c1b3aa7d2d41b",
+    "bash-n.log": "071c5201a1fea8f7c72c92e0a140d23a49267b0bc47f78a5fbf9af0b9d15f332"
+  },
+  "leftover_process_check": {
+    "command": "ps -C pytest -C ruff -C make -o pid=,comm=,args=",
+    "result": "no matching processes"
+  },
+  "hpc_launch": false
+}

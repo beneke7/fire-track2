@@ -1,0 +1,15 @@
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location "system";
+    object branchColdstartTopoSetDict;
+}
+actions
+(
+    { name aLowTrue; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainA_lowerBranch.stl"; outsidePoints ((6.20 -0.55 0.65)); includeCut true; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+    { name aHighTrue; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainA_upperBranch.stl"; outsidePoints ((6.20 -0.55 0.90)); includeCut true; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+    { name bLowTrue; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainB_lowerBranch.stl"; outsidePoints ((6.20 0.55 0.65)); includeCut true; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+    { name bHighTrue; type cellSet; action new; source surfaceToCell; file "constant/triSurface/trainB_upperBranch.stl"; outsidePoints ((6.20 0.55 0.90)); includeCut true; includeInside true; includeOutside false; nearDistance -1; curvature -100; }
+);

@@ -3,10 +3,10 @@
 **26 October run state:** the finite-water first-step case contacted the
 pressure floor at .409998 s and saved at .410223 s. The uninterrupted
 constant-density cold control ended at .434532 s with eighteen raw contacts.
-The smaller-timestep finite-water run is at .302981 s with no raw contacts at
-its latest guard sample. A warm-start upwind fork saved a complete .460048 s
-checkpoint with no pressure-floor contacts, but its next-child preparation
-failed before GO on a dictionary preflight. The warm fork does not establish a
+The smaller-timestep finite-water comparison remains in progress. A warm-start
+upwind fork saved a complete .460048 s checkpoint with no pressure-floor
+contacts, then stopped at .481894 s on persistent pressure updates without
+floor contacts. The warm fork does not establish a
 full cold-history remedy. No complete credible discharge or validation result
 has been produced. See
 [live status](../../../docs/STATUS.md) for exact run identities and deadlines.
@@ -26,6 +26,9 @@ raw pressure-floor contacts. A smaller-timestep finite-water cold comparison is
 under way; it is an exploratory sensitivity, not a successful discharge. The
 [frozen material packet](../../../experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json)
 records equations, primary-source locators, assumptions and initial-mass effects.
+The [corrected-flush finite-water input capsule](../../../cases/i4f_corrected_flush_finite_water_reference/README.md)
+publishes the actual smaller-timestep dictionaries and their pre-launch hashes;
+the native mesh and restart fields remain separate required inputs.
 The [four recent failed trials](pressure-filling-diagnostic-outcomes.json) and
 [comparison table](pressure-filling-diagnostic-outcomes.csv) retain actual stop
 conditions, saved endpoints and source-metadata hashes. Pressure-floor cell
@@ -65,8 +68,13 @@ probe. The package includes
 show identical fourteen native fields plus `uniform/time` at .401007658722 s for
 audit output on/off, in distinct files, after seven steps. The one sequential
 pair used 51/42 solver ClockTime seconds. This is not a universal performance
-claim. Future child helpers disable only detailed audit logging; current live
-cases have no explicit switch and retain the solver default.
+claim. Future child helpers disable only detailed audit logging; the completed
+warm continuation used this setting. The
+[runtime profile](runtime-performance/runtime-profile-index.json) separates
+wall time, calling-process CPU time, iteration counts and sampled output sizes.
+The [full software check](runtime-performance/checks/make-check-20261026T153334Z/check-result.json)
+and [post-merge checks](runtime-performance/checks/postmerge-20261026T154602Z/check-record.json)
+record their distinct revisions and coverage.
 
 **Early corrected-CFD comparison:** at .250021 s, mean water withdrawn per
 tank is 62.581 L versus 62.210 L in the adiabatic reduced model (+.597%);

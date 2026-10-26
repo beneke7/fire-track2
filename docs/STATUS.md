@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 15:41 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 16:02 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -33,7 +33,7 @@ unknown start estimates; the 300-rank diagnostic was cancelled.
   preserved. The repaired helper writes that record before freeze. The original
   controller resumed the healthy pilot without repeating it; stage01 Docker
   `4b8fa349b80d`, StartedAt 2026-10-26T13:18:45.043691461Z, ten MPI / 10 CPU
-  equivalents, is at .302981 s with zero raw contacts at the latest guard sample.
+  equivalents, is at .349782 s with zero raw contacts at the latest guard sample.
   Initial deltaT=5e-6 s, maxDeltaT=.000125 s, maxCo=.25 and maxAlphaCo=.125;
   the same EOS, mesh, partition, binary, source and turbulence are retained.
   This is adaptive time refinement, not a claim of exactly half every step.
@@ -49,35 +49,54 @@ unknown start estimates; the 300-rank diagnostic was cancelled.
   `efd36809073d`, StartedAt 2026-10-26T12:18:00.051165253Z. Authority:
   `results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/stock-campaign-status.json`;
   cell review `../results/summaries/i4f_20261025/stock-cold-pressure-contact-review.json`.
-- **Warm upwind numerical probe: saved at .460047515286 s.** It changed momentum
+- **Warm upwind numerical probe: stopped at .481894 s.** It changed momentum
   convection from `linearUpwind grad(U)` to `upwind` from the complete
   .400019820001 s finite-EOS checkpoint, retaining the adaptive controls and
   strict health rules. Docker `400939f169cc`, StartedAt
   2026-10-26T14:44:50.083120753Z, ended normally after 688 steps with a complete
-  checkpoint and no pressure-floor contacts. Its next child failed preflight
-  before GO because the helper expected two `divSchemes/div(rhoPhi,U)` entries
-  that did not match the copied dictionary; there is no child solver to resume.
+  checkpoint and no pressure-floor contacts. A preserved child preparation
+  failed before GO because its check required an unprinted scheme-summary
+  token. The repaired preflight checks the actual copied dictionary. A fresh
+  admission sample and complete fourteen-field restart now run as Docker
+  `9d04af8e39cb`, StartedAt 2026-10-26T15:44:21.391905429Z, ended normally at
+  .481894099790 s after the pressure-update screen requested a save. All
+  fourteen fields and `uniform/time` exist; no raw floor contacts occurred.
+  Final pressure update was 300.719 Pa, final/penultimate ratio .999762,
+  velocity update .013510 m/s and field minimum pressure 65.745 kPa. The five
+  recorded consecutive failing steps exceed the configured three-step trigger.
+  Upwind delayed the failure; it has not supplied a remedy.
+  This child disabled detailed pressure audit output; health screens remained.
   This is a warm fork, not a complete cold-history remedy. Authority:
-  `results/runs/i4f-upwind-momentum-warm-20261026T130013Z/stock-campaign-status.json`;
-  service `i4f-upwind-warm-reservation-fix-20261026t1444z.service`.
+  `results/runs/i4f-upwind-warm-recovery-20261026T154152Z/warm-recovery-campaign-status.json`;
+  service `i4f-upwind-warm-recovery-20261026t154152z-campaign.service`.
+  The family is terminal with no automatic restart. A separate short trial is
+  being prepared from the healthy .460048 s checkpoint: sixteen rather than
+  eight outer iterations, target .50 s, retaining all health stop rules. Its
+  purpose is to test whether the persistent pressure update decreases with
+  stronger coupling. Failed .481894 s fields are not restart inputs.
 - **Audit-output toggle:** the matched `i4fFullPressureAudit` true/false pair
   ended at the same .401007658722 s checkpoint after seven steps. All fourteen
   native fields and `uniform/time` were byte-identical in distinct output files;
   step-health rows also matched. Solver ClockTime was 51 s with audit on and
   42 s off in this single sequential pair, a descriptive sample, not a general
   speedup claim. Future child helpers turn off only this detailed audit stream;
-  the live long cases do not explicitly set the switch and retain the source
-  default. See the [exact-byte evidence](../results/summaries/i4f_20261025/pressure-audit-toggle/exact-byte-proof.json).
-- **Rendering:** the prior serialized CPU/Mesa watcher is terminal and produced
-  no new milestone discharge movie; current runs have not reached its healthy
-  >=.65 s target. No replacement watcher is verified active yet. Cameras/scales
-  remain matched and playback holds actual states.
-  Authority:
-  `results/runs/i4f-cold-pair-render-20261026T1247Z-attempt3/watch-status.json`;
-  service `i4f-cold-pair-render-20261026t1247z-attempt3.service`;
+  the completed warm continuation used it, while the current half-dt stage
+  retains the source default on. See the [exact-byte evidence](../results/summaries/i4f_20261025/pressure-audit-toggle/exact-byte-proof.json).
+- **Rendering:** the replacement CPU/Mesa watcher follows both current
+  histories, waiting for healthy resolved water at >=.65 s and their normal
+  endpoints; the failed warm branch is now held without rendering. A transient
+  pressure-update counter below the solver's three-step
+  stop now waits and rechecks; it does not permanently cancel rendering.
+  Failed earlier watcher attempts remain preserved. One low-priority thread
+  and a shared lock serialize conversion/rendering. The warm movie starts at
+  its .400020 s scheme-change seed; it cannot depict earlier startup.
+  Cameras/scales match and 10x playback holds actual saved states. Authority:
+  `results/runs/i4f-cold-pair-render-20261026T1553Z-attempt5/watch-status.json`;
+  service `i4f-cold-pair-render-20261026t1553z-attempt5.service`;
   fixed deadline **2026-10-27 06:53:53 UTC**.
-- **Resources and retention:** twenty effective CPUs; one ten-rank solver is
-  active at a 10-CPU quota. The other recent numerical trials are terminal. No
+- **Resources and retention:** twenty effective CPUs; the half-dt ten-rank
+  solver is active at a ten-CPU quota. The sixteen-outer diagnostic will use
+  newly measured spare capacity when its preparation passes. No
   GPU solver/rendering job was launched. About 118 GiB available RAM and 27 GiB
   free disk were measured at 15:35 UTC. Closed historical
   gas-boundary VTK exports were losslessly archived, recovering 2.05 GiB net;
@@ -185,9 +204,13 @@ retain exact checkpoints, stop reasons, ledger values and source hashes.
   explicit. Independent read-only review found no material defect. Full
   workstation `make check` at 15:35:25 UTC on commit `06a41f1` plus the then-dirty
   source tree reported **920 passed, two skipped, four subtests**; Ruff checked
-  166 files and formatting was clean. That check does not include the later
-  fetched, unmerged `43cb951` HPC updates. Software checks do not validate the
-  apparatus.
+  166 files and formatting was clean. After merging `43cb951`, the two changed
+  HPC test modules reported **88 passed, one skipped** on `7caf306`; their
+  changed Python files passed Ruff/format and the batch script passed shell
+  syntax checking. No HPC job was launched here. Check records:
+  `results/runs/i4f-runtime-check-20261026T153334Z/` and
+  `results/runs/i4f-postmerge-hpc-check-20261026T154602Z/`.
+  Software checks do not validate the apparatus.
 
 ## Inputs, limits and next result
 

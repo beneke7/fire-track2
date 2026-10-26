@@ -1,0 +1,1040 @@
+{
+  "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+  "campaign_admission_helper_sha256": "2182c4508e929e2c7160ff533876fd4e4b66ed11e52992c4ffa5ac09be080313",
+  "conditional_admission": {
+    "absolute_deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+    "active_solver_process_count": 10,
+    "active_solver_processes": [
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174788,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174789,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174790,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174791,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174792,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174793,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 200,
+        "pid": 2174794,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174795,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174796,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174797,
+        "progressed": true,
+        "state": "R"
+      }
+    ],
+    "admission_allowed": true,
+    "available_candidate_quota_equiv": 8.8,
+    "available_memory_bytes": 125976150016,
+    "cpu_budget_fits": true,
+    "disk_threshold_bytes": 26843545600,
+    "external_cpu_equiv": 1.1598958935379053,
+    "family_states": {
+      "finite-water-eos-n2": {
+        "active_observation_matches_latest": true,
+        "controller": {
+          "ActiveState": "inactive",
+          "LoadState": "not-found",
+          "SubState": "dead"
+        },
+        "controller_unit": "i4f-cold-finite-water-eos-n2-campaign-20261026T1108Z.service",
+        "deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+        "key": "finite-water-eos-n2",
+        "pause_flags": [],
+        "pilot_bundle": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+        "pilot_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+        "reserve_cpu_equiv": 0.0,
+        "schema": "i4f-finite-water-eos-n2-campaign/v1",
+        "stages": [
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/0.050021166664",
+              "checkpoint_time_s": 0.050021166664,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+            "container_name": "i4f-cold-finite-water-eos-n2-20261026T1108Z-pilot",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:16:19.903650119Z",
+            "terminal_capture_settled": true
+          },
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/processors10/0.410222565383",
+              "checkpoint_time_s": 0.410222565383,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "41ebc8ea6318513c66b14670dffd6198540600342ad97a170821a63d640b1a1e",
+            "container_name": "i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:24:24.947464278Z",
+            "terminal_capture_settled": true
+          }
+        ],
+        "state": "whole_campaign_terminal_released",
+        "status": "terminal_numerical_or_capture_failure_no_restart",
+        "status_path": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/stock-campaign-status.json",
+        "status_sha256": "e2c847bf51453e3d73ff371a8a651b2197cfacfe8d583a3effd8e3795243ea82",
+        "unlisted_pending": [],
+        "verified": true,
+        "whole_terminal_released": true
+      },
+      "rho-const-control": {
+        "active_observation_matches_latest": true,
+        "controller": {
+          "ActiveState": "active",
+          "LoadState": "loaded",
+          "SubState": "running"
+        },
+        "controller_unit": "i4f-rhoconst-cold-control-recovery-v2-20261026t1217z.service",
+        "deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+        "key": "rho-const-control",
+        "pause_flags": [],
+        "pilot_bundle": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z",
+        "pilot_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+        "reserve_cpu_equiv": 10.0,
+        "schema": "i4f-stock-cold-campaign/v1",
+        "stages": [
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/case/processors10/0.050021166664",
+              "checkpoint_time_s": 0.050021166664,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+            "container_name": "i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z-pilot",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 8.8,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:36:57.278019383Z",
+            "terminal_capture_settled": true
+          },
+          {
+            "branch_status": "running",
+            "bundle": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "capture_detail": {
+              "branch_status": "running",
+              "checkpoint_complete": null,
+              "checkpoint_time_s": null,
+              "guard_status": "solver_released_after_exact_identity_guard"
+            },
+            "container_id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+            "container_name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "docker_exited": false,
+            "exit_code": 0,
+            "guard_status": "solver_released_after_exact_identity_guard",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": true,
+            "started_at": "2026-10-26T12:18:00.051165253Z",
+            "terminal_capture_settled": false
+          }
+        ],
+        "state": "active_child_reserved",
+        "status": "monitoring_stock_stage",
+        "status_path": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/stock-campaign-status.json",
+        "status_sha256": "f054108a72df9cd41503abe95ebddbc74715f72b22dac46f747f2be4d1495c90",
+        "unlisted_pending": [],
+        "verified": true,
+        "whole_terminal_released": false
+      }
+    },
+    "free_disk_bytes": 28072378368,
+    "memory_threshold_bytes": 42949672960,
+    "pause_flags": [],
+    "progressing_solver_processes": [
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174788,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174789,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174790,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174791,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174792,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174793,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 200,
+        "pid": 2174794,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174795,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174796,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174797,
+        "progressed": true,
+        "state": "R"
+      }
+    ],
+    "projected_cpu_total_equiv": 19.959895893537904,
+    "rank_count_fits": true,
+    "raw_available_cpu_equiv": 8.840104106462094,
+    "reason": "all terminal/capture/resource conditions verified",
+    "released_whole_campaigns": [
+      "finite-water-eos-n2"
+    ],
+    "requested_candidate_quota_equiv": 8.8,
+    "requested_mpi_ranks": 10,
+    "reserved_cpu_equiv": 10.0,
+    "sample_elapsed_s": 2.000179510010639,
+    "sampled_utc": "2026-10-26T13:18:44.686600+00:00",
+    "status": "admitted"
+  },
+  "container_id": "4b8fa349b80d10de55f527e8e9b78a8e5b86a291d79e6e035bfecbfde22bce4a",
+  "container_name": "i4f-finite-water-eos-halfdt-stage01-20261026T131840Z",
+  "container_uid_gid": "1000:1000",
+  "created_utc": "2026-10-26T13:18:44.879491+00:00",
+  "docker_cpu_quota_equiv": 8.8,
+  "docker_started_at": "2026-10-26T13:18:45.043691461Z",
+  "docker_state_at_launch": {
+    "ExitCode": 0,
+    "FinishedAt": "0001-01-01T00:00:00Z",
+    "Running": true,
+    "StartedAt": "2026-10-26T13:18:45.043691461Z",
+    "Status": "running"
+  },
+  "experiment_record_sha256": "8cb10fc0a053f41457ac98a77b07ec03e159a5d78a0c1b087d392dce2b9bac4b",
+  "geometry_bundle": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z",
+  "go_sha256": "290a1fe491d35e081931ef3b79e9ec5a28fc8787a72bd2c44cfb575bb6fe1025",
+  "guard_hard_wall_s_from_StartedAt": 14400,
+  "guard_sha256": "0ccc68dace8033c67bbd6c8dcaa581239fd1295cc1a0a6969d22727bd5958189",
+  "guard_writeNow_s_from_StartedAt": 13200,
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "image_id_and_digests": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+  "initial_field_contract_sha256": "7f3f7e6f86349f5367570f84b78dce12c0c34db46f70945b09ab33a3ed35971e",
+  "initial_mesh_source": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+  "inner_timeout_s": 14415,
+  "input_freeze_sha256": "0a1073345a59cc0b02eed9a8b1c273bcd0553776e870705191ac35faa2cf34e9",
+  "launcher_sha256": "33b47b642d6e5e7325396ed15c5eacbec3272ffd306e6be642ca27b0f878e3c5",
+  "log": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-halfdt-stage01-20261026T131840Z/case/log.cold-coupled",
+  "mandatory_initial_fields": [
+    "alpha.water",
+    "p",
+    "p_rgh",
+    "T",
+    "U",
+    "k",
+    "omega",
+    "nut",
+    "alphat"
+  ],
+  "memory_limit_bytes": 34359738368,
+  "mesh_variant": "corrected flush-join / 48 source layers / 299214 cells (provisional geometry)",
+  "pause_flags_prelaunch": [],
+  "pilot_first_write_s": 0.05,
+  "pilot_horizon_s": 0.46,
+  "preflight": {
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "dictionary_preflight_sha256": "36d8d0e40bd6b456b2a1cc49c3ebb87f061aea53542c8b162c71af5066c4a4ea",
+    "endTime": "0.46",
+    "half_step_controls": {
+      "deltaT": "0.000005",
+      "maxAlphaCo": "0.125",
+      "maxCo": "0.25",
+      "maxDeltaT": "0.000125"
+    },
+    "mesh_cells": 299214,
+    "mesh_load_preflight_sha256": "f6b69faeced5733303c68c672dcafe278a27a32dd5adc8fa0d300eacf127b98c",
+    "output_only_policy_sha256": "fcc2deeb00f3ec15307e331dbfb276e1a0b2e03ae017646e78ca85264eb666fd",
+    "pimple": {
+      "nCorrectors": 2,
+      "nNonOrthogonalCorrectors": 0,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "startFrom": "latestTime",
+    "startTime": "0.0500105833320222",
+    "status": "passed_true_cold_finite_water_eos_halfdt_preflight",
+    "water_overlay_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+    "writeInterval": "0.05"
+  },
+  "ranks": 10,
+  "release_resource_sample": {
+    "absolute_deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+    "active_solver_process_count": 10,
+    "active_solver_processes": [
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174788,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174789,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174790,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174791,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174792,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 200,
+        "pid": 2174793,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174794,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174795,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174796,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174797,
+        "progressed": true,
+        "state": "R"
+      }
+    ],
+    "admission_allowed": true,
+    "available_candidate_quota_equiv": 8.8,
+    "available_memory_bytes": 125102886912,
+    "cpu_budget_fits": true,
+    "disk_threshold_bytes": 26843545600,
+    "external_cpu_equiv": 1.1949465273354913,
+    "family_states": {
+      "finite-water-eos-n2": {
+        "active_observation_matches_latest": true,
+        "controller": {
+          "ActiveState": "inactive",
+          "LoadState": "not-found",
+          "SubState": "dead"
+        },
+        "controller_unit": "i4f-cold-finite-water-eos-n2-campaign-20261026T1108Z.service",
+        "deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+        "key": "finite-water-eos-n2",
+        "pause_flags": [],
+        "pilot_bundle": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+        "pilot_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+        "reserve_cpu_equiv": 0.0,
+        "schema": "i4f-finite-water-eos-n2-campaign/v1",
+        "stages": [
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/0.050021166664",
+              "checkpoint_time_s": 0.050021166664,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+            "container_name": "i4f-cold-finite-water-eos-n2-20261026T1108Z-pilot",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:16:19.903650119Z",
+            "terminal_capture_settled": true
+          },
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/processors10/0.410222565383",
+              "checkpoint_time_s": 0.410222565383,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "41ebc8ea6318513c66b14670dffd6198540600342ad97a170821a63d640b1a1e",
+            "container_name": "i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:24:24.947464278Z",
+            "terminal_capture_settled": true
+          }
+        ],
+        "state": "whole_campaign_terminal_released",
+        "status": "terminal_numerical_or_capture_failure_no_restart",
+        "status_path": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/stock-campaign-status.json",
+        "status_sha256": "e2c847bf51453e3d73ff371a8a651b2197cfacfe8d583a3effd8e3795243ea82",
+        "unlisted_pending": [],
+        "verified": true,
+        "whole_terminal_released": true
+      },
+      "rho-const-control": {
+        "active_observation_matches_latest": true,
+        "controller": {
+          "ActiveState": "active",
+          "LoadState": "loaded",
+          "SubState": "running"
+        },
+        "controller_unit": "i4f-rhoconst-cold-control-recovery-v2-20261026t1217z.service",
+        "deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+        "key": "rho-const-control",
+        "pause_flags": [],
+        "pilot_bundle": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z",
+        "pilot_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+        "reserve_cpu_equiv": 10.0,
+        "schema": "i4f-stock-cold-campaign/v1",
+        "stages": [
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/case/processors10/0.050021166664",
+              "checkpoint_time_s": 0.050021166664,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+            "container_name": "i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z-pilot",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 8.8,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:36:57.278019383Z",
+            "terminal_capture_settled": true
+          },
+          {
+            "branch_status": "running",
+            "bundle": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "capture_detail": {
+              "branch_status": "running",
+              "checkpoint_complete": null,
+              "checkpoint_time_s": null,
+              "guard_status": "solver_released_after_exact_identity_guard"
+            },
+            "container_id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+            "container_name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "docker_exited": false,
+            "exit_code": 0,
+            "guard_status": "solver_released_after_exact_identity_guard",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": true,
+            "started_at": "2026-10-26T12:18:00.051165253Z",
+            "terminal_capture_settled": false
+          }
+        ],
+        "state": "active_child_reserved",
+        "status": "monitoring_stock_stage",
+        "status_path": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/stock-campaign-status.json",
+        "status_sha256": "c5bb49be6a1463a2dfb06aecc4e457608c2c8831427fa06260a2a52ef6446bd3",
+        "unlisted_pending": [],
+        "verified": true,
+        "whole_terminal_released": false
+      }
+    },
+    "free_disk_bytes": 28071694336,
+    "memory_threshold_bytes": 42949672960,
+    "pause_flags": [],
+    "progressing_solver_processes": [
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174788,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174789,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174790,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174791,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174792,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 200,
+        "pid": 2174793,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174794,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174795,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174796,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174797,
+        "progressed": true,
+        "state": "R"
+      }
+    ],
+    "projected_cpu_total_equiv": 19.994946527335493,
+    "rank_count_fits": true,
+    "raw_available_cpu_equiv": 8.80505347266451,
+    "reason": "all terminal/capture/resource conditions verified",
+    "released_whole_campaigns": [
+      "finite-water-eos-n2"
+    ],
+    "requested_candidate_quota_equiv": 8.8,
+    "requested_mpi_ranks": 10,
+    "reserved_cpu_equiv": 10.0,
+    "sample_elapsed_s": 2.0000894980039448,
+    "sampled_utc": "2026-10-26T13:18:47.853620+00:00",
+    "status": "admitted"
+  },
+  "released_utc": "2026-10-26T13:18:47.853657+00:00",
+  "resource_sample_prelaunch": {
+    "absolute_deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+    "active_solver_process_count": 10,
+    "active_solver_processes": [
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174788,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174789,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174790,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174791,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174792,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174793,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 200,
+        "pid": 2174794,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174795,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174796,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174797,
+        "progressed": true,
+        "state": "R"
+      }
+    ],
+    "admission_allowed": true,
+    "available_candidate_quota_equiv": 8.8,
+    "available_memory_bytes": 125976150016,
+    "cpu_budget_fits": true,
+    "disk_threshold_bytes": 26843545600,
+    "external_cpu_equiv": 1.1598958935379053,
+    "family_states": {
+      "finite-water-eos-n2": {
+        "active_observation_matches_latest": true,
+        "controller": {
+          "ActiveState": "inactive",
+          "LoadState": "not-found",
+          "SubState": "dead"
+        },
+        "controller_unit": "i4f-cold-finite-water-eos-n2-campaign-20261026T1108Z.service",
+        "deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+        "key": "finite-water-eos-n2",
+        "pause_flags": [],
+        "pilot_bundle": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+        "pilot_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+        "reserve_cpu_equiv": 0.0,
+        "schema": "i4f-finite-water-eos-n2-campaign/v1",
+        "stages": [
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/0.050021166664",
+              "checkpoint_time_s": 0.050021166664,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "f9308f23861049fb78c900143aa5bdfad402b21da62199da7cb56bd61e50cd84",
+            "container_name": "i4f-cold-finite-water-eos-n2-20261026T1108Z-pilot",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:16:19.903650119Z",
+            "terminal_capture_settled": true
+          },
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-finite-water-eos-n2-stage01-20261026T112421Z/case/processors10/0.410222565383",
+              "checkpoint_time_s": 0.410222565383,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "41ebc8ea6318513c66b14670dffd6198540600342ad97a170821a63d640b1a1e",
+            "container_name": "i4f-finite-water-eos-n2-stage01-20261026T112421Z",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:24:24.947464278Z",
+            "terminal_capture_settled": true
+          }
+        ],
+        "state": "whole_campaign_terminal_released",
+        "status": "terminal_numerical_or_capture_failure_no_restart",
+        "status_path": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/stock-campaign-status.json",
+        "status_sha256": "e2c847bf51453e3d73ff371a8a651b2197cfacfe8d583a3effd8e3795243ea82",
+        "unlisted_pending": [],
+        "verified": true,
+        "whole_terminal_released": true
+      },
+      "rho-const-control": {
+        "active_observation_matches_latest": true,
+        "controller": {
+          "ActiveState": "active",
+          "LoadState": "loaded",
+          "SubState": "running"
+        },
+        "controller_unit": "i4f-rhoconst-cold-control-recovery-v2-20261026t1217z.service",
+        "deadline_utc": "2026-10-27T06:23:53.018118+00:00",
+        "key": "rho-const-control",
+        "pause_flags": [],
+        "pilot_bundle": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z",
+        "pilot_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+        "reserve_cpu_equiv": 10.0,
+        "schema": "i4f-stock-cold-campaign/v1",
+        "stages": [
+          {
+            "branch_status": "normal_End_complete_native10_checkpoint",
+            "bundle": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z",
+            "capture_detail": {
+              "branch_status": "normal_End_complete_native10_checkpoint",
+              "checkpoint_complete": true,
+              "checkpoint_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/case/processors10/0.050021166664",
+              "checkpoint_time_s": 0.050021166664,
+              "guard_status": "solver_terminal",
+              "uniform_time_present": true
+            },
+            "container_id": "a090386443831b248409baad0dcee54461114c60fc0afd12363032bcb4eb9e13",
+            "container_name": "i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z-pilot",
+            "docker_exited": true,
+            "exit_code": 0,
+            "guard_status": "solver_terminal",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 8.8,
+            "ranks": 10,
+            "running": false,
+            "started_at": "2026-10-26T11:36:57.278019383Z",
+            "terminal_capture_settled": true
+          },
+          {
+            "branch_status": "running",
+            "bundle": "results/runs/i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "capture_detail": {
+              "branch_status": "running",
+              "checkpoint_complete": null,
+              "checkpoint_time_s": null,
+              "guard_status": "solver_released_after_exact_identity_guard"
+            },
+            "container_id": "efd36809073d9abedb27ed6e6442429d6bf4111da238567dbd55c6795e3158c3",
+            "container_name": "i4f-rhoconst-cold-control-stage02-20261026T121421Z",
+            "docker_exited": false,
+            "exit_code": 0,
+            "guard_status": "solver_released_after_exact_identity_guard",
+            "identity_verified": true,
+            "oom_killed": false,
+            "paused": false,
+            "quota_cpu_equiv": 10.0,
+            "ranks": 10,
+            "running": true,
+            "started_at": "2026-10-26T12:18:00.051165253Z",
+            "terminal_capture_settled": false
+          }
+        ],
+        "state": "active_child_reserved",
+        "status": "monitoring_stock_stage",
+        "status_path": "results/runs/i4f-rhoconst-uninterrupted-cold-control-20261026T1110Z/stock-campaign-status.json",
+        "status_sha256": "f054108a72df9cd41503abe95ebddbc74715f72b22dac46f747f2be4d1495c90",
+        "unlisted_pending": [],
+        "verified": true,
+        "whole_terminal_released": false
+      }
+    },
+    "free_disk_bytes": 28072378368,
+    "memory_threshold_bytes": 42949672960,
+    "pause_flags": [],
+    "progressing_solver_processes": [
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174788,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174789,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174790,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174791,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174792,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174793,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 200,
+        "pid": 2174794,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 202,
+        "pid": 2174795,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174796,
+        "progressed": true,
+        "state": "R"
+      },
+      {
+        "comm": "compressibleInt",
+        "cpu_tick_delta": 201,
+        "pid": 2174797,
+        "progressed": true,
+        "state": "R"
+      }
+    ],
+    "projected_cpu_total_equiv": 19.959895893537904,
+    "rank_count_fits": true,
+    "raw_available_cpu_equiv": 8.840104106462094,
+    "reason": "all terminal/capture/resource conditions verified",
+    "released_whole_campaigns": [
+      "finite-water-eos-n2"
+    ],
+    "requested_candidate_quota_equiv": 8.8,
+    "requested_mpi_ranks": 10,
+    "reserved_cpu_equiv": 10.0,
+    "sample_elapsed_s": 2.000179510010639,
+    "sampled_utc": "2026-10-26T13:18:44.686600+00:00",
+    "status": "admitted"
+  },
+  "runner_sha256": "789b0982ff8a103ccd132578d393a14d4e3477b21acc08579e6b4faed4419691",
+  "schema": "i4f-finite-water-eos-halfdt-launch/v1",
+  "static_case_tree_sha256": "a4589eb8f0d9c09f4bb4f0755b6409375da02fda4d1cfea72efe26f803e13ca0",
+  "static_input_tree_sha256": "f077e4a00e65415b0035a6b5e2184c5c9349e401a64bfdbee9bc2e2a3ca1b327",
+  "status": "solver_released_under_exact_guard"
+}
