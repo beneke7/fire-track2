@@ -1,129 +1,129 @@
 # Live project status
 
-Updated: 2026-10-26 02:14 UTC. Workstation priority: **I4F internal discharge**.
-Aerial work continues separately on the server. User requested publication of
-the reviewed code, summaries and video; HPC execution belongs to another agent.
+Updated: 2026-10-26 04:36 UTC. Priority: **I4F internal pressure-driven discharge**.
+Aerial/HPC work belongs to the separate server agent. No complete trustworthy
+current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 
 ## Current execution
 
-- **Bend/outlet refinement completed its cold pilot and is continuing:**
-  881,431 cells, ten MPI ranks. Pilot `b5d05f19814c` ended normally at
-  .050021166664 s after 212 steps, with all 14 restart fields and no raw
-  pressure contacts. Child `212925cc3be6`, StartedAt
-  2026-10-26T00:54:50.781946359Z, is advancing from that checkpoint toward
-  the .7 s filling/sheet interval; the latest check reached .128021 s with
-  no raw pressure contacts or diagnostic errors.
-  Source bands stay
-  at 48 layers and tank resolution remains coarse; the refined region covers
-  the bend/transition failure cells. All nine configured quality rows pass;
-  optional concavity flags and approximately -.453% line-volume differences
-  remain explicit. Bundle:
-  `results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z/`.
-  The campaign wrapper initially called its one-shot launcher twice after
-  successful GO and recorded a false failure. That wrapper is repaired and
-  the existing pilot is adopted under the active campaign service; Docker, GO
-  and its original start are unchanged. Terminal capture is bounded to 300 s.
-  The rate-derived campaign deadline is 2026-10-27 16:25:42 UTC. Future child
-  runners record process-local MPI yielding; the live pilot was not changed.
-  First child preparation also exposed an undefined Python name. Failed
-  no-launch child attempts are preserved; stage04 passed undefined-name lint,
-  actual checkpoint preparation, four checksum checks and exact-ID GO.
-  The continuation is real, rather than a prepared but unstarted queue.
-- **Tank/interface refinement completed:** 456,954 cells, ten MPI
-  ranks, Docker `b31f9fc09916`, StartedAt 2026-10-25T23:59:36.593088248Z,
-  reached .399995294759 s with original physics/numerics. It resumed the complete native
-  .135021166664 s checkpoint, preserving time-zero mass ledgers. The preceding
-  healthy branch was saved at root's resource-priority request to free a short
-  diagnostic slot; this was neither user PAUSE nor numerical failure. Both
-  short diagnostics then ended, so the saved thermal run resumed immediately.
-  Docker ended normally at 02:10:27 UTC, all 14 restart fields are captured,
-  and raw contacts/clipping and diagnostic errors remain zero. The final outer
-  pressure update was 2.415 Pa; cumulative water/gas ledger defects are
-  +.045687/+.000151 kg, respectively (.001429%/.000443% of initial mass).
-  Failed no-solver preparation attempts and exact restart hashes are retained.
-  Bundle: `results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/`.
-  Read-only terminal analysis completed; root inspected the plot and independently
-  checked EOS/work/reference arithmetic for 38 tank-states and all 15 terminal
-  native-file hashes. No solver or controller change was made by this analysis.
-  Analysis bundle: `results/runs/i4f-tank-refinement-terminal-comparison-20261026T014438Z/`.
-- **Stock source treatment from the true cold state is running.**
-  The dispatcher automatically launched the fresh 299,248-cell, 48-layer,
-  initially air-filled case after thermal endpoint capture. Docker
-  `ae3d81dc9d01`, StartedAt 2026-10-26T02:10:45.881380584Z, has completed
-  28 steps through .004271 s with zero raw contacts or diagnostic errors.
-  Only the phase-source update treatment changes; physical inputs, other solver
-  controls, initial geometry/inventories and raw-pressure criteria stay fixed.
-  A guarded .05 s pilot precedes the .46 s comparison and, if healthy, the
-  useful discharge interval. The switched .4 s restart below cannot substitute
-  for this independent trajectory. Actual Docker, exact-ID guard, GO and
-  advancing native steps are verified; the campaign controller is active.
-  Bundle: `results/runs/i4f-stock-from-cold-299248-20261026T002045Z-attempt2/`.
-  The thermal waiter handed off successfully; the stock campaign's absolute
-  deadline is 2026-10-27 02:10:45 UTC, 24 h from its own pilot start. A prospective
-  half-terminal-step endpoint rule handles discrete solver End times without
-  changing pressure, mass or other scientific criteria.
-- **All recent short numerical variants stopped before .46 s.** The original
-  reference and restart controls develop a persistent kPa-scale pressure cycle
-  near .443 s. Transonic-off, pressure-component relaxation .5 and one added
-  non-orthogonal correction retain that cycle; the last saved at
-  .443765279816 s with a 3.56 kPa final update and zero raw pressure contacts.
-  Momentum relaxation .5 saved at .410704346663 s after three raw contacts
-  reaching -127.21 kPa. Stock-source switching from the same .400087 s seed
-  saved at .410533462436 s after one 6.380 kPa raw contact. The earlier
-  half-Courant case also contacted its 10 kPa floor. Positive final saved
-  pressures and normal End do not clear these intermediate events; no long
-  continuation was selected from any of these failed variants.
-- **Raw failure cells are now identified, without another simulation.** The
-  parser had missed `[rank]` prefixes. Corrected analysis reconciles all
-  affected-cell records, global minima and all ten rank summaries with no
-  omitted cells. U-relaxation's worst event is rank 0/cell 7902 at
-  (3.436916,.736759,.964727) m, alpha_water=.999706; the stock event is nearby
-  cell 7966, alpha_water=.9999999986. These are intermediate solves in the
-  rising bend, not demonstrated physical cavitation. Recorded liquid support
-  is not water mass removed by clipping. See the
-  [corrected raw data](../results/summaries/i4f_20261025/pressure-contact-review.json).
-- **Tank mesh sensitivity now reaches the .4 s comparison.** Coarse/refined
-  endpoint times differ by 91.4 microseconds, without interpolation. Tank-A
-  gas-mass-weighted T is 261.207/254.920 K and pressure 654.125/642.040 kPa;
-  native seat flow changes -1.04% and drawdown -1.107 L per tank (-.584%).
-  Gas volume in mixed cells falls from 19.80% to 9.69%. Initial gas capacity
-  is .883% larger on the refined mesh, while total feed water is 7.1 mL lower;
-  this is sensitivity with a geometric confound, not convergence or identified
-  heat transfer. See the [terminal comparison](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.png).
-- **Earlier focused evidence remains qualified.** Suppressed-diffusion sealed
-  withdrawal mesh refinement reduces adiabatic pressure error 6.66 to 1.92%.
-  The all-water valve-source benchmark reduces flow error 6.34 to 1.38% with
-  source refinement; the separate strict 2% apparatus startup screen remains
-  HOLD at its first two microsteps. Through .4 s, current CFD and the reduced
-  model differ 7.67% in pressure and 2.480 L in tank-A water. None is hardware
-  validation. Observer source-lag identities close to roundoff without proving
-  the cause of the pressure cycle; no speculative equation patch was adopted.
-- **Current gas storage/work proxy is computed.** For both baseline tanks
-  through clean .400087 s, delta(U*)=-195.307 kJ and integral(pbar dV)=332.626 kJ,
-  leaving +137.319 kJ. The new refined near-.4 s endpoint gives -235.708 kJ
-  storage, +327.933 kJ work proxy, and +92.225 kJ remainder. Work coarsening
-  changes .844/.763 kJ per tank, coarse/refined. These are uniform-headspace
-  proxies, not measured heat or closed total-energy defects. Open-domain gas
-  inventory loss is not conservation error. See the
-  [terminal analysis](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.json).
+- **Stock source treatment, 299,248 cells / ten MPI ranks:** Docker
+  `4a5dd1dccbee`, StartedAt 2026-10-26T04:10:38.502224958Z, is advancing
+  from the exact .170021166664 s checkpoint toward .46 s, then the useful
+  discharge interval if healthy. Latest check: .216521 s, 185 completed steps,
+  zero raw pressure contacts or diagnostic errors. Current bundle:
+  `results/runs/i4f-stock-cold-299248-stage02-20261026T040738Z/`.
+  Authority: its `stock-campaign-recovery-status.json` and service
+  `i4f-stock-cold-299248-recovery-stage02-campaign.service`.
+  Original campaign deadline remains **2026-10-27 02:10:45 UTC**.
+  The diagnostic fork uses the standard MULES corrector source update;
+  other physical inputs and numerical controls match the coarse reference.
+- **Bend/outlet refinement, 881,431 cells / ten MPI ranks:** Docker
+  `bc850309e648`, StartedAt 2026-10-26T04:10:55.78655512Z, is advancing
+  from exact .189271166664 s toward .7 s. Latest check: .206771 s,
+  69 completed steps, zero raw contacts or diagnostic errors. Current bundle:
+  `results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage05-resource-save-recovery3/`.
+  Authority: its `campaign-recovery-status.json` and service
+  `i4f-881k-outlet-bend-diagnostic-recovery-stage05-campaign.service`.
+  Original outer deadline remains **2026-10-27 16:25:42 UTC**.
+  Bend/transition/outlets are refined, while tanks remain coarse and the valve
+  source retains 48 bands. All nine configured mesh-quality rows pass; optional
+  concavity flags and about -.453% downstream line-volume difference remain.
+- **Disk resource save and recovery:** both preceding children saved normally
+  at 03:34 UTC when free space fell below 20 GiB. Stock saved .170021 s;
+  bend refinement saved .189271 s. Both had all 14 fields, exact uniform/time,
+  normal End, zero contacts/errors and no PAUSE. This was an automatic resource
+  stop, not a numerical failure or user pause. New children preserve meshes,
+  partitioning, physics/numerics, binaries and original t=0 phase ledgers.
+  Original terminal statuses and failed preparation attempts remain preserved;
+  they are **not the live campaign authorities**. Recovery proof:
+  `results/runs/i4f-disk-save-recovery-prep-20261026T0340Z/recovery-plan.json`.
+- **Conditional follow-up:** a 456,954-cell continuation from the completed
+  refined-tank .399995 s checkpoint toward .46 s is prepared. It compares
+  against the original coarse frozen-source failure; stock failure is only
+  its resource trigger. Waiter `i4f-thermal-stock-fallback-attempt4-buffer25-waiter.service`
+  is verified active, held on the actual running stock stage02; no fallback
+  GO, launch manifest or container exists. Its absolute wait deadline is
+  2026-10-26 14:33:56 UTC. It never triggers on disk/healthy wall saves or PAUSE.
+  Fresh admission is 25 GiB, based on the measured-file/estimated <3 GiB I/O
+  envelope; the original 20 GiB runtime guard is unchanged. Authority:
+  `results/runs/i4f-tank-interface-thermal-fallback-stockfailure-20261026T0332Z-attempt4/conditional-status.json`.
+- **Rendering:** watcher attempt2 exited at 03:35 after the resource save.
+  Replacement `i4f-current-discharge-milestone-render-attempt3.service` is
+  verified active, actual PID 1587947, following the exact live recovered 881
+  identity and its current status. Its immutable deadline is
+  **2026-10-27 16:55:42 UTC**; it must wait for a healthy native checkpoint
+  >=.65 s with resolved water, using this 881 trajectory's own cold prefix,
+  fixed camera/scales, CPU/Mesa and actual state holds. No new movie exists.
+  Authority: `results/runs/i4f-current-discharge-milestone-render-20261025T233209Z/attempts/watcher-attempt3-20261026T0420Z/milestone/watch-status.json`.
+  Native mouth preflight found 960 faces and .149999993 m2 per outlet.
+- **Resources:** both current Docker identities, GO/input-freeze hashes,
+  exact-ID guards and advancing steps are verified. Twenty project MPI ranks
+  share the host with unrelated work. A bounded 02:54 UTC sample delivered
+  6.64/6.48 CPU equivalents to stock/bend and about 6.56 to other processes,
+  with no container quota throttling and negligible I/O wait. This is one
+  sample, not a rank-scaling result. Unrelated workloads stay untouched.
+  Future controller helpers passed second-generation preparation checks for
+  wrapper idempotence, empty checksum lists and numeric dictionary display;
+  failed no-solver preparations remain preserved.
 
-The bounded Astra hard-blocker review selected two actions: continue the actual
-bend refinement and run stock source treatment from cold; both are running. Finite water
-compressibility remains conditional: nearly pure-water pressure storage can
-change substantially despite small bulk density change, but an earlier Tait
-restart did not remove clipping. Physical pressure-margin interpretation needs
-settled native acceleration/curvature evidence. No scientific gate passed.
+## Current evidence and limits
 
-The .65 s render watcher is active for the adopted 881k campaign. Native cell
-ordering, processor mapping and four mouth cuts (960 faces and .149999993 m2
-each) pass preflight. It uses this mesh's own cold states without a 299k prefix.
-The fixed renderer deadline is 2026-10-27 16:55:42 UTC, 30 min after the revised
-campaign bound; its resolved-water screen, CPU/Mesa backend and PAUSE policy
-remain in force. No new movie exists yet. Current corrected-source movies end at .443669 s
-before useful exterior liquid. A complete trustworthy discharge remains pending.
-Aerial and historical primed-line queues stay stopped; HPC belongs to another
-agent. Unrelated workloads are untouched. Two ten-rank jobs share the machine
-with unrelated CPU work, so delivered capacity is lower than the MPI count.
+- **Tank refinement finished near .4 s.** Coarse/refined native endpoints differ
+  by 91.4 microseconds; no interpolation is used. Tank-A gas temperature is
+  261.207/254.920 K, pressure 654.125/642.040 kPa, native seat flow changes
+  -1.04%, and withdrawal changes -1.107 L (-.584%). Initial headspace differs
+  +.883% and feed water about -7.1 mL. Mixed-cell gas-volume share falls
+  19.80% to 9.69%. This is mesh sensitivity, not convergence or identified
+  heat transfer. [Comparison](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.png).
+  The refined endpoint had final outer dp=2.415 Pa and water/gas ledger
+  defects +.045687/+.000151 kg. Root checked 38 tank-state EOS/work/reference
+  identities, CSV/output hashes and all 15 terminal native-file hashes.
+- **Gas energy remains qualified.** Near .4 s, the two-tank uniform-headspace
+  delta(U*)+integral(pbar dV) proxy is +137.319 kJ coarse and +92.225 kJ refined.
+  This is not measured heat or a closed total-energy defect. Open-domain gas
+  inventory loss is distinct from a boundary-flux-balanced conservation residual.
+  [Analysis](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.json).
+- **Pressure instability is unresolved.** The reference/restart cases develop
+  persistent kPa-scale outer updates near .443 s. Transonic-off, pressure-component
+  relaxation .5 and nonOrth1 did not remove it; U relaxation .5 and half-Courant
+  produced raw floor contacts earlier. Switching the source treatment only at
+  .4 s also failed; it does not replace the current true-cold trajectory.
+  Corrected rank-prefixed logs locate raw contacts in nearly pure water in the
+  rising bend; these intermediate solves do not demonstrate physical cavitation.
+  [Raw review](../results/summaries/i4f_20261025/pressure-contact-review.json).
+  The executed solver never calls p_rgh.relax(), so a fields.p_rgh dictionary
+  factor alone is not a whole-pressure damping trial. No production equation
+  change is adopted; finite water compressibility remains conditional.
+- **Source-control startup is nearly coincident.** At exact .050021 s,
+  stock/frozen tank observables and seat fluxes match closely, while local
+  interface differences remain. Initial fields/mesh/checked physics match;
+  binaries differ in diagnostic source/object code, so executable identity is
+  not claimed. Checked .05 restart phase-temperature files are regenerated
+  from common T: internal differences <=5.68e-14 K, boundary resets <=.001758 K.
+  Original checkpoints and pre-GO hashes remain recoverable. Evidence:
+  `results/runs/i4f-stock-vs-frozen-cold-pilot-20261026T023644Z/analysis/comparison.json`.
+- **Outlet diagnostics:** automatic native analysis covers signed water flux,
+  five-channel flows, full-mouth projected-area flux CV and reconstructed
+  momentum. The new tested `outlet_secondary_metrics` helper supplies direction
+  distributions, sign/undefined-flow accounting, raw gas-area proxy and separate
+  momentum resultants; its native adapter still needs integration on wet data.
+  Sheet thickness, recirculation and gas-quality history remain incomplete.
+  Saved phi-alphaPhi0.water is an endpoint complement across pressure stages,
+  not automatically the solver's same-stage gas-volume or gas-mass flux.
+  [Source audit](../results/runs/i4f-outlet-flux-semantics-audit-20261026T032902Z/source-semantics.json).
+- **Storage recovered without discarding native evidence.** Verified regenerable
+  exports freed 3.865 GB, obsolete project Flutas build caches were evicted with
+  binaries/metadata retained, and lossless native archives reclaimed 15.031 GB
+  net. All four archive/manifest hashes match; every member was streamed and
+  checked before deleting only its duplicated uncompressed intermediate file.
+  Initial/restart-seed and latest complete checkpoints remain in place.
+  [Archive index and restore commands](../results/archives/index.json); payloads
+  are local/ignored, while per-file manifests are retained. Free space reached
+  40.37 GiB before recovery copies; the original 20 GiB runtime guard is unchanged.
+- **Software checks:** make check passed 740 tests and four subtests; one optional
+  real-Docker test was skipped. These checks do not validate the apparatus.
+  The earlier strict 2% source-flow startup screen remains HOLD; no nearfield
+  appearance or analytical consistency check supplies hardware validation.
 
 ## Current inputs and scientific direction
 
@@ -174,8 +174,7 @@ and a decoded final video frame. No complete emptying or new geometry is shown.
 The [published results index](../results/summaries/i4f_20261025/README.md) contains
 selected figures, JSON/CSV summaries and video. Executed solver source and the
 small four-outlet case dictionaries are included for the shared-repo handoff;
-native meshes/restarts remain separate. `make check`: 721 passed, one optional
-Docker test skipped, four subtests passed.
+native meshes/restarts remain separate. Current software-check results are recorded above.
 
 The overnight outage came from account `v` requesting reboot at 00:03 UTC;
 Tailscale/Docker stopped normally. NVIDIA modeset errors continued until
