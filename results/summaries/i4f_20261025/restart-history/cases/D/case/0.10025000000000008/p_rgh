@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0.10025000000000008";
+    object      p_rgh;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   nonuniform List<scalar> 
+60
+(p2'mş-Ap2'mş-Al2'mş-Ag2'mş-Ac2'mş-A_2'mş-A\2'mş-AW2'mş-AT2'mş-AS2'mş-AQ2'mş-AN2'mş-AK2'mş-AI2'mş-AG2'mş-AD2'mş-AB2'mş-A>2'mş-A:2'mş-A42'mş-A12'mş-A,2'mş-A&2'mş-A!2'mş-A)2'mş-A+2'mş-Aª1'mş-A	2'mş-AÓ6'mş-Aà-'mş-A9'mş-Aê€'mş-Aqe'mş-A­…ı&mş-Ax&ú&mş-A#'mş-A|'mş-AÀWø%mş-A_Û&mş-A†ó¹-mş-AºP$mş-A?Nùmş-A3
+OFmş-Aœ3çËmş-AiZMlş-AİéÅjş-AàâÙãlş-AvºFÆlş-A›7¹®lş-A|Í‘lş-Aí{d|lş-Auaglş-AZ¯ÿTlş-A3gGlş-AÇ5Ö=lş-AT´ lş-AFÁ9lş-ADÑUlş-AÄAì.lş-AFS¬lş-A);
+
+boundaryField
+{
+    withdrawal
+    {
+        type            fixedFluxPressure;
+        gradient        uniform 0;
+        value           uniform 982838.57618100755;
+    }
+    sealedEnd
+    {
+        type            zeroGradient;
+    }
+    emptySides
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //

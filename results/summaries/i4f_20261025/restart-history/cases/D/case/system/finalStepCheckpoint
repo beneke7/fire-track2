@@ -1,0 +1,38 @@
+finalStepCheckpoint
+{
+    type coded;
+    libs (utilityFunctionObjects);
+    name finalStepCheckpoint;
+    codeInclude
+    #{
+        #include "fvCFD.H"
+    #};
+    codeOptions
+    #{
+        -I$(LIB_SRC)/finiteVolume/lnInclude
+    #};
+    codeLibs
+    #{
+        -lfiniteVolume
+    #};
+    codeExecute
+    #{
+        const Time& t = mesh().time();
+        const scalar terminalThreshold = t.endTime().value() - 0.5*t.deltaTValue();
+        if (t.value() >= terminalThreshold)
+        {
+            if (Pstream::master())
+            {
+                Info<< "I4F_TERMINAL_CHECKPOINT_REQUEST time="
+                    << t.timeName() << " value_s=" << t.value()
+                    << " endTime_s=" << t.endTime().value()
+                    << " deltaT_s=" << t.deltaTValue() << nl << endl;
+            }
+            const_cast<Time&>(t).writeAndEnd();
+        }
+    #};
+    executeControl timeStep;
+    executeInterval 1;
+    writeControl timeStep;
+    writeInterval 1;
+}

@@ -38,15 +38,27 @@ not the minimal necessary field set or all time schemes. The corresponding
 apparatus replay still stopped at .494129 s, so restart fidelity and the later
 nonlinear pressure cycle are distinct problems.
 
-The cold run with corrected initialization exposed an intermediate air state near
-12 K and 9.71 kPa with the optional momentum predictor enabled. The momentum
-solve changes kinetic energy before the first temperature solve and before
-pressure projection. That ordering supplies a specific energy-error hypothesis;
-a matched term-by-term audit is pending. A fresh trial disables only that
-optional predictor, retaining pressure-driven velocity/kinetic-energy updates
-and the 10 kPa floor. Early healthy evolution is not yet evidence of a complete
-remedy. A separate source-relaxation trial will measure the undamped fixed-point
-defect, rather than accepting smaller damped updates alone.
+The matched one-step startup audit now measures the intermediate state:
+with the momentum predictor enabled, two initially pure-air cells reach about
+713 m/s and K=254178 m2/s2 before the first temperature solve. Preserved Kold
+is zero. The explicit kinetic-energy term corresponds to a -354.03 K change
+over 12 microseconds; the actual temperature drop is -281.11 K to about
+12.04 K. The +72.92 K remainder requires the implicit equation budget, which
+is not yet closed. Disabling that predictor leaves these cells at 293.15 K
+at the same stage; a read-only observer reproduces all fifteen native fields
+and time exactly against its uninstrumented predictor-off baseline. Pressure
+correction still updates velocity and kinetic energy. This identifies the
+startup unprojected state, not the cause of the later interface cycle.
+
+Relaxing the pressure-derived expansion source with weight .5 also failed:
+the matched warm trial stopped at .494129725325 s, dp 1253.704 Pa, zero raw
+floor contacts, essentially the proper-history control's failure window.
+The raw source fixed-point defect stopped contracting in the later outer
+iterations. A smoother applied source is not proof of convergence; the
+conditional sixteen-outer run was withheld. A separate same-seed trial now
+disables the momentum predictor with source weight 1, leaving other numerical
+and physical controls unchanged. The longer cold-derived predictor-off run
+continues separately. Current runtime authorities belong in live status.
 
 The predictor/corrector equations explain the targeted numerical change.
 For this static Euler, single alpha-correction/subcycle configuration, let

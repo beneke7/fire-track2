@@ -1,0 +1,46 @@
+/* OpenCFD v2512 adiabatic closed-gas expansion verification. */
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location "system";
+    object fvSolution;
+}
+
+solvers
+{
+    "alpha.water.*"
+    {
+        nAlphaCorr 1;
+        nAlphaSubCycles 1;
+        cAlpha 1;
+        MULESCorr yes;
+        nLimiterIter 3;
+        solver smoothSolver;
+        smoother symGaussSeidel;
+        tolerance 1e-10;
+        relTol 0;
+    }
+    "(rho|rhoFinal)" { solver diagonal; }
+    p_rgh
+    {
+        solver PBiCGStab;
+        preconditioner DILU;
+        tolerance 1e-8;
+        relTol 0.001;
+    }
+    p_rghFinal { $p_rgh; relTol 0; }
+    U { solver smoothSolver; smoother symGaussSeidel; tolerance 1e-9; relTol 0; maxIter 100; }
+    T { solver PBiCGStab; preconditioner DILU; tolerance 1e-9; relTol 0.001; maxIter 200; }
+    UFinal { $U; relTol 0; }
+    TFinal { $T; relTol 0; }
+}
+PIMPLE
+{
+    momentumPredictor yes;
+    nOuterCorrectors 2;
+    nCorrectors 2;
+    nNonOrthogonalCorrectors 0;
+    transonic yes;
+}

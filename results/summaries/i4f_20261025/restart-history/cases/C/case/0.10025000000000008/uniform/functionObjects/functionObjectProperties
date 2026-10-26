@@ -1,0 +1,104 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       dictionary;
+    location    "0.10025000000000008/uniform/functionObjects";
+    object      functionObjectProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+cdf7e925f5746741c316f5fbcf39ad0dfca90775
+{
+    withdrawWaterFlux
+    {
+        scalar
+        {
+            sum(withdrawal,alphaPhi0.water) 3.172675000000001e-05;
+        }
+    }
+    waterVolume
+    {
+        scalar
+        {
+            volIntegrate(alpha.water) 7.681939331250009e-05;
+        }
+    }
+    gasVolume
+    {
+        scalar
+        {
+            volIntegrate(alpha.air) 2.318060668749991e-05;
+        }
+    }
+    mixtureMass
+    {
+        scalar
+        {
+            volIntegrate(rho) 0.0769664129048752;
+        }
+    }
+    gasMeanState
+    {
+        scalar
+        {
+            weightedAverage(p) 982964.2203920519;
+            weightedAverage(T) 278.2960756433198;
+        }
+    }
+    fieldExtrema
+    {
+        scalar
+        {
+            min(T)          275.9253320488115;
+            max(T)          293.1500000000004;
+            min(alpha.water) 0;
+            max(alpha.water) 1.000000000000003;
+            min(p)          982939.986510613;
+            max(p)          982965.8966214041;
+            min(rho)        12.10296399663244;
+            max(rho)        998.2000000000029;
+        }
+        label
+        {
+            min(T)_cell     48;
+            min(T)_processor 0;
+            max(T)_cell     16;
+            max(T)_processor 0;
+            min(alpha.water)_cell 47;
+            min(alpha.water)_processor 0;
+            max(alpha.water)_cell 2;
+            max(alpha.water)_processor 0;
+            min(p)_cell     45;
+            min(p)_processor 0;
+            max(p)_cell     58;
+            max(p)_processor 0;
+            min(rho)_cell   47;
+            min(rho)_processor 0;
+            max(rho)_cell   2;
+            max(rho)_processor 0;
+        }
+        vector
+        {
+            min(T)_position ( 0.8083333333335001 0.005000000000000001 0.005000000000000001 );
+            max(T)_position ( 0.275 0.005000000000000001 0.005 );
+            min(alpha.water)_position ( 0.7916666666664999 0.004999999999999999 0.005 );
+            max(alpha.water)_position ( 0.04166666666665 0.005 0.005 );
+            min(p)_position ( 0.7583333333334998 0.005 0.004999999999999999 );
+            max(p)_position ( 0.9750000000000001 0.005000000000000001 0.005000000000000002 );
+            min(rho)_position ( 0.7916666666664999 0.004999999999999999 0.005 );
+            max(rho)_position ( 0.04166666666665 0.005 0.005 );
+        }
+    }
+}
+
+
+// ************************************************************************* //

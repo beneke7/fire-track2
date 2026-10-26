@@ -1,0 +1,962 @@
+{
+  "arm_runtime": {
+    "arm-a-uninterrupted": {
+      "container_id": "7ad7aff5c507f29f7d50db3d87d87e6d38ebd827e0f929d947bd223041a96fa0",
+      "endpoint_field_sha256": {
+        "T": "09d23160fd9f319fefd20fe50d68609d2c59a2c3af6a883cb9cf7e337874e14a",
+        "T.air": "f11f202d4c2a716e5d47d0138b1c02215328f71b28d25eb2fac9f55ed735bd3b",
+        "T.water": "acba6c26de9ef6829c40066a5f3ba24cf678e0af985fd43d965cdb2456a09b3b",
+        "U": "bf3198eb04e042dc5024e71952a1f9d7a6d11fe4b12ff6a530de992e66d0872c",
+        "alpha.air": "0b7bd539373eb78e182ef1b660d7fea1d74762a6daf59e8a5f1dbd05a140232d",
+        "alpha.water": "968081f3cbae585b5f3f6f098741b92f1002411e68887b7175f9e3044a632cad",
+        "alphaPhi0.water": "198861ef773c987767e4a4cedcfc3faf57a7900c7f8cc0b6966a16e260b0ca80",
+        "dgdt": "2e23e6b6edb4e892254e97dacf4cbb68e2768be8e2ff7b8b6b9ef1097b0bf15c",
+        "p": "2da658f90ecd0aa81f63c0e0147c969f342e4fd5185e3b56535186ddfb3f7965",
+        "p_rgh": "937566c83a595f0c78eb24a6b3dacedad43cd800ae69ae2aaae742fd0a36c536",
+        "phi": "83903f51e7814dbfc25443f422e0114b95950657d4fa865ac4e8025009074ac9",
+        "rho": "8820b07c4f6c0255896848103f17263fbcc92687fb157914327c79748ba08956"
+      },
+      "endpoint_time_directory": "0.10025000000000008",
+      "log_sha256": "3e670561932a3b8e4d06b840b30b4b5451234c8ed61c3f5d0d6ecf22f4ed78e7",
+      "started_at": "2026-10-26T19:11:40.110974855Z"
+    },
+    "arm-b-fallback": {
+      "container_id": "58b1d5030b1acafc565cf2a88faee01ba0d2d7d58e27a8bdc83b1471f77d74f5",
+      "endpoint_field_sha256": {
+        "T": "5b1f44e3574db45f0e9b95675dc74eace63b76334e6ef0d85bfbe612e58e4bd7",
+        "T.air": "dc21ea3130eacede8221effc206d3744ac3e1e1dac9362b38f089a7c69aabc7d",
+        "T.water": "3a4b20fd41e7cdd355e5f9ce8b95bf7b79a3e47c5142b209d9a419163b52d124",
+        "U": "6e09b4421eefc21ea5b813ff16f3951248c5595987788c8f99e489c5823a5a9d",
+        "alpha.air": "5e66f9913e30f5c8e569b6042df80047f93691847ca0fe5248e8257bc80c7743",
+        "alpha.water": "08404ab95092202b5c05fc391579261c6c5f45d6293ce034f34e07088b5aa522",
+        "alphaPhi0.water": "801847563a7023633328f0e0cdb6ad5dbf7ea1e3b94fa57ccc5d0008e904b53c",
+        "dgdt": "ddc3b714eb1c55cf46b09a952e1c489d7465be85eeace157db076139dac11195",
+        "p": "76739950d0fac6bc9a8c2fd4c9f8959ee31a725251f027248b09d5113fefba92",
+        "p_rgh": "3aa038afd2e0eb323ed2ee88f639584ae9e34d2918e159f5e988550e0cc862e2",
+        "phi": "99035258e44fae49bae489890a820bddc5e8aa1ed5cd4e60fb0dad732e940272",
+        "rho": "42e925050ad3ae5d4af4d0f69c39d72c28163dacf0f8c10462142d4ed933b3a0"
+      },
+      "endpoint_time_directory": "0.10025000000000008",
+      "log_sha256": "864c2627a52594d936b291323ea0728ce0b16e8b6dc97c258d9610dcbd166941",
+      "started_at": "2026-10-26T19:12:53.953168207Z"
+    },
+    "arm-c-saved-dgdt": {
+      "container_id": "c1dff4190e965c589f57eb8ebffb9a7a3b764a8401acb966df4333f8d64022f1",
+      "endpoint_field_sha256": {
+        "T": "af9e6970979f8f0f565a3ddf80e8addf953db2601dcf7720352ced922952d43c",
+        "T.air": "91721acd6432706a2ba3d3a393e67f49a638887fb8e26d1f4345c4fae0c58e09",
+        "T.water": "48bacfed85da33b49856d8e616de96d1647ca7c672fe1807c9065fccfee86504",
+        "U": "a101e9309d496472e8ba1dfb4192380251ffbe5e02999adace9de387e3c93010",
+        "alpha.air": "a7738f7bb6c89b389c5fddd08e404b69017dc79cc14154da35557d97c90093b4",
+        "alpha.water": "8674949f9042d3682f1f0f79040a405331fd08fc6f173d544a5772cbcecd08e5",
+        "alphaPhi0.water": "10f1de544cc29ff5a41bd3a4e1914e6e2fd258f6bb9654b8156b8e4b97131adf",
+        "dgdt": "48fcdc7ef11059332f492735070f5f427ce4a7aa74787e88e9ee4f71914b6392",
+        "p": "06a99b166c61a2639b89cb549ab6627b7d3451ea2d9e62ce460a84137a056484",
+        "p_rgh": "81f328bb3afb54d7b7b9947f629c8cde3e0d43b1cea12eff13a2cb6cbb89ffde",
+        "phi": "9c091acd292fdda56a33120893b59476712be8f46b5074766c517c3b43e26d78",
+        "rho": "1cbad7a48ab4da796c78bc4ba630dd72285684f978d79a6071aa431ed2d69e5c"
+      },
+      "endpoint_time_directory": "0.10025000000000008",
+      "log_sha256": "ba3e38779b7f616b7815203b612a8e1b9225287b6a1a7524feae2f81fedaa92e",
+      "started_at": "2026-10-26T19:13:20.080232512Z"
+    }
+  },
+  "candidate_missing_euler_history": {
+    "cheap_followup": "On the same tiny fixture, add a probe-only read/restore of prior-time ddt history (first alpha_i/rho_i and p_rgh; then rho/U/T/K if needed) from a .09975 snapshot and compare the first .10025 step against A. Keep the same native .1 checkpoint, binary precision, code, and all governing equations.",
+    "current_restart_fields_are_not_the_full_euler_state": "The copied native checkpoint contains current-time fields only. `dgdt` is a separate lagged pressure-derived quantity; saving it repairs the outer-1 full-source audit signature, but does not supply prior-time values used by the Euler ddt terms.",
+    "evidence": "B/C contain only the current split state at t=0.10000000000000007. A has an alpha.air function-object output at t=0.099750000000000075, but not the full previous-time solver state. The configured time scheme is Euler. Source equations use ddt(alpha1,rho1), ddt(alpha2,rho2), ddt(p_rgh), ddt(rho,U), ddt(rho,T), and ddt(rho,K).",
+    "interpretation_status": "source-supported hypothesis, not isolated by this probe; exact OpenFOAM oldTime initialization behavior should be confirmed before implementing a history-preserving restart patch",
+    "likely_minimal_next_state": [
+      "one previous-time history for alpha1/alpha2 and phase rho1/rho2 (or enough prior p/T plus exact EOS state to reconstruct rho1/rho2)",
+      "one previous-time history for p_rgh, rho, U, T, and K where the compiled UEqn/TEqn/pEqn ddt operators use them; K is algebraically derived from U but its prior-time value must be consistent",
+      "saved dgdt at the current checkpoint for the frozen/full-source path"
+    ],
+    "observed_consequence": "Endpoint gas-phase continuity L1 rises from 4.7048e-8 kg/s in uninterrupted A to 3.5741e-4 and 3.7638e-4 kg/s in restart B/C (about 7.60e3 and 8.00e3 times A); C still differs from A by max |p|=127.824 Pa although its outer-1 full-source summary matches A exactly.",
+    "only_files_written_in_that_previous_time_directory": [
+      "alpha.air"
+    ],
+    "previous_time_directory_in_A": "0.099750000000000075",
+    "previous_time_directory_present_in_restart_B_or_C": {
+      "arm-b-fallback": false,
+      "arm-c-saved-dgdt": false
+    }
+  },
+  "created_utc": "2026-10-26T19:19:18.230682+00:00",
+  "csv_path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/provenance/restart-internal-field-differences.csv",
+  "csv_sha256": "a5b0e08ccff78f4e2374d27ddfff11f3de572d16b3fe30225e831321a02fb908",
+  "diagnostic_summary": {
+    "A_vs_C_T_max_abs_K": 0.011538627207187346,
+    "A_vs_C_U_max_abs_m_s": 0.005999296727435766,
+    "A_vs_C_alpha_water_max_abs": 5.581339258209361e-06,
+    "A_vs_C_endpoint_gas_inventory_difference_kg": 3.7333925513311893e-08,
+    "A_vs_C_endpoint_water_inventory_difference_kg": -2.7755575615628914e-17,
+    "A_vs_C_pressure_max_abs_Pa": 127.82372903707437,
+    "A_water_inventory_increment_minus_prescribed_outflow_kg": 3.4254012386963906e-17,
+    "B_vs_C_endpoint_gas_inventory_difference_kg": 1.861193545203005e-12,
+    "B_vs_C_pressure_max_abs_Pa": 0.07358090730849653,
+    "B_water_inventory_increment_minus_prescribed_outflow_kg": 2.037622457914945e-17,
+    "C_outer1_full_source_summary_matches_A_outer1": true,
+    "C_water_inventory_increment_minus_prescribed_outflow_kg": 6.498436771334992e-18,
+    "endpoint_gas_continuity_L1_nativeV_kg_s": {
+      "arm-a-uninterrupted": 4.704813854050372e-08,
+      "arm-b-fallback": 0.0003574064624042468,
+      "arm-c-saved-dgdt": 0.0003763785361683942
+    },
+    "interpretation": "Saving dgdt reproduces A's outer-1 full-source residual summary in C but does not reproduce A's endpoint state. The large restart-arm gas-continuity L1 suggests additional Euler history/thermodynamic state matters; this short test does not isolate which state term is responsible. At the split, T.air and T.water already match common T to roundoff, so the expected constructor rewrite is not by itself evidence explaining the endpoint mismatch.",
+    "restart_to_A_endpoint_gas_continuity_L1_ratio": {
+      "B_over_A": 7596.612182574572,
+      "C_over_A": 7999.8603099752845
+    },
+    "split_phase_temperature_minus_common_T": {
+      "T.air": {
+        "left_max": 293.15000000000043,
+        "left_min": 275.9619291368717,
+        "max_abs": 5.684341886080802e-14,
+        "max_relative": 2.0522689802758404e-16,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9619291368717,
+        "rms_abs": 1.0378140918593053e-14,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.water": {
+        "left_max": 293.15000000000043,
+        "left_min": 275.9619291368717,
+        "max_abs": 0.0,
+        "max_relative": 0.0,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9619291368717,
+        "rms_abs": 0.0,
+        "shape": [
+          60,
+          1
+        ]
+      }
+    }
+  },
+  "endpoint_full_predictor_source_summaries": {
+    "arm-a-uninterrupted": [
+      {
+        "alpha_corrector": 1.0,
+        "alpha_residual_claim": "discrete_local_equation_only",
+        "full_R_max_s-1": 1.024274293352028e-12,
+        "full_R_signed_volume_integral_m3_s": 3.859128855442572e-18,
+        "full_R_volume_L1_m3_s": 1.473749706066119e-17,
+        "min_rDeltaT_minus_C_s-1": 3998.536380412012,
+        "outer_iteration": 801.0,
+        "predicted_Sp_only_lag_max_s-1": 0.003219798611741004,
+        "predicted_Sp_only_lag_signed_volume_integral_m3_s": 4.957636516523454e-09,
+        "predicted_Sp_only_lag_volume_L1_m3_s": 5.775025522183937e-09,
+        "time_s": 0.10025000000000008
+      },
+      {
+        "alpha_corrector": 1.0,
+        "alpha_residual_claim": "discrete_local_equation_only",
+        "full_R_max_s-1": 9.369675174609971e-13,
+        "full_R_signed_volume_integral_m3_s": 2.398083915226462e-18,
+        "full_R_volume_L1_m3_s": 1.394646213776137e-17,
+        "min_rDeltaT_minus_C_s-1": 3998.53821107669,
+        "outer_iteration": 802.0,
+        "predicted_Sp_only_lag_max_s-1": 0.003229299420387698,
+        "predicted_Sp_only_lag_signed_volume_integral_m3_s": 4.965230928647238e-09,
+        "predicted_Sp_only_lag_volume_L1_m3_s": 5.799100472214534e-09,
+        "time_s": 0.10025000000000008
+      }
+    ],
+    "arm-b-fallback": [
+      {
+        "alpha_corrector": 1.0,
+        "alpha_residual_claim": "discrete_local_equation_only",
+        "full_R_max_s-1": 9.28836001169958e-13,
+        "full_R_signed_volume_integral_m3_s": 6.513596449217536e-18,
+        "full_R_volume_L1_m3_s": 1.273674263030261e-17,
+        "min_rDeltaT_minus_C_s-1": 3998.536380412012,
+        "outer_iteration": 1.0,
+        "predicted_Sp_only_lag_max_s-1": 0.003221548212711025,
+        "predicted_Sp_only_lag_signed_volume_integral_m3_s": 4.960473265681397e-09,
+        "predicted_Sp_only_lag_volume_L1_m3_s": 5.778020776259165e-09,
+        "time_s": 0.10025000000000008
+      },
+      {
+        "alpha_corrector": 1.0,
+        "alpha_residual_claim": "discrete_local_equation_only",
+        "full_R_max_s-1": 9.41033275607737e-13,
+        "full_R_signed_volume_integral_m3_s": -4.695775088864537e-19,
+        "full_R_volume_L1_m3_s": 1.48619217339382e-17,
+        "min_rDeltaT_minus_C_s-1": 3998.221248250044,
+        "outer_iteration": 2.0,
+        "predicted_Sp_only_lag_max_s-1": 0.002595887783814611,
+        "predicted_Sp_only_lag_signed_volume_integral_m3_s": 3.997790624519781e-09,
+        "predicted_Sp_only_lag_volume_L1_m3_s": 4.655168654516154e-09,
+        "time_s": 0.10025000000000008
+      }
+    ],
+    "arm-c-saved-dgdt": [
+      {
+        "alpha_corrector": 1.0,
+        "alpha_residual_claim": "discrete_local_equation_only",
+        "full_R_max_s-1": 1.024274293352028e-12,
+        "full_R_signed_volume_integral_m3_s": 3.859128855442572e-18,
+        "full_R_volume_L1_m3_s": 1.473749706066119e-17,
+        "min_rDeltaT_minus_C_s-1": 3998.536380412012,
+        "outer_iteration": 1.0,
+        "predicted_Sp_only_lag_max_s-1": 0.003219798611741004,
+        "predicted_Sp_only_lag_signed_volume_integral_m3_s": 4.957636516523454e-09,
+        "predicted_Sp_only_lag_volume_L1_m3_s": 5.775025522183937e-09,
+        "time_s": 0.10025000000000008
+      },
+      {
+        "alpha_corrector": 1.0,
+        "alpha_residual_claim": "discrete_local_equation_only",
+        "full_R_max_s-1": 8.96309935994092e-13,
+        "full_R_signed_volume_integral_m3_s": -2.515910033594546e-20,
+        "full_R_volume_L1_m3_s": 9.960832532237224e-18,
+        "min_rDeltaT_minus_C_s-1": 3998.221300116388,
+        "outer_iteration": 2.0,
+        "predicted_Sp_only_lag_max_s-1": 0.002596167652763903,
+        "predicted_Sp_only_lag_signed_volume_integral_m3_s": 3.998047752196273e-09,
+        "predicted_Sp_only_lag_volume_L1_m3_s": 4.655844423337264e-09,
+        "time_s": 0.10025000000000008
+      }
+    ]
+  },
+  "final_phase_mass_events": {
+    "arm-a-uninterrupted": {
+      "alphaFluxField": "alphaPhi1_and_alphaPhi2",
+      "continuity_definition": "ddt(alpha*rho)+div(alphaPhi*rhoFace)",
+      "gas_cont_L1_nativeV_kg_s": 4.704813854050372e-08,
+      "gas_cont_max_kg_m3_s": 0.0084968441904536,
+      "gas_cont_signed_nativeV_kg_s": -8.511733563686537e-10,
+      "gas_inventory_kg": 0.0002852571664121002,
+      "gas_signed_boundary_flux_kg_s": -7.914590362464675e-20,
+      "nAlphaSubCycles": 1.0,
+      "pass": 1604.0,
+      "phaseDensityField": "EOS_rho1_and_rho2_after_correctRho",
+      "source_terms": "none_in_configured_phase_mass_equations",
+      "stage": "after_correctRho",
+      "time_s": 0.10025000000000008,
+      "water_cont_L1_nativeV_kg_s": 2.008553904980737e-14,
+      "water_cont_max_kg_m3_s": 1.155582601830574e-09,
+      "water_cont_signed_nativeV_kg_s": 1.680684844838241e-15,
+      "water_inventory_kg": 0.0766811184045376,
+      "water_signed_boundary_flux_kg_s": 0.03166964185000001
+    },
+    "arm-b-fallback": {
+      "alphaFluxField": "alphaPhi1_and_alphaPhi2",
+      "continuity_definition": "ddt(alpha*rho)+div(alphaPhi*rhoFace)",
+      "gas_cont_L1_nativeV_kg_s": 0.0003574064624042468,
+      "gas_cont_max_kg_m3_s": 122.931529497972,
+      "gas_cont_signed_nativeV_kg_s": -0.0003520653586090745,
+      "gas_inventory_kg": 0.00028529449847642,
+      "gas_signed_boundary_flux_kg_s": -7.915417708747376e-20,
+      "nAlphaSubCycles": 1.0,
+      "pass": 4.0,
+      "phaseDensityField": "EOS_rho1_and_rho2_after_correctRho",
+      "source_terms": "none_in_configured_phase_mass_equations",
+      "stage": "after_correctRho",
+      "time_s": 0.10025000000000008,
+      "water_cont_L1_nativeV_kg_s": 2.307474894137123e-14,
+      "water_cont_max_kg_m3_s": 1.309174990629991e-09,
+      "water_cont_signed_nativeV_kg_s": -1.580364695694213e-15,
+      "water_inventory_kg": 0.07668111840453759,
+      "water_signed_boundary_flux_kg_s": 0.03166964185000001
+    },
+    "arm-c-saved-dgdt": {
+      "alphaFluxField": "alphaPhi1_and_alphaPhi2",
+      "continuity_definition": "ddt(alpha*rho)+div(alphaPhi*rhoFace)",
+      "gas_cont_L1_nativeV_kg_s": 0.0003763785361683942,
+      "gas_cont_max_kg_m3_s": 130.5447336003797,
+      "gas_cont_signed_nativeV_kg_s": -0.0003710378062734103,
+      "gas_inventory_kg": 0.0002852945003376135,
+      "gas_signed_boundary_flux_kg_s": -7.915418271223209e-20,
+      "nAlphaSubCycles": 1.0,
+      "pass": 4.0,
+      "phaseDensityField": "EOS_rho1_and_rho2_after_correctRho",
+      "source_terms": "none_in_configured_phase_mass_equations",
+      "stage": "after_correctRho",
+      "time_s": 0.10025000000000008,
+      "water_cont_L1_nativeV_kg_s": 2.054922544714578e-14,
+      "water_cont_max_kg_m3_s": 1.33877620100975e-09,
+      "water_cont_signed_nativeV_kg_s": 1.068624480288296e-15,
+      "water_inventory_kg": 0.07668111840453758,
+      "water_signed_boundary_flux_kg_s": 0.03166964185000001
+    }
+  },
+  "initial_phase_mass_events": {
+    "arm-a-uninterrupted": {
+      "definition": "sum(alpha_phase*rho_phase*native_cellV)",
+      "gas_inventory_kg": 0.0002852116092037419,
+      "time_s": 0.0,
+      "water_inventory_kg": 0.079856
+    },
+    "arm-b-fallback": {
+      "definition": "sum(alpha_phase*rho_phase*native_cellV)",
+      "gas_inventory_kg": 0.0002852571666248935,
+      "time_s": 0.10000000000000007,
+      "water_inventory_kg": 0.07668903581500007
+    },
+    "arm-c-saved-dgdt": {
+      "definition": "sum(alpha_phase*rho_phase*native_cellV)",
+      "gas_inventory_kg": 0.0002852571666248935,
+      "time_s": 0.10000000000000007,
+      "water_inventory_kg": 0.07668903581500007
+    }
+  },
+  "internal_field_pairwise_differences": {
+    "arm-a-uninterrupted__vs__arm-b-fallback": {
+      "T": {
+        "bitwise_equal": false,
+        "left_max": 293.15000000000043,
+        "left_min": 275.92537457731777,
+        "left_sha256": "09d23160fd9f319fefd20fe50d68609d2c59a2c3af6a883cb9cf7e337874e14a",
+        "max_abs": 0.011540434187338633,
+        "max_relative": 4.0786202535627876e-05,
+        "right_max": 293.1500000000005,
+        "right_min": 275.9253309596071,
+        "right_sha256": "5b1f44e3574db45f0e9b95675dc74eace63b76334e6ef0d85bfbe612e58e4bd7",
+        "rms_abs": 0.001491414137626019,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.air": {
+        "bitwise_equal": false,
+        "left_max": 293.15000000000043,
+        "left_min": 275.92537457731777,
+        "left_sha256": "f11f202d4c2a716e5d47d0138b1c02215328f71b28d25eb2fac9f55ed735bd3b",
+        "max_abs": 0.011540434187338633,
+        "max_relative": 4.0786202535627876e-05,
+        "right_max": 293.1500000000005,
+        "right_min": 275.9253309596071,
+        "right_sha256": "dc21ea3130eacede8221effc206d3744ac3e1e1dac9362b38f089a7c69aabc7d",
+        "rms_abs": 0.001491414137625828,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.water": {
+        "bitwise_equal": false,
+        "left_max": 293.15000000000043,
+        "left_min": 275.92537457731777,
+        "left_sha256": "acba6c26de9ef6829c40066a5f3ba24cf678e0af985fd43d965cdb2456a09b3b",
+        "max_abs": 0.011540434187338633,
+        "max_relative": 4.0786202535627876e-05,
+        "right_max": 293.1500000000005,
+        "right_min": 275.9253309596071,
+        "right_sha256": "3a4b20fd41e7cdd355e5f9ce8b95bf7b79a3e47c5142b209d9a419163b52d124",
+        "rms_abs": 0.001491414137626019,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "U": {
+        "bitwise_equal": false,
+        "left_max": 0.0,
+        "left_min": -0.3195054000820427,
+        "left_sha256": "bf3198eb04e042dc5024e71952a1f9d7a6d11fe4b12ff6a530de992e66d0872c",
+        "max_abs": 0.006004248471167539,
+        "max_relative": 0.02185149022670326,
+        "right_max": 0.0,
+        "right_min": -0.3196105518205861,
+        "right_sha256": "6e09b4421eefc21ea5b813ff16f3951248c5595987788c8f99e489c5823a5a9d",
+        "rms_abs": 0.0004643886883399674,
+        "shape": [
+          60,
+          3
+        ]
+      },
+      "alpha.air": {
+        "bitwise_equal": false,
+        "left_max": 1.0,
+        "left_min": -2.886579864025407e-15,
+        "left_sha256": "0b7bd539373eb78e182ef1b660d7fea1d74762a6daf59e8a5f1dbd05a140232d",
+        "max_abs": 5.5945737172935495e-06,
+        "max_relative": 1.0,
+        "right_max": 1.0,
+        "right_min": -2.886579864025407e-15,
+        "right_sha256": "5e66f9913e30f5c8e569b6042df80047f93691847ca0fe5248e8257bc80c7743",
+        "rms_abs": 1.0214208485017445e-06,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "alpha.water": {
+        "bitwise_equal": false,
+        "left_max": 1.0000000000000029,
+        "left_min": 0.0,
+        "left_sha256": "968081f3cbae585b5f3f6f098741b92f1002411e68887b7175f9e3044a632cad",
+        "max_abs": 5.5945737172935495e-06,
+        "max_relative": 2.9516988868760995e-05,
+        "right_max": 1.0000000000000029,
+        "right_min": 0.0,
+        "right_sha256": "08404ab95092202b5c05fc391579261c6c5f45d6293ce034f34e07088b5aa522",
+        "rms_abs": 1.0214208485017445e-06,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "alphaPhi0.water": {
+        "bitwise_equal": false,
+        "left_max": 0.0,
+        "left_min": -3.1726750000001544e-05,
+        "left_sha256": "198861ef773c987767e4a4cedcfc3faf57a7900c7f8cc0b6966a16e260b0ca80",
+        "max_abs": 3.729715811197321e-08,
+        "max_relative": 0.0020071420108464235,
+        "right_max": 0.0,
+        "right_min": -3.1726750000001944e-05,
+        "right_sha256": "801847563a7023633328f0e0cdb6ad5dbf7ea1e3b94fa57ccc5d0008e904b53c",
+        "rms_abs": 4.855676397418467e-09,
+        "shape": [
+          59,
+          1
+        ]
+      },
+      "dgdt": {
+        "bitwise_equal": false,
+        "left_max": 6.465451445172086e-29,
+        "left_min": -0.32561195713766833,
+        "left_sha256": "2e23e6b6edb4e892254e97dacf4cbb68e2768be8e2ff7b8b6b9ef1097b0bf15c",
+        "max_abs": 0.05878465026940749,
+        "max_relative": 2.0,
+        "right_max": 5.868180669387884e-29,
+        "right_min": -0.26682730686826084,
+        "right_sha256": "ddc3b714eb1c55cf46b09a952e1c489d7465be85eeace157db076139dac11195",
+        "rms_abs": 0.00867883503591175,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "p": {
+        "bitwise_equal": false,
+        "left_max": 982838.8982483028,
+        "left_min": 982837.0327599605,
+        "left_sha256": "2da658f90ecd0aa81f63c0e0147c969f342e4fd5185e3b56535186ddfb3f7965",
+        "max_abs": 127.82137053541373,
+        "max_relative": 0.00013003643085425309,
+        "right_max": 982965.8941608061,
+        "right_min": 982939.9129297057,
+        "right_sha256": "76739950d0fac6bc9a8c2fd4c9f8959ee31a725251f027248b09d5113fefba92",
+        "rms_abs": 108.64209375409823,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "p_rgh": {
+        "bitwise_equal": false,
+        "left_max": 982838.8982483028,
+        "left_min": 982837.0327599605,
+        "left_sha256": "937566c83a595f0c78eb24a6b3dacedad43cd800ae69ae2aaae742fd0a36c536",
+        "max_abs": 127.82137053541373,
+        "max_relative": 0.00013003643085425309,
+        "right_max": 982965.8941608061,
+        "right_min": 982939.9129297057,
+        "right_sha256": "3aa038afd2e0eb323ed2ee88f639584ae9e34d2918e159f5e988550e0cc862e2",
+        "rms_abs": 108.64209375409823,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "phi": {
+        "bitwise_equal": false,
+        "left_max": -2.171111307338059e-06,
+        "left_min": -3.1726750000001e-05,
+        "left_sha256": "83903f51e7814dbfc25443f422e0114b95950657d4fa865ac4e8025009074ac9",
+        "max_abs": 5.771032494297119e-07,
+        "max_relative": 0.019801582193610164,
+        "right_max": -2.173383507411935e-06,
+        "right_min": -3.17267500000007e-05,
+        "right_sha256": "99035258e44fae49bae489890a820bddc5e8aa1ed5cd4e60fb0dad732e940272",
+        "rms_abs": 7.856704741091183e-08,
+        "shape": [
+          59,
+          1
+        ]
+      },
+      "rho": {
+        "bitwise_equal": false,
+        "left_max": 998.2000000000029,
+        "left_min": 12.100939490078938,
+        "left_sha256": "8820b07c4f6c0255896848103f17263fbcc92687fb157914327c79748ba08956",
+        "max_abs": 0.005638825662231284,
+        "max_relative": 0.00016726466023855475,
+        "right_max": 998.2000000000029,
+        "right_min": 12.10296388822158,
+        "right_sha256": "42e925050ad3ae5d4af4d0f69c39d72c28163dacf0f8c10462142d4ed933b3a0",
+        "rms_abs": 0.0011970248589524154,
+        "shape": [
+          60,
+          1
+        ]
+      }
+    },
+    "arm-a-uninterrupted__vs__arm-c-saved-dgdt": {
+      "T": {
+        "bitwise_equal": false,
+        "left_max": 293.15000000000043,
+        "left_min": 275.92537457731777,
+        "left_sha256": "09d23160fd9f319fefd20fe50d68609d2c59a2c3af6a883cb9cf7e337874e14a",
+        "max_abs": 0.011538627207187346,
+        "max_relative": 4.077981630637238e-05,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9253320488115,
+        "right_sha256": "af9e6970979f8f0f565a3ddf80e8addf953db2601dcf7720352ced922952d43c",
+        "rms_abs": 0.0014911706068486234,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.air": {
+        "bitwise_equal": false,
+        "left_max": 293.15000000000043,
+        "left_min": 275.92537457731777,
+        "left_sha256": "f11f202d4c2a716e5d47d0138b1c02215328f71b28d25eb2fac9f55ed735bd3b",
+        "max_abs": 0.011538627207187346,
+        "max_relative": 4.077981630637238e-05,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9253320488115,
+        "right_sha256": "91721acd6432706a2ba3d3a393e67f49a638887fb8e26d1f4345c4fae0c58e09",
+        "rms_abs": 0.0014911706068486234,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.water": {
+        "bitwise_equal": false,
+        "left_max": 293.15000000000043,
+        "left_min": 275.92537457731777,
+        "left_sha256": "acba6c26de9ef6829c40066a5f3ba24cf678e0af985fd43d965cdb2456a09b3b",
+        "max_abs": 0.011538627207187346,
+        "max_relative": 4.077981630637238e-05,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9253320488115,
+        "right_sha256": "48bacfed85da33b49856d8e616de96d1647ca7c672fe1807c9065fccfee86504",
+        "rms_abs": 0.0014911706068486234,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "U": {
+        "bitwise_equal": false,
+        "left_max": 0.0,
+        "left_min": -0.3195054000820427,
+        "left_sha256": "bf3198eb04e042dc5024e71952a1f9d7a6d11fe4b12ff6a530de992e66d0872c",
+        "max_abs": 0.005999296727435766,
+        "max_relative": 0.021833862626634348,
+        "right_max": 0.0,
+        "right_min": -0.31961014741588767,
+        "right_sha256": "a101e9309d496472e8ba1dfb4192380251ffbe5e02999adace9de387e3c93010",
+        "rms_abs": 0.0004639302140459051,
+        "shape": [
+          60,
+          3
+        ]
+      },
+      "alpha.air": {
+        "bitwise_equal": false,
+        "left_max": 1.0,
+        "left_min": -2.886579864025407e-15,
+        "left_sha256": "0b7bd539373eb78e182ef1b660d7fea1d74762a6daf59e8a5f1dbd05a140232d",
+        "max_abs": 5.581339258209361e-06,
+        "max_relative": 0.5,
+        "right_max": 1.0,
+        "right_min": -2.886579864025407e-15,
+        "right_sha256": "a7738f7bb6c89b389c5fddd08e404b69017dc79cc14154da35557d97c90093b4",
+        "rms_abs": 1.019004587203135e-06,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "alpha.water": {
+        "bitwise_equal": false,
+        "left_max": 1.0000000000000029,
+        "left_min": 0.0,
+        "left_sha256": "968081f3cbae585b5f3f6f098741b92f1002411e68887b7175f9e3044a632cad",
+        "max_abs": 5.581339258209361e-06,
+        "max_relative": 2.9447163820202864e-05,
+        "right_max": 1.0000000000000029,
+        "right_min": 0.0,
+        "right_sha256": "8674949f9042d3682f1f0f79040a405331fd08fc6f173d544a5772cbcecd08e5",
+        "rms_abs": 1.019004587203135e-06,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "alphaPhi0.water": {
+        "bitwise_equal": false,
+        "left_max": 0.0,
+        "left_min": -3.1726750000001544e-05,
+        "left_sha256": "198861ef773c987767e4a4cedcfc3faf57a7900c7f8cc0b6966a16e260b0ca80",
+        "max_abs": 3.7208928388200735e-08,
+        "max_relative": 0.0020024034465873776,
+        "right_max": 0.0,
+        "right_min": -3.172675000000131e-05,
+        "right_sha256": "10f1de544cc29ff5a41bd3a4e1914e6e2fd258f6bb9654b8156b8e4b97131adf",
+        "rms_abs": 4.844189865764054e-09,
+        "shape": [
+          59,
+          1
+        ]
+      },
+      "dgdt": {
+        "bitwise_equal": false,
+        "left_max": 6.465451445172086e-29,
+        "left_min": -0.32561195713766833,
+        "left_sha256": "2e23e6b6edb4e892254e97dacf4cbb68e2768be8e2ff7b8b6b9ef1097b0bf15c",
+        "max_abs": 0.05875519276870983,
+        "max_relative": 1.9541984732824744,
+        "right_max": 6.23218663823387e-29,
+        "right_min": -0.2668567643689585,
+        "right_sha256": "48fcdc7ef11059332f492735070f5f427ce4a7aa74787e88e9ee4f71914b6392",
+        "rms_abs": 0.008670807655320793,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "p": {
+        "bitwise_equal": false,
+        "left_max": 982838.8982483028,
+        "left_min": 982837.0327599605,
+        "left_sha256": "2da658f90ecd0aa81f63c0e0147c969f342e4fd5185e3b56535186ddfb3f7965",
+        "max_abs": 127.82372903707437,
+        "max_relative": 0.0001300388299151853,
+        "right_max": 982965.8966214041,
+        "right_min": 982939.986510613,
+        "right_sha256": "06a99b166c61a2639b89cb549ab6627b7d3451ea2d9e62ce460a84137a056484",
+        "rms_abs": 108.6947415239664,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "p_rgh": {
+        "bitwise_equal": false,
+        "left_max": 982838.8982483028,
+        "left_min": 982837.0327599605,
+        "left_sha256": "937566c83a595f0c78eb24a6b3dacedad43cd800ae69ae2aaae742fd0a36c536",
+        "max_abs": 127.82372903707437,
+        "max_relative": 0.0001300388299151853,
+        "right_max": 982965.8966214041,
+        "right_min": 982939.986510613,
+        "right_sha256": "81f328bb3afb54d7b7b9947f629c8cde3e0d43b1cea12eff13a2cb6cbb89ffde",
+        "rms_abs": 108.6947415239664,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "phi": {
+        "bitwise_equal": false,
+        "left_max": -2.171111307338059e-06,
+        "left_min": -3.1726750000001e-05,
+        "left_sha256": "83903f51e7814dbfc25443f422e0114b95950657d4fa865ac4e8025009074ac9",
+        "max_abs": 5.767055952177747e-07,
+        "max_relative": 0.019788207868290386,
+        "right_max": -2.173371128314434e-06,
+        "right_min": -3.1726750000000094e-05,
+        "right_sha256": "9c091acd292fdda56a33120893b59476712be8f46b5074766c517c3b43e26d78",
+        "rms_abs": 7.849601131186989e-08,
+        "shape": [
+          59,
+          1
+        ]
+      },
+      "rho": {
+        "bitwise_equal": false,
+        "left_max": 998.2000000000029,
+        "left_min": 12.100939490078938,
+        "left_sha256": "8820b07c4f6c0255896848103f17263fbcc92687fb157914327c79748ba08956",
+        "max_abs": 0.005625855834864524,
+        "max_relative": 0.00016727361612152965,
+        "right_max": 998.2000000000029,
+        "right_min": 12.102963996632443,
+        "right_sha256": "1cbad7a48ab4da796c78bc4ba630dd72285684f978d79a6071aa431ed2d69e5c",
+        "rms_abs": 0.0011952012602073816,
+        "shape": [
+          60,
+          1
+        ]
+      }
+    },
+    "arm-b-fallback__vs__arm-c-saved-dgdt": {
+      "T": {
+        "bitwise_equal": false,
+        "left_max": 293.1500000000005,
+        "left_min": 275.9253309596071,
+        "left_sha256": "5b1f44e3574db45f0e9b95675dc74eace63b76334e6ef0d85bfbe612e58e4bd7",
+        "max_abs": 3.869969759762171e-06,
+        "max_relative": 1.3221731527844228e-08,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9253320488115,
+        "right_sha256": "af9e6970979f8f0f565a3ddf80e8addf953db2601dcf7720352ced922952d43c",
+        "rms_abs": 6.010080778813221e-07,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.air": {
+        "bitwise_equal": false,
+        "left_max": 293.1500000000005,
+        "left_min": 275.9253309596071,
+        "left_sha256": "dc21ea3130eacede8221effc206d3744ac3e1e1dac9362b38f089a7c69aabc7d",
+        "max_abs": 3.869969759762171e-06,
+        "max_relative": 1.3221731527844228e-08,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9253320488115,
+        "right_sha256": "91721acd6432706a2ba3d3a393e67f49a638887fb8e26d1f4345c4fae0c58e09",
+        "rms_abs": 6.010080792989867e-07,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "T.water": {
+        "bitwise_equal": false,
+        "left_max": 293.1500000000005,
+        "left_min": 275.9253309596071,
+        "left_sha256": "3a4b20fd41e7cdd355e5f9ce8b95bf7b79a3e47c5142b209d9a419163b52d124",
+        "max_abs": 3.869969759762171e-06,
+        "max_relative": 1.3221731527844228e-08,
+        "right_max": 293.15000000000043,
+        "right_min": 275.9253320488115,
+        "right_sha256": "48bacfed85da33b49856d8e616de96d1647ca7c672fe1807c9065fccfee86504",
+        "rms_abs": 6.010080778813221e-07,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "U": {
+        "bitwise_equal": false,
+        "left_max": 0.0,
+        "left_min": -0.3196105518205861,
+        "left_sha256": "6e09b4421eefc21ea5b813ff16f3951248c5595987788c8f99e489c5823a5a9d",
+        "max_abs": 4.95174373177365e-06,
+        "max_relative": 1.8021069627545035e-05,
+        "right_max": 0.0,
+        "right_min": -0.31961014741588767,
+        "right_sha256": "a101e9309d496472e8ba1dfb4192380251ffbe5e02999adace9de387e3c93010",
+        "rms_abs": 5.40875573709517e-07,
+        "shape": [
+          60,
+          3
+        ]
+      },
+      "alpha.air": {
+        "bitwise_equal": false,
+        "left_max": 1.0,
+        "left_min": -2.886579864025407e-15,
+        "left_sha256": "5e66f9913e30f5c8e569b6042df80047f93691847ca0fe5248e8257bc80c7743",
+        "max_abs": 1.3234459084188188e-08,
+        "max_relative": 1.0,
+        "right_max": 1.0,
+        "right_min": -2.886579864025407e-15,
+        "right_sha256": "a7738f7bb6c89b389c5fddd08e404b69017dc79cc14154da35557d97c90093b4",
+        "rms_abs": 2.4162612986097403e-09,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "alpha.water": {
+        "bitwise_equal": false,
+        "left_max": 1.0000000000000029,
+        "left_min": 0.0,
+        "left_sha256": "08404ab95092202b5c05fc391579261c6c5f45d6293ce034f34e07088b5aa522",
+        "max_abs": 1.3234459084188188e-08,
+        "max_relative": 6.982710476832242e-08,
+        "right_max": 1.0000000000000029,
+        "right_min": 0.0,
+        "right_sha256": "8674949f9042d3682f1f0f79040a405331fd08fc6f173d544a5772cbcecd08e5",
+        "rms_abs": 2.4162612986097403e-09,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "alphaPhi0.water": {
+        "bitwise_equal": false,
+        "left_max": 0.0,
+        "left_min": -3.1726750000001944e-05,
+        "left_sha256": "801847563a7023633328f0e0cdb6ad5dbf7ea1e3b94fa57ccc5d0008e904b53c",
+        "max_abs": 8.822972377247858e-11,
+        "max_relative": 4.748071814411712e-06,
+        "right_max": 0.0,
+        "right_min": -3.172675000000131e-05,
+        "right_sha256": "10f1de544cc29ff5a41bd3a4e1914e6e2fd258f6bb9654b8156b8e4b97131adf",
+        "rms_abs": 1.1486531654413606e-11,
+        "shape": [
+          59,
+          1
+        ]
+      },
+      "dgdt": {
+        "bitwise_equal": false,
+        "left_max": 5.868180669387884e-29,
+        "left_min": -0.26682730686826084,
+        "left_sha256": "ddc3b714eb1c55cf46b09a952e1c489d7465be85eeace157db076139dac11195",
+        "max_abs": 7.51133127126491e-05,
+        "max_relative": 2.0,
+        "right_max": 6.23218663823387e-29,
+        "right_min": -0.2668567643689585,
+        "right_sha256": "48fcdc7ef11059332f492735070f5f427ce4a7aa74787e88e9ee4f71914b6392",
+        "rms_abs": 1.041613659807126e-05,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "p": {
+        "bitwise_equal": false,
+        "left_max": 982965.8941608061,
+        "left_min": 982939.9129297057,
+        "left_sha256": "76739950d0fac6bc9a8c2fd4c9f8959ee31a725251f027248b09d5113fefba92",
+        "max_abs": 0.07358090730849653,
+        "max_relative": 7.485798555179856e-08,
+        "right_max": 982965.8966214041,
+        "right_min": 982939.986510613,
+        "right_sha256": "06a99b166c61a2639b89cb549ab6627b7d3451ea2d9e62ce460a84137a056484",
+        "rms_abs": 0.061385631888801535,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "p_rgh": {
+        "bitwise_equal": false,
+        "left_max": 982965.8941608061,
+        "left_min": 982939.9129297057,
+        "left_sha256": "3aa038afd2e0eb323ed2ee88f639584ae9e34d2918e159f5e988550e0cc862e2",
+        "max_abs": 0.07358090730849653,
+        "max_relative": 7.485798555179856e-08,
+        "right_max": 982965.8966214041,
+        "right_min": 982939.986510613,
+        "right_sha256": "81f328bb3afb54d7b7b9947f629c8cde3e0d43b1cea12eff13a2cb6cbb89ffde",
+        "rms_abs": 0.061385631888801535,
+        "shape": [
+          60,
+          1
+        ]
+      },
+      "phi": {
+        "bitwise_equal": false,
+        "left_max": -2.173383507411935e-06,
+        "left_min": -3.17267500000007e-05,
+        "left_sha256": "99035258e44fae49bae489890a820bddc5e8aa1ed5cd4e60fb0dad732e940272",
+        "max_abs": 3.976542119371628e-10,
+        "max_relative": 1.3644321999729164e-05,
+        "right_max": -2.173371128314434e-06,
+        "right_min": -3.1726750000000094e-05,
+        "right_sha256": "9c091acd292fdda56a33120893b59476712be8f46b5074766c517c3b43e26d78",
+        "rms_abs": 9.085527491515319e-11,
+        "shape": [
+          59,
+          1
+        ]
+      },
+      "rho": {
+        "bitwise_equal": false,
+        "left_max": 998.2000000000029,
+        "left_min": 12.10296388822158,
+        "left_sha256": "42e925050ad3ae5d4af4d0f69c39d72c28163dacf0f8c10462142d4ed933b3a0",
+        "max_abs": 1.3378048720369407e-05,
+        "max_relative": 6.733716595090059e-08,
+        "right_max": 998.2000000000029,
+        "right_min": 12.102963996632443,
+        "right_sha256": "1cbad7a48ab4da796c78bc4ba630dd72285684f978d79a6071aa431ed2d69e5c",
+        "rms_abs": 2.4056838134903344e-06,
+        "shape": [
+          60,
+          1
+        ]
+      }
+    }
+  },
+  "method": {
+    "comparison_time_s": 0.10025000000000008,
+    "dt_s": 0.00025,
+    "field_comparison": "binary native internalField values parsed as little-endian IEEE-754 float64 from OpenFOAM v2512 headers; boundary values remain recoverable in hashed native files",
+    "phase_inventory": "I4F_PHASE_MASS_STATE post-correctRho; A baseline is t=0.1 last after_correctRho, B/C baseline is restart startup I4F_INITIAL_PHASE_MASS",
+    "serialization": "binary, scalar precision 64, writePrecision 17",
+    "source_diagnostics": "I4F_FULL_PREDICTOR_SOURCE_SUMMARY rows at common endpoint physical time, grouped by PIMPLE outer iteration"
+  },
+  "patch_sha256": "41eda31f23fc89262481efecb8296b4c420124b5119272b22060ca70484ea9bf",
+  "probe_binary_sha256": "02eefafb7cc47979528578e79fbf35cc239000561a6c7c5c6ffa462c55d44fb0",
+  "schema": "i4f-dgdt-restart-comparison/v1",
+  "single_step_mass_increments": {
+    "arm-a-uninterrupted": {
+      "baseline_source": "A last t=0.1 after_correctRho audit",
+      "gas_end_kg": 0.0002852571664121002,
+      "gas_increment_kg": -2.1279327041753837e-13,
+      "gas_start_kg": 0.0002852571666248935,
+      "water_end_kg": 0.0766811184045376,
+      "water_increment_kg": -7.917410462465746e-06,
+      "water_start_kg": 0.07668903581500007
+    },
+    "arm-b-fallback": {
+      "baseline_source": "restart startup I4F_INITIAL_PHASE_MASS",
+      "gas_end_kg": 0.00028529449847642,
+      "gas_increment_kg": 3.733185152649627e-08,
+      "gas_start_kg": 0.0002852571666248935,
+      "water_end_kg": 0.07668111840453759,
+      "water_increment_kg": -7.917410462479624e-06,
+      "water_start_kg": 0.07668903581500007
+    },
+    "arm-c-saved-dgdt": {
+      "baseline_source": "restart startup I4F_INITIAL_PHASE_MASS",
+      "gas_end_kg": 0.0002852945003376135,
+      "gas_increment_kg": 3.7333712720041476e-08,
+      "gas_start_kg": 0.0002852571666248935,
+      "water_end_kg": 0.07668111840453758,
+      "water_increment_kg": -7.917410462493502e-06,
+      "water_start_kg": 0.07668903581500007
+    }
+  },
+  "source_interpretation_limits": [
+    "A/B/C are deterministic short diagnostic arms on one sealed 60-cell grid, not apparatus validation.",
+    "Exact or near field agreement only assesses this one saved Euler step and startup path.",
+    "The phase source audit is a local equation diagnostic and does not establish energy closure.",
+    "The B and C runs share the same t=0.1 files except for intentionally omitting dgdt in B; constructors may reconstruct phase T after restart."
+  ],
+  "source_state_locations": {
+    "files": {
+      "TEqn.H": {
+        "key_source_roles": "Euler ddt(rho,T) and ddt(rho,K)",
+        "path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/TEqn.H",
+        "sha256": "248be8cedf663cc162ab57e23ea0cbe69d00207a91fb98f3021900846e7a6542"
+      },
+      "UEqn.H": {
+        "key_source_roles": "Euler ddt(rho,U); K reconstructed from U before pressure coupling",
+        "path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/UEqn.H",
+        "sha256": "a18c62a6ffc03cdf6c7ee4cfcf52d146da9af282058996a72c0afd66906427a8"
+      },
+      "createFields.H": {
+        "key_source_roles": "phase rho1/rho2 references, composite rho READ_IF_PRESENT, rhoPhi NO_READ, and dgdt restart IO",
+        "path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/createFields.H",
+        "sha256": "572a41cf723c35928818d09a1e045ff64abf7ccd5bf08271378d708c0b06679e"
+      },
+      "pEqn.H": {
+        "key_source_roles": "Euler ddt(alpha_i,rho_i) and ddt(p_rgh) phase continuity/pressure terms plus EOS correction",
+        "path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+        "sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6"
+      }
+    },
+    "source_tree_sha256_manifest": "3bc689e01f393bf153c1fe626fd5117ce629a3dd2720a1670f3e8bf754b1219c"
+  }
+}

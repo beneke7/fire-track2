@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0.10000000000000007";
+    object      T.air;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   nonuniform List<scalar> 
+60
+(kffffRr@UffffRr@AffffRr@AffffRr@.ffffRr@TffffRr@RffffRr@9ffffRr@KffffRr@CffffRr@9ffffRr@FffffRr@[ffffRr@YffffRr@YffffRr@]ffffRr@nffffRr@MffffRr@AffffRr@VffffRr@fffffRr@]ffffRr@lffffRr@nffffRr@kffffRr@ZffffRr@lffffRr@[ffffRr@jffffRr@jffffRr@kffffRr@MffffRr@èefffRr@^fffRr@J(fffRr@okdffRr@)=WffRr@ˇä˘efRr@MTâcfRr@deTfRr@}B˝eRr@˙’ÿ/dRr@?˚Ü[Rr@*º;¨6Rr@´T.˝±Qr@Èüƒ”6Pr@+@<Kr@©Ë;B∞q@Ô~Œd?q@ôÈp-Pq@[¡^O„Nq@}UÏNq@–¥·Nq@ˇz˚‘Nq@É%7~ƒNq@úíEØNq@Äl±WîNq@§ît‘uNq@È}õ*rNq@æ“ËãßOq@);
+
+boundaryField
+{
+    withdrawal
+    {
+        type            zeroGradient;
+    }
+    sealedEnd
+    {
+        type            zeroGradient;
+    }
+    emptySides
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //

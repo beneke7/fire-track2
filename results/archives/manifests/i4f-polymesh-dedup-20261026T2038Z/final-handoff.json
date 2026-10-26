@@ -1,0 +1,84 @@
+{
+  "bundle": "results/runs/i4f-disk-recovery-audit-20261026T2038Z",
+  "command": "python3 scripts/run_local.py --threads 1 --timeout 900 -- nice -n 19 .venv/bin/python results/runs/i4f-disk-recovery-audit-20261026T2038Z/dedup_polymesh_once.py --apply",
+  "created_utc": "2026-10-26T20:50:25.250984+00:00",
+  "inventory": {
+    "groups": 608,
+    "path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/duplicate-polymesh-inventory.json",
+    "sha256": "4503f4bbaeef02ccbe265f28417e9ded89770c83c557ece3cdfa9b9c8d4e2a3f"
+  },
+  "journal_sha256": "ce563aaab9dbd8a06456bc45f268aa2b54adcba63792c854467d45ec23e63567",
+  "limitations": [
+    "21 source files were retained because their parent directories denied unlink; no permission changes were made.",
+    "The measured free-space delta includes concurrent filesystem activity while the Gamma run remained live."
+  ],
+  "plan_sha256": "8e591a640f9df502b0caf4ae4629277593bb52203431d59de1b26280f78c94ee",
+  "prior_manifest_crosscheck_sha256": "d9f8e75ba08cd5026e934e30f38fb05ea8a17fd78da85e5fd0d0114ee1b04c73",
+  "proof_files": {
+    "dedup_polymesh_once.py": "6e63d1d83a2689f0369f8425936413e74b23a10cb94872a069121c9785a1a592",
+    "duplicate-polymesh-inventory.json": "4503f4bbaeef02ccbe265f28417e9ded89770c83c557ece3cdfa9b9c8d4e2a3f",
+    "polymesh-dedup-journal.jsonl": "ce563aaab9dbd8a06456bc45f268aa2b54adcba63792c854467d45ec23e63567",
+    "polymesh-dedup-plan.json": "8e591a640f9df502b0caf4ae4629277593bb52203431d59de1b26280f78c94ee",
+    "polymesh-dedup-restore-verification.json": "425c1192ffd715b793effa448db3f408e161ca03a3ecae152605554ed23b0eea",
+    "polymesh-dedup-summary.json": "bd21012154cf8425ee1332801f9b0c393f1569ce00d2c69dd52c83344130a469",
+    "polymesh-prior-manifest-crosscheck.json": "d9f8e75ba08cd5026e934e30f38fb05ea8a17fd78da85e5fd0d0114ee1b04c73",
+    "restore_duplicate_polymesh.py": "762025573b462451c3d00eadec4647744f9694ec8505f7f2be7dddf93487ee42",
+    "restore_duplicate_polymesh_v2.py": "3b3108f37ef7d15ba671146d604f8038f3434cae27d14f7c9ca89d0a52b80122"
+  },
+  "restore": {
+    "metadata": "SHA/size, uid/gid, mode, atime, and mtime restore verified. ctime is recorded but necessarily changes on file recreation. V2 restore hashes before resetting timestamps and refuses overwrite.",
+    "plan_helper_sha256": "762025573b462451c3d00eadec4647744f9694ec8505f7f2be7dddf93487ee42",
+    "plan_restore_command": "python3 results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh.py <repository-relative-duplicate_path>",
+    "tested_v2_helper": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh_v2.py",
+    "tested_v2_helper_sha256": "3b3108f37ef7d15ba671146d604f8038f3434cae27d14f7c9ca89d0a52b80122",
+    "verification_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-restore-verification.json",
+    "verification_sha256": "425c1192ffd715b793effa448db3f408e161ca03a3ecae152605554ed23b0eea"
+  },
+  "result": {
+    "batch_measured_free_after_bytes": 31694782464,
+    "batch_measured_free_before_bytes": 22339452928,
+    "batch_measured_free_change_bytes": 9355329536,
+    "current_free_bytes": 31985250304,
+    "deleted_files_at_batch_end": 2230,
+    "elapsed_s": 100.448,
+    "estimated_allocated_bytes_persistently_released": 10235924480,
+    "logical_bytes_persistently_removed": 10231344421,
+    "net_current_vs_batch_start_bytes": 9645797376,
+    "persistent_duplicate_unlinks": 2229,
+    "planned_files": 2251,
+    "restored_for_real_restore_smoke": 1,
+    "skip_reason_counts": {
+      "PermissionError": 21
+    },
+    "skipped_files": 21
+  },
+  "retention_safety": {
+    "active_mounts_rechecked_every_100_unlinks": true,
+    "canonical_files_retained": true,
+    "global_canonical_target_overlap": false,
+    "initial_open_target_fds": 0,
+    "live_docker_at_preflight": [
+      {
+        "id": "d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7",
+        "name": "i4f-gamma-outer-relaxation-warm-omega0p5-20261026T2040Z",
+        "paused": false,
+        "running": true,
+        "started_at": "2026-10-26T20:43:55.431189317Z",
+        "writable_mounts": [
+          {
+            "destination": "/pair",
+            "source": "/home/v/proj/bene/fire-track2/results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-relaxation-on"
+          }
+        ]
+      }
+    ],
+    "prior_manifest_canonical_references": 0,
+    "prior_manifest_target_references": 0,
+    "published_archive_json_documents_scanned": 127,
+    "remaining_target_open_fds_after_pause_crosscheck": 0,
+    "remaining_target_writable_mount_conflicts_after_pause_crosscheck": 0
+  },
+  "schema": "i4f-polymesh-dedup-final-handoff/v1",
+  "scope": "Exact-hash duplicate static polyMesh files only, under older analysis/prep/attempt/reconstruction paths; no 0-time fields, dictionaries, source code, or native checkpoints.",
+  "summary_sha256": "bd21012154cf8425ee1332801f9b0c393f1569ce00d2c69dd52c83344130a469"
+}

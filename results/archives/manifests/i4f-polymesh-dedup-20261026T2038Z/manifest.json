@@ -1,0 +1,86 @@
+{
+  "created_utc": "2026-10-26T20:55:03.607368+00:00",
+  "entries": [
+    {
+      "bytes": 2594,
+      "path": "README.md",
+      "sha256": "c502e9b68bcda41ee8a8df4f0d709662dbcf27531b4a44667d61409ac3885e53"
+    },
+    {
+      "bytes": 2318886,
+      "path": "dedup-journal.jsonl",
+      "sha256": "ce563aaab9dbd8a06456bc45f268aa2b54adcba63792c854467d45ec23e63567",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-journal.jsonl"
+    },
+    {
+      "bytes": 1959017,
+      "path": "dedup-plan.json",
+      "sha256": "8e591a640f9df502b0caf4ae4629277593bb52203431d59de1b26280f78c94ee",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-plan.json"
+    },
+    {
+      "bytes": 15100,
+      "path": "dedup-summary.json",
+      "sha256": "bd21012154cf8425ee1332801f9b0c393f1569ce00d2c69dd52c83344130a469",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-summary.json"
+    },
+    {
+      "bytes": 1164881,
+      "path": "duplicate-inventory.json",
+      "sha256": "4503f4bbaeef02ccbe265f28417e9ded89770c83c557ece3cdfa9b9c8d4e2a3f",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/duplicate-polymesh-inventory.json"
+    },
+    {
+      "bytes": 4957,
+      "path": "final-handoff.json",
+      "sha256": "eb732c9fc673c22361fae3dad37ba20895a89a5c535f0920a06fd5a67be01f81",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-final-handoff.json"
+    },
+    {
+      "bytes": 34555,
+      "path": "prior-archive-map-crosscheck.json",
+      "sha256": "d9f8e75ba08cd5026e934e30f38fb05ea8a17fd78da85e5fd0d0114ee1b04c73",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-prior-manifest-crosscheck.json"
+    },
+    {
+      "bytes": 1405,
+      "path": "public-helper-restore-smoke.json",
+      "sha256": "f7f4d1b6ea64746503e1d5135472410d3e1aee9cb8ba77f6bdbb47bfc51ca70d"
+    },
+    {
+      "bytes": 624,
+      "path": "restore-helper-safety-smoke.json",
+      "sha256": "f7d96a89b551ec95dc4ff19e43f8d92ffd184a93a067b30a60d7f1372dfcbddc"
+    },
+    {
+      "bytes": 1749,
+      "path": "restore-smoke.json",
+      "sha256": "425c1192ffd715b793effa448db3f408e161ca03a3ecae152605554ed23b0eea",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-restore-verification.json"
+    },
+    {
+      "bytes": 4013,
+      "path": "restore_duplicate_polymesh-executed-v1.py",
+      "sha256": "762025573b462451c3d00eadec4647744f9694ec8505f7f2be7dddf93487ee42",
+      "source_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh.py"
+    },
+    {
+      "bytes": 4949,
+      "derivation": "portable default plan path and Ruff formatting; preserved because the public real-path restore smoke used it before safety review",
+      "derived_from": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh_v2.py",
+      "path": "restore_duplicate_polymesh-pre-safetyfix.py",
+      "sha256": "9ba0ea62c827caf642517f8c59a6833ae0578a3b5647dbbe7d904b3644419525"
+    },
+    {
+      "bytes": 5111,
+      "derivation": "portable default plan path plus symlink-component rejection and atomic no-clobber install from a copied temp file; Ruff formatted",
+      "derived_from": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh_v2.py",
+      "path": "restore_duplicate_polymesh.py",
+      "sha256": "246c7cd94e8cc631ecfc92830208d28c2d82158cc1afd3bd20d01de25a713e57"
+    }
+  ],
+  "execution_bundle": "results/runs/i4f-disk-recovery-audit-20261026T2038Z",
+  "packet": "results/archives/manifests/i4f-polymesh-dedup-20261026T2038Z",
+  "restore_command": "python3 results/archives/manifests/i4f-polymesh-dedup-20261026T2038Z/restore_duplicate_polymesh.py <repository-relative-duplicate-path>",
+  "schema": "i4f-polymesh-dedup-public-recovery-packet/v1"
+}

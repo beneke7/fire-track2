@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0.10000000000000007";
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   nonuniform List<scalar> 
+60
+(Fó]í.AFó]í.AFó]í.AFó]í.AFó]í.AFó]í.AFó]í.A%Fó]í.A*Fó]í.A,Fó]í.A,Fó]í.A/Fó]í.A/Fó]í.A0Fó]í.A0Fó]í.A.Fó]í.A-Fó]í.A,Fó]í.A,Fó]í.A+Fó]í.A*Fó]í.A)Fó]í.A&Fó]í.A#Fó]í.A-Fó]í.A1Fó]í.A±Eó]í.A
+Fó]í.AÃJó]í.ABó]í.A±ó]í.Aú’ó]í.A¡wô]í.ATªï]í.AŽ9ì]í.A4 ^í.Aÿò^í.A¢êì\í.A™éÈ]í.AzW¡dí.Af`[í.AT%	9í.AÚž|í.A+î.A(Á¸Jì.A”n)Cê.Aœ®-í.ApYöì.Ab	àÞì.A>OrÁì.Av+¬ì.Afmå–ì.AÁY\„ì.A<x¢vì.AúE÷lì.Auœ®Oì.Aw@Áhì.AE&4ì.A×íÒ]ì.A¿®x<ì.A);
+
+boundaryField
+{
+    withdrawal
+    {
+        type            calculated;
+        value           uniform 983286.68349665485;
+    }
+    sealedEnd
+    {
+        type            calculated;
+        value           uniform 983286.11810823518;
+    }
+    emptySides
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //

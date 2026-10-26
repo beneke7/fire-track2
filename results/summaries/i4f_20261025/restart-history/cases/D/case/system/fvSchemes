@@ -1,0 +1,28 @@
+/* OpenCFD v2512 adiabatic closed-gas expansion verification. */
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location "system";
+    object fvSchemes;
+}
+
+ddtSchemes { default Euler; }
+gradSchemes { default Gauss linear; }
+divSchemes
+{
+    default none;
+    div(phi,alpha) Gauss vanLeer;
+    div(phirb,alpha) Gauss linear;
+    div(rhoPhi,U) Gauss linearUpwind grad(U);
+    div(rhoPhi,T) Gauss upwind;
+    div(rhoPhi,K) Gauss upwind;
+    div(phi,p) Gauss upwind;
+    div(phid1,p_rgh) Gauss upwind;
+    div(phid2,p_rgh) Gauss upwind;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+laplacianSchemes { default Gauss linear corrected; }
+interpolationSchemes { default linear; }
+snGradSchemes { default corrected; }

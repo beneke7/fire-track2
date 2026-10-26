@@ -1,0 +1,18 @@
+/* OpenCFD v2512 adiabatic closed-gas expansion verification. */
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class volVectorField;
+    location "0";
+    object U;
+}
+
+dimensions [0 1 -1 0 0 0 0];
+internalField uniform (-0.3172675 0 0);
+boundaryField
+{
+    withdrawal { type fixedValue; value uniform (-0.3172675 0 0); }
+    sealedEnd { type slip; }
+    emptySides { type empty; }
+}
