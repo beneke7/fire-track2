@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 01:20 UTC. Workstation priority: **I4F internal discharge**.
+Updated: 2026-10-26 02:14 UTC. Workstation priority: **I4F internal discharge**.
 Aerial work continues separately on the server. User requested publication of
 the reviewed code, summaries and video; HPC execution belongs to another agent.
 
@@ -11,7 +11,8 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   .050021166664 s after 212 steps, with all 14 restart fields and no raw
   pressure contacts. Child `212925cc3be6`, StartedAt
   2026-10-26T00:54:50.781946359Z, is advancing from that checkpoint toward
-  the .7 s filling/sheet interval; its first completed steps are healthy.
+  the .7 s filling/sheet interval; the latest check reached .128021 s with
+  no raw pressure contacts or diagnostic errors.
   Source bands stay
   at 48 layers and tank resolution remains coarse; the refined region covers
   the bend/transition failure cells. All nine configured quality rows pass;
@@ -28,27 +29,37 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   no-launch child attempts are preserved; stage04 passed undefined-name lint,
   actual checkpoint preparation, four checksum checks and exact-ID GO.
   The continuation is real, rather than a prepared but unstarted queue.
-- **Tank/interface refinement is also running:** 456,954 cells, ten MPI
+- **Tank/interface refinement completed:** 456,954 cells, ten MPI
   ranks, Docker `b31f9fc09916`, StartedAt 2026-10-25T23:59:36.593088248Z,
-  target .4 s with original physics/numerics. It resumes the complete native
+  reached .399995294759 s with original physics/numerics. It resumed the complete native
   .135021166664 s checkpoint, preserving time-zero mass ledgers. The preceding
   healthy branch was saved at root's resource-priority request to free a short
   diagnostic slot; this was neither user PAUSE nor numerical failure. Both
   short diagnostics then ended, so the saved thermal run resumed immediately.
-  The latest worker check reached .178271 s with no raw contacts/clipping.
+  Docker ended normally at 02:10:27 UTC, all 14 restart fields are captured,
+  and raw contacts/clipping and diagnostic errors remain zero. The final outer
+  pressure update was 2.415 Pa; cumulative water/gas ledger defects are
+  +.045687/+.000151 kg, respectively (.001429%/.000443% of initial mass).
   Failed no-solver preparation attempts and exact restart hashes are retained.
   Bundle: `results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt5/`.
-- **Next allocation is armed: stock source treatment from the true cold state.**
-  A fresh 299,248-cell, 48-layer, initially air-filled case waits for the thermal
-  slot after its .4 s endpoint/capture or numerical stop.
-  Only the source-update flag changes physically; solver controls, initial
-  geometry/inventories and raw-pressure criteria remain the reference values.
+  Read-only terminal analysis completed; root inspected the plot and independently
+  checked EOS/work/reference arithmetic for 38 tank-states and all 15 terminal
+  native-file hashes. No solver or controller change was made by this analysis.
+  Analysis bundle: `results/runs/i4f-tank-refinement-terminal-comparison-20261026T014438Z/`.
+- **Stock source treatment from the true cold state is running.**
+  The dispatcher automatically launched the fresh 299,248-cell, 48-layer,
+  initially air-filled case after thermal endpoint capture. Docker
+  `ae3d81dc9d01`, StartedAt 2026-10-26T02:10:45.881380584Z, has completed
+  28 steps through .004271 s with zero raw contacts or diagnostic errors.
+  Only the phase-source update treatment changes; physical inputs, other solver
+  controls, initial geometry/inventories and raw-pressure criteria stay fixed.
   A guarded .05 s pilot precedes the .46 s comparison and, if healthy, the
   useful discharge interval. The switched .4 s restart below cannot substitute
-  for this independent trajectory. No stock-cold solver has launched yet.
+  for this independent trajectory. Actual Docker, exact-ID guard, GO and
+  advancing native steps are verified; the campaign controller is active.
   Bundle: `results/runs/i4f-stock-from-cold-299248-20261026T002045Z-attempt2/`.
-  The active five-hour thermal waiter preserves its 05:27:22 UTC deadline;
-  the separate stock campaign has 24 h from its own pilot start. A prospective
+  The thermal waiter handed off successfully; the stock campaign's absolute
+  deadline is 2026-10-27 02:10:45 UTC, 24 h from its own pilot start. A prospective
   half-terminal-step endpoint rule handles discrete solver End times without
   changing pressure, mass or other scientific criteria.
 - **All recent short numerical variants stopped before .46 s.** The original
@@ -71,16 +82,14 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   rising bend, not demonstrated physical cavitation. Recorded liquid support
   is not water mass removed by clipping. See the
   [corrected raw data](../results/summaries/i4f_20261025/pressure-contact-review.json).
-- **Tank mesh sensitivity now has exact .05/.10 s native comparisons.** At
-  .1 s, gas-mass-weighted T is 290.796 versus 290.527 K and pressure departure
-  from each observed-volume adiabat is .446% versus .342%. Tank drawdown
-  differs 1.18 mL; seat water flow differs .0374%. Initial gas capacity is
-  .883% larger on the refined mesh, while total feed water is 7.1 mL lower.
-  Alpha minima near -1.08e-5 are retained without clipping; equivalent negative
-  water is below .13 mg. Root inspected the plot and independently checked
-  the gas weighted identity and reference formulas. This is startup sensitivity,
-  not convergence or heat-transfer attribution. See the
-  [trajectory comparison](../results/summaries/i4f_20261025/tank-interface-time-series.png).
+- **Tank mesh sensitivity now reaches the .4 s comparison.** Coarse/refined
+  endpoint times differ by 91.4 microseconds, without interpolation. Tank-A
+  gas-mass-weighted T is 261.207/254.920 K and pressure 654.125/642.040 kPa;
+  native seat flow changes -1.04% and drawdown -1.107 L per tank (-.584%).
+  Gas volume in mixed cells falls from 19.80% to 9.69%. Initial gas capacity
+  is .883% larger on the refined mesh, while total feed water is 7.1 mL lower;
+  this is sensitivity with a geometric confound, not convergence or identified
+  heat transfer. See the [terminal comparison](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.png).
 - **Earlier focused evidence remains qualified.** Suppressed-diffusion sealed
   withdrawal mesh refinement reduces adiabatic pressure error 6.66 to 1.92%.
   The all-water valve-source benchmark reduces flow error 6.34 to 1.38% with
@@ -91,15 +100,15 @@ the reviewed code, summaries and video; HPC execution belongs to another agent.
   the cause of the pressure cycle; no speculative equation patch was adopted.
 - **Current gas storage/work proxy is computed.** For both baseline tanks
   through clean .400087 s, delta(U*)=-195.307 kJ and integral(pbar dV)=332.626 kJ,
-  leaving +137.319 kJ. The energy-reference correction is .099 kJ; work
-  coarsening changes .844 kJ. The refined curve currently ends at .284932 s,
-  so endpoint remainders are not a paired mesh comparison. Neither measured
-  heat nor a closed total-energy defect follows. Open-domain gas inventory
-  loss is not conservation error. See the
-  [analysis and plot](../results/summaries/i4f_20261025/headspace-pv-energy-proxy.json).
+  leaving +137.319 kJ. The new refined near-.4 s endpoint gives -235.708 kJ
+  storage, +327.933 kJ work proxy, and +92.225 kJ remainder. Work coarsening
+  changes .844/.763 kJ per tank, coarse/refined. These are uniform-headspace
+  proxies, not measured heat or closed total-energy defects. Open-domain gas
+  inventory loss is not conservation error. See the
+  [terminal analysis](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.json).
 
 The bounded Astra hard-blocker review selected two actions: continue the actual
-bend refinement and run stock source treatment from cold. Finite water
+bend refinement and run stock source treatment from cold; both are running. Finite water
 compressibility remains conditional: nearly pure-water pressure storage can
 change substantially despite small bulk density change, but an earlier Tait
 restart did not remove clipping. Physical pressure-margin interpretation needs

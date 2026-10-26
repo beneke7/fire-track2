@@ -1,5 +1,19 @@
 # I4F discharge: published results, 25–26 October 2026
 
+**Tank refinement now reaches .4 s:** the 456,954-cell case ends normally at
+.399995 s, compared with the clean 299,248-cell state at .400087 s. Tank-A
+gas-mass-weighted temperature changes from 261.207 to 254.920 K and pressure
+from 654.125 to 642.040 kPa. Valve flow changes -1.04%, while tank withdrawal
+changes -1.107 L (-.584%). The exact 91.4-microsecond time offset and .883%
+initial gas-capacity difference remain explicit; no fields are interpolated.
+The [analysis](tank-interface-terminal-comparison.json) and
+[native history](tank-interface-terminal-history.csv) show thermal sensitivity,
+not mesh convergence or a demonstrated heat-transfer mechanism. The refined
+run has no pressure-floor events through this endpoint; it does not test the
+later .41–.44 s failure interval.
+
+![Tank refinement through the native near-.4 s endpoint](tank-interface-terminal-comparison.png)
+
 **New controlled thermal diagnostic:** uniform refinement in a sealed
 water–air withdrawal test reduces pressure error against adiabatic expansion
 from **6.66% to 1.92%**. Both phase meshes change together; thermal diffusion

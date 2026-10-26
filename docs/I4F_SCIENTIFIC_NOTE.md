@@ -209,7 +209,7 @@ therefore normalizes pressure and gas volume to each mesh's own initial state.
 At those distinct observed expansion ratios, pressure exceeds the adiabatic
 reference by .179% and .143%, respectively. This single startup snapshot
 does not establish a convergence order, thermal mechanism or later behavior;
-the same-settings refined continuation is needed for the .4 s comparison.
+the same-settings refined continuation now supplies the near-.4 s comparison below.
 The [extended exact-time comparison](../results/summaries/i4f_20261025/tank-interface-time-series.png)
 now includes .100021166664 s. Gas-mass-weighted temperature is 290.796 versus
 290.527 K, and pressure departure from each observed-volume adiabat is .446%
@@ -220,13 +220,40 @@ integrated equivalent negative-water mass is below .13 mg in each mesh.
 No alpha clipping is applied to those reductions. These two startup checkpoints
 do not isolate a thermal mechanism or establish convergence.
 
+The [terminal tank-refinement comparison](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.json)
+now compares the coarse clean .400086712911 s state with the refined normal-End
+.399995294759 s checkpoint. The exact time offset is -91.4 microseconds; neither
+fields nor scalar histories are interpolated. For tank A, gas-mass-weighted
+temperature changes from 261.207 to 254.920 K and gas-volume-weighted pressure
+from 654.125 to 642.040 kPa (-1.85%). Tank withdrawal is 189.407 versus
+188.300 L (-.584%), and the sum of two native valve-seat water fluxes is
+1.047557 versus 1.036627 m3/s (-1.04%). The small time offset is retained in
+these differences; they are not exact-common-time error estimates. Each mesh
+starts with its own gas volume, differing by .883%, so geometry and discretization
+effects are not fully isolated. Against the adiabat at each observed gas-volume
+ratio, pressure departures are 8.44% and 5.60%; the adiabat is a diagnostic
+reference, not an established exact solution for this turbulent apparatus.
+
+The [native plot](../results/summaries/i4f_20261025/tank-interface-terminal-comparison.png)
+shows stronger thermal sensitivity than early hydraulic sensitivity. Gas volume
+in cells with .01 < alpha_water < .99 falls from 19.80% to 9.69%. The temperature
+mean in the fixed headspace zone changes by 1.19 K, versus 6.29 K over all tank
+gas. These observations make diffuse-interface thermal transport worth examining,
+but neither identify a physical heat flux nor prove numerical diffusion is the
+sole cause. The refined endpoint has no raw pressure contacts or persistent
+pressure-update stop; its final outer pressure update is 2.415 Pa. Boundary-flux
+balanced cumulative water/gas defects are +.045687/+.000151 kg, respectively.
+This result precedes the reference's later .41–.44 s failures and therefore does
+not establish their remedy. Keep the independent bend-refinement and stock-source
+cold-start comparisons as the next discriminating experiments.
+
 The [native gas storage/work analysis](../results/summaries/i4f_20261025/headspace-pv-energy-proxy.json)
 checks `U_g* = sum(alpha_g p V)/(gamma-1)` against `sum(m_g Cv T)` and integrates
 gas-volume-weighted pressure against the saved gas volumes. For both tanks
 together through .400087 s, storage changes by -195.307 kJ while the
 trapezoidal pressure–volume work proxy is +332.626 kJ, leaving +137.319 kJ.
 The configured sensible-energy reference changes that remainder by only
-.099 kJ; coarsening the saved-state quadrature changes work by .844 kJ.
+.099 kJ; coarsening the saved-state quadrature changes work by .844 kJ per tank.
 The positive-gas-volume p05–p95 pressure spread at the endpoint is about 124 Pa.
 These checks make the calculation traceable, but do not turn the remainder
 into measured heat transfer or identify a numerical energy defect. Interface transport,
@@ -236,6 +263,15 @@ also includes the refined trajectory through .284932 s; its different endpoint
 must not be interpreted as a paired mesh-error reduction. Domain gas inventory
 loss reflects an open, venting control volume and is distinct from a
 boundary-flux-balanced conservation residual.
+The new terminal refinement analysis extends that case to .399995 s: both
+tanks together have delta(U*)=-235.708 kJ and integral(pbar dV)=327.933 kJ,
+leaving +92.225 kJ. The sensible-energy reference changes this by -.044 kJ;
+every-other-snapshot quadrature changes work by .763 kJ per tank. The reduced
+proxy remainder is observed at nearly matched times with different initial
+capacities and saved-point sets. It is not a 32.8% reduction in a proven
+numerical energy error. Root independently checked EOS/work/reference arithmetic
+for all 38 tank-states, the CSV row count, output hashes and all 15 terminal
+native-file hashes, and inspected the plotted curves.
 
 The [forward-model comparison through .400087 s](../results/summaries/i4f_20261025/corrected-source-model-comparison.png)
 also shows how the initial agreement evolves. At that same time, CFD tank-A
