@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 20:36 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 20:52 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -73,12 +73,21 @@ Current work is bounded and parallel; no failed fields are restart inputs:
   retained. The intended control change from the failed cold startup was
   `momentumPredictor no`; pressure correction still updates velocity and
   kinetic energy. It has not tested the previous .48–.49 s coupling window.
-  Recovery worker is reclaiming verified duplicate/closed-log space before
-  performance worker prepares a recorded continuation from this healthy save.
+  A recorded continuation is now live: Docker `f960b72b8049`, StartedAt
+  20:50:36.466720222 UTC, ten MPI/ten CPU equivalents, target 1.0 s.
+  All fifteen checkpoint fields plus time were copied and hash-checked. Root
+  verified Docker and advancing guard at .098271 s/29 new steps with no raw
+  floor contact or parser error. The original campaign deadline is retained
+  (about 04:24 UTC, 27 October); this operational split is not claimed
+  bitwise-equivalent to uninterrupted apparatus integration. No n-1 time
+  directory requirement is inferred for Euler. Continuation authority:
+  `results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/guardian-status.json`.
   Authority: `results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/guardian-status.json`.
 - **First-step energy audit (performance worker):** preparing a small
   predictor-on/off comparison with read-only kinetic-energy and temperature
-  term recording. The otherwise matched predictor-on cold run stopped after
+  term recording. Its read-only observer binary has compiled; the matched
+  probes share remaining capacity after the two live main jobs.
+  The otherwise matched predictor-on cold run stopped after
   four steps at 64.416 microseconds: its first pressure correction saw air
   near 12 K and 9.71 kPa, below the unchanged 10 kPa floor. The hypothesis is
   that unprojected predictor kinetic energy drives the temperature excursion;
@@ -88,9 +97,21 @@ Current work is bounded and parallel; no failed fields are restart inputs:
   trial that mixes the pressure-derived expansion source with its previous
   outer-iteration value, once after both pressure corrections. Weight .5,
   default 1 preserving the existing path. A small default identity comparison
-  precedes a matched warm replay toward .505 s. It is not launched at this
-  readback. Both the raw source fixed-point defect and pressure/velocity
-  changes must decrease; merely damping the displayed update is insufficient.
+  preceded a matched warm replay toward .505 s, now live as Docker
+  `d353e078c78c`, StartedAt 20:43:55.431189317 UTC, ten MPI/eight CPU
+  equivalents, 50-minute save/one-hour hard bound. Root verified actual
+  Docker state and advancing guard/log at .462007 s/18 steps, zero floor
+  contacts. The four-step default-weight identity comparison reproduced
+  all twelve common laminar fields byte-for-byte; optional k/omega history
+  initialization was guarded identically in both test binaries. The pilot
+  ledger includes +.133296 kg inherited from its warm parent; the first
+  fifty new rows add about +.000410 kg. The first new step contributes
+  +.000227 kg, versus -1.44e-6 kg for the matched unrelaxed trial. These
+  different cumulative origins must not be compared as new trial errors.
+  Source and mass closure need scrutiny alongside pressure. Both raw source
+  fixed-point defect and pressure/velocity changes must decrease; merely
+  damping the displayed update or crossing .5 s is insufficient.
+  Authority: `results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-relaxation-on/guardian-status.json`.
 - **Restart finding:** saving the expansion source alone did not reproduce
   uninterrupted evolution. Correctly initializing Euler field history before
   derived-field mutation did: a source-active channel split/restart matches
@@ -120,12 +141,23 @@ Current work is bounded and parallel; no failed fields are restart inputs:
   evidence are in `full-source-apparatus/context-20261026T193827Z/` and
   `full-source-apparatus/source-closure-20261026T2010Z/` under the summary root.
 
-Twenty effective CPUs are shared with unrelated workloads. No long CFD is live at the 20:36 UTC readback; source compilation and small
-diagnostics continue while disk headroom is recovered. No GPU or HPC
+Twenty effective CPUs are shared with unrelated workloads. At 20:52 UTC the eight-CPU source-relaxation pilot and ten-CPU cold-derived
+continuation are live. Their total declared quota is eighteen of twenty,
+with about 1.13 CPU equivalents of unrelated work measured at admission.
+Small diagnostics share admitted remaining capacity. No GPU or HPC
 job is launched here. The runtime save floor remains 20 GiB. Verified
 lossless archives preserve the old terminal logs, and duplicate-only cleanup
 preserved every executed run's unique fields and source. A further three
 closed logs were archived with about 1.32 GiB net allocated space recovered.
+A further exact static-mesh duplicate cleanup removed 2,228 redundant paths
+while retaining 401 canonical files; root checked every canonical SHA/size
+and the global canonical/deletion-set separation. Measured free-space gain
+was 9.36 GB during concurrent filesystem activity, with about 32 GB free
+afterward. Two files were restored for smoke checks; 21 candidates with
+permission failures remained untouched. Unique fields and source were not
+removed. The [public recovery map and helper](../results/archives/manifests/i4f-polymesh-dedup-20261026T2038Z/README.md)
+include atomic overwrite refusal and symlink checks, exercised with synthetic
+restore/race tests. Root verified all thirteen public artifact hashes.
 See the [archive and restore index](../results/archives/index.json).
 
 After merging HPC commit e5c4d92, eleven focused terminal-audit tests passed;

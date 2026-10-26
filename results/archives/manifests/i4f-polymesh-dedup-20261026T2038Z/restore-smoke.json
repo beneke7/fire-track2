@@ -1,0 +1,33 @@
+{
+  "executed_batch_summary": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-summary.json",
+  "executed_batch_summary_sha256": "bd21012154cf8425ee1332801f9b0c393f1569ce00d2c69dd52c83344130a469",
+  "persistent_unlinks_after_smoke_restore": 2229,
+  "restore_command": "python3 results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh_v2.py <repository-relative-duplicate_path> --plan results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-plan.json",
+  "restored_targets_remaining": 1,
+  "schema": "i4f-polymesh-dedup-restore-verification/v1",
+  "v1_restore_smoke": {
+    "atime_reset_after_readback": true,
+    "bytes": 524325,
+    "ctime_note": "ctime changes when a file is recreated and is not restorable",
+    "path": "results/runs/i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-residualControl-samepartition-attempt2/case/processor15/constant/polyMesh/sets/lineBT",
+    "sha256": "5029c9435c9abb6b7c583da04648bc7b4860543e8f8892beb89deda3cf8400e5",
+    "uid_gid_mode_atime_mtime_verified": {
+      "atime_ns": true,
+      "gid": true,
+      "mode": true,
+      "mtime_ns": true,
+      "size": true,
+      "uid": true
+    }
+  },
+  "v2_restore_helper": {
+    "path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore_duplicate_polymesh_v2.py",
+    "refuses_existing_target": true,
+    "sha256": "3b3108f37ef7d15ba671146d604f8038f3434cae27d14f7c9ca89d0a52b80122",
+    "sha256_verified": true,
+    "smoke_destination_removed_after_verification": true,
+    "synthetic_destination": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/restore-smoke/sets/lineBT",
+    "uid_gid_mode_atime_mtime_size_verified": true
+  },
+  "verified_utc": "2026-10-26T20:49:46.847970+00:00"
+}

@@ -2408,6 +2408,23 @@
       "status": "verified_duplicate_payload_files_removed",
       "completed_utc": "2026-10-26T17:42:27.154242+00:00",
       "measured_free_change_bytes": 2821910528
+    },
+    {
+      "completed_utc": "2026-10-26T20:48:15.601184+00:00",
+      "deduplication_path": "results/archives/manifests/i4f-polymesh-dedup-20261026T2038Z/manifest.json",
+      "deduplication_sha256": "d0b07fdf77e8f9f24cc8bc66388ccbf1b90739022cc4d1d865b32bc800d1d745",
+      "source_type": "exact_duplicate_static_polyMesh",
+      "status": "duplicate_paths_removed_canonical_retained",
+      "file_count": 2228,
+      "planned_file_count": 2251,
+      "unlinks_during_batch": 2230,
+      "restored_for_checks": 2,
+      "permission_denied_retained": 21,
+      "retained_canonical_file_count": 401,
+      "measured_free_change_during_batch_bytes": 9355329536,
+      "free_change_scope": "Original batch measurement includes concurrent filesystem activity and precedes the two restore checks; not an exact net retained-byte figure.",
+      "restore_strategy": "Use the public portable helper and dedup-plan.json; copy from retained canonical with SHA/size and metadata checks, atomic no-clobber install; never modify canonical.",
+      "recovery_packet_created_utc": "2026-10-26T20:55:03.607368+00:00"
     }
   ],
   "log_compressions": [

@@ -1,0 +1,189 @@
+{
+  "completed_utc": "2026-10-26T20:48:15.601184+00:00",
+  "created_utc": "2026-10-26T20:46:35.111868+00:00",
+  "elapsed_s": 100.448,
+  "estimated_allocated_bytes_released": 10236452864,
+  "files_removed": 2230,
+  "files_skipped": 21,
+  "journal_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-journal.jsonl",
+  "journal_sha256": "ce563aaab9dbd8a06456bc45f268aa2b54adcba63792c854467d45ec23e63567",
+  "logical_bytes_removed": 10231868746,
+  "measured_free_after_bytes": 31694782464,
+  "measured_free_before_bytes": 22339452928,
+  "measured_free_change_bytes": 9355329536,
+  "plan_path": "results/runs/i4f-disk-recovery-audit-20261026T2038Z/polymesh-dedup-plan.json",
+  "plan_sha256": "8e591a640f9df502b0caf4ae4629277593bb52203431d59de1b26280f78c94ee",
+  "restore_strategy": "Copy the retained canonical file to a temporary sibling (never hardlink), verify its SHA-256 and byte count, restore recorded uid/gid/mode/atime/mtime, then atomically rename to duplicate_path. Do not overwrite an existing target.",
+  "schema": "i4f-polymesh-duplicate-payload-cleanup/v1",
+  "skipped": [
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/faces",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/faces",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/faces'",
+      "sha256": "400dc695fea020079a369b2c11dea3dcfef5e7ab1b044acb68721c7bb52ab603",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:36.173799+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/faces",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/faces",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/faces'",
+      "sha256": "400dc695fea020079a369b2c11dea3dcfef5e7ab1b044acb68721c7bb52ab603",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:36.248962+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/points",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/points",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/points'",
+      "sha256": "b3560241463ccea73beb9c9825e97621234a957c96758553595663d840c757e2",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:41.411807+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/points",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/points",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/points'",
+      "sha256": "b3560241463ccea73beb9c9825e97621234a957c96758553595663d840c757e2",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:41.464489+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/surfaceIndex",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/surfaceIndex",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/surfaceIndex'",
+      "sha256": "e6bdfca5d897b23226bd6a725daf5c8de62e88e743c857352284c0075946199e",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:47.506412+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/surfaceIndex",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/surfaceIndex",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/surfaceIndex'",
+      "sha256": "e6bdfca5d897b23226bd6a725daf5c8de62e88e743c857352284c0075946199e",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:47.554128+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/owner",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/owner",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/owner'",
+      "sha256": "8558443a7d5bacca1f64f26f24afd981baf26b191688596b819ce06dc94f43c9",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:49.067787+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/owner",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/owner",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/owner'",
+      "sha256": "8558443a7d5bacca1f64f26f24afd981baf26b191688596b819ce06dc94f43c9",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:49.116319+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/neighbour",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/neighbour",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/neighbour'",
+      "sha256": "3c4dd72ef8aee707e5c526a94a1d1663a22968618e4dc699a3cc1d4efae87876",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:50.897404+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/neighbour",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/neighbour",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/neighbour'",
+      "sha256": "3c4dd72ef8aee707e5c526a94a1d1663a22968618e4dc699a3cc1d4efae87876",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:46:50.944287+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/pointLevel",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/pointLevel",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/pointLevel'",
+      "sha256": "f9a45da9a40af89ac1626e6d7d7e8cd556603b3d8628928143520576310ab515",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:00.913471+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/pointLevel",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/pointLevel",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/pointLevel'",
+      "sha256": "f9a45da9a40af89ac1626e6d7d7e8cd556603b3d8628928143520576310ab515",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:00.958554+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/cellLevel",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/cellLevel",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/cellLevel'",
+      "sha256": "8e37717665e405046583b46d9f12516ff05f6c62ef7b560fc766ec0a83f2b43c",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:02.957280+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-apparatus-corrected-continuation-cpu-20261023T215313Z/case/constant/polyMesh/cellLevel",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/cellLevel",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/cellLevel'",
+      "sha256": "8e37717665e405046583b46d9f12516ff05f6c62ef7b560fc766ec0a83f2b43c",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:03.002909+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-881k-outlet-bend-diagnostic-20261025T2325Z-stage01/case/constant/polyMesh/sets/multiZoneCells",
+      "duplicate_path": "results/runs/i4f-local2x-outlet-bend-prep-20261025T193425Z/attempt-snappy-region-x4/canonical/case/constant/polyMesh/sets/multiZoneCells",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-local2x-outlet-bend-prep-20261025T193425Z/attempt-snappy-region-x4/canonical/case/constant/polyMesh/sets/multiZoneCells'",
+      "sha256": "4347c10e3781137aaadb3185aadf9fbd0b3b603cd2a81d84bbdd73f9107ed887",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:09.251288+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031200Z/case/constant/polyMesh/cellZones",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/cellZones",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/cellZones'",
+      "sha256": "a38b00005f482b45ef9fe9d901709b94d1cb6dc561dbee7526aa904b956b0388",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:21.393787+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031200Z/case/constant/polyMesh/cellZones",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/cellZones",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/cellZones'",
+      "sha256": "a38b00005f482b45ef9fe9d901709b94d1cb6dc561dbee7526aa904b956b0388",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:21.413697+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031200Z/case/constant/polyMesh/sets/ambientCells",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/sets/ambientCells",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/sets/ambientCells'",
+      "sha256": "a12f6f1ff7fb33ceb25f0558f778b773ba2792702f23c27ee78eabe50031239a",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:22.841506+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031200Z/case/constant/polyMesh/sets/ambientCells",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/sets/ambientCells",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/sets/ambientCells'",
+      "sha256": "a12f6f1ff7fb33ceb25f0558f778b773ba2792702f23c27ee78eabe50031239a",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:22.861524+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031200Z/case/constant/polyMesh/sets/ambientZone",
+      "duplicate_path": "results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/sets/ambientZone",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-valve-taper-sensitivity-20261024T010920Z/prepared-case/constant/polyMesh/sets/ambientZone'",
+      "sha256": "55bef751a7b0d38810eab0f0e6a5c8b350c6eabfa94bc3dbad1b9483487e9a6e",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:23.229955+00:00"
+    },
+    {
+      "canonical_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031200Z/case/constant/polyMesh/sets/ambientZone",
+      "duplicate_path": "results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/sets/ambientZone",
+      "error": "PermissionError: [Errno 13] Permission denied: '/home/v/proj/bene/fire-track2/results/runs/i4f-partial-drained-cutplane-20261024T004933Z/prepared-case/constant/polyMesh/sets/ambientZone'",
+      "sha256": "55bef751a7b0d38810eab0f0e6a5c8b350c6eabfa94bc3dbad1b9483487e9a6e",
+      "status": "skipped_source_retained",
+      "utc": "2026-10-26T20:47:23.250241+00:00"
+    }
+  ],
+  "status": "complete_with_restorable_duplicate_removals"
+}
