@@ -75,6 +75,25 @@ evidence of damping for the tested direction, not an exact derivative or
 a proof of global pressure-operator stability. It shifts the next test toward
 mechanical pressure/density/momentum feedback while holding water transport.
 
+The first frozen-water mechanical probe reached the same .493844 s physical
+state but aborted after two diagnostic pressure correctors: rederived air-phase
+T changed its bitwise hash on eight ranks while shared T and the other checked
+inputs stayed fixed. The temperature-change magnitude was not captured, so
+neither a mechanical-cycle result nor a thermodynamic cause follows. A separate
+thermo-only test at the healthy .460048 seed measured exactly zero phase-T
+changes under repeated refresh and +/-1 to 1000 Pa perturbations, without time
+advance. The next map records actual deltas and checks rederived phase T against
+a declared floating-arithmetic bound; it does not loosen physical convergence.
+
+The cold advisory continuation ended at .528211 s after 63 raw floor contacts,
+with a lowest raw pressure of positive 9418.44 Pa against the stock 10000 Pa floor.
+These are floor contacts, not demonstrated negative pressures or cavitation.
+Its persistent final outer update remained 1.347 kPa; .002593 kg maximum liquid
+support in contact cells is not lost water mass. Continuing beyond the earlier
+pressure-update warning therefore did not supply a complete accepted trajectory.
+A same-seed 16-outer comparison is prepared to measure iterative sensitivity
+of both local updates and engineering observables with physical inputs fixed.
+
 The local startup balance can be checked directly from the
 [raw matrix packet](../results/summaries/i4f_20261025/firststep-energy/firststep-temperature-matrix-evidence.json).
 For this initially pure-air, zero-flux first outer iteration only, define
@@ -87,9 +106,12 @@ The enriched observer reproduces all fifteen fields and time byte-for-byte.
 The original packet's source-closure reference identifies an ancestor. The
 [exact immediate v8 parent source](../results/summaries/i4f_20261025/immediate-parent-source/README.md)
 is now released with its build script, 90-entry source inventory and pinned
-image/library identities. Root verified all 100 package artifacts. A fresh
-rebuild and one-step equivalence test remain pending; the executable and full
-CFD mesh remain separately required local inputs.
+image/library identities. The [later rebuild addendum](../results/summaries/i4f_20261025/immediate-parent-source/rebuild-equivalence-addendum.json)
+records an exact executable rebuild and byte-identical 14 native fields plus
+uniform/time after the declared 12-microsecond step; root checked those bytes
+independently. The package now has 101 verified artifacts. This establishes
+this reconstruction/step only; full apparatus evolution is not validated.
+The executable and full CFD mesh remain separately required local inputs.
 
 The predictor/corrector equations explain the targeted numerical change.
 For this static Euler, single alpha-correction/subcycle configuration, let

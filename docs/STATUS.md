@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 23:14 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 23:36 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -15,17 +15,19 @@ No new scientific gate passed.
 
 ## Current execution
 
-No complete credible tank-to-nozzle trajectory exists yet. The latest
-completed discharge trials failed their numerical screens;
-failed fields are not restart inputs. A separate pressure-reconstruction trial
-and tighter pressure-only diagnostic have ended. The latter damps the tested
-pressure disturbance with held physical fields; this does not establish global
-operator stability. A separate diagnostic continuation is live from the healthy
-.390706 s cold-derived checkpoint. The case-staging utility passed ten regression tests and the real-apparatus
-staging smoke; exact immediate-parent source recovery is complete. The source
-rebuild reproduced the exact baseline binary; a one-step equivalence test is
-preparing after a preserved MPI-user launch error. The mechanical-feedback
-probe is live under its exact-ID guard.
+No complete credible tank-to-nozzle trajectory exists yet. The advisory
+continuation saved at .528211 s after raw pressure crossed the stock 10 kPa
+floor; its .65 s target was not reached. The mechanical map aborted on a
+derived phase-temperature invariant, so it supplied no completed map result.
+A thermo-only seed test was idempotent but does not explain that later hash
+change. An instrumented mechanical retry is preparing.
+
+The matched 16-outer case is staged behind a durable dispatcher/review gate.
+Its parser grouping, exact checkpoint and single 8→16 dictionary change passed
+review. It may launch at at least 21 GiB free while archiving continues; the 20 GiB
+hard guard is unchanged. New mechanical/mesh jobs await larger combined disk
+headroom. No new physical solver was verified live at this update; distinguish
+preparation agents/dispatchers from actual CFD processes.
 
 | Latest test | Saved time (s) | Actual outcome |
 | --- | ---: | --- |
@@ -33,6 +35,7 @@ probe is live under its exact-ID guard.
 | Same healthy warm seed, predictor off, source weight 1 | .494129 | Persistent pressure updates, final 1254.224 Pa; no raw floor contact |
 | Same warm seed, source relaxation weight .5 | .494130 | Same late failure window, final 1253.704 Pa; no raw floor contact |
 | Same warm seed, predictor off, maximum timestep 25 microseconds | .461923 | Two raw contacts at .461873 s: -2.671 and -62.001 kPa; one water-bearing cell |
+| Cold-derived diagnostic with pressure-update warnings advisory | .528211 | 63 stock-floor contacts; lowest raw pressure +9.418 kPa, final dp1.347 kPa; target .65 unmet |
 
 The cold-derived run `f960b72b8049` finished at 21:59:19.36122318 UTC, normal
 End/native checkpoint .484006034892. Its 1.0 s target was not reached. The
@@ -71,12 +74,16 @@ Current independent tasks:
   or global stability. All 38 held-field checks match. The next discrimination
   is mechanical pressure/density/momentum feedback with water transport held,
   with the worker source-order sequence reviewed and authorized. The next
-  probe Docker `7d24b34e1a23`, StartedAt 23:09:04.824336741 UTC, is
-  confirmed live with ten MPI/eight CPUs and 32 GiB. It starts after the complete
-  original pEqn/EOS/U update (a later stage
-  than the pressure-only capture), holds water/temperature/turbulence state,
-  preserves source ordering and old-time history, and stops censored on a
-  first raw pressure-floor contact. It writes no physical endpoint. This follows
+  probe Docker `7d24b34e1a23`, StartedAt 23:09:04.824336741 UTC,
+  exited 1 at 23:19:39.60699689 UTC after reaching .493844 s and executing
+  two diagnostic pressure correctors. Phase-air T hashes changed on eight
+  ranks during thermo refresh; shared T, water T, alpha/water flux, SST and
+  tracked old histories stayed exact. No completed mechanical-map result is
+  inferred. The delta magnitude was not logged. A separate thermo-only seed
+  test exited 0 at unchanged .460048 s with zero measured phase-T changes;
+  it does not resolve the later discrepancy. Retry records numeric deltas
+  before checking a declared 128-epsilon bound for rederived phase T while
+  shared T and all other held inputs remain exact. This follows
   the focused Astra review;
   it is an algebraic test, not a discharge continuation. The measured source
   change largely cancels the changed alpha-times-flux divergence, making it
@@ -95,22 +102,25 @@ Current independent tasks:
   It had no raw floor contacts, but its coupled defects were worse than
   the nearest-time baseline. Final dp had recovered to 42.8 Pa after the
   stop request; the .505 target was not reached. This is not a remedy.
-- **Diagnostic continuation:** Docker `87c69f24d16d`, StartedAt
-  22:34:41.550545949 UTC, ten MPI/ten CPUs, uses the unchanged corrected
-  pressure operator and exact .390705595007 cold checkpoint. Only the
-  >100 Pa update stop ACTION becomes advisory with identical thresholds
-  and a flushed event CSV. Raw floor/clipping, mass/phase, NaN, disk and wall
-  stops remain hard. Root reviewed that guard delta. At 23:02 UTC it had completed
-  641 steps through .490599 s with zero raw floor contacts, but 68 consecutive
-  pressure-update warnings and final updates about 1.34–1.60 kPa; no recovery
-  from that criterion was established. Luna is auditing a frozen completed-step
-  prefix for signed oscillations and engineering observables. Its CPU quota
-  was raised from eight to ten after the pressure-only job ended, with exact
-  identity/StartedAt, memory and deadlines unchanged; adjustment provenance
-  remains in its private bundle. Target .65 s; save 00:49 UTC,
-  hard 01:04 UTC on 27 October. Underconverged fields will not become a
-  validation pass merely by finishing. Its launch had three preserved
-  preparation attempts; the exact live ID/guard/seed hashes are recorded.
+- **Diagnostic continuation ended:** Docker `87c69f24d16d` ended0 at
+  23:09:26.143315337 UTC with native checkpoint .528211229857 s after 895 steps.
+  Its unchanged hard guard requested save after first raw floor contact at
+  .52769344 s (9989.07 Pa). There were 63 corrector-pass contacts; worst 9418.44 Pa
+  stayed positive, while saved pressure is clamped to 10000 Pa. Maximum contact
+  liquid support .0025933 kg is not removed mass. Final pressure updates were
+  1347.10/1347.47 Pa; ledger defects water −.004791 kg, gas +4.13e−6 kg. It did
+  not recover merely by continuing beyond the update warning. The first warning
+  was .483808963090 s; the frozen .498333 prefix shows a rise then decline in
+  update magnitude, but lacks signed same-cell records across all outers and
+  therefore does not establish an outer two-cycle.
+- **16-outer sensitivity staged:** `results/runs/i4f-cold-nouter16-advisory-20261026T2320Z/`
+  uses the same immutable .390705595007 checkpoint, exact 12d8 binary and all
+  original physical inputs; only nOuterCorrectors changes 8→16. Guard grouping
+  is 32 pressure passes/step and 16 outer updates, tested explicitly. Target .65s,
+  ten MPI/ten CPU/32 GiB, same warning policy and all hard stops. Its actual
+  bounded user-systemd dispatcher is armed behind a hash-pinned release gate,
+  with PAUSE latching. Release is authorized when unchanged readiness hashes
+  and at least 21 GiB free are measured; no restart from the failed .528 endpoint.
 - **Mesh candidate:** the initialized 0.8 m base has 293,356 cells and
   matching 48 axial valve layers at 6.25 mm, 5,376 cells per branch. Its nine
   configured quality rows are zero, but four baffle-boundary faces fail
@@ -120,6 +130,9 @@ Current independent tasks:
   at skewness 4.052 and 6,894 concave cells. The 1.0 m baseline has generic
   Mesh OK/max skew 3.230, with 6,345 concave cells as a separate qualification.
   No dimensions, dividers or thresholds changed, and no 0.8 m CFD has run.
+  A single fourth-corner refinement is prepared and inspected, with no changed
+  geometry or thresholds; launch is held for disk recovery. Numeric preflight
+  now compares coordinates numerically rather than rejecting 0.60 versus 0.6.
   Its corrected source-zone classification is complete; the baseline was
   independently checked as fully classified and wetted: 21,504 source cells,
   .0841063 m3. The earlier omission was confined to the new candidate's prep.
@@ -172,9 +185,10 @@ The [exact immediate-parent source](../results/summaries/i4f_20261025/immediate-
 for the startup energy baseline is recovered, including original build recipe
 and pinned image/library identities. Root verified 100 artifacts, also
 from a clean Git archive. A fresh isolated rebuild reproduced the exact 12d8
-baseline executable hash. The first one-step launch exited before stepping
-because MPI ran as root; its retry matches the original non-root user.
-The one-step native-field comparison remains pending. The ancestor packet alone was insufficient.
+baseline executable hash, and all 14 native fields plus uniform/time matched
+byte-for-byte after 12 microseconds. Root independently verified these bytes
+and the terminal Docker identities. Pre-solver launcher mistakes are preserved;
+this proves only the declared reconstruction and single step. The ancestor packet alone was insufficient.
 Unique fields and original source/CAD remain. Older outcomes and restorable
 archives are retained in the scientific note, published results index and
 [archive index](../results/archives/index.json). Thirteen focused tests passed

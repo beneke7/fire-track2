@@ -35,7 +35,9 @@ numerical evidence; the raw full case and immediate parent source remain local.
 The frozen metadata's matrix units are corrected in a separate record.
 The [exact immediate parent source](immediate-parent-source/README.md) now
 supplements the ancestor-only reference, including the pinned build environment
-and original script. A fresh rebuild has not yet been verified.
+and original script. The [fresh rebuild and one-step check](immediate-parent-source/rebuild-equivalence-addendum.json)
+now reproduce the exact executable and all 14 native fields plus uniform/time
+byte-for-byte at 12 microseconds. This does not certify longer evolution.
 The [real-apparatus staging evidence](case-staging/integration-report.json)
 shows rejection of mutated runtime phase caches and a successful hash-verified
 174-file stage from the immutable checkpoint. This is preparation evidence,

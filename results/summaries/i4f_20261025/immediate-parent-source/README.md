@@ -1,5 +1,10 @@
 # Immediate parent solver source for first-step energy baseline
 
+The [rebuild addendum](rebuild-equivalence-addendum.json) records the later
+verified result: the rebuilt executable and all 14 one-step native fields plus
+`uniform/time` match the original byte-for-byte. This verifies reconstruction
+and one-step equivalence, not longer physical evolution.
+
 This packet publishes the exact v8 solver-source overlay used for the uninstrumented first-step baseline executable. Its SHA256 is 12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a. The baseline container was i4f-firststep-energy-baseline-12d8-predictor-no-20261026t205819z, ID f462b86a1d657c26a6215fdd5f773e78aacccc8f91667ff4337b342615346fb7, started 2026-10-26T20:58:19.8784497Z, and exited 0 after a complete native checkpoint at 1.2e-05 s. This was a one-step energy diagnostic, not physical validation.
 
 ## Rebuild inputs
