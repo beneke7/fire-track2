@@ -1,0 +1,381 @@
+{
+  "artifacts": {
+    "analysis_script_sha256": "224739b4dce5e386184843a4a0ff872c84ed77dced9881290c672795b82ba228",
+    "matched_metrics_csv": "results/runs/i4f-fine-reservoir-coldstart-20261025T134345Z/analysis/matched-coarse-grid-0p05-v2/matched-metrics.csv",
+    "plot": "results/runs/i4f-fine-reservoir-coldstart-20261025T134345Z/analysis/matched-coarse-grid-0p05-v2/matched-startup-grid-sensitivity.png",
+    "plot_sha256": "3387e206cc8fb860fd4a8833220c391848c6adbebf39dc71401ad78c7177f782"
+  },
+  "caveats": [
+    "Pressure and temperature probe values are point samples at fixed (1.25,-0.55,1.6) m in tank A and (1.25,0.55,1.6) m in tank B; they are not headspace volume averages.",
+    "T is the current shared mixture temperature. The case does not assert a separately conservative gas-energy equation.",
+    "Mouth-plane area averages are sampled-surface diagnostics; native alphaPhi0.water is the finite-volume boundary ledger. Do not equate the sampled plane integral to exact boundary flux.",
+    "CellZone volume outputs are reported as their own operators. externalAirZone and mouth-slab values are not presumed mutually exclusive for summation; all-region volIntegrate(alpha.water) and native guard inventory remain the total checks.",
+    "The 100 kPa/293.15 K reservoir treatment is exploratory and does not establish the physical four-outlet apparatus or hardware discharge rate."
+  ],
+  "coarse": {
+    "binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "bundle": "results/runs/i4f-quality-limited-coldstart-20261025T1258Z",
+    "checkpoint_folder": "processors10/0.050021166664",
+    "checkpoint_uniform_time_sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+    "endpoint": {
+      "all_region_volIntegrate_alpha_water_m3": 4.44916024,
+      "ambientAnnulus_alphaPhi0_water_sum_m3_s": 5.73371441e-06,
+      "externalAirZone_water_volume_m3": 0.00677988582,
+      "four_mouth_sampled_plane": {
+        "alpha_weighted_area_integral_U_m3_s": [
+          0.200138943,
+          6.16497955e-06,
+          -0.157990503
+        ],
+        "area_m2": 0.600000118,
+        "area_mean_T_shared_K": 293.149985,
+        "area_mean_U_m_s": [
+          0.330069836,
+          1.09941736e-05,
+          -0.270880589
+        ],
+        "area_mean_alpha_water": 0.969853824,
+        "area_mean_p_abs_Pa": 100157.32
+      },
+      "global_extrema": {
+        "T": {
+          "max": 293.181786,
+          "max_processor": 9,
+          "max_xyz_m": [
+            2.28750018,
+            0.256525012,
+            0.566587518
+          ],
+          "min": 291.470897,
+          "min_processor": 7,
+          "min_xyz_m": [
+            2.48581741,
+            0.305277949,
+            1.5965499
+          ]
+        },
+        "mag(U)": {
+          "max": 2.86238387,
+          "max_processor": 5,
+          "max_xyz_m": [
+            5.81480544,
+            1.01173007,
+            0.710963592
+          ],
+          "min": 0.0,
+          "min_processor": 0,
+          "min_xyz_m": [
+            5.78682201,
+            -0.537616563,
+            0.725000024
+          ]
+        },
+        "p": {
+          "max": 1188247.7,
+          "max_processor": 2,
+          "max_xyz_m": [
+            2.08749993,
+            -0.738657711,
+            0.350938985
+          ],
+          "min": 97800.8868,
+          "min_processor": 2,
+          "min_xyz_m": [
+            2.41250001,
+            -0.738673887,
+            0.649052742
+          ]
+        },
+        "p_rgh": {
+          "max": 1191703.99,
+          "max_processor": 2,
+          "max_xyz_m": [
+            2.08750095,
+            -0.736428463,
+            0.513585503
+          ],
+          "min": 99994.171,
+          "min_processor": 1,
+          "min_xyz_m": [
+            5.83364814,
+            -1.12499998,
+            -0.5
+          ]
+        },
+        "rho": {
+          "max": 998.2,
+          "max_processor": 6,
+          "max_xyz_m": [
+            5.76900238,
+            0.242811217,
+            0.969365898
+          ],
+          "min": 1.18833632,
+          "min_processor": 0,
+          "min_xyz_m": [
+            5.80498976,
+            -0.25593603,
+            0.807252489
+          ]
+        }
+      },
+      "guardian_step_health": {
+        "deltaT_logged_s": 0.00025,
+        "final_field_min_T_K": 291.4708967210527,
+        "final_field_min_p_Pa": 97800.8867969759,
+        "final_field_min_rho_kg_m3": 1.188336316355882,
+        "final_outer_max_abs_dp_Pa": 0.001161567444796674,
+        "gas_boundary_flux_kg_s": 0.2331388079316761,
+        "gas_cumulative_defect_fraction_initial": 1.8849168611397375e-07,
+        "gas_cumulative_defect_kg": -6.19286248983846e-06,
+        "gas_inventory_kg": 32.84373764823494,
+        "gas_step_defect_kg": -2.405883766109395e-08,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 97849.0496619225,
+        "water_boundary_flux_kg_s": 0.005723393726430524,
+        "water_cumulative_defect_fraction_initial": 1.0925461199549644e-07,
+        "water_cumulative_defect_kg": 0.00048521629095347953,
+        "water_inventory_kg": 4441.151747202366,
+        "water_step_defect_kg": 5.006293111489543e-06
+      },
+      "lineA_initial_zone_water_volume_m3": 0.874378661,
+      "lineA_mouth_slab_water_volume_m3": 0.00145940268,
+      "lineB_initial_zone_water_volume_m3": 0.874423032,
+      "lineB_mouth_slab_water_volume_m3": 0.0014594673,
+      "probe_T_shared_K": [
+        291.48956,
+        291.48954
+      ],
+      "probe_p_abs_Pa": [
+        1176292.4,
+        1176292.3
+      ],
+      "tankA_water_volume_m3": 1.3453299,
+      "tankB_water_volume_m3": 1.34532988
+    },
+    "initial_actual_headspace_m3": {
+      "tankA": 0.2984977021531967,
+      "tankB": 0.2984967699826191
+    },
+    "initial_gas_masses_kg_by_initial_zone": {
+      "mouthSlabsAndExterior": 24.341443189379135,
+      "tankAHeadspace": 4.2567152622068685,
+      "tankBHeadspace": 4.2567019689219405
+    },
+    "initial_mouth_slab_geometric_volume_m3": {
+      "tankA": 0.0053663877385570005,
+      "tankB": 0.005366424467023
+    },
+    "initial_primed_line_water_m3": {
+      "tankA": 0.8745578526269301,
+      "tankB": 0.8746021996128037
+    },
+    "initial_tank_water_m3": {
+      "tankA": 1.3499999999999994,
+      "tankB": 1.350000000000001
+    },
+    "initial_total_water_m3": 4.449160052239734,
+    "initial_water_mass_kg_from_guard": 4441.151564141572,
+    "input_freeze_sha256": "bcfb578a95adc430eafd19bdebd7be0e9c7e59301056f47a0b553b55ad110c7e",
+    "label": "coarse",
+    "launch_manifest_sha256": "fc8cc3d53c1850eaef18b29831704bcb6f1a9f3fb3d8ff0767f8a9d8e124b64d",
+    "mesh_cells": 303108,
+    "mesh_quality": "failed_2_face_decomposition_tet_quality_rows; all other eight configured rows zero; no threshold changed",
+    "reservoir_fragment_hashes": {
+      "T": "dc8a9f884b1bf4dbe3cee480e79170f1c28cf21939db193072da5a0d821dca8f",
+      "p_rgh": "e2406f16b9473c3a2d69c6a494e84ba0241b385f099133d9abf31dec9670917b"
+    }
+  },
+  "fine": {
+    "binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "bundle": "results/runs/i4f-fine-reservoir-coldstart-20261025T134345Z",
+    "checkpoint_folder": "processors10/0.050021166664",
+    "checkpoint_uniform_time_sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+    "endpoint": {
+      "all_region_volIntegrate_alpha_water_m3": 4.45198788,
+      "ambientAnnulus_alphaPhi0_water_sum_m3_s": 1.51119857e-06,
+      "externalAirZone_water_volume_m3": 0.00956405551,
+      "four_mouth_sampled_plane": {
+        "alpha_weighted_area_integral_U_m3_s": [
+          0.202519597,
+          4.7600059e-07,
+          -0.174973839
+        ],
+        "area_m2": 0.600000114,
+        "area_mean_T_shared_K": 293.149979,
+        "area_mean_U_m_s": [
+          0.32653776,
+          4.20221351e-06,
+          -0.311173423
+        ],
+        "area_mean_alpha_water": 0.943535868,
+        "area_mean_p_abs_Pa": 100137.113
+      },
+      "global_extrema": {
+        "T": {
+          "max": 293.178969,
+          "max_processor": 6,
+          "max_xyz_m": [
+            2.34375013,
+            0.417827279,
+            0.630801014
+          ],
+          "min": 291.512574,
+          "min_processor": 6,
+          "min_xyz_m": [
+            2.58919233,
+            0.336857003,
+            1.63937871
+          ]
+        },
+        "mag(U)": {
+          "max": 1.78874672,
+          "max_processor": 4,
+          "max_xyz_m": [
+            5.80690911,
+            0.156237632,
+            0.967224321
+          ],
+          "min": 0.0,
+          "min_processor": 0,
+          "min_xyz_m": [
+            5.63125,
+            -0.418633465,
+            0.824999988
+          ]
+        },
+        "p": {
+          "max": 1188217.69,
+          "max_processor": 7,
+          "max_xyz_m": [
+            2.09375008,
+            -0.74383281,
+            0.350325321
+          ],
+          "min": 98326.3614,
+          "min_processor": 7,
+          "min_xyz_m": [
+            2.40625007,
+            -0.756166218,
+            0.649663544
+          ]
+        },
+        "p_rgh": {
+          "max": 1191679.47,
+          "max_processor": 7,
+          "max_xyz_m": [
+            2.09375006,
+            -0.756520188,
+            0.493486722
+          ],
+          "min": 99994.171,
+          "min_processor": 1,
+          "min_xyz_m": [
+            5.83364813,
+            -1.12499998,
+            -0.5
+          ]
+        },
+        "rho": {
+          "max": 998.2,
+          "max_processor": 2,
+          "max_xyz_m": [
+            5.76921866,
+            0.869357261,
+            0.719646472
+          ],
+          "min": 1.18830794,
+          "min_processor": 4,
+          "min_xyz_m": [
+            5.804596,
+            -0.0437325914,
+            0.80637536
+          ]
+        }
+      },
+      "guardian_step_health": {
+        "deltaT_logged_s": 0.00025,
+        "final_field_min_T_K": 291.5125741091273,
+        "final_field_min_p_Pa": 98326.36142806488,
+        "final_field_min_rho_kg_m3": 1.188307940200303,
+        "final_outer_max_abs_dp_Pa": 0.04229625783045776,
+        "gas_boundary_flux_kg_s": 0.2245220504044866,
+        "gas_cumulative_defect_fraction_initial": 2.3986067009540606e-07,
+        "gas_cumulative_defect_kg": -7.90134658217756e-06,
+        "gas_inventory_kg": 32.93057459616985,
+        "gas_step_defect_kg": -2.6856187823299192e-08,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 98320.53769405573,
+        "water_boundary_flux_kg_s": 0.001508478411145412,
+        "water_cumulative_defect_fraction_initial": 3.2504220611012277e-07,
+        "water_cumulative_defect_kg": 0.0014444788014848309,
+        "water_inventory_kg": 4443.974302812452,
+        "water_step_defect_kg": 3.787240883253491e-06
+      },
+      "lineA_initial_zone_water_volume_m3": 0.875742424,
+      "lineA_mouth_slab_water_volume_m3": 0.000598274551,
+      "lineB_initial_zone_water_volume_m3": 0.87579361,
+      "lineB_mouth_slab_water_volume_m3": 0.000607105118,
+      "probe_T_shared_K": [
+        291.51365,
+        291.51365
+      ],
+      "probe_p_abs_Pa": [
+        1176695.6,
+        1176695.5
+      ],
+      "tankA_water_volume_m3": 1.3454439,
+      "tankB_water_volume_m3": 1.34544389
+    },
+    "initial_actual_headspace_m3": {
+      "relative_to_nominal_0p30375": {
+        "tankA_percent": -0.7429411289169408,
+        "tankB_percent": -0.7431910203373082
+      },
+      "tankA": 0.3014933163209148,
+      "tankB": 0.30149255727572544
+    },
+    "initial_gas_masses_kg_by_initial_zone": {
+      "mouthBoundaryAndExterior": 24.342593611863425,
+      "tankAHeadspace": 4.299423995638827,
+      "tankBHeadspace": 4.299413171674485
+    },
+    "initial_mouth_slab_geometric_volume_m3": {
+      "tankA": 0.001601072927039,
+      "tankB": 0.0016108415561799999
+    },
+    "initial_primed_line_water_m3": {
+      "tankA": 0.875967705872481,
+      "tankB": 0.876018912100371
+    },
+    "initial_tank_water_m3": {
+      "tankA": 1.3500000000000003,
+      "tankB": 1.3499999999999996
+    },
+    "initial_total_water_m3": 4.451986617972853,
+    "initial_water_mass_kg_from_guard": 4443.973042059184,
+    "input_freeze_sha256": "86291e4df90c0d482763cad5076e344eb79df075b459b78dd74f4e5ff407dd76",
+    "label": "fine",
+    "launch_manifest_sha256": "3120f3aac674b3d821a57806d19fde336179c9b7630744c21fc196e422494b8d",
+    "mesh_cells": 1779258,
+    "mesh_quality": "passed all nine configured checkMesh -meshQuality rows; max non-orthogonality 58.020121 deg",
+    "reservoir_fragment_hashes": {
+      "T": "dc8a9f884b1bf4dbe3cee480e79170f1c28cf21939db193072da5a0d821dca8f",
+      "p_rgh": "e2406f16b9473c3a2d69c6a494e84ba0241b385f099133d9abf31dec9670917b"
+    }
+  },
+  "interpretation": "Exploratory nominal-geometry grid sensitivity, not a formal grid-convergence or validation result. The fine case has 1,779,258 cells and passes its nine configured meshQuality rows; the coarse 303,108-cell case retains two configured face-tet failures. Native initial headspace and primed-line capacities differ, including about +1.004% fine headspace volume per tank and a different x=5.8m center-classified mouth-slab volume. Thus differences cannot be attributed to cell count alone.",
+  "matched_time_s": 0.050021166664,
+  "physics_match": {
+    "ambient_reservoir_T0_K": 293.15,
+    "ambient_reservoir_p0_abs_Pa": 100000.0,
+    "matched_checkpoint_and_dt": true,
+    "matched_initial_tank_water_m3_each": 1.35,
+    "reservoir_patch_fragment_sha256": {
+      "T": "dc8a9f884b1bf4dbe3cee480e79170f1c28cf21939db193072da5a0d821dca8f",
+      "p_rgh": "e2406f16b9473c3a2d69c6a494e84ba0241b385f099133d9abf31dec9670917b"
+    },
+    "source_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1"
+  },
+  "schema": "i4f-matched-coarse-fine-startup-grid-sensitivity/v2"
+}

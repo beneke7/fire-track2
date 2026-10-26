@@ -1,0 +1,104 @@
+{
+  "additional_wetted_feed_water_m3": {
+    "tankA_feed": 0.2510568437958543,
+    "tankB_feed": 0.2511091493075715
+  },
+  "case_static_tree_sha256": "1255acb9a72ccba5f6d669ec89674a5b9fae7abdb78d80f5b2443336070d2f4c",
+  "initial_field_ranges": {
+    "all_fields_finite": true,
+    "alpha_max": 1.0,
+    "alpha_min": 0.0,
+    "maximum_T_K": 293.15,
+    "maximum_mixture_density_kg_m3": 998.2,
+    "maximum_p_Pa": 1211011.7118868,
+    "minimum_T_K": 293.15,
+    "minimum_mixture_density_kg_m3": 1.1883817050155918,
+    "minimum_p_Pa": 100000.0,
+    "p_rgh_relation": "p_rgh=p-rho*gh; g=(0,0,-9.81), so p_rgh=p+rho_mix*9.81*z.",
+    "p_rgh_relation_max_abs_residual_Pa": 0.36869071586988866,
+    "p_rgh_relation_rms_residual_Pa": 0.008955540959870077,
+    "positive_absolute_p": true,
+    "positive_mixture_density": true
+  },
+  "native_mesh_cells": 299214,
+  "native_partition": {
+    "compartment_cells": {
+      "externalAirZone": 122413,
+      "lineAZone": 66507,
+      "lineBZone": 66616,
+      "tankAZone": 21839,
+      "tankBZone": 21839
+    },
+    "compartment_names": [
+      "tankAZone",
+      "tankBZone",
+      "lineAZone",
+      "lineBZone",
+      "externalAirZone"
+    ],
+    "overlap_cells": 0,
+    "overlap_cells_by_pair": {
+      "lineAZone__externalAirZone": 0,
+      "lineAZone__lineBZone": 0,
+      "lineBZone__externalAirZone": 0,
+      "tankAZone__externalAirZone": 0,
+      "tankAZone__lineAZone": 0,
+      "tankAZone__lineBZone": 0,
+      "tankAZone__tankBZone": 0,
+      "tankBZone__externalAirZone": 0,
+      "tankBZone__lineAZone": 0,
+      "tankBZone__lineBZone": 0
+    },
+    "partition_cells": 299214,
+    "status": "PASS_EXACT_DISJOINT_PRIMARY_COMPARTMENTS",
+    "unclassified_cells": 0
+  },
+  "native_tank_water_integrals_m3": {
+    "tankA": 1.3500000000021355,
+    "tankB": 1.350000000000505
+  },
+  "primary_compartment_phase_volumes": {
+    "externalAirZone": {
+      "cells": 122413,
+      "gas_m3": 20.472101059491724,
+      "volume_m3": 20.472101059491724,
+      "water_m3": 0.0
+    },
+    "lineAZone": {
+      "cells": 66507,
+      "gas_m3": 0.43525095890341836,
+      "volume_m3": 0.6863078026992726,
+      "water_m3": 0.2510568437958543
+    },
+    "lineBZone": {
+      "cells": 66616,
+      "gas_m3": 0.43525493867644455,
+      "volume_m3": 0.6863640879840159,
+      "water_m3": 0.2511091493075715
+    },
+    "tankAZone": {
+      "cells": 21839,
+      "gas_m3": 0.29849720040624456,
+      "volume_m3": 1.64849720040838,
+      "water_m3": 1.3500000000021355
+    },
+    "tankBZone": {
+      "cells": 21839,
+      "gas_m3": 0.298496768325698,
+      "volume_m3": 1.6484967683262028,
+      "water_m3": 1.350000000000505
+    }
+  },
+  "qualified_input_state": "fresh t=0; water only in the two tanks and separately accounted wetted tank-to-valve feeds; downstream of all valve seats is ambient air",
+  "schema": "i4f-flush-join-stock-cold-native-initialization/v1",
+  "source_branch_water_volumes_m3": {
+    "A1": 0.02102614948303455,
+    "A2": 0.021026985560674186,
+    "B1": 0.021026149665387482,
+    "B2": 0.021026985519076724
+  },
+  "source_readiness_path": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/final-canonical-readiness.json",
+  "source_readiness_sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+  "status": "PASS_MAPPED_NATIVE_FIELD_TRANSFER",
+  "total_initial_water_m3": 3.2021659931060658
+}

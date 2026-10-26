@@ -1,0 +1,1380 @@
+{
+  "schema": "i4f-pmin-endpoint-extreme-field-audit/v1",
+  "captured_utc": "2026-10-25T11:05:28.149333+00:00",
+  "endpoint_time_s": 0.589617581493,
+  "air_thermo": {
+    "equation_of_state": "perfectGas",
+    "air_molecular_weight_kg_kmol": 28.96546,
+    "universal_gas_constant_j_kmol_k": 8314.46261815324,
+    "gas_constant_j_kg_k": 287.047490982475,
+    "Cp_j_kg_k": 1005.0,
+    "gamma": 1.3998140369692171,
+    "source": "case thermophysicalProperties.air: perfectGas, molWeight 28.96546, Cp 1005; R=8314.46261815324/MW"
+  },
+  "water_density_kg_m3": 998.2,
+  "alpha_classification": {
+    "gas_max_water_fraction": 0.01,
+    "liquid_min_water_fraction": 0.99
+  },
+  "phase_mass_method": {
+    "water": "clip(alpha.water,0,1)*998.2*V; V is reconstructed native OpenFOAM cell volume",
+    "gas": "clip(1-alpha.water,0,1)*p/(R*T)*V using absolute p, shared T, and the air perfectGas EOS",
+    "bounds": "alpha is clipped only for integrated phase-support estimates; raw alpha values are preserved at extrema cells"
+  },
+  "nozzle_plane": {
+    "x_m": 5.79,
+    "source": "/home/v/proj/bene/fire-track2/results/runs/i4f-twooutlet-air-water-phi-pressure-tail-20261024T222910Z/case/experiment-config.json",
+    "source_description": "internal both-nozzle sampled plane; not a boundary patch"
+  },
+  "arms": {
+    "pmin-10k": {
+      "arm": "pmin-10k",
+      "configured_pressure_floor_pa": 10000,
+      "endpoint_time_s": 0.589617581493,
+      "mesh_cell_count": 212705,
+      "time_step_s_from_uniform_time": 4.435052e-06,
+      "field_extrema": {
+        "max_speed_m_s": 1489.9296875,
+        "max_speed_cell_index": 26894,
+        "max_speed_location_xyz_m": [
+          5.8057302832603455,
+          -0.017156131216324866,
+          0.8426620811223984
+        ],
+        "max_temperature_K": 652.2453002929688,
+        "max_temperature_cell_index": 26979,
+        "max_temperature_location_xyz_m": [
+          5.828850242159787,
+          0.005130780587059142,
+          0.8352304652608142
+        ],
+        "max_Co": 0.5004225969314575,
+        "max_Co_cell_index": 26894,
+        "max_Co_location_xyz_m": [
+          5.8057302832603455,
+          -0.017156131216324866,
+          0.8426620811223984
+        ],
+        "min_saved_absolute_p_pa": 21774.294921875,
+        "min_saved_absolute_p_cell_index": 163537,
+        "min_saved_absolute_p_location_xyz_m": [
+          4.813792288303375,
+          -0.5965268984436989,
+          0.8646847382187843
+        ]
+      },
+      "extreme_cells": {
+        "maximum_speed_cell": {
+          "cell_index_in_reconstructed_vtk_order": 26894,
+          "cell_center_xyz_m": [
+            5.8057302832603455,
+            -0.017156131216324866,
+            0.8426620811223984
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": 0.015730283260345423,
+          "absolute_pressure_p_pa": 93828.84375,
+          "temperature_shared_field_K": 273.6070556640625,
+          "alpha_water_raw": -1.9912116698503097e-16,
+          "alpha_water_bounded_for_phase_support": 0.0,
+          "alpha_air_bounded_for_phase_support": 1.0,
+          "phase_class": "gas-dominant (alpha.water <= 0.01)",
+          "velocity_U_m_s": [
+            1489.9293212890625,
+            -1.056249976158142,
+            -0.32569918036460876
+          ],
+          "speed_m_s": 1489.9296875,
+          "mixture_density_solver_field_kg_m3": 1.194689154624939,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 1.1946902429376844,
+          "air_sound_speed_from_common_T_m_s": 331.57035629810406,
+          "common_U_over_air_sound_speed_mach": 4.493555166193605,
+          "cell_volume_native_m3": 2.88917840407521e-06,
+          "courant_number_from_reconstructed_native_phi": 0.5004225969314575,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 1109945.2368469238,
+          "local_cpT_enthalpy_scale_J_kg": 274975.0909423828,
+          "local_cpT_plus_kinetic_scale_J_kg": 1384920.3277893066,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 2.88917840407521e-06,
+            "water": 0.0
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 3.4516732494549242e-06,
+            "water_const_density": 0.0
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 5,
+            "cell_count_including_center": 6,
+            "speed_min_m_s": 24.551342010498047,
+            "speed_max_m_s": 1489.9296875,
+            "temperature_min_K": 235.40042114257812,
+            "temperature_max_K": 292.24334716796875,
+            "alpha_water_min_bounded": 0.0,
+            "alpha_water_max_bounded": 5.168092082757925e-12,
+            "Co_min": 0.010627228766679764,
+            "Co_max": 0.5004225969314575,
+            "gas_dominant_count": 6,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 0
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.03508729807471091,
+              "nearest_face_center_xyz_m": [
+                5.793386936187744,
+                -0.05000000074505806,
+                0.8424608260393143
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.0067311267258546035,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                -0.01723274332471192,
+                0.8426109999418259
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 0.9684429771964714,
+              "nearest_face_center_xyz_m": [
+                5.855096220970154,
+                0.949999988079071,
+                0.8500000089406967
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 1.9953187630276281,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                -0.06997849512845278,
+                0.8800024092197418
+              ],
+              "face_count": 525
+            }
+          }
+        },
+        "maximum_temperature_cell": {
+          "cell_index_in_reconstructed_vtk_order": 26979,
+          "cell_center_xyz_m": [
+            5.828850242159787,
+            0.005130780587059142,
+            0.8352304652608142
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": 0.038850242159787385,
+          "absolute_pressure_p_pa": 106892.171875,
+          "temperature_shared_field_K": 652.2453002929688,
+          "alpha_water_raw": 4.701606942311698e-13,
+          "alpha_water_bounded_for_phase_support": 4.701606942311698e-13,
+          "alpha_air_bounded_for_phase_support": 0.9999999999995298,
+          "phase_class": "gas-dominant (alpha.water <= 0.01)",
+          "velocity_U_m_s": [
+            752.6741943359375,
+            -9.0515718460083,
+            23.410436630249023
+          ],
+          "speed_m_s": 753.0925903320312,
+          "mixture_density_solver_field_kg_m3": 0.5709272623062134,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 0.5709277962951792,
+          "air_sound_speed_from_common_T_m_s": 511.9381903485545,
+          "common_U_over_air_sound_speed_mach": 1.471061554949214,
+          "cell_volume_native_m3": 2.7244590455666184e-05,
+          "courant_number_from_reconstructed_native_phi": 0.09524132311344147,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 283574.2248065043,
+          "local_cpT_enthalpy_scale_J_kg": 655506.5267944336,
+          "local_cpT_plus_kinetic_scale_J_kg": 939080.7516009379,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 2.7244590455653374e-05,
+            "water": 1.2809335562679916e-17
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 1.5554693989810853e-05,
+            "water_const_density": 1.2786278758667094e-14
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 12,
+            "cell_count_including_center": 13,
+            "speed_min_m_s": 9.351715087890625,
+            "speed_max_m_s": 1476.9609375,
+            "temperature_min_K": 235.40042114257812,
+            "temperature_max_K": 652.2453002929688,
+            "alpha_water_min_bounded": 0.0,
+            "alpha_water_max_bounded": 1.074662048239361e-08,
+            "Co_min": 0.0037308435421437025,
+            "Co_max": 0.42663076519966125,
+            "gas_dominant_count": 13,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 0
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.06560669181546812,
+              "nearest_face_center_xyz_m": [
+                5.793688416481018,
+                -0.05000000074505806,
+                0.8298937082290649
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.031036176794290368,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                0.009480253967922181,
+                0.8425295501947403
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 0.9453490414078859,
+              "nearest_face_center_xyz_m": [
+                5.855096220970154,
+                0.949999988079071,
+                0.8500000089406967
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 1.9721710523670952,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                0.05009759496897459,
+                0.8800023943185806
+              ],
+              "face_count": 525
+            }
+          }
+        },
+        "maximum_courant_cell": {
+          "cell_index_in_reconstructed_vtk_order": 26894,
+          "cell_center_xyz_m": [
+            5.8057302832603455,
+            -0.017156131216324866,
+            0.8426620811223984
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": 0.015730283260345423,
+          "absolute_pressure_p_pa": 93828.84375,
+          "temperature_shared_field_K": 273.6070556640625,
+          "alpha_water_raw": -1.9912116698503097e-16,
+          "alpha_water_bounded_for_phase_support": 0.0,
+          "alpha_air_bounded_for_phase_support": 1.0,
+          "phase_class": "gas-dominant (alpha.water <= 0.01)",
+          "velocity_U_m_s": [
+            1489.9293212890625,
+            -1.056249976158142,
+            -0.32569918036460876
+          ],
+          "speed_m_s": 1489.9296875,
+          "mixture_density_solver_field_kg_m3": 1.194689154624939,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 1.1946902429376844,
+          "air_sound_speed_from_common_T_m_s": 331.57035629810406,
+          "common_U_over_air_sound_speed_mach": 4.493555166193605,
+          "cell_volume_native_m3": 2.88917840407521e-06,
+          "courant_number_from_reconstructed_native_phi": 0.5004225969314575,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 1109945.2368469238,
+          "local_cpT_enthalpy_scale_J_kg": 274975.0909423828,
+          "local_cpT_plus_kinetic_scale_J_kg": 1384920.3277893066,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 2.88917840407521e-06,
+            "water": 0.0
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 3.4516732494549242e-06,
+            "water_const_density": 0.0
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 5,
+            "cell_count_including_center": 6,
+            "speed_min_m_s": 24.551342010498047,
+            "speed_max_m_s": 1489.9296875,
+            "temperature_min_K": 235.40042114257812,
+            "temperature_max_K": 292.24334716796875,
+            "alpha_water_min_bounded": 0.0,
+            "alpha_water_max_bounded": 5.168092082757925e-12,
+            "Co_min": 0.010627228766679764,
+            "Co_max": 0.5004225969314575,
+            "gas_dominant_count": 6,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 0
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.03508729807471091,
+              "nearest_face_center_xyz_m": [
+                5.793386936187744,
+                -0.05000000074505806,
+                0.8424608260393143
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.0067311267258546035,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                -0.01723274332471192,
+                0.8426109999418259
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 0.9684429771964714,
+              "nearest_face_center_xyz_m": [
+                5.855096220970154,
+                0.949999988079071,
+                0.8500000089406967
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 1.9953187630276281,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                -0.06997849512845278,
+                0.8800024092197418
+              ],
+              "face_count": 525
+            }
+          }
+        },
+        "minimum_saved_absolute_pressure_cell": {
+          "cell_index_in_reconstructed_vtk_order": 163537,
+          "cell_center_xyz_m": [
+            4.813792288303375,
+            -0.5965268984436989,
+            0.8646847382187843
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": -0.9762077116966248,
+          "absolute_pressure_p_pa": 21774.294921875,
+          "temperature_shared_field_K": 293.28143310546875,
+          "alpha_water_raw": 1.0,
+          "alpha_water_bounded_for_phase_support": 1.0,
+          "alpha_air_bounded_for_phase_support": 0.0,
+          "phase_class": "liquid-dominant (alpha.water >= 0.99)",
+          "velocity_U_m_s": [
+            11.213383674621582,
+            -3.3622748851776123,
+            -0.04750208184123039
+          ],
+          "speed_m_s": 11.70671272277832,
+          "mixture_density_solver_field_kg_m3": 998.2000122070312,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 0.2586460057327713,
+          "air_sound_speed_from_common_T_m_s": 343.2846106464794,
+          "common_U_over_air_sound_speed_mach": 0.03410206097130903,
+          "cell_volume_native_m3": 1.9761726434808224e-05,
+          "courant_number_from_reconstructed_native_phi": 0.0024586140643805265,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 68.5235613868299,
+          "local_cpT_enthalpy_scale_J_kg": 294747.8402709961,
+          "local_cpT_plus_kinetic_scale_J_kg": 294816.36383238295,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 0.0,
+            "water": 1.9761726434808224e-05
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 0.0,
+            "water_const_density": 0.01972615532722557
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 5,
+            "cell_count_including_center": 6,
+            "speed_min_m_s": 8.398921966552734,
+            "speed_max_m_s": 14.346437454223633,
+            "temperature_min_K": 293.2611999511719,
+            "temperature_max_K": 293.28143310546875,
+            "alpha_water_min_bounded": 1.0,
+            "alpha_water_max_bounded": 1.0,
+            "Co_min": 0.001617836533114314,
+            "Co_max": 0.002670775633305311,
+            "gas_dominant_count": 0,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 6
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.012369746497505645,
+              "nearest_face_center_xyz_m": [
+                4.813787937164307,
+                -0.6088636815547943,
+                0.8655871748924255
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.9863918974852701,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                -0.6024987995624542,
+                0.8167316615581512
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 1.5426077696283365,
+              "nearest_face_center_xyz_m": [
+                5.858026385307312,
+                -0.5800000131130219,
+                2.0
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 2.9866096196431955,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                -0.5499999970197678,
+                0.8800024092197418
+              ],
+              "face_count": 525
+            }
+          }
+        }
+      },
+      "phase_total_support": {
+        "gas": {
+          "volume_m3": 15.60814776100195,
+          "mass_eos_kg": 24.060241168183868
+        },
+        "water": {
+          "volume_m3": 2.19984185363027,
+          "mass_const_density_kg": 2195.882138293736
+        },
+        "mixed_cell_count_alpha_water_0p01_to_0p99": 23643
+      },
+      "threshold_support": {
+        "speed": {
+          "greater_than_100_m_s": {
+            "cell_count": 343,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 343,
+              "phase_volume_support_m3": 0.003834043169076526,
+              "phase_mass_support_kg": 0.0037243285328172116,
+              "fraction_of_total_phase_volume": 0.0002456437001869082,
+              "fraction_of_total_phase_mass": 0.00015479182053013203
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 3,
+              "phase_volume_support_m3": 3.555982904938546e-07,
+              "phase_mass_support_kg": 0.00035495821357096565,
+              "fraction_of_total_phase_volume": 1.6164720655124893e-07,
+              "fraction_of_total_phase_mass": 1.616472065512489e-07
+            }
+          },
+          "greater_than_300_m_s": {
+            "cell_count": 142,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 142,
+              "phase_volume_support_m3": 0.001296339558769945,
+              "phase_mass_support_kg": 0.0010562149446371421,
+              "fraction_of_total_phase_volume": 8.305531050961345e-05,
+              "fraction_of_total_phase_mass": 4.389876798216932e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 7.360872004219728e-10,
+              "phase_mass_support_kg": 7.347622434612132e-07,
+              "fraction_of_total_phase_volume": 3.346091443833797e-10,
+              "fraction_of_total_phase_mass": 3.346091443833797e-10
+            }
+          },
+          "greater_than_700_m_s": {
+            "cell_count": 75,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 75,
+              "phase_volume_support_m3": 0.0005878633472051596,
+              "phase_mass_support_kg": 0.000511545606240642,
+              "fraction_of_total_phase_volume": 3.766387634245604e-05,
+              "fraction_of_total_phase_mass": 2.1261034029745546e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 5.430102376323557e-11,
+              "phase_mass_support_kg": 5.420328192046174e-08,
+              "fraction_of_total_phase_volume": 2.4684057935176462e-11,
+              "fraction_of_total_phase_mass": 2.4684057935176462e-11
+            }
+          }
+        },
+        "temperature": {
+          "greater_than_350_K": {
+            "cell_count": 201,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 201,
+              "phase_volume_support_m3": 0.0022435950332854943,
+              "phase_mass_support_kg": 0.0018500858359908046,
+              "fraction_of_total_phase_volume": 0.00014374511746302618,
+              "fraction_of_total_phase_mass": 7.689390239517928e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 2.387799406005765e-08,
+              "phase_mass_support_kg": 2.3835013670749548e-05,
+              "fraction_of_total_phase_volume": 1.085441393009829e-08,
+              "fraction_of_total_phase_mass": 1.085441393009829e-08
+            }
+          },
+          "greater_than_500_K": {
+            "cell_count": 29,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 29,
+              "phase_volume_support_m3": 0.0002657990926326018,
+              "phase_mass_support_kg": 0.00016629242867942723,
+              "fraction_of_total_phase_volume": 1.7029508991241064e-05,
+              "fraction_of_total_phase_mass": 6.911502986068341e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 1.3892362794423861e-10,
+              "phase_mass_support_kg": 1.3867356541393902e-07,
+              "fraction_of_total_phase_volume": 6.31516432488004e-11,
+              "fraction_of_total_phase_mass": 6.315164324880041e-11
+            }
+          }
+        },
+        "joint_speed_temperature": {
+          "speed_gt_100_m_s_and_T_gt_350_K": {
+            "cell_count": 199,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 199,
+              "phase_volume_support_m3": 0.00223671209757473,
+              "phase_mass_support_kg": 0.001843733200671218,
+              "fraction_of_total_phase_volume": 0.00014330413395773403,
+              "fraction_of_total_phase_mass": 7.662987198604162e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 2.3869442281665575e-08,
+              "phase_mass_support_kg": 2.382647728555858e-05,
+              "fraction_of_total_phase_volume": 1.085052647865356e-08,
+              "fraction_of_total_phase_mass": 1.085052647865356e-08
+            }
+          },
+          "speed_gt_100_m_s_and_T_gt_500_K": {
+            "cell_count": 29,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 29,
+              "phase_volume_support_m3": 0.0002657990926326018,
+              "phase_mass_support_kg": 0.00016629242867942723,
+              "fraction_of_total_phase_volume": 1.7029508991241064e-05,
+              "fraction_of_total_phase_mass": 6.911502986068341e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 1.3892362794423861e-10,
+              "phase_mass_support_kg": 1.3867356541393902e-07,
+              "fraction_of_total_phase_volume": 6.31516432488004e-11,
+              "fraction_of_total_phase_mass": 6.315164324880041e-11
+            }
+          },
+          "speed_gt_300_m_s_and_T_gt_350_K": {
+            "cell_count": 104,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 104,
+              "phase_volume_support_m3": 0.0011442630739875346,
+              "phase_mass_support_kg": 0.0008674355729466028,
+              "fraction_of_total_phase_volume": 7.331190680079003e-05,
+              "fraction_of_total_phase_mass": 3.6052654954001826e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 7.200160291546237e-10,
+              "phase_mass_support_kg": 7.187200003021454e-07,
+              "fraction_of_total_phase_volume": 3.273035413734053e-10,
+              "fraction_of_total_phase_mass": 3.2730354137340524e-10
+            }
+          },
+          "speed_gt_300_m_s_and_T_gt_500_K": {
+            "cell_count": 29,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 29,
+              "phase_volume_support_m3": 0.0002657990926326018,
+              "phase_mass_support_kg": 0.00016629242867942723,
+              "fraction_of_total_phase_volume": 1.7029508991241064e-05,
+              "fraction_of_total_phase_mass": 6.911502986068341e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 1.3892362794423861e-10,
+              "phase_mass_support_kg": 1.3867356541393902e-07,
+              "fraction_of_total_phase_volume": 6.31516432488004e-11,
+              "fraction_of_total_phase_mass": 6.315164324880041e-11
+            }
+          },
+          "speed_gt_700_m_s_and_T_gt_350_K": {
+            "cell_count": 38,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 38,
+              "phase_volume_support_m3": 0.0004392105028871227,
+              "phase_mass_support_kg": 0.0003284073662259592,
+              "fraction_of_total_phase_volume": 2.813982220135825e-05,
+              "fraction_of_total_phase_mass": 1.364937965211378e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 3.822994054721219e-11,
+              "phase_mass_support_kg": 3.816112665422721e-08,
+              "fraction_of_total_phase_volume": 1.7378494951409145e-11,
+              "fraction_of_total_phase_mass": 1.737849495140915e-11
+            }
+          },
+          "speed_gt_700_m_s_and_T_gt_500_K": {
+            "cell_count": 12,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 12,
+              "phase_volume_support_m3": 0.00013556204758294506,
+              "phase_mass_support_kg": 8.955445733320252e-05,
+              "fraction_of_total_phase_volume": 8.685338558983681e-06,
+              "fraction_of_total_phase_mass": 3.722093087397026e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 8.16206462968858e-13,
+              "phase_mass_support_kg": 8.147372913355141e-10,
+              "fraction_of_total_phase_volume": 3.7102960907027034e-13,
+              "fraction_of_total_phase_mass": 3.7102960907027034e-13
+            }
+          }
+        }
+      },
+      "solver_density_vs_eos_phase_blend_crosscheck": {
+        "method": "rho_mix_from_fields vs clip(alpha.water)*998.2 + clip(1-alpha.water)*p/(R*T)",
+        "max_abs_difference_kg_m3": 5.976556622044882e-05,
+        "mean_abs_difference_kg_m3": 8.98543199336547e-06,
+        "maximum_speed_cell_difference_kg_m3": -1.0883127454786035e-06,
+        "maximum_temperature_cell_difference_kg_m3": -5.344580117361275e-07
+      },
+      "mean_temperature_air_is_shared_single_T_field": true,
+      "qualified_air_energy_envelope_screen": {
+        "assumed_reservoir_state": "endpoint alpha.air-volume-weighted tank means; approximate reservoir stagnation state",
+        "reservoir_mean_p_pa": 480283.112886,
+        "reservoir_mean_T_K": 262.01875088,
+        "local_saved_max_speed_cell_p_pa": 93828.84375,
+        "local_saved_max_speed_cell_T_K": 273.6070556640625,
+        "local_saved_max_speed_m_s": 1489.9296875,
+        "local_isentropic_T_at_cell_pressure_K": 164.3547463551805,
+        "ideal_air_isentropic_speed_reference_m_s": 443.0628049101924,
+        "observed_to_reference_speed_ratio": 3.362795682661749,
+        "local_specific_kinetic_energy_J_kg": 1109945.2368469238,
+        "local_cpT_plus_kinetic_energy_J_kg": 1384920.3277893066,
+        "tank_mean_cpT_reference_J_kg": 263328.84463440004,
+        "local_cpT_plus_kinetic_to_tank_cpT_ratio": 5.259280766268122,
+        "qualifications": [
+          "This uses bulk tank means as a stagnation state and local saved cell p,T,U as the downstream state; it is a scale check, not a closed transient energy balance or a strict upper bound.",
+          "It does not identify a source term or numerical error. Spatially nonuniform reservoir states, interface/wall heat transfer, pressure work, unresolved coupling, and solver energy behavior are not closed by this calculation."
+        ]
+      },
+      "saved_extrema_crosscheck_against_solver_function_objects": {
+        "pyvista_max_speed_m_s": 1489.9296875,
+        "solver_log_max_speed_m_s": 1489.929675483362,
+        "absolute_speed_difference_m_s": 1.2016638038403471e-05,
+        "pyvista_max_temperature_K": 652.2453002929688,
+        "solver_log_max_temperature_K": 652.2453195124306,
+        "absolute_temperature_difference_K": -1.9219461819375283e-05
+      }
+    },
+    "pmin-5k": {
+      "arm": "pmin-5k",
+      "configured_pressure_floor_pa": 5000,
+      "endpoint_time_s": 0.589617581493,
+      "mesh_cell_count": 212705,
+      "time_step_s_from_uniform_time": 4.435052e-06,
+      "field_extrema": {
+        "max_speed_m_s": 1489.9293212890625,
+        "max_speed_cell_index": 26894,
+        "max_speed_location_xyz_m": [
+          5.8057302832603455,
+          -0.017156131216324866,
+          0.8426620811223984
+        ],
+        "max_temperature_K": 652.2453002929688,
+        "max_temperature_cell_index": 26979,
+        "max_temperature_location_xyz_m": [
+          5.828850242159787,
+          0.005130780587059142,
+          0.8352304652608142
+        ],
+        "max_Co": 0.5004225373268127,
+        "max_Co_cell_index": 26894,
+        "max_Co_location_xyz_m": [
+          5.8057302832603455,
+          -0.017156131216324866,
+          0.8426620811223984
+        ],
+        "min_saved_absolute_p_pa": 21774.03515625,
+        "min_saved_absolute_p_cell_index": 163537,
+        "min_saved_absolute_p_location_xyz_m": [
+          4.813792288303375,
+          -0.5965268984436989,
+          0.8646847382187843
+        ]
+      },
+      "extreme_cells": {
+        "maximum_speed_cell": {
+          "cell_index_in_reconstructed_vtk_order": 26894,
+          "cell_center_xyz_m": [
+            5.8057302832603455,
+            -0.017156131216324866,
+            0.8426620811223984
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": 0.015730283260345423,
+          "absolute_pressure_p_pa": 93828.796875,
+          "temperature_shared_field_K": 273.6070861816406,
+          "alpha_water_raw": -1.9912296693004388e-16,
+          "alpha_water_bounded_for_phase_support": 0.0,
+          "alpha_air_bounded_for_phase_support": 1.0,
+          "phase_class": "gas-dominant (alpha.water <= 0.01)",
+          "velocity_U_m_s": [
+            1489.928955078125,
+            -1.0562676191329956,
+            -0.32570144534111023
+          ],
+          "speed_m_s": 1489.9293212890625,
+          "mixture_density_solver_field_kg_m3": 1.1946884393692017,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 1.1946895128412538,
+          "air_sound_speed_from_common_T_m_s": 331.5703747894473,
+          "common_U_over_air_sound_speed_mach": 4.493553811118355,
+          "cell_volume_native_m3": 2.88917840407521e-06,
+          "courant_number_from_reconstructed_native_phi": 0.5004225373268127,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 1109944.6912184432,
+          "local_cpT_enthalpy_scale_J_kg": 274975.1216125488,
+          "local_cpT_plus_kinetic_scale_J_kg": 1384919.812830992,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 2.88917840407521e-06,
+            "water": 0.0
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 3.4516711400760837e-06,
+            "water_const_density": 0.0
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 5,
+            "cell_count_including_center": 6,
+            "speed_min_m_s": 24.551315307617188,
+            "speed_max_m_s": 1489.9293212890625,
+            "temperature_min_K": 235.40049743652344,
+            "temperature_max_K": 292.2432861328125,
+            "alpha_water_min_bounded": 0.0,
+            "alpha_water_max_bounded": 5.168053918841453e-12,
+            "Co_min": 0.010627270676195621,
+            "Co_max": 0.5004225373268127,
+            "gas_dominant_count": 6,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 0
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.03508729807471091,
+              "nearest_face_center_xyz_m": [
+                5.793386936187744,
+                -0.05000000074505806,
+                0.8424608260393143
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.0067311267258546035,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                -0.01723274332471192,
+                0.8426109999418259
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 0.9684429771964714,
+              "nearest_face_center_xyz_m": [
+                5.855096220970154,
+                0.949999988079071,
+                0.8500000089406967
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 1.9953187630276281,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                -0.06997849512845278,
+                0.8800024092197418
+              ],
+              "face_count": 525
+            }
+          }
+        },
+        "maximum_temperature_cell": {
+          "cell_index_in_reconstructed_vtk_order": 26979,
+          "cell_center_xyz_m": [
+            5.828850242159787,
+            0.005130780587059142,
+            0.8352304652608142
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": 0.038850242159787385,
+          "absolute_pressure_p_pa": 106892.1953125,
+          "temperature_shared_field_K": 652.2453002929688,
+          "alpha_water_raw": 4.701611821221474e-13,
+          "alpha_water_bounded_for_phase_support": 4.701611821221474e-13,
+          "alpha_air_bounded_for_phase_support": 0.9999999999995298,
+          "phase_class": "gas-dominant (alpha.water <= 0.01)",
+          "velocity_U_m_s": [
+            752.6741943359375,
+            -9.051505088806152,
+            23.410451889038086
+          ],
+          "speed_m_s": 753.0925903320312,
+          "mixture_density_solver_field_kg_m3": 0.5709273815155029,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 0.5709279214785298,
+          "air_sound_speed_from_common_T_m_s": 511.9381903485545,
+          "common_U_over_air_sound_speed_mach": 1.471061554949214,
+          "cell_volume_native_m3": 2.7244590455666184e-05,
+          "courant_number_from_reconstructed_native_phi": 0.09524130821228027,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 283574.2248065043,
+          "local_cpT_enthalpy_scale_J_kg": 655506.5267944336,
+          "local_cpT_plus_kinetic_scale_J_kg": 939080.7516009379,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 2.7244590455653374e-05,
+            "water": 1.2809348855069788e-17
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 1.5554697400379972e-05,
+            "water_const_density": 1.2786292027130664e-14
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 12,
+            "cell_count_including_center": 13,
+            "speed_min_m_s": 9.351723670959473,
+            "speed_max_m_s": 1476.960693359375,
+            "temperature_min_K": 235.40049743652344,
+            "temperature_max_K": 652.2453002929688,
+            "alpha_water_min_bounded": 0.0,
+            "alpha_water_max_bounded": 1.0746625811464128e-08,
+            "Co_min": 0.0037308435421437025,
+            "Co_max": 0.4266306161880493,
+            "gas_dominant_count": 13,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 0
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.06560669181546812,
+              "nearest_face_center_xyz_m": [
+                5.793688416481018,
+                -0.05000000074505806,
+                0.8298937082290649
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.031036176794290368,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                0.009480253967922181,
+                0.8425295501947403
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 0.9453490414078859,
+              "nearest_face_center_xyz_m": [
+                5.855096220970154,
+                0.949999988079071,
+                0.8500000089406967
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 1.9721710523670952,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                0.05009759496897459,
+                0.8800023943185806
+              ],
+              "face_count": 525
+            }
+          }
+        },
+        "maximum_courant_cell": {
+          "cell_index_in_reconstructed_vtk_order": 26894,
+          "cell_center_xyz_m": [
+            5.8057302832603455,
+            -0.017156131216324866,
+            0.8426620811223984
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": 0.015730283260345423,
+          "absolute_pressure_p_pa": 93828.796875,
+          "temperature_shared_field_K": 273.6070861816406,
+          "alpha_water_raw": -1.9912296693004388e-16,
+          "alpha_water_bounded_for_phase_support": 0.0,
+          "alpha_air_bounded_for_phase_support": 1.0,
+          "phase_class": "gas-dominant (alpha.water <= 0.01)",
+          "velocity_U_m_s": [
+            1489.928955078125,
+            -1.0562676191329956,
+            -0.32570144534111023
+          ],
+          "speed_m_s": 1489.9293212890625,
+          "mixture_density_solver_field_kg_m3": 1.1946884393692017,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 1.1946895128412538,
+          "air_sound_speed_from_common_T_m_s": 331.5703747894473,
+          "common_U_over_air_sound_speed_mach": 4.493553811118355,
+          "cell_volume_native_m3": 2.88917840407521e-06,
+          "courant_number_from_reconstructed_native_phi": 0.5004225373268127,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 1109944.6912184432,
+          "local_cpT_enthalpy_scale_J_kg": 274975.1216125488,
+          "local_cpT_plus_kinetic_scale_J_kg": 1384919.812830992,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 2.88917840407521e-06,
+            "water": 0.0
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 3.4516711400760837e-06,
+            "water_const_density": 0.0
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 5,
+            "cell_count_including_center": 6,
+            "speed_min_m_s": 24.551315307617188,
+            "speed_max_m_s": 1489.9293212890625,
+            "temperature_min_K": 235.40049743652344,
+            "temperature_max_K": 292.2432861328125,
+            "alpha_water_min_bounded": 0.0,
+            "alpha_water_max_bounded": 5.168053918841453e-12,
+            "Co_min": 0.010627270676195621,
+            "Co_max": 0.5004225373268127,
+            "gas_dominant_count": 6,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 0
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.03508729807471091,
+              "nearest_face_center_xyz_m": [
+                5.793386936187744,
+                -0.05000000074505806,
+                0.8424608260393143
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.0067311267258546035,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                -0.01723274332471192,
+                0.8426109999418259
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 0.9684429771964714,
+              "nearest_face_center_xyz_m": [
+                5.855096220970154,
+                0.949999988079071,
+                0.8500000089406967
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 1.9953187630276281,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                -0.06997849512845278,
+                0.8800024092197418
+              ],
+              "face_count": 525
+            }
+          }
+        },
+        "minimum_saved_absolute_pressure_cell": {
+          "cell_index_in_reconstructed_vtk_order": 163537,
+          "cell_center_xyz_m": [
+            4.813792288303375,
+            -0.5965268984436989,
+            0.8646847382187843
+          ],
+          "offset_downstream_of_internal_nozzle_sample_plane_x_m": -0.9762077116966248,
+          "absolute_pressure_p_pa": 21774.03515625,
+          "temperature_shared_field_K": 293.28143310546875,
+          "alpha_water_raw": 1.0,
+          "alpha_water_bounded_for_phase_support": 1.0,
+          "alpha_air_bounded_for_phase_support": 0.0,
+          "phase_class": "liquid-dominant (alpha.water >= 0.99)",
+          "velocity_U_m_s": [
+            11.213383674621582,
+            -3.3622748851776123,
+            -0.04750208184123039
+          ],
+          "speed_m_s": 11.70671272277832,
+          "mixture_density_solver_field_kg_m3": 998.2000122070312,
+          "ideal_gas_air_density_from_p_RT_kg_m3": 0.25864292010627576,
+          "air_sound_speed_from_common_T_m_s": 343.2846106464794,
+          "common_U_over_air_sound_speed_mach": 0.03410206097130903,
+          "cell_volume_native_m3": 1.9761726434808224e-05,
+          "courant_number_from_reconstructed_native_phi": 0.0024586140643805265,
+          "last_deltaT_s": 4.435052e-06,
+          "local_kinetic_energy_per_unit_mass_J_kg": 68.5235613868299,
+          "local_cpT_enthalpy_scale_J_kg": 294747.8402709961,
+          "local_cpT_plus_kinetic_scale_J_kg": 294816.36383238295,
+          "single_cell_phase_volume_support_m3": {
+            "gas": 0.0,
+            "water": 1.9761726434808224e-05
+          },
+          "single_cell_phase_mass_estimate_kg": {
+            "gas_eos": 0.0,
+            "water_const_density": 0.01972615532722557
+          },
+          "direct_face_neighbor_summary_including_center": {
+            "face_neighbor_count": 5,
+            "cell_count_including_center": 6,
+            "speed_min_m_s": 8.398921966552734,
+            "speed_max_m_s": 14.346437454223633,
+            "temperature_min_K": 293.2611999511719,
+            "temperature_max_K": 293.28143310546875,
+            "alpha_water_min_bounded": 1.0,
+            "alpha_water_max_bounded": 1.0,
+            "Co_min": 0.001617836533114314,
+            "Co_max": 0.002670775633305311,
+            "gas_dominant_count": 0,
+            "intermixed_count": 0,
+            "liquid_dominant_count": 6
+          },
+          "nearest_boundary_patch_faces": {
+            "apparatusWall": {
+              "nearest_face_center_distance_m": 0.012369746497505645,
+              "nearest_face_center_xyz_m": [
+                4.813787937164307,
+                -0.6088636815547943,
+                0.8655871748924255
+              ],
+              "face_count": 22454
+            },
+            "ambientAnnulus": {
+              "nearest_face_center_distance_m": 0.9863918974852701,
+              "nearest_face_center_xyz_m": [
+                5.798999786376953,
+                -0.6024987995624542,
+                0.8167316615581512
+              ],
+              "face_count": 4368
+            },
+            "externalSides": {
+              "nearest_face_center_distance_m": 1.5426077696283365,
+              "nearest_face_center_xyz_m": [
+                5.858026385307312,
+                -0.5800000131130219,
+                2.0
+              ],
+              "face_count": 1938
+            },
+            "farOutlet": {
+              "nearest_face_center_distance_m": 2.9866096196431955,
+              "nearest_face_center_xyz_m": [
+                7.800000190734863,
+                -0.5499999970197678,
+                0.8800024092197418
+              ],
+              "face_count": 525
+            }
+          }
+        }
+      },
+      "phase_total_support": {
+        "gas": {
+          "volume_m3": 15.608147762890017,
+          "mass_eos_kg": 24.0602399532387
+        },
+        "water": {
+          "volume_m3": 2.199841851742202,
+          "mass_const_density_kg": 2195.882136409066
+        },
+        "mixed_cell_count_alpha_water_0p01_to_0p99": 23643
+      },
+      "threshold_support": {
+        "speed": {
+          "greater_than_100_m_s": {
+            "cell_count": 343,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 343,
+              "phase_volume_support_m3": 0.00383404316981048,
+              "phase_mass_support_kg": 0.0037243284120236503,
+              "fraction_of_total_phase_volume": 0.0002456437002042173,
+              "fraction_of_total_phase_mass": 0.00015479182332603155
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 3,
+              "phase_volume_support_m3": 3.5559755653967e-07,
+              "phase_mass_support_kg": 0.0003549574809378986,
+              "fraction_of_total_phase_volume": 1.616468730504643e-07,
+              "fraction_of_total_phase_mass": 1.616468730504643e-07
+            }
+          },
+          "greater_than_300_m_s": {
+            "cell_count": 142,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 142,
+              "phase_volume_support_m3": 0.001296339558780204,
+              "phase_mass_support_kg": 0.001056214899281695,
+              "fraction_of_total_phase_volume": 8.305531050022381e-05,
+              "fraction_of_total_phase_mass": 4.389876831380147e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 7.360769413735471e-10,
+              "phase_mass_support_kg": 7.347520028790747e-07,
+              "fraction_of_total_phase_volume": 3.346044811314952e-10,
+              "fraction_of_total_phase_mass": 3.346044811314952e-10
+            }
+          },
+          "greater_than_700_m_s": {
+            "cell_count": 75,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 75,
+              "phase_volume_support_m3": 0.000587863347205362,
+              "phase_mass_support_kg": 0.0005115451084698968,
+              "fraction_of_total_phase_volume": 3.766387633791294e-05,
+              "fraction_of_total_phase_mass": 2.126101441482252e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 5.430082137931932e-11,
+              "phase_mass_support_kg": 5.420307990083654e-08,
+              "fraction_of_total_phase_volume": 2.4683965957059537e-11,
+              "fraction_of_total_phase_mass": 2.4683965957059533e-11
+            }
+          }
+        },
+        "temperature": {
+          "greater_than_350_K": {
+            "cell_count": 201,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 201,
+              "phase_volume_support_m3": 0.0022435950332992346,
+              "phase_mass_support_kg": 0.0018500858222969489,
+              "fraction_of_total_phase_volume": 0.00014374511744651811,
+              "fraction_of_total_phase_mass": 7.689390570886275e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 2.387798031984158e-08,
+              "phase_mass_support_kg": 2.383499995526587e-05,
+              "fraction_of_total_phase_volume": 1.0854407693412602e-08,
+              "fraction_of_total_phase_mass": 1.0854407693412605e-08
+            }
+          },
+          "greater_than_500_K": {
+            "cell_count": 29,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 29,
+              "phase_volume_support_m3": 0.00026579909263393773,
+              "phase_mass_support_kg": 0.00016629241056924436,
+              "fraction_of_total_phase_volume": 1.7029508989266654e-05,
+              "fraction_of_total_phase_mass": 6.911502582369719e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 1.3892229191349906e-10,
+              "phase_mass_support_kg": 1.386722317880548e-07,
+              "fraction_of_total_phase_volume": 6.315103597264377e-11,
+              "fraction_of_total_phase_mass": 6.315103597264378e-11
+            }
+          }
+        },
+        "joint_speed_temperature": {
+          "speed_gt_100_m_s_and_T_gt_350_K": {
+            "cell_count": 199,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 199,
+              "phase_volume_support_m3": 0.002236712097588515,
+              "phase_mass_support_kg": 0.001843733186788845,
+              "fraction_of_total_phase_volume": 0.0001433041339412822,
+              "fraction_of_total_phase_mass": 7.662987527855738e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 2.3869428496615312e-08,
+              "phase_mass_support_kg": 2.3826463525321406e-05,
+              "fraction_of_total_phase_volume": 1.085052022158389e-08,
+              "fraction_of_total_phase_mass": 1.0850520221583892e-08
+            }
+          },
+          "speed_gt_100_m_s_and_T_gt_500_K": {
+            "cell_count": 29,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 29,
+              "phase_volume_support_m3": 0.00026579909263393773,
+              "phase_mass_support_kg": 0.00016629241056924436,
+              "fraction_of_total_phase_volume": 1.7029508989266654e-05,
+              "fraction_of_total_phase_mass": 6.911502582369719e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 1.3892229191349906e-10,
+              "phase_mass_support_kg": 1.386722317880548e-07,
+              "fraction_of_total_phase_volume": 6.315103597264377e-11,
+              "fraction_of_total_phase_mass": 6.315103597264378e-11
+            }
+          },
+          "speed_gt_300_m_s_and_T_gt_350_K": {
+            "cell_count": 104,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 104,
+              "phase_volume_support_m3": 0.0011442630739956243,
+              "phase_mass_support_kg": 0.0008674355156802985,
+              "fraction_of_total_phase_volume": 7.331190679244004e-05,
+              "fraction_of_total_phase_mass": 3.605265439439372e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 7.200079393944703e-10,
+              "phase_mass_support_kg": 7.187119251035603e-07,
+              "fraction_of_total_phase_volume": 3.272998642262615e-10,
+              "fraction_of_total_phase_mass": 3.2729986422626153e-10
+            }
+          },
+          "speed_gt_300_m_s_and_T_gt_500_K": {
+            "cell_count": 29,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 29,
+              "phase_volume_support_m3": 0.00026579909263393773,
+              "phase_mass_support_kg": 0.00016629241056924436,
+              "fraction_of_total_phase_volume": 1.7029508989266654e-05,
+              "fraction_of_total_phase_mass": 6.911502582369719e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 1.3892229191349906e-10,
+              "phase_mass_support_kg": 1.386722317880548e-07,
+              "fraction_of_total_phase_volume": 6.315103597264377e-11,
+              "fraction_of_total_phase_mass": 6.315103597264378e-11
+            }
+          },
+          "speed_gt_700_m_s_and_T_gt_350_K": {
+            "cell_count": 38,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 38,
+              "phase_volume_support_m3": 0.00043921050288515587,
+              "phase_mass_support_kg": 0.0003284070251116144,
+              "fraction_of_total_phase_volume": 2.8139822197828253e-05,
+              "fraction_of_total_phase_mass": 1.3649366163840282e-05
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 3.8231907459900817e-11,
+              "phase_mass_support_kg": 3.816309002647301e-08,
+              "fraction_of_total_phase_volume": 1.7379389081820776e-11,
+              "fraction_of_total_phase_mass": 1.737938908182078e-11
+            }
+          },
+          "speed_gt_700_m_s_and_T_gt_500_K": {
+            "cell_count": 12,
+            "gas": {
+              "cells_with_phase_fraction_gt_0_01": 12,
+              "phase_volume_support_m3": 0.00013556204758295357,
+              "phase_mass_support_kg": 8.955442051102633e-05,
+              "fraction_of_total_phase_volume": 8.685338557933591e-06,
+              "fraction_of_total_phase_mass": 3.7220917449317286e-06
+            },
+            "water": {
+              "cells_with_phase_fraction_gt_0_01": 0,
+              "phase_volume_support_m3": 8.161979609547841e-13,
+              "phase_mass_support_kg": 8.147288046250654e-10,
+              "fraction_of_total_phase_volume": 3.710257445590384e-13,
+              "fraction_of_total_phase_mass": 3.7102574455903833e-13
+            }
+          }
+        }
+      },
+      "solver_density_vs_eos_phase_blend_crosscheck": {
+        "method": "rho_mix_from_fields vs clip(alpha.water)*998.2 + clip(1-alpha.water)*p/(R*T)",
+        "max_abs_difference_kg_m3": 6.0013488678123394e-05,
+        "mean_abs_difference_kg_m3": 8.985833164971938e-06,
+        "maximum_speed_cell_difference_kg_m3": -1.0734720521377028e-06,
+        "maximum_temperature_cell_difference_kg_m3": -5.404320733148893e-07
+      },
+      "mean_temperature_air_is_shared_single_T_field": true,
+      "qualified_air_energy_envelope_screen": {
+        "assumed_reservoir_state": "endpoint alpha.air-volume-weighted tank means; approximate reservoir stagnation state",
+        "reservoir_mean_p_pa": 480283.112864,
+        "reservoir_mean_T_K": 262.018750879,
+        "local_saved_max_speed_cell_p_pa": 93828.796875,
+        "local_saved_max_speed_cell_T_K": 273.6070861816406,
+        "local_saved_max_speed_m_s": 1489.9293212890625,
+        "local_isentropic_T_at_cell_pressure_K": 164.3547229049707,
+        "ideal_air_isentropic_speed_reference_m_s": 443.06285810006557,
+        "observed_to_reference_speed_ratio": 3.3627944524128055,
+        "local_specific_kinetic_energy_J_kg": 1109944.6912184432,
+        "local_cpT_plus_kinetic_energy_J_kg": 1384919.812830992,
+        "tank_mean_cpT_reference_J_kg": 263328.84463339497,
+        "local_cpT_plus_kinetic_to_tank_cpT_ratio": 5.259278810716958,
+        "qualifications": [
+          "This uses bulk tank means as a stagnation state and local saved cell p,T,U as the downstream state; it is a scale check, not a closed transient energy balance or a strict upper bound.",
+          "It does not identify a source term or numerical error. Spatially nonuniform reservoir states, interface/wall heat transfer, pressure work, unresolved coupling, and solver energy behavior are not closed by this calculation."
+        ]
+      },
+      "saved_extrema_crosscheck_against_solver_function_objects": {
+        "pyvista_max_speed_m_s": 1489.9293212890625,
+        "solver_log_max_speed_m_s": 1489.929329068756,
+        "absolute_speed_difference_m_s": -7.779693532938836e-06,
+        "pyvista_max_temperature_K": 652.2453002929688,
+        "solver_log_max_temperature_K": 652.245316159416,
+        "absolute_temperature_difference_K": -1.5866447256485117e-05
+      }
+    }
+  },
+  "interpretation": [
+    "These are saved endpoint extrema from the common velocity U and shared T fields. Gas Mach uses common U divided by ideal-air sound speed at this T; it is not a measured relative gas velocity.",
+    "The high-speed point is gas-dominant and lies just downstream of the recorded internal nozzle plane. Its local Courant number is approximately the configured 0.5 maximum, so the endpoint evidence is consistent with the near-lip gas jet controlling the shrinking time step. This endpoint alone does not prove a causal time-history.",
+    "The peak-speed cell's kinetic-energy scale is much larger than its local Cp*T scale; a bulk-tank-to-cell isentropic comparison is also recorded as a screening inconsistency. Neither is a complete gas energy balance or a strict physical bound: this shared-T case has no separately conservative air-temperature field, and interface, wall, pressure-work, model, and numerical energy transfer terms are not resolved here.",
+    "The 5 kPa and 10 kPa replay arms show almost identical extreme U/T/Co values, so this peak behavior is not materially changed by the tested pMin reduction over the replay window. The near-identical bulk outputs do not clear these local extremes or establish physical validation.",
+    "No cavitation conclusion is made. The audited extreme cells are gas-dominant at the saved endpoint, and the earlier intermediate clamp-cell alpha/T/location trace is unavailable."
+  ],
+  "source_paths": {},
+  "source_sha256": {
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-twooutlet-air-water-phi-pressure-tail-20261024T222910Z/case/experiment-config.json": "a7b798e1bc627c5ad7c278a722255b3090a7dec6e62a5f17bd370214efd2220f",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pair-plan.json": "076c12ab39136c2c8b0be2091efff1b93e3c4e0f0319e65cc8a14c457dd610ad",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/matched-endpoint-summary.json": "abcc07005497ade1530412ac762fb51efeff95fcc9ae686beece2b35d8487710",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/bin/instrumented/compressibleInterFoamFrozenAlphaSourceV2NoPout": "365632cc0065ee56e4efce2998ad596f6651745a95f8e9ab8661de4a5804329d",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/case/processors8/0.589617581493/U": "305c738592913cdb984a567891a786ff978fb79578ac366b81a035a74cd20b4b",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/U": "2d95c33f8ee08626e35e5c24eebdf903229a6343fbdc6311a8e883976f4233eb",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/case/processors8/0.589617581493/phi": "c0d824e2ba0e4ad37fc3a7e07d6ae2c293598308009875d24699616d3ba0de22",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/phi": "811d5cbbd969fe1dcccecff171cea5639a8443b9cda2236870362ed8e02577a6",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/case/processors8/0.589617581493/rho": "7ee9c9c4c83dc3a560a11e5da852c563fb17694f195fb2b1a5944e6a8497f991",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/rho": "17a5c2a44568ec71e0e6f662a2d277661b2f710d0db5a735e5ad5cdfef66f5b3",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/T": "40354f5c8bf4b334f75c7204c35259ec11779cc92c1418b13e4704cc58212852",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/p": "6e3a40c464dd34ddcdcb481fbb1ff11c15c1c7b7259ddfa9f492bbb1fcf28825",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/alpha.water": "9e0cb094b8778c038a15f2caf3412290846f9952e86862d7496af18939d199d3",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/V": "4d9cc30c0c50f24eb60c6752273b87b431fb528fec91112b737940648729326d",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-10k/case/0.589617581493/Co": "6f2d905b08b96ef0eb2a474a38cf71e2a8f0a68555f6309450a7afd760fee1bb",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-10k/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/extreme-field-audit/pmin-10k_reconstruct_courant.log": "93a76585ad78753b2e5898e3fab1c433329fd9e6a9cda99dd1fff79a601d110a",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/case/processors8/0.589617581493/U": "540ba3d97f67264095560935fe480762f0d9ec218373c8c23bc03b0daca5cbc9",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/U": "0e8a9bab6dbc8b21427fb5402a53a53db39801b43b3437dc3527592f6cb43fae",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/case/processors8/0.589617581493/phi": "05fdbb13dd7d370a8b84c597f9f784b0677c5a56d1c2569d5c7c5b676118428d",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/phi": "3746506daa4c76415ca59ab485591ea95576b746be6c786b27cedc668a92c6c9",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/case/processors8/0.589617581493/rho": "e0b84c874e4489b66062f0fd56a37b1405d199dcd8a8e6b014b4f8badbb652e9",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/rho": "d6eae15fcf464ee8d79280a160e06f6c7915a8d2bc213a499bcef87050480794",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/T": "46426ef29490293e16561b4de7b1eddb93be11bd653a86559f4c766cef0280b1",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/p": "0ac85460f2244d50936d097cbee1bbf9fdba6b680c2c1beff8b85a509708384f",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/alpha.water": "2b7413c56823153a3f32e2d5fe1222a19bcbcec9f28f278dcabac654b7174377",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/V": "4d9cc30c0c50f24eb60c6752273b87b431fb528fec91112b737940648729326d",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/matched-endpoint/pmin-5k/case/0.589617581493/Co": "cd05d59ebbb741c9ede6076d7934d4d7f7df51417eb3f2cded55b124eea188a9",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/pmin-5k/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/extreme-field-audit/pmin-5k_reconstruct_courant.log": "4285bb6c850b470dfbda5c3708f33fbdf43351ace1890d42c10118c6d8339d0d"
+  },
+  "analysis_script": "/home/v/proj/bene/fire-track2/results/runs/i4f-pmin-replay-pair-20261025T095211Z/analysis/extreme-field-audit/audit_extremes.py",
+  "analysis_script_sha256": "2d00329c65c70e8a61e09fd5d3d9b7717c98f411494532cd469d8f1178015a73",
+  "runtime": {
+    "solver_jobs_launched": 0,
+    "postprocessing": "reconstructPar U/phi/rho and v2512 postProcess CourantNo only",
+    "cpu_allocation": 1,
+    "nice_level": 10,
+    "OMP_BLAS_threads": 1,
+    "gpu_use": false,
+    "CourantNo_method": "OpenFOAM v2512 functionObject from reconstructed native phi and deltaT with native V; per-cell Co = 0.5*deltaT*sum(abs(phi_face))/V"
+  }
+}

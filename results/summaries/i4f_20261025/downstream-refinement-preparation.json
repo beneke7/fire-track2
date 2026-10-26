@@ -1,0 +1,249 @@
+{
+  "candidate": "Outlet/bend region snappy level-3 refinement plus matched axial-X4 refinement of all four 0.30 m source/approach bands.",
+  "canonical_case": "results/runs/i4f-local2x-outlet-bend-prep-20261025T193425Z/attempt-snappy-region-x4/canonical/case",
+  "comparison_to_299248_cell_source": {
+    "cell_count_source": 299248,
+    "method_caveat": "Snappy geometry was regenerated for outlet/bend refinement; this is not an exact cellMap refinement. Initial fields were regenerated on the new canonical mesh.",
+    "selected_zone_volume_changes": {
+      "externalAirZone": {
+        "delta_m3": 0.008507263710232138,
+        "relative": 0.00041555404002968643,
+        "source": 20.47209963263534,
+        "target": 20.480606896345574
+      },
+      "lineAZone": {
+        "delta_m3": -0.0031093497561592853,
+        "relative": -0.004527806916717059,
+        "source": 0.6867231340363162,
+        "target": 0.683613784280157
+      },
+      "lineBZone": {
+        "delta_m3": -0.003108958661236394,
+        "relative": -0.004526903253370018,
+        "source": 0.6867738246718526,
+        "target": 0.6836648660106162
+      },
+      "tankAZone": {
+        "delta_m3": 3.732522220634138e-06,
+        "relative": 2.2641968817627145e-06,
+        "source": 1.6484972004092866,
+        "target": 1.6485009329315072
+      },
+      "tankBZone": {
+        "delta_m3": 3.732644984655309e-06,
+        "relative": 2.2642719454957216e-06,
+        "source": 1.6484967683325067,
+        "target": 1.6485005009774913
+      }
+    },
+    "total_volume_relative_change": 9.133587306986435e-05,
+    "total_volume_source_m3": 25.142590560085303,
+    "total_volume_target_minus_source_m3": 0.002296420460041304
+  },
+  "initial_state": {
+    "absolute_pressure_range_Pa": [
+      100000.0,
+      1211011.7039299512
+    ],
+    "downstream_line_and_external_water_m3": {
+      "downstreamTrainA": 0.0,
+      "downstreamTrainB": 0.0,
+      "externalAir": 0.0,
+      "mouthA": 0.0,
+      "mouthB": 0.0
+    },
+    "fields_in_0": [
+      "T",
+      "U",
+      "alpha.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh"
+    ],
+    "freshly_initialized_on_final_mesh": true,
+    "global_cell_count": 881431,
+    "headspace_m3": {
+      "tankA": 0.2985009329315078,
+      "tankB": 0.29850050097749103
+    },
+    "overlap_cells": 0,
+    "p_rgh_relation_max_abs_residual_Pa": 2.3283064365386963e-10,
+    "partition_cells": 881431,
+    "tank_water_m3": {
+      "tankA": 1.3499999999999994,
+      "tankB": 1.3500000000000003
+    },
+    "total_water_m3": 3.2021659958266397,
+    "unclassified_cells": 0,
+    "wetted_feed_water_m3": {
+      "tankA_feed": 0.25105684519688176,
+      "tankB_feed": 0.2511091506297583
+    }
+  },
+  "mesh": {
+    "C_sha256": "1bda22244e73cb84e707afb5284f76070dd1364378e0376a4a4fa724f21989cc",
+    "all_nine_configured_rows_zero": true,
+    "boundary_patches": [
+      "ambientAnnulus",
+      "apparatusWall",
+      "externalSides",
+      "farOutlet",
+      "lamellaMaster",
+      "lamellaSlave"
+    ],
+    "cellVolume_sha256": "910a6728cd36f7d1da152e549c142d340fc7b607e085941c388698a281131d2f",
+    "cellZones": 19,
+    "cells": 881431,
+    "checkMesh_quality_log_sha256": "03e3a24aad6ef072a7c2e695706c865f74de740fd533c6b9472f064ed8335a8e",
+    "configured_mesh_quality_rows": {
+      "faces on cells with determinant < 0.001": 0,
+      "faces with concavity >  80 degrees": 0,
+      "faces with face pyramid volume < 1e-13": 0,
+      "faces with face twist <  0.02": 0,
+      "faces with face-decomposition tet quality < 1e-15": 0,
+      "faces with interpolation weights (0..1)  <  0.05": 0,
+      "faces with skewness >   4 (internal) or  20 (boundary)": 0,
+      "faces with volume ratio of neighbour cells <  0.01": 0,
+      "non-orthogonality >  65 degrees": 0
+    },
+    "constant_polyMesh_sha256": {
+      "boundary": "21feaee5a824e6dc95e4b236509bf1a01d3841a10c96beccc13a08af32f8a1d0",
+      "cellZones": "85ca49bed6fbac69172116340756776e63b7f721df8881c88b765df9912e2653",
+      "faceZones": "e927111ded30a1fb010f1640f803377f88ecb95684250a0f0c1ffa91db94776f",
+      "faces": "8d3f38a653d46faaa86239a6b9a8c1f003082452a3bc754b2808ceacbd5aa0d5",
+      "neighbour": "04e9d8e7667affcfe3a8cfbd4f5670f291fed4da9e85256db74156b0f68c36cd",
+      "owner": "bfb37daca22a663f109dcdb8b7834f6014095b678cf1c021f2c8b4d3fc186220",
+      "points": "2ea28398e90a2d629b922c72498404ffa2220db75fdbf9d6d909f5ebf8eb7e70"
+    },
+    "faceZones": 10,
+    "only_numeric_time_directory": "0",
+    "optional_allGeometry_log_sha256": "ba52064dbd1858088766f1c112104c9097f8f2c97d1d2cbc7e595c310c337256",
+    "optional_diagnostic": "The separate -allGeometry check reports 11,521 concave cells. It is not one of the nine configured quality rows; do not describe this candidate as clearing that optional diagnostic.",
+    "total_volume_m3": 25.144886980545344
+  },
+  "preserved_intermediate": {
+    "bundle": "results/runs/i4f-local2x-outlet-bend-prep-20261025T193425Z/attempt-snappy-region",
+    "classification": "Outlet-region L3 plus source-axis X2, not X4. Its launch manifest is now marked completed and the attempt remains preserved."
+  },
+  "provenance": {
+    "candidate_input_manifest_sha256": "70736aa382b60cd42c298b9fe803bc238e3793322eb86c1e6415b4d4da563a59",
+    "canonical_initializer_sha256": "a49182dfa00a513f9dede941213c2f00b9814ec2e715a06a51441381cc4cc6da",
+    "canonical_mesh_audit_sha256": "a697a2063bd50270d00bbb25109727838a86717eada9cf34ba21578e48a9b918",
+    "region_resolution_helper_sha256": "5f4107797d51b790123b1e138f4d26390913e01e7d70432460ea8fc25618e8c4",
+    "region_resolution_json_sha256": "eca4606eb05d7b5aa58c0771b13bd43583e3c4115d436c2758c2e9ab0ec0e710",
+    "region_resolution_provenance_sha256": "473e362b875a864abcca94f000f63bfd01f75a2e366e62ea331134aa27b74010"
+  },
+  "recorded_at_utc": "2026-10-25T20:13:42+00:00",
+  "schema": "i4f-private-outlet-bend-refinement-preparation/v1",
+  "scope": "Private geometry and cold-start preparation only. No CFD run was launched.",
+  "source_band_x4": {
+    "cells_per_branch": 5376,
+    "cells_per_layer_per_branch": 112,
+    "layers_per_branch": 48,
+    "measured_bands": {
+      "valveBandA1": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "cells_per_axial_layer_max": 112,
+        "cells_per_axial_layer_min": 112,
+        "cells_per_axial_layer_unique": [
+          112
+        ],
+        "layer_center_spacing_m": {
+          "max": 0.006250011797097166,
+          "median": 0.006250005867132646,
+          "min": 0.006249996299323213
+        },
+        "volume_equivalent_area_m2_over_0p30m": 0.07008716780593857,
+        "within_layer_x_span_max_m": 7.777543982179225e-07,
+        "x_center_max_m": 2.2468751508794833,
+        "x_center_min_m": 1.953124912305114,
+        "zone_volume_m3": 0.021026150341781572
+      },
+      "valveBandA2": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "cells_per_axial_layer_max": 112,
+        "cells_per_axial_layer_min": 112,
+        "cells_per_axial_layer_unique": [
+          112
+        ],
+        "layer_center_spacing_m": {
+          "max": 0.006250009296817405,
+          "median": 0.0062500017410140885,
+          "min": 0.006249996475211184
+        },
+        "volume_equivalent_area_m2_over_0p30m": 0.07008995366782209,
+        "within_layer_x_span_max_m": 6.347107190940449e-07,
+        "x_center_max_m": 2.2468751271695764,
+        "x_center_min_m": 1.9531250289915558,
+        "zone_volume_m3": 0.021026986100346624
+      },
+      "valveBandB1": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "cells_per_axial_layer_max": 112,
+        "cells_per_axial_layer_min": 112,
+        "cells_per_axial_layer_unique": [
+          112
+        ],
+        "layer_center_spacing_m": {
+          "max": 0.00625001000490677,
+          "median": 0.006250005646150303,
+          "min": 0.00624999673730442
+        },
+        "volume_equivalent_area_m2_over_0p30m": 0.0700871681905503,
+        "within_layer_x_span_max_m": 1.0342559568776721e-06,
+        "x_center_max_m": 2.2468751516389327,
+        "x_center_min_m": 1.9531249124109,
+        "zone_volume_m3": 0.02102615045716509
+      },
+      "valveBandB2": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "cells_per_axial_layer_max": 112,
+        "cells_per_axial_layer_min": 112,
+        "cells_per_axial_layer_unique": [
+          112
+        ],
+        "layer_center_spacing_m": {
+          "max": 0.006250007786841039,
+          "median": 0.006250002049565051,
+          "min": 0.006249997828546849
+        },
+        "volume_equivalent_area_m2_over_0p30m": 0.07008995349498985,
+        "within_layer_x_span_max_m": 6.347126877415121e-07,
+        "x_center_max_m": 2.2468751275389853,
+        "x_center_min_m": 1.953125025669754,
+        "zone_volume_m3": 0.021026986048496954
+      }
+    },
+    "measurement_method": "cell-centre X sorted into groups separated by >1 mm; same-layer spread <=1.04 um; median layer pitch ~6.25 mm.",
+    "source_and_seat_faceZone_areas_m2": {
+      "sourceStartA1": 0.07008769222466003,
+      "sourceStartA2": 0.07009178440796993,
+      "sourceStartB1": 0.07008769212376728,
+      "sourceStartB2": 0.07009178367161437,
+      "valveSeatA1": 0.07008572425877412,
+      "valveSeatA2": 0.07008771133276472,
+      "valveSeatB1": 0.07008572519831756,
+      "valveSeatB2": 0.070087711741466
+    },
+    "source_and_seat_faceZones": {
+      "sourceStartA1": 112,
+      "sourceStartA2": 112,
+      "sourceStartB1": 112,
+      "sourceStartB2": 112,
+      "valveSeatA1": 112,
+      "valveSeatA2": 112,
+      "valveSeatB1": 112,
+      "valveSeatB2": 112
+    },
+    "total_cells": 21504
+  },
+  "source_case": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case",
+  "status": "prepared_not_launched"
+}

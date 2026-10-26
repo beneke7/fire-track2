@@ -1,0 +1,65 @@
+{
+  "source_type": "docker_volume",
+  "volume_name": "aerial_drop_3d_2492526_coarse_mesh_sensitivity",
+  "volume_created_at": "2026-09-09T18:21:04+02:00",
+  "volume_driver": "local",
+  "volume_labels": null,
+  "archive_path": "results/archives/docker-volume-aerial_drop_3d_2492526_coarse_mesh_sensitivity-20261026T0541Z.tar.zst",
+  "archive_sha256": "59b68282d31c8c8b92997229b35a4282ec4b8b3aedfc147105d5aee25c995e59",
+  "archive_size_bytes": 658638751,
+  "source_file_bytes": 1855073918,
+  "archive_member_count": 1212,
+  "regular_file_count": 924,
+  "source_manifest_path": "results/archives/manifests/docker-volume-aerial_drop_3d_2492526_coarse_mesh_sensitivity-20261026T0541Z.tar.zst.members.json",
+  "source_manifest_sha256": "b5c1b03e077d13b8da182c7665fc7e46a76b25ae54d2041fb673dad515e4b139",
+  "volume_inspect_path": "results/archives/manifests/docker-volume-aerial_drop_3d_2492526_coarse_mesh_sensitivity-20261026T0541Z.tar.zst.volume-inspect.json",
+  "volume_inspect_sha256": "4ff2968263ccec32701eeb92bb92073afab8596bb2014fb7191215877428d169",
+  "verification_path": "results/archives/manifests/docker-volume-aerial_drop_3d_2492526_coarse_mesh_sensitivity-20261026T0541Z.tar.zst.verification.json",
+  "verification_sha256": "fc62829db02905db6cebea0e9684399df542921405ac870ea0799a5ae1bf7e84",
+  "tar_metadata_flags": [
+    "--numeric-owner",
+    "--format=pax",
+    "--xattrs",
+    "--acls",
+    "--selinux"
+  ],
+  "restore_command": "docker volume create aerial_drop_3d_2492526_coarse_mesh_sensitivity && zstd -dc results/archives/docker-volume-aerial_drop_3d_2492526_coarse_mesh_sensitivity-20261026T0541Z.tar.zst | docker run --rm -i --pull=never --log-driver=none --network none --read-only --cpus=1 --user 0:0 -v aerial_drop_3d_2492526_coarse_mesh_sensitivity:/restore:rw debian:bookworm-slim tar --numeric-owner --same-owner --same-permissions --xattrs --acls --selinux -xpf - -C /restore",
+  "volume_removal": {
+    "status": "removed after explicit root GO and last-consumer check",
+    "volume_name": "aerial_drop_3d_2492526_coarse_mesh_sensitivity",
+    "stopped_read_only_helper_removed_first": true,
+    "remaining_container_consumers_before_remove": 0,
+    "docker_volume_rm_started_utc": "2026-10-26T05:42:41.296395+00:00",
+    "docker_volume_rm_completed_utc": "2026-10-26T05:42:41.376816+00:00",
+    "free_before_bytes": 26399690752,
+    "free_after_bytes": 28258025472,
+    "reclaimed_bytes": 1858334720,
+    "volume_absent_after_remove": true,
+    "archive_sha256_rechecked_after_remove": "59b68282d31c8c8b92997229b35a4282ec4b8b3aedfc147105d5aee25c995e59"
+  },
+  "copy_space_gate": {
+    "disk_free_before_copy_bytes": 27831173120,
+    "archive_size_bytes": 658638751,
+    "disk_free_after_copy_bytes": 27172524032,
+    "required_free_floor_bytes": 22548578304,
+    "passed": true
+  },
+  "export_helper": {
+    "container_id": "2ddc5ab2b30224c0f797141d35adf11c4bf95c14835862659af1715de7793181",
+    "started_at_utc": "2026-10-26T05:41:16.046304605Z",
+    "finished_at_utc": "2026-10-26T05:41:22.743195212Z",
+    "exit_code": 0,
+    "log_driver": "none",
+    "volume_mount": "read-only"
+  },
+  "verification": "all 1212 member paths, types, modes, uid/gid, mtimes checked; all 924 file sizes/SHA256 matched; original volume rehashed after export and identical; staged and final archive hashes matched; zstd integrity passed",
+  "root_independent_verification": {
+    "verified_by_root_before_volume_removal": true,
+    "verified_archive_sha256": "59b68282d31c8c8b92997229b35a4282ec4b8b3aedfc147105d5aee25c995e59",
+    "verified_zstd_integrity": true,
+    "verified_member_count": 1212,
+    "verified_regular_file_count": 924,
+    "verified_regular_file_bytes": 1855073918,
+    "checks": "safe paths, unique membership, type/mode/uid/gid/mtime/size and every file SHA256 passed"
+  }
+}

@@ -1,0 +1,557 @@
+{
+  "schema": "i4f-flush-reduced-model-comparison-public/v1",
+  "purpose": "Tank/headspace-matched one-tank/two-branch reduced-model sensitivities; line/feed volumes are compared with native zones, not forced to match.",
+  "model_scope": "One representative Tank A with its distinct lower and upper branches; not the full two-tank/four-outlet apparatus.",
+  "execution_and_review_status": {
+    "results_are_preserved": true,
+    "source_run_bundle": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z",
+    "no_trajectory_rerun_after_final_review_fixes": true,
+    "review_note": "The preserved n=gamma, n=1, and half-step trajectories were executed before final review fixes. Those fixes restored the legacy-path terminal hydraulic diameter, treated producer/source hashes as provenance rather than runtime requirements, and clarified packet-purpose wording. This run used the identity_compact packet; no new trajectory was run after the fixes, so neutrality is not claimed as freshly executed. Subsequent independent source/input comparison confirmed all twelve identity-mode payloads and core-module hashes match the executed runs. The final native-partition summary fix distinguishes legacy downstream-only groups from the new full-line group; it does not alter either mode's physical parameters.",
+    "executed_source_hashes_recorded_in_comparison": {
+      "experiments/i4f_flush_filling_reference/inputs-manifest.json": "e9d3274e1fd5cdf5db6233ec4588a31c0a249efafd2351e2eaac0255d7000df6",
+      "experiments/i4f_flush_filling_reference/inputs/branch-centerline-sections.csv": "d43a82021a4221664d8f3038b9aed4b6c7e57993ca176be2ec8ebd7ef684e596",
+      "experiments/i4f_flush_filling_reference/inputs/branch-hydraulic-geometry.json": "4607c4a9de804c55a2d5ce0f5cab2976e3c7cbb35cbebd1b225fcef3f2d0ec7a",
+      "experiments/i4f_flush_filling_reference/inputs/final-canonical-readiness-v4.json": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+      "experiments/i4f_flush_filling_reference/inputs/geometry-adapter-short1.json": "82033634344db89f9d897aab3339b41594dc0791f8c23a2f2919e35369099d8e",
+      "experiments/i4f_flush_filling_reference/inputs/geometry_summary.json": "53d9aac2e2f59a6228f7e8d2e6b2b123e8cff8d59bbb312f2ddcc6b279c31e6e",
+      "experiments/i4f_flush_filling_reference/inputs/legacy-branch-hydraulic-geometry.json": "bfc9f3911621f83b437d9b6e5b7a5cb2b1ff1a1ad182d3050d6586cdbd1da5a0",
+      "experiments/i4f_flush_filling_reference/inputs/native-initialization-dryline.json": "1f2d00899f87ded9a4ea23defe610283724db0009091a81da6ee530852fa3412",
+      "experiments/i4f_flush_filling_reference/inputs/native-initialization-source.json": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+      "experiments/i4f_flush_filling_reference/inputs/preview-geometry.json": "b527cf0c57a46bc1bd5fcec1df91fea2f2a8ae410ff018bee13e7992e898a4b6",
+      "experiments/i4f_flush_filling_reference/inputs/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+      "experiments/i4f_flush_filling_reference/inputs/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+      "experiments/i4f_flush_filling_reference/inputs/transition_sections.csv": "11ade9395722efcfcc9f48a8d7a22b3b58b84274cecaeabc97ae7945b53acb08",
+      "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/final-canonical-readiness-v4.json": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+      "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/geometry-adapter-short1.json": "82033634344db89f9d897aab3339b41594dc0791f8c23a2f2919e35369099d8e",
+      "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/geometry/four_pipe_transition_joined_branches.step": "d9728b4784d7daf96c77f58e2bb30f7edc2093d195804f489314fb434df54f85",
+      "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/geometry_summary.json": "53d9aac2e2f59a6228f7e8d2e6b2b123e8cff8d59bbb312f2ddcc6b279c31e6e",
+      "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/flush-at-inlet-v6/transition_sections.csv": "11ade9395722efcfcc9f48a8d7a22b3b58b84274cecaeabc97ae7945b53acb08",
+      "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/native-initialization-dryline.json": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+      "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/case/constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+      "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/case/constant/thermophysicalProperties.water": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+      "scripts/i4f_four_outlet_geometry/generate.py": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+      "scripts/run_i4f_filling_network.py": "532994fea2297d5331f79c1bb2b0ae7490e8935b885df571c0e847701b5f9632",
+      "src/aerial_drop/i4f_filling_network.py": "d00694ad3c42e2c9d7b6d456024667774ce52d157c82b750b7a1260a5dfba052",
+      "src/aerial_drop/i4f_reduced.py": "22c2d12a3150a802dcd1dc5185e34808562b0175b1e94766caf4fcec6579423d",
+      "src/aerial_drop/i4f_reduced_network.py": "56a6259469341f9af1b39d05a641803e75c5caa600dc7795fb8715fe43474e7c"
+    },
+    "analysis_bundle_artifacts": {
+      "comparison_json": {
+        "path": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z/comparison.json",
+        "bytes": 46716,
+        "sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab"
+      },
+      "comparison_csv": {
+        "path": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z/comparison.csv",
+        "bytes": 6226,
+        "sha256": "38dbc74b79a11335382d18bd3a91618ee7c9b7ed2d1925246578de345883998e"
+      },
+      "thermo_sensitivity_png": {
+        "path": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z/thermo-sensitivity.png",
+        "bytes": 130755,
+        "sha256": "c809675461bbaedec9ff57038f1f5bad2626e30c66727b09162a3bf7185df838"
+      },
+      "analysis_script": {
+        "path": "results/runs/i4f-flush-filling-model-corrected299214-comparison-20261026T072500Z/analyze.py",
+        "bytes": 13130,
+        "sha256": "cd318181b591f2147618849885511f2a15e4d638f3b89e7d5825433047f190cd"
+      }
+    }
+  },
+  "initial_state_and_thermo": {
+    "tank_capacity_m3": 1.64849720040838,
+    "tank_water_m3": 1.3500000000021357,
+    "gas_headspace_m3": 0.2984972004062443,
+    "initial_pressure_absolute_Pa": 1200000.0,
+    "initial_temperature_K": 293.15,
+    "air_R_J_kg_K": 287.0477481284761,
+    "air_Cp_J_kg_K": 1005.0,
+    "air_gamma": 1.3998145383348455,
+    "water_density_kg_m3": 998.2,
+    "input_manifest_sha256": "e9d3274e1fd5cdf5db6233ec4588a31c0a249efafd2351e2eaac0255d7000df6"
+  },
+  "geometry_and_inventory_alignment": {
+    "coordinate_map_mode": "identity_compact",
+    "route_geometry_source": "Current scripts/i4f_four_outlet_geometry/generate.py branch_pipe Bezier/straight centerline equations.",
+    "centerline_is_provisional_not_measured": true,
+    "tank_to_valve_feed_volume": {
+      "reduced_model_m3": 0.252648321606991,
+      "native_zone_m3": 0.2510568437958543,
+      "model_minus_native_m3": 0.0015914778111367212,
+      "model_minus_native_percent": 0.633911343373228,
+      "comparison_only_no_rescaling": true
+    },
+    "full_tank_to_mouth_line_volume_per_tank": {
+      "reduced_model_m3": 0.7005877945113135,
+      "native_mesh_zone_m3": 0.6863078026992726,
+      "model_minus_native_m3": 0.014279991812040871,
+      "model_minus_native_percent": 2.0806978670324217,
+      "current_flush_BREP_m3": 0.6859397610054407,
+      "comparison_only_no_rescaling": true,
+      "zone_scope": "Native line zone covers wetted tank-to-valve feed and downstream train; downstream initial-water residual is near zero."
+    },
+    "current_flush_BREP_minus_native_line_zone_m3_per_tank": -0.00036804169383186647,
+    "reduced_model_minus_current_flush_BREP_line_m3_per_tank": 0.014648033505871405,
+    "reduced_model_minus_current_flush_BREP_line_percent": 2.135469371887777,
+    "branch_full_wet_inertance_integral_m_minus1": {
+      "lower": 57.96929085021658,
+      "upper": 58.92767621878763
+    },
+    "inertance_limit": "No native-mesh centerline integral of ds/A is available for comparison.",
+    "lamella_friction_limit": "The equivalent hydraulic-diameter profile is based on assumed rectangular sections and does not add the zero-thickness divider surfaces to wetted perimeter; downstream lamella friction is therefore not represented exactly."
+  },
+  "comparison_method": {
+    "integration": "Explicit midpoint RK2 moving-front network model.",
+    "sampling": "Nearest saved reduced-model sample at each target; no time interpolation or curve fitting.",
+    "target_times_s": [
+      0.05,
+      0.25,
+      0.5,
+      0.6,
+      0.7,
+      0.9
+    ],
+    "thermal_sensitivity": "Only polytropic n changes from dry-air gamma to isothermal n=1; other model inputs are held fixed.",
+    "time_refinement": "Only fixed dt changes from 50 us to 25 us in the gamma case.",
+    "full_results_csv": "flush-filling-model-comparison.csv",
+    "csv_rows": 18
+  },
+  "runs": {
+    "gamma_dt25us": {
+      "preserved_run_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072426.698280Z",
+      "polytropic_n": 1.3998145383348455,
+      "time_step_s": 2.5e-05,
+      "first_outlet_water_arrival_s_by_branch": {
+        "lower": 0.6169750000001959,
+        "upper": 0.6251750000002132
+      },
+      "stop": {
+        "reason": "tank_intake_crown_reached",
+        "time_s": 1.1265523281829803
+      },
+      "total_external_water_volume_at_stop_m3": 0.6061104547304987,
+      "max_abs_volume_balance_residual_m3": 2.5757174171303632e-14,
+      "max_abs_branch_volume_balance_residual_m3": 3.4416913763379853e-15,
+      "summary_files": {
+        "history.csv": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072426.698280Z/history.csv",
+          "sha256": "c487a2844582b7e219300bccd91b0d935725a113d6cd655abca7c96d354c00bf"
+        },
+        "summary.json": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072426.698280Z/summary.json",
+          "sha256": "f09ff5daf9644e1734d85aaccea0df21154ef2e191552c76f301ecb423a935ac"
+        }
+      }
+    },
+    "gamma_dt50us": {
+      "preserved_run_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z",
+      "polytropic_n": 1.3998145383348455,
+      "time_step_s": 5e-05,
+      "first_outlet_water_arrival_s_by_branch": {
+        "lower": 0.6169999999999403,
+        "upper": 0.6251999999999394
+      },
+      "stop": {
+        "reason": "tank_intake_crown_reached",
+        "time_s": 1.1265521234050802
+      },
+      "total_external_water_volume_at_stop_m3": 0.6061104547305122,
+      "max_abs_volume_balance_residual_m3": 1.199040866595169e-14,
+      "max_abs_branch_volume_balance_residual_m3": 3.191891195797325e-15,
+      "summary_files": {
+        "history.csv": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/history.csv",
+          "sha256": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e"
+        },
+        "summary.json": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/summary.json",
+          "sha256": "8827aa49e201459823e8be4ea8fa5c297aaf9e1db87b74cab8a5881100429f16"
+        }
+      }
+    },
+    "isothermal_dt50us": {
+      "preserved_run_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z",
+      "polytropic_n": 1.0,
+      "time_step_s": 5e-05,
+      "first_outlet_water_arrival_s_by_branch": {
+        "lower": 0.5845999999999438,
+        "upper": 0.5914499999999431
+      },
+      "stop": {
+        "reason": "tank_intake_crown_reached",
+        "time_s": 0.9697910060343804
+      },
+      "total_external_water_volume_at_stop_m3": 0.6061104547305166,
+      "max_abs_volume_balance_residual_m3": 9.992007221626409e-15,
+      "max_abs_branch_volume_balance_residual_m3": 4.413136522884997e-15,
+      "summary_files": {
+        "history.csv": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/history.csv",
+          "sha256": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f"
+        },
+        "summary.json": {
+          "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/summary.json",
+          "sha256": "b762d73ae9ae78626c3e02a5ea3c64404a738423cb026f1cf5b936c43da472e6"
+        }
+      }
+    }
+  },
+  "same_target_samples": [
+    {
+      "target_time_s": 0.05,
+      "values_by_run": {
+        "gamma_dt25us": {
+          "actual_time_s": 0.04999999999999857,
+          "time_offset_s": -1.429412144204889e-15,
+          "gas_pressure_abs_Pa": 1174742.0519142577,
+          "gas_temperature_K": 291.3742277534236,
+          "gas_volume_m3": 0.30306810253265337,
+          "tank_water_volume_m3": 1.3454290978757266,
+          "total_branch_flow_m3_s": 0.09225182834531702,
+          "total_wet_line_water_volume_m3": 0.25721922373340267,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 1.8182636204430458,
+          "front_s_upper_m": 1.8206440164841715,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.0019013128694652013,
+          "air_mach_upper": 0.0019013131601386545
+        },
+        "gamma_dt50us": {
+          "actual_time_s": 0.05000000000000092,
+          "time_offset_s": 9.159339953157541e-16,
+          "gas_pressure_abs_Pa": 1174741.982256358,
+          "gas_temperature_K": 291.3742228186516,
+          "gas_volume_m3": 0.3030681153706605,
+          "tank_water_volume_m3": 1.3454290850377195,
+          "total_branch_flow_m3_s": 0.09225182538235771,
+          "total_wet_line_water_volume_m3": 0.2572192365714075,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 1.8182637113138467,
+          "front_s_upper_m": 1.8206441072339865,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.001901312808398539,
+          "air_mach_upper": 0.001901313099071952
+        },
+        "isothermal_dt50us": {
+          "actual_time_s": 0.05000000000000092,
+          "time_offset_s": 9.159339953157541e-16,
+          "gas_pressure_abs_Pa": 1181872.7239747683,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.30307547777466115,
+          "tank_water_volume_m3": 1.3454217226337188,
+          "total_branch_flow_m3_s": 0.09255130644280611,
+          "total_wet_line_water_volume_m3": 0.25722659897540934,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 1.8183157904083207,
+          "front_s_upper_m": 1.8206961848497287,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.0019074851667817807,
+          "air_mach_upper": 0.0019074853683916071
+        }
+      }
+    },
+    {
+      "target_time_s": 0.25,
+      "values_by_run": {
+        "gamma_dt25us": {
+          "actual_time_s": 0.24999999999997655,
+          "time_offset_s": -2.3453461395206432e-14,
+          "gas_pressure_abs_Pa": 920700.0769581842,
+          "gas_temperature_K": 271.78508866294237,
+          "gas_volume_m3": 0.36069411460414846,
+          "tank_water_volume_m3": 1.2878030858042315,
+          "total_branch_flow_m3_s": 0.6041282261189669,
+          "total_wet_line_water_volume_m3": 0.31484523580488666,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 2.2258902883399343,
+          "front_s_upper_m": 2.228258652751719,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.012451415488519203,
+          "air_mach_upper": 0.012450787091783414
+        },
+        "gamma_dt50us": {
+          "actual_time_s": 0.24999999999998063,
+          "time_offset_s": -1.9373391779708982e-14,
+          "gas_pressure_abs_Pa": 920700.03706347,
+          "gas_temperature_K": 271.7850852992916,
+          "gas_volume_m3": 0.360694125769329,
+          "tank_water_volume_m3": 1.287803074639051,
+          "total_branch_flow_m3_s": 0.604128210458716,
+          "total_wet_line_water_volume_m3": 0.31484524697007077,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 2.225890367377452,
+          "front_s_upper_m": 2.2282587316692455,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.012451415166091133,
+          "air_mach_upper": 0.012450786768694986
+        },
+        "isothermal_dt50us": {
+          "actual_time_s": 0.24999999999998063,
+          "time_offset_s": -1.9373391779708982e-14,
+          "gas_pressure_abs_Pa": 989537.5653996221,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.3619838730860474,
+          "tank_water_volume_m3": 1.2865133273223326,
+          "total_branch_flow_m3_s": 0.628221142095337,
+          "total_wet_line_water_volume_m3": 0.31613499428679087,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 2.2350137130932377,
+          "front_s_upper_m": 2.2373815780241717,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.012948002874001847,
+          "air_mach_upper": 0.012947311182399274
+        }
+      }
+    },
+    {
+      "target_time_s": 0.5,
+      "values_by_run": {
+        "gamma_dt25us": {
+          "actual_time_s": 0.49999999999994904,
+          "time_offset_s": -5.0959236830294685e-14,
+          "gas_pressure_abs_Pa": 456010.5050891179,
+          "gas_temperature_K": 222.36718287669086,
+          "gas_volume_m3": 0.595836983500913,
+          "tank_water_volume_m3": 1.052660216907467,
+          "total_branch_flow_m3_s": 1.178113581939407,
+          "total_wet_line_water_volume_m3": 0.5499881047016437,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 3.832837132989114,
+          "front_s_upper_m": 3.8455486193228903,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.01874051572117594,
+          "air_mach_upper": 0.02007766284821837
+        },
+        "gamma_dt50us": {
+          "actual_time_s": 0.4999999999999531,
+          "time_offset_s": -4.6906922790412864e-14,
+          "gas_pressure_abs_Pa": 456010.49737274,
+          "gas_temperature_K": 222.3671818019657,
+          "gas_volume_m3": 0.5958369907036176,
+          "tank_water_volume_m3": 1.0526602097047624,
+          "total_branch_flow_m3_s": 1.1781135655515516,
+          "total_wet_line_water_volume_m3": 0.5499881119043557,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 3.8328371723586456,
+          "front_s_upper_m": 3.845548661402048,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.01874051426767614,
+          "air_mach_upper": 0.020077662246304615
+        },
+        "isothermal_dt50us": {
+          "actual_time_s": 0.4999999999999531,
+          "time_offset_s": -4.6906922790412864e-14,
+          "gas_pressure_abs_Pa": 577881.9580083832,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.6198439586554749,
+          "tank_water_volume_m3": 1.028653241752905,
+          "total_branch_flow_m3_s": 1.3544638064448111,
+          "total_wet_line_water_volume_m3": 0.5739950798562128,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 3.9522803324198503,
+          "front_s_upper_m": 3.9741570603006076,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.018090263137673146,
+          "air_mach_upper": 0.019179281525747084
+        }
+      }
+    },
+    {
+      "target_time_s": 0.6,
+      "values_by_run": {
+        "gamma_dt25us": {
+          "actual_time_s": 0.6000000000001601,
+          "time_offset_s": 1.6009416015094757e-13,
+          "gas_pressure_abs_Pa": 350257.5861708358,
+          "gas_temperature_K": 206.2254739624236,
+          "gas_volume_m3": 0.7194263986920875,
+          "tank_water_volume_m3": 0.9290708017162925,
+          "total_branch_flow_m3_s": 1.2790988169121353,
+          "total_wet_line_water_volume_m3": 0.6735775198928173,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 4.3228561685803415,
+          "front_s_upper_m": 4.355860798886476,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.012453338817385574,
+          "air_mach_upper": 0.012392593541863915
+        },
+        "gamma_dt50us": {
+          "actual_time_s": 0.5999999999999421,
+          "time_offset_s": -5.784261958297066e-14,
+          "gas_pressure_abs_Pa": 350257.55181212956,
+          "gas_temperature_K": 206.22546818439534,
+          "gas_volume_m3": 0.7194264491077129,
+          "tank_water_volume_m3": 0.9290707513006671,
+          "total_branch_flow_m3_s": 1.2791016882223742,
+          "total_wet_line_water_volume_m3": 0.6735775703084506,
+          "total_external_water_volume_m3": 0.0,
+          "front_s_lower_m": 4.322856189124032,
+          "front_s_upper_m": 4.355861114448307,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "air_mach_lower": 0.012453338590174187,
+          "air_mach_upper": 0.012392649542897718
+        },
+        "isothermal_dt50us": {
+          "actual_time_s": 0.5999999999999421,
+          "time_offset_s": -5.784261958297066e-14,
+          "gas_pressure_abs_Pa": 468479.7528517826,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.7645936421094792,
+          "tank_water_volume_m3": 0.8839035582989008,
+          "total_branch_flow_m3_s": 1.518866363791187,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.018156968798905555,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.7608864811178891,
+          "outlet_flow_upper_m3_s": 0.7579798826732979,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        }
+      }
+    },
+    {
+      "target_time_s": 0.7,
+      "values_by_run": {
+        "gamma_dt25us": {
+          "actual_time_s": 0.7000000000003711,
+          "time_offset_s": 3.7114755713218983e-13,
+          "gas_pressure_abs_Pa": 277940.45482629846,
+          "gas_temperature_K": 193.0438081374074,
+          "gas_volume_m3": 0.8486638870088508,
+          "tank_water_volume_m3": 0.7998333133995292,
+          "total_branch_flow_m3_s": 1.297015088498936,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.10222721369826525,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.6503972347421378,
+          "outlet_flow_upper_m3_s": 0.6466178537567981,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        },
+        "gamma_dt50us": {
+          "actual_time_s": 0.6999999999999311,
+          "time_offset_s": -6.88338275267597e-14,
+          "gas_pressure_abs_Pa": 277940.35839387076,
+          "gas_temperature_K": 193.04378900739073,
+          "gas_volume_m3": 0.8486640973560278,
+          "tank_water_volume_m3": 0.7998331030523522,
+          "total_branch_flow_m3_s": 1.2970158530124698,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.10222742404545149,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.6503971400499423,
+          "outlet_flow_upper_m3_s": 0.6466187129625275,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        },
+        "isothermal_dt50us": {
+          "actual_time_s": 0.6999999999999311,
+          "time_offset_s": -6.88338275267597e-14,
+          "gas_pressure_abs_Pa": 388973.09767376864,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.920877671565637,
+          "tank_water_volume_m3": 0.727619528842743,
+          "total_branch_flow_m3_s": 1.596517607055111,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.1744409982550624,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.8000523660745128,
+          "outlet_flow_upper_m3_s": 0.7964652409805983,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        }
+      }
+    },
+    {
+      "target_time_s": 0.9,
+      "values_by_run": {
+        "gamma_dt25us": {
+          "actual_time_s": 0.9000000000007932,
+          "time_offset_s": 7.931433287922118e-13,
+          "gas_pressure_abs_Pa": 192944.5749561363,
+          "gas_temperature_K": 173.93207581761672,
+          "gas_volume_m3": 1.1014853313189792,
+          "tank_water_volume_m3": 0.5470118690894007,
+          "total_branch_flow_m3_s": 1.208995211114708,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.35504865800839047,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.6069457450655389,
+          "outlet_flow_upper_m3_s": 0.6020494660491691,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        },
+        "gamma_dt50us": {
+          "actual_time_s": 0.8999999999999091,
+          "time_offset_s": -9.092726571680032e-14,
+          "gas_pressure_abs_Pa": 192944.5144892444,
+          "gas_temperature_K": 173.93206024889756,
+          "gas_volume_m3": 1.1014855779191701,
+          "tank_water_volume_m3": 0.54701162248921,
+          "total_branch_flow_m3_s": 1.2089950936136722,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.35504890460859373,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.6069455877271616,
+          "outlet_flow_upper_m3_s": 0.6020495058865106,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        },
+        "isothermal_dt50us": {
+          "actual_time_s": 0.8999999999999091,
+          "time_offset_s": -9.092726571680032e-14,
+          "gas_pressure_abs_Pa": 288223.54476012907,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 1.242773697706058,
+          "tank_water_volume_m3": 0.40572350270232216,
+          "total_branch_flow_m3_s": 1.591650708070913,
+          "total_wet_line_water_volume_m3": 0.7005877945113135,
+          "total_external_water_volume_m3": 0.49633702439548333,
+          "front_s_lower_m": 4.395520751954956,
+          "front_s_upper_m": 4.4632650217022,
+          "outlet_flow_lower_m3_s": 0.7980111948552275,
+          "outlet_flow_upper_m3_s": 0.7936395132156854,
+          "air_mach_lower": 0.0,
+          "air_mach_upper": 0.0
+        }
+      }
+    }
+  ],
+  "sensitivity_at_0p9_s": {
+    "isothermal_minus_gamma_dt50us": {
+      "gas_pressure_abs_Pa": 95279.03027088466,
+      "gas_temperature_K": 119.21793975110242,
+      "tank_water_volume_m3": -0.14128811978688782,
+      "gas_volume_m3": 0.14128811978688782,
+      "total_branch_flow_m3_s": 0.38265561445724083,
+      "total_external_water_volume_m3": 0.1412881197868896
+    },
+    "interpretation": "Sensitivity to prescribed n=1 vs n=gamma gas law; not a heat-transfer measurement or fitted exponent."
+  },
+  "model_limits": [
+    "Uncalibrated, full-bore moving-front reduced model, not a validated CFD or experiment result.",
+    "The n=gamma and n=1 cases are explicit thermal-law limits; neither is a fitted heat-transfer model.",
+    "Ambient static pressure is imposed at the advancing gas/liquid front. The dry-air pressure-loss screen is incomplete because no air minor-loss coefficient K is supplied; low early Mach does not validate later gas-pressure uniformity.",
+    "A single full-bore front per branch omits stratification, slugs, trapped air pockets, and other air/water interface dynamics; Froude/Mach quantities are diagnostics only.",
+    "One representative tank and two branches are modeled; tank symmetry and four-outlet behavior are not established.",
+    "The endpoint is the modeled mean-level tank intake-crown condition. It is not tank emptying, a measured event, or validated gas breakthrough.",
+    "Model line/feed integrals differ from native inventories by the reported amounts and were not rescaled. Zero-thickness lamella divider wetted perimeter is not represented exactly in reduced friction diameter."
+  ]
+}

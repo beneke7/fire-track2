@@ -1,0 +1,42 @@
+FoamFile { version 2.0; format ascii; class dictionary; object fvOptions; }
+valveLoss
+{
+    type vectorCodedSource;
+    active true;
+    name i4fFourValveScalarValveLossC07S1_v1;
+    vectorCodedSourceCoeffs
+    {
+        selectionMode cellZone;
+        cellZone allFourValves;
+        fields (U);
+        codeCorrect #{ #};
+        codeConstrain #{ #};
+        codeAddSup #{ #};
+        codeAddSupRho
+        #{
+            const scalar time = mesh_.time().value();
+            const scalar openingTime = 1.0;
+            const scalar Cd = 0.7;
+            const scalar valveLength = 0.30;
+            const scalar minOpenFraction = 0.02;
+            const scalar s = min(max(time/openingTime, scalar(0)), scalar(1));
+            const scalar opening = max(sqr(s)*(3.0 - 2.0*s), minOpenFraction);
+            const scalar K = 1.0/sqr(Cd*opening);
+            const scalar lossPerLength = K/valveLength;
+            const scalar uRegularization = 0.10;
+            const vectorField& U = mesh_.lookupObject<volVectorField>("U").primitiveField();
+            const scalarField& rhoCells = rho.primitiveField();
+            const scalarField& V = mesh_.V();
+            scalarField& diag = eqn.diag();
+            forAll(cells_, i)
+            {
+                const label celli = cells_[i];
+                const scalar speed = max(mag(U[celli]), uRegularization);
+                diag[celli] -= 0.5*rhoCells[celli]*lossPerLength*speed*V[celli];
+            }
+        #};
+    }
+}
+// Assumed scalar pressure-loss zones spanning 0.30 m in each of four valves.
+// All four share a synchronized 1 s smoothstep command with min opening 0.02.
+// This is a pressure-driven loss source; no discharge rate or outlet velocity is prescribed.

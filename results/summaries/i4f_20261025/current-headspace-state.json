@@ -1,0 +1,346 @@
+{
+  "title": "Same-case native checkpoint headspace EOS and energy-storage diagnostic",
+  "time_s": 0.200021166664,
+  "case": "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case",
+  "mesh_cells": 303108,
+  "ranks_in_checkpoint": 10,
+  "mapping_check": {
+    "addressed_local_cells": 303108,
+    "unique_global_cells": 303108,
+    "global_min": 0,
+    "global_max": 303107,
+    "one_to_one": true
+  },
+  "thermo": {
+    "model": "perfectGas air from actual case thermophysicalProperties.air",
+    "R_J_kgK": 287.0474909771845,
+    "Cp_J_kgK": 1005.0,
+    "Cv_J_kgK": 717.9525090228155,
+    "gamma": 1.399814036958902,
+    "rho_EOS_definition": "rho_g = p/(R*T), evaluated on checkpoint/initial cells; gas-phase volume fraction multiplies gas mass",
+    "internal_energy_proxy": "sum(alpha_g*p*V/(gamma-1)); uniform perfect-gas sensible internal-energy identity, no boundary flux/heat closure implied",
+    "pure_mixed_threshold": "pure gas if alpha.water <= 1e-6; mixed if 1e-6 < alpha.water < 1 - 1e-6; pure liquid if alpha.water >= 1 - 1e-6"
+  },
+  "tank_results": {
+    "A": {
+      "static_tank_zone_cell_count": 21839,
+      "static_tank_zone_volume_m3": 1.6484977021531961,
+      "initial": {
+        "gas_volume_m3": 0.2984977021531966,
+        "gas_mass_kg_eos": 4.25671526220687,
+        "gas_volume_weighted_p_Pa": 1199988.991630577,
+        "gas_mass_weighted_T_K": 293.15,
+        "gas_internal_energy_proxy_J": 895901.4029006651,
+        "pure_gas_cells": {
+          "cell_count": 2872,
+          "gas_volume_m3": 0.25570170690376803,
+          "gas_mass_kg": 3.6464146422162482,
+          "gas_mass_weighted_T_K": 293.1499999999999
+        },
+        "mixed_cells": {
+          "cell_count": 864,
+          "gas_volume_m3": 0.04279599524942861,
+          "gas_mass_kg": 0.6103006199906219,
+          "gas_mass_weighted_T_K": 293.1499999999999
+        },
+        "pure_liquid_cells": {
+          "cell_count": 18103,
+          "gas_volume_m3": 0.0,
+          "gas_mass_kg": 0.0,
+          "gas_mass_weighted_T_K": null
+        }
+      },
+      "checkpoint": {
+        "gas_volume_m3": 0.33523628051337573,
+        "gas_mass_kg_eos": 4.256770627943601,
+        "gas_volume_weighted_p_Pa": 1038443.6132651628,
+        "gas_mass_weighted_T_K": 284.90490661340556,
+        "gas_internal_energy_proxy_J": 870714.7379862207,
+        "pure_gas_cells": {
+          "cell_count": 2771,
+          "gas_volume_m3": 0.24621485145450484,
+          "gas_mass_kg": 3.153216767552316,
+          "gas_mass_weighted_T_K": 282.475395987929
+        },
+        "mixed_cells": {
+          "cell_count": 1834,
+          "gas_volume_m3": 0.08902140626490138,
+          "gas_mass_kg": 1.1035535789552982,
+          "gas_mass_weighted_T_K": 291.84681815498084
+        },
+        "pure_liquid_cells": {
+          "cell_count": 17234,
+          "gas_volume_m3": 2.279396955095389e-08,
+          "gas_mass_kg": 2.8143598597085906e-07,
+          "gas_mass_weighted_T_K": 293.12952180999713
+        }
+      },
+      "ideal_closed_headspace_refs_at_checkpoint_volume": {
+        "adiabatic_gamma_from_air_inputs": 1.399814036958902,
+        "p_Pa": 1020029.205549469,
+        "isothermal_p_Pa": 1068482.07497806,
+        "assumption": "uniform sealed ideal-gas headspace from zone-averaged initial p and alpha-derived initial gas volume; diagnostic reference only"
+      },
+      "gas_mass_drift_kg": 5.5365736730372817e-05,
+      "gas_mass_drift_fraction": 1.3006680813720806e-05,
+      "gas_energy_proxy_change_J": -25186.66491444432,
+      "p_probe_available_exact_checkpoint": false
+    },
+    "B": {
+      "static_tank_zone_cell_count": 21839,
+      "static_tank_zone_volume_m3": 1.64849676998262,
+      "initial": {
+        "gas_volume_m3": 0.29849676998261887,
+        "gas_mass_kg_eos": 4.256701968921942,
+        "gas_volume_weighted_p_Pa": 1199988.9916019805,
+        "gas_mass_weighted_T_K": 293.15,
+        "gas_internal_energy_proxy_J": 895898.6050925239,
+        "pure_gas_cells": {
+          "cell_count": 2872,
+          "gas_volume_m3": 0.255701058392965,
+          "gas_mass_kg": 3.6464053943149706,
+          "gas_mass_weighted_T_K": 293.1499999999999
+        },
+        "mixed_cells": {
+          "cell_count": 864,
+          "gas_volume_m3": 0.04279571158965389,
+          "gas_mass_kg": 0.6102965746069725,
+          "gas_mass_weighted_T_K": 293.15
+        },
+        "pure_liquid_cells": {
+          "cell_count": 18103,
+          "gas_volume_m3": 0.0,
+          "gas_mass_kg": 0.0,
+          "gas_mass_weighted_T_K": null
+        }
+      },
+      "checkpoint": {
+        "gas_volume_m3": 0.3352355886736883,
+        "gas_mass_kg_eos": 4.256757430773228,
+        "gas_volume_weighted_p_Pa": 1038442.2366702945,
+        "gas_mass_weighted_T_K": 284.9048242499933,
+        "gas_internal_energy_proxy_J": 870711.7868139585,
+        "pure_gas_cells": {
+          "cell_count": 2771,
+          "gas_volume_m3": 0.2462141919729229,
+          "gas_mass_kg": 3.1532053265073214,
+          "gas_mass_weighted_T_K": 282.47528998267325
+        },
+        "mixed_cells": {
+          "cell_count": 1835,
+          "gas_volume_m3": 0.08902137403531474,
+          "gas_mass_kg": 1.1035518244172056,
+          "gas_mass_weighted_T_K": 291.84678920486505
+        },
+        "pure_liquid_cells": {
+          "cell_count": 17233,
+          "gas_volume_m3": 2.2665450672508455e-08,
+          "gas_mass_kg": 2.798487008245974e-07,
+          "gas_mass_weighted_T_K": 293.12947126130274
+        }
+      },
+      "ideal_closed_headspace_refs_at_checkpoint_volume": {
+        "adiabatic_gamma_from_air_inputs": 1.399814036958902,
+        "p_Pa": 1020027.6932337024,
+        "isothermal_p_Pa": 1068480.9432823942,
+        "assumption": "uniform sealed ideal-gas headspace from zone-averaged initial p and alpha-derived initial gas volume; diagnostic reference only"
+      },
+      "gas_mass_drift_kg": 5.54618512857985e-05,
+      "gas_mass_drift_fraction": 1.3029301015432537e-05,
+      "gas_energy_proxy_change_J": -25186.818278565304,
+      "p_probe_available_exact_checkpoint": false
+    }
+  },
+  "valve_zone": {
+    "zone": "allFourValves",
+    "cell_count": 5376,
+    "metrics": {
+      "gas_volume_m3": 1.043515295102231e-15,
+      "gas_mass_kg_eos": 4.408583235467686e-15,
+      "gas_volume_weighted_p_Pa": 355661.4222759237,
+      "gas_mass_weighted_T_K": 293.2802244180518,
+      "gas_internal_energy_proxy_J": 9.282768980442023e-10,
+      "pure_gas_cells": {
+        "cell_count": 0,
+        "gas_volume_m3": 0.0,
+        "gas_mass_kg": 0.0,
+        "gas_mass_weighted_T_K": null
+      },
+      "mixed_cells": {
+        "cell_count": 0,
+        "gas_volume_m3": 0.0,
+        "gas_mass_kg": 0.0,
+        "gas_mass_weighted_T_K": null
+      },
+      "pure_liquid_cells": {
+        "cell_count": 5376,
+        "gas_volume_m3": 1.043515295102231e-15,
+        "gas_mass_kg": 4.408583235467686e-15,
+        "gas_mass_weighted_T_K": 293.2802244180518
+      }
+    },
+    "qualification": "Static valve-region gas fraction only; does not identify gas connected from the headspace or gas crossing an outlet."
+  },
+  "probe_comparison": {
+    "probe_output_times_s": [
+      0.050021166664
+    ],
+    "checkpoint_probe_rows": {
+      "p": {
+        "path": "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/p",
+        "time_s": 0.20002117,
+        "offset_s": 3.3360000040172366e-09,
+        "probes": [
+          {
+            "index": 0,
+            "xyz_m": [
+              1.25,
+              -0.55,
+              1.6
+            ]
+          },
+          {
+            "index": 1,
+            "xyz_m": [
+              1.25,
+              0.55,
+              1.6
+            ]
+          }
+        ],
+        "values": [
+          1038412.1,
+          1038410.7
+        ]
+      },
+      "T": {
+        "path": "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/T",
+        "time_s": 0.20002117,
+        "offset_s": 3.3360000040172366e-09,
+        "probes": [
+          {
+            "index": 0,
+            "xyz_m": [
+              1.25,
+              -0.55,
+              1.6
+            ]
+          },
+          {
+            "index": 1,
+            "xyz_m": [
+              1.25,
+              0.55,
+              1.6
+            ]
+          }
+        ],
+        "values": [
+          281.35716,
+          281.35677
+        ]
+      },
+      "alpha.water": {
+        "path": "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/alpha.water",
+        "time_s": 0.20002117,
+        "offset_s": 3.3360000040172366e-09,
+        "probes": [
+          {
+            "index": 0,
+            "xyz_m": [
+              1.25,
+              -0.55,
+              1.6
+            ]
+          },
+          {
+            "index": 1,
+            "xyz_m": [
+              1.25,
+              0.55,
+              1.6
+            ]
+          }
+        ],
+        "values": [
+          9.623181e-35,
+          8.7242176e-35
+        ]
+      },
+      "per_tank": {
+        "A": {
+          "location_m": [
+            1.25,
+            -0.55,
+            1.6
+          ],
+          "alpha_water": 9.623181e-35,
+          "p_Pa": 1038412.1,
+          "T_K": 281.35716,
+          "phase_average_p_Pa": 1038443.6132651628,
+          "phase_average_T_mass_weighted_K": 284.90490661340556,
+          "probe_minus_phase_average_p_Pa": -31.51326516282279,
+          "probe_minus_phase_average_T_K": -3.547746613405536,
+          "qualification": "Probe output row is at the checkpoint time to printed precision; point probe values and tank-zone gas-phase averages are different spatial statistics."
+        },
+        "B": {
+          "location_m": [
+            1.25,
+            0.55,
+            1.6
+          ],
+          "alpha_water": 8.7242176e-35,
+          "p_Pa": 1038410.7,
+          "T_K": 281.35677,
+          "phase_average_p_Pa": 1038442.2366702945,
+          "phase_average_T_mass_weighted_K": 284.9048242499933,
+          "probe_minus_phase_average_p_Pa": -31.536670294590294,
+          "probe_minus_phase_average_T_K": -3.5480542499932994,
+          "qualification": "Probe output row is at the checkpoint time to printed precision; point probe values and tank-zone gas-phase averages are different spatial statistics."
+        }
+      }
+    },
+    "qualification": "The directory is named for the functionObject start, while its data file contains rows through the current checkpoint; each probe row was joined by its actual row time."
+  },
+  "qualification": [
+    "Native collated fields mapped through cellProcAddressing to original global cell IDs; zone indices are from the same global cellZones.",
+    "Static tankAZone/tankBZone masks define per-tank integration domains; current gas volume is alpha_g weighted within those fixed geometric zones.",
+    "The pV/(gamma-1) quantity is an ideal-gas internal-energy storage proxy, not a global energy balance. Water enthalpy transport, pressure work at boundaries, heat transfer, kinetic energy, and cellwise thermodynamic discretization are not closed here.",
+    "The adiabatic/isothermal curves are limiting uniform sealed-headspace references evaluated at native observed gas volume, not fitted or independently validated model predictions."
+  ],
+  "render": {
+    "png": "results/runs/i4f-fourmouth-observer-audit-20261025T102803Z/headspace-eos-cutaway-20261025T1359Z/fourmouth_native_water_cutaway_t0200021-v4.png",
+    "sha256": "68aaf919751556aea544499c1c0f8cdb292cf5bb69dfbe228a55e437034700df",
+    "pyvista_version": "0.49.0",
+    "vtk_version": [
+      9,
+      7,
+      0
+    ],
+    "rendering": "PyVista/VTK off-screen software rendering requested with LIBGL_ALWAYS_SOFTWARE=1; no GPU used",
+    "field_representation": "deterministic subsample of native finite-volume cell-centre alpha.water points colored by alpha; U arrows are a sparse subset, glyph length scales with |U|",
+    "geometry": "actual constant/triSurface/apparatusWall.stl, clipped at each tank y centre to make a display cutaway",
+    "global_cell_mapping_verified": true,
+    "mapped_cell_count": 303108,
+    "eligible_alpha_points": 174007,
+    "displayed_alpha_points": 58003,
+    "display_subsample": "every third eligible global cell ID, deterministic for visual clarity",
+    "velocity_arrows": 160,
+    "qualification": "This image is a cell-centre display cutaway, not an interpolated VTK volume rendering. Apparatus wall is actual STL. Mesh quality limitations remain."
+  },
+  "source_sha256": {
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/constant/cellVolume": "16351470794df5f37dccaf771bd40c14738a085d83558fa8a89e83ffe71b5255",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/constant/polyMesh/cellZones": "57627dcd17d75efca3965f2245b540cbd6c3589eb71245b655e7f0aee176721b",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/constant/polyMesh/cellProcAddressing": "5ed5ff95c2d9d896f99124c5528283e58725720dc3d7e151ce284d14ca446592",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/0/alpha.water": "96626f354202a2a8c3b9e457797a393225a90082925945480dc820c42c0acd96",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/0/p": "f7f3ec77a1b98acb92f6db808ca4b21ce2a7d80cce479798e20ddfc79ba012c1",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/0/T": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/0.200021166664/alpha.water": "bf399445c6315c39d768fbe8ee36cdf13774d41096983a6391ac117f3eb489a5",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/0.200021166664/p": "aa6a13b89cc59e70c554c7a4551bba2a250820e65946b94e2518267c703053f8",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/0.200021166664/T": "0590b7a3c1f592fc8f4e841f93614020314f524432cf2a177f188be7f69c4032",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/processors10/0.200021166664/U": "a5481eb826a6536d3d9afa247b56e571a55ccc2e200c6db1eec9c93f82f609d8",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/constant/C": "790e9ed2a164ef9a47643212966d20605ef2c38c4adad3b31811130edb03150a",
+    "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z/case/constant/triSurface/apparatusWall.stl": "5f5c420953b3c1542d0cebd0bbdb15fdae913bd8c26733856c5a562f9b63838e"
+  },
+  "analysis_script_sha256": "a14637a7994293ff195a4f3eeba6ff3048e71dd49ffdfa0b73ddb58e4ccb1d09"
+}

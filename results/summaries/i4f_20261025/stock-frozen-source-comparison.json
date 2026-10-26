@@ -1,0 +1,1133 @@
+{
+  "comparisons": [
+    {
+      "entity": "A",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 1.20999281
+      },
+      "metric": "tank_water_volume",
+      "native_observable_definition": "sum of raw alpha.water * cell volume in tank zone",
+      "relative_percent_vs_frozen": -9.50418870583447e-05,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 1.20999166
+      },
+      "stock_minus_frozen": -1.1499999998942911e-06,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3"
+    },
+    {
+      "entity": "B",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 1.20999261
+      },
+      "metric": "tank_water_volume",
+      "native_observable_definition": "sum of raw alpha.water * cell volume in tank zone",
+      "relative_percent_vs_frozen": -9.421545144437418e-05,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 1.20999147
+      },
+      "stock_minus_frozen": -1.1399999999550658e-06,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3"
+    },
+    {
+      "entity": "A",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.1400071900023261
+      },
+      "metric": "tank_withdrawal_from_t0",
+      "native_observable_definition": "true t=0 tank water volume minus nearest saved tank volume",
+      "relative_percent_vs_frozen": 0.0008213863872813854,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.14000834000232598
+      },
+      "stock_minus_frozen": 1.1499999998942911e-06,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3"
+    },
+    {
+      "entity": "B",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.1400073899951566
+      },
+      "metric": "tank_withdrawal_from_t0",
+      "native_observable_definition": "true t=0 tank water volume minus nearest saved tank volume",
+      "relative_percent_vs_frozen": 0.000814242733897477,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.14000852999515656
+      },
+      "stock_minus_frozen": 1.1399999999550658e-06,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3"
+    },
+    {
+      "entity": "A",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.391081419
+      },
+      "metric": "line_water_volume",
+      "native_observable_definition": "sum(raw alpha.water * cellVolume) over the full lineAZone or lineBZone; each combines both branches and spans the upstream feeds through downstream filling and mouth, not only the wetted upstream feed",
+      "relative_percent_vs_frozen": 0.0032468942228199246,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.391094117
+      },
+      "stock_minus_frozen": 1.2698000000033183e-05,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3"
+    },
+    {
+      "entity": "B",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.391133919
+      },
+      "metric": "line_water_volume",
+      "native_observable_definition": "sum(raw alpha.water * cellVolume) over the full lineAZone or lineBZone; each combines both branches and spans the upstream feeds through downstream filling and mouth, not only the wetted upstream feed",
+      "relative_percent_vs_frozen": 0.0032316297273129618,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.391146559
+      },
+      "stock_minus_frozen": 1.26400000000082e-05,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3"
+    },
+    {
+      "entity": "A1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.462674792
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.005298970340273407,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.462699309
+      },
+      "stock_minus_frozen": 2.4517000000001676e-05,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3/s"
+    },
+    {
+      "entity": "A2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.462188867
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.005097915956503771,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.462212429
+      },
+      "stock_minus_frozen": 2.356199999997699e-05,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3/s"
+    },
+    {
+      "entity": "B1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.462675745
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.005305011180127227,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.46270029
+      },
+      "stock_minus_frozen": 2.454499999998694e-05,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3/s"
+    },
+    {
+      "entity": "B2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 0.462189853
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.005098770526238791,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 0.462213419
+      },
+      "stock_minus_frozen": 2.3566000000030396e-05,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "m3/s"
+    },
+    {
+      "entity": "A1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 122829.703
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.016491939250241727,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 122849.96
+      },
+      "stock_minus_frozen": 20.25700000001234,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "Pa"
+    },
+    {
+      "entity": "A2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 124133.561
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0280520430731864,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 124168.383
+      },
+      "stock_minus_frozen": 34.822000000000116,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "Pa"
+    },
+    {
+      "entity": "B1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 122831.002
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.01700303641584664,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 122851.887
+      },
+      "stock_minus_frozen": 20.885000000009313,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "Pa"
+    },
+    {
+      "entity": "B2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.350114456683,
+        "value": 124133.843
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.028067285405802146,
+      "stock": {
+        "offset_from_target_s": -3.0029660000319147e-06,
+        "row_time_s": 0.350111453717,
+        "value": 124168.684
+      },
+      "stock_minus_frozen": 34.84100000000035,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "Pa"
+    },
+    {
+      "entity": "probe0",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": 3.3170000079962847e-09,
+        "row_time_s": 0.35011446,
+        "value": 745443.69
+      },
+      "metric": "headspace_pressure_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": 0.01763379337211505,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.006683000017496e-06,
+        "row_time_s": 0.35011145,
+        "value": 745575.14
+      },
+      "stock_minus_frozen": 131.45000000006985,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "Pa"
+    },
+    {
+      "entity": "probe1",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": 3.3170000079962847e-09,
+        "row_time_s": 0.35011446,
+        "value": 745442.25
+      },
+      "metric": "headspace_pressure_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": 0.01763382743598896,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.006683000017496e-06,
+        "row_time_s": 0.35011145,
+        "value": 745573.7
+      },
+      "stock_minus_frozen": 131.44999999995343,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "Pa"
+    },
+    {
+      "entity": "probe0",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": 3.3170000079962847e-09,
+        "row_time_s": 0.35011446,
+        "value": 255.86293
+      },
+      "metric": "headspace_temperature_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": -0.0017548458465648392,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.006683000017496e-06,
+        "row_time_s": 0.35011145,
+        "value": 255.85844
+      },
+      "stock_minus_frozen": -0.004490000000004102,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "K"
+    },
+    {
+      "entity": "probe1",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": 3.3170000079962847e-09,
+        "row_time_s": 0.35011446,
+        "value": 255.86195
+      },
+      "metric": "headspace_temperature_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": -0.0017587609255722766,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.006683000017496e-06,
+        "row_time_s": 0.35011145,
+        "value": 255.85745
+      },
+      "stock_minus_frozen": -0.004500000000007276,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "K"
+    },
+    {
+      "entity": "probe0",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": 3.3170000079962847e-09,
+        "row_time_s": 0.35011446,
+        "value": 4.480362e-20
+      },
+      "metric": "headspace_raw_alpha_water_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": null,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.006683000017496e-06,
+        "row_time_s": 0.35011145,
+        "value": 4.2265328e-20
+      },
+      "stock_minus_frozen": -2.5382920000000017e-21,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "1"
+    },
+    {
+      "entity": "probe1",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": 3.3170000079962847e-09,
+        "row_time_s": 0.35011446,
+        "value": 4.0791654e-20
+      },
+      "metric": "headspace_raw_alpha_water_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": null,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.006683000017496e-06,
+        "row_time_s": 0.35011145,
+        "value": 3.9125615e-20
+      },
+      "stock_minus_frozen": -1.6660389999999989e-21,
+      "target": "near_0p35",
+      "target_time_s": 0.350114456683,
+      "units": "1"
+    },
+    {
+      "entity": "A",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 1.16059306
+      },
+      "metric": "tank_water_volume",
+      "native_observable_definition": "sum of raw alpha.water * cell volume in tank zone",
+      "relative_percent_vs_frozen": 0.002404805005470209,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 1.16062097
+      },
+      "stock_minus_frozen": 2.7910000000019863e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3"
+    },
+    {
+      "entity": "B",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 1.16059267
+      },
+      "metric": "tank_water_volume",
+      "native_observable_definition": "sum of raw alpha.water * cell volume in tank zone",
+      "relative_percent_vs_frozen": 0.0024039441848345156,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 1.16062057
+      },
+      "stock_minus_frozen": 2.7900000000080638e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3"
+    },
+    {
+      "entity": "A",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.18940694000232594
+      },
+      "metric": "tank_withdrawal_from_t0",
+      "native_observable_definition": "true t=0 tank water volume minus nearest saved tank volume",
+      "relative_percent_vs_frozen": -0.014735468510117488,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.18937903000232592
+      },
+      "stock_minus_frozen": -2.7910000000019863e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3"
+    },
+    {
+      "entity": "B",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.18940732999515664
+      },
+      "metric": "tank_withdrawal_from_t0",
+      "native_observable_definition": "true t=0 tank water volume minus nearest saved tank volume",
+      "relative_percent_vs_frozen": -0.01473015854285791,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.18937942999515656
+      },
+      "stock_minus_frozen": -2.7900000000080638e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3"
+    },
+    {
+      "entity": "A",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.440487459
+      },
+      "metric": "line_water_volume",
+      "native_observable_definition": "sum(raw alpha.water * cellVolume) over the full lineAZone or lineBZone; each combines both branches and spans the upstream feeds through downstream filling and mouth, not only the wetted upstream feed",
+      "relative_percent_vs_frozen": 0.0015466955666482223,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.440494272
+      },
+      "stock_minus_frozen": 6.812999999994407e-06,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3"
+    },
+    {
+      "entity": "B",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.440540219
+      },
+      "metric": "line_water_volume",
+      "native_observable_definition": "sum(raw alpha.water * cellVolume) over the full lineAZone or lineBZone; each combines both branches and spans the upstream feeds through downstream filling and mouth, not only the wetted upstream feed",
+      "relative_percent_vs_frozen": 0.0014659274503123116,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.440546677
+      },
+      "stock_minus_frozen": 6.457999999986974e-06,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3"
+    },
+    {
+      "entity": "A1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.52402192
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0023514283524645394,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.524034242
+      },
+      "stock_minus_frozen": 1.2322000000009048e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3/s"
+    },
+    {
+      "entity": "A2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.523534581
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0021354845325870695,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.523545761
+      },
+      "stock_minus_frozen": 1.1179999999999524e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3/s"
+    },
+    {
+      "entity": "B1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.524025926
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0023584710959649808,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.524038285
+      },
+      "stock_minus_frozen": 1.235900000007284e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3/s"
+    },
+    {
+      "entity": "B2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 0.523537697
+      },
+      "metric": "seat_water_volume_flux",
+      "native_observable_definition": "native surfaceFieldValue sum(alphaPhi0.water) at valve seat; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0021371908965092255,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 0.523548886
+      },
+      "stock_minus_frozen": 1.1189000000078053e-05,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "m3/s"
+    },
+    {
+      "entity": "A1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 124941.398
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0009172300121000442,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 124942.544
+      },
+      "stock_minus_frozen": 1.1459999999933643,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "Pa"
+    },
+    {
+      "entity": "A2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 125704.055
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": -0.012895367615620556,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 125687.845
+      },
+      "stock_minus_frozen": -16.20999999999185,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "Pa"
+    },
+    {
+      "entity": "B1",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 124944.243
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": 0.0009076048425783968,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 124945.377
+      },
+      "stock_minus_frozen": 1.1339999999909196,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "Pa"
+    },
+    {
+      "entity": "B2",
+      "frozen": {
+        "offset_from_target_s": 0.0,
+        "row_time_s": 0.400086712911,
+        "value": 125706.682
+      },
+      "metric": "seat_area_average_pressure",
+      "native_observable_definition": "native surfaceFieldValue areaAverage(p), not p_rgh; columns_after_time[1]",
+      "relative_percent_vs_frozen": -0.01280441082678883,
+      "stock": {
+        "offset_from_target_s": -3.4526593999995026e-05,
+        "row_time_s": 0.400052186317,
+        "value": 125690.586
+      },
+      "stock_minus_frozen": -16.096000000005006,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "Pa"
+    },
+    {
+      "entity": "probe0",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -2.9109999966081546e-09,
+        "row_time_s": 0.40008671,
+        "value": 654094.27
+      },
+      "metric": "headspace_pressure_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": 0.025143164761245004,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.452291100003446e-05,
+        "row_time_s": 0.40005219,
+        "value": 654258.73
+      },
+      "stock_minus_frozen": 164.45999999996275,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "Pa"
+    },
+    {
+      "entity": "probe1",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -2.9109999966081546e-09,
+        "row_time_s": 0.40008671,
+        "value": 654092.13
+      },
+      "metric": "headspace_pressure_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": 0.025141718185778116,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.452291100003446e-05,
+        "row_time_s": 0.40005219,
+        "value": 654256.58
+      },
+      "stock_minus_frozen": 164.44999999995343,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "Pa"
+    },
+    {
+      "entity": "probe0",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -2.9109999966081546e-09,
+        "row_time_s": 0.40008671,
+        "value": 246.45603
+      },
+      "metric": "headspace_temperature_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": 0.00036111918219176094,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.452291100003446e-05,
+        "row_time_s": 0.40005219,
+        "value": 246.45692
+      },
+      "stock_minus_frozen": 0.0008899999999982811,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "K"
+    },
+    {
+      "entity": "probe1",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -2.9109999966081546e-09,
+        "row_time_s": 0.40008671,
+        "value": 246.45499
+      },
+      "metric": "headspace_temperature_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": 0.00036112070605601496,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.452291100003446e-05,
+        "row_time_s": 0.40005219,
+        "value": 246.45588
+      },
+      "stock_minus_frozen": 0.0008899999999982811,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "K"
+    },
+    {
+      "entity": "probe0",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -2.9109999966081546e-09,
+        "row_time_s": 0.40008671,
+        "value": 1.5917136e-16
+      },
+      "metric": "headspace_raw_alpha_water_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": null,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          -0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.452291100003446e-05,
+        "row_time_s": 0.40005219,
+        "value": 1.4852972e-16
+      },
+      "stock_minus_frozen": -1.0641640000000012e-17,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "1"
+    },
+    {
+      "entity": "probe1",
+      "frozen": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -2.9109999966081546e-09,
+        "row_time_s": 0.40008671,
+        "value": 1.6232083e-16
+      },
+      "metric": "headspace_raw_alpha_water_probe",
+      "native_observable_definition": "point probe at (1.25,-0.55,1.60) m or (1.25,+0.55,1.60) m; alpha.water is reported raw, un-clipped",
+      "relative_percent_vs_frozen": null,
+      "stock": {
+        "coordinate_xyz_m": [
+          1.25,
+          0.55,
+          1.6
+        ],
+        "offset_from_target_s": -3.452291100003446e-05,
+        "row_time_s": 0.40005219,
+        "value": 1.6117118e-16
+      },
+      "stock_minus_frozen": -1.149649999999993e-18,
+      "target": "near_0p40",
+      "target_time_s": 0.400086712911,
+      "units": "1"
+    }
+  ],
+  "created_utc": "2026-10-26T06:40:58.390123+00:00",
+  "csv_path": "results/summaries/i4f_20261025/stock-frozen-source-comparison.csv",
+  "limits": [
+    "The scalar/probe rows are close in time but not exactly time matched; small source-versus-time-evolution effects cannot be separated completely.",
+    "Full native checkpoint fields differ by 8.737 ms at the 0.35 target and 8.781 ms at the 0.4 target. Unequal-time fieldwise profiles are intentionally excluded from this summary and are not attributed to source treatment.",
+    "Bulk source-trajectory sensitivity through 0.4 s only; no validation pass, physical hardware validation, or explanation of later pressure contacts is claimed."
+  ],
+  "matched_initialization_and_mesh": {
+    "cellProcAddressing_equal_by_rank": true,
+    "cell_centers_equal": true,
+    "frozen_input_freeze_sha256": "958d0bdd4ee0757357fc9cbf1fc470f1355a2ec2e69723c47f3783bd88642a78",
+    "mesh_volumes_equal": true,
+    "n_cells": 299248,
+    "native_t0_fields_equal": true,
+    "native_t0_hashed_fields": [
+      "T",
+      "T.air",
+      "T.water",
+      "U",
+      "alpha.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh"
+    ],
+    "selected_other_physics_dictionaries_equal": true,
+    "stock_input_freeze_sha256": "d78fb0c9edf8691be6dcf3c470683014454e9e8e3ed33609fc86342a557a72fc",
+    "t0_water_volumes_m3_by_zone": {
+      "frozen": {
+        "lineAZone": 0.25105684381253746,
+        "lineBZone": 0.2511091492250325,
+        "tankAZone": 1.350000000002326,
+        "tankBZone": 1.3499999999951566
+      },
+      "stock": {
+        "lineAZone": 0.25105684381253746,
+        "lineBZone": 0.2511091492250325,
+        "tankAZone": 1.350000000002326,
+        "tankBZone": 1.3499999999951566
+      }
+    },
+    "zones_equal": true
+  },
+  "observable_definitions": {
+    "headspace_probes": "two fixed gas-region points (1.25,\u00b10.55,1.60) m; raw alpha.water and the common T/p fields",
+    "line_water_volume": "sum(raw alpha.water * cellVolume) over the full lineAZone or lineBZone; each combines both branches and spans the upstream feeds through downstream filling and mouth, not only the wetted upstream feed",
+    "row_policy": "nearest saved native row per arm; exact row times and offsets retained; no time interpolation",
+    "seat_pressure": "areaAverage(p) at each valveSeat faceZone, Pa",
+    "seat_water_flux": "native sum(alphaPhi0.water) at each valveSeat faceZone, m3/s",
+    "tank_water_volume": "sum(raw alpha.water * cellVolume)",
+    "tank_withdrawal": "true t=0 water volume minus nearest saved tank water volume"
+  },
+  "schema": "i4f-stock-frozen-source-treatment-comparison/v1",
+  "scope": "Near-synchronous bulk/probe scalar histories at targets 0.350114456683 and 0.400086712911 s, stock-Sp versus frozen-Sp source selector. No full-field profile is used as a source-effect comparison.",
+  "source_analysis": {
+    "analysis_created_utc": "2026-10-26T06:12:33.615877+00:00",
+    "path": "results/runs/i4f-stock-frozen-approach-20261026T060136Z/analysis/approach-comparison-v2.json",
+    "schema": "i4f-stock-vs-frozen-near-transition-native-comparison/v2",
+    "sha256": "0cadacbcf0ecc31ab4c13c04c47408fc4e1dcf4991218712f7cbb7723606ca6b"
+  },
+  "source_treatment": {
+    "alphaEqn_source_path": "results/runs/i4f-pressure-audit-dpcell-source-prep-20261025T210520Z/source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/VoF/alphaEqn.H",
+    "alphaEqn_source_same": true,
+    "alphaEqn_source_sha256": "f2f10939f37b7765f8e4a1c032daab3140c5605533ac2bf955245925a425df7e",
+    "binary_hashes_equal": false,
+    "frozen_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "frozen_bundle": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z",
+    "frozen_controlDict_sha256": "87c7216c524273d89881c1505468516ca613524409097cb5ea809061c86bd18a",
+    "frozen_i4fFrozenPredictorSp": "true",
+    "interpretation": "The control selector is the intended algorithm difference. Executable hashes differ; this is not a byte-identical-binary pair.",
+    "stock_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "stock_bundle": "results/runs/i4f-stock-cold-299248-stage03-20261026T054311Z",
+    "stock_controlDict_sha256": "398ccc9800372fa42e1f5c31b71e1e4cd6dacebb98860e7d5636660d708cb33f",
+    "stock_i4fFrozenPredictorSp": "false"
+  },
+  "stock_cold_to_current_selector_chain": [
+    {
+      "bundle": "results/runs/i4f-stock-from-cold-299248-20261026T002045Z-attempt2",
+      "controlDict_sha256": "0d9037486fcbad2fddd45bda570a84c408e3258f637476493d6813fa98df2c1a",
+      "i4fFrozenPredictorSp": "false",
+      "input_freeze_sha256": "7ce9d8a73a1af198d19c4f322f8658751188984bbc1118dfcd3da042516a11b3"
+    },
+    {
+      "bundle": "results/runs/i4f-stock-cold-299248-stage01-20261026T023352Z",
+      "controlDict_sha256": "7c5afc9969b6e58d9e6f157f7f3ce09158f221fdf1d85defb23def2a152f53e1",
+      "i4fFrozenPredictorSp": "false",
+      "input_freeze_sha256": "ba58cabb821274bedb789a0a5f8e4befe2df73b4b3806217bc841a9497642c7e"
+    },
+    {
+      "bundle": "results/runs/i4f-stock-cold-299248-stage02-20261026T040738Z",
+      "controlDict_sha256": "847b6ff75364c913dafbb6b9d51131721697715bc19a7fe971526cd46fa22c74",
+      "i4fFrozenPredictorSp": "false",
+      "input_freeze_sha256": "72f4c5f00778bb5605f98fecb1971bc6cff8e9c01e9aa6007aedf765e92975cd"
+    },
+    {
+      "bundle": "results/runs/i4f-stock-cold-299248-stage03-20261026T054311Z",
+      "controlDict_sha256": "398ccc9800372fa42e1f5c31b71e1e4cd6dacebb98860e7d5636660d708cb33f",
+      "i4fFrozenPredictorSp": "false",
+      "input_freeze_sha256": "d78fb0c9edf8691be6dcf3c470683014454e9e8e3ed33609fc86342a557a72fc"
+    }
+  ],
+  "targets": {
+    "near_0p35": {
+      "field_snapshots_used_for_cellwise_source_effect": false,
+      "full_native_field_checkpoint_times_s": {
+        "frozen": 0.35011445668282176,
+        "frozen_minus_stock_s": 0.008737040875647584,
+        "stock": 0.3413774158071742
+      },
+      "headspace_probe_times_s": {
+        "frozen": {
+          "T": 0.35011446,
+          "alpha.water": 0.35011446,
+          "p": 0.35011446
+        },
+        "stock": {
+          "T": 0.35011145,
+          "alpha.water": 0.35011145,
+          "p": 0.35011145
+        }
+      },
+      "scalar_row_times_s": {
+        "frozen": 0.350114456683,
+        "stock": 0.350111453717
+      },
+      "stock_scalar_row_offset_s": -3.0029660000319147e-06,
+      "summary": {
+        "headspace_pressure_relative_delta_percent_vs_frozen_mean": 0.01763381040402745,
+        "headspace_two_probe_mean_pressure_delta_Pa": 131.45000000001164,
+        "headspace_two_probe_mean_temperature_delta_K": -0.004495000000005689,
+        "line_water_volume_delta_stock_minus_frozen_mL": {
+          "A": 12.698000000033183,
+          "B": 12.6400000000082
+        },
+        "max_raw_alpha_water_at_gas_probes": {
+          "frozen": 4.480362e-20,
+          "stock": 4.2265328e-20
+        },
+        "seat_flux_mean_delta_stock_minus_frozen_m3_s": 2.4047499999999e-05,
+        "seat_flux_relative_delta_percent_range": [
+          0.005097915956503771,
+          0.005305011180127227
+        ],
+        "tank_water_volume_delta_stock_minus_frozen_mL": {
+          "A": -1.1499999998942911,
+          "B": -1.1399999999550658
+        },
+        "tank_withdrawal_delta_stock_minus_frozen_mL": {
+          "A": 1.1499999998942911,
+          "B": 1.1399999999550658
+        }
+      },
+      "target_time_s": 0.350114456683
+    },
+    "near_0p40": {
+      "field_snapshots_used_for_cellwise_source_effect": false,
+      "full_native_field_checkpoint_times_s": {
+        "frozen": 0.40008671291114567,
+        "frozen_minus_stock_s": 0.008781228185497425,
+        "stock": 0.39130548472564824
+      },
+      "headspace_probe_times_s": {
+        "frozen": {
+          "T": 0.40008671,
+          "alpha.water": 0.40008671,
+          "p": 0.40008671
+        },
+        "stock": {
+          "T": 0.40005219,
+          "alpha.water": 0.40005219,
+          "p": 0.40005219
+        }
+      },
+      "scalar_row_times_s": {
+        "frozen": 0.400086712911,
+        "stock": 0.400052186317
+      },
+      "stock_scalar_row_offset_s": -3.4526593999995026e-05,
+      "summary": {
+        "headspace_pressure_relative_delta_percent_vs_frozen_mean": 0.025142441474712562,
+        "headspace_two_probe_mean_pressure_delta_Pa": 164.4549999999581,
+        "headspace_two_probe_mean_temperature_delta_K": 0.0008899999999982811,
+        "line_water_volume_delta_stock_minus_frozen_mL": {
+          "A": 6.812999999994407,
+          "B": 6.457999999986974
+        },
+        "max_raw_alpha_water_at_gas_probes": {
+          "frozen": 1.6232083e-16,
+          "stock": 1.6117118e-16
+        },
+        "seat_flux_mean_delta_stock_minus_frozen_m3_s": 1.1762500000039866e-05,
+        "seat_flux_relative_delta_percent_range": [
+          0.0021354845325870695,
+          0.0023584710959649808
+        ],
+        "tank_water_volume_delta_stock_minus_frozen_mL": {
+          "A": 27.910000000019863,
+          "B": 27.900000000080638
+        },
+        "tank_withdrawal_delta_stock_minus_frozen_mL": {
+          "A": -27.910000000019863,
+          "B": -27.900000000080638
+        }
+      },
+      "target_time_s": 0.400086712911
+    }
+  }
+}

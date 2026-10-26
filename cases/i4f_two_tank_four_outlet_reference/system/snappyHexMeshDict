@@ -1,0 +1,59 @@
+FoamFile { version 2.0; format ascii; class dictionary; object snappyHexMeshDict; }
+castellatedMesh true;
+snap true;
+addLayers false;
+geometry
+{
+ apparatusWall.stl { type triSurfaceMesh; name apparatusWall; }
+ ambientAnnulus.stl { type triSurfaceMesh; name ambientAnnulus; }
+ externalSides.stl { type triSurfaceMesh; name externalSides; }
+ farOutlet.stl { type triSurfaceMesh; name farOutlet; }
+ finalLamellaMidSurfaces.stl { type triSurfaceMesh; name lamellaMidSurfaces; }
+ tankARefine { type searchableBox; min (-0.02 -1.03 0.77); max (2.62 -0.07 1.73); }
+ tankBRefine { type searchableBox; min (-0.02 0.07 0.77); max (2.62 1.03 1.73); }
+ linesRefine { type searchableBox; min (1.90 -1.10 0.32); max (4.05 1.10 1.02); }
+ transitionRefine { type searchableBox; min (3.90 -1.12 0.30); max (5.85 1.12 1.75); }
+ mouthExternalRefine { type searchableBox; min (5.65 -1.10 0.32); max (6.55 1.10 1.12); }
+}
+castellatedMeshControls
+{
+ maxLocalCells 1500000;
+ maxGlobalCells 6000000;
+ minRefinementCells 0;
+ maxLoadUnbalance 0.10;
+ nCellsBetweenLevels 2;
+ features
+ (
+  { file "apparatusWall.eMesh"; level 2; }
+  { file "finalLamellaMidSurfaces.eMesh"; level 2; }
+ );
+ refinementSurfaces
+ {
+  apparatusWall { level (1 2); patchInfo { type wall; } }
+  ambientAnnulus { level (1 2); patchInfo { type patch; } }
+  externalSides { level (0 0); patchInfo { type patch; } }
+  farOutlet { level (0 0); patchInfo { type patch; } }
+  lamellaMidSurfaces
+  {
+   level (2 3);
+   faceZone lamellaMidSurfaceZone;
+   faceType internal;
+  }
+ }
+ resolveFeatureAngle 30;
+ refinementRegions
+ {
+  tankARefine { mode inside; levels ((1e15 2)); }
+  tankBRefine { mode inside; levels ((1e15 2)); }
+  linesRefine { mode inside; levels ((1e15 3)); }
+  transitionRefine { mode inside; levels ((1e15 3)); }
+  mouthExternalRefine { mode inside; levels ((1e15 3)); }
+ }
+ locationInMesh (6.20 0.00 1.00);
+ allowFreeStandingZoneFaces true;
+}
+snapControls { nSmoothPatch 4; tolerance 2.0; nSolveIter 40; nRelaxIter 6; nFeatureSnapIter 20; implicitFeatureSnap false; explicitFeatureSnap true; multiRegionFeatureSnap true; }
+addLayersControls { relativeSizes true; layers {}; expansionRatio 1.0; finalLayerThickness 0.3; minThickness 0.1; nGrow 0; featureAngle 60; slipFeatureAngle 30; nRelaxIter 3; nSmoothSurfaceNormals 1; nSmoothNormals 3; nSmoothThickness 10; maxFaceThicknessRatio 0.5; maxThicknessToMedialRatio 0.3; minMedianAxisAngle 90; nBufferCellsNoExtrude 0; nLayerIter 0; }
+meshQualityControls { #includeEtc "caseDicts/meshQualityDict" nSmoothScale 4; errorReduction 0.75; relaxed { maxNonOrtho 75; } }
+writeFlags (scalarLevels layerSets layerFields);
+mergeTolerance 1e-6;

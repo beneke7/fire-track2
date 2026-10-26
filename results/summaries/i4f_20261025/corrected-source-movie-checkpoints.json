@@ -1,0 +1,667 @@
+{
+  "schema": "i4f-48layer-native-terminal-render-input-freeze/v1",
+  "created_utc": "2026-10-25T20:47:56.806394+00:00",
+  "source_bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z",
+  "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case",
+  "container": {
+    "id": "ee2629b9f7b10dd02d4677f0d4136fe13581a7aa1699989aac4397daec5e16f9",
+    "started_at": "2026-10-25T18:45:08.355947321Z",
+    "terminal_status": "normal_End_complete_native10_checkpoint",
+    "exit_code": 0
+  },
+  "terminal_diagnostic": {
+    "time_s": 0.443669498426,
+    "completed_steps": 2051,
+    "write_now_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+    "raw_pressure_contact_count": 0,
+    "maximum_clipped_liquid_mass_kg": 0.0,
+    "interpretation": "diagnostic stop at sustained outer-pressure updates; not a complete discharge"
+  },
+  "timeline": [
+    {
+      "directory": "0",
+      "time_s": 0.0,
+      "kind": "initial_state_not_solver_checkpoint",
+      "fields_hashed": {
+        "alpha.water": {
+          "bytes": 966224,
+          "sha256": "0320d46da7e4bbeaa695a4310239e488a68be94f8f792729b8b57c4552960472"
+        },
+        "U": {
+          "bytes": 12005,
+          "sha256": "e0fd4ded5781599926ccb9d6c240d6614706f143864f6072dc0c848b6bdeb3b6"
+        }
+      }
+    },
+    {
+      "directory": "0.050021166664",
+      "time_s": 0.050021166664044305,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "36a74dae61f653921835fe5abd60b8de0d28e6f6da5dd5fd11821333d48409e8"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "d890175c0b93d26eb4a33a71c880e66b830bf01e65a2050c9be59c2bf25ad328"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "0a68f2c8babc88c2755eb0b4ae84bc8967fad5d47d60875b1915932530b6c4df"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "fcdfce116f37f14aa5bb74a54fd81f657c5c5a6b2345cae13a234ca95df8880d"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "ac7ea6687bd262bda56247aff6c34d6ac922d85d8de93136c00ea8ab3a91df87"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "a43dd552c7c2368bb15859e99da8fe25ab2fdca1e845357a154cde775c39016d"
+        },
+        "alpha.water": {
+          "bytes": 2641245,
+          "sha256": "315339149cf418442a981079bc10951237d25d13c540929e3cd218421b154674"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7709346,
+          "sha256": "05e4cfdb0e59f585ee68ab77a1d911690ffcf2dc89fcfcb2801f2ea8e0274d0f"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "383be921de340ff63dbca2df47d45a00441afc957a32b46098298adee973e2d1"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "6341596365a6e6509abf89221306a54605d98c5c4cdf2411cadfa3806e6a97ca"
+        },
+        "nut": {
+          "bytes": 3196760,
+          "sha256": "1de977e8ea8a3e7fbd56af5e3778405a12112e06cd536eea45f41d6103f8e8e8"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "5e4c4a2962b80a9b493a9c159c22e2dad75c7c3f5234d87347b3ef578a765b1d"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "6fe30c3cd7f670449367415dcb37184265c0993a0fbe131ce654d726169a9b9e"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "2dfc788c5936100589b8da785c7a41002a39735fb9731521b01f6863dc80a1df"
+        },
+        "uniform/time": {
+          "bytes": 1062,
+          "sha256": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d"
+        }
+      }
+    },
+    {
+      "directory": "0.100021166664",
+      "time_s": 0.10002116666400004,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "33ae360e67c0afe25f50f2d0d7541ceac4f376356b54734e3e73871d0dc11917"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "e6ce87ca269fabb7d98e548bae38fcb8a105541e0b598c591cb07bbeb37e379b"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "9b397123752379ee116df8a77acfd293995ac93b5b189aeef4e5aeb05c3e8203"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "953abdaaba65439853b7eca0a2ccc8c487ecd8d10add1fd2e3f8d6d5fbcb290b"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "1f621b561520054c3b00b2d966239ac54fca4a38143ac840f2cd55db108b3ff6"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "bad3ca67c16b6ebe22ba6e91cb43b5fe932a552d402e8a78d9c97a41514a49ef"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "d222498f3f5b6034c5cf01e836dc3427591048027f9ad2434a3203d418f29af0"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "213f39bfcfec1b9ceb5e24d788a16a1afa848a2aa8bf6c1c2bf1a27700c084d4"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "31f7b7c57f3fbfd1f476b743ce65d3e8029a0e53ef692193ef7448af76d7fb74"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "c95c66a8a9e8aff2ab5b041778d8958c754f881306229278d085e0842564ffa2"
+        },
+        "nut": {
+          "bytes": 3196760,
+          "sha256": "2f6492c29b3395a6c3d8e153e6a9d85fa91c8e558583b9d1c1830dbde07acdc3"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "8b7107930e7650190e051a912268de5653c7af9d7ee4cf0d6b8cfa298519636f"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "631762e51634dbf5350280a3e3bddf113695a74d693583fb6b31b3986fbd05e8"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "59da009da9640313cb41abbc12eed271a7bfa511bdadf004f3a53d9c5ab121b3"
+        },
+        "uniform/time": {
+          "bytes": 1061,
+          "sha256": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f"
+        }
+      }
+    },
+    {
+      "directory": "0.150021166664",
+      "time_s": 0.1500211666640001,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "cef8003b18e02d74feedcf99864427c8fe65e74353253f902c522a928985dfbe"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "6b7eaace0086296068155557decf8c34aede3d85f83fbb62dbd5049501c5bfbc"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "1afda9a4d132e46deb3c8ce7cbd6f4c7b7d6a18aecacf8cbc36239bf92022eb3"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "514e82c3e7518db1881e95df1cb8ddd76b1f0568c38bc11e096f49e31589a3f2"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "c7c69a08d7ddc59eef9a0f0e1c87c2ff9a76d1a824218aebef738bfb91a0fbfb"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "e528bf6190efe10d3bd238f0f135d57e31d69089b00d8e0382b48d2784e18fa5"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "215982a1df688f7256f246a8b9aac2a887f5613bd9ad22ec151bae89d7f8c374"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "1ee07f700b1ca941557ef29b47075cd6751d9c0bbe874faaf0b94e43f4a99580"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "b1cc2f602e139a8ea8b5d2c36659215c04ddcc861a232a2bbf8b2bb38f6c0deb"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "1acd54f9aa31319b62f1adbed6f60f125928db1aab1dc4904196c67e5634d938"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "46a4c2130d2942d140062f37063a404c81b0b3a421fd4c3629358f360e836c8f"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "1c56ae32eabec7ed7f2288391198f4e0fe8a232f10f3d8f46fe60449f5d947a6"
+        },
+        "phi": {
+          "bytes": 7722532,
+          "sha256": "a30fc1e721ff2a54cdc66de5323b61ece7062d2a50a115fa18302e574d3e4e14"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "74beb8f9474cfa680a83d42d02f6472d208680610d0dcf99afce80c17782ab86"
+        },
+        "uniform/time": {
+          "bytes": 1061,
+          "sha256": "9f3b1a92f2ff624477b934ef726167d03826fc083850e7982b198036ca4e5261"
+        }
+      }
+    },
+    {
+      "directory": "0.200021166664",
+      "time_s": 0.20002116666400013,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "28d78c07cea3c9b16f2c062ef8eb7731b584d7e9b451fa63fc05d14b07f73c18"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "75579db72b25ec3ab25b6eceee47022f37680e345206cdcbadfc7c35abcd271e"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "3c729c191da8decf97bba6015c6cf62b41e8c68ea10a92e99b2a2090a9db08df"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "bd7884575664a2458bca12896f4b2bb0960f5609d9d66aa3219dadadeb35946d"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "bfa958c483f79fe8ec2e416d1b7a956ee8b1fc90732454124bcb45cb1c7fe01d"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "b54e93c89b69e52b332f9e2d3492c8ca0bbd7701bf587c36c0192529c6720cd0"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "5593ffc15d152c718835b9a0458e41520917b5047cd65a25bf39e1ce02e8f126"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "9ca4acf675eee68d6ce73ad531802f765b9dd3a70ff42ba5e472829701627e3d"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "d39da0aa5cdcccc666ff6f50f709eeb013039cf91709934ec32e52659b15039f"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "9ea93fdfde0075471414f4b08fb089fabb4c757fe8c58dcdd297c09c644e5781"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "09b17840b2fd259147d0106ef4d22c2566742afd774410a3e834856b39ed0017"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "195ba409233a9a1f331e6b44c8ec5d1b7308e54c0ef96caf1252a3dc134e9fe2"
+        },
+        "phi": {
+          "bytes": 7722532,
+          "sha256": "f7a369f5c93fb6ae7cb091ecccd9c23dfa61e9689a5be455bb1febfb329731af"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "a38b4ab85eccd4149ccf48d07b3ac557c3cc5b9cdb76a1a2ce903d4fb636e770"
+        },
+        "uniform/time": {
+          "bytes": 1061,
+          "sha256": "ae3c057211b72becf39a534ff758ede1924d23bbde931400eb22bb54db88c514"
+        }
+      }
+    },
+    {
+      "directory": "0.250021166664",
+      "time_s": 0.25002116666400015,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "16f067ddf776db56c0a391b0fd3279d731d8139821a590cc9fa6535c5b57f018"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "150d6ac7a8218308edc6bc269f09530d3fed78d672eca9d667649c383d1c864d"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "b72492104b4b608a5f6a97cbd17173de25c7496e64224212d52719b2499fa2b7"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "7c1543acfff7fc2292c757b804d609cdafa5b96f045f010647b8bcc8c9ed237a"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "ad14b64252c54e0ec4f6df620daec6b59ff424f0e55a1605b3662db8db143b92"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "ffdf7ac00348905c514d66f6857806979cf9fc79e0e39ca68134d5b4f7c54888"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "045bd78c94a88e1de98ba34552227bbb4133a8e3b6b046a423a24b367cc5ffde"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717659,
+          "sha256": "f27bfc2928d0838987d040b4a19509eeed317aa5c5ba90ba52bb06f236e43322"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "e980b8ceea139dee6390ab0069d3683e78a28e6ef22d84615a86819b60102f2c"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "bc992f7178bed57d778877ba512a71e6e397bf9418f164798e92e47f32dbf13f"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "8657165c8031440bc93cbad816c0b49662842a8fd981d34b57e9ffae7f4a09bf"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "69ed13158bea7677d3059fadd0a93357acba07394c1df59a4c970c34ab39625a"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "1a0cc9b972f8faf9dbcc9585c7f795d064914a1ce298e84fa4d3d0de02367e70"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "5d04b461753e26e76b837d770b7ee9628f361eed48536dae959f385853c43029"
+        },
+        "uniform/time": {
+          "bytes": 1061,
+          "sha256": "c7b5d409bb2b24ea4a7cd81b3b7cb48424eb04919e164ea7c560533f21488b96"
+        }
+      }
+    },
+    {
+      "directory": "0.299926664984",
+      "time_s": 0.2999266649839629,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "784ac80b8e3a03d1aa6620daa0c52ff203b335c48a94385d4c833a191ac759cd"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "f872bd0f7728030c9f2bb33a39bf6f273c6cfcb5d390ff96653ef074113a127a"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "f6dd087142d326de22ad301028a9d79f541a0b7a883fd4c4b27bd2228d98c6e6"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "669b8cb3c99454fe04aa747fa6518a31254551336487ca103479719e435882ff"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "ef254723daf5636c7dde6d76b727a5d95f7aef156a7c4556b629069c6800e0c1"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "722c5c56b0897d67389b140830bb76db9b0f21f79e8f71cc3961bae88734cbff"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "aa2eef33b1370d1344a1aae331c29e3a0f23b1a4624f766af6aca8ffe0b87ab7"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "e8e638b169678a996a299454d098bc47e693fb048259bd0224649bc1ff901b7d"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "c3616518398d566f52ea3d5e52ee8db32eecfa409bac9e8ed41d736a3ed2f8df"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "bf294e9821eeffcc33de8e14a98533bebad4a82cdefba26657674b81698b40ff"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "83c51e04c25c72193c6c03b0a8b97d6e0378f9ba784a5c110dabe2d6a6d11483"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "cb5ef0b8709bb77143bae06098b6e8fa0c7765beadc6f9285873ef8af06b38bc"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "ac916ac014d89375de7eee212b24f5a6849f0d854659ed3bcc7c2032906f8a1f"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "b37cb195b6a4e7a4417418f3bc950f4eae561994ab581d8fa7aafb67432b6a86"
+        },
+        "uniform/time": {
+          "bytes": 1074,
+          "sha256": "e66660c100ce8126650561766b0ed5f89f2d5c93404526f8d0b3c7d65c366630"
+        }
+      }
+    },
+    {
+      "directory": "0.350114456683",
+      "time_s": 0.35011445668282176,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "b141f44fe2b337020465e5b815688ec4895b5c457e2dce86ba9e91006755ba2f"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "3c4e2a08207589e124094e24763ef7c4cbadb39ecc89f549112759745762c771"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "304b62bfd486fc2617139b18bcaee8e2a87c1cae7ecb874214844a82a937c60a"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "4aef7da2c50f1f8238c52a336aa6495febe9e0f345453dc653bb0c60c2769d6e"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "dbd541334435a5fb8006cea6bdcca8c2cdeb6a2611838ab3fa26a7bbb463044c"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "a3efd793450e0741d9b1a94f651dadb74f6be0b03ae02d511acd57fa030fffa7"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "fa8b133f884d1b81c5b0c741129d65d376af0eb0ad303a4c6bbab03d4abf017c"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "cb3d1a48c101bd4b5afa3287b0e506b5e68f1130edd5dd1277c3cf4b4cfacc21"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "b64321688530f0d9075191943e5e086df53ab65dc35c7274fbba3adb73d02d32"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "2337235690edac06513b756fe2348d34ee5126b7b5d80c2f68eadd09ca4fb542"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "bfd0a23909cd398ef9b35a6348810b75dbb8037623caa19de7688a3e7a851d30"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "f8a4f3794a20ad3f502f724f82618275f03f38dce22cf42c2a0da7e5232e3ef2"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "c58a9f76ddc992a17a8d2a620370987f932ac3c88c17d952bf7581eb5e6051a1"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "ceb12bee9fb092f668f7e569614f898607928f96dbb5e0ac66f05e12e4193830"
+        },
+        "uniform/time": {
+          "bytes": 1074,
+          "sha256": "deeb87968518484a0a267d1f46ad869d42ff0145c63b73e66872e1ecd4928f99"
+        }
+      }
+    },
+    {
+      "directory": "0.400086712911",
+      "time_s": 0.40008671291114567,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "ce92de37b6e802a7fc6c7650c70cd8d9dfaf1d88d392206aab7eb0ff039e1f4d"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "c65aa2476381d1b0f5347d37f16e6d6bc1fc1139eaec02fff85c85a512f250c1"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "e5f24a194b68a6f3a99fde20e81ba5f0327ed05de96b224c4f723a16b3354249"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "78c5ba87b80279e304a16724c460361a16b236543e701258414242071f352f2a"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "e22192eb8b3aed13c7625d22a70ed18622e57d21bb42b16ceeeedd0a6a92fef5"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "cd21a6e1405c20ffecb73d633255f49df584aa08485bbfe66acd43648ae40e98"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "4c13bb2b40e10dd8a0bc7d354360ad3a0ccdcb6f12d419691b23550f84346805"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "840f0033f005b0c6f3bb308dacdd994afb2515e67b3400c65dceecb94c7fbf4b"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "07bf198fbfbbd470a03e37aeae7acc5219f0be332e7fc1944c02b5282ed76c51"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "6b7b67e8b277d409ed672a4ff8533a9496d74dcff97f1145c5ab5cc369b3eabb"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "dcdb0a3061ada9d9c770fe2ab2628a1571a31362a750e7fa298213808d941c1b"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "19f7142c1562984c6d5f87bfbcb13128284f986ad29bdecb88813390121a413a"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "cce5c71e70d788560170ffe3486e7429f8720f58481986a6157ea12794d0810c"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "52ef1af3270934c3445f267a5bb3da5e289d17478ef559f8e6ee1f2cd87541f5"
+        },
+        "uniform/time": {
+          "bytes": 1073,
+          "sha256": "5e04ec5d4873785d5e9494102288c888cd13c3977ee75e8a1291fb194a14f8ba"
+        }
+      }
+    },
+    {
+      "directory": "0.443669498426",
+      "time_s": 0.4436694984262083,
+      "kind": "complete_native10_checkpoint",
+      "fields_hashed": {
+        "U": {
+          "bytes": 7909659,
+          "sha256": "58316910e66ef4835030b12e887a21b7244496876ed2de954fe1ef891100cdf5"
+        },
+        "p": {
+          "bytes": 3197601,
+          "sha256": "2d1aa4e1c63290ab36cb4c934f2fee1f747d24b47ea427c276f62cce3ffcf960"
+        },
+        "p_rgh": {
+          "bytes": 3787473,
+          "sha256": "cd6514c3b511a96d44f016a2e4a2d06a14d46851f8707ce3760a429b6709970d"
+        },
+        "T": {
+          "bytes": 2648895,
+          "sha256": "52395da6ed061b352bff6e55cf21a7ea634a503c2584747e91ab2bf604ff9354"
+        },
+        "T.air": {
+          "bytes": 2648903,
+          "sha256": "b3122b4d1fa6274ccf7062492ac5532ecc3f69191ac4de8c2fe545b7353345ba"
+        },
+        "T.water": {
+          "bytes": 2648907,
+          "sha256": "9f54c7d94ba49b1b7b125b9e5c347141962ffcfa6036e38c37db4eb371151c10"
+        },
+        "alpha.water": {
+          "bytes": 2641378,
+          "sha256": "4fc7ae33b3ab4a464a40a254e2c1cb4f3b171591253689d9a14fd5034539dc9c"
+        },
+        "alphaPhi0.water": {
+          "bytes": 7717856,
+          "sha256": "9d90ac181033d2af4d36589864d6c15ac2f9d3938e67c041aa9cd9a5b2180886"
+        },
+        "alphat": {
+          "bytes": 3198271,
+          "sha256": "e00a78fb958ecc472a94413def7a49cc8d3270e687713e94be8dc8465892d084"
+        },
+        "k": {
+          "bytes": 3197108,
+          "sha256": "c5f9f11b3f9f896882aeb0c54ec24dfbb7526cf12cc17f97fb6c1093e46ccf02"
+        },
+        "nut": {
+          "bytes": 3198795,
+          "sha256": "0d896063b18adc4c44a5b7ffafd6aacd4a4e677b3e8ad330adcedddb249d0cba"
+        },
+        "omega": {
+          "bytes": 3198978,
+          "sha256": "d18cd0e81deb921edbe01a5901bdd9ef6bdadb07ad134d345643ff7e2cef2e81"
+        },
+        "phi": {
+          "bytes": 7722729,
+          "sha256": "4f98e6c4b28fc54459f929a449b78049e12c364cfea4e440157d960cde1a2a1f"
+        },
+        "rho": {
+          "bytes": 3197595,
+          "sha256": "7dd52a439676b9a008d83d664f0bbb44f5b3605ee96139d906425e41da4fb0bc"
+        },
+        "uniform/time": {
+          "bytes": 1074,
+          "sha256": "8fbd09e76685d5b6f681fb0cf3e458323b28bf97410c44153ad4d050f5969441"
+        }
+      }
+    }
+  ],
+  "mesh_and_mapping_hashes": {
+    "constant/polyMesh/points": "fcb7a11e370b4ae55207c47623ec25044edd216459f8717eb3ca0218e31ab8de",
+    "constant/polyMesh/faces": "5f294f6b4c3e3f0faaafac5ca58011457234007bff4272033ca6a46d5dcc9b04",
+    "constant/polyMesh/owner": "15c97d6ad6c3d1af79066d955b5b086dc4fede6ec1d74a9fccb90d8626b67f7d",
+    "constant/polyMesh/neighbour": "f0b8e4bc09460897a029dab47bfcb47867ae36432ec61a2bb5d7dc24a0c53d8f",
+    "processors10/constant/polyMesh/cellProcAddressing": "fd0a39b03f0c28498ed63b60471f6b085c13920a693aac247630ee4bd09a7867"
+  },
+  "wall_geometry_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-refineMesh-axial-feasibility-20261025T1731Z/attempt-4x/mapped-initial-state/case/constant/triSurface/apparatusWall.stl",
+  "wall_geometry_sha256": "8cf69c94639842557ff3f0ecf2f229084ec68a8b41fe5723ad28ac76de903720",
+  "copied_source_hashes": {
+    "analysis/render_native_cutaway.py": "1b34bf021a90722c853e453a80127b01a7c2b215b9e5a4f6ddf62791d680fd53",
+    "analysis/render_native_cutaway_v1-tested-image.py": "10c0a723db972a4f6fcb5bc3f0f8e3b03f4b939d08342b23567cc0a27df5f7b1",
+    "analysis/render_native_cutaway_v2-tested-image.py": "f24830826a32ad5295480dcb730dbb7a07cd2d5e051e2070f575072b2d02026c",
+    "analysis/render_native_cutaway_v2.py": "afa119db523ceae58f48ab58ca91f9236ba8de3ac731f1b1bb1745cef25f8363",
+    "analysis/watch_and_render_milestone-v1.py": "f9d94bbabfe5e7edcfa6c6d02993df9a66f87201b86bc9a1b7c1f9db0d86b1c5",
+    "analysis/watch_and_render_milestone.py": "f8c2a4d269850da875bf50e73d1351f052acc9bc4accf478584b38acb5b8febe"
+  },
+  "source_renderer_original_hashes": {
+    "render_native_cutaway.py": "1b34bf021a90722c853e453a80127b01a7c2b215b9e5a4f6ddf62791d680fd53",
+    "render_native_cutaway_v2.py": "3c8db896fbb21636fc1dc31a2f06738dfd97ecc87a29d1dab94c281397fd4960",
+    "watch_and_render_milestone.py": "f8c2a4d269850da875bf50e73d1351f052acc9bc4accf478584b38acb5b8febe"
+  },
+  "qualification": [
+    "The zero state is the immutable initial state; only alpha.water and U are rendered from it.",
+    "All positive times in the timeline contain the 14 declared native fields and uniform/time.",
+    "The selected endpoint was frozen before rendering; no later or incomplete time directory is included."
+  ]
+}

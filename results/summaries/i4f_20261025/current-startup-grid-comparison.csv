@@ -1,0 +1,47 @@
+metric,unit,coarse,fine,fine_minus_coarse,relative_difference_pct,scope
+initial_tankA_actual_headspace,m3,0.2984977021531967,0.3014933163209148,0.002995614167718097,1.0035635604928947,native geometric gas volume; differs across discretized mesh
+initial_tankA_water,m3,1.3499999999999994,1.3500000000000003,8.881784197001252e-16,6.579099405186116e-14,native alpha.water*V initialization
+endpoint_tankA_water_volume,m3,1.3453299,1.3454439,0.00011399999999994748,0.008473757997941433,volFieldValue on tank cellZone at matched native time
+endpoint_tankA_tank_water_loss_from_1p35,L,4.670099999999344,4.556100000000285,-0.1139999999990593,-2.4410612192260404,tank alpha-water loss relative to each exact 1.35m3 native initialization
+initial_tankA_headspace_mass,kg,4.2567152622068685,4.299423995638827,0.04270873343195891,1.0033260577973644,native ideal-air initial mass in tank headspace
+initial_tankB_actual_headspace,m3,0.2984967699826191,0.30149255727572544,0.0029957872931063445,1.0036246935873991,native geometric gas volume; differs across discretized mesh
+initial_tankB_water,m3,1.350000000000001,1.3499999999999996,-1.3322676295501878e-15,-9.868649107779162e-14,native alpha.water*V initialization
+endpoint_tankB_water_volume,m3,1.34532988,1.34544389,0.00011401000000010875,0.008474501436042493,volFieldValue on tank cellZone at matched native time
+endpoint_tankB_tank_water_loss_from_1p35,L,4.670120000000999,4.556109999999558,-0.11401000000144101,-2.4412648925812745,tank alpha-water loss relative to each exact 1.35m3 native initialization
+initial_tankB_headspace_mass,kg,4.2567019689219405,4.299413171674485,0.04271120275254425,1.0033872012740739,native ideal-air initial mass in tank headspace
+initial_line_A_primed_water,m3,0.8745578526269301,0.875967705872481,0.0014098532455508739,0.1612075451973891,includeCut line water capacity; geometric discretization differs
+initial_line_A_mouth_slab_geometric_volume,m3,0.0053663877385570005,0.001601072927039,-0.0037653148115180004,-70.16479231391651,center-classified x>=5.8m slab; not included in primed initial water
+endpoint_line_A_primed_zone_water,m3,0.874378661,0.875742424,0.0013637630000000733,0.15596938269746652,volFieldValue line initial zone at matched time
+endpoint_line_A_mouth_slab_water,m3,0.00145940268,0.000598274551,-0.000861128129,-59.00551923064853,separate mouth-slab zone volFieldValue; zone overlap with external-air output is not presumed disjoint
+initial_line_B_primed_water,m3,0.8746021996128037,0.876018912100371,0.001416712487567251,0.16198364104211557,includeCut line water capacity; geometric discretization differs
+initial_line_B_mouth_slab_geometric_volume,m3,0.005366424467023,0.0016108415561799999,-0.0037555829108430003,-69.98296414905833,center-classified x>=5.8m slab; not included in primed initial water
+endpoint_line_B_primed_zone_water,m3,0.874423032,0.87579361,0.0013705779999999557,0.1567408393698344,volFieldValue line initial zone at matched time
+endpoint_line_B_mouth_slab_water,m3,0.0014594673,0.000607105118,-0.000852362182,-58.402280201824325,separate mouth-slab zone volFieldValue; zone overlap with external-air output is not presumed disjoint
+initial_total_water_capacity,m3,4.449160052239734,4.451986617972853,0.002826565733118791,0.06353032257618785,sum of initial native alpha*V across specified initial water compartments
+guard_water_inventory_kg,kg,4441.151747202366,4443.974302812452,2.822555610086056,0.0635545860792548,guard native phase inventory from alpha*rho*V at matched time
+guard_water_cumulative_defect_kg,kg,0.00048521629095347953,0.0014444788014848309,0.0009592625105313514,197.69791913753394,"guard campaign cumulative discrete ledger defect, carried from t=0"
+guard_gas_inventory_kg,kg,32.84373764823494,32.93057459616985,0.0868369479349056,0.26439423206016355,guard native phase inventory from (1-alpha)*rho*V at matched time
+guard_gas_cumulative_defect_kg,kg,-6.19286248983846e-06,-7.90134658217756e-06,-1.7084840923390996e-06,27.587954603262396,"guard campaign cumulative discrete ledger defect, carried from t=0"
+guard_final_field_min_p_Pa,Pa,97800.8867969759,98326.36142806488,525.474631088975,0.5372902519583526,guard endpoint field minimum absolute p
+guard_final_field_min_T_K,K,291.4708967210527,291.5125741091273,0.041677388074560895,0.01429898783838015,guard endpoint minimum shared mixture T; not a separate gas temperature
+guard_final_field_min_rho_kg_m3,kg/m3,1.188336316355882,1.188307940200303,-2.837615557904627e-05,-0.0023878892859273857,guard endpoint mixture density minimum
+guard_final_outer_max_abs_dp_Pa,Pa,0.001161567444796674,0.04229625783045776,0.04113469038566109,3541.3088211043564,exploratory final PIMPLE outer pressure update
+guard_deltaT_logged_s,s,0.00025,0.00025,0.0,0.0,actual solver step at matched endpoint
+headspace_probe_0_p_abs,Pa,1176292.4,1176695.6,403.20000000018626,0.03427719162345912,"point probe at (1.25,-/+0.55,1.6)m; not volume average"
+headspace_probe_0_T_shared,K,291.48956,291.51365,0.024090000000001055,0.008264446932507996,point probe of the shared mixture T; not phase-specific energy
+headspace_probe_1_p_abs,Pa,1176292.3,1176695.5,403.19999999995343,0.03427719453744222,"point probe at (1.25,-/+0.55,1.6)m; not volume average"
+headspace_probe_1_T_shared,K,291.48954,291.51365,0.024110000000007403,0.008271308809231166,point probe of the shared mixture T; not phase-specific energy
+mouth_plane_area_mean_alpha_water,area fraction,0.969853824,0.943535868,-0.026317955999999976,-2.713600271374501,sampled four-mouth plane; interpolated surface diagnostic
+mouth_plane_area_mean_p_abs,Pa,100157.32,100137.113,-20.20700000000943,-0.020175260280536088,sampled four-mouth plane; not a boundary-pressure average
+mouth_plane_area_mean_T_shared,K,293.149985,293.149979,-6.000000041694875e-06,-2.046733873001861e-06,sampled plane shared mixture T
+ambientAnnulus_alphaPhi0_water_sum,m3/s,5.73371441e-06,1.51119857e-06,-4.2225158400000005e-06,-73.64363723166325,native finite-volume boundary water volume flux; only ambientAnnulus patch
+global_p_min,Pa abs,97800.8868,98326.3614,525.4746000000014,0.5372902201537108,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_p_max,Pa abs,1188247.7,1188217.69,-30.010000000009313,-0.0025255676909796934,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_p_rgh_min,Pa,99994.171,99994.171,0.0,0.0,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_p_rgh_max,Pa,1191703.99,1191679.47,-24.520000000018626,-0.0020575579343338965,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_rho_min,kg/m3,1.18833632,1.18830794,-2.8379999999827987e-05,-0.0023882127914619314,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_rho_max,kg/m3,998.2,998.2,0.0,0.0,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_T_min,K,291.470897,291.512574,0.04167699999999286,0.014298854681190645,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_T_max,K,293.181786,293.178969,-0.002816999999993186,-0.0009608373147686556,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_mag(U)_min,m/s,0.0,0.0,0.0,,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema
+global_mag(U)_max,m/s,2.86238387,1.78874672,-1.07363715,-37.508496370893816,native cell-centered fieldMinMax at matched saved time; mesh-dependent extrema

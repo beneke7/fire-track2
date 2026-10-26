@@ -1,0 +1,32 @@
+{
+  "dynamic_code": "The fvOptions coded-source name is unique to this four-valve 1s configuration. No cached dynamicCode directory/library was copied; clear/check the case-local cache before future release.",
+  "openfoam_image": "opencfd/openfoam-default:2512",
+  "openfoam_image_digest": "sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "physics_change": "Frozen predictor-Sp MULES correction from parent binary V1; V2NoPout only disables per-rank Pout diagnostics, no PDE changes.",
+  "runtime_flags": {
+    "MPI_ranks": 8,
+    "MULESCorr": true,
+    "application": "compressibleInterFoam",
+    "cAlpha": 1,
+    "i4fFrozenPredictorSp": true,
+    "maxAlphaCo": 0.25,
+    "maxCo": 0.5,
+    "maxDeltaT_s": 0.00025,
+    "nAlphaCorr": 1,
+    "nCorrectors": 2,
+    "nOuterCorrectors": 16,
+    "p_rgh_relTol": 0,
+    "p_rgh_tolerance": 1e-10,
+    "transonic": true
+  },
+  "schema": "i4f-two-tank-four-mouth-source-lock.v1",
+  "solver_binary_path": "bin/compressibleInterFoamFrozenAlphaSourceV2NoPout",
+  "solver_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+  "source_build_record_sha256": "fb57fe7a44835aa96f158cd996a875af8258bdceb467219793a684aedd13fecf",
+  "source_origin": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont2-20261024T2357Z-attempt3/source/v7-frozen-sp-v2-nopout",
+  "source_output_only_patch_sha256": "a4541acb34c3bb64ae9924ba2980754bedb445259a14d5da3ef806aa95e13e95",
+  "source_snapshot_tree_sha256": "baa827ddf61948ea7a86e7298e682103057e3586db7b37945c011acc9f7e18eb",
+  "source_snapshot_file_count": 84,
+  "source_snapshot_manifest": "provenance/source-snapshot.json",
+  "source_snapshot_crosscheck": "Copied build source tree has identical per-file paths and SHA-256 hashes to the frozen cont3 source snapshot."
+}

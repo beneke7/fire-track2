@@ -2,6 +2,40 @@
 
 ## Purpose and source of truth
 
+Current user direction (2026-10-23): this workstation now investigates the
+I4F internal pressure-driven discharge apparatus; aerial work continues
+separately on the server. Follow the internal-apparatus section added to the
+plan; `experiments/i4f_baseline.json` describes the earlier single-outlet
+reference, while later one-tank/two-outlet references and full two-tank/four-outlet
+runs carry their own immutable apparatus inputs. The latest user-confirmed
+hardware facts take precedence in `experiments/i4f_hardware_notes_20261024.json`;
+never apply them retroactively to historical cases. Preserve prior aerial evidence and
+do not resume old aerial queues automatically. Predict discharge from tank,
+gas headspace, valve, pipe and transition rather than prescribing an outlet
+history. The new objective permits suitable GPU use, including rendering,
+after inspecting unrelated workloads; avoid a GPU solver port before the
+first complete physical result. CPU OpenFOAM remains an acceptable route.
+The supplied, dimensionally approximate CAD and photo are preserved as
+`docs/bencz 3D model (1).step` and `docs/IMG_20180209_103212.jpg`; maker notes
+are in `experiments/i4f_hardware_notes_20261024.json`. Do not treat CAD
+dimensions or their provisional reconstruction as measurements. Always generate
+and inspect pictures of parameterized CAD/geometry for debugging, including
+connection/cross-section views; preserve the original models.
+
+User correction (2026-10-25): passages downstream of the valves initially
+contain air. New apparatus baselines use that initial state and separately
+account for wetted tank-to-valve feeds. Earlier primed-line runs are conditional
+sensitivities, not the confirmed startup. The current provisional outlet train
+has no added post-rise straight and a 1 m transition/mouth assembly; preserve
+historical geometries and fields rather than changing them in place.
+
+26 October reconstruction correction: the scaled pipe overlap creates an
+unintended exposed shoulder inside the transition. New corrected-junction
+candidates use `--pipe-transition-join flush-at-inlet`; `legacy-overlap` remains
+available for historical reproduction. The corrected native mesh is being
+tested with the standard phase-source update. Its effect on numerical stability
+or hardware performance is not established.
+
 Build the multiregion aerial-water-drop pipeline in
 `track2_aerial_drop_experiment_plan.md`. Read that plan before changing physics,
 metrics, validation order, or solver architecture. The root PDFs are reference
@@ -139,6 +173,9 @@ Use `make help` for commands. Python dependencies live in `pyproject.toml` and
 - Record revision and dirty state, code/input hashes, solver/dependency versions,
   seeds, mesh, time steps, resource use, mass errors, raw observables and the gate
   decision. Never overwrite an existing run or omit failed attempts.
+  Capture UTC timestamps from the clock automatically; a bundle-name time is
+  not an execution timestamp. Snapshot uncommitted source before a run, so a
+  recorded hash still identifies recoverable code after later edits.
 - Visuals use computed fields with consistent scales/cameras/times. Label
   computed, inferred subgrid, and footage content. Water-only inputs do not
   validate foam or the built pressurized device. No fire suppression or
@@ -161,6 +198,45 @@ separate review memos unless a hard decision needs one.
 - Use `scripts/run_local.py` for local jobs. Allocate a **shared total** CPU
   budget across workers, processes and MPI ranks; keep BLAS/OpenMP threads at
   one inside process-parallel sweeps. Avoid nested oversubscription.
+- Long workstation Docker runs, endpoint monitors and dispatchers must survive
+  agent-session exit. Use bounded user-systemd services with `run_local.py`,
+  and inspect Docker state plus solver End/checkpoints as the runtime authority.
+  A missing launcher PID does not mean its Docker solver stopped: reattach
+  supervision without relaunching it. Anchor deadlines to the original
+  container start, honor PAUSE, and expose the active controller through the
+  documented status/event paths while preserving prior attempts.
+  For a new Docker launch, hold the solver behind a GO sentinel until its
+  exact container ID/StartedAt and manifest exist and the guard is verified.
+  Source the OpenFOAM bashrc before enabling shell nounset/pipefail, then set
+  the case working directory explicitly. Check current CPU-tick deltas rather
+  than lifetime `ps` percentages when paused historical MPI ranks are visible.
+  Guard readiness is monotonic: a verified guard progressing to `running`
+  must not fail a check waiting for its earlier readiness status. Test parsers
+  against actual startup logs; `trapFpe`/`FOAM_SIGFPE` banners are not failures.
+  Normalize MPI `[rank]` prefixes before matching Pout records, and search the
+  raw log before claiming a diagnostic is absent. A stage monitor must adopt
+  an existing manifest/GO rather than call its one-shot launcher a second time.
+  Lint private/generated Python stage builders for undefined names as well as
+  compiling syntax; exercise preparation against the actual saved parent before
+  calling a continuation ready. This does not hold the initial diagnostic pilot.
+  Terminal checks must use the branch's configured log path, not a fixed log
+  basename. A missing expected filename is not evidence that the solver failed.
+  Compare numerical dictionary values numerically, not by printed notation
+  (`1e-05` and `1e-5` are equal). Formatting or cosmetic labels must not block
+  an otherwise verified launch. If Docker exits before the guard records its
+  final checkpoint, a dispatcher must wait for capture until its bounded
+  deadline; pending metadata is not a failed solver or permission to relaunch.
+  Keep internal and external wall deadlines consistent, checkpoint before the
+  earliest limit, and guarantee an endpoint write independently of sparse output.
+  An agent-initiated resource pause must have a durable resume-or-save action
+  before that deadline; a read-only pause watcher is insufficient. A graceful
+  save requires the solver to run, so unfreeze operationally paused containers
+  before requesting the save. Never automatically resume a user-requested pause.
+  Evaluate coupled-field diagnostics and `fvMatrix::residual()` on all MPI
+  ranks in identical order; restrict only local extraction/printing to selected
+  ranks. High CPU use without advancing `Time` can be an MPI communication
+  stall. Preserve and stop a confirmed stalled observer rather than waiting
+  for a writeNow checkpoint that its blocked solver cannot produce.
 - The orchestrator and workers share the compute schedule. Use all effective
   CPU capacity when the machine is idle; there is no fixed 18-core ceiling or
   two-core reserve. Allocations are initial estimates, not standing caps.
@@ -188,6 +264,9 @@ separate review memos unless a hard decision needs one.
 - Keep full 3D snapshots sparse; routinely save compact flux, impact, ledger,
   and scoring data. Checkpoint expensive jobs; measure CPU/MPI scaling before
   requesting cluster resources. Stop failed or unaffordable runs with evidence.
+  Docker helpers that stream binary archives must use `--log-driver=none`,
+  verified before export; the default JSON logger can exhaust disk by recording
+  the binary stream. Verify lossless archives before removing their sources.
 
 ## Completion and autonomy
 

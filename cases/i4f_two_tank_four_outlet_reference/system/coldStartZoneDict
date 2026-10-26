@@ -1,0 +1,26 @@
+FoamFile { version 2.0; format ascii; class dictionary; object coldStartZoneDict; }
+actions
+(
+ { name mouthXCells; type cellSet; action new; source boxToCell; box (5.8 -2.05 -0.5) (8.0 2.05 2.0); }
+ { name lineAWork; type cellSet; action new; source cellToCell; set lineAT; }
+ { name lineAMouthCells; type cellSet; action new; source cellToCell; set lineAWork; }
+ { name lineAMouthCells; type cellSet; action subset; source cellToCell; set mouthXCells; }
+ { name lineAInitialCells; type cellSet; action new; source cellToCell; set lineAWork; }
+ { name lineAInitialCells; type cellSet; action subtract; source cellToCell; set lineAMouthCells; }
+ { name lineBWork; type cellSet; action new; source cellToCell; set lineBT; }
+ { name lineBMouthCells; type cellSet; action new; source cellToCell; set lineBWork; }
+ { name lineBMouthCells; type cellSet; action subset; source cellToCell; set mouthXCells; }
+ { name lineBInitialCells; type cellSet; action new; source cellToCell; set lineBWork; }
+ { name lineBInitialCells; type cellSet; action subtract; source cellToCell; set lineBMouthCells; }
+ { name allMeshCells; type cellSet; action new; source boxToCell; box (-0.2 -2.25 -0.7) (8.0 2.25 2.2); }
+ { name externalInitialCells; type cellSet; action new; source cellToCell; set allMeshCells; }
+ { name externalInitialCells; type cellSet; action subtract; source cellToCell; set tankA; }
+ { name externalInitialCells; type cellSet; action subtract; source cellToCell; set tankB; }
+ { name externalInitialCells; type cellSet; action subtract; source cellToCell; set lineAInitialCells; }
+ { name externalInitialCells; type cellSet; action subtract; source cellToCell; set lineBInitialCells; }
+ { name lineAInitialZone; type cellZoneSet; action new; source setToCellZone; set lineAInitialCells; }
+ { name lineBInitialZone; type cellZoneSet; action new; source setToCellZone; set lineBInitialCells; }
+ { name lineAMouthBoundaryZone; type cellZoneSet; action new; source setToCellZone; set lineAMouthCells; }
+ { name lineBMouthBoundaryZone; type cellZoneSet; action new; source setToCellZone; set lineBMouthCells; }
+ { name externalAirZone; type cellZoneSet; action new; source setToCellZone; set externalInitialCells; }
+);

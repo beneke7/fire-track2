@@ -1,0 +1,566 @@
+{
+  "schema": "i4f-tank-cutaway-movie/v1",
+  "created_utc": "2026-10-25T11:50:20.184598+00:00",
+  "status": "exploratory saved-field cutaway visualization; not validation or hardware prediction",
+  "source_bundle": "results/runs/i4f-twooutlet-reference-movie-20261025T085104Z",
+  "source_movie_metadata": {
+    "path": "results/runs/i4f-tank-cutaway-video-20261025T114403Z/data/source-render-metadata.json",
+    "sha256": "5ac5b0e993857c1a9cbda1e9e01f958fdc7940db0d487ed7ef1546f6a92367cb"
+  },
+  "apparatus_geometry": {
+    "wall_surface_path": "results/runs/i4f-twooutlet-air-water-20261024T211140Z/solver/case/constant/triSurface/apparatusWall.stl",
+    "wall_surface_sha256": "9268900d99475579e992865f78dcc81a1977ad5f3d5d9ad06328a82da88fb4db",
+    "old_case_config_path": "results/runs/i4f-twooutlet-air-water-20261024T211140Z/solver/case/experiment-config.json",
+    "old_case_config_sha256": "d8cedd966ca7131393ec98e4ac80f6cdcbefe9a01b65308c6c8034c24dd40e95",
+    "geometry_identity": "older provisional one-tank/two-outlet mesh geometry, matching the saved fields; no new/two-tank geometry used",
+    "display_cut": "original wall STL clipped at y=-0.55 m, retaining y>=-0.55 m; display only"
+  },
+  "saved_times_s": [
+    0.0,
+    0.050021166664,
+    0.101021166664,
+    0.151021166664,
+    0.201021166664,
+    0.251021166664,
+    0.300021166664,
+    0.350021166664,
+    0.400021166664,
+    0.450021166664,
+    0.460771166664,
+    0.5108363332,
+    0.560717355465
+  ],
+  "source_segments_by_frame": [
+    {
+      "time_s": 0.0,
+      "source_segment": "initializer/main"
+    },
+    {
+      "time_s": 0.050021166664,
+      "source_segment": "phi-scaled-continuation"
+    },
+    {
+      "time_s": 0.101021166664,
+      "source_segment": "phi-scaled-continuation"
+    },
+    {
+      "time_s": 0.151021166664,
+      "source_segment": "phi-scaled-continuation"
+    },
+    {
+      "time_s": 0.201021166664,
+      "source_segment": "phi-scaled-continuation"
+    },
+    {
+      "time_s": 0.251021166664,
+      "source_segment": "phi-scaled-continuation"
+    },
+    {
+      "time_s": 0.300021166664,
+      "source_segment": "phi-scaled-continuation"
+    },
+    {
+      "time_s": 0.350021166664,
+      "source_segment": "pressure-tail"
+    },
+    {
+      "time_s": 0.400021166664,
+      "source_segment": "pressure-tail"
+    },
+    {
+      "time_s": 0.450021166664,
+      "source_segment": "pressure-tail"
+    },
+    {
+      "time_s": 0.460771166664,
+      "source_segment": "frozen-predictor-Sp candidate"
+    },
+    {
+      "time_s": 0.5108363332,
+      "source_segment": "frozen-predictor-Sp candidate"
+    },
+    {
+      "time_s": 0.560717355465,
+      "source_segment": "frozen-predictor-Sp candidate"
+    }
+  ],
+  "solver_source_seam": {
+    "last_pre_candidate_time_s": 0.450021166664,
+    "first_candidate_time_s": 0.460771166664,
+    "user_facing_note": "Computed runs were combined after 0.45 s; exploratory stitched sequence.",
+    "source_note": "Code-source seam: baseline/phi-scaled/pressure-tail fields through 0.450021 s; frozen-predictor-Sp candidate from 0.460771 s onward. This stitched movie is not a single validated production trajectory."
+  },
+  "source_field_hashes": [
+    {
+      "time_s": 0.0,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0/alpha.water",
+      "sha256": "ce64679bde0c22488e81c1acf9c3f174d6b854d1ea011e3b6748a51986b8259c",
+      "size_bytes": 1703126
+    },
+    {
+      "time_s": 0.0,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0/p",
+      "sha256": "b7dbdf74038da37ae48a640599cdb38a7f1881ba5a3e5c5c4d80776ae0eb0151",
+      "size_bytes": 1703063
+    },
+    {
+      "time_s": 0.0,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0/U",
+      "sha256": "160d4046a59a02628af0615542d48644eae6381652254ca5a5104a725cb24414",
+      "size_bytes": 1413
+    },
+    {
+      "time_s": 0.050021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.050021166664/alpha.water",
+      "sha256": "31cc85d4b85df65c5c206b80a7bbf2ee06346109b6f90b8783c88d5293fbb8a4",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.050021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.050021166664/p",
+      "sha256": "658c4c0e6f269b8a38ace01e39b0e1160a50e1e0267c228edf7d1427448ebfe5",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.050021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.050021166664/U",
+      "sha256": "6cb6d71fab5179a5d34f2892d5e512d175d56abf91ab2dbf9312a6d02d85e4a4",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.101021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.101021166664/alpha.water",
+      "sha256": "89590dad7cf8b7f904aca45d2fe167eb74bb5f6315f61818d452fe09b0ab036c",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.101021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.101021166664/p",
+      "sha256": "3499adda7a2ada8a6d53986ce33943ba3feb39bb27ff90ddd46c243cbcccae56",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.101021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.101021166664/U",
+      "sha256": "f19653c0ef1211d238d369adf3ff9aa080817a56b5e62fc3569a12f13eed6d8f",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.151021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.151021166664/alpha.water",
+      "sha256": "af307cc2d061ba1d9e4e135b486ce6289d450ec535c362019d49614a81f2046b",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.151021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.151021166664/p",
+      "sha256": "2a21a9105b658ad6c9fbf95ef9a89cbf12fd8d3bd08113ef3b5f338e388be991",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.151021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.151021166664/U",
+      "sha256": "dd8751cc022cfae79e77b8cc47be18a0a95cc228084fb831809e42cc523ae623",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.201021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.201021166664/alpha.water",
+      "sha256": "6a9f511473e7df987a784e5682ef8cadd7f5b9ccef587d492ef9b2e5bfe430b9",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.201021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.201021166664/p",
+      "sha256": "9c887ffa9de108426b564f29df2245561e47d62b2a49c82e3473c071820cd4b0",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.201021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.201021166664/U",
+      "sha256": "1b422d60d47df83e8ca42b8542f6e8f6369c51c198a4be8c66d5956dd52ed745",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.251021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.251021166664/alpha.water",
+      "sha256": "a9f6ef3cfebb7ea9db8d1746f0cb9b427f6851f130e4d6f4ec978ef844e4072f",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.251021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.251021166664/p",
+      "sha256": "9d6e3dae5e61f71fba17b71989c4d9e8204df2080e74c613c586da4110def7de",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.251021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.251021166664/U",
+      "sha256": "5560e04e8934a207e20964e2c294ffa95045bafb93c3d26c82313dcba9430e7b",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.300021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.300021166664/alpha.water",
+      "sha256": "535404f669d03d6a0b78547c965e2e52fe3559e8d22dd7ec6bf8512541aa76d9",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.300021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.300021166664/p",
+      "sha256": "8fba3a38e0a1ab5f01ebb7158cdb38906e5ec4e1baece77f8bd401a485f8ae30",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.300021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.300021166664/U",
+      "sha256": "1cfd0bdc5dfcd8ffeeda77ff9d5ab9ea5b2943395dc08c504394e64f58100c91",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.350021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.350021166664/alpha.water",
+      "sha256": "85a75837116aed5c5f94c74a33aa3bc68daafc6bb7ac10ed365e4816b40a80bc",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.350021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.350021166664/p",
+      "sha256": "14386a77783f83ca7bc42fa87411067b6fe02eee54c3b20b0b3d0e379209422c",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.350021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.350021166664/U",
+      "sha256": "6593d71c434725de8fb479803c7a883fa8a75460b96e80aebc4f4c65c4204dc7",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.400021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.400021166664/alpha.water",
+      "sha256": "b016661192e58505a17bd2196a7ade7f99270d8a4e596f5dad7e5813868b1341",
+      "size_bytes": 1757855
+    },
+    {
+      "time_s": 0.400021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.400021166664/p",
+      "sha256": "2567bf65d95cb6f6ec01e8c29fe41211c4d97c1fdd9c828bfbe4b1bb8b1e7f46",
+      "size_bytes": 1882727
+    },
+    {
+      "time_s": 0.400021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-mouth-quality-20261024T2248Z/case/0.400021166664/U",
+      "sha256": "f44fab1a91beb9dc68b7b7a3913c72c6e5788af17bdfd6e00f85f2ecc899173f",
+      "size_bytes": 5270359
+    },
+    {
+      "time_s": 0.450021166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-twooutlet-air-water-phi-pressure-tail-20261024T222910Z/case/processors8/0.450021166664/alpha.water",
+      "sha256": "a135a4666caa1c9f3c43fd334068215c12d5aa0a54985d2955b07357117a0856",
+      "size_bytes": 1930695
+    },
+    {
+      "time_s": 0.450021166664,
+      "field": "p",
+      "path": "results/runs/i4f-twooutlet-air-water-phi-pressure-tail-20261024T222910Z/case/processors8/0.450021166664/p",
+      "sha256": "45ce1986d6160297bf4cc81e57ccadf603842a7c861b774cf3531e4a4891fcc3",
+      "size_bytes": 2054891
+    },
+    {
+      "time_s": 0.450021166664,
+      "field": "U",
+      "path": "results/runs/i4f-twooutlet-air-water-phi-pressure-tail-20261024T222910Z/case/processors8/0.450021166664/U",
+      "sha256": "50ec0b984127ca09ade02c75785b80e7c5b06c1db3d1baf2a900c42ea7acd04a",
+      "size_bytes": 5768439
+    },
+    {
+      "time_s": 0.460771166664,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.460771166664/alpha.water",
+      "sha256": "9cbd38cbd5c003835db93cad181282a46784d6449476ceb54c6909394f9662c2",
+      "size_bytes": 1930747
+    },
+    {
+      "time_s": 0.460771166664,
+      "field": "p",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.460771166664/p",
+      "sha256": "7e251e737a25339908ddda1fd66e3dff423b698ab48397adcb71be4b5cafc6ac",
+      "size_bytes": 2054891
+    },
+    {
+      "time_s": 0.460771166664,
+      "field": "U",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.460771166664/U",
+      "sha256": "8b05a2b80d41dcbf6ffe4bea89eeae89eee6f7a64497b71f9c36dfb4f3526318",
+      "size_bytes": 5768439
+    },
+    {
+      "time_s": 0.5108363332,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.5108363332/alpha.water",
+      "sha256": "f93fd19ef8163af0ffd42bdf0d70a8ed543ed0ae7d0a0763114aaf8bfb61fa15",
+      "size_bytes": 1929243
+    },
+    {
+      "time_s": 0.5108363332,
+      "field": "p",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.5108363332/p",
+      "sha256": "118398205ef9ac9b621fbf343af9d430ab652881c31922173864032905da0045",
+      "size_bytes": 2054889
+    },
+    {
+      "time_s": 0.5108363332,
+      "field": "U",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.5108363332/U",
+      "sha256": "fa76d5b7501e9ac5b83364d3710eea8d16a72fd91b83895de11f49445e6397bc",
+      "size_bytes": 5768437
+    },
+    {
+      "time_s": 0.560717355465,
+      "field": "alpha.water",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.560717355465/alpha.water",
+      "sha256": "34c121d1e6529f73c93cdefedf6c38586db75cc5ee4e62fb5b6e5fafc9da574a",
+      "size_bytes": 1929032
+    },
+    {
+      "time_s": 0.560717355465,
+      "field": "p",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.560717355465/p",
+      "sha256": "929aebd2a4f7851e0a15bdda32eb0b09881bd78d15dc8f70eec728c10d1d695a",
+      "size_bytes": 2054891
+    },
+    {
+      "time_s": 0.560717355465,
+      "field": "U",
+      "path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont3-nopout-20261025T0753Z/case/processors8/0.560717355465/U",
+      "sha256": "24e585c21cd69557921ddf87c3ea778fc0f3315761259f2dcba2129819cfacb1",
+      "size_bytes": 5768439
+    }
+  ],
+  "frame_records": [
+    {
+      "time_s": 0.0,
+      "source_segment": "initializer/main",
+      "frame": "frames/frame_00_t_0.000000000000.png",
+      "sha256": "8ff5988357b995a42f4308e2499b7bc6b1ddee23f6f18d9dbe4215cdb5f4d196",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.050021166664,
+      "source_segment": "phi-scaled-continuation",
+      "frame": "frames/frame_01_t_0.050021166664.png",
+      "sha256": "5f2d81ddee9d6f7f07ed24f55e80589ae7fb0aa5b282f260a661a343230fb868",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.101021166664,
+      "source_segment": "phi-scaled-continuation",
+      "frame": "frames/frame_02_t_0.101021166664.png",
+      "sha256": "41838fdb4efeb0013ede9cb67e6ded7c4299aafe0a240b797e44428b2de0a18e",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.151021166664,
+      "source_segment": "phi-scaled-continuation",
+      "frame": "frames/frame_03_t_0.151021166664.png",
+      "sha256": "bf11c8e7b6d50bfa2b9d157dd5d23247fb0c31d6d75a29aef743b80b59152dd7",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.201021166664,
+      "source_segment": "phi-scaled-continuation",
+      "frame": "frames/frame_04_t_0.201021166664.png",
+      "sha256": "c9ea5c056a0a503fe2e200743883b372a382cd50d3080e3effec85353380b025",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.251021166664,
+      "source_segment": "phi-scaled-continuation",
+      "frame": "frames/frame_05_t_0.251021166664.png",
+      "sha256": "2fb0ec8904a993fb7d2630758713401318c83fc60d9ac744b66e010e04dbd63c",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.300021166664,
+      "source_segment": "phi-scaled-continuation",
+      "frame": "frames/frame_06_t_0.300021166664.png",
+      "sha256": "3d689483eecc7870f8d8fbbf7a6587401bdd86ca653f4a5967c91baf8b7e759a",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.350021166664,
+      "source_segment": "pressure-tail",
+      "frame": "frames/frame_07_t_0.350021166664.png",
+      "sha256": "195cbeaeb63150e8298e4ed217aa4a16210e9a7a00bc19c230867359c478525a",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.400021166664,
+      "source_segment": "pressure-tail",
+      "frame": "frames/frame_08_t_0.400021166664.png",
+      "sha256": "6a00bc9335409c0d3037c48f08fb8e443d97488a1465cc113b4770f111a234f8",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.450021166664,
+      "source_segment": "pressure-tail",
+      "frame": "frames/frame_09_t_0.450021166664.png",
+      "sha256": "ed2fe50482c39de2c2faf6a01947349ce536db9d4841c25dd013c97cac035642",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.460771166664,
+      "source_segment": "frozen-predictor-Sp candidate",
+      "frame": "frames/frame_10_t_0.460771166664.png",
+      "sha256": "4c9e007915084d66f44dad4bd59d197ef5d310d8002cc8251c9f226bd6d19158",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.5108363332,
+      "source_segment": "frozen-predictor-Sp candidate",
+      "frame": "frames/frame_11_t_0.510836333200.png",
+      "sha256": "ce1ec90b809803799459b7a3cd752370cb64b1f2a2402181132c9cc0338be45a",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    },
+    {
+      "time_s": 0.560717355465,
+      "source_segment": "frozen-predictor-Sp candidate",
+      "frame": "frames/frame_12_t_0.560717355465.png",
+      "sha256": "0d529918ef30ecfc4bd97918ef49e4a4acaafb9309d23c84818afb7c0923e8ed",
+      "resolution_px": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "render_generator": {
+    "path": "scripts/render_cutaway_movie_rendered-v1.py",
+    "sha256": "589aa839e6823eed8908b30cc9ba6c4d0a2e22480cf6a0b19da8f39dc5fdcaa4",
+    "note": "exact renderer file used for the 13 final PNG frames; a missing metadata label prevented only the original in-script manifest write, so this separate finalizer records unchanged output hashes"
+  },
+  "display": {
+    "video_path": "figures/i4f-tank-cutaway-10x.mp4",
+    "video_sha256": "3bb7b76d51f80d43a8756c4114b59bdbe1efdcd71b00f7dde8cfae688732d822",
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "width": 1280,
+          "height": 720,
+          "pix_fmt": "yuv420p",
+          "r_frame_rate": "24/1",
+          "nb_frames": "165"
+        }
+      ],
+      "format": {
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "duration": "6.875000",
+        "size": "162615"
+      }
+    },
+    "fps": 24,
+    "playback": "exact saved-time frames held to represent 10x slower playback",
+    "simulation_seconds_per_video_second": 0.1,
+    "physical_sequence_duration_s": 0.560717355465,
+    "endpoint_hold_s": 1.25,
+    "expected_frame_holds": [
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      12,
+      3,
+      12,
+      12,
+      30
+    ],
+    "contact_sheet": "figures/contact-sheet.png",
+    "review_frames": {
+      "first": "figures/first-frame.png",
+      "middle": "figures/middle-frame.png",
+      "last": "figures/last-frame.png"
+    },
+    "camera": "fixed oblique parallel camera: camera=(4.65,-6.90,5.60), focal=(3.05,-0.56,1.06), up=+z, parallel_scale=2.08",
+    "water_visual": "alpha.water>=0.5 volume cells translucent blue; alpha.water=0.5 contour from cell-to-point interpolation; no field smoothing",
+    "shell_visual": "original mesh wall STL rendered neutral gray/translucent and clipped for a viewer-side cutaway; no shell geometry altered in the CFD case"
+  },
+  "qualifications": [
+    "Older exploratory one-tank/two-outlet, 9 bar absolute water/ideal-air reference; geometry and most apparatus inputs are provisional.",
+    "Valve is a scalar distributed loss zone; no resolved valve disk or disk wake is shown.",
+    "Water and the alpha=0.5 surface are computed from saved alpha.water; no foam, mist, particles, or invented flow structures.",
+    "The exact saved snapshots span 0.560717 s physical time (about 5.61 s at 10x slow), followed by a 1.25 s endpoint hold. This is not a complete discharge.",
+    "Source seam at 0.450021/0.460771 s is preserved in metadata; the stitched series is not one validated production trajectory.",
+    "No CFD solver was launched or changed for this video."
+  ],
+  "render_resources": "One low-priority renderer process, BLAS/OpenMP threads limited to one, offscreen VTK via xvfb-run, H.264 encoding with ffmpeg."
+}

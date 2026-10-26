@@ -1,0 +1,128 @@
+{
+  "schema": "i4f-downstream-length-sensitivity.v2",
+  "experiment": "I4F shortened post-rise transition-and-mouth geometry alternatives",
+  "status": "user-directed provisional geometry: SHORT1 is the primary layout; its separate exploratory CFD pilot started on 2026-10-25. SHORT2 remains a geometry-only alternative. Historical CFD cases are unchanged.",
+  "comparison_bundle_path": "results/runs/i4f-downstream-length-comparison-20261025T1440Z/comparison-manifest.json",
+  "cli_default": {
+    "post_rise_straight_m": 0.0,
+    "transition_and_mouth_length_m": 1.0,
+    "matches_candidate": "SHORT1"
+  },
+  "coordinate_frame": "stationary apparatus; +X is horizontal discharge, Y separates tank columns and spans the mouths, +Z is upward; SI units",
+  "purpose": "Compare a shorter downstream train after the pipes rise from below the tanks. The post-rise straight is removed in both alternatives; the transition-and-mouth train is 1.0 m or 0.8 m long.",
+  "user_direction": "Remove the post-rise straight and compare an approximately 1 m transition-and-mouth train with an even shorter 0.8 m alternative.",
+  "reference_geometry": {
+    "source": "Reviewed aligned-ruled-v4 two-tank/four-mouth reconstruction; retained only as the legacy geometry reference",
+    "fixed_rise_bend_end_x_m": 3.8,
+    "post_rise_straight_m": 0.2,
+    "transition_and_mouth_length_m": 1.8,
+    "transition_inlet_x_m": 4.0,
+    "mouth_x_m": 5.8,
+    "total_distance_from_rise_bend_end_to_mouth_m": 2.0
+  },
+  "photo_proportion_context": {
+    "source": "docs/IMG_20180209_103212.jpg",
+    "use": "Visual reference for the compact relationship between the rising pipe and outlet train.",
+    "scale": "The image has no scale reference; no lengths were measured or inferred from the photograph."
+  },
+  "alternatives": [
+    {
+      "name": "SHORT1",
+      "status": "user-directed provisional primary geometry, not a measured length",
+      "post_rise_straight_m": 0.0,
+      "transition_and_mouth_length_m": 1.0,
+      "transition_inlet_x_m": 3.8,
+      "mouth_x_m": 4.8,
+      "total_distance_from_rise_bend_end_to_mouth_m": 1.0,
+      "reduction_from_reference_total_post_rise_distance_fraction": 0.5
+    },
+    {
+      "name": "SHORT2",
+      "status": "shorter provisional sensitivity, not a measured length",
+      "post_rise_straight_m": 0.0,
+      "transition_and_mouth_length_m": 0.8,
+      "transition_inlet_x_m": 3.8,
+      "mouth_x_m": 4.6,
+      "total_distance_from_rise_bend_end_to_mouth_m": 0.8,
+      "reduction_from_reference_total_post_rise_distance_fraction": 0.6
+    }
+  ],
+  "station_mapping": {
+    "post_rise_straight_definition": "Distance from fixed rise-bend endpoint x=3.8 m to transition inlet x0; zero is allowed.",
+    "transition_and_mouth_length_definition": "Distance from x0 to the mouth.",
+    "rule": "x0 = 3.8 m + post_rise_straight_m. Each downstream station is x = x0 + original_offset_from_4.0_m * (transition_and_mouth_length_m / 1.8 m). Original offsets are 0.75 m (divider start), 0.80 m (intermediate section), 1.50 m (transition end), and 1.80 m (mouth). The 0.20 m pipe overlap offset scales by the same factor as a BREP construction overlap into the transition; it is not extra exposed straight length.",
+    "fixed_upstream_geometry": "Tanks, ports, branches, valves, and the rise bend through x=3.8 m remain unchanged."
+  },
+  "held_geometry_assumptions": {
+    "tank_inside_diameter_m": 0.9,
+    "water_volume_m3_per_tank": 1.35,
+    "headspace_ratio_to_liquid_volume": 0.225,
+    "pipe_inside_diameter_m": 0.3,
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15,
+    "divider_count_per_mouth": 4,
+    "divider_thickness_m_assumed_not_measured": 0.004,
+    "branch_layout": "fixed horizontal +X layout from the reviewed aligned-ruled-v4 geometry"
+  },
+  "inventory_note": "The BREP pipe-plus-transition fluid volume outside each tank is reported for all three geometries. If lines are fully primed, geometry changes the initially primed line-water inventory; this is separate from the 1.350 m3 tank payload and does not establish that downstream lines are fully primed.",
+  "exploratory_cfd_comparison": {
+    "declared_utc": "2026-10-25T15:39:38.507952+00:00",
+    "hypothesis": "Removing downstream length reduces geometric liquid inertance, while the steeper circular-to-rectangular transition can change separation and outlet nonuniformity. The scalar reduced model holds transition loss fixed and cannot predict the latter effect. Early discharge may remain dominated by the common valve restriction.",
+    "compact_bundle": "results/runs/i4f-short1-coldstart-pilot-20261025T152415Z",
+    "legacy_bundles": [
+      "results/runs/i4f-quality-limited-coldstart-20261025T1258Z",
+      "results/runs/i4f-quality-limited-fourmouth-continue-20261025T131742Z"
+    ],
+    "initial_stage_horizon_s": 0.05,
+    "next_stage_target_s": 1.3,
+    "physical_endpoint": "Continue beyond a numerical stage target where feasible until the approach of connected tank-headspace gas to an intake is established, or stop with a preserved numerical-failure diagnosis. A fixed 0.8 s horizon alone is not a complete discharge.",
+    "matched_conditions": "Same tank geometry and native initial tank inventories, 12 bar absolute ideal-air headspace, water properties, gravity, scalar valve law, solver binary and eight PIMPLE outer iterations. Each run retains its own immutable mesh and input record.",
+    "native_initial_primed_line_water_m3": {
+      "compact_tank_A": 0.6813566389157878,
+      "compact_tank_B": 0.6814073281733437,
+      "qualification": "Additional to 1.350 m3 of water per tank. Fully primed downstream pipes are an unconfirmed initial-state hypothesis; the shorter geometry reduces total initial line-water inventory."
+    },
+    "observables": [
+      "Tank pressure, liquid inventory and native water withdrawal rate",
+      "Native mouth control-volume flux and cumulative water balance; keep sampled-plane estimates separate",
+      "Same-observer outlet velocity distribution, direction, nonuniformity, reverse flow and momentum flux",
+      "Transition separation and minimum pressure with phase and location",
+      "Connected headspace-gas approach, separated from external-air entrainment",
+      "Computed emerging sheet extent and thickness only where resolved"
+    ],
+    "comparison_limitations": "Tank payload and initial pressure match, but total primed liquid inventory and downstream meshes differ. The old coarse mesh has two configured face-tet failures; the compact mesh passes the configured quality criteria. This is an exploratory geometric sensitivity, not a mesh-isolated effect or matched-total-payload engineering gain.",
+    "initial_fill_revision": {
+      "received_utc": "2026-10-25T15:48:32.617867+00:00",
+      "user_reply": "Initially contain air",
+      "new_primary": "Same compact geometry with air-filled downstream passages; initialize tank-to-valve wetted passage separately.",
+      "primed_case_role": "Retain short pilot as conditional initial-state sensitivity; do not extend it as hardware baseline. The legacy long primed run is being saved and stopped.",
+      "inventory_comparison": "The two cases intentionally differ in initial line-water inventory; this is not a matched-total-payload geometric design comparison."
+    },
+    "air_filled_primary": {
+      "bundle": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z",
+      "container_id": "c49fa7487931eac8c63733618f6d7538b2e1020e644e2f07fb6ac1255c43fca1",
+      "docker_started_at": "2026-10-25T15:58:24.037034808Z",
+      "native_initial_tank_water_m3_each": 1.35,
+      "native_additional_upstream_feed_water_m3": {
+        "A": 0.25105684381198295,
+        "B": 0.2511091492240681
+      },
+      "effective_valve_plane_x_m_assumed": 2.25,
+      "initial_downstream_air_pressure_absolute_Pa": 100000,
+      "initial_temperature_K": 293.15,
+      "status": "Exploratory ten-rank cold-start pilot; exact identity, release and first steps verified, not physical validation."
+    },
+    "intermediate_observation_time_s": 0.8,
+    "stage_target_update": {
+      "recorded_utc": "2026-10-25T16:45:00.632674+00:00",
+      "reason": "The initially air-filled downstream passages must fill before useful mouth discharge. The reduced model brackets first water near .612/.620 s and intake-crown exposure near 1.127 s, conditionally; .8 s alone is too short for the intended physical interval.",
+      "stage_limit_is_not_emptying_or_validation": true
+    }
+  },
+  "scope_limitations": [
+    "The 1.0 m and 0.8 m lengths are provisional options, not dimensions measured from the photograph or hardware.",
+    "The published CAD comparison alone establishes no flow result. The new compact CFD is a separate immutable run and does not modify any historical case.",
+    "No hydraulic performance, pressure-loss, mesh-quality, or discharge-time improvement is inferred from compactness alone.",
+    "Exact BREP volume differences are geometry inventory estimates; any later CFD cell-zone initialization still requires native mesh reconciliation."
+  ]
+}

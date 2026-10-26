@@ -1,0 +1,255 @@
+{
+  "status": "reproducible provisional geometry source smoke generation; no mesh or CFD",
+  "created_utc": "2026-10-25T15:03:28.655180+00:00",
+  "generator": "generate.py",
+  "generator_sha256": "f5e2252f9199bb8262bf95da519dcf9ece7105b15e4724dfc2270d2eb2458cd9",
+  "runtime": {
+    "python": "3.12.3",
+    "packages": {
+      "cadquery-ocp": "8.0.1.1.0",
+      "numpy": "2.5.4",
+      "matplotlib": "3.11.2",
+      "pyvista": "0.49.1",
+      "vtk": "9.6.2"
+    }
+  },
+  "units": "SI metres; +X discharge; Y separates tanks and spans mouth width; +Z up",
+  "assumptions": {
+    "tank_axis": "+X horizontal, flat-ended cylinder",
+    "tank_diameter_m": 0.9,
+    "water_volume_m3_per_tank": 1.35,
+    "headspace_to_water_volume_ratio": 0.225,
+    "valve_and_pipe_id_m": 0.3,
+    "pipe_id_basis": "assumed equal to reported valve diameter",
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15,
+    "post_rise_straight_m_assumed": 0.0,
+    "transition_and_mouth_length_m_assumed": 1.0,
+    "downstream_stations_x_m": {
+      "rise_bend_end": 3.8,
+      "transition_inlet": 3.8,
+      "divider_start": 4.216666666666667,
+      "transition_intermediate": 4.2444444444444445,
+      "transition_end": 4.633333333333333,
+      "mouth": 4.8,
+      "pipe_overlap_end": 3.911111111111111
+    },
+    "station_mapping": "Transition inlet = fixed rise-bend end + post-rise straight. All original downstream offsets from x=4.0 m scale by transition_and_mouth_length/1.8 m; pipe overlap offset 0.2 m scales by the same factor as an internal pipe/transition BREP overlap, not as an additional exposed straight length.",
+    "intermediate_width_m_assumed": 0.5,
+    "divider_count_per_mouth": 4,
+    "divider_thickness_m_assumed_not_measured": 0.004,
+    "divider_start_x_m_assumed": 4.216666666666667,
+    "divider_geometry": "4 equally spaced plates fanned through the aligned ruled transition; 0.004 m thickness is assumed. Zero-thickness candidates are separate from fitted display solids.",
+    "tank_length": "capacity divided by circular cross-sectional area; ideal flat-ended length, no end-cap correction"
+  },
+  "tank_metrics": {
+    "capacity_m3_each": 1.65375,
+    "derived_flat_cylinder_length_m": 2.599530737167624,
+    "records": [
+      {
+        "tank_index": 1,
+        "center_y_m": -0.55,
+        "volume_m3": 1.65375,
+        "length_m": 2.599530737167624,
+        "bounds_m": [
+          0.0,
+          2.599530737167624,
+          -1.0,
+          -0.10000000000000003,
+          0.8,
+          1.7
+        ],
+        "downstream_line_volume_m3": 0.6864456960875336
+      },
+      {
+        "tank_index": 2,
+        "center_y_m": 0.55,
+        "volume_m3": 1.65375,
+        "length_m": 2.599530737167624,
+        "bounds_m": [
+          0.0,
+          2.599530737167624,
+          0.10000000000000003,
+          1.0,
+          0.8,
+          1.7
+        ],
+        "downstream_line_volume_m3": 0.6864456960956736
+      }
+    ],
+    "downstream_line_volume_m3_each": [
+      0.6864456960875336,
+      0.6864456960956736
+    ],
+    "downstream_line_volume_total_m3": 1.3728913921832073,
+    "branch_line_volume_records": [
+      {
+        "tank_index": 1,
+        "branch": "lower",
+        "branch_pipe_transition_union_volume_m3": 0.3723593163862222,
+        "branch_pipe_shape_volume_m3": 0.2766226333523297,
+        "transition_shape_volume_m3": 0.10333765552985753,
+        "pipe_transition_overlap_volume_m3": 0.007600972495965044,
+        "union_volume_inside_tank_m3": 0.03159210875197258,
+        "line_volume_outside_tank_m3": 0.3407672076342496
+      },
+      {
+        "tank_index": 1,
+        "branch": "upper",
+        "branch_pipe_transition_union_volume_m3": 0.3774503335899708,
+        "branch_pipe_shape_volume_m3": 0.28171373515428166,
+        "transition_shape_volume_m3": 0.10333765552985753,
+        "pipe_transition_overlap_volume_m3": 0.007601057094168352,
+        "union_volume_inside_tank_m3": 0.03177184513668692,
+        "line_volume_outside_tank_m3": 0.3456784884532839
+      },
+      {
+        "tank_index": 2,
+        "branch": "lower",
+        "branch_pipe_transition_union_volume_m3": 0.37235931638932074,
+        "branch_pipe_shape_volume_m3": 0.27662263335233,
+        "transition_shape_volume_m3": 0.10333765552985752,
+        "pipe_transition_overlap_volume_m3": 0.007600972492866771,
+        "union_volume_inside_tank_m3": 0.03159210875198015,
+        "line_volume_outside_tank_m3": 0.3407672076373406
+      },
+      {
+        "tank_index": 2,
+        "branch": "upper",
+        "branch_pipe_transition_union_volume_m3": 0.37745033359501456,
+        "branch_pipe_shape_volume_m3": 0.2817137351542813,
+        "transition_shape_volume_m3": 0.10333765552985753,
+        "pipe_transition_overlap_volume_m3": 0.007601057089124212,
+        "union_volume_inside_tank_m3": 0.03177184513668152,
+        "line_volume_outside_tank_m3": 0.34567848845833304
+      }
+    ],
+    "line_volume_definition": "For each branch, exact BREP inclusion-exclusion computes pipe plus transition minus their overlap; the common part inside the tank is subtracted with the same inclusion-exclusion rule. Branch line volumes are summed per tank; this is a geometry inventory estimate, not a CFD zone-volume measurement."
+  },
+  "topology": {
+    "tank_count": 2,
+    "mouth_count": 4,
+    "envelope_solid_count": 10,
+    "divider_solid_count": 16,
+    "divider_count": 16,
+    "zero_thickness_segment_count": 48,
+    "passages_per_mouth": 5
+  },
+  "area_metrics": {
+    "pipe_area_m2": 0.07068583470577035,
+    "gross_mouth_area_m2_each": 0.15,
+    "nominal_divider_open_mouth_area_m2_each": 0.14759999999999998,
+    "section_samples_one_transition_only_m2": [
+      {
+        "x_m": 3.8000555555555553,
+        "centerline_y_m": -0.75,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07068999053579164,
+        "divider_blockage_area_m2": 0.0,
+        "open_area_after_dividers_m2": 0.07068999053579164
+      },
+      {
+        "x_m": 3.800000555555555,
+        "centerline_y_m": -0.75,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.07068583470577036,
+        "divider_blockage_area_m2": 0.0,
+        "open_area_after_dividers_m2": 0.07068583470577036
+      },
+      {
+        "x_m": 4.24445,
+        "centerline_y_m": -0.749997142857143,
+        "section_normal_xyz": [
+          1.0,
+          0.5142857142857148,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.08574094729138826,
+        "divider_blockage_area_m2": 0.0017429981557909818,
+        "open_area_after_dividers_m2": 0.08399794913559727
+      },
+      {
+        "x_m": 4.633338888888888,
+        "centerline_y_m": -0.55,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.1499999999999999,
+        "divider_blockage_area_m2": 0.0024000000000000007,
+        "open_area_after_dividers_m2": 0.1475999999999999
+      },
+      {
+        "x_m": 4.799944444444444,
+        "centerline_y_m": -0.55,
+        "section_normal_xyz": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "gross_envelope_area_m2": 0.1499999999999999,
+        "divider_blockage_area_m2": 0.0024000000000000007,
+        "open_area_after_dividers_m2": 0.1475999999999999
+      }
+    ],
+    "endpoint_probe_to_pipe_area_ratio": 1.0000000000000002,
+    "continuous_minimum_area": "not proven; section values are discrete BREP slab samples"
+  },
+  "artifacts": {
+    "envelope_step": "geometry/two_tank_four_outlet_aligned_ruled_envelope.step",
+    "fitted_dividers_step": "geometry/four_mouth_fitted_divider_solids.step",
+    "zero_thickness_surfaces_step": "geometry/four_mouth_zero_thickness_divider_surfaces.step",
+    "divider_index": "divider_index.json",
+    "assembly_png": "figures/two_tank_four_outlet_assembly.png",
+    "section_png": "figures/transition_cross_sections.png"
+  },
+  "roundtrip": {
+    "envelope": {
+      "solid_count": 10,
+      "validity": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    },
+    "fitted_dividers": {
+      "solid_count": 16,
+      "validity": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    }
+  }
+}

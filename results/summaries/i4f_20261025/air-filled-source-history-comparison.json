@@ -1,0 +1,3443 @@
+{
+  "created_utc": "2026-10-25T18:03:21.560149+00:00",
+  "interpretation": {
+    "exterior_water_m3_baseline": -1.927607003269932e-145,
+    "exterior_water_m3_thin_wet_side": -7.774252633545078e-116,
+    "front_status": "Compare each native alpha threshold with x=3.8m; the x-bin fill table separately shows the source and transition region occupancy.",
+    "latest_baseline_headspace_gas_mean_p_Pa": 1023226.0692484541,
+    "latest_baseline_tankA_water_drawdown_m3": 0.040873160804044684,
+    "latest_max_water_front_x_by_alpha_threshold_m": {
+      "baseline": {
+        "alpha_ge_0.01": 2.562602818,
+        "alpha_ge_0.5": 2.537562751,
+        "alpha_ge_0.99": 2.537549159
+      },
+      "thin_wet_side": {
+        "alpha_ge_0.01": 2.714976895,
+        "alpha_ge_0.5": 2.689849224,
+        "alpha_ge_0.99": 2.662651064
+      }
+    },
+    "latest_thin_headspace_gas_mean_p_Pa": 1011375.7136983634,
+    "latest_thin_minus_baseline_tankA_drawdown_m3": 0.0030762222471591993,
+    "latest_thin_tankA_water_drawdown_m3": 0.04394938305120388,
+    "transition_start_x_m": 3.8
+  },
+  "mesh_and_solver_provenance": {
+    "analysis_script_sha256": "85f70f3531cdbeae0bfc7b1479e4a267266b6b683770bada8f43b310de315a2a",
+    "baseline_container_id": "42b79f4695fa0648eacc6044191302cb68d9de8d76bb61b1a15ee395f9697a9e",
+    "baseline_docker_started_at": "2026-10-25T16:09:55.062932203Z",
+    "cell_count": 269680,
+    "checkpoint_field_hashes": {
+      "0.050021166664/baseline/T.air": "4ff8cf0f7f258557c049d595039bc0866a72a043bb790409757d3c4c9848a0dc",
+      "0.050021166664/baseline/alpha.water": "0d35e1939d73fc38963c28f65a13ea13e6ea2159b609cd70dcdbcb7d425896e8",
+      "0.050021166664/baseline/p": "9fd542bcce13fc6400817ef789179b6fa3421ba04edf533c2728389bd537b46b",
+      "0.050021166664/baseline/uniform/time": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+      "0.050021166664/thin_wet_side/T.air": "620dc89b6e9786c90c2d87c6050032c3051cb6306b161ee0e50959a9ae6de4d1",
+      "0.050021166664/thin_wet_side/alpha.water": "be785d91e07f9f79e14ed8e0430c627dc956833bbaf24fcfea3000f7bb9224b9",
+      "0.050021166664/thin_wet_side/p": "08b8b435db1d6c73c64932fed6d25d64437ac945e6dd6eba0061fa16a05c3dbc",
+      "0.050021166664/thin_wet_side/uniform/time": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d",
+      "0.100021166664/baseline/T.air": "17acdbd4d0081d385631fd904477302d95e991266f1ea666d3f54575029bb7d9",
+      "0.100021166664/baseline/alpha.water": "34e44c241ca62974fdabf2ef71abd2aa4306456a7373aebaae8035943ab79cd0",
+      "0.100021166664/baseline/p": "750c83323921ce32bf82e2754f886b334ee4c793e47e31cc5ff776c7b2cf1236",
+      "0.100021166664/baseline/uniform/time": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f",
+      "0.100021166664/thin_wet_side/T.air": "a180a6914107a4f39d5d129cab27cfc24ccc61ded058808f7c51d13e30a8b313",
+      "0.100021166664/thin_wet_side/alpha.water": "05e91ad61480e423f6a61d292233981ec35e89925099f3cf6571903a40b3b66c",
+      "0.100021166664/thin_wet_side/p": "a340e78b8aa894e1b579026bf0a30bd8a40509f2e3de4d826fb236efac73248a",
+      "0.100021166664/thin_wet_side/uniform/time": "71da0b9df1f3ca800d8737ead58bc401dedfeabaef2204b0e9b0aae54f6d6a7f",
+      "0.150021166664/baseline/T.air": "24d6992cd6ac65d7eecbae4309d7e7841e899bf0ebd9afa8a617d782af645174",
+      "0.150021166664/baseline/alpha.water": "5d6c582aac8cda133052d56627418afdef1eed22a71cf5645933a54dd2eeb126",
+      "0.150021166664/baseline/p": "35c46f6405e92627b9b94402331057bac11bfa5b519a3b4f71883f384dd2708c",
+      "0.150021166664/baseline/uniform/time": "9f3b1a92f2ff624477b934ef726167d03826fc083850e7982b198036ca4e5261",
+      "0.150021166664/thin_wet_side/T.air": "d5c8ce82c566694127d2c4f41ab2039b977f9c17de00fc4397274d493c9d96dc",
+      "0.150021166664/thin_wet_side/alpha.water": "1b47f54878d91421ef13a29b98e89482d016cf2fb2e9842c32a93e8e81d9214e",
+      "0.150021166664/thin_wet_side/p": "5f5b9e60a80b3c2bef68a80ef7c2ba981e7c223f5fd124a213ecaa063b3cf69a",
+      "0.150021166664/thin_wet_side/uniform/time": "9f3b1a92f2ff624477b934ef726167d03826fc083850e7982b198036ca4e5261",
+      "0.200021166664/baseline/T.air": "3f8e927eaec96b80c6b002158860612c12c4cc1ff6b4fc8536798b1d4e134d85",
+      "0.200021166664/baseline/alpha.water": "8d9cc756701655e55c319be1bc99f59386cb3c2850d260245fe48f498a2ea622",
+      "0.200021166664/baseline/p": "d5c32515c3d3fafafc40adc1884b742d2826940c74905413c993d7a4eef1f296",
+      "0.200021166664/baseline/uniform/time": "ae3c057211b72becf39a534ff758ede1924d23bbde931400eb22bb54db88c514",
+      "0.200021166664/thin_wet_side/T.air": "371f9d26352945dbede10881a7016732508473cc9a5df9389c18aeb3c3b438e0",
+      "0.200021166664/thin_wet_side/alpha.water": "7d3f04f9ca6dd7a952832140a5884258df9c12ff2b0b2cf0a80adb4451cca7e8",
+      "0.200021166664/thin_wet_side/p": "c501a2c0fecbdc8c1929d9f3a9a707f721a896f89ca67e7d27c88549b07504dc",
+      "0.200021166664/thin_wet_side/uniform/time": "ae3c057211b72becf39a534ff758ede1924d23bbde931400eb22bb54db88c514",
+      "0/baseline/T.air": "363281d46045e24f30178b4eb0f1992532ed99cb7bdfd305784fc04b0b244816",
+      "0/baseline/alpha.water": "2684b67d7355065cf299e0e03bc3844ae0b7efb85a079180ec21b77e995dc6e1",
+      "0/baseline/p": "97be93a81f343013282f31d7dd1a9d0026cf0580496d9a74b016e626d5c86ee6",
+      "0/thin_wet_side/T.air": "363281d46045e24f30178b4eb0f1992532ed99cb7bdfd305784fc04b0b244816",
+      "0/thin_wet_side/alpha.water": "2684b67d7355065cf299e0e03bc3844ae0b7efb85a079180ec21b77e995dc6e1",
+      "0/thin_wet_side/p": "97be93a81f343013282f31d7dd1a9d0026cf0580496d9a74b016e626d5c86ee6"
+    },
+    "configured_mesh_quality": "PASS",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "input_freeze_sha256": "f0c4ff38732f01bfe7ec6392955f304a77ffa1ed6798ddcd052113515b06d838",
+    "input_hashes": {
+      "results/runs/i4f-filling-network-20261025T161752.477231Z/history.csv": "89a9363895f5c86d961bf3b47d3bfb4c7c940e08f7fe8275e1a1d6ca6e4f5fe7",
+      "results/runs/i4f-filling-network-20261025T161752.477231Z/summary.json": "2d6028b5c032379e13ea6b4f8f8c8093ec0580018c6ea6351d7653f3f731ad29",
+      "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/experiment.json": "b1381c9e48f01b31c82f7b2b29922d746fc9df8d1fc3dfd6fee83612cf131b42",
+      "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/launch-manifest.json": "40474439ea16e02cb1b6014e5f0d9442075f8bdf19fd7ed0631fb8e0da29445d",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/analysis/mesh-quality-summary.json": "8d123932c953c8d5347a2c28b0ba15623fdf14e4a83dfd7db41948042b862a2e",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/C": "7bfd67e226c94fd655f5aab25150ca179644099f6459f0e7a7cafa64b17ba2d4",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/cellVolume": "25a186a61043e253c583ef52a9f7a034b794dd2919e70b400d7f0732865c3053",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/fvOptions": "6aab5ad4777d1bbf2bd9485a1529706f0d6f49c68d5a72349c31c85efb2bad0a",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/polyMesh/cellZones": "17965ba06ba4c2a3266bc55123111598341fd11c83868a67941d85e05fa55886",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/processors10/constant/polyMesh/cellProcAddressing": "8936f161613fb7e3dfc8f4c1c3fd691b92b64d1dc52e926246829d8f620984ab",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/system/controlDict": "38733eb1a3445dba55ac03989294261a356e4262a04d69f189d2ab096ae98a1c",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/experiment.json": "cb04af3fbfe9b06133b02a0b6b0e97f1f749b35bc27a4cd02119682dc32d1cc0",
+      "results/runs/i4f-short1-dryline-continue-20261025T160951Z/launch-manifest.json": "67148f39048239eab3bfd34a68e65c0bd6e169c9e4f05ddcfd6ddcf91f4f3360",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/constant/C": "7bfd67e226c94fd655f5aab25150ca179644099f6459f0e7a7cafa64b17ba2d4",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/constant/cellVolume": "25a186a61043e253c583ef52a9f7a034b794dd2919e70b400d7f0732865c3053",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/constant/fvOptions": "5bdb56acb0176a49011910201de538eb85a30a135b0112a1b267c87bbfc5437f",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/constant/polyMesh/cellZones": "17965ba06ba4c2a3266bc55123111598341fd11c83868a67941d85e05fa55886",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/processors10/constant/polyMesh/cellProcAddressing": "8936f161613fb7e3dfc8f4c1c3fd691b92b64d1dc52e926246829d8f620984ab",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/system/controlDict": "8deed204306d2d4f331202272d9db19f804af61f29dbe71558ef91ddbab33983",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/experiment.json": "76d1948cd8797f9a9468d8e5666cd129f7768c955ee53106600ad8c6bfa0e17a",
+      "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/launch-manifest.json": "54eca57e915e714329883708891d7eec8e7cfcde2b075b90fd1657986c4bebcb",
+      "results/runs/i4f-short1-valve-wetside-source-20261025T1636Z/experiment.json": "4431af0830edfbf115252c10345187f596b33172b38d1716a586237768f16afb",
+      "results/runs/i4f-short1-valve-wetside-source-20261025T1636Z/launch-manifest.json": "37aafc60b65ce9f3b0204c91440e22d5cfd1a81adb937943a73bfa6d0f5a8197",
+      "results/runs/i4f-valve-phase-weighting-20261025T162515Z/analysis/analyze_native_valve_source.py": "4cc3cd1c258223c4897c6bea7e3356ebe607917fd5ffc183c1f2f19b1e607f75",
+      "results/runs/i4f-valve-source-placement-comparison-20261025T164029Z/matched-source-placement-v2.json": "a37b750dafd5c84da430dbfb96965af756f33f73df33583bdd6dae1b49c0bd35"
+    },
+    "mesh_quality_summary": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/analysis/mesh-quality-summary.json",
+    "thin_container_id": "5a6bb983ac5a1dbab1e50cfc680c2049464dda03236b4c9cbf5276a7af6c76f3",
+    "thin_docker_started_at": "2026-10-25T16:58:04.406855274Z"
+  },
+  "native_branch_partition": {
+    "bin_width_m": 0.1,
+    "branch_centres_by_x_bin": {
+      "tankA_source_y-0.35_m": {
+        "x_2.0_2.1_m": {
+          "cell_count": 448,
+          "center_y_m": -0.3500009618845774,
+          "center_z_m": 0.49999531324849755,
+          "centroid_separation_m": 0.3999943107152288
+        },
+        "x_2.1_2.2_m": {
+          "cell_count": 448,
+          "center_y_m": -0.3500012654091723,
+          "center_z_m": 0.49999544253831774,
+          "centroid_separation_m": 0.39999442533840557
+        },
+        "x_2.2_2.3_m": {
+          "cell_count": 448,
+          "center_y_m": -0.3500013325124654,
+          "center_z_m": 0.4999956948720057,
+          "centroid_separation_m": 0.3999949583848444
+        },
+        "x_2.3_2.4_m": {
+          "cell_count": 448,
+          "center_y_m": -0.3500012088079885,
+          "center_z_m": 0.4999965190738869,
+          "centroid_separation_m": 0.3999957933617145
+        },
+        "x_2.4_2.5_m": {
+          "cell_count": 448,
+          "center_y_m": -0.3500017292497109,
+          "center_z_m": 0.4999919420744931,
+          "centroid_separation_m": 0.39999637577224745
+        },
+        "x_2.5_2.6_m": {
+          "cell_count": 448,
+          "center_y_m": -0.3500022515701449,
+          "center_z_m": 0.4998825902604961,
+          "centroid_separation_m": 0.39999815570448916
+        },
+        "x_2.6_2.7_m": {
+          "cell_count": 458,
+          "center_y_m": -0.3499499339705687,
+          "center_z_m": 0.5022549912092419,
+          "centroid_separation_m": 0.40002254428618184
+        },
+        "x_2.7_2.8_m": {
+          "cell_count": 461,
+          "center_y_m": -0.34993147761029336,
+          "center_z_m": 0.5182805486600809,
+          "centroid_separation_m": 0.40029792105252954
+        },
+        "x_2.8_2.9_m": {
+          "cell_count": 474,
+          "center_y_m": -0.35000288427670506,
+          "center_z_m": 0.545828185612684,
+          "centroid_separation_m": 0.4009809602169754
+        },
+        "x_2.9_3.0_m": {
+          "cell_count": 487,
+          "center_y_m": -0.3501436293762267,
+          "center_z_m": 0.5831544992929653,
+          "centroid_separation_m": 0.4033277947669136
+        },
+        "x_3.0_3.1_m": {
+          "cell_count": 503,
+          "center_y_m": -0.3500962380867781,
+          "center_z_m": 0.6268737533120802,
+          "centroid_separation_m": 0.40759922314601865
+        },
+        "x_3.1_3.2_m": {
+          "cell_count": 504,
+          "center_y_m": -0.35001247169752536,
+          "center_z_m": 0.6752390800022079,
+          "centroid_separation_m": 0.4147220526133973
+        },
+        "x_3.2_3.3_m": {
+          "cell_count": 504,
+          "center_y_m": -0.3500324568810256,
+          "center_z_m": 0.724847855204882,
+          "centroid_separation_m": 0.42385608368865385
+        },
+        "x_3.3_3.4_m": {
+          "cell_count": 502,
+          "center_y_m": -0.3499926821243972,
+          "center_z_m": 0.7731155805007169,
+          "centroid_separation_m": 0.43518652243809985
+        },
+        "x_3.4_3.5_m": {
+          "cell_count": 488,
+          "center_y_m": -0.3500174253858059,
+          "center_z_m": 0.8168689528410882,
+          "centroid_separation_m": 0.44614132711008864
+        },
+        "x_3.5_3.6_m": {
+          "cell_count": 476,
+          "center_y_m": -0.34999910798758366,
+          "center_z_m": 0.8542429129521967,
+          "centroid_separation_m": 0.4571776464017429
+        },
+        "x_3.6_3.7_m": {
+          "cell_count": 461,
+          "center_y_m": -0.3501013737976552,
+          "center_z_m": 0.8819287402083006,
+          "centroid_separation_m": 0.46538331007040423
+        },
+        "x_3.7_3.8_m": {
+          "cell_count": 456,
+          "center_y_m": -0.3499100026261294,
+          "center_z_m": 0.8975515037404479,
+          "centroid_separation_m": 0.47099999877083115
+        },
+        "x_3.8_3.9_m": {
+          "cell_count": 480,
+          "center_y_m": -0.3499767786585666,
+          "center_z_m": 0.9001053395270219,
+          "centroid_separation_m": 0.4717994091436683
+        },
+        "x_3.9_4.0_m": {
+          "cell_count": 503,
+          "center_y_m": -0.35010935692090345,
+          "center_z_m": 0.8999115646053353,
+          "centroid_separation_m": 0.47145047578558547
+        },
+        "x_4.0_4.1_m": {
+          "cell_count": 506,
+          "center_y_m": -0.34990000559040185,
+          "center_z_m": 0.9000897993021101,
+          "centroid_separation_m": 0.47179369873111615
+        },
+        "x_4.1_4.2_m": {
+          "cell_count": 553,
+          "center_y_m": -0.35145780783274166,
+          "center_z_m": 0.9000567869252201,
+          "centroid_separation_m": 0.4693725452046935
+        },
+        "x_4.2_4.3_m": {
+          "cell_count": 1618,
+          "center_y_m": -0.35401209712854365,
+          "center_z_m": 0.8974755785986538,
+          "centroid_separation_m": 0.46223491216433144
+        },
+        "x_4.3_4.4_m": {
+          "cell_count": 1936,
+          "center_y_m": -0.36137369314238654,
+          "center_z_m": 0.8559753514856396,
+          "centroid_separation_m": 0.41052236979618956
+        },
+        "x_4.4_4.5_m": {
+          "cell_count": 2118,
+          "center_y_m": -0.3484395213173433,
+          "center_z_m": 0.8135148039202307,
+          "centroid_separation_m": 0.41043852046430374
+        },
+        "x_4.5_4.6_m": {
+          "cell_count": 2096,
+          "center_y_m": -0.32419787636810105,
+          "center_z_m": 0.7889944139153793,
+          "centroid_separation_m": 0.4524559458576366
+        },
+        "x_4.6_4.7_m": {
+          "cell_count": 1738,
+          "center_y_m": -0.30131065119210726,
+          "center_z_m": 0.7749162005638134,
+          "centroid_separation_m": 0.4973966286444224
+        },
+        "x_4.7_4.8_m": {
+          "cell_count": 1352,
+          "center_y_m": -0.30021847503183446,
+          "center_z_m": 0.7748499730602625,
+          "centroid_separation_m": 0.4995492461739973
+        }
+      },
+      "tankA_source_y-0.75_m": {
+        "x_2.0_2.1_m": {
+          "cell_count": 448,
+          "center_y_m": -0.7499952725533063,
+          "center_z_m": 0.5000014123755816,
+          "centroid_separation_m": 0.3999943107152288
+        },
+        "x_2.1_2.2_m": {
+          "cell_count": 448,
+          "center_y_m": -0.7499956907065002,
+          "center_z_m": 0.5000011750496465,
+          "centroid_separation_m": 0.39999442533840557
+        },
+        "x_2.2_2.3_m": {
+          "cell_count": 448,
+          "center_y_m": -0.7499962908643744,
+          "center_z_m": 0.5000008279023024,
+          "centroid_separation_m": 0.3999949583848444
+        },
+        "x_2.3_2.4_m": {
+          "cell_count": 448,
+          "center_y_m": -0.7499970021500127,
+          "center_z_m": 0.5000004879585883,
+          "centroid_separation_m": 0.3999957933617145
+        },
+        "x_2.4_2.5_m": {
+          "cell_count": 448,
+          "center_y_m": -0.7499981049725987,
+          "center_z_m": 0.4999982259758837,
+          "centroid_separation_m": 0.39999637577224745
+        },
+        "x_2.5_2.6_m": {
+          "cell_count": 448,
+          "center_y_m": -0.7500003984672552,
+          "center_z_m": 0.49996652994452473,
+          "centroid_separation_m": 0.39999815570448916
+        },
+        "x_2.6_2.7_m": {
+          "cell_count": 450,
+          "center_y_m": -0.7499704243502464,
+          "center_z_m": 0.5009731122787215,
+          "centroid_separation_m": 0.40002254428618184
+        },
+        "x_2.7_2.8_m": {
+          "cell_count": 457,
+          "center_y_m": -0.7500511392978434,
+          "center_z_m": 0.5063355944945045,
+          "centroid_separation_m": 0.40029792105252954
+        },
+        "x_2.8_2.9_m": {
+          "cell_count": 452,
+          "center_y_m": -0.7499489556402085,
+          "center_z_m": 0.5170380752025613,
+          "centroid_separation_m": 0.4009809602169754
+        },
+        "x_2.9_3.0_m": {
+          "cell_count": 458,
+          "center_y_m": -0.7500501005550222,
+          "center_z_m": 0.5307319436430853,
+          "centroid_separation_m": 0.4033277947669136
+        },
+        "x_3.0_3.1_m": {
+          "cell_count": 460,
+          "center_y_m": -0.7499623439862366,
+          "center_z_m": 0.5478533504907779,
+          "centroid_separation_m": 0.40759922314601865
+        },
+        "x_3.1_3.2_m": {
+          "cell_count": 458,
+          "center_y_m": -0.7499544863899732,
+          "center_z_m": 0.565508656656559,
+          "centroid_separation_m": 0.4147220526133973
+        },
+        "x_3.2_3.3_m": {
+          "cell_count": 462,
+          "center_y_m": -0.750002690130116,
+          "center_z_m": 0.5845703010682657,
+          "centroid_separation_m": 0.42385608368865385
+        },
+        "x_3.3_3.4_m": {
+          "cell_count": 464,
+          "center_y_m": -0.7500306299058512,
+          "center_z_m": 0.6017768818755392,
+          "centroid_separation_m": 0.43518652243809985
+        },
+        "x_3.4_3.5_m": {
+          "cell_count": 458,
+          "center_y_m": -0.7500301336559058,
+          "center_z_m": 0.6193039838360263,
+          "centroid_separation_m": 0.44614132711008864
+        },
+        "x_3.5_3.6_m": {
+          "cell_count": 452,
+          "center_y_m": -0.7499554082759236,
+          "center_z_m": 0.6327787889295904,
+          "centroid_separation_m": 0.4571776464017429
+        },
+        "x_3.6_3.7_m": {
+          "cell_count": 460,
+          "center_y_m": -0.7499485893296156,
+          "center_z_m": 0.6438030811049104,
+          "centroid_separation_m": 0.46538331007040423
+        },
+        "x_3.7_3.8_m": {
+          "cell_count": 452,
+          "center_y_m": -0.7500266456552,
+          "center_z_m": 0.6490607175666538,
+          "centroid_separation_m": 0.47099999877083115
+        },
+        "x_3.8_3.9_m": {
+          "cell_count": 478,
+          "center_y_m": -0.750043143274774,
+          "center_z_m": 0.6500221806156582,
+          "centroid_separation_m": 0.4717994091436683
+        },
+        "x_3.9_4.0_m": {
+          "cell_count": 504,
+          "center_y_m": -0.7499034695149656,
+          "center_z_m": 0.6500511662754253,
+          "centroid_separation_m": 0.47145047578558547
+        },
+        "x_4.0_4.1_m": {
+          "cell_count": 504,
+          "center_y_m": -0.7499559433775635,
+          "center_z_m": 0.6500007335602792,
+          "centroid_separation_m": 0.47179369873111615
+        },
+        "x_4.1_4.2_m": {
+          "cell_count": 556,
+          "center_y_m": -0.7486771707293679,
+          "center_z_m": 0.6500020650503264,
+          "centroid_separation_m": 0.4693725452046935
+        },
+        "x_4.2_4.3_m": {
+          "cell_count": 1616,
+          "center_y_m": -0.7460141558607664,
+          "center_z_m": 0.6525357901336798,
+          "centroid_separation_m": 0.46223491216433144
+        },
+        "x_4.3_4.4_m": {
+          "cell_count": 1936,
+          "center_y_m": -0.7386086569760284,
+          "center_z_m": 0.6940420375427998,
+          "centroid_separation_m": 0.41052236979618956
+        },
+        "x_4.4_4.5_m": {
+          "cell_count": 2104,
+          "center_y_m": -0.7515829422884616,
+          "center_z_m": 0.7364748064602724,
+          "centroid_separation_m": 0.41043852046430374
+        },
+        "x_4.5_4.6_m": {
+          "cell_count": 2068,
+          "center_y_m": -0.7757839721654872,
+          "center_z_m": 0.7609519278557854,
+          "centroid_separation_m": 0.4524559458576366
+        },
+        "x_4.6_4.7_m": {
+          "cell_count": 1738,
+          "center_y_m": -0.7987072419893787,
+          "center_z_m": 0.7751102368726083,
+          "centroid_separation_m": 0.4973966286444224
+        },
+        "x_4.7_4.8_m": {
+          "cell_count": 1352,
+          "center_y_m": -0.7997676307517335,
+          "center_z_m": 0.7751505933274293,
+          "centroid_separation_m": 0.4995492461739973
+        }
+      },
+      "tankB_source_y+0.35_m": {
+        "x_2.0_2.1_m": {
+          "cell_count": 448,
+          "center_y_m": 0.35000472751498074,
+          "center_z_m": 0.5000014119838165,
+          "centroid_separation_m": 0.39999431163181814
+        },
+        "x_2.1_2.2_m": {
+          "cell_count": 448,
+          "center_y_m": 0.3500043091376222,
+          "center_z_m": 0.5000011746883172,
+          "centroid_separation_m": 0.39999442621740217
+        },
+        "x_2.2_2.3_m": {
+          "cell_count": 448,
+          "center_y_m": 0.3500037089505513,
+          "center_z_m": 0.5000008274584636,
+          "centroid_separation_m": 0.39999495907995186
+        },
+        "x_2.3_2.4_m": {
+          "cell_count": 448,
+          "center_y_m": 0.35000299823076936,
+          "center_z_m": 0.5000004865389901,
+          "centroid_separation_m": 0.39999579493888865
+        },
+        "x_2.4_2.5_m": {
+          "cell_count": 448,
+          "center_y_m": 0.3500019149412264,
+          "center_z_m": 0.49999818976294425,
+          "centroid_separation_m": 0.39999640267264425
+        },
+        "x_2.5_2.6_m": {
+          "cell_count": 448,
+          "center_y_m": 0.3499998975455158,
+          "center_z_m": 0.4999661380445238,
+          "centroid_separation_m": 0.3999980491471539
+        },
+        "x_2.6_2.7_m": {
+          "cell_count": 450,
+          "center_y_m": 0.35001901591586254,
+          "center_z_m": 0.5009886436610157,
+          "centroid_separation_m": 0.40003967837842136
+        },
+        "x_2.7_2.8_m": {
+          "cell_count": 457,
+          "center_y_m": 0.3499618842884184,
+          "center_z_m": 0.5063148141136103,
+          "centroid_separation_m": 0.40028012205548585
+        },
+        "x_2.8_2.9_m": {
+          "cell_count": 452,
+          "center_y_m": 0.3500507296599834,
+          "center_z_m": 0.5170384658309396,
+          "centroid_separation_m": 0.40098137983683935
+        },
+        "x_2.9_3.0_m": {
+          "cell_count": 458,
+          "center_y_m": 0.34994987201885946,
+          "center_z_m": 0.5307319709240387,
+          "centroid_separation_m": 0.40332782359752406
+        },
+        "x_3.0_3.1_m": {
+          "cell_count": 460,
+          "center_y_m": 0.3500376510695225,
+          "center_z_m": 0.5478533506670247,
+          "centroid_separation_m": 0.4075992286881249
+        },
+        "x_3.1_3.2_m": {
+          "cell_count": 458,
+          "center_y_m": 0.3500455098707,
+          "center_z_m": 0.5655086533835147,
+          "centroid_separation_m": 0.41472205796060685
+        },
+        "x_3.2_3.3_m": {
+          "cell_count": 462,
+          "center_y_m": 0.3499973087969518,
+          "center_z_m": 0.5845703021022141,
+          "centroid_separation_m": 0.42385608568750427
+        },
+        "x_3.3_3.4_m": {
+          "cell_count": 464,
+          "center_y_m": 0.3499693724735505,
+          "center_z_m": 0.6017768814089348,
+          "centroid_separation_m": 0.4351865226934759
+        },
+        "x_3.4_3.5_m": {
+          "cell_count": 458,
+          "center_y_m": 0.3499698709267509,
+          "center_z_m": 0.6193039882234354,
+          "centroid_separation_m": 0.44614132350107194
+        },
+        "x_3.5_3.6_m": {
+          "cell_count": 452,
+          "center_y_m": 0.3500446644396425,
+          "center_z_m": 0.6327788211848061,
+          "centroid_separation_m": 0.45717758135571296
+        },
+        "x_3.6_3.7_m": {
+          "cell_count": 460,
+          "center_y_m": 0.350053656923667,
+          "center_z_m": 0.6438034745473873,
+          "centroid_separation_m": 0.46538170462099215
+        },
+        "x_3.7_3.8_m": {
+          "cell_count": 452,
+          "center_y_m": 0.35001208117070565,
+          "center_z_m": 0.6490638348028042,
+          "centroid_separation_m": 0.47098206182196806
+        },
+        "x_3.8_3.9_m": {
+          "cell_count": 480,
+          "center_y_m": 0.35001992067403914,
+          "center_z_m": 0.6500546812665436,
+          "centroid_separation_m": 0.4717159743856423
+        },
+        "x_3.9_4.0_m": {
+          "cell_count": 504,
+          "center_y_m": 0.3499979770955496,
+          "center_z_m": 0.6500119444881212,
+          "centroid_separation_m": 0.47154641538617564
+        },
+        "x_4.0_4.1_m": {
+          "cell_count": 504,
+          "center_y_m": 0.3500402253788928,
+          "center_z_m": 0.6499973709350915,
+          "centroid_separation_m": 0.4718038534001424
+        },
+        "x_4.1_4.2_m": {
+          "cell_count": 554,
+          "center_y_m": 0.3513279996815538,
+          "center_z_m": 0.6499997879343853,
+          "centroid_separation_m": 0.4694027567472557
+        },
+        "x_4.2_4.3_m": {
+          "cell_count": 1613,
+          "center_y_m": 0.3530421626008767,
+          "center_z_m": 0.6513109764008803,
+          "centroid_separation_m": 0.4622443966279063
+        },
+        "x_4.3_4.4_m": {
+          "cell_count": 1936,
+          "center_y_m": 0.36143572402451235,
+          "center_z_m": 0.6940436671768214,
+          "centroid_separation_m": 0.4104522398363573
+        },
+        "x_4.4_4.5_m": {
+          "cell_count": 2104,
+          "center_y_m": 0.34844026639274334,
+          "center_z_m": 0.7364579623166064,
+          "centroid_separation_m": 0.41046892713570476
+        },
+        "x_4.5_4.6_m": {
+          "cell_count": 2068,
+          "center_y_m": 0.32419489091991205,
+          "center_z_m": 0.7609911599375275,
+          "centroid_separation_m": 0.45246380455303337
+        },
+        "x_4.6_4.7_m": {
+          "cell_count": 1738,
+          "center_y_m": 0.3012858815229049,
+          "center_z_m": 0.7750897914198993,
+          "centroid_separation_m": 0.4974077563447981
+        },
+        "x_4.7_4.8_m": {
+          "cell_count": 1352,
+          "center_y_m": 0.30021437447993143,
+          "center_z_m": 0.7751403281549069,
+          "centroid_separation_m": 0.499550524174936
+        }
+      },
+      "tankB_source_y+0.75_m": {
+        "x_2.0_2.1_m": {
+          "cell_count": 448,
+          "center_y_m": 0.7499990391002996,
+          "center_z_m": 0.4999953128955749,
+          "centroid_separation_m": 0.39999431163181814
+        },
+        "x_2.1_2.2_m": {
+          "cell_count": 448,
+          "center_y_m": 0.7499987353139463,
+          "center_z_m": 0.49999544214998,
+          "centroid_separation_m": 0.39999442621740217
+        },
+        "x_2.2_2.3_m": {
+          "cell_count": 448,
+          "center_y_m": 0.7499986679975672,
+          "center_z_m": 0.4999956943872317,
+          "centroid_separation_m": 0.39999495907995186
+        },
+        "x_2.3_2.4_m": {
+          "cell_count": 448,
+          "center_y_m": 0.7499987931499812,
+          "center_z_m": 0.49999651901032827,
+          "centroid_separation_m": 0.39999579493888865
+        },
+        "x_2.4_2.5_m": {
+          "cell_count": 448,
+          "center_y_m": 0.7499983175651808,
+          "center_z_m": 0.499991948643965,
+          "centroid_separation_m": 0.39999640267264425
+        },
+        "x_2.5_2.6_m": {
+          "cell_count": 448,
+          "center_y_m": 0.7499979379767269,
+          "center_z_m": 0.49988263522901266,
+          "centroid_separation_m": 0.3999980491471539
+        },
+        "x_2.6_2.7_m": {
+          "cell_count": 458,
+          "center_y_m": 0.7500566795340645,
+          "center_z_m": 0.5022582751040126,
+          "centroid_separation_m": 0.40003967837842136
+        },
+        "x_2.7_2.8_m": {
+          "cell_count": 461,
+          "center_y_m": 0.750063090210653,
+          "center_z_m": 0.5182814816667893,
+          "centroid_separation_m": 0.40028012205548585
+        },
+        "x_2.8_2.9_m": {
+          "cell_count": 474,
+          "center_y_m": 0.7499972542975514,
+          "center_z_m": 0.5458281238036709,
+          "centroid_separation_m": 0.40098137983683935
+        },
+        "x_2.9_3.0_m": {
+          "cell_count": 487,
+          "center_y_m": 0.7498563766548398,
+          "center_z_m": 0.5831544931616047,
+          "centroid_separation_m": 0.40332782359752406
+        },
+        "x_3.0_3.1_m": {
+          "cell_count": 503,
+          "center_y_m": 0.7499037623114307,
+          "center_z_m": 0.6268737550410105,
+          "centroid_separation_m": 0.4075992286881249
+        },
+        "x_3.1_3.2_m": {
+          "cell_count": 504,
+          "center_y_m": 0.7499875285031046,
+          "center_z_m": 0.6752390825785118,
+          "centroid_separation_m": 0.41472205796060685
+        },
+        "x_3.2_3.3_m": {
+          "cell_count": 504,
+          "center_y_m": 0.7499675441984376,
+          "center_z_m": 0.7248478561413868,
+          "centroid_separation_m": 0.42385608568750427
+        },
+        "x_3.3_3.4_m": {
+          "cell_count": 502,
+          "center_y_m": 0.7500073205535784,
+          "center_z_m": 0.773115579985643,
+          "centroid_separation_m": 0.4351865226934759
+        },
+        "x_3.4_3.5_m": {
+          "cell_count": 488,
+          "center_y_m": 0.749982577536112,
+          "center_z_m": 0.816868952441136,
+          "centroid_separation_m": 0.44614132350107194
+        },
+        "x_3.5_3.6_m": {
+          "cell_count": 476,
+          "center_y_m": 0.7500009097671275,
+          "center_z_m": 0.8542429101875159,
+          "centroid_separation_m": 0.45717758135571296
+        },
+        "x_3.6_3.7_m": {
+          "cell_count": 461,
+          "center_y_m": 0.7498991203012707,
+          "center_z_m": 0.8819289381422951,
+          "centroid_separation_m": 0.46538170462099215
+        },
+        "x_3.7_3.8_m": {
+          "cell_count": 456,
+          "center_y_m": 0.750107186486912,
+          "center_z_m": 0.8975553019804235,
+          "centroid_separation_m": 0.47098206182196806
+        },
+        "x_3.8_3.9_m": {
+          "cell_count": 480,
+          "center_y_m": 0.7500079045661255,
+          "center_z_m": 0.9001058225007719,
+          "centroid_separation_m": 0.4717159743856423
+        },
+        "x_3.9_4.0_m": {
+          "cell_count": 503,
+          "center_y_m": 0.7498843826917885,
+          "center_z_m": 0.8999056908742042,
+          "centroid_separation_m": 0.47154641538617564
+        },
+        "x_4.0_4.1_m": {
+          "cell_count": 506,
+          "center_y_m": 0.7501056185359796,
+          "center_z_m": 0.9000904681634809,
+          "centroid_separation_m": 0.4718038534001424
+        },
+        "x_4.1_4.2_m": {
+          "cell_count": 553,
+          "center_y_m": 0.7485836613433967,
+          "center_z_m": 0.9000535567912747,
+          "centroid_separation_m": 0.4694027567472557
+        },
+        "x_4.2_4.3_m": {
+          "cell_count": 1623,
+          "center_y_m": 0.7444829747040055,
+          "center_z_m": 0.8971645361350036,
+          "centroid_separation_m": 0.4622443966279063
+        },
+        "x_4.3_4.4_m": {
+          "cell_count": 1936,
+          "center_y_m": 0.7385985466026656,
+          "center_z_m": 0.8559672493122321,
+          "centroid_separation_m": 0.4104522398363573
+        },
+        "x_4.4_4.5_m": {
+          "cell_count": 2118,
+          "center_y_m": 0.751601722829434,
+          "center_z_m": 0.8135655507095969,
+          "centroid_separation_m": 0.41046892713570476
+        },
+        "x_4.5_4.6_m": {
+          "cell_count": 2097,
+          "center_y_m": 0.7757914578582623,
+          "center_z_m": 0.788991787789447,
+          "centroid_separation_m": 0.45246380455303337
+        },
+        "x_4.6_4.7_m": {
+          "cell_count": 1737,
+          "center_y_m": 0.7986936112835461,
+          "center_z_m": 0.7749271681405673,
+          "centroid_separation_m": 0.4974077563447981
+        },
+        "x_4.7_4.8_m": {
+          "cell_count": 1352,
+          "center_y_m": 0.7997648155495388,
+          "center_z_m": 0.7748521778225427,
+          "centroid_separation_m": 0.499550524174936
+        }
+      }
+    },
+    "branch_names_by_train": {
+      "A": [
+        "tankA_source_y-0.75_m",
+        "tankA_source_y-0.35_m"
+      ],
+      "B": [
+        "tankB_source_y+0.35_m",
+        "tankB_source_y+0.75_m"
+      ]
+    },
+    "initial_valve_y_centres_m": [
+      -0.7499963278990316,
+      -0.35000126891039113,
+      0.3500036721142513,
+      0.7499987321533065
+    ],
+    "limit": "The x-bin liquid-volume fraction is a native-cell fill proxy, not an exact normal-plane area fraction. Cell-centre front thresholds are separate metrics.",
+    "partition_method": "native line-zone cells assigned to two volume-weighted (y,z) centroids per 0.1m x bin, initialized from the two allFourValves y bands and propagated bin-to-bin",
+    "x_bin_edges_m": [
+      2.0,
+      2.1,
+      2.2,
+      2.3000000000000003,
+      2.4000000000000004,
+      2.5000000000000004,
+      2.6000000000000005,
+      2.7000000000000006,
+      2.8000000000000007,
+      2.900000000000001,
+      3.000000000000001,
+      3.100000000000001,
+      3.200000000000001,
+      3.300000000000001,
+      3.4000000000000012,
+      3.5000000000000013,
+      3.6000000000000014,
+      3.7000000000000015,
+      3.8000000000000016,
+      3.9000000000000017,
+      4.000000000000002,
+      4.100000000000001,
+      4.200000000000002,
+      4.3000000000000025,
+      4.400000000000002,
+      4.500000000000002,
+      4.600000000000002,
+      4.700000000000003,
+      4.8000000000000025
+    ]
+  },
+  "paired_source_sensitivity": {
+    "baseline_case": "same-mesh compact air-filled dryline baseline; allFourValves source distributed over full nominal 0.30m source zone",
+    "baseline_support": {
+      "length_m": 0.3,
+      "x_approx_m": [
+        2.1,
+        2.4
+      ],
+      "zone": "allFourValves"
+    },
+    "first_sampled_time_original_source_volume_fraction_alpha_ge_0p99_reaches_0p99_s": 0.150021166664,
+    "latest_original_source_volume_fraction_alpha_ge_0p99": 1.0,
+    "qualifications": [
+      "The thin wet-side arm changes only the declared volumetric fvOptions source support/length normalization. This is not a modeled moving valve disc or a measured seat restriction.",
+      "Uniform-field K/L coefficient integral is algebraically preserved by V-band normalization; spatial phase, density, and velocity distributions are intentionally not identical.",
+      "The reduced network has a matched compact one-tank/two-branch geometry and downstream-air scope, but uses a centerline wet-feed volume that differs from the native initial line zone by the recorded amount; predictions are consistency comparisons, not validation.",
+      "The reduced network has no source-location degree of freedom, so its trajectory is common to both CFD arms and cannot explain their difference."
+    ],
+    "same_mesh_partition_binary_and_initial_native_fields": true,
+    "source_fully_wet_by_latest_checkpoint_at_alpha_ge_0p99": true,
+    "thin_support": {
+      "band_fraction_of_zone": 0.33333725841949624,
+      "baseline_zone": "allFourValves cellZone; x extent approximately [2.10,2.40] m",
+      "diagnostic_fvOptions_sha256": "5bdb56acb0176a49011910201de538eb85a30a135b0112a1b267c87bbfc5437f",
+      "diagnostic_mask": "cell-centre x >= 2.15 m and x < 2.25 m, applied within existing allFourValves selected cell list",
+      "initial_mask_phase": "alpha.water=1.0 in every selected band cell, verified against exact baseline initial field/partition",
+      "initial_source_zone_volume_m3": 0.08410397690444701,
+      "initial_wet_band_volume_m3": 0.028034989083504998,
+      "mask_units": "m, global x coordinate",
+      "native_mask_audit": "analysis/wetside-band-audit.json",
+      "native_mask_audit_sha256": "df810f4a81cc21f899677805855924b492fd9ccf494c7539730ae0bbfa1a45c2",
+      "normalization": "L_eff = 0.30 * V_band / V_zone, preserving the volume-integrated linear coefficient K/L for spatially uniform rho and velocity; no fitting to trajectory",
+      "normalized_effective_length_m": 0.10000117752584887,
+      "original_distributed_length_m": 0.3,
+      "other_parameters_unchanged": {
+        "Cd": 0.7,
+        "U_regularization_m_s": 0.1,
+        "loss_form": "diag -= 0.5*rho*(K/L)*max(|U|,0.10)*V",
+        "minimum_effective_open_fraction": 0.02,
+        "opening": "1 s smoothstep"
+      },
+      "per_cluster_geometry": [
+        {
+          "band_volume_m3": 0.007008640727276,
+          "cluster_y_center_m": -0.75,
+          "effective_length_m": 0.1000010553996589,
+          "zone_volume_m3": 0.021025700276659
+        },
+        {
+          "band_volume_m3": 0.007008853770666,
+          "cluster_y_center_m": -0.35,
+          "effective_length_m": 0.1000012999311871,
+          "zone_volume_m3": 0.021026287984723
+        },
+        {
+          "band_volume_m3": 0.007008640784856,
+          "cluster_y_center_m": 0.35,
+          "effective_length_m": 0.10000105685541733,
+          "zone_volume_m3": 0.021025700143317
+        },
+        {
+          "band_volume_m3": 0.007008853800707,
+          "cluster_y_center_m": 0.75,
+          "effective_length_m": 0.1000012979103421,
+          "zone_volume_m3": 0.021026288499748
+        }
+      ],
+      "qualification": "Exploratory numerical sensitivity of source placement/support, not a resolved valve or measured seat model. Uniform-flow equivalence is algebraic only; spatial density/velocity and phase weighting differ intentionally.",
+      "verifier_script": "scripts/verify_source_band.py",
+      "verifier_script_sha256": "b165b0d0786166770ef8ed9aa6355b88f615e37bab53e6ed9d3838958a6e6095"
+    },
+    "thin_wet_side_case": "matched source-support sensitivity: source restricted to fully wet cell-centre band x=[2.15,2.25)m in allFourValves with volume-normalized effective length"
+  },
+  "reduced_network_scope": {
+    "gas_polytropic_n": 1.3998140369692171,
+    "history": "results/runs/i4f-filling-network-20261025T161752.477231Z/history.csv",
+    "history_sha256": "89a9363895f5c86d961bf3b47d3bfb4c7c940e08f7fe8275e1a1d6ca6e4f5fe7",
+    "input_wet_feed_volume_m3_per_tank": 0.25264843238893564,
+    "interpretation": "Same compact geometry, tank state, air-filled downstream initial condition, and nominal valve law. Interpolated model states use explicit two-sided time brackets; shared pressure/flow agreement is a consistency screen, not independent validation. The ODE does not distinguish source support and its wet-feed line volume differs by the above native/centerline amount.",
+    "model_line_scope": "current compact one-tank / two-branch candidate, 4.8 m mouth",
+    "model_minus_native_initial_wet_feed_m3": 0.001591588576952685,
+    "model_minus_native_initial_wet_feed_percent": 0.6339554631478715,
+    "native_initial_wet_feed_volume_m3_per_tank": 0.25105684381198295,
+    "summary": "results/runs/i4f-filling-network-20261025T161752.477231Z/summary.json",
+    "summary_sha256": "2d6028b5c032379e13ea6b4f8f8c8093ec0580018c6ea6351d7653f3f731ad29"
+  },
+  "samples": [
+    {
+      "baseline": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0,
+        "global_alpha_min": 0.0,
+        "native_exterior_water_inventory_m3": 0.0,
+        "native_field_time_directory": "0",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.0,
+            "volFieldValue_observer": null
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.25105684381198284,
+            "volFieldValue_observer": null
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.0,
+            "volFieldValue_observer": null
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.251109149224068,
+            "volFieldValue_observer": null
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.0,
+            "volFieldValue_observer": null
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3499999999999999,
+            "volFieldValue_observer": null
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.350000000000001,
+            "volFieldValue_observer": null
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 3.2021659930360515,
+            "volFieldValue_observer": null
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.25105684381198284,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.0,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381198284,
+            "lineZone_water_increment_from_t0_m3": 0.0,
+            "lineZone_water_m3": 0.25105684381198284,
+            "mouthBoundaryZone_water_m3": 0.0
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.251109149224068,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.0,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25110914922406796,
+            "lineZone_water_increment_from_t0_m3": 0.0,
+            "lineZone_water_m3": 0.251109149224068,
+            "mouthBoundaryZone_water_m3": 0.0
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.0,
+            "gas_mass_kg_ideal_air_EOS": 4.256708108589219,
+            "gas_mass_weighted_mean_Tair_K": 293.15000000000003,
+            "gas_volume_m3": 0.2984972004081192,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1199988.9920753166,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3499999999999999
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.0,
+            "gas_mass_kg_ideal_air_EOS": 4.25670194533971,
+            "gas_mass_weighted_mean_Tair_K": 293.15,
+            "gas_volume_m3": 0.29849676833613037,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1199988.9915951893,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.350000000000001
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.042051317969132,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.500007972073571,
+            "volume_fraction_alpha_le_0p01": 0.4999920279264289,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.500007972073571,
+            "water_volume_m3": 0.042052658935315
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 0.0,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 1.0000000000000002,
+            "water_volume_m3": 0.028034989083505
+          }
+        },
+        "time_s": 0.0
+      },
+      "reduced_network_reference": {
+        "bracket_gap_s": 0.0,
+        "flow_lower_m3_s": 0.0,
+        "flow_upper_m3_s": 0.0,
+        "front_s_lower_m": 1.7859314980042726,
+        "front_s_upper_m": 1.788312669028405,
+        "gas_pressure_abs_Pa": 1200000.0,
+        "gas_volume_m3": 0.29849720040811945,
+        "interpolation_fraction": 0.0,
+        "lower_saved_time_s": 0.0,
+        "method": "exact saved reduced-model row",
+        "tank_water_volume_m3": 1.3499999999999994,
+        "target_time_s": 0.0,
+        "total_branch_flow_m3_s": 0.0,
+        "total_external_water_volume_m3": 0.0,
+        "total_wet_line_water_volume_m3": 0.25264843238893564,
+        "upper_saved_time_s": 0.0,
+        "wet_line_volume_lower_m3": 0.12624005866375884,
+        "wet_line_volume_upper_m3": 0.12640837372517683
+      },
+      "reduced_network_residuals": {
+        "baseline": {
+          "lineA_water_increment_minus_model_m3": 0.0,
+          "lineB_water_increment_minus_model_m3": 0.0,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -11.007924683392048,
+          "tankA_water_minus_reduced_model_m3": 4.440892098500626e-16,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -11.008404810680076,
+          "tankB_water_minus_reduced_model_m3": 1.5543122344752192e-15
+        },
+        "thin_wet_side": {
+          "lineA_water_increment_minus_model_m3": 0.0,
+          "lineB_water_increment_minus_model_m3": 0.0,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -11.007924683392048,
+          "tankA_water_minus_reduced_model_m3": 4.440892098500626e-16,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -11.008404810680076,
+          "tankB_water_minus_reduced_model_m3": 1.5543122344752192e-15
+        }
+      },
+      "source_cases": {
+        "baseline": {
+          "case": "results/runs/i4f-short1-dryline-coldstart-20261025T155038Z/case",
+          "time_dir": "0"
+        },
+        "thin_wet_side": {
+          "case": "results/runs/i4f-short1-valve-wetside-source-20261025T1636Z/case",
+          "time_dir": "0"
+        }
+      },
+      "thin_wet_side": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 0,
+                "furthest_wet_cell_centre_x_m": null,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0,
+        "global_alpha_min": 0.0,
+        "native_exterior_water_inventory_m3": 0.0,
+        "native_field_time_directory": "0",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.0,
+            "volFieldValue_observer": null
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.25105684381198284,
+            "volFieldValue_observer": null
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.0,
+            "volFieldValue_observer": null
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.251109149224068,
+            "volFieldValue_observer": null
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.0,
+            "volFieldValue_observer": null
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3499999999999999,
+            "volFieldValue_observer": null
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.350000000000001,
+            "volFieldValue_observer": null
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 3.2021659930360515,
+            "volFieldValue_observer": null
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.25105684381198284,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.0,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381198284,
+            "lineZone_water_increment_from_t0_m3": 0.0,
+            "lineZone_water_m3": 0.25105684381198284,
+            "mouthBoundaryZone_water_m3": 0.0
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.251109149224068,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.0,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25110914922406796,
+            "lineZone_water_increment_from_t0_m3": 0.0,
+            "lineZone_water_m3": 0.251109149224068,
+            "mouthBoundaryZone_water_m3": 0.0
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.0,
+            "gas_mass_kg_ideal_air_EOS": 4.256708108589219,
+            "gas_mass_weighted_mean_Tair_K": 293.15000000000003,
+            "gas_volume_m3": 0.2984972004081192,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1199988.9920753166,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3499999999999999
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.0,
+            "gas_mass_kg_ideal_air_EOS": 4.25670194533971,
+            "gas_mass_weighted_mean_Tair_K": 293.15,
+            "gas_volume_m3": 0.29849676833613037,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1199988.9915951893,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.350000000000001
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.042051317969132,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.500007972073571,
+            "volume_fraction_alpha_le_0p01": 0.4999920279264289,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.500007972073571,
+            "water_volume_m3": 0.042052658935315
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 0.0,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 1.0000000000000002,
+            "water_volume_m3": 0.028034989083505
+          }
+        },
+        "time_s": 0.0
+      },
+      "time_s": 0.0
+    },
+    {
+      "baseline": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503752,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 224,
+                "furthest_wet_cell_centre_x_m": 2.287502643,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 112,
+                "furthest_wet_cell_centre_x_m": 2.262503919,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503743,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 224,
+                "furthest_wet_cell_centre_x_m": 2.287502604,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 112,
+                "furthest_wet_cell_centre_x_m": 2.262503777,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503743,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 224,
+                "furthest_wet_cell_centre_x_m": 2.287502603,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 112,
+                "furthest_wet_cell_centre_x_m": 2.262503777,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503752,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 224,
+                "furthest_wet_cell_centre_x_m": 2.287502644,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 112,
+                "furthest_wet_cell_centre_x_m": 2.262503919,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000000000233,
+        "global_alpha_min": -6.493725912895543e-17,
+        "native_exterior_water_inventory_m3": 3.524106415395074e-182,
+        "native_field_time_directory": "0.050021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 3.524106415395074e-182,
+            "volFieldValue_observer": null
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.2576058153375122,
+            "volFieldValue_observer": null
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3658210314175572e-183,
+            "volFieldValue_observer": null
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.25765814096152956,
+            "volFieldValue_observer": null
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 2.3314115718919743e-183,
+            "volFieldValue_observer": null
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3434530125258466,
+            "volFieldValue_observer": null
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3434530741404562,
+            "volFieldValue_observer": null
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 3.202170042965344,
+            "volFieldValue_observer": null
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.2576058153375122,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.006548971525529433,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381198284,
+            "lineZone_water_increment_from_t0_m3": 0.006548971525529357,
+            "lineZone_water_m3": 0.2576058153375122,
+            "mouthBoundaryZone_water_m3": 1.3658210314175572e-183
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.25765814096152956,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.006548991737461658,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.2511091492240679,
+            "lineZone_water_increment_from_t0_m3": 0.006548991737461596,
+            "lineZone_water_m3": 0.2576581409615296,
+            "mouthBoundaryZone_water_m3": 2.3314115718919743e-183
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.006546987474153276,
+            "gas_mass_kg_ideal_air_EOS": 4.256704263791949,
+            "gas_mass_weighted_mean_Tair_K": 291.35775095361936,
+            "gas_volume_m3": 0.30504418788227283,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1167054.2782644748,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3434530125258466
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.00654692585954475,
+            "gas_mass_kg_ideal_air_EOS": 4.256698034129783,
+            "gas_mass_weighted_mean_Tair_K": 291.35777331977374,
+            "gas_volume_m3": 0.3050436941956748,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1167054.5486492414,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3434530741404562
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.028953354706145615,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.5833412098930946,
+            "volume_fraction_alpha_le_0p01": 0.24999382057934855,
+            "volume_fraction_mixed_0p01_to_0p99": 0.16666496952755677,
+            "volume_weighted_alpha_water": 0.6557433337660077,
+            "water_volume_m3": 0.0551506221983014
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 1.397140870932568e-18,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 1.0,
+            "water_volume_m3": 0.028034989083504998
+          }
+        },
+        "time_s": 0.050021166664044305
+      },
+      "reduced_network_reference": {
+        "bracket_gap_s": 5.000000000000143e-05,
+        "flow_lower_m3_s": 0.0461256838285998,
+        "flow_upper_m3_s": 0.046125690880658855,
+        "front_s_lower_m": 1.8182782405334748,
+        "front_s_upper_m": 1.8206587693473746,
+        "gas_pressure_abs_Pa": 1174731.396596205,
+        "gas_volume_m3": 0.30307006800433217,
+        "interpolation_fraction": 0.4233332799816071,
+        "lower_saved_time_s": 0.05000000000000092,
+        "method": "linear interpolation inside saved reduced-model history; no extrapolation",
+        "tank_water_volume_m3": 1.3454271324037868,
+        "target_time_s": 0.050021166664,
+        "total_branch_flow_m3_s": 0.09225137470925866,
+        "total_external_water_volume_m3": 0.0,
+        "total_wet_line_water_volume_m3": 0.2572212999851479,
+        "upper_saved_time_s": 0.05005000000000092,
+        "wet_line_volume_lower_m3": 0.12852651515944813,
+        "wet_line_volume_upper_m3": 0.1286947848256998
+      },
+      "reduced_network_residuals": {
+        "baseline": {
+          "lineA_water_increment_minus_model_m3": 0.0019761039293170746,
+          "lineB_water_increment_minus_model_m3": 0.0019761241412493136,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -7677.118331730133,
+          "tankA_water_minus_reduced_model_m3": -0.0019741198779401614,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -7676.847946963506,
+          "tankB_water_minus_reduced_model_m3": -0.001974058263330525
+        },
+        "thin_wet_side": {
+          "lineA_water_increment_minus_model_m3": 0.0011835705584223866,
+          "lineB_water_increment_minus_model_m3": 0.0011835842235682903,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -3795.09827744239,
+          "tankA_water_minus_reduced_model_m3": -0.0011831889373161708,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -3795.046388371382,
+          "tankB_water_minus_reduced_model_m3": -0.0011831756738984733
+        }
+      },
+      "source_cases": {
+        "baseline": {
+          "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+          "time_dir": "0.050021166664"
+        },
+        "thin_wet_side": {
+          "case": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case",
+          "time_dir": "0.050021166664"
+        }
+      },
+      "thin_wet_side": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 314,
+                "furthest_wet_cell_centre_x_m": 2.312503752,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 206,
+                "furthest_wet_cell_centre_x_m": 2.287502643,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 94,
+                "furthest_wet_cell_centre_x_m": 2.262503919,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 314,
+                "furthest_wet_cell_centre_x_m": 2.312503743,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 206,
+                "furthest_wet_cell_centre_x_m": 2.287502604,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 94,
+                "furthest_wet_cell_centre_x_m": 2.262503777,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 314,
+                "furthest_wet_cell_centre_x_m": 2.312503743,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 206,
+                "furthest_wet_cell_centre_x_m": 2.287502603,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 94,
+                "furthest_wet_cell_centre_x_m": 2.262503777,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 314,
+                "furthest_wet_cell_centre_x_m": 2.312503752,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 206,
+                "furthest_wet_cell_centre_x_m": 2.287502644,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 94,
+                "furthest_wet_cell_centre_x_m": 2.262503919,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000000000222,
+        "global_alpha_min": -8.789561960209635e-17,
+        "native_exterior_water_inventory_m3": 2.3763339937389704e-188,
+        "native_field_time_directory": "0.050021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 2.3763339937389704e-188,
+            "volFieldValue_observer": null
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.25681328196661746,
+            "volFieldValue_observer": null
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 8.454208437707802e-190,
+            "volFieldValue_observer": null
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 0.2568656010438486,
+            "volFieldValue_observer": null
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.553129125847416e-189,
+            "volFieldValue_observer": null
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3442439434664706,
+            "volFieldValue_observer": null
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 1.3442439567298883,
+            "volFieldValue_observer": null
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": null,
+            "native_field_integral": 3.2021667832068257,
+            "volFieldValue_observer": null
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.25681328196661746,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.005756438154634677,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381198284,
+            "lineZone_water_increment_from_t0_m3": 0.005756438154634669,
+            "lineZone_water_m3": 0.2568132819666175,
+            "mouthBoundaryZone_water_m3": 8.454208437707802e-190
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.2568656010438486,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.00575645181978062,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.2511091492240679,
+            "lineZone_water_increment_from_t0_m3": 0.0057564518197805725,
+            "lineZone_water_m3": 0.2568656010438486,
+            "mouthBoundaryZone_water_m3": 1.553129125847416e-189
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.005756056533529286,
+            "gas_mass_kg_ideal_air_EOS": 4.256704789351479,
+            "gas_mass_weighted_mean_Tair_K": 291.5689130206796,
+            "gas_volume_m3": 0.30425325694164895,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1170936.2983187626,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3442439434664706
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.0057560432701126985,
+            "gas_mass_kg_ideal_air_EOS": 4.256698622756576,
+            "gas_mass_weighted_mean_Tair_K": 291.5689215614637,
+            "gas_volume_m3": 0.3042528116062426,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1170936.3502078336,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3442439567298883
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.03053842799471973,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.5731118145820446,
+            "volume_fraction_alpha_le_0p01": 0.2597820008828708,
+            "volume_fraction_mixed_0p01_to_0p99": 0.1671061845350844,
+            "volume_weighted_alpha_water": 0.6368967423571976,
+            "water_volume_m3": 0.05356554890972729
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 7.616341333778191e-19,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 1.0,
+            "water_volume_m3": 0.028034989083504998
+          }
+        },
+        "time_s": 0.050021166664044305
+      },
+      "time_s": 0.050021166664
+    },
+    {
+      "baseline": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 560,
+                "furthest_wet_cell_centre_x_m": 2.362504031,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 448,
+                "furthest_wet_cell_centre_x_m": 2.337502928,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503752,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 560,
+                "furthest_wet_cell_centre_x_m": 2.362503897,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 448,
+                "furthest_wet_cell_centre_x_m": 2.33750283,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503743,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 560,
+                "furthest_wet_cell_centre_x_m": 2.362503896,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 448,
+                "furthest_wet_cell_centre_x_m": 2.337502827,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503743,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 560,
+                "furthest_wet_cell_centre_x_m": 2.362504032,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 448,
+                "furthest_wet_cell_centre_x_m": 2.337502932,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 336,
+                "furthest_wet_cell_centre_x_m": 2.312503752,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.000000000000031,
+        "global_alpha_min": -2.8762166814605797e-15,
+        "native_exterior_water_inventory_m3": 4.4610050801703924e-173,
+        "native_field_time_directory": "0.100021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": 1.7039222669492177e-183,
+            "native_field_integral": 4.4610050801703924e-173,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 4.46100508e-173
+            }
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -2.2828805512631334e-10,
+            "native_field_integral": 0.26367317977171195,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.26367318
+            }
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -2.6829844957805968e-183,
+            "native_field_integral": 2.8321750373170154e-174,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 2.83217504e-174
+            }
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": 2.4088830929969163e-10,
+            "native_field_integral": 0.26372550524088834,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.263725505
+            }
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": 6.124194469968168e-184,
+            "native_field_integral": 4.14074218061242e-174,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 4.14074218e-174
+            }
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": 2.7247590850265624e-09,
+            "native_field_integral": 1.337386912724759,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.33738691
+            }
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": -1.911136582322115e-09,
+            "native_field_integral": 1.3373870080888635,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.33738701
+            }
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": -4.173777767846332e-09,
+            "native_field_integral": 3.202172605826222,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/totalWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 3.20217261
+            }
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.26367317977171195,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.012616335959732192,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381197985,
+            "lineZone_water_increment_from_t0_m3": 0.012616335959729164,
+            "lineZone_water_m3": 0.263673179771712,
+            "mouthBoundaryZone_water_m3": 2.8321750373170154e-174
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.26372550524088834,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.012616356016824058,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25110914922406424,
+            "lineZone_water_increment_from_t0_m3": 0.012616356016820318,
+            "lineZone_water_m3": 0.26372550524088834,
+            "mouthBoundaryZone_water_m3": 4.14074218061242e-174
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.012613087275240797,
+            "gas_mass_kg_ideal_air_EOS": 4.256807860171119,
+            "gas_mass_weighted_mean_Tair_K": 290.06875592484624,
+            "gas_volume_m3": 0.31111028768336,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1139264.0227871381,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.337386912724759
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.012612991911137517,
+            "gas_mass_kg_ideal_air_EOS": 4.256801579681436,
+            "gas_mass_weighted_mean_Tair_K": 290.06877809533864,
+            "gas_volume_m3": 0.31110976024726766,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1139264.3604286688,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3373870080888635
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.01681862607427278,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.7500061794206513,
+            "volume_fraction_alpha_le_0p01": 0.08333090162178082,
+            "volume_fraction_mixed_0p01_to_0p99": 0.1666629189575677,
+            "volume_weighted_alpha_water": 0.800025793151483,
+            "water_volume_m3": 0.06728535083017423
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 2.1908689306572526e-17,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.9999999999999992,
+            "water_volume_m3": 0.028034989083504977
+          }
+        },
+        "time_s": 0.10002116666400004
+      },
+      "reduced_network_reference": {
+        "bracket_gap_s": 4.999999999999449e-05,
+        "flow_lower_m3_s": 0.06287063900437562,
+        "flow_upper_m3_s": 0.06286944676426531,
+        "front_s_lower_m": 1.852563441723881,
+        "front_s_upper_m": 1.8549437705774452,
+        "gas_pressure_abs_Pa": 1148928.4119008814,
+        "gas_volume_m3": 0.30791700999836674,
+        "interpolation_fraction": 0.423333280057161,
+        "lower_saved_time_s": 0.09999999999999715,
+        "method": "linear interpolation inside saved reduced-model history; no extrapolation",
+        "tank_water_volume_m3": 1.340580190409752,
+        "target_time_s": 0.100021166664,
+        "total_branch_flow_m3_s": 0.12574008576864093,
+        "total_external_water_volume_m3": 0.0,
+        "total_wet_line_water_volume_m3": 0.26206824197918294,
+        "upper_saved_time_s": 0.10004999999999714,
+        "wet_line_volume_lower_m3": 0.13094999322364728,
+        "wet_line_volume_upper_m3": 0.13111824875553568
+      },
+      "reduced_network_residuals": {
+        "baseline": {
+          "lineA_water_increment_minus_model_m3": 0.003196526369481867,
+          "lineB_water_increment_minus_model_m3": 0.0031965464265730215,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -9664.389113743324,
+          "tankA_water_minus_reduced_model_m3": -0.003193277684993001,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -9664.051472212654,
+          "tankB_water_minus_reduced_model_m3": -0.00319318232088861
+        },
+        "thin_wet_side": {
+          "lineA_water_increment_minus_model_m3": 0.0024402085737972867,
+          "lineB_water_increment_minus_model_m3": 0.0024402251252991225,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -6274.074537780136,
+          "tankA_water_minus_reduced_model_m3": -0.0024394447905426997,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -6274.053174876375,
+          "tankB_water_minus_reduced_model_m3": -0.002439426510141285
+        }
+      },
+      "source_cases": {
+        "baseline": {
+          "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+          "time_dir": "0.100021166664"
+        },
+        "thin_wet_side": {
+          "case": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case",
+          "time_dir": "0.100021166664"
+        }
+      },
+      "thin_wet_side": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 490,
+                "furthest_wet_cell_centre_x_m": 2.387500569,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 383,
+                "furthest_wet_cell_centre_x_m": 2.362500664,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 258,
+                "furthest_wet_cell_centre_x_m": 2.337500221,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 490,
+                "furthest_wet_cell_centre_x_m": 2.387500331,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 383,
+                "furthest_wet_cell_centre_x_m": 2.362500537,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 259,
+                "furthest_wet_cell_centre_x_m": 2.337500218,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 490,
+                "furthest_wet_cell_centre_x_m": 2.38750033,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 383,
+                "furthest_wet_cell_centre_x_m": 2.362500537,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 259,
+                "furthest_wet_cell_centre_x_m": 2.337500218,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 490,
+                "furthest_wet_cell_centre_x_m": 2.387500569,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 383,
+                "furthest_wet_cell_centre_x_m": 2.362500665,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 258,
+                "furthest_wet_cell_centre_x_m": 2.337500221,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000004294862,
+        "global_alpha_min": -2.9534013788622322e-15,
+        "native_exterior_water_inventory_m3": 8.947050902307269e-178,
+        "native_field_time_directory": "0.100021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": 2.307268385990793e-187,
+            "native_field_integral": 8.947050902307269e-178,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 8.9470509e-178
+            }
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -2.3972546170369924e-11,
+            "native_field_integral": 0.2629168619760274,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.262916862
+            }
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": 1.5143101201831606e-188,
+            "native_field_integral": 6.59703628151431e-179,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 6.59703628e-179
+            }
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -6.038564093202581e-11,
+            "native_field_integral": 0.2629691839396144,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.262969184
+            }
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": 3.53015183645152e-187,
+            "native_field_integral": 1.0306510135301519e-178,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.03065101e-178
+            }
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": -4.380790619151753e-09,
+            "native_field_integral": 1.3381407456192094,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.33814075
+            }
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": 3.899610856450408e-09,
+            "native_field_integral": 1.3381407638996108,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.33814076
+            }
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": -4.565538169742922e-09,
+            "native_field_integral": 3.2021675554344617,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.100021166664,
+              "offset_s": -4.163336342344337e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/totalWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 3.20216756
+            }
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.2629168619760274,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.011860018164051009,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381197646,
+            "lineZone_water_increment_from_t0_m3": 0.011860018164044583,
+            "lineZone_water_m3": 0.2629168619760274,
+            "mouthBoundaryZone_water_m3": 6.59703628151431e-179
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.2629691839396144,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.01186003471555313,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.2511091492240613,
+            "lineZone_water_increment_from_t0_m3": 0.01186003471554642,
+            "lineZone_water_m3": 0.26296918393961444,
+            "mouthBoundaryZone_water_m3": 1.0306510135301519e-178
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.011859254380790496,
+            "gas_mass_kg_ideal_air_EOS": 4.256804871650591,
+            "gas_mass_weighted_mean_Tair_K": 290.2272298866018,
+            "gas_volume_m3": 0.3103564547889101,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1142654.3373631013,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3381407456192094
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.011859236100390191,
+            "gas_mass_kg_ideal_air_EOS": 4.256798696592967,
+            "gas_mass_weighted_mean_Tair_K": 290.22723518232164,
+            "gas_volume_m3": 0.3103560044365201,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1142654.358726005,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3381407638996108
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.01833133162117727,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.6986713650826303,
+            "volume_fraction_alpha_le_0p01": 0.12932734673283777,
+            "volume_fraction_mixed_0p01_to_0p99": 0.1720012881845318,
+            "volume_weighted_alpha_water": 0.7820396573873785,
+            "water_volume_m3": 0.06577264528326973
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 6.6748115620323934e-15,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.999999999999762,
+            "water_volume_m3": 0.028034989083498326
+          }
+        },
+        "time_s": 0.10002116666400004
+      },
+      "time_s": 0.100021166664
+    },
+    {
+      "baseline": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 874,
+                "furthest_wet_cell_centre_x_m": 2.437506865,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 784,
+                "furthest_wet_cell_centre_x_m": 2.412505003,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 672,
+                "furthest_wet_cell_centre_x_m": 2.387504243,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 870,
+                "furthest_wet_cell_centre_x_m": 2.43750528,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 784,
+                "furthest_wet_cell_centre_x_m": 2.412504305,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 672,
+                "furthest_wet_cell_centre_x_m": 2.387503563,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 870,
+                "furthest_wet_cell_centre_x_m": 2.437505257,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 784,
+                "furthest_wet_cell_centre_x_m": 2.412504303,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 672,
+                "furthest_wet_cell_centre_x_m": 2.387503555,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 874,
+                "furthest_wet_cell_centre_x_m": 2.437506885,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 784,
+                "furthest_wet_cell_centre_x_m": 2.412505007,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 672,
+                "furthest_wet_cell_centre_x_m": 2.387504253,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000000000406,
+        "global_alpha_min": -2.249031039527893e-16,
+        "native_exterior_water_inventory_m3": 2.2103811448880405e-165,
+        "native_field_time_directory": "0.150021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": 4.88804046238818e-174,
+            "native_field_integral": 2.2103811448880405e-165,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 2.21038114e-165
+            }
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -2.735517368179785e-11,
+            "native_field_integral": 0.2741272559726448,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.274127256
+            }
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -1.7203679879010802e-175,
+            "native_field_integral": 1.806922938279632e-166,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.80692294e-166
+            }
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": 4.109565465704179e-10,
+            "native_field_integral": 0.27417960441095657,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.274179604
+            }
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": 4.80177527213694e-175,
+            "native_field_integral": 2.3976980648017754e-166,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 2.39769806e-166
+            }
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": 3.448438645747842e-09,
+            "native_field_integral": 1.3269350334484387,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.32693503
+            }
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": -4.709794776402987e-09,
+            "native_field_integral": 1.3269351752902052,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.32693518
+            }
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": -8.777560900341541e-10,
+            "native_field_integral": 3.2021770691222438,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/totalWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 3.20217707
+            }
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.2741272559726448,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.02307041216066518,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381197957,
+            "lineZone_water_increment_from_t0_m3": 0.023070412160661913,
+            "lineZone_water_m3": 0.27412725597264476,
+            "mouthBoundaryZone_water_m3": 1.806922938279632e-166
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.27417960441095657,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.023070455186892574,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.2511091492240639,
+            "lineZone_water_increment_from_t0_m3": 0.02307045518688855,
+            "lineZone_water_m3": 0.27417960441095657,
+            "mouthBoundaryZone_water_m3": 2.3976980648017754e-166
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.023064966551561206,
+            "gas_mass_kg_ideal_air_EOS": 4.2568001684871115,
+            "gas_mass_weighted_mean_Tair_K": 287.82632755396395,
+            "gas_volume_m3": 0.32156216695968054,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1093711.0201729978,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3269350334484387
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.02306482470979576,
+            "gas_mass_kg_ideal_air_EOS": 4.256793825070093,
+            "gas_mass_weighted_mean_Tair_K": 287.82634438023285,
+            "gas_volume_m3": 0.321561593045926,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1093711.4063007175,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3269351752902052
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 4.2137251178617666e-17,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.9999999999999993,
+            "water_volume_m3": 0.08410397690444696
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 4.873116951669187e-17,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.9999999999999986,
+            "water_volume_m3": 0.028034989083504956
+          }
+        },
+        "time_s": 0.1500211666640001
+      },
+      "reduced_network_reference": {
+        "bracket_gap_s": 4.999999999999449e-05,
+        "flow_lower_m3_s": 0.13221833019195184,
+        "flow_upper_m3_s": 0.13221484860461807,
+        "front_s_lower_m": 1.9204526627558625,
+        "front_s_upper_m": 1.9228314148502987,
+        "gas_pressure_abs_Pa": 1100610.3490090512,
+        "gas_volume_m3": 0.3175145110561727,
+        "interpolation_fraction": 0.4233332801673506,
+        "lower_saved_time_s": 0.14999999999999164,
+        "method": "linear interpolation inside saved reduced-model history; no extrapolation",
+        "tank_water_volume_m3": 1.330982689351946,
+        "target_time_s": 0.150021166664,
+        "total_branch_flow_m3_s": 0.26443317879656997,
+        "total_external_water_volume_m3": 0.0,
+        "total_wet_line_water_volume_m3": 0.2716657430369882,
+        "upper_saved_time_s": 0.15004999999999163,
+        "wet_line_volume_lower_m3": 0.1357487994798174,
+        "wet_line_volume_upper_m3": 0.13591694355717077
+      },
+      "reduced_network_residuals": {
+        "baseline": {
+          "lineA_water_increment_minus_model_m3": 0.004053101512609347,
+          "lineB_water_increment_minus_model_m3": 0.004053144538835984,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -6899.328836053377,
+          "tankA_water_minus_reduced_model_m3": -0.004047655903507419,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -6898.942708333721,
+          "tankB_water_minus_reduced_model_m3": -0.0040475140617408645
+        },
+        "thin_wet_side": {
+          "lineA_water_increment_minus_model_m3": 0.004557802472849648,
+          "lineB_water_increment_minus_model_m3": 0.004557850116488182,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -9375.909511014353,
+          "tankA_water_minus_reduced_model_m3": -0.0045561411150769615,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -9375.967491775285,
+          "tankB_water_minus_reduced_model_m3": -0.004556117538005555
+        }
+      },
+      "source_cases": {
+        "baseline": {
+          "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+          "time_dir": "0.150021166664"
+        },
+        "thin_wet_side": {
+          "case": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case",
+          "time_dir": "0.150021166664"
+        }
+      },
+      "thin_wet_side": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 880,
+                "furthest_wet_cell_centre_x_m": 2.537545478,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 756,
+                "furthest_wet_cell_centre_x_m": 2.512522922,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 600,
+                "furthest_wet_cell_centre_x_m": 2.487510142,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 880,
+                "furthest_wet_cell_centre_x_m": 2.537520776,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 756,
+                "furthest_wet_cell_centre_x_m": 2.512509428,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 600,
+                "furthest_wet_cell_centre_x_m": 2.487503694,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 880,
+                "furthest_wet_cell_centre_x_m": 2.537520775,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 756,
+                "furthest_wet_cell_centre_x_m": 2.512509427,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 600,
+                "furthest_wet_cell_centre_x_m": 2.487503693,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 880,
+                "furthest_wet_cell_centre_x_m": 2.537545479,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 756,
+                "furthest_wet_cell_centre_x_m": 2.512522923,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 600,
+                "furthest_wet_cell_centre_x_m": 2.487510143,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000000016163,
+        "global_alpha_min": -2.1678991067586307e-16,
+        "native_exterior_water_inventory_m3": -2.756560441551673e-151,
+        "native_field_time_directory": "0.150021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": -1.5516728946438595e-160,
+            "native_field_integral": -2.756560441551673e-151,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": -2.75656044e-151
+            }
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -6.711492472888381e-11,
+            "native_field_integral": 0.27463195693288506,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.274631957
+            }
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -4.278687398302215e-165,
+            "native_field_integral": -1.6398885642786875e-156,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": -1.63988856e-156
+            }
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -1.1391165788410262e-11,
+            "native_field_integral": 0.2746843099886088,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.27468431
+            }
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -3.3544893682923805e-177,
+            "native_field_integral": 1.2104301266455107e-168,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.21043013e-168
+            }
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": -1.763130974552496e-09,
+            "native_field_integral": 1.3264265482368691,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.32642655
+            }
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": 1.8139405533190711e-09,
+            "native_field_integral": 1.3264265718139405,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.32642657
+            }
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": -3.0276980922394614e-09,
+            "native_field_integral": 3.202169386972302,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.150021166664,
+              "offset_s": -8.326672684688674e-17,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/totalWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 3.20216939
+            }
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.27463195693288506,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.02357511312090583,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381197924,
+            "lineZone_water_increment_from_t0_m3": 0.023575113120902214,
+            "lineZone_water_m3": 0.27463195693288506,
+            "mouthBoundaryZone_water_m3": -1.6398885642786875e-156
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.2746843099886088,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.02357516076454446,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25110914922406435,
+            "lineZone_water_increment_from_t0_m3": 0.023575160764540748,
+            "lineZone_water_m3": 0.27468430998860877,
+            "mouthBoundaryZone_water_m3": 1.2104301266455107e-168
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.02357345176313075,
+            "gas_mass_kg_ideal_air_EOS": 4.256795062690798,
+            "gas_mass_weighted_mean_Tair_K": 287.6290317265545,
+            "gas_volume_m3": 0.3220706521712507,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1091234.4394980369,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3264265482368691
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.023573428186060452,
+            "gas_mass_kg_ideal_air_EOS": 4.256788845572797,
+            "gas_mass_weighted_mean_Tair_K": 287.62902960795736,
+            "gas_volume_m3": 0.3220701965221906,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1091234.381517276,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3264265718139405
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.0037702720546206087,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.8926443051418701,
+            "volume_fraction_alpha_le_0p01": 0.012182170335845625,
+            "volume_fraction_mixed_0p01_to_0p99": 0.09517352452228406,
+            "volume_weighted_alpha_water": 0.9551712987495924,
+            "water_volume_m3": 0.08033370484982638
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 5.071261345375461e-16,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.999999999999982,
+            "water_volume_m3": 0.028034989083504495
+          }
+        },
+        "time_s": 0.1500211666640001
+      },
+      "time_s": 0.150021166664
+    },
+    {
+      "baseline": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1416,
+                "furthest_wet_cell_centre_x_m": 2.562602806,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1314,
+                "furthest_wet_cell_centre_x_m": 2.53756273,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1216,
+                "furthest_wet_cell_centre_x_m": 2.537549158,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1416,
+                "furthest_wet_cell_centre_x_m": 2.562550996,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1314,
+                "furthest_wet_cell_centre_x_m": 2.537529487,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1216,
+                "furthest_wet_cell_centre_x_m": 2.53752349,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1416,
+                "furthest_wet_cell_centre_x_m": 2.562550975,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1314,
+                "furthest_wet_cell_centre_x_m": 2.53752947,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1216,
+                "furthest_wet_cell_centre_x_m": 2.537523489,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1416,
+                "furthest_wet_cell_centre_x_m": 2.562602818,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1314,
+                "furthest_wet_cell_centre_x_m": 2.537562751,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1216,
+                "furthest_wet_cell_centre_x_m": 2.537549159,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000000000469,
+        "global_alpha_min": -9.946128122495511e-16,
+        "native_exterior_water_inventory_m3": -1.927607003269932e-145,
+        "native_field_time_directory": "0.200021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": -3.26993204845209e-154,
+            "native_field_integral": -1.927607003269932e-145,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": -1.927607e-145
+            }
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -2.0480783735621344e-11,
+            "native_field_integral": 0.2919366509795192,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.291936651
+            }
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -5.884211436126868e-155,
+            "native_field_integral": -9.334214935884211e-146,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": -9.33421493e-146
+            }
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -7.585343464455718e-11,
+            "native_field_integral": 0.29198905092414656,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.291989051
+            }
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -4.6322685634122784e-163,
+            "native_field_integral": 4.543204325367731e-154,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 4.54320433e-154
+            }
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": -8.040448307156112e-10,
+            "native_field_integral": 1.3091268391959552,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.30912684
+            }
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": -1.878031730129237e-09,
+            "native_field_integral": 1.3091269781219683,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.30912698
+            }
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": -7.784111133446459e-10,
+            "native_field_integral": 3.202179519221589,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/postProcessing/totalWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 3.20217952
+            }
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.2919366509795192,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.040879807167540146,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.2510568438119791,
+            "lineZone_water_increment_from_t0_m3": 0.040879807167536364,
+            "lineZone_water_m3": 0.2919366509795192,
+            "mouthBoundaryZone_water_m3": -9.334214935884211e-146
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.29198905092414656,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.040879901700083016,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.2511091492240636,
+            "lineZone_water_increment_from_t0_m3": 0.04087990170007849,
+            "lineZone_water_m3": 0.2919890509241465,
+            "mouthBoundaryZone_water_m3": 4.543204325367731e-154
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.040873160804044684,
+            "gas_mass_kg_ideal_air_EOS": 4.256780113380719,
+            "gas_mass_weighted_mean_Tair_K": 284.1911404790856,
+            "gas_volume_m3": 0.33937036121216413,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1023226.0692484541,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.3091268391959552
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.040873021878032656,
+            "gas_mass_kg_ideal_air_EOS": 4.256773741736701,
+            "gas_mass_weighted_mean_Tair_K": 284.19113839075993,
+            "gas_volume_m3": 0.33936979021416225,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1023226.2517421198,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3091269781219683
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 2.9925533877894026e-16,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.9999999999999962,
+            "water_volume_m3": 0.0841039769044467
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 7.969679150623576e-17,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.9999999999999974,
+            "water_volume_m3": 0.028034989083504925
+          }
+        },
+        "time_s": 0.20002116666400013
+      },
+      "reduced_network_reference": {
+        "bracket_gap_s": 4.999999999999449e-05,
+        "flow_lower_m3_s": 0.21537960570334924,
+        "flow_upper_m3_s": 0.21537271776321235,
+        "front_s_lower_m": 2.0428802319844714,
+        "front_s_upper_m": 2.0452553681421692,
+        "gas_pressure_abs_Pa": 1021803.1227405586,
+        "gas_volume_m3": 0.3348220453045152,
+        "interpolation_fraction": 0.4233332802772627,
+        "lower_saved_time_s": 0.19999999999998613,
+        "method": "linear interpolation inside saved reduced-model history; no extrapolation",
+        "tank_water_volume_m3": 1.3136751551036037,
+        "target_time_s": 0.200021166664,
+        "total_branch_flow_m3_s": 0.43075232346656156,
+        "total_external_water_volume_m3": 0.0,
+        "total_wet_line_water_volume_m3": 0.28897327728532696,
+        "upper_saved_time_s": 0.20004999999998613,
+        "wet_line_volume_lower_m3": 0.1444026944017401,
+        "wet_line_volume_upper_m3": 0.14457058288358685
+      },
+      "reduced_network_residuals": {
+        "baseline": {
+          "lineA_water_increment_minus_model_m3": 0.004554962271145047,
+          "lineB_water_increment_minus_model_m3": 0.004555056803687174,
+          "tankA_gas_volume_mean_p_minus_model_Pa": 1422.9465078954818,
+          "tankA_water_minus_reduced_model_m3": -0.004548315907648481,
+          "tankB_gas_volume_mean_p_minus_model_Pa": 1423.129001561203,
+          "tankB_water_minus_reduced_model_m3": -0.0045481769816353435
+        },
+        "thin_wet_side": {
+          "lineA_water_increment_minus_model_m3": 0.007628015004131461,
+          "lineB_water_increment_minus_model_m3": 0.0076281133268651935,
+          "tankA_gas_volume_mean_p_minus_model_Pa": -10427.409042195184,
+          "tankA_water_minus_reduced_model_m3": -0.007624538154807681,
+          "tankB_gas_volume_mean_p_minus_model_Pa": -10427.63223526068,
+          "tankB_water_minus_reduced_model_m3": -0.007624519090672521
+        }
+      },
+      "source_cases": {
+        "baseline": {
+          "case": "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case",
+          "time_dir": "0.200021166664"
+        },
+        "thin_wet_side": {
+          "case": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case",
+          "time_dir": "0.200021166664"
+        }
+      },
+      "thin_wet_side": {
+        "branch_front_positions": {
+          "A": {
+            "tankA_source_y-0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1534,
+                "furthest_wet_cell_centre_x_m": 2.714976895,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1414,
+                "furthest_wet_cell_centre_x_m": 2.689849224,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1208,
+                "furthest_wet_cell_centre_x_m": 2.662288357,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankA_source_y-0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1530,
+                "furthest_wet_cell_centre_x_m": 2.712785225,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1414,
+                "furthest_wet_cell_centre_x_m": 2.687490725,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1210,
+                "furthest_wet_cell_centre_x_m": 2.662651064,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          },
+          "B": {
+            "tankB_source_y+0.35_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1530,
+                "furthest_wet_cell_centre_x_m": 2.712785212,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1414,
+                "furthest_wet_cell_centre_x_m": 2.687490724,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1210,
+                "furthest_wet_cell_centre_x_m": 2.662651062,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            },
+            "tankB_source_y+0.75_m": {
+              "alpha_ge_0.01": {
+                "cell_count": 1534,
+                "furthest_wet_cell_centre_x_m": 2.714976884,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.5": {
+                "cell_count": 1414,
+                "furthest_wet_cell_centre_x_m": 2.68984922,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              },
+              "alpha_ge_0.99": {
+                "cell_count": 1208,
+                "furthest_wet_cell_centre_x_m": 2.662288356,
+                "qualification": "native cell-centre threshold, own line-zone branch cluster, x>=2.25m; no interface interpolation"
+              }
+            }
+          }
+        },
+        "global_alpha_max": 1.0000000000001839,
+        "global_alpha_min": -9.874284549737933e-16,
+        "native_exterior_water_inventory_m3": -7.774252633545078e-116,
+        "native_field_time_directory": "0.200021166664",
+        "native_inventory_vs_volFieldValue": {
+          "externalAirWaterVolume": {
+            "difference_native_minus_observer_m3": -3.5450783304055913e-125,
+            "native_field_integral": -7.774252633545078e-116,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/externalAirWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": -7.77425263e-116
+            }
+          },
+          "lineAInitialWaterVolume": {
+            "difference_native_minus_observer_m3": -2.8749436165043107e-10,
+            "native_field_integral": 0.2950097037125056,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineAInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.295009704
+            }
+          },
+          "lineAMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -5.292359737337745e-128,
+            "native_field_integral": -6.78290430529236e-119,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineAMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": -6.7829043e-119
+            }
+          },
+          "lineBInitialWaterVolume": {
+            "difference_native_minus_observer_m3": 4.47324566277274e-10,
+            "native_field_integral": 0.2950621074473246,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineBInitialWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 0.295062107
+            }
+          },
+          "lineBMouthBoundaryWaterVolume": {
+            "difference_native_minus_observer_m3": -2.1627859399755332e-157,
+            "native_field_integral": 8.347339937837214e-148,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/lineBMouthBoundaryWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 8.34733994e-148
+            }
+          },
+          "tankAWaterVolume": {
+            "difference_native_minus_observer_m3": -3.05120395616143e-09,
+            "native_field_integral": 1.306050616948796,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.30605062
+            }
+          },
+          "tankBWaterVolume": {
+            "difference_native_minus_observer_m3": -3.98706889725986e-09,
+            "native_field_integral": 1.3060506360129311,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 1.30605064
+            }
+          },
+          "totalWaterVolume": {
+            "difference_native_minus_observer_m3": 4.1215555413032234e-09,
+            "native_field_integral": 3.2021730641215553,
+            "volFieldValue_observer": {
+              "duplicate_rows": 1,
+              "exact_join_tolerance_s": 5e-11,
+              "matched_time_s": 0.200021166664,
+              "offset_s": -1.3877787807814457e-16,
+              "table": "results/runs/i4f-short1-valve-wetside-continue-20261025T165800Z/case/postProcessing/totalWaterVolume/0.050021166664/volFieldValue.dat",
+              "value": 3.20217306
+            }
+          }
+        },
+        "native_line_inventory": {
+          "A": {
+            "lineInitialZone_water_m3": 0.2950097037125056,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.043952859900526685,
+            "lineZone_total_volume_m3": 0.6867231340348099,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25105684381197896,
+            "lineZone_water_increment_from_t0_m3": 0.04395285990052278,
+            "lineZone_water_m3": 0.2950097037125056,
+            "mouthBoundaryZone_water_m3": -6.78290430529236e-119
+          },
+          "B": {
+            "lineInitialZone_water_m3": 0.2950621074473246,
+            "lineZone_downstream_x_ge_2p25_water_m3": 0.04395295822326049,
+            "lineZone_total_volume_m3": 0.6867738246708877,
+            "lineZone_upstream_x_lt_2p25_water_m3": 0.25110914922406413,
+            "lineZone_water_increment_from_t0_m3": 0.04395295822325651,
+            "lineZone_water_m3": 0.29506210744732453,
+            "mouthBoundaryZone_water_m3": 8.347339937837214e-148
+          }
+        },
+        "native_tank_phase_means": {
+          "A": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.04394938305120388,
+            "gas_mass_kg_ideal_air_EOS": 4.256769389168545,
+            "gas_mass_weighted_mean_Tair_K": 283.44674906174305,
+            "gas_volume_m3": 0.34244658345932305,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1011375.7136983634,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.6484972004081189,
+            "tank_water_m3": 1.306050616948796
+          },
+          "B": {
+            "cell_count": 21839,
+            "drawdown_from_t0_m3": 0.043949363987069834,
+            "gas_mass_kg_ideal_air_EOS": 4.2567631315085395,
+            "gas_mass_weighted_mean_Tair_K": 283.44672978039796,
+            "gas_volume_m3": 0.34244613232319965,
+            "gas_volume_weighted_mean_absolute_p_Pa": 1011375.4905052979,
+            "gas_weight_definition": "alpha.gas * native cellVolume; T.air mass weight uses alpha.gas * p/(R*T.air) * cellVolume",
+            "native_cell_zone_volume_m3": 1.648496768336131,
+            "tank_water_m3": 1.3060506360129311
+          }
+        },
+        "source_support_wetness": {
+          "full_original_allFourValves_support": {
+            "cell_count": 5376,
+            "gas_volume_m3": 0.00025368744246890385,
+            "support_volume_m3": 0.08410397690444701,
+            "volume_fraction_alpha_ge_0p99": 0.9543364539966724,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.045663546003327386,
+            "volume_weighted_alpha_water": 0.9969836451044741,
+            "water_volume_m3": 0.08385028946197809
+          },
+          "full_support_geometry_from_input": "allFourValves cellZone, nominal x\u2248[2.10,2.40]m, declared 0.30m source length",
+          "thin_band_selection": "cell-centre x>=2.15m and x<2.25m, intersected with existing allFourValves cellZone",
+          "thin_wet_side_x_2p15_to_2p25_support": {
+            "cell_count": 1792,
+            "gas_volume_m3": 1.859612384395809e-16,
+            "support_volume_m3": 0.028034989083504998,
+            "volume_fraction_alpha_ge_0p99": 1.0,
+            "volume_fraction_alpha_le_0p01": 0.0,
+            "volume_fraction_mixed_0p01_to_0p99": 0.0,
+            "volume_weighted_alpha_water": 0.9999999999999934,
+            "water_volume_m3": 0.028034989083504814
+          }
+        },
+        "time_s": 0.20002116666400013
+      },
+      "time_s": 0.200021166664
+    }
+  ],
+  "schema": "i4f-native-source-placement-persistence/v1",
+  "status": "read-only native saved-field comparison; no case edits, solver runs, or VTK ordering used",
+  "time_window": {
+    "common_latest_complete_checkpoint_s": 0.200021166664,
+    "field_time_source": "processors10/<time>/uniform/time for evolved snapshots; initial condition is explicitly t=0",
+    "no_extrapolation": true,
+    "no_interpolation_of_cfd_fields": true,
+    "sample_times_s": [
+      0.0,
+      0.050021166664,
+      0.100021166664,
+      0.150021166664,
+      0.200021166664
+    ]
+  }
+}

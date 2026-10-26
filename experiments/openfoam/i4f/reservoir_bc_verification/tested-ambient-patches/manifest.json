@@ -1,0 +1,95 @@
+{
+  "created_utc": "2026-10-25T12:29:52.457641+00:00",
+  "external_open_patches": [
+    {
+      "faces": 4368,
+      "mesh_type": "patch",
+      "name": "ambientAnnulus"
+    },
+    {
+      "faces": 1938,
+      "mesh_type": "patch",
+      "name": "externalSides"
+    },
+    {
+      "faces": 525,
+      "mesh_type": "patch",
+      "name": "farOutlet"
+    }
+  ],
+  "limitations": [
+    "T is the solver shared mixture temperature, not a separately conservative gas temperature.",
+    "These fragments specify external reservoir pressure and thermal treatment only; they do not specify a velocity history.",
+    "The pair shows sensitivity to boundary treatment, not validated ambient coupling or physical hardware performance."
+  ],
+  "mesh_boundary_source": {
+    "path": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/compressible-reservoir/case/constant/polyMesh/boundary",
+    "sha256": "936cfaa6281ddd5fcea7f886bc1655bcca7c523879ec82f6203311dcc6bda437"
+  },
+  "origin_template_hashes": {
+    "bc/i4fAmbientPRgh.target.inc": "e2406f16b9473c3a2d69c6a494e84ba0241b385f099133d9abf31dec9670917b",
+    "bc/i4fAmbientT.target.inc": "dc8a9f884b1bf4dbe3cee480e79170f1c28cf21939db193072da5a0d821dca8f"
+  },
+  "pressure_fragment": {
+    "field": "p_rgh",
+    "formula": "pStatic=p0/(1+0.5*psi*((gamma-1)/gamma)*neg(phi)*|U|^2)^(gamma/(gamma-1)); p_rgh=pStatic-rho*(g.Cf-ghRef). The code obtains psi from registered thermo:psi and uses current rho, U, phi, gravity and hRef.",
+    "path": "p_rgh.boundaryField.patch-only.inc",
+    "sha256": "e2406f16b9473c3a2d69c6a494e84ba0241b385f099133d9abf31dec9670917b",
+    "type": "codedFixedValue"
+  },
+  "private_source_manifest": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/replay-prep/patch-only-tested-v2512/manifest.json",
+  "public_selected_pair_outputs": {
+    "evidence_json": "results/summaries/i4f_20261025/ambient-reservoir-pair-r2-evidence.json",
+    "matched_boundary_history_csv": "results/summaries/i4f_20261025/ambient-reservoir-pair-r2-matched-boundary-history.csv",
+    "matched_bulk_history_csv": "results/summaries/i4f_20261025/ambient-reservoir-pair-r2-matched-bulk-history.csv",
+    "path_base": "repository root",
+    "plot": "results/summaries/i4f_20261025/ambient-reservoir-pair-r2.png"
+  },
+  "reservoir_values": {
+    "absolute_stagnation_pressure_Pa": 100000.0,
+    "air_Cp_J_kg_K": 1005.0,
+    "air_R_J_kg_K": 287.047490982475,
+    "air_gamma": 1.399814036969217,
+    "incoming_alpha_water": 0.0,
+    "stagnation_temperature_K": 293.15
+  },
+  "schema": "i4f-tested-ambient-boundary-fragments/v1",
+  "scope": "Public copies of the exact patch-only dictionary fragments used in the completed private pair-r2 compressible-reservoir arm. Insert these blocks under p_rgh.boundaryField and T.boundaryField for the listed external patches only. They are not whole-field replacements and must not replace pressurized tank/internal boundary conditions.",
+  "software": {
+    "container_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "distribution": "OpenCFD OpenFOAM v2512",
+    "solver_binary_sha256": "365632cc0065ee56e4efce2998ad596f6651745a95f8e9ab8661de4a5804329d"
+  },
+  "source_api": {
+    "inletOutletTotalTemperature_source": "OpenCFD v2512 inletOutletTotalTemperatureFvPatchScalarField.C, source SHA256 a5800720a6983dbb36bd787f23c33700c7f0c9f7cbd5d0008be5350d20008f18.",
+    "pressure_conversion_reason": "OpenCFD v2512 prghTotalPressure applies an incompressible p0-0.5*rho*U^2 correction; totalPressure has a compressible psi/gamma relation for absolute p, not p_rgh. The tested codedFixedValue uses the compressible isentropic total-to-static relation and then subtracts hydrostatic head.",
+    "prghTotalPressure_source": "OpenCFD v2512 prghTotalPressureFvPatchScalarField.C, source SHA256 59a5dd36e6c0fe75590a2d0ae07bf905e08e9a611bf33362b7a17388db803b72.",
+    "registered_psi": "psiThermo registers phaseScopedName(\"thermo\",\"psi\"); twoPhaseMixtureThermo corrects it as the phase-fraction weighted psi. With alpha.water=0 at incoming ambient faces, thermo:psi is pure-air psi=1/(R_air*T).",
+    "solver_update_order": "In this solver TEqn corrects thermo/mixture before pEqn calls p_rgh.correctBoundaryConditions(); see replay-prep/experiment-v2.json source_api.update_order.",
+    "totalPressure_source": "OpenCFD v2512 totalPressureFvPatchScalarField.C, source SHA256 9aa6d85e8e8ca958847c5a5b5793aeb85541c1fa213c79c2fd0218bffebb63dd."
+  },
+  "source_summary_bundle": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/",
+  "temperature_fragment": {
+    "field": "T",
+    "formula_and_reversal": "Tref=T0/(1+0.5*psi*((gamma-1)/gamma)*neg(phi)*|U|^2); total temperature applies on inflow, zero-gradient treatment on outflow.",
+    "path": "T.boundaryField.patch-only.inc",
+    "sha256": "dc8a9f884b1bf4dbe3cee480e79170f1c28cf21939db193072da5a0d821dca8f",
+    "type": "inletOutletTotalTemperature"
+  },
+  "terminal": {
+    "container_id": "81a4ab9138e7be9d007bfa63d566740f54331f5268f1de73be773b896d0d1882",
+    "exit_code": 0,
+    "native_endpoint": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair-r2/compressible-reservoir/case/processors8/0.588704120044",
+    "normal_End": true,
+    "raw_pressure_contact_count": 0,
+    "schedule_steps_verified": 373
+  },
+  "tested_arm": "pair-r2/compressible-reservoir",
+  "tested_time_s": "0.560717355465 -> 0.588704120044",
+  "tiny_verification": {
+    "inflow_test_values": "100 kPa back pressure, T0=300 K; verified total-to-static p/T and p_rgh hydrostatic relation.",
+    "path": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/tiny-results-v1.json",
+    "qualification": "The tiny verification is code/relationship testing only, not hardware or full-solver validation.",
+    "reverse_outflow_test": "Verified static pressure and zero-gradient temperature behavior on outflow."
+  }
+}

@@ -1,0 +1,69 @@
+fourMouthPlaneAreaAlpha
+{
+    type surfaceFieldValue;
+    libs (fieldFunctionObjects);
+    regionType sampledSurface;
+    name fourMouthPlane;
+    sampledSurfaceDict
+    {
+        type plane;
+        point (5.79 0 0.775);
+        normal (1 0 0);
+        triangulate true;
+    }
+    operation areaAverage;
+    fields (alpha.water U p T);
+    writeControl runTime;
+    writeInterval 0.001;
+    writeFields true;
+    surfaceFormat vtk;
+    log true;
+    writeArea true;
+}
+fourMouthPlaneTotalUIntegral
+{
+    type surfaceFieldValue;
+    libs (fieldFunctionObjects);
+    regionType sampledSurface;
+    name fourMouthPlane;
+    sampledSurfaceDict
+    {
+        type plane;
+        point (5.79 0 0.775);
+        normal (1 0 0);
+        triangulate true;
+    }
+    operation areaIntegrate;
+    fields (U);
+    writeControl timeStep;
+    writeInterval 1;
+    writeFields false;
+    log true;
+    writeArea true;
+}
+fourMouthPlaneWaterWeightedUIntegral
+{
+    type surfaceFieldValue;
+    libs (fieldFunctionObjects);
+    regionType sampledSurface;
+    name fourMouthPlane;
+    sampledSurfaceDict
+    {
+        type plane;
+        point (5.79 0 0.775);
+        normal (1 0 0);
+        triangulate true;
+    }
+    operation weightedAreaIntegrate;
+    weightField alpha.water;
+    fields (U);
+    writeControl timeStep;
+    writeInterval 1;
+    writeFields false;
+    log true;
+    writeArea true;
+}
+// These plane outputs are quadrature diagnostics. Partition the sampled plane
+// into four 1.0x0.15 m mouth windows (centres y=-0.55/+0.55, z=0.65/0.90)
+// to compute per-mouth alpha_g=1-alpha.water and gas-weighted U offline from
+// sampled values/face areas. They are not the native phase mass ledger.

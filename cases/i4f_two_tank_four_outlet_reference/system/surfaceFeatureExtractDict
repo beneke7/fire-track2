@@ -1,0 +1,3 @@
+FoamFile { version 2.0; format ascii; class dictionary; object surfaceFeatureExtractDict; }
+apparatusWall.stl { extractionMethod extractFromSurface; includedAngle 145; subsetFeatures { nonManifoldEdges yes; openEdges yes; } trimFeatures { minElem 0; minLen 0; } writeObj yes; }
+finalLamellaMidSurfaces.stl { extractionMethod extractFromSurface; includedAngle 150; subsetFeatures { nonManifoldEdges yes; openEdges yes; } trimFeatures { minElem 0; minLen 0; } writeObj yes; }

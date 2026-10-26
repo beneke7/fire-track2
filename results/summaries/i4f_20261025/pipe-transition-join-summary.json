@@ -1,0 +1,55 @@
+{
+  "schema": "i4f.pipe-transition-join-geometry-proof.v1",
+  "status": "geometry-only preparation; no mesh or CFD",
+  "comparison": "Legacy overlapping pipe end versus pipe terminating flush at the ruled transition inlet; same four branches, tanks, valves, divider geometry, and 1 m transition/mouth train.",
+  "generator": {
+    "source": "scripts/i4f_four_outlet_geometry/generate.py",
+    "sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+    "preserved_snapshot": "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/provenance/generate-v6.py",
+    "snapshot_sha256": "6714518f845b88bbd3ec10799a1b035f063a9546576e25ad04cc1a0ffaf812e2",
+    "ruff_and_compile": "passed"
+  },
+  "inputs": {
+    "tank_axis": "horizontal",
+    "tank_diameter_m": 0.9,
+    "water_volume_m3_per_tank": 1.35,
+    "headspace_to_water_ratio": 0.225,
+    "post_rise_straight_m": 0.0,
+    "transition_and_mouth_length_m": 1.0,
+    "intermediate_width_m": 0.5,
+    "pipe_id_m_assumed": 0.3,
+    "pipe_area_m2": 0.07068583470577035,
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15
+  },
+  "checks": {
+    "both_envelope_step_roundtrips_valid_10_solids": true,
+    "both_joined_branch_step_roundtrips_valid_4_solids": true,
+    "all_four_flush_branch_solids_valid": true,
+    "flush_pipe_and_transition_inlet_section_each_m2": 0.07068583470577035,
+    "analytic_pipe_area_m2": 0.07068583470577035,
+    "zero_volume_overlap_at_coincident_flush_interface": true,
+    "brep_checks_and_discrete_sections": "See full private record; sampled x-normal sections at common stations, not a continuous minimum proof."
+  },
+  "volume_effects": {
+    "tank_capacity_delta_m3": 0.0,
+    "in_tank_feed_volume_delta_m3": 0.0,
+    "downstream_line_volume_flush_minus_legacy_m3": -0.001011870172325735,
+    "downstream_line_volume_flush_minus_legacy_liters": -1.011870172325735,
+    "qualification": "Per-branch BREP intersections summed; cross-branch overlaps are not globally union-corrected. The removed overlap is downstream of valves and changes initialized downstream air volume."
+  },
+  "interpretation": "The legacy overlap creates a visible shoulder at the pipe end. The flush join removes that step in the idealized geometry. This geometry-only comparison does not show that the shoulder caused prior pressure cycling or that the correction improves CFD.",
+  "artifacts": {
+    "pipe-transition-join-comparison.png": {
+      "path": "results/summaries/i4f_20261025/pipe-transition-join-comparison.png",
+      "sha256": "4432f002f1172f8ffc4d61a7c58322e1a98568c9962a23084122e72a1cd92fbd",
+      "bytes": 188766
+    },
+    "pipe-transition-join-areas.png": {
+      "path": "results/summaries/i4f_20261025/pipe-transition-join-areas.png",
+      "sha256": "1835430e28cba3b85abb72522b1c0e35bd2e7b707f70c4c8226bf2c8a58353b7",
+      "bytes": 232386
+    }
+  },
+  "full_private_record": "results/runs/i4f-flush-pipe-transition-proof-20261026T053245Z/analysis/geometry-join-comparison-v9.json"
+}

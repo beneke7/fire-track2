@@ -1,0 +1,276 @@
+{
+  "schema": "i4f-branch-hydraulic-geometry-v1",
+  "purpose": "geometry-derived path/section aids for the parallel reduced model; no CFD result or loss coefficient",
+  "units": {
+    "length": "m",
+    "area": "m2",
+    "volume_integral": "m3",
+    "integral_ds_over_A": "m-1"
+  },
+  "assumptions": [
+    "0.90 m tank ID, 3.10 m tank length, 0.30 m pipe ID, 1.0x0.15 m open mouths are provisional preview values.",
+    "Branch paths are the generated Bezier/straight preview centerlines; they are not measured STEP centerlines.",
+    "The tank-side entry is the numerical first crossing of the preview centerline through the 0.90 m cylindrical tank side.",
+    "Area is circular in the pipe and linearly interpolated between sampled centerline-normal OCP BREP sections in the ruled transition.",
+    "The open valve marker occupies x=2.10-2.40 m but retains the full circular pipe area; no valve restriction or K is inferred.",
+    "Integral of area along centerline is a 1D hydraulic-line estimate and is not the exact partitioned inventory volume."
+  ],
+  "source_sha256": {
+    "results/runs/i4f-mesh-feasibility-one-train-20261024T2055Z-attempt4/geometry-and-mesh-plan.json": "63e9c1bdb0caf239f29745b82c276130ab2a4efdff72e5172da0c49ee0c0f84a",
+    "results/runs/i4f-revised-dimensioned-cad-preview-v2-20261024T2030Z/preview-geometry.json": "496cacb13db991ba8a6d4ff179cde9dd8c20c2de1cda1a0e68573591cdf62cbe",
+    "results/runs/i4f-mesh-feasibility-one-train-20261024T2055Z-attempt4/scripts/prepare_mesh_case.py": "94e97e08ca39be7ae33782bf5b725bec96f412943f37fdd242b6f6a111df0830",
+    "results/runs/i4f-mesh-feasibility-one-train-20261024T2055Z-attempt4/analysis/mesh-trigger-audit/tank-port-aperture-edges.json": "7e21510d641821e4ae6b98b2d0bb5ce44fc8fe6d583552d8261bd17952187cf0"
+  },
+  "branches": [
+    {
+      "branch": "lower",
+      "source_geometry_status": "assumed topology-guided preview; not measured STEP centerline",
+      "tank_cylinder_center_x_m": 1.55,
+      "tank_center_yz_m": [
+        -0.55,
+        1.25
+      ],
+      "tank_radius_m": 0.45,
+      "centerline_sidewall_intersection_t": 0.35584094072063055,
+      "centerline_sidewall_intersection_xyz_m": [
+        0.5647807006063451,
+        -0.7491998568178657,
+        0.8464911190026398
+      ],
+      "unit_tangent_at_intersection_xyz": [
+        0.7212820941616722,
+        -0.11051278675121956,
+        -0.6837682828314224
+      ],
+      "nominal_tube_cross_section_upper_z_envelope_m": 0.955946000329878,
+      "upper_envelope_qualification": "pipe-circle cross-section projected vertically at centerline/cylinder intersection; not the exact curved wall aperture or a physical intake-crown datum",
+      "path_start_inside_vessel_xyz_m": [
+        0.25,
+        -0.631,
+        1.15
+      ],
+      "path_end_open_mouth_xyz_m": [
+        5.8,
+        -0.55,
+        0.65
+      ],
+      "cross_section_assumption": "round pipe area until x=4.0 m; centerline-normal OCP BREP area samples through the ruled transition; exact 1.0x0.15 m mouth at x=5.8 m; linear area interpolation between sampled stations",
+      "valve": {
+        "x_span_m": [
+          2.1,
+          2.4
+        ],
+        "modeled_opening_geometry": "unchanged full circular 0.30 m pipe; valve is a station marker only, no disk/seat/loss area modeled"
+      },
+      "segments_from_tank_sidewall": {
+        "wall_to_valve_start": {
+          "length_m": 1.6359314980042712,
+          "integral_ds_over_A_m_minus1": 23.14369639707621,
+          "integral_A_ds_m3": 0.11563718345789294
+        },
+        "valve_marker_zone": {
+          "length_m": 0.2999999999999998,
+          "integral_ds_over_A_m_minus1": 4.244131815783881,
+          "integral_A_ds_m3": 0.0212057504117307
+        },
+        "valve_end_to_transition_start": {
+          "length_m": 1.6111757183919289,
+          "integral_ds_over_A_m_minus1": 22.79347375748563,
+          "integral_A_ds_m3": 0.11388730051220167
+        },
+        "round_to_intermediate_x4.8": {
+          "length_m": 0.7999999999999998,
+          "integral_ds_over_A_m_minus1": 10.216431432557144,
+          "integral_A_ds_m3": 0.06269816036748982
+        },
+        "intermediate_to_exit_x5.5": {
+          "length_m": 0.7280109889280579,
+          "integral_ds_over_A_m_minus1": 6.910345105152729,
+          "integral_A_ds_m3": 0.07957090455517013
+        },
+        "exit_channel_to_open_mouth": {
+          "length_m": 0.2999999999999998,
+          "integral_ds_over_A_m_minus1": 2.0000011904872395,
+          "integral_A_ds_m3": 0.044999973214395306
+        },
+        "total_wall_to_open_mouth": {
+          "length_m": 5.375118205324258,
+          "integral_ds_over_A_m_minus1": 69.30807969854283,
+          "integral_A_ds_m3": 0.43799927251888054
+        }
+      },
+      "full_preview_route_including_tank_overlap": {
+        "length_m": 5.830298214142117,
+        "integral_ds_over_A_m_minus1": 75.74755955631838,
+        "integral_A_ds_m3": 0.4701740513835509,
+        "qualification": "starts at x=0.25 m inside tank; not a disjoint line-inventory volume"
+      },
+      "exact_tank_wall_aperture_section": {
+        "method": "OCP intersection of tank-fluid cylinder with the separate pre-fusion swept pipe solid",
+        "connected_loop_count": 1,
+        "sampled_curve_floor_z_m": 0.8032527638186613,
+        "sampled_curve_crown_z_m": 0.9464149176201075,
+        "components": [
+          {
+            "component_id": 0,
+            "edge_count": 1,
+            "sampled_point_count": 2001,
+            "edge_endpoint_gap_m_by_edge": [
+              3.1185214200286946e-15
+            ],
+            "all_edges_closed_within_1e-6_m": true,
+            "bounds_xyz_m": [
+              [
+                0.34902433673787825,
+                0.7984851954627484
+              ],
+              [
+                -0.8821687790210418,
+                -0.6040083971563545
+              ],
+              [
+                0.8032527638186613,
+                0.9464149176201075
+              ]
+            ],
+            "sampled_z_floor_m": 0.8032527638186613,
+            "sampled_z_crown_m": 0.9464149176201075,
+            "sampled_y_min_m": -0.8821687790210418,
+            "sampled_y_max_m": -0.6040083971563545,
+            "edge_ids_in_section_result": [
+              0
+            ],
+            "sampling_note": "2001 equally spaced curve parameters per exact OCP section edge; extrema are sampled curve extrema, not analytic optimizer extrema"
+          }
+        ],
+        "qualification": "exact generated BREP intersection curve, numerically sampled at 2001 points per edge; provisional preview only, no wall thickness"
+      }
+    },
+    {
+      "branch": "upper",
+      "source_geometry_status": "assumed topology-guided preview; not measured STEP centerline",
+      "tank_cylinder_center_x_m": 1.55,
+      "tank_center_yz_m": [
+        -0.55,
+        1.25
+      ],
+      "tank_radius_m": 0.45,
+      "centerline_sidewall_intersection_t": 0.3727058753514184,
+      "centerline_sidewall_intersection_xyz_m": [
+        0.5801305723801888,
+        -0.29717258199178503,
+        0.8777389401195722
+      ],
+      "unit_tangent_at_intersection_xyz": [
+        0.7202047233128456,
+        0.05305732242827373,
+        -0.6917297716988979
+      ],
+      "nominal_tube_cross_section_upper_z_envelope_m": 0.9860624060273397,
+      "upper_envelope_qualification": "pipe-circle cross-section projected vertically at centerline/cylinder intersection; not the exact curved wall aperture or a physical intake-crown datum",
+      "path_start_inside_vessel_xyz_m": [
+        0.25,
+        -0.43900000000000006,
+        1.15
+      ],
+      "path_end_open_mouth_xyz_m": [
+        5.8,
+        -0.55,
+        0.9
+      ],
+      "cross_section_assumption": "round pipe area until x=4.0 m; centerline-normal OCP BREP area samples through the ruled transition; exact 1.0x0.15 m mouth at x=5.8 m; linear area interpolation between sampled stations",
+      "valve": {
+        "x_span_m": [
+          2.1,
+          2.4
+        ],
+        "modeled_opening_geometry": "unchanged full circular 0.30 m pipe; valve is a station marker only, no disk/seat/loss area modeled"
+      },
+      "segments_from_tank_sidewall": {
+        "wall_to_valve_start": {
+          "length_m": 1.6383126690284042,
+          "integral_ds_over_A_m_minus1": 23.177383076084,
+          "integral_A_ds_m3": 0.11580549851931098
+        },
+        "valve_marker_zone": {
+          "length_m": 0.2999999999999998,
+          "integral_ds_over_A_m_minus1": 4.244131815783884,
+          "integral_A_ds_m3": 0.0212057504117307
+        },
+        "valve_end_to_transition_start": {
+          "length_m": 1.676542380669252,
+          "integral_ds_over_A_m_minus1": 23.71822286102809,
+          "integral_A_ds_m3": 0.118507797597204
+        },
+        "round_to_intermediate_x4.8": {
+          "length_m": 0.7999999999999998,
+          "integral_ds_over_A_m_minus1": 10.216431431886,
+          "integral_A_ds_m3": 0.06269816037173315
+        },
+        "intermediate_to_exit_x5.5": {
+          "length_m": 0.7280109889280579,
+          "integral_ds_over_A_m_minus1": 6.910345107826956,
+          "integral_A_ds_m3": 0.07957090453857935
+        },
+        "exit_channel_to_open_mouth": {
+          "length_m": 0.2999999999999998,
+          "integral_ds_over_A_m_minus1": 2.0000011904872252,
+          "integral_A_ds_m3": 0.044999973214395694
+        },
+        "total_wall_to_open_mouth": {
+          "length_m": 5.442866038625714,
+          "integral_ds_over_A_m_minus1": 70.26651548309616,
+          "integral_A_ds_m3": 0.4427880846529539
+        }
+      },
+      "full_preview_route_including_tank_overlap": {
+        "length_m": 5.902319360682871,
+        "integral_ds_over_A_m_minus1": 76.76645035646408,
+        "integral_A_ds_m3": 0.47526492623090316,
+        "qualification": "starts at x=0.25 m inside tank; not a disjoint line-inventory volume"
+      },
+      "exact_tank_wall_aperture_section": {
+        "method": "OCP intersection of tank-fluid cylinder with the separate pre-fusion swept pipe solid",
+        "connected_loop_count": 1,
+        "sampled_curve_floor_z_m": 0.812334449478391,
+        "sampled_curve_crown_z_m": 1.0118300605414665,
+        "components": [
+          {
+            "component_id": 0,
+            "edge_count": 1,
+            "sampled_point_count": 2001,
+            "edge_endpoint_gap_m_by_edge": [
+              4.2001807449902774e-16
+            ],
+            "all_edges_closed_within_1e-6_m": true,
+            "bounds_xyz_m": [
+              [
+                0.3508405247685098,
+                0.823277102652419
+              ],
+              [
+                -0.4453631714615961,
+                -0.16819497130303215
+              ],
+              [
+                0.812334449478391,
+                1.0118300605414665
+              ]
+            ],
+            "sampled_z_floor_m": 0.812334449478391,
+            "sampled_z_crown_m": 1.0118300605414665,
+            "sampled_y_min_m": -0.4453631714615961,
+            "sampled_y_max_m": -0.16819497130303215,
+            "edge_ids_in_section_result": [
+              0
+            ],
+            "sampling_note": "2001 equally spaced curve parameters per exact OCP section edge; extrema are sampled curve extrema, not analytic optimizer extrema"
+          }
+        ],
+        "qualification": "exact generated BREP intersection curve, numerically sampled at 2001 points per edge; provisional preview only, no wall thickness"
+      }
+    }
+  ],
+  "csv": "analysis/hydraulic-geometry/branch-centerline-sections.csv",
+  "csv_sha256": "d388897de6d4cbeefd932c8af79eaab7607c737272737e198875a7ef95e6c7b8"
+}

@@ -1,0 +1,258 @@
+{
+  "actual_tank_headspace_m3": {
+    "tankA": 0.29849720040811945,
+    "tankB": 0.29849676833613015
+  },
+  "additional_wetted_feed_water_m3": {
+    "tankA_feed": 0.25105684381198295,
+    "tankB_feed": 0.2511091492240681
+  },
+  "assumptions": {
+    "downstream_pressure_absolute_Pa": 100000.0,
+    "each_tank_initial_water_m3": 1.35,
+    "effective_valve_plane_definition": "cell-centre split within native allFourValves loss zones; x < 2.25 m is wetted, x >= 2.25 m remains air-filled",
+    "effective_valve_plane_x_m_assumed": 2.25,
+    "gas": "dry ideal air, MW 28.96546 g/mol; no CO2, foam, dissolution, or measured regulator history",
+    "initial_turbulence": "k=0.02 m2/s2; omega=10 1/s; nut=0; alphat=0",
+    "opening_vs_release": "1 s source ramp is a provisional numerical assumption; approximate 5 s duration is a comparison target, not an imposed opening or discharge history",
+    "pressure_initialization": "1.2 MPa absolute tank free-surface pressure with hydrostatic tank water/headspace; wetted tank-to-plane cells use hydrostatic water pressure; all downstream line, mouth, and exterior gas starts at 100 kPa absolute without a downstream pressure ramp",
+    "solver": "frozen predictor-Sp OpenFOAM compressibleInterFoam exploratory binary; no prescribed outlet history",
+    "tank_feed_water": "additional water inventory from line-zone cells upstream of the effective valve plane; reported separately from tank payload",
+    "tank_pressure_absolute_Pa_assumed": 1200000.0,
+    "temperature_K": 293.15,
+    "user_confirmed_downstream_line_initial_state": "ambient air downstream of the valves; tank-to-valve feed remains wetted",
+    "valve_source_assumption": "existing four-zone scalar coded source retained: Cd=0.7, 1 s smoothstep ramp, minimum effective opening fraction 0.02; this finite numerical opening is not measured leakage or a truly shut valve",
+    "water_density_kg_m3": 998.2,
+    "zero_initial_velocity": true
+  },
+  "boundary_conditions": {
+    "T_fragment_sha256": "dc8a9f884b1bf4dbe3cee480e79170f1c28cf21939db193072da5a0d821dca8f",
+    "alphat_wall": "compressible::alphatWallFunction on apparatusWall, lamellaMaster, lamellaSlave; zero internal field",
+    "ambient_patches": [
+      "ambientAnnulus",
+      "externalSides",
+      "farOutlet"
+    ],
+    "p_rgh_ambient": "tested compressible-reservoir codedFixedValue patch fragment, p0=100 kPa absolute, current thermo state",
+    "p_rgh_fragment_sha256": "e2406f16b9473c3a2d69c6a494e84ba0241b385f099133d9abf31dec9670917b",
+    "temperature_ambient": "tested inletOutletTotalTemperature patch fragment, T0=293.15 K",
+    "tested_fragment_manifest_sha256": "5ec7f6f7d6a16b2b2523c0b375e9920e1116657315a9d2555b8907db056a9c10",
+    "wall_patches": [
+      "apparatusWall",
+      "lamellaMaster",
+      "lamellaSlave"
+    ]
+  },
+  "created_utc": "2026-10-25T15:57:00.995610+00:00",
+  "field_hashes": {
+    "T": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+    "U": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+    "alpha.water": "9e8865eb64640b81da2dca869d786bd4cef7fe7ab27dcbab33229675bbabb755",
+    "alphat": "8e515a1618970553e6e1058db4b58cbd822167460a3cbac59ecc887b5a9cd455",
+    "k": "ef644b4f58c25b669c64b5cbe83f2ccda43dc03e442bca2abaeadf0608c74247",
+    "nut": "2a443276542f6729f00ffbe12f40650f27678ba727c02996ddb8b0c5db458071",
+    "omega": "e6fc3fc82dd2af150c1a6be2a01e4c6de3583cd839f3b291e731c7fc21dd434d",
+    "p": "480c370949677f5c211817f20c05fab91e4969ea950849b89d1a9519356e6bdd",
+    "p_rgh": "ad2e1971b56a970d01d091df8a5df879bbe1377dfb37d9577c0f4600cbee94d8"
+  },
+  "free_surface_z_m": {
+    "analytical_volume_match": 1.484725255189472,
+    "interface_width_m": 0.025,
+    "native_tankA": 1.4841394748048033,
+    "native_tankB": 1.48414048111109
+  },
+  "initial_field_ranges": {
+    "T_max_K": 293.15,
+    "T_min_K": 293.15,
+    "all_fields_finite": true,
+    "alpha_max": 1.0,
+    "alpha_min": 0.0,
+    "downstream_p_max_Pa": 100000.0,
+    "downstream_p_min_Pa": 100000.0,
+    "p_abs_max_Pa": 1211011.7118865517,
+    "p_abs_min_Pa": 100000.0,
+    "p_rgh_max_Pa": 1214533.2111670845,
+    "p_rgh_min_Pa": 99994.39753268537,
+    "p_rgh_relation_max_abs_residual_Pa": 2.3283064365386963e-10,
+    "positive_absolute_p": true,
+    "positive_mixture_density": true,
+    "rho_mix_max_kg_m3": 998.2,
+    "rho_mix_min_kg_m3": 1.1883827696265006
+  },
+  "initial_gas_mass_kg": {
+    "all_downstream_plus_exterior": 25.364165167694935,
+    "downstream_trainA": 0.5113608622751754,
+    "downstream_trainB": 0.5113589416649795,
+    "external_air": 24.328690461451096,
+    "mouth_slabs": 0.012754902303672714,
+    "tankA_headspace": 4.256708108667671,
+    "tankB_headspace": 4.25670194541816
+  },
+  "mandatory_initial_fields": [
+    "alpha.water",
+    "p",
+    "p_rgh",
+    "T",
+    "U",
+    "k",
+    "omega",
+    "nut",
+    "alphat"
+  ],
+  "mesh": {
+    "cells": 269680,
+    "configured_quality_status": "all nine configured rows passed unchanged thresholds; optional allGeometry concavity remains separately diagnostic",
+    "connected_fluid_regions": 1,
+    "native_C_sha256": "7bfd67e226c94fd655f5aab25150ca179644099f6459f0e7a7cafa64b17ba2d4",
+    "native_boundary_patches": [
+      "ambientAnnulus",
+      "apparatusWall",
+      "externalSides",
+      "farOutlet",
+      "lamellaMaster",
+      "lamellaSlave"
+    ],
+    "native_cellVolume_sha256": "25a186a61043e253c583ef52a9f7a034b794dd2919e70b400d7f0732865c3053",
+    "polyMesh_boundary_sha256": "e3789199aca94e32250c339fd671f3e3fbfc2463aceec5c23dd9ed5aa270574d",
+    "source_bundle": "results/runs/i4f-short1-compact-mesh-20261025T150312Z"
+  },
+  "native_partition": {
+    "basis": "Native compact-mesh cell zones; tankA/B, lineA/B initial cells split at x=2.25 m, separate mouth slabs, and exterior cover all cells exactly once.",
+    "classification_note": "Native cell-centre classification is a mesh discretization of the assumed x=2.25 m valve plane. The user confirmed downstream air; the short line segment from each tank to that plane remains wetted and is reported separately from the 1.350 m3 tank payload.",
+    "effective_plane_is_assumed": true,
+    "effective_valve_plane_x_m": 2.25,
+    "groups": {
+      "downstreamTrainA": {
+        "cells": 40149,
+        "volume_m3": 0.430299795103805,
+        "water_volume_m3": 0.0
+      },
+      "downstreamTrainB": {
+        "cells": 40151,
+        "volume_m3": 0.4302981789492756,
+        "water_volume_m3": 0.0
+      },
+      "externalAir": {
+        "cells": 122413,
+        "volume_m3": 20.472099632593473,
+        "water_volume_m3": 0.0
+      },
+      "mouthA": {
+        "cells": 448,
+        "volume_m3": 0.005366495119022,
+        "water_volume_m3": 0.0
+      },
+      "mouthB": {
+        "cells": 448,
+        "volume_m3": 0.005366496497543999,
+        "water_volume_m3": 0.0
+      },
+      "tankA": {
+        "cells": 21839,
+        "volume_m3": 1.6484972004081189,
+        "water_volume_m3": 1.3499999999999994
+      },
+      "tankB": {
+        "cells": 21839,
+        "volume_m3": 1.648496768336131,
+        "water_volume_m3": 1.3500000000000008
+      },
+      "upstreamFeedA": {
+        "cells": 11144,
+        "volume_m3": 0.251056843811983,
+        "water_volume_m3": 0.25105684381198295
+      },
+      "upstreamFeedB": {
+        "cells": 11249,
+        "volume_m3": 0.251109149224068,
+        "water_volume_m3": 0.2511091492240681
+      }
+    },
+    "lineA_initial_volume_m3": 0.681356638915788,
+    "lineA_mouth_slab_volume_m3": 0.005366495119022,
+    "lineA_native_zone_volume_m3": 0.6867231340348099,
+    "lineB_initial_volume_m3": 0.6814073281733437,
+    "lineB_mouth_slab_volume_m3": 0.005366496497543999,
+    "lineB_native_zone_volume_m3": 0.6867738246708877,
+    "line_train_volume_parts": {
+      "A": {
+        "dryValve_x_2p25_to_2p40": {
+          "cells": 1344,
+          "volume_m3": 0.021025658846234998
+        },
+        "dry_native_total": {
+          "cells": 40149,
+          "volume_m3": 0.430299795103805
+        },
+        "postValve_x_2p40_to_4p80": {
+          "cells": 38805,
+          "volume_m3": 0.40927413625757003
+        },
+        "preValve_x_lt_2p10": {
+          "cells": 9800,
+          "volume_m3": 0.23003051439683603
+        },
+        "wetValve_x_2p10_to_2p25": {
+          "cells": 1344,
+          "volume_m3": 0.021026329415147
+        },
+        "wet_native_total": {
+          "cells": 11144,
+          "volume_m3": 0.251056843811983
+        }
+      },
+      "B": {
+        "dryValve_x_2p25_to_2p40": {
+          "cells": 1344,
+          "volume_m3": 0.021025659122897
+        },
+        "dry_native_total": {
+          "cells": 40151,
+          "volume_m3": 0.4302981789492756
+        },
+        "postValve_x_2p40_to_4p80": {
+          "cells": 38807,
+          "volume_m3": 0.4092725198263786
+        },
+        "preValve_x_lt_2p10": {
+          "cells": 9905,
+          "volume_m3": 0.2300828197039
+        },
+        "wetValve_x_2p10_to_2p25": {
+          "cells": 1344,
+          "volume_m3": 0.021026329520168
+        },
+        "wet_native_total": {
+          "cells": 11249,
+          "volume_m3": 0.251109149224068
+        }
+      }
+    },
+    "overlap_cells": 0,
+    "partition_cells": 269680,
+    "unclassified_cells": 0,
+    "valve_zone": {
+      "all_four_cells": 5376,
+      "all_four_volume_m3": 0.08410397690444701,
+      "trainA_cells": 2688,
+      "trainA_dry_side_cells": 1344,
+      "trainA_dry_side_volume_m3": 0.021025658846234998,
+      "trainA_volume_m3": 0.042051988261382,
+      "trainA_wet_side_cells": 1344,
+      "trainA_wet_side_volume_m3": 0.021026329415147,
+      "trainB_cells": 2688,
+      "trainB_dry_side_cells": 1344,
+      "trainB_dry_side_volume_m3": 0.021025659122897,
+      "trainB_volume_m3": 0.042051988643064996,
+      "trainB_wet_side_cells": 1344,
+      "trainB_wet_side_volume_m3": 0.021026329520168
+    }
+  },
+  "native_tank_water_integrals_m3": {
+    "tankA": 1.3499999999999994,
+    "tankB": 1.3500000000000008
+  },
+  "qualification": "Exploratory native cold-start fields for user-confirmed initially-air downstream plumbing; all nine configured meshQuality rows pass at unchanged thresholds, while optional allGeometry concavity diagnostics remain separate. This is not validation or grid convergence.",
+  "schema": "i4f-short1-two-tank-four-mouth-dryline-initialization/v1",
+  "total_initial_water_m3": 3.202165993036051
+}

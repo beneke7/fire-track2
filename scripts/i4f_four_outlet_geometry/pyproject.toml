@@ -1,0 +1,15 @@
+[project]
+name = "i4f-four-outlet-geometry"
+version = "0.1.0"
+description = "Standalone provisional I4F two-tank/four-outlet CAD geometry generator"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "cadquery-ocp==8.0.1.1.0",
+    "matplotlib==3.11.2",
+    "numpy==2.5.4",
+    "pyvista==0.49.1",
+    "vtk==9.6.2",
+]
+
+[tool.uv]
+package = false

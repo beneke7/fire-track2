@@ -1,0 +1,85 @@
+{
+  "schema": "i4f-flush-native-initialization-adapter/v1",
+  "native_initialization_source": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/native-initialization-dryline.json",
+  "native_initialization_source_sha256": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+  "readiness_v4_source": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/final-canonical-readiness-v4.json",
+  "readiness_v4_source_sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+  "native_partition": {
+    "groups": {
+      "tankA": {
+        "volume_m3": 1.64849720040838,
+        "water_volume_m3": 1.3500000000021357
+      },
+      "downstreamTrainA": {
+        "water_volume_m3": 0.2510568437958543
+      }
+    },
+    "lineA_native_zone_volume_m3": 0.6863078026992726
+  },
+  "native_tank_water_integrals_m3": {
+    "tankA": 1.3500000000021357,
+    "tankB": 1.3500000000005044
+  },
+  "actual_tank_headspace_m3": {
+    "tankA": 0.29849720040624456,
+    "tankB": 0.29849676832569794
+  },
+  "additional_wetted_feed_water_m3": {
+    "tankA_feed": 0.2510568437958543,
+    "tankB_feed": 0.2511091493075715
+  },
+  "assumptions": {
+    "tank_pressure_absolute_Pa_assumed": 1200000.0,
+    "temperature_K": 293.15,
+    "downstream_pressure_absolute_Pa": 100000.0,
+    "water_density_kg_m3": 998.2,
+    "air_R_J_kg_K_installed_v2512": 287.0477481284761
+  },
+  "global_initial_inventory": {
+    "all_four_valve_zone_m3": {
+      "V_m3": 0.08410397948276717,
+      "cells": 21504,
+      "gas_m3_(1-alpha)V": 0.04205132048912734,
+      "water_m3_alphaV": 0.04205265899363985
+    },
+    "feedA_m3": {
+      "V_m3": 0.6809413901296786,
+      "cells": 66059,
+      "gas_m3_(1-alpha)V": 0.42988454633382456,
+      "water_m3_alphaV": 0.25105684379585436
+    },
+    "feedB_m3": {
+      "V_m3": 0.680997569720632,
+      "cells": 66168,
+      "gas_m3_(1-alpha)V": 0.4298884204130606,
+      "water_m3_alphaV": 0.25110914930757156
+    },
+    "gas_m3_(1-alpha)V": 21.939600925803575,
+    "gravity_vector_m_s2": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "hydrostatic_relation": "OpenFOAM p_rgh = p - rho*gh, with gh=g dot C and g=(0,0,-9.81), so p_rgh = p + rho_mix*9.81*z. rho_mix=alpha*998.2+(1-alpha)*p/(287.0477481284761*293.15); evaluated at canonical mesh cell centres.",
+    "max_abs_p_rgh_hydrostatic_relation_residual_Pa": 0.36869071586988866,
+    "p_abs_min_max_Pa": [
+      100000.0,
+      1211011.7118868
+    ],
+    "rms_p_rgh_hydrostatic_relation_residual_Pa": 0.008955540959870077,
+    "tankA_m3": {
+      "V_m3": 1.64849720040838,
+      "cells": 21839,
+      "gas_m3_(1-alpha)V": 0.29849720040624456,
+      "water_m3_alphaV": 1.3500000000021357
+    },
+    "tankB_m3": {
+      "V_m3": 1.6484967683262028,
+      "cells": 21839,
+      "gas_m3_(1-alpha)V": 0.29849676832569794,
+      "water_m3_alphaV": 1.3500000000005044
+    },
+    "water_m3_alphaV": 3.202165993106066
+  },
+  "qualified_scope": "Tank A represents the one-tank/two-branch equivalent; native mesh inventory, not ideal CAD cylinder capacity, supplies initial tank state."
+}

@@ -1,0 +1,941 @@
+{
+  "aggregate_four_source_zone_samples": [
+    {
+      "alpha_water_volume_fraction_max": 0.5000090137302713,
+      "alpha_water_volume_fraction_mean": 0.5000079720590815,
+      "alpha_water_volume_fraction_min": 0.5000069324286746,
+      "branch_count": 4,
+      "mean_p_upstream_minus_downstream_Pa": 1109637.0520417294,
+      "mixture_coeff_fraction_of_all_water_zone_mean": 0.5006032254260867,
+      "native_checkpoint_tag": "t0",
+      "summed_fvOptions_diagonal_kg_s": -35737.19150590572,
+      "summed_fvOptions_force_rhs_N": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "summed_implied_dissipation_power_W": 0.0,
+      "time_s": 0.0,
+      "water_partial_density_coeff_fraction_of_all_water_zone_mean": 0.5000079720590814
+    },
+    {
+      "alpha_water_volume_fraction_max": 0.5130544058587742,
+      "alpha_water_volume_fraction_mean": 0.5130326624116788,
+      "alpha_water_volume_fraction_min": 0.5130104844496933,
+      "branch_count": 4,
+      "mean_p_upstream_minus_downstream_Pa": 571782.7014798735,
+      "mixture_coeff_fraction_of_all_water_zone_mean": 0.5034999985941354,
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "summed_fvOptions_diagonal_kg_s": -331768.5059590672,
+      "summed_fvOptions_force_rhs_N": [
+        -306260.23779639805,
+        0.3593168938415543,
+        118.6934967939779
+      ],
+      "summed_implied_dissipation_power_W": 287518.51525630604,
+      "time_s": 0.00495695923227,
+      "water_partial_density_coeff_fraction_of_all_water_zone_mean": 0.5029038534856161
+    },
+    {
+      "alpha_water_volume_fraction_max": 0.655759735469824,
+      "alpha_water_volume_fraction_mean": 0.6557433335374461,
+      "alpha_water_volume_fraction_min": 0.6557265679253291,
+      "branch_count": 4,
+      "mean_p_upstream_minus_downstream_Pa": 670952.2534748534,
+      "mixture_coeff_fraction_of_all_water_zone_mean": 0.6512662936959936,
+      "native_checkpoint_tag": "baseline_50ms",
+      "summed_fvOptions_diagonal_kg_s": -373309.4478611766,
+      "summed_fvOptions_force_rhs_N": [
+        -303129.105856842,
+        0.5485012126857914,
+        96.77551733782241
+      ],
+      "summed_implied_dissipation_power_W": 249812.2101715692,
+      "time_s": 0.050021166664,
+      "water_partial_density_coeff_fraction_of_all_water_zone_mean": 0.6508483738531061
+    }
+  ],
+  "analysis_script_sha256": "4cc3cd1c258223c4897c6bea7e3356ebe607917fd5ffc183c1f2f19b1e607f75",
+  "case_scope": "short1 compact dry-line one-tank/two-branch initialization and 0.05 s continuation; diagnostics only",
+  "created_utc": "2026-10-25T16:31:46.050663+00:00",
+  "input_sha256": {
+    "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/C": "7bfd67e226c94fd655f5aab25150ca179644099f6459f0e7a7cafa64b17ba2d4",
+    "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/cellVolume": "25a186a61043e253c583ef52a9f7a034b794dd2919e70b400d7f0732865c3053",
+    "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/fvOptions": "6aab5ad4777d1bbf2bd9485a1529706f0d6f49c68d5a72349c31c85efb2bad0a",
+    "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/constant/polyMesh/cellZones": "17965ba06ba4c2a3266bc55123111598341fd11c83868a67941d85e05fa55886",
+    "results/runs/i4f-short1-dryline-continue-20261025T160951Z/case/processors10/constant/polyMesh/cellProcAddressing": "8936f161613fb7e3dfc8f4c1c3fd691b92b64d1dc52e926246829d8f620984ab",
+    "results/runs/i4f-short1-dryline-halfdt-20261025T1603Z-attempt3/case/constant/C": "7bfd67e226c94fd655f5aab25150ca179644099f6459f0e7a7cafa64b17ba2d4",
+    "results/runs/i4f-short1-dryline-halfdt-20261025T1603Z-attempt3/case/constant/cellVolume": "25a186a61043e253c583ef52a9f7a034b794dd2919e70b400d7f0732865c3053",
+    "results/runs/i4f-short1-dryline-halfdt-20261025T1603Z-attempt3/case/constant/fvOptions": "6aab5ad4777d1bbf2bd9485a1529706f0d6f49c68d5a72349c31c85efb2bad0a",
+    "results/runs/i4f-short1-dryline-halfdt-20261025T1603Z-attempt3/case/constant/polyMesh/cellZones": "17965ba06ba4c2a3266bc55123111598341fd11c83868a67941d85e05fa55886",
+    "results/runs/i4f-short1-dryline-halfdt-20261025T1603Z-attempt3/case/processors10/constant/polyMesh/cellProcAddressing": "8936f161613fb7e3dfc8f4c1c3fd691b92b64d1dc52e926246829d8f620984ab"
+  },
+  "interpretation": {
+    "effective_source_strength": "Because the source diagonal is proportional to mixture rho, gas-only cells contribute little: the water partial-density coefficient is 50.0%, 50.3%, and 65.1% of a hypothetical all-water source zone at the three checkpoints. The lumped moving-front model applies the full assumed Cd/K loss at the valve seat throughout, so it does not represent this progressive wetting of a 0.30 m distributed zone. This is consistent with, but does not prove the cause of, its lower predicted flow/drawdown.",
+    "limitations": "The 4.957 ms state is from the separate half-deltaT run, not the original-deltaT continuation. The full source cell-zone includes both tanks' four branch valves; the reduced model is Tank A representative. Results are early-time diagnostics on the same compact, quality-limited mesh, not a validation or causal isolation experiment.",
+    "native_vs_reduced_storage": "Tank A native drawdown uses tankAWaterZone plus the small initial water fraction in tankAHeadspaceZone. Relative to the model's own initial state, native drawdown and lineAInitialZone water gain are 0.548 L by 4.957 ms and 6.547/6.549 L by 50.021 ms; the reduced model gives 0.394 L and 4.573 L. No water reached externalAirZone at these checkpoints. At 50.021 ms the native-global alpha-volume change is +0.00405 L, small relative to the 1.974 L native-model line-storage difference.",
+    "pressure_and_work": "Volume-weighted static p means on the x<2.25 and x>=2.25 cell-center subsets differ by 0.572 MPa at 4.957 ms and 0.671 MPa at 50.021 ms. These are spatial source-zone diagnostics, not cross-sectional pressure taps. Four-zone instantaneous source power contractions are 287.5 kW and 249.8 kW at those times (about half for Tank A's two branches); they are not integrated energy losses or a fitted Cd.",
+    "source_zone_phase_coverage": "At t=0 each 0.30 m source zone is split almost exactly in half by the assumed x=2.25 m seat: upstream half alpha.water=1 and downstream half alpha.water=0. By 4.957 ms, mean zone alpha-water is 0.513 (2.6% wetting in its downstream half); at 50.021 ms it is 0.656 (31.1% of downstream-half zone volume wet)."
+  },
+  "limits": [
+    "No CFD run or field modification was performed.",
+    "The t=0 rho is reconstructed from the configured incompressible-water constant density and ideal-air EOS; later rho fields are native and compared against this reconstruction.",
+    "Tank/line inventories are cellZone integrals of alpha.water times native cell volume; no extrapolation between native snapshots.",
+    "The reduced-network result is a frozen exploratory model; close drawdown is not validation of valve behavior.",
+    "Upstream/downstream static pressure means are spatial diagnostics only; the distributed source and moving interface prevent interpreting them as a calibrated valve \u0394p or Cd."
+  ],
+  "model_at_native_checkpoint_times": [
+    {
+      "model": {
+        "flow_lower_m3_s": 0.0,
+        "flow_upper_m3_s": 0.0,
+        "gas_pressure_abs_Pa": 1200000.0,
+        "integrated_branch_inflow_lower_m3": 0.0,
+        "integrated_branch_inflow_upper_m3": 0.0,
+        "tank_water_volume_m3": 1.3499999999999994,
+        "time_s": 0.0,
+        "total_branch_flow_m3_s": 0.0,
+        "total_wet_line_water_volume_m3": 0.25264843238893564,
+        "wet_line_volume_lower_m3": 0.12624005866375884,
+        "wet_line_volume_upper_m3": 0.12640837372517683
+      },
+      "native_checkpoint_tag": "t0",
+      "time_s": 0.0
+    },
+    {
+      "model": {
+        "flow_lower_m3_s": 0.0466055884778198,
+        "flow_upper_m3_s": 0.04660549241869497,
+        "gas_pressure_abs_Pa": 1197787.623333726,
+        "integrated_branch_inflow_lower_m3": 0.0001969042332681222,
+        "integrated_branch_inflow_upper_m3": 0.00019685857735724877,
+        "tank_water_volume_m3": 1.3496062371893736,
+        "time_s": 0.00495695923227,
+        "total_branch_flow_m3_s": 0.09321108089651478,
+        "total_wet_line_water_volume_m3": 0.2530421951995612,
+        "wet_line_volume_lower_m3": 0.12643696289702713,
+        "wet_line_volume_upper_m3": 0.12660523230253412
+      },
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "time_s": 0.00495695923227
+    },
+    {
+      "model": {
+        "flow_lower_m3_s": 0.0461256838285998,
+        "flow_upper_m3_s": 0.046125690880658855,
+        "gas_pressure_abs_Pa": 1174731.396596205,
+        "integrated_branch_inflow_lower_m3": 0.0022864564956888668,
+        "integrated_branch_inflow_upper_m3": 0.002286411100523026,
+        "tank_water_volume_m3": 1.3454271324037868,
+        "time_s": 0.050021166664,
+        "total_branch_flow_m3_s": 0.09225137470925866,
+        "total_wet_line_water_volume_m3": 0.2572212999851479,
+        "wet_line_volume_lower_m3": 0.12852651515944813,
+        "wet_line_volume_upper_m3": 0.1286947848256998
+      },
+      "native_checkpoint_tag": "baseline_50ms",
+      "time_s": 0.050021166664
+    }
+  ],
+  "native_field_sha256": {
+    "baseline_50ms:T": "41910775ecf66281782e22774d829b5bea2fb8f7bde6210a5325d51ab13c1719",
+    "baseline_50ms:U": "3b36033e10dca55f8085e9f3668415b35d410a218b274354d988f20c664b1006",
+    "baseline_50ms:alpha.water": "0d35e1939d73fc38963c28f65a13ea13e6ea2159b609cd70dcdbcb7d425896e8",
+    "baseline_50ms:p": "9fd542bcce13fc6400817ef789179b6fa3421ba04edf533c2728389bd537b46b",
+    "baseline_50ms:rho": "d772301faec2fc209737602c629a8a6153eb290ff239ada02749233e47d844bb",
+    "halfdt_near_5ms:T": "1862a8df38c0f90a7e935d5ca754755705d955ab12e6b5fd55419de6eb3fb018",
+    "halfdt_near_5ms:U": "806ae5957f0e12e79c0b6d937fd35d62ba598eadfb969d334e84928245fc823c",
+    "halfdt_near_5ms:alpha.water": "262d9cbb03793c4029ab958f4c79ac8d7f0d8e5b6228ba5a8d959a0a0cca758a",
+    "halfdt_near_5ms:p": "a6b8b72d26485457b74e91fdafb47b8b1eec1d83f24d108583233c5447ed698f",
+    "halfdt_near_5ms:rho": "b14bd06caef40ca863818bd5e0b4cf0a021cebfc09e7f80d0b484576671ded8b",
+    "t0:T": "e13e9cdd3342f25ea31e400b13715965b4a379c28e2b114d819840cc889bf5f7",
+    "t0:U": "5931d1a0b441938d9d56bd545b7cdab8f6f7111dc6cb8d010b5a91f0337889c5",
+    "t0:alpha.water": "2684b67d7355065cf299e0e03bc3844ae0b7efb85a079180ec21b77e995dc6e1",
+    "t0:p": "97be93a81f343013282f31d7dd1a9d0026cf0580496d9a74b016e626d5c86ee6"
+  },
+  "native_vs_model_inventory_comparison": [
+    {
+      "model_external_water_m3": 0.0,
+      "model_gas_p_Pa": 1200000.0,
+      "model_line_gain_from_model_t0_L": 0.0,
+      "model_tank_drawdown_from_model_t0_L": 6.661338147750939e-13,
+      "model_tank_water_m3": 1.3499999999999994,
+      "model_wet_line_storage_m3": 0.25264843238893564,
+      "native_checkpoint_tag": "t0",
+      "native_externalAirZone_water_m3": 0.0,
+      "native_lineA_gain_from_native_t0_L": 0.0,
+      "native_lineA_initialZone_water_m3": 0.251056843811983,
+      "native_tankA_drawdown_from_native_t0_L": 0.0,
+      "native_tankA_headspace_mean_p_Pa": 1199985.7239907372,
+      "native_total_tankA_water_in_tankAWaterZone_plus_headspaceZone_m3": 1.3499999999999996,
+      "native_whole_domain_water_gain_from_native_t0_L": 0.0,
+      "time_s": 0.0
+    },
+    {
+      "model_external_water_m3": 0.0,
+      "model_gas_p_Pa": 1197787.623333726,
+      "model_line_gain_from_model_t0_L": 0.3937628106255864,
+      "model_tank_drawdown_from_model_t0_L": 0.39376281062653007,
+      "model_tank_water_m3": 1.3496062371893736,
+      "model_wet_line_storage_m3": 0.2530421951995612,
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "native_externalAirZone_water_m3": 0.0,
+      "native_lineA_gain_from_native_t0_L": 0.547704959093398,
+      "native_lineA_initialZone_water_m3": 0.2516045487710764,
+      "native_tankA_drawdown_from_native_t0_L": 0.5477111282365943,
+      "native_tankA_headspace_mean_p_Pa": 1197062.833555861,
+      "native_total_tankA_water_in_tankAWaterZone_plus_headspaceZone_m3": 1.349452288871763,
+      "native_whole_domain_water_gain_from_native_t0_L": -3.1135553690830875e-05,
+      "time_s": 0.00495695923227
+    },
+    {
+      "model_external_water_m3": 0.0,
+      "model_gas_p_Pa": 1174731.396596205,
+      "model_line_gain_from_model_t0_L": 4.572867596212282,
+      "model_tank_drawdown_from_model_t0_L": 4.572867596213337,
+      "model_tank_water_m3": 1.3454271324037868,
+      "model_wet_line_storage_m3": 0.2572212999851479,
+      "native_checkpoint_tag": "baseline_50ms",
+      "native_externalAirZone_water_m3": 3.524106415395075e-182,
+      "native_lineA_gain_from_native_t0_L": 6.548971525529412,
+      "native_lineA_initialZone_water_m3": 0.2576058153375124,
+      "native_tankA_drawdown_from_native_t0_L": 6.546987474153276,
+      "native_tankA_headspace_mean_p_Pa": 1167030.4469366076,
+      "native_total_tankA_water_in_tankAWaterZone_plus_headspaceZone_m3": 1.3434530125258464,
+      "native_whole_domain_water_gain_from_native_t0_L": 0.004049929292815335,
+      "time_s": 0.050021166664
+    }
+  ],
+  "native_zone_inventory_samples": [
+    {
+      "native_checkpoint_tag": "t0",
+      "time_s": 0.0,
+      "whole_domain_water_gain_from_native_t0_m3": 0.0,
+      "whole_domain_water_m3": 3.2021659930360515,
+      "zones": {
+        "allFourValves": {
+          "cells": 5376,
+          "geometric_volume_m3": 0.08410397690444701,
+          "pressure_volume_mean_Pa": 654827.372129301,
+          "water_volume_m3": 0.042052658935315
+        },
+        "externalAirZone": {
+          "cells": 122413,
+          "geometric_volume_m3": 20.472099632593473,
+          "pressure_volume_mean_Pa": 100000.00000000001,
+          "water_volume_m3": 0.0
+        },
+        "lineAInitialZone": {
+          "cells": 51293,
+          "geometric_volume_m3": 0.681356638915788,
+          "pressure_volume_mean_Pa": 508645.52068580873,
+          "water_gain_from_native_t0_m3": 0.0,
+          "water_volume_m3": 0.251056843811983
+        },
+        "tankAHeadspaceZone": {
+          "cells": 2920,
+          "geometric_volume_m3": 0.25642880807463697,
+          "pressure_volume_mean_Pa": 1199985.7239907372,
+          "water_volume_m3": 0.00013310405803455271
+        },
+        "tankAWaterZone": {
+          "cells": 18919,
+          "geometric_volume_m3": 1.3920683923334818,
+          "pressure_volume_mean_Pa": 1202901.4581339653,
+          "water_drawdown_from_native_t0_m3": 0.0,
+          "water_volume_m3": 1.349866895941965
+        }
+      }
+    },
+    {
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "time_s": 0.00495695923227,
+      "whole_domain_water_gain_from_native_t0_m3": -3.1135553690830875e-08,
+      "whole_domain_water_m3": 3.202165961900498,
+      "zones": {
+        "allFourValves": {
+          "cells": 5376,
+          "geometric_volume_m3": 0.08410397690444701,
+          "pressure_volume_mean_Pa": 386891.9811126096,
+          "water_volume_m3": 0.0431480872161832
+        },
+        "externalAirZone": {
+          "cells": 122413,
+          "geometric_volume_m3": 20.472099632593473,
+          "pressure_volume_mean_Pa": 99999.99836754106,
+          "water_volume_m3": 0.0
+        },
+        "lineAInitialZone": {
+          "cells": 51293,
+          "geometric_volume_m3": 0.681356638915788,
+          "pressure_volume_mean_Pa": 488646.33631793497,
+          "water_gain_from_native_t0_m3": 0.000547704959093398,
+          "water_volume_m3": 0.2516045487710764
+        },
+        "tankAHeadspaceZone": {
+          "cells": 2920,
+          "geometric_volume_m3": 0.25642880807463697,
+          "pressure_volume_mean_Pa": 1197062.833555861,
+          "water_volume_m3": 0.00012987065025933748
+        },
+        "tankAWaterZone": {
+          "cells": 18919,
+          "geometric_volume_m3": 1.3920683923334818,
+          "pressure_volume_mean_Pa": 1199839.0757574227,
+          "water_drawdown_from_native_t0_m3": 0.0005444777204612894,
+          "water_volume_m3": 1.3493224182215038
+        }
+      }
+    },
+    {
+      "native_checkpoint_tag": "baseline_50ms",
+      "time_s": 0.050021166664,
+      "whole_domain_water_gain_from_native_t0_m3": 4.049929292815335e-06,
+      "whole_domain_water_m3": 3.2021700429653444,
+      "zones": {
+        "allFourValves": {
+          "cells": 5376,
+          "geometric_volume_m3": 0.08410397690444701,
+          "pressure_volume_mean_Pa": 461328.186663284,
+          "water_volume_m3": 0.0551506221983014
+        },
+        "externalAirZone": {
+          "cells": 122413,
+          "geometric_volume_m3": 20.472099632593473,
+          "pressure_volume_mean_Pa": 99999.78130460308,
+          "water_volume_m3": 3.524106415395075e-182
+        },
+        "lineAInitialZone": {
+          "cells": 51293,
+          "geometric_volume_m3": 0.681356638915788,
+          "pressure_volume_mean_Pa": 485974.908885876,
+          "water_gain_from_native_t0_m3": 0.006548971525529412,
+          "water_volume_m3": 0.2576058153375124
+        },
+        "tankAHeadspaceZone": {
+          "cells": 2920,
+          "geometric_volume_m3": 0.25642880807463697,
+          "pressure_volume_mean_Pa": 1167030.4469366076,
+          "water_volume_m3": 0.000170956951819697
+        },
+        "tankAWaterZone": {
+          "cells": 18919,
+          "geometric_volume_m3": 1.3920683923334818,
+          "pressure_volume_mean_Pa": 1169994.6855075653,
+          "water_drawdown_from_native_t0_m3": 0.006584840367938494,
+          "water_volume_m3": 1.3432820555740266
+        }
+      }
+    }
+  ],
+  "per_branch_samples": [
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.0,
+      "alpha_water_volume_fraction_full_zone": 0.5000069324286746,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0,
+      "branch": "cluster0_y~-0.7500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 10.623398593658955,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 8923.531041565908,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9988109228842176
+      },
+      "density_source": "reconstructed alpha*rhoWater+(1-alpha)*p/(R*T); no rho field saved at t=0",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 17846.814639592703,
+      "fvOptions_force_vector_as_rhs_N": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "fvOptions_power_as_rhs_W": -0.0,
+      "implied_dissipation_power_W": 0.0,
+      "integrated_density_coefficient_kg_s": 8934.154440159567,
+      "integrated_fvOptions_diagonal_kg_s": -8934.154440159567,
+      "max_speed_m_s": 0.0,
+      "mean_speed_m_s": 0.0,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.0,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5006021870333865,
+      "native_checkpoint_tag": "t0",
+      "native_rho_vs_reconstructed_max_relative_difference": null,
+      "p_upstream_minus_downstream_Pa": 1109637.0196521522,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 78435.61895453568,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021025700276659,
+      "time_s": 0.0,
+      "volume_fraction_center_upstream_of_seat": 0.5000069324286746,
+      "volume_weighted_p_downstream_Pa": 99999.99999999999,
+      "volume_weighted_p_full_zone_Pa": 654826.2023055694,
+      "volume_weighted_p_upstream_Pa": 1209637.0196521522,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5000069324286746,
+      "water_volume_downstream_m3": 0.0,
+      "water_volume_upstream_m3": 0.010512995897497001,
+      "x_bounds_m": [
+        2.112496555,
+        2.387503563
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.0,
+      "alpha_water_volume_fraction_full_zone": 0.5000090137302713,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0,
+      "branch": "cluster1_y~-0.3500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 10.623651314887116,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 8923.817616767206,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.998810932771718
+      },
+      "density_source": "reconstructed alpha*rhoWater+(1-alpha)*p/(R*T); no rho field saved at t=0",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 17847.313491794648,
+      "fvOptions_force_vector_as_rhs_N": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "fvOptions_power_as_rhs_W": -0.0,
+      "implied_dissipation_power_W": 0.0,
+      "integrated_density_coefficient_kg_s": 8934.441268082093,
+      "integrated_fvOptions_diagonal_kg_s": -8934.441268082093,
+      "max_speed_m_s": 0.0,
+      "mean_speed_m_s": 0.0,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.0,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5006042658571402,
+      "native_checkpoint_tag": "t0",
+      "native_rho_vs_reconstructed_max_relative_difference": null,
+      "p_upstream_minus_downstream_Pa": 1109637.074573274,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 78435.62283668101,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021026287984723,
+      "time_s": 0.0,
+      "volume_fraction_center_upstream_of_seat": 0.5000090137302713,
+      "volume_weighted_p_downstream_Pa": 100000.0,
+      "volume_weighted_p_full_zone_Pa": 654828.5392559262,
+      "volume_weighted_p_upstream_Pa": 1209637.074573274,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5000090137302713,
+      "water_volume_downstream_m3": 0.0,
+      "water_volume_upstream_m3": 0.010513333517649999,
+      "x_bounds_m": [
+        2.112496476,
+        2.387504243
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.0,
+      "alpha_water_volume_fraction_full_zone": 0.5000069392929846,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0,
+      "branch": "cluster2_y~0.3500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 10.623398380440248,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 8923.531107480212,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9988109229168277
+      },
+      "density_source": "reconstructed alpha*rhoWater+(1-alpha)*p/(R*T); no rho field saved at t=0",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 17846.814526410744,
+      "fvOptions_force_vector_as_rhs_N": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "fvOptions_power_as_rhs_W": -0.0,
+      "implied_dissipation_power_W": 0.0,
+      "integrated_density_coefficient_kg_s": 8934.154505860652,
+      "integrated_fvOptions_diagonal_kg_s": -8934.154505860652,
+      "max_speed_m_s": 0.0,
+      "mean_speed_m_s": 0.0,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.0,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5006021938895244,
+      "native_checkpoint_tag": "t0",
+      "native_rho_vs_reconstructed_max_relative_difference": null,
+      "p_upstream_minus_downstream_Pa": 1109637.0295099665,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 78435.6196513435,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021025700143317002,
+      "time_s": 0.0,
+      "volume_fraction_center_upstream_of_seat": 0.5000069392929845,
+      "volume_weighted_p_downstream_Pa": 100000.0,
+      "volume_weighted_p_full_zone_Pa": 654826.2148514374,
+      "volume_weighted_p_upstream_Pa": 1209637.0295099665,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5000069392929846,
+      "water_volume_downstream_m3": 0.0,
+      "water_volume_upstream_m3": 0.010512995975152,
+      "x_bounds_m": [
+        2.112496555,
+        2.387503555
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.0,
+      "alpha_water_volume_fraction_full_zone": 0.5000090027843955,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0,
+      "branch": "cluster3_y~0.7500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 10.623651807680956,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 8923.817639995726,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9988109327197184
+      },
+      "density_source": "reconstructed alpha*rhoWater+(1-alpha)*p/(R*T); no rho field saved at t=0",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 17847.31392895277,
+      "fvOptions_force_vector_as_rhs_N": [
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "fvOptions_power_as_rhs_W": -0.0,
+      "implied_dissipation_power_W": 0.0,
+      "integrated_density_coefficient_kg_s": 8934.441291803407,
+      "integrated_fvOptions_diagonal_kg_s": -8934.441291803407,
+      "max_speed_m_s": 0.0,
+      "mean_speed_m_s": 0.0,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.0,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5006042549242957,
+      "native_checkpoint_tag": "t0",
+      "native_rho_vs_reconstructed_max_relative_difference": null,
+      "p_upstream_minus_downstream_Pa": 1109637.0844315253,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 78435.62353351973,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021026288499748,
+      "time_s": 0.0,
+      "volume_fraction_center_upstream_of_seat": 0.5000090027843954,
+      "volume_weighted_p_downstream_Pa": 100000.0,
+      "volume_weighted_p_full_zone_Pa": 654828.5320391909,
+      "volume_weighted_p_upstream_Pa": 1209637.0844315253,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5000090027843954,
+      "water_volume_downstream_m3": 0.0,
+      "water_volume_upstream_m3": 0.010513333545015999,
+      "x_bounds_m": [
+        2.112496476,
+        2.387504253
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.02600746463182444,
+      "alpha_water_volume_fraction_full_zone": 0.5130104844496933,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0,
+      "branch": "cluster0_y~-0.7500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 98.1526954571197,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 82821.73048275989,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9988162948174184
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 164667.6245612282,
+      "fvOptions_force_vector_as_rhs_N": [
+        -76528.55537135848,
+        0.16388112836834723,
+        29.750618191039514
+      ],
+      "fvOptions_power_as_rhs_W": -71830.55232067277,
+      "implied_dissipation_power_W": 71830.55232067277,
+      "integrated_density_coefficient_kg_s": 82919.88309031201,
+      "integrated_fvOptions_diagonal_kg_s": -82919.88309031201,
+      "max_speed_m_s": 1.3136455019742403,
+      "mean_speed_m_s": 0.922672352947048,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.08333321828748222,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5035591137678675,
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958386159253927e-07,
+      "p_upstream_minus_downstream_Pa": 571488.4091581908,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 40396.13522601953,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021025700276659,
+      "time_s": 0.00495695923227,
+      "volume_fraction_center_upstream_of_seat": 0.5000069324286746,
+      "volume_weighted_p_downstream_Pa": 100994.07827571408,
+      "volume_weighted_p_full_zone_Pa": 386742.24465744436,
+      "volume_weighted_p_upstream_Pa": 672482.4874339049,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5029630487683653,
+      "water_volume_downstream_m3": 0.0002734087873258817,
+      "water_volume_upstream_m3": 0.010512995897497001,
+      "x_bounds_m": [
+        2.112496555,
+        2.387503563
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.026091254616068663,
+      "alpha_water_volume_fraction_full_zone": 0.5130544058587742,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0000000000000002,
+      "branch": "cluster1_y~-0.3500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 98.25352061245034,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 82865.50435851101,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9988157055186001
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 164792.99033726327,
+      "fvOptions_force_vector_as_rhs_N": [
+        -76600.5043375249,
+        0.01657064034314952,
+        29.594557187206398
+      ],
+      "fvOptions_power_as_rhs_W": -71927.25165352371,
+      "implied_dissipation_power_W": 71927.25165352371,
+      "integrated_density_coefficient_kg_s": 82963.75779112644,
+      "integrated_fvOptions_diagonal_kg_s": -82963.75779112644,
+      "max_speed_m_s": 1.314980922361942,
+      "mean_speed_m_s": 0.9233489982289342,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.0833332571860084,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5034422739786071,
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958385557916897e-07,
+      "p_upstream_minus_downstream_Pa": 572068.9464550685,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 40437.17098942716,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021026287984723,
+      "time_s": 0.00495695923227,
+      "volume_fraction_center_upstream_of_seat": 0.5000090137302713,
+      "volume_weighted_p_downstream_Pa": 100998.03326612683,
+      "volume_weighted_p_full_zone_Pa": 387037.66296884103,
+      "volume_weighted_p_upstream_Pa": 673066.9797211954,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5028460506051835,
+      "water_volume_downstream_m3": 0.00027429617176753806,
+      "water_volume_upstream_m3": 0.010513333517650002,
+      "x_bounds_m": [
+        2.112496476,
+        2.387504243
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.026009485893412652,
+      "alpha_water_volume_fraction_full_zone": 0.513011501752248,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0000000000000002,
+      "branch": "cluster2_y~0.3500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 98.15513351327829,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 82822.59935388545,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.998816277853234
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 164670.49066783985,
+      "fvOptions_force_vector_as_rhs_N": [
+        -76530.00240838726,
+        0.16229377905126272,
+        29.75115341533599
+      ],
+      "fvOptions_power_as_rhs_W": -71832.50434403642,
+      "implied_dissipation_power_W": 71832.50434403642,
+      "integrated_density_coefficient_kg_s": 82920.75439949255,
+      "integrated_fvOptions_diagonal_kg_s": -82920.75439949255,
+      "max_speed_m_s": 1.31367623643425,
+      "mean_speed_m_s": 0.9226884182841198,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.08333321985322403,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5035556404987804,
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958386358260424e-07,
+      "p_upstream_minus_downstream_Pa": 571500.3066915039,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 40396.9762130927,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021025700143317002,
+      "time_s": 0.00495695923227,
+      "volume_fraction_center_upstream_of_seat": 0.5000069392929845,
+      "volume_weighted_p_downstream_Pa": 100994.13419130234,
+      "volume_weighted_p_full_zone_Pa": 386748.25334512314,
+      "volume_weighted_p_upstream_Pa": 672494.4408828062,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.502959571068192,
+      "water_volume_downstream_m3": 0.00027343003076350797,
+      "water_volume_upstream_m3": 0.010512995975152003,
+      "x_bounds_m": [
+        2.112496555,
+        2.387503555
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.026090979386132786,
+      "alpha_water_volume_fraction_full_zone": 0.5130542575859998,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0000000000000002,
+      "branch": "cluster3_y~0.7500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 98.25368103076629,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 82865.8570851007,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9988157086223978
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 164793.46472088958,
+      "fvOptions_force_vector_as_rhs_N": [
+        -76601.17567912742,
+        0.01657134607879483,
+        29.597168000395996
+      ],
+      "fvOptions_power_as_rhs_W": -71928.20693807313,
+      "implied_dissipation_power_W": 71928.20693807313,
+      "integrated_density_coefficient_kg_s": 82964.11067813619,
+      "integrated_fvOptions_diagonal_kg_s": -82964.11067813619,
+      "max_speed_m_s": 1.314983366565142,
+      "mean_speed_m_s": 0.9233516336234422,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.08333325595033093,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.5034429661312866,
+      "native_checkpoint_tag": "halfdt_near_5ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958385568139287e-07,
+      "p_upstream_minus_downstream_Pa": 572073.1436147308,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 40437.467669161284,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021026288499748,
+      "time_s": 0.00495695923227,
+      "volume_fraction_center_upstream_of_seat": 0.5000090027843954,
+      "volume_weighted_p_downstream_Pa": 100998.03321331265,
+      "volume_weighted_p_full_zone_Pa": 387039.7552718484,
+      "volume_weighted_p_upstream_Pa": 673071.1768280434,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.5028467435007236,
+      "water_volume_downstream_m3": 0.00027429329101125513,
+      "water_volume_upstream_m3": 0.010513333545016,
+      "x_bounds_m": [
+        2.112496476,
+        2.387504253
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.3114435891142445,
+      "alpha_water_volume_fraction_full_zone": 0.6557265679253291,
+      "alpha_water_volume_fraction_upstream_center_part": 0.9999999999999997,
+      "branch": "cluster0_y~-0.7500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 59.591735872920815,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 93267.15430308419,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9993614720495232
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 143056.89945931546,
+      "fvOptions_force_vector_as_rhs_N": [
+        -75784.51773533091,
+        0.29459148698673554,
+        24.374677690269532
+      ],
+      "fvOptions_power_as_rhs_W": -62457.284100257384,
+      "implied_dissipation_power_W": 62457.284100257384,
+      "integrated_density_coefficient_kg_s": 93326.74598537773,
+      "integrated_fvOptions_diagonal_kg_s": -93326.74598537773,
+      "max_speed_m_s": 1.1438118933777903,
+      "mean_speed_m_s": 0.8015822562640809,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.16666504369683843,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.6523750083925124,
+      "native_checkpoint_tag": "baseline_50ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.95830857983056e-07,
+      "p_upstream_minus_downstream_Pa": 670977.165661623,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 47428.58102330377,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021025700276659,
+      "time_s": 0.050021166664,
+      "volume_fraction_center_upstream_of_seat": 0.5000069324286746,
+      "volume_weighted_p_downstream_Pa": 125822.9346538631,
+      "volume_weighted_p_full_zone_Pa": 461316.1689860178,
+      "volume_weighted_p_upstream_Pa": 796800.1003154861,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.6519584490897541,
+      "water_volume_downstream_m3": 0.0032741143831432496,
+      "water_volume_upstream_m3": 0.010512995897496998,
+      "x_bounds_m": [
+        2.112496555,
+        2.387503563
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.31150683213180685,
+      "alpha_water_volume_fraction_full_zone": 0.6557596219576124,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0000000000000002,
+      "branch": "cluster1_y~-0.3500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 60.18633343836371,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 93267.82899021517,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9993551096824501
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 143546.71462254552,
+      "fvOptions_force_vector_as_rhs_N": [
+        -75780.15183018835,
+        -0.025069194811654056,
+        24.008748675638618
+      ],
+      "fvOptions_power_as_rhs_W": -62448.98856398316,
+      "implied_dissipation_power_W": 62448.98856398316,
+      "integrated_density_coefficient_kg_s": 93328.01526953901,
+      "integrated_fvOptions_diagonal_kg_s": -93328.01526953901,
+      "max_speed_m_s": 1.1544730909108993,
+      "mean_speed_m_s": 0.8043043267466644,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.16666489484530697,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.6501577936837076,
+      "native_checkpoint_tag": "baseline_50ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958308580006866e-07,
+      "p_upstream_minus_downstream_Pa": 670927.6643175468,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 47425.08197947869,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021026287984723,
+      "time_s": 0.050021166664,
+      "volume_fraction_center_upstream_of_seat": 0.5000090137302713,
+      "volume_weighted_p_downstream_Pa": 125870.30665615923,
+      "volume_weighted_p_full_zone_Pa": 461340.1863759303,
+      "volume_weighted_p_upstream_Pa": 796797.970973706,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.6497385135944204,
+      "water_volume_downstream_m3": 0.003274857142383838,
+      "water_volume_upstream_m3": 0.010513333517650002,
+      "x_bounds_m": [
+        2.112496476,
+        2.387504243
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.31144526142790346,
+      "alpha_water_volume_fraction_full_zone": 0.6557274087970186,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0000000000000002,
+      "branch": "cluster2_y~0.3500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 59.59266778604476,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 93267.11876935937,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9993614618272907
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 143057.6158954841,
+      "fvOptions_force_vector_as_rhs_N": [
+        -75784.36118691368,
+        0.2976027397288707,
+        24.386546467911142
+      ],
+      "fvOptions_power_as_rhs_W": -62457.04731393934,
+      "implied_dissipation_power_W": 62457.04731393934,
+      "integrated_density_coefficient_kg_s": 93326.71138356587,
+      "integrated_fvOptions_diagonal_kg_s": -93326.71138356587,
+      "max_speed_m_s": 1.1438323559512433,
+      "mean_speed_m_s": 0.801586275712,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.16666504515012892,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.6523714994086652,
+      "native_checkpoint_tag": "baseline_50ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958308580130739e-07,
+      "p_upstream_minus_downstream_Pa": 670975.764090446,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 47428.48195207523,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021025700143317002,
+      "time_s": 0.050021166664,
+      "volume_fraction_center_upstream_of_seat": 0.5000069392929845,
+      "volume_weighted_p_downstream_Pa": 125823.28219651002,
+      "volume_weighted_p_full_zone_Pa": 461315.8203391456,
+      "volume_weighted_p_upstream_Pa": 796799.046286956,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.6519549356777973,
+      "water_volume_downstream_m3": 0.003274131897968359,
+      "water_volume_upstream_m3": 0.010512995975152001,
+      "x_bounds_m": [
+        2.112496555,
+        2.387503555
+      ]
+    },
+    {
+      "alpha_water_volume_fraction_downstream_center_part": 0.3115070742329113,
+      "alpha_water_volume_fraction_full_zone": 0.655759735469824,
+      "alpha_water_volume_fraction_upstream_center_part": 1.0,
+      "branch": "cluster3_y~0.7500m",
+      "constituent_partial_density_accounting_kg_s": {
+        "air_1_minus_alpha_rhoEOS_component": 60.18547121479443,
+        "interpretation": "bookkeeping decomposition under one shared mixture velocity; not a phase-specific force or power model",
+        "water_alpha_rho_component": 93267.78980558997,
+        "water_fraction_of_partial_density_weighted_coefficient": 0.9993551186443691
+      },
+      "density_source": "native rho field",
+      "diagonal_coefficient_meaning": "fvOptions directly applies a negative source-matrix diagonal. The actual solver form, base UEqn == fvOptions(rho,U), makes that a negative RHS force and a positive resistance when moved to the left-hand operator. The contraction is an instantaneous dissipative power proxy using shared mixture U.",
+      "full_zone_if_all_water_coefficient_kg_s": 143545.9730898954,
+      "fvOptions_force_vector_as_rhs_N": [
+        -75780.0751044091,
+        -0.018623819218160836,
+        24.005544504003105
+      ],
+      "fvOptions_power_as_rhs_W": -62448.89019338932,
+      "implied_dissipation_power_W": 62448.89019338932,
+      "integrated_density_coefficient_kg_s": 93327.97522269402,
+      "integrated_fvOptions_diagonal_kg_s": -93327.97522269402,
+      "max_speed_m_s": 1.1544600128816727,
+      "mean_speed_m_s": 0.8043001521759989,
+      "mixed_cell_volume_fraction_alpha_0p01_to_0p99": 0.16666489442214205,
+      "mixture_coefficient_as_fraction_of_all_water_zone": 0.6501608732990898,
+      "native_checkpoint_tag": "baseline_50ms",
+      "native_rho_vs_reconstructed_max_relative_difference": 8.958308577976367e-07,
+      "p_upstream_minus_downstream_Pa": 670928.4198297977,
+      "pressure_mean_difference_times_nominal_pipe_area_N": 47425.13538349277,
+      "seat_x_m_assumed": 2.25,
+      "source_zone_cell_count": 1344,
+      "source_zone_volume_m3": 0.021026288499748,
+      "time_s": 0.050021166664,
+      "volume_fraction_center_upstream_of_seat": 0.5000090027843954,
+      "volume_weighted_p_downstream_Pa": 125870.32013129372,
+      "volume_weighted_p_full_zone_Pa": 461340.57027010113,
+      "volume_weighted_p_upstream_Pa": 796798.7399610914,
+      "water_partial_density_coefficient_as_fraction_of_all_water_zone": 0.649741597050453,
+      "water_volume_downstream_m3": 0.003274859839490954,
+      "water_volume_upstream_m3": 0.010513333545015999,
+      "x_bounds_m": [
+        2.112496476,
+        2.387504253
+      ]
+    }
+  ],
+  "plot": {
+    "path": "results/runs/i4f-valve-phase-weighting-20261025T162515Z/valve-phase-weighting.png",
+    "sha256": "f8ef9d8876200a0e0ef0e659826f0eaa591c117230b99e6e36b15e52e021193b"
+  },
+  "reduced_network_inputs": {
+    "driver_sha256": "359a6de77f4b10350ffff4814db8b637091da53d3e5e9b3d0d10614e0d64c2e3",
+    "model_history_path": "results/runs/i4f-filling-network-20261025T161752.477231Z/history.csv",
+    "model_history_sha256": "89a9363895f5c86d961bf3b47d3bfb4c7c940e08f7fe8275e1a1d6ca6e4f5fe7",
+    "model_summary_path": "results/runs/i4f-filling-network-20261025T161752.477231Z/summary.json",
+    "model_summary_sha256": "2d6028b5c032379e13ea6b4f8f8c8093ec0580018c6ea6351d7653f3f731ad29",
+    "module_sha256": "7b54471bd79f010afcdc60a320fcc68374e279a8d6bd2dd4393b28667c8094c8",
+    "test_sha256": "6cae15c4dfd3c6a9d32b9699e27da897cb6f73f5538e2083c06bc833154c62a6"
+  },
+  "sampling": {
+    "branch_clustering": "Four volume-weighted y-center clusters in allFourValves cells; each cluster is a spatial band, not a prescribed physical branch label.",
+    "global_native_cell_count": 269680,
+    "near_0p005": "half-dt run native checkpoint 0.00495695923227 s, not exact 0.005 s; different maxDeltaT only, same mesh/partition/physics",
+    "near_0p05": "continuation native checkpoint 0.050021166664 s",
+    "partition_bijection_verified": true,
+    "partition_hash_equal_between_short1_main_and_halfdt": true,
+    "phase_weighting": "native alpha.water with partial-density decomposition alpha*rhoWater and (1-alpha)*p/(R*T); common velocity means this is an accounting split, not a phase-specific force model.",
+    "t0": "native starting state"
+  },
+  "schema": "i4f-native-distributed-valve-phase-weighting-v1",
+  "source_definition": {
+    "Cd": 0.7,
+    "K": 5102.040816326531,
+    "K_per_length_m_minus1": 17006.80272108844,
+    "actual_solver_UEqn_source_path": "results/runs/i4f-frozen-sp-long-20261024T2344Z/outer16-cont2-20261024T2357Z-attempt3/source/v7-frozen-sp-v2-nopout/applications/solvers/multiphase/compressibleInterFoam/UEqn.H",
+    "actual_solver_UEqn_source_sha256": "a18c62a6ffc03cdf6c7ee4cfcf52d146da9af282058996a72c0afd66906427a8",
+    "actual_solver_momentum_assembly": "fvm::ddt(rho,U) + fvm::div(rhoPhi,U) - fvm::Sp(contErr,U) + MRF.DDt(rho,U) + turbulence.divDevRhoReff(U) == fvOptions(rho,U)",
+    "assumed_seat_plane_x_m": 2.25,
+    "declared_zone_x_extent_m": [
+      2.1,
+      2.4
+    ],
+    "field": "U in cellZone allFourValves",
+    "formula_exact": "diag[celli] -= 0.5*rhoCells[celli]*(K/0.30)*max(|U[celli]|,0.10)*V[celli]",
+    "frozen_solver_binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "opening_at_sampled_times": 0.02,
+    "power_limit": "Reported fvOptions RHS force/power are instantaneous contractions using native shared mixture velocity; positive implied dissipation is not integrated over time, not a phase-resolved work transfer, and not a calibrated pressure drop.",
+    "source_matrix_sign": "The code subtracts a positive coefficient from the fvOptions source-matrix diagonal. The actual solver form is base UEqn == fvOptions(rho,U), so the negative option diagonal is a negative RHS force and becomes a positive resistance when moved to the left-hand operator. This is consistent with valve-loss intent; it is not evidence of anti-damping.",
+    "valve_option_file_sha256": "6aab5ad4777d1bbf2bd9485a1529706f0d6f49c68d5a72349c31c85efb2bad0a"
+  }
+}

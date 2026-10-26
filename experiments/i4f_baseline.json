@@ -1,0 +1,87 @@
+{
+  "experiment": "I4F complete simplified internal discharge apparatus: water/air hydraulic reference",
+  "status": "exploratory; all apparatus dimensions except nominal nozzle size are assumptions",
+  "coordinate_frame": "stationary apparatus; x discharge direction, y horizontal cross-stream, z upward; SI units",
+  "tank": {
+    "diameter_m": 1.0,
+    "length_m": 2.0,
+    "axis": "horizontal",
+    "axis_vector": [1.0, 0.0, 0.0],
+    "center_z_m": 1.0,
+    "start_x_m": 0.0,
+    "fill_fraction": 0.7
+  },
+  "connection": {
+    "center_z_m": 0.65,
+    "lower_edge_z_m": 0.525,
+    "upper_edge_z_m": 0.775,
+    "end_condition": "gas first reaches upper edge of pipe entrance; single-liquid reduced model stops here"
+  },
+  "pipe": {
+    "diameter_m": 0.25,
+    "length_m": 1.0,
+    "transition_length_m": 1.5,
+    "roughness_m": 0.00001,
+    "entrance_K": 0.5,
+    "entrance_K_reference": "pipe mean velocity; square-edged reservoir entrance approximation, not measured I4F data; DOI 10.1061/JIDEDH.IRENG-10219 Table 2, approximate sensitivity 0.3-0.7",
+    "transition_K": 0.2,
+    "transition_K_reference": "pipe mean velocity; assumed sensitivity input, not a measured transition coefficient"
+  },
+  "nozzle": {
+    "width_m": 1.0,
+    "height_m": 0.15,
+    "center_z_m": 0.65,
+    "direction": [1.0, 0.0, 0.0],
+    "dimension_source": "user nominal dimensions in goal-objective.md"
+  },
+  "gas": {
+    "kind": "air",
+    "mode": "sealed",
+    "initial_absolute_pressure_Pa": 900000.0,
+    "ambient_pressure_Pa": 100000.0,
+    "temperature_K": 293.15,
+    "polytropic_n": 1.25,
+    "qualification": "air reference permits two-phase gas/water CFD with external air; does not reproduce CO2 pressurization, dissolution or mixing. User describes sealed waiting/discharge after CO2 charging at roughly 8-10 bar; gauge versus absolute convention is unconfirmed. Mainly liquid with a gas headspace is the user's uncertain current interpretation; pre-existing dispersed bubbles are not confirmed."
+  },
+  "liquid": {
+    "density_kg_m3": 998.2,
+    "dynamic_viscosity_Pa_s": 0.001002,
+    "surface_tension_N_m": 0.0728,
+    "temperature_K": 293.15
+  },
+  "valve": {
+    "opening_time_s": 0.5,
+    "Cd": 0.7,
+    "opening_law": "smoothstep",
+    "minimum_effective_opening": 0.02,
+    "minimum_opening_qualification": "Declared finite-bleed regularization: effective opening=max(smoothstep command,0.02), not measured closed-valve leakage. Existing CFD uses this value; original closed-valve reduced histories are preserved separately.",
+    "location_x_m": 2.4,
+    "representation": "time-dependent scalar restriction; not resolved butterfly disk; Cd and area law provisional",
+    "qualification": "cannot predict disk wake or asymmetric valve jet; do not infer outlet uniformity robustness to resolved valve geometry"
+  },
+  "external": {
+    "length_m": 2.0,
+    "half_width_m": 1.5,
+    "bottom_z_m": -0.5,
+    "top_z_m": 2.0,
+    "wind_velocity_m_s": [0.0, 0.0, 0.0]
+  },
+  "gravity_m_s2": 9.81,
+  "lamellae": {
+    "included_in_reference": false,
+    "reported_count": 5,
+    "reported_start_transition_fraction": 0.5,
+    "orientation": "awaiting clarification",
+    "reach_exit": "awaiting clarification",
+    "thickness_m": null,
+    "qualification": "user reports five lamellae beginning roughly halfway through expansion; the initial no-vane reference omits this actual hardware feature"
+  },
+  "provenance": {
+    "objective_file": "/home/v/.codex/attachments/4126e1f8-c209-4d49-b87f-d3662304dfc3/goal-objective.md",
+    "measured_inputs": [],
+    "user_nominal_inputs": ["nozzle.width_m", "nozzle.height_m"],
+    "user_hardware_description": "Charged with CO2 to roughly 8-10 bar and waits sealed before discharge, like a soda can. User thinks mainly liquid before charging with a gas headspace, but is unsure. Initial gas composition, dispersed bubbles, dissolved gas and gauge/absolute convention unconfirmed.",
+    "reference_model_omissions": ["possible dispersed gas in liquid", "CO2 identity and dissolution", "retardant rheology and interfacial stabilization"],
+    "all_other_values": "declared provisional inputs, not hardware measurements"
+  }
+}

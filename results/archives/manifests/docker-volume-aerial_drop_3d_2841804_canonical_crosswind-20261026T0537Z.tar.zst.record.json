@@ -1,0 +1,65 @@
+{
+  "source_type": "docker_volume",
+  "volume_name": "aerial_drop_3d_2841804_canonical_crosswind",
+  "volume_created_at": "2026-09-09T20:12:44+02:00",
+  "volume_driver": "local",
+  "volume_labels": null,
+  "archive_path": "results/archives/docker-volume-aerial_drop_3d_2841804_canonical_crosswind-20261026T0537Z.tar.zst",
+  "archive_sha256": "0b9feda3f783258a9d689785cf80776224f02763239bcdd65aff48220f30db24",
+  "archive_size_bytes": 1532385046,
+  "source_file_bytes": 4271869604,
+  "archive_member_count": 1660,
+  "regular_file_count": 1268,
+  "source_manifest_path": "results/archives/manifests/docker-volume-aerial_drop_3d_2841804_canonical_crosswind-20261026T0537Z.tar.zst.members.json",
+  "source_manifest_sha256": "b3d9461e1e3dcbb79881b1d9c5f6ed9e6d77c211c8f66674a8f289a314978b09",
+  "volume_inspect_path": "results/archives/manifests/docker-volume-aerial_drop_3d_2841804_canonical_crosswind-20261026T0537Z.tar.zst.volume-inspect.json",
+  "volume_inspect_sha256": "6a062727233753b86f03b5827b366b7afbd333498c2c2928ba8c5afa72f2e1fa",
+  "verification_path": "results/archives/manifests/docker-volume-aerial_drop_3d_2841804_canonical_crosswind-20261026T0537Z.tar.zst.verification.json",
+  "verification_sha256": "e711e84449dddd607284ccea2558c7fc1adf423b02fd8fd0c2096a4daee348ef",
+  "tar_metadata_flags": [
+    "--numeric-owner",
+    "--format=pax",
+    "--xattrs",
+    "--acls",
+    "--selinux"
+  ],
+  "restore_command": "docker volume create aerial_drop_3d_2841804_canonical_crosswind && zstd -dc results/archives/docker-volume-aerial_drop_3d_2841804_canonical_crosswind-20261026T0537Z.tar.zst | docker run --rm -i --pull=never --log-driver=none --network none --read-only --cpus=1 --user 0:0 -v aerial_drop_3d_2841804_canonical_crosswind:/restore:rw debian:bookworm-slim tar --numeric-owner --same-owner --same-permissions --xattrs --acls --selinux -xpf - -C /restore",
+  "volume_removal": {
+    "status": "removed after explicit root GO and last-consumer check",
+    "volume_name": "aerial_drop_3d_2841804_canonical_crosswind",
+    "stopped_read_only_helper_removed_first": true,
+    "remaining_container_consumers_before_remove": 0,
+    "docker_volume_rm_started_utc": "2026-10-26T05:40:18.057819+00:00",
+    "docker_volume_rm_completed_utc": "2026-10-26T05:40:18.139106+00:00",
+    "free_before_bytes": 23591448576,
+    "free_after_bytes": 27867836416,
+    "reclaimed_bytes": 4276387840,
+    "volume_absent_after_remove": true,
+    "archive_sha256_rechecked_after_remove": "0b9feda3f783258a9d689785cf80776224f02763239bcdd65aff48220f30db24"
+  },
+  "copy_space_gate": {
+    "disk_free_before_copy_bytes": 25129017344,
+    "archive_size_bytes": 1532385046,
+    "disk_free_after_copy_bytes": 23596552192,
+    "required_free_floor_bytes": 22548578304,
+    "passed": true
+  },
+  "export_helper": {
+    "container_id": "31adf01a20cd69f319f79641f21ffcd0669d894734e0a4d6389dfb5b85f422b9",
+    "started_at_utc": "2026-10-26T05:36:46.849840392Z",
+    "finished_at_utc": "2026-10-26T05:37:02.216060561Z",
+    "exit_code": 0,
+    "log_driver": "none",
+    "volume_mount": "read-only"
+  },
+  "verification": "staged and final archive SHA256 matched; zstd test passed; all 1660 member paths/types and all 1268 file sizes/SHA256 matched source manifest; file modes, uid/gid, mtimes checked; original volume rehashed after archive and identical",
+  "root_independent_verification": {
+    "verified_by_root_before_volume_removal": true,
+    "verified_archive_sha256": "0b9feda3f783258a9d689785cf80776224f02763239bcdd65aff48220f30db24",
+    "verified_zstd_integrity": true,
+    "verified_member_count": 1660,
+    "verified_regular_file_count": 1268,
+    "verified_regular_file_bytes": 4271869604,
+    "checks": "safe paths, unique membership, member type/mode/uid/gid/mtime/size and every file SHA256 passed"
+  }
+}
