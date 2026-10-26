@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-26T21:41:58Z",
+  "case_id": "S1-ORIG-120-01MS-005",
+  "job_id": 14651174,
+  "status": "COMPLETED exploratory terminal audit; no E1 decision",
+  "terminal": {
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:30:39",
+    "elapsed_s": 1839,
+    "allocated_cpus": 120,
+    "requested_memory": "67108864K",
+    "partition": "cpu",
+    "node": "x1000c1s2b0n1",
+    "start_cluster_local": "2026-10-26T21:27:37",
+    "end_cluster_local": "2026-10-26T21:58:16",
+    "start_utc_from_run_state_epoch": "2026-10-26T20:27:37Z",
+    "end_utc_from_run_state_epoch": "2026-10-26T21:12:37Z",
+    "solver_step": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:27:18",
+      "elapsed_s": 1638,
+      "run_state_wall_s": 1638.3924480259884,
+      "native_clock_time_s": 1631.0
+    },
+    "time_basis": "sacct Start/End are cluster-local CET (+0100); UTC fields are converted from the native run-state epoch."
+  },
+  "case": {
+    "ranks": 120,
+    "nodes": 1,
+    "cpus_per_task": 1,
+    "memory_gib_requested": 64,
+    "node": "x1000c1s2b0n1",
+    "partition": "cpu",
+    "gpu_allocated": false,
+    "current_host_capacity": {
+      "CPUTot": 128,
+      "CPUEfctv": 128,
+      "capture_utc": "2026-10-26T21:37:52.824Z",
+      "raw_capture_path": "results/summaries/rouaix_s1_120_20261026/evidence/scontrol-node-x1000c1s2b0n1.raw.txt",
+      "raw_capture_sha256": "ef9683d3b99f8c07af781025d27ee7b9da09e8d446ffdbbee70c0a9b6604e722",
+      "scope": "Current node capacity only; historical job allocation is the 120 CPUs recorded by sacct."
+    },
+    "solver": "interIsoFoam OpenCFD v2512",
+    "solver_build": "_87ed40d256-20251219",
+    "solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "mesh_cells": 10099265,
+    "mesh_input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "mesh_qualification": "qualified",
+    "qualification_exception_sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f",
+    "delta_t_s": 0.0001,
+    "fixed_delta_t": true,
+    "steps": 500,
+    "horizon_s": 0.05,
+    "field_write_times_s": [
+      0.0,
+      0.05
+    ],
+    "declared_simulation_inputs": {
+      "source_velocity_m_s": [
+        0.0,
+        -10.0,
+        0.0
+      ],
+      "air_speed_m_s": 70.0,
+      "gravity_m_s2": [
+        0.0,
+        -9.81,
+        0.0
+      ],
+      "initial_fields": {
+        "alpha.water": "fresh air-filled internalField uniform 0; source boundary is prescribed",
+        "fields_mapped_from_prior_run": false,
+        "p_rgh": "native v2512 setExprFields transform of uniform gauge-static p0, hRef=0 m"
+      },
+      "status": "declared model inputs, not measurements; no digitization or fitting was performed."
+    }
+  },
+  "numerical_results": {
+    "classification": "completed_horizon_converged_exploratory_only",
+    "expected_inputs_match": true,
+    "fatal_errors_reported": [],
+    "speed_peak_m_s": 103.293547802,
+    "speed_peak_time_s": 0.0497,
+    "speed_source": "per-step max-speed CSV inside the compact bundle; peak-time 3D field not retained",
+    "bulk_courant_max": 1.12154115569,
+    "interface_courant_max": 0.560172813445,
+    "alpha_min": -6.43745364866e-14,
+    "alpha_water_min": -1.64978071246e-20,
+    "linear_solves": {
+      "all_converged": true,
+      "records": 4001,
+      "failed": 0
+    },
+    "water_ledger": {
+      "rows": 500,
+      "horizon_s": 0.05,
+      "injected_kg": 62.582216014881666,
+      "final_inventory_kg": 62.58221601489213,
+      "closure_residual_kg": 1.0466294497746276e-11,
+      "max_abs_cumulative_closure_residual_kg": 1.33013600134e-11,
+      "caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual."
+    },
+    "momentum_balance": "not available; this audit provides a water-mass ledger only.",
+    "diagnostic_gaps": [
+      "TKE extrema not exposed by current parser",
+      "peak-time field not retained in compact evidence",
+      "no momentum closure"
+    ],
+    "raw_log_review": {
+      "sha256": "eb884642c7725231fc20391a1d8fc74f04e0f1b62636098be7296253959d47d2",
+      "bytes": 2039743,
+      "End_present": true,
+      "Finalising_parallel_run_present": true,
+      "FOAM_FATAL_or_Fatal_error_lines": [],
+      "trapFpe_enabled_banner_is_not_a_failure": true
+    }
+  },
+  "resources": {
+    "parent_job": {
+      "total_cpu_raw": "2-06:07:38",
+      "total_cpu_seconds": 194858,
+      "total_cpu_core_hours": 54.12722222222222,
+      "allocated_core_hours": 61.3,
+      "busy_fraction_estimate": 0.8829889432662679,
+      "maxrss": null
+    },
+    "batch_step": {
+      "maxrss": "9442664K",
+      "scope": "batch row only"
+    },
+    "solver_step": {
+      "total_cpu_raw": "2-06:03:47",
+      "total_cpu_seconds": 194627,
+      "total_cpu_core_hours": 54.06305555555556,
+      "allocated_core_hours": 54.6,
+      "busy_fraction_estimate": 0.9901658526658527,
+      "maxrss": "1413592K",
+      "maxrss_scope": "Slurm .0 task maximum, not node aggregate"
+    },
+    "parent_maxrss_note": "blank; no parent MaxRSS value.",
+    "audit_job_14656217": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:00:39",
+      "allocated_cpus": "1",
+      "total_cpu": "00:37.471",
+      "node": "x1000c0s4b1n1",
+      "batch_maxrss": "160956K",
+      "scope": "separate automatic audit process, not CFD resources"
+    },
+    "accounting_note": "Direct sacct rows supersede the native report’s earlier partial scontrol-only accounting, which records a temporary sacct persistent-DB connection refusal."
+  },
+  "comparisons": {
+    "S1_120": {
+      "job_id": 14651174,
+      "ranks": 120,
+      "host_profile": "CPU128",
+      "peak_speed_m_s": 103.293547802,
+      "peak_time_s": 0.0497,
+      "whole_job_elapsed_s": 1839,
+      "whole_job_allocated_core_hours": 61.3,
+      "solver_wall_s": 1638.3924480259884
+    },
+    "S1_96": {
+      "job_id": 14651185,
+      "ranks": 96,
+      "host_profile": "CPU128",
+      "peak_speed_m_s": 103.323474473,
+      "peak_time_s": 0.0499,
+      "whole_job_elapsed_s": 2339.0,
+      "whole_job_allocated_core_hours": 62.373333333333335,
+      "solver_wall_s": 2140.7075303061865
+    },
+    "S1_64": {
+      "job_id": 14651180,
+      "ranks": 64,
+      "host_profile": "CPU64 GPU-capable; no GPU allocated",
+      "peak_speed_m_s": 103.502606784,
+      "peak_time_s": 0.0495,
+      "whole_job_elapsed_s": 3681.0,
+      "whole_job_allocated_core_hours": 65.44,
+      "solver_wall_s": 3490.2026369050145
+    },
+    "peak_delta_vs_S1_96_m_s": -0.02992667099999835,
+    "peak_delta_vs_S1_64_m_s": -0.20905898199998774,
+    "caution": "All three original S1 runs reached 500 fixed 0.1 ms steps on the same qualified 10M-cell mesh. Rank counts and host sizes differ; observed runtimes are not a controlled scaling law. Per-step peak speed is a scalar; peak-time fields are unavailable."
+  },
+  "archive_audit": {
+    "native_report_status": "complete",
+    "capture_status": "verified",
+    "native_archive_status": "verified_crc_hash_and_member_list",
+    "reported_original_archive_sha256": "0e2225f58d762cd1785adaf437c67347420d89acdc529d3ac2d0819d67f0801a",
+    "full_original_archive_reread_locally": false,
+    "outer_bundle_sha256": "89876c31e0254e86a20d5a56f83c9fcacda5239c9ae2568232185cdce75c7666",
+    "remote_sidecar_matches_outer_bundle": true,
+    "inner_compact_sha256": "0f9bbc93a8e2120852af578dc51df873ec5b8ac2e35bd55cb22770a0906eba71",
+    "selected_members": 13,
+    "selected_bytes": 2274787,
+    "all_selected_member_sizes_and_hashes_verified_locally": true,
+    "full_3d_fields_or_mesh_binaries_transferred": false
+  },
+  "provenance": {
+    "remote_audit_report_directory": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1-hpc-pilot-14651174",
+    "exact_case_root_from_ledger": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1hpc-14651174.x82ktybq/attempt/case",
+    "attempt_manifest_sha256": "ce9c5bc22e1cde98c81a7d66b881642f2c1e3cd4c3b0444ecb42d1df6cf0c1a9",
+    "native_auditor_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+    "revision": "unknown",
+    "dirty": null,
+    "input_status": "simulation parameters are declared inputs, not measurements; no digitization or fitting."
+  },
+  "source_bundle_members": [
+    {
+      "path": "attempt/case/case-inputs.json",
+      "bytes": 11428,
+      "sha256": "d3e81b0a9b52c33596e23f30351296712e2974bc613ec1e9a47c4b5bfa4592ed"
+    },
+    {
+      "path": "attempt/case/system/controlDict",
+      "bytes": 4340,
+      "sha256": "26c64f134d78a82de7dc5c51f1a5c775feb8875118e0374b1cf96fdb277b548c"
+    },
+    {
+      "path": "attempt/case/system/fvSchemes",
+      "bytes": 1159,
+      "sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13"
+    },
+    {
+      "path": "attempt/case/system/fvSolution",
+      "bytes": 2111,
+      "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+    },
+    {
+      "path": "attempt/ledger/ledger.csv",
+      "bytes": 166994,
+      "sha256": "7256b26a7986a29e112315bd4a5f755e020accfe6ec9a869ef4b6299d170c315"
+    },
+    {
+      "path": "attempt/ledger/summary.json",
+      "bytes": 26459,
+      "sha256": "038d4017276e7249f11dad3cc44d8fb55fc2297530fdce13127a1091eaf68445"
+    },
+    {
+      "path": "attempt/ledger-audit.log",
+      "bytes": 371,
+      "sha256": "25652c15951ace8c00aa88ef3c63b36096075bfbd82ffa49a575b5272cfb4663"
+    },
+    {
+      "path": "attempt/manifest.json",
+      "bytes": 6656,
+      "sha256": "6d80ab70f63e9aea5ee6ea5af21397c27853f8fefb7493b27a8a5583eafb1b67"
+    },
+    {
+      "path": "attempt/max-speed.csv",
+      "bytes": 10928,
+      "sha256": "fe06d44ad92a6a530059b2e1e70ed7f14bc28e69df2a3b2f93c11b8704b90c48"
+    },
+    {
+      "path": "attempt/native-source-evidence.json",
+      "bytes": 2639,
+      "sha256": "aee12ba7bfb59c9329322e0ff8979e1e7878f17f7801545fb8b5794536ed483b"
+    },
+    {
+      "path": "attempt/slurm-step-accounting.txt",
+      "bytes": 468,
+      "sha256": "a0b44505abb7fb72b163888dbf1624b8446f134afbc63ed117a5a142f8486a1f"
+    },
+    {
+      "path": "attempt/solver-convergence.json",
+      "bytes": 1491,
+      "sha256": "f0ac8f6fd63c335e7c55ca576dbabfaa0078dfd8cce7e2d2d4b248d48f193d38"
+    },
+    {
+      "path": "attempt/solver.log",
+      "bytes": 2039743,
+      "sha256": "eb884642c7725231fc20391a1d8fc74f04e0f1b62636098be7296253959d47d2"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "results/summaries/rouaix_s1_120_20261026/evidence/native-audit.json",
+      "bytes": 29093,
+      "sha256": "c06c1040766ac67330d58e38c7374f5027961bb9bea55245417b9b1380917c3c",
+      "purpose": "native completed-run report and selected-member manifest"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_120_20261026/evidence/native-audit-bundle.tar.gz",
+      "bytes": 402254,
+      "sha256": "89876c31e0254e86a20d5a56f83c9fcacda5239c9ae2568232185cdce75c7666",
+      "purpose": "original compact bundle with selection and nested compact archive"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_120_20261026/evidence/native-audit-bundle.tar.gz.sha256",
+      "bytes": 86,
+      "sha256": "32511a8271e24c8f4784c4452cd1b400eb5b0709e4c0d227432ba5a7766c0ef8",
+      "purpose": "remote SHA-256 sidecar for original compact bundle"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_120_20261026/evidence/terminal-sacct.txt",
+      "bytes": 953,
+      "sha256": "4951e202caa644c80ca1d19d8feec34ee3a97c58d04b0a8726bd2ef0f5c35a35",
+      "purpose": "direct sacct rows for CFD job 14651174 and audit job 14656217"
+    },
+    {
+      "path": "results/summaries/rouaix_s1_120_20261026/evidence/scontrol-node-x1000c1s2b0n1.raw.txt",
+      "bytes": 722,
+      "sha256": "ef9683d3b99f8c07af781025d27ee7b9da09e8d446ffdbbee70c0a9b6604e722",
+      "purpose": "read-only current host-capacity query; not historical allocation"
+    }
+  ],
+  "formal_validation_decision": null
+}

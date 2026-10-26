@@ -1,20 +1,30 @@
 # Komondor Rouaix status
 
-Updated 2026-10-26 20:39 UTC (21:39 CET). Analytical E0 remains the only
+Updated 2026-10-26 21:43 UTC (22:43 CET). Analytical E0 remains the only
 passed gate; all CFD results below are exploratory.
 
 ## Current compute and queue
 
-**120-rank original trial 14651174 is RUNNING**, started 20:27:37 UTC on
-x1000c1s2b0n1. At 20:32 UTC it had reached .0043/.05 s with peak speed
-84.16 m/s and no recorded stop. It uses fixed .1 ms timesteps.
-Upwind 120-rank 14651178 remains afterany-dependent on that trial. Independent
-5 s target 14650641 remains pending on Priority; the latest provisional start
-forecast is 27 October 16:29:55 UTC (17:29:55 CET). Forecasts are not reservations.
-Our CFD allocation is 120 CPUs; pending requests are not allocated CPUs.
+**No CFD cores are currently allocated.** Original 120-rank trial 14651174
+completed at 20:58:16 UTC; its automatic inspector 14656217 completed at
+20:59:43 UTC. Upwind 120-rank 14651178 is now eligible but pending on Priority,
+with start estimate N/A; its earlier midnight CET forecast was withdrawn.
+Independent 5 s target 14650641 is also pending on Priority; latest forecast
+27 October 16:29:55 UTC (17:29:55 CET). Forecasts are not reservations.
+Both remaining CFD jobs have released afterany inspectors waiting for them.
 
 ## New terminal results
 
+- **120-rank original, 14651174:** all 500 fixed .1 ms steps through .05 s;
+  all 4,001 recorded linear solves converged, peak speed 103.29355 m/s.
+  Bulk/interface Co 1.12154/.56017; mass closure +1.0466e-11 kg.
+  Solver wall 1638.392 s (27m18); whole job 1839 s (30m39), 61.300 allocated
+  core-hours and 54.127 TotalCPU hours. This is faster and fewer allocated
+  core-hours than the 96-/64-rank short trials, with host/NUMA/co-tenancy
+  uncertainty preventing a controlled scaling claim. Native automatic audit
+  verified the archive and diagnostics; login-node accounting supplements its
+  state-only controller fallback.
+  [Compact terminal audit](../results/summaries/rouaix_s1_120_20261026/README.md).
 - **96-rank original, 14651185:** 500 fixed .1 ms steps through .05 s;
   all 4,001 recorded linear solves converged. Peak speed 103.3235 m/s,
   bulk/interface Co 1.1312/.53365. Mass-ledger closure +1.0466e-11 kg.
@@ -65,10 +75,13 @@ unaffected. Login-node sacct remains usable.
 156136 KiB batch MaxRSS. It verified the baseline archive, 100 steps, all
 801 solves and ledger. Missing sacct/purged controller state are explicit
 UNKNOWN/null accounting gaps; no CPU or scheduler state is fabricated.
-The three remaining parents have released dependent inspectors:
-14656217 -> original 120-rank 14651174; 14656218 -> upwind 14651178;
-14656219 -> 5 s 14650641. Smoke success is satisfied; each waits for its
-own parent's termination. Completed 96-rank/profile runs were audited directly.
+The real 120-rank completion also passed native inspection: 14656217 ran
+39 s, 37.471 CPU-seconds and 160956 KiB batch MaxRSS; it recovered retained
+COMPLETED state through scontrol and preserved verified archive diagnostics.
+Actual CPU/RSS were separately captured through login sacct. The two remaining
+inspectors are 14656218 -> upwind 14651178 and 14656219 -> 5 s 14650641;
+smoke success is satisfied and each waits for its parent's termination.
+Completed 96-rank/profile runs were audited directly.
 Each inspector is bounded to one CPU, 1800 MiB, ten minutes, no requeue/GPU.
 [Native proof, source hashes and repaired deployment](../results/summaries/rouaix_audit_repair_20261026/README.md).
 
@@ -76,4 +89,4 @@ Each inspector is bounded to one CPU, 1800 MiB, ten minutes, no requeue/GPU.
 Root owns integration; workers completed inspection, not separate CFD jobs.
 [Historical attempt registry](../results/summaries/rouaix_finished_inspection_20261026/README.md)
 preserves the earlier 59 terminal cases/19 support jobs plus its five-pending
-snapshot; the two new terminal audits above supplement that frozen inventory.
+snapshot; the three new terminal audits above supplement that frozen inventory.
