@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 20:52 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-26 21:10 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -83,35 +83,45 @@ Current work is bounded and parallel; no failed fields are restart inputs:
   directory requirement is inferred for Euler. Continuation authority:
   `results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/guardian-status.json`.
   Authority: `results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/guardian-status.json`.
-- **First-step energy audit (performance worker):** preparing a small
-  predictor-on/off comparison with read-only kinetic-energy and temperature
-  term recording. Its read-only observer binary has compiled; the matched
-  probes share remaining capacity after the two live main jobs.
-  The otherwise matched predictor-on cold run stopped after
-  four steps at 64.416 microseconds: its first pressure correction saw air
-  near 12 K and 9.71 kPa, below the unchanged 10 kPa floor. The hypothesis is
-  that unprojected predictor kinetic energy drives the temperature excursion;
-  that energy budget is not yet measured. Later recovered fields do not
-  erase this intermediate failure.
-- **Pressure-cycle intervention (source worker):** compiling a separate
-  trial that mixes the pressure-derived expansion source with its previous
-  outer-iteration value, once after both pressure corrections. Weight .5,
-  default 1 preserving the existing path. A small default identity comparison
-  preceded a matched warm replay toward .505 s, now live as Docker
-  `d353e078c78c`, StartedAt 20:43:55.431189317 UTC, ten MPI/eight CPU
-  equivalents, 50-minute save/one-hour hard bound. Root verified actual
-  Docker state and advancing guard/log at .462007 s/18 steps, zero floor
-  contacts. The four-step default-weight identity comparison reproduced
-  all twelve common laminar fields byte-for-byte; optional k/omega history
-  initialization was guarded identically in both test binaries. The pilot
-  ledger includes +.133296 kg inherited from its warm parent; the first
-  fifty new rows add about +.000410 kg. The first new step contributes
-  +.000227 kg, versus -1.44e-6 kg for the matched unrelaxed trial. These
-  different cumulative origins must not be compared as new trial errors.
-  Source and mass closure need scrutiny alongside pressure. Both raw source
-  fixed-point defect and pressure/velocity changes must decrease; merely
-  damping the displayed update or crossing .5 s is insufficient.
-  Authority: `results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-relaxation-on/guardian-status.json`.
+- **First-step energy audit (performance worker):** three one-step arms
+  reached 12 microseconds. The read-only predictor-off observer reproduces
+  the baseline's fifteen native fields and time byte-for-byte. With the
+  predictor enabled, the two selected pure-air cells reach about 713 m/s
+  before temperature is solved, with K about 254178 m2/s2 and preserved Kold=0.
+  The measured kinetic-energy source alone corresponds to -354.03 K; the
+  solved temperature falls by 281.11 K to about 12.04 K. The remaining
+  +72.92 K requires the implicit equation budget; it is not closed yet.
+  Predictor-off leaves those cells at 293.15 K at this stage. The enabled
+  trial has a raw 9.712 kPa pressure-floor contact (282 cells, no liquid
+  clipping); its later sampled pressure-field minimum is 21.834 kPa, a
+  different stage. Thus the unprojected predictor state is now measured,
+  not inferred from a pressure-corrected velocity. An enriched read-only
+  budget replay is assigned, with compact publication of the existing data.
+  Evidence: `results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/analysis/`.
+- **Source relaxation did not cure the late cycle:** weight .5, applied
+  once after both pressure correctors, stopped at .494129725325 s with
+  final dp 1253.704 Pa and dU 5.512 m/s. Docker `d353e078c78c` finished
+  21:01:34.746304627 UTC with normal End/complete native checkpoint after
+  the unchanged persistent-update screen, zero raw floor contacts/clipping.
+  At .493750 s the raw source fixed-point error stopped contracting and
+  grew from 3.62 to 3.98 s-1 over the later outer iterations. Smaller applied
+  updates therefore did not provide convergence. The default-weight four-step
+  identity test reproduced all twelve common laminar fields byte-for-byte.
+  Its cumulative water defect .134243 kg includes .133296 kg inherited
+  from the warm seed; compare only the new increment against other trials.
+  Native localization places the terminal maximum-update cell at global
+  31926 (rank 7 local 1779), a mixed cell owning a divider wall face, about
+  14.9 mm beyond its leading edge. This is a location, not proof of a mesh bug.
+  The conditional sixteen-outer run was withheld because this parent failed.
+  No failed .494 s fields are used for continuation.
+- **Matched warm predictor-off trial is live:** same healthy .460048 s
+  seed, full-source method, eight outer/two pressure corrections and source
+  weight 1; momentum predictor disabled. Docker `4b8ad3431709`, StartedAt
+  21:06:10.557383444 UTC, ten MPI/eight CPU equivalents, target .505 s.
+  Root verified exact Docker state and advancing guard at .464785 s/41
+  completed steps, zero floor contacts. It tests whether predictor ordering
+  matters in the late failure window, separately from cold startup.
+  Authority: `results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-on/guardian-status.json`.
 - **Restart finding:** saving the expansion source alone did not reproduce
   uninterrupted evolution. Correctly initializing Euler field history before
   derived-field mutation did: a source-active channel split/restart matches
@@ -122,7 +132,10 @@ Current work is bounded and parallel; no failed fields are restart inputs:
   history therefore did not cure the later pressure cycle. Its guard's wrong
   log path was repaired on the same running container, preserving the original
   deadline and checkpoint; no solver relaunch occurred.
-  Evidence: `results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/`.
+  The [public restart packet](../results/summaries/i4f_20261025/restart-history/README.md)
+  contains both solver sources, inputs, split/end fields and comparison data.
+  Root verified 335 artifacts and independently checked A/C/D staging; the
+  new public rebuild recipe has not yet been exercised.
 - **Other newly terminal trials:** tightened alpha solve stopped at
   .494128 s; the earlier uninterrupted Sp-only cold run stopped at .484302 s.
   Its conditional continuation correctly refused the failed parent and
@@ -141,8 +154,9 @@ Current work is bounded and parallel; no failed fields are restart inputs:
   evidence are in `full-source-apparatus/context-20261026T193827Z/` and
   `full-source-apparatus/source-closure-20261026T2010Z/` under the summary root.
 
-Twenty effective CPUs are shared with unrelated workloads. At 20:52 UTC the eight-CPU source-relaxation pilot and ten-CPU cold-derived
-continuation are live. Their total declared quota is eighteen of twenty,
+Twenty effective CPUs are shared with unrelated workloads. At 21:10 UTC the
+eight-CPU warm predictor-off trial and ten-CPU cold-derived continuation
+are live. Their total declared quota is eighteen of twenty,
 with about 1.13 CPU equivalents of unrelated work measured at admission.
 Small diagnostics share admitted remaining capacity. No GPU or HPC
 job is launched here. The runtime save floor remains 20 GiB. Verified
@@ -160,8 +174,8 @@ include atomic overwrite refusal and symlink checks, exercised with synthetic
 restore/race tests. Root verified all thirteen public artifact hashes.
 See the [archive and restore index](../results/archives/index.json).
 
-After merging HPC commit e5c4d92, eleven focused terminal-audit tests passed;
-Ruff and batch-shell syntax checks passed. This is software verification,
+After merging the shared HPC audit update 6d12db6, thirteen focused
+terminal-audit tests passed (3.06 s), with Ruff passing for its module/tests. This is software verification,
 not CFD acceptance. The earlier seven-step audit-output timing comparison
 (51/42 seconds) does not establish a universal performance gain.
 

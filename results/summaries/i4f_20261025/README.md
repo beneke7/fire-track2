@@ -26,6 +26,13 @@ and [grid figure](source-active-withdrawal/grid-trend.png) separate the improved
 water-volume balance from the remaining thermal/refinement error. All eight
 grid/source runs and one passive audit reached .4 s; these simplified cases
 do not validate the apparatus.
+The [Euler restart-history packet](restart-history/README.md) includes the
+small A/C/D inputs, native split/end states and both source snapshots. Saving
+the expansion source alone did not restore the uninterrupted step; initializing
+Euler history before mutation reduced the difference to near roundoff. The
+335-file packet and staging were verified; its new rebuild recipe was not run.
+This is one-step numerical evidence, not an apparatus validation.
+
 The [cell/iteration review](finite-water-floor-review.json),
 [pressure-pass table](finite-water-floor-pressure-passes.csv),
 [contact cells](finite-water-floor-cells.csv), and

@@ -1,0 +1,121 @@
+/* OpenCFD v2512 adiabatic closed-gas expansion verification. */
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location "system";
+    object controlDict;
+}
+
+application compressibleInterFoam;
+startFrom startTime;
+startTime 0;
+stopAt endTime;
+endTime 0.10025;
+deltaT 0.00025;
+writeControl timeStep;
+writeInterval 400;
+purgeWrite 0;
+writeFormat binary;
+writePrecision 17;
+writeCompression off;
+timeFormat general;
+timePrecision 17;
+runTimeModifiable no;
+adjustTimeStep no;
+maxCo 0.2;
+maxAlphaCo 0.1;
+maxDeltaT 0.00025;
+
+i4fFrozenPredictorSp true;
+i4fFrozenPredictorFullSource true;
+i4fFullPressureAudit false;
+
+functions
+{
+    alphaGasField
+    {
+        type exprField;
+        libs (fieldFunctionObjects);
+        field alpha.air;
+        expression "1 - alpha.water";
+        dimensions [0 0 0 0 0 0 0];
+        autowrite true;
+        executeControl writeTime;
+        executeInterval 1;
+    }
+    withdrawWaterFlux
+    {
+        type surfaceFieldValue;
+        libs (fieldFunctionObjects);
+        regionType patch;
+        name withdrawal;
+        operation sum;
+        fields (alphaPhi0.water);
+        writeControl timeStep;
+        writeInterval 1;
+        writeFields false;
+        log true;
+    }
+    waterVolume
+    {
+        type volFieldValue;
+        libs (fieldFunctionObjects);
+        regionType all;
+        operation volIntegrate;
+        fields (alpha.water);
+        writeControl timeStep;
+        writeInterval 1;
+        writeFields false;
+        log true;
+    }
+    gasVolume
+    {
+        type volFieldValue;
+        libs (fieldFunctionObjects);
+        regionType all;
+        operation volIntegrate;
+        fields (alpha.air);
+        writeControl timeStep;
+        writeInterval 1;
+        writeFields false;
+        log true;
+    }
+    mixtureMass
+    {
+        type volFieldValue;
+        libs (fieldFunctionObjects);
+        regionType all;
+        operation volIntegrate;
+        fields (rho);
+        writeControl timeStep;
+        writeInterval 1;
+        writeFields false;
+        log true;
+    }
+    gasMeanState
+    {
+        type volFieldValue;
+        libs (fieldFunctionObjects);
+        regionType all;
+        operation weightedAverage;
+        weightField alpha.air;
+        fields (p T);
+        writeControl timeStep;
+        writeInterval 1;
+        writeFields false;
+        log true;
+    }
+    fieldExtrema
+    {
+        type fieldMinMax;
+        libs (fieldFunctionObjects);
+        fields (T p rho alpha.water);
+        location yes;
+        writeControl timeStep;
+        writeInterval 1;
+    }
+
+    #include "finalStepCheckpoint"
+}

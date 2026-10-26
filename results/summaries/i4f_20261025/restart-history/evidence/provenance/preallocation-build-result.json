@@ -1,0 +1,23 @@
+{
+  "build_command": "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 1800 -- docker run --rm --cpus=1 --cpu-shares=128 --log-driver=none -v /home/v/proj/bene/fire-track2/results/runs/i4f-dgdt-restart-serialization-20261026T185614Z:/pair opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319 bash --noprofile --norc /pair/scripts/build_oldtime_preallocation.sh",
+  "build_exit_code": 0,
+  "build_log_path": "logs/build-oldtime-preallocation.log",
+  "build_log_sha256": "9404f7153afdba8fa21327285bf58e5a84abee7d3304599b4681fc2735abf648",
+  "build_observed_utc": "2026-10-26T19:34:53.343695+00:00",
+  "build_resource_admission_path": "provenance/resource-admission-arm-d-build.json",
+  "build_resource_admission_sha256": "37c51048674c8ff21f973b2b1f09f92dba0e283cf3fc996bb78e391cb71fb5c5",
+  "build_warnings_scope": "Wmake completed and emitted the expected binary SHA256; no help probe was run before the bounded case.",
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "openfoam_version": "OpenFOAM-2512 (2512)",
+  "patch_path": "provenance/restart-oldtime-preallocation-final.patch",
+  "patch_sha256": "e0b79827fb0abc8b98b23da64f7b2be3119f966dfe7927dcbcadc39550e9988d",
+  "preallocation_binary_bytes": 1665856,
+  "preallocation_binary_sha256": "74b2d48a4199b66757758b36ad0538daf5fb36dc7915d03f81ae0b1e1d03e2b1",
+  "preallocation_source_tree_sha256": "55cf81fd11cfda7ba3cb70322c6579481064b50e41b9e99320e321eb493cdcce",
+  "schema": "i4f-dgdt-preallocation-build-result/v1",
+  "solver_binary": "bin/compressibleInterFoamFrozenAlphaOldTimePreallocationProbe",
+  "source_copy_verification_path": "provenance/preallocation-source-manifest.json",
+  "source_copy_verification_sha256": "f08a33076f0fc896783735f7ef4c67abf2e92dd2174f7389830a892e61f71eb4",
+  "source_manifest_path": "provenance/preallocation-source-manifest.json",
+  "status": "compiled_binary_present"
+}

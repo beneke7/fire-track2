@@ -1,0 +1,30 @@
+{
+  "arm": "arm-a-uninterrupted",
+  "binary_mount": "/home/v/proj/bene/fire-track2/results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/bin",
+  "binary_sha256": "02eefafb7cc47979528578e79fbf35cc239000561a6c7c5c6ffa462c55d44fb0",
+  "case_freeze_sha256": "8f86730ea01bb7689dca3c8e4703e77fa3540e40f7c1eb33d2415e5e2470a757",
+  "case_mount": "/home/v/proj/bene/fire-track2/results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/cases/arm-a-uninterrupted/case",
+  "case_static_tree_sha256": "3fa7a4c0bf4715c4cf1187c6cfeab4d8e55a86c17a406cda6f1f6bd363a614a4",
+  "container_command": "source /usr/lib/openfoam/openfoam2512/etc/bashrc; set -euo pipefail; cd /case; while [[ ! -s /case/.GO ]]; do sleep 0.05; done; nice -n 19 /solver/compressibleInterFoamFrozenAlphaDgdtRestartProbe > /case/log.compressibleInterFoam 2>&1",
+  "container_id": "7ad7aff5c507f29f7d50db3d87d87e6d38ebd827e0f929d947bd223041a96fa0",
+  "container_name": "i4f-dgdt-arm-a-uninterrupted-20261026T191140Z",
+  "container_user": "1000:1000",
+  "docker_inspect_before_GO_sha256": "c1192e6f8578fb1ebb708080905b85856eaa6ddee41b1764930465afe155427b",
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "post_create_case_recheck": {
+    "case_static_file_count": 23,
+    "case_static_tree_sha256": "3fa7a4c0bf4715c4cf1187c6cfeab4d8e55a86c17a406cda6f1f6bd363a614a4",
+    "freeze_sha256": "8f86730ea01bb7689dca3c8e4703e77fa3540e40f7c1eb33d2415e5e2470a757"
+  },
+  "resource_admission_path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/provenance/resource-admission-arm-a-uninterrupted.json",
+  "resource_admission_sha256": "c3cd1f00676fdfb0e5e07c3a6954fa4a0980c7911588aeecf69c545312e20fd9",
+  "role": "uninterrupted_reference",
+  "schema": "i4f-dgdt-restart-launch-manifest/v1",
+  "solver_binary": "compressibleInterFoamFrozenAlphaDgdtRestartProbe",
+  "source_copy_verification_sha256": "725007c489686ec5714f658147c0959c330bf42d5f71f43602b4225a827c6b0e",
+  "source_patch_sha256": "41eda31f23fc89262481efecb8296b4c420124b5119272b22060ca70484ea9bf",
+  "started_at": "2026-10-26T19:11:40.110974855Z",
+  "status": "normal_end_complete",
+  "terminal_inspect_sha256": "e317074eb71721400655d09b81960118b0ab3ead2af3a68107eda470972874e8",
+  "verified_utc": "2026-10-26T19:11:40.233478+00:00"
+}

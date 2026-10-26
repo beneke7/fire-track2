@@ -1,0 +1,90 @@
+{
+  "created_utc": "2026-10-26T19:03:54.078939+00:00",
+  "schema": "i4f-dgdt-restart-source-inputs/v1",
+  "source_case": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0060-full-source/case",
+  "source_case_files": [
+    {
+      "path": "0/T",
+      "sha256": "ccafe54ead1700029428f1c1611897a2e12a4f2286eaba86d1c3e8dab87f4f6f"
+    },
+    {
+      "path": "0/T.air",
+      "sha256": "6de91e5e410f9b0898b5e7bea2f0ea1c2f628cbd5adc629c06f7ef1919831b3a"
+    },
+    {
+      "path": "0/T.water",
+      "sha256": "3e5b3db3c81d9e36d14a0f48c6da14a91f8d7daf7128d13652e6797bde51580c"
+    },
+    {
+      "path": "0/U",
+      "sha256": "357bfcb37bffabcf26c46672a18e29ae305e9e71f12ac860c5885ada8773d72b"
+    },
+    {
+      "path": "0/alpha.water",
+      "sha256": "f076f92b4d7f777f756d8a9c539a04c04c7e5a3a06b58dafba9fe7353fcff0e5"
+    },
+    {
+      "path": "0/p",
+      "sha256": "df478ccd0d2d0e6992b54b55087eb8659e74fe36e3dea25067b157c778594811"
+    },
+    {
+      "path": "0/p_rgh",
+      "sha256": "8d1938b4c0f52264c15d844922ac3b7dfa4c85f0add84e5aa20e0c19ce754bf5"
+    },
+    {
+      "path": "constant/g",
+      "sha256": "926a9f59e3e285cffc2cdc3d37f64fc9316c3cc77c4895185909e5f746ef2035"
+    },
+    {
+      "path": "constant/thermophysicalProperties",
+      "sha256": "3133ee14866a7d519e9f902ca938bca8c625293f4c773083f674d88ef6a31c54"
+    },
+    {
+      "path": "constant/thermophysicalProperties.air",
+      "sha256": "f06da2a49b45cb505545502a9267c8aee776c7352050eebc7cf0879d61916ba7"
+    },
+    {
+      "path": "constant/thermophysicalProperties.water",
+      "sha256": "43767969fd8452a282ec18e34e0197c45f85b1daa768852426323822ec2a6241"
+    },
+    {
+      "path": "constant/turbulenceProperties",
+      "sha256": "b0483bf82e4adb9bfdeb48fc7dab466e4ffcbbca889424e3a1496173276a247a"
+    },
+    {
+      "path": "system/blockMeshDict",
+      "sha256": "ea4cb8cbd3d46c52d4c37561d167a1fc10959eb25af2cd20fd9d25f5a3a0d449"
+    },
+    {
+      "path": "system/controlDict",
+      "sha256": "fd56028900c1678bfd9e49690fab2d99e9ffb809a85da7f3578124437627f0f7"
+    },
+    {
+      "path": "system/fvSchemes",
+      "sha256": "7626dd8bcfc89f243254c96bf4a9ff8bab9316f628f57daf464554dbe16eb00b"
+    },
+    {
+      "path": "system/fvSolution",
+      "sha256": "583994b8a5bd160cf68646ba0bf3956ff79d483b2588a56372c2362f4775f8c3"
+    },
+    {
+      "path": "system/setFieldsDict",
+      "sha256": "cd9c9772ba28a0cc0b05ddf685bfded9914475491f3d47c14aaaec12bd81087a"
+    }
+  ],
+  "source_case_input_manifest": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0060-full-source/case-input-manifest.json",
+  "source_case_input_manifest_sha256": "4788c7da2922826f7dfe33079076de2a4d08ee6197e657e2f55266b5fd21e144",
+  "source_grid_cells_x": 60,
+  "source_physics": {
+    "gas_eos": "perfectGas air; Cp=1005 J/(kg K), MW=28.96546 kg/kmol",
+    "initial_pressure_Pa_abs": 1200000.0,
+    "initial_water_volume_m3": 8e-05,
+    "thermal_transport": "Pr=1e9 in both phases",
+    "turbulence": "laminar",
+    "water_eos": "rhoConst, 998.2 kg/m3",
+    "withdrawal_Q_m3_s": 3.172675e-05
+  },
+  "source_run": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z",
+  "verified_all_source_files_match": true,
+  "verified_input_file_count": 17
+}

@@ -1,0 +1,67 @@
+{
+  "attempt_disposition": {
+    "compat_old07_attempt01": "preserved; no time step because OpenFOAM blocked runtime coded function object under Docker root; log/status/hash and privilege cause in attempts/compat-old07-root-runtime-failure-attempt-01.json",
+    "compat_old07_retry02": "preserved unlaunched; copied after failed process constructor rewrote T.air/T.water, not used",
+    "compat_old07_retry03": "normal first-step result from untouched seed; original uncorrected status bytes and numeric-endpoint-parser correction retained under attempts/",
+    "probe_and_A_B_C": "normal End and exact endpoint fields captured for all successful arms"
+  },
+  "cold_fallback_compatibility": {
+    "both_from_same_initial_0_fields": true,
+    "dgdt_input_present": false,
+    "expected_physics_difference": "none; only dgdt registration/READ_IF_PRESENT/AUTO_WRITE and executable name differ",
+    "old_binary": "original 07fca full-source prototype",
+    "probe_binary": "new IO-only probe binary"
+  },
+  "completed_utc": "2026-10-26T19:19:00+00:00",
+  "continuity_arms": {
+    "A": "one process from t=0 through t=0.10025; native checkpoint at t=0.1 and endpoint at t=0.10025",
+    "B": "restart from A's exact t=0.1 files with dgdt intentionally absent; same patched binary uses fallback alpha1*div(phi)",
+    "C": "restart from the same t=0.1 files including A's saved dgdt"
+  },
+  "created_utc": "2026-10-26T19:03:54.092108+00:00",
+  "deltaT_s": 0.00025,
+  "execution": {
+    "analysis_command": "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 -- .venv/bin/python results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/scripts/analyze_restart_probe.py",
+    "focused_static_checks": "ruff check and py_compile for the three private scripts",
+    "resource_per_arm": "serial, 1 CPU quota, CPU shares 128, solver nice 19, exact Docker ID/StartedAt and fresh resource admission in each case launch manifest",
+    "runtime": "pinned OpenFOAM v2512 image; Docker run as UID:GID 1000:1000 because dynamicCode rejects administrator identity"
+  },
+  "limits": [
+    "small sealed-channel diagnostic; not apparatus validation",
+    "single-grid restart-fidelity test; not proof of bitwise continuation beyond this case",
+    "if C differs from A, inspect phase thermodynamic reconstruction and other hidden state before adding persisted fields"
+  ],
+  "next_time_s": 0.10025,
+  "prepared_case_freezes": {
+    "arm-a-uninterrupted": "3fa7a4c0bf4715c4cf1187c6cfeab4d8e55a86c17a406cda6f1f6bd363a614a4",
+    "arm-b-fallback": "5774e134b3877e561082ff2695dde0be331c412c754161991cf12e1c120d7619",
+    "arm-c-saved-dgdt": "5774e134b3877e561082ff2695dde0be331c412c754161991cf12e1c120d7619",
+    "compat-old07": "c91f1552debd9c2c647c68859b29a082a8f830a98699fb2db26ef53941a198cb",
+    "compat-probe": "c91f1552debd9c2c647c68859b29a082a8f830a98699fb2db26ef53941a198cb"
+  },
+  "purpose": "Test whether persisting the accepted pressure-derived dgdt restores same-code Euler/full-source restart fidelity.",
+  "results": {
+    "A_B_C_comparison": "provenance/restart-comparison.json",
+    "A_B_C_field_difference_table": "provenance/restart-internal-field-differences.csv",
+    "A_vs_C_restart_fidelity": "not restored by dgdt alone; see quantified field and gas-continuity differences in restart-comparison.json",
+    "B_and_C_split_bytes": "B exactly equals A split except intentionally omitted dgdt; C is byte-identical to A split, as recorded in split-checkpoint.json",
+    "cold_fallback_compatibility": "provenance/cold-compatibility-comparison.json",
+    "endpoint_native_directory": "0.10025000000000008",
+    "split_checkpoint": "provenance/split-checkpoint.json",
+    "split_checkpoint_native_directory": "0.10000000000000007"
+  },
+  "schema": "i4f-dgdt-restart-serialization/v1",
+  "serialization": {
+    "timePrecision": 17,
+    "writeFormat": "binary",
+    "writePrecision": 17
+  },
+  "source_active": {
+    "i4fFrozenPredictorFullSource": true,
+    "i4fFrozenPredictorSp": true,
+    "i4fFullPressureAudit": false
+  },
+  "source_case_input_manifest": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0060-full-source/case-input-manifest.json",
+  "split_time_s": 0.1,
+  "status": "completed_short_restart_serialization_diagnostic"
+}

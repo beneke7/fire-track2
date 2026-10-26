@@ -1,0 +1,30 @@
+{
+  "arm": "arm-c-saved-dgdt",
+  "binary_mount": "/home/v/proj/bene/fire-track2/results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/bin",
+  "binary_sha256": "02eefafb7cc47979528578e79fbf35cc239000561a6c7c5c6ffa462c55d44fb0",
+  "case_freeze_sha256": "77b086e03a63f35836947b830f2c518b8120a90f7245904cba19de767341a470",
+  "case_mount": "/home/v/proj/bene/fire-track2/results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/cases/arm-c-saved-dgdt/case",
+  "case_static_tree_sha256": "5774e134b3877e561082ff2695dde0be331c412c754161991cf12e1c120d7619",
+  "container_command": "source /usr/lib/openfoam/openfoam2512/etc/bashrc; set -euo pipefail; cd /case; while [[ ! -s /case/.GO ]]; do sleep 0.05; done; nice -n 19 /solver/compressibleInterFoamFrozenAlphaDgdtRestartProbe > /case/log.compressibleInterFoam 2>&1",
+  "container_id": "c1dff4190e965c589f57eb8ebffb9a7a3b764a8401acb966df4333f8d64022f1",
+  "container_name": "i4f-dgdt-arm-c-saved-dgdt-20261026T191319Z",
+  "container_user": "1000:1000",
+  "docker_inspect_before_GO_sha256": "675ecc5f5e3cf1130e0e774e05aa79c15aed02161aa543c3a416a85fda1b8e47",
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "post_create_case_recheck": {
+    "case_static_file_count": 23,
+    "case_static_tree_sha256": "5774e134b3877e561082ff2695dde0be331c412c754161991cf12e1c120d7619",
+    "freeze_sha256": "77b086e03a63f35836947b830f2c518b8120a90f7245904cba19de767341a470"
+  },
+  "resource_admission_path": "results/runs/i4f-dgdt-restart-serialization-20261026T185614Z/provenance/resource-admission-arm-c-saved-dgdt.json",
+  "resource_admission_sha256": "318efb015940d5d8b40cb7f584c944fe263eadd1d6466aa772efd43b1b428f56",
+  "role": "restart_with_saved_dgdt",
+  "schema": "i4f-dgdt-restart-launch-manifest/v1",
+  "solver_binary": "compressibleInterFoamFrozenAlphaDgdtRestartProbe",
+  "source_copy_verification_sha256": "725007c489686ec5714f658147c0959c330bf42d5f71f43602b4225a827c6b0e",
+  "source_patch_sha256": "41eda31f23fc89262481efecb8296b4c420124b5119272b22060ca70484ea9bf",
+  "started_at": "2026-10-26T19:13:20.080232512Z",
+  "status": "normal_end_complete",
+  "terminal_inspect_sha256": "8eac986bfae5b98eae832041c7940c256e9f0597dd10f2f8158b0bdd748c90fd",
+  "verified_utc": "2026-10-26T19:13:20.298751+00:00"
+}
