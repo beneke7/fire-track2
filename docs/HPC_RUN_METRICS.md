@@ -626,3 +626,40 @@ evidence bindings are in
 The first metrics parse failed on a JobIDRaw-header/step-row handling defect;
 the preserved rerun used the documented JobID header and succeeded. No
 parser behavior or source physics was changed for this measurement.
+
+## P0 per-core measurement setup, 26 October
+
+The submitted v2 pair is **14652546 baseline -> 14652548 native profile**:
+24 single-threaded ranks on one node, 46 GiB, fixed 0.1 ms through 0.01 s
+(100 steps), 60 min caps and unchanged original numerical settings. The only
+profiled-case dictionary change is the native monitoring block documented
+above. At the 15:12 UTC root capture both remained pending, with no runtime
+or speedup result. Case/source/command hashes, the failed admission and
+independent readbacks are in the [compact P0 proof](../results/summaries/rouaix_percore_p0_20261026/README.md).
+
+The first held 48 GiB request, 14652491, became 48 CPUs for 24 tasks with
+CPUs/Task=2; it was cancelled before allocation. At the partition's 2000 MiB
+per-core threshold, 48 GiB/24 is 2048 MiB whereas 46 GiB/24 is 1962.67 MiB.
+The revised held jobs read back as 24 CPUs/CPT1. Test-only admission had
+reported 24 processors for the original request, so it cannot replace actual
+held-job validation. Slurm documents memory-related CPU/task adjustment in
+its [sbatch memory rules](https://slurm.schedmd.com/sbatch.html#OPT_mem-per-cpu).
+
+Historical solver-step totals sum each task's RSS high-water mark, not a
+simultaneous node peak; MaxRSS is one task's maximum. N2 at 64 ranks summed
+to about 31.23 GiB and T1 at 120 to 33.62 GiB; T1's separate batch maximum
+was 9.03 GiB. These phases must not be blindly added. The 46 GiB budget is
+informed by those sums with margin, not a measured 24-rank qualification.
+See the upstream [accounting definitions](https://slurm.schedmd.com/sacct.html).
+P0 captures optional cgroup-v2 job memory peak/current data; absence is null,
+and the accounting fallback retains its different measurement scope.
+
+Both jobs capture CPU model/topology and rank-zero affinity while retaining
+core binding, local memory binding and one thread per rank. Native scopes
+can identify linear-solver timing and rank imbalance. Interpret an observed
+profile/baseline wall-time ratio with actual placement and co-tenancy, and
+retain inclusive/child times separately. Full field-write timing remains
+unmeasured by the built-in uniform/time scope. Only use complete, converged,
+ledger-audited samples for performance comparisons. The 0.0020--0.0099 s
+window contains 80 samples but 79 endpoint intervals (0.0079 s); no long-time
+optimum or E1 acceptance is inferred from this startup pair.

@@ -308,6 +308,65 @@ def test_preparation_preserves_case1_inputs_and_builds_fixed_step_case(
     }
 
 
+def test_24_rank_32_gib_profile_is_only_a_control_dict_addition(tmp_path: Path) -> None:
+    mesh, manifest, audit = _inputs(tmp_path)
+    utility = _set_expr_fixture(tmp_path)
+    control_baseline = tmp_path / "baseline"
+    control_profile = tmp_path / "profile"
+    for output, profiling in ((control_baseline, False), (control_profile, True)):
+        hpc_case.prepare_case(
+            mesh,
+            manifest,
+            audit,
+            output,
+            ranks=24,
+            delta_t_s=0.001,
+            memory_gib=48,
+            profiling=profiling,
+            set_expr_fields=str(utility),
+        )
+
+    baseline_inputs = json.loads((control_baseline / "case-inputs.json").read_text())
+    profile_inputs = json.loads((control_profile / "case-inputs.json").read_text())
+    baseline_control = (control_baseline / "system/controlDict").read_text()
+    profile_control = (control_profile / "system/controlDict").read_text()
+    block = (
+        "\nprofiling\n{\n    active true;\n    cpuInfo false;\n"
+        "    memInfo false;\n    sysInfo false;\n}\n"
+    )
+    assert baseline_inputs["ranks"] == profile_inputs["ranks"] == 24
+    assert baseline_inputs["resource_budget_provisional"]["memory_gib"] == 48
+    assert baseline_inputs["profiling"] is False
+    assert profile_inputs["profiling"] is True
+    assert "profiling\n{" not in baseline_control
+    assert profile_control == baseline_control + block
+
+    from scripts import audit_iso_vof_ledger
+
+    profile_case = control_profile
+    audit = audit_iso_vof_ledger._check_supported_configuration(
+        profile_case,
+        profile_inputs,
+        profile_case / "system/controlDict",
+        profile_case / "system/fvSolution",
+        profile_case / "constant/transportProperties",
+    )
+    assert audit["nAlphaSubCycles"] == 1
+    solution = profile_case / "system/fvSolution"
+    solution.write_text(
+        solution.read_text().replace("nAlphaSubCycles 1;", "nAlphaSubCycles 2;", 1),
+        encoding="utf-8",
+    )
+    with pytest.raises(audit_iso_vof_ledger.AuditError, match="nAlphaSubCycles=2"):
+        audit_iso_vof_ledger._check_supported_configuration(
+            profile_case,
+            profile_inputs,
+            profile_case / "system/controlDict",
+            solution,
+            profile_case / "constant/transportProperties",
+        )
+
+
 @pytest.mark.parametrize(
     ("ranks", "nodes", "end_time_s", "delta_t_s", "steps"),
     [

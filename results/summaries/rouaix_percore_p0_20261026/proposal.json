@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-10-26T14:52:48Z",
+  "objective": "Provide operational evidence and proposed criteria for a small-rank, one-node Rouaix CPU P0; no solver changes or scientific gate decision.",
+  "decision_for_32_gib": "Not justified as a safe production request from existing evidence. A 32-GiB request could be used only as an explicitly bounded memory-qualification trial after confirming site enforcement and a usable aggregate-memory measurement. Otherwise use 64 GiB for a performance baseline.",
+  "candidate_p0": {
+    "status": "proposed by the primary task; not launched",
+    "solver": "OpenCFD OpenFOAM v2512 interIsoFoam, build _87ed40d256-20251219",
+    "input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_cells": 10099265,
+    "numerical_variant": "original",
+    "ranks": 24,
+    "nodes": 1,
+    "cpus_per_task": 1,
+    "delta_t_s": 0.0001,
+    "horizon_s": 0.01,
+    "fixed_steps": 100,
+    "field_write_times_s": [0.0, 0.01],
+    "wall_cap_s": 3600,
+    "memory_request_gib_under_review": 32,
+    "cpu_bind": "--cpu-bind=cores",
+    "memory_bind": "--mem-bind=local",
+    "file_handler": "collated",
+    "io_rank": 0,
+    "max_thread_file_buffer_size": 0,
+    "decomposition": "24 subdomains; method scotch",
+    "gpu": false
+  },
+  "measurements": [
+    {
+      "name": "T1 120-rank solver-step MaxRSS",
+      "value": 1431484,
+      "unit": "KiB; maximum task high-water mark",
+      "provenance": {
+        "path": "analysis/remote-t1-accounting-config.txt",
+        "captured_utc": "2026-10-26T14:47:22Z",
+        "accounting_row": "14649329.0",
+        "field": "MaxRSS",
+        "job": "120 ranks, 1 node, 64 GiB request; mesh/input hash as candidate; deltaT 0.0001 s; horizon 0.05 s; 500 steps",
+        "archive_crosscheck": "results/runs/rouaix-one-node-t1-20261026/analysis-terminal-20261026T102840Z/metrics/14649329.metrics.sacct"
+      }
+    },
+    {
+      "name": "T1 120-rank solver-step AveRSS",
+      "value": 293770,
+      "unit": "KiB; average of task high-water marks for the completed step",
+      "provenance": {
+        "path": "analysis/remote-t1-accounting-config.txt",
+        "captured_utc": "2026-10-26T14:47:22Z",
+        "accounting_row": "14649329.0",
+        "field": "AveRSS",
+        "source_definition": "SchedMD sacct completed-job AveRSS/TRESUsageInAve/Tot note",
+        "url": "https://slurm.schedmd.com/sacct.html"
+      }
+    },
+    {
+      "name": "T1 120-rank solver-step TRESUsageInTot memory",
+      "value": 35252400,
+      "unit": "KiB; sum of task high-water marks, not simultaneous node RSS",
+      "provenance": {
+        "path": "analysis/remote-t1-accounting-config.txt",
+        "captured_utc": "2026-10-26T14:47:22Z",
+        "accounting_row": "14649329.0",
+        "field": "TRESUsageInTot mem",
+        "definition": "sum of task high-water memory values for a completed job step",
+        "url": "https://slurm.schedmd.com/sacct.html"
+      }
+    },
+    {
+      "name": "T1 batch-step MaxRSS",
+      "value": 9467248,
+      "unit": "KiB; separate batch step, not solver-step memory",
+      "provenance": {
+        "path": "analysis/remote-t1-accounting-config.txt",
+        "captured_utc": "2026-10-26T14:47:22Z",
+        "accounting_row": "14649329.batch",
+        "field": "MaxRSS"
+      }
+    },
+    {
+      "name": "N2 64-rank solver-step MaxRSS",
+      "value": 1561684,
+      "unit": "KiB; maximum task high-water mark",
+      "provenance": {
+        "path": "analysis/remote-n2-accounting.txt",
+        "captured_utc": "2026-10-26T14:47:44Z",
+        "accounting_row": "14647714.0",
+        "field": "MaxRSS",
+        "job": "64 ranks, 1 node, 64 GiB request; same mesh/input; original schemes; deltaT 0.0001 s; horizon 0.01 s; 100 steps"
+      }
+    },
+    {
+      "name": "N2 64-rank solver-step TRESUsageInTot memory",
+      "value": 32749316,
+      "unit": "KiB; sum of task high-water marks, not simultaneous node RSS",
+      "provenance": {
+        "path": "analysis/remote-n2-accounting.txt",
+        "captured_utc": "2026-10-26T14:47:44Z",
+        "accounting_row": "14647714.0",
+        "field": "TRESUsageInTot mem",
+        "definition": "sum of task high-water memory values for a completed job step",
+        "url": "https://slurm.schedmd.com/sacct.html"
+      }
+    },
+    {
+      "name": "T1 observed archive disk facts",
+      "value": {
+        "minimum_free_disk_bytes": 10358448128,
+        "minimum_free_disk_requested_bytes": 6442450944,
+        "result_archive_bytes": 1719302994
+      },
+      "unit": "bytes",
+      "provenance": {
+        "path": "results/runs/rouaix-one-node-t1-20261026/analysis-terminal-20261026T102840Z/terminal-analysis.json",
+        "json_pointer": "/memory_disk"
+      }
+    },
+    {
+      "name": "current CPU-partition availability",
+      "value": {
+        "captured_utc": "2026-10-26T14:43:49Z",
+        "owned_jobs_pending": [14651174, 14651178, 14651180, 14651185, 14650641],
+        "cpu_partition_idle_cores": 44,
+        "largest_idle_fragment_cores": 16,
+        "fully_idle_cpu_nodes": 0
+      },
+      "unit": "Slurm snapshot values",
+      "provenance": {
+        "path": "analysis/remote-latest-queue-node-snapshot.txt",
+        "method": "read-only ssh with existing multiplexed connection"
+      }
+    },
+    {
+      "name": "Slurm memory accounting configuration observed",
+      "value": {
+        "JobAcctGatherType": "jobacct_gather/cgroup",
+        "JobAcctGatherFrequency": 30,
+        "TaskPlugin": "task/cgroup,task/affinity",
+        "ConstrainRAMSpace": null
+      },
+      "unit": "cluster configuration fields",
+      "provenance": {
+        "path": "analysis/remote-t1-accounting-config.txt",
+        "captured_utc": "2026-10-26T14:47:22Z",
+        "method": "read-only scontrol show config",
+        "missing": "cgroup.conf memory enforcement setting was not exposed"
+      }
+    },
+    {
+      "name": "Native profilingSummary availability",
+      "value": "available; installed v2512 command accepts -latestTime",
+      "unit": "command/help observation",
+      "provenance": {
+      "path": "analysis/remote-profiling-help-current.txt",
+      "captured_utc": "2026-10-26T14:50:53Z",
+        "executable": "/opt/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/platforms/linux64GccDPInt32Opt/bin/profilingSummary",
+        "runtime_build": "_87ed40d256-20251219"
+      }
+    }
+  ],
+  "numerical_results": [
+    {
+      "name": "T1 solver-step sum-of-task-peak memory",
+      "value": 33.6193,
+      "unit": "GiB",
+      "calculation": "35252400 KiB / 1024^2",
+      "interpretation": "Conservative sum of per-task high-water marks, not a simultaneously observed node peak; greater than 32 GiB."
+    },
+    {
+      "name": "N2 solver-step sum-of-task-peak memory",
+      "value": 31.2322,
+      "unit": "GiB",
+      "calculation": "32749316 KiB / 1024^2",
+      "interpretation": "Conservative sum of per-task high-water marks, not a simultaneously observed node peak; only about 2.4 percent below 32 GiB before any safety margin."
+    },
+    {
+      "name": "T1 solver-step maximum task RSS",
+      "value": 1.3652,
+      "unit": "GiB",
+      "calculation": "1431484 KiB / 1024^2",
+      "interpretation": "One task only. 120 times this value is 163.82 GiB and is a loose bound, not observed node use."
+    },
+    {
+      "name": "T1 batch-step maximum RSS",
+      "value": 9.0287,
+      "unit": "GiB",
+      "calculation": "9467248 KiB / 1024^2",
+      "interpretation": "Separate Slurm batch step; do not add to or substitute for solver-step memory."
+    },
+    {
+      "name": "N2 measured full-envelope cell-step throughput per rank",
+      "value": 22266.8,
+      "unit": "cell-steps/s/rank",
+      "calculation": "10099265 cells * 100 logged steps / (708.681820 s * 64 ranks)",
+      "interpretation": "Exploratory full solver envelope, includes startup; not a matched-window scaling result."
+    },
+    {
+      "name": "T1 measured full-envelope cell-step throughput per rank",
+      "value": 26011.7,
+      "unit": "cell-steps/s/rank",
+      "calculation": "10099265 cells * 500 logged steps / (1617.744340 s * 120 ranks)",
+      "interpretation": "Longer horizon than N2; startup amortization and different placement prevent a controlled rank-scaling claim."
+    },
+    {
+      "name": "N2 solver-step CPU busy fraction",
+      "value": 0.9890,
+      "unit": "fraction of 64 allocated core-seconds",
+      "calculation": "solver-step TotalCPU 12:27:35 / (708.681820 s * 64)",
+      "interpretation": "Indicates the solver used nearly all allocated core time; not a pressure-solver timing."
+    },
+    {
+      "name": "T1 solver-step CPU busy fraction",
+      "value": 0.9901,
+      "unit": "fraction of 120 allocated core-seconds",
+      "calculation": "solver-step TotalCPU 2-05:23:27 / (1617.744340 s * 120)",
+      "interpretation": "Indicates the solver used nearly all allocated core time; not a pressure-solver timing."
+    },
+    {
+      "name": "T1 whole-job CPU busy fraction",
+      "value": 0.8826,
+      "unit": "fraction of allocated job core-seconds",
+      "calculation": "parent TotalCPU 192434 s / (1817 s * 120)",
+      "interpretation": "Includes preparation and finalization; keep separate from solver-step utilization."
+    },
+    {
+      "name": "24-rank wall extrapolation from N2",
+      "value": 1889.8,
+      "unit": "s for the proposed 100-step window",
+      "calculation": "708.681820 s * 64 / 24",
+      "interpretation": "Unfitted inverse-rank extrapolation only; 60-minute wall cap is 1.9 times this estimate."
+    },
+    {
+      "name": "24-rank 100-step wall extrapolation from T1",
+      "value": 1617.7,
+      "unit": "s for the proposed 100-step window",
+      "calculation": "1617.744340 s * 0.01 / 0.05 * 120 / 24",
+      "interpretation": "Unfitted inverse-rank extrapolation from a longer run, not a performance prediction."
+    }
+  ],
+  "digitized_inputs": [],
+  "fits": [],
+  "assumptions": [
+    {
+      "statement": "The proposed 24-rank case reuses the existing clean-start mesh and original numerical variant, with only the rank count/decomposition and resource request changed.",
+      "basis": "Primary task description; candidate settings are proposed, not measured."
+    },
+    {
+      "statement": "The two rank-inverse wall estimates assume fixed per-cell/per-step cost and no change in convergence, memory pressure, network placement, or output behavior.",
+      "basis": "Back-of-envelope operational extrapolation only; not a fit and not evidence that a 5 s run is affordable."
+    },
+    {
+      "statement": "A 20 percent margin below a 32-GiB request (25.6 GiB aggregate high-water bound) is proposed as conservative operational headroom if a 32-GiB qualification gate is needed.",
+      "basis": "Agent-proposed resource margin; not paper-derived or established by prior runs."
+    }
+  ],
+  "proposed_gate_criteria": {
+    "queue_fit": "Take a fresh Slurm snapshot and require at least 24 idle CPU cores on one eligible cpu-partition node. At 14:43:49Z the largest fragment was 16, so this P0 was not currently placeable as one node.",
+    "memory_32_gib": "Do not sign off 32 GiB from current evidence. A qualification trial must confirm site memory enforcement semantics and capture step aggregate memory. Proposed conservative pass criterion: sum of task high-water RSS no greater than 25.6 GiB through the final write, plus no memory failure; if aggregate data or enforcement semantics are unavailable, mark unqualified. Otherwise request 64 GiB for forward-progress work.",
+    "runtime": "60-minute Slurm wall cap is a bounded P0; the two unfitted estimates are about 27-32 minutes for 100 steps. Stop on solver failure, non-finite state, no declared progress, or wall cap; preserve failure and do not change deltaT or solver constants.",
+    "completion": "Require clean-start solver exit 0, time 0.01 s reached, exactly 100 fixed steps, scheduled final write captured, compact ledger audit and solver convergence checks recorded. Exploratory completion is not an E1 validation pass.",
+    "performance_report": "Report solver_wall_s, logged time window, steps, allocated core-hours, measured CPU time, per-rank cell-step rate, memory accounting rows, node placement, output bytes, and pressure-profile max/average/min if profiled. Do not call this rank count optimal from one run.",
+    "5_s_progression": "Do not project a 5 s budget from this 0.01 s P0 alone. The existing progression contract uses a longer completed window (0.25-0.49 s for a 0.5 s run) and checks storage, output and deadline first."
+  },
+  "profiling_pair": {
+    "status": "proposed; not run",
+    "baseline": "fresh 24-rank, 0.01 s, 100-step unprofiled case",
+    "profiled_change_only": "Add the native profiling controlDict block documented in docs/HPC_RUN_METRICS.md:340-347; freeze a separate case hash. This is the only prepared-case file difference; numerical settings remain identical.",
+    "summary_command": "profilingSummary -latestTime",
+    "expected_output": "postProcessing/profiling/<time>/profiling",
+    "measure": [
+      "lduMatrix::solver.<field> calls and per-rank totalTime/childTime summarized as max, average and minimum",
+      "p_rgh slowest-rank pressure-solver wall time, average/minimum and max/average rank imbalance",
+      "solver_wall_s and whole-job accounting pair ratio (profiled_wall / baseline_wall) - 1 as observed profiler overhead"
+    ],
+    "limits": [
+      "totalTime is inclusive and childTime is nested; do not add them",
+      "cpuInfo is not a per-scope CPU timer; use Slurm accounting for CPU use",
+      "the objectRegistry::writeObject profile scope covers only uniform/time metadata and does not time full field writes or total I/O share",
+      "same actual node and identical mesh, fields, fvSchemes, fvSolution, dt, horizon, write schedule, rank count and resources are preferred; record if placement differs"
+    ],
+    "installed_source_provenance": "results/runs/rouaix-hpc-metrics-20261025/native-profile-inspection.json"
+  },
+  "unknowns": [
+    "No actual simultaneous node-wide memory peak was archived for the 64- or 120-rank solver steps.",
+    "Slurm site ConstrainRAMSpace or OverMemoryKill settings are not known; task/cgroup plugin presence alone does not prove the --mem request is enforced.",
+    "No 24-rank runtime or aggregate RSS has been measured.",
+    "No native pressure timing, rank imbalance profile, or paired profiler-overhead measurement exists yet.",
+    "Native profiling does not measure actual full-field write duration or total I/O share for this path.",
+    "The 24-rank 0.01 s pilot cannot establish a stable longer-horizon throughput forecast or E1 scientific validity."
+  ],
+  "analysis_artifacts": [
+    {
+      "path": "analysis/remote-queue-and-idle-snapshot.txt",
+      "sha256": "4ee2b8e5a4bbb29e03c4fe66e1620a5ab8e856c2ce027a0d0655f49b739152f7",
+      "captured_utc": "2026-10-26T14:41:34Z"
+    },
+    {
+      "path": "analysis/remote-cpu-partition-nodes.txt",
+      "sha256": "8756a37c207b706772dedda6b9d6f05c49d95d6d997101bb272fb0e666385d8d",
+      "captured_utc": "2026-10-26T14:41:34Z"
+    },
+    {
+      "path": "analysis/remote-latest-queue-node-snapshot.txt",
+      "sha256": "19ee0768c1dc54cc7f90886286b98d29722b9b075e0ee316380d6b486c3adb83",
+      "captured_utc": "2026-10-26T14:43:49Z"
+    },
+    {
+      "path": "analysis/remote-t1-accounting-config.txt",
+      "sha256": "5f530af33935c59fcbad44c0eaecc3f9fd00dd9c2f37e65e109e2a0a1d198ca8",
+      "captured_utc": "2026-10-26T14:47:22Z"
+    },
+    {
+      "path": "analysis/remote-n2-accounting.txt",
+      "sha256": "5c93cb46842235ae9ba3019329ac408bbf215fcda42710508f8c58419f10761a",
+      "captured_utc": "2026-10-26T14:47:44Z"
+    },
+    {
+      "path": "analysis/remote-profiling-help-current.txt",
+      "sha256": "dbe618619a5eef4e0cfe2ca4416ec32f4936c7b33958a7076e3044af5bf56e94",
+      "captured_utc": "2026-10-26T14:50:53Z"
+    }
+  ],
+  "source_provenance": [
+    {
+      "path": "docs/HPC_RUN_METRICS.md",
+      "lines": "330-387",
+      "sha256": "af2bca4948e15dc743dd454e5fb5d2f58f6a2f5464d00f07b8774c2201456c9a",
+      "use": "installed v2512 profiler activation, output, timing interpretation, limitations, and pair design"
+    },
+    {
+      "path": "results/runs/rouaix-hpc-metrics-20261025/native-profile-inspection.json",
+      "sha256": "c970b2720f1bfbe9f528d832234553d07d65ebdd64c263d3d42295b3eab3b469",
+      "use": "exact installed source locations and SHA-256 values for Time.C, TimeIO.C, objectRegistry.C, lduMatrixSolver.C, and profilingSummary.C"
+    },
+    {
+      "path": "results/runs/rouaix-one-node-campaign-20261026/source-capsule/s1-source-capsule-24-members.tar.gz",
+      "sha256": "4d67729f3fee89aa888e9e8869952f1339ba0d02450b5e8528f1848b63d60420",
+      "member_index": "results/runs/rouaix-one-node-campaign-20261026/source-capsule/source-capsule-index.json",
+      "member_index_sha256": "ae637c583dbd0eb63e3885ddbbffcb5cb8f0a907c12b0e2e7167991c6b197582",
+      "use": "frozen runner and dictionaries; runner uses srun --cpu-bind=cores and --mem-bind=local; file handler collated"
+    },
+    {
+      "path": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+      "lines": "142-157",
+      "use": "measured N2 64-rank solver wall and T1-era diagnostic comparison; no start-up-excluded N2 window"
+    },
+    {
+      "path": "results/runs/rouaix-one-node-t1-20261026/analysis-terminal-20261026T102840Z/metrics/attempt/manifest.json",
+      "json_pointer": "/rank_count, /delta_t_s, /horizon_s, /input_archive_sha256, /memory_mb_per_node",
+      "use": "T1 run input and allocation identity"
+    },
+    {
+      "path": "https://slurm.schedmd.com/sacct.html",
+      "use": "official definition of completed-step MaxRSS, AveRSS, TRESUsageInAve and TRESUsageInTot task high-water values"
+    },
+    {
+      "path": "https://slurm.schedmd.com/srun.html",
+      "use": "official CPU/memory binding semantics and condition that --mem is not strictly enforced without site configuration"
+    },
+    {
+      "path": "https://api.openfoam.com/2506/profilingSummary_8C_source.html",
+      "use": "official OpenFOAM source documentation describing profilingSummary max/average/min summary behavior; v2512 installed source hashes are recorded locally"
+    }
+  ],
+  "scientific_gate_decision": null,
+  "run_launched": false
+}

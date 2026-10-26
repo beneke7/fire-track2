@@ -1,0 +1,18 @@
+verification=prepared controlDict generator output differs only by the declared native profiling block
+baseline_sha256=a8940544a7e4e30261f948d6aa5bf6b52c504847a2276ca11abef7e3100f99e6
+profile_sha256=60cd7a173da8ee61b0ac7f641b9649e7025a6c6d6180e3eb2e0174ddd04eeb23
+--- profiling=0
++++ profiling=1
+@@ -186,3 +186,11 @@
+         writeInterval 1;
+     }
+ }
++
++profiling
++{
++    active true;
++    cpuInfo false;
++    memInfo false;
++    sysInfo false;
++}
+

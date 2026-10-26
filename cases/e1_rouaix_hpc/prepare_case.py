@@ -51,7 +51,7 @@ FVSCHEMES_OVERRIDE_BY_VARIANT = {
     "upwind": ("div(rhoPhi,U) Gauss limitedLinearV 1;", "div(rhoPhi,U) Gauss upwind;"),
     "u_gradient_limited": ("grad(U) Gauss linear;", "grad(U) cellLimited Gauss linear 1;"),
 }
-SUPPORTED_PLACEMENTS = {64: 1, 96: 1, 120: 1, 240: 2, 300: 3}
+SUPPORTED_PLACEMENTS = {24: 1, 64: 1, 96: 1, 120: 1, 240: 2, 300: 3}
 RHO_WATER = 997.6
 RHO_AIR = 1.18
 MU_WATER = 8.89e-4
@@ -656,11 +656,12 @@ def _control_dict(
     delta_t_s: float,
     end_time_s: float = HORIZON_S,
     write_interval_s: float | None = None,
+    profiling: bool = False,
 ) -> str:
     if write_interval_s is None:
         write_interval_s = end_time_s
     purge_write = 2 if end_time_s == 5.0 and write_interval_s == 1.0 else 0
-    return f"""FoamFile
+    control = f"""FoamFile
 {{
     version 2.0;
     format ascii;
@@ -695,6 +696,9 @@ OptimisationSwitches
 }}
 {_function_objects()}
 """
+    if profiling:
+        control += "\nprofiling\n{\n    active true;\n    cpuInfo false;\n    memInfo false;\n    sysInfo false;\n}\n"
+    return control
 
 
 def _decompose_dict(ranks: int) -> str:
@@ -725,6 +729,7 @@ def prepare_case(
     numerical_variant: str = "original",
     write_interval_s: float | None = None,
     memory_gib: int = 64,
+    profiling: bool = False,
     timeout_s: float = 1200.0,
     set_expr_fields: str = "setExprFields",
 ) -> Path:
@@ -734,9 +739,17 @@ def prepare_case(
         or isinstance(nodes, bool)
         or nodes != SUPPORTED_PLACEMENTS[ranks]
     ):
-        raise ValueError("supported rank/node placements are 64/1, 96/1, 120/1, 240/2, or 300/3")
-    if isinstance(memory_gib, bool) or memory_gib < 1:
-        raise ValueError("memory_gib must be positive")
+        raise ValueError(
+            "supported rank/node placements are 24/1, 64/1, 96/1, 120/1, 240/2, or 300/3"
+        )
+    if (
+        isinstance(memory_gib, bool)
+        or not isinstance(memory_gib, int)
+        or not 32 <= memory_gib <= 64
+    ):
+        raise ValueError("memory_gib must be an integer from 32 through 64")
+    if not isinstance(profiling, bool):
+        raise ValueError("profiling must be a boolean")
     if not math.isfinite(timeout_s) or timeout_s <= 0:
         raise ValueError("timeout_s must be finite and positive")
     if isinstance(delta_t_s, bool) or delta_t_s not in DELTA_T_OPTIONS_S:
@@ -814,7 +827,7 @@ def prepare_case(
     for name in POLYMESH_FILES:
         shutil.copy2(Path(mesh_dir) / name, poly_mesh / name)
     (output_dir / "system/controlDict").write_text(
-        _control_dict(delta_t_s, end_time_s, write_interval_s), encoding="utf-8"
+        _control_dict(delta_t_s, end_time_s, write_interval_s, profiling), encoding="utf-8"
     )
     (output_dir / "system/decomposeParDict").write_text(_decompose_dict(ranks), encoding="utf-8")
 
@@ -907,6 +920,7 @@ def prepare_case(
         "horizon_s": end_time_s,
         "node_count": nodes,
         "ranks": ranks,
+        "profiling": profiling,
         "time_controls": {
             "delta_t_s": delta_t_s,
             "fixed_delta_t": True,
@@ -1014,6 +1028,7 @@ def main() -> int:
     parser.add_argument("--write-interval-s", type=float)
     parser.add_argument("--numerical-variant", choices=NUMERICAL_VARIANTS, default="original")
     parser.add_argument("--memory-gib", type=int, default=64)
+    parser.add_argument("--profiling", action="store_true")
     parser.add_argument("--timeout-s", type=float, default=1200.0)
     parser.add_argument("--delta-t-s", type=float, choices=DELTA_T_OPTIONS_S, required=True)
     parser.add_argument(
@@ -1033,6 +1048,7 @@ def main() -> int:
             numerical_variant=args.numerical_variant,
             write_interval_s=args.write_interval_s,
             memory_gib=args.memory_gib,
+            profiling=args.profiling,
             timeout_s=args.timeout_s,
             set_expr_fields=args.set_expr_fields,
         )

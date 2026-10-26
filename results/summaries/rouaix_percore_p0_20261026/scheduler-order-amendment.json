@@ -1,0 +1,22 @@
+{
+  "declared_utc": "2026-10-26T14:49:15.684253+00:00",
+  "purpose": "Make smaller existing pilots eligible before waiting for a120-core block; a64-idle-core block was observed14:40 while64-rank job was dependency-blocked.",
+  "old_order": [
+    14651174,
+    14651178,
+    14651180,
+    14651185
+  ],
+  "new_order": [
+    14651180,
+    14651185,
+    14651174,
+    14651178
+  ],
+  "changes": {
+    "14651180": "clear dependency",
+    "14651174": "afterany:14651185"
+  },
+  "unchanged": "case inputs,source snapshots,ranks,memory,horizons,timesteps,wallcaps,original/upwind pair; independent14650641 and unrelatedjobs",
+  "procedure": "Require all four pending and exact ownership/root; briefly hold only14651174; clear14651180 dependency; set14651174 afterany14651185; verify chain thenrelease14651174. Abort on started jobs or mismatched identity."
+}

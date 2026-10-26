@@ -1,0 +1,16 @@
+{
+  "affected_suite": {
+    "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_rouaix_hpc_case.py tests/test_rouaix_hpc_runner.py tests/test_rouaix_hpc_queue.py tests/test_rouaix_matched_mesh.py tests/test_hpc_metrics.py tests/test_komondor_tutorial.py tests/test_iso_vof_ledger.py tests/test_native_vof_runner.py",
+    "passed": 221,
+    "elapsed_s": 4.32,
+    "exit_code": 0
+  },
+  "additional_adjacent_suite": {
+    "passed": 212,
+    "log": "checks/pytest-broader.log"
+  },
+  "ruff": "check and format passed;163 files formatted across src/scripts/tests/cases/e1_rouaix_hpc",
+  "bash_syntax": "pilot.sbatch passed bash -n",
+  "full_suite": "not repeated; prior dependency/platform/fixture failures remain documented in the earlier bundle",
+  "measured_speedup": null
+}

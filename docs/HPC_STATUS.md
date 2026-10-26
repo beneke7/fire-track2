@@ -1,7 +1,43 @@
 # Komondor Rouaix status
 
-Updated from an independent readback at 2026-10-26 14:11:20 UTC.
+Updated from independent scheduler/accounting captures on 2026-10-26, latest 15:12 UTC.
 Analytical E0 is the only passed gate; current CFD work is exploratory.
+
+## Current queue and per-core profiling
+
+At **15:12:37 UTC (16:12:37 CET)** all seven owned CFD jobs remained
+PENDING, with zero allocated CPUs and StartTime Unknown/N/A. The shared
+account had 25 allocated CPUs in other work: 1 on cpu and 24 on gpu. Its
+earlier 14:51 snapshot was 82 (1 cpu,25 ai,56 gpu); these are allocation
+counts rather than measured CPU activity.
+
+S1 now runs **64 -> 96 -> original 120 -> upwind 120**, jobs 14651180 ->
+14651185 -> 14651174 -> 14651178. Root amended only pending dependencies,
+verified the chain and released the brief control hold. Numerical inputs,
+source snapshots, requests and original declarations remain preserved.
+The independent 5 s target 14650641 is unchanged.
+
+P0 v2 is submitted and released: **14652546 baseline -> 14652548 native
+profile**. Both request 24 ranks/24 CPUs/CPT1, one node, 46 GiB, fixed 0.1 ms
+through 0.01 s/100 steps and 60 min. Baseline waits on Priority and profile
+on Dependency. Real held readbacks verified that shape. The earlier 48 GiB
+request 14652491 became 48 CPUs/CPT2 and was cancelled before allocation.
+The cpu limit is 2000 MiB/core: 48 GiB/24 exceeds it, whereas 46 GiB/24 fits.
+Test-only admission did not reveal that inflation.
+
+Prior summed task RSS peaks 31.2–33.6 GiB informed the 46 GiB budget; the
+24-rank actual peak remains unmeasured. New source retains default 64 GiB,
+adds 24-rank/memory/profile support, and captures topology, rank-zero affinity
+and optional cgroup-v2 memory peaks. The profile adds only monitoring;
+pressure/rank timing and overhead await execution, and full I/O timing is
+not covered. No measured solver speedup or scientific gate is claimed.
+
+All 221 affected tests and Ruff pass. Root verified the frozen 24-file v2
+capsule against current bytes, submitted flags, actual CPU/memory shape and
+source command. [Compact P0 proof](../results/summaries/rouaix_percore_p0_20261026/README.md);
+full records: `results/runs/rouaix-percore-p0-20261026/`.
+
+## Earlier S1 submission capture
 
 S1 replacement is queued and released: **14651174** original 120 ranks,
 **14651178** matched upwind 120, **14651180** original 64, **14651185**

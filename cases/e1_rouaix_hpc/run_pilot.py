@@ -53,6 +53,7 @@ FVSCHEMES_OVERRIDE_BY_VARIANT = {
     "u_gradient_limited": ("grad(U) Gauss linear;", "grad(U) cellLimited Gauss linear 1;"),
 }
 SUPPORTED_PLACEMENTS = {
+    24: (1, (24,)),
     64: (1, (64,)),
     96: (1, (96,)),
     120: (1, (120,)),
@@ -107,13 +108,23 @@ class PilotConfig:
     write_interval_s: float | None = None
     retention_mode: str = "full"
     minimum_free_disk_gib: int = 12
+    memory_gib: int = MEMORY_GIB
+    profiling: bool = False
 
     def validate(self) -> PilotConfig:
         placement = SUPPORTED_PLACEMENTS.get(self.ranks)
         if placement is None or self.nodes != placement[0]:
             raise PilotError(
-                "supported rank/node placements are 64/1, 96/1, 120/1, 240/2, or 300/3"
+                "supported rank/node placements are 24/1, 64/1, 96/1, 120/1, 240/2, or 300/3"
             )
+        if (
+            isinstance(self.memory_gib, bool)
+            or not isinstance(self.memory_gib, int)
+            or not 32 <= self.memory_gib <= 64
+        ):
+            raise PilotError("declared per-node memory must be an integer from 32 through 64 GiB")
+        if not isinstance(self.profiling, bool):
+            raise PilotError("profiling must be a boolean")
         if self.delta_t_s not in SUPPORTED_DELTA_T_S:
             raise PilotError("fixed deltaT must be one of 0.001, 0.0005, or 0.0001 s")
         if self.horizon_s not in SUPPORTED_HORIZONS_S:
@@ -196,8 +207,10 @@ def _validate_allocation(config: PilotConfig, env: dict[str, str]) -> dict[str, 
         )
     if cpus_on_node < max(expected_layout):
         raise PilotError("allocated CPUs on node are fewer than the requested MPI tasks per node")
-    if memory_mb_per_node < MEMORY_GIB * 1024:
-        raise PilotError("allocated memory is below the 64 GiB per-node starting floor")
+    if memory_mb_per_node < config.memory_gib * 1024:
+        raise PilotError(
+            f"allocated memory is below the declared {config.memory_gib} GiB per-node floor"
+        )
     if sum(actual_layout) != config.ranks:
         raise PilotError("Slurm task distribution does not sum to the declared MPI rank count")
     return {
@@ -209,6 +222,7 @@ def _validate_allocation(config: PilotConfig, env: dict[str, str]) -> dict[str, 
         "memory_mb_per_node": memory_mb_per_node,
         "memory_gib_per_node": math.ceil(memory_mb_per_node / 1024),
         "memory_gib_total": math.ceil(memory_mb_per_node / 1024) * nodes,
+        "memory_gib_declared_per_node": config.memory_gib,
         "node_list": env.get("SLURM_JOB_NODELIST", "unknown"),
         "wall_budget_s_declared": config.wall_budget_s,
         "slurm_job_start_time": env.get("SLURM_JOB_START_TIME"),
@@ -586,6 +600,7 @@ def validate_prepared_case(
 ) -> tuple[dict[str, Any], dict[str, str]]:
     config = (config or PilotConfig()).validate()
     inputs = read_json_object(case / "case-inputs.json")
+    resource_budget = inputs.get("resource_budget_provisional")
     if (
         inputs.get("execution_backend") != "slurm-native"
         or inputs.get("solver_version") != "v2512"
@@ -593,6 +608,9 @@ def validate_prepared_case(
         or inputs.get("node_count") != config.nodes
         or inputs.get("horizon_s") != config.horizon_s
         or inputs.get("numerical_variant") != config.numerical_variant
+        or not isinstance(resource_budget, dict)
+        or resource_budget.get("memory_gib") != config.memory_gib
+        or inputs.get("profiling", False) is not config.profiling
     ):
         raise PilotError(
             "prepared case differs from the declared native Slurm placement/horizon/numerics"
@@ -683,6 +701,12 @@ def validate_prepared_case(
     ):
         raise PilotError("prepared fvSchemes does not match its declared variant and hash chain")
     control_text = (case / "system/controlDict").read_text(encoding="utf-8")
+    profiling_block = "profiling\n{\n    active true;\n    cpuInfo false;\n    memInfo false;\n    sysInfo false;\n}\n"
+    if config.profiling:
+        if control_text.count(profiling_block) != 1:
+            raise PilotError("prepared profiling control block differs from its declared flag")
+    elif re.search(r"(?m)^\s*profiling\s*\{", control_text):
+        raise PilotError("prepared controlDict has an undeclared profiling block")
     required = (
         "stopAt endTime;",
         f"endTime {config.horizon_s:.12g};",
@@ -1076,6 +1100,7 @@ def supervise_solver(
     write_state: Any,
 ) -> tuple[int, OutputMonitor, str | None, bool]:
     identity_path = attempt / "solver-step-identity.txt"
+    affinity_path = attempt / "rank0-affinity.txt"
     launcher = attempt / "solver-step.sh"
     launcher.write_text(
         """#!/usr/bin/env bash
@@ -1083,6 +1108,7 @@ set -euo pipefail
 if [[ ${SLURM_PROCID:-} == 0 ]]; then
   printf '%s %s %s %s\\n' "${SLURM_JOB_ID:-}" "${SLURM_STEP_ID:-}" "${SLURM_NTASKS:-}" "${SLURM_PROCID:-}" > "${ROUAIX_STEP_IDENTITY}.tmp"
   mv -- "${ROUAIX_STEP_IDENTITY}.tmp" "$ROUAIX_STEP_IDENTITY"
+  { printf 'slurm_procid=%s\\n' "$SLURM_PROCID"; sed -n '/^Cpus_allowed_list:/p; /^Mems_allowed_list:/p' /proc/self/status; } > "$ROUAIX_RANK0_AFFINITY"
 fi
 exec interIsoFoam -parallel
 """,
@@ -1091,6 +1117,7 @@ exec interIsoFoam -parallel
     launcher.chmod(0o755)
     environment = dict(os.environ)
     environment["ROUAIX_STEP_IDENTITY"] = str(identity_path)
+    environment["ROUAIX_RANK0_AFFINITY"] = str(affinity_path)
     command = [
         "srun",
         "--kill-on-bad-exit=1",
@@ -1100,7 +1127,10 @@ exec interIsoFoam -parallel
         "--cpus-per-task=1",
         "--cpu-bind=cores",
         "--mem-bind=local",
-        "--export=ALL,ROUAIX_STEP_IDENTITY=" + str(identity_path),
+        "--export=ALL,ROUAIX_STEP_IDENTITY="
+        + str(identity_path)
+        + ",ROUAIX_RANK0_AFFINITY="
+        + str(affinity_path),
         str(launcher),
     ]
     log_path = attempt / "solver.log"
@@ -1308,7 +1338,39 @@ def run_setup_command(
         raise PilotError(f"setup command failed ({result}): {' '.join(command)}; log={log_path}")
 
 
-def _write_step_accounting(attempt: Path, job_id: str) -> None:
+def _cgroup_v2_memory(
+    job_id: str,
+    *,
+    membership_path: Path = Path("/proc/self/cgroup"),
+    cgroup_root: Path = Path("/sys/fs/cgroup"),
+) -> dict[str, Any] | None:
+    try:
+        membership = next(
+            line.split("::", 1)[1]
+            for line in membership_path.read_text(encoding="utf-8").splitlines()
+            if line.startswith("0::")
+        )
+        relative = PurePosixPath(membership.lstrip("/"))
+        parts = relative.parts
+        job_index = parts.index(f"job_{job_id}")
+        job_path = cgroup_root.joinpath(*parts[: job_index + 1]).resolve(strict=True)
+        root = cgroup_root.resolve(strict=True)
+        if not job_path.is_relative_to(root):
+            return None
+        peak = int((job_path / "memory.peak").read_text(encoding="ascii").strip())
+        current = int((job_path / "memory.current").read_text(encoding="ascii").strip())
+    except (OSError, StopIteration, ValueError, IndexError):
+        return None
+    return {
+        "source": "cgroup-v2-job-scope",
+        "path": str(job_path),
+        "memory_peak_bytes": peak,
+        "memory_current_bytes_after_solver": current,
+    }
+
+
+def _write_step_accounting(attempt: Path, job_id: str) -> dict[str, Any] | None:
+    cgroup_memory = _cgroup_v2_memory(job_id)
     with (attempt / "slurm-step-accounting.txt").open("w", encoding="utf-8") as stream:
         for command in (
             ["sstat", "-j", f"{job_id}.0", "--format=JobID,AveCPU,MaxRSS,AveRSS"],
@@ -1320,6 +1382,14 @@ def _write_step_accounting(attempt: Path, job_id: str) -> None:
             stream.write(f"$ {' '.join(command)}\n")
             stream.write(result.stdout or result.stderr)
             stream.write("\n")
+        stream.write("\n-- cgroup v2 job memory --\n")
+        stream.write(
+            json.dumps(cgroup_memory, sort_keys=True)
+            if cgroup_memory is not None
+            else "unavailable; see sacct MaxRSS above"
+        )
+        stream.write("\n")
+    return cgroup_memory
 
 
 def _foam_named_block(text: str, name: str) -> str | None:
@@ -1794,6 +1864,7 @@ def run_pilot(
         "ranks": config.ranks,
         "nodes": config.nodes,
         "tasks_per_node": allocation["tasks_per_node"],
+        "memory_gib": config.memory_gib,
         "memory_gib_per_node": allocation["memory_gib_per_node"],
         "memory_mb_per_node": allocation["memory_mb_per_node"],
         "memory_gib_total": allocation["memory_gib_total"],
@@ -1803,6 +1874,7 @@ def run_pilot(
         "horizon_s": config.horizon_s,
         "delta_t_s": config.delta_t_s,
         "numerical_variant": config.numerical_variant,
+        "profiling": config.profiling,
         "write_interval_s": write_interval,
         "purge_write": 2 if config.horizon_s == 5.0 and write_interval == 1.0 else 0,
         "retention_mode": config.retention_mode,
@@ -1897,11 +1969,12 @@ def run_pilot(
                 "--numerical-variant",
                 config.numerical_variant,
                 "--memory-gib",
-                str(allocation["memory_gib_per_node"]),
+                str(config.memory_gib),
                 "--timeout-s",
                 str(config.wall_budget_s),
                 "--delta-t-s",
                 str(config.delta_t_s),
+                *(["--profiling"] if config.profiling else []),
             ],
             cwd=mesh_input,
             log_path=attempt / "prepare-case.log",
@@ -1939,12 +2012,14 @@ def run_pilot(
             "rank_count": config.ranks,
             "node_count": config.nodes,
             "tasks_per_node": allocation["tasks_per_node"],
+            "memory_gib": config.memory_gib,
             "memory_mb_per_node": allocation["memory_mb_per_node"],
             "wall_budget_s": config.wall_budget_s,
             "hard_deadline_utc": hard_deadline_utc,
             "horizon_s": config.horizon_s,
             "delta_t_s": config.delta_t_s,
             "numerical_variant": config.numerical_variant,
+            "profiling": config.profiling,
             "retention_mode": config.retention_mode,
             "minimum_free_disk_gib": config.minimum_free_disk_gib,
             "parent_fvSchemes_sha256": inputs.get("parent_fvSchemes_sha256"),
@@ -2033,7 +2108,11 @@ def run_pilot(
             }
         write_json(convergence_path, solver_convergence)
         state["solver_convergence"] = solver_convergence
-        _write_step_accounting(attempt, job_id)
+        cgroup_memory = _write_step_accounting(attempt, job_id)
+        state["cgroup_v2_job_memory"] = cgroup_memory
+        state["memory_measurement_source"] = (
+            "cgroup-v2-job-scope" if cgroup_memory is not None else "sacct MaxRSS fallback"
+        )
         audit_log = attempt / "ledger-audit.log"
         audit_output = attempt / "ledger"
         command = [
@@ -2131,6 +2210,8 @@ def main() -> int:
     parser.add_argument("--write-interval-s", type=float)
     parser.add_argument("--retention-mode", choices=("full", "diagnostic"), default="full")
     parser.add_argument("--minimum-free-disk-gib", type=int, default=12)
+    parser.add_argument("--memory-gib", type=int, default=MEMORY_GIB)
+    parser.add_argument("--profiling", action="store_true")
     args = parser.parse_args()
     try:
         return run_pilot(
@@ -2148,6 +2229,8 @@ def main() -> int:
                 write_interval_s=args.write_interval_s,
                 retention_mode=args.retention_mode,
                 minimum_free_disk_gib=args.minimum_free_disk_gib,
+                memory_gib=args.memory_gib,
+                profiling=args.profiling,
             ),
         )
     except (

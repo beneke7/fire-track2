@@ -212,14 +212,45 @@ def test_completion_monitor_supports_half_second_half_ms_case() -> None:
     assert "End completion marker" in monitor.completion_fault()
 
 
+def test_cgroup_v2_memory_records_job_peak_and_postrun_current(tmp_path: Path) -> None:
+    root = tmp_path / "cgroup"
+    job = root / "slurm/uid_1000/job_45678"
+    job.mkdir(parents=True)
+    (job / "memory.peak").write_text("36000000000\n")
+    (job / "memory.current").write_text("1000000\n")
+    membership = tmp_path / "self.cgroup"
+    membership.write_text("0::/slurm/uid_1000/job_45678/step_batch\n")
+
+    record = run_pilot._cgroup_v2_memory("45678", membership_path=membership, cgroup_root=root)
+
+    assert record == {
+        "source": "cgroup-v2-job-scope",
+        "path": str(job.resolve()),
+        "memory_peak_bytes": 36_000_000_000,
+        "memory_current_bytes_after_solver": 1_000_000,
+    }
+
+
 def test_default_pilot_configuration_preserves_frozen_first_capsule() -> None:
     assert run_pilot.PilotConfig() == run_pilot.PilotConfig(
-        ranks=64, nodes=1, wall_budget_s=1200, horizon_s=0.05, delta_t_s=0.001
+        ranks=64,
+        nodes=1,
+        wall_budget_s=1200,
+        horizon_s=0.05,
+        delta_t_s=0.001,
+        memory_gib=64,
+        profiling=False,
     )
     assert (
         run_pilot.PilotConfig(numerical_variant="u_gradient_limited").validate().numerical_variant
         == "u_gradient_limited"
     )
+
+
+@pytest.mark.parametrize("memory_gib", [True, 31, 65, 32.0])
+def test_pilot_memory_declaration_requires_integer_32_through_64(memory_gib: object) -> None:
+    with pytest.raises(run_pilot.PilotError, match="integer from 32 through 64"):
+        run_pilot.PilotConfig(memory_gib=memory_gib).validate()  # type: ignore[arg-type]
 
 
 @pytest.mark.parametrize(
@@ -281,6 +312,8 @@ def test_prepared_gradient_variant_requires_exact_scheme_and_metadata_chain(
             "full_field_write_times_s": [0.0, 0.01],
         },
         "source_dictionary_provenance": {"system/fvSchemes": {"sha256": parent_sha}},
+        "resource_budget_provisional": {"memory_gib": 64},
+        "profiling": False,
         "parent_fvSchemes_sha256": parent_sha,
         "post_override_fvSchemes_sha256": post_sha,
         "solver_dictionary_sha256": {"system/fvSchemes": post_sha},
@@ -507,11 +540,17 @@ def test_supervisor_runs_declared_one_node_fixed_step_candidate(
     assert "--nodes=1" in captured[0]
     assert f"--ntasks={ranks}" in captured[0]
     assert f"--ntasks-per-node={ranks}" in captured[0]
+    assert "Cpus_allowed_list" in (attempt / "solver-step.sh").read_text()
+    assert any(
+        item.startswith("--export=ALL,ROUAIX_STEP_IDENTITY=") and "ROUAIX_RANK0_AFFINITY=" in item
+        for item in captured[0]
+    )
 
 
 @pytest.mark.parametrize(
     ("ranks", "nodes", "tasks_per_node", "cpus_on_node"),
     [
+        (24, 1, "24", 24),
         (64, 1, "64", 64),
         (96, 1, "96", 96),
         (120, 1, "120", 120),
@@ -556,6 +595,41 @@ def test_allocation_rejects_wrong_tasks_per_node_distribution() -> None:
     }
     with pytest.raises(run_pilot.PilotError, match="tasks per node"):
         run_pilot._validate_allocation(config, env)
+
+
+@pytest.mark.parametrize(
+    ("declared_memory_gib", "allocated_memory_mb", "accepted"),
+    [
+        (32, 32768, True),
+        (32, 32767, False),
+        (48, 49152, True),
+        (48, 49151, False),
+        (64, 32768, False),
+    ],
+)
+def test_allocation_enforces_declared_memory_floor_for_24_rank_placement(
+    declared_memory_gib: int, allocated_memory_mb: int, accepted: bool
+) -> None:
+    config = run_pilot.PilotConfig(
+        ranks=24, nodes=1, wall_budget_s=1800, memory_gib=declared_memory_gib
+    )
+    env = {
+        "SLURM_JOB_NAME": run_pilot.JOB_NAME,
+        "SLURM_JOB_ACCOUNT": "nk_meshapplied",
+        "SLURM_JOB_NUM_NODES": "1",
+        "SLURM_NTASKS": "24",
+        "SLURM_TASKS_PER_NODE": "24",
+        "SLURM_CPUS_PER_TASK": "1",
+        "SLURM_CPUS_ON_NODE": "24",
+        "SLURM_MEM_PER_NODE": str(allocated_memory_mb),
+    }
+    if accepted:
+        allocation = run_pilot._validate_allocation(config, env)
+        assert allocation["memory_gib_declared_per_node"] == declared_memory_gib
+        assert allocation["memory_gib_per_node"] == (allocated_memory_mb + 1023) // 1024
+    else:
+        with pytest.raises(run_pilot.PilotError, match="declared .* GiB per-node floor"):
+            run_pilot._validate_allocation(config, env)
 
 
 def test_multinode_workspace_uses_quota_checked_shared_scratch(
@@ -906,11 +980,12 @@ def test_stop_signal_source_resolves_and_hashes_installed_cxx(
         "max_speed_line",
         "retention_mode",
         "numerical_variant",
+        "profiling",
     ),
     [
-        (50, True, "solver_complete_exploratory", 0, False, None, "full", "original"),
-        (25, False, "stopped_with_preserved_evidence", 1, False, None, "full", "original"),
-        (0, False, "failed_preserved", 1, True, None, "full", "original"),
+        (50, True, "solver_complete_exploratory", 0, False, None, "full", "original", False),
+        (25, False, "stopped_with_preserved_evidence", 1, False, None, "full", "original", False),
+        (0, False, "failed_preserved", 1, True, None, "full", "original", False),
         (
             1,
             False,
@@ -920,9 +995,21 @@ def test_stop_signal_source_resolves_and_hashes_installed_cxx(
             "fieldMinMax speedExtrema write: min/max(mag(U)) = 0 92672390.4876\n",
             "full",
             "original",
+            False,
         ),
-        (50, True, "solver_complete_exploratory", 0, False, None, "diagnostic", "original"),
-        (50, True, "solver_complete_exploratory", 0, False, None, "full", "u_gradient_limited"),
+        (50, True, "solver_complete_exploratory", 0, False, None, "diagnostic", "original", False),
+        (
+            50,
+            True,
+            "solver_complete_exploratory",
+            0,
+            False,
+            None,
+            "full",
+            "u_gradient_limited",
+            False,
+        ),
+        (50, True, "solver_complete_exploratory", 0, False, None, "full", "original", True),
     ],
 )
 def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
@@ -936,6 +1023,7 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
     max_speed_line: str | None,
     retention_mode: str,
     numerical_variant: str,
+    profiling: bool,
 ) -> None:
     project_root = tmp_path / "project"
     project_root.mkdir()
@@ -977,6 +1065,7 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
         lambda _path: SimpleNamespace(total=200 * 1024**3, used=1, free=100 * 1024**3),
     )
     monkeypatch.setattr(run_pilot, "_git_record", lambda: {"revision": "fixture", "dirty": False})
+    monkeypatch.setattr(run_pilot, "_cgroup_v2_memory", lambda _job_id: None)
 
     def fake_prepare_case(command, **_kwargs):
         assert "prepare_case.py" in command[1]
@@ -986,6 +1075,8 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
         assert command[command.index("--delta-t-s") + 1] == "0.001"
         assert command[command.index("--numerical-variant") + 1] == numerical_variant
         assert command[command.index("--write-interval-s") + 1] == "0.05"
+        assert command[command.index("--memory-gib") + 1] == "64"
+        assert ("--profiling" in command) is profiling
         case = Path(command[command.index("--output-dir") + 1])
         attempt = case.parent
         progression = attempt / "experiment-progression.md"
@@ -1023,13 +1114,18 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
             if numerical_variant == "u_gradient_limited"
             else None
         )
-        (case / "system/controlDict").write_text(
+        control_text = (
             "application interIsoFoam; stopAt endTime; endTime 0.05; deltaT 0.001; "
             "adjustTimeStep no; runTimeModifiable false; writeNowSignal 10; "
             "fileHandler collated; maxThreadFileBufferSize 0; stopAtWriteNowSignal 12; "
-            "writeInterval 0.05; purgeWrite 0; speedExtrema fieldMinMax mode magnitude;\n",
-            encoding="utf-8",
+            "writeInterval 0.05; purgeWrite 0; speedExtrema fieldMinMax mode magnitude;\n"
         )
+        if profiling:
+            control_text += (
+                "profiling\n{\n    active true;\n    cpuInfo false;\n"
+                "    memInfo false;\n    sysInfo false;\n}\n"
+            )
+        (case / "system/controlDict").write_text(control_text, encoding="utf-8")
         (case / "system/fvSolution").write_text(
             "solvers\n{\n"
             "    U\n    {\n        solver PBiCGStab;\n        tolerance 1e-8;\n"
@@ -1050,6 +1146,8 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
                     "node_count": 1,
                     "horizon_s": 0.05,
                     "numerical_variant": numerical_variant,
+                    "profiling": profiling,
+                    "resource_budget_provisional": {"memory_gib": 64},
                     "parent_fvSchemes_sha256": parent_sha,
                     "post_override_fvSchemes_sha256": schemes_sha,
                     "actual_momentum_convection": expected_momentum,
@@ -1207,7 +1305,9 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
             input_sha256=_tar_sha(archive),
             shared_pause=tmp_path / "shared-PAUSE",
             config=run_pilot.PilotConfig(
-                retention_mode=retention_mode, numerical_variant=numerical_variant
+                retention_mode=retention_mode,
+                numerical_variant=numerical_variant,
+                profiling=profiling,
             ),
         )
     finally:
@@ -1219,6 +1319,10 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
     assert state["status"] == expected_status
     assert state["attempt_archive_status"] == "verified_crc_hash_and_member_list"
     assert state["retention_mode"] == retention_mode
+    assert state["memory_gib"] == 64
+    assert state["profiling"] is profiling
+    if expected_status != "failed_preserved":
+        assert state["memory_measurement_source"] == "sacct MaxRSS fallback"
     if inject_unexpected_solver_error:
         assert active_solver[0].waited
         assert state["cleanup_stop_signals"] == ["12"]
@@ -1249,6 +1353,10 @@ def test_synthetic_native_setup_and_srun_lifecycle_completion_and_frozen_hashes(
         manifest["prepared_case_sha256"]["system/controlDict"]
         == hashlib.sha256(control).hexdigest()
     )
+    assert manifest["prepared_case_sha256"]["case-inputs.json"]
+    assert manifest["memory_gib"] == 64
+    assert manifest["profiling"] is profiling
+    assert (b"profiling\n{" in control) is profiling
     if numerical_variant == "u_gradient_limited":
         assert manifest["numerical_variant"] == "u_gradient_limited"
         assert manifest["momentum_convection"] == "limitedLinearV 1"

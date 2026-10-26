@@ -1,0 +1,183 @@
+{
+  "admission_history": {
+    "amendment": "A2 changes memory budget to 46 GiB and new case IDs; no solver or numerical input change",
+    "superseded_job_id": "14652491",
+    "superseded_memory_gib": 48,
+    "superseded_outcome": "cancelled while held before allocation; no CFD start or billing; preserved under v1 source root and receipts",
+    "superseded_readback": "24 tasks, NumCPUs=48, CPUs/Task=2, pending held"
+  },
+  "case": {
+    "adaptive_time_stepping": false,
+    "alpha_subcycles": 1,
+    "boundary_conditions": "unchanged from qualified frozen T1 source capsule",
+    "delta_t_s": 0.0001,
+    "horizon_s": 0.01,
+    "momentum_convection": "div(rhoPhi,U) Gauss limitedLinearV 1;",
+    "nCorrectors": 3,
+    "nOuterCorrectors": 1,
+    "numerical_variant": "original",
+    "profiling": true,
+    "profiling_block": "profiling { active true; cpuInfo false; memInfo false; sysInfo false; } (sole controlDict difference from baseline)",
+    "retention": "full initial and final 3D endpoint fields plus every-step compact convergence/residual/Courant/extrema/alpha/turbulence/flux-ledger diagnostics",
+    "source_initialization_properties": "unchanged from qualified T1 source capsule",
+    "steps": 100,
+    "turbulence": "realizable k-epsilon; same wall functions; k/epsilon convection Gauss upwind",
+    "velocity_gradient": "grad(U) Gauss linear;",
+    "write_interval_s": 0.01
+  },
+  "case_id": "P0-PROFILE-24-46G-01MS-001",
+  "declaration": {
+    "a2_amendment_section_sha256": "c9b605475811ca360fe87b8a78cdffed860f1fa2a4b83d77a89164fcb9ff8960",
+    "p0_section_sha256": "fc5cec159580b5ded25e9991b24149ea422075252ce52a5a6fca63fdac43f34e",
+    "path": "experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+    "sections": [
+      "P0 small-allocation native profiling pair, declared 26 October",
+      "A2 P0 memory/admission amendment, 26 October"
+    ],
+    "whole_file_sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d"
+  },
+  "diagnostics": [
+    "solver elapsed time and setup/decomposition time",
+    "whole-job wall time, queue wait, Slurm TotalCPU/AllocTRES, per-task RSS, node/CPU model/NUMA topology and actual affinity",
+    "linear-solve criteria, Courant, extrema/locations, alpha bounds, turbulence diagnostics, water inventory and boundary-flux ledger",
+    "full initial/final fields and every-step compact diagnostics",
+    "raw collated per-rank native profiling objects; matched ClockTime samples from 0.0020 to 0.0099 s (80 samples/79 intervals)",
+    "inclusive parent/child scopes overlap; objectRegistry::writeObject does not establish full field I/O; no profilingSummary unless installed reader/CLI is verified"
+  ],
+  "guards": [
+    "ROUAIX_REQUIRE_SHARED_WORKSPACE=1; source root and run workspace are on shared /project Lustre",
+    "shared PAUSE markers checked absent before submission and checked by runner",
+    "nonfinite fields/residuals; maximum speed above 1000 m/s; no solver-time progress",
+    "12 GiB runtime free-space floor, Slurm signal/deadline and checkpoint-stop guards"
+  ],
+  "input": {
+    "archive_member_count": 18,
+    "archive_top_level": "mesh-input/",
+    "bytes": 336471054,
+    "fresh_start": "t=0; no restart or mapped fields",
+    "hardlink_target": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/inputs/qualified-mesh-input.tar.gz",
+    "local_path": "results/runs/rouaix-native-mesh-qa-20261025/qualified-mesh-input.tar.gz",
+    "mesh_cells": 10099265,
+    "qualification": "same qualified native OpenCFD v2512 mesh input used for preceding T1 cases",
+    "remote_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/inputs/qualified-mesh-input.tar.gz",
+    "same_device_inode": true,
+    "sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "storage_method": "hardlink to existing project archive; runner reads only; source bytes and permissions unchanged",
+    "verified_hardlink": {
+      "device": 552238028,
+      "inode": 144123882666849855,
+      "link_count": 4,
+      "mode_octal": "0640",
+      "regular_file": true,
+      "symlink": false
+    }
+  },
+  "purpose": "Exploratory short fixed-step per-core scaling and native profiling diagnostic; not an E1 gate or field-validation result",
+  "record_created_utc": "2026-10-26T15:09:26Z",
+  "record_kind": "pre-submit immutable case declaration",
+  "resources": {
+    "allocated_core_hours_max": 24.0,
+    "automatic_retry": false,
+    "cpus_per_task": 1,
+    "memory_basis": "46 GiB = 47104 MiB; 47104/24 = 1962.67 MiB per requested core, below cpu MaxMemPerCPU 2000 MiB. About 37% above the prior 33.62 GiB summed solver-task RSS marks; not a measured 24-rank peak.",
+    "memory_gib_per_node": 46,
+    "minimum_free_disk_gib": 12,
+    "no_more_than_24_alloc_cpus": true,
+    "nodes": 1,
+    "pair_max_allocated_core_hours": 48,
+    "partition": "cpu",
+    "qos": "normal",
+    "requested_alloc_cpus": 24,
+    "requested_core_hours_per_job": 24.0,
+    "requested_ranks": 24,
+    "slurm_wall_cap_hms": "01:00:00",
+    "slurm_wall_cap_s": 3600,
+    "tasks_per_node": [
+      24
+    ]
+  },
+  "scheduler": {
+    "ROUAIX_CASE_ID": "P0-PROFILE-24-46G-01MS-001",
+    "ROUAIX_MEMORY_GIB": "46",
+    "ROUAIX_PROFILING": "1",
+    "afterany_dependency_on_case": "afterany P0-BASE-24-46G-01MS-001",
+    "campaign_job_id": "not submitted at record freeze",
+    "hard_deadline_utc": "empty string explicitly exported; no inherited overnight cutoff",
+    "job_name": "ml-vof",
+    "release_protocol": "submit with --hold; verify exact identity/resources/dependency; then scontrol release",
+    "sbatch_export_mode": "ALL followed by explicit case-specific ROUAIX overrides",
+    "workdir_directive": "/scratch/nk_meshapplied/bene/fire-track2-hpc (batch script chdir); source/run root is shared /project"
+  },
+  "schema_version": 1,
+  "sequence": 2,
+  "solver": {
+    "application": "interIsoFoam",
+    "distribution_version": "OpenCFD v2512",
+    "modules": [
+      "cray-python/3.11.7",
+      "openfoam",
+      "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH"
+    ],
+    "momentum_convection": "div(rhoPhi,U) Gauss limitedLinearV 1;",
+    "mpi": "Cray MPICH",
+    "source_initialization_properties": "unchanged from qualified T1 input/source",
+    "time_integration": "Euler",
+    "turbulence": "realizable k-epsilon; existing wall functions; k/epsilon convection Gauss upwind",
+    "velocity_gradient": "grad(U) Gauss linear;"
+  },
+  "source": {
+    "base_capsule_bytes": 122596,
+    "campaign_capsule_bytes": 122596,
+    "campaign_capsule_member_count": 24,
+    "campaign_capsule_path_local": "results/runs/rouaix-percore-p0-20261026/source-capsule-v2/p0-v2-source-capsule-24-members.tar.gz",
+    "campaign_capsule_path_remote": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/source-capsule/p0-v2-source-capsule-24-members.tar.gz",
+    "campaign_capsule_sha256": "b43ba9d9768bd853b53876af47f2366af431113c9c3284cafc736771b2d85692",
+    "campaign_index_sha256": "90506d31ec88adcbc09c95396b8b8d1fb0525206d21a35f04e1ec33537a28cf3",
+    "campaign_pilot_sbatch_sha256": "dbccd06f8cfd4b8a5cd3da121e62c58ab13daad4be26af1abe61f21100cb570d",
+    "campaign_prepare_case_sha256": "5c0d1382e1f26a6ebd6101c50608fe83125c00e601180a29598200e8818de7f6",
+    "campaign_runner_sha256": "024483de8b2825f8c8842b5507602313ba310e1dbe2408d67270d17adfd3c96f",
+    "campaign_source_frozen": true,
+    "dirty_source_snapshot_preserved_in_capsule": true,
+    "git_revision": "4c86f017ed1feb3a81620e82cc93766088acee01",
+    "parent_inventory_index_sha256": "a15ebff9a8f62d7a03309d59ed4b8ad0e426a1ee20ffedbc6ac81b6711fa9f97",
+    "progression_document_sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d",
+    "progression_document_source_root_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/experiments/E1_ROUAIX_HPC_PROGRESSION.md",
+    "source_freeze_utc": "2026-10-26T15:08:13Z"
+  },
+  "status": "frozen pre-submit; no job ID assigned at record freeze",
+  "workspace": {
+    "actual_filesystem_type": "lustre",
+    "actual_mount_source": "171@kfi:43@kfi:/project",
+    "actual_mount_target": "/project",
+    "forced_shared_workspace_environment": "ROUAIX_REQUIRE_SHARED_WORKSPACE=1",
+    "project_quota_preflight": {
+      "captured_utc": "2026-10-26T15:08:49Z",
+      "host": "vn01",
+      "input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+      "input_hardlink": {
+        "bytes": 336471054,
+        "device": 552238028,
+        "inode": 144123882666849855,
+        "is_symlink": false,
+        "link_count": 4,
+        "mode_octal": "0640",
+        "same_bytes_and_permissions_as_source": true,
+        "verified_regular_file": true
+      },
+      "pause_markers": "absent at project root, new v2 source root, and shared scratch root",
+      "project_inode_headroom": 401440,
+      "project_inode_quota": 1000000,
+      "project_inodes_used": 598560,
+      "project_mount": {
+        "fstype": "lustre",
+        "source": "171@kfi:43@kfi:/project",
+        "target": "/project"
+      },
+      "project_quota_headroom_kib": 3310520792,
+      "project_quota_kib": 4294967296,
+      "project_used_kib": 984446504,
+      "required_staging_margin_gib": 16
+    },
+    "project_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026"
+  }
+}
