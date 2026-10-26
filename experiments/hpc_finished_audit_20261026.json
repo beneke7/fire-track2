@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "purpose": "Read-only terminal inspection of explicitly owned Rouaix jobs, including unsuccessful attempts. Exploratory diagnostics, no scientific gate decision.",
+  "predeclared_utc": "2026-10-26T18:56:00Z",
+  "resources": {
+    "cpus_per_job": 1,
+    "memory_mib": 1800,
+    "wall_limit_s": 600,
+    "maximum_jobs": 6,
+    "maximum_allocated_core_hours": 1,
+    "launch_order": "Completed baseline smoke first; after success, one afterany auditor per remaining parent.",
+    "stop_conditions": "10 minute Slurm cap; no requeue; integrity/parser errors preserve evidence and fail the audit. No CFD parent mutation, full-field download, or external dashboard upload."
+  },
+  "observables": [
+    "archive integrity and selected-file hashes",
+    "scheduler state and separate parent/step CPU accounting",
+    "declared inputs versus actual run manifest",
+    "fixed timestep, reached horizon, linear convergence and fatal markers",
+    "velocity, alpha, Courant number and available mass-ledger diagnostics",
+    "explicit missing diagnostics and raw profiling availability"
+  ],
+  "jobs": [
+    {
+      "job_id": "14652546",
+      "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026",
+      "expected_ranks": 24,
+      "horizon_s": 0.01,
+      "delta_t_s": 0.0001,
+      "case_id": "P0-BASE-24-46G-01MS-001",
+      "slurm_output_path": "/scratch/nk_meshapplied/bene/fire-track2-hpc/rouaix-e1-hpc-14652546.slurm.out"
+    },
+    {
+      "job_id": "14652548",
+      "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026",
+      "expected_ranks": 24,
+      "horizon_s": 0.01,
+      "delta_t_s": 0.0001,
+      "case_id": "P0-PROFILE-24-46G-01MS-001",
+      "slurm_output_path": "/scratch/nk_meshapplied/bene/fire-track2-hpc/rouaix-e1-hpc-14652548.slurm.out"
+    },
+    {
+      "job_id": "14651185",
+      "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026",
+      "expected_ranks": 96,
+      "horizon_s": 0.05,
+      "delta_t_s": 0.0001,
+      "case_id": "S1-ORIG-96-01MS-005",
+      "slurm_output_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/logs/S1-ORIG-96-01MS-005-14651185.slurm.out"
+    },
+    {
+      "job_id": "14651174",
+      "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026",
+      "expected_ranks": 120,
+      "horizon_s": 0.05,
+      "delta_t_s": 0.0001,
+      "case_id": "S1-ORIG-120-01MS-005",
+      "slurm_output_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/logs/S1-ORIG-120-01MS-005-14651174.slurm.out"
+    },
+    {
+      "job_id": "14651178",
+      "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026",
+      "expected_ranks": 120,
+      "horizon_s": 0.05,
+      "delta_t_s": 0.0001,
+      "case_id": "S1-UPWIND-120-01MS-005",
+      "slurm_output_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/logs/S1-UPWIND-120-01MS-005-14651178.slurm.out"
+    },
+    {
+      "job_id": "14650641",
+      "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026",
+      "expected_ranks": 120,
+      "horizon_s": 5.0,
+      "delta_t_s": 0.0001,
+      "case_id": "L1-ORIG-120-01MS-5S",
+      "slurm_output_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/logs/one-node-5s-14650641.slurm.out"
+    }
+  ],
+  "deployment_amendment": {
+    "utc": "2026-10-26T19:02:00Z",
+    "cancelled_auditor_job_id": "14654148",
+    "allocated_cpus": 0,
+    "elapsed_s": 0,
+    "reason": "Pre-allocation review added native collated uniform/profiling capture. Preserve v1 source; submit v2 smoke and gate future auditors on its success.",
+    "maximum_submissions_including_cancelled": 7,
+    "maximum_executing_jobs": 6,
+    "future_dependencies": "afterok:v2-smoke AND afterany:CFD-parent; failed smoke cancels dependent auditors."
+  }
+}

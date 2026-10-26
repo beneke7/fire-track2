@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-26T18:57:21Z",
+  "case_id": "P0-BASE-24-46G-01MS-001",
+  "job_id": "14652546",
+  "purpose": "Terminal inspection of the completed P0 Rouaix startup baseline; exploratory only, no E1 gate decision.",
+  "terminal": {
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:39:32",
+    "start_local": "2026-10-26T18:49:48",
+    "end_local": "2026-10-26T19:29:20",
+    "timezone": "CET +0100; sacct --utc unsupported, run-state UTC authoritative",
+    "started_utc": "2026-10-26T17:49:54.944183+00:00",
+    "solver_started_utc": "2026-10-26T17:51:16.514958+00:00",
+    "state_updated_utc": "2026-10-26T18:29:20.734180+00:00",
+    "solver_status": "solver_complete_exploratory",
+    "solver_exit_code": 0,
+    "End_marker": true,
+    "solver_time_s": 0.01,
+    "steps": 100,
+    "horizon_s": 0.01,
+    "delta_t_s": 0.0001,
+    "solver_elapsed_s": 2168.697047112044,
+    "solver_wall_s": 2191.4174056160264,
+    "last_log_execution_time_s": 2177.03,
+    "last_log_clock_time_s": 2189,
+    "solver_elapsed_s_status": "Stale run-state value; use solver_wall_s and sacct solver-step elapsed as the solver wall timing evidence.",
+    "slurm_solver_step_elapsed_s": 2191,
+    "whole_job_elapsed_s": 2372
+  },
+  "case": {
+    "mesh_cells": 10099265,
+    "ranks": 24,
+    "nodes": 1,
+    "node": "x1000c6s1b1n0",
+    "memory_gib_per_node": 46.0,
+    "solver": "interIsoFoam",
+    "solver_version": "v2512",
+    "variant": "original",
+    "turbulence": "realizable k-epsilon RANS",
+    "full_field_write_times_s": [
+      0.0,
+      0.01
+    ],
+    "retained_positive_checkpoint_times_s": [
+      0.01
+    ],
+    "nAlphaSubCycles": 1,
+    "nOuterCorrectors": 1,
+    "nCorrectors": 3,
+    "source_velocity_m_s": [
+      0.0,
+      -10.0,
+      0.0
+    ],
+    "air_speed_m_s": 70.0,
+    "water_density_kg_m3": 997.6,
+    "formal_validation_decision": null
+  },
+  "provenance": {
+    "source_capsule_sha256": "b43ba9d9768bd853b53876af47f2366af431113c9c3284cafc736771b2d85692",
+    "source_capsule_git_revision": "4c86f017ed1feb3a81620e82cc93766088acee01",
+    "run_manifest_revision": "unknown",
+    "run_manifest_dirty": null,
+    "run_manifest_status_porcelain": [],
+    "mesh_input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "primary_experiment_declaration_sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d",
+    "solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "solver_build": "_87ed40d256-20251219",
+    "solver_source_hashes": {
+      "interIsoFoam_alphaEqn.H": "cbb4348977388633b29f0aa1f612225249c3062e80755f548fddfb0760c7311f",
+      "interIsoFoam_alphaEqnSubCycle.H": "b5f9845d57cb3fc75577ef00ed338186f83d13a9261c67d4ef88e6f1ef419385",
+      "isoAdvection.H": "505239083111afb87204f76ec9c3d722eaa9c47f5ee5d44b6f2e0e0e762d0ce7",
+      "isoAdvectionTemplates.C": "1d704aec280cffa4302f75cc3e15654db25dc75c6d1cb9e230ab8a4be64f1e90"
+    },
+    "solver_log_sha256": "5703f0690f59f5e6767177b5cbb12313b5b86723e6c2baa7986995579d3db406",
+    "max_speed_csv_sha256": "e1f227430ba37439ef0c6078a8e35b31319e71bcfecd4373a0749dd42f58e014",
+    "prepared_case_hashes_verified": true,
+    "prepared_case_file_count": 22
+  },
+  "numerics": {
+    "time_lines": 100,
+    "max_speed_rows": 100,
+    "alpha_conservative_bound_samples": 100,
+    "phase_fraction_samples": 100,
+    "failure_location_samples": 100,
+    "End_markers": 1,
+    "alpha_after_conservative_bounding": {
+      "min": -8.98649723217e-14,
+      "max": 1.0000000000015359,
+      "final_max": 1.00000000000002
+    },
+    "phase1_volume_fraction": {
+      "first": 5.45502388471e-08,
+      "last": 5.45502388471e-06,
+      "max": 5.45502388471e-06,
+      "post_update_alpha_water_min_max": [
+        0,
+        1
+      ]
+    },
+    "bulk_courant": {
+      "records": 101,
+      "peak": {
+        "time_s": 0.0099,
+        "mean": 0.0686443839342,
+        "max": 0.95744784315
+      }
+    },
+    "interface_courant": {
+      "records": 100,
+      "peak": {
+        "time_s": 0.0076,
+        "mean": 1.27926051904e-07,
+        "max": 0.420123275152
+      }
+    },
+    "peak_speed_csv": {
+      "time_s": 0.01,
+      "max_magnitude_U_m_s": 91.2425591071
+    },
+    "peak_speed_field_logger": {
+      "time_s": 0.01,
+      "value": 91.2425591071,
+      "detail": "in cell 4456 at location (-0.0349162011173 -0.00703185436558 0.228675801048) on processor 9"
+    },
+    "native_field_extrema_over_steps": {
+      "mag(U)": {
+        "min": {
+          "time_s": 0.0001,
+          "value": 0.0,
+          "detail": "in cell 406116 at location (2.13687150838 0 -0.0388888888889) on processor 1"
+        },
+        "max": {
+          "time_s": 0.01,
+          "value": 91.2425591071,
+          "detail": "in cell 4456 at location (-0.0349162011173 -0.00703185436558 0.228675801048) on processor 9"
+        }
+      },
+      "epsilon": {
+        "min": {
+          "time_s": 0.0001,
+          "value": 0.010781042,
+          "detail": "in cell 4452 at location (-0.0349162011173 0 0.160416666667) on processor 9"
+        },
+        "max": {
+          "time_s": 0.01,
+          "value": 32454.4209965,
+          "detail": "in cell 363179 at location (0.244413407821 -0.105357516293 -0.0246329005526) on processor 11"
+        }
+      },
+      "k": {
+        "min": {
+          "time_s": 0.0001,
+          "value": 0.015,
+          "detail": "in cell 4452 at location (-0.0349162011173 0 0.160416666667) on processor 9"
+        },
+        "max": {
+          "time_s": 0.01,
+          "value": 193.716231576,
+          "detail": "in cell 106181 at location (0.272346368715 -0.11939127147 0.00493871252796) on processor 11"
+        }
+      },
+      "nut": {
+        "min": {
+          "time_s": 0.0001,
+          "value": 0.0,
+          "detail": "in cell 0 at location (-2.44413407821 -9.94382022472 -7.97471910112) on processor 18"
+        },
+        "max": {
+          "time_s": 0.01,
+          "value": 0.0572424747856,
+          "detail": "in cell 18657 at location (0.286312849162 -0.11939127147 0.00493871252796) on processor 11"
+        }
+      },
+      "p_rgh": {
+        "min": {
+          "time_s": 0.0015,
+          "value": -20488.3926849,
+          "detail": "in cell 27139 at location (-0.146648044693 -0.00703185436558 0.00486848791639) on processor 10"
+        },
+        "max": {
+          "time_s": 0.0001,
+          "value": 30443.8183271,
+          "detail": "in cell 367878 at location (-0.188547486034 0 0.00486111111111) on processor 10"
+        }
+      }
+    },
+    "linear_solve_audit": {
+      "all_converged": true,
+      "by_field": {
+        "Ux": {
+          "failed_count": 0,
+          "max_final_residual": 9.99444296411e-09,
+          "max_iterations": 4,
+          "solve_count": 100
+        },
+        "Uy": {
+          "failed_count": 0,
+          "max_final_residual": 9.98486043515e-09,
+          "max_iterations": 5,
+          "solve_count": 100
+        },
+        "Uz": {
+          "failed_count": 0,
+          "max_final_residual": 9.97735754291e-09,
+          "max_iterations": 4,
+          "solve_count": 100
+        },
+        "epsilon": {
+          "failed_count": 0,
+          "max_final_residual": 5.4215752995e-09,
+          "max_iterations": 6,
+          "solve_count": 100
+        },
+        "k": {
+          "failed_count": 0,
+          "max_final_residual": 9.72864852801e-09,
+          "max_iterations": 8,
+          "solve_count": 100
+        },
+        "p_rgh": {
+          "failed_count": 0,
+          "max_final_residual": 0.000302821240515,
+          "max_iterations": 19,
+          "solve_count": 300
+        },
+        "pcorr": {
+          "failed_count": 0,
+          "max_final_residual": 9.65725161774e-11,
+          "max_iterations": 806,
+          "solve_count": 1
+        }
+      },
+      "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+      "failed_record_count": 0,
+      "failure_examples": [],
+      "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "pimple": {
+        "nCorrectors": 3,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 1
+      },
+      "schema_version": 1,
+      "solver_record_count": 801
+    },
+    "solver_log_solve_counts": {
+      "p_rgh": 300,
+      "k": 100,
+      "epsilon": 100
+    },
+    "native_field_units": {
+      "p_rgh": "Pa reduced pressure; not absolute pressure",
+      "k": "m^2/s^2",
+      "epsilon": "m^2/s^3",
+      "nut": "m^2/s",
+      "mag(U)": "m/s"
+    }
+  },
+  "mass_ledger": {
+    "matched_rows": 100,
+    "horizon_reached": true,
+    "injected_kg": 12.516443202976454,
+    "final_inventory_kg": 12.516443202976433,
+    "final_inventory_m3": 0.01254655493482,
+    "signed_net_escape_kg": 0.0,
+    "final_closure_residual_kg": -2.1316282072803006e-14,
+    "max_abs_per_step_residual_kg": 8.18153877979e-12,
+    "max_abs_cumulative_residual_kg": 7.36299909931e-12,
+    "formal_validation_decision": null,
+    "caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual."
+  },
+  "resources": {
+    "job_total_cpu": "14:33:33",
+    "solver_step_total_cpu": "14:30:29",
+    "job_cpu_fraction_of_allocation": 0.9206892917369308,
+    "solver_cpu_fraction_of_allocation": 0.9932488970028907,
+    "batch_MaxRSS_KiB": 9655132,
+    "solver_step_MaxRSS_KiB": 2254608,
+    "solver_step_AveRSS_KiB": 1308832,
+    "cgroup_v2_job_memory": null,
+    "cgroup_memory_time_series_available": false,
+    "profiling_enabled": false,
+    "solver_clock_samples": 100,
+    "pressure_solver_wall_time_measured": false,
+    "separate_io_fraction_measured": false,
+    "sampling_note": "Slurm accounting and native-launcher samples; periodic samples are not a true peak",
+    "job_total_cpu_core_hours": 14.5591666667,
+    "solver_step_total_cpu_core_hours": 14.5080555556,
+    "rss_scope_note": "Slurm batch and solver-step MaxRSS/AveRSS are retained as reported; no aggregate node RSS or cgroup-v2 trace is available."
+  },
+  "archive": {
+    "sha256": "979f02b616e49881100c8289e9255f37799f6bdad03e0b79402cb05f036b3a09",
+    "members": 131,
+    "bytes": 1577750282,
+    "compact_files_transferred": 16,
+    "compact_file_bytes": 522194,
+    "full_fields_transferred": false,
+    "verification_file": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/archive-verification.json"
+  },
+  "profile_followup": {
+    "case_id": "P0-PROFILE-24-46G-01MS-001",
+    "job_id": 14652548,
+    "observed_utc": "2026-10-26T18:43:30Z",
+    "slurm_state": "PD",
+    "reason": "Priority",
+    "cpus": 24,
+    "memory": "46G",
+    "time_limit": "01:00:00",
+    "profile_analysis_created": false,
+    "status_snapshot_path": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/profile-state-final-utc.txt"
+  },
+  "remaining_limits": [
+    "Archived experiment.md retains legacy 0.001 s/50-step/0.05 s text; the active progression hash, case-inputs, manifest, controlDict, run-state and solver log establish 0.0001 s, 100 steps, 0.01 s for P0.",
+    "This exploratory 0.01 s pilot does not compare Rouaix penetration, expansion or breakup and is not E1 acceptance or field validation.",
+    "Large logged k, epsilon and reduced p_rgh extrema are in Pa, not absolute pressure, and have unresolved physical/numerical interpretation.",
+    "Ledger audit notes post-flux alpha snap/clipping can appear in residual; the small residual is not solver validation.",
+    "No cgroup-v2 trace, true peak node RSS, pressure-solver wall share or separate I/O share was captured; baseline profiling was disabled.",
+    "Profile follow-up is still pending; no profile-analysis.json was created."
+  ],
+  "evidence_paths": [
+    "results/runs/rouaix-p0-terminal-inspection-20261026/archive/run-state.json",
+    "results/runs/rouaix-p0-terminal-inspection-20261026/archive/terminal-sacct.txt",
+    "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver.log",
+    "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/solver-convergence.json",
+    "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/max-speed.csv",
+    "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/summary.json",
+    "results/runs/rouaix-p0-terminal-inspection-20261026/metrics/attempt/ledger/ledger.csv"
+  ],
+  "commands": [
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tvzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar --no-same-owner --no-same-permissions -xzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz -C /tmp/rouaix-p0-terminal-inspection-20261026 attempt/solver.log attempt/max-speed.csv attempt/solver-convergence.json attempt/ledger/summary.json attempt/ledger/ledger.csv attempt/ledger-audit.log attempt/case/case-inputs.json attempt/case/system/controlDict attempt/case/system/fvSchemes attempt/case/system/fvSolution attempt/manifest.json attempt/native-source-evidence.json attempt/experiment.md attempt/slurm-step-accounting.txt attempt/case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat attempt/case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat'",
+    "rsync -avP --files-from=results/runs/rouaix-p0-terminal-inspection-20261026/archive/select-members.txt -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' nk_memj@komondor.hpc.kifu.hu:/tmp/rouaix-p0-terminal-inspection-20261026/ results/runs/rouaix-p0-terminal-inspection-20261026/metrics/",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14652546 --format=JobID,JobIDRaw,JobName,State,ExitCode,AllocCPUS,Elapsed,TotalCPU,CPUTimeRAW,MaxRSS,AveRSS,ReqMem,Start,End,NodeList -P'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'squeue -j 14652546,14652548 -o \"%i %t %M %l %C %m %R\"'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'date -u; squeue -j 14652548 -o \"%i %t %M %l %C %m %R\"'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/source-capsule/p0-v2-source-capsule-24-members.tar.gz'",
+    "No CFD launch or repository tests run."
+  ]
+}

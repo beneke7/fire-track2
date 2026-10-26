@@ -27,6 +27,13 @@ cases/i4f_corrected_flush_finite_water_reference/** -text
 # Preserve hash-bound S1 terminal diagnostics, including native CSV line endings.
 results/summaries/rouaix_s1_64_20261026/** -text
 results/summaries/rouaix_s1_64_20261026/**/*.csv whitespace=cr-at-eol
+# Native audit fixtures and terminal evidence retain their hash-bound bytes.
+tests/fixtures/rouaix_s1_audit/** -text
+results/summaries/rouaix_p0_base_20261026/** -text
+results/summaries/rouaix_p0_base_20261026/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_finished_inspection_20261026/** -text
+results/summaries/rouaix_finished_inspection_20261026/deployment/*readbacks.txt whitespace=-blank-at-eol
+results/summaries/rouaix_finished_inspection_20261026/deployment/smoke-v1-pre-cancel.txt whitespace=-blank-at-eol
 
 # I4F numerical verification packets retain their captured payload hashes.
 cases/i4f_pressure_equilibrium_reference/** -text

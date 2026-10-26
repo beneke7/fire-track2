@@ -1,0 +1,46 @@
+{
+  "verified_utc": "2026-10-26T18:43:33Z",
+  "remote_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz",
+  "remote_archive_bytes": 1577750282,
+  "remote_sha256": "979f02b616e49881100c8289e9255f37799f6bdad03e0b79402cb05f036b3a09",
+  "sidecar_sha256": "979f02b616e49881100c8289e9255f37799f6bdad03e0b79402cb05f036b3a09",
+  "run_state_sha256": "979f02b616e49881100c8289e9255f37799f6bdad03e0b79402cb05f036b3a09",
+  "sha256s_match": true,
+  "tar_member_count": 131,
+  "saved_inventory_count": 131,
+  "actual_inventory_matches_saved_after_stripping_directory_slashes": true,
+  "path_safety": {
+    "unsafe_names": [],
+    "absolute_or_dot_parent_paths": false
+  },
+  "tar_member_types": {
+    "nonregular_entries": [],
+    "all_members_regular_files_or_directories": true
+  },
+  "selected_files": {
+    "count": 16,
+    "bytes": 522194,
+    "all_regular": true,
+    "remote_local_sha256_match": true,
+    "allowlist": "results/runs/rouaix-p0-terminal-inspection-20261026/archive/select-members.txt"
+  },
+  "full_result_archive_copied_locally": false,
+  "full_field_transfer": false,
+  "source_capsule": {
+    "sha256": "b43ba9d9768bd853b53876af47f2366af431113c9c3284cafc736771b2d85692",
+    "git_revision": "4c86f017ed1feb3a81620e82cc93766088acee01",
+    "progression_document_sha256": "c1821fd2989d6d75d188cac2d95346a52cd0818a39e6aeeec31ee77a998fdc0d"
+  },
+  "commands": [
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar -tvzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'tar --no-same-owner --no-same-permissions -xzf /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/rouaix-e1-hpc-pilot-14652546/result.tar.gz -C /tmp/rouaix-p0-terminal-inspection-20261026 attempt/solver.log attempt/max-speed.csv attempt/solver-convergence.json attempt/ledger/summary.json attempt/ledger/ledger.csv attempt/ledger-audit.log attempt/case/case-inputs.json attempt/case/system/controlDict attempt/case/system/fvSchemes attempt/case/system/fvSolution attempt/manifest.json attempt/native-source-evidence.json attempt/experiment.md attempt/slurm-step-accounting.txt attempt/case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat attempt/case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat'",
+    "rsync -avP --files-from=results/runs/rouaix-p0-terminal-inspection-20261026/archive/select-members.txt -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' nk_memj@komondor.hpc.kifu.hu:/tmp/rouaix-p0-terminal-inspection-20261026/ results/runs/rouaix-p0-terminal-inspection-20261026/metrics/",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14652546 --format=JobID,JobIDRaw,JobName,State,ExitCode,AllocCPUS,Elapsed,TotalCPU,CPUTimeRAW,MaxRSS,AveRSS,ReqMem,Start,End,NodeList -P'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'squeue -j 14652546,14652548 -o \"%i %t %M %l %C %m %R\"'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'date -u; squeue -j 14652548 -o \"%i %t %M %l %C %m %R\"'",
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-percore-p0-source-v2-20261026/source-capsule/p0-v2-source-capsule-24-members.tar.gz'",
+    "No CFD launch or repository tests run."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_hpc_finished_audit.py tests/test_hpc_metrics.py tests/test_rouaix_hpc_runner.py",
+      "result": "95 passed in 0.61s"
+    },
+    {
+      "command": ".venv/bin/ruff check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "result": "All checks passed"
+    },
+    {
+      "command": ".venv/bin/ruff format --check scripts/hpc_finished_audit.py tests/test_hpc_finished_audit.py",
+      "result": "2 files already formatted"
+    },
+    {
+      "command": "bash -n scripts/hpc_finished_audit.sbatch",
+      "exit_code": 0
+    }
+  ],
+  "native_smoke_status": "pending allocation; not yet verified",
+  "scope": "New auditor and unchanged shared metrics/runner helpers; no full repository suite claim"
+}
