@@ -1,15 +1,18 @@
 # Komondor Rouaix status
 
-Updated from independent scheduler/accounting captures on 2026-10-26, latest 15:12 UTC.
+Updated from independent scheduler/accounting captures on 2026-10-26, latest 15:29 UTC.
 Analytical E0 is the only passed gate; current CFD work is exploratory.
 
 ## Current queue and per-core profiling
 
-At **15:12:37 UTC (16:12:37 CET)** all seven owned CFD jobs remained
-PENDING, with zero allocated CPUs and StartTime Unknown/N/A. The shared
-account had 25 allocated CPUs in other work: 1 on cpu and 24 on gpu. Its
-earlier 14:51 snapshot was 82 (1 cpu,25 ai,56 gpu); these are allocation
-counts rather than measured CPU activity.
+At **15:29:10 UTC (16:29:10 CET)** all seven owned CFD jobs remained
+PENDING with zero allocated CPUs. The shared account had **1 CPU allocated**
+on the cpu partition for unrelated work. Earlier snapshots were 82 CPUs at
+14:51 and 25 at 15:12; allocation counts do not establish actual CPU activity.
+
+Slurm now forecasts L1 job 14650641 for **28 October 06:46:56 UTC
+(07:46:56 CET)**. The other six jobs still show N/A start estimates. This is
+a provisional scheduler forecast, not a reservation or guaranteed start.
 
 S1 now runs **64 -> 96 -> original 120 -> upwind 120**, jobs 14651180 ->
 14651185 -> 14651174 -> 14651178. Root amended only pending dependencies,

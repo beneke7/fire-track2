@@ -13,3 +13,5 @@ The source captures CPU topology/rank-zero affinity and optional cgroup-v2 job m
 S1's scheduler order was separately amended to 64 -> 96 -> original 120 -> upwind 120, preserving every numerical input and original record. P0 is independent so a 24-core opening can admit useful work while larger jobs wait. At most one P0 and one S1 short job can run alongside the independent 5 s target.
 
 Source, case and scheduler hashes are retained here; large input/result archives remain outside Git. All 24 source member bytes matched this repository at verification. Batch cwd/Slurm stdout retain the historical /scratch defaults documented in the case records; submitted environment explicitly places source, run data and workspaces under the verified /project v2 root. No scientific gate or developed-flow performance qualification is claimed.
+
+Later [15:29 UTC scheduler snapshot](root-latest-status.json): all seven CFD jobs remain pending, shared account allocation is 1 CPU, and Slurm forecasts the 5 s job for 28 October 06:46:56 UTC/07:46:56 CET. Other start estimates remain N/A; this forecast is provisional.
