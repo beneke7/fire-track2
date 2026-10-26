@@ -1,0 +1,186 @@
+{
+  "arms": [
+    {
+      "arm": "n0060-sp-only",
+      "binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+      "case_input_manifest_sha256": "d7b0c3fbf2ae611029f6f596be4a6b73f56a233f58394448fb8a39af02d461f2",
+      "case_input_tree_sha256": "f13b100f432fa8a7ebb74247a36dde7ea05fa5ff77bc885f25b6e83dae679ad4",
+      "case_path": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0060-sp-only/case",
+      "completed_time_lines": 1600,
+      "container_id": "59e9d672c529bb35fb19796f058514f9370be67e283c27ca5181b599ecb01d9f",
+      "container_name": "i4f-fsgw-n0060-sp-only-20261026T184619Z",
+      "control_flags": {
+        "i4fFrozenPredictorFullSource": false,
+        "i4fFrozenPredictorSp": true,
+        "i4fFullPressureAudit": false
+      },
+      "endpoint_field_hashes": {
+        "T": "3e61341efa6a7b12131d56b40503ec636a6cbd8d4ddd0013c4a36b732a1d7b1b",
+        "T.air": "f9f828f32aa113e1caab33a95bb36c1c73d57a2bdcc41fcb466460d6bb1058a5",
+        "T.water": "2cec2f6817a07c3c0f2de6d96d0bc36f7a0530a359848d9b47ba5585d6260acc",
+        "U": "c574179bc529876995f87d9bb868b5deed6c46ccddc23dce974160313b2042cf",
+        "alpha.air": "fe01f3527392f915fc17fac169fd4ebbab12c5e4d8197a3758d6fd7fa519fe56",
+        "alpha.water": "d4e6e42b9a4e063b7bc332ac4a457101391be3221f6414aa85dde9aeb2b342e2",
+        "alphaPhi0.water": "60997dc81270d64fb77ebff4fb21815b8aa20294f82e2567226fcc9f107eb35e",
+        "p": "29cf5df342038d0c632874c763bddc143c71846a65fbd1e475397b993a422442",
+        "p_rgh": "2bfe8481e093632bef18787f1d5b47754edf185806b653b8e3fd24d146acb27d",
+        "phi": "72d7ef5c898bea6b6125ce7f02930b5ca4f68e80707dad0ba38486b0dd4622c5",
+        "rho": "6414950171404ea9d33325bd42334dec1fee35c42b1ba3cea0e3031090ba49f1"
+      },
+      "exit_code": 0,
+      "grid_cells_x": 60,
+      "log_sha256": "b403814b705557c874886e6295d74bc06fd913848b4c5c110818d11ce0ec1d92",
+      "mode": "sp-only",
+      "normal_End": true,
+      "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "reached_exact_0p4_log_time": true,
+      "required_native_fields_present": true,
+      "resource_limits": {
+        "bounded_wall_timeout_s": 180,
+        "cpu_equivalents": 1,
+        "memory": "Docker default"
+      },
+      "started_at": "2026-10-26T18:46:19.437547752Z",
+      "startup_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=false",
+      "terminal_status": "normal_end_complete_0p4"
+    },
+    {
+      "arm": "n0060-full-source",
+      "binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+      "case_input_manifest_sha256": "4788c7da2922826f7dfe33079076de2a4d08ee6197e657e2f55266b5fd21e144",
+      "case_input_tree_sha256": "8de2c2febd46edd9c7152a290246f1317af25a788b4d2b03bcf56e201ae9d815",
+      "case_path": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0060-full-source/case",
+      "completed_time_lines": 1600,
+      "container_id": "8a84125e203fb171f181d95653d0ebc804bb72969089a2374a0b22da7ba50df7",
+      "container_name": "i4f-fsgw-n0060-full-source-20261026T184623Z",
+      "control_flags": {
+        "i4fFrozenPredictorFullSource": true,
+        "i4fFrozenPredictorSp": true,
+        "i4fFullPressureAudit": false
+      },
+      "endpoint_field_hashes": {
+        "T": "be438e8bcef11cf03b74bb8a61189d056689fa4f8c9c81d6db15423b3ff50be3",
+        "T.air": "443ba671930ba8df8e0b9ab066202d8bbc37577f039260739c2463da65d4e72f",
+        "T.water": "9488eba5ea295935cd84dbb2eb5a0b90bbfaca78223a45032e51da7063f97279",
+        "U": "47a5b8f165c1ae7ca7aca56acfa02c399555b3432f78215f50e3a604ed3530ae",
+        "alpha.air": "f07af8e9737c37653feaac9deb63006b00d1521f4663e25859c56fd6a0d7d887",
+        "alpha.water": "0d58309cae4f94d221f1b0400804f8dc2368ea6e419c80ff99059645186e0aeb",
+        "alphaPhi0.water": "a4ca2a90c8d15dfb1347138a264dacfd7b8d222e9772d5ab228039e1cf8d16dd",
+        "p": "d8bc9c707ab272ce666eeb98941c10f5bd05cec9923f4e6523c81a82d98c9346",
+        "p_rgh": "83cdf1c4e62c4ce7c173edb01ab3e88d35e5ce86384600c93688c7435f692a56",
+        "phi": "3f8122192cc6c089a9dd446cbfc4c84748c40768964965a5c045659dced9edbc",
+        "rho": "1b43ab7322e3beed1b2f105f3ea634bbee03265aa97574d5620de69b7041c245"
+      },
+      "exit_code": 0,
+      "grid_cells_x": 60,
+      "log_sha256": "7d1b7dd2bc5518d7ce99c3f28c54173f63c854312bb506db2692066469c09ea8",
+      "mode": "full-source",
+      "normal_End": true,
+      "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "reached_exact_0p4_log_time": true,
+      "required_native_fields_present": true,
+      "resource_limits": {
+        "bounded_wall_timeout_s": 180,
+        "cpu_equivalents": 1,
+        "memory": "Docker default"
+      },
+      "started_at": "2026-10-26T18:46:23.221440836Z",
+      "startup_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=true",
+      "terminal_status": "normal_end_complete_0p4"
+    },
+    {
+      "arm": "n0120-sp-only",
+      "binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+      "case_input_manifest_sha256": "3074c9155e8d96b0e344f63ca7a5e076a520f09639be9ffbd38befb63246cc31",
+      "case_input_tree_sha256": "4a2c4717449bc0398e4dffaa5646d9685f9393d6408fd89f76fce255a9c684ba",
+      "case_path": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0120-sp-only/case",
+      "completed_time_lines": 1600,
+      "container_id": "d92b01f52b53e160b09bd42da0e9ed5bf9a94f4c38b1679d28fba6ec2bdeccce",
+      "container_name": "i4f-fsgw-n0120-sp-only-20261026T184626Z",
+      "control_flags": {
+        "i4fFrozenPredictorFullSource": false,
+        "i4fFrozenPredictorSp": true,
+        "i4fFullPressureAudit": false
+      },
+      "endpoint_field_hashes": {
+        "T": "f7267da41f3ee7bea3d00bb20e0d460265a09391875be3e136720dcbb2886859",
+        "T.air": "3272672e7b953e5acf3bbd95228095dd539449e9dd51157bcd506b5bbfeda679",
+        "T.water": "2a875e0d1c5e4a1a05b02e7152582d1eb6fa49bb5a0d216f700f95091faf551f",
+        "U": "7a9968b60cf4a052feaea687cfcebfd9969322f7634d225fc2c6fac31bdd6eec",
+        "alpha.air": "62b7941af94eecf1ce965546ede5a7429c04cf18f3db4dea10f60a3fec000d31",
+        "alpha.water": "697aa39a4a1ce5d204d5cd79918eaa5964415387fe11ab9131f3141f41436cbe",
+        "alphaPhi0.water": "16a467917d7b53834d6b82aebb5335dc1677d6e715ca3f1601799b6d869116ba",
+        "p": "db21a120b48365552e929224522bf59f839f8b30807df9b2431176368cedaef6",
+        "p_rgh": "7c44efd4f6569338dd033a6f78830352f32d5a65404c30cde783571230a61887",
+        "phi": "54c695f6213b659d4f73a4752dee0bc151d2aa9d731d3f6ca93161ca4326a373",
+        "rho": "73c3904db973a8de26d4351a2d209d0027e58ada3d7933b9db54ff4db9b3c479"
+      },
+      "exit_code": 0,
+      "grid_cells_x": 120,
+      "log_sha256": "1daf7374e3847f35528b4e05d987ed9476f62cbeae077a6f642c71822bdfc232",
+      "mode": "sp-only",
+      "normal_End": true,
+      "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "reached_exact_0p4_log_time": true,
+      "required_native_fields_present": true,
+      "resource_limits": {
+        "bounded_wall_timeout_s": 180,
+        "cpu_equivalents": 1,
+        "memory": "Docker default"
+      },
+      "started_at": "2026-10-26T18:46:27.133194896Z",
+      "startup_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=false",
+      "terminal_status": "normal_end_complete_0p4"
+    },
+    {
+      "arm": "n0120-full-source",
+      "binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+      "case_input_manifest_sha256": "d78787dc441d2a6da400e09c68ae9d2e86a2297906bb8dcb195665c7446e36ec",
+      "case_input_tree_sha256": "5bd96da09008a31670139c3907a591b4c121914ba07a4b5b2d7627c5a02f5547",
+      "case_path": "results/runs/i4f-full-source-gas-withdrawal-20261026T183953Z/n0120-full-source/case",
+      "completed_time_lines": 1600,
+      "container_id": "ef8210aadcf4a49640cc894d467cf4dfbad6f0d6c9db039dd128d3555d490fad",
+      "container_name": "i4f-fsgw-n0120-full-source-20261026T184630Z",
+      "control_flags": {
+        "i4fFrozenPredictorFullSource": true,
+        "i4fFrozenPredictorSp": true,
+        "i4fFullPressureAudit": false
+      },
+      "endpoint_field_hashes": {
+        "T": "b5893d9c5b065d4cd5829a350447727676c58382ac035486489e9f28cecff59f",
+        "T.air": "351a0e5ce7341ad06373f12828fdab3fc3f29eb4823a73583d4905e0afa2c452",
+        "T.water": "0c9c4e6eaaad80408a7f1bd238c8305fd054af6ba38a9200dfdf6029ef9efd5a",
+        "U": "2b0496b88baf66ff6574e63ff27c5aaa8175fee771c03fba1844e7c386710b15",
+        "alpha.air": "7ee48ea04e90edac60f97cda469600583cf402fafe5bcfeff9d0f8954a4a3b74",
+        "alpha.water": "2ebfbd63a4c5f4b92ff55ea84c1f5287e5d82e60ee05b72327016de9e5f197f5",
+        "alphaPhi0.water": "a53c47c20e6e11b96794c0e4d60dafe8b95061f6ff9bf522a9e05f9447907bdc",
+        "p": "7a0f08c54ea957d15584cd38990dfb1f66d654c140f9c1f856c3e685df30bc03",
+        "p_rgh": "bf043c4c1130af2c231b54e3a793097e5cb4649597763ebd32665c6afec05ac4",
+        "phi": "8557770fd0635e4a55ea3aa5b7dc15b702bd4444c54c5fae7a1b3a2bd4521013",
+        "rho": "0ae552af2f35e923b7e6459bc325809d1c0b77322cde41e1e213faf8add7e850"
+      },
+      "exit_code": 0,
+      "grid_cells_x": 120,
+      "log_sha256": "9bd40f8752d126e7d329eb4585524881adbf1ce95d628c06ffab12b7b4dfd857",
+      "mode": "full-source",
+      "normal_End": true,
+      "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "reached_exact_0p4_log_time": true,
+      "required_native_fields_present": true,
+      "resource_limits": {
+        "bounded_wall_timeout_s": 180,
+        "cpu_equivalents": 1,
+        "memory": "Docker default"
+      },
+      "started_at": "2026-10-26T18:46:31.05697158Z",
+      "startup_mode_banner": "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp=true full_predictor_source=true",
+      "terminal_status": "normal_end_complete_0p4"
+    }
+  ],
+  "prototype_binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+  "prototype_source_tree_manifest_sha256": "3bc689e01f393bf153c1fe626fd5117ce629a3dd2720a1670f3e8bf754b1219c",
+  "schema": "i4f-source-active-withdrawal-execution/v1",
+  "source_lock_sha256": "e83f9f24db1b9e8568e566f86c9cb1e1e13ecbf0cbe96ffd894199af190aa8eb",
+  "study_path": "results/summaries/i4f_20261025/source-active-withdrawal/experiment.json",
+  "study_sha256": "dbfadf00c7361ebc4e3ad5d18a9ba85f4e71a2ee387f71ed8958e0e2d3f4a98b"
+}

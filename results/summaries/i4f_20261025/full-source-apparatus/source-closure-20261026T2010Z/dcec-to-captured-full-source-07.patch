@@ -1,0 +1,271 @@
+--- DCEC/applications/solvers/multiphase/VoF/alphaEqn.H
++++ full-source-07/applications/solvers/multiphase/VoF/alphaEqn.H
+@@ -54,6 +54,51 @@
+ 
+     // Set the time blending factor, 1 for Euler
+     scalar cnCoeff = 1.0/(1.0 + ocCoeff);
++
++    if (i4fFrozenPredictorFullSource)
++    {
++        tmp<fv::ddtScheme<scalar>> tFullSourceAlphaDdt
++        (
++            fv::ddtScheme<scalar>::New
++            (
++                mesh,
++                mesh.ddtScheme("ddt(alpha)")
++            )
++        );
++        const bool i4fStaticEulerDdt =
++            isType<fv::EulerDdtScheme<scalar>>(tFullSourceAlphaDdt());
++
++        if (!i4fFrozenPredictorSp)
++        {
++            FatalErrorInFunction
++                << "i4fFrozenPredictorFullSource requires "
++                   "i4fFrozenPredictorSp=true"
++                << exit(FatalError);
++        }
++
++        if
++        (
++            LTS
++         || !i4fStaticEulerDdt
++         || nAlphaSubCycles != 1
++         || nAlphaCorr != 1
++         || !MULESCorr
++         || alphaApplyPrevCorr
++        )
++        {
++            FatalErrorInFunction
++                << "i4fFrozenPredictorFullSource only supports static "
++                   "Euler, MULESCorr=true, nAlphaCorr=1, "
++                   "nAlphaSubCycles=1 and alphaApplyPrevCorr=false; got "
++                << "LTS=" << LTS
++                << " Euler=" << i4fStaticEulerDdt
++                << " MULESCorr=" << MULESCorr
++                << " nAlphaCorr=" << nAlphaCorr
++                << " nAlphaSubCycles=" << nAlphaSubCycles
++                << " alphaApplyPrevCorr=" << alphaApplyPrevCorr
++                << exit(FatalError);
++        }
++    }
+ 
+     // Read-only snapshots of the predictor source. These are local internal
+     // fields (not registered or written) and are refreshed every PIMPLE outer
+@@ -252,7 +297,169 @@
+ 
+             const scalar alphaPredMin = min(alpha1).value();
+             const scalar alphaPredMax = max(alpha1).value();
+-            if (i4fFrozenPredictorSp)
++            if (i4fFrozenPredictorFullSource)
++            {
++                volScalarField::Internal i4fFullSourceCoefficient
++                (
++                    IOobject
++                    (
++                        "i4fFullSourceCoefficient",
++                        runTime.timeName(),
++                        mesh,
++                        IOobject::NO_READ,
++                        IOobject::NO_WRITE,
++                        false
++                    ),
++                    mesh,
++                    dimensionedScalar(i4fSpPredictor.dimensions(), Zero)
++                );
++                i4fFullSourceCoefficient =
++                    i4fSpPredictor + i4fDivUPredictor;
++
++                const scalar rDeltaT = 1.0/runTime.deltaTValue();
++                scalar minFullSourceMargin = GREAT;
++                forAll(i4fFullSourceCoefficient, celli)
++                {
++                    minFullSourceMargin = min
++                    (
++                        minFullSourceMargin,
++                        rDeltaT - i4fFullSourceCoefficient[celli]
++                    );
++                }
++                reduce(minFullSourceMargin, minOp<scalar>());
++
++                if (!(minFullSourceMargin > 0))
++                {
++                    FatalErrorInFunction
++                        << "Unsafe full predictor source for bounded MULES: "
++                           "global min(rDeltaT - C)="
++                        << minFullSourceMargin << " s^-1; no coefficient "
++                           "clipping or alpha correction was applied"
++                        << exit(FatalError);
++                }
++
++                MULES::correct
++                (
++                    geometricOneField(),
++                    alpha1,
++                    alphaPhiUn,
++                    talphaPhi1Corr.ref(),
++                    i4fFullSourceCoefficient,
++                    (-i4fFullSourceCoefficient*alpha1)(),
++                    oneField(),
++                    zeroField()
++                );
++
++                surfaceScalarField i4fFullCorrectedAlphaFlux
++                (
++                    "i4fFullCorrectedAlphaFlux",
++                    alphaPhi10 + talphaPhi1Corr()
++                );
++                tmp<volScalarField> ti4fFullCorrectedAlphaFluxDiv
++                (
++                    fvc::div(i4fFullCorrectedAlphaFlux)
++                );
++                const volScalarField& i4fFullCorrectedAlphaFluxDiv =
++                    ti4fFullCorrectedAlphaFluxDiv();
++
++                scalar fullResidualMax = 0;
++                scalar fullResidualL1Volume = 0;
++                scalar fullResidualSignedVolume = 0;
++                scalar spOnlyLagMax = 0;
++                scalar spOnlyLagL1Volume = 0;
++                scalar spOnlyLagSignedVolume = 0;
++                forAll(i4fFullSourceCoefficient, celli)
++                {
++                    const scalar alphaFinal = alpha1[celli];
++                    const scalar alphaStorage =
++                        (alphaFinal - alpha1.oldTime()[celli])
++                       /runTime.deltaTValue();
++                    const scalar fullSource =
++                        i4fSuPredictor[celli]
++                      + i4fFullSourceCoefficient[celli]*alphaFinal;
++                    const scalar fullResidual =
++                        alphaStorage
++                      + i4fFullCorrectedAlphaFluxDiv[celli]
++                      - fullSource;
++                    const scalar spOnlyLag =
++                        i4fDivUPredictor[celli]
++                       *(i4fAlphaPredictor[celli] - alphaFinal);
++                    const scalar cellVolume = mesh.V()[celli];
++
++                    fullResidualMax = max
++                    (
++                        fullResidualMax,
++                        mag(fullResidual)
++                    );
++                    fullResidualL1Volume += cellVolume*mag(fullResidual);
++                    fullResidualSignedVolume += cellVolume*fullResidual;
++                    spOnlyLagMax = max(spOnlyLagMax, mag(spOnlyLag));
++                    spOnlyLagL1Volume += cellVolume*mag(spOnlyLag);
++                    spOnlyLagSignedVolume += cellVolume*spOnlyLag;
++                }
++                reduce(fullResidualMax, maxOp<scalar>());
++                reduce(fullResidualL1Volume, sumOp<scalar>());
++                reduce(fullResidualSignedVolume, sumOp<scalar>());
++                reduce(spOnlyLagMax, maxOp<scalar>());
++                reduce(spOnlyLagL1Volume, sumOp<scalar>());
++                reduce(spOnlyLagSignedVolume, sumOp<scalar>());
++
++                Info<< "I4F_FULL_PREDICTOR_SOURCE_SUMMARY"
++                    << " time_s=" << runTime.timeName()
++                    << " outer_iteration=" << i4fOuterLoop
++                    << " alpha_corrector=" << aCorr + 1
++                    << " min_rDeltaT_minus_C_s-1="
++                    << minFullSourceMargin
++                    << " full_R_max_s-1=" << fullResidualMax
++                    << " full_R_volume_L1_m3_s=" << fullResidualL1Volume
++                    << " full_R_signed_volume_integral_m3_s="
++                    << fullResidualSignedVolume
++                    << " predicted_Sp_only_lag_max_s-1=" << spOnlyLagMax
++                    << " predicted_Sp_only_lag_volume_L1_m3_s="
++                    << spOnlyLagL1Volume
++                    << " predicted_Sp_only_lag_signed_volume_integral_m3_s="
++                    << spOnlyLagSignedVolume
++                    << " alpha_residual_claim=discrete_local_equation_only"
++                    << nl;
++
++                const label i4fTargetCells[] = {2684, 2752};
++                if (Pstream::myProcNo() == 2)
++                {
++                    for (const label i4fCell : i4fTargetCells)
++                    {
++                        const scalar alphaFinal = alpha1[i4fCell];
++                        const scalar alphaStorage =
++                            (alphaFinal - alpha1.oldTime()[i4fCell])
++                           /runTime.deltaTValue();
++                        const scalar fullResidual =
++                            alphaStorage
++                          + i4fFullCorrectedAlphaFluxDiv[i4fCell]
++                          - i4fSuPredictor[i4fCell]
++                          - i4fFullSourceCoefficient[i4fCell]*alphaFinal;
++                        Pout<< "I4F_FULL_PREDICTOR_SOURCE_CELL"
++                            << " time_s=" << runTime.timeName()
++                            << " outer_iteration=" << i4fOuterLoop
++                            << " alpha_corrector=" << aCorr + 1
++                            << " rank=" << Pstream::myProcNo()
++                            << " local_cell=" << i4fCell
++                            << " predictor_Sp_s-1="
++                            << i4fSpPredictor[i4fCell]
++                            << " predictor_divU_s-1="
++                            << i4fDivUPredictor[i4fCell]
++                            << " full_C_s-1="
++                            << i4fFullSourceCoefficient[i4fCell]
++                            << " alphaP=" << i4fAlphaPredictor[i4fCell]
++                            << " alphaF=" << alphaFinal
++                            << " full_R_s-1=" << fullResidual
++                            << " predicted_Sp_only_lag_s-1="
++                            << i4fDivUPredictor[i4fCell]
++                               *(i4fAlphaPredictor[i4fCell] - alphaFinal)
++                            << " continuity_claim=none"
++                            << nl;
++                    }
++                }
++            }
++            else if (i4fFrozenPredictorSp)
+             {
+                 MULES::correct
+                 (
+--- DCEC/applications/solvers/multiphase/compressibleInterFoam/Make/files
++++ full-source-07/applications/solvers/multiphase/compressibleInterFoam/Make/files
+@@ -1,3 +1,3 @@
+ compressibleInterFoam.C
+ 
+-EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamFrozenAlphaSourceV2NoPout
++EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamFrozenAlphaFullPredictorPrototype
+--- DCEC/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
++++ full-source-07/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
+@@ -88,6 +88,27 @@
+             false
+         )
+     );
++    const Switch i4fFrozenPredictorFullSource
++    (
++        runTime.controlDict().lookupOrDefault<Switch>
++        (
++            "i4fFrozenPredictorFullSource",
++            false
++        )
++    );
++
++    if (i4fFrozenPredictorFullSource && !i4fFrozenPredictorSp)
++    {
++        FatalErrorInFunction
++            << "i4fFrozenPredictorFullSource requires "
++               "i4fFrozenPredictorSp=true"
++            << exit(FatalError);
++    }
++
++    Info<< "I4F_ALPHA_SOURCE_MODE frozen_predictor_Sp="
++        << i4fFrozenPredictorSp
++        << " full_predictor_source=" << i4fFrozenPredictorFullSource
++        << nl;
+ 
+     // Increase diagnostic stream precision only; solver state and equations
+     // are unchanged.
+@@ -345,7 +366,7 @@
+                 Pout<< "]" << nl;
+             };
+ 
+-            if (true && i4fDpMax > 1000 && i4fDpCellIsGlobal)
++            if (false && i4fDpMax > 1000 && i4fDpCellIsGlobal)
+             {
+                 i4fWriteOuterCell("DP_CELL", i4fDpLocalCell, i4fDpMax);
+             }

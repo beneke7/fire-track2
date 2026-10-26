@@ -16,7 +16,11 @@ the new hardware case includes both tanks and all four outlets.
 
 **Latest outcome:** no complete credible tank-to-nozzle discharge exists yet.
 The source-consistency investigation now provides a specific discrete error
-mechanism, with a limited improvement when one part is removed. The matched
+mechanism, but correcting it has not cured the pressure cycle. The complete
+Sp+divU warm trial stopped at .494130 s with 1261.902 Pa and 5.520 m/s final
+outer updates, zero raw floor contacts, and a complete checkpoint. The Sp-only
+trial stopped at .494225 s. These are effectively the same stopping window;
+better intermediate water balance did not supply a stable discharge. The matched
 warm upwind baseline stopped at .481894 s; caching its predictor Sp continued
 to .494225 s without floor contact, then also stopped on persistent pressure
 updates. At approximately .480 s, its post-EOS water-continuity volume-L1
@@ -24,6 +28,25 @@ residual fell from 1.527 to .387 kg/s and its accumulated water defect since
 the common .460048 s seed fell from .01181 to .00463 kg. Actual sample times
 differ by .119 microseconds; these are nearest-sample comparisons, not
 identical-time fields or a proof of physical phase-mass conservation.
+
+A separate restart audit found a real field-history initialization defect.
+Saving the pressure-derived expansion source alone left a 127.824 Pa
+one-step restart discrepancy in the sealed channel. Allocating the accepted
+Euler histories before derived-field updates reduced the discrepancy to
+7.92e-9 Pa and 5.55e-13 m/s. This tests a grouped ten-field intervention,
+not the minimal necessary field set or all time schemes. The corresponding
+apparatus replay still stopped at .494129 s, so restart fidelity and the later
+nonlinear pressure cycle are distinct problems.
+
+The cold run with corrected initialization exposed an intermediate air state near
+12 K and 9.71 kPa with the optional momentum predictor enabled. The momentum
+solve changes kinetic energy before the first temperature solve and before
+pressure projection. That ordering supplies a specific energy-error hypothesis;
+a matched term-by-term audit is pending. A fresh trial disables only that
+optional predictor, retaining pressure-driven velocity/kinetic-energy updates
+and the 10 kPa floor. Early healthy evolution is not yet evidence of a complete
+remedy. A separate source-relaxation trial will measure the undamped fixed-point
+defect, rather than accepting smaller damped updates alone.
 
 The predictor/corrector equations explain the targeted numerical change.
 For this static Euler, single alpha-correction/subcycle configuration, let
@@ -66,6 +89,26 @@ contact; this is not a cold timestep-convergence result. A separate periodic
 p/U/T errors of 7.20e-9 Pa / 4.27e-12 m/s / 2.01e-11 K. Its public launcher
 reproduced that result. Uniform equilibrium does not excite the apparatus's
 compression sources, so this limited verification does not clear the tank.
+
+A separate [source-active sealed-channel study](../results/summaries/i4f_20261025/source-active-withdrawal/README.md)
+now compares cached Sp and cached Sp+divU on 60/120/240/480 axial cells.
+Each case starts with 80 mL water and 20 mL air at 1.2 MPa and 293.15 K,
+and completes .4 s/1600 fixed steps. Constant-density water, laminar flow and
+Pr=1e9 deliberately separate this test from the apparatus's finite-water EOS,
+SST and heat transport. With the full coefficient, same-volume adiabatic
+pressure errors decrease from 1.930% to 1.288% to .878% on the three finest
+meshes; temperature errors are 1.914%, 1.272% and .861%. These are refinement
+trends, not a demonstrated asymptotic order, GCI or apparatus validation.
+The source change leaves these thermal errors almost unchanged and slightly
+increases gas-mass drift, while reducing normalized water-volume balance error
+from roughly 2e-5 to at most 5.32e-11 of initial water volume in this study.
+Thus improved water balance does not establish a closed gas-energy model.
+An additional n=120 read-only audit reproduces identical native endpoint fields
+and finds corrected-minus-predictor alpha-equation residual below 9.21e-13 s^-1.
+The [inspected figure](../results/summaries/i4f_20261025/source-active-withdrawal/grid-trend.png)
+and SI data preserve both effects. The tighter predictor solve also stopped
+near .494128 s with a 1259.55 Pa outer pressure update. Its much smaller correction inconsistency did not
+eliminate the coupled pressure cycle.
 
 The earlier finite-water cold test contacted the pressure floor:
 one pass at .409998 s reached -308.269 Pa in two cells. It saved all fields at

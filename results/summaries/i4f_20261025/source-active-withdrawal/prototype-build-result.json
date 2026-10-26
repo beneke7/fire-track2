@@ -1,0 +1,54 @@
+{
+  "schema": "i4f-full-predictor-source-build-result/v1",
+  "created_utc": "2026-10-26T18:09:09.983365+00:00",
+  "status": "compiled_and_help_validated; off_mode_passivity_not_yet_run; full_source_mode_not_run",
+  "solver_image": "opencfd/openfoam-default:2512",
+  "image_inspect": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+  "expected_image_digest": "sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "git_head_at_build": "6a8e724e5bfaedd437d4b4fcf3ae291083c99666",
+  "build_command": "nice -n 19 .venv/bin/python scripts/run_local.py --threads 1 --timeout 1800 -- docker run --rm --cpus=1 --cpu-shares=2 --user 1000:1000 --log-driver=none -v <absolute-bundle>:/pair opencfd/openfoam-default:2512 bash --noprofile --norc /pair/scripts/build_full_predictor.sh",
+  "build_script_sha256": "947a124e23b0485079ac2c57ba190479ee9185561b8b132034dd15515a6220d5",
+  "build_exit_code": 0,
+  "binary_path": "bin/compressibleInterFoamFrozenAlphaFullPredictorPrototype",
+  "binary_sha256": "07fca3b6b79b9d36fe835019a68661e3967dec9928ff67ea47310bd558ef75d2",
+  "binary_size_bytes": 1661240,
+  "binary_help_validation": {
+    "exit_code": 0,
+    "openfoam_version": "OpenFOAM-2512 (2512)",
+    "output_path": "logs/prototype-help.txt",
+    "output_sha256": "606289e206a4d99c17d3938a98c6c303446b4602299d85525615d580cbc9743c"
+  },
+  "source_parent": "results/runs/i4f-pressure-audit-lean-prototype-20261025T185425Z/build/source/v7-frozen-sp-v2-nopout",
+  "source_tree_path": "build/source/v7-frozen-sp-v2-full-predictor-prototype",
+  "source_changed_files": [
+    {
+      "path": "applications/solvers/multiphase/VoF/alphaEqn.H",
+      "parent_sha256": "f2f10939f37b7765f8e4a1c032daab3140c5605533ac2bf955245925a425df7e",
+      "prototype_sha256": "6503398a24f250b0459db1638dfa19d46c8bee3ccf9e6ef32a5ccc23ce95d86d",
+      "diff_lines": 229
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "parent_sha256": "fa5f33ba89ed73c1615dfcdb0b1d8ac3e6577fe6414332af7085c72e1faf7078",
+      "prototype_sha256": "cd02b090e57aa49a24d3255eb201ac14b66875f21ef1b179329acf9feb45a3e6",
+      "diff_lines": 32
+    },
+    {
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/files",
+      "parent_sha256": "f756eb32e1e3c7d4e4d47aec8d9ebbf418e8f2664a06023f7e72218f77050cb0",
+      "prototype_sha256": "1b0b51ef0cbd9b53bd49aa3b097d3cb3e812f997b46e9ca94f0608a2fe0f17e3",
+      "diff_lines": 7
+    }
+  ],
+  "source_patch_path": "provenance/full-source-prototype.patch",
+  "source_patch_sha256": "03ac8584344ccf545774a7d116ef2c841d803099a0b81f7152b5c2f366561f77",
+  "source_tree_manifest_path": "provenance/source-tree-manifest.json",
+  "source_tree_manifest_sha256": "3bc689e01f393bf153c1fe626fd5117ce629a3dd2720a1670f3e8bf754b1219c",
+  "source_changes_summary": "Adds a default-off full predictor source option, Euler/MULESCorr/subcycle/previous-correction gates, global min(rDeltaT-C) safety stop, and all-cell residual plus selected-cell diagnostics. Existing Sp-only/stock branches remain selected when the flag is off. Make/files changes only the private binary output name.",
+  "source_safety": "Full mode has NOT been run. The scalar fixture checks source identities and limiter-capacity positivity only; it does not validate the finite-volume implementation or full solver behavior.",
+  "build_attempts": [
+    "provenance/build-attempt-01.json",
+    "provenance/build-attempt-02.json",
+    "attempt 03 is the final successful required-lnInclude build; stdout shown in build record"
+  ]
+}

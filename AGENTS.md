@@ -236,6 +236,11 @@ separate review memos unless a hard decision needs one.
   Matching the fourteen stored fields does not prove a bitwise continuation:
   `createFields.H` reconstructs `dgdt` on restart. Use a matched same-scheme
   restart control before attributing a warm-fork improvement to a scheme change.
+  OpenFOAM `oldTime()` may allocate and update history lazily. Calling it in
+  supposedly passive diagnostics before its natural equation use can alter
+  evolution; inspect allocation order and verify passivity. A first-order Euler
+  restart mismatch is not by itself evidence that a previous-time directory is
+  mathematically required.
   Terminal checks must use the branch's configured log path, not a fixed log
   basename. A missing expected filename is not evidence that the solver failed.
   Compare numerical dictionary values numerically, not by printed notation

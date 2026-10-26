@@ -21,12 +21,30 @@ completed .1 s/1000 steps with roundoff-level uniform p/U/T errors, but does not
 exercise the tank's compression sources. No complete credible discharge or validation result
 has been produced. See
 [live status](../../../docs/STATUS.md) for exact run identities and deadlines.
+The [source-active sealed-channel verification](source-active-withdrawal/README.md)
+and [grid figure](source-active-withdrawal/grid-trend.png) separate the improved
+water-volume balance from the remaining thermal/refinement error. All eight
+grid/source runs and one passive audit reached .4 s; these simplified cases
+do not validate the apparatus.
 The [cell/iteration review](finite-water-floor-review.json),
 [pressure-pass table](finite-water-floor-pressure-passes.csv),
 [contact cells](finite-water-floor-cells.csv), and
 [trace plot](finite-water-floor-pressure-passes.png) show the isolated last-pass
 undershoot and two subsequent positive-pressure steps. Small final corrections
 do not undo the pressure-floor operation.
+
+The [new diagnostic cutaway](full-source-apparatus/context-20261026T193827Z/context-cutaway-preview.png)
+shows the guarded .494130 s endpoint on its actual 299,214-cell mesh. Dense
+water has not yet left the mouths; this is an incomplete, failed trajectory.
+Orange markers locate earlier replay cells, not the current pressure-update
+maximum. The [localization audit](full-source-apparatus/context-cell-localization-20261026T1954Z/context-cell-localization.json)
+explains why that current maximum cannot be recovered from the original logs.
+The [complete source patch and closure](full-source-apparatus/source-closure-20261026T2010Z/closure-manifest.json)
+reconstruct all 68 captured source files from the public DCEC snapshot,
+including the previously omitted diagnostic logger switch. Root independently
+reconstructed and checked all 68 hashes. This identifies source inputs; it
+does not promise a bitwise-identical rebuilt binary. The rendering command
+still requires its recorded local helper and raw fields.
 
 **26 October numerical update:** the corrected-junction restarted constant-density
 continuation stopped at .434224 s with negative intermediate pressure; geometry

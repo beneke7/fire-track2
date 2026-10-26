@@ -1,0 +1,123 @@
+--- build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/VoF/alphaEqn.H (before)
++++ build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/VoF/alphaEqn.H (diagnostic)
+@@ -350,6 +350,15 @@
+                     zeroField()
+                 );
+ 
++                // Read-only diagnostic: retain the predictor flux divergence
++                // for the actual RP and RF-RP discrete-residual audit.
++                tmp<volScalarField> ti4fPredictorAlphaFluxDiv
++                (
++                    fvc::div(alphaPhi10)
++                );
++                const volScalarField& i4fPredictorAlphaFluxDiv =
++                    ti4fPredictorAlphaFluxDiv();
++
+                 surfaceScalarField i4fFullCorrectedAlphaFlux
+                 (
+                     "i4fFullCorrectedAlphaFlux",
+@@ -365,6 +374,12 @@
+                 scalar fullResidualMax = 0;
+                 scalar fullResidualL1Volume = 0;
+                 scalar fullResidualSignedVolume = 0;
++                scalar predictorResidualMax = 0;
++                scalar predictorResidualL1Volume = 0;
++                scalar predictorResidualSignedVolume = 0;
++                scalar residualDifferenceMax = 0;
++                scalar residualDifferenceL1Volume = 0;
++                scalar residualDifferenceSignedVolume = 0;
+                 scalar spOnlyLagMax = 0;
+                 scalar spOnlyLagL1Volume = 0;
+                 scalar spOnlyLagSignedVolume = 0;
+@@ -381,6 +396,15 @@
+                         alphaStorage
+                       + i4fFullCorrectedAlphaFluxDiv[celli]
+                       - fullSource;
++                    const scalar alphaPredictor = i4fAlphaPredictor[celli];
++                    const scalar predictorResidual =
++                        (alphaPredictor - alpha1.oldTime()[celli])
++                       /runTime.deltaTValue()
++                      + i4fPredictorAlphaFluxDiv[celli]
++                      - i4fSuPredictor[celli]
++                      - i4fFullSourceCoefficient[celli]*alphaPredictor;
++                    const scalar residualDifference =
++                        fullResidual - predictorResidual;
+                     const scalar spOnlyLag =
+                         i4fDivUPredictor[celli]
+                        *(i4fAlphaPredictor[celli] - alphaFinal);
+@@ -393,6 +417,24 @@
+                     );
+                     fullResidualL1Volume += cellVolume*mag(fullResidual);
+                     fullResidualSignedVolume += cellVolume*fullResidual;
++                    predictorResidualMax = max
++                    (
++                        predictorResidualMax,
++                        mag(predictorResidual)
++                    );
++                    predictorResidualL1Volume +=
++                        cellVolume*mag(predictorResidual);
++                    predictorResidualSignedVolume +=
++                        cellVolume*predictorResidual;
++                    residualDifferenceMax = max
++                    (
++                        residualDifferenceMax,
++                        mag(residualDifference)
++                    );
++                    residualDifferenceL1Volume +=
++                        cellVolume*mag(residualDifference);
++                    residualDifferenceSignedVolume +=
++                        cellVolume*residualDifference;
+                     spOnlyLagMax = max(spOnlyLagMax, mag(spOnlyLag));
+                     spOnlyLagL1Volume += cellVolume*mag(spOnlyLag);
+                     spOnlyLagSignedVolume += cellVolume*spOnlyLag;
+@@ -400,6 +442,12 @@
+                 reduce(fullResidualMax, maxOp<scalar>());
+                 reduce(fullResidualL1Volume, sumOp<scalar>());
+                 reduce(fullResidualSignedVolume, sumOp<scalar>());
++                reduce(predictorResidualMax, maxOp<scalar>());
++                reduce(predictorResidualL1Volume, sumOp<scalar>());
++                reduce(predictorResidualSignedVolume, sumOp<scalar>());
++                reduce(residualDifferenceMax, maxOp<scalar>());
++                reduce(residualDifferenceL1Volume, sumOp<scalar>());
++                reduce(residualDifferenceSignedVolume, sumOp<scalar>());
+                 reduce(spOnlyLagMax, maxOp<scalar>());
+                 reduce(spOnlyLagL1Volume, sumOp<scalar>());
+                 reduce(spOnlyLagSignedVolume, sumOp<scalar>());
+@@ -420,6 +468,22 @@
+                     << " predicted_Sp_only_lag_signed_volume_integral_m3_s="
+                     << spOnlyLagSignedVolume
+                     << " alpha_residual_claim=discrete_local_equation_only"
++                    << nl;
++
++                Info<< "I4F_FULL_PREDICTOR_RP_AUDIT"
++                    << " time_s=" << runTime.timeName()
++                    << " outer_iteration=" << i4fOuterLoop
++                    << " alpha_corrector=" << aCorr + 1
++                    << " RP_max_s-1=" << predictorResidualMax
++                    << " RP_volume_L1_m3_s=" << predictorResidualL1Volume
++                    << " RP_signed_volume_integral_m3_s="
++                    << predictorResidualSignedVolume
++                    << " RF_minus_RP_max_s-1=" << residualDifferenceMax
++                    << " RF_minus_RP_volume_L1_m3_s="
++                    << residualDifferenceL1Volume
++                    << " RF_minus_RP_signed_volume_integral_m3_s="
++                    << residualDifferenceSignedVolume
++                    << " diagnostic_only=true"
+                     << nl;
+ 
+                 const label i4fTargetCells[] = {2684, 2752};
+--- build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/Make/files (before)
++++ build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/Make/files (diagnostic)
+@@ -1,3 +1,3 @@
+ compressibleInterFoam.C
+ 
+-EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamFrozenAlphaFullPredictorPrototype
++EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamFrozenAlphaFullPredictorResidualAudit
+--- scripts/build_full_predictor.sh (before)
++++ scripts/build_full_predictor.sh (diagnostic)
+@@ -21,4 +21,4 @@
+ cd "$source_root/applications/solvers/multiphase/compressibleInterFoam"
+ nice -n 19 wclean
+ nice -n 19 wmake
+-sha256sum /pair/bin/compressibleInterFoamFrozenAlphaFullPredictorPrototype
++sha256sum /pair/bin/compressibleInterFoamFrozenAlphaFullPredictorResidualAudit
