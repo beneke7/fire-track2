@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 06:25 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 07:25 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -16,13 +16,17 @@ Each has ten MPI ranks/nine CPU equivalents and 32 GiB memory allowance.
 
 | Case | Exact container | Latest independently checked state |
 | --- | --- | --- |
-| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.031332 s, 258 completed steps, last pressure correction 0.0007221 Pa; 0 diagnostic and 0 parser errors. |
-| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.044957 s, 367 completed steps, last pressure correction 0.006872 Pa; 0 diagnostic and 0 parser errors. |
+| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.095457 s, 771 completed steps, last completed-step pressure correction 0.0010773 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.104457 s, 843 completed steps, last completed-step pressure correction 0.0021049 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
 
 Baseline StartedAt 05:56:04 UTC; corridor StartedAt 05:47:27 UTC. Each targets
 .65 physical seconds with six hours to save and another fifteen minutes hard
 limit, anchored separately to its own Docker start. These are targets, not ETA
-promises. Current early health does not predict survival through the failing region.
+promises. At the 07:25 UTC observed throughput, a linear projection gives about
+.38 s after six hours and roughly ten hours to .65 s, before any later slowdown.
+Thus the existing wall budget does not presently cover the intended endpoint;
+continuation/resource planning must account for this. Current early health does
+not predict survival through the failing region.
 
 Run root: `results/runs/i4f-cold-mesh-pair-20261027T050932Z/`.
 The bounded PAUSE-aware dispatcher `i4f-coldmesh-pair-dispatcher-r002.service`
@@ -100,8 +104,12 @@ partition was rejected and replaced by a finite assembly/state-change identity.
 passed. In that one step the assembly-cutoff term is 94-97% of the final signed
 water residual, with exact staged accounting; this is not a causal explanation
 of the pressure instability or a retroactive validation of the old estimate.
-A bounded 1e-4/1e-5 numerical-cutoff sensitivity probe is being prepared; live
-cold-case cutoffs are unchanged. No conservation gate passes by this diagnostic.
+The completed one-natural-step 1e-4/1e-5 cutoff comparison reduced the signed
+water mass residual from -.022006 to -.004957 kg/s (4.44 times), while final
+pressure/velocity updates were essentially unchanged. This separates a measured
+conservation bias from an unproven pressure-instability mechanism; it supplies
+no long-trajectory cure. See [cutoff sensitivity](../results/summaries/i4f_20261025/source-cutoff-sensitivity/).
+Live cold-case cutoffs are unchanged. No conservation gate passes by this diagnostic.
 
 ## Provisional engineering reference and limits
 

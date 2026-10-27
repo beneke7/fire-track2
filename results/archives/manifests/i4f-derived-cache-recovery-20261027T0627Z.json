@@ -1,0 +1,132 @@
+{
+  "created_utc": "2026-10-27T06:37:24.209366Z",
+  "disk_accounting": {
+    "final_available_bytes_at_last_record": 21709783040,
+    "first_cleanup_available_before_bytes": 19824365568,
+    "last_cleanup_available_after_bytes": 21709783040,
+    "net_available_space_change_over_full_window_bytes": 1885417472,
+    "note": "Per-operation df gains are the direct observed frees. The smaller net window change includes unrelated filesystem writes between the two cleanup operations.",
+    "sum_of_each_operation_df_gains_bytes": 1907359744
+  },
+  "operations": [
+    {
+      "branches": [
+        "outer8",
+        "outer16"
+      ],
+      "bundle": "results/runs/i4f-fine-outer8-vs16-20261024T0901Z/analysis/read-only-reconstruction",
+      "command_to_regenerate": "source /usr/lib/openfoam/openfoam2512/etc/bashrc; cd analysis/read-only-reconstruction/<branch>/case; reconstructPar -time <time> -fileHandler collated",
+      "kind": "rebuildable_global_recon_timegroups",
+      "observed_df_gain_bytes": 1801138176,
+      "preserved_global_times_s_per_branch": [
+        "0.030258211",
+        "0.040008211"
+      ],
+      "removed_selected_times_s": [
+        "0.030758211",
+        "0.032008211",
+        "0.033258211",
+        "0.034508211",
+        "0.035758211",
+        "0.037008211",
+        "0.038258211",
+        "0.039508211"
+      ],
+      "removed_timegroups": 16,
+      "verified_native_source": "Each removed time had exact source-vs-clone processors6 tree SHA equality against the original clone manifest; all native data remained in the run source and hardlinked read-only clone inputs."
+    },
+    {
+      "bundles": [
+        "results/runs/i4f-headspace-intake-connectivity-20261024T2325Z/reconstruction-case",
+        "results/runs/i4f-halfdt-analysis-20261024T232445Z/analysis/reconstructed"
+      ],
+      "command_to_regenerate": "source /usr/lib/openfoam/openfoam2512/etc/bashrc; cd <clone-case>; reconstructPar -time <time> -fileHandler collated",
+      "kind": "rebuildable_intermediate_global_timegroups",
+      "observed_df_gain_bytes": 69799936,
+      "preserved_global_times": [
+        {
+          "case": "headspace-intake-connectivity",
+          "times_s": [
+            "0",
+            "0.489232241974"
+          ]
+        },
+        {
+          "case": "halfdt baseline and half_dt",
+          "times_s": [
+            "0.300021166664",
+            "0.400021166664"
+          ]
+        }
+      ],
+      "removed_timegroups": 6,
+      "removed_times": [
+        {
+          "case": "headspace-intake-connectivity",
+          "times_s": [
+            "0.300021166664",
+            "0.350021166664",
+            "0.400021166664",
+            "0.450021166664"
+          ]
+        },
+        {
+          "case": "halfdt baseline and half_dt",
+          "times_s": [
+            "0.350021166664"
+          ]
+        }
+      ],
+      "verified_native_source": "For each removed group, retained original and clone processors8 time trees were SHA256-identical immediately before unlink."
+    },
+    {
+      "files": 16,
+      "kind": "exact_duplicate_global_reconstruction_mirror",
+      "observed_df_gain_bytes": 36581376,
+      "removed_path": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair/static-control/preflight/reconstructed-global-from-collated-v1",
+      "retained_identical_path": "results/runs/i4f-compressible-ambient-reservoir-20261025T111856Z/pair/static-control/preflight/global-reconstructed-checkpoint",
+      "tree_sha256": "2e150c202b1cf25bc528eabafb797b005d420a2efb002d207b14403d91b6e7fa",
+      "verification": "All 16 relative file paths, byte counts and SHA256 values matched. The retained exact twin and the preflight processor checkpoint remain present."
+    }
+  ],
+  "private_evidence": {
+    "auxiliary_completion_json": {
+      "path": "results/runs/i4f-derived-cache-recovery-20261027T0627Z/operations/auxiliary/auxiliary-completed.json",
+      "sha256": "383c58cef7fab6018a18d5f61615dd7433ddd36aa0d697ccc56a043b4f14ef5a"
+    },
+    "auxiliary_operation_script_sha256": "767b9cdd3c74adc7fbe45b87fe8311510b5c2adf211c5ee0064383de29ad600c",
+    "bundle": "results/runs/i4f-derived-cache-recovery-20261027T0627Z/operations",
+    "failed_auxiliary_preflight_attempt": "results/runs/i4f-derived-cache-recovery-20261027T0627Z/operations/attempt-001-auxiliary-source-manifest-shape.json",
+    "fine_outer_completion_json": {
+      "path": "results/runs/i4f-derived-cache-recovery-20261027T0627Z/operations/fine-outer-completed.json",
+      "sha256": "0173bf99771e3748584ed9dd38648fd60304558bc46ba317454c95ef0c018135"
+    },
+    "fine_outer_operation_script_sha256": "24c565e383beba4774b768fe8cb95a5c741f55c8523a4699f05435a2ce68b92b"
+  },
+  "rebuild_smoke_test_performed": false,
+  "schema": "i4f-derived-cache-recovery/v1",
+  "scope": "Terminal older I4F global reconstruction outputs and one exact duplicate preflight cache only. Native processor fields, source meshes, checkpoints, controls, logs, source manifests, and final figures were retained.",
+  "source_solver_identities": {
+    "fine_outer_outer16": {
+      "container_id": "79edf2f281626265adc34c6a764bfc5469ffc00d564e616a727830dff47d3bac",
+      "docker_started_at": "2026-10-24T09:01:31.065585685Z",
+      "terminal_status": "completed_normal_end"
+    },
+    "fine_outer_outer8": {
+      "container_id": "b83c443e3eee1baef74fa283a2ea8ac7c1399b280541559e62a38146b6307ee9",
+      "docker_started_at": "2026-10-24T09:01:30.800833731Z",
+      "terminal_status": "completed_normal_end"
+    },
+    "results/runs/i4f-revised-geometry-dt-half-20261024T2240Z": {
+      "container_id": "8407cec645f7d99a120cc2c323588558b2fc2316a39b516b282e2363bbb5d558",
+      "docker_started_at": "2026-10-24T22:43:10.221049733Z",
+      "terminal_status": "normal_End_complete_native8_checkpoint"
+    },
+    "results/runs/i4f-twooutlet-air-water-phi-pressure-tail-20261024T222910Z": {
+      "container_id": "ca018c14ec3e14ed5e93df46f3ba2ea9c513b5e02908bb519574fa9497567152",
+      "docker_started_at": "2026-10-24T22:31:25.487053294Z",
+      "terminal_status": "normal_End_complete_native8_checkpoint"
+    }
+  },
+  "status": "completed_recoverable_cache_prune"
+}

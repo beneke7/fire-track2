@@ -1,0 +1,129 @@
+--- a/applications/solvers/multiphase/VoF/alphaEqn.H
++++ b/applications/solvers/multiphase/VoF/alphaEqn.H
+@@ -636,12 +636,12 @@
+                         const scalar dgdtCorr = dgdt[i4fCell];
+                         const bool predictorFloorActive =
+                             dgdtPred > 0
+-                          ? (1.0 - alphaBefore < 1e-4)
+-                          : (dgdtPred < 0 && alphaBefore < 1e-4);
++                          ? (1.0 - alphaBefore < i4fAlphaSourceDenominatorFloor)
++                          : (dgdtPred < 0 && alphaBefore < i4fAlphaSourceDenominatorFloor);
+                         const bool correctionFloorActive =
+                             dgdtCorr > 0
+-                          ? (1.0 - alphaPred < 1e-4)
+-                          : (dgdtCorr < 0 && alphaPred < 1e-4);
++                          ? (1.0 - alphaPred < i4fAlphaSourceDenominatorFloor)
++                          : (dgdtCorr < 0 && alphaPred < i4fAlphaSourceDenominatorFloor);
+                         const scalar frozenSource =
+                             i4fSuPredictor[i4fCell]
+                           + i4fSpPredictor[i4fCell]*alphaFinal
+--- a/applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H
+@@ -26,12 +26,12 @@
+ {
+     if (dgdt[celli] > 0.0)
+     {
+-        Sp[celli] -= dgdt[celli]/Foam::max(1.0 - alpha1[celli], 1e-4);
+-        Su[celli] += dgdt[celli]/Foam::max(1.0 - alpha1[celli], 1e-4);
++        Sp[celli] -= dgdt[celli]/Foam::max(1.0 - alpha1[celli], i4fAlphaSourceDenominatorFloor);
++        Su[celli] += dgdt[celli]/Foam::max(1.0 - alpha1[celli], i4fAlphaSourceDenominatorFloor);
+     }
+     else if (dgdt[celli] < 0.0)
+     {
+-        Sp[celli] += dgdt[celli]/Foam::max(alpha1[celli], 1e-4);
++        Sp[celli] += dgdt[celli]/Foam::max(alpha1[celli], i4fAlphaSourceDenominatorFloor);
+     }
+ }
+ 
+@@ -49,10 +49,10 @@
+         const scalar i4fDgdt = dgdt[i4fCell];
+         const scalar i4fDenom =
+             i4fDgdt > 0
+-          ? Foam::max(1.0 - i4fAlpha, scalar(1e-4))
+-          : Foam::max(i4fAlpha, scalar(1e-4));
++          ? Foam::max(1.0 - i4fAlpha, scalar(i4fAlphaSourceDenominatorFloor))
++          : Foam::max(i4fAlpha, scalar(i4fAlphaSourceDenominatorFloor));
+         const bool i4fDenomFloorActive =
+-            i4fDgdt > 0 ? (1.0 - i4fAlpha < 1e-4) : (i4fAlpha < 1e-4);
++            i4fDgdt > 0 ? (1.0 - i4fAlpha < i4fAlphaSourceDenominatorFloor) : (i4fAlpha < i4fAlphaSourceDenominatorFloor);
+         std::ofstream i4fAlphaSourceLog("alpha-su-sp-rank2.log", std::ios::app);
+         i4fAlphaSourceLog << std::setprecision(17)
+             << "I4F_ALPHA_SUP_SP"
+--- a/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
++++ b/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
+@@ -132,6 +132,31 @@
+     // Default-off, read-only per-step bridge from the alpha source split to
+     // the post-EOS water-mass budget. Empty arrays impose no cell-storage cost
+     // unless explicitly enabled in controlDict.
++    // Experimental, dimensionless alpha-source denominator floor. The default
++    // preserves the captured v3 equations exactly; a trial may set a positive
++    // finite value in controlDict. Both source branches and diagnostics use it.
++    const scalar i4fAlphaSourceDenominatorFloor
++    (
++        runTime.controlDict().lookupOrDefault<scalar>
++        (
++            "i4fAlphaSourceDenominatorFloor",
++            scalar(1e-4)
++        )
++    );
++    if
++    (
++        !(i4fAlphaSourceDenominatorFloor > 0.0)
++     || !(i4fAlphaSourceDenominatorFloor < GREAT)
++    )
++    {
++        FatalErrorInFunction
++            << "i4fAlphaSourceDenominatorFloor must be finite and positive; got "
++            << i4fAlphaSourceDenominatorFloor << exit(FatalError);
++    }
++    Info<< "I4F_ALPHA_SOURCE_DENOMINATOR_FLOOR value="
++        << i4fAlphaSourceDenominatorFloor
++        << " dimensionless=true default=1e-4" << nl;
++
+     const Switch i4fAlphaMassBudgetAudit
+     (
+         runTime.controlDict().lookupOrDefault<Switch>
+--- a/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetAlphaObserve.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetAlphaObserve.H
+@@ -135,8 +135,8 @@
+ 
+         if
+         (
+-            (gamma > 0 && 1.0 - alphaSource < 1e-4)
+-         || (gamma < 0 && alphaSource < 1e-4)
++            (gamma > 0 && 1.0 - alphaSource < i4fAlphaSourceDenominatorFloor)
++         || (gamma < 0 && alphaSource < i4fAlphaSourceDenominatorFloor)
+         )
+         {
+             ++i4fAlphaBudgetSourceDenominatorFloorCells;
+--- a/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetEosObserve.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetEosObserve.H
+@@ -94,8 +94,8 @@
+ 
+         if
+         (
+-            (gamma > 0 && 1.0 - alphaSource < 1e-4)
+-         || (gamma < 0 && alphaSource < 1e-4)
++            (gamma > 0 && 1.0 - alphaSource < i4fAlphaSourceDenominatorFloor)
++         || (gamma < 0 && alphaSource < i4fAlphaSourceDenominatorFloor)
+         )
+         {
+             ++i4fBudgetSourceDenominatorFloorCells;
+--- a/applications/solvers/multiphase/compressibleInterFoam/i4fPhysicalAlphaFluxRelaxApply.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fPhysicalAlphaFluxRelaxApply.H
+@@ -45,12 +45,12 @@
+     scalar sourceSu = 0;
+     if (gamma > 0)
+     {
+-        sourceSp -= gamma/Foam::max(1.0 - sourceAlpha, scalar(1e-4));
+-        sourceSu += gamma/Foam::max(1.0 - sourceAlpha, scalar(1e-4));
++        sourceSp -= gamma/Foam::max(1.0 - sourceAlpha, i4fAlphaSourceDenominatorFloor);
++        sourceSu += gamma/Foam::max(1.0 - sourceAlpha, i4fAlphaSourceDenominatorFloor);
+     }
+     else if (gamma < 0)
+     {
+-        sourceSp += gamma/Foam::max(sourceAlpha, scalar(1e-4));
++        sourceSp += gamma/Foam::max(sourceAlpha, i4fAlphaSourceDenominatorFloor);
+     }
+     const scalar sourceError =
+         max(mag(Sp[celli] - sourceSp), mag(Su[celli] - sourceSu));

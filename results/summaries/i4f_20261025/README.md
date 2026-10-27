@@ -21,6 +21,11 @@ cached source terms. Its accounting identity does not establish coupled
 convergence. No complete trustworthy CFD discharge, hardware validation or
 accepted 1.0/0.8 m geometry benefit is claimed.
 
+The matched [source-cutoff sensitivity](source-cutoff-sensitivity/) reduces the
+final signed water-mass residual by 4.44 times in one natural timestep while
+leaving the pressure/velocity iteration almost unchanged. This identifies a
+conservation sensitivity without establishing a cure for the later failure.
+
 **27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
 isolates a sufficient feedback path at one fixed state: pressure updates settle
 below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it

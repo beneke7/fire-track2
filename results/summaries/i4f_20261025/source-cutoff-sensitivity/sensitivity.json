@@ -1,0 +1,703 @@
+{
+  "classification": "exploratory one-step sensitivity; no validation or trajectory pass",
+  "limitations": [
+    "One natural timestep only; no causal attribution or long-run conclusion about pressure-cycle behavior.",
+    "No dedicated internal native valve-seat flux, per-tank inventory, or outlet-quality observer was emitted. Reported phase inventories and physical-boundary flux totals cover the whole domain.",
+    "Default-v3 byte parity applies to this seed and timestep, not every trajectory.",
+    "The compiled executable is identified by hash; no bitwise-reproducible rebuild claim is made."
+  ],
+  "native_probe": {
+    "arms": {
+      "default-1e-4": {
+        "effective_floor_dimensionless": 0.0001,
+        "native_files": [
+          {
+            "bytes": 2652298,
+            "field": "alpha.water",
+            "sha256": "e4147608cd80fc9535983b630060eb3fe35dbd6a58cb09392ceee659dd3611d2"
+          },
+          {
+            "bytes": 3206857,
+            "field": "p",
+            "sha256": "e78c6c2d62a359f000d1daeb2caa27f5db5ec7b35e4b5dbd7ac494910906022d"
+          },
+          {
+            "bytes": 3796238,
+            "field": "p_rgh",
+            "sha256": "7346a2b964df79c5e1f5fe599fa420b19abb626ed74f623d244d8f93d2de106b"
+          },
+          {
+            "bytes": 2658642,
+            "field": "T",
+            "sha256": "3541d9145adec68be553659da0fa36aee2b2d0ab601cd885eecdb35dd698918d"
+          },
+          {
+            "bytes": 7938894,
+            "field": "U",
+            "sha256": "65fc9cd847f60a8f994fc617fe89f13aec38e8c40b0ae04bbb8a23d707dee241"
+          },
+          {
+            "bytes": 3204683,
+            "field": "k",
+            "sha256": "966dc58830877f4ef22e2dcc0dafc630301736e278dda3ff7d8d2d0f5426cbb2"
+          },
+          {
+            "bytes": 3206553,
+            "field": "omega",
+            "sha256": "f13dc10ce2ab6114364afa4bfe220eb98eff0c6212479b595559d884957fb3d7"
+          },
+          {
+            "bytes": 3208051,
+            "field": "nut",
+            "sha256": "3ba820cabbbd7d6fa062028ad428bb991513483ca11360e6bb142f6881f67b00"
+          },
+          {
+            "bytes": 3207527,
+            "field": "alphat",
+            "sha256": "b17390c5e93a63f135f2be22115a1c98360d6b014a73b1764cebfdfdf280253f"
+          },
+          {
+            "bytes": 2658650,
+            "field": "T.air",
+            "sha256": "80dab8fda525dc4807b44fd56c6dc50cc36399828684595977fba7f5dce2f25a"
+          },
+          {
+            "bytes": 2658654,
+            "field": "T.water",
+            "sha256": "fa9374728c20fa8251f0aa105864eb0f456ac2dcaa4f762839d9f29a6c1aa28c"
+          },
+          {
+            "bytes": 3206851,
+            "field": "rho",
+            "sha256": "13cb256018e30b2b51f45f643dd9be11800b2e4684d325d20fe71fc580af10e4"
+          },
+          {
+            "bytes": 7726577,
+            "field": "phi",
+            "sha256": "f38d0120536837f074380492600fd717a79b54c179606f60e3cafd9600d8258b"
+          },
+          {
+            "bytes": 7722877,
+            "field": "alphaPhi0.water",
+            "sha256": "a8ef461ad3490d8c6bc0cbe3011efa0290533a071a8ca5a19f1532d36a62aa3e"
+          },
+          {
+            "bytes": 3203849,
+            "field": "dgdt",
+            "sha256": "157b16914112a6582265183002d330f3b91a8d9487973aca78ba2f69068c33dd"
+          },
+          {
+            "bytes": 1074,
+            "field": "uniform/time",
+            "sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873"
+          }
+        ],
+        "normal_End": true,
+        "requested_Time_seen": true,
+        "solver_log_path": "results/runs/i4f-alpha-source-floor-sensitivity-20261027T061106Z/arms/native-step-002/logs-attempt004/default-1e-4-solver.log",
+        "solver_log_sha256": "8d167520d6041b1b5e2f1d6e81ac539bcc1330e944fef7b6c4aec90bb42bd880",
+        "source_diagnostic_first_last": {
+          "CLAMP_TRACE_RAW": [
+            "CLAMP_TRACE_RAW time_s=0.490813343913 outer=1 pass=1 pMin_Pa=10000 raw_cell_p_min_Pa=32889.30752844803 raw_cell_p_max_Pa=524545.8443593432 cells_strictly_below_pMin=0 clipped_water_volume_m3=0 clipped_water_mass_kg=0 local_cells_below_pMin=0",
+            "CLAMP_TRACE_RAW time_s=0.490813343913 outer=16 pass=32 pMin_Pa=10000 raw_cell_p_min_Pa=32869.10121543532 raw_cell_p_max_Pa=524545.8034020242 cells_strictly_below_pMin=0 clipped_water_volume_m3=0 clipped_water_mass_kg=0 local_cells_below_pMin=0"
+          ],
+          "I4F_ALPHA_MASS_BUDGET_ALPHA_V3": [
+            "I4F_ALPHA_MASS_BUDGET_ALPHA_V3 time_s=0.490813343913 time_index=2280 outer_iteration=1 source_mode=frozen_predictor_full_source source_call_index=1 alpha_ddt_scheme=1(Euler) alpha_rho_ddt_scheme=1(Euler) dgdt_generation=0 alpha_relax_active=1 alpha_relax_omega=0.5 source_assembly_alpha_min=-1.088709954276104e-09 source_assembly_alpha_max=1.000000000000051 source_assembly_gamma_min_s-1=-34.62039325725345 source_assembly_gamma_max_s-1=30.48774010507331 source_assembly_Su_min_s-1=0 source_assembly_Su_max_s-1=9914.140563670264 source_assembly_Sp_min_s-1=-9914.140563670264 source_assembly_Sp_max_s-1=0 candidate_Ralpha_signed_m3_s=-5.515132484683696e-08 candidate_Ralpha_L1_m3_s=5.66322689321285e-08 candidate_Ralpha_max_s-1=0.0009578097532094276 applied_Ralpha_signed_m3_s=-0.0009828699449077852 applied_Ralpha_L1_m3_s=2.408620483204774 applied_Ralpha_max_s-1=530.0349356390423 applied_gamma_assembly_signed_m3_s=-0.1506649748809951 applied_gamma_actual_signed_m3_s=-0.1511376310054013 applied_cutoff_at_assembly_signed_m3_s=-2.337585024937085e-05 applied_cutoff_at_assembly_L1_m3_s=2.347300270327803e-05 applied_source_state_delta_signed_m3_s=-0.0004726561244063855 applied_source_state_delta_L1_m3_s=0.0008339756325730754 applied_divU_source_signed_m3_s=0.1524684260568805 source_split_identity_error_max_s-1=1.280753281207581e-12 source_denominator_floor_cells=109170 source_effective=Su+Sp*alpha+divU_mode_specific residual=ddtEuler_alpha+div(alphaPhi)-source",
+            "I4F_ALPHA_MASS_BUDGET_ALPHA_V3 time_s=0.490813343913 time_index=2280 outer_iteration=16 source_mode=frozen_predictor_full_source source_call_index=31 alpha_ddt_scheme=1(Euler) alpha_rho_ddt_scheme=1(Euler) dgdt_generation=30 alpha_relax_active=1 alpha_relax_omega=0.5 source_assembly_alpha_min=-1.492470765160136e-09 source_assembly_alpha_max=1.000000000000052 source_assembly_gamma_min_s-1=-30.11748308820452 source_assembly_gamma_max_s-1=26.67258970232849 source_assembly_Su_min_s-1=0 source_assembly_Su_max_s-1=21572.78201388261 source_assembly_Sp_min_s-1=-21572.78201388261 source_assembly_Sp_max_s-1=0 candidate_Ralpha_signed_m3_s=-1.378070951728933e-09 candidate_Ralpha_L1_m3_s=2.712505128047797e-08 candidate_Ralpha_max_s-1=0.0005573869538596632 applied_Ralpha_signed_m3_s=-7.103406291261819e-07 applied_Ralpha_L1_m3_s=7.43515038102985e-05 applied_Ralpha_max_s-1=0.03116642660478863 applied_gamma_assembly_signed_m3_s=-0.1501738036071839 applied_gamma_actual_signed_m3_s=-0.1501738374943382 applied_cutoff_at_assembly_signed_m3_s=-2.145586731569312e-05 applied_cutoff_at_assembly_L1_m3_s=2.154971502473921e-05 applied_source_state_delta_signed_m3_s=-3.388715448407486e-08 applied_source_state_delta_L1_m3_s=4.670775825384008e-08 applied_divU_source_signed_m3_s=0.1521368584942465 source_split_identity_error_max_s-1=8.428258091441876e-13 source_denominator_floor_cells=113690 source_effective=Su+Sp*alpha+divU_mode_specific residual=ddtEuler_alpha+div(alphaPhi)-source"
+          ],
+          "I4F_ALPHA_MASS_BUDGET_EOS_V3": [
+            "I4F_ALPHA_MASS_BUDGET_EOS_V3 time_s=0.490813343913 time_index=2280 source_outer_iteration=1 source_call_index=1 source_dgdt_generation=0 pressure_pass=1 source_mode=frozen_predictor_full_source Ralpha_signed_m3_s=-0.0009828699449077852 Ralpha_L1_m3_s=2.408620483204774 Ralpha_max_s-1=530.0349356390423 Rmass_signed_kg_s=-1.385156103415381 Rmass_L1_kg_s=2405.261545291718 Rmass_max_kg_m3_s=530937.1588978802 rho_Ralpha_signed_kg_s=-0.7530020766284776 rho_Ralpha_L1_kg_s=2404.51398954647 rho_source_signed_kg_s=1.32873599134153 rho_source_L1_kg_s=2.818245573171045 alphaOld_drho_signed_kg_s=-1.504319554959629 alphaOld_drho_L1_kg_s=1.671068300415962 face_density_noncommutation_signed_kg_s=-0.4565704631689084 face_density_noncommutation_L1_kg_s=0.5175655476419918 source_gamma_dgdt_signed_kg_s=-150.3986516905445 source_gamma_at_assembly_signed_kg_s=-150.4219854352558 source_gamma_actual_signed_kg_s=-150.893756540036 source_cutoff_at_assembly_delta_signed_kg_s=-0.02333374471067162 source_cutoff_at_assembly_delta_L1_kg_s=0.0234307226353794 source_state_delta_signed_kg_s=-0.4717711047800394 source_state_delta_L1_kg_s=0.8325078066871404 source_split_identity_error_signed_kg_s=1.04980222264495e-14 source_split_identity_error_L1_kg_s=4.391374370177729e-14 source_split_identity_error_max_kg_m3_s=1.278433216238171e-09 divU_source_signed_kg_s=152.2224925313769 identity_error_signed_kg_s=-3.378193836508693e-12 identity_error_L1_kg_s=8.12641271671911e-10 identity_error_max_kg_m3_s=1.063733323647398e-09 div_alphaPhi_rhoFace_integral_kg_s=1.401612159668275e-11 boundary_water_flux_kg_s=-2.435360131360323e-23 divFlux_boundary_difference_kg_s=1.40161215967071e-11 source_denominator_floor_cells=109170 continuity_source_terms=none_in_configured_phase_mass_equations flux_density=fvc_interpolate(rho1)_after_correctRho",
+            "I4F_ALPHA_MASS_BUDGET_EOS_V3 time_s=0.490813343913 time_index=2280 source_outer_iteration=16 source_call_index=31 source_dgdt_generation=30 pressure_pass=32 source_mode=frozen_predictor_full_source Ralpha_signed_m3_s=-7.103406291261819e-07 Ralpha_L1_m3_s=7.43515038102985e-05 Ralpha_max_s-1=0.03116642660478863 Rmass_signed_kg_s=-0.02200597706847616 Rmass_L1_kg_s=0.09573324498439525 Rmass_max_kg_m3_s=697.0593644348538 rho_Ralpha_signed_kg_s=-0.0007021123807379886 rho_Ralpha_L1_kg_s=0.07422467482304243 rho_source_signed_kg_s=1.959820265971363 rho_source_L1_kg_s=2.160912441704773 alphaOld_drho_signed_kg_s=-1.52443436972262 alphaOld_drho_L1_kg_s=1.702116500396513 face_density_noncommutation_signed_kg_s=-0.4566897609306814 face_density_noncommutation_L1_kg_s=0.5176290670303678 source_gamma_dgdt_signed_kg_s=-149.9102762261134 source_gamma_at_assembly_signed_kg_s=-149.9316934479628 source_gamma_actual_signed_kg_s=-149.9317272730258 source_cutoff_at_assembly_delta_signed_kg_s=-0.02141722184782923 source_cutoff_at_assembly_delta_L1_kg_s=0.02151090097818762 source_state_delta_signed_kg_s=-3.382506302954089e-05 source_state_delta_L1_kg_s=4.662465053700135e-05 source_split_identity_error_signed_kg_s=-1.096598259341585e-14 source_split_identity_error_L1_kg_s=4.040408279858839e-14 source_split_identity_error_max_kg_m3_s=8.413015104227743e-10 divU_source_signed_kg_s=151.8915475389958 identity_error_signed_kg_s=-5.799513147476245e-12 identity_error_L1_kg_s=8.449289467700485e-10 identity_error_max_kg_m3_s=1.063744647922249e-09 div_alphaPhi_rhoFace_integral_kg_s=1.092193002705244e-11 boundary_water_flux_kg_s=1.068339884415104e-23 divFlux_boundary_difference_kg_s=1.092193002704176e-11 source_denominator_floor_cells=113690 continuity_source_terms=none_in_configured_phase_mass_equations flux_density=fvc_interpolate(rho1)_after_correctRho"
+          ],
+          "I4F_OUTER_STATE_DELTA": [
+            "I4F_OUTER_STATE_DELTA time_s=0.490813343913 outer_iteration=1 reference=start_of_this_outer_iteration first_outer_reference=previous_time_step_state max_abs_dp_Pa=3051.92359963413 max_rel_dp=0.03430250836391062 max_abs_dU_m_s=0.7896510660254751 max_abs_dphi_m3_s=0.0001608596083586128 max_abs_dalpha1=0.05832904080500967 max_abs_dT_K=0.08675326408143746 max_abs_drho1_kg_m3=0.001444234363816577 max_abs_drho2_kg_m3=0.03769888522281128 scope=internal_cells_and_internal_faces",
+            "I4F_OUTER_STATE_DELTA time_s=0.490813343913 outer_iteration=16 reference=start_of_this_outer_iteration first_outer_reference=previous_time_step_state max_abs_dp_Pa=49.79422833706485 max_rel_dp=0.0005006603519011064 max_abs_dU_m_s=0.4371354503943826 max_abs_dphi_m3_s=3.244913882044813e-05 max_abs_dalpha1=9.064232709987685e-05 max_abs_dT_K=0 max_abs_drho1_kg_m3=2.261964755234658e-05 max_abs_drho2_kg_m3=0.0005908872937225862 scope=internal_cells_and_internal_faces"
+          ],
+          "I4F_THERMO_ENVELOPE": [
+            "I4F_THERMO_ENVELOPE time_s=0.490813343913 outer=1 pass=1 alpha_cutoff=0.001 water_supported_cells=128758 min_raw_p_water_Pa=32889.30752844803 min_p_rank=0 min_p_local_cell=4399 min_p_alpha_water=0.997158270868692 min_p_T_K=293.3084137528776 min_p_Cx_m=4.220087803507014 min_p_Cy_m=-0.3808156806577422 min_p_Cz_m=0.9709147146145044 max_T_water_supported_K=293.4173992998471 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2375.720343453039 saturation_margin_Pa=30513.58718499499 saturation_margin_ok=1",
+            "I4F_THERMO_ENVELOPE time_s=0.490813343913 outer=16 pass=32 alpha_cutoff=0.001 water_supported_cells=128772 min_raw_p_water_Pa=32869.10121543532 min_p_rank=0 min_p_local_cell=4399 min_p_alpha_water=0.9972011277493669 min_p_T_K=293.3084267362036 min_p_Cx_m=4.220087803507014 min_p_Cy_m=-0.3808156806577422 min_p_Cz_m=0.9709147146145044 max_T_water_supported_K=293.414131693368 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2375.240427826635 saturation_margin_Pa=30493.86078760868 saturation_margin_ok=1"
+          ]
+        },
+        "source_diagnostic_line_counts": {
+          "CLAMP_TRACE_RAW": 32,
+          "I4F_ALPHA_MASS_BUDGET_ALPHA_V3": 16,
+          "I4F_ALPHA_MASS_BUDGET_EOS_V3": 32,
+          "I4F_OUTER_STATE_DELTA": 16,
+          "I4F_THERMO_ENVELOPE": 32
+        },
+        "uniform_time_s": 0.4908133439132807
+      },
+      "explicit-1e-5": {
+        "effective_floor_dimensionless": 1e-05,
+        "native_files": [
+          {
+            "bytes": 2652298,
+            "field": "alpha.water",
+            "sha256": "df34c8cf0eb63a6acf84a303e9da6bc2b2c287a65ade7a90065ab5b1942b202e"
+          },
+          {
+            "bytes": 3206857,
+            "field": "p",
+            "sha256": "1dba4e2fa34c3cb661408904212add87fa77841c369ff33667f18aee3d9e31ce"
+          },
+          {
+            "bytes": 3796238,
+            "field": "p_rgh",
+            "sha256": "35dcc6354a86f9d260b7b090f0ba3c80dd284914881df8852944ebf1282d7247"
+          },
+          {
+            "bytes": 2658642,
+            "field": "T",
+            "sha256": "ab60a6a593440e4863614a049593a75f1c5458246208babe15298d2eea57dce7"
+          },
+          {
+            "bytes": 7938894,
+            "field": "U",
+            "sha256": "9218859287033d75bb576e40eb125ab5ed4db55827cc61316a593030b68796c0"
+          },
+          {
+            "bytes": 3204683,
+            "field": "k",
+            "sha256": "b83a5c28534ef4a9536f6d1d5fbe222b878c97ef14dea35513334ed2bfadad2e"
+          },
+          {
+            "bytes": 3206553,
+            "field": "omega",
+            "sha256": "9ea2e87d8b39c8b23a4e1517c84d09efcfc4cf71cbe7b25054898bf892b5c0b9"
+          },
+          {
+            "bytes": 3208051,
+            "field": "nut",
+            "sha256": "9d85b8bf7a4429b5a1b12e4e6001966a604abc764d8cfc4ac3bf1c07a4cf79f5"
+          },
+          {
+            "bytes": 3207527,
+            "field": "alphat",
+            "sha256": "13b28ff5477c12f2bc637d3ca285c7cf46b8b3b7835be046e24f66f5c7817f25"
+          },
+          {
+            "bytes": 2658650,
+            "field": "T.air",
+            "sha256": "ad482cd2be057cbb5e21d01557e108b719500c9ad8b881c64216eea68c0d8341"
+          },
+          {
+            "bytes": 2658654,
+            "field": "T.water",
+            "sha256": "7628f7ad95e3055b69b4960ada0375ca3871f89e3731180560edb6d33ae4dbcb"
+          },
+          {
+            "bytes": 3206851,
+            "field": "rho",
+            "sha256": "7e676058d8e8f2683c3b706853734f0e801b09f4fee8671b09ca89f1f8bb67b2"
+          },
+          {
+            "bytes": 7726577,
+            "field": "phi",
+            "sha256": "41c6475db42433b3bce761893c04ec4bf650feeab7ffa0f5d0e07e3b31840d34"
+          },
+          {
+            "bytes": 7722877,
+            "field": "alphaPhi0.water",
+            "sha256": "fb3da724556d63eef70c3f466460ad8529139a582114c94e93280f20cd822ae8"
+          },
+          {
+            "bytes": 3203849,
+            "field": "dgdt",
+            "sha256": "6602f588b32650fc1c24c8e18d51f29a3a9f4fe27a4110afc012559daeaffebb"
+          },
+          {
+            "bytes": 1074,
+            "field": "uniform/time",
+            "sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873"
+          }
+        ],
+        "normal_End": true,
+        "requested_Time_seen": true,
+        "solver_log_path": "results/runs/i4f-alpha-source-floor-sensitivity-20261027T061106Z/arms/native-step-002/logs-attempt004/explicit-1e-5-solver.log",
+        "solver_log_sha256": "27bc9b3c763a4da64b0b596c3431db71e7d5238ddfbdefdfb51ddf2a45a310ac",
+        "source_diagnostic_first_last": {
+          "CLAMP_TRACE_RAW": [
+            "CLAMP_TRACE_RAW time_s=0.490813343913 outer=1 pass=1 pMin_Pa=10000 raw_cell_p_min_Pa=32889.24310754902 raw_cell_p_max_Pa=524545.8443593404 cells_strictly_below_pMin=0 clipped_water_volume_m3=0 clipped_water_mass_kg=0 local_cells_below_pMin=0",
+            "CLAMP_TRACE_RAW time_s=0.490813343913 outer=16 pass=32 pMin_Pa=10000 raw_cell_p_min_Pa=32868.46957005095 raw_cell_p_max_Pa=524545.8034020239 cells_strictly_below_pMin=0 clipped_water_volume_m3=0 clipped_water_mass_kg=0 local_cells_below_pMin=0"
+          ],
+          "I4F_ALPHA_MASS_BUDGET_ALPHA_V3": [
+            "I4F_ALPHA_MASS_BUDGET_ALPHA_V3 time_s=0.490813343913 time_index=2280 outer_iteration=1 source_mode=frozen_predictor_full_source source_call_index=1 alpha_ddt_scheme=1(Euler) alpha_rho_ddt_scheme=1(Euler) dgdt_generation=0 alpha_relax_active=1 alpha_relax_omega=0.5 source_assembly_alpha_min=-1.088709954276104e-09 source_assembly_alpha_max=1.000000000000051 source_assembly_gamma_min_s-1=-34.62039325725345 source_assembly_gamma_max_s-1=30.48774010507331 source_assembly_Su_min_s-1=0 source_assembly_Su_max_s-1=80603.06328736684 source_assembly_Sp_min_s-1=-80603.06328736684 source_assembly_Sp_max_s-1=0 candidate_Ralpha_signed_m3_s=-5.514847123452252e-08 candidate_Ralpha_L1_m3_s=5.662934990079854e-08 candidate_Ralpha_max_s-1=0.0009577913696144571 applied_Ralpha_signed_m3_s=-0.0009921585375944069 applied_Ralpha_L1_m3_s=2.40862690177029 applied_Ralpha_max_s-1=530.0349356390535 applied_gamma_assembly_signed_m3_s=-0.1506463976927757 applied_gamma_actual_signed_m3_s=-0.151119729756154 applied_cutoff_at_assembly_signed_m3_s=-4.798662030239412e-06 applied_cutoff_at_assembly_L1_m3_s=4.808133684198359e-06 applied_source_state_delta_signed_m3_s=-0.0004733320633783183 applied_source_state_delta_L1_m3_s=0.0008356650725622022 applied_divU_source_signed_m3_s=0.1524684238546913 source_split_identity_error_max_s-1=9.061529304688065e-12 source_denominator_floor_cells=108097 source_effective=Su+Sp*alpha+divU_mode_specific residual=ddtEuler_alpha+div(alphaPhi)-source",
+            "I4F_ALPHA_MASS_BUDGET_ALPHA_V3 time_s=0.490813343913 time_index=2280 outer_iteration=16 source_mode=frozen_predictor_full_source source_call_index=31 alpha_ddt_scheme=1(Euler) alpha_rho_ddt_scheme=1(Euler) dgdt_generation=30 alpha_relax_active=1 alpha_relax_omega=0.5 source_assembly_alpha_min=-1.49247897341611e-09 source_assembly_alpha_max=1.000000000000052 source_assembly_gamma_min_s-1=-30.11744887787246 source_assembly_gamma_max_s-1=26.66938990658069 source_assembly_Su_min_s-1=0 source_assembly_Su_max_s-1=73643.79866234203 source_assembly_Sp_min_s-1=-73643.79866234203 source_assembly_Sp_max_s-1=0 candidate_Ralpha_signed_m3_s=-1.387620951376247e-09 candidate_Ralpha_L1_m3_s=2.711509493910593e-08 candidate_Ralpha_max_s-1=0.0005572788022920595 applied_Ralpha_signed_m3_s=-8.125943751858442e-07 applied_Ralpha_L1_m3_s=7.444517510535678e-05 applied_Ralpha_max_s-1=0.0311676404539023 applied_gamma_assembly_signed_m3_s=-0.1501569285406903 applied_gamma_actual_signed_m3_s=-0.1501569706497772 applied_cutoff_at_assembly_signed_m3_s=-4.266320775454364e-06 applied_cutoff_at_assembly_L1_m3_s=4.275262854458093e-06 applied_source_state_delta_signed_m3_s=-4.21090869464052e-08 applied_source_state_delta_L1_m3_s=6.242284688265619e-08 applied_divU_source_signed_m3_s=0.1521371734994705 source_split_identity_error_max_s-1=7.080114272639548e-12 source_denominator_floor_cells=112593 source_effective=Su+Sp*alpha+divU_mode_specific residual=ddtEuler_alpha+div(alphaPhi)-source"
+          ],
+          "I4F_ALPHA_MASS_BUDGET_EOS_V3": [
+            "I4F_ALPHA_MASS_BUDGET_EOS_V3 time_s=0.490813343913 time_index=2280 source_outer_iteration=1 source_call_index=1 source_dgdt_generation=0 pressure_pass=1 source_mode=frozen_predictor_full_source Ralpha_signed_m3_s=-0.0009921585375944069 Ralpha_L1_m3_s=2.40862690177029 Ralpha_max_s-1=530.0349356390535 Rmass_signed_kg_s=-1.376559952044885 Rmass_L1_kg_s=2405.254060293913 Rmass_max_kg_m3_s=530937.1588947795 rho_Ralpha_signed_kg_s=-0.7622739322550965 rho_Ralpha_L1_kg_s=2404.5203965387 rho_source_signed_kg_s=1.346602784026172 rho_source_L1_kg_s=2.802594055382478 alphaOld_drho_signed_kg_s=-1.504318357595121 alphaOld_drho_L1_kg_s=1.671067529079474 face_density_noncommutation_signed_kg_s=-0.4565704462153489 face_density_noncommutation_L1_kg_s=0.5175655515954345 source_gamma_dgdt_signed_kg_s=-150.3986516906205 source_gamma_at_assembly_signed_kg_s=-150.403441724721 source_gamma_actual_signed_kg_s=-150.8758875492172 source_cutoff_at_assembly_delta_signed_kg_s=-0.004790034099968879 source_cutoff_at_assembly_delta_L1_kg_s=0.004799489043933656 source_state_delta_signed_kg_s=-0.472445824496088 source_state_delta_L1_kg_s=0.8341942017655823 source_split_identity_error_signed_kg_s=-3.845612232472735e-15 source_split_identity_error_L1_kg_s=1.130792170452463e-13 source_split_identity_error_max_kg_m3_s=9.045176934729836e-09 divU_source_signed_kg_s=152.2224903332429 identity_error_signed_kg_s=-8.082471749955103e-12 identity_error_L1_kg_s=8.115719136171441e-10 identity_error_max_kg_m3_s=1.063733323647398e-09 div_alphaPhi_rhoFace_integral_kg_s=1.754218992289225e-11 boundary_water_flux_kg_s=-2.435359735681691e-23 divFlux_boundary_difference_kg_s=1.75421899229166e-11 source_denominator_floor_cells=108097 continuity_source_terms=none_in_configured_phase_mass_equations flux_density=fvc_interpolate(rho1)_after_correctRho",
+            "I4F_ALPHA_MASS_BUDGET_EOS_V3 time_s=0.490813343913 time_index=2280 source_outer_iteration=16 source_call_index=31 source_dgdt_generation=30 pressure_pass=32 source_mode=frozen_predictor_full_source Ralpha_signed_m3_s=-8.125943751858442e-07 Ralpha_L1_m3_s=7.444517510535678e-05 Ralpha_max_s-1=0.0311676404539023 Rmass_signed_kg_s=-0.0049569111262972 Rmass_L1_kg_s=0.07862250151176227 Rmass_max_kg_m3_s=205.2438661831613 rho_Ralpha_signed_kg_s=-0.0008041819935559096 rho_Ralpha_L1_kg_s=0.07431817738455472 rho_source_signed_kg_s=1.976971153675062 rho_source_L1_kg_s=2.144024601072942 alphaOld_drho_signed_kg_s=-1.524434145978938 alphaOld_drho_L1_kg_s=1.702116537106038 face_density_noncommutation_signed_kg_s=-0.4566897368261015 face_density_noncommutation_L1_kg_s=0.5176290756748932 source_gamma_dgdt_signed_kg_s=-149.9105901406093 source_gamma_at_assembly_signed_kg_s=-149.9148487918331 source_gamma_actual_signed_kg_s=-149.9148908240373 source_cutoff_at_assembly_delta_signed_kg_s=-0.004258651222708255 source_cutoff_at_assembly_delta_L1_kg_s=0.004267577547801283 source_state_delta_signed_kg_s=-4.203220431767776e-05 source_state_delta_L1_kg_s=6.231143144345466e-05 source_split_identity_error_signed_kg_s=3.550559676002078e-14 source_split_identity_error_L1_kg_s=1.272871448127908e-13 source_split_identity_error_max_kg_m3_s=7.067337817813239e-09 divU_source_signed_kg_s=151.8918619777124 identity_error_signed_kg_s=-2.778625179236903e-12 identity_error_L1_kg_s=8.460739038672709e-10 identity_error_max_kg_m3_s=1.064730748012721e-09 div_alphaPhi_rhoFace_integral_kg_s=1.723243769902183e-11 boundary_water_flux_kg_s=-2.297735048100159e-23 divFlux_boundary_difference_kg_s=1.723243769904481e-11 source_denominator_floor_cells=112593 continuity_source_terms=none_in_configured_phase_mass_equations flux_density=fvc_interpolate(rho1)_after_correctRho"
+          ],
+          "I4F_OUTER_STATE_DELTA": [
+            "I4F_OUTER_STATE_DELTA time_s=0.490813343913 outer_iteration=1 reference=start_of_this_outer_iteration first_outer_reference=previous_time_step_state max_abs_dp_Pa=3052.006223585369 max_rel_dp=0.03430250258736637 max_abs_dU_m_s=0.7896541034806804 max_abs_dphi_m3_s=0.0001608595546919184 max_abs_dalpha1=0.05832904080447954 max_abs_dT_K=0.08675326408143746 max_abs_drho1_kg_m3=0.001444182211685074 max_abs_drho2_kg_m3=0.03769752386492509 scope=internal_cells_and_internal_faces",
+            "I4F_OUTER_STATE_DELTA time_s=0.490813343913 outer_iteration=16 reference=start_of_this_outer_iteration first_outer_reference=previous_time_step_state max_abs_dp_Pa=49.79404508219159 max_rel_dp=0.0005006585051234877 max_abs_dU_m_s=0.4371335500006537 max_abs_dphi_m3_s=3.244898449603171e-05 max_abs_dalpha1=9.064389094115555e-05 max_abs_dT_K=0 max_abs_drho1_kg_m3=2.261956922211539e-05 max_abs_drho2_kg_m3=0.0005908852491829375 scope=internal_cells_and_internal_faces"
+          ],
+          "I4F_THERMO_ENVELOPE": [
+            "I4F_THERMO_ENVELOPE time_s=0.490813343913 outer=1 pass=1 alpha_cutoff=0.001 water_supported_cells=128758 min_raw_p_water_Pa=32889.24310754902 min_p_rank=0 min_p_local_cell=4399 min_p_alpha_water=0.9971582708687106 min_p_T_K=293.3084137528662 min_p_Cx_m=4.220087803507014 min_p_Cy_m=-0.3808156806577422 min_p_Cz_m=0.9709147146145044 max_T_water_supported_K=293.4173992998551 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2375.720343454215 saturation_margin_Pa=30513.5227640948 saturation_margin_ok=1",
+            "I4F_THERMO_ENVELOPE time_s=0.490813343913 outer=16 pass=32 alpha_cutoff=0.001 water_supported_cells=128772 min_raw_p_water_Pa=32868.46957005095 min_p_rank=0 min_p_local_cell=4399 min_p_alpha_water=0.9972010800557425 min_p_T_K=293.3084267340691 min_p_Cx_m=4.220087803507014 min_p_Cy_m=-0.3808156806577422 min_p_Cz_m=0.9709147146145044 max_T_water_supported_K=293.4141316758752 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2375.240425257679 saturation_margin_Pa=30493.22914479328 saturation_margin_ok=1"
+          ]
+        },
+        "source_diagnostic_line_counts": {
+          "CLAMP_TRACE_RAW": 32,
+          "I4F_ALPHA_MASS_BUDGET_ALPHA_V3": 16,
+          "I4F_ALPHA_MASS_BUDGET_EOS_V3": 32,
+          "I4F_OUTER_STATE_DELTA": 16,
+          "I4F_THERMO_ENVELOPE": 32
+        },
+        "uniform_time_s": 0.4908133439132807
+      }
+    },
+    "container_id": "7535048861f64295a0ebf6256f76a8043c4f7e9115d23e35aa707fc09c663a07",
+    "container_name": "i4f-alpha-source-floor-20261027t061106z-native-step004",
+    "default_vs_published_v3_endpoint": {
+      "T": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "3541d9145adec68be553659da0fa36aee2b2d0ab601cd885eecdb35dd698918d",
+        "prior_v3_sha256": "3541d9145adec68be553659da0fa36aee2b2d0ab601cd885eecdb35dd698918d"
+      },
+      "T.air": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "80dab8fda525dc4807b44fd56c6dc50cc36399828684595977fba7f5dce2f25a",
+        "prior_v3_sha256": "80dab8fda525dc4807b44fd56c6dc50cc36399828684595977fba7f5dce2f25a"
+      },
+      "T.water": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "fa9374728c20fa8251f0aa105864eb0f456ac2dcaa4f762839d9f29a6c1aa28c",
+        "prior_v3_sha256": "fa9374728c20fa8251f0aa105864eb0f456ac2dcaa4f762839d9f29a6c1aa28c"
+      },
+      "U": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "65fc9cd847f60a8f994fc617fe89f13aec38e8c40b0ae04bbb8a23d707dee241",
+        "prior_v3_sha256": "65fc9cd847f60a8f994fc617fe89f13aec38e8c40b0ae04bbb8a23d707dee241"
+      },
+      "alpha.water": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "e4147608cd80fc9535983b630060eb3fe35dbd6a58cb09392ceee659dd3611d2",
+        "prior_v3_sha256": "e4147608cd80fc9535983b630060eb3fe35dbd6a58cb09392ceee659dd3611d2"
+      },
+      "alphaPhi0.water": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "a8ef461ad3490d8c6bc0cbe3011efa0290533a071a8ca5a19f1532d36a62aa3e",
+        "prior_v3_sha256": "a8ef461ad3490d8c6bc0cbe3011efa0290533a071a8ca5a19f1532d36a62aa3e"
+      },
+      "alphat": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "b17390c5e93a63f135f2be22115a1c98360d6b014a73b1764cebfdfdf280253f",
+        "prior_v3_sha256": "b17390c5e93a63f135f2be22115a1c98360d6b014a73b1764cebfdfdf280253f"
+      },
+      "dgdt": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "157b16914112a6582265183002d330f3b91a8d9487973aca78ba2f69068c33dd",
+        "prior_v3_sha256": "157b16914112a6582265183002d330f3b91a8d9487973aca78ba2f69068c33dd"
+      },
+      "k": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "966dc58830877f4ef22e2dcc0dafc630301736e278dda3ff7d8d2d0f5426cbb2",
+        "prior_v3_sha256": "966dc58830877f4ef22e2dcc0dafc630301736e278dda3ff7d8d2d0f5426cbb2"
+      },
+      "nut": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "3ba820cabbbd7d6fa062028ad428bb991513483ca11360e6bb142f6881f67b00",
+        "prior_v3_sha256": "3ba820cabbbd7d6fa062028ad428bb991513483ca11360e6bb142f6881f67b00"
+      },
+      "omega": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "f13dc10ce2ab6114364afa4bfe220eb98eff0c6212479b595559d884957fb3d7",
+        "prior_v3_sha256": "f13dc10ce2ab6114364afa4bfe220eb98eff0c6212479b595559d884957fb3d7"
+      },
+      "p": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "e78c6c2d62a359f000d1daeb2caa27f5db5ec7b35e4b5dbd7ac494910906022d",
+        "prior_v3_sha256": "e78c6c2d62a359f000d1daeb2caa27f5db5ec7b35e4b5dbd7ac494910906022d"
+      },
+      "p_rgh": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "7346a2b964df79c5e1f5fe599fa420b19abb626ed74f623d244d8f93d2de106b",
+        "prior_v3_sha256": "7346a2b964df79c5e1f5fe599fa420b19abb626ed74f623d244d8f93d2de106b"
+      },
+      "phi": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "f38d0120536837f074380492600fd717a79b54c179606f60e3cafd9600d8258b",
+        "prior_v3_sha256": "f38d0120536837f074380492600fd717a79b54c179606f60e3cafd9600d8258b"
+      },
+      "rho": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "13cb256018e30b2b51f45f643dd9be11800b2e4684d325d20fe71fc580af10e4",
+        "prior_v3_sha256": "13cb256018e30b2b51f45f643dd9be11800b2e4684d325d20fe71fc580af10e4"
+      },
+      "uniform/time": {
+        "byte_identical_to_prior_v3": true,
+        "default_sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873",
+        "prior_v3_sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873"
+      }
+    },
+    "default_vs_trial_field_comparison": {
+      "T": {
+        "byte_identical": false,
+        "default_sha256": "3541d9145adec68be553659da0fa36aee2b2d0ab601cd885eecdb35dd698918d",
+        "trial_sha256": "ab60a6a593440e4863614a049593a75f1c5458246208babe15298d2eea57dce7"
+      },
+      "T.air": {
+        "byte_identical": false,
+        "default_sha256": "80dab8fda525dc4807b44fd56c6dc50cc36399828684595977fba7f5dce2f25a",
+        "trial_sha256": "ad482cd2be057cbb5e21d01557e108b719500c9ad8b881c64216eea68c0d8341"
+      },
+      "T.water": {
+        "byte_identical": false,
+        "default_sha256": "fa9374728c20fa8251f0aa105864eb0f456ac2dcaa4f762839d9f29a6c1aa28c",
+        "trial_sha256": "7628f7ad95e3055b69b4960ada0375ca3871f89e3731180560edb6d33ae4dbcb"
+      },
+      "U": {
+        "byte_identical": false,
+        "default_sha256": "65fc9cd847f60a8f994fc617fe89f13aec38e8c40b0ae04bbb8a23d707dee241",
+        "trial_sha256": "9218859287033d75bb576e40eb125ab5ed4db55827cc61316a593030b68796c0"
+      },
+      "alpha.water": {
+        "byte_identical": false,
+        "default_sha256": "e4147608cd80fc9535983b630060eb3fe35dbd6a58cb09392ceee659dd3611d2",
+        "trial_sha256": "df34c8cf0eb63a6acf84a303e9da6bc2b2c287a65ade7a90065ab5b1942b202e"
+      },
+      "alphaPhi0.water": {
+        "byte_identical": false,
+        "default_sha256": "a8ef461ad3490d8c6bc0cbe3011efa0290533a071a8ca5a19f1532d36a62aa3e",
+        "trial_sha256": "fb3da724556d63eef70c3f466460ad8529139a582114c94e93280f20cd822ae8"
+      },
+      "alphat": {
+        "byte_identical": false,
+        "default_sha256": "b17390c5e93a63f135f2be22115a1c98360d6b014a73b1764cebfdfdf280253f",
+        "trial_sha256": "13b28ff5477c12f2bc637d3ca285c7cf46b8b3b7835be046e24f66f5c7817f25"
+      },
+      "dgdt": {
+        "byte_identical": false,
+        "default_sha256": "157b16914112a6582265183002d330f3b91a8d9487973aca78ba2f69068c33dd",
+        "trial_sha256": "6602f588b32650fc1c24c8e18d51f29a3a9f4fe27a4110afc012559daeaffebb"
+      },
+      "k": {
+        "byte_identical": false,
+        "default_sha256": "966dc58830877f4ef22e2dcc0dafc630301736e278dda3ff7d8d2d0f5426cbb2",
+        "trial_sha256": "b83a5c28534ef4a9536f6d1d5fbe222b878c97ef14dea35513334ed2bfadad2e"
+      },
+      "nut": {
+        "byte_identical": false,
+        "default_sha256": "3ba820cabbbd7d6fa062028ad428bb991513483ca11360e6bb142f6881f67b00",
+        "trial_sha256": "9d85b8bf7a4429b5a1b12e4e6001966a604abc764d8cfc4ac3bf1c07a4cf79f5"
+      },
+      "omega": {
+        "byte_identical": false,
+        "default_sha256": "f13dc10ce2ab6114364afa4bfe220eb98eff0c6212479b595559d884957fb3d7",
+        "trial_sha256": "9ea2e87d8b39c8b23a4e1517c84d09efcfc4cf71cbe7b25054898bf892b5c0b9"
+      },
+      "p": {
+        "byte_identical": false,
+        "default_sha256": "e78c6c2d62a359f000d1daeb2caa27f5db5ec7b35e4b5dbd7ac494910906022d",
+        "trial_sha256": "1dba4e2fa34c3cb661408904212add87fa77841c369ff33667f18aee3d9e31ce"
+      },
+      "p_rgh": {
+        "byte_identical": false,
+        "default_sha256": "7346a2b964df79c5e1f5fe599fa420b19abb626ed74f623d244d8f93d2de106b",
+        "trial_sha256": "35dcc6354a86f9d260b7b090f0ba3c80dd284914881df8852944ebf1282d7247"
+      },
+      "phi": {
+        "byte_identical": false,
+        "default_sha256": "f38d0120536837f074380492600fd717a79b54c179606f60e3cafd9600d8258b",
+        "trial_sha256": "41c6475db42433b3bce761893c04ec4bf650feeab7ffa0f5d0e07e3b31840d34"
+      },
+      "rho": {
+        "byte_identical": false,
+        "default_sha256": "13cb256018e30b2b51f45f643dd9be11800b2e4684d325d20fe71fc580af10e4",
+        "trial_sha256": "7e676058d8e8f2683c3b706853734f0e801b09f4fee8671b09ca89f1f8bb67b2"
+      },
+      "uniform/time": {
+        "byte_identical": true,
+        "default_sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873",
+        "trial_sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873"
+      }
+    },
+    "docker_exit_code": 0,
+    "endpoint_budgets": {
+      "default-1e-4": {
+        "final_eos_pressure_pass": {
+          "Ralpha_L1_m3_s": 7.43515038102985e-05,
+          "Ralpha_signed_m3_s": -7.103406291261819e-07,
+          "Rmass_L1_kg_s": 0.09573324498439525,
+          "Rmass_signed_kg_s": -0.02200597706847616,
+          "identity_error_L1_kg_s": 8.449289467700485e-10,
+          "identity_error_signed_kg_s": -5.799513147476245e-12,
+          "pressure_pass": 32.0,
+          "rho_source_signed_kg_s": 1.959820265971363,
+          "source_cutoff_at_assembly_delta_signed_kg_s": -0.02141722184782923,
+          "source_denominator_floor_cells": 113690.0,
+          "source_outer_iteration": 16.0,
+          "source_state_delta_signed_kg_s": -3.382506302954089e-05
+        },
+        "final_outer_state_delta": {
+          "max_abs_dU_m_s": 0.4371354503943826,
+          "max_abs_dalpha1": 9.064232709987685e-05,
+          "max_abs_dp_Pa": 49.79422833706485,
+          "max_abs_dphi_m3_s": 3.244913882044813e-05,
+          "outer_iteration": 16.0
+        },
+        "final_whole_domain_phase_state": {
+          "gas_inventory_kg": 33.18310138734098,
+          "gas_signed_boundary_flux_kg_s": 2.877944000469257,
+          "stage": "after_correctRho",
+          "water_inventory_kg": 3198.006873712507,
+          "water_signed_boundary_flux_kg_s": 1.068339884415104e-23
+        },
+        "raw_pressure": {
+          "final_minimum_Pa": 32869.10121543532,
+          "max_cells_below_pMin": 0.0,
+          "max_clipped_water_mass_kg": 0.0,
+          "minimum_over_step_Pa": 32867.91873340428
+        }
+      },
+      "explicit-1e-5": {
+        "final_eos_pressure_pass": {
+          "Ralpha_L1_m3_s": 7.444517510535678e-05,
+          "Ralpha_signed_m3_s": -8.125943751858442e-07,
+          "Rmass_L1_kg_s": 0.07862250151176227,
+          "Rmass_signed_kg_s": -0.0049569111262972,
+          "identity_error_L1_kg_s": 8.460739038672709e-10,
+          "identity_error_signed_kg_s": -2.778625179236903e-12,
+          "pressure_pass": 32.0,
+          "rho_source_signed_kg_s": 1.976971153675062,
+          "source_cutoff_at_assembly_delta_signed_kg_s": -0.004258651222708255,
+          "source_denominator_floor_cells": 112593.0,
+          "source_outer_iteration": 16.0,
+          "source_state_delta_signed_kg_s": -4.203220431767776e-05
+        },
+        "final_outer_state_delta": {
+          "max_abs_dU_m_s": 0.4371335500006537,
+          "max_abs_dalpha1": 9.064389094115555e-05,
+          "max_abs_dp_Pa": 49.79404508219159,
+          "max_abs_dphi_m3_s": 3.244898449603171e-05,
+          "outer_iteration": 16.0
+        },
+        "final_whole_domain_phase_state": {
+          "gas_inventory_kg": 33.18310138527347,
+          "gas_signed_boundary_flux_kg_s": 2.877944000469304,
+          "stage": "after_correctRho",
+          "water_inventory_kg": 3198.006875531427,
+          "water_signed_boundary_flux_kg_s": -2.297735048100159e-23
+        },
+        "raw_pressure": {
+          "final_minimum_Pa": 32868.46957005095,
+          "max_cells_below_pMin": 0.0,
+          "max_clipped_water_mass_kg": 0.0,
+          "minimum_over_step_Pa": 32867.8584007068
+        }
+      }
+    },
+    "experiment_sha256": "5344536f952ce9ee460c451d753676bd8af6528f157fe362de141cc88bf3c38c",
+    "finished_at": "2026-10-27T06:32:46.909416305Z",
+    "fixed_controls": {
+      "MULESCorr": true,
+      "PIMPLE_nCorrectors": 2,
+      "PIMPLE_nOuterCorrectors": 16,
+      "ddt": "Euler",
+      "i4fAlphaMassBudgetAudit": true,
+      "i4fFrozenPredictorFullSource": true,
+      "i4fFrozenPredictorSp": true,
+      "i4fPhysicalAlphaFluxRelax": true,
+      "i4fPhysicalAlphaFluxRelaxOmega": 0.5,
+      "nAlphaCorr": 1,
+      "nAlphaSubCycles": 1
+    },
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "launch_manifest_sha256": "1d92d9e8a3d59a322f12cf4545356a73fa0bb4dd3a5602f09dc7d2a086fc7661",
+    "only_case_input_difference": {
+      "default_arm": "floor key omitted; compiled default 1e-4",
+      "default_input_manifest_sha256": "b367d892f5adb874204def8622b024c40705656baae457ad8edcd37a3758da18",
+      "input_file_manifest_differences": [
+        "case/system/controlDict"
+      ],
+      "path": "case/system/controlDict",
+      "trial_arm": "i4fAlphaSourceDenominatorFloor 1e-5",
+      "trial_input_manifest_sha256": "b7622d2d276cd9e7925d3315424b58d127d222e3b6b93b2117f94da76bacbc6b"
+    },
+    "outer_and_mass_budget_csv": "outer-and-mass-budget.csv",
+    "outer_and_mass_budget_csv_sha256": "f31cb604439df3004040aac769e98a9ad8a638fdb57fb919c9bfc74ce557531d",
+    "output_interpretation": {
+      "assembly_cutoff_abs_contribution_ratio_default_to_trial": 5.029109154003253,
+      "default_arm_matches_v3_endpoint_byte_for_byte": true,
+      "trial_changed_native_fields": [
+        "T",
+        "T.air",
+        "T.water",
+        "U",
+        "alpha.water",
+        "alphaPhi0.water",
+        "alphat",
+        "dgdt",
+        "k",
+        "nut",
+        "omega",
+        "p",
+        "p_rgh",
+        "phi",
+        "rho"
+      ],
+      "trial_time_field_unchanged": true,
+      "whole_domain_final_mass_residual_L1_reduction_fraction": 0.17873355776691868,
+      "whole_domain_final_signed_mass_residual_abs_reduction_factor": 4.439453625006703
+    },
+    "run_bundle": "results/runs/i4f-alpha-source-floor-sensitivity-20261027T061106Z",
+    "seed": {
+      "mesh_cell_count": 299214,
+      "parent_case": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case",
+      "seed_field_hashes": [
+        {
+          "bytes": 2652298,
+          "field": "alpha.water",
+          "sha256": "6e48ffd2eddcfedcc6535dd37d129e6bc4bf9dedd7b2ba365662c1fe73142a8f"
+        },
+        {
+          "bytes": 3206857,
+          "field": "p",
+          "sha256": "24f7de11fa3a8608c0167f7d88701a8459d1f9e99b2c2d49fd10b8e22dfac9b3"
+        },
+        {
+          "bytes": 3796238,
+          "field": "p_rgh",
+          "sha256": "f39ba5d715c9a60c586fc86cc6e874449ba5387533f421452362c349b24cfef6"
+        },
+        {
+          "bytes": 2658642,
+          "field": "T",
+          "sha256": "3c218b601c6d160439f8df2accd55d1e155e54b23cc4232f9ffc5dd4ac3cb320"
+        },
+        {
+          "bytes": 7938894,
+          "field": "U",
+          "sha256": "cddd6327b2a455bd7f1922b3f634ef1add07d71069285c6c154c130857f769bd"
+        },
+        {
+          "bytes": 3204683,
+          "field": "k",
+          "sha256": "c77c5a6eb109ad4a234487d1fc30dea998bd0790a30054911a766dd77a174932"
+        },
+        {
+          "bytes": 3206553,
+          "field": "omega",
+          "sha256": "30af6ae356ce1032bead08b98b61cfa88332349c87a644d9f922264da62c37a3"
+        },
+        {
+          "bytes": 3208051,
+          "field": "nut",
+          "sha256": "fc2458eac3b3f67f15e2c74ad644669b895ceeee9ae992a326c43e153ab3645d"
+        },
+        {
+          "bytes": 3207527,
+          "field": "alphat",
+          "sha256": "bd4a3b9baf08f4720a611338022b527a2a24159e50be84b7f39315e2a457c7c4"
+        },
+        {
+          "bytes": 2658650,
+          "field": "T.air",
+          "sha256": "284e1c035cd51039c506d905357471ab300166f999215412d693f54add79523c"
+        },
+        {
+          "bytes": 2658654,
+          "field": "T.water",
+          "sha256": "490b225b2a11fb2cef70dcb27fa5466804b8c41fcfb42bd5762d516a498631b0"
+        },
+        {
+          "bytes": 3206851,
+          "field": "rho",
+          "sha256": "4387558befb3a41cb9435a03dbab5a57f409a9b156c99717d7349ce79df6d884"
+        },
+        {
+          "bytes": 7726577,
+          "field": "phi",
+          "sha256": "8d04d8fd44e970541cde38fcb14b6ea15f20e723c3b0aeba4c6f53e41dc6577e"
+        },
+        {
+          "bytes": 7722877,
+          "field": "alphaPhi0.water",
+          "sha256": "b8a3fbef39f6eef19de3e3ebc826bb6e83bea880e5009dc7ad8a9a7665d67e29"
+        },
+        {
+          "bytes": 3203849,
+          "field": "dgdt",
+          "sha256": "0720ca55bc01a0c5ce9f606044744ed511e172eca958873e7decdedc0e376bba"
+        },
+        {
+          "bytes": 1074,
+          "field": "uniform/time",
+          "sha256": "c277a8935dade8a9c33d1c258073d809a4fb3a291ea14bb2155e65da0f6f8fa5"
+        }
+      ],
+      "source_checkpoint_field_count": 16,
+      "time_s": 0.490706656519
+    },
+    "stage_bundle": "results/runs/i4f-alpha-source-floor-sensitivity-20261027T061106Z/arms/native-step-002",
+    "started_at": "2026-10-27T06:28:10.713461603Z",
+    "status": "both_arms_normal_end_complete",
+    "target": {
+      "actual_time_s": 0.4908133439132807,
+      "delta_t_s": 0.0001066873942806877,
+      "requested_time_s": 0.4908133439134624
+    }
+  },
+  "purpose": "Compare the compiled v3 denominator default 1e-4 to a single 1e-5 trial at the same natural timestep.",
+  "schema": "i4f-alpha-source-denominator-floor-sensitivity/v1",
+  "source": {
+    "base_public_packet": "results/summaries/i4f_20261025/alpha-mass-budget-observer",
+    "base_public_v3_source_manifest_sha256": "806d3c5c5d1d60344a68a910fb20725ae922982f751101218cafef3b6ba44679",
+    "base_v3_target_tree_digest_sha256": "4b9cbedfba9d62e6f6e811ee5e43eb699ca904b798883a50d6d68ce584027add",
+    "binary_sha256": "0d3770e452136a22b11c3a6cc22074df72567161bce55409e13e1fee7c313272",
+    "compile_qualification": "Pinned v2512 build and -help exited successfully. Compiler stdout was not fully captured because docker logs were disabled for the streamed build; no bitwise rebuild claim is made.",
+    "compile_status": "compiled_help_passed",
+    "controlled_source_file_count": 6,
+    "controlled_source_files": [
+      {
+        "parent_bytes": 28752,
+        "parent_sha256": "b52522e0906905e24676898ae4828cdf9fe6915c711c8c2105b6def10c49b5b6",
+        "path": "applications/solvers/multiphase/VoF/alphaEqn.H",
+        "variant_bytes": 28856,
+        "variant_sha256": "e92b3582b4b40a6a6f6037893d1d67e967273d893b79f610243a23ae44869873"
+      },
+      {
+        "parent_bytes": 2905,
+        "parent_sha256": "fc1dce13303b83586d2b24b185bfa23e31843f640678cd2a1e78d5e4eaa455f3",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H",
+        "variant_bytes": 3087,
+        "variant_sha256": "08498a761186581bc84db7845762ea4f308a2c7a16f745267a199f73d6e44422"
+      },
+      {
+        "parent_bytes": 21809,
+        "parent_sha256": "612420c762c68f640a1e806193450256b30af82933e7274759019ec84f96e2b3",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+        "variant_bytes": 22712,
+        "variant_sha256": "a405d77592d004d7d2be52758588635ba184e5ff99d287d107b80e6f0df93691"
+      },
+      {
+        "parent_bytes": 14265,
+        "parent_sha256": "e8b49a90ed2eb1c8dc7b1ebd9bab3bcb9f5f1eca6ac5c7b2ccd3bcd0be913316",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetAlphaObserve.H",
+        "variant_bytes": 14317,
+        "variant_sha256": "84e079a8ef9b7017ae32e9678b30738dd541014f84fe38bd976699a7f12b7061"
+      },
+      {
+        "parent_bytes": 11355,
+        "parent_sha256": "97a72afdfb72aea2da83b808286b7159ab7c424f91884e0a78c0222b106527d2",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetEosObserve.H",
+        "variant_bytes": 11407,
+        "variant_sha256": "b506d18942b37272a7a05a0ddb323330ea5c2c53bc59dc457126907b2e477231"
+      },
+      {
+        "parent_bytes": 9486,
+        "parent_sha256": "8c4b1646a92cb2eb5e3ab540834353bedf9a1f2ceb45af10cfa86c69cee3c41a",
+        "path": "applications/solvers/multiphase/compressibleInterFoam/i4fPhysicalAlphaFluxRelaxApply.H",
+        "variant_bytes": 9540,
+        "variant_sha256": "ed7bf5caa861cd73cf0079dee9c0971024d3952ff09c5337f05b38359b021c0c"
+      }
+    ],
+    "direct_patch": "source/from-published-v3.patch",
+    "direct_patch_sha256": "13fc78c2966320e883bd1902a0cbdb69777278f4de0acde010af55a99327ee47",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "source_closure_manifest": "source-closure.json",
+    "source_closure_manifest_sha256": "42fa6ec52da9edf7c6da52cc73c0d3f27bbe10832eccc54222a105e9202d731a",
+    "variant_source_manifest_sha256": "2941b1f3fd65133291ee771c9c956ff52d480d180f0cdede275f133cfbb7beac"
+  }
+}

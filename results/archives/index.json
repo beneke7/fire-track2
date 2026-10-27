@@ -2631,6 +2631,16 @@
       "rebuild": "From each recorded reconstruction working directory, source /usr/lib/openfoam/openfoam2512/etc/bashrc then run the recorded `reconstructPar -fileHandler collated -time <time>` command. Rebuild was not run during cleanup.",
       "rebuild_verified_by_execution": false,
       "qualification": "Predelete original/native-clone time-tree path/size/SHA equivalence and terminal/no-FD state verified; source hashes unchanged after cleanup. Reconstructed caches are derived, not unique raw CFD output."
+    },
+    {
+      "manifest_path": "results/archives/manifests/i4f-derived-cache-recovery-20261027T0627Z.json",
+      "manifest_sha256": "f493389dcd7c525b123b24e2aadc4e509cd853928e52b671cc26b0bc51265079",
+      "observed_free_space_gain_bytes": 1907359744,
+      "net_free_space_change_over_window_bytes": 1885417472,
+      "deleted_scope": "Terminal older I4F global reconstruction outputs and one exact duplicate preflight cache only. Native processor fields, source meshes, checkpoints, controls, logs, source manifests, and final figures were retained.",
+      "rebuild_verified_by_execution": false,
+      "rebuild": "Recorded reconstructPar commands regenerate the global timegroups from retained native processor fields; the duplicate preflight mirror also has an exact retained global twin.",
+      "qualification": "Original and clone native time-tree SHA equivalence, terminal/no-FD state, and retained duplicate hashes were checked before removal. No unique native fields were removed; no rebuild smoke was performed."
     }
   ]
 }
