@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 13:01 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 13:10 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -24,8 +24,8 @@ equivalents and 32 GiB memory allowance. Exact container identities:
 
 | Case | Container | Verified continuation progress |
 | --- | --- | --- |
-| 299,214-cell baseline | `cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3` | Started 10:35:32 UTC from .259831959 s; 1,328 steps completed through .425957 s. |
-| 323,682-cell corridor mesh | `c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96` | Started 10:44:17 UTC from .239331959 s; 1,058 steps completed through .371707 s. |
+| 299,214-cell baseline | `cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3` | Started 10:35:32 UTC from .259831959 s; 1,561 steps completed through .455082 s. |
+| 323,682-cell corridor mesh | `c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96` | Started 10:44:17 UTC from .239331959 s; 1,271 steps completed through .398332 s. |
 
 Both first-step checks have zero raw pressure-floor contacts, clipped mass,
 parser errors or diagnostic errors. This early health does not predict survival
@@ -181,6 +181,10 @@ pre-failure state with dgdt/oldTime and natural 179.288 microsecond step retaine
 64 outer iterations maximum, unchanged EOS/cutoff/mesh/BCs/floor. Compare unrelaxed
 defects and physical phase balances before any clamp. The older .55 s quarter-
 weight continuation remains staged/no GO. Full-case settings are unchanged.
+The clean pre-step capture is actually running under exact Docker
+`9afa2d61a2c9667367b8ef1ac5117f7a820bf3f44e897010791e94ca2fc0fd17`
+(StartedAt 13:05:35 UTC; one CPU/4 GiB). The 64-outer A/B arms are not yet launched;
+the new read-only trace and checkpoint-dgdt restoration hook are being checked.
 
 A read-only companion restores the historical native x-plane reader for the
 processor-only baseline: all 53 processor mesh/map files match the retained
