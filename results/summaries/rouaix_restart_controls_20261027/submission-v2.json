@@ -1,0 +1,75 @@
+{
+  "allocation": {
+    "cpus_per_task": 1,
+    "gpu_request": null,
+    "memory_gib_per_node": 22,
+    "nodes": 3,
+    "partition": "cpu-short",
+    "ranks": 120,
+    "tasks_per_node": [
+      40,
+      40,
+      40
+    ]
+  },
+  "control": {
+    "case_id": "rouaix-restart-original-control-0300",
+    "delta_t_s": 0.0001,
+    "dependency": "afterok:14676288",
+    "hold_state": "PENDING/JobHeldUser",
+    "job_id": "14676290",
+    "kill_on_invalid_dependency": true,
+    "parent_smoke_job_id": "14676288",
+    "start_s": 0.2,
+    "submission_command": "sbatch --parsable --hold --dependency=afterok:14676288 --kill-on-invalid-dep=yes --export=ALL,ROUAIX_PARENT_SMOKE_JOB_ID=14676288 /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v2-20261027/unpacked/cases/e1_rouaix_hpc_restart/restart_control.sbatch",
+    "target_s": 0.3,
+    "time_limit_s": 5400,
+    "variant": "original-control"
+  },
+  "local_checks": {
+    "focused_tests": "13 passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed"
+  },
+  "notes": [
+    "Both v2 jobs are held pending review/release.",
+    "The control runner requires the successful v2 smoke result state, allocation, convergence, interval ledger, terminal receipt, and verified packed archive before preparation.",
+    "No pressure-boundary candidate submitted in this stage."
+  ],
+  "old_v1_jobs": {
+    "auditor_14676006": "left untouched",
+    "smoke_14675897": "left untouched"
+  },
+  "recorded_utc": "2026-10-27T18:02:07Z",
+  "remote_source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v2-20261027/unpacked",
+  "remote_source_verification": {
+    "control_steps": 1000,
+    "cray_python_numpy": "1.24.4",
+    "member_bytes_and_sha256_verified": true,
+    "runtime_imports": [
+      "cases.e1_rouaix_hpc_restart.run_restart",
+      "cases.e1_rouaix_hpc_restart.audit_restart",
+      "cases.e1_rouaix_hpc.run_pilot"
+    ],
+    "smoke_steps": 10,
+    "tar_sha256_verified": true
+  },
+  "schema_version": 2,
+  "smoke": {
+    "case_id": "rouaix-restart-original-smoke-0201",
+    "delta_t_s": 0.0001,
+    "dependency": null,
+    "hold_state": "PENDING/JobHeldUser",
+    "job_id": "14676288",
+    "start_s": 0.2,
+    "submission_command": "sbatch --parsable --hold /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v2-20261027/unpacked/cases/e1_rouaix_hpc_restart/restart_smoke_v2.sbatch",
+    "target_s": 0.201,
+    "time_limit_s": 1200,
+    "variant": "original-smoke"
+  },
+  "solver_steps_observed": 0,
+  "source_capsule": "restart-source-v2.tar.gz",
+  "source_capsule_bytes": 127425,
+  "source_capsule_files": 16,
+  "source_capsule_sha256": "d4de27c68f50afca40920e8553a3b82992777516cc6c6958ad9b300bf495c5dd"
+}

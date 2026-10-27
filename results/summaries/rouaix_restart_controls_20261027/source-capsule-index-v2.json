@@ -1,0 +1,120 @@
+{
+  "allocation": {
+    "gpu_request": null,
+    "memory_gib_per_node": 22,
+    "nodes": 3,
+    "partition": "cpu-short",
+    "ranks": 120,
+    "tasks_per_node": [
+      40,
+      40,
+      40
+    ]
+  },
+  "capsule": "restart-source-v2.tar.gz",
+  "capsule_bytes": 127425,
+  "capsule_sha256": "d4de27c68f50afca40920e8553a3b82992777516cc6c6958ad9b300bf495c5dd",
+  "files": [
+    {
+      "bytes": 40923,
+      "path": "cases/e1_rouaix_hpc_restart/run_restart.py",
+      "sha256": "a7120e3fc1be1194c24856b9a152bc0b1b414b425b8c29f4868159c3507c052c"
+    },
+    {
+      "bytes": 1823,
+      "path": "cases/e1_rouaix_hpc_restart/restart_smoke_v2.sbatch",
+      "sha256": "371540f16fa3825e3ecf03c83fe2c8e1bb580594572c5bfce25477bfba1fb259"
+    },
+    {
+      "bytes": 1926,
+      "path": "cases/e1_rouaix_hpc_restart/restart_control.sbatch",
+      "sha256": "4b17127680374cae35fc38ff785af8e48f1475bec6cd5d108ce1379becc66013"
+    },
+    {
+      "bytes": 24943,
+      "path": "cases/e1_rouaix_hpc_restart/audit_restart.py",
+      "sha256": "5ecdc5216480ee50c65f423c60da688d1afa036a6a668518b70f7dd5d3c7ba3d"
+    },
+    {
+      "bytes": 96464,
+      "path": "cases/e1_rouaix_hpc/run_pilot.py",
+      "sha256": "40451793b20fb7365dc7a691f16557ce349719735295f7aa2ffddb1ba7f4d21a"
+    },
+    {
+      "bytes": 10632,
+      "path": "cases/e1_rouaix_hpc/collect_native_provenance.py",
+      "sha256": "c1ad1f7dd8ae5118ad9ba36b7cca3a362b85fb38b3058a351eb46eb9d8d9ca35"
+    },
+    {
+      "bytes": 45698,
+      "path": "cases/e1_rouaix_hpc/prepare_case.py",
+      "sha256": "d117fa7d0a08ccbadb1dc38c515a0f55f1a9dde6812d689d8458a4c506c2e7dc"
+    },
+    {
+      "bytes": 2631,
+      "path": "cases/e1_rouaix_hpc/source-provenance.json",
+      "sha256": "947a39931ceb724795f1305194ae6309aa3216730baf231b8bebc4df2896e751"
+    },
+    {
+      "bytes": 37319,
+      "path": "scripts/hpc_metrics.py",
+      "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+    },
+    {
+      "bytes": 105688,
+      "path": "scripts/audit_iso_vof_ledger.py",
+      "sha256": "4df8cc2088a5115290a709c90a2ea746b06d29e10935608f1f0c4857e1dacc80"
+    },
+    {
+      "bytes": 72383,
+      "path": "scripts/continue_rouaix_case.py",
+      "sha256": "bd0c867e3f3e158b3cbb715c429b80d607602368eb7afe707f198074a915c656"
+    },
+    {
+      "bytes": 45655,
+      "path": "scripts/audit_interface_wave_flux.py",
+      "sha256": "1338ee5939157ccba37c700a3c09a83ee58c31d4aa66328d3b9cb04385ef3f3f"
+    },
+    {
+      "bytes": 7982,
+      "path": "experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md",
+      "sha256": "7d7b0b622540ed42cb9a2c42911843cf40a5b76e1a3f896923291d094fb4f1c9"
+    },
+    {
+      "bytes": 8190,
+      "path": "results/runs/rouaix-restart-controls-20261027/research/outlet-control-review.md",
+      "sha256": "db43d7e9e657ec070bcc46ae39ca52451abf2ee00999ce452811850344ab2a3a"
+    },
+    {
+      "bytes": 10914,
+      "path": "tests/test_rouaix_hpc_restart.py",
+      "sha256": "2d634c47c78997ef563afdbb244f8f5e47d6e51122ee8fa6aae441329851a8af"
+    },
+    {
+      "bytes": 9038,
+      "path": "tests/test_rouaix_hpc_restart_audit.py",
+      "sha256": "4e9089bde5ddb1b85287694b484358b142ff4c6af12c96ee485ebfd5c2e1a215"
+    }
+  ],
+  "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+  "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+  "run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027",
+  "schema_version": 2,
+  "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v2-20261027",
+  "variants": {
+    "original-control": {
+      "case_id": "rouaix-restart-original-control-0300",
+      "delta_t_s": 0.0001,
+      "start_time_s": 0.2,
+      "target_time_s": 0.3,
+      "wall_limit_s": 5400
+    },
+    "original-smoke": {
+      "case_id": "rouaix-restart-original-smoke-0201",
+      "delta_t_s": 0.0001,
+      "start_time_s": 0.2,
+      "target_time_s": 0.201,
+      "wall_limit_s": 1200
+    }
+  }
+}

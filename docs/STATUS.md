@@ -7,13 +7,12 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-At 2026-10-27 14:24 UTC, checkpoint job 14669440 and its auditor 14669459
-have completed: 0.20 s, 2000 fixed steps, 120 ranks, peak 116.93 m/s, no guard.
-No Rouaix job remains active on Komondor. On Goblin, the eight-rank timing
-pilot completed; the original all-air branch hit its U guard at 0.1752 s,
-and its upwind sibling hit the same guard at 0.1960 s. The finite queue is
-complete; upwind alone did not cure the coarse all-air failure. These
-diagnostics do not establish water/VOF stability. I4F jobs are not changed. No new scientific gate passed.
+At2026-10-27 18:04 UTC, restart smoke14676288 and original control14676290
+are released in cpu-short (three nodes ×40 ranks,66 GiB total). The control
+waits for verified smoke success before0.20→0.30 s; both use fixed0.1 ms.
+Auditors14676361/14676362 are armed. The obsolete two-node jobs were
+cancelled before allocation. No restart success or new scientific gate is
+claimed; the pressure candidate remains unsubmitted. I4F work is unchanged.
 
 ## Running now
 

@@ -1,9 +1,27 @@
 # Komondor Rouaix status
 
-Updated 2026-10-27 14:24 UTC (15:24 CET). Analytical E0 remains the only
+Updated 2026-10-27 18:04 UTC (19:04 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
+
+**Smoke14676288 and original restart control14676290 are released.**
+Both request120 ranks over three nodes (40/node),22 GiB/node, cpu-short.
+The smoke targets0.20→0.201 s in ten fixed0.1 ms steps, capped at20 minutes.
+The control targets0.20→0.30 s in1000 steps, capped at90 minutes, and waits
+on afterok:14676288 with invalid-dependency cancellation. Its runtime gate
+checks actual clean smoke/time/ledger/convergence/archive evidence, not just
+the scheduler's success flag. Auditors14676361/14676362 are armed afterany.
+No native restart steps have yet been observed.
+
+The earlier two-node smoke14675897/auditor14676006 were cancelled while
+pending, with zero elapsed time and zero allocated CPUs. Three40-rank blocks
+fit the fragmented short queue better than two60-rank blocks in the test-only
+forecast; this does not reserve capacity. The120-way mesh decomposition is
+unchanged. Hardware/placement differs from the single-node donor.
+[Restart declaration](../experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md) and
+[source, submission and release receipts](../results/summaries/rouaix_restart_controls_20261027/README.md).
+The pressure/backflow-energy candidate is declared but **not submitted**.
 
 **14669440 (`ml-vof`) COMPLETED 0:0** on one CPU node with 120 ranks.
 It reached all **2000 fixed 0.1 ms steps through 0.20 s** on the unchanged
@@ -16,8 +34,8 @@ collated fields, flux, time state and mesh addressing in the verified archive.
 Native afterany auditor **14669459 COMPLETED 0:0** in 46 s. Its recorded
 archive SHA is `31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9`,
 classified `completed_horizon_converged_exploratory_only`. Login-node sacct
-independently confirms both terminal states. **No Rouaix CFD job is currently
-running or pending on Komondor**; other jobs on the shared login are unrelated.
+independently confirms both donor terminal states. The donor is complete;
+the new restart sequence above is queued. Other jobs on the shared login are unrelated.
 The run stops before the prior 0.2281/0.2341/0.2511 s events, so it does not
 establish survival through the failure window or validate the water physics.
 The terminal audit records 250.328864 kg injected and a +1.67e-6 kg ledger
