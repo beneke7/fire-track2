@@ -1,0 +1,298 @@
+{
+  "case": {
+    "build": "_87ed40d2-20251219",
+    "delta_t_s": 0.0001,
+    "expected_steps": 100,
+    "gas_inlet_velocity_m_s": [
+      70,
+      0,
+      0
+    ],
+    "horizon_s": 0.01,
+    "image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "initial_condition": "alpha.water=0 in every cell; source/nozzle composition is gas while velocity is retained",
+    "mesh_cell_count_by_block": [
+      4,
+      20,
+      18,
+      10,
+      13
+    ],
+    "mesh_cells": 299520,
+    "mesh_minimum_cell_determinant": 0.001307024566559602,
+    "mesh_qa_status": "passed",
+    "mesh_y_cell_counts": [
+      5,
+      7,
+      20
+    ],
+    "mesh_z_cells": 144,
+    "momentum_convection": "limitedLinearV 1",
+    "nozzle_area_m2": 0.1263888888888889,
+    "nozzle_area_relative_error": 0.005770820927949893,
+    "nozzle_faces": 52,
+    "nozzle_normal": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "nozzle_spacing": "not computed",
+    "nozzle_velocity_m_s": [
+      0,
+      -10,
+      0
+    ],
+    "observed_unique_time_steps": 100,
+    "snappy_refinement": "off; this coarse mesh is not grid-qualified",
+    "solver": "OpenCFD OpenFOAM v2512 interIsoFoam"
+  },
+  "diagnostics": {
+    "boundary_flux_closure": {
+      "boundary_alphaPhi_sum_m3_s": {
+        "final": 0.0,
+        "max_abs": 0.0
+      },
+      "boundary_phi_sum_m3_s": {
+        "final": 6.4861228610269e-08,
+        "max_abs": 5.0227653564660635e-06
+      }
+    },
+    "continuity_records": 301,
+    "field_minmax_rows": {
+      "alpha": 100,
+      "pressure_turbulence": 400,
+      "speed": 100
+    },
+    "final_cumulative_continuity_error_m3": -2.26528777691e-08,
+    "linear_absolute_tolerances": {
+      "U": 1e-08,
+      "epsilon": 1e-08,
+      "k": 1e-08,
+      "p_rgh_final_corrector": 1e-08,
+      "pcorr": 1e-10
+    },
+    "linear_criteria_scope": "The fixed fvSolution tolerances were used. The final p_rgh correction (third p_rgh solve each time step) was checked against 1e-8; non-final p_rgh corrections use relTol 0.01. U, k, epsilon and pcorr were checked against their absolute tolerances.",
+    "linear_final_corrector_pressure_max_final_residual": 9.87450758583e-09,
+    "linear_final_corrector_pressure_solve_count": 100,
+    "linear_final_corrector_pressure_tolerance_passed": true,
+    "linear_nonconvergence_markers_found": false,
+    "linear_solves": {
+      "Ux": {
+        "count": 100,
+        "max_final_residual": 9.85213250729e-09,
+        "max_initial_residual": 0.99999999781,
+        "max_iterations": 2,
+        "min_iterations": 1
+      },
+      "Uy": {
+        "count": 100,
+        "max_final_residual": 6.67389501652e-09,
+        "max_initial_residual": 1.0,
+        "max_iterations": 2,
+        "min_iterations": 2
+      },
+      "Uz": {
+        "count": 100,
+        "max_final_residual": 3.60090695647e-09,
+        "max_initial_residual": 1.0,
+        "max_iterations": 2,
+        "min_iterations": 2
+      },
+      "epsilon": {
+        "count": 100,
+        "max_final_residual": 9.92874906657e-09,
+        "max_initial_residual": 0.00794945683112,
+        "max_iterations": 4,
+        "min_iterations": 2
+      },
+      "k": {
+        "count": 100,
+        "max_final_residual": 1.59343730125e-11,
+        "max_initial_residual": 0.99999999744,
+        "max_iterations": 4,
+        "min_iterations": 4
+      },
+      "p_rgh": {
+        "count": 300,
+        "max_final_residual": 0.00950840415046,
+        "max_initial_residual": 1.0,
+        "max_iterations": 21,
+        "min_iterations": 2
+      },
+      "pcorr": {
+        "count": 1,
+        "max_final_residual": 9.28057276542e-11,
+        "max_initial_residual": 1.0,
+        "max_iterations": 292,
+        "min_iterations": 292
+      }
+    },
+    "max_abs_instantaneous_global_continuity_error_m3_s": 2.29966417659e-08,
+    "p_rgh_interpretation": "reduced hydrostatic pressure field in Pa from dimensions [1 -1 -2]; not absolute pressure",
+    "ranges": {
+      "Co_max": {
+        "final": 0.174332274098,
+        "max_over_time": 0.174332274098,
+        "min_over_time": 0.159790493538
+      },
+      "alpha_water_max": {
+        "final": 0.0,
+        "max_over_time": 0.0,
+        "min_over_time": 0.0
+      },
+      "alpha_water_min": {
+        "final": 0.0,
+        "max_over_time": 0.0,
+        "min_over_time": 0.0
+      },
+      "epsilon_max": {
+        "final": 455.9401462255,
+        "max_over_time": 455.9401462255,
+        "min_over_time": 10.07443153247
+      },
+      "epsilon_min": {
+        "final": 0.010781042,
+        "max_over_time": 0.010781042,
+        "min_over_time": 0.010781042
+      },
+      "interface_Co_max": {
+        "final": 0.0,
+        "max_over_time": 0.0,
+        "min_over_time": 0.0
+      },
+      "k_max": {
+        "final": 3.878371795959,
+        "max_over_time": 3.878371795959,
+        "min_over_time": 0.735
+      },
+      "k_min": {
+        "final": 0.015,
+        "max_over_time": 0.015,
+        "min_over_time": 0.015
+      },
+      "max_U_m_s": {
+        "final": 75.64143794512,
+        "max_over_time": 75.64167866564,
+        "min_over_time": 72.37401106865
+      },
+      "nut_max": {
+        "final": 0.03630993867922,
+        "max_over_time": 0.03652024709116,
+        "min_over_time": 0.03630993867922
+      },
+      "nut_min": {
+        "final": 0.0,
+        "max_over_time": 0.0,
+        "min_over_time": 0.0
+      },
+      "p_rgh_max": {
+        "final": 1070.294986975,
+        "max_over_time": 15373.33123863,
+        "min_over_time": 940.4077155703
+      },
+      "p_rgh_min": {
+        "final": -1147.745211521,
+        "max_over_time": -115.758,
+        "min_over_time": -1155.414510481
+      },
+      "water_volume_m3": {
+        "final": 0.0,
+        "max_over_time": 0.0,
+        "min_over_time": 0.0
+      }
+    },
+    "time_records": 100,
+    "water_phase_present": false
+  },
+  "guard": {
+    "end_marker": true,
+    "hard_deadline_elapsed_s": 95,
+    "latest_max_U_m_s": "75.6414379451",
+    "latest_solver_time_s": "0.010000000000",
+    "log": "interIsoFoam.log",
+    "reason": "horizon_end",
+    "solver_exit_code": 0,
+    "threshold_m_s": 1000.0,
+    "trigger_max_U_m_s": "unknown",
+    "trigger_time_s": "unknown",
+    "write_and_stop_signal": 12
+  },
+  "interpretation": "exploratory 100-step all-air negative control only; not E1 validation and not evidence that interface-driven boundary behavior is excluded",
+  "limitations": [
+    "The archive included compact every-step diagnostics but omitted the declared final 0.01 s processor field snapshot because the output-capture selector only accepted 0.25 and 0.5 s.",
+    "No full-horizon case was launched because measured solver-only extrapolation exceeds the 30-minute branch.",
+    "No separate I/O timing breakdown was collected.",
+    "All-air alpha.water=0 means this run does not test interface-driven behavior."
+  ],
+  "performance": {
+    "allocated_cpus": 4,
+    "allocated_memory_gib": 3,
+    "container_started_utc": "2026-10-27T11:30:41.100901956Z",
+    "container_to_completed_wall_s": 102.60466,
+    "gpu": false,
+    "projected_5000_step_solver_min_from_clock_ols": 75.09974405299609,
+    "projection_caveat": "linear extrapolation from t=0.002..0.010; excludes startup and any full-horizon output/I/O differences",
+    "resource_sample_scope": "manual docker stats samples during run; not max RSS and not complete per-process accounting",
+    "resource_samples": [
+      {
+        "approx_container_elapsed_s": 20,
+        "cgroup_memory_usage": "983.7 MiB of 3 GiB",
+        "cpu_percent": 397.64
+      },
+      {
+        "approx_container_elapsed_s": 40,
+        "cgroup_memory_usage": "1023 MiB of 3 GiB",
+        "cpu_percent": 396.87
+      },
+      {
+        "approx_container_elapsed_s": 80,
+        "cgroup_memory_usage": "1.009 GiB of 3 GiB",
+        "cpu_percent": 393.58
+      }
+    ],
+    "run_result_completed_utc": "2026-10-27T11:32:23.705561+00:00",
+    "solver_ClockTime_s": 93,
+    "solver_ExecutionTime_s": 91.26,
+    "warm_window_clock_ols_s_per_step": 0.901196928635953,
+    "warm_window_clock_time_s_per_step": 0.9125,
+    "warm_window_solver_time_s_per_step": 0.9001250000000001
+  },
+  "provenance": {
+    "case_file_list_sha256": "b64a1ad667bea65599f5505f5aa946c4ed8446e2ab73b13cfd2bd9a940d5c5fe",
+    "case_inputs_sha256": "55e280ad484425b824a5f469b87d2f74ad003f7c2d8a5de8c2e42e65888ec866",
+    "git_dirty_at_run": true,
+    "git_revision": "b2d86bab3f716805ec3f33a23b84292ac5c9228a",
+    "mesh_qa_sha256": "1d42d483a1aed6a81d7bc8dcff6f1e8d9edbceac6fc5ecaee19f5e8e0839d40b",
+    "native_mesh_archive_sha256": "f7873fcd7093061f25362a6e71c4b360582a575f54cead2a55428ed2c843c3c0",
+    "pre_go_manifest_sha256": "1f66a21939fe045bf096d2f935ef5ba4266bf10191de4ec250adb50fd10f5aa8",
+    "result_archive_bytes": 76330,
+    "result_archive_members": 57,
+    "result_archive_sha256": "62893a7904cc9d2a91cec747e71dacfc451b50f7fdd6b79685ca0e95ece18d76",
+    "source_hashes": {
+      "build_cases.py": "416ba6c22d2c42ff6c44c90eb097029dbba235bf8f8ffb1c0ecacfed34c22e2a",
+      "container/container-start.sh": "7bfadfbe269d01e102ae0cdae77353a9f75d8f03e242c70074d0e61c95434218",
+      "container/remote-control.sh": "1db774eb26277bb7d9fa81431b1f7dfabc0a7c1523a3ab4bf3557a50cf1deab5",
+      "container/solver-supervisor.sh": "062acb86eeb9eccf948b400f0617c658580f27c7e992975bb0fc9eb96a4b40ef",
+      "experiment.md": "ac8abfc98242579462a8297b20fcb5831247b6a38bf372bb4046e77eca22472d",
+      "mesh_audit.py": "02e572373e9ebf4ff7aa0d9b9ccff4773ab42a886683e29f365f2566b1bdc691",
+      "rouaix_mesh_helper.py": "ef820006654c6a49d261a4bd8cb2184691910676789502013a9f02ffe777ba1e",
+      "run_remote.py": "75be3ee37406656c94df3ea5c47899e11bf38895b950ea0a8d4c9897687b3653",
+      "templates/hpc-fvSchemes": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+      "templates/hpc-fvSolution": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "templates/mesh-controlDict": "1086ebcb58097109a28be1646b6a1d6bcadfdc753f2728f531d7385b2609c245",
+      "templates/source-createPatchDict": "470351b42265a2e3e0a759deedf988229661838600530444067c676deb118de9",
+      "templates/source-topoSetDict": "b6a53014f1f2ebb3740a77c581a55321cf33f2bfda06697bed5f1652dccd133b",
+      "test_rouaix_fast_diagnostics.py": "713d9c6493cff301c207d0e74807ffc3ab80a2ad9c0198151bb68f225590362f"
+    }
+  },
+  "run_id": "ROUAIX-AIR-ORIGINAL-00100",
+  "schema_version": 1,
+  "terminal": {
+    "end_marker": true,
+    "guard_reason": "horizon_end",
+    "max_U_m_s": "75.6414379451",
+    "solver_exit_code": 0,
+    "solver_time_s": "0.010000000000",
+    "state": "terminal"
+  }
+}

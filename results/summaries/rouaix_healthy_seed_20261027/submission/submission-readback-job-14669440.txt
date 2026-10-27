@@ -1,0 +1,8 @@
+ACTUAL_HELD_JOB_ID=14669440
+scontrol show job -o readback at submission:
+JobId=14669440 JobName=ml-vof UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A Priority=0 Nice=0 Account=nk_meshapplied QOS=normal JobState=PENDING Reason=JobHeldUser Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=02:00:00 TimeMin=N/A SubmitTime=2026-10-27T12:00:05 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-27T12:00:05 Scheduler=Main Partition=cpu AllocNode:Sid=10.150.1.134:1146754 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=120 NumTasks=120 CPUs/Task=1 ReqTRES=cpu=120,mem=64G,node=1,billing=120 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:1 CoreSpec=* MinCPUsNode=120 MinMemoryNode=64G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-source-v1-20261027/cases/e1_rouaix_hpc/pilot.sbatch WorkDir=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-source-v1-20261027 StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-source-v1-20261027/logs/HSEED-14669440.slurm.out StdIn=/dev/null StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-source-v1-20261027/logs/HSEED-14669440.slurm.out TresPerTask=cpu=1
+
+Queue readback:
+14669440 PENDING cpu priority=0 CPUs=120 memory=64G wall=02:00:00 reason=(JobHeldUser)
+
+`scontrol show job --json` did not expose submitted environment. Export variables are recorded with the exact sbatch command file.

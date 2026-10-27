@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-27T10:18:19Z",
+  "case_id": "S1-UPWIND-120-01MS-005",
+  "job_id": 14651178,
+  "status": "COMPLETED exploratory matched-control comparison; no physical validation decision",
+  "terminal": {
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_s": 1896,
+    "elapsed_raw": "00:31:36",
+    "allocated_cpus": 120,
+    "req_mem": "67108864K",
+    "node": "x1000c5s4b1n1",
+    "partition": "cpu",
+    "start_cluster_local": "2026-10-26T23:07:01",
+    "end_cluster_local": "2026-10-26T23:38:37",
+    "solver_elapsed_s": 1693,
+    "solver_elapsed_raw": "00:28:13",
+    "solver_wall_s": 1692.688718935009,
+    "solver_clock_s": 1685.0,
+    "time_basis": "sacct timestamps are cluster-local CET (+0100)."
+  },
+  "case": {
+    "ranks": 120,
+    "nodes": 1,
+    "gpu_allocated": false,
+    "memory_gib_requested": 64,
+    "current_node_capacity": {
+      "node": "x1000c5s4b1n1",
+      "CPUTot": 128,
+      "CPUEfctv": 128,
+      "partition": "cpu",
+      "capture_utc": "2026-10-27T10:14:39.573Z",
+      "scope": "current host capacity, not historical allocation"
+    },
+    "solver": "interIsoFoam OpenCFD v2512",
+    "solver_build": "_87ed40d256-20251219",
+    "solver_executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "mesh_cells": 10099265,
+    "mesh_input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "native_mesh_qualification": "qualified",
+    "qualification_exception_sha256": "4a5e7a27f6580d05bcac5816cd0570166c164dd4c067358d24582e642b96904f",
+    "delta_t_s": 0.0001,
+    "fixed_delta_t": true,
+    "steps": 500,
+    "horizon_s": 0.05,
+    "field_write_times_s": [
+      0.0,
+      0.05
+    ]
+  },
+  "matched_control": {
+    "original_job_id": 14651174,
+    "original_summary_analysis_path": "results/summaries/rouaix_s1_120_20261026/analysis.json",
+    "original_summary_analysis_sha256": "9b738e6ef90d16b0bb793681c2af78e5cdf07a5fb037d277949a54ed699d39b5",
+    "original_native_audit_sha256": "c06c1040766ac67330d58e38c7374f5027961bb9bea55245417b9b1380917c3c",
+    "original_outer_bundle_sha256": "89876c31e0254e86a20d5a56f83c9fcacda5239c9ae2568232185cdce75c7666",
+    "same_input_archive_mesh_hashes_solver_binary_controlDict_fvSolution_ranks_dt_and_horizon": true,
+    "different_fvSchemes_term": "div(rhoPhi,U): Gauss limitedLinearV 1 -> Gauss upwind",
+    "prepared_case_hashes_that_differ": {
+      "case-inputs.json": {
+        "original_sha256": "d3e81b0a9b52c33596e23f30351296712e2974bc613ec1e9a47c4b5bfa4592ed",
+        "upwind_sha256": "0d1d298074d29a9d4d2b2e41866bd5bf38c2d68ae1d2e438e1b681435156d28a"
+      },
+      "setExprFields.log": {
+        "original_sha256": "8fe6bb2da3d394d473167db702dce387c913e215c3831c689ff01252059b2e90",
+        "upwind_sha256": "ac7a9159419b71a9f096101b524a9f685fc3cba01d3d979fae5ee54403fd564f"
+      },
+      "system/fvSchemes": {
+        "original_sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+        "upwind_sha256": "adcf88d3a7ea05ab44fba30b61ef3cfb2ff27de599cf5ee82618e6bfee07579f"
+      }
+    },
+    "other_case_input_differences": "numerical variant metadata and run-specific mesh/qualification paths; source hashes match. Generated setExprFields.log also differs."
+  },
+  "numerical_results": {
+    "upwind": {
+      "U_peak_m_s": 96.3851145471,
+      "peak_time_s": 0.05,
+      "bulk_Co_max": 1.02016153774,
+      "interface_Co_max": 0.471036191788,
+      "alpha_min": -1.17961196366e-16,
+      "alpha_water_min": 0.0,
+      "all_linear_solves_converged": true,
+      "records": 4001,
+      "failed_records": 0,
+      "max_final_residuals": {
+        "Ux": 9.91406690583e-09,
+        "Uy": 9.98331113761e-09,
+        "Uz": 9.84113440641e-09,
+        "epsilon": 7.15608696009e-09,
+        "k": 9.63139502051e-09,
+        "p_rgh": 0.000566735631337,
+        "pcorr": 9.77976034462e-11
+      },
+      "injected_kg": 62.582216014881666,
+      "final_inventory_kg": 62.582216014403315,
+      "mass_closure_residual_kg": -4.783515805684146e-10,
+      "max_abs_cumulative_mass_residual_kg": 4.78351580568e-10,
+      "mass_ledger_caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual."
+    },
+    "original": {
+      "U_peak_m_s": 103.293547802,
+      "peak_time_s": 0.0497,
+      "bulk_Co_max": 1.12154115569,
+      "interface_Co_max": 0.560172813445,
+      "alpha_min": -6.43745364866e-14,
+      "alpha_water_min": -1.64978071246e-20,
+      "all_linear_solves_converged": true,
+      "records": 4001,
+      "failed_records": 0,
+      "max_final_residuals": {
+        "Ux": 9.61862285419e-09,
+        "Uy": 9.99739634904e-09,
+        "Uz": 9.85319296519e-09,
+        "epsilon": 9.94765013324e-09,
+        "k": 9.94985829844e-09,
+        "p_rgh": 0.000290661812029,
+        "pcorr": 9.77976034462e-11
+      },
+      "injected_kg": 62.582216014881666,
+      "final_inventory_kg": 62.58221601489213,
+      "mass_closure_residual_kg": 1.0466294497746276e-11,
+      "max_abs_cumulative_mass_residual_kg": 1.33013600134e-11
+    },
+    "delta_U_peak_m_s": -6.908433254900004,
+    "delta_U_peak_percent": -6.688155651447418,
+    "interpretation": "Lower Upeak does not establish greater accuracy. Upwind has lower Co and less-negative alpha minima, but a higher p_rgh max residual and larger signed mass closure; all configured linear solves converge."
+  },
+  "resources": {
+    "upwind_parent": {
+      "allocated_core_hours": 63.2,
+      "TotalCPU": "2-07:53:40",
+      "TotalCPU_seconds": 201220,
+      "TotalCPU_core_hours": 55.894444444444446,
+      "MaxRSS": null,
+      "batch_MaxRSS": "9440904K"
+    },
+    "upwind_solver_step": {
+      "allocated_core_hours": 56.43333333333333,
+      "TotalCPU": "2-07:49:54",
+      "TotalCPU_seconds": 200994,
+      "TotalCPU_core_hours": 55.83166666666666,
+      "MaxRSS": "1422580K",
+      "MaxRSS_scope": "Slurm solver-step task maximum, not node aggregate"
+    },
+    "original_parent_elapsed_s": 1839,
+    "original_parent_allocated_core_hours": 61.3,
+    "original_solver_wall_s": 1638.3924480259884,
+    "original_solver_allocated_core_hours": 54.6,
+    "caution": "Different CPU128 node IDs; measured wall times are observational."
+  },
+  "archive_audit": {
+    "native_audit_status": "complete",
+    "capture_status": "verified",
+    "native_archive_status": "verified_crc_hash_and_member_list",
+    "reported_original_archive_sha256": "8a224b2a075be5b98e7454a5c3b3d96726e55cc9100793d2114208edb6477284",
+    "full_archive_reread_locally": false,
+    "outer_bundle_sha256": "819753f3a6555a35cb22ba8f043cbe6698b1962c23e3e84812348dd0e98bbe38",
+    "remote_sidecar_matches": true,
+    "inner_compact_archive_sha256": "97e6c6e83b74d70c1648d7676ccdc6cd107d052fd2a4ea5ea640a0347c7f4acf",
+    "selected_members": 13,
+    "selected_bytes": 2274447,
+    "all_selected_hashes_and_lengths_verified": true,
+    "3d_fields_or_mesh_binaries_transferred": false
+  },
+  "limitations": [
+    "Lower speed is not a physical-accuracy conclusion.",
+    "Mass ledger only; no momentum balance, with alphaPhi_ snapping/clipping caveat.",
+    "Peak-time field data were not transferred.",
+    "Exploratory short-horizon run; no formal gate decision."
+  ],
+  "evidence": [
+    {
+      "path": "results/summaries/rouaix_upwind_20261027/evidence/native-audit.json",
+      "bytes": 29087,
+      "sha256": "1aed1a30993253a1104be47e196f960c95031f8b9070f6cbe03462b58c04a0ee"
+    },
+    {
+      "path": "results/summaries/rouaix_upwind_20261027/evidence/native-audit-bundle.tar.gz",
+      "bytes": 403287,
+      "sha256": "819753f3a6555a35cb22ba8f043cbe6698b1962c23e3e84812348dd0e98bbe38"
+    },
+    {
+      "path": "results/summaries/rouaix_upwind_20261027/evidence/native-audit-bundle.tar.gz.sha256",
+      "bytes": 86,
+      "sha256": "5d4f150d5509793d29e4beae4c2405aed902c51fd956d98f90d04106bfe89fab"
+    },
+    {
+      "path": "results/summaries/rouaix_upwind_20261027/evidence/terminal-sacct.txt",
+      "bytes": 595,
+      "sha256": "5aaf6be3ced2940f3517ac4ab162d82cc8af15612bd2054f16fd0a640a1d3874"
+    },
+    {
+      "path": "results/summaries/rouaix_upwind_20261027/evidence/scontrol-node-x1000c5s4b1n1.raw.txt",
+      "bytes": 738,
+      "sha256": "0179e0c61f428f4269794512a944ba3ac5ed5863e6295fbd8c1759043f2f44dc"
+    }
+  ],
+  "source_bundle_members": [
+    {
+      "path": "attempt/case/case-inputs.json",
+      "bytes": 11404,
+      "sha256": "0d1d298074d29a9d4d2b2e41866bd5bf38c2d68ae1d2e438e1b681435156d28a"
+    },
+    {
+      "path": "attempt/case/system/controlDict",
+      "bytes": 4340,
+      "sha256": "26c64f134d78a82de7dc5c51f1a5c775feb8875118e0374b1cf96fdb277b548c"
+    },
+    {
+      "path": "attempt/case/system/fvSchemes",
+      "bytes": 1149,
+      "sha256": "adcf88d3a7ea05ab44fba30b61ef3cfb2ff27de599cf5ee82618e6bfee07579f"
+    },
+    {
+      "path": "attempt/case/system/fvSolution",
+      "bytes": 2111,
+      "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+    },
+    {
+      "path": "attempt/ledger/ledger.csv",
+      "bytes": 167262,
+      "sha256": "f33eb4abb554c9e1f32825c34d56c9a7872c80c7e475110f2a10977112430657"
+    },
+    {
+      "path": "attempt/ledger/summary.json",
+      "bytes": 26459,
+      "sha256": "a21bf0f39b98ce68af5b4145ec06da9054b18fc085e90f8f0d49d61dc01483d1"
+    },
+    {
+      "path": "attempt/ledger-audit.log",
+      "bytes": 371,
+      "sha256": "f2339b9971686755ab9b3b4cc107863f3fe5b433103e86561eac06029a89ac9f"
+    },
+    {
+      "path": "attempt/manifest.json",
+      "bytes": 6646,
+      "sha256": "92fb5dfa8683fc7535e588286b22671557edd04e9deecfe47164bd85623fded4"
+    },
+    {
+      "path": "attempt/max-speed.csv",
+      "bytes": 10923,
+      "sha256": "831d46785617bda65d22f106b982d96121b106995bbb4e82eb68b45baf78e836"
+    },
+    {
+      "path": "attempt/native-source-evidence.json",
+      "bytes": 2639,
+      "sha256": "252411fc2ca47f031fa08dda368aff66a80690526cd3d52703f1eb1ee210c646"
+    },
+    {
+      "path": "attempt/slurm-step-accounting.txt",
+      "bytes": 468,
+      "sha256": "2086579b5b9f0bc138733f0f03f0c8a32ecc9a5bfdb37ef15819f59d8a8bda37"
+    },
+    {
+      "path": "attempt/solver-convergence.json",
+      "bytes": 1490,
+      "sha256": "0fe2cca765d18adf4638907db31ea225f719d16d864abb1df2cc706b2bbc5ff4"
+    },
+    {
+      "path": "attempt/solver.log",
+      "bytes": 2039185,
+      "sha256": "23b4270e771b2f2d9568cdffc07f26dad501ff8fb9193e48b6d0328ae8629539"
+    }
+  ],
+  "formal_validation_decision": null
+}

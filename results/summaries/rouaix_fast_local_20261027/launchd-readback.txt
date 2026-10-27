@@ -1,0 +1,57 @@
+gui/501/com.firetrack.rouaix-fast-q20261027 = {
+	active count = 1
+	path = /Users/bene/fire-track2/results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/launchd-queue.plist
+	type = LaunchAgent
+	state = running
+
+	program = /Users/bene/fire-track2/.venv/bin/python
+	arguments = {
+		/Users/bene/fire-track2/.venv/bin/python
+		/Users/bene/fire-track2/results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py
+	}
+
+	working directory = /Users/bene/fire-track2
+
+	stdout path = /Users/bene/fire-track2/results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/launchd.stdout.log
+	stderr path = /Users/bene/fire-track2/results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/launchd.stderr.log
+	inherited environment = {
+		SSH_AUTH_SOCK => /private/tmp/com.apple.launchd.m5W9azc19q/Listeners
+	}
+
+	default environment = {
+		PATH => /usr/bin:/bin:/usr/sbin:/sbin
+	}
+
+	environment = {
+		XPC_SERVICE_NAME => com.firetrack.rouaix-fast-q20261027
+	}
+
+	domain = gui/501 [100016]
+	asid = 100016
+	minimum runtime = 10
+	exit timeout = 30
+	runs = 1
+	pid = 60998
+	immediate reason = speculative
+	forks = 12
+	execs = 1
+	initialized = 1
+	trampolined = 1
+	started suspended = 0
+	proxy started suspended = 0
+	last exit code = (never exited)
+
+	spawn type = background (5)
+	jetsam priority = 40
+	jetsam memory limit (active) = (unlimited)
+	jetsam memory limit (inactive) = (unlimited)
+	jetsamproperties category = daemon
+	jetsam thread limit = 32
+	cpumon = default
+	probabilistic guard malloc policy = {
+		activation rate = 1/1000
+		sample rate = 1/0
+	}
+
+	properties = runatload | inferred program
+}

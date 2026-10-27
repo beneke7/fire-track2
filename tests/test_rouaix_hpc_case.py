@@ -9,6 +9,7 @@ import pytest
 
 from cases.e1_rouaix_hpc import collect_native_provenance as native_provenance
 from cases.e1_rouaix_hpc import prepare_case as hpc_case
+from cases.e1_rouaix_hpc import run_pilot
 
 REAL_QUALIFIED_MESH_BUNDLE = (
     Path(__file__).resolve().parents[1]
@@ -373,6 +374,7 @@ def test_24_rank_32_gib_profile_is_only_a_control_dict_addition(tmp_path: Path) 
         (64, 1, 0.05, 0.0001, 500),
         (96, 1, 0.05, 0.0001, 500),
         (120, 1, 0.05, 0.0001, 500),
+        (120, 1, 0.2, 0.0001, 2000),
         (120, 1, 0.5, 0.001, 500),
         (240, 2, 0.5, 0.0005, 1000),
         (300, 3, 0.5, 0.001, 500),
@@ -409,6 +411,7 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
     )
     assert metadata["time_controls"]["delta_t_s"] == delta_t_s
     assert metadata["time_controls"]["startup_steps"] == steps
+    assert metadata["time_controls"]["full_field_write_times_s"] == [0, end_time_s]
     assert f"numberOfSubdomains {ranks};" in decompose
     assert f"endTime {end_time_s:g};" in control
     assert f"deltaT {delta_t_s:g};" in control
@@ -416,6 +419,31 @@ def test_case_preparation_records_supported_scaling_and_fixed_horizons(
     assert f"writeInterval {end_time_s:g};" in control
     assert "adjustTimeStep no;" in control
     assert "nAlphaSubCycles 1;" in (output / "system/fvSolution").read_text()
+    config = run_pilot.PilotConfig(
+        ranks=ranks,
+        nodes=nodes,
+        horizon_s=end_time_s,
+        delta_t_s=delta_t_s,
+        write_interval_s=end_time_s,
+    )
+    verified_inputs, prepared_hashes = run_pilot.validate_prepared_case(output, config)
+    assert verified_inputs["time_controls"]["full_field_write_times_s"] == [0, end_time_s]
+    assert prepared_hashes
+
+
+def test_case_preparation_rejects_undeclared_horizon(tmp_path: Path) -> None:
+    mesh, manifest, audit = _inputs(tmp_path)
+    with pytest.raises(ValueError, match="0.01, 0.05, 0.2, 0.5, or 5.0"):
+        hpc_case.prepare_case(
+            mesh,
+            manifest,
+            audit,
+            tmp_path / "prepared",
+            ranks=120,
+            end_time_s=0.3,
+            delta_t_s=0.0001,
+            set_expr_fields=str(_set_expr_fixture(tmp_path)),
+        )
 
 
 @pytest.mark.parametrize(

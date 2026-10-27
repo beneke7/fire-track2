@@ -1,0 +1,494 @@
+{
+  "case_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case",
+  "coverage": {
+    "common_prefix_rows": 2628,
+    "configured_horizon_reached": false,
+    "configured_horizon_s": 5.0,
+    "coverage_fraction_of_requested_horizon": 0.052559999999999996,
+    "first_matched_time_s": 0.0001,
+    "interpretation": "A partial prefix is reported as partial; it is never labeled a horizon success or gate pass.",
+    "last_matched_printed_time_s": 0.2628,
+    "last_matched_reconstructed_time_s": 0.2628,
+    "requested_end_reached": false,
+    "requested_end_time_s": 5.0,
+    "requested_end_was_explicit_cli_prefix": false,
+    "status": "partial_prefix_only"
+  },
+  "formal_validation_decision": null,
+  "integration": {
+    "closure_residual_kg": 1.1975754603099631e-05,
+    "configured_deltaT_token": "0.0001",
+    "deltaT_provenance": "Exact positive deltaT token from the hash-verified, immutable controlDict; the native solver log contained no deltaT lines.",
+    "deltaT_source_mode": "fixed-controlDict",
+    "density_kg_m3": 997.6,
+    "final_inventory_m3": 0.3295438132031,
+    "flux_interpretation": "sum(alphaPhi_) is the interval-mean water volumetric flux for the completed alpha-advection step; outward boundary sign is positive.",
+    "initial_inventory_kg": 0.0,
+    "initial_inventory_m3": 0.0,
+    "injected_kg": 328.9321273742234,
+    "known_closure_caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual.",
+    "max_abs_cumulative_closure_residual_kg": 1.19764272881e-05,
+    "max_abs_per_step_closure_residual_kg": 3.18560949095e-06,
+    "method": "right rectangle on each completed physical interval: Q_k * interval deltaT_k",
+    "native_function_inventory_kg": 328.7529080514126,
+    "open_patches": [
+      "gasInlet",
+      "downstreamOutlet",
+      "bottomOutlet",
+      "spanwiseMinus",
+      "spanwisePlus"
+    ],
+    "rounding_diagnostic": {
+      "cumulative_deltaT_print_rounding_bound_s": 0.0,
+      "cumulative_ieee_time_accumulation_bound_s": 7.667626533705024e-14,
+      "deltaT_source_mode": "fixed-controlDict",
+      "first_interval_deltaT_s": 0.0001,
+      "first_interval_deltaT_token": "0.0001",
+      "first_native_deltaT_s": null,
+      "first_native_deltaT_token": null,
+      "first_native_minus_printed_interval_s": null,
+      "first_printed_interval_s": 0.0001,
+      "first_source_deltaT_minus_printed_interval_s": 0.0,
+      "max_abs_native_deltaT_vs_rounded_interval_s": null,
+      "max_abs_reconstructed_native_time_vs_printed_time_s": null,
+      "max_abs_reconstructed_time_vs_printed_time_s": 0.0,
+      "max_abs_source_deltaT_vs_rounded_interval_s": 0.0,
+      "max_allowed_native_vs_printed_time_difference_s": null,
+      "max_allowed_reconstructed_time_vs_printed_time_s": 5.766762653370503e-13,
+      "printed_time_half_unit_s": 5e-13,
+      "time_format": "fixed",
+      "time_precision_digits": 12,
+      "warning": "The exact declared controlDict deltaT is used for integration in fixed-controlDict mode; no native log line is fabricated. Rounded printed timestamp differences are diagnostic only."
+    },
+    "signed_net_escape_kg": 0.179231298563926,
+    "signed_total_boundary_mass_kg": -328.752896075658,
+    "source_geometry": {
+      "analytic_circle_area_m2": 0.12566370614359174,
+      "area_deviation_limit_fraction": 0.005,
+      "mass_flow_from_measured_area_kg_s": 1251.6443202979385,
+      "measured_area_m2": 0.1254655493482296,
+      "measured_outward_area_vector_m2": [
+        0.0,
+        0.1254655493482296,
+        0.0
+      ],
+      "momentum_influx_from_measured_area_N": [
+        0.0,
+        -12516.443202979384,
+        0.0
+      ],
+      "patch": "nozzle",
+      "relative_area_deviation_fraction": -0.0015768816744566871,
+      "velocity_m_s": [
+        0.0,
+        -10.0,
+        0.0
+      ],
+      "velocity_renormalized": false,
+      "volume_flow_from_measured_area_m3_s": 1.254655493482296
+    },
+    "source_patch": "nozzle"
+  },
+  "mutable_data_snapshot": {
+    "captured_file_count": 8,
+    "policy": "Each discovered diagnostics/log file was read once before parsing; hashes and byte lengths identify those exact in-memory byte snapshots. The live on-disk files may append after capture; later bytes are outside this audit.",
+    "snapshot_files": {
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/bottomOutletFlux/0.000000000000/surfaceFieldValue.dat": {
+        "byte_length": 156480,
+        "sha256": "cd798ee1df697587faa700b89d75838626d837dd68cdb8283be3cb76efc8f83a"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/downstreamOutletFlux/0.000000000000/surfaceFieldValue.dat": {
+        "byte_length": 155535,
+        "sha256": "8146383b97a75e0cfcf4f7b265ee0802d345938571bb5f24eaacc5d24c28d26e"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/gasInletFlux/0.000000000000/surfaceFieldValue.dat": {
+        "byte_length": 157869,
+        "sha256": "dec90e31f2486c1f60a8394e78ad9a295eb7b4ec6154b623820c27202c67ce2f"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/nozzleFlux/0.000000000000/surfaceFieldValue.dat": {
+        "byte_length": 160494,
+        "sha256": "635b5337e06a2e483a9856130988e812baba2158f120f02618105a3ad78b63d3"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/spanwiseMinusFlux/0.000000000000/surfaceFieldValue.dat": {
+        "byte_length": 158335,
+        "sha256": "6b8203e6dd5e8fbba63b8ad39efe78af54b8f0eb58792378fc69f3aacdac3565"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/spanwisePlusFlux/0.000000000000/surfaceFieldValue.dat": {
+        "byte_length": 158125,
+        "sha256": "6da2ba18cf82ac4c8dfd1928602c56f9bb016c4018cf20a5ef7a1de146c6611d"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/waterVolume/0.000000000000/volFieldValue.dat": {
+        "byte_length": 105273,
+        "sha256": "9b25bd885b940e92c1daa5e6455015cc4c2bcdae03f7383d9b34f024e5175392"
+      },
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/solver.log": {
+        "byte_length": 10842111,
+        "sha256": "8fceef30bd32015b7d496ff8fa4d154cd737b39d06d85b229e4c5cd74c505919"
+      }
+    }
+  },
+  "output_files": [
+    "ledger.csv",
+    "summary.json"
+  ],
+  "prepared_input_hash_verification": {
+    "note": "Every file listed in each available prepared_case_sha256 map matched.",
+    "run_manifests": [
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/manifest.json"
+    ],
+    "verification_status": "verified",
+    "verified_file_count": 22
+  },
+  "purpose": "Exploratory fixed-mesh interIsoFoam water ledger audit; not a validation or conservation gate.",
+  "row_coverage": {
+    "bottomOutlet": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/bottomOutletFlux/0.000000000000/surfaceFieldValue.dat": {
+          "byte_length": 156480,
+          "sha256": "cd798ee1df697587faa700b89d75838626d837dd68cdb8283be3cb76efc8f83a"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/bottomOutletFlux/0.000000000000/surfaceFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    },
+    "downstreamOutlet": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/downstreamOutletFlux/0.000000000000/surfaceFieldValue.dat": {
+          "byte_length": 155535,
+          "sha256": "8146383b97a75e0cfcf4f7b265ee0802d345938571bb5f24eaacc5d24c28d26e"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/downstreamOutletFlux/0.000000000000/surfaceFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    },
+    "gasInlet": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/gasInletFlux/0.000000000000/surfaceFieldValue.dat": {
+          "byte_length": 157869,
+          "sha256": "dec90e31f2486c1f60a8394e78ad9a295eb7b4ec6154b623820c27202c67ce2f"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/gasInletFlux/0.000000000000/surfaceFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    },
+    "nozzle": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/nozzleFlux/0.000000000000/surfaceFieldValue.dat": {
+          "byte_length": 160494,
+          "sha256": "635b5337e06a2e483a9856130988e812baba2158f120f02618105a3ad78b63d3"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/nozzleFlux/0.000000000000/surfaceFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    },
+    "solverLog": {
+      "complete_interval_rows_total": 2628,
+      "complete_paired_rows_total": null,
+      "configured_deltaT_token": "0.0001",
+      "deltaT_source_mode": "fixed-controlDict",
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "interval_rows_at_or_before_requested_end": 2628,
+      "matched_common_prefix_rows": 2628,
+      "paired_rows_at_or_before_requested_end": null,
+      "snapshot_byte_length": 10842111,
+      "snapshot_sha256": "8fceef30bd32015b7d496ff8fa4d154cd737b39d06d85b229e4c5cd74c505919",
+      "source_file": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/solver.log",
+      "trailing_unpaired_deltaT_s": null
+    },
+    "spanwiseMinus": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/spanwiseMinusFlux/0.000000000000/surfaceFieldValue.dat": {
+          "byte_length": 158335,
+          "sha256": "6b8203e6dd5e8fbba63b8ad39efe78af54b8f0eb58792378fc69f3aacdac3565"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/spanwiseMinusFlux/0.000000000000/surfaceFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    },
+    "spanwisePlus": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/spanwisePlusFlux/0.000000000000/surfaceFieldValue.dat": {
+          "byte_length": 158125,
+          "sha256": "6da2ba18cf82ac4c8dfd1928602c56f9bb016c4018cf20a5ef7a1de146c6611d"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/spanwisePlusFlux/0.000000000000/surfaceFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    },
+    "waterVolume": {
+      "complete_rows_at_or_before_requested_end": 2628,
+      "complete_rows_total": 2628,
+      "excluded_after_requested_end": 0,
+      "excluded_unmatched_tail_rows": 0,
+      "file_snapshots": {
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/waterVolume/0.000000000000/volFieldValue.dat": {
+          "byte_length": 105273,
+          "sha256": "9b25bd885b940e92c1daa5e6455015cc4c2bcdae03f7383d9b34f024e5175392"
+        }
+      },
+      "matched_common_prefix_rows": 2628,
+      "source_files": [
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/postProcessing/waterVolume/0.000000000000/volFieldValue.dat"
+      ],
+      "trailing_partial_rows_ignored": 0
+    }
+  },
+  "run_dir": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt",
+  "schema_version": 1,
+  "scientific_caveats": [
+    "This narrow audit supports the pinned interIsoFoam/isoAdvection implementation with nAlphaSubCycles=1, nOuterCorrectors=1, fixed mesh, constant water density, zero initial water, and no internal source, phase-change, or porosity model.",
+    "It does not establish semantic support for other solvers, multiphase models, restart-only cumulative intervals, subcycling, moving meshes, or source/sink models.",
+    "A small residual is a diagnostic result for this sampled prefix, not a solver validation or E0-E6 gate decision.",
+    "Fluxes are signed outward-positive at each patch; injected mass is the negative source-patch signed mass, while signed net escape sums all declared open boundaries."
+  ],
+  "solver_image_verification": {
+    "execution_backend": "slurm-native",
+    "interpretation": "Trusted installed-source/runtime record matched the native run manifest; this is not proof of reproducible or bit-for-bit binary construction.",
+    "native_solver": {
+      "architecture": "x86_64",
+      "build": "_87ed40d256-20251219",
+      "executable_path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/platforms/linux64GccDPInt32Opt/bin/interIsoFoam",
+      "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+      "label_size_bits": 32,
+      "module_name": "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH",
+      "precision": "DP",
+      "solver_banner_sha256": "8b27dd2b6fc5b80a6ef959f82538beabca9d8efecc9a4b4291549498ce59ba67",
+      "version": "v2512",
+      "wm_options": "linux64GccDPInt32Opt"
+    },
+    "run_manifests": [
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/manifest.json"
+    ],
+    "source_evidence": {
+      "native_solver": {
+        "architecture": "x86_64",
+        "build": "_87ed40d256-20251219",
+        "executable_path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/platforms/linux64GccDPInt32Opt/bin/interIsoFoam",
+        "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+        "label_size_bits": 32,
+        "module_name": "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH",
+        "precision": "DP",
+        "solver_banner_sha256": "8b27dd2b6fc5b80a6ef959f82538beabca9d8efecc9a4b4291549498ce59ba67",
+        "version": "v2512",
+        "wm_options": "linux64GccDPInt32Opt"
+      },
+      "path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/native-source-evidence.json",
+      "sha256": "fd9372c73346b9dee8e825e5a3ea22ea5a02ae42cf8e83920c815814bcac5120",
+      "source_reference_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+      "source_run": null,
+      "verified_installed_source_hashes": {
+        "interIsoFoam_alphaEqn.H": "cbb4348977388633b29f0aa1f612225249c3062e80755f548fddfb0760c7311f",
+        "interIsoFoam_alphaEqnSubCycle.H": "b5f9845d57cb3fc75577ef00ed338186f83d13a9261c67d4ef88e6f1ef419385",
+        "isoAdvection.H": "505239083111afb87204f76ec9c3d722eaa9c47f5ee5d44b6f2e0e0e762d0ce7",
+        "isoAdvectionTemplates.C": "1d704aec280cffa4302f75cc3e15654db25dc75c6d1cb9e230ab8a4be64f1e90"
+      }
+    },
+    "source_reference_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "verification_mode": "native-module-source-correspondence"
+  },
+  "source_code_and_input_sha256": {
+    "audit_script_sha256": "4df8cc2088a5115290a709c90a2ea746b06d29e10935608f1f0c4857e1dacc80",
+    "inputs": {
+      "case/0/U": "f02ff11e12ff1333b4941414f6aced63d9f246441ae2e475263fc59f1bc22ad8",
+      "case/0/alpha.water": "4e5d4735a7b55dbdfa9b9e4630df2f0c7bf53cfcf5f2a07cfd7d056bd6ead4c8",
+      "case/case-inputs.json": "234b0461ea06a9ccf59b9156cd014f7f9ed6a2ef2742261aa3e042a382ce7f5a",
+      "case/constant/g": "18f0445d263795f548dd7cbe066b74d4fa2458ede883efcd94d95f3c5a89d7d4",
+      "case/constant/hRef": "f2999e33aeeab37967b295381c225dcb2a0a0f8dbed45a7eb0e66e86867cca82",
+      "case/constant/polyMesh/boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+      "case/constant/transportProperties": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f",
+      "case/constant/turbulenceProperties": "c6a7d91e95eff3464545922a9baaab454a7da870fbefffc05640fb6c63d4f3ab",
+      "case/postProcessing/bottomOutletFlux/0.000000000000/surfaceFieldValue.dat": "cd798ee1df697587faa700b89d75838626d837dd68cdb8283be3cb76efc8f83a",
+      "case/postProcessing/downstreamOutletFlux/0.000000000000/surfaceFieldValue.dat": "8146383b97a75e0cfcf4f7b265ee0802d345938571bb5f24eaacc5d24c28d26e",
+      "case/postProcessing/gasInletFlux/0.000000000000/surfaceFieldValue.dat": "dec90e31f2486c1f60a8394e78ad9a295eb7b4ec6154b623820c27202c67ce2f",
+      "case/postProcessing/nozzleFlux/0.000000000000/surfaceFieldValue.dat": "635b5337e06a2e483a9856130988e812baba2158f120f02618105a3ad78b63d3",
+      "case/postProcessing/spanwiseMinusFlux/0.000000000000/surfaceFieldValue.dat": "6b8203e6dd5e8fbba63b8ad39efe78af54b8f0eb58792378fc69f3aacdac3565",
+      "case/postProcessing/spanwisePlusFlux/0.000000000000/surfaceFieldValue.dat": "6da2ba18cf82ac4c8dfd1928602c56f9bb016c4018cf20a5ef7a1de146c6611d",
+      "case/postProcessing/waterVolume/0.000000000000/volFieldValue.dat": "9b25bd885b940e92c1daa5e6455015cc4c2bcdae03f7383d9b34f024e5175392",
+      "case/system/controlDict": "f5dc644e8b26a7be2791fc0fd20ab1369767f76e4c37e73ec3f589a3eecda90a",
+      "case/system/decomposeParDict": "8df44edca8a337353994b51c5084e34d55226838c5a591d4b7d378ae57a2f180",
+      "case/system/fvSchemes": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+      "case/system/fvSolution": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "case/system/setExprFieldsDict": "1feb5a66222198a2133b26353fd75dfeecdb9fa61e877be27d73df977ad5e891",
+      "manifest.json": "3b5da959bae5436e2d15766e960afc466924581bd5f4991f4bf293fad35c3bc3",
+      "native-source-evidence.json": "fd9372c73346b9dee8e825e5a3ea22ea5a02ae42cf8e83920c815814bcac5120",
+      "solver.log": "8fceef30bd32015b7d496ff8fa4d154cd737b39d06d85b229e4c5cd74c505919"
+    }
+  },
+  "supported_configuration": {
+    "boundary_inventory": {
+      "ledger_open_patches": [
+        "gasInlet",
+        "downstreamOutlet",
+        "bottomOutlet",
+        "spanwiseMinus",
+        "spanwisePlus"
+      ],
+      "ledger_source_patch": "nozzle",
+      "mesh_boundary_file": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/constant/polyMesh/boundary",
+      "mesh_boundary_types": {
+        "aircraftWall": "wall",
+        "bottomOutlet": "patch",
+        "downstreamOutlet": "patch",
+        "gasInlet": "patch",
+        "nozzle": "patch",
+        "spanwiseMinus": "patch",
+        "spanwisePlus": "patch"
+      },
+      "omitted_boundaries_verified_impermeable_walls": [
+        "aircraftWall"
+      ],
+      "velocity_boundary_file": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/0/U",
+      "velocity_boundary_types": {
+        "aircraftWall": "noSlip",
+        "bottomOutlet": "pressureInletOutletVelocity",
+        "downstreamOutlet": "pressureInletOutletVelocity",
+        "gasInlet": "fixedValue",
+        "nozzle": "fixedValue",
+        "spanwiseMinus": "pressureInletOutletVelocity",
+        "spanwisePlus": "pressureInletOutletVelocity"
+      }
+    },
+    "configuration_files_scanned": [
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/system/controlDict",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/system/fvSolution",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/constant/transportProperties",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/system/fvSchemes",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/system/decomposeParDict",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/system/setExprFieldsDict",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/constant/turbulenceProperties",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/constant/g",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/constant/hRef",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1hpc-14650641.gvw8nwhg/attempt/case/constant/polyMesh/boundary"
+    ],
+    "diagnostic_function_object_bindings": {
+      "bottomOutletFlux": {
+        "fields": [
+          "phi",
+          "alphaPhi_"
+        ],
+        "operation": "sum",
+        "patch": "bottomOutlet",
+        "regionType": "patch",
+        "type": "surfaceFieldValue"
+      },
+      "downstreamOutletFlux": {
+        "fields": [
+          "phi",
+          "alphaPhi_"
+        ],
+        "operation": "sum",
+        "patch": "downstreamOutlet",
+        "regionType": "patch",
+        "type": "surfaceFieldValue"
+      },
+      "gasInletFlux": {
+        "fields": [
+          "phi",
+          "alphaPhi_"
+        ],
+        "operation": "sum",
+        "patch": "gasInlet",
+        "regionType": "patch",
+        "type": "surfaceFieldValue"
+      },
+      "nozzleFlux": {
+        "fields": [
+          "phi",
+          "alphaPhi_"
+        ],
+        "operation": "sum",
+        "patch": "nozzle",
+        "regionType": "patch",
+        "type": "surfaceFieldValue"
+      },
+      "spanwiseMinusFlux": {
+        "fields": [
+          "phi",
+          "alphaPhi_"
+        ],
+        "operation": "sum",
+        "patch": "spanwiseMinus",
+        "regionType": "patch",
+        "type": "surfaceFieldValue"
+      },
+      "spanwisePlusFlux": {
+        "fields": [
+          "phi",
+          "alphaPhi_"
+        ],
+        "operation": "sum",
+        "patch": "spanwisePlus",
+        "regionType": "patch",
+        "type": "surfaceFieldValue"
+      },
+      "waterVolume": {
+        "fields": [
+          "alpha.water"
+        ],
+        "operation": "volIntegrate",
+        "type": "volFieldValue"
+      }
+    },
+    "internal_sources_phase_change_porosity": "none detected in case inputs and scanned system/constant dictionaries",
+    "mesh_mode": "fixed mesh; no dynamicFvMeshDict present",
+    "nAlphaSubCycles": 1,
+    "nOuterCorrectors": 1,
+    "open_patches": [
+      "gasInlet",
+      "downstreamOutlet",
+      "bottomOutlet",
+      "spanwiseMinus",
+      "spanwisePlus"
+    ],
+    "solver": "interIsoFoam",
+    "source_patch": "nozzle",
+    "turbulent_viscosity_limiter": {
+      "active": false,
+      "status": "not configured"
+    },
+    "water_density_kg_m3": 997.6
+  }
+}

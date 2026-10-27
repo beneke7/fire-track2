@@ -1,0 +1,195 @@
+{
+  "active_mesh_cells": 299520,
+  "active_queue": {
+    "consecutive_low_samples": 0,
+    "dispatcher_source": {
+      "bytes": 22606,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py",
+      "sha256": "2f3dbbd7b34a2f2507a323644482fff5d87deb807d684b29802bdaf60216262c"
+    },
+    "field_handler": "FOAM_FILEHANDLER=collated; capture supports both processorN and processorsN snapshot directories.",
+    "latest_gate": {
+      "busy_cpu_equivalents": 18.137,
+      "reason": "all pause checks clear; system-wide busy CPU-equivalent sample",
+      "state": "busy"
+    },
+    "launch_gate": "Two system-wide busy-CPU samples at <=11 equivalents, 30 s apart, followed by a final recheck; six-hour total wait cap. PAUSE on local/Goblin/Komondor stops the queue. Active PAUSE or unavailable check requests write-stop; any observed pause prevents case acceptance.",
+    "launchd_keepalive": false,
+    "launchd_label": "com.firetrack.rouaix-fast-q20261027",
+    "launchd_plist": {
+      "bytes": 1096,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/launchd-queue.plist",
+      "sha256": "b79f88e8359a050619694ac18bbbca66a7e837d1cf2fab9f4b2c68705379d3bd"
+    },
+    "other_solver_process_readback": "",
+    "pid": 60998,
+    "process_readback": "60998 03:38 /Users/bene/fire-track2/.venv/bin/python /Users/bene/fire-track2/results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py",
+    "queue_id": "q20261027",
+    "read_only_preflight_sample": {
+      "bytes": 177,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/read-only-sample-gate.json",
+      "sha256": "e17e40d8a7d359930a95e5751fb51c8c892287bd2cf78eba1305211ff2d2b218"
+    },
+    "remote_evidence_retention": "On failed transfer/recovery, stop the owned container but retain its durable Goblin work directory. Delete remote work only after local archive SHA verification and safe extraction.",
+    "run_local_dependency": {
+      "bytes": 12962,
+      "path": "scripts/run_local.py",
+      "sha256": "1956fda07bb81ece7e26edefd41e8ea714c96eb7c0cf84c123dd09340354ea49"
+    },
+    "runner_source": {
+      "bytes": 35765,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/run_remote.py",
+      "sha256": "b645afb746ce1259294fe7ebad83989bd434ef0bff73ab4855133f53f1a3af07"
+    },
+    "solver_active": false,
+    "stage": "air-a-pilot-8rank",
+    "state": "waiting_for_capacity",
+    "terminal_gate": "Pilot must have 100 unique steps to t=0.01 with End and verified archive. Branches proceed only after measured warm ClockTime forecast <=1,680 s for 3,000 steps. Branches require a clean End/exit 0 at t=0.30, or verified max-U guard End/exit 0 at or before t=0.30; all reached declared and terminal U/alpha.water/p_rgh snapshots must be present.",
+    "updated_utc": "2026-10-27T12:05:20.603052+00:00",
+    "wait_budget_s": 21600,
+    "wait_used_s": 194.45
+  },
+  "baseline_pilot_analysis": {
+    "bytes": 10631,
+    "path": "results/summaries/rouaix_fast_local_20261027/analysis.json",
+    "sha256": "66a626ddc0c69a38dfae6c96be2d88fbe98a4c293c8d4948975b765cc064a8e4"
+  },
+  "baseline_summary": {
+    "bytes": 4663,
+    "path": "results/summaries/rouaix_fast_local_20261027/README.md",
+    "sha256": "31f229785233e1d503c853e554656e7034ac69abd6472ae2509f1f204ebe3f99"
+  },
+  "created_utc": "2026-10-27T12:05:44.024275+00:00",
+  "focused_checks": [
+    {
+      "command": ".venv/bin/ruff check results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/run_remote.py results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/prepare_queue_cases.py tests/test_rouaix_fast_diagnostics.py",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/python -m py_compile results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/run_remote.py results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/prepare_queue_cases.py tests/test_rouaix_fast_diagnostics.py",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/python results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py --selftest",
+      "result": "passed: busy/paused/unknown gates, remote timeout, incomplete terminal, guard terminal target and observed pause"
+    },
+    {
+      "command": "bash -n results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container/remote-control.sh results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container/container-start.sh results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container/solver-supervisor.sh",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/pytest -q tests/test_rouaix_fast_diagnostics.py",
+      "result": "2 passed; includes early-guard collated snapshot inventory"
+    },
+    {
+      "command": ".venv/bin/python results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/dispatch_queue.py --sample-gate",
+      "result": "read-only actual sample: 18.365 busy CPU equivalents; all PAUSE checks clear"
+    }
+  ],
+  "input_provenance": {
+    "active_manifest": {
+      "bytes": 15008,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/preparation-manifest.json",
+      "sha256": "16129e547b9bcc66de94c694c6c3d2b861085ad5d0a1f9a5c378ee0c0808956b"
+    },
+    "case_manifest": {
+      "bytes": 11849,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/queue-cases-manifest.json",
+      "sha256": "5c96b1bb207c4d06c9571f11a0a4d1579285a182454f79ea12ca32adcb93ff54"
+    },
+    "historical_manifest_preserved": {
+      "bytes": 9484,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/historical-preparation-manifest-from-initial-candidate.json",
+      "sha256": "56b80c9eafdf52cc0dc97f6718c11b815c9084c77e9dd6f78267faae2459485a"
+    },
+    "mesh_input": {
+      "bytes": 2812,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/mesh-input/mesh-input.json",
+      "sha256": "1096fc9fe79bc85d7ca368d03ffa1cf9c42f6d20364269d4f5c55d66f4721ed4"
+    },
+    "mesh_qa": {
+      "bytes": 1851,
+      "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/mesh-qa.json",
+      "sha256": "1d42d483a1aed6a81d7bc8dcff6f1e8d9edbceac6fc5ecaee19f5e8e0839d40b"
+    },
+    "source_bundle": {
+      "bytes": 78723,
+      "content_manifest": {
+        "bytes": 8560,
+        "path": "results/summaries/rouaix_fast_local_20261027/queue-source-content-manifest.json",
+        "sha256": "d9365d305367fcec07629ccb4cfe62a00bf9876e8f4589a58911e4267812eb8f"
+      },
+      "path": "results/summaries/rouaix_fast_local_20261027/queue-source-bundle.tar.gz",
+      "sha256": "c71f7b089b792a3c5fb72f9af05df304015a7c2ae2b8b42d3936b9a628f9b5a6",
+      "sidecar": {
+        "bytes": 93,
+        "path": "results/summaries/rouaix_fast_local_20261027/queue-source-bundle.tar.gz.sha256",
+        "sha256": "ad26dd3aea39e54fa0f75845dd1bf93b979213cad56e8fb4528065a2b2dee90d"
+      }
+    }
+  },
+  "launchd_readback": {
+    "bytes": 1631,
+    "path": "results/summaries/rouaix_fast_local_20261027/launchd-readback.txt",
+    "sha256": "79039d6f433ca5fdbdda0c7db5ff4625115f327d3bbc624fce66ed2239c72199"
+  },
+  "mac_vm_check": {
+    "evidence_records": [
+      {
+        "bytes": 802,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/host-after-stop.txt",
+        "sha256": "4a3f8007ff46ade3d5d5705709efef3a091366e4db92545fbb7861efce8aa5b5"
+      },
+      {
+        "bytes": 222,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/host-load-readback.txt",
+        "sha256": "a1e93ca680182928e7e2c4eeb88a8bbea35b7b86fe30b04526bb4da3176c81fb"
+      },
+      {
+        "bytes": 465,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/multipass-final-state.txt",
+        "sha256": "67e77036ca9e23f54ccb2e6d66952874b01e2c5a3f001741c63c79d111211686"
+      },
+      {
+        "bytes": 328,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/multipass-info.txt",
+        "sha256": "b8da19998f4cb1efcfd71aeb8e3bfa49fc4127f366608baadba50d851bc83b92"
+      },
+      {
+        "bytes": 355,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/multipass-start.txt",
+        "sha256": "c4f09169cd3044c58a50cb1fcab73e62aecb828fe34ab7bfe20b8acdc53e9b28"
+      },
+      {
+        "bytes": 131,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/multipass-stop.txt",
+        "sha256": "953a9e55dfd4e1e7689d8d68aa514044f6cbd8f137275f9dd95ba99da5a42471"
+      },
+      {
+        "bytes": 3332,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/receipt.json",
+        "sha256": "2bc1f084e76f187488e29ffbbf44c4008e541bb55746ab7970c50d3f7991488e"
+      },
+      {
+        "bytes": 74,
+        "path": "results/runs/rouaix-fast-local-20261027/mac-vm-check/vm-readonly-inspection.txt",
+        "sha256": "995d957a98aac25f51310182706d411ea8ba1a93e983dec8150cbbae418f2b3e"
+      }
+    ],
+    "result": "The existing OpenFOAM VM was started then stopped; multipass exec returned No route to host. Guest CPU affinity, free resources, and OpenFOAM version remain unknown. No solver ran."
+  },
+  "no_git_commit_or_remote_publish": true,
+  "queue_event_snapshot": {
+    "bytes": 1965,
+    "path": "results/summaries/rouaix_fast_local_20261027/dispatcher-events-at-handoff.jsonl",
+    "sha256": "317058f145d8852bb691b41e19468252f2e6385974fd404e301a71c947daa9d3"
+  },
+  "queue_state_snapshot": {
+    "bytes": 432,
+    "path": "results/summaries/rouaix_fast_local_20261027/dispatcher-state-at-handoff.json",
+    "sha256": "b305c84fe592ec794dbd8f0aea79103083753852497d49a4ea22e54936f56e8b"
+  },
+  "schema_version": 1,
+  "status": "bounded queue is armed and waiting; no new solver result yet",
+  "summary_sha_manifest_policy": "SHA256SUMS.json hashes every regular summary file except itself to avoid recursive self-hashing."
+}

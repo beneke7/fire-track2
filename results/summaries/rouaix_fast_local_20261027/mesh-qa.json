@@ -1,0 +1,71 @@
+{
+  "area_tolerance_fraction": 0.02,
+  "interpretation": "coarse exploratory mesh only; native QA is a run prerequisite, not E1 grid qualification",
+  "mesh_archive_sha256": "f7873fcd7093061f25362a6e71c4b360582a575f54cead2a55428ed2c843c3c0",
+  "native_checkMesh": {
+    "cells": 299520,
+    "concave_or_planar_cells": 0,
+    "failed_checkmesh_categories": null,
+    "low_quality_tet_faces": 0,
+    "mesh_ok_banner": true,
+    "minimum_cell_determinant": 0.001307024566559602,
+    "minimum_face_interpolation_weight": 0.09090909090909001,
+    "minimum_face_volume_ratio": 0.09999999999999672
+  },
+  "nozzle": {
+    "analytic_area_m2": 0.12566370614359174,
+    "area_m2": 0.1263888888888889,
+    "area_vector_m2": [
+      0.0,
+      0.1263888888888889,
+      0.0
+    ],
+    "area_vector_magnitude_m2": 0.1263888888888889,
+    "binary_abi": {
+      "endian": "little",
+      "label_bits": 32,
+      "scalar_bits": 64
+    },
+    "faces": 52,
+    "max_face_area_m2": 0.0024305555555555847,
+    "min_face_area_m2": 0.0024305555555555326,
+    "normal": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "patch": "nozzle",
+    "point_count": 315810,
+    "relative_area_error": 0.005770820927949893
+  },
+  "nozzle_owner_spacing": {
+    "reason": "native mesh was written in binary format; nozzle area/normal are the predeclared QA metrics",
+    "status": "not-computed"
+  },
+  "patch_inventory": {
+    "actual": [
+      "aircraftWall",
+      "bottomOutlet",
+      "downstreamOutlet",
+      "gasInlet",
+      "nozzle",
+      "spanwiseMinus",
+      "spanwisePlus"
+    ],
+    "expected": [
+      "aircraftWall",
+      "bottomOutlet",
+      "downstreamOutlet",
+      "gasInlet",
+      "nozzle",
+      "spanwiseMinus",
+      "spanwisePlus"
+    ],
+    "passed": true
+  },
+  "schema_version": 1,
+  "snappy_refinement_counts": {
+    "0": 299520
+  },
+  "status": "passed"
+}

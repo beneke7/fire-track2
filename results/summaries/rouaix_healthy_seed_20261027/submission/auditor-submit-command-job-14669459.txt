@@ -1,0 +1,5 @@
+Remote sbatch command (argument values as submitted):
+sbatch --parsable --hold --dependency=afterany:14669440 --account=nk_meshapplied --partition=cpu --qos=normal --job-name=ml-aud --nodes=1 --ntasks=1 --cpus-per-task=1 --mem=1800M --time=00:10:00 --no-requeue --output=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-audit-reports-v1-20261027/logs/auditor-%j.slurm.out --export=ALL,TZ=UTC,OMP_NUM_THREADS=1,OPENBLAS_NUM_THREADS=1,MKL_NUM_THREADS=1 --wrap="module load cray-python/3.11.7 && python3 /project/nk_meshapplied/bene/fire-track2-hpc/hpc-finished-audit-source-v3-20261026/scripts/hpc_finished_audit.py --manifest /project/nk_meshapplied/bene/fire-track2-hpc/afterany-manifest-14669440.json --job-id 14669440 --output /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-audit-reports-v1-20261027/14669440"
+
+ACTUAL_HELD_AUDITOR_JOB_ID=14669459
+Dependency afterany:14669440. This auditor job was submitted held and will not execute until dependency is met and the root agent releases it.
