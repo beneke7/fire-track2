@@ -1,0 +1,820 @@
+{
+  "cases": [
+    {
+      "case_id": "ROUAIX-AIR-ORIGINAL-00100-08RANK",
+      "input_identity": {
+        "expected_steps": 100,
+        "fixed_delta_t_s": 0.0001,
+        "gas_inlet_velocity_m_s": [
+          70.0,
+          0.0,
+          0.0
+        ],
+        "git_dirty": false,
+        "git_revision": "891e8b1918ead38e130fc0f8fec0d34eb41891fe",
+        "initial_condition": "all-air alpha.water=0",
+        "input_hash_check": "0/U: OK\n0/alpha.water: OK\n0/epsilon: OK\n0/k: OK\n0/nut: OK\n0/p_rgh: OK\ncase-inputs.json: OK\ncase.foam: OK\nconstant/g: OK\nconstant/hRef: OK\nconstant/polyMesh/boundary: OK\nconstant/polyMesh/cellZones: OK\nconstant/polyMesh/faceZones: OK\nconstant/polyMesh/faces: OK\nconstant/polyMesh/neighbour: OK\nconstant/polyMesh/owner: OK\nconstant/polyMesh/pointZones: OK\nconstant/polyMesh/points: OK\nconstant/transportProperties: OK\nconstant/turbulenceProperties: OK\nsystem/controlDict: OK\nsystem/decomposeParDict: OK\nsystem/fvSchemes: OK\nsystem/fvSolution: OK",
+        "launch_command": "decomposePar -force; mpirun --bind-to none -np 8 interIsoFoam -parallel",
+        "nozzle_velocity_m_s": [
+          0.0,
+          -10.0,
+          0.0
+        ],
+        "rank_count": 8,
+        "requested_end_time_s": 0.01,
+        "resource_cap": {
+          "cpus": 8,
+          "durable_output_free_bytes_before_upload": 103919611904,
+          "field_handler": "collated",
+          "gpu": false,
+          "memory_gib": 3,
+          "network": "none",
+          "workspace_tmpfs_gib": 2
+        },
+        "solver": "OpenCFD OpenFOAM v2512 interIsoFoam",
+        "solver_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      },
+      "numerical_diagnostics": {
+        "all_recorded_alpha_water_is_zero": true,
+        "alpha_water_extrema_rows": 100,
+        "alpha_water_maximum_over_rows": 0.0,
+        "alpha_water_minimum_over_rows": 0.0,
+        "bulk_Courant_max": 0.174332301117,
+        "bulk_Courant_max_time_s": 0.0099,
+        "divergence_markers": [],
+        "fatal_errors": [],
+        "fixed_absolute_tolerance_checks": {
+          "all_listed_checks_passed": true,
+          "interpretation": "The log records three p_rgh solves per timestep; fvSolution sets p_rgh relTol 0.01 and the final p_rgh corrector relTol 0, so the third solve per step is assessed against 1e-8. The non-final p_rgh correctors are reported separately and are not judged against the final absolute tolerance.",
+          "limits": {
+            "U_components_k_epsilon_p_rgh_final": 1e-08,
+            "pcorr": 1e-10
+          },
+          "passed_by_logged_final_residual": {
+            "Ux": true,
+            "Uy": true,
+            "Uz": true,
+            "epsilon": true,
+            "k": true,
+            "p_rgh_final_corrector_each_step": true,
+            "pcorr": true
+          }
+        },
+        "fvSolution_tolerances_interpretation": {
+          "U_final_abs_tolerance": 1e-08,
+          "criterion": "Each logged solve final residual was compared with its fixed fvSolution criterion; p_rgh non-final correctors are governed by relTol 0.01, while the third p_rgh solve per step is p_rghFinal with relTol 0.",
+          "k_epsilon_final_abs_tolerance": 1e-08,
+          "p_rghFinal_abs_tolerance": 1e-08,
+          "p_rgh_nonfinal_relative_tolerance": 0.01,
+          "pcorr_abs_tolerance": 1e-10
+        },
+        "global_peak_mag_U": {
+          "maximum": 75.6416969948,
+          "maximum_location_m": [
+            0.225,
+            -0.1750261962976,
+            0.02485251241899
+          ],
+          "maximum_processor": 6,
+          "minimum": 0.0,
+          "minimum_location_m": [
+            -2.25,
+            0.0,
+            -3.475694444444
+          ],
+          "minimum_processor": 2,
+          "time_s": 0.0099
+        },
+        "interface_Courant_max": 0.0,
+        "interface_Courant_max_time_s": 0.0001,
+        "linear_solve_summary": {
+          "Ux": {
+            "max_final_residual_logged": 9.79299328344e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 100
+          },
+          "Uy": {
+            "max_final_residual_logged": 7.50355130283e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 100
+          },
+          "Uz": {
+            "max_final_residual_logged": 3.98990651784e-09,
+            "max_iterations_logged": 2,
+            "solve_count": 100
+          },
+          "epsilon": {
+            "max_final_residual_logged": 9.99650165797e-09,
+            "max_iterations_logged": 4,
+            "solve_count": 100
+          },
+          "k": {
+            "max_final_residual_logged": 2.52723420755e-11,
+            "max_iterations_logged": 4,
+            "solve_count": 100
+          },
+          "p_rgh": {
+            "max_final_residual_logged": 0.00678491199657,
+            "max_iterations_logged": 24,
+            "solve_count": 300
+          },
+          "pcorr": {
+            "max_final_residual_logged": 9.92650363403e-11,
+            "max_iterations_logged": 307,
+            "solve_count": 1
+          }
+        },
+        "log_parser_completion_status": "completed",
+        "mag_U_extrema_rows": 100,
+        "per_step_last_p_rgh_corrector": {
+          "last_p_rgh_residual_each_step_count": 100,
+          "last_p_rgh_residual_each_step_max": 9.94357059394e-09,
+          "last_p_rgh_residual_each_step_max_abs": 9.94357059394e-09,
+          "p_rgh_solves_per_step_distribution": {
+            "3": 100
+          },
+          "step_blocks": 100
+        },
+        "physical_time_reached_s": 0.01,
+        "solver_log_contains_End": true,
+        "steps_logged": 100
+      },
+      "run_id": "air-a-pilot-8rank",
+      "scope": "exploratory all-air negative control; not a fluid-validation result",
+      "source_paths": {
+        "archive": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/result.tar.gz",
+        "archive_sha256_sidecar": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/result.tar.gz.sha256",
+        "archive_verification": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/archive-verification.json",
+        "input_context": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/input-context.json",
+        "pre_go_manifest": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/pre-go-manifest.json",
+        "run_directory": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank",
+        "run_result": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/run-result.json",
+        "snapshot_inventory": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/snapshot-inventory.json",
+        "terminal_status": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/terminal-status.json"
+      },
+      "terminal": {
+        "End_marker": true,
+        "completed_utc": "2026-10-27T13:58:21.246166+00:00",
+        "container_started_at": "2026-10-27T13:57:25.187637497Z",
+        "container_to_archive_complete_wall_s": 56.058529,
+        "declared_horizon_reached": true,
+        "guard_reason": "horizon_end",
+        "guard_threshold_m_s": 1000.0,
+        "guard_trigger_max_U_m_s": "unknown",
+        "guard_trigger_time_s": "unknown",
+        "resource_samples_available": false,
+        "resource_samples_count": 0,
+        "solver_clock_time_s": 36.0,
+        "solver_execution_time_s": 35.83,
+        "solver_exit_code": 0,
+        "state": "terminal",
+        "terminal_max_U_m_s": "75.6414553242",
+        "terminal_solver_time_s": "0.010000000000"
+      },
+      "verification": {
+        "archive_bytes_actual": 25907926,
+        "archive_hashes_agree": true,
+        "archive_members_actual": 86,
+        "archive_sha256_actual": "8fead51baff18ab6b25293d6c3d3a8f8a65603b37bc9606cdba90477f52d0231",
+        "archive_sha256_recorded": "8fead51baff18ab6b25293d6c3d3a8f8a65603b37bc9606cdba90477f52d0231",
+        "archive_sha256_sidecar": "8fead51baff18ab6b25293d6c3d3a8f8a65603b37bc9606cdba90477f52d0231",
+        "archive_verification_remote_local_sha_match": true,
+        "archive_verification_report_sha256": "8fead51baff18ab6b25293d6c3d3a8f8a65603b37bc9606cdba90477f52d0231",
+        "raw_artifact_hashes": {
+          "archive_member_alpha_fieldMinMax": {
+            "bytes": 20994,
+            "member": "./case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat",
+            "sha256": "6156ca9ec62ef5da912f60d72aff6265d9cab362f8d53750d06a8e96ab7cb2cb"
+          },
+          "archive_member_case_inputs": {
+            "bytes": 6919,
+            "member": "./case/case-inputs.json",
+            "sha256": "b8874266ebc84f21801b6f64d7258eae72304d8c3d54e2d3d33857f7f7953fee"
+          },
+          "archive_member_fvSolution": {
+            "bytes": 2111,
+            "member": "./case/fvSolution",
+            "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+          },
+          "archive_member_input_hash_check": {
+            "bytes": 544,
+            "member": "./input-hash-check.txt",
+            "sha256": "86e5f2451805a7a669540fe5cbb9674f6129865c119bbd876babeb4f9cf0adfe"
+          },
+          "archive_member_interIsoFoam_log": {
+            "bytes": 395007,
+            "member": "./interIsoFoam.log",
+            "sha256": "5a49c7a1d1be436f74893f3941f4c5dbb87843b6eccc95bdf7fed5d73a80b942"
+          },
+          "archive_member_speed_fieldMinMax": {
+            "bytes": 20710,
+            "member": "./case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat",
+            "sha256": "c155841b131d6094c2f4ced5959829216f8015308ff4a5382321964e12b51f27"
+          }
+        },
+        "receipt_file_sha256": {
+          "archive-verification.json": {
+            "bytes": 4485,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/archive-verification.json",
+            "sha256": "eca7060e99196204bee20b8e2952c63e085adcca2f417e222e080b539a70dd40"
+          },
+          "input-context.json": {
+            "bytes": 3196,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/input-context.json",
+            "sha256": "c7173549d866461b544d6aa2b7b086ea15191ac497754d8a9ddc6dfb0a184753"
+          },
+          "pre-go-manifest.json": {
+            "bytes": 3415,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/pre-go-manifest.json",
+            "sha256": "194e82e343562340748c942f87fa1cd450ce59f985812af7aa3353e3e64e91df"
+          },
+          "result.tar.gz.sha256": {
+            "bytes": 80,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/result.tar.gz.sha256",
+            "sha256": "f8b9752111aacde527bc1558efe96620c94a23f2571bafe0f75d3b16d2852f0e"
+          },
+          "run-result.json": {
+            "bytes": 2892,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/run-result.json",
+            "sha256": "3e762bf349b8ceb02da83ec7cfd811dc7d4c6eb0c82876229130b102475d1634"
+          },
+          "snapshot-inventory.json": {
+            "bytes": 1496,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/snapshot-inventory.json",
+            "sha256": "131f2595d5949f30f84f198e1c3daefefee4558bf62d4d716a1b7f5a4fb9fa1e"
+          },
+          "terminal-status.json": {
+            "bytes": 175,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-a-pilot-8rank/terminal-status.json",
+            "sha256": "bb7ce96a9e5dcc1b1860a418860dbc4ae1b4414cab408ec4d3df18195440aeae"
+          }
+        },
+        "snapshot_inventory_passed": true,
+        "snapshot_inventory_sha256": "131f2595d5949f30f84f198e1c3daefefee4558bf62d4d716a1b7f5a4fb9fa1e"
+      }
+    },
+    {
+      "case_id": "ROUAIX-AIR-ORIGINAL-03000-08RANK",
+      "input_identity": {
+        "expected_steps": 3000,
+        "fixed_delta_t_s": 0.0001,
+        "gas_inlet_velocity_m_s": [
+          70.0,
+          0.0,
+          0.0
+        ],
+        "git_dirty": false,
+        "git_revision": "891e8b1918ead38e130fc0f8fec0d34eb41891fe",
+        "initial_condition": "all-air alpha.water=0",
+        "input_hash_check": "0/U: OK\n0/alpha.water: OK\n0/epsilon: OK\n0/k: OK\n0/nut: OK\n0/p_rgh: OK\ncase-inputs.json: OK\ncase.foam: OK\nconstant/g: OK\nconstant/hRef: OK\nconstant/polyMesh/boundary: OK\nconstant/polyMesh/cellZones: OK\nconstant/polyMesh/faceZones: OK\nconstant/polyMesh/faces: OK\nconstant/polyMesh/neighbour: OK\nconstant/polyMesh/owner: OK\nconstant/polyMesh/pointZones: OK\nconstant/polyMesh/points: OK\nconstant/transportProperties: OK\nconstant/turbulenceProperties: OK\nsystem/controlDict: OK\nsystem/decomposeParDict: OK\nsystem/fvSchemes: OK\nsystem/fvSolution: OK",
+        "launch_command": "decomposePar -force; mpirun --bind-to none -np 8 interIsoFoam -parallel",
+        "nozzle_velocity_m_s": [
+          0.0,
+          -10.0,
+          0.0
+        ],
+        "rank_count": 8,
+        "requested_end_time_s": 0.3,
+        "resource_cap": {
+          "cpus": 8,
+          "durable_output_free_bytes_before_upload": 103907680256,
+          "field_handler": "collated",
+          "gpu": false,
+          "memory_gib": 3,
+          "network": "none",
+          "workspace_tmpfs_gib": 2
+        },
+        "solver": "OpenCFD OpenFOAM v2512 interIsoFoam",
+        "solver_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      },
+      "numerical_diagnostics": {
+        "all_recorded_alpha_water_is_zero": true,
+        "alpha_water_extrema_rows": 1752,
+        "alpha_water_maximum_over_rows": 0.0,
+        "alpha_water_minimum_over_rows": 0.0,
+        "bulk_Courant_max": 3.0744513714,
+        "bulk_Courant_max_time_s": 0.1751,
+        "divergence_markers": [],
+        "fatal_errors": [],
+        "fixed_absolute_tolerance_checks": {
+          "all_listed_checks_passed": true,
+          "interpretation": "The log records three p_rgh solves per timestep; fvSolution sets p_rgh relTol 0.01 and the final p_rgh corrector relTol 0, so the third solve per step is assessed against 1e-8. The non-final p_rgh correctors are reported separately and are not judged against the final absolute tolerance.",
+          "limits": {
+            "U_components_k_epsilon_p_rgh_final": 1e-08,
+            "pcorr": 1e-10
+          },
+          "passed_by_logged_final_residual": {
+            "Ux": true,
+            "Uy": true,
+            "Uz": true,
+            "epsilon": true,
+            "k": true,
+            "p_rgh_final_corrector_each_step": true,
+            "pcorr": true
+          }
+        },
+        "fvSolution_tolerances_interpretation": {
+          "U_final_abs_tolerance": 1e-08,
+          "criterion": "Each logged solve final residual was compared with its fixed fvSolution criterion; p_rgh non-final correctors are governed by relTol 0.01, while the third p_rgh solve per step is p_rghFinal with relTol 0.",
+          "k_epsilon_final_abs_tolerance": 1e-08,
+          "p_rghFinal_abs_tolerance": 1e-08,
+          "p_rgh_nonfinal_relative_tolerance": 0.01,
+          "pcorr_abs_tolerance": 1e-10
+        },
+        "global_peak_mag_U": {
+          "maximum": 1364.743492838,
+          "maximum_location_m": [
+            17.42307692308,
+            -0.0250266998932,
+            3.486878250959
+          ],
+          "maximum_processor": 7,
+          "minimum": 0.0,
+          "minimum_location_m": [
+            -2.25,
+            0.0,
+            -3.475694444444
+          ],
+          "minimum_processor": 2,
+          "time_s": 0.1752
+        },
+        "interface_Courant_max": 0.0,
+        "interface_Courant_max_time_s": 0.0001,
+        "linear_solve_summary": {
+          "Ux": {
+            "max_final_residual_logged": 9.79299328344e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 1752
+          },
+          "Uy": {
+            "max_final_residual_logged": 9.96531135437e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 1752
+          },
+          "Uz": {
+            "max_final_residual_logged": 9.99239143816e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 1752
+          },
+          "epsilon": {
+            "max_final_residual_logged": 9.99650165797e-09,
+            "max_iterations_logged": 8,
+            "solve_count": 1752
+          },
+          "k": {
+            "max_final_residual_logged": 9.90040735181e-09,
+            "max_iterations_logged": 6,
+            "solve_count": 1752
+          },
+          "p_rgh": {
+            "max_final_residual_logged": 0.00678491199657,
+            "max_iterations_logged": 24,
+            "solve_count": 5256
+          },
+          "pcorr": {
+            "max_final_residual_logged": 9.92650363403e-11,
+            "max_iterations_logged": 307,
+            "solve_count": 1
+          }
+        },
+        "log_parser_completion_status": "completed",
+        "mag_U_extrema_rows": 1752,
+        "per_step_last_p_rgh_corrector": {
+          "last_p_rgh_residual_each_step_count": 1752,
+          "last_p_rgh_residual_each_step_max": 9.99942546685e-09,
+          "last_p_rgh_residual_each_step_max_abs": 9.99942546685e-09,
+          "p_rgh_solves_per_step_distribution": {
+            "3": 1752
+          },
+          "step_blocks": 1752
+        },
+        "physical_time_reached_s": 0.1752,
+        "solver_log_contains_End": true,
+        "steps_logged": 1752
+      },
+      "run_id": "air-original-030",
+      "scope": "exploratory all-air negative control; not a fluid-validation result",
+      "source_paths": {
+        "archive": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/result.tar.gz",
+        "archive_sha256_sidecar": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/result.tar.gz.sha256",
+        "archive_verification": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/archive-verification.json",
+        "input_context": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/input-context.json",
+        "pre_go_manifest": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/pre-go-manifest.json",
+        "run_directory": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030",
+        "run_result": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/run-result.json",
+        "snapshot_inventory": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/snapshot-inventory.json",
+        "terminal_status": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/terminal-status.json"
+      },
+      "terminal": {
+        "End_marker": true,
+        "completed_utc": "2026-10-27T14:10:05.347228+00:00",
+        "container_started_at": "2026-10-27T13:59:18.296496334Z",
+        "container_to_archive_complete_wall_s": 647.050732,
+        "declared_horizon_reached": false,
+        "guard_reason": "max_abs_U_exceeded_1000.0_m_s",
+        "guard_threshold_m_s": 1000.0,
+        "guard_trigger_max_U_m_s": "1091.29438224",
+        "guard_trigger_time_s": "0.175100000000",
+        "resource_samples_available": false,
+        "resource_samples_count": 0,
+        "solver_clock_time_s": 630.0,
+        "solver_execution_time_s": 623.16,
+        "solver_exit_code": 0,
+        "state": "terminal",
+        "terminal_max_U_m_s": "1364.74349284",
+        "terminal_solver_time_s": "0.175200000000"
+      },
+      "verification": {
+        "archive_bytes_actual": 28597777,
+        "archive_hashes_agree": true,
+        "archive_members_actual": 86,
+        "archive_sha256_actual": "69e53d6863a8df792281d75a74c40a78c2b4db40eff11721f14cb1a532e12493",
+        "archive_sha256_recorded": "69e53d6863a8df792281d75a74c40a78c2b4db40eff11721f14cb1a532e12493",
+        "archive_sha256_sidecar": "69e53d6863a8df792281d75a74c40a78c2b4db40eff11721f14cb1a532e12493",
+        "archive_verification_remote_local_sha_match": true,
+        "archive_verification_report_sha256": "69e53d6863a8df792281d75a74c40a78c2b4db40eff11721f14cb1a532e12493",
+        "raw_artifact_hashes": {
+          "archive_member_alpha_fieldMinMax": {
+            "bytes": 364610,
+            "member": "./case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat",
+            "sha256": "2be670d9326fa09daa87d5ee3acf1e47fd8a3a0934c1871492a0a701a5d3c716"
+          },
+          "archive_member_case_inputs": {
+            "bytes": 6915,
+            "member": "./case/case-inputs.json",
+            "sha256": "2b64c6b382719ba480e9da7c72ca4ceb9689c70b4613b2a9dcc248156c925920"
+          },
+          "archive_member_fvSolution": {
+            "bytes": 2111,
+            "member": "./case/fvSolution",
+            "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+          },
+          "archive_member_input_hash_check": {
+            "bytes": 544,
+            "member": "./input-hash-check.txt",
+            "sha256": "86e5f2451805a7a669540fe5cbb9674f6129865c119bbd876babeb4f9cf0adfe"
+          },
+          "archive_member_interIsoFoam_log": {
+            "bytes": 6912434,
+            "member": "./interIsoFoam.log",
+            "sha256": "664142ac527678c7c361c405eb66d4bdd38b939ed2c3528efd1637541f1fc4b8"
+          },
+          "archive_member_speed_fieldMinMax": {
+            "bytes": 360005,
+            "member": "./case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat",
+            "sha256": "84614a23ad5741d56e7a339e6586aa82850e60148a0fca5d79b1f0a0b4f5e9bc"
+          }
+        },
+        "receipt_file_sha256": {
+          "archive-verification.json": {
+            "bytes": 4485,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/archive-verification.json",
+            "sha256": "542cb3afaa17b020102fcd7cb404ab54d10bf8e62b223cd0f5ef4525b39f894a"
+          },
+          "input-context.json": {
+            "bytes": 3195,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/input-context.json",
+            "sha256": "466b3cc91a5592ce8a1f400337ca6c84acfe6693e2a3a2ef0f7adca8eb16a23b"
+          },
+          "pre-go-manifest.json": {
+            "bytes": 3413,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/pre-go-manifest.json",
+            "sha256": "8e0ccff645dd4a80ebfd6f38d44f856e68d895924ea2c26c5aa2695df9b1f45d"
+          },
+          "result.tar.gz.sha256": {
+            "bytes": 80,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/result.tar.gz.sha256",
+            "sha256": "8e0a386ffabca593592bbe49aa7b8b7042fb259f34e6db5093db735387e73e3c"
+          },
+          "run-result.json": {
+            "bytes": 2948,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/run-result.json",
+            "sha256": "036dd6b3e36032ad6330624897a84d61390056643bc4361184bb5cf9dd16a863"
+          },
+          "snapshot-inventory.json": {
+            "bytes": 1502,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/snapshot-inventory.json",
+            "sha256": "d5dc709995ae7c6d2eb2632a5b72e404e145f2242bb129a1cd2c2ba4fa961702"
+          },
+          "terminal-status.json": {
+            "bytes": 193,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/terminal-status.json",
+            "sha256": "75be8e986474e07da9ee00a22ecff68947d94273745af6fb5edc573f365dec8c"
+          }
+        },
+        "snapshot_inventory_passed": true,
+        "snapshot_inventory_sha256": "d5dc709995ae7c6d2eb2632a5b72e404e145f2242bb129a1cd2c2ba4fa961702"
+      }
+    },
+    {
+      "case_id": "ROUAIX-AIR-UPWIND-03000-08RANK",
+      "input_identity": {
+        "expected_steps": 3000,
+        "fixed_delta_t_s": 0.0001,
+        "gas_inlet_velocity_m_s": [
+          70.0,
+          0.0,
+          0.0
+        ],
+        "git_dirty": false,
+        "git_revision": "891e8b1918ead38e130fc0f8fec0d34eb41891fe",
+        "initial_condition": "all-air alpha.water=0",
+        "input_hash_check": "0/U: OK\n0/alpha.water: OK\n0/epsilon: OK\n0/k: OK\n0/nut: OK\n0/p_rgh: OK\ncase-inputs.json: OK\ncase.foam: OK\nconstant/g: OK\nconstant/hRef: OK\nconstant/polyMesh/boundary: OK\nconstant/polyMesh/cellZones: OK\nconstant/polyMesh/faceZones: OK\nconstant/polyMesh/faces: OK\nconstant/polyMesh/neighbour: OK\nconstant/polyMesh/owner: OK\nconstant/polyMesh/pointZones: OK\nconstant/polyMesh/points: OK\nconstant/transportProperties: OK\nconstant/turbulenceProperties: OK\nsystem/controlDict: OK\nsystem/decomposeParDict: OK\nsystem/fvSchemes: OK\nsystem/fvSolution: OK",
+        "launch_command": "decomposePar -force; mpirun --bind-to none -np 8 interIsoFoam -parallel",
+        "mesh_files_sha256": {
+          "boundary": "29602eecb93e5cdf7571c868f0a1bd27ca1823bb884297e7c702f72f7687b4ab",
+          "cellZones": "78d4adac4421119a7216d512741ff5cb71fd19fd5db817a06f3c9e089eae82b1",
+          "faceZones": "222fa55dcccd56b06d6cc19354440c637725b3fb564ad02e7f36fbdc38c7d1fd",
+          "faces": "62dc8bc14df734c3896851a8251296fbd1291b723d7f29c75c9e991ad80591ac",
+          "neighbour": "44c6187dc3d5b5668178847bf4848b3d214e952b0475b3818a0615980f02c569",
+          "owner": "7f107eedc7d4a7d3836e469365f986d1e5483a2d89bfe37ab5faebadf285ffc2",
+          "pointZones": "71db044862d40f7de8e5879178519e9db165ca5a8f50fda773880b5ae35e2ce2",
+          "points": "da7a756ebd96925b75ad40e2df1efbc9e73fbb31c2fe2877d83ef34ffc10f201"
+        },
+        "mesh_input_sha256": "1096fc9fe79bc85d7ca368d03ffa1cf9c42f6d20364269d4f5c55d66f4721ed4",
+        "mesh_qa_sha256": "1d42d483a1aed6a81d7bc8dcff6f1e8d9edbceac6fc5ecaee19f5e8e0839d40b",
+        "momentum_convection": "upwind",
+        "nozzle_velocity_m_s": [
+          0.0,
+          -10.0,
+          0.0
+        ],
+        "rank_count": 8,
+        "requested_end_time_s": 0.3,
+        "resource_cap": {
+          "cpus": 8,
+          "durable_output_free_bytes_before_upload": 103857799168,
+          "field_handler": "collated",
+          "gpu": false,
+          "memory_gib": 3,
+          "network": "none",
+          "workspace_tmpfs_gib": 2
+        },
+        "solver": "OpenCFD OpenFOAM v2512 interIsoFoam",
+        "solver_image_digest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      },
+      "numerical_diagnostics": {
+        "all_recorded_alpha_water_is_zero": true,
+        "alpha_water_extrema_rows": 1960,
+        "alpha_water_maximum_over_rows": 0.0,
+        "alpha_water_minimum_over_rows": 0.0,
+        "bulk_Courant_max": 2.74922251964,
+        "bulk_Courant_max_time_s": 0.1959,
+        "divergence_markers": [],
+        "fatal_errors": [],
+        "fixed_absolute_tolerance_checks": {
+          "all_listed_checks_passed": true,
+          "interpretation": "Three p_rgh solves are logged per step. The third per step is assessed as p_rghFinal (tol 1e-8, relTol 0); non-final p_rgh solves use relTol 0.01.",
+          "limits": {
+            "U_components_k_epsilon_p_rgh_final": 1e-08,
+            "pcorr": 1e-10
+          },
+          "passed_by_logged_final_residual": {
+            "Ux": true,
+            "Uy": true,
+            "Uz": true,
+            "epsilon": true,
+            "k": true,
+            "p_rgh_final_corrector_each_step": true,
+            "pcorr": true
+          }
+        },
+        "global_peak_mag_U": {
+          "maximum": 1221.676328464,
+          "maximum_location_m": [
+            17.42307692308,
+            -0.0250266998932,
+            3.486878250959
+          ],
+          "maximum_processor": 7,
+          "minimum": 0.0,
+          "minimum_location_m": [
+            -2.25,
+            0.0,
+            -3.475694444444
+          ],
+          "minimum_processor": 2,
+          "time_s": 0.196
+        },
+        "interface_Courant_max": 0.0,
+        "interface_Courant_max_time_s": 0.0001,
+        "linear_solve_summary": {
+          "Ux": {
+            "max_final_residual_logged": 9.98120920691e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 1960
+          },
+          "Uy": {
+            "max_final_residual_logged": 9.98954168796e-09,
+            "max_iterations_logged": 3,
+            "solve_count": 1960
+          },
+          "Uz": {
+            "max_final_residual_logged": 9.89112689635e-09,
+            "max_iterations_logged": 2,
+            "solve_count": 1960
+          },
+          "epsilon": {
+            "max_final_residual_logged": 9.94069763338e-09,
+            "max_iterations_logged": 6,
+            "solve_count": 1960
+          },
+          "k": {
+            "max_final_residual_logged": 9.94845483561e-09,
+            "max_iterations_logged": 6,
+            "solve_count": 1960
+          },
+          "p_rgh": {
+            "max_final_residual_logged": 0.00703966170785,
+            "max_iterations_logged": 22,
+            "solve_count": 5880
+          },
+          "pcorr": {
+            "max_final_residual_logged": 9.92650363403e-11,
+            "max_iterations_logged": 307,
+            "solve_count": 1
+          }
+        },
+        "log_parser_completion_status": "completed",
+        "mag_U_extrema_rows": 1960,
+        "per_step_last_p_rgh_corrector": {
+          "last_p_rgh_residual_each_step_count": 1960,
+          "last_p_rgh_residual_each_step_max": 9.99416235454e-09,
+          "last_p_rgh_residual_each_step_max_abs": 9.99416235454e-09,
+          "p_rgh_solves_per_step_distribution": {
+            "3": 1960
+          },
+          "step_blocks": 1960
+        },
+        "physical_time_reached_s": 0.196,
+        "steps_logged": 1960
+      },
+      "run_id": "air-upwind-030",
+      "scope": "same-mesh all-air momentum-scheme diagnostic; exploratory only; not a fluid-validation result",
+      "source_paths": {
+        "archive": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/result.tar.gz",
+        "archive_sha256_sidecar": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/result.tar.gz.sha256",
+        "archive_verification": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/archive-verification.json",
+        "input_context": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/input-context.json",
+        "pre_go_manifest": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/pre-go-manifest.json",
+        "run_directory": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030",
+        "run_result": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/run-result.json",
+        "snapshot_inventory": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/snapshot-inventory.json",
+        "terminal_status": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/terminal-status.json"
+      },
+      "terminal": {
+        "End_marker": true,
+        "completed_utc": "2026-10-27T14:22:59.977559+00:00",
+        "container_started_at": "2026-10-27T14:11:01.965903811Z",
+        "container_to_archive_complete_wall_s": 718.011656,
+        "declared_horizon_reached": false,
+        "guard_reason": "max_abs_U_exceeded_1000.0_m_s",
+        "guard_threshold_m_s": 1000.0,
+        "guard_trigger_max_U_m_s": "1031.09584854",
+        "guard_trigger_time_s": "0.195900000000",
+        "resource_samples_available": false,
+        "resource_samples_count": 0,
+        "solver_clock_time_s": 695.0,
+        "solver_execution_time_s": 688.29,
+        "solver_exit_code": 0,
+        "state": "terminal",
+        "terminal_max_U_m_s": "1221.67632846",
+        "terminal_solver_time_s": "0.196000000000"
+      },
+      "verification": {
+        "archive_bytes_actual": 28453827,
+        "archive_hashes_agree": true,
+        "archive_members_actual": 86,
+        "archive_sha256_actual": "4985ea5b01b27da53ae28e86c15de8b71d42f57c5122d448d289e07e663c8527",
+        "archive_sha256_recorded": "4985ea5b01b27da53ae28e86c15de8b71d42f57c5122d448d289e07e663c8527",
+        "archive_sha256_sidecar": "4985ea5b01b27da53ae28e86c15de8b71d42f57c5122d448d289e07e663c8527",
+        "archive_verification_remote_local_sha_match": true,
+        "archive_verification_report_sha256": "4985ea5b01b27da53ae28e86c15de8b71d42f57c5122d448d289e07e663c8527",
+        "raw_artifact_hashes": {
+          "archive_member_alpha_fieldMinMax": {
+            "bytes": 407874,
+            "member": "./case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat",
+            "sha256": "1996dc4f626bfdb283199e322fc45a1362fcdb9586854291d3dc1ee0ff961f83"
+          },
+          "archive_member_case_inputs": {
+            "bytes": 6901,
+            "member": "./case/case-inputs.json",
+            "sha256": "2ac45571efe77baa5ac240e6cf3fea83eaa4fbf0042eb3b9c933bd51632aab5b"
+          },
+          "archive_member_fvSolution": {
+            "bytes": 2111,
+            "member": "./case/fvSolution",
+            "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+          },
+          "archive_member_input_hash_check": {
+            "bytes": 544,
+            "member": "./input-hash-check.txt",
+            "sha256": "86e5f2451805a7a669540fe5cbb9674f6129865c119bbd876babeb4f9cf0adfe"
+          },
+          "archive_member_interIsoFoam_log": {
+            "bytes": 7715478,
+            "member": "./interIsoFoam.log",
+            "sha256": "d987de365ea79ae796b9a2cf510358bc5cb3b7918be20dbc254a2ff3ae59eb95"
+          },
+          "archive_member_speed_fieldMinMax": {
+            "bytes": 402067,
+            "member": "./case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat",
+            "sha256": "d927551f47803ead4ee0646112a9d5ee69832de48f6b2417509aa7c7b884aaed"
+          }
+        },
+        "receipt_file_sha256": {
+          "archive-verification.json": {
+            "bytes": 4485,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/archive-verification.json",
+            "sha256": "aa8fa824d08b60692582cbc6ecfad2e89f849d34a7ce8def9062bf337f32f160"
+          },
+          "input-context.json": {
+            "bytes": 3193,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/input-context.json",
+            "sha256": "74160725c095f5ab275977d9df5d559fd5406291fe1095fd598f63c58aad1661"
+          },
+          "pre-go-manifest.json": {
+            "bytes": 3405,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/pre-go-manifest.json",
+            "sha256": "aaaeda341767d553cad198854853274353081e689bde309bf5ca9664f009d88f"
+          },
+          "result.tar.gz.sha256": {
+            "bytes": 80,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/result.tar.gz.sha256",
+            "sha256": "e99ea91d07c664d5cc5c25e80f55901690bea06f6346bf3b2d6d8ca08dff3794"
+          },
+          "run-result.json": {
+            "bytes": 2941,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/run-result.json",
+            "sha256": "ec9abaa35cb571e5ec91caeb778677418ea5b90682e7ef597a70d53b04ab611a"
+          },
+          "snapshot-inventory.json": {
+            "bytes": 1499,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/snapshot-inventory.json",
+            "sha256": "8caade4a5bfc6240f917279db108da703b7632911b616423645dca1bb7e72160"
+          },
+          "terminal-status.json": {
+            "bytes": 193,
+            "path": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-upwind-030/terminal-status.json",
+            "sha256": "26c7058573cfba050cac50988fe5b34d440affa187425dc68158af359c001e4c"
+          }
+        },
+        "snapshot_inventory_passed": true,
+        "snapshot_inventory_sha256": "8caade4a5bfc6240f917279db108da703b7632911b616423645dca1bb7e72160"
+      }
+    }
+  ],
+  "comparability": {
+    "an_8_vs_4_rank_measurement_is_available_here": false,
+    "both_runs_use_8_mpi_ranks": true,
+    "timing_scopes": [
+      "OpenFOAM ClockTime is solver-internal wall time.",
+      "container_to_archive_complete_wall_s starts at Docker container start and ends when the archived result arrived; it includes setup/teardown and packaging, and is not CPU time.",
+      "resource_samples are empty in both run-result records; CPU utilization and observed peak memory are unavailable. Caps are recorded only.",
+      "All three terminal records use 8 MPI ranks; this bundle contains no 4-rank performance comparator."
+    ]
+  },
+  "created_utc": "2026-10-27T14:25:37.361664+00:00",
+  "matched_upwind_comparison": {
+    "alpha_water_identically_zero_in_both": true,
+    "cases": [
+      "air-original-030",
+      "air-upwind-030"
+    ],
+    "configured_change": "momentum convection: limitedLinearV 1 -> upwind; case-input metadata and case-files.sha256 consequently also differ. Mesh geometry/mesh QA hashes, initial fields, remaining per-file inputs, fvSolution, solver, rank count, fixed time step and boundary velocities were matched.",
+    "fvSchemes_changed": true,
+    "fvSolution_identical": true,
+    "guard_crossing_delta_definition": "Difference between guard trigger times (0.1959 s upwind minus 0.1751 s limitedLinearV), not terminal snapshot times.",
+    "guard_crossing_delta_upwind_minus_original_s": 0.020799999999999985,
+    "guard_crossing_step_delay_at_dt_0_0001": 208,
+    "input_context_hash_keys_with_different_values": [
+      "case-files.sha256",
+      "case/case-inputs.json",
+      "case/system/fvSchemes"
+    ],
+    "input_file_hash_differences": [
+      "case-files.sha256",
+      "case/case-inputs.json",
+      "case/system/fvSchemes"
+    ],
+    "interpretation": "On the same mesh and all-air initialization, changing momentum convection from limitedLinearV 1 to upwind delayed the configured 1000 m/s guard event, but the upwind run also crossed the guard and ended at .1960 s. This is a coarse all-air diagnostic, not evidence that upwind cures the corner instability or predicts the cause of a fine-grid water-containing event.",
+    "momentum_convection_original": "limitedLinearV 1",
+    "momentum_convection_upwind": "upwind",
+    "original_bulk_Courant_max": 3.0744513714,
+    "original_guard_trigger_U_m_s": 1091.29438224,
+    "original_guard_trigger_time_s": 0.1751,
+    "original_terminal_U_peak_m_s": 1364.743492838,
+    "original_terminal_time_s": 0.1752,
+    "same_initial_U_and_alpha_hashes": true,
+    "same_mesh_manifest": true,
+    "same_solver_and_fixed_delta_t": true,
+    "upwind_bulk_Courant_max": 2.74922251964,
+    "upwind_guard_trigger_U_m_s": 1031.09584854,
+    "upwind_guard_trigger_time_s": 0.1959,
+    "upwind_terminal_U_peak_m_s": 1221.676328464,
+    "upwind_terminal_time_s": 0.196
+  },
+  "schema_version": 1,
+  "scientific_limit": "Both the limitedLinearV and upwind same-mesh cases trigger the configured velocity guard with alpha.water identically zero. This supports only the coarse-control finding; it neither proves a common cause on a finer grid nor validates VOF physics.",
+  "scope": "Read-only terminal inspection of three attempt-003 local all-air interIsoFoam runs. No solver, queue, source, or published summary files changed."
+}

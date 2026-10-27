@@ -1,21 +1,32 @@
 # Komondor Rouaix status
 
-Updated 2026-10-27 12:05 UTC (13:05 CET). Analytical E0 remains the only
+Updated 2026-10-27 14:24 UTC (15:24 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-SSH access is restored. **14669440 (`ml-vof`) is RUNNING on one node,
-120 CPU ranks**, x1000c1s1b0n1, since 11:35:09 UTC. It targets a fresh
-original-scheme checkpoint at **0.20 s**, fixed 0.1 ms, on the unchanged
-10,099,265-cell mesh. At 12:05:10 UTC its guard readback was 0.0523 s,
-max recorded speed 103.29355 m/s, with no guard stop. This equals the prior
-original short-trial peak; full-field equivalence has not been checked.
-The two-hour allocation ends at 13:35:09 UTC; completion within that cap is
-not guaranteed. Native auditor **14669459** waits on `afterany:14669440`.
-A captured checkpoint is a candidate donor until its terminal audit passes.
+**14669440 (`ml-vof`) COMPLETED 0:0** on one CPU node with 120 ranks.
+It reached all **2000 fixed 0.1 ms steps through 0.20 s** on the unchanged
+10,099,265-cell mesh. Peak recorded speed was **116.92652 m/s**, with no guard
+stop. All **16,001 recorded linear solves** met their configured criteria.
+Whole-job wall was **1:55:13**, ending at 13:30:22 UTC; the solver step was
+1:51:44. The positive-time checkpoint at exactly 0.20 s is retained, including
+collated fields, flux, time state and mesh addressing in the verified archive.
+
+Native afterany auditor **14669459 COMPLETED 0:0** in 46 s. Its recorded
+archive SHA is `31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9`,
+classified `completed_horizon_converged_exploratory_only`. Login-node sacct
+independently confirms both terminal states. **No Rouaix CFD job is currently
+running or pending on Komondor**; other jobs on the shared login are unrelated.
+The run stops before the prior 0.2281/0.2341/0.2511 s events, so it does not
+establish survival through the failure window or validate the water physics.
+The terminal audit records 250.328864 kg injected and a +1.67e-6 kg ledger
+closure residual, bulk/interface Co maxima 1.30161/0.96384, and retained
+pre-bound alpha and large RANS extrema. These qualify the checkpoint as an
+exploratory candidate; no restart equivalence or physical-health claim is made.
+[Terminal metrics and receipts](../results/summaries/rouaix_healthy_seed_20261027/terminal/README.md).
 [Declaration](../experiments/E1_ROUAIX_HEALTHY_SEED_20261027.md) and
-[submission proof](../results/summaries/rouaix_healthy_seed_20261027/README.md).
+[checkpoint record](../results/summaries/rouaix_healthy_seed_20261027/README.md).
 
 The prepared eight-hour upwind extension is **unsubmitted**. No old failed
 CFD run was resumed. This 120-CPU allocation was accepted in `cpu`; no
@@ -71,26 +82,34 @@ four MPI ranks, no GPU: 0.01 s reached, maximum speed 75.642 m/s, bulk Co
 not a water reproduction or a paper-resolution mesh.
 
 Measured warm cost was 0.9125 wall seconds/step: a 0.5 s branch projects to
-about 75 minutes, exceeding its declared 30-minute cap. The full comparison
-has not launched. Its compact metrics and raw log are verified; an output
+about 75 minutes, exceeding its declared 30-minute cap. That original
+four-rank 0.5 s pair was not launched. Its compact metrics and raw log are verified; an output
 selector omitted the pilot's final 3D snapshot. That gap is recorded and the
 selector is corrected for follow-ups.
 [Local pilot](../results/summaries/rouaix_fast_local_20261027/README.md).
-The finite local dispatcher is **armed and waiting**, launchd label
-`com.firetrack.rouaix-fast-q20261027`, PID 60998. At 12:02:13 UTC its live
-sample measured 18.249 busy CPU equivalents on Goblin; no Rouaix solver was
-active. It has a shared six-hour capacity-wait budget and requires two samples
-at or below 11 busy CPUs plus a final recheck before each eight-rank launch.
-All three project PAUSE paths are checked; unavailable checks defer launch.
+The finite local dispatcher (PID 60998) advanced after capacity became
+available. Its **eight-rank 100-step reprofile completed** with final fields
+captured; measured warm solver-clock slope was 0.35122 s/step, projecting
+1053.66 s for 3000 steps. That passed the declared affordability gate.
 
-Its finite sequence is an eight-rank 100-step reprofile, then fresh matched
-original/upwind air branches to **0.30 s** only if measured 3000-step solver
-wall projects within 1680 s. Each branch has a 1680 s cap and 120 s stop grace,
-with no automatic retries. A clean, captured speed-guard terminal permits the
-independent sibling; pause, timeout, nonfinite or archive failures stop the
-sequence. Fields are collated, terminal snapshots inventoried, and remote
-failure data retained if transfer fails. The queued sources are frozen in the
-compact local summary. No GPU work or changes to I4F jobs were made.
+The **all-air original-scheme branch hit the U guard**, ending cleanly at
+**0.1752 s**, final speed **1364.74 m/s**. The requested 0.30 s was not reached;
+its terminal checkpoint inventory passed and the verified archive was captured.
+This shows that high-speed growth can occur without water in this coarse
+setup, not that it shares the fine-grid failure mechanism. The matched
+**upwind all-air branch also hit the U guard**, ending with a captured
+checkpoint at **0.1960 s**, final speed **1221.68 m/s**. Neither air branch
+reached 0.30 s. The finite queue is now complete, not waiting or retrying.
+Upwind alone did not cure this coarse all-air failure; common boundary,
+pressure-coupling, turbulence and mesh effects remain hypotheses for targeted
+controls. This is not proof of the fine-grid cause.
+[Matched terminal air comparison](../results/summaries/rouaix_fast_local_20261027/terminal-local/README.md).
+No GPU work or changes to I4F jobs were made.
+
+The finite sequence retains the shared six-hour capacity-wait budget,
+1680 s branch cap plus 120 s grace, all three project PAUSE checks, no retries,
+collated field capture and retention of remote failure evidence after failed
+transfers. A verified speed-guard terminal permits its independent sibling.
 
 Independent read-only review found no blocker for these declared cases.
 The 94 affected case/runner/local-generator tests, Ruff and formatting checks
