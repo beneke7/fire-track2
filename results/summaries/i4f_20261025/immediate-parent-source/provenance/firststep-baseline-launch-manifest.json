@@ -1,0 +1,453 @@
+{
+  "PIMPLE_end_time_s": 1.2e-05,
+  "arm": "baseline-12d8-predictor-no",
+  "binary_path": "bin/compressibleInterFoamI4FColdRestartConsistent",
+  "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z",
+  "case_path": "cases/baseline-12d8-predictor-no/case",
+  "container_id": "f462b86a1d657c26a6215fdd5f773e78aacccc8f91667ff4337b342615346fb7",
+  "container_name": "i4f-firststep-energy-baseline-12d8-predictor-no-20261026t205819z",
+  "container_uid_gid": "1000:1000",
+  "created_utc": "2026-10-26T20:58:19.497604+00:00",
+  "docker_started_at": "2026-10-26T20:58:19.8784497Z",
+  "docker_state_at_launch": {
+    "ExitCode": 0,
+    "Running": true,
+    "StartedAt": "2026-10-26T20:58:19.8784497Z",
+    "Status": "running"
+  },
+  "expected_log_path": "cases/baseline-12d8-predictor-no/case/log.energy-audit",
+  "expected_momentumPredictor": "no",
+  "experiment_sha256": "30ed25ac15eaecfdc3f0cb5985b71c52d98c09a83f93f90f082dbbb97f8bbfcf",
+  "freeze": {
+    "case_file_count": 225,
+    "case_freeze_path": "cases/baseline-12d8-predictor-no/case-freeze.json",
+    "case_freeze_sha256": "7e76066196089303e86ebbea14c2ccc63f16fe306736ce586e773510895b4b17",
+    "case_inputs_sha256_manifest": "arms/baseline-12d8-predictor-no/case-inputs.sha256",
+    "case_inputs_sha256_manifest_sha256": "fcfa50b6d982c2bb690355644aeebfc971ab148c3aef74f2fa769add2bc489ac",
+    "case_static_tree_sha256": "dbe58906c25db5af1665c75f794d3e62675539f119d0d96f8c371501bc494980"
+  },
+  "go_sha256": "69670ce99077016808c6ac5970112b78dba8f77dc7db2850115ee44c583c8b68",
+  "guard_unit": "i4f-energy-audit-baseline-12d8-predictor-no-20261026t205819z-guard",
+  "hard_wall_s_from_StartedAt": 600,
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "image_id_and_digests": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+  "instrumented_observer": false,
+  "instrumented_source_delta_sha256": "f9c5c705704d5da9049bdad3741b2eaaaa01c1b17232d0d82dc6a3b5e5ade209",
+  "log_path": "cases/baseline-12d8-predictor-no/case/log.energy-audit",
+  "memory_limit_bytes": 8589934592,
+  "nice_priority": 19,
+  "pause_flags_prelaunch": [],
+  "physics_changes": false,
+  "quota_cpu_equivalents": 0.5,
+  "ranks": 10,
+  "released_utc": "2026-10-26T20:58:28.336551+00:00",
+  "resource_sample_final": {
+    "active_docker_containers": [
+      {
+        "cpu_equivalents": 0.5,
+        "id": "f462b86a1d657c26a6215fdd5f773e78aacccc8f91667ff4337b342615346fb7",
+        "memory_bytes": 8589934592,
+        "name": "i4f-firststep-energy-baseline-12d8-predictor-no-20261026t205819z",
+        "nano_cpus": 500000000,
+        "started_at": "2026-10-26T20:58:19.8784497Z",
+        "status": "running"
+      },
+      {
+        "cpu_equivalents": 10.0,
+        "id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+        "memory_bytes": 34359738368,
+        "name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+        "nano_cpus": 10000000000,
+        "started_at": "2026-10-26T20:50:36.466720222Z",
+        "status": "running"
+      },
+      {
+        "cpu_equivalents": 8.0,
+        "id": "d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7",
+        "memory_bytes": 34359738368,
+        "name": "i4f-gamma-outer-relaxation-warm-omega0p5-20261026T2040Z",
+        "nano_cpus": 8000000000,
+        "started_at": "2026-10-26T20:43:55.431189317Z",
+        "status": "running"
+      }
+    ],
+    "active_docker_quota_cpu_equivalents": 18.5,
+    "active_mpi_solver_process_count": 20,
+    "available_memory_bytes": 123507400704,
+    "candidate_quota_cpu_equivalents": 0.5,
+    "disk_floor_bytes": 21474836480,
+    "effective_cpus": 20.0,
+    "free_disk_bytes": 31503093760,
+    "host_cpu_equivalents_observed": 19.49675177419273,
+    "pause_flags": [],
+    "projected_host_cpu_with_candidate_quota": 19.99675177419273,
+    "sample_duration_s": 5.137266,
+    "sample_end_utc": "2026-10-26T20:58:26.931479+00:00",
+    "sample_start_utc": "2026-10-26T20:58:21.794213+00:00",
+    "top_process_cpu_ticks": [
+      {
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/tmux-spawn-c6aae85e-1bac-4b07-85b1-9080e1127ce4.scope",
+        "cmd": "rg --no-ignore -n 725007c489686ec5714f658147c0959c330bf42d5f71f43602b4225a827c6b0e results/runs/i4f-dgdt-restart-serialization-20261026T185614Z .",
+        "comm": "rg",
+        "cpu_equivalents": 2.530528884429967,
+        "pid": 2977178,
+        "ticks_5s": 1300
+      },
+      {
+        "cgroup": "0::/user.slice/user-1001.slice/session-3305.scope",
+        "cmd": "/home/router/lfm-venv/bin/python gmk.py /home/router/lfm25-q8/LFM2.5-24B-A2B-Q8_0.gguf --prompt-ids 124894,597,5205,302,3980,355,4741,20,309,278,5205,302,6398,355 --gen 64",
+        "comm": "python",
+        "cpu_equivalents": 0.9810665828866949,
+        "pid": 2977117,
+        "ticks_5s": 504
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.9246163231571034,
+        "pid": 2966676,
+        "ticks_5s": 475
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.9070972770341267,
+        "pid": 2966671,
+        "ticks_5s": 466
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8740057454685041,
+        "pid": 2957269,
+        "ticks_5s": 449
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8662195027471811,
+        "pid": 2966670,
+        "ticks_5s": 445
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8370210925422198,
+        "pid": 2966674,
+        "ticks_5s": 430
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8370210925422198,
+        "pid": 2966675,
+        "ticks_5s": 430
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8214486070995739,
+        "pid": 2966668,
+        "ticks_5s": 422
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8136623643782509,
+        "pid": 2957274,
+        "ticks_5s": 418
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8039295609765972,
+        "pid": 2957272,
+        "ticks_5s": 413
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7922501968946128,
+        "pid": 2966677,
+        "ticks_5s": 407
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7786242721322976,
+        "pid": 2957270,
+        "ticks_5s": 400
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7669449080503131,
+        "pid": 2966669,
+        "ticks_5s": 394
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7513724226076671,
+        "pid": 2957266,
+        "ticks_5s": 386
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7474793012470057,
+        "pid": 2957271,
+        "ticks_5s": 384
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.737746497845352,
+        "pid": 2957273,
+        "ticks_5s": 379
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.737746497845352,
+        "pid": 2966672,
+        "ticks_5s": 379
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7357999371650211,
+        "pid": 2957268,
+        "ticks_5s": 378
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7357999371650211,
+        "pid": 2957275,
+        "ticks_5s": 378
+      }
+    ]
+  },
+  "resource_sample_prelaunch": {
+    "active_docker_containers": [
+      {
+        "cpu_equivalents": 10.0,
+        "id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+        "memory_bytes": 34359738368,
+        "name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+        "nano_cpus": 10000000000,
+        "started_at": "2026-10-26T20:50:36.466720222Z",
+        "status": "running"
+      },
+      {
+        "cpu_equivalents": 8.0,
+        "id": "d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7",
+        "memory_bytes": 34359738368,
+        "name": "i4f-gamma-outer-relaxation-warm-omega0p5-20261026T2040Z",
+        "nano_cpus": 8000000000,
+        "started_at": "2026-10-26T20:43:55.431189317Z",
+        "status": "running"
+      }
+    ],
+    "active_docker_quota_cpu_equivalents": 18.0,
+    "active_mpi_solver_process_count": 20,
+    "available_memory_bytes": 124030029824,
+    "candidate_quota_cpu_equivalents": 0.5,
+    "disk_floor_bytes": 21474836480,
+    "effective_cpus": 20.0,
+    "free_disk_bytes": 31503941632,
+    "host_cpu_equivalents_observed": 15.723416287786572,
+    "pause_flags": [],
+    "projected_host_cpu_with_candidate_quota": 16.22341628778657,
+    "sample_duration_s": 6.576179,
+    "sample_end_utc": "2026-10-26T20:58:18.237699+00:00",
+    "sample_start_utc": "2026-10-26T20:58:11.661520+00:00",
+    "top_process_cpu_ticks": [
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8971775251251526,
+        "pid": 2966677,
+        "ticks_5s": 590
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8804504865211242,
+        "pid": 2966673,
+        "ticks_5s": 579
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8758885669018438,
+        "pid": 2966670,
+        "ticks_5s": 576
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8637234479170959,
+        "pid": 2966676,
+        "ticks_5s": 568
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8485170491861612,
+        "pid": 2966674,
+        "ticks_5s": 558
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8393932099476002,
+        "pid": 2966669,
+        "ticks_5s": 552
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.8317900105821329,
+        "pid": 2966671,
+        "ticks_5s": 547
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7983359333740764,
+        "pid": 2966668,
+        "ticks_5s": 525
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7983359333740764,
+        "pid": 2966675,
+        "ticks_5s": 525
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7770469751507677,
+        "pid": 2957268,
+        "ticks_5s": 511
+      },
+      {
+        "cgroup": "0::/system.slice/docker-f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FColdRestartConsistent -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7709644156583938,
+        "pid": 2966672,
+        "ticks_5s": 507
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7664024960391134,
+        "pid": 2957267,
+        "ticks_5s": 504
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7557580169274589,
+        "pid": 2957269,
+        "ticks_5s": 497
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7542373770543654,
+        "pid": 2957274,
+        "ticks_5s": 496
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7238245795924959,
+        "pid": 2957271,
+        "ticks_5s": 476
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7131801004808416,
+        "pid": 2957273,
+        "ticks_5s": 469
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.7070975409884677,
+        "pid": 2957275,
+        "ticks_5s": 465
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.6706021840342242,
+        "pid": 2957270,
+        "ticks_5s": 441
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.6645196245418502,
+        "pid": 2957266,
+        "ticks_5s": 437
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope",
+        "cmd": "/pair/bin/compressibleInterFoamI4FGammaOuterRelaxation -parallel -fileHandler collated",
+        "comm": "compressibleInt",
+        "cpu_equivalents": 0.6569164251763829,
+        "pid": 2957272,
+        "ticks_5s": 432
+      }
+    ]
+  },
+  "schema": "i4f-firststep-energy-audit-arm-launch/v1",
+  "solver_binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "source_manifest_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "stage": "one true-cold first time-step; baseline/predictor-no passivity or predictor-yes energy-source diagnostic",
+  "status": "released"
+}

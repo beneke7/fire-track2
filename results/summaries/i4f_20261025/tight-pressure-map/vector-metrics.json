@@ -1,0 +1,123 @@
+{
+  "source": {
+    "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z",
+    "cell_volume_file": "case/constant/V",
+    "cell_addressing": "case/processors10/constant/polyMesh/cellProcAddressing",
+    "rank_sweep_indices": [
+      "case/i4f_frozen_pressure_probe/rank0.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank1.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank2.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank3.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank4.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank5.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank6.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank7.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank8.sweeps-index.csv",
+      "case/i4f_frozen_pressure_probe/rank9.sweeps-index.csv"
+    ],
+    "rank_sweep_binary": [
+      "case/i4f_frozen_pressure_probe/rank0.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank1.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank2.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank3.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank4.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank5.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank6.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank7.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank8.sweeps.bin",
+      "case/i4f_frozen_pressure_probe/rank9.sweeps.bin"
+    ],
+    "global_cells": 299214,
+    "sum_cell_volumes_m3": 25.1417669189096
+  },
+  "baseline_sweeps": [
+    {
+      "map": "baseline",
+      "step": 1,
+      "difference": {
+        "max_abs": 4.276635413974873,
+        "volume_weighted_l2": 0.06924812972735717,
+        "volume_weighted_rms": 0.013810523792890538
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 2,
+      "difference_from_previous_output": {
+        "max_abs": 0.3521607521979604,
+        "volume_weighted_l2": 0.0022224067311345987,
+        "volume_weighted_rms": 0.00044322642587831565
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 3,
+      "difference_from_previous_output": {
+        "max_abs": 0.03273776330752298,
+        "volume_weighted_l2": 0.00021970444735174883,
+        "volume_weighted_rms": 4.3816829559174204e-05
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 4,
+      "difference_from_previous_output": {
+        "max_abs": 0.0032201989233726636,
+        "volume_weighted_l2": 1.9937563360206018e-05,
+        "volume_weighted_rms": 3.976254582506201e-06
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 5,
+      "difference_from_previous_output": {
+        "max_abs": 0.0005445350252557546,
+        "volume_weighted_l2": 2.7779478475762367e-06,
+        "volume_weighted_rms": 5.540209532793234e-07
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 6,
+      "difference_from_previous_output": {
+        "max_abs": 0.0,
+        "volume_weighted_l2": 0.0,
+        "volume_weighted_rms": 0.0
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 7,
+      "difference_from_previous_output": {
+        "max_abs": 0.0,
+        "volume_weighted_l2": 0.0,
+        "volume_weighted_rms": 0.0
+      }
+    },
+    {
+      "map": "baseline",
+      "step": 8,
+      "difference_from_previous_output": {
+        "max_abs": 0.0,
+        "volume_weighted_l2": 0.0,
+        "volume_weighted_rms": 0.0
+      }
+    }
+  ],
+  "centered_response": {
+    "1": {
+      "gain_recomputed": 0.03255645105992721,
+      "alignment_recomputed": -0.5658323674338015,
+      "projection_recomputed": -0.01842149377848131,
+      "centered_vector_weighted_rms_per_Pa": 3.97896450761712e-05
+    },
+    "10": {
+      "gain_recomputed": 0.031581139309508996,
+      "alignment_recomputed": -0.5726138026221766,
+      "projection_recomputed": -0.01808379627115865,
+      "centered_vector_weighted_rms_per_Pa": 3.859764450103705e-05
+    }
+  },
+  "relative_centered_response_1Pa_vs_10Pa_weighted_L2": 0.23204025427826602,
+  "interpretation_limit": "one pressure-only direction at one frozen state; not global operator stability or a physical cause test"
+}

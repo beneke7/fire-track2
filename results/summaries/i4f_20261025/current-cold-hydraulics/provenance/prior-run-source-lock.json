@@ -1,0 +1,50 @@
+{
+  "binary_parent_bundle": "results/runs/i4f-pressure-dp-cell-trace-20261025T2128Z",
+  "binary_path": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/bin/compressibleInterFoamFrozenAlphaSourceV2NoPout",
+  "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "binary_source_qualification": "Frozen stock-alpha source with diagnostic-only DP_CELL logger enabled; i4fFrozenPredictorSp=false. No equation/threshold/pressure-floor change relative to the selected stock reference.",
+  "case_static_tree_sha256": "763bd98f44459f717f75482a756419d00abb2c2f0ca2da9c6f2b65e7ef947a27",
+  "cellZones_sha256": "2d4744095f2e9c9e47c3b8bb04fdaf4dd4a5a3f810581a4c9a3355a420436664",
+  "controlDict_i4fFrozenPredictorSp": false,
+  "controlDict_sha256": "0d9037486fcbad2fddd45bda570a84c408e3258f637476493d6813fa98df2c1a",
+  "created_utc": "2026-10-26T06:44:45.238345+00:00",
+  "faceZones_sha256": "e9c928c629e5c257c8eb89b1d93a571fec697252a058e1299d72ef4babbc8177",
+  "fvOptions_sha256": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+  "fvSolution_sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+  "graceful_writeNow_s": 13200,
+  "hard_wall_s": 14400,
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "parent_bundle": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z",
+  "parent_input_freeze_sha256": "016e70f7fe4b2861e1d789ce4637b0535e8a1488bcc0240f90b403ad43c29bf7",
+  "parent_launch_manifest_sha256": "701c7dba2752c141625ff5f461f501f5b823fc72ad1e2ab3aadb827be52301af",
+  "restart_checkpoint": {
+    "field_sha256": {
+      "T": "4689d1d17e1ff6da1b540a63214bbfa0925c9ee56099ad98ca752160212ea4ef",
+      "T.air": "fec3bad1ecd6607ca3e01f42da8838d5105048afcff4cfa56f1f14c48bed0e2d",
+      "T.water": "d5cdce8418fc9dc321ac0a6d8c62262876ce6b8c2fe9b8f810b065d0b5a17a1e",
+      "U": "9ef58612458f9ae7623bb12cdf0c020e6573fa069652770dcae0e655eacee6eb",
+      "alpha.water": "70cec22678e68f35a6485c8e92b798e7982b2ee3fac382eade95cbfc6925e7ac",
+      "alphaPhi0.water": "f37b34b8ab42bcdd3ace8401b85964d4d68c514480541a9ed2f923106ba26ee9",
+      "alphat": "ff404466e78edf4e40b71ea87466d8e7c9f99cc03223499b43ba8f4e39007340",
+      "k": "b20d02ce8cb70fae5295b9e3fcc1b4de644d137bc77e01d4891aed84ae6dae56",
+      "nut": "602b0ba889e25278241fea7b36ba53baeeb77bc2d4473e902b98fcf03fcade6a",
+      "omega": "8dbf4ac6564b2133e9d6a29fee89108131d84a8c8f74340dec64b7c879ad00f4",
+      "p": "7e76bd2943584efe31d270dec818c029d24d6b422d7ee45e9e33e693ba47839a",
+      "p_rgh": "7468b99a217b4e8d786ae3a5ad2206a56ea8538068df2d3c20f06b857ae64151",
+      "phi": "ee8aa1dc8c7a5a06f113028855bf6a7469eea8d0f3463771326f917aa01812c0",
+      "rho": "4b267310edd355f6878010e0b5d3d1753ef84f5cd5fc406c57d4a1e0ed0d4529",
+      "uniform/time": "cf16328ec6d4496df2c076f50a43fdf930438fcaf18508f355b415ecc5ad1f5d"
+    },
+    "path_in_parent": "processors10/0.050021166664",
+    "time_s": 0.050021166664044305
+  },
+  "runtime_environment": {
+    "OMPI_MCA_mpi_yield_when_idle": "1",
+    "scope": "container-local runtime fairness setting; no host/global MPI configuration changed"
+  },
+  "schema": "i4f-stock-cold-stage-run-source-lock/v1",
+  "source_binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "stage_target_end_s": 0.46,
+  "static_input_tree_sha256": "62ec4aa85b49c65ebd02369ffddedf8f34d3d59d531c18b1d0b13d46d2e57608"
+}

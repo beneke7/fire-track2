@@ -1,0 +1,323 @@
+{
+  "classification": "bounded algebraic frozen-pressure diagnostic; not a physical continuation or a global stability test",
+  "continuation_after_probe": false,
+  "interpretation_limit": "The selected perturbation direction is damped in both tested amplitudes (weighted gains about 0.032), with negative alignment. The centered 1 Pa and 10 Pa response vectors differ by 23.2% in weighted L2, so an amplitude-independent derivative is not established. This single direction/state does not establish global pressure-map stability or explain the physical pressure cycle.",
+  "method": {
+    "amplitudes_Pa": [
+      1,
+      10
+    ],
+    "centered_response_maps_per_sign_and_amplitude": 1,
+    "diagnostic_maxIter": 1000,
+    "diagnostic_relTol": 0.0,
+    "diagnostic_solver": "GAMG",
+    "diagnostic_tolerance": 1e-14,
+    "map": "Frozen pressure-only map from the same physical second p_rgh equation; only p_rgh and explicit non-orthogonal correction evolve. Processor-neighbor pressure exchange remains live.",
+    "matrix_dimensions": "[0 3 -1 0 0 0 0]",
+    "matrix_residual_units": "integrated m^3/s, not per-volume units",
+    "physical_fvSolution_unchanged": true,
+    "physical_p_rgh_tolerance": 1e-10,
+    "unperturbed_maps": 8
+  },
+  "native_seed_only_checkpoint": true,
+  "physical_checkpoint_written": false,
+  "private_raw_vector_artifacts": [
+    {
+      "bytes": 24200,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank0.state-index.csv",
+      "sha256": "e403516d4167a20976fb8a6822ecf4adb96adaba5ac242df1c5fbfa4e27e7f49"
+    },
+    {
+      "bytes": 27223968,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank0.state.bin",
+      "sha256": "5f4f05cf14f70f33725a4b7be510980997d6db35930155ec314da69e7d012faf"
+    },
+    {
+      "bytes": 4411,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank0.sweeps-index.csv",
+      "sha256": "66bc9af9e0b04dc7f990b33a62f1f329111f1fd41c65fad5025a8d6434090702"
+    },
+    {
+      "bytes": 11388288,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank0.sweeps.bin",
+      "sha256": "9b18aa6acfca287f1c4c9980b29e2c15ac75b4523640cae64e119724dce6a3fb"
+    },
+    {
+      "bytes": 19268,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank1.state-index.csv",
+      "sha256": "18624df5ac61e92fd3aa8f0c8850d6235aa8c37edbc6634018644e2e3b7aeb9f"
+    },
+    {
+      "bytes": 26824896,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank1.state.bin",
+      "sha256": "ca11b665d3bea161d50e301884a12045ea8bdcb68f74857e134a6da15a16f091"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank1.sweeps-index.csv",
+      "sha256": "64769f7a86317b79879c884f7c4823ebc63cb7cdf09f329a20d416a3aa448efe"
+    },
+    {
+      "bytes": 11463552,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank1.sweeps.bin",
+      "sha256": "a365ee92d7e09c4a1189da290a5dc89921dd6853632cfe524a7dd609de813b8d"
+    },
+    {
+      "bytes": 29147,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank2.state-index.csv",
+      "sha256": "8e5b3f9b635718f82a56485348509908b6b3307d7f310f9ffc47f1f076b26e2d"
+    },
+    {
+      "bytes": 28666976,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank2.state.bin",
+      "sha256": "ba684571c1dc398869637fbb3c72074ae9a5e46663d3580e4d13dbf5c6977654"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank2.sweeps-index.csv",
+      "sha256": "64769f7a86317b79879c884f7c4823ebc63cb7cdf09f329a20d416a3aa448efe"
+    },
+    {
+      "bytes": 11463552,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank2.sweeps.bin",
+      "sha256": "21cba193cc39629465c2688a912bbdb0768d9ceb8853404c560a0b83ec759d4f"
+    },
+    {
+      "bytes": 29053,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank3.state-index.csv",
+      "sha256": "acaa2dcd697a33150c80aa95322d9d5e05a8847e0db2e1139614b09ea84b9257"
+    },
+    {
+      "bytes": 26433488,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank3.state.bin",
+      "sha256": "5c54575da36b98611fd431ce093937578adab36e5ee2d2296a740509620ec837"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank3.sweeps-index.csv",
+      "sha256": "3fbfb1b7896967e2e96aed6645f20d0e826737933fb7719ccf64a600eecf1e93"
+    },
+    {
+      "bytes": 11600256,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank3.sweeps.bin",
+      "sha256": "3c903b94302506f700f55d6268913d89abd2c290b769b3410aa11f55a15ba8da"
+    },
+    {
+      "bytes": 29359,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank4.state-index.csv",
+      "sha256": "d841baf393df045370468d8e70fc76719707d8553e36581f823b9aafe9ddcae5"
+    },
+    {
+      "bytes": 27754224,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank4.state.bin",
+      "sha256": "e4260e7792192d52ce9734d128263a25b88e79e427ea60c8c1a7f68b40f8f391"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank4.sweeps-index.csv",
+      "sha256": "d972f650cd01846dace3a5a615171e8ce067b79324250c2cfcf890e5ecb2b0d1"
+    },
+    {
+      "bytes": 11489664,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank4.sweeps.bin",
+      "sha256": "868436e3474f405a644af5fda98517c8bda9490c674f6eadb6aa662d3cd03b5a"
+    },
+    {
+      "bytes": 24049,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank5.state-index.csv",
+      "sha256": "a6bc3e5453933a161904df3f231e3f9246a39ee156ecbf279c507eab611e3eea"
+    },
+    {
+      "bytes": 26623792,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank5.state.bin",
+      "sha256": "722493b777f68d9db8cc40f17c7278b500d37b55ddb329f2e7d36f15e63239ad"
+    },
+    {
+      "bytes": 4411,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank5.sweeps-index.csv",
+      "sha256": "6d5840bf063de610ec70947c153f66d593beb2b859030c0810f32b1cf98be51c"
+    },
+    {
+      "bytes": 11381376,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank5.sweeps.bin",
+      "sha256": "d56927a9c4e22e1c22d1cdbb31a0768c1a7e3c343c92e24a1117c0f8dece3c80"
+    },
+    {
+      "bytes": 19268,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank6.state-index.csv",
+      "sha256": "6b0394f881d51f0361d2b09ca080adccbbb2fea7e0c61fdfb6e004890ecbd99c"
+    },
+    {
+      "bytes": 26694272,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank6.state.bin",
+      "sha256": "be2d884f4ac3e4dfbd28eb9c7d304ca6aa72e7fd061ac3583f72481ed0d896bb"
+    },
+    {
+      "bytes": 4411,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank6.sweeps-index.csv",
+      "sha256": "d722a72c1dc1aca88ac9c5e6c0fe4b7102c7bb6d46b88b49bdfd06eaeb328603"
+    },
+    {
+      "bytes": 11396352,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank6.sweeps.bin",
+      "sha256": "3e558076973ab225c557044649657e8b3a49e75c88f751d7f8a212ae09ef43b8"
+    },
+    {
+      "bytes": 31646,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank7.state-index.csv",
+      "sha256": "19dfa037bd66e43fc9a74616491d517e04bed1c21fe06f577716d81dabba8d45"
+    },
+    {
+      "bytes": 28362472,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank7.state.bin",
+      "sha256": "dafe43dba2e8ec36f9b0cd7a8f3a83285fa052bbbcbc8ed6ebb5d370cea80610"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank7.sweeps-index.csv",
+      "sha256": "08ff5fd76a36c07af7ebaad78892a7b8b4a8272380c4bbb097b16e96f9d1585b"
+    },
+    {
+      "bytes": 11566080,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank7.sweeps.bin",
+      "sha256": "a90bc2328514df912123d215fcf730c436bc99229880aae920571db50bb3e8ac"
+    },
+    {
+      "bytes": 26781,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank8.state-index.csv",
+      "sha256": "6653e08f0eb5f65af9eda6bf96508351ed52c9fcf73098cde959746b1cdfe442"
+    },
+    {
+      "bytes": 26435952,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank8.state.bin",
+      "sha256": "55c42e758e90d76b912f22547410cd7532df5a16c5de8ff26064fd932c3d4c3c"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank8.sweeps-index.csv",
+      "sha256": "ff298b503b4ddb5b439dd797448694629879c285787d232558301b2ff22c7eb7"
+    },
+    {
+      "bytes": 11579904,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank8.sweeps.bin",
+      "sha256": "a08bbeaae9f1671be2f4f431783da20e460ee7258c4e5fac5d5b625151826865"
+    },
+    {
+      "bytes": 29242,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank9.state-index.csv",
+      "sha256": "9a502c97e18a46e57927c26d67fa075a363c446612d09b32ba75429effd9e387"
+    },
+    {
+      "bytes": 28944344,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank9.state.bin",
+      "sha256": "28921454c60a096823d8fa672f26b2f725116b0f9226cb9a35e3c5a0cef52880"
+    },
+    {
+      "bytes": 4412,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank9.sweeps-index.csv",
+      "sha256": "26a66aa18b3f2365127ebe28b5266c976e3edeab690f6273b791b935a9cc04e4"
+    },
+    {
+      "bytes": 11569152,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/rank9.sweeps.bin",
+      "sha256": "7b1b74e53c2b640052d4f04b55c4b17e63b1e7ee1b4769096312862b9dd9cfeb"
+    },
+    {
+      "bytes": 11434,
+      "private_path": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z/case/i4f_frozen_pressure_probe/selected-pressure-rows.csv",
+      "sha256": "8b704fbcc3fdbaaf7d28abffcfab18970867740db0020bc7a8e70847cde1f836"
+    }
+  ],
+  "private_source_parent": "results/runs/i4f-frozen-pressure-operator-20261026T2200Z/build/source/v8-frozen-pressure-probe; public patch is relative to this private parent and the tight-map private source tree.",
+  "results": {
+    "baseline_solver_final_residuals": [
+      3.021683893607742e-15,
+      8.579129372400682e-15,
+      2.311136703650988e-15,
+      1.345748467078031e-15,
+      1.550642454575754e-15,
+      3.067164095229136e-15,
+      3.067164095229136e-15,
+      3.067164095229136e-15
+    ],
+    "baseline_solver_iterations": [
+      6,
+      3,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0
+    ],
+    "centered_response": {
+      "1": {
+        "alignment_recomputed": -0.5658323674338015,
+        "centered_vector_weighted_rms_per_Pa": 3.97896450761712e-05,
+        "gain_recomputed": 0.03255645105992721,
+        "projection_recomputed": -0.01842149377848131
+      },
+      "10": {
+        "alignment_recomputed": -0.5726138026221766,
+        "centered_vector_weighted_rms_per_Pa": 3.859764450103705e-05,
+        "gain_recomputed": 0.031581139309508996,
+        "projection_recomputed": -0.01808379627115865
+      }
+    },
+    "integrity": {
+      "comp1_and_comp2_source_hashes_unchanged": true,
+      "fixedFluxPressure_gradient_hash_unchanged": true,
+      "global_mismatch_checks": 0,
+      "held_field_count": 38,
+      "local_mismatches": 0,
+      "original_comp_matrices_unchanged": true
+    },
+    "note": "Baseline differences become exactly zero after the fifth solve because the later GAMG solves take zero iterations once the residual is below tolerance; those unchanged snapshots are not evidence of further operator contraction.",
+    "relative_centered_response_1Pa_vs_10Pa_weighted_L2": 0.23204025427826602
+  },
+  "run": {
+    "binary_sha256": "c3986247acdc1116c97aa9769bf3db4426a092dfe02ccf046cfe61e28b251cbf",
+    "bundle": "results/runs/i4f-frozen-pressure-operator-tightmaps-20261026T2234Z",
+    "case_freeze_sha256": "bc306583c5fb1ba979317e44dba042fcdc38270992518d97d443d81b949a89c7",
+    "cpu_quota": 10,
+    "docker_id": "fa6d93ab0de61049337b871405eb4ab9ee385a5d7b3d0d2c0c41af262f847bfd",
+    "docker_name": "i4f-frozen-pressure-operator-tightmaps-20261026t2234z",
+    "exit_code": 0,
+    "finished_at_utc": "2026-10-26T22:53:25.623349021Z",
+    "go_sha256": "a23fd965aea8e486ff27a92f226b575cf7534b869e7b7e18d162e6e5d50589a3",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "mpi_ranks": 10,
+    "solver_log_sha256": "602a3fef2dd327898d0ee223c0a6d8966c55fa5f06f0e92377992e7634e13b70",
+    "source_patch_sha256": "8edb357393a78d1c020d0397c55aa985eb59ef96c531b658e8a1648bb461c68a",
+    "started_at_utc": "2026-10-26T22:38:28.320884831Z"
+  },
+  "schema": "i4f-frozen-pressure-tight-map-summary/v1",
+  "source_lineage": {
+    "base_package_path": "results/summaries/i4f_20261025/restart-history/solver-source/v8",
+    "base_source_manifest_sha256": "5747f93c5be1f393c26a45c7779fbc80d84bfa3ecfe28ad173c9a475c3171531",
+    "binary_sha256": "c3986247acdc1116c97aa9769bf3db4426a092dfe02ccf046cfe61e28b251cbf",
+    "build_script_sha256": "1dc03081b20524b843bba6026fc1268ebf508c58b6d4922d9866efdf4ed27bed",
+    "complete_patch": "v8-published-to-tight-map.patch",
+    "complete_patch_sha256": "02941b9a472031aada98bdc68dde29d315a69c751c13f200ec0a91b60a21cf03",
+    "historical_source.patch_role": "This earlier diff is only the tight-map change relative to a private frozen-pressure-probe source tree; it is preserved as history and is not sufficient to reconstruct tight source from published v8 by itself.",
+    "output_source_manifest_sha256": "be18678e2f4e76ed4eefb04a9359fe547347f1aa85f41f2bd204e96dc6fe5579",
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "qualification": "The base is the restart-history channel-D published v8 source package, not the separate apparatus v8-restart-cold source overlay associated with the 12d8 apparatus binary. The published v8 package has two unchanged helper scripts (Allwclean/Allwmake) not included in the tight run\u2019s 69-entry source manifest. Applying this delta to the published v8 tree reproduces every declared tight source hash. It does not recreate the mesh, case dictionaries, restart fields, dynamicCode cache or exact build environment beyond the pinned image/build script.",
+    "verified_declared_output_source_hashes": 69
+  },
+  "state": {
+    "canonical_seed_case": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/case/processors10/0.460047515286",
+    "deltaT_s": 9.514090971421265e-05,
+    "global_cells_under_test": [
+      31926,
+      62270
+    ],
+    "global_face_under_test": 136938,
+    "mesh_cells": 299214,
+    "physical_outer_iteration": 8,
+    "physical_pressure_corrector": 2,
+    "sum_cell_volume_m3": 25.1417669189096,
+    "time_index": 2736,
+    "time_s": 0.493844492237
+  }
+}

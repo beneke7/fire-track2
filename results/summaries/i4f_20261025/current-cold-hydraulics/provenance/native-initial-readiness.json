@@ -1,0 +1,253 @@
+{
+  "audits": {
+    "global_0_p_rgh_source_sha256": "f252ce27cdd1a34efdd082071840080bc9462b3ceddc82a5d21fb39dcde82b58",
+    "global_0_p_rgh_target_sha256": "5121a0df468dffe69672ee8743fb0900a4cd173634eda390435040a0f26120e3",
+    "global_eos_application": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/analysis/eos-application-audit.json",
+    "global_eos_application_sha256": "bf69b4d828b2d4b4680808e33d9271512c3a205b328509bcec07a22c3bf24e83",
+    "global_p_rgh_header_and_boundary_unchanged": true,
+    "processor10_0_p_rgh_source_sha256": "4257aacca2d3422e1e9a5832cb6900434f199fd27c05a28c6a969e6a5c08c285",
+    "processor10_0_p_rgh_target_sha256": "278fc8400ed8493d8ff9f622c5e6c98622c00b5acc17f6db4726a33831f4ce5b",
+    "processor_field_roundtrip_audit": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/analysis/processor-map-audit-v2.json",
+    "processor_field_roundtrip_audit_sha256": "de45110e18f88d275189e90568b275bcab209f03d3f150ca243b4c8af0263af8",
+    "processor_p_rgh_mapping_initial": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/analysis/processor-map-audit.json",
+    "processor_p_rgh_mapping_initial_sha256": "16537bc1c064e446a818f462d1edaa94eec4f1f48039d801018afbe6a0ab0377"
+  },
+  "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/case",
+  "case_scope": {
+    "case_bytes": 240220996,
+    "copied_file_count": 186,
+    "global_polyMesh_file_count": 9,
+    "no_warm_restart_or_history_copied": true,
+    "only_changed_files": [
+      {
+        "path": "0/p_rgh",
+        "source_sha256": "f252ce27cdd1a34efdd082071840080bc9462b3ceddc82a5d21fb39dcde82b58",
+        "target_sha256": "5121a0df468dffe69672ee8743fb0900a4cd173634eda390435040a0f26120e3"
+      },
+      {
+        "path": "constant/thermophysicalProperties.water",
+        "source_sha256": "32d8ca7e56f2d5aae3bf9e13406f11bd335599c61c51eb5327009a3d5323f0be",
+        "target_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+      },
+      {
+        "path": "processors10/0/p_rgh",
+        "source_sha256": "4257aacca2d3422e1e9a5832cb6900434f199fd27c05a28c6a969e6a5c08c285",
+        "target_sha256": "278fc8400ed8493d8ff9f622c5e6c98622c00b5acc17f6db4726a33831f4ce5b"
+      }
+    ],
+    "postProcessing_or_dynamicCode_copied": false,
+    "processor_collated_polyMesh_file_count": 12,
+    "source_and_target_file_sets_identical": true,
+    "source_copied_directories": [
+      "0",
+      "constant",
+      "system",
+      "processors10/0",
+      "processors10/constant"
+    ],
+    "unchanged_global_and_processor_meshes": true
+  },
+  "created_utc": "2026-10-26T11:07:16.128869+00:00",
+  "eos": {
+    "B_Pa": 306667767.13022316,
+    "Cp_J_kgK": 4182.0,
+    "Cv_expected_J_kgK": 4182.0,
+    "c0_m_s": 1482.3443444561285,
+    "c0_reference_T_K": 293.15,
+    "c0_reference_p_Pa": 100000.0,
+    "c0_source": "IAPWS SR6-08(2011), direct Eq. (2)-(3)/Tables 1-3 evaluation; Table 8 check reproduced",
+    "gamma_exponent": 7.15,
+    "gamma_status": "assumed barotropic exponent; not Cp/Cv",
+    "model": "OpenFOAM adiabaticPerfectFluid pressure-only rho(p), hConst sensibleInternalEnergy",
+    "rho0_kg_m3": 998.2,
+    "rho0_note": "retained selected reference; IAPWS direct correlation gives 998.206546424 kg/m3 at 20 C/0.1 MPa",
+    "source_pdf_sha256": "fda79dde9f441a90da755477c6533e23065e4f90c7f59a505f64c394d775bd45",
+    "water_overlay_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+  },
+  "initial_state": {
+    "T_range_K": [
+      293.15,
+      293.15
+    ],
+    "absolute_p_range_Pa": [
+      100000.0,
+      1211011.7118868
+    ],
+    "alpha_range": [
+      0.0,
+      1.0
+    ],
+    "finiteEOS_minus_rhoConst_water_mass_kg": 1.6062765103242782,
+    "geometry_fields": [
+      "C",
+      "Cx",
+      "Cy",
+      "Cz",
+      "V"
+    ],
+    "global_formula_roundoff_residual_Pa": 0.0,
+    "global_initial_fields": [
+      "U",
+      "p",
+      "p_rgh",
+      "T",
+      "alpha.water",
+      "alphat",
+      "k",
+      "nut",
+      "omega"
+    ],
+    "global_p_rgh_max_delta_vs_rhoConst_Pa": 7.200474418001249,
+    "global_p_rgh_rms_delta_vs_rhoConst_Pa": 2.138773011873219,
+    "p_rgh_formula": "p_rgh=p-rhoMix*(g dot C), with g=(0,0,-9.81), hRef=0",
+    "solver_generated_fields_not_fabricated": [
+      "rho",
+      "psi",
+      "T.air",
+      "T.water",
+      "phi",
+      "alphaPhi0.water"
+    ],
+    "time_s": 0.0,
+    "water_mass_finiteEOS_kg": 3198.008370828796,
+    "water_mass_rhoConst_kg": 3196.402094318472,
+    "water_volume_total_tanks_and_wetted_feeds_m3": 3.202165993106066,
+    "zone_inventories": {
+      "externalAirZone": {
+        "EOS_water_density_range_kg_m3": [
+          998.2,
+          998.2
+        ],
+        "cells": 122413,
+        "finiteEOS_minus_rhoConst_water_mass_kg": 0.0,
+        "native_water_volume_m3": 0.0,
+        "water_mass_finiteEOS_kg": 0.0,
+        "water_mass_rhoConst_kg": 0.0
+      },
+      "lineAZone": {
+        "EOS_water_density_range_kg_m3": [
+          998.2,
+          998.7048297973529
+        ],
+        "cells": 66507,
+        "finiteEOS_minus_rhoConst_water_mass_kg": 0.1265169669221109,
+        "native_water_volume_m3": 0.2510568437958543,
+        "water_mass_finiteEOS_kg": 250.73145844394378,
+        "water_mass_rhoConst_kg": 250.60494147702167
+      },
+      "lineBZone": {
+        "EOS_water_density_range_kg_m3": [
+          998.2,
+          998.7048291153352
+        ],
+        "cells": 66616,
+        "finiteEOS_minus_rhoConst_water_mass_kg": 0.1265433700100118,
+        "native_water_volume_m3": 0.2511091493075716,
+        "water_mass_finiteEOS_kg": 250.78369620882788,
+        "water_mass_rhoConst_kg": 250.65715283881786
+      },
+      "tankAZone": {
+        "EOS_water_density_range_kg_m3": [
+          998.6998208649342,
+          998.7028272436487
+        ],
+        "cells": 21839,
+        "finiteEOS_minus_rhoConst_water_mass_kg": 0.6766080843028703,
+        "native_water_volume_m3": 1.3500000000021357,
+        "water_mass_finiteEOS_kg": 1348.246608086435,
+        "water_mass_rhoConst_kg": 1347.570000002132
+      },
+      "tankBZone": {
+        "EOS_water_density_range_kg_m3": [
+          998.6998208649989,
+          998.7028272412091
+        ],
+        "cells": 21839,
+        "finiteEOS_minus_rhoConst_water_mass_kg": 0.6766080890811281,
+        "native_water_volume_m3": 1.3500000000005044,
+        "water_mass_finiteEOS_kg": 1348.2466080895852,
+        "water_mass_rhoConst_kg": 1347.570000000504
+      }
+    }
+  },
+  "limitations": [
+    "Mechanical finite-compressibility sensitivity only; gamma=7.15 is assumed and independent of the thermo Cp/Cv ratio.",
+    "The source sound speed is a 0.1 MPa reference, not EOS validation through the ~1.21 MPa tank pressure.",
+    "This is an input-preparation artifact only; runtime thermo registry and physical response remain untested."
+  ],
+  "native_mesh": {
+    "cellProcAddressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+    "field_roundtrip": {
+      "T": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      },
+      "U": {
+        "bit_exact_global_roundtrip": true,
+        "components": 3
+      },
+      "alpha.water": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      },
+      "alphat": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      },
+      "k": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      },
+      "nut": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      },
+      "omega": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      },
+      "p": {
+        "bit_exact_global_roundtrip": true,
+        "components": 1
+      }
+    },
+    "global_cells": 299214,
+    "mesh_hashes_from_source_readiness": {
+      "boundary": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d",
+      "cellZones": "2d4744095f2e9c9e47c3b8bb04fdaf4dd4a5a3f810581a4c9a3355a420436664",
+      "faceZones": "e9c928c629e5c257c8eb89b1d93a571fec697252a058e1299d72ef4babbc8177",
+      "faces": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460",
+      "neighbour": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8",
+      "owner": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+      "points": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779"
+    },
+    "processor_cell_counts": [
+      29657,
+      29853,
+      29853,
+      30209,
+      29921,
+      29639,
+      29678,
+      30120,
+      30156,
+      30128
+    ],
+    "processor_count": 10,
+    "processor_p_rgh_exact_global_map": true,
+    "processor_p_rgh_headers_and_boundary_bytes_preserved": true,
+    "processor_p_rgh_max_map_error_Pa": 0.0
+  },
+  "schema": "i4f-physical-water-eos-cold-input-readiness/v1",
+  "solver_launched": false,
+  "source_case": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+  "source_case_mutated": false,
+  "source_exact20_calculation_record_sha256": "fa8c840cf313a1d32cc9765c4294287e0a248c06d0d8036da20b9383d78f98a4",
+  "source_exact20_eos_candidate": "results/runs/i4f-finite-water-eos-cold-preparation-20261026T1047Z-exact20c",
+  "source_exact20_overlay_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+  "source_prepared_case_manifest": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/provenance/prepared-case-all-files.sha256",
+  "source_prepared_case_manifest_sha256": "6cdcd425429c7e77e1ef8d36b0614a361f9e3ac4d7e6db2fc2a7fabdcd2aad4d",
+  "source_readiness": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/analysis/final-canonical-readiness-v4.json",
+  "source_readiness_sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+  "status": "READY_FOR_ENERGY_RUNTIME_PREFLIGHT_NO_SOLVER_LAUNCH"
+}

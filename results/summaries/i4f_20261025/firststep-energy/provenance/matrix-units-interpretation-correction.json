@@ -1,0 +1,24 @@
+{
+  "corrected_interpretation": {
+    "basis": "The assembled TEqn begins with fvm::ddt(rho,T); in OpenFOAM FV matrices the cell-volume integral is represented in the matrix coefficients and source. Pinned OpenFOAM 2512 source shows fvMatrix::residual initializes from source and subtracts the diagonal product, then applies the LDU off-diagonal/interface contributions.",
+    "matrix_D": "kg/s per cell (the finite-volume matrix coefficient includes the cell volume)",
+    "matrix_residual": "kg*K/s per cell; `fvMatrix::residual()` is source - A*psi, including off-diagonal and coupled-interface terms",
+    "matrix_source": "kg*K/s per cell"
+  },
+  "created_utc": "2026-10-26T21:22:53.164027+00:00",
+  "frozen_experiment_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/experiment.json",
+  "frozen_experiment_sha256_at_GO": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c",
+  "frozen_experiment_sha256_current": "c7a3c05d7c5dc1434eda845235e4fdf333482907f3e37aa29a60541f6557c14c",
+  "frozen_metadata_statement": "residual_units was written as kg*K/(m^3*s), and D as kg/(m^3*s).",
+  "pinned_source_excerpt_path": "results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/provenance/openfoam-matrix-api-source.txt",
+  "pinned_source_excerpt_sha256": "37babda3552b785d6353d6f2b154606fba05ca525a91a8519d14b7bafdc937f0",
+  "pinned_source_file_hash_lines": [
+    "9065053a1bde494de9c9d0f6959767c84eadce709c81c5673dbb46b676c557f3  /usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvMatrix/fvMatrixSolve.C",
+    "12b6c9dc4619844395278631903d374e1887203c94c59082dbaae0e7f037f129  /usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvMatrix/fvMatrix.H",
+    "e2f1fb9de03bfbd7454ae5d98f1bdf91a105465d98aabfb10809ef13efbbfcae  /usr/lib/openfoam/openfoam2512/src/OpenFOAM/matrices/lduMatrix/lduMatrix/lduMatrixATmul.C"
+  ],
+  "pinned_source_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "purpose": "Correct metadata interpretation only; retains frozen experiment bytes and does not change solver, dictionaries, or case fields.",
+  "schema": "i4f-fv-matrix-units-interpretation-correction/v1",
+  "solver_inputs_or_equations_changed_after_GO": false
+}

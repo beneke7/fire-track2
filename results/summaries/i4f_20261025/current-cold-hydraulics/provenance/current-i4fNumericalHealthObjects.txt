@@ -1,0 +1,83 @@
+i4fPimpleCaptureExtrema
+{
+    type fieldMinMax;
+    libs (fieldFunctionObjects);
+    mode component;
+    fields (T p p_rgh alpha.water rho);
+    location true;
+    log true;
+    executeControl timeStep;
+    executeInterval 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+i4fPimpleCaptureSpeedExtrema
+{
+    type fieldMinMax;
+    libs (fieldFunctionObjects);
+    mode magnitude;
+    fields (U);
+    location true;
+    log true;
+    executeControl timeStep;
+    executeInterval 1;
+    writeControl timeStep;
+    writeInterval 1;
+}
+i4fTankHeadspaceProbes
+{
+    type probes;
+    libs (sampling);
+    fields (p T alpha.water U);
+    probeLocations ((1.25 -0.55 1.60) (1.25 0.55 1.60));
+    writeControl timeStep;
+    writeInterval 1;
+}
+
+ambientAnnulusAmbientGasDiagnostics
+{
+    type surfaceFieldValue;
+    libs (fieldFunctionObjects);
+    regionType patch;
+    name ambientAnnulus;
+    operation areaAverage;
+    fields (U T p p_rgh rho alpha.water phi alphaPhi0.water);
+    writeControl runTime;
+    writeInterval 0.001;
+    writeFields true;
+    surfaceFormat vtk;
+    log true;
+    writeArea true;
+}
+
+externalSidesAmbientGasDiagnostics
+{
+    type surfaceFieldValue;
+    libs (fieldFunctionObjects);
+    regionType patch;
+    name externalSides;
+    operation areaAverage;
+    fields (U T p p_rgh rho alpha.water phi alphaPhi0.water);
+    writeControl runTime;
+    writeInterval 0.001;
+    writeFields true;
+    surfaceFormat vtk;
+    log true;
+    writeArea true;
+}
+
+farOutletAmbientGasDiagnostics
+{
+    type surfaceFieldValue;
+    libs (fieldFunctionObjects);
+    regionType patch;
+    name farOutlet;
+    operation areaAverage;
+    fields (U T p p_rgh rho alpha.water phi alphaPhi0.water);
+    writeControl runTime;
+    writeInterval 0.001;
+    writeFields true;
+    surfaceFormat vtk;
+    log true;
+    writeArea true;
+}

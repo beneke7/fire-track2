@@ -1,0 +1,1022 @@
+--- a/applications/solvers/multiphase/VoF/alphaEqn.H
++++ b/applications/solvers/multiphase/VoF/alphaEqn.H
+@@ -240,6 +240,12 @@
+     );
+     scalarField i4fAlphaBeforePredictor(alpha1.primitiveField());
+     scalarField i4fAlphaPredictor(alpha1.primitiveField());
++    scalarField i4fAlphaMassBudgetMulesSourceAlpha;
++    label i4fAlphaMassBudgetPredictorSourceCallIndex = -1;
++    if (i4fAlphaMassBudgetAudit)
++    {
++        i4fAlphaMassBudgetSourceValid = false;
++    }
+ 
+     // Standard face-flux compression coefficient
+     surfaceScalarField phic(mixture.cAlpha()*mag(phi/mesh.magSf()));
+@@ -285,6 +291,12 @@
+     if (MULESCorr)
+     {
+         #include "alphaSuSp.H"
++
++        if (i4fAlphaMassBudgetAudit)
++        {
++            i4fAlphaMassBudgetPredictorSourceCallIndex =
++                i4fAlphaSuSpCallIndex;
++        }
+ 
+         i4fSpPredictor = Sp;
+         i4fSuPredictor = Su;
+@@ -351,6 +363,12 @@
+ 
+     for (int aCorr=0; aCorr<nAlphaCorr; aCorr++)
+     {
++        if (i4fAlphaMassBudgetAudit)
++        {
++            // alphaSuSp.H reads alpha1 in this state; keep the exact split
++            // denominator state for the non-frozen MULES source path.
++            i4fAlphaMassBudgetMulesSourceAlpha = alpha1.primitiveField();
++        }
+         scalarField i4fPhysicalMulesSourceAlpha;
+         if (i4fPhysicalAlphaFluxRelaxActive)
+         {
+@@ -702,9 +720,40 @@
+             );
+         }
+ 
++        scalarField i4fAlphaMassBudgetCandidateAlpha;
++        autoPtr<surfaceScalarField> i4fAlphaMassBudgetCandidatePhi;
++        if (i4fAlphaMassBudgetAudit)
++        {
++            i4fAlphaMassBudgetCandidateAlpha = alpha1.primitiveField();
++            if (i4fPhysicalAlphaFluxRelaxActive)
++            {
++                i4fAlphaMassBudgetCandidatePhi.reset
++                (
++                    new surfaceScalarField
++                    (
++                        IOobject
++                        (
++                            "i4fAlphaMassBudgetCandidatePhi",
++                            runTime.timeName(),
++                            mesh,
++                            IOobject::NO_READ,
++                            IOobject::NO_WRITE,
++                            false
++                        ),
++                        alphaPhi10
++                    )
++                );
++            }
++        }
++
+         if (i4fPhysicalAlphaFluxRelaxActive)
+         {
+             #include "i4fPhysicalAlphaFluxRelaxApply.H"
++        }
++
++        if (i4fAlphaMassBudgetAudit)
++        {
++            #include "i4fAlphaMassBudgetAlphaObserve.H"
+         }
+ 
+         alpha2 = 1.0 - alpha1;
+--- a/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
++++ b/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
+@@ -128,6 +128,52 @@
+     const bool i4fPhysicalAlphaFluxRelaxActive =
+         i4fPhysicalAlphaFluxRelaxEnabled
+      && i4fPhysicalAlphaFluxRelaxOmega < 1.0;
++
++    // Default-off, read-only per-step bridge from the alpha source split to
++    // the post-EOS water-mass budget. Empty arrays impose no cell-storage cost
++    // unless explicitly enabled in controlDict.
++    const Switch i4fAlphaMassBudgetAudit
++    (
++        runTime.controlDict().lookupOrDefault<Switch>
++        (
++            "i4fAlphaMassBudgetAudit",
++            false
++        )
++    );
++    const label i4fAlphaMassBudgetSize =
++        i4fAlphaMassBudgetAudit ? mesh.nCells() : 0;
++    scalarField i4fAlphaMassBudgetAlphaSource
++    (
++        i4fAlphaMassBudgetSize, Zero
++    );
++    scalarField i4fAlphaMassBudgetGamma
++    (
++        i4fAlphaMassBudgetSize, Zero
++    );
++    scalarField i4fAlphaMassBudgetSu
++    (
++        i4fAlphaMassBudgetSize, Zero
++    );
++    scalarField i4fAlphaMassBudgetSp
++    (
++        i4fAlphaMassBudgetSize, Zero
++    );
++    scalarField i4fAlphaMassBudgetDivU
++    (
++        i4fAlphaMassBudgetSize, Zero
++    );
++    scalarField i4fAlphaMassBudgetDivUEvalAlpha
++    (
++        i4fAlphaMassBudgetSize, Zero
++    );
++    bool i4fAlphaMassBudgetSourceValid = false;
++    label i4fAlphaMassBudgetTimeIndex = -1;
++    label i4fAlphaMassBudgetOuterIteration = -1;
++    label i4fAlphaMassBudgetSourceCallIndex = -1;
++    label i4fAlphaMassBudgetCorrectorSourceCallIndex = -1;
++    label i4fAlphaMassBudgetDgdtGeneration = 0;
++    label i4fDgdtGeneration = 0;
++    word i4fAlphaMassBudgetSourceMode("inactive");
+ 
+     if (i4fFrozenPredictorFullSource && !i4fFrozenPredictorSp)
+     {
+--- a/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetAlphaObserve.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetAlphaObserve.H
+@@ -0,0 +1,340 @@
++// Default-off, read-only alpha budget. This header is included after the
++// optional alpha/alphaPhi relaxation, while the source coefficients assembled
++// for this MULES update and the matching source-alpha state are still in scope.
++const word i4fAlphaMassBudgetAlphaDdtKey
++(
++    "ddt(" + alpha1.name() + ')'
++);
++const word i4fAlphaMassBudgetAlphaRhoDdtKey
++(
++    "ddt(" + alpha1.name() + ',' + rho1.name() + ')'
++);
++const word i4fAlphaMassBudgetAlphaDdtScheme
++(
++    mesh.ddtScheme(i4fAlphaMassBudgetAlphaDdtKey)
++);
++const word i4fAlphaMassBudgetAlphaRhoDdtScheme
++(
++    mesh.ddtScheme(i4fAlphaMassBudgetAlphaRhoDdtKey)
++);
++const bool i4fAlphaMassBudgetSupported =
++    !LTS
++ && !mesh.moving()
++ && nAlphaSubCycles == 1
++ && nAlphaCorr == 1
++ && MULESCorr
++ && !alphaApplyPrevCorr
++ && i4fFrozenPredictorSp
++ && i4fFrozenPredictorFullSource
++ && i4fAlphaMassBudgetAlphaDdtScheme
++    == fv::EulerDdtScheme<scalar>::typeName
++ && i4fAlphaMassBudgetAlphaRhoDdtScheme
++    == fv::EulerDdtScheme<scalar>::typeName;
++
++if (i4fAlphaMassBudgetAudit && !i4fAlphaMassBudgetSupported)
++{
++    i4fAlphaMassBudgetSourceValid = false;
++    if (Pstream::master())
++    {
++        Info<< "I4F_ALPHA_MASS_BUDGET status=unsupported"
++            << " time_s=" << runTime.timeName()
++            << " requires=static_Euler_full_predictor_source_MULESCorr"
++               "_nAlphaCorr1_nSubCycles1"
++            << " alpha_ddt_key=" << i4fAlphaMassBudgetAlphaDdtKey
++            << " alpha_ddt_scheme=" << i4fAlphaMassBudgetAlphaDdtScheme
++            << " alpha_rho_ddt_key=" << i4fAlphaMassBudgetAlphaRhoDdtKey
++            << " alpha_rho_ddt_scheme="
++            << i4fAlphaMassBudgetAlphaRhoDdtScheme
++            << nl;
++    }
++}
++else if (i4fAlphaMassBudgetAudit)
++{
++    const bool i4fAlphaBudgetUsePredictor =
++        i4fFrozenPredictorFullSource || i4fFrozenPredictorSp;
++    const word i4fAlphaBudgetMode =
++        i4fFrozenPredictorFullSource
++      ? word("frozen_predictor_full_source")
++      : i4fFrozenPredictorSp
++      ? word("frozen_predictor_Sp_lagged_divU")
++      : word("standard_MULES_corrector_source");
++
++    const surfaceScalarField& i4fAlphaBudgetCandidateFlux =
++        i4fPhysicalAlphaFluxRelaxActive
++      ? i4fAlphaMassBudgetCandidatePhi()
++      : alphaPhi10;
++    tmp<volScalarField> tI4fAlphaBudgetCandidateDiv
++    (
++        fvc::div(i4fAlphaBudgetCandidateFlux)
++    );
++    tmp<volScalarField> tI4fAlphaBudgetAppliedDiv(fvc::div(alphaPhi10));
++    const volScalarField& i4fAlphaBudgetCandidateDiv =
++        tI4fAlphaBudgetCandidateDiv();
++    const volScalarField& i4fAlphaBudgetAppliedDiv =
++        tI4fAlphaBudgetAppliedDiv();
++    const scalarField& i4fAlphaBudgetOld = alpha1.oldTime().primitiveField();
++
++    scalar i4fAlphaBudgetCandidateSignedV = 0;
++    scalar i4fAlphaBudgetCandidateL1V = 0;
++    scalar i4fAlphaBudgetCandidateMax = 0;
++    scalar i4fAlphaBudgetAppliedSignedV = 0;
++    scalar i4fAlphaBudgetAppliedL1V = 0;
++    scalar i4fAlphaBudgetAppliedMax = 0;
++    scalar i4fAlphaBudgetGammaAssemblyAppliedSignedV = 0;
++    scalar i4fAlphaBudgetGammaAppliedSignedV = 0;
++    scalar i4fAlphaBudgetGammaCutAppliedSignedV = 0;
++    scalar i4fAlphaBudgetGammaCutAppliedL1V = 0;
++    scalar i4fAlphaBudgetGammaStateAppliedSignedV = 0;
++    scalar i4fAlphaBudgetGammaStateAppliedL1V = 0;
++    scalar i4fAlphaBudgetDivUAppliedSignedV = 0;
++    scalar i4fAlphaBudgetSplitErrorMax = 0;
++    scalar i4fAlphaBudgetAlphaSourceMin = GREAT;
++    scalar i4fAlphaBudgetAlphaSourceMax = -GREAT;
++    scalar i4fAlphaBudgetGammaMin = GREAT;
++    scalar i4fAlphaBudgetGammaMax = -GREAT;
++    scalar i4fAlphaBudgetSuMin = GREAT;
++    scalar i4fAlphaBudgetSuMax = -GREAT;
++    scalar i4fAlphaBudgetSpMin = GREAT;
++    scalar i4fAlphaBudgetSpMax = -GREAT;
++    label i4fAlphaBudgetSourceDenominatorFloorCells = 0;
++
++    const label i4fAlphaBudgetSourceCall =
++        i4fAlphaBudgetUsePredictor
++      ? i4fAlphaMassBudgetPredictorSourceCallIndex
++      : i4fAlphaSuSpCallIndex;
++
++    forAll(alpha1, celli)
++    {
++        scalar alphaSource = 0;
++        scalar gamma = 0;
++        scalar sourceSu = 0;
++        scalar sourceSp = 0;
++        scalar sourceDivU = 0;
++        scalar divUEvalAlpha = 0;
++
++        if (i4fAlphaBudgetUsePredictor)
++        {
++            alphaSource = i4fAlphaBeforePredictor[celli];
++            gamma = i4fDgdtPredictor[celli];
++            sourceSu = i4fSuPredictor[celli];
++            sourceSp = i4fSpPredictor[celli];
++            sourceDivU = i4fDivUPredictor[celli];
++            divUEvalAlpha = i4fFrozenPredictorFullSource
++              ? alpha1[celli]
++              : i4fAlphaPredictor[celli];
++        }
++        else
++        {
++            alphaSource = i4fAlphaMassBudgetMulesSourceAlpha[celli];
++            gamma = dgdt[celli];
++            sourceSu = Su[celli];
++            sourceSp = Sp[celli];
++            sourceDivU = divU[celli];
++            divUEvalAlpha = min(alpha1[celli], scalar(1));
++        }
++
++        if
++        (
++            (gamma > 0 && 1.0 - alphaSource < 1e-4)
++         || (gamma < 0 && alphaSource < 1e-4)
++        )
++        {
++            ++i4fAlphaBudgetSourceDenominatorFloorCells;
++        }
++
++        i4fAlphaMassBudgetAlphaSource[celli] = alphaSource;
++        i4fAlphaMassBudgetGamma[celli] = gamma;
++        i4fAlphaMassBudgetSu[celli] = sourceSu;
++        i4fAlphaMassBudgetSp[celli] = sourceSp;
++        i4fAlphaMassBudgetDivU[celli] = sourceDivU;
++        i4fAlphaMassBudgetDivUEvalAlpha[celli] = divUEvalAlpha;
++        i4fAlphaBudgetAlphaSourceMin = min
++        (
++            i4fAlphaBudgetAlphaSourceMin,
++            alphaSource
++        );
++        i4fAlphaBudgetAlphaSourceMax = max
++        (
++            i4fAlphaBudgetAlphaSourceMax,
++            alphaSource
++        );
++        i4fAlphaBudgetGammaMin = min(i4fAlphaBudgetGammaMin, gamma);
++        i4fAlphaBudgetGammaMax = max(i4fAlphaBudgetGammaMax, gamma);
++        i4fAlphaBudgetSuMin = min(i4fAlphaBudgetSuMin, sourceSu);
++        i4fAlphaBudgetSuMax = max(i4fAlphaBudgetSuMax, sourceSu);
++        i4fAlphaBudgetSpMin = min(i4fAlphaBudgetSpMin, sourceSp);
++        i4fAlphaBudgetSpMax = max(i4fAlphaBudgetSpMax, sourceSp);
++
++        struct I4fAlphaBudgetSourceTerms
++        {
++            scalar effective;
++            scalar gammaActual;
++            scalar gammaAssembly;
++            scalar gammaCut;
++            scalar gammaState;
++            scalar splitError;
++        };
++        auto i4fSourceTerms =
++        [gamma, alphaSource, sourceSu, sourceSp, sourceDivU]
++        (const scalar alphaEval, const scalar divUEval)
++         -> I4fAlphaBudgetSourceTerms
++        {
++            // Finite algebraic partition of the assembled Su/Sp source.
++            // gammaCut is not an uncut-source estimate or causal attribution.
++            const scalar gammaAssembly = sourceSu + sourceSp*alphaSource;
++            const scalar gammaActual = sourceSu + sourceSp*alphaEval;
++            const scalar gammaCut = gammaAssembly - gamma;
++            const scalar gammaState = sourceSp*(alphaEval - alphaSource);
++            const scalar splitError =
++                gammaActual - (gamma + gammaCut + gammaState);
++            const scalar divUSource = sourceDivU*divUEval;
++            return I4fAlphaBudgetSourceTerms
++            {
++                gammaActual + divUSource,
++                gammaActual,
++                gammaAssembly,
++                gammaCut,
++                gammaState,
++                splitError
++            };
++        };
++
++        const scalar alphaCandidate = i4fAlphaMassBudgetCandidateAlpha[celli];
++        const auto candidateTerms = i4fSourceTerms
++        (
++            alphaCandidate,
++            i4fFrozenPredictorSp && !i4fFrozenPredictorFullSource
++              ? i4fAlphaPredictor[celli]
++              : i4fFrozenPredictorFullSource
++              ? alphaCandidate
++              : min(alphaCandidate, scalar(1))
++        );
++        const scalar candidateResidual =
++            (alphaCandidate - i4fAlphaBudgetOld[celli])
++           /runTime.deltaTValue()
++          + i4fAlphaBudgetCandidateDiv[celli]
++          - candidateTerms.effective;
++        const scalar appliedAlpha = alpha1[celli];
++        const auto appliedTerms = i4fSourceTerms
++        (
++            appliedAlpha,
++            i4fAlphaMassBudgetDivUEvalAlpha[celli]
++        );
++        const scalar appliedResidual =
++            (appliedAlpha - i4fAlphaBudgetOld[celli])
++           /runTime.deltaTValue()
++          + i4fAlphaBudgetAppliedDiv[celli]
++          - appliedTerms.effective;
++        const scalar volume = mesh.V()[celli];
++
++        i4fAlphaBudgetCandidateSignedV += candidateResidual*volume;
++        i4fAlphaBudgetCandidateL1V += mag(candidateResidual)*volume;
++        i4fAlphaBudgetCandidateMax =
++            max(i4fAlphaBudgetCandidateMax, mag(candidateResidual));
++        i4fAlphaBudgetAppliedSignedV += appliedResidual*volume;
++        i4fAlphaBudgetAppliedL1V += mag(appliedResidual)*volume;
++        i4fAlphaBudgetAppliedMax =
++            max(i4fAlphaBudgetAppliedMax, mag(appliedResidual));
++        i4fAlphaBudgetGammaAssemblyAppliedSignedV +=
++            appliedTerms.gammaAssembly*volume;
++        i4fAlphaBudgetGammaAppliedSignedV +=
++            appliedTerms.gammaActual*volume;
++        i4fAlphaBudgetGammaCutAppliedSignedV +=
++            appliedTerms.gammaCut*volume;
++        i4fAlphaBudgetGammaCutAppliedL1V +=
++            mag(appliedTerms.gammaCut)*volume;
++        i4fAlphaBudgetGammaStateAppliedSignedV +=
++            appliedTerms.gammaState*volume;
++        i4fAlphaBudgetGammaStateAppliedL1V +=
++            mag(appliedTerms.gammaState)*volume;
++        i4fAlphaBudgetDivUAppliedSignedV +=
++            (appliedTerms.effective
++           - appliedTerms.gammaActual)*volume;
++        i4fAlphaBudgetSplitErrorMax =
++            max(i4fAlphaBudgetSplitErrorMax, mag(appliedTerms.splitError));
++    }
++
++    reduce(i4fAlphaBudgetCandidateSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetCandidateL1V, sumOp<scalar>());
++    reduce(i4fAlphaBudgetCandidateMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetAppliedSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetAppliedL1V, sumOp<scalar>());
++    reduce(i4fAlphaBudgetAppliedMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetGammaAssemblyAppliedSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetGammaAppliedSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetGammaCutAppliedSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetGammaCutAppliedL1V, sumOp<scalar>());
++    reduce(i4fAlphaBudgetGammaStateAppliedSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetGammaStateAppliedL1V, sumOp<scalar>());
++    reduce(i4fAlphaBudgetDivUAppliedSignedV, sumOp<scalar>());
++    reduce(i4fAlphaBudgetSplitErrorMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetAlphaSourceMin, minOp<scalar>());
++    reduce(i4fAlphaBudgetAlphaSourceMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetGammaMin, minOp<scalar>());
++    reduce(i4fAlphaBudgetGammaMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetSuMin, minOp<scalar>());
++    reduce(i4fAlphaBudgetSuMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetSpMin, minOp<scalar>());
++    reduce(i4fAlphaBudgetSpMax, maxOp<scalar>());
++    reduce(i4fAlphaBudgetSourceDenominatorFloorCells, sumOp<label>());
++
++    i4fAlphaMassBudgetSourceValid = true;
++    i4fAlphaMassBudgetTimeIndex = runTime.timeIndex();
++    i4fAlphaMassBudgetOuterIteration = i4fOuterLoop;
++    i4fAlphaMassBudgetSourceCallIndex = i4fAlphaBudgetSourceCall;
++    i4fAlphaMassBudgetDgdtGeneration = i4fDgdtGeneration;
++    i4fAlphaMassBudgetSourceMode = i4fAlphaBudgetMode;
++
++    if (Pstream::master())
++    {
++        Info<< "I4F_ALPHA_MASS_BUDGET_ALPHA_V3"
++            << " time_s=" << runTime.timeName()
++            << " time_index=" << runTime.timeIndex()
++            << " outer_iteration=" << i4fOuterLoop
++            << " source_mode=" << i4fAlphaBudgetMode
++            << " source_call_index=" << i4fAlphaBudgetSourceCall
++            << " alpha_ddt_scheme=" << mesh.ddtScheme("ddt(alpha)")
++            << " alpha_rho_ddt_scheme="
++            << mesh.ddtScheme("ddt(alpha1,rho1)")
++            << " dgdt_generation=" << i4fDgdtGeneration
++            << " alpha_relax_active=" << i4fPhysicalAlphaFluxRelaxActive
++            << " alpha_relax_omega=" << i4fPhysicalAlphaFluxRelaxOmega
++            << " source_assembly_alpha_min=" << i4fAlphaBudgetAlphaSourceMin
++            << " source_assembly_alpha_max=" << i4fAlphaBudgetAlphaSourceMax
++            << " source_assembly_gamma_min_s-1=" << i4fAlphaBudgetGammaMin
++            << " source_assembly_gamma_max_s-1=" << i4fAlphaBudgetGammaMax
++            << " source_assembly_Su_min_s-1=" << i4fAlphaBudgetSuMin
++            << " source_assembly_Su_max_s-1=" << i4fAlphaBudgetSuMax
++            << " source_assembly_Sp_min_s-1=" << i4fAlphaBudgetSpMin
++            << " source_assembly_Sp_max_s-1=" << i4fAlphaBudgetSpMax
++            << " candidate_Ralpha_signed_m3_s="
++            << i4fAlphaBudgetCandidateSignedV
++            << " candidate_Ralpha_L1_m3_s=" << i4fAlphaBudgetCandidateL1V
++            << " candidate_Ralpha_max_s-1=" << i4fAlphaBudgetCandidateMax
++            << " applied_Ralpha_signed_m3_s="
++            << i4fAlphaBudgetAppliedSignedV
++            << " applied_Ralpha_L1_m3_s=" << i4fAlphaBudgetAppliedL1V
++            << " applied_Ralpha_max_s-1=" << i4fAlphaBudgetAppliedMax
++            << " applied_gamma_assembly_signed_m3_s="
++            << i4fAlphaBudgetGammaAssemblyAppliedSignedV
++            << " applied_gamma_actual_signed_m3_s="
++            << i4fAlphaBudgetGammaAppliedSignedV
++            << " applied_cutoff_at_assembly_signed_m3_s="
++            << i4fAlphaBudgetGammaCutAppliedSignedV
++            << " applied_cutoff_at_assembly_L1_m3_s="
++            << i4fAlphaBudgetGammaCutAppliedL1V
++            << " applied_source_state_delta_signed_m3_s="
++            << i4fAlphaBudgetGammaStateAppliedSignedV
++            << " applied_source_state_delta_L1_m3_s="
++            << i4fAlphaBudgetGammaStateAppliedL1V
++            << " applied_divU_source_signed_m3_s="
++            << i4fAlphaBudgetDivUAppliedSignedV
++            << " source_split_identity_error_max_s-1="
++            << i4fAlphaBudgetSplitErrorMax
++            << " source_denominator_floor_cells="
++            << i4fAlphaBudgetSourceDenominatorFloorCells
++            << " source_effective=Su+Sp*alpha+divU_mode_specific"
++            << " residual=ddtEuler_alpha+div(alphaPhi)-source"
++            << nl;
++    }
++}
+--- a/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetEosObserve.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetEosObserve.H
+@@ -0,0 +1,236 @@
++// Read-only post-EOS identity. The alpha source snapshot was captured in the
++// alpha solve at the same physical time/outer iteration and is intentionally
++// not recomputed from the later dgdt field.
++if
++(
++    i4fAlphaMassBudgetAudit
++ && i4fAlphaMassBudgetSourceValid
++ && i4fAlphaMassBudgetTimeIndex == runTime.timeIndex()
++)
++{
++    tmp<volScalarField> tI4fBudgetDivAlpha(fvc::div(alphaPhi1));
++    tmp<volScalarField> tI4fBudgetDivWaterFlux
++    (
++        fvc::div(i4fWaterAdvMassFluxAfterEos)
++    );
++    const volScalarField& i4fBudgetDivAlpha = tI4fBudgetDivAlpha();
++    const volScalarField& i4fBudgetDivWaterFlux = tI4fBudgetDivWaterFlux();
++    const scalarField& i4fBudgetAlphaOld = alpha1.oldTime().primitiveField();
++    const scalarField& i4fBudgetRhoOld = rho1.oldTime().primitiveField();
++
++    scalar i4fBudgetRalphaSignedV = 0;
++    scalar i4fBudgetRalphaL1V = 0;
++    scalar i4fBudgetRalphaMax = 0;
++    scalar i4fBudgetRmassSignedV = 0;
++    scalar i4fBudgetRmassL1V = 0;
++    scalar i4fBudgetRmassMax = 0;
++    scalar i4fBudgetRhoRalphaSigned = 0;
++    scalar i4fBudgetRhoRalphaL1 = 0;
++    scalar i4fBudgetRhoSourceSigned = 0;
++    scalar i4fBudgetRhoSourceL1 = 0;
++    scalar i4fBudgetAlphaOldDrhoSigned = 0;
++    scalar i4fBudgetAlphaOldDrhoL1 = 0;
++    scalar i4fBudgetFaceDensitySigned = 0;
++    scalar i4fBudgetFaceDensityL1 = 0;
++    scalar i4fBudgetGammaAssemblyMassSigned = 0;
++    scalar i4fBudgetGammaActualMassSigned = 0;
++    scalar i4fBudgetCutoffAtAssemblyMassSigned = 0;
++    scalar i4fBudgetCutoffAtAssemblyMassL1 = 0;
++    scalar i4fBudgetSourceStateMassSigned = 0;
++    scalar i4fBudgetSourceStateMassL1 = 0;
++    scalar i4fBudgetGammaMassSigned = 0;
++    scalar i4fBudgetSourceSplitErrorSigned = 0;
++    scalar i4fBudgetSourceSplitErrorL1 = 0;
++    scalar i4fBudgetSourceSplitErrorMax = 0;
++    scalar i4fBudgetDivUMassSigned = 0;
++    scalar i4fBudgetIdentityErrorSigned = 0;
++    scalar i4fBudgetIdentityErrorL1 = 0;
++    scalar i4fBudgetIdentityErrorMax = 0;
++    scalar i4fBudgetDivWaterFluxIntegral = 0;
++    label i4fBudgetSourceDenominatorFloorCells = 0;
++
++    forAll(alpha1, celli)
++    {
++        const scalar alpha = alpha1[celli];
++        const scalar alphaOld = i4fBudgetAlphaOld[celli];
++        const scalar rho = rho1[celli];
++        const scalar rhoOld = i4fBudgetRhoOld[celli];
++        const scalar su = i4fAlphaMassBudgetSu[celli];
++        const scalar sp = i4fAlphaMassBudgetSp[celli];
++        const scalar gamma = i4fAlphaMassBudgetGamma[celli];
++        const scalar alphaSource = i4fAlphaMassBudgetAlphaSource[celli];
++        // Finite algebraic partition only; not a counterfactual uncut source.
++        const scalar sourceGammaAssembly = su + sp*alphaSource;
++        const scalar sourceGammaActual = su + sp*alpha;
++        const scalar sourceCutoffAtAssembly = sourceGammaAssembly - gamma;
++        const scalar sourceStateDelta = sp*(alpha - alphaSource);
++        const scalar sourceSplitError =
++            sourceGammaActual
++          - (gamma + sourceCutoffAtAssembly + sourceStateDelta);
++        const scalar sourceDivU =
++            i4fAlphaMassBudgetDivU[celli]
++           *i4fAlphaMassBudgetDivUEvalAlpha[celli];
++        const scalar sourceActual = sourceGammaActual + sourceDivU;
++        const scalar alphaStorage =
++            (alpha - alphaOld)/runTime.deltaTValue();
++        const scalar rAlpha =
++            alphaStorage + i4fBudgetDivAlpha[celli] - sourceActual;
++        const scalar rMass = i4fWaterContinuityAfterEos[celli];
++        const scalar divWaterFlux = i4fBudgetDivWaterFlux[celli];
++
++        const scalar termRhoRalpha = rho*rAlpha;
++        const scalar termRhoSource = rho*sourceActual;
++        const scalar termOldAlphaDrho =
++            alphaOld*(rho - rhoOld)/runTime.deltaTValue();
++        const scalar termFaceDensity =
++            divWaterFlux - rho*i4fBudgetDivAlpha[celli];
++        const scalar reconstructedMassResidual =
++            termRhoRalpha
++          + termRhoSource
++          + termOldAlphaDrho
++          + termFaceDensity;
++        const scalar identityError = rMass - reconstructedMassResidual;
++        const scalar volume = mesh.V()[celli];
++
++        if
++        (
++            (gamma > 0 && 1.0 - alphaSource < 1e-4)
++         || (gamma < 0 && alphaSource < 1e-4)
++        )
++        {
++            ++i4fBudgetSourceDenominatorFloorCells;
++        }
++
++        i4fBudgetRalphaSignedV += rAlpha*volume;
++        i4fBudgetRalphaL1V += mag(rAlpha)*volume;
++        i4fBudgetRalphaMax = max(i4fBudgetRalphaMax, mag(rAlpha));
++        i4fBudgetRmassSignedV += rMass*volume;
++        i4fBudgetRmassL1V += mag(rMass)*volume;
++        i4fBudgetRmassMax = max(i4fBudgetRmassMax, mag(rMass));
++        i4fBudgetRhoRalphaSigned += termRhoRalpha*volume;
++        i4fBudgetRhoRalphaL1 += mag(termRhoRalpha)*volume;
++        i4fBudgetRhoSourceSigned += termRhoSource*volume;
++        i4fBudgetRhoSourceL1 += mag(termRhoSource)*volume;
++        i4fBudgetAlphaOldDrhoSigned += termOldAlphaDrho*volume;
++        i4fBudgetAlphaOldDrhoL1 += mag(termOldAlphaDrho)*volume;
++        i4fBudgetFaceDensitySigned += termFaceDensity*volume;
++        i4fBudgetFaceDensityL1 += mag(termFaceDensity)*volume;
++        i4fBudgetGammaAssemblyMassSigned += rho*sourceGammaAssembly*volume;
++        i4fBudgetGammaActualMassSigned += rho*sourceGammaActual*volume;
++        i4fBudgetGammaMassSigned += rho*gamma*volume;
++        i4fBudgetCutoffAtAssemblyMassSigned +=
++            rho*sourceCutoffAtAssembly*volume;
++        i4fBudgetCutoffAtAssemblyMassL1 +=
++            mag(rho*sourceCutoffAtAssembly)*volume;
++        i4fBudgetDivUMassSigned += rho*sourceDivU*volume;
++        i4fBudgetSourceStateMassSigned += rho*sourceStateDelta*volume;
++        i4fBudgetSourceStateMassL1 += mag(rho*sourceStateDelta)*volume;
++        i4fBudgetSourceSplitErrorSigned += rho*sourceSplitError*volume;
++        i4fBudgetSourceSplitErrorL1 += mag(rho*sourceSplitError)*volume;
++        i4fBudgetSourceSplitErrorMax = max
++        (
++            i4fBudgetSourceSplitErrorMax,
++            mag(rho*sourceSplitError)
++        );
++        i4fBudgetIdentityErrorSigned += identityError*volume;
++        i4fBudgetIdentityErrorL1 += mag(identityError)*volume;
++        i4fBudgetIdentityErrorMax = max
++        (
++            i4fBudgetIdentityErrorMax,
++            mag(identityError)
++        );
++        i4fBudgetDivWaterFluxIntegral += divWaterFlux*volume;
++    }
++
++    reduce(i4fBudgetRalphaSignedV, sumOp<scalar>());
++    reduce(i4fBudgetRalphaL1V, sumOp<scalar>());
++    reduce(i4fBudgetRalphaMax, maxOp<scalar>());
++    reduce(i4fBudgetRmassSignedV, sumOp<scalar>());
++    reduce(i4fBudgetRmassL1V, sumOp<scalar>());
++    reduce(i4fBudgetRmassMax, maxOp<scalar>());
++    reduce(i4fBudgetRhoRalphaSigned, sumOp<scalar>());
++    reduce(i4fBudgetRhoRalphaL1, sumOp<scalar>());
++    reduce(i4fBudgetRhoSourceSigned, sumOp<scalar>());
++    reduce(i4fBudgetRhoSourceL1, sumOp<scalar>());
++    reduce(i4fBudgetAlphaOldDrhoSigned, sumOp<scalar>());
++    reduce(i4fBudgetAlphaOldDrhoL1, sumOp<scalar>());
++    reduce(i4fBudgetFaceDensitySigned, sumOp<scalar>());
++    reduce(i4fBudgetFaceDensityL1, sumOp<scalar>());
++    reduce(i4fBudgetGammaAssemblyMassSigned, sumOp<scalar>());
++    reduce(i4fBudgetGammaActualMassSigned, sumOp<scalar>());
++    reduce(i4fBudgetCutoffAtAssemblyMassSigned, sumOp<scalar>());
++    reduce(i4fBudgetCutoffAtAssemblyMassL1, sumOp<scalar>());
++    reduce(i4fBudgetSourceStateMassSigned, sumOp<scalar>());
++    reduce(i4fBudgetSourceStateMassL1, sumOp<scalar>());
++    reduce(i4fBudgetGammaMassSigned, sumOp<scalar>());
++    reduce(i4fBudgetDivUMassSigned, sumOp<scalar>());
++    reduce(i4fBudgetSourceSplitErrorSigned, sumOp<scalar>());
++    reduce(i4fBudgetSourceSplitErrorL1, sumOp<scalar>());
++    reduce(i4fBudgetSourceSplitErrorMax, maxOp<scalar>());
++    reduce(i4fBudgetIdentityErrorSigned, sumOp<scalar>());
++    reduce(i4fBudgetIdentityErrorL1, sumOp<scalar>());
++    reduce(i4fBudgetIdentityErrorMax, maxOp<scalar>());
++    reduce(i4fBudgetDivWaterFluxIntegral, sumOp<scalar>());
++    reduce(i4fBudgetSourceDenominatorFloorCells, sumOp<label>());
++
++    if (Pstream::master())
++    {
++        Info<< "I4F_ALPHA_MASS_BUDGET_EOS_V3"
++            << " time_s=" << runTime.timeName()
++            << " time_index=" << i4fAlphaMassBudgetTimeIndex
++            << " source_outer_iteration=" << i4fAlphaMassBudgetOuterIteration
++            << " source_call_index=" << i4fAlphaMassBudgetSourceCallIndex
++            << " source_dgdt_generation=" << i4fAlphaMassBudgetDgdtGeneration
++            << " pressure_pass=" << i4fPressurePass
++            << " source_mode=" << i4fAlphaMassBudgetSourceMode
++            << " Ralpha_signed_m3_s=" << i4fBudgetRalphaSignedV
++            << " Ralpha_L1_m3_s=" << i4fBudgetRalphaL1V
++            << " Ralpha_max_s-1=" << i4fBudgetRalphaMax
++            << " Rmass_signed_kg_s=" << i4fBudgetRmassSignedV
++            << " Rmass_L1_kg_s=" << i4fBudgetRmassL1V
++            << " Rmass_max_kg_m3_s=" << i4fBudgetRmassMax
++            << " rho_Ralpha_signed_kg_s=" << i4fBudgetRhoRalphaSigned
++            << " rho_Ralpha_L1_kg_s=" << i4fBudgetRhoRalphaL1
++            << " rho_source_signed_kg_s=" << i4fBudgetRhoSourceSigned
++            << " rho_source_L1_kg_s=" << i4fBudgetRhoSourceL1
++            << " alphaOld_drho_signed_kg_s=" << i4fBudgetAlphaOldDrhoSigned
++            << " alphaOld_drho_L1_kg_s=" << i4fBudgetAlphaOldDrhoL1
++            << " face_density_noncommutation_signed_kg_s="
++            << i4fBudgetFaceDensitySigned
++            << " face_density_noncommutation_L1_kg_s="
++            << i4fBudgetFaceDensityL1
++            << " source_gamma_dgdt_signed_kg_s=" << i4fBudgetGammaMassSigned
++            << " source_gamma_at_assembly_signed_kg_s="
++            << i4fBudgetGammaAssemblyMassSigned
++            << " source_gamma_actual_signed_kg_s="
++            << i4fBudgetGammaActualMassSigned
++            << " source_cutoff_at_assembly_delta_signed_kg_s="
++            << i4fBudgetCutoffAtAssemblyMassSigned
++            << " source_cutoff_at_assembly_delta_L1_kg_s="
++            << i4fBudgetCutoffAtAssemblyMassL1
++            << " source_state_delta_signed_kg_s="
++            << i4fBudgetSourceStateMassSigned
++            << " source_state_delta_L1_kg_s="
++            << i4fBudgetSourceStateMassL1
++            << " source_split_identity_error_signed_kg_s="
++            << i4fBudgetSourceSplitErrorSigned
++            << " source_split_identity_error_L1_kg_s="
++            << i4fBudgetSourceSplitErrorL1
++            << " source_split_identity_error_max_kg_m3_s="
++            << i4fBudgetSourceSplitErrorMax
++            << " divU_source_signed_kg_s=" << i4fBudgetDivUMassSigned
++            << " identity_error_signed_kg_s=" << i4fBudgetIdentityErrorSigned
++            << " identity_error_L1_kg_s=" << i4fBudgetIdentityErrorL1
++            << " identity_error_max_kg_m3_s=" << i4fBudgetIdentityErrorMax
++            << " div_alphaPhi_rhoFace_integral_kg_s="
++            << i4fBudgetDivWaterFluxIntegral
++            << " boundary_water_flux_kg_s=" << i4fWaterBoundaryAfterEos
++            << " divFlux_boundary_difference_kg_s="
++            << i4fBudgetDivWaterFluxIntegral - i4fWaterBoundaryAfterEos
++            << " source_denominator_floor_cells="
++            << i4fBudgetSourceDenominatorFloorCells
++            << " continuity_source_terms=none_in_configured_phase_mass_equations"
++            << " flux_density=fvc_interpolate(rho1)_after_correctRho"
++            << nl;
++    }
++}
+--- a/applications/solvers/multiphase/compressibleInterFoam/pEqn.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/pEqn.H
+@@ -788,6 +788,10 @@
+                 alpha1*(p_rghEqnComp2 & p_rgh)
+               - alpha2*(p_rghEqnComp1 & p_rgh)
+             );
++            if (i4fAlphaMassBudgetAudit)
++            {
++                ++i4fDgdtGeneration;
++            }
+ 
+             phi = phiHbyA + p_rghEqnIncomp.flux();
+ 
+@@ -948,6 +952,8 @@
+     reduce(i4fGasContinuityL1Local, sumOp<scalar>());
+     reduce(i4fGasContinuitySignedLocal, sumOp<scalar>());
+ 
++    #include "i4fAlphaMassBudgetEosObserve.H"
++
+     // Localized post-EOS phase continuity values from the same native
+     // alphaPhi*rhoFace fields used by the global residual above.
+     if (false && i4fFrozenPredictorSp && Pstream::myProcNo() == 2)
+--- a/applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/lnInclude/liquidPropertiesSurfaceTension.C
++++ b/applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/lnInclude/liquidPropertiesSurfaceTension.C
+@@ -0,0 +1,150 @@
++/*---------------------------------------------------------------------------*\
++  =========                 |
++  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
++   \\    /   O peration     |
++    \\  /    A nd           | www.openfoam.com
++     \\/     M anipulation  |
++-------------------------------------------------------------------------------
++    Copyright (C) 2017 OpenFOAM Foundation
++    Copyright (C) 2019 OpenCFD Ltd.
++-------------------------------------------------------------------------------
++License
++    This file is part of OpenFOAM.
++
++    OpenFOAM is free software: you can redistribute it and/or modify it
++    under the terms of the GNU General Public License as published by
++    the Free Software Foundation, either version 3 of the License, or
++    (at your option) any later version.
++
++    OpenFOAM is distributed in the hope that it will be useful, but WITHOUT
++    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++    for more details.
++
++    You should have received a copy of the GNU General Public License
++    along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
++
++\*---------------------------------------------------------------------------*/
++
++#include "liquidPropertiesSurfaceTension.H"
++#include "liquidThermo.H"
++#include "addToRunTimeSelectionTable.H"
++
++// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
++
++namespace Foam
++{
++namespace surfaceTensionModels
++{
++    defineTypeNameAndDebug(liquidProperties, 0);
++    addToRunTimeSelectionTable
++    (
++        surfaceTensionModel,
++        liquidProperties,
++        dictionary
++    );
++}
++}
++
++
++// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
++
++Foam::surfaceTensionModels::liquidProperties::liquidProperties
++(
++    const dictionary& dict,
++    const fvMesh& mesh
++)
++:
++    surfaceTensionModel(mesh),
++    phaseName_(dict.get<word>("phase"))
++{}
++
++
++// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
++
++Foam::tmp<Foam::volScalarField>
++Foam::surfaceTensionModels::liquidProperties::sigma() const
++{
++    const heRhoThermopureMixtureliquidProperties& thermo =
++        mesh_.lookupObject<heRhoThermopureMixtureliquidProperties>
++        (
++             IOobject::groupName(basicThermo::dictName, phaseName_)
++        );
++
++    const Foam::liquidProperties& liquid = thermo.mixture().properties();
++
++    tmp<volScalarField> tsigma
++    (
++        new volScalarField
++        (
++            IOobject
++            (
++                "sigma",
++                mesh_.time().timeName(),
++                mesh_,
++                IOobject::NO_READ,
++                IOobject::NO_WRITE,
++                IOobject::NO_REGISTER
++            ),
++            mesh_,
++            dimSigma
++        )
++    );
++    volScalarField& sigma = tsigma.ref();
++
++    const volScalarField& T = thermo.T();
++    const volScalarField& p = thermo.p();
++
++    volScalarField::Internal& sigmai = sigma;
++    const volScalarField::Internal& pi = p;
++    const volScalarField::Internal& Ti = T;
++
++    forAll(sigmai, celli)
++    {
++        sigmai[celli] = liquid.sigma(pi[celli], Ti[celli]);
++    }
++
++    volScalarField::Boundary& sigmaBf = sigma.boundaryFieldRef();
++    const volScalarField::Boundary& pBf = p.boundaryField();
++    const volScalarField::Boundary& TBf = T.boundaryField();
++
++    forAll(sigmaBf, patchi)
++    {
++        scalarField& sigmaPf = sigmaBf[patchi];
++        const scalarField& pPf = pBf[patchi];
++        const scalarField& TPf = TBf[patchi];
++
++        forAll(sigmaPf, facei)
++        {
++            sigmaPf[facei] = liquid.sigma(pPf[facei], TPf[facei]);
++        }
++    }
++
++    return tsigma;
++}
++
++
++bool Foam::surfaceTensionModels::liquidProperties::readDict
++(
++    const dictionary& dict
++)
++{
++    return true;
++}
++
++
++bool Foam::surfaceTensionModels::liquidProperties::writeData
++(
++    Ostream& os
++) const
++{
++    if (surfaceTensionModel::writeData(os))
++    {
++        return os.good();
++    }
++
++    return false;
++}
++
++
++// ************************************************************************* //
+--- a/applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/lnInclude/liquidPropertiesSurfaceTension.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/lnInclude/liquidPropertiesSurfaceTension.H
+@@ -0,0 +1,125 @@
++/*---------------------------------------------------------------------------*\
++  =========                 |
++  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
++   \\    /   O peration     |
++    \\  /    A nd           | www.openfoam.com
++     \\/     M anipulation  |
++-------------------------------------------------------------------------------
++    Copyright (C) 2017 OpenFOAM Foundation
++-------------------------------------------------------------------------------
++License
++    This file is part of OpenFOAM.
++
++    OpenFOAM is free software: you can redistribute it and/or modify it
++    under the terms of the GNU General Public License as published by
++    the Free Software Foundation, either version 3 of the License, or
++    (at your option) any later version.
++
++    OpenFOAM is distributed in the hope that it will be useful, but WITHOUT
++    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++    for more details.
++
++    You should have received a copy of the GNU General Public License
++    along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
++
++Class
++    Foam::surfaceTensionModels::liquidProperties
++
++Description
++    Temperature-dependent surface tension model in which the surface tension
++    function provided by the phase Foam::liquidProperties class is used.
++
++Usage
++    \table
++        Property     | Description               | Required    | Default value
++        phase        | Phase name                | yes         |
++    \endtable
++
++    Example of the surface tension specification:
++    \verbatim
++        sigma
++        {
++            type    liquidProperties;
++            phase   water;
++        }
++    \endverbatim
++
++See also
++    Foam::surfaceTensionModel
++
++SourceFiles
++    liquidPropertiesSurfaceTension.C
++
++\*---------------------------------------------------------------------------*/
++
++#ifndef liquidPropertiesSurfaceTension_H
++#define liquidPropertiesSurfaceTension_H
++
++#include "surfaceTensionModel.H"
++
++// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
++
++namespace Foam
++{
++
++namespace surfaceTensionModels
++{
++
++/*---------------------------------------------------------------------------*\
++                           Class liquidProperties Declaration
++\*---------------------------------------------------------------------------*/
++
++class liquidProperties
++:
++    public surfaceTensionModel
++{
++    // Private data
++
++        //- Name of the liquid phase
++        word phaseName_;
++
++
++public:
++
++    //- Runtime type information
++    TypeName("liquidProperties");
++
++
++    // Constructors
++
++        //- Construct from dictionary and mesh
++        liquidProperties
++        (
++            const dictionary& dict,
++            const fvMesh& mesh
++        );
++
++
++    //- Destructor
++    virtual ~liquidProperties() = default;
++
++
++    // Member Functions
++
++        //- Surface tension coefficient
++        virtual tmp<volScalarField> sigma() const;
++
++        //- Update surface tension coefficient from given dictionary
++        virtual bool readDict(const dictionary& dict);
++
++        //- Write in dictionary format
++        virtual bool writeData(Ostream& os) const;
++};
++
++
++// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
++
++} // End namespace surfaceTensionModels
++} // End namespace Foam
++
++// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
++
++#endif
++
++// ************************************************************************* //

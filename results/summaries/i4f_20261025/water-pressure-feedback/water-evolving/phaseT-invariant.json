@@ -1,0 +1,35 @@
+{
+  "PDE_terms_changed": false,
+  "alpha_update": "stock alphaControls.H + compressibleAlphaEqnSubCycle.H + VoF/alphaEqn.H; nAlphaSubCycles=1 and LTS=false asserted",
+  "evolving": [
+    "alpha1/alpha2 via stock MULES",
+    "alphaPhi1",
+    "alphaPhi2",
+    "rhoPhi",
+    "contErr",
+    "p/p_rgh/U/phi/rho1/rho2/psi/K/Gamma through source-order update"
+  ],
+  "held": {
+    "SST_transported": [
+      "k",
+      "omega",
+      "nut",
+      "alphat"
+    ],
+    "common_T": "exact hash",
+    "oldTime_histories": "exact hashes for materialized fields; alphaPhi1 oldTime level count unchanged and its oldTime accessor is not called"
+  },
+  "map_time": "same physical time/index/deltaT; no physical checkpoint or runtime increment",
+  "phase_temperature_rule": "For each phase-T internal and boundary value, abs(delta) <= 128*epsilon*max(1,abs(trigger value)); common T remains exact.",
+  "predeclared_utc": "2026-10-27T00:35:32.075211+00:00",
+  "raw_floor_policy": "existing no-clamp raw-pressure censor path; no continuation after censor",
+  "schema": "i4f-water-feedback-phaseT-invariant/v1",
+  "source_order": [
+    "stock alpha controls and alpha/MULES",
+    "turbulence.correctPhasePhi",
+    "UEqn",
+    "fixed-T thermo refresh at post-TEqn slot",
+    "two pEqn correctors"
+  ],
+  "source_parent_tree_sha256": "a9510b826d792239c44b3314ea595a8fc8c2a68c9050227f4025a8934a5b874a"
+}

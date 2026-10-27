@@ -1,0 +1,429 @@
+{
+  "capture_command": ".venv/bin/python scripts/run_local.py --threads 1 --timeout 300 -- nice -n 19 .venv/bin/python results/runs/i4f-current-cold-hydraulics-20261026T2126Z/scripts/analyze_current_cold_hydraulics.py --capture",
+  "capture_finished_utc": "2026-10-26T21:30:24.665473+00:00",
+  "capture_started_utc": "2026-10-26T21:30:24.595532+00:00",
+  "current_container": {
+    "id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+    "inspect_sha256": "2fa86a93007dbc5ba4204f853d3be15bd003dbb32fa1008edbb85f8f87e74b89",
+    "log_driver": "json-file",
+    "memory_bytes": 34359738368,
+    "name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "nano_cpus": 10000000000,
+    "running": true,
+    "started_at": "2026-10-26T20:50:36.466720222Z",
+    "status": "running"
+  },
+  "current_guard_branch_status_at_capture": "running",
+  "current_guard_time_s_at_capture": 0.295021166664,
+  "current_guard_updated_utc_at_capture": "2026-10-26T21:30:20.939060+00:00",
+  "current_solver_latest_full_precision_times_s": {
+    "flux_A1": 0.294771166664,
+    "flux_A2": 0.294771166664,
+    "flux_B1": 0.294771166664,
+    "flux_B2": 0.294771166664,
+    "tankA": 0.294771166664,
+    "tankB": 0.294771166664
+  },
+  "current_solver_max_latest_time_spread_s": 0.0,
+  "current_solver_native_row_counts": {
+    "flux_A1": 816,
+    "flux_A2": 816,
+    "flux_B1": 816,
+    "flux_B2": 816,
+    "tankA": 816,
+    "tankB": 816
+  },
+  "current_solver_prefix_cutoff_definition": "Minimum last exact-time row across captured tank-A/tank-B VOF-volume and four valve-seat alphaPhi0.water native function files. Probe p/T files print time rounded to 8 decimals; row count and rounded final time were checked against the same full-precision step.",
+  "current_solver_prefix_cutoff_s": 0.294771166664,
+  "doctor": {
+    "path": "results/machine.json",
+    "sha256": "27917f8c70e532a3cc8f7fb080563f5207569708070ca7e45c3800f8618e3926"
+  },
+  "files": {
+    "current.continuation_lineage": {
+      "bytes": 3684,
+      "label": "current.continuation_lineage",
+      "mtime_ns": 1793047742672692077,
+      "sha256": "d217f6e4adc25573864c60d62f4c92e835207a49ab37ada220e4758151c77e30",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-continuation_lineage.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/provenance/continuation-lineage.json",
+      "stable_read_attempt": 1
+    },
+    "current.continuation_seed": {
+      "bytes": 4607,
+      "label": "current.continuation_seed",
+      "mtime_ns": 1793047742375134882,
+      "sha256": "280d70bbfccc9ecf399543ad71368a2028a3f06791c27abb240a8dd3bd6ad39a",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-continuation_seed.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/continuation-seed.json",
+      "stable_read_attempt": 1
+    },
+    "current.control_dict": {
+      "bytes": 851,
+      "label": "current.control_dict",
+      "mtime_ns": 1793047742335129468,
+      "sha256": "7374b1a4276cc502941d28f4446b7ef67c6afc4057707594f678f3a27f60b403",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-control_dict.txt",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/system/controlDict",
+      "stable_read_attempt": 1
+    },
+    "current.experiment": {
+      "bytes": 4956,
+      "label": "current.experiment",
+      "mtime_ns": 1793047742375578319,
+      "sha256": "c9b55196c40c699235462d4ba700f9999952538800bb9afa8803de222c791384",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-experiment.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/experiment.json",
+      "stable_read_attempt": 1
+    },
+    "current.flux_A1": {
+      "bytes": 38520,
+      "label": "current.flux_A1",
+      "mtime_ns": 1793050219914938525,
+      "sha256": "b144f86d242419c6310a7f2baf546a6521a18fd0413fc7ccbeced105685f8e25",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/flux_A1.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/seatFluxA1/0.090771166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "current.flux_A2": {
+      "bytes": 38520,
+      "label": "current.flux_A2",
+      "mtime_ns": 1793050219914938525,
+      "sha256": "b13d6a0a5a4dca5c28f66ddd2d7bbc6f064c8446de7d0f3d314e59656f561bb3",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/flux_A2.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/seatFluxA2/0.090771166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "current.flux_B1": {
+      "bytes": 38520,
+      "label": "current.flux_B1",
+      "mtime_ns": 1793050219914938525,
+      "sha256": "ad7719216bf10ec66005273706992922ebcf33b6479d6df7ec2fe2bb4e8ab2f3",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/flux_B1.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/seatFluxB1/0.090771166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "current.flux_B2": {
+      "bytes": 38520,
+      "label": "current.flux_B2",
+      "mtime_ns": 1793050219914938525,
+      "sha256": "23ee10d26f1cf42a5661534ab590249da3695fa3627824c0da736d01601e85d6",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/flux_B2.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/seatFluxB2/0.090771166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "current.guardian_status": {
+      "bytes": 12394,
+      "label": "current.guardian_status",
+      "mtime_ns": 1793050220939301026,
+      "sha256": "a89bf993df568cb8eceb19f23afca71c29d1b558bc2c2f207f2b4fc911a16c81",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-guardian_status.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/guardian-status.json",
+      "stable_read_attempt": 1
+    },
+    "current.input_freeze": {
+      "bytes": 8208,
+      "label": "current.input_freeze",
+      "mtime_ns": 1793047742672363245,
+      "sha256": "3b1c06ddc7bd4d3848deb00a1ec31914ed2b91b2387002b16a8e0fe0e82cc87f",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-input_freeze.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/input-freeze.json",
+      "stable_read_attempt": 1
+    },
+    "current.launch_manifest": {
+      "bytes": 9499,
+      "label": "current.launch_manifest",
+      "mtime_ns": 1793047839185989978,
+      "sha256": "51e6dcc0ac643e303a92931459ec03541352b135a8500df21ffcd2329bd518fd",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-launch_manifest.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/launch-manifest.json",
+      "stable_read_attempt": 1
+    },
+    "current.ledger_objects": {
+      "bytes": 2841,
+      "label": "current.ledger_objects",
+      "mtime_ns": 1792941044299283264,
+      "sha256": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-ledger_objects.txt",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/system/twoTankLedgerObjects",
+      "stable_read_attempt": 1
+    },
+    "current.parent_input_freeze": {
+      "bytes": 7245,
+      "label": "current.parent_input_freeze",
+      "mtime_ns": 1793047742375329969,
+      "sha256": "e1786af8ad6ae94ab24df910e51273b2f0d828295cd5129590dd3bfa3484fd22",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-parent_input_freeze.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/provenance/parent-input-freeze.json",
+      "stable_read_attempt": 1
+    },
+    "current.probe_T": {
+      "bytes": 39269,
+      "label": "current.probe_T",
+      "mtime_ns": 1793050219926938534,
+      "sha256": "b0755047337ba234959ca006861b32e241e9f32bf2b14e265eb593ff8d5bcd64",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/probe_T.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/i4fTankHeadspaceProbes/0.090771166664/T",
+      "stable_read_attempt": 1
+    },
+    "current.probe_p": {
+      "bytes": 39269,
+      "label": "current.probe_p",
+      "mtime_ns": 1793050219926938534,
+      "sha256": "296e964ff435a33e5251c0cbb296d1415d42ae6a365b5f00c1d6aec294ab7d8e",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/probe_p.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/i4fTankHeadspaceProbes/0.090771166664/p",
+      "stable_read_attempt": 1
+    },
+    "current.reused_binary_build_reference": {
+      "bytes": 2131,
+      "label": "current.reused_binary_build_reference",
+      "mtime_ns": 1793046244636317743,
+      "sha256": "235d872a1efeab2d94502d3d74570892a718d020c1339ee47f943b83f920ce9b",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-reused_binary_build_reference.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/provenance/reused-binary-build-reference.json",
+      "stable_read_attempt": 1
+    },
+    "current.seat_flux_objects": {
+      "bytes": 4255,
+      "label": "current.seat_flux_objects",
+      "mtime_ns": 1792950927054644368,
+      "sha256": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-seat_flux_objects.txt",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/system/valveBandFluxObjects",
+      "stable_read_attempt": 1
+    },
+    "current.source_tree_manifest": {
+      "bytes": 20760,
+      "label": "current.source_tree_manifest",
+      "mtime_ns": 1793046213241449513,
+      "sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-source_tree_manifest.json",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/provenance/source-tree-sha256.json",
+      "stable_read_attempt": 1
+    },
+    "current.tankA": {
+      "bytes": 26249,
+      "label": "current.tankA",
+      "mtime_ns": 1793050219889938507,
+      "sha256": "daa857e04af91f8ed6ad4e7abac86d9726c444bbfecf39446676ffa8b95a5ec8",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/tankA.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/tankAWaterVolume/0.090771166664/volFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "current.tankB": {
+      "bytes": 26249,
+      "label": "current.tankB",
+      "mtime_ns": 1793050219896938512,
+      "sha256": "a3c0f5c1b5abeefd935a05a5e1a6fc269c67bd5fc240ff6590ea6541425bb663",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/current-cfd/tankB.dat",
+      "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/postProcessing/tankBWaterVolume/0.090771166664/volFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "model_comparison": {
+      "bytes": 46716,
+      "label": "model_comparison",
+      "mtime_ns": 1793002877914607786,
+      "sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/model_comparison.json",
+      "source_path": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/comparison.json",
+      "stable_read_attempt": 1
+    },
+    "native_initial_readiness": {
+      "bytes": 9955,
+      "label": "native_initial_readiness",
+      "mtime_ns": 1793012836134740914,
+      "sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/native_initial_readiness.json",
+      "source_path": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/analysis/physical-water-eos-cold-input-readiness.json",
+      "stable_read_attempt": 1
+    },
+    "prior.control_dict": {
+      "bytes": 747,
+      "label": "prior.control_dict",
+      "mtime_ns": 1793007225769880345,
+      "sha256": "7c5afc9969b6e58d9e6f157f7f3ce09158f221fdf1d85defb23def2a152f53e1",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-control_dict.txt",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/controlDict",
+      "stable_read_attempt": 1
+    },
+    "prior.experiment": {
+      "bytes": 9131,
+      "label": "prior.experiment",
+      "mtime_ns": 1792997084925038955,
+      "sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-experiment.json",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/experiment.json",
+      "stable_read_attempt": 1
+    },
+    "prior.flux_A1": {
+      "bytes": 77436,
+      "label": "prior.flux_A1",
+      "mtime_ns": 1793007238214324900,
+      "sha256": "d0627d9d05aea4f15178fb7a471141732205ad876a3b1aa90dddd8870c29d3e6",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/flux_A1.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxA1/0.050021166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "prior.flux_A2": {
+      "bytes": 77436,
+      "label": "prior.flux_A2",
+      "mtime_ns": 1793007238217324905,
+      "sha256": "29f1b338754af7124ad03f0c1a7178706af7d733d068393fdd92afc3958259a3",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/flux_A2.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxA2/0.050021166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "prior.flux_B1": {
+      "bytes": 77436,
+      "label": "prior.flux_B1",
+      "mtime_ns": 1793007238219324908,
+      "sha256": "d82ef7940712598cfb44cc23c0a80cd108426c62a2b826a070e99e82e368aef7",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/flux_B1.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxB1/0.050021166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "prior.flux_B2": {
+      "bytes": 77436,
+      "label": "prior.flux_B2",
+      "mtime_ns": 1793007238230324924,
+      "sha256": "3ee0cb0c66b051e3c4b5893a7d9daa93e67b4e7b18256717b56aadcab8ef91c5",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/flux_B2.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/seatFluxB2/0.050021166664/surfaceFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "prior.guardian_status": {
+      "bytes": 16125,
+      "label": "prior.guardian_status",
+      "mtime_ns": 1793007249026306329,
+      "sha256": "c9bece1002e28c9bebfa36777e7519dfde130b0cd81f17a77523ede7ec11fd1b",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-guardian_status.json",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/guardian-status.json",
+      "stable_read_attempt": 1
+    },
+    "prior.input_freeze": {
+      "bytes": 46287,
+      "label": "prior.input_freeze",
+      "mtime_ns": 1792997085238201932,
+      "sha256": "d81f983e0aa7ff8c5ac885aaeafaf61484cd743cbab1cba2b7be3a8bf79bbcec",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-input_freeze.json",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/input-freeze.json",
+      "stable_read_attempt": 1
+    },
+    "prior.launch_manifest": {
+      "bytes": 9391,
+      "label": "prior.launch_manifest",
+      "mtime_ns": 1792997091738561534,
+      "sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-launch_manifest.json",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/launch-manifest.json",
+      "stable_read_attempt": 1
+    },
+    "prior.ledger_objects": {
+      "bytes": 2841,
+      "label": "prior.ledger_objects",
+      "mtime_ns": 1792941044299283264,
+      "sha256": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-ledger_objects.txt",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/twoTankLedgerObjects",
+      "stable_read_attempt": 1
+    },
+    "prior.probe_T": {
+      "bytes": 79013,
+      "label": "prior.probe_T",
+      "mtime_ns": 1793007238260324968,
+      "sha256": "5c44a68bd3939751158fbdcb424cdb2480a3ace82ad52f2ceaeb257abcad08f1",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/probe_T.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/T",
+      "stable_read_attempt": 1
+    },
+    "prior.probe_p": {
+      "bytes": 79013,
+      "label": "prior.probe_p",
+      "mtime_ns": 1793007238262324970,
+      "sha256": "cb62f455199ab53020ed33be79c1aa96804135ef3a120ad0279b40845bf43cbc",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/probe_p.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/i4fTankHeadspaceProbes/0.050021166664/p",
+      "stable_read_attempt": 1
+    },
+    "prior.seat_flux_objects": {
+      "bytes": 4255,
+      "label": "prior.seat_flux_objects",
+      "mtime_ns": 1792950927054644368,
+      "sha256": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-seat_flux_objects.txt",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/valveBandFluxObjects",
+      "stable_read_attempt": 1
+    },
+    "prior.source_lock": {
+      "bytes": 3590,
+      "label": "prior.source_lock",
+      "mtime_ns": 1792997085239304268,
+      "sha256": "94ec657c9d5d8dce3fff89be31a2493fc4998e7903b4f24bf52adb58ca9653e1",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-source_lock.json",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/provenance/run-source-lock.json",
+      "stable_read_attempt": 1
+    },
+    "prior.tankA": {
+      "bytes": 52745,
+      "label": "prior.tankA",
+      "mtime_ns": 1793007238198324877,
+      "sha256": "97dd6baf7f00996116f30ebd147a2acd88ada7a7ae8edb176c8ef9c209f784b2",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/tankA.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/tankAWaterVolume/0.050021166664/volFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "prior.tankB": {
+      "bytes": 52745,
+      "label": "prior.tankB",
+      "mtime_ns": 1793007238202324882,
+      "sha256": "cdd60ecbd07bb3a5dd1060aa3562ad902e1655256b5b41d45f7779be815b404c",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/prior-cfd/tankB.dat",
+      "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/postProcessing/tankBWaterVolume/0.050021166664/volFieldValue.dat",
+      "stable_read_attempt": 1
+    },
+    "published_summary": {
+      "bytes": 56930,
+      "label": "published_summary",
+      "mtime_ns": 1793002897948991671,
+      "sha256": "c738a05fb91c799917dd65a1a6417bc3efd3e335c979d3c19dc22059ab5a0c73",
+      "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/published_summary.json",
+      "source_path": "results/summaries/i4f_20261025/flush-early-cfd-model-comparison.json",
+      "stable_read_attempt": 1
+    }
+  },
+  "model_history_sources": {
+    "n1_isothermal": {
+      "bytes": 11039854,
+      "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/history.csv",
+      "polytropic_n": 1.0,
+      "sha256": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f",
+      "source_summary_run": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z",
+      "time_step_s": 5e-05
+    },
+    "n_gamma": {
+      "bytes": 13069324,
+      "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/history.csv",
+      "polytropic_n": 1.3998145383348455,
+      "sha256": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e",
+      "source_summary_run": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z",
+      "time_step_s": 5e-05
+    }
+  },
+  "prefix_only": true,
+  "previous_cfd_case": {
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "bundle": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+    "container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+    "docker_started_at": "2026-10-26T06:44:49.045490597Z"
+  },
+  "repository": {
+    "dirty": true,
+    "porcelain_sha256": "08b8ced917c2a66923442480183497e05403de8a4c3bb7c00aee40ec77cbfb52",
+    "porcelain_status_at_capture": [
+      "?? results/summaries/i4f_20261025/firststep-energy/"
+    ],
+    "revision": "af96c1ba45de4465889cd01a17d703ebedd21351"
+  },
+  "schema": "i4f-current-cold-hydraulics-prefix-capture/v1"
+}

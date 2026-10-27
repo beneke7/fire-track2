@@ -1,0 +1,33 @@
+{
+  "archive_bytes": 124266041,
+  "bundle": "results/runs/i4f-recent-closed-log-recovery-20261027T021433Z",
+  "files": {
+    "archive_execution_helper.py": {
+      "capture": "execution-time bytes; only restore-branch edits made after archival were excluded from this copy",
+      "sha256": "fb42631e622a7686ba0d351853895b804ede901353b003d9d6c1cef7554a22da"
+    },
+    "recovery-manifest.json": {
+      "copied_byte_for_byte_from_private_bundle": true,
+      "sha256": "09d95fea782fda55ee9300311dfdd44eb16803c1b5da25eb05b48d1c6f87c517"
+    },
+    "restore_archived_logs.py": {
+      "sha256": "e70d6d285fe9dd66d787fa88f9ee8e3f07970e9c0a2240b86d2dc490686516ef"
+    }
+  },
+  "metadata_not_recorded_or_reconstructed": [
+    "owner",
+    "group",
+    "xattrs",
+    "atime"
+  ],
+  "metadata_restored": [
+    "mode",
+    "mtime_ns"
+  ],
+  "payloads": "remain in the private run bundle; each manifest archive_path is relative to bundle",
+  "record_count": 10,
+  "restore_all_requires": "--all",
+  "restore_command": "python3 results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/restore_archived_logs.py --manifest results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/recovery-manifest.json --repo-root <repo-root> --source-path <source-path> [--destination-root <new-or-empty-tree>]",
+  "schema": "i4f-recent-closed-log-recovery-public-packet/v1",
+  "source_bytes": 1883575234
+}

@@ -1,0 +1,68 @@
+{
+  "capture_cells": {
+    "rank0_local5154_native_C_m": [
+      2.2531251578440923,
+      -0.7860508002907803,
+      0.36086487255256816
+    ],
+    "rank5_local4440_native_C_m": [
+      2.2531251842343183,
+      0.7860320548022439,
+      0.3608467912323964
+    ]
+  },
+  "capture_stages": [
+    "assembled_before_relax",
+    "after_relax_before_options_constrain",
+    "before_solve_after_options_constrain",
+    "after_solve_before_options_correct",
+    "after_options_correct_before_thermo",
+    "after_thermo_correct"
+  ],
+  "case_input_reconstruction": "Copied processors10/constant from canonical cold input after identifying post-run cleanup in the parent branch; verified all 225 native files byte-identical to frozen predictor-yes arm.",
+  "created_utc": "2026-10-26T21:14:29.066095+00:00",
+  "matrix_binary_bytes": 1687760,
+  "matrix_binary_sha256": "29185113610fba3f5a9a0cd66ad083c16bd6244860bad633efb65094f40f8da0",
+  "matrix_source_delta_path": "provenance/instrumented-source-delta.json",
+  "matrix_source_delta_sha256": "6ecafa75594db5384df98d2fb2ea6c78727ab0c4a7852a757f666fedb54dc0ec",
+  "matrix_source_manifest_path": "provenance/source-manifest.json",
+  "matrix_source_manifest_sha256": "775fcfb1a7d01ac07aed5cb5635fcaec2e0a3427997c7668abf1dfd89c685a1f",
+  "operator_api_source": {
+    "OpenFOAM": "2512",
+    "fvMatrix_residual_sign": "source minus A*psi, directly confirmed in fvMatrixSolve.C -> lduMatrix::residual",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "matrix_diagonal": "fvMatrix::D() including average boundary diagonal; residual includes full off-diagonal and coupled-interface terms"
+  },
+  "outputs": "Compact matrix CSVs per selected rank; existing 14 fields plus dgdt and uniform/time compared with parent predictor-yes output.",
+  "parent_arm": "predictor-yes",
+  "parent_audit_bundle": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z",
+  "parent_audit_source_manifest_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "parent_input_static_tree_sha256": "409f570e56918b4931b5bacc1dc98ada6743818d42c95380b056be0958664a3b",
+  "parent_instrumented_binary_sha256": "da21a07b013dd29fd94ff283a3449a053f999ac906a1992d120d2adc8c765f54",
+  "purpose": "Measure exact FV matrix/residual behavior for first cold predictor-on TEqn at 12 us; no PDE equation changes.",
+  "read_only_method": "FV matrix construction/residual/diagonal evaluations run on all MPI ranks in identical order; only ranks 0 and 5 write values. Existing first-step source instrumentation remains unchanged.",
+  "replay_input_static_tree_sha256": "409f570e56918b4931b5bacc1dc98ada6743818d42c95380b056be0958664a3b",
+  "residual_units": "kg*K/(m^3*s), matching fvm::ddt(rho,T); matrix D has kg/(m^3*s), source has kg*K/(m^3*s).",
+  "same_input_tree": true,
+  "schema": "i4f-firststep-temperature-matrix-replay/v1",
+  "source_files_after_matrix_instrumentation": {
+    "Make/files": {
+      "bytes": 102,
+      "patch": "provenance/Make-files.matrix.diff",
+      "patch_sha256": "796cf22d3c83dc841ce5b273271f7f39adb9891d1bed5314fe520a4f90899185",
+      "sha256": "d9b6b4c38df85a9bf860b45b85e180afd5f714bbfeb9ba14d8aeccafd481eedf"
+    },
+    "TEqn.H": {
+      "bytes": 1562,
+      "patch": "provenance/TEqn.H.matrix.diff",
+      "patch_sha256": "d9080e5d74993e17fd1d0c0e16074b661dbed11ab19e8d479b2a0cc093033897",
+      "sha256": "d37f90c17ca2f5aca4bd7f577bd376a2f727d444e1247d83a681ebc14de06371"
+    },
+    "compressibleInterFoam.C": {
+      "bytes": 32002,
+      "patch": "provenance/compressibleInterFoam.C.matrix.diff",
+      "patch_sha256": "46182a382d134f0774e53e08a594d1f3e4c5c889e7c9442cbff8e1b4f6425832",
+      "sha256": "ce754a8d10cb746162bce1dbfe6827a902b70a99fa510bf932ae4fb42ecbe792"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "all_other_parent_manifest_filepaths_retained": true,
+  "build_artifact_changes": [
+    {
+      "after": {
+        "bytes": 3222392,
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/compressibleInterFoam.o",
+        "sha256": "8c6c9662aa919fdef7721476251b7e578bdf376cdc435c5cf53743fbfac3c38d"
+      },
+      "before": {
+        "bytes": 3197520,
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/compressibleInterFoam.o",
+        "sha256": "6c80631f20b706064b1ebb855720cff3aa376c782c823c08e88f75a4855aea44"
+      },
+      "kind": "compiler-generated or include-link artifact; source inputs unchanged",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/compressibleInterFoam.o"
+    },
+    {
+      "after": {
+        "bytes": 77,
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/variables",
+        "sha256": "3839ab70dad534e314d8093e25b3cc7cd27aede4d993b07eec4c7a28ef436813"
+      },
+      "before": {
+        "bytes": 72,
+        "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/variables",
+        "sha256": "04b1222f2a3328ef9e98170639e63d242ef341f7ef15fbb6be9164a7827706f1"
+      },
+      "kind": "compiler-generated or include-link artifact; source inputs unchanged",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/linux64GccDPInt32Opt/variables"
+    }
+  ],
+  "canonical_DCEC_parent_binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "canonical_DCEC_parent_source_content_sha256": "09862c07aede283b1256c1f2e2465a113edd7cd567ec4869cad68b7f305e6747",
+  "canonical_DCEC_parent_source_tree_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "changed_compiled_source_files": [
+    {
+      "after_bytes": 32002,
+      "after_sha256": "ce754a8d10cb746162bce1dbfe6827a902b70a99fa510bf932ae4fb42ecbe792",
+      "before_bytes": 19457,
+      "before_sha256": "e888ac0076937ddee347f273326ca61009d47e32238a1136de72b52e6b3a6d7b",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "purpose": "Read-only exact FV residual/diagonal/source snapshots at selected cells; no equation changed."
+    },
+    {
+      "after_bytes": 1562,
+      "after_sha256": "d37f90c17ca2f5aca4bd7f577bd376a2f727d444e1247d83a681ebc14de06371",
+      "before_bytes": 580,
+      "before_sha256": "248be8cedf663cc162ab57e23ea0cbe69d00207a91fb98f3021900846e7a6542",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/TEqn.H",
+      "purpose": "Assemble and query a separate same-scheme -laplacian matrix, and capture the original full TEqn matrix at solver stages; original equation retained."
+    },
+    {
+      "after_bytes": 102,
+      "after_sha256": "d9b6b4c38df85a9bf860b45b85e180afd5f714bbfeb9ba14d8aeccafd481eedf",
+      "before_bytes": 97,
+      "before_sha256": "3c53dee5d865a1f7c8ec90e451003ef6b54fd726b713ad361958630e55c0ce08",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/Make/files",
+      "purpose": "Unique executable name for the matrix observer."
+    }
+  ],
+  "created_utc": "2026-10-26T21:18:15.950228+00:00",
+  "final_source_manifest_content_sha256": "cc19f6efb069dacfda4c35dbcba80e3e348856e31840084c19e734092902e814",
+  "final_source_manifest_path": "provenance/source-manifest.json",
+  "final_source_manifest_sha256": "775fcfb1a7d01ac07aed5cb5635fcaec2e0a3427997c7668abf1dfd89c685a1f",
+  "governing_equations_changed": false,
+  "immediate_parent_binary_sha256": "da21a07b013dd29fd94ff283a3449a053f999ac906a1992d120d2adc8c765f54",
+  "immediate_parent_source_manifest_path": "results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/provenance/source-manifest.json",
+  "immediate_parent_source_manifest_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+  "patches": [
+    {
+      "bytes": 5169,
+      "path": "provenance/compressibleInterFoam.C.matrix.diff",
+      "sha256": "46182a382d134f0774e53e08a594d1f3e4c5c889e7c9442cbff8e1b4f6425832"
+    },
+    {
+      "bytes": 1690,
+      "path": "provenance/TEqn.H.matrix.diff",
+      "sha256": "d9080e5d74993e17fd1d0c0e16074b661dbed11ab19e8d479b2a0cc093033897"
+    },
+    {
+      "bytes": 658,
+      "path": "provenance/Make-files.matrix.diff",
+      "sha256": "796cf22d3c83dc841ce5b273271f7f39adb9891d1bed5314fe520a4f90899185"
+    }
+  ],
+  "purpose": "read-only matrix, residual, diagonal, source, and stage capture for the one-step temperature budget replay.",
+  "schema": "i4f-firststep-temperature-matrix-source-delta/v1"
+}

@@ -1,0 +1,19 @@
+{
+  "created_utc": "2026-10-27T01:18:38.213380+00:00",
+  "captured_from_container": "b7e4269f13870fd78e57eb0597cc0dc961d5d58680db132f4513c4f84d95895b",
+  "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "image_source_path": "/usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvScalarMatrix/fvScalarMatrix.C",
+  "file": "source/fvScalarMatrix-2512.C",
+  "sha256": "3f85e208715fab50c0dc71b447157f9ca734e3e6e2cdda3edc72bc60d3825639",
+  "official_source": "https://api.openfoam.com/2512/fvScalarMatrix_8C_source.html",
+  "independent_review": {
+    "reviewer": "independent Luna Max scientific reviewer",
+    "finding": "The corrected residual agrees with direct -(matrix & p)*nativeV to roundoff. Raw scalar residual adds a coupled-neighbor contribution in this path; it is not the actual assembled pressure defect for this periodic test.",
+    "scope": "One periodic uniform-contact case, not general pressure-solver convergence; normalized tolerance was not attained.",
+    "startup_energy_scope": "The two selected startup-energy cells are not processor-boundary owners in the matching ten-rank mesh, so this coupled-boundary artifact does not invalidate their local budget."
+  },
+  "published_helper_reference": {
+    "path": "results/summaries/i4f_20261025/immediate-parent-source/build/source/v8-restart-cold/applications/solvers/multiphase/compressibleInterFoam/i4fDefectAudit.H",
+    "sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85"
+  }
+}

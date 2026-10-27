@@ -1,0 +1,246 @@
+{
+  "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+  "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+  "container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+  "container_name": "i4f-flush-stock-cold-stage01-20261026T064444Z",
+  "container_uid_gid": "1000:1000",
+  "created_utc": "2026-10-26T06:44:48.899840+00:00",
+  "docker_started_at": "2026-10-26T06:44:49.045490597Z",
+  "docker_state_at_launch": {
+    "ExitCode": 0,
+    "FinishedAt": "0001-01-01T00:00:00Z",
+    "Running": true,
+    "StartedAt": "2026-10-26T06:44:49.045490597Z",
+    "Status": "running"
+  },
+  "experiment_record_sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+  "geometry_bundle": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z",
+  "go_sha256": "571cea7a4fe82b389c3fb1315b2cb6edc286b89a6ae51e667f9e9212a6432267",
+  "guard_hard_wall_s_from_StartedAt": 14400,
+  "guard_sha256": "9b35da1b3fdd6deeb66f4677e22462b0bec2f3954b94b7a6830928aed5a477e8",
+  "guard_writeNow_s_from_StartedAt": 13200,
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "image_id_and_digests": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+  "initial_field_contract_sha256": "7f3f7e6f86349f5367570f84b78dce12c0c34db46f70945b09ab33a3ed35971e",
+  "initial_mesh_source": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+  "inner_timeout_s": 14415,
+  "input_freeze_sha256": "d81f983e0aa7ff8c5ac885aaeafaf61484cd743cbab1cba2b7be3a8bf79bbcec",
+  "launcher_sha256": "81984cd3528fbfd812d4bccb9e4831e4ba20c6c134ba2c18fd5838dd140017fc",
+  "log": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/log.cold-coupled",
+  "mandatory_initial_fields": [
+    "alpha.water",
+    "p",
+    "p_rgh",
+    "T",
+    "U",
+    "k",
+    "omega",
+    "nut",
+    "alphat"
+  ],
+  "memory_limit_bytes": 34359738368,
+  "mesh_variant": "corrected flush-join / 48 source layers / 299214 cells (provisional geometry)",
+  "pause_flags_prelaunch": [],
+  "pilot_first_write_s": 0.05,
+  "pilot_horizon_s": 0.46,
+  "preflight": {
+    "additional_wetted_feed_m3_each": {
+      "tankA_feed": 0.2510568437958543,
+      "tankB_feed": 0.2511091493075715
+    },
+    "configured_quality_rows": "all 9 unchanged rows PASS",
+    "initial_downstream_state": "dry air at 100 kPa, 293.15 K",
+    "mesh_cell_count": 299214,
+    "mesh_quality_summary_sha256": "9b59c6afe26559140630bf6b47c2a08b6c87d17608fb73a12ae7b795d7c147ac",
+    "native_initialization_sha256": "007db4441c06dc60eafcf3d5d028b7a00d5c1476f8e7bea82177bf373ace1891",
+    "preflight_log_sha256": "c37dc02ff866bad7c029b2476e0dd658258ccb7b2c2cd29f66a00e74be7d24df",
+    "source_branch_metrics": [
+      {
+        "alpha_max": 1.0,
+        "alpha_min": 1.0,
+        "branch": "A1",
+        "cell_count": 5376,
+        "native_water_volume_m3": 0.02102614948303455
+      },
+      {
+        "alpha_max": 1.0,
+        "alpha_min": 1.0,
+        "branch": "A2",
+        "cell_count": 5376,
+        "native_water_volume_m3": 0.021026985560674186
+      },
+      {
+        "alpha_max": 1.0,
+        "alpha_min": 1.0,
+        "branch": "B1",
+        "cell_count": 5376,
+        "native_water_volume_m3": 0.021026149665387482
+      },
+      {
+        "alpha_max": 1.0,
+        "alpha_min": 1.0,
+        "branch": "B2",
+        "cell_count": 5376,
+        "native_water_volume_m3": 0.021026985519076724
+      }
+    ],
+    "source_support_m": [
+      1.95,
+      2.25
+    ],
+    "status": "passed_axial_mesh_native_input_and_dictionary_preflight",
+    "tank_water_m3_each": {
+      "tankA": 1.3500000000021355,
+      "tankB": 1.350000000000505
+    }
+  },
+  "ranks": 10,
+  "release_resource_sample": {
+    "active_solver_process_count": 10,
+    "available_memory_bytes": 120158969856,
+    "effective_cpu_allocation": 20,
+    "fits_by_solver_rank_count": true,
+    "free_disk_bundle_bytes": 37949345792,
+    "progressing_solver_processes": [
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662191,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662192,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662193,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662194,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662195,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662196,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662197,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662198,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662199,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662200,
+        "state": "R"
+      }
+    ],
+    "requested_mpi_ranks": 10,
+    "sampled_utc": "2026-10-26T06:44:51.738030+00:00"
+  },
+  "released_utc": "2026-10-26T06:44:51.738132+00:00",
+  "resource_sample_prelaunch": {
+    "active_solver_process_count": 10,
+    "available_memory_bytes": 120192040960,
+    "effective_cpu_allocation": 20,
+    "fits_by_solver_rank_count": true,
+    "free_disk_bundle_bytes": 37949620224,
+    "progressing_solver_processes": [
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662191,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662192,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662193,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662194,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662195,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662196,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662197,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662198,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 200,
+        "pid": 1662199,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d1e8e2922f8ef670d9bd088ec6b6fa05f01ff1547d2492d17963d5de69fdcaa5.scope\n",
+        "cpu_tick_delta_2s": 201,
+        "pid": 1662200,
+        "state": "R"
+      }
+    ],
+    "requested_mpi_ranks": 10,
+    "sampled_utc": "2026-10-26T06:44:48.678043+00:00"
+  },
+  "runner_sha256": "bf3c7448da36736a9814ea4a56a0751d913109c4731be54f7dbf7bb59121d25a",
+  "schema": "i4f-flush-stock-cold-launch/v1",
+  "static_case_tree_sha256": "763bd98f44459f717f75482a756419d00abb2c2f0ca2da9c6f2b65e7ef947a27",
+  "static_input_tree_sha256": "62ec4aa85b49c65ebd02369ffddedf8f34d3d59d531c18b1d0b13d46d2e57608",
+  "status": "solver_released_under_exact_guard"
+}

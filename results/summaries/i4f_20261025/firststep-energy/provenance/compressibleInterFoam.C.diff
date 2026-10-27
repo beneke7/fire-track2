@@ -1,0 +1,205 @@
+--- parent/compressibleInterFoam.C
++++ audit/compressibleInterFoam.C
+@@ -58,6 +58,7 @@
+ #include <fstream>
+ #include <iomanip>
+ #include <string>
++#include <sstream>
+ 
+ // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+@@ -266,14 +267,194 @@
+ 
+             turbulence.correctPhasePhi();
+ 
++            // Read-only first-step energy-source probe. All finite-volume
++            // operators and collective extrema execute on every rank in the
++            // same order; only ranks 0 and 5 write their selected cell rows.
++            auto i4fCaptureFirstStepEnergy =
++            [&](const char* stage, const label pressureCorrector)
++            {
++                if (runTime.timeIndex() != 1)
++                {
++                    return;
++                }
++
++                const tmp<volScalarField> ti4fDivUp
++                (
++                    fvc::div(fvc::absolute(phi, U), p)
++                );
++                const tmp<volScalarField> ti4fDdtRhoK
++                (
++                    fvc::ddt(rho, K)
++                );
++                const tmp<volScalarField> ti4fDivRhoPhiK
++                (
++                    fvc::div(rhoPhi, K)
++                );
++                const tmp<volScalarField> ti4fCvWater
++                (
++                    mixture.thermo1().Cv()
++                );
++                const tmp<volScalarField> ti4fCvAir
++                (
++                    mixture.thermo2().Cv()
++                );
++
++                scalar i4fGlobalMinT = GREAT;
++                scalar i4fGlobalMinP = GREAT;
++                forAll(T.primitiveField(), celli)
++                {
++                    i4fGlobalMinT = min
++                    (
++                        i4fGlobalMinT,
++                        T.primitiveField()[celli]
++                    );
++                    i4fGlobalMinP = min
++                    (
++                        i4fGlobalMinP,
++                        p.primitiveField()[celli]
++                    );
++                }
++                reduce(i4fGlobalMinT, minOp<scalar>());
++                reduce(i4fGlobalMinP, minOp<scalar>());
++
++                const volScalarField& i4fKOld = K.oldTime();
++                const volScalarField& i4fRhoOld = rho.oldTime();
++                const scalar i4fDeltaT = runTime.deltaTValue();
++                const label i4fSelectedCell =
++                    Pstream::myProcNo() == 0 ? 5154
++                  : Pstream::myProcNo() == 5 ? 4440
++                  : -1;
++
++                if
++                (
++                    i4fSelectedCell >= 0
++                 && i4fSelectedCell < mesh.nCells()
++                )
++                {
++                    const label celli = i4fSelectedCell;
++                    const scalar divUpValue = ti4fDivUp()[celli];
++                    const scalar ddtRhoKValue = ti4fDdtRhoK()[celli];
++                    const scalar divRhoPhiKValue =
++                        ti4fDivRhoPhiK()[celli];
++                    const scalar contErrKValue = contErr[celli]*K[celli];
++                    const scalar energySumValue =
++                        divUpValue + ddtRhoKValue + divRhoPhiKValue
++                      - contErrKValue;
++                    const scalar heatCapacityFactor =
++                        alpha1[celli]/ti4fCvWater()[celli]
++                      + alpha2[celli]/ti4fCvAir()[celli];
++                    const scalar explicitTemperatureRate =
++                        -energySumValue*heatCapacityFactor/rho[celli];
++                    const scalar divUpTemperatureRate =
++                        -divUpValue*heatCapacityFactor/rho[celli];
++                    const scalar ddtRhoKTemperatureRate =
++                        -ddtRhoKValue*heatCapacityFactor/rho[celli];
++                    const scalar divRhoPhiKTemperatureRate =
++                        -divRhoPhiKValue*heatCapacityFactor/rho[celli];
++                    const scalar contErrKTemperatureRate =
++                        contErrKValue*heatCapacityFactor/rho[celli];
++                    const scalar storageRateEstimate =
++                        (
++                            rho[celli]*K[celli]
++                          - i4fRhoOld[celli]*i4fKOld[celli]
++                        )/i4fDeltaT;
++
++                    std::ostringstream fileName;
++                    fileName << "i4f_firststep_energy_rank"
++                             << Pstream::myProcNo() << ".csv";
++                    std::ofstream energyLog
++                    (
++                        fileName.str().c_str(),
++                        std::ios::app
++                    );
++                    if
++                    (
++                        energyLog
++                     && energyLog.tellp() == std::streampos(0)
++                    )
++                    {
++                        energyLog
++                            << "time_s,deltaT_s,time_index,outer,stage,"
++                            << "pressure_corrector,rank,local_cell,"
++                            << "x_m,y_m,z_m,Ux_m_s,Uy_m_s,Uz_m_s,"
++                            << "K_m2_s2,K_old_m2_s2,T_K,p_Pa,"
++                            << "rho_kg_m3,rho_old_kg_m3,"
++                            << "rho_water_kg_m3,rho_air_kg_m3,"
++                            << "alpha_water,alpha_air,psi_air_kg_m3_Pa,"
++                            << "Cv_water_J_kgK,Cv_air_J_kgK,"
++                            << "divUp_W_m3,ddt_rhoK_W_m3,"
++                            << "div_rhoPhiK_W_m3,contErr_times_K_W_m3,"
++                            << "explicit_energy_sum_W_m3,"
++                            << "T_rate_divUp_K_s,T_rate_ddt_rhoK_K_s,"
++                            << "T_rate_div_rhoPhiK_K_s,"
++                            << "T_rate_contErrK_K_s,"
++                            << "T_rate_explicit_source_only_K_s,"
++                            << "rhoK_storage_rate_estimate_W_m3,"
++                            << "global_min_T_K,global_min_p_field_Pa\n";
++                    }
++                    energyLog << std::setprecision(17)
++                        << runTime.value() << ','
++                        << i4fDeltaT << ','
++                        << runTime.timeIndex() << ','
++                        << i4fOuterLoop << ','
++                        << stage << ','
++                        << pressureCorrector << ','
++                        << Pstream::myProcNo() << ','
++                        << celli << ','
++                        << mesh.C()[celli].x() << ','
++                        << mesh.C()[celli].y() << ','
++                        << mesh.C()[celli].z() << ','
++                        << U[celli].x() << ','
++                        << U[celli].y() << ','
++                        << U[celli].z() << ','
++                        << K[celli] << ','
++                        << i4fKOld[celli] << ','
++                        << T[celli] << ','
++                        << p[celli] << ','
++                        << rho[celli] << ','
++                        << i4fRhoOld[celli] << ','
++                        << rho1[celli] << ','
++                        << rho2[celli] << ','
++                        << alpha1[celli] << ','
++                        << alpha2[celli] << ','
++                        << psi2[celli] << ','
++                        << ti4fCvWater()[celli] << ','
++                        << ti4fCvAir()[celli] << ','
++                        << divUpValue << ','
++                        << ddtRhoKValue << ','
++                        << divRhoPhiKValue << ','
++                        << contErrKValue << ','
++                        << energySumValue << ','
++                        << divUpTemperatureRate << ','
++                        << ddtRhoKTemperatureRate << ','
++                        << divRhoPhiKTemperatureRate << ','
++                        << contErrKTemperatureRate << ','
++                        << explicitTemperatureRate << ','
++                        << storageRateEstimate << ','
++                        << i4fGlobalMinT << ','
++                        << i4fGlobalMinP << '\n';
++                }
++            };
++
++            i4fCaptureFirstStepEnergy("before_UEqn", -1);
++
+             #include "UEqn.H"
++            i4fCaptureFirstStepEnergy("before_TEqn_after_UEqn", -1);
+             volScalarField divUp("divUp", fvc::div(fvc::absolute(phi, U), p));
+             #include "TEqn.H"
++            i4fCaptureFirstStepEnergy("after_TEqn", -1);
+ 
+             // --- Pressure corrector loop
++            label i4fEnergyPressureCorrector = 0;
+             while (pimple.correct())
+             {
+                 #include "pEqn.H"
++                ++i4fEnergyPressureCorrector;
++                i4fCaptureFirstStepEnergy
++                (
++                    "after_pEqn_pressure_corrector",
++                    i4fEnergyPressureCorrector
++                );
+             }
+ 
+             if (pimple.turbCorr())

@@ -195,6 +195,11 @@ separate review memos unless a hard decision needs one.
 - Run `make doctor` before assigning compute. Detect CPU affinity/cgroup limits,
   current free RAM, GPU memory and disk; do not assume the workstation or a
   remote cluster is available from the plan's hardware description.
+- Current bounded internal-apparatus jobs use a 16 GiB free-disk stop reserve
+  plus their declared incremental output/temporary allowance at admission.
+  This replaces the earlier agent-selected 20 GiB reserve for new jobs only;
+  preserve historical guards/records, continue lossless recovery, and account
+  for concurrent writers. Do not change physical tolerances to gain headroom.
 - Use `scripts/run_local.py` for local jobs. Allocate a **shared total** CPU
   budget across workers, processes and MPI ranks; keep BLAS/OpenMP threads at
   one inside process-parallel sweeps. Avoid nested oversubscription.
@@ -205,6 +210,8 @@ separate review memos unless a hard decision needs one.
   supervision without relaunching it. Anchor deadlines to the original
   container start, honor PAUSE, and expose the active controller through the
   documented status/event paths while preserving prior attempts.
+  Short compile/read-only utility containers may run directly with bounded
+  timeouts and provenance; the GO/guardian protocol below applies to solvers.
   For a new Docker launch, hold the solver behind a GO sentinel until its
   exact container ID/StartedAt and manifest exist and the guard is verified.
   Source the OpenFOAM bashrc before enabling shell nounset/pipefail, then set
@@ -226,6 +233,10 @@ separate review memos unless a hard decision needs one.
   then regenerate and recheck its unreleased manifests. Repeated preparation
   errors do not require another full copy of unchanged mesh/checkpoint files.
   Released runs remain immutable; preserve their executed inputs and failures.
+  Hardlinks may share genuinely immutable static mesh inputs, but detach all
+  restart fields, `uniform/time`, control files and any runtime-written inputs
+  before GO. Verify independent inodes as well as bytes. Never hardlink writable
+  seed fields to bypass a disk limit; recover storage first.
   In the current v2512 internal solver, the mixture-thermo constructor rewrites
   `T.air` and `T.water` from common `T` after GO. These are derived startup
   outputs, as documented in the corrected finite-water capsule. Verify the
@@ -244,8 +255,11 @@ separate review memos unless a hard decision needs one.
   Terminal checks must use the branch's configured log path, not a fixed log
   basename. A missing expected filename is not evidence that the solver failed.
   Compare numerical dictionary values numerically, not by printed notation
-  (`1e-05` and `1e-5` are equal). Formatting or cosmetic labels must not block
-  an otherwise verified launch. If Docker exits before the guard records its
+  (`1e-05` and `1e-5` are equal). For checkpoint times, parse the original
+  dictionary value at full precision: default `foamDictionary -value` output
+  can round a valid restart time to six significant digits. Do not validate
+  rounded tool output against an exact checkpoint timestamp. Formatting or
+  cosmetic labels must not block an otherwise verified launch. If Docker exits before the guard records its
   final checkpoint, a dispatcher must wait for capture until its bounded
   deadline; pending metadata is not a failed solver or permission to relaunch.
   Keep internal and external wall deadlines consistent, checkpoint before the
@@ -283,12 +297,27 @@ separate review memos unless a hard decision needs one.
   also authorizes larger exploratory tests when measured memory, disk and
   solver support make them viable; size is not itself a review gate. GPU
   visibility is not proof that a solver supports this problem.
+- Before repeating an expensive replay with a changed diagnostic hook, exercise
+  that hook at an early trigger on the actual apparatus and each relevant
+  control arm. Confirm its runtime assertions, output schema and terminal parser
+  execute; compilation and source inspection alone do not cover a late branch.
+  Use the existing launcher/guard and a short pilot, without another review memo
+  or approval gate. Preserve the pilot separately from the target experiment.
 - Keep full 3D snapshots sparse; routinely save compact flux, impact, ledger,
   and scoring data. Checkpoint expensive jobs; measure CPU/MPI scaling before
   requesting cluster resources. Stop failed or unaffordable runs with evidence.
   Docker helpers that stream binary archives must use `--log-driver=none`,
   verified before export; the default JSON logger can exhaust disk by recording
   the binary stream. Verify lossless archives before removing their sources.
+- User retention direction (2026-10-27): concluded exploratory trials do not
+  require permanent full 3D histories. Keep inputs/source, compact findings,
+  plots/videos, selected representative evidence and required restart/source
+  states; remove superseded raw histories, redundant output copies and unused
+  intermediate archives with a compact deletion record. Preserve failed-attempt
+  identities and outcomes, rather than every raw field. Protect active jobs and
+  shared input meshes, and mark discarded archive payloads unavailable. Leave
+  unmounted drives alone. This supersedes blanket raw-output retention for
+  concluded trials; lossless archival is not required for obsolete output.
 
 ## Completion and autonomy
 

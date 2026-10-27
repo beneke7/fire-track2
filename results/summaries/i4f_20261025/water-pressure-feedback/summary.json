@@ -1,0 +1,37 @@
+{
+  "arms": [
+    {
+      "declared_source_files_reconstructed_and_verified": 72,
+      "first_max_dU_m_s": 0.1377777836468218,
+      "first_max_dp_Pa": 16.47155419536284,
+      "held_field_mismatches": 0,
+      "last_max_dU_m_s": 0.012472038573541918,
+      "last_max_dp_Pa": 0.4756435035378672,
+      "name": "water-held",
+      "new_rebuild_tested": false,
+      "private_bundle": "results/runs/i4f-frozen-water-mechanical-phaseT-20261026T2335Z",
+      "source_patch": "water-held/from-public-parent.patch",
+      "source_patch_sha256": "eb5016601a1bf5c3ef5c3266ff734400d75ab29cb1a7c45e5136063b4d2d45a3",
+      "trigger_time_s": 0.4938444922371094
+    },
+    {
+      "declared_source_files_reconstructed_and_verified": 72,
+      "first_max_dU_m_s": 3.9392673348181613,
+      "first_max_dp_Pa": 827.3002793900814,
+      "held_field_mismatches": 0,
+      "last_max_dU_m_s": 5.076029741463261,
+      "last_max_dp_Pa": 1063.7219472597062,
+      "name": "water-evolving",
+      "new_rebuild_tested": false,
+      "private_bundle": "results/runs/i4f-water-feedback-map-20261027T003208Z",
+      "source_patch": "water-evolving/from-public-parent.patch",
+      "source_patch_sha256": "4a6caa222468fac55a6faa09b2ccf1db8be02375091d21cbb269d8c5311dad60",
+      "trigger_time_s": 0.4938444922371094
+    }
+  ],
+  "base_source": "results/summaries/i4f_20261025/immediate-parent-source/build/source/v8-restart-cold",
+  "classification": "Exploratory same-time algebraic diagnostic, not a physical discharge or validation result",
+  "created_utc": "2026-10-27T01:35:18.597518+00:00",
+  "interpretation": "At the sampled warm state, restoring water transport suffices to reproduce large noncontracting coupled updates while common temperature, transported turbulence and old-time history are held. This does not identify the exact trigger, prove a signed two-cycle, establish global stability, or demonstrate a production remedy.",
+  "schema": "i4f-water-pressure-feedback-comparison/v1"
+}

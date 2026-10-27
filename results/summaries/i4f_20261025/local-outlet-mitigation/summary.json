@@ -1,0 +1,858 @@
+{
+  "schema": "i4f-local-outlet-mitigation/v1",
+  "created_utc": "2026-10-27T09:58:49.513344+00:00",
+  "headline": "The corrected B outlet-pressure profile did not stop the same iteration-197 runaway. The D outlet-extension run stayed below the runaway screen through 3000 steady iterations and E through 9000, but neither met the configured SIMPLE convergence criteria. This is an unsettled, single-phase prescribed-flow diagnostic, not an accepted hydraulic reference, cavitation result, or full-tank discharge fix.",
+  "scope_and_limits": [
+    "Steady SIMPLE iteration labels are solver iteration counts, not physical seconds.",
+    "Q=0.599812435 m3/s was derived from earlier CFD; it is not measured and is not an outlet-history boundary condition for the pressurized apparatus.",
+    "D/E add a 0.30 m downstream numerical extension, 4608 cells and no-slip side-wall faces while moving the pressure boundary to a flat x=5.10 m plane. The result cannot isolate outlet distance alone as the cause.",
+    "D and E end at iteration caps without a SIMPLE solution-converged message. Their native pAbs minima and required heads are unsettled diagnostics only.",
+    "The branch reference is incompressible, single-phase water. Cavitation is not modeled; do not interpret its pressure minimum as a cavitation prediction.",
+    "No tank headspace, valve transient, air-filled downstream line, or unsteady discharge is represented."
+  ],
+  "model": {
+    "solver": "stock serial OpenCFD v2512 simpleFoam",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "fluid": "fully water-filled incompressible single branch, RAS kOmegaSST",
+    "div_phi_U": "bounded Gauss upwind",
+    "SIMPLE_consistent": "yes",
+    "rho_kg_m3": 998.2,
+    "mu_Pa_s": 0.001002,
+    "ambient_pressure_Pa_abs": 100000.0,
+    "gravity_xyz_m_s2": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "prescribed_inlet_Q_m3_s": 0.599812435,
+    "Q_origin": "derived from earlier CFD, not measured"
+  },
+  "B_native_Cf_pressure_profile_control": {
+    "purpose": "Test whether the B runaway came from the small outlet pressure-profile discrepancy relative to OpenCFD v2512 face::centre evaluation.",
+    "B_original_run_id": "i4f-wet-branch-upwind-20261027T080629Z",
+    "B_original_container_id": "417d9a83148dcf7faa10bc7f20d4c8afcf1b9584aff0fae55e932cc420db99f7",
+    "B_original_started_at_utc": "2026-10-27T08:07:41.204072637Z",
+    "B_original_input_freeze_sha256": "95a4fb9c0635032a19826b8469230623c9274ef59c81c38500e227db23379a21",
+    "B_original_log_sha256": "092966ad8cf794c06709685d16b005d1841415333b7d7c11404be6593219b7a2",
+    "B_native_Cf_control_run_id": "i4f-wet-branch-v2512-cf-control-20261027T0917Z",
+    "B_native_Cf_control_container_id": "652301d9f0ecbabbf7490e17d6f888b2906af9e26ea85e7175f2aba9997ad5c1",
+    "B_native_Cf_control_started_at_utc": "2026-10-27T09:18:37.703188193Z",
+    "B_native_Cf_control_input_freeze_sha256": "fc57502d6a9dc1ef0bde92aad0e4066f94dc5e11e7f1eb52828f55cd16e22c7f",
+    "B_native_Cf_control_log_sha256": "7b03f6b4469f2214a318e5f06f15c2e586188e34792795eb43fb1a62d92b4399",
+    "only_changed_case_path_vs_B_original": [
+      "0/p"
+    ],
+    "all_other_parent_input_hashes_match": true,
+    "max_profile_delta_pa": 5.878783716143109,
+    "rms_profile_delta_pa": 0.8986201792413262,
+    "first_runaway_iteration_equal": true,
+    "first_runaway_cell_equal": true,
+    "B_original_first_runaway": {
+      "criterion": "max_magnitude_U_m_s > 200",
+      "location_xyz_m": [
+        4.7939507864068425,
+        -0.2424492738698738,
+        0.9683886767154217
+      ],
+      "observed": 202.8845125551205,
+      "steady_iteration": 197
+    },
+    "B_control_first_runaway": {
+      "criterion": "max_magnitude_U_m_s > 200",
+      "location_xyz_m": [
+        4.7939507864068425,
+        -0.2424492738698738,
+        0.9683886767154217
+      ],
+      "observed": 202.96255572675142,
+      "steady_iteration": 197
+    },
+    "interpretation": "The <=5.879 Pa correction alone did not prevent the same iteration-197 max(|U|)>200 m/s runaway.",
+    "comparison_evidence": {
+      "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/analysis/bc-profile-confound-comparison.json",
+      "bytes": 4278,
+      "sha256": "4143b56667f0c5461ea7d1e225fe63480e4ab4c8d259478982400c4fb2516300"
+    }
+  },
+  "D_geometry": {
+    "parent_bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-wet-branch-upwind-20261027T080629Z",
+    "extension_method": {
+      "divider_continuation": false,
+      "layers": 12,
+      "mergeTol": 0,
+      "model": "offsetSurface",
+      "project_intermediate_layers": false,
+      "side_wall_bc": "inherited noSlip",
+      "side_wall_patch": "apparatusWall",
+      "source_patch": "wetOutlet",
+      "target_x_m": 5.1,
+      "tool": "OpenCFD v2512 extrudeMesh"
+    },
+    "cells_parent": 22918,
+    "cells_extended": 27526,
+    "cells_added": 4608,
+    "points_parent": 29718,
+    "points_extended": 35466,
+    "one_connected_region": true,
+    "parent_cell_centers_max_abs_difference_m": 1.7763568394002505e-15,
+    "parent_point_coordinates_exact_prefix": true,
+    "added_noSlip_sidewall_faces": 1488,
+    "new_outlet_plane_x_m": [
+      5.099999999999998,
+      5.100000000000001
+    ],
+    "new_outlet_faces": 384,
+    "new_outlet_native_area_m2": 0.15000002838749826,
+    "quality_note": {
+      "checkMesh_exit_status": "checkMesh_exit=0\nwriteCellCentres_exit=0\n",
+      "reported_failed_checks": "1",
+      "min_cell_volume_m3": 3.120157715339819e-07
+    },
+    "reviewed_geometry_image": {
+      "path": "outlet-extension-native-geometry.png",
+      "sha256": "a849da5e0173c78131927ec8b757e4346b18d02ce1c0ce00c58489d6e5e0ae3c",
+      "source_path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/figures/outlet-extension-native-geometry.png"
+    },
+    "geometry_validation_evidence": {
+      "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/analysis/geometry-validation.json",
+      "bytes": 4373,
+      "sha256": "3dd5c53ed25a640a579d4c284412382c1864a862636e6ce7b287deb34f98b4f5"
+    }
+  },
+  "D_E_results": {
+    "D": {
+      "run_id": "i4f-wet-branch-outlet-extension-20261027T085020Z",
+      "container_id": "a0cd0ec25b0566be3024b1920122d8138059875c7a843f012afb592d61ee8322",
+      "steady_iteration": 3000,
+      "classification": "iteration_cap_or_external_stop_without_convergence_message",
+      "runaway_crossing": null,
+      "solution_converged_message": false,
+      "native_pAbs_min_pa": 5910.962791857193,
+      "pAbs_min_cell": 3575,
+      "pAbs_min_xyz_m": [
+        4.220087803507014,
+        -0.3808156806577422,
+        0.9709147146145044
+      ],
+      "required_head_m": 2.088093318333429,
+      "Q_out_m3_s": 0.5998111611922005,
+      "relative_Q_imbalance": 2.123676878193247e-06,
+      "last_max_speed_m_s": 11.78393489314466
+    },
+    "E": {
+      "run_id": "i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z",
+      "container_id": "315138a324aa998bd65ea0aba2dbe07049a4d8014016226584702247f38ec457",
+      "parent_run_id": "i4f-wet-branch-outlet-extension-20261027T085020Z",
+      "steady_iteration": 9000,
+      "classification": "iteration_cap_or_external_stop_without_convergence_message",
+      "runaway_crossing": null,
+      "solution_converged_message": false,
+      "native_pAbs_min_pa": 5779.36416091655,
+      "pAbs_min_cell": 3575,
+      "pAbs_min_xyz_m": [
+        4.220087803507014,
+        -0.3808156806577422,
+        0.9709147146145044
+      ],
+      "required_head_m": 2.0819602758426674,
+      "Q_out_m3_s": 0.5998123343227383,
+      "relative_Q_imbalance": 1.678479067186022e-07,
+      "last_max_speed_m_s": 11.779384819118963,
+      "quota_events": [
+        {
+          "event": "resource_quota_update_requested",
+          "utc": "2026-10-27T09:21:34.385822+00:00",
+          "old_nano_cpus": 750000000,
+          "new_nano_cpus": 500000000
+        },
+        {
+          "event": "resource_quota_update_applied",
+          "utc": "2026-10-27T09:21:34.505418+00:00",
+          "old_nano_cpus": 750000000,
+          "new_nano_cpus": 500000000
+        },
+        {
+          "event": "resource_quota_update_requested",
+          "utc": "2026-10-27T09:36:17.471053+00:00",
+          "old_nano_cpus": 500000000,
+          "new_nano_cpus": 1000000000
+        },
+        {
+          "event": "resource_quota_update_applied",
+          "utc": "2026-10-27T09:36:17.559661+00:00",
+          "old_nano_cpus": 500000000,
+          "new_nano_cpus": 1000000000
+        }
+      ]
+    },
+    "E_minus_D": {
+      "native_pAbs_min_change_pa": -131.5986309406435,
+      "required_head_change_m": -0.006133042490761742,
+      "Q_out_change_m3_s": 1.1731305378237522e-06,
+      "relative_Q_imbalance_ratio_E_over_D": 0.07903646192230597
+    },
+    "interpretation": "Bounded tail through 9000 iterations; unchanged residual criteria remain unmet. Reported pAbs minima/head are not converged hydraulic results."
+  },
+  "runs": {
+    "B_original_upwind": {
+      "run_id": "i4f-wet-branch-upwind-20261027T080629Z",
+      "bundle": "results/runs/i4f-wet-branch-upwind-20261027T080629Z",
+      "container_id": "417d9a83148dcf7faa10bc7f20d4c8afcf1b9584aff0fae55e932cc420db99f7",
+      "started_at_utc": "2026-10-27T08:07:41.204072637Z",
+      "finished_at_utc": "2026-10-27T08:07:58.632862883Z",
+      "exit_code": 0,
+      "normal_solver_End": true,
+      "solver_log": {
+        "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/case/log.simpleFoam",
+        "bytes": 520820,
+        "sha256": "092966ad8cf794c06709685d16b005d1841415333b7d7c11404be6593219b7a2"
+      },
+      "input_freeze": {
+        "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/input-freeze.json",
+        "sha256": "95a4fb9c0635032a19826b8469230623c9274ef59c81c38500e227db23379a21",
+        "frozen_file_count": 104
+      },
+      "analysis": {
+        "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/analysis.json",
+        "sha256": "95e44e6f921b93cbc898f80e9ac2251fc0314fd27a8d64e77e9a880466a3aee0"
+      },
+      "history": {
+        "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/analysis/steady-iteration-history.csv",
+        "sha256": "908952ac90d7fe5807d163cb2f1133b1481baf87fe3003c9cf128f845f1b73d6",
+        "rows": 197,
+        "first_iteration": 1,
+        "last_iteration": 197
+      },
+      "native_hash_record_count": 10,
+      "native_hashes_verified": {
+        "case/197/U": {
+          "sha256": "31c44eb81ebc9f9f76a64ee51e1bd62d96b00c5ac90e9ce4c452dd2102438a74",
+          "bytes": 560690,
+          "matches_analysis": true
+        },
+        "case/197/p": {
+          "sha256": "8ea5492a17090dcac8b93c03a06c6f88bcb848475578985b7dcce35cb8d4e9ce",
+          "bytes": 187803,
+          "matches_analysis": true
+        },
+        "case/197/phi": {
+          "sha256": "1898b70cb9f64ea24e0c98a649316e2cf123f2956897f58b526091374bc42a65",
+          "bytes": 523270,
+          "matches_analysis": true
+        },
+        "case/constant/C": {
+          "sha256": "170393333f396b1996c250cd8b975b1fef03dfcaf165561de5f2a6ae70aaf772",
+          "bytes": 827718,
+          "matches_analysis": true
+        },
+        "case/constant/cellVolume": {
+          "sha256": "3ef568611fa286075d1b867914f991c034b7cd5ecb3261cde5ee394f4d49a892",
+          "bytes": 184854,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/faces": {
+          "sha256": "fd8323f750c0044818a57202565ab995eb56add4141dde68287a7ff3c0c6bb70",
+          "bytes": 1542887,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/neighbour": {
+          "sha256": "2ca45cb2847c77e120f2a4778525323ca7613546f9c565eee5ceb3a8c48781d1",
+          "bytes": 259870,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/owner": {
+          "sha256": "05f13a670932044916671d5f8d8205b83ca9fcbca67f26c6297a7daab440083d",
+          "bytes": 305878,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/points": {
+          "sha256": "d503f621da851efc6270b8cfbd293fd9da0c3a6f2b6c067f70c2fface4ee8015",
+          "bytes": 714154,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/sets/concaveCells": {
+          "sha256": "145f2077b17d5329906f25a268d6cb6c26edef31cf7d8c3fabac807d4c2d4713",
+          "bytes": 5775,
+          "matches_analysis": true
+        }
+      },
+      "solver": "stock serial simpleFoam",
+      "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "initial_docker_nano_cpus": 750000000,
+      "memory_bytes": 4294967296,
+      "mesh_cells": 22918,
+      "cell_volume_sum_m3": 0.21722868540198287,
+      "numerical_outcome": {
+        "classification": "divergent_nonphysical_endpoint",
+        "first_declared_runaway_threshold_crossing": {
+          "criterion": "max_magnitude_U_m_s > 200",
+          "location_xyz_m": [
+            4.7939507864068425,
+            -0.2424492738698738,
+            0.9683886767154217
+          ],
+          "observed": 202.8845125551205,
+          "steady_iteration": 197
+        },
+        "hydraulic_interpretation": "invalid; do not interpret raw p_abs extrema, total head, or outlet flow as a hydraulic result"
+      },
+      "steady_converged_message_present": false,
+      "provenance_checks": {
+        "container_identity_matches_launch": true,
+        "started_at_matches_launch": true,
+        "freeze_sha_matches_launch": true,
+        "log_sha_matches_terminal": true,
+        "history_sha_matches_analysis": true,
+        "freeze_entry_count_matches_preparation": true
+      },
+      "endpoint_hydraulic_interpretation": "invalid; divergent/nonphysical endpoint; no pressure, head, or flow engineering interpretation",
+      "source_identity": {
+        "launch_manifest": {
+          "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/launch-manifest.json",
+          "bytes": 993,
+          "sha256": "ea634333e93848ccd83cb47a12516f4a708c33d659217325f3928250868994cf"
+        },
+        "terminal_record": {
+          "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/terminal.json",
+          "bytes": 805,
+          "sha256": "972ec2d11c7ae34e54679a3c0de166806aa0c268ec057222846707033b946fde"
+        },
+        "input_freeze_record": {
+          "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/input-freeze.json",
+          "bytes": 24735,
+          "sha256": "95a4fb9c0635032a19826b8469230623c9274ef59c81c38500e227db23379a21"
+        },
+        "preparation_record": {
+          "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/preparation.json",
+          "bytes": 68415,
+          "sha256": "743bf13235abea7844a56bea0ca737c68d5f68a483edea3a15eea1eee97678a3"
+        },
+        "events": {
+          "path": "results/runs/i4f-wet-branch-upwind-20261027T080629Z/events.jsonl",
+          "bytes": 929,
+          "sha256": "fd0a0b57fc0b61f777488495e4a1bb668c2da4c12795c6d22c7e3075a5123bcd"
+        },
+        "preparation_script_sha256": "23fd59a3a3e5f2ddf6138689cf7da3c02a2ed10137a4cd52cc986355fb585136",
+        "controller_source_sha256": "23fd59a3a3e5f2ddf6138689cf7da3c02a2ed10137a4cd52cc986355fb585136",
+        "solver_wrapper_sha256": "ee859be422374395069a6e9da631661381e72bd162fefc358e988ea044ed9334",
+        "openfoam_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      }
+    },
+    "B_native_Cf_control": {
+      "run_id": "i4f-wet-branch-v2512-cf-control-20261027T0917Z",
+      "bundle": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z",
+      "container_id": "652301d9f0ecbabbf7490e17d6f888b2906af9e26ea85e7175f2aba9997ad5c1",
+      "started_at_utc": "2026-10-27T09:18:37.703188193Z",
+      "finished_at_utc": "2026-10-27T09:18:54.035055923Z",
+      "exit_code": 0,
+      "normal_solver_End": true,
+      "solver_log": {
+        "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/case/log.simpleFoam",
+        "bytes": 520742,
+        "sha256": "7b03f6b4469f2214a318e5f06f15c2e586188e34792795eb43fb1a62d92b4399"
+      },
+      "input_freeze": {
+        "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/input-freeze.json",
+        "sha256": "fc57502d6a9dc1ef0bde92aad0e4066f94dc5e11e7f1eb52828f55cd16e22c7f",
+        "frozen_file_count": 104
+      },
+      "analysis": {
+        "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/analysis.json",
+        "sha256": "c5e9eb688c4657fb17479ff899e7f759857bc53c30920cc315096d6babf20fb4"
+      },
+      "history": {
+        "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/analysis/steady-iteration-history.csv",
+        "sha256": "e41c2f31202e5799621af8f64e1c9f7a00cadf7b63af634342630c1f5e3441d1",
+        "rows": 197,
+        "first_iteration": 1,
+        "last_iteration": 197
+      },
+      "native_hash_record_count": 10,
+      "native_hashes_verified": {
+        "case/197/U": {
+          "sha256": "73578bce3576c10779b882c75add67fc406d43e29ce39168e8fcacecafdfae0b",
+          "bytes": 560690,
+          "matches_analysis": true
+        },
+        "case/197/p": {
+          "sha256": "c1f4cbf9c4fc5582542e9e2c3f2f961eb0ba428d48d96faed94c50dc988f64f9",
+          "bytes": 187803,
+          "matches_analysis": true
+        },
+        "case/197/phi": {
+          "sha256": "fd7a85618c5cb7d4441bdb60d925bfe636f69d45283d49f33edb1a07a3c50251",
+          "bytes": 523270,
+          "matches_analysis": true
+        },
+        "case/constant/C": {
+          "sha256": "170393333f396b1996c250cd8b975b1fef03dfcaf165561de5f2a6ae70aaf772",
+          "bytes": 827718,
+          "matches_analysis": true
+        },
+        "case/constant/cellVolume": {
+          "sha256": "3ef568611fa286075d1b867914f991c034b7cd5ecb3261cde5ee394f4d49a892",
+          "bytes": 184854,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/faces": {
+          "sha256": "fd8323f750c0044818a57202565ab995eb56add4141dde68287a7ff3c0c6bb70",
+          "bytes": 1542887,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/neighbour": {
+          "sha256": "2ca45cb2847c77e120f2a4778525323ca7613546f9c565eee5ceb3a8c48781d1",
+          "bytes": 259870,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/owner": {
+          "sha256": "05f13a670932044916671d5f8d8205b83ca9fcbca67f26c6297a7daab440083d",
+          "bytes": 305878,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/points": {
+          "sha256": "d503f621da851efc6270b8cfbd293fd9da0c3a6f2b6c067f70c2fface4ee8015",
+          "bytes": 714154,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/sets/concaveCells": {
+          "sha256": "145f2077b17d5329906f25a268d6cb6c26edef31cf7d8c3fabac807d4c2d4713",
+          "bytes": 5775,
+          "matches_analysis": true
+        }
+      },
+      "solver": "stock serial simpleFoam",
+      "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "initial_docker_nano_cpus": 750000000,
+      "memory_bytes": 4294967296,
+      "mesh_cells": 22918,
+      "cell_volume_sum_m3": 0.21722868540198287,
+      "numerical_outcome": {
+        "classification": "divergent_nonphysical_endpoint",
+        "first_declared_runaway_threshold_crossing": {
+          "criterion": "max_magnitude_U_m_s > 200",
+          "location_xyz_m": [
+            4.7939507864068425,
+            -0.2424492738698738,
+            0.9683886767154217
+          ],
+          "observed": 202.96255572675142,
+          "steady_iteration": 197
+        },
+        "hydraulic_interpretation": "invalid; do not interpret raw p_abs extrema, total head, or outlet flow as a hydraulic result"
+      },
+      "steady_converged_message_present": false,
+      "provenance_checks": {
+        "container_identity_matches_launch": true,
+        "started_at_matches_launch": true,
+        "freeze_sha_matches_launch": true,
+        "log_sha_matches_terminal": true,
+        "history_sha_matches_analysis": true,
+        "freeze_entry_count_matches_preparation": true
+      },
+      "endpoint_hydraulic_interpretation": "invalid; divergent/nonphysical endpoint; no pressure, head, or flow engineering interpretation",
+      "source_identity": {
+        "launch_manifest": {
+          "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/launch-manifest.json",
+          "bytes": 1001,
+          "sha256": "40e8c74c813bfcec106c58c081c42719fdebbbb29f19677d838146bf0995f8cb"
+        },
+        "terminal_record": {
+          "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/terminal.json",
+          "bytes": 805,
+          "sha256": "e9bcf30ba5339ff43c393915a714dd6f28a77b55ab4aa5baa170159cd03ee4c5"
+        },
+        "input_freeze_record": {
+          "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/input-freeze.json",
+          "bytes": 24743,
+          "sha256": "fc57502d6a9dc1ef0bde92aad0e4066f94dc5e11e7f1eb52828f55cd16e22c7f"
+        },
+        "preparation_record": {
+          "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/preparation.json",
+          "bytes": 57273,
+          "sha256": "1fa89d3e7f036297634596fec43c55498b3e8e4359c9a353e315a2d956af4766"
+        },
+        "events": {
+          "path": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/events.jsonl",
+          "bytes": 929,
+          "sha256": "4f554b9c85df98084f347195a1085cdb0645d41b5e8d86322b3fe89bda401d2b"
+        },
+        "preparation_script_sha256": "836b4c267868915c7b5833429c5b2d1b7e2a39da52724abc0ade9f6ed0926bb7",
+        "controller_source_sha256": "1e2b977ec2aeae568935bf284cc6f52e084dc974768435f25d496a311788b3f5",
+        "solver_wrapper_sha256": "ee859be422374395069a6e9da631661381e72bd162fefc358e988ea044ed9334",
+        "openfoam_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      }
+    },
+    "D_outlet_extension": {
+      "run_id": "i4f-wet-branch-outlet-extension-20261027T085020Z",
+      "bundle": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z",
+      "container_id": "a0cd0ec25b0566be3024b1920122d8138059875c7a843f012afb592d61ee8322",
+      "started_at_utc": "2026-10-27T09:09:22.189039494Z",
+      "finished_at_utc": "2026-10-27T09:14:04.931542432Z",
+      "exit_code": 0,
+      "normal_solver_End": true,
+      "solver_log": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/case/log.simpleFoam",
+        "bytes": 7910147,
+        "sha256": "d0cebbe3d531657d6e1649635f6bdb4a665033305ecb25982c8e3e1873e5b549"
+      },
+      "input_freeze": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/input-freeze.json",
+        "sha256": "9fb2608add93219b868cbd667b39e99a624d4e5cefd8bfc49c77fe9bef24dca5",
+        "frozen_file_count": 120
+      },
+      "analysis": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/analysis/steady-endpoint-analysis.json",
+        "sha256": "a1a1a31569cdb75c45fc31d9208bb69968234d54d9799551b2023d40f8f3f085"
+      },
+      "history": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/analysis/steady-iteration-history.csv",
+        "sha256": "ad54d3bca6f5936f071380031d59f5d20c9a5e9b3e9116a357a2ef4240cc2bc9",
+        "rows": 3000,
+        "first_iteration": 1,
+        "last_iteration": 3000
+      },
+      "native_hash_record_count": 10,
+      "native_hashes_verified": {
+        "case/3000/U": {
+          "sha256": "83c944dc0e763a2abb91e7572cb41e39376f66ffb756678b8a25d73ded86ff4e",
+          "bytes": 671283,
+          "matches_analysis": true
+        },
+        "case/3000/p": {
+          "sha256": "3fd5b6e9c80af311ac01620eacb609bf24ba01461c79a7844dc44447fa4414b1",
+          "bytes": 224668,
+          "matches_analysis": true
+        },
+        "case/3000/phi": {
+          "sha256": "806d328a195929cba5493da1eee59de68031d3843d20ea888b370d6c2819701d",
+          "bytes": 630983,
+          "matches_analysis": true
+        },
+        "case/constant/C": {
+          "sha256": "66e6f9fe65f3f24c15df3ec94048e959b86f29b7fbbe45301796c9909277c63e",
+          "bytes": 974022,
+          "matches_analysis": true
+        },
+        "case/constant/cellVolume": {
+          "sha256": "b734217d8355044bb87b40b89b3589d81b01c43acfc09d51db34b60f61fda685",
+          "bytes": 221718,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/faces": {
+          "sha256": "e6bda30f4151f7892cfa786cf2367206f6c2fd7002afb9ccba76350762ce9b7e",
+          "bytes": 1844999,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/neighbour": {
+          "sha256": "93ae3342f16dfa514a14188380b0c03fa715f7164e03038daf5393a5468e8e02",
+          "bytes": 313726,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/owner": {
+          "sha256": "a64f8e08275062bdb95673fd75b47886aadd89179f802c589d0c7d3a971cd697",
+          "bytes": 365686,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/points": {
+          "sha256": "279e21f022610c6e9118855fe2a0f08ff533e900cd544c301c222d0e66b83af7",
+          "bytes": 852106,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/sets/concaveCells": {
+          "sha256": "587743ec459ed64bddf32454408b4840c511a33afd4d208368151f2e03407722",
+          "bytes": 6928,
+          "matches_analysis": true
+        }
+      },
+      "solver": "stock serial simpleFoam",
+      "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "initial_docker_nano_cpus": 750000000,
+      "memory_bytes": 4294967296,
+      "mesh_cells": 27526,
+      "cell_volume_sum_m3": 0.2617164035380438,
+      "numerical_outcome": {
+        "classification": "iteration_cap_or_external_stop_without_convergence_message",
+        "first_declared_runaway_threshold_crossing": null,
+        "hydraulic_interpretation": "unsettled; do not interpret raw pressure minimum or required head as converged hydraulic results"
+      },
+      "steady_converged_message_present": false,
+      "endpoint_diagnostics": {
+        "pAbs_min_pa": 5910.962791857193,
+        "pAbs_min_cell": 3575,
+        "pAbs_min_xyz_m": [
+          4.220087803507014,
+          -0.3808156806577422,
+          0.9709147146145044
+        ],
+        "required_head_m": 2.088093318333429,
+        "Q_in_m3_s": 0.5998124349999999,
+        "Q_out_m3_s": 0.5998111611922005,
+        "relative_Q_imbalance": 2.123676878193247e-06,
+        "last_history_max_speed_m_s": 11.78393489314466,
+        "last_history_pAbs_at_logged_min_p_cell_pa": 6671.057870842007
+      },
+      "provenance_checks": {
+        "container_identity_matches_launch": true,
+        "started_at_matches_launch": true,
+        "freeze_sha_matches_launch": true,
+        "log_sha_matches_terminal": true,
+        "history_sha_matches_analysis": true,
+        "freeze_entry_count_matches_preparation": true
+      },
+      "source_identity": {
+        "launch_manifest": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/launch-manifest.json",
+          "bytes": 1003,
+          "sha256": "a750861b6a646571b9b9986b61b3e781d9e1503051502f4d817fe190f04b6cc9"
+        },
+        "terminal_record": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/terminal.json",
+          "bytes": 808,
+          "sha256": "4aba4cefbd8fe8699cc0edad19f2c874ac1c4b643394099f4a78bda56eb96d89"
+        },
+        "input_freeze_record": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/input-freeze.json",
+          "bytes": 28541,
+          "sha256": "9fb2608add93219b868cbd667b39e99a624d4e5cefd8bfc49c77fe9bef24dca5"
+        },
+        "preparation_record": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/preparation.json",
+          "bytes": 76773,
+          "sha256": "76ce0de9a676708d4d777cc97726c559f18579bda687fa1e188c724f4a2f1ef2"
+        },
+        "events": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/events.jsonl",
+          "bytes": 932,
+          "sha256": "30a4b00e17a58fbe514d7f9bfa0763365ca54e9b7dba2d9763cc3a691b5c858e"
+        },
+        "preparation_script_sha256": "0aff6361419f2cd6c43f950d4c7ed8c580b74e5cb1a023bbfa9ba6fe6350fb80",
+        "controller_source_sha256": "1e2b977ec2aeae568935bf284cc6f52e084dc974768435f25d496a311788b3f5",
+        "solver_wrapper_sha256": "ee859be422374395069a6e9da631661381e72bd162fefc358e988ea044ed9334",
+        "openfoam_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      }
+    },
+    "E_D_continuation": {
+      "run_id": "i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z",
+      "bundle": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z",
+      "container_id": "315138a324aa998bd65ea0aba2dbe07049a4d8014016226584702247f38ec457",
+      "started_at_utc": "2026-10-27T09:20:56.094196719Z",
+      "finished_at_utc": "2026-10-27T09:36:24.434099879Z",
+      "exit_code": 0,
+      "normal_solver_End": true,
+      "solver_log": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/case/log.simpleFoam",
+        "bytes": 15824913,
+        "sha256": "bd37a2b10ef92ea2be77bbbcc1d0d5f9148eb1579dc7960d3d12258a41be652f"
+      },
+      "input_freeze": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/input-freeze.json",
+        "sha256": "7453b4431d5393309f4baa8be37c7dbb72ddbe420461067a521b9b4ff11de45b",
+        "frozen_file_count": 123
+      },
+      "analysis": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/analysis/steady-endpoint-analysis.json",
+        "sha256": "337951e915272107df1cfc6b78544b483ac7f01d54ef2a77f704bd1f2baa2c35"
+      },
+      "history": {
+        "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/analysis/steady-iteration-history.csv",
+        "sha256": "dbe46a8875eafb56095ca476f76f37042d1760168d007efe427a57875c904538",
+        "rows": 6000,
+        "first_iteration": 3001,
+        "last_iteration": 9000
+      },
+      "native_hash_record_count": 10,
+      "native_hashes_verified": {
+        "case/9000/U": {
+          "sha256": "a27cb1598ec74ce160ea9c9ee23436ba05c5c6c1e9ab3dc83b7f9df540f2560f",
+          "bytes": 671283,
+          "matches_analysis": true
+        },
+        "case/9000/p": {
+          "sha256": "01a47b335a2babac41d2560e59fe2927fa703ea70f294142769d269c3cd2e292",
+          "bytes": 224668,
+          "matches_analysis": true
+        },
+        "case/9000/phi": {
+          "sha256": "c3acee2a1ddd436ad8c74ef90e861fe874150809fd531f5c5a4b5a581b5dcd1c",
+          "bytes": 630983,
+          "matches_analysis": true
+        },
+        "case/constant/C": {
+          "sha256": "66e6f9fe65f3f24c15df3ec94048e959b86f29b7fbbe45301796c9909277c63e",
+          "bytes": 974022,
+          "matches_analysis": true
+        },
+        "case/constant/cellVolume": {
+          "sha256": "b734217d8355044bb87b40b89b3589d81b01c43acfc09d51db34b60f61fda685",
+          "bytes": 221718,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/faces": {
+          "sha256": "e6bda30f4151f7892cfa786cf2367206f6c2fd7002afb9ccba76350762ce9b7e",
+          "bytes": 1844999,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/neighbour": {
+          "sha256": "93ae3342f16dfa514a14188380b0c03fa715f7164e03038daf5393a5468e8e02",
+          "bytes": 313726,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/owner": {
+          "sha256": "a64f8e08275062bdb95673fd75b47886aadd89179f802c589d0c7d3a971cd697",
+          "bytes": 365686,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/points": {
+          "sha256": "279e21f022610c6e9118855fe2a0f08ff533e900cd544c301c222d0e66b83af7",
+          "bytes": 852106,
+          "matches_analysis": true
+        },
+        "case/constant/polyMesh/sets/concaveCells": {
+          "sha256": "587743ec459ed64bddf32454408b4840c511a33afd4d208368151f2e03407722",
+          "bytes": 6928,
+          "matches_analysis": true
+        }
+      },
+      "solver": "stock serial simpleFoam",
+      "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "initial_docker_nano_cpus": 750000000,
+      "memory_bytes": 4294967296,
+      "mesh_cells": 27526,
+      "cell_volume_sum_m3": 0.2617164035380438,
+      "numerical_outcome": {
+        "classification": "iteration_cap_or_external_stop_without_convergence_message",
+        "first_declared_runaway_threshold_crossing": null,
+        "hydraulic_interpretation": "unsettled; do not interpret raw pressure minimum or required head as converged hydraulic results"
+      },
+      "steady_converged_message_present": false,
+      "endpoint_diagnostics": {
+        "pAbs_min_pa": 5779.36416091655,
+        "pAbs_min_cell": 3575,
+        "pAbs_min_xyz_m": [
+          4.220087803507014,
+          -0.3808156806577422,
+          0.9709147146145044
+        ],
+        "required_head_m": 2.0819602758426674,
+        "Q_in_m3_s": 0.5998124349999999,
+        "Q_out_m3_s": 0.5998123343227383,
+        "relative_Q_imbalance": 1.678479067186022e-07,
+        "last_history_max_speed_m_s": 11.779384819118963,
+        "last_history_pAbs_at_logged_min_p_cell_pa": 6535.665892874895
+      },
+      "provenance_checks": {
+        "container_identity_matches_launch": true,
+        "started_at_matches_launch": true,
+        "freeze_sha_matches_launch": true,
+        "log_sha_matches_terminal": true,
+        "history_sha_matches_analysis": true,
+        "freeze_entry_count_matches_preparation": true
+      },
+      "source_identity": {
+        "launch_manifest": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/launch-manifest.json",
+          "bytes": 1015,
+          "sha256": "ac50f4bd0407b05e1b3c72cd2412d0a5ee35dbd6845a8207488197baf37f5cdd"
+        },
+        "terminal_record": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/terminal.json",
+          "bytes": 833,
+          "sha256": "289594ad05bf0b57b8e18ff92ce163af799c71c5cb1363d706a7bf61165532c0"
+        },
+        "input_freeze_record": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/input-freeze.json",
+          "bytes": 29320,
+          "sha256": "7453b4431d5393309f4baa8be37c7dbb72ddbe420461067a521b9b4ff11de45b"
+        },
+        "preparation_record": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/preparation.json",
+          "bytes": 15395,
+          "sha256": "bc8168b482b394a2288220fd8dcee124af2ea0f6eff045fb85fb39416096db86"
+        },
+        "events": {
+          "path": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/events.jsonl",
+          "bytes": 2527,
+          "sha256": "0a2d784f9f20a043249ceeb0f3e9884f7cc9e007576bb7c0c0851a55931e2dc6"
+        },
+        "preparation_script_sha256": "9678285ddc1df1f5c1fea15627f4a16d53d4cba1c7206098d37cee2045bf9763",
+        "controller_source_sha256": "1e2b977ec2aeae568935bf284cc6f52e084dc974768435f25d496a311788b3f5",
+        "solver_wrapper_sha256": "ee859be422374395069a6e9da631661381e72bd162fefc358e988ea044ed9334",
+        "openfoam_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b"
+      }
+    }
+  },
+  "history_csv": {
+    "path": "comparison.csv",
+    "decimation_metadata": "comparison-csv-provenance.json",
+    "pressure_series": "absolute pressure at per-iteration logged min(p) cell; not global pAbs minimum"
+  },
+  "rebuild_commands": {
+    "csv": ".venv/bin/python results/summaries/i4f_20261025/local-outlet-mitigation/build_comparison_csv.py",
+    "plot": ".venv/bin/python results/summaries/i4f_20261025/local-outlet-mitigation/plot_comparison.py",
+    "custom_plot": ".venv/bin/python results/summaries/i4f_20261025/local-outlet-mitigation/plot_comparison.py --csv <public-csv> --output <png>"
+  },
+  "artifact_manifest": "artifact-manifest.json",
+  "mesh_and_restart_lineage": {
+    "D_and_E_mesh_and_geometry_hashes_identical": true,
+    "matching_static_mesh_paths": [
+      "case/constant/C",
+      "case/constant/cellVolume",
+      "case/constant/polyMesh/faces",
+      "case/constant/polyMesh/neighbour",
+      "case/constant/polyMesh/owner",
+      "case/constant/polyMesh/points",
+      "case/constant/polyMesh/sets/concaveCells"
+    ],
+    "E_restart_checkpoint": {
+      "captured_from_D_at_utc": "2026-10-27T09:14:09.748879+00:00",
+      "time_label": "3000",
+      "interpretation": "steady iteration index, not physical seconds",
+      "parent_terminal_sha256": "4aba4cefbd8fe8699cc0edad19f2c874ac1c4b643394099f4a78bda56eb96d89",
+      "field_count": 6,
+      "fields": [
+        {
+          "bytes": 671283,
+          "continuation_inode": 186933967,
+          "field": "U",
+          "parent_inode": 186933658,
+          "sha256": "83c944dc0e763a2abb91e7572cb41e39376f66ffb756678b8a25d73ded86ff4e"
+        },
+        {
+          "bytes": 321720,
+          "continuation_inode": 186933970,
+          "field": "k",
+          "parent_inode": 186933659,
+          "sha256": "0cd93ce14a7d94c9451c745f3f8aad1fc2a54eb2fcf0836d3c4ac926d603a566"
+        },
+        {
+          "bytes": 324955,
+          "continuation_inode": 186933971,
+          "field": "nut",
+          "parent_inode": 186933657,
+          "sha256": "9029959ee1467206066c511d61244335a1d04349d9d5245f1013887bfde38b53"
+        },
+        {
+          "bytes": 321911,
+          "continuation_inode": 186933972,
+          "field": "omega",
+          "parent_inode": 186933675,
+          "sha256": "05cbe73b98e1e9ca82cd5b2d783c05d9fe741cb3fc52a807716b270a23f34e73"
+        },
+        {
+          "bytes": 224668,
+          "continuation_inode": 186933968,
+          "field": "p",
+          "parent_inode": 186933674,
+          "sha256": "3fd5b6e9c80af311ac01620eacb609bf24ba01461c79a7844dc44447fa4414b1"
+        },
+        {
+          "bytes": 630983,
+          "continuation_inode": 186933969,
+          "field": "phi",
+          "parent_inode": 186933662,
+          "sha256": "806d328a195929cba5493da1eee59de68031d3843d20ea888b370d6c2819701d"
+        }
+      ]
+    }
+  }
+}

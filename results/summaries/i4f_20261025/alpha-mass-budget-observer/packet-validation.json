@@ -1,0 +1,44 @@
+{
+  "checked_at_utc": "2026-10-27T06:05:42+00:00",
+  "csv_reproduction": {
+    "byte_identical": true,
+    "extractor": "extract_natural_step_budget.py",
+    "extractor_sha256": "4eb164dcee2a401e6afc03f82398e1b3b37d3ea2204fd4dcdddc4175dd4b8dda",
+    "private_log": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/arms/native-natural-dt-attempt001-20261027T0542Z/logs/restart-observer-v3-explicit-on-solver.log",
+    "private_log_sha256": "87fff798a344956df5fe54f3f7016ae0ea57a6ed868aa85701a1753bc09bd526",
+    "published_csv_bytes": 3607,
+    "published_csv_sha256": "13cb8f954893202b160777a6f347d68916c29c52eee561069bfc7b048d7f5334",
+    "selected_pressure_passes": [
+      1,
+      2,
+      29,
+      30,
+      31,
+      32
+    ]
+  },
+  "schema": "i4f-alpha-mass-budget-observer-packet-validation/v1",
+  "scope": "Derived evidence and source-closure checks only; no solver rebuild or CFD run was performed.",
+  "source_reconstruction": {
+    "checked_at_utc": "2026-10-27T06:05:42+00:00",
+    "direct_v3_patch_sha256": "2b92b5f7f1ea3fe6a5581b3dd6122f9d11e558e1bde6ccef5c9c1a63a57aad8a",
+    "physical_alpha_files": 71,
+    "public_parent_files": 90,
+    "schema": "i4f-alpha-mass-budget-observer-public-reconstruction-check/v1",
+    "source_manifest_sha256": "806d3c5c5d1d60344a68a910fb20725ae922982f751101218cafef3b6ba44679",
+    "status": "verified",
+    "temporary_tree_cleaned": true,
+    "v3_target_files": 75,
+    "verifier_sha256": "ece756625e24acacb5567dae622b455a1dcb1ed699941bea5a2de9c42678e0fb"
+  },
+  "synthetic_tests": {
+    "command": "python3 scripts/run_local.py --threads 1 --timeout 120 -- .venv/bin/python -m unittest discover -s results/summaries/i4f_20261025/alpha-mass-budget-observer/tests -v",
+    "exit_code": 0,
+    "format_command": ".venv/bin/ruff format --check results/summaries/i4f_20261025/alpha-mass-budget-observer",
+    "format_exit_code": 0,
+    "ruff_command": ".venv/bin/ruff check results/summaries/i4f_20261025/alpha-mass-budget-observer",
+    "ruff_exit_code": 0,
+    "test_count": 4,
+    "test_source_sha256": "e058cede06fbb0ad29cfc4fb5a4199e84b931c36d92802d1d3b7b2d5b4d75393"
+  }
+}

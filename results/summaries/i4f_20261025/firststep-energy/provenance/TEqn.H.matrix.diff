@@ -1,0 +1,49 @@
+--- /home/v/proj/bene/fire-track2/results/runs/i4f-cold-firststep-energy-audit-20261026T2032Z/build/source/v8-energy-audit/applications/solvers/multiphase/compressibleInterFoam/TEqn.H	2025-12-22 12:32:06.000000000 +0100
++++ /home/v/proj/bene/fire-track2/results/runs/i4f-cold-firststep-energy-matrix-replay-20261026T211305Z/build/source/v8-energy-matrix-audit/applications/solvers/multiphase/compressibleInterFoam/TEqn.H	2026-10-26 22:14:28.879792563 +0100
+@@ -15,14 +15,46 @@
+         fvOptions(rho, T)
+     );
+ 
++    // Rebuild the exact negative-laplacian term with the same live
++    // turbulence coefficient and unmodified scheme for direct FV residual
++    // evaluation. The original TEqn below is left unchanged.
++    fvScalarMatrix i4fDiffusionMatrix
++    (
++        -fvm::laplacian(turbulence.alphaEff(), T)
++    );
++    i4fCaptureTemperatureMatrix
++    (
++        "assembled_before_relax", TEqn, i4fDiffusionMatrix
++    );
++
+     TEqn.relax();
++    i4fCaptureTemperatureMatrix
++    (
++        "after_relax_before_options_constrain", TEqn, i4fDiffusionMatrix
++    );
+ 
+     fvOptions.constrain(TEqn);
++    i4fCaptureTemperatureMatrix
++    (
++        "before_solve_after_options_constrain", TEqn, i4fDiffusionMatrix
++    );
+ 
+     TEqn.solve();
++    i4fCaptureTemperatureMatrix
++    (
++        "after_solve_before_options_correct", TEqn, i4fDiffusionMatrix
++    );
+ 
+     fvOptions.correct(T);
++    i4fCaptureTemperatureMatrix
++    (
++        "after_options_correct_before_thermo", TEqn, i4fDiffusionMatrix
++    );
+ 
+     mixture.correctThermo();
+     mixture.correct();
++    i4fCaptureTemperatureMatrix
++    (
++        "after_thermo_correct", TEqn, i4fDiffusionMatrix
++    );
+ }

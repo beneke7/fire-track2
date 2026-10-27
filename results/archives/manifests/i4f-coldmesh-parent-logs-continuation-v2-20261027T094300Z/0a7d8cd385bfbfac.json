@@ -1,0 +1,41 @@
+{
+  "created_utc": "2026-10-27T09:42:31.469020+00:00",
+  "record": {
+    "archive_bytes": 45510029,
+    "archive_path": "results/archives/i4f-coldmesh-parent-logs-continuation-v2-20261027T094300Z/0a7d8cd385bfbfac-log.cold-coupled.zst",
+    "archive_sha256": "11fee7e8a1807636dfbab5d3d846492605e6c15dee9817bcc6b10fbadd255c42",
+    "capture_path": "results/runs/i4f-coldmesh-continuation-v2-20261027T094300Z/analysis/baseline-1p0m-299214-terminal-capture.json",
+    "capture_sha256_before_archive_receipt": "870782cb36353459f4cd9e524338c9b340acb107ca50bce81ad0b4324762b3fd",
+    "decompressed_bytes": 691608313,
+    "decompressed_sha256": "fcbfe9ec900d55bd1ecae4cb3c1e5ee320f508b9f8b332e6cecee177c1f05fca",
+    "docker_terminal_evidence": {
+      "exit_code": 0,
+      "finished_at": "2026-10-27T09:37:29.679883506Z",
+      "id": "085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be",
+      "name": "i4f-coldmesh-base299214-20261027t050932z",
+      "started_at": "2026-10-27T05:56:04.427586577Z",
+      "status": "exited"
+    },
+    "free_bytes_after_unlink": 19922059264,
+    "gid": 1000,
+    "mode": 33188,
+    "mtime_ns": 1793093849602923676,
+    "restore_command": "zstd -dc results/archives/i4f-coldmesh-parent-logs-continuation-v2-20261027T094300Z/0a7d8cd385bfbfac-log.cold-coupled.zst > results/runs/i4f-cold-mesh-pair-20261027T050932Z/arms/baseline-1p0m-299214/case/log.cold-coupled && chmod 644 results/runs/i4f-cold-mesh-pair-20261027T050932Z/arms/baseline-1p0m-299214/case/log.cold-coupled && touch -d @1793093849.602923870 results/runs/i4f-cold-mesh-pair-20261027T050932Z/arms/baseline-1p0m-299214/case/log.cold-coupled",
+    "roundtrip_verified": true,
+    "source_allocated_bytes": 691613696,
+    "source_bytes": 691608313,
+    "source_inode": {
+      "device": 66306,
+      "inode": 186928337
+    },
+    "source_link_count": 1,
+    "source_path": "results/runs/i4f-cold-mesh-pair-20261027T050932Z/arms/baseline-1p0m-299214/case/log.cold-coupled",
+    "source_sha256": "fcbfe9ec900d55bd1ecae4cb3c1e5ee320f508b9f8b332e6cecee177c1f05fca",
+    "status": "archived_and_unlinked",
+    "uid": 1000,
+    "unlinked_utc": "2026-10-27T09:42:31.776269+00:00",
+    "verification": "source unchanged after streaming compressed roundtrip; exact Docker terminal; no open FDs; normal End; zero contacts/clipping/parser/diagnostic errors",
+    "zstd_integrity_check": "passed"
+  },
+  "schema": "i4f-coldmesh-parent-log-archive/v1"
+}

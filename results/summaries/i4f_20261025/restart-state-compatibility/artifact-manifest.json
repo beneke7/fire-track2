@@ -1,0 +1,21 @@
+{
+  "analysis_script": "results/runs/i4f-restart-state-compatibility-20261027T0532Z/analysis/audit_restart_state_compatibility.py",
+  "artifacts": {
+    "restart-state-compatibility.json": {
+      "bytes": 32675,
+      "sha256": "e157ae9ea1bfa79aa52fe25872ae4c4ad17fa071932cab53a5c5f2bdf3265f38"
+    },
+    "restart-state-extrema.csv": {
+      "bytes": 5447,
+      "sha256": "6dfcc30c05e43256a49c77139ccd6d20858de128055965f3653e065e90244b09"
+    },
+    "restart-state-summary.csv": {
+      "bytes": 728,
+      "sha256": "c6c0375f5eee6a34ef3f140000985590f65439f1669fc2ef1ccc280e2a1ca30e"
+    }
+  },
+  "private_analysis_bundle": "results/runs/i4f-restart-state-compatibility-20261027T0532Z",
+  "reproduction_command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python scripts/run_local.py --threads 1 --timeout 600 -- nice -n 19 .venv/bin/python results/runs/i4f-restart-state-compatibility-20261027T0532Z/analysis/audit_restart_state_compatibility.py",
+  "schema": "i4f-restart-state-compatibility-public/v1",
+  "script_sha256": "1387bc4475075ba6b7343fa6bf93a9b37865d91f4282f047247adabcf95e1d6f"
+}

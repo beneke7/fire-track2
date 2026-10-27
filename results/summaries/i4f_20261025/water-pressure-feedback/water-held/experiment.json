@@ -1,0 +1,128 @@
+{
+  "build": {
+    "command_file": "logs/build-attempt-002-command.txt",
+    "cpu_quota_equivalent": 1,
+    "ended_utc": "2026-10-26T23:38:45Z",
+    "final_attempt": 2,
+    "log_file": "logs/build-attempt-002.log",
+    "nice": 19,
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "started_utc": "2026-10-26T23:38:20Z",
+    "status": "success"
+  },
+  "classification": "Warm-restart diagnostic. It executes the original physical path to the predeclared .4938 s trigger, then performs only the already-declared frozen-water mechanical map; not a production result or continuation.",
+  "mechanical_map": {
+    "censoring": "On a phase-T bound violation, write trigger, sweep-1 and offending phase/common temperature arrays before fatal exit; do not continue. At the first pre-clamp absolute pressure below unchanged pMin, log raw state, skip stock clamp and exit censored.",
+    "held": [
+      "alpha.water and alpha.air cell fields",
+      "water alphaPhi1",
+      "common T exact hash",
+      "phase thermo T checked against the strict 128-epsilon per-element rule",
+      "SST transported k and omega, nut and alphat fields",
+      "Time index, physical time, deltaT, and materialized oldTime fields"
+    ],
+    "no_updates": [
+      "No alpha equation or MULES update",
+      "No TEqn solve or common temperature change",
+      "No turbulence.correct() call",
+      "No runTime increment, physical checkpoint or continuation"
+    ],
+    "outer_state": "Reuse the active PIMPLE controller at corr=8; finalIter remains true for all eight diagnostic sweeps. Each sweep uses the normal two-corrector loop and corrector-2 finalSolver selection.",
+    "sweeps": 8,
+    "time_advancement": false,
+    "trigger": "Complete original final outer-8, pressure-corrector-2 update at the first physical time >= 0.4938 s.",
+    "updated_by_source_order": [
+      "alphaPhi2 and rhoPhi from current fields",
+      "mixture continuity error and UEqn A/H after current rho/rhoPhi",
+      "mixture.correctThermo() and mixture.correct() at the original post-TEqn position with common T held",
+      "two transonic pressure correctors, p_rgh/p/EOS rho/psi, phi/U/K and raw dgdt/Gamma"
+    ]
+  },
+  "other_held_state": "All existing non-phase-T held hashes and Euler old-time histories remain exact. Physical source order is unchanged: alpha/flux, turbulence.correctPhasePhi, UEqn, fixed-T thermo refresh at the original post-TEqn position, then two pEqn correctors.",
+  "parent_seed": {
+    "bundle": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z",
+    "source_phase_temperature_fields_restored_before_GO": true,
+    "stored_fields": 14,
+    "time_s": 0.460047515286
+  },
+  "phase_temperature_invariant": {
+    "diagnostic_metrics": [
+      "internal global max absolute delta K",
+      "internal native-cell-volume-weighted RMS delta K",
+      "boundary max absolute delta K",
+      "maximum delta divided by epsilon*max(1,abs(Tphase_trigger))",
+      "internal and boundary out-of-bound counts"
+    ],
+    "fields": {
+      "thermo1": "T.water",
+      "thermo2": "T.air"
+    },
+    "if_out_of_bound": "write trigger, sweep-1, and offending phase-T/common-T arrays to rank-local binary snapshots; abort before held-field integrity check and before pressure sweep continuation",
+    "if_within_bound": "log phase-T hashes and numeric deltas, then continue all eight declared mechanical sweeps; do not require phase-T hashes to remain byte-identical",
+    "independent_shared_T": "exact full-field hash unchanged",
+    "per_element_rule": "abs(Tphase_current - Tphase_trigger) <= 128 * numeric_limits<scalar>::epsilon() * max(1, abs(Tphase_trigger)) for every internal cell and boundary value",
+    "reference": "each phase temperature at physical map trigger, after the original physical outer-8/corrector-2/EOS/U/K completion and before any mechanical-map operation"
+  },
+  "physical_case": {
+    "mesh": "Corrected native I4F apparatus, 299214 cells, ten-rank decomposition.",
+    "physical_change_before_trigger": "None intended. Trigger is after original final outer-8/corrector-2 pressure, EOS density, flux, velocity and K updates. Physical fvSolution is byte-identical to source template.",
+    "pimple": {
+      "alpha_relTol": 0,
+      "alpha_tolerance": 1e-12,
+      "gamma_outer_relaxation": 1.0,
+      "momentum_advection": "Gauss upwind",
+      "momentum_predictor": false,
+      "nonorthogonal_correctors": 0,
+      "outer_correctors": 8,
+      "pressure_correctors": 2,
+      "transonic": true
+    },
+    "solver": "Isolated DCEC compressibleInterFoam v2512-derived source and executable.",
+    "time_controls": "Unchanged from original healthy warm parent: adaptive Euler time stepping, maxDeltaT=2.5e-4 s, original maxCo/maxAlphaCo and write controls."
+  },
+  "qualification": "The .460 startup thermo roundtrip showed idempotent thermo refresh after createFields/thermo construction but did not resolve the .493 held-phase hash mismatch. This run measures the trigger-state phase-T rederivation directly. The 128-epsilon rule is a strict floating-arithmetic invariant, not a physical convergence tolerance or a field reset.",
+  "resources": {
+    "case_stage_minimum_free_disk_bytes": 24696061952,
+    "disk_floor_bytes": 21474836480,
+    "docker_log_driver": "none",
+    "hard_wall_s_from_StartedAt": 7200,
+    "initial_cpu_quota": 6,
+    "memory_limit_bytes": 34359738368,
+    "mpi_ranks": 10
+  },
+  "schema": "i4f-frozen-water-mechanical-phaseT-bound/v1",
+  "snapshot_contract": {
+    "fields": [
+      "T_common",
+      "T_water_thermo1",
+      "T_air_thermo2"
+    ],
+    "layout": "rank-local binary64 internal field followed by boundary patches in patch order; header contains magic, local internal count, patch count and each patch size",
+    "stages": [
+      "trigger",
+      "sweep1_after_refresh",
+      "sweepN_violation_after_refresh_if_applicable"
+    ]
+  },
+  "solver": {
+    "Gamma_outer_relaxation": 1.0,
+    "PIMPLE_outer_correctors": 8,
+    "Sp": true,
+    "binary_name": "compressibleInterFoamI4FFrozenWaterMechPhaseTBound",
+    "binary_sha256": "4b2bfb2c95be5bb7a18973eb3b0aafb774a3aeb62a0a3f67fbf44e65f7ba274f",
+    "momentum_predictor": false,
+    "physical_fvSolution_unchanged": true,
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "pressure_correctors": 2,
+    "source_parent_binary_sha256": "1c02ae6422ca5517c75431fcd04307317fcdbe719b6cab9971790d0ca69141b5",
+    "source_parent_bundle": "results/runs/i4f-frozen-water-mechanical-20261026T2302Z",
+    "source_patch_sha256": "6b1f420a0c46daf139ce4ca5cb9ed8a1e2b3efd058d927c0a6637fd3eea0939a",
+    "source_tree_manifest_sha256": "a9510b826d792239c44b3314ea595a8fc8c2a68c9050227f4025a8934a5b874a",
+    "transonic": true
+  },
+  "trigger": {
+    "physical_state": "after original outer 8 / pressure corrector 2, EOS/U/K updates complete",
+    "time_advancement_during_map": false,
+    "time_s_min": 0.4938
+  }
+}

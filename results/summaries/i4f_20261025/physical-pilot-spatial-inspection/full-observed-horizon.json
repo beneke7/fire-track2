@@ -1,0 +1,179 @@
+{
+  "schema": "i4f-physical-pilot-full-observed-horizon-v1",
+  "observed_utc": "2026-10-27T05:15:34.331043+00:00",
+  "source_bundle": "results/runs/i4f-physical-pilot-comparison-20261027T044453Z",
+  "source_runtime_snapshot_utc": "2026-10-27T04:59:20.258215+00:00",
+  "endpoints_are_per_arm_captured_times": true,
+  "no_temporal_extrapolation_or_time_interpolation": true,
+  "valve_seat_flow_definition": "At each actual seatFlux output time, sum values_json[1] for seatFluxA1,A2,B1,B2. values_json[0] is seat area. These are valve-seat alphaPhi0.water integrals, not nozzle-outlet fluxes.",
+  "source_hashes": {
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/comparison.json": {
+      "size_bytes": 99465,
+      "sha256": "dca78430aa211e5f8260ccd36ccc1e554c7b301f4c94591192f1851a186c16ba"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/outer16-terminal-addendum-20261027T050412Z.json": {
+      "size_bytes": 35712,
+      "sha256": "70082f8ec8d1d1856269d18e9825e24f1f7c9afac92d9e26980847c99f7a45d2"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/apparatus-series.csv": {
+      "size_bytes": 3018176,
+      "sha256": "4174ea6a92b09d20cef0cfc6d20433c24c5f57003457ea324c5129c0cf2aca5c"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/outer8-pressure-mass-series.csv": {
+      "size_bytes": 237676,
+      "sha256": "ef4af8b1fdb7994fef698890f908c8ec431dbc5559a8c0e855438230889800b0"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/outer8-outer-updates.csv": {
+      "size_bytes": 232572,
+      "sha256": "70995f3725732b12dee2aa54366643b29cb8e6e7f1771a38d50cd752de05005e"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/outer16-pressure-mass-series.csv": {
+      "size_bytes": 231777,
+      "sha256": "52fb76734cd85aec092aa773b7804a09e70a336c082c0076a2d917a0e35e2c78"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/outer16-outer-updates.csv": {
+      "size_bytes": 232400,
+      "sha256": "3f35f9d57c487b789f86d912b501d59f443e2483e54d3f8c6e00d94054d245c7"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/dtcap_half_outer16-pressure-mass-series.csv": {
+      "size_bytes": 36219,
+      "sha256": "0d9dd1e4f3b41a933e3dce27b13612faf37545c50d2f002bbc8416f3defe4fba"
+    },
+    "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/dtcap_half_outer16-outer-updates.csv": {
+      "size_bytes": 50866,
+      "sha256": "28b240b46263524ec8f9ecb0662bd2a1ace00d6fbb70b7db5f5b4f6f6602fd24"
+    }
+  },
+  "arms": {
+    "outer8": {
+      "captured_series_endpoint_s": 0.518390228794,
+      "pressure_endpoint_s": 0.518390228794,
+      "captured_outer_update_endpoint_s": 0.518390228794,
+      "last_complete_outer_update_endpoint_s": 0.518390228794,
+      "expected_outer_rows": 8,
+      "valve_seat_flux_endpoint_s": 0.518390228794,
+      "pressure_samples": 839,
+      "captured_outer_update_samples": 839,
+      "complete_outer_update_samples": 839,
+      "incomplete_outer_groups_excluded_from_update_panels": 0,
+      "valve_flux_sample_count": 839,
+      "raw_water_pressure_endpoint_kPa": 9.1652709,
+      "last_complete_outer_dp_Pa": 6111.8037,
+      "last_complete_outer_dU_m_s": 0.84678965,
+      "four_valve_seat_flux_endpoint_m3_s": 2.454750838,
+      "comparison_snapshot_status": "normal_End_complete_native10_checkpoint",
+      "comparison_snapshot_time_s": 0.518390228794,
+      "comparison_snapshot_container": {
+        "exit_code": 0,
+        "finished_at": "2026-10-27T04:23:37.627894255Z",
+        "id": "3b3d4b5c8159f8019d9860893b004b876d26714e544ed3ca8d1ced790f69e17e",
+        "log_driver": "none",
+        "name": "i4f-phys-a050-o8-20261027t024711z",
+        "oom_killed": false,
+        "paused": false,
+        "running": false,
+        "started_at": "2026-10-27T03:35:28.999921713Z",
+        "status": "exited"
+      },
+      "incomplete_outer_update_tail": []
+    },
+    "outer16": {
+      "captured_series_endpoint_s": 0.51621220623,
+      "pressure_endpoint_s": 0.51621220623,
+      "captured_outer_update_endpoint_s": 0.51621220623,
+      "last_complete_outer_update_endpoint_s": 0.516043756044,
+      "expected_outer_rows": 16,
+      "valve_seat_flux_endpoint_s": 0.51621220623,
+      "pressure_samples": 826,
+      "captured_outer_update_samples": 826,
+      "complete_outer_update_samples": 825,
+      "incomplete_outer_groups_excluded_from_update_panels": 1,
+      "valve_flux_sample_count": 826,
+      "raw_water_pressure_endpoint_kPa": 15.986225845704919,
+      "last_complete_outer_dp_Pa": 303.3217938288399,
+      "last_complete_outer_dU_m_s": 1.94124538922191,
+      "four_valve_seat_flux_endpoint_m3_s": 2.450300891,
+      "comparison_snapshot_status": "running",
+      "comparison_snapshot_time_s": 0.51621220623,
+      "comparison_snapshot_container": {
+        "exit_code": 0,
+        "finished_at": "0001-01-01T00:00:00Z",
+        "id": "de0cc3d2a13034485c2415a7bbf744355f37c583a381df5f5fddff90a18bc3f3",
+        "log_driver": "none",
+        "name": "i4f-phys-a050-o16-20261027t024711z-r007",
+        "oom_killed": false,
+        "paused": false,
+        "running": true,
+        "started_at": "2026-10-27T03:37:59.016670377Z",
+        "status": "running"
+      },
+      "incomplete_outer_update_tail": [
+        {
+          "time_s": 0.51621220623,
+          "outer_rows": 9,
+          "final_max_abs_dp_Pa_not_plotted": 402.5514235145129,
+          "final_max_abs_dU_m_s_not_plotted": 0.8810553905319264
+        }
+      ]
+    },
+    "dtcap_half_outer16": {
+      "captured_series_endpoint_s": 0.412205595007,
+      "pressure_endpoint_s": 0.412205595007,
+      "captured_outer_update_endpoint_s": 0.412205595007,
+      "last_complete_outer_update_endpoint_s": 0.412080595007,
+      "expected_outer_rows": 16,
+      "valve_seat_flux_endpoint_s": 0.412080595007,
+      "pressure_samples": 172,
+      "captured_outer_update_samples": 172,
+      "complete_outer_update_samples": 171,
+      "incomplete_outer_groups_excluded_from_update_panels": 1,
+      "valve_flux_sample_count": 171,
+      "raw_water_pressure_endpoint_kPa": 90.5535479557324,
+      "last_complete_outer_dp_Pa": 0.617923300829716,
+      "last_complete_outer_dU_m_s": 0.01057786150949826,
+      "four_valve_seat_flux_endpoint_m3_s": 2.143665766,
+      "comparison_snapshot_status": "running",
+      "comparison_snapshot_time_s": 0.412080595007,
+      "comparison_snapshot_container": {
+        "exit_code": 0,
+        "finished_at": "0001-01-01T00:00:00Z",
+        "id": "27cf3bd28cfe9366869a74e149bdd3974a7eab448c34915f08b5e12d8e2601c8",
+        "log_driver": "none",
+        "name": "i4f-phys-a050-o16-dt125-20261027t0400z-r002",
+        "oom_killed": false,
+        "paused": false,
+        "running": true,
+        "started_at": "2026-10-27T04:38:33.788407218Z",
+        "status": "running"
+      },
+      "incomplete_outer_update_tail": [
+        {
+          "time_s": 0.412205595007,
+          "outer_rows": 8,
+          "final_max_abs_dp_Pa_not_plotted": 18.24186894024024,
+          "final_max_abs_dU_m_s_not_plotted": 0.01434810494370909
+        }
+      ]
+    }
+  },
+  "plot": {
+    "path": "results/runs/i4f-pilot-spatial-inspection-20261027T045855Z/images/full-observed-horizon.png",
+    "sha256": "8145e87ce3fba920370e07813967460268d7016024a9b3f829c6581449d46f55",
+    "panels": [
+      "raw water p-min\n(kPa)",
+      "complete-group max |\u0394p|\n(Pa, log)",
+      "complete-group max |\u0394U|\n(m/s)",
+      "four-seat water flux\n(m\u00b3/s)"
+    ],
+    "update_panel_filter": "Only rows with outer_rows equal to each arm's configured nOuterCorrectors are plotted as update values. Incomplete captured tail rows remain recorded per arm below but are excluded from dP/dU panels.",
+    "pressure_floor_line_kPa": 10.0,
+    "dp_log_axis": true,
+    "dp_reference_line_Pa": 100.0,
+    "outer16_later_terminal_checkpoint_s_not_appended": 0.517939363287,
+    "status_notes": [
+      "outer8 per-arm CSV reaches 0.518390228794 s and its captured controller records the raw-pressure floor stop.",
+      "outer16 series file ends at 0.516212206230 s while comparison snapshot marked it running; a later terminal addendum records 0.517939363287 s (not appended to this plot). Its final captured 9/16 outer row is excluded from update panels.",
+      "dt-cap half pressure/seat data ends at the comparison snapshot while live; its final captured 8/16 outer row is excluded from update panels."
+    ]
+  }
+}

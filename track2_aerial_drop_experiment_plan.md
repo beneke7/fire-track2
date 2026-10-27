@@ -85,6 +85,16 @@ The new user objective permits suitable GPU rendering/compute; use CPU
 OpenFOAM for the first credible complete calculation and do not start a GPU
 solver port. Inspect unrelated workloads before using either resource.
 
+27 October numerical investigation: a fixed-state diagnostic identifies a
+near-unit-magnitude sign-alternating water/pressure iteration. Joint relaxation
+of water fraction and its actual face flux damps that mode, but leaves a
+measurable water-continuity defect. The default-off physical implementation is
+therefore exploratory: compare matched eight/sixteen-outer-iteration pilots,
+retaining phase ledgers and local residuals alongside pressure updates. A
+smaller applied increment is not conservation acceptance. The source-cutoff
+analysis is a signed-defect scale estimate with endpoint/cached-source timing
+limitations; do not alter the native cutoff merely to fit that estimate.
+
 ## Objective and first assumption
 
 Build a conservative, multiregion water–air simulation that predicts an aerial drop from outlet to ground. Use the **same exterior physics and scoring code** to compare a conventional release with the built Restás/i4f architecture. Deliver numerical comparisons, uncertainty ranges, and a scientifically labelled 3D animation.

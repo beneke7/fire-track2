@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-10-27T01:18:38.213380+00:00",
+  "source_addendum": "baseline-inventory-domain-comparison-v3.json",
+  "source_sha256": "585a23a5d73511d2dd8166e847cfd8b8ba52657b07c6a904ec0c858a9ea29034",
+  "inventory_not_bitwise_identical": true,
+  "headspace_relative_differences_A_B": {
+    "A": 1.4898717730771113e-08,
+    "B": 7.337965558451244e-12
+  },
+  "inventory_disposition": "The microlitre-scale residuals do not block a provisional matched-input comparison. They are explicitly retained; no fill, CAD or pressure was adjusted to force equality. This is not an accuracy or physical validation decision.",
+  "analytical_sensitivity_context": {
+    "model": "p=p0*(H/(H+W))**n at fixed withdrawn volume W>=0",
+    "identity": "abs(d ln(p)/d ln(H)) = n*W/(H+W) <= n",
+    "n_range": [
+      1.0,
+      1.4
+    ],
+    "first_order_relative_pressure_bound_from_headspace_delta": 2.0858204823079556e-08,
+    "scope": "Bulk polytropic reference only, not a bound on instantaneous nonlinear CFD disturbances."
+  },
+  "still_unresolved": [
+    "Different meshes/local refinement and optional concavity flags",
+    "Absolute exterior boundaries shift with the mouth; approximately2m nominal clearance preserved, but actual patch shapes differ",
+    "Runtime solver/source/PIMPLE and pressure-floor controls remain unbound; legacy prepared flags are not approved for launch"
+  ],
+  "solver_launch_ready": false,
+  "geometry_initial_fields_prepared": true,
+  "no_cfd_result": true
+}

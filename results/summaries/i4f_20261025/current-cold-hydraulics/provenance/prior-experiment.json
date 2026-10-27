@@ -1,0 +1,172 @@
+{
+  "branch_metrics": [
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 1.0,
+      "branch": "A1",
+      "cell_count": 5376,
+      "native_water_volume_m3": 0.02102614948303455
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 1.0,
+      "branch": "A2",
+      "cell_count": 5376,
+      "native_water_volume_m3": 0.021026985560674186
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 1.0,
+      "branch": "B1",
+      "cell_count": 5376,
+      "native_water_volume_m3": 0.021026149665387482
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 1.0,
+      "branch": "B2",
+      "cell_count": 5376,
+      "native_water_volume_m3": 0.021026985519076724
+    }
+  ],
+  "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case",
+  "created_utc": "2026-10-26T06:44:44.924815+00:00",
+  "decision_context": {
+    "new_initialization_relationship": "Independent fresh t=0 cold start on corrected flush-join geometry; no predecessor trajectory fields were mapped.",
+    "predecessor_observation": {
+      "bundle": "results/runs/i4f-stock-cold-299248-stage03-20261026T054311Z",
+      "classification": "normal End with a complete native10 capture after raw pressure-floor contacts; not a healthy target endpoint",
+      "contacts": 2,
+      "container_id": "7a4508c7f1fea53336140ed3c763ac79d7ddff01d27fda62934ea7e3f986c249",
+      "first_raw_contact_time_s": 0.41005436428,
+      "first_raw_pressure_Pa": -9094.778758767421,
+      "maximum_clipped_liquid_kg": 0.08947309717904467,
+      "normal_end_checkpoint_s": 0.410269089521,
+      "started_at_utc": "2026-10-26T05:43:15.899063019Z"
+    },
+    "resource_snapshot": {
+      "free_disk_GiB": 22.677,
+      "free_disk_bytes": 24349589504,
+      "note": "Fresh make doctor showed 22.7 GiB free. This exceeds the existing 20 GiB runtime guard threshold; no claim is made that it satisfies earlier campaign-controller 25 GiB admission used for different recovery stages.",
+      "runtime_guard_low_disk_threshold_GiB": 20
+    },
+    "root_geometry_review": "approved for an exploratory cold-start pilot after review of the final native section and wall comparison images",
+    "slot_basis": "The stock predecessor is exited with complete native10 capture. The 881-rank campaign remains live in the other ten-rank slot; this pilot uses the released ten ranks."
+  },
+  "geometry": {
+    "change": "Corrected feed-to-flush junction; retain the approved short1 outlet assembly and four-mouth topology.",
+    "provisional": true,
+    "qualification": "User-directed provisional short1 train; final native case has 299214 cells, 9/9 configured quality rows pass, four connected branch sections at the checked planes, and native tank/feed volumes are reported below. Optional allGeometry concavity count is diagnostic only.",
+    "source_bundle": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z"
+  },
+  "initial_inventory": {
+    "downstream_gas_m3": 21.342606957071588,
+    "global_water_m3": 3.2021659931060658,
+    "headspace_gas_m3_each": {
+      "tankA": 0.29849720040624456,
+      "tankB": 0.298496768325698
+    },
+    "qualification": "Pressure plane means are native face-zone-adjacent cell values; each valve face zone has 112 native internal faces and orientation +x. Provisional initial-state inputs, not measurements.",
+    "tank_water_m3_each": {
+      "tankA": 1.3500000000021355,
+      "tankB": 1.350000000000505
+    },
+    "valve_plane_downstream_mean_p_abs_Pa": {
+      "valveSeatA1": 100000.0,
+      "valveSeatA2": 99999.99999999999,
+      "valveSeatB1": 100000.00000000001,
+      "valveSeatB2": 99999.99999999999
+    },
+    "valve_plane_upstream_mean_p_abs_Pa": {
+      "valveSeatA1": 1209637.0225255166,
+      "valveSeatA2": 1209637.0726824244,
+      "valveSeatB1": 1209637.0323837902,
+      "valveSeatB2": 1209637.0825399833
+    },
+    "wetted_feed_water_m3_each": {
+      "tankA_feed": 0.2510568437958543,
+      "tankB_feed": 0.2511091493075715
+    }
+  },
+  "initial_state": {
+    "downstream_of_valves": "ambient air at 100 kPa and 293.15 K",
+    "kind": "genuine cold start at t=0; not mapped from a pressure-driven trajectory",
+    "pressure": "12 bar absolute tank reference; hydrostatic initialization per the case initializer",
+    "qualification": "Native tank/feed/air compartment volumes and interface placement will be copied from the final mesh audit, not inferred from CAD alone.",
+    "tank_to_valve_feed": "wetted water inventory initialized and separately reported from the tank payload",
+    "tank_water_m3_per_tank": 1.35
+  },
+  "mesh": {
+    "configured_quality": "9/9 configured checkMesh rows pass; no failure counts",
+    "native_cells": 299214,
+    "optional_allGeometry_concavity_cells": 6345,
+    "optional_diagnostic_is_not_the_configured_gate": true,
+    "readiness_path": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z/analysis/final-canonical-readiness.json",
+    "readiness_sha256": "5a96bdcae8b2545a6cce065f4d22d93f5d8e2fe7d5af0351351d17047d3e18de",
+    "source_cells_per_branch": 5376,
+    "source_faces_per_valve_seat": 112
+  },
+  "objective": "Exploratory cold-start comparison of the corrected tank-feed/flush junction using the standard alpha-source treatment.",
+  "parent": {
+    "bundle": "results/runs/i4f-flush-stock-cold-campaign-20261026T060440Z",
+    "checkpoint_time_s": 0.050021166664044305,
+    "container_id": "147cfaa407c1de8b9bb26f2f5307774ccdb081f9f1fba2a8dcf48d84bddc3a8a",
+    "docker_started_at": "2026-10-26T06:23:53.01811895Z"
+  },
+  "pilot": {
+    "full_field_write_interval_s": 0.05,
+    "graceful_writeNow_s": 13200,
+    "hard_wall_s": 14400,
+    "mpi_ranks": 10,
+    "note": "Restart preserves stock-alpha i4fFrozenPredictorSp=false from t=0; mesh/source/thermo/EOS/Cd/BC/numerics unchanged; only stage time bounds and sparse full-field cadence differ.",
+    "restart_time_s": 0.050021166664044305,
+    "runtime_environment": {
+      "OMPI_MCA_mpi_yield_when_idle": "1",
+      "scope": "container-local runtime fairness setting; no host/global MPI configuration changed"
+    },
+    "startFrom": "latestTime",
+    "target_end_s": 0.46
+  },
+  "preflight_record": {
+    "dictionary_preflight": "logs/preflight.log (pinned OpenFOAM v2512, exit 0)",
+    "prelaunch_launcher_preflight": "launch_guarded.check_preflight passed with exact native mesh, initialization and source metrics; repeated launch-time checks remain required",
+    "runner_manifest_precheck": "logs/runner-manifest-check.log (all four frozen manifests verified from /pair/case, exit 0)",
+    "solver_released": false,
+    "source_full_case_manifest": "provenance/source-prepared-case-all-files.sha256 verified against the copied case"
+  },
+  "qualification": "Exploratory stock-alpha cold-start trajectory; not a validation/convergence pass. Target milestones are .05 s, .46 s, and 1.3 s; 1.3 s is not an emptying claim.",
+  "run_plan": {
+    "campaign_clock": "starts at the first actual pilot Docker StartedAt; no old campaign clock is reused",
+    "compact_flux_and_inventory_diagnostics": "every completed step",
+    "full_field_interval_s_after_pilot": 0.05,
+    "go_policy": "GO is authorized after these recorded checks: source-prepared full-case manifest verified against the copied case; authoritative v4 configured quality and native inventory review accepted by root; all frozen checksums verified from /pair/case under OpenFOAM v2512; dictionary preflight passed; capacity, memory, disk threshold, no-PAUSE, no-name-collision checks are repeated immediately by launch_guarded.py before Docker creation and again before GO.",
+    "mpi_ranks": 10,
+    "next_milestones_s": [
+      0.46,
+      1.3
+    ],
+    "pilot_graceful_writeNow_s": 6000,
+    "pilot_hard_wall_s": 7200,
+    "pilot_target_s": 0.05
+  },
+  "schema": "i4f-stock-cold-continuation/v1",
+  "scope": "Exploratory corrected-junction cold-start trajectory; no mesh, source, hardware validation, or convergence claim.",
+  "solver": {
+    "alpha_source": "standard source (i4fFrozenPredictorSp=false)",
+    "application": "compressibleInterFoam",
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "numerics": "deltaT=1e-5 s; maxDeltaT=2.5e-4 s; maxCo=0.5; maxAlphaCo=0.25; 8 PIMPLE outer correctors; 2 pressure correctors; transonic=yes",
+    "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "valve": "Cd=0.7; 1 s smoothstep opening; minimum effective opening 0.02; vector-coded source with existing 0.10 m/s speed regularizer",
+    "water_air_model": "compressible VOF, ideal air, common temperature, SST turbulence"
+  },
+  "status": "prepared_from_exact_healthy_native10_checkpoint",
+  "stop_conditions": [
+    "PAUSE sentinel",
+    "nonfinite or nonpositive pressure, temperature, or density",
+    "raw pressure below the declared pressure floor or repeated final-floor contacts",
+    "persistent outer-pressure corrections under the existing guard",
+    "phase-ledger or clipping limits under the existing guard",
+    "bounded wall save with complete native checkpoint"
+  ]
+}

@@ -1,0 +1,114 @@
+OpenFOAM=v2512
+FOAM_SRC=/usr/lib/openfoam/openfoam2512/src
+9065053a1bde494de9c9d0f6959767c84eadce709c81c5673dbb46b676c557f3  /usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvMatrix/fvMatrixSolve.C
+12b6c9dc4619844395278631903d374e1887203c94c59082dbaae0e7f037f129  /usr/lib/openfoam/openfoam2512/src/finiteVolume/fvMatrices/fvMatrix/fvMatrix.H
+e2f1fb9de03bfbd7454ae5d98f1bdf91a105465d98aabfb10809ef13efbbfcae  /usr/lib/openfoam/openfoam2512/src/OpenFOAM/matrices/lduMatrix/lduMatrix/lduMatrixATmul.C
+--- fvMatrix::residual definition ---
+   362	Foam::tmp<Foam::Field<Type>> Foam::fvMatrix<Type>::residual() const
+   363	{
+   364	    auto tres = tmp<Field<Type>>::New(source_);
+   365	    auto& res = tres.ref();
+   366	
+   367	    addBoundarySource(res);
+   368	
+   369	    // Loop over field components
+   370	    for (direction cmpt=0; cmpt<Type::nComponents; cmpt++)
+   371	    {
+   372	        scalarField psiCmpt(psi_.primitiveField().component(cmpt));
+   373	
+   374	        scalarField boundaryDiagCmpt(psi_.size(), Zero);
+   375	        addBoundaryDiag(boundaryDiagCmpt, cmpt);
+   376	
+   377	        FieldField<Field, scalar> bouCoeffsCmpt
+   378	        (
+   379	            boundaryCoeffs_.component(cmpt)
+   380	        );
+   381	
+   382	        res.replace
+   383	        (
+   384	            cmpt,
+   385	            lduMatrix::residual
+   386	            (
+   387	                psiCmpt,
+   388	                res.component(cmpt) - boundaryDiagCmpt*psiCmpt,
+   389	                bouCoeffsCmpt,
+   390	                psi_.boundaryField().scalarInterfaces(),
+   391	                cmpt
+   392	            )
+   393	        );
+--- lduMatrix::residual sign/body ---
+   268	void Foam::lduMatrix::residual
+   269	(
+   270	    solveScalarField& rA,
+   271	    const solveScalarField& psi,
+   272	    const scalarField& source,
+   273	    const FieldField<Field, scalar>& interfaceBouCoeffs,
+   274	    const lduInterfaceFieldPtrsList& interfaces,
+   275	    const direction cmpt
+   276	) const
+   277	{
+   278	    solveScalar* __restrict__ rAPtr = rA.begin();
+   279	
+   280	    const solveScalar* const __restrict__ psiPtr = psi.begin();
+   281	    const scalar* const __restrict__ diagPtr = diag().begin();
+   282	    const scalar* const __restrict__ sourcePtr = source.begin();
+   283	
+   284	    const label* const __restrict__ uPtr = lduAddr().upperAddr().begin();
+   285	    const label* const __restrict__ lPtr = lduAddr().lowerAddr().begin();
+   286	
+   287	    const scalar* const __restrict__ upperPtr = upper().begin();
+   288	    const scalar* const __restrict__ lowerPtr = lower().begin();
+   289	
+   290	    // Parallel boundary initialisation.
+   291	    // Note: there is a change of sign in the coupled
+   292	    // interface update.  The reason for this is that the
+   293	    // internal coefficients are all located at the l.h.s. of
+   294	    // the matrix whereas the "implicit" coefficients on the
+   295	    // coupled boundaries are all created as if the
+   296	    // coefficient contribution is of a source-kind (i.e. they
+   297	    // have a sign as if they are on the r.h.s. of the matrix.
+   298	    // To compensate for this, it is necessary to turn the
+   299	    // sign of the contribution.
+   300	
+   301	    const label startRequest = UPstream::nRequests();
+   302	
+   303	    // Initialise the update of interfaced interfaces
+   304	    initMatrixInterfaces
+   305	    (
+   306	        false,
+   307	        interfaceBouCoeffs,
+   308	        interfaces,
+   309	        psi,
+   310	        rA,
+   311	        cmpt
+   312	    );
+   313	
+   314	    const label nCells = diag().size();
+   315	    for (label cell=0; cell<nCells; cell++)
+   316	    {
+   317	        rAPtr[cell] = sourcePtr[cell] - diagPtr[cell]*psiPtr[cell];
+   318	    }
+   319	
+   320	
+   321	    const label nFaces = upper().size();
+   322	
+   323	    for (label face=0; face<nFaces; face++)
+   324	    {
+   325	        rAPtr[uPtr[face]] -= lowerPtr[face]*psiPtr[lPtr[face]];
+   326	        rAPtr[lPtr[face]] -= upperPtr[face]*psiPtr[uPtr[face]];
+   327	    }
+   328	
+   329	    // Update interface interfaces
+   330	    updateMatrixInterfaces
+--- fvMatrix::D ---
+  1280	Foam::tmp<Foam::scalarField> Foam::fvMatrix<Type>::D() const
+  1281	{
+  1282	    auto tdiag = tmp<scalarField>::New(diag());
+  1283	    addCmptAvBoundaryDiag(tdiag.ref());
+  1284	    return tdiag;
+  1285	}
+  1286	
+  1287	
+  1288	template<class Type>
+  1289	Foam::tmp<Foam::Field<Type>> Foam::fvMatrix<Type>::DD() const
+  1290	{

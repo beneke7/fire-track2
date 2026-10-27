@@ -1,0 +1,2925 @@
+{
+  "created_utc": "2026-10-26T22:48:10.349792+00:00",
+  "finished_utc": "2026-10-26T22:48:10.369829+00:00",
+  "operation_summary": "results/runs/i4f-closed-log-retention-20261026T2240Z/operations/summary.json",
+  "operation_summary_data": {
+    "archive_bytes": 120769895,
+    "archived_unlinked_count": 60,
+    "concurrent_activity_at_inventory": [
+      {
+        "container_id": "fa6d93ab0de61049337b871405eb4ab9ee385a5d7b3d0d2c0c41af262f847bfd",
+        "name": "i4f-frozen-pressure-operator-tightmaps-20261026t2234z",
+        "nano_cpus": 10000000000,
+        "started_at": "2026-10-26T22:38:28.320884831Z",
+        "state": "running"
+      },
+      {
+        "container_id": "87c69f24d16d1eb3ae3a79271c4c88516386fec2c130f98625e2bebc868c761c",
+        "name": "i4f-cold-pressure-advisory-continuation-20261026T2227Z-a003",
+        "nano_cpus": 8000000000,
+        "started_at": "2026-10-26T22:34:41.550545949Z",
+        "state": "running"
+      }
+    ],
+    "concurrent_docker_stats_sample": [
+      {
+        "container_id": "fa6d93ab0de61049337b871405eb4ab9ee385a5d7b3d0d2c0c41af262f847bfd",
+        "cpu_percent": "924.60%",
+        "memory": "1.096GiB / 32GiB"
+      },
+      {
+        "container_id": "87c69f24d16d1eb3ae3a79271c4c88516386fec2c130f98625e2bebc868c761c",
+        "cpu_percent": "796.86%",
+        "memory": "1.127GiB / 32GiB"
+      }
+    ],
+    "concurrent_docker_stats_sample_utc": "2026-10-26T22:49:46Z",
+    "eligible_source_count": 60,
+    "estimated_net_allocated_release_bytes": 1890988740,
+    "final_df_sample_utc": "2026-10-26T22:50:29Z",
+    "gross_source_bytes_unlinked": 2011758635,
+    "measured_free_bytes_after_final_sample": 25795420160,
+    "measured_free_bytes_before": 23961219072,
+    "measured_net_free_change_bytes": 1834201088,
+    "restore_smoke": {
+      "mode_uid_gid_mtime_match": true,
+      "restored_to_temporary_directory": true,
+      "second_restore_refused_existing_target": true,
+      "source_bytes": 187727806,
+      "source_path": "results/runs/i4f-coarse-outer8-pilot-20261024T0914Z/analysis/coarse8-vs-stage1-16/outer16/case/log.compressibleInterFoam.coarse-comparison",
+      "source_sha256": "79cbfe2cfacd8f5ccff1e033210e81a60ce29944543e084b68729227f374074b",
+      "temporary_copy_removed_after_verification": true
+    },
+    "runtime_floor_bytes": 21474836480
+  },
+  "private_evidence_bundle": "results/runs/i4f-closed-log-retention-20261026T2240Z/",
+  "records": [
+    {
+      "archive_bytes": 13687909,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/8d6a05efc1f0cb43-log.compressibleInterFoam.coarse-comparison.zst",
+      "archive_sha256": "c8e7a63333e5321efb7833084b5ea2c41114b752ef7d396db9d4db339818280c",
+      "archived_utc": "2026-10-26T22:47:19.908944+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 174039897,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792834264892408006,
+      "size_bytes": 187727806,
+      "source_path": "results/runs/i4f-coarse-outer8-pilot-20261024T0914Z/analysis/coarse8-vs-stage1-16/outer16/case/log.compressibleInterFoam.coarse-comparison",
+      "source_sha256": "79cbfe2cfacd8f5ccff1e033210e81a60ce29944543e084b68729227f374074b",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:20.198757+00:00"
+    },
+    {
+      "archive_bytes": 13687909,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/8f75e0b4ac29082e-log.source-native.zst",
+      "archive_sha256": "c8e7a63333e5321efb7833084b5ea2c41114b752ef7d396db9d4db339818280c",
+      "archived_utc": "2026-10-26T22:47:22.127180+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 174039897,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792834264892408006,
+      "size_bytes": 187727806,
+      "source_path": "results/runs/i4f-coarse-outer8-pilot-20261024T0914Z/analysis/coarse8-vs-stage1-16/outer16/case/log.source-native",
+      "source_sha256": "79cbfe2cfacd8f5ccff1e033210e81a60ce29944543e084b68729227f374074b",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:22.401434+00:00"
+    },
+    {
+      "archive_bytes": 10480499,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/e0ee8f8fcf57a84a-log.ambient-reservoir-bc.zst",
+      "archive_sha256": "6f91d2c4d45c1d164af02c66586408b7b47964fb9734026a160cae5f3c105979",
+      "archived_utc": "2026-10-26T22:47:24.345479+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T13:01:55.010382344Z",
+          "id": "0d0195e6e362a03a8b9853c84e92cb91470702aa1973335b8eb196f961d1f95d",
+          "name": "i4f-ambient-reservoir-adaptive-20261025T1242Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T12:45:59.456705831Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T13:01:55.010382344Z",
+          "id": "0d0195e6e362a03a8b9853c84e92cb91470702aa1973335b8eb196f961d1f95d",
+          "name": "i4f-ambient-reservoir-adaptive-20261025T1242Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T12:45:59.456705831Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T13:01:55.010382344Z",
+          "id": "0d0195e6e362a03a8b9853c84e92cb91470702aa1973335b8eb196f961d1f95d",
+          "name": "i4f-ambient-reservoir-adaptive-20261025T1242Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T12:45:59.456705831Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 174564687,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792933314942678602,
+      "size_bytes": 185045186,
+      "source_path": "results/runs/i4f-ambient-reservoir-adaptive-20261025T124200Z/pair-r3/adaptive-reservoir/case/log.ambient-reservoir-bc",
+      "source_sha256": "97db589f4e32f2824bb2bf2bfc81097194a68b9c9db0c1a96b41d15ddf634c85",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:24.576034+00:00"
+    },
+    {
+      "archive_bytes": 7005253,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/1347562c1f15b425-log.solver.zst",
+      "archive_sha256": "0af049f2fc4c250d689cf31a7ba7ae5e0b698d73d7a64a4a5f64965fad35f91b",
+      "archived_utc": "2026-10-26T22:47:26.025493+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:30:53.220543188Z",
+          "id": "704e6b68c270c3be6f2f009690015d7d3d0989daae2aed91164bbc1df82a502f",
+          "name": "i4f-headspace-frozen-sp16-a3-20261024T223020Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:30:20.52885628Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:30:53.220543188Z",
+          "id": "704e6b68c270c3be6f2f009690015d7d3d0989daae2aed91164bbc1df82a502f",
+          "name": "i4f-headspace-frozen-sp16-a3-20261024T223020Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:30:20.52885628Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 136,
+          "finished_at": "2026-10-24T22:25:29.447851473Z",
+          "id": "64d5f6deeb8903104cf117b3c315fe71af3a2ae24465594b02e8e3c9fdfb008e",
+          "name": "i4f-headspace-frozen-sp16-a2-20261024T222527Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:25:27.603457545Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 136,
+          "finished_at": "2026-10-24T22:25:29.447851473Z",
+          "id": "64d5f6deeb8903104cf117b3c315fe71af3a2ae24465594b02e8e3c9fdfb008e",
+          "name": "i4f-headspace-frozen-sp16-a2-20261024T222527Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:25:27.603457545Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:29:41.23124159Z",
+          "id": "54ce05813e39a98f6899d0a85abf128d4b4ea4cdcd43e16b3d5e8be9183fafeb",
+          "name": "i4f-hs-preflight-stock-off-20261024T222940Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:29:40.419772957Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:29:42.404004082Z",
+          "id": "4126fbfc96c4967081cada0dfe7b040271d06aae573f71fe5a8d76eff5282414",
+          "name": "i4f-hs-preflight-v4-off-20261024T222941Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:29:41.553380358Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 124408108,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792881053164207957,
+      "size_bytes": 131413361,
+      "source_path": "results/runs/i4f-headspace-frozen-sp16-20261024T222233Z/cases/candidate-v4/log.solver",
+      "source_sha256": "7da52fba60d2e09cfe8d9750f35d22971253d6cc92f6e3bdadb711b38921ec56",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:26.327165+00:00"
+    },
+    {
+      "archive_bytes": 6920000,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/9625bc572934b873-log.solver.zst",
+      "archive_sha256": "69bdc122219aab6f7d98c4a2048f9c1c1029ecc6d044596b6112fe7d30a55aaf",
+      "archived_utc": "2026-10-26T22:47:27.824690+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:49.978245398Z",
+          "id": "745b65f79a0377bce78c56aa1dc83b3cac54b4e2dba3a161010dd5b2d146c53d",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-fine320",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:08.750870889Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:24.911593746Z",
+          "id": "37ac46fafc65a815f4d26f8f3d56a45762e859959cd0b40dba9e41b1836bc1ef",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-coarse80",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:06.431181163Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-25T00:03:11.014953926Z",
+          "id": "f979d449279c6a8966aba7133ea4cc73097f9ef420387008ee6894978d3bb953",
+          "name": "rr-rouaix-c4-continue-5s-20261014T114815Z",
+          "oom_killed": false,
+          "started_at": "2026-10-14T11:57:19.887920087Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-25T00:03:11.010775667Z",
+          "id": "b262ba663eb6f103b713eb07caf20d5fa7579c205eec80bfd501fc83536a1ec6",
+          "name": "rr-rouaix-c4-ram-20261013T081725Z",
+          "oom_killed": false,
+          "started_at": "2026-10-13T08:19:11.932209058Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-25T00:03:10.925291901Z",
+          "id": "6f9b4209f53de4f46e9545a6ea14ccc1723280811e681bf496c8678f16754fde",
+          "name": "rr-rouaix-c4-paired-stock-mules-4mpi-to-1p800234-20261012T0939Z",
+          "oom_killed": false,
+          "started_at": "2026-10-12T10:02:29.289138519Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:49.978245398Z",
+          "id": "745b65f79a0377bce78c56aa1dc83b3cac54b4e2dba3a161010dd5b2d146c53d",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-fine320",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:08.750870889Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:24.911593746Z",
+          "id": "37ac46fafc65a815f4d26f8f3d56a45762e859959cd0b40dba9e41b1836bc1ef",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-coarse80",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:06.431181163Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 122963534,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792874629921125658,
+      "size_bytes": 129883534,
+      "source_path": "results/runs/i4f-headspace-channel-piston-pair-20261024T2029Z/fine320/case/log.solver",
+      "source_sha256": "9f4c0fcf22ddd8102674a57daef7997bbcf0faa364b6406cbfdc46f9018be2a2",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:28.029345+00:00"
+    },
+    {
+      "archive_bytes": 7430796,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/5bb9afa0be8f9861-log.resume-from-010002116664.zst",
+      "archive_sha256": "8887cfd94cc4ff64f82b7a7204f8bee0fc28ed157c7efdd8d8813e8d457b30fa",
+      "archived_utc": "2026-10-26T22:47:29.543041+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:35:05.102952499Z",
+          "id": "2b1672d931a4bb3a1d24cc0e1fdb22c26fb135d1e40c4c25fdeed187eddb5829",
+          "name": "i4f-twooutlet-fine-coupled-resume-20261025T0756Z-from0100021",
+          "oom_killed": false,
+          "started_at": "2026-10-25T07:58:14.985237053Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T23:18:40.236242138Z",
+          "id": "8407cec645f7d99a120cc2c323588558b2fc2316a39b516b282e2363bbb5d558",
+          "name": "i4f-revised-geometry-dt-half-20261024T2240Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:43:10.221049733Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:35:05.102952499Z",
+          "id": "2b1672d931a4bb3a1d24cc0e1fdb22c26fb135d1e40c4c25fdeed187eddb5829",
+          "name": "i4f-twooutlet-fine-coupled-resume-20261025T0756Z-from0100021",
+          "oom_killed": false,
+          "started_at": "2026-10-25T07:58:14.985237053Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 119669579,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792920905018757042,
+      "size_bytes": 127100375,
+      "source_path": "results/runs/i4f-twooutlet-fine-coupled-resume-20261025T0756Z-from0100021/case/log.resume-from-010002116664",
+      "source_sha256": "4a014fda997a697bde1e8f6fc218cb8e18cef9b158829de8158d30ccbae4da58",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:29.757804+00:00"
+    },
+    {
+      "archive_bytes": 4571230,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/8fe0ae4556dcf013-log.cold-coupled.zst",
+      "archive_sha256": "5db6bd0b2a43bad9276047ec7f997b3251200ee1acd88bc8ca49f2ea60704975",
+      "archived_utc": "2026-10-26T22:47:30.752996+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T21:47:30.7985415Z",
+          "id": "db98dd151985c1ea03c361d7ab66eb0dde50d9e6acd8e7e18e06e97f7f18104a",
+          "name": "i4f-pressure-dp-cell-trace-20261025T2128Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T21:32:35.355177303Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T21:47:30.7985415Z",
+          "id": "db98dd151985c1ea03c361d7ab66eb0dde50d9e6acd8e7e18e06e97f7f18104a",
+          "name": "i4f-pressure-dp-cell-trace-20261025T2128Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T21:32:35.355177303Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T21:47:30.7985415Z",
+          "id": "db98dd151985c1ea03c361d7ab66eb0dde50d9e6acd8e7e18e06e97f7f18104a",
+          "name": "i4f-pressure-dp-cell-trace-20261025T2128Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T21:32:35.355177303Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 72599943,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792964850705519449,
+      "size_bytes": 77171173,
+      "source_path": "results/runs/i4f-pressure-dp-cell-trace-20261025T2128Z/case/log.cold-coupled",
+      "source_sha256": "908734e0458ea8cbdbc290303ac74139b5271b966a66f4f3bb38078cfb6fa829",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:30.949400+00:00"
+    },
+    {
+      "archive_bytes": 6150404,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/f045a540007d4900-log.compressibleInterFoam.vertical-matched.zst",
+      "archive_sha256": "eb45138b549fd9fa0c44456251355a51293969bad907e43e45449ce7fb9047e0",
+      "archived_utc": "2026-10-26T22:47:31.956436+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T03:10:11.218722109Z",
+          "id": "3ac293e10fa8f6bce18ad4a39b35e8729e459b5835b99f11e3917e443f89eb59",
+          "name": "i4f-vertical-matched-flow-20261024T0015Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T00:14:14.624898923Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 67344578,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": false,
+        "failure_marker_in_last_128KiB": true
+      },
+      "mode": 420,
+      "mtime_ns": 1792811411173217672,
+      "size_bytes": 73494982,
+      "source_path": "results/runs/i4f-vertical-matched-flow-20261024T0015Z/case/log.compressibleInterFoam.vertical-matched",
+      "source_sha256": "36f566d1d598997801e6dc27fe60a477d6aacfd7f6a85bb6da3338971f46bc15",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:32.153342+00:00"
+    },
+    {
+      "archive_bytes": 2964867,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/084fa0e403f2bad8-log.solver.zst",
+      "archive_sha256": "32902002d05eea312bf12c5217f9b0adb0631a54ebebb8e9532be5a3d3be2714",
+      "archived_utc": "2026-10-26T22:47:33.253602+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:49.978245398Z",
+          "id": "745b65f79a0377bce78c56aa1dc83b3cac54b4e2dba3a161010dd5b2d146c53d",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-fine320",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:08.750870889Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:24.911593746Z",
+          "id": "37ac46fafc65a815f4d26f8f3d56a45762e859959cd0b40dba9e41b1836bc1ef",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-coarse80",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:06.431181163Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-25T00:03:11.014953926Z",
+          "id": "f979d449279c6a8966aba7133ea4cc73097f9ef420387008ee6894978d3bb953",
+          "name": "rr-rouaix-c4-continue-5s-20261014T114815Z",
+          "oom_killed": false,
+          "started_at": "2026-10-14T11:57:19.887920087Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-25T00:03:11.010775667Z",
+          "id": "b262ba663eb6f103b713eb07caf20d5fa7579c205eec80bfd501fc83536a1ec6",
+          "name": "rr-rouaix-c4-ram-20261013T081725Z",
+          "oom_killed": false,
+          "started_at": "2026-10-13T08:19:11.932209058Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-25T00:03:10.925291901Z",
+          "id": "6f9b4209f53de4f46e9545a6ea14ccc1723280811e681bf496c8678f16754fde",
+          "name": "rr-rouaix-c4-paired-stock-mules-4mpi-to-1p800234-20261012T0939Z",
+          "oom_killed": false,
+          "started_at": "2026-10-12T10:02:29.289138519Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:49.978245398Z",
+          "id": "745b65f79a0377bce78c56aa1dc83b3cac54b4e2dba3a161010dd5b2d146c53d",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-fine320",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:08.750870889Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T20:43:24.911593746Z",
+          "id": "37ac46fafc65a815f4d26f8f3d56a45762e859959cd0b40dba9e41b1836bc1ef",
+          "name": "i4f-headspace-channel-piston-pair-20261024T2029Z-coarse80",
+          "oom_killed": false,
+          "started_at": "2026-10-24T20:43:06.431181163Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 53895136,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792874604855110599,
+      "size_bytes": 56860003,
+      "source_path": "results/runs/i4f-headspace-channel-piston-pair-20261024T2029Z/coarse80/case/log.solver",
+      "source_sha256": "62344a4a161d49ffb15559671aa23ab627eb96056b6774d4b4acb7cdc2703824",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:33.405830+00:00"
+    },
+    {
+      "archive_bytes": 2986139,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/18ddda2205690ee3-log.cold-coupled.zst",
+      "archive_sha256": "2ad4c932cdbdb35f9c6aef492cac44643db2658d996ece4205d607196000006f",
+      "archived_utc": "2026-10-26T22:47:34.394148+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T18:08:47.15570075Z",
+          "id": "5a6bb983ac5a1dbab1e50cfc680c2049464dda03236b4c9cbf5276a7af6c76f3",
+          "name": "i4f-short1-valve-wetside-continue-20261025T165800Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T16:58:04.406855274Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T18:36:48.101418618Z",
+          "id": "0b27687ba66d0b8b52c936cfc3783b748abf4d91990d53907ade2ac34ae1037f",
+          "name": "i4f-short1-valve-band-12p5-20261025T1811Z-retry1d",
+          "oom_killed": false,
+          "started_at": "2026-10-25T18:21:55.250036609Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T18:37:42.285525816Z",
+          "id": "f7577b552a149d96f8e4ca68b6105c769cf108a5e32281c4c6d66a35f6283489",
+          "name": "i4f-short1-valve-band-6p25-20261025T1811Z-retry1d",
+          "oom_killed": false,
+          "started_at": "2026-10-25T18:22:18.521270743Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T18:37:42.285525816Z",
+          "id": "f7577b552a149d96f8e4ca68b6105c769cf108a5e32281c4c6d66a35f6283489",
+          "name": "i4f-short1-valve-band-6p25-20261025T1811Z-retry1d",
+          "oom_killed": false,
+          "started_at": "2026-10-25T18:22:18.521270743Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T18:37:42.285525816Z",
+          "id": "f7577b552a149d96f8e4ca68b6105c769cf108a5e32281c4c6d66a35f6283489",
+          "name": "i4f-short1-valve-band-6p25-20261025T1811Z-retry1d",
+          "oom_killed": false,
+          "started_at": "2026-10-25T18:22:18.521270743Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 95,
+          "finished_at": "2026-10-25T18:19:13.821145902Z",
+          "id": "87099cb4e3de1ed5a6801c22023893d109fb84004948c16ab5ab8758892ff09c",
+          "name": "i4f-short1-valve-band-12p5-20261025T1811Z-retry1c",
+          "oom_killed": false,
+          "started_at": "2026-10-25T18:19:11.020265014Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 50459220,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792953462213720473,
+      "size_bytes": 53445359,
+      "source_path": "results/runs/i4f-short1-valve-band-axial-qualification-20261025T1811Z-retry1/cases-6p25/case/log.cold-coupled",
+      "source_sha256": "6037d0bc69be95d073776e1e9b7556bf99d3f3f8d902832b9f2d8a34aa9ab83f",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:34.568564+00:00"
+    },
+    {
+      "archive_bytes": 2237534,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/99af5804b81ac828-log.coarse-v2-replay.zst",
+      "archive_sha256": "8bca296e9593840399e3256a456f4f53ec75a6ee1abefc53257f02e218e70ea6",
+      "archived_utc": "2026-10-26T22:47:35.305926+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T08:28:47.26440407Z",
+          "id": "9656800b31482ed694fac07bc2a7cc9ba0a76947497f02b47564a8b52165ffa2",
+          "name": "i4f-coarse-floor10k-v2-replay-retry2-20261024T082000Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T08:18:18.244873244Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 47883368,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792830527202682501,
+      "size_bytes": 50120902,
+      "source_path": "results/runs/i4f-coarse-floor10k-v2-replay-retry2-20261024T082000Z/case/log.coarse-v2-replay",
+      "source_sha256": "c065f39160ba97244c73f6bca0c3e920881afed725511135ed170d7528bc7d93",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:35.499573+00:00"
+    },
+    {
+      "archive_bytes": 4418696,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/727da13b9b5f0c8e-log.compressibleInterFoamCleanWaterPair.zst",
+      "archive_sha256": "bf1212134415dc6fa551f8fb7c978cb383539205d83b8689aa53aac07742018a",
+      "archived_utc": "2026-10-26T22:47:36.514937+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:03.951896427Z",
+          "id": "86c48951cdbfb47d13dc9abce3d78eb45be4fd126a6b8f6eb6e00373336527dd",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.560575623Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:05.716866792Z",
+          "id": "e85ed271c6d3ba50c077532b25b1b09c278eb2d8f254f26174f3a1a60b31748e",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.270403202Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:03.951896427Z",
+          "id": "86c48951cdbfb47d13dc9abce3d78eb45be4fd126a6b8f6eb6e00373336527dd",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.560575623Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:05.716866792Z",
+          "id": "e85ed271c6d3ba50c077532b25b1b09c278eb2d8f254f26174f3a1a60b31748e",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.270403202Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 44614178,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792839185624654205,
+      "size_bytes": 49032874,
+      "source_path": "results/runs/i4f-clean-water-eos-pair-20261024T1010Z/case-rhoConst/log.compressibleInterFoamCleanWaterPair",
+      "source_sha256": "890673e8c9766c7449c660b272176fe51b957fc6c1f6dde8941a07e9556b8d91",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:36.693452+00:00"
+    },
+    {
+      "archive_bytes": 2855054,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/a9692c072eda3186-log.cold-coupled.zst",
+      "archive_sha256": "006240f1c122ede08cab663dde2a8496f700968a3ef525a8cbe49dcb2a80da99",
+      "archived_utc": "2026-10-26T22:47:37.753201+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:04:47.616784485Z",
+          "id": "cdf414f805d62549eb1d8d662a57105178a8c09a02889ebbfb06b6885ef92dce",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-pilot",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:47:04.40392529Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-26T02:10:27.6639027Z",
+          "id": "b31f9fc09916204c611f17f48643717508d31740df31f696bf9b4c737ae7ded2",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt5",
+          "oom_killed": false,
+          "started_at": "2026-10-25T23:59:36.593088248Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:56:13.512827574Z",
+          "id": "09f65430a32a97713fd05f7cf92b510179ff11b41217425135b86058440e0255",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T23:10:37.35162488Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:56:13.512827574Z",
+          "id": "09f65430a32a97713fd05f7cf92b510179ff11b41217425135b86058440e0255",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T23:10:37.35162488Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:56:13.512827574Z",
+          "id": "09f65430a32a97713fd05f7cf92b510179ff11b41217425135b86058440e0255",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T23:10:37.35162488Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 45406685,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792972573389464318,
+      "size_bytes": 48261739,
+      "source_path": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/continuation-attempt2/case/log.cold-coupled",
+      "source_sha256": "3a39f66a5a40f94f7f8310b4795584a358cc83aaacabaa7a10db1315fd3a18df",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:37.902347+00:00"
+    },
+    {
+      "archive_bytes": 1962779,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/cdae6bbe6e0a2001-coarse-wide.solver.log.zst",
+      "archive_sha256": "67d06235c5c81440d9d8ddbdaeafe20fe0a5d52fc627e3590abacdfa33dff72f",
+      "archived_utc": "2026-10-26T22:47:38.624360+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 44316368,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792948845820096153,
+      "size_bytes": 46279147,
+      "source_path": "results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/logs/coarse-wide.solver.log",
+      "source_sha256": "0668f9eec33d1c02d8c31abf1992189f03de9edc4151a7ce4f0273fa83a47eb1",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:38.758673+00:00"
+    },
+    {
+      "archive_bytes": 1757502,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/db0b14fb5eca442f-fine-thin.solver.log.zst",
+      "archive_sha256": "8b6f11306bbfa2ce308c30a803fd3bf4021bfaddb7fa6b41e810f1b3c756bb33",
+      "archived_utc": "2026-10-26T22:47:39.601651+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 44521229,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792948923350002764,
+      "size_bytes": 46278731,
+      "source_path": "results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/logs/fine-thin.solver.log",
+      "source_sha256": "72cc0bef33cb6bb2d95af2735bcdd5a8b777c9d44282d184ba9be0ee5269dd35",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:39.723569+00:00"
+    },
+    {
+      "archive_bytes": 1696214,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/9a9767630ae6e37b-fine-wide.solver.log.zst",
+      "archive_sha256": "243211eb6d2a0117395a49ce2e8084dcf518565c05c2be173b1de31ff76cfc9f",
+      "archived_utc": "2026-10-26T22:47:40.555032+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 44577595,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792948890701039329,
+      "size_bytes": 46273809,
+      "source_path": "results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/logs/fine-wide.solver.log",
+      "source_sha256": "3e463b1b61169de279cd293032622ce91f5ba7c53c1d0a9234618d333c8cf3f3",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:40.708654+00:00"
+    },
+    {
+      "archive_bytes": 2011672,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/5c7ed55be61b1170-coarse-thin.solver.log.zst",
+      "archive_sha256": "79bcdcee659f61b4cd1d46f2dbf2a2bd9935a92447b170e8aba6e20a2d0ad0f4",
+      "archived_utc": "2026-10-26T22:47:41.458144+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T17:22:03.364537634Z",
+          "id": "7069333619c4ebbf007a9237f833437429f1910e05aa7b9fc963fc88db6df70a",
+          "name": "i4f-valve-resistance-duct-20261025T1721Z-attempt4",
+          "oom_killed": false,
+          "started_at": "2026-10-25T17:20:32.533519096Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 44261068,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792948858639079114,
+      "size_bytes": 46272740,
+      "source_path": "results/runs/i4f-valve-resistance-duct-20261025T1721Z-attempt4/logs/coarse-thin.solver.log",
+      "source_sha256": "152b624f0d5cc88b9afb5445afff1550e8d7fffb02a2d4d4347fb0849ffa42c8",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:41.637447+00:00"
+    },
+    {
+      "archive_bytes": 2146788,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/51b2f80c8867b8dd-log.cold-coupled.zst",
+      "archive_sha256": "61d81513387b9a52cb66794e27b60cc46d6ebf425c4513c873dfdc40d5553a98",
+      "archived_utc": "2026-10-26T22:47:42.498283+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T22:38:10.0096479Z",
+          "id": "82d0b916f8659abad1579074fc3cfb3b52c5cc99c7f1b91798359876c0196c54",
+          "name": "i4f-pressure-observer-pulse-20261025T2222Z-collective-safe-retry1",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:26:34.722398801Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T22:38:10.0096479Z",
+          "id": "82d0b916f8659abad1579074fc3cfb3b52c5cc99c7f1b91798359876c0196c54",
+          "name": "i4f-pressure-observer-pulse-20261025T2222Z-collective-safe-retry1",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:26:34.722398801Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T22:38:10.0096479Z",
+          "id": "82d0b916f8659abad1579074fc3cfb3b52c5cc99c7f1b91798359876c0196c54",
+          "name": "i4f-pressure-observer-pulse-20261025T2222Z-collective-safe-retry1",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:26:34.722398801Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 35866249,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 436,
+      "mtime_ns": 1792967889911764623,
+      "size_bytes": 38013037,
+      "source_path": "results/runs/i4f-pressure-observer-pulse-20261025T2222Z-collective-safe-retry1/case/log.cold-coupled",
+      "source_sha256": "d72907fc43db45f7561022fe4eb6c535e0513e63c0d61e722178b7ae2e542abc",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:42.677075+00:00"
+    },
+    {
+      "archive_bytes": 2102940,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/09ff966b169fd0be-log.fine-continuation.zst",
+      "archive_sha256": "97b108368e181f869103cf82fcf945be6f725c3f828ebad39f7143f1addc62f3",
+      "archived_utc": "2026-10-26T22:47:43.457748+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:01:13.545407745Z",
+          "id": "1c8ff822dcbfcf89be0bf48c53c57804ebc63598b0737322bb374b81fc527f18",
+          "name": "i4f-fine-coupled-continuation-20261024T0925Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:32:00.91718345Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:01:13.545407745Z",
+          "id": "1c8ff822dcbfcf89be0bf48c53c57804ebc63598b0737322bb374b81fc527f18",
+          "name": "i4f-fine-coupled-continuation-20261024T0925Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:32:00.91718345Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 35630879,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792836073455037696,
+      "size_bytes": 37733819,
+      "source_path": "results/runs/i4f-fine-coupled-continuation-20261024T0925Z/case/log.fine-continuation",
+      "source_sha256": "da6d7db5fb279607f51751334f585a9d2975e98c59c29db4ca92877adc88d380",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:43.605281+00:00"
+    },
+    {
+      "archive_bytes": 2102940,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/102f7dc127e359fd-log.fine-continuation.zst",
+      "archive_sha256": "97b108368e181f869103cf82fcf945be6f725c3f828ebad39f7143f1addc62f3",
+      "archived_utc": "2026-10-26T22:47:44.357551+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-24T16:17:10.750157309Z",
+          "id": "fca9f5205c8e3087ae6aab0518aa8ba3d58767ae97e7254373007d2b07392975",
+          "name": "i4f-fine-full-discharge-20261024T1002Z-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:17:09.460661994Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T10:12:50.592006096Z",
+          "id": "d4b8bad4dcf2c9fac60d75be5c29f830de89bc3003a9594cb26d5546acd1a15e",
+          "name": "i4f-fine-full-discharge-20261024T1002Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:12:49.772847137Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 35630879,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792836073455037696,
+      "size_bytes": 37733819,
+      "source_path": "results/runs/i4f-fine-full-discharge-20261024T1002Z/case/log.fine-continuation",
+      "source_sha256": "da6d7db5fb279607f51751334f585a9d2975e98c59c29db4ca92877adc88d380",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:44.499342+00:00"
+    },
+    {
+      "archive_bytes": 1688370,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/6c52f177bdfae623-log.outer8-pilot.zst",
+      "archive_sha256": "7d9f96b934c9676faffab005838ef9d3977e630b29603059c2dcc8fd78f56165",
+      "archived_utc": "2026-10-26T22:47:45.160801+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 31966384,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833808246814786,
+      "size_bytes": 33654754,
+      "source_path": "results/runs/i4f-coarse-outer8-pilot-20261024T0914Z/case/log.outer8-pilot",
+      "source_sha256": "5f828b2e6cd48c30ae2d441857e96fa91a4137c461744c5ed90bd93a815570b9",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:45.348544+00:00"
+    },
+    {
+      "archive_bytes": 1688370,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/f19aaf6b49f82973-log.compressibleInterFoam.coarse-comparison.zst",
+      "archive_sha256": "7d9f96b934c9676faffab005838ef9d3977e630b29603059c2dcc8fd78f56165",
+      "archived_utc": "2026-10-26T22:47:45.966864+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 31966384,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833808246814786,
+      "size_bytes": 33654754,
+      "source_path": "results/runs/i4f-coarse-outer8-pilot-20261024T0914Z/analysis/coarse8-vs-stage1-16/outer8/case/log.compressibleInterFoam.coarse-comparison",
+      "source_sha256": "5f828b2e6cd48c30ae2d441857e96fa91a4137c461744c5ed90bd93a815570b9",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:46.096137+00:00"
+    },
+    {
+      "archive_bytes": 1688370,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/0bf699ed934cd364-log.source-native.zst",
+      "archive_sha256": "7d9f96b934c9676faffab005838ef9d3977e630b29603059c2dcc8fd78f56165",
+      "archived_utc": "2026-10-26T22:47:46.811943+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:23:28.329576511Z",
+          "id": "bf36e6d9a719474580ce83d3c93d06d2372c8052c76b2deff252a886ee8680ab",
+          "name": "i4f-coarse-outer8-pilot-20261024T0914Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:15:52.01518033Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 31966384,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833808246814786,
+      "size_bytes": 33654754,
+      "source_path": "results/runs/i4f-coarse-outer8-pilot-20261024T0914Z/analysis/coarse8-vs-stage1-16/outer8/case/log.source-native",
+      "source_sha256": "5f828b2e6cd48c30ae2d441857e96fa91a4137c461744c5ed90bd93a815570b9",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:46.969015+00:00"
+    },
+    {
+      "archive_bytes": 1777850,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/01fc59e1165139cf-log.cold-coupled.zst",
+      "archive_sha256": "5e69779a36a5125091fb5cd07bbffc3a87ccb3af2853191be932e51ecb7d61a5",
+      "archived_utc": "2026-10-26T22:47:47.633633+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:04:47.616784485Z",
+          "id": "cdf414f805d62549eb1d8d662a57105178a8c09a02889ebbfb06b6885ef92dce",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-pilot",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:47:04.40392529Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:04:47.616784485Z",
+          "id": "cdf414f805d62549eb1d8d662a57105178a8c09a02889ebbfb06b6885ef92dce",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-pilot",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:47:04.40392529Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:04:47.616784485Z",
+          "id": "cdf414f805d62549eb1d8d662a57105178a8c09a02889ebbfb06b6885ef92dce",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-pilot",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:47:04.40392529Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-26T02:10:27.6639027Z",
+          "id": "b31f9fc09916204c611f17f48643717508d31740df31f696bf9b4c737ae7ded2",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt5",
+          "oom_killed": false,
+          "started_at": "2026-10-25T23:59:36.593088248Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T23:56:13.512827574Z",
+          "id": "09f65430a32a97713fd05f7cf92b510179ff11b41217425135b86058440e0255",
+          "name": "i4f-tank-interface-thermal-resolution-20261025T223913Z-continue-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T23:10:37.35162488Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 28202776,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792969487536614131,
+      "size_bytes": 29980626,
+      "source_path": "results/runs/i4f-tank-interface-thermal-resolution-20261025T223913Z/case/log.cold-coupled",
+      "source_sha256": "fd4a2c33bdec2788d61ffcdc92c820b11f15711543c1c8ceb50347b559b9e5c0",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:47.775790+00:00"
+    },
+    {
+      "archive_bytes": 1854871,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/f11e23881106ae14-log.compressibleInterFoamCleanWaterPair.zst",
+      "archive_sha256": "9948915bf58561b185209f3d3714ecab3e4f87a6248c5b2572e988892602bf3a",
+      "archived_utc": "2026-10-26T22:47:48.446788+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:03.951896427Z",
+          "id": "86c48951cdbfb47d13dc9abce3d78eb45be4fd126a6b8f6eb6e00373336527dd",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.560575623Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:05.716866792Z",
+          "id": "e85ed271c6d3ba50c077532b25b1b09c278eb2d8f254f26174f3a1a60b31748e",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.270403202Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:03.951896427Z",
+          "id": "86c48951cdbfb47d13dc9abce3d78eb45be4fd126a6b8f6eb6e00373336527dd",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.560575623Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:53:05.716866792Z",
+          "id": "e85ed271c6d3ba50c077532b25b1b09c278eb2d8f254f26174f3a1a60b31748e",
+          "name": "i4f-clean-water-eos-pair-20261024T1010Z-attempt1-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:23:55.270403202Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 27098048,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792839183842654082,
+      "size_bytes": 28952919,
+      "source_path": "results/runs/i4f-clean-water-eos-pair-20261024T1010Z/case-weakWaterEOS/log.compressibleInterFoamCleanWaterPair",
+      "source_sha256": "4ba133d60ba49572634bc9133416f27a249168a698208221d2790587f90f758a",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:48.599152+00:00"
+    },
+    {
+      "archive_bytes": 2099121,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/06d09e8ca968c0ec-log.compressibleInterFoam.dt025.zst",
+      "archive_sha256": "d89805f1e9b9f779e68f40cb543e04f8bf71cfbcc9ce8e164f35aa3815241559",
+      "archived_utc": "2026-10-26T22:47:49.131611+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T04:25:51.767691969Z",
+          "id": "0d8592890ccd20afb2e8e116e5393761c5ac4e4c76c3b661f9700072b84a0db1",
+          "name": "i4f-post-marker-tail-20261024T0418Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T04:25:43.569262523Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 22855788,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792799744918582372,
+      "size_bytes": 24954909,
+      "source_path": "results/runs/i4f-post-marker-tail-20261024T0418Z/case/log.compressibleInterFoam.dt025",
+      "source_sha256": "60c24bf45dd5a614736eccff6a6811a6d50a7e9bb35b21f865af537f24d97a8d",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:49.240238+00:00"
+    },
+    {
+      "archive_bytes": 1407574,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/d63fa3fedacb139e-log.compressibleInterFoam.abrupt-dt1e5.zst",
+      "archive_sha256": "af8a04ce90a9ee1e35991c798ab9f9ff56abf1f06159c30af798c55c336c6994",
+      "archived_utc": "2026-10-26T22:47:49.873581+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T03:32:55.750586761Z",
+          "id": "60a0538ffdda51e5d41582d2c472f5e06f69461dd0adad23d6b11d0c31906d4f",
+          "name": "i4f-partial-drained-abrupt-dt1e-5-20261024T031800Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T03:17:43.815753656Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 19907734,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792812775545961708,
+      "size_bytes": 21315308,
+      "source_path": "results/runs/i4f-partial-drained-abrupt-dt1e-5-20261024T031800Z/case/log.compressibleInterFoam.abrupt-dt1e5",
+      "source_sha256": "4f1f91ef5fb472ef0ee653eaed5c4474eb45325aba76bd784b0975da3a43a4cf",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:49.953067+00:00"
+    },
+    {
+      "archive_bytes": 877880,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/4d586219b42816b1-log.outer-pilot.zst",
+      "archive_sha256": "72cb3a3ac84d9614c3fc0dc8ebb24f5d4e0b8db7b316a9b39a64246d5d8b55bf",
+      "archived_utc": "2026-10-26T22:47:50.540384+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:19:50.823514348Z",
+          "id": "79edf2f281626265adc34c6a764bfc5469ffc00d564e616a727830dff47d3bac",
+          "name": "i4f-fine-outer-outer16-20261024T090130Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:01:31.065585685Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:19:50.823514348Z",
+          "id": "79edf2f281626265adc34c6a764bfc5469ffc00d564e616a727830dff47d3bac",
+          "name": "i4f-fine-outer-outer16-20261024T090130Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:01:31.065585685Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 17107740,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833590689701401,
+      "size_bytes": 17985620,
+      "source_path": "results/runs/i4f-fine-outer8-vs16-20261024T0901Z/cases/outer16/case/log.outer-pilot",
+      "source_sha256": "9e3eef4ff465413f6d14a24a80f10dc60de21654acbbc8cb71071b7ba6858513",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:50.643781+00:00"
+    },
+    {
+      "archive_bytes": 877880,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/cea5249969a23132-log.outer-pilot.zst",
+      "archive_sha256": "72cb3a3ac84d9614c3fc0dc8ebb24f5d4e0b8db7b316a9b39a64246d5d8b55bf",
+      "archived_utc": "2026-10-26T22:47:51.162186+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T10:01:13.545407745Z",
+          "id": "1c8ff822dcbfcf89be0bf48c53c57804ebc63598b0737322bb374b81fc527f18",
+          "name": "i4f-fine-coupled-continuation-20261024T0925Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:32:00.91718345Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 17107740,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833590689701401,
+      "size_bytes": 17985620,
+      "source_path": "results/runs/i4f-fine-coupled-continuation-20261024T0925Z/case/log.outer-pilot",
+      "source_sha256": "9e3eef4ff465413f6d14a24a80f10dc60de21654acbbc8cb71071b7ba6858513",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:51.297045+00:00"
+    },
+    {
+      "archive_bytes": 877880,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/971b8b800b063596-log.outer-pilot.zst",
+      "archive_sha256": "72cb3a3ac84d9614c3fc0dc8ebb24f5d4e0b8db7b316a9b39a64246d5d8b55bf",
+      "archived_utc": "2026-10-26T22:47:51.902637+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 124,
+          "finished_at": "2026-10-24T16:17:10.750157309Z",
+          "id": "fca9f5205c8e3087ae6aab0518aa8ba3d58767ae97e7254373007d2b07392975",
+          "name": "i4f-fine-full-discharge-20261024T1002Z-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:17:09.460661994Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T10:12:50.592006096Z",
+          "id": "d4b8bad4dcf2c9fac60d75be5c29f830de89bc3003a9594cb26d5546acd1a15e",
+          "name": "i4f-fine-full-discharge-20261024T1002Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T10:12:49.772847137Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 17107740,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833590689701401,
+      "size_bytes": 17985620,
+      "source_path": "results/runs/i4f-fine-full-discharge-20261024T1002Z/case/log.outer-pilot",
+      "source_sha256": "9e3eef4ff465413f6d14a24a80f10dc60de21654acbbc8cb71071b7ba6858513",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:52.027592+00:00"
+    },
+    {
+      "archive_bytes": 1145363,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/8df176c45d9057d8-log.compressibleInterFoam.dtcap.zst",
+      "archive_sha256": "e3d3f117b7ff189d7c4a7b79096120b38af25d460232a1a3461a439b6d9c335f",
+      "archived_utc": "2026-10-26T22:47:52.621880+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T01:40:42.424924986Z",
+          "id": "ba3075c363bcc4d119927426d2611065c271ea1de20f6b86e24e89312f4e8cee",
+          "name": "i4f-partial-drained-dtcap-20261024T013547Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T01:40:39.692359208Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 15655470,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792809171980569707,
+      "size_bytes": 16800833,
+      "source_path": "results/runs/i4f-partial-drained-dtcap-20261024T013547Z/case-attempt4/log.compressibleInterFoam.dtcap",
+      "source_sha256": "32ffe7b09bc05ef7dadf2af029552c79863d5e1bcedb0bdd78ac87a43586d5c1",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:52.755016+00:00"
+    },
+    {
+      "archive_bytes": 884754,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/f4801fed4b452182-log.compressibleInterFoamPressureClampTrace.zst",
+      "archive_sha256": "a714a81bb546ba635a2ff49781b0ee5e551a8f4c600aeec9003fa9716e3ba571",
+      "archived_utc": "2026-10-26T22:47:53.354196+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T06:55:32.875398761Z",
+          "id": "c1de1e8ba18218771b0d36560477d2546c58b0ed7c35a47380808401d67a7600",
+          "name": "i4f-cold-original-pressure-trace-20261024T0646Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:49:12.54439738Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T06:55:32.875398761Z",
+          "id": "c1de1e8ba18218771b0d36560477d2546c58b0ed7c35a47380808401d67a7600",
+          "name": "i4f-cold-original-pressure-trace-20261024T0646Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:49:12.54439738Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 10354023,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792824932810941836,
+      "size_bytes": 11238777,
+      "source_path": "results/runs/i4f-cold-original-pressure-trace-20261024T0646Z/case/log.compressibleInterFoamPressureClampTrace",
+      "source_sha256": "424542d65a05ba38922a2695e6172583076672f8cd34b3f57df38eee969bd28d",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:53.455598+00:00"
+    },
+    {
+      "archive_bytes": 495505,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/480dde0ff86f70b9-log.outer-pilot.zst",
+      "archive_sha256": "c9f6fa567e327178dd77a19c5f2278b0e52e95c9617da3615da7dc8a4421050e",
+      "archived_utc": "2026-10-26T22:47:53.950860+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:11:38.000608849Z",
+          "id": "b83c443e3eee1baef74fa283a2ea8ac7c1399b280541559e62a38146b6307ee9",
+          "name": "i4f-fine-outer-outer8-20261024T090130Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:01:30.800833731Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T09:11:38.000608849Z",
+          "id": "b83c443e3eee1baef74fa283a2ea8ac7c1399b280541559e62a38146b6307ee9",
+          "name": "i4f-fine-outer-outer8-20261024T090130Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T09:01:30.800833731Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 8587626,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792833097867395707,
+      "size_bytes": 9083131,
+      "source_path": "results/runs/i4f-fine-outer8-vs16-20261024T0901Z/cases/outer8/case/log.outer-pilot",
+      "source_sha256": "88cb3413107bec656c3c60fa21f219efd27b5e16305b26fc9de231ae9be01931",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:54.068249+00:00"
+    },
+    {
+      "archive_bytes": 502123,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/ec43da41916818ae-log.cold-coupled.zst",
+      "archive_sha256": "b862d58f1f33b8a28676eb5a0c21366e5d1a9b6458b32449b26fd52af9b9484d",
+      "archived_utc": "2026-10-26T22:47:54.698588+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T22:21:01.63995298Z",
+          "id": "341597a6ba892d7506f7e78c5c9e10aa3091d0b430effa46879186eb17cc1a93",
+          "name": "i4f-pressure-transition-residual-pulse-20261025T2220Z-retry2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:20:14.377182095Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T22:21:01.63995298Z",
+          "id": "341597a6ba892d7506f7e78c5c9e10aa3091d0b430effa46879186eb17cc1a93",
+          "name": "i4f-pressure-transition-residual-pulse-20261025T2220Z-retry2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:20:14.377182095Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T22:21:01.63995298Z",
+          "id": "341597a6ba892d7506f7e78c5c9e10aa3091d0b430effa46879186eb17cc1a93",
+          "name": "i4f-pressure-transition-residual-pulse-20261025T2220Z-retry2",
+          "oom_killed": false,
+          "started_at": "2026-10-25T22:20:14.377182095Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 5687922,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792966861569549773,
+      "size_bytes": 6190045,
+      "source_path": "results/runs/i4f-pressure-transition-residual-pulse-20261025T2220Z-retry2/case/log.cold-coupled",
+      "source_sha256": "630f3b7c458086959c9fbaea279bdeaacb83418975985d8e238c73a456e8f2a9",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:54.856256+00:00"
+    },
+    {
+      "archive_bytes": 437397,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/5c5a6ed739290929-log.compressibleInterFoamPressureClampStress.zst",
+      "archive_sha256": "57a42c85b76519fa8753408027a75e39696be147675a1cb92e5a5647020ba520",
+      "archived_utc": "2026-10-26T22:47:55.370839+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T05:51:50.683566474Z",
+          "id": "74c440cff64b61a917954d61ea665ce4b50778c5ff5033315063d125649c1d3a",
+          "name": "i4f-pressure-clamp-stress-native4-20261024T0549Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T05:49:38.329884674Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T05:51:50.683566474Z",
+          "id": "74c440cff64b61a917954d61ea665ce4b50778c5ff5033315063d125649c1d3a",
+          "name": "i4f-pressure-clamp-stress-native4-20261024T0549Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T05:49:38.329884674Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 4882828,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792821110619394890,
+      "size_bytes": 5320225,
+      "source_path": "results/runs/i4f-pressure-clamp-stress-native4-20261024T0549Z/case/log.compressibleInterFoamPressureClampStress",
+      "source_sha256": "2d71cc357ba736df92a4a7020b169ac8104df8ca3ac42c4ed0004f3be534fed7",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:55.465411+00:00"
+    },
+    {
+      "archive_bytes": 290684,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/5902667b03a2a312-log.compressibleInterFoam.upwind-restart.zst",
+      "archive_sha256": "41db2ed4cec6547d9efc296bc6a23d9e0d0871b3abdb53badd2d90e187408580",
+      "archived_utc": "2026-10-26T22:47:55.913618+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T03:52:34.063202925Z",
+          "id": "7a938609cab31970b281e1226092dd6f50a1c48229ebd0b1297dadb2d8d5c695",
+          "name": "i4f-dt1e5-upwind-restart-20261024T034700Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T03:49:33.286384355Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 4021058,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792813953862434341,
+      "size_bytes": 4311742,
+      "source_path": "results/runs/i4f-upwind-restart-field-analysis-20261024T035500Z/case/log.compressibleInterFoam.upwind-restart",
+      "source_sha256": "45a2812e0e8296d10810c9b99d41d2696e7e6a4ce726aa7d59d7921aae27bc65",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:56.055079+00:00"
+    },
+    {
+      "archive_bytes": 290684,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/0ff00c4146f0518b-log.compressibleInterFoam.upwind-restart.zst",
+      "archive_sha256": "41db2ed4cec6547d9efc296bc6a23d9e0d0871b3abdb53badd2d90e187408580",
+      "archived_utc": "2026-10-26T22:47:56.471704+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T03:52:34.063202925Z",
+          "id": "7a938609cab31970b281e1226092dd6f50a1c48229ebd0b1297dadb2d8d5c695",
+          "name": "i4f-dt1e5-upwind-restart-20261024T034700Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T03:49:33.286384355Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 4021058,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792813953862434341,
+      "size_bytes": 4311742,
+      "source_path": "results/runs/i4f-upwind-restart-field-analysis-20261024T035500Z/analysis-case/log.compressibleInterFoam.upwind-restart",
+      "source_sha256": "45a2812e0e8296d10810c9b99d41d2696e7e6a4ce726aa7d59d7921aae27bc65",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:56.557078+00:00"
+    },
+    {
+      "archive_bytes": 290684,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/fbc554b55c109a5c-log.compressibleInterFoam.upwind-restart.zst",
+      "archive_sha256": "41db2ed4cec6547d9efc296bc6a23d9e0d0871b3abdb53badd2d90e187408580",
+      "archived_utc": "2026-10-26T22:47:56.958740+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T03:52:34.063202925Z",
+          "id": "7a938609cab31970b281e1226092dd6f50a1c48229ebd0b1297dadb2d8d5c695",
+          "name": "i4f-dt1e5-upwind-restart-20261024T034700Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T03:49:33.286384355Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 4021058,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792813953862434341,
+      "size_bytes": 4311742,
+      "source_path": "results/runs/i4f-partial-drained-dt1e5-upwind-restart-20261024T034700Z-attempt3/case/log.compressibleInterFoam.upwind-restart",
+      "source_sha256": "45a2812e0e8296d10810c9b99d41d2696e7e6a4ce726aa7d59d7921aae27bc65",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:57.052244+00:00"
+    },
+    {
+      "archive_bytes": 154003,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/45f2bd155bd46a6d-log.solver.zst",
+      "archive_sha256": "64f94103694344fe5ab4ed6099f9e154bff679ae6a2fc6f423cd71fabe36fe4e",
+      "archived_utc": "2026-10-26T22:47:57.672655+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:19:14.215657435Z",
+          "id": "8cb7a368262de6e8524fecaeff627e6eb1d83c497f67d9d1ddd9e01c413ece04",
+          "name": "i4f-effective-sp-20261024T221911Z-passivity-v3-off-a2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:19:11.505350018Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:19:34.987295706Z",
+          "id": "be090274fe50973be433a4ae905d618fac643980334e37312df4797d1dc7a0c1",
+          "name": "i4f-effective-sp-20261024T221927Z-effective-sp16-a1",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:19:27.741973726Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T22:18:51.200147079Z",
+          "id": "dfd5f8438265d03bde866f86d89359488d050117a18e9d8da15b56a32a8114c2",
+          "name": "i4f-effective-sp-20261024T221850Z-passivity-v3-off",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:18:50.521559819Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 2116375,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792880374924789564,
+      "size_bytes": 2270378,
+      "source_path": "results/runs/i4f-frozen-alpha-effective-sp-20261024T221631Z/cases/effective-sp16-a1/log.solver",
+      "source_sha256": "1d9f8bc633475ecc14d46c93317d7f1cd5dfb210b1d7a0f3eb0b301a886458b0",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:57.777976+00:00"
+    },
+    {
+      "archive_bytes": 145374,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/c00925fa53566ec8-log.solver.zst",
+      "archive_sha256": "60bd83d0e9ae13006ff549e80dad996eec2997a2c0a8e42b1156d81f235e4ef3",
+      "archived_utc": "2026-10-26T22:47:58.256788+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:13:00.934953434Z",
+          "id": "0fa651c1b94d57f1250aea6fc4da7f1e471d8b54831b6e5e897045582507a02d",
+          "name": "i4f-frozen-alpha-outer-20261024T221253Z-frozen-16outer",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:12:53.912811434Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:12:46.452282874Z",
+          "id": "07744c9197f5cded668034f67c60d06d1f90814beadb63fce13c7d052ae369d3",
+          "name": "i4f-frozen-alpha-outer-20261024T221242Z-frozen-8outer",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:12:42.371287089Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:12:35.061381113Z",
+          "id": "cb808a863b3590a3a8d1aa4e8bc4643ba5ca0cf17138b4133d0e204dce5ac3d0",
+          "name": "i4f-frozen-alpha-outer-20261024T221233Z-passivity-v2-flag-on",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:12:33.34896372Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 2076965,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792879980870553670,
+      "size_bytes": 2222339,
+      "source_path": "results/runs/i4f-frozen-alpha-outer-count-20261024T221020Z/cases/frozen-16outer/log.solver",
+      "source_sha256": "e26fbd30ed8c9a74eb78b3dcc4db712b6baeaf756f7427ac5e5dac706d6da2e2",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:58.323728+00:00"
+    },
+    {
+      "archive_bytes": 149892,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/fd6f2951de0c8249-log.compressibleInterFoam.pmin-trigger-capture.zst",
+      "archive_sha256": "9b8fe66c6e0a6e5c06bd7b88486ffae4667d77df154d905bc99170c070e06512",
+      "archived_utc": "2026-10-26T22:47:58.776914+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T04:20:50.416258796Z",
+          "id": "01b6fc62d3165c7244d4ec61a7d2652bb297bab87c2f3805c09db7b6943f7bd2",
+          "name": "i4f-pmin-trigger-field-capture-20261024T0416Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T04:19:08.353615665Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 2066190,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792815650203167147,
+      "size_bytes": 2216082,
+      "source_path": "results/runs/i4f-pmin-trigger-field-capture-20261024T0416Z/case/log.compressibleInterFoam.pmin-trigger-capture",
+      "source_sha256": "910b57cffa512a140d551852f403e38b988c711ff4eacd9d532d814f8fc8137c",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:58.890568+00:00"
+    },
+    {
+      "archive_bytes": 172676,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/12c93e51c0d77447-log.stock-profile.zst",
+      "archive_sha256": "44c84608544bb3fd2c99ad1f81098bc01db9aabe715a22064486b8e62c26b640",
+      "archived_utc": "2026-10-26T22:47:59.317673+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T08:27:51.588914158Z",
+          "id": "08c5e41afd5d805727348f0b2954550658de6be8a3cca6684116e9d915f653c2",
+          "name": "i4f-stock-passivity-profile-20261024T081608Z-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T08:18:00.186293854Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 127,
+          "finished_at": "2026-10-24T08:16:53.596952976Z",
+          "id": "082916a30cd66fd140cd8ecc963624d02080c959bc9d46fc58adfd59c764e973",
+          "name": "i4f-stock-passivity-profile-20261024T081608Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T08:16:53.244085319Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 2029741,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792830471522696763,
+      "size_bytes": 2202417,
+      "source_path": "results/runs/i4f-stock-passivity-profile-20261024T081608Z/case/log.stock-profile",
+      "source_sha256": "fc1b9b205c4465ec0d11d70df3739202657a418ae430b65318e572eb8f4c4148",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:59.405320+00:00"
+    },
+    {
+      "archive_bytes": 148748,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/b508471b9b9c9773-log.compressibleInterFoam.same-scheme-restart.zst",
+      "archive_sha256": "07f844fa1f5bb358bc4e229d322866feba9822512acb1b62b4e8c8d20f4c44d2",
+      "archived_utc": "2026-10-26T22:47:59.817260+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T03:55:35.897363315Z",
+          "id": "77ac48d630278ef75dd358670d044d7583d77d010adc8adc2983c5690b3a0cbd",
+          "name": "i4f-dt1e5-linearupwind-restart-control-20261024T035300Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T03:53:57.852070274Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 2048336,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792814135695959817,
+      "size_bytes": 2197084,
+      "source_path": "results/runs/i4f-partial-drained-dt1e5-linearupwind-restart-control-20261024T035300Z/case/log.compressibleInterFoam.same-scheme-restart",
+      "source_sha256": "df92b74857bfd17c6876adf6c44676083923bf570806ee5b16a9460fd4aebd0a",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:47:59.906160+00:00"
+    },
+    {
+      "archive_bytes": 151728,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/31c4b173ff2bda51-log.compressibleInterFoam.fine-pfloor-tail.zst",
+      "archive_sha256": "89757b55cccf83fbafc4ed18d0f3b98364279ac1663c4ef711c9991c4376746b",
+      "archived_utc": "2026-10-26T22:48:00.324984+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T05:00:59.809461647Z",
+          "id": "4c18f0a8753c3d65151e5cf0017823963583b4f3e2668ea2576f8f5575b467c9",
+          "name": "i4f-fine-pfloor-hook-tail-20261024T0455Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T04:56:22.565753263Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1779070,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792818059723417421,
+      "size_bytes": 1930798,
+      "source_path": "results/runs/i4f-fine-pfloor-hook-tail-20261024T0455Z/case/log.compressibleInterFoam.fine-pfloor-tail",
+      "source_sha256": "ba35c08bf443f48feaf12ac4ea3a0c6b5fa4334c2d35ee918a6c40e52d284a90",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:00.468489+00:00"
+    },
+    {
+      "archive_bytes": 97315,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/d91028efa8935517-log.pressure-floor-replay.zst",
+      "archive_sha256": "3cfc70bff4760764040ddb3570607b23090571d3f1e3e7867763f7d11832f237",
+      "archived_utc": "2026-10-26T22:48:01.050673+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:46:59.794360252Z",
+          "id": "c18c3e4442445adcf82856919151a0ec2dfec2078b582d8d591199002a75addc",
+          "name": "i4f-pmin10-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.978328081Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:47:02.001095566Z",
+          "id": "cc5df0eafdbdd89295e4a6ac8e6aa817228b03b12d3f6e2871f7d0b8a236fa39",
+          "name": "i4f-pmin5-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.980791631Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:47:02.001095566Z",
+          "id": "cc5df0eafdbdd89295e4a6ac8e6aa817228b03b12d3f6e2871f7d0b8a236fa39",
+          "name": "i4f-pmin5-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.980791631Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:47:02.001095566Z",
+          "id": "cc5df0eafdbdd89295e4a6ac8e6aa817228b03b12d3f6e2871f7d0b8a236fa39",
+          "name": "i4f-pmin5-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.980791631Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1669837,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792921621937645743,
+      "size_bytes": 1767152,
+      "source_path": "results/runs/i4f-pmin-replay-pair-20261025T094149Z/pmin-5k/case/log.pressure-floor-replay",
+      "source_sha256": "c49682952741eb8b6b1e4496c58541d05175dde8ad70b05316b81180d7e181ae",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:01.151867+00:00"
+    },
+    {
+      "archive_bytes": 151750,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/73d7b8f27bd640bd-log.compressibleInterFoam.rank12-continuation.zst",
+      "archive_sha256": "55932814ff3bb19cdd5eb54d49570507f255fe00df9ad3d6969bf5c59301dd95",
+      "archived_utc": "2026-10-26T22:48:01.521134+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T04:39:39.01656143Z",
+          "id": "fb737a5478547e00db9fa81c5b702355894dae8be01e14edb8e56c3caaab9a2d",
+          "name": "i4f-fine-postmarker-restart-20261024T0434Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T04:37:30.46769211Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1575355,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792811465051927883,
+      "size_bytes": 1727105,
+      "source_path": "results/runs/i4f-fine-postmarker-restart-20261024T0434Z/case/log.compressibleInterFoam.rank12-continuation",
+      "source_sha256": "a316663e096d48db94fc319009b259088abecfbfdb46f78edbb438cf3ea1fbc7",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:01.620255+00:00"
+    },
+    {
+      "archive_bytes": 98533,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/9132f5c76d16d62e-log.cold-coupled.zst",
+      "archive_sha256": "3279a807850ace00309e8b4fb641c1056317ab9edec35dccaf05897609308eca",
+      "archived_utc": "2026-10-26T22:48:02.107412+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T19:17:38.822033427Z",
+          "id": "9865352cd738bf6362b3c571c8b26b9993cf1dff7ae3bdb2b1d4b47a5dd5e0fd",
+          "name": "i4f-pressure-audit-short-proof-20261025T1916Z-lean",
+          "oom_killed": false,
+          "started_at": "2026-10-25T19:17:01.628337405Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T19:17:38.822033427Z",
+          "id": "9865352cd738bf6362b3c571c8b26b9993cf1dff7ae3bdb2b1d4b47a5dd5e0fd",
+          "name": "i4f-pressure-audit-short-proof-20261025T1916Z-lean",
+          "oom_killed": false,
+          "started_at": "2026-10-25T19:17:01.628337405Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T19:17:38.822033427Z",
+          "id": "9865352cd738bf6362b3c571c8b26b9993cf1dff7ae3bdb2b1d4b47a5dd5e0fd",
+          "name": "i4f-pressure-audit-short-proof-20261025T1916Z-lean",
+          "oom_killed": false,
+          "started_at": "2026-10-25T19:17:01.628337405Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1439804,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792955858715880979,
+      "size_bytes": 1538337,
+      "source_path": "results/runs/i4f-pressure-audit-short-proof-20261025T1916Z-lean/case/log.cold-coupled",
+      "source_sha256": "35a76f88ccf29a8f0a15c9d1e5281c47c56b9969a45b2c45e6bf185a5cd86900",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:02.254654+00:00"
+    },
+    {
+      "archive_bytes": 59181,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/c7d8663b7d0123ab-log.cold-coupled.zst",
+      "archive_sha256": "21c4089f5451d176d9292ce890e0b6a77bb45d91f354a76e999ac5bb286121c7",
+      "archived_utc": "2026-10-26T22:48:02.859832+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T10:56:09.978973101Z",
+          "id": "4b978bc247175eec9152be53abbdd9868090d5d44409fdee46de0d1a230b4f62",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-fixed16",
+          "oom_killed": false,
+          "started_at": "2026-10-25T10:54:07.670838411Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T10:56:09.978973101Z",
+          "id": "4b978bc247175eec9152be53abbdd9868090d5d44409fdee46de0d1a230b4f62",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-fixed16",
+          "oom_killed": false,
+          "started_at": "2026-10-25T10:54:07.670838411Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T10:56:09.978973101Z",
+          "id": "4b978bc247175eec9152be53abbdd9868090d5d44409fdee46de0d1a230b4f62",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-fixed16",
+          "oom_killed": false,
+          "started_at": "2026-10-25T10:54:07.670838411Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1381243,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792925769852123225,
+      "size_bytes": 1440424,
+      "source_path": "results/runs/i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-fixed16/case/log.cold-coupled",
+      "source_sha256": "308268f9ebe58c72bbbabfa6619f879c7cff71f0e5d168f1249d884eef693fc5",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:02.987994+00:00"
+    },
+    {
+      "archive_bytes": 59181,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/62d041492745941f-log.cold-coupled.zst",
+      "archive_sha256": "21c4089f5451d176d9292ce890e0b6a77bb45d91f354a76e999ac5bb286121c7",
+      "archived_utc": "2026-10-26T22:48:03.308537+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T11:04:35.952982338Z",
+          "id": "391006098c353deeaedcea99cfd61ed8e4fdac29ad5c418714dd4e570965c1cf",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-fixed8-samepartition",
+          "oom_killed": false,
+          "started_at": "2026-10-25T11:02:18.239098232Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1381243,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792925769852123225,
+      "size_bytes": 1440424,
+      "source_path": "results/runs/i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-fixed8-samepartition/analysis/reconstruction/fixed16/case/log.cold-coupled",
+      "source_sha256": "308268f9ebe58c72bbbabfa6619f879c7cff71f0e5d168f1249d884eef693fc5",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:03.410730+00:00"
+    },
+    {
+      "archive_bytes": 58109,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/d82a12641b03d197-log.cold-coupled.zst",
+      "archive_sha256": "cdf8cce4aea37598f14caf157c48cc17452639eb4e7d9fe3866abc1373319c57",
+      "archived_utc": "2026-10-26T22:48:03.897815+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T10:59:06.860681042Z",
+          "id": "859d2e74f7a64dc133c083d08c0bbff87e0ffaa63c5ab431f46b1abacd622355",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-residualControl",
+          "oom_killed": false,
+          "started_at": "2026-10-25T10:57:10.800654793Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T10:59:06.860681042Z",
+          "id": "859d2e74f7a64dc133c083d08c0bbff87e0ffaa63c5ab431f46b1abacd622355",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-residualControl",
+          "oom_killed": false,
+          "started_at": "2026-10-25T10:57:10.800654793Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T10:59:06.860681042Z",
+          "id": "859d2e74f7a64dc133c083d08c0bbff87e0ffaa63c5ab431f46b1abacd622355",
+          "name": "i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-residualControl",
+          "oom_killed": false,
+          "started_at": "2026-10-25T10:57:10.800654793Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1382265,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792925946739618339,
+      "size_bytes": 1440374,
+      "source_path": "results/runs/i4f-two-tank-four-mouth-pimple-equivalence-20261025T1051Z-residualControl/case/log.cold-coupled",
+      "source_sha256": "8eef9a48c60d7ce34662294438c9aca29deda42c929540a33d41a34e8be23008",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:04.056662+00:00"
+    },
+    {
+      "archive_bytes": 101786,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/ec596a0711b6689a-log.compressibleInterFoam.i4f-coarse.zst",
+      "archive_sha256": "1300d8a6ac17010bbb22e73e9f1c8ee0b0677f23ce4da0d515e67bd91df8310c",
+      "archived_utc": "2026-10-26T22:48:04.480689+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T05:39:30.044600873Z",
+          "id": "d57d1accd7ee4dce9ea1f978cd89fdbba29ec97cfd6734113a8dfb5a073856ac",
+          "name": "i4f-mules-v2512-20261024t0535z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T05:37:41.440627072Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1256391,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792820369981253419,
+      "size_bytes": 1358177,
+      "source_path": "results/runs/i4f-mules-stock-matched-20261024T0535Z/case/log.compressibleInterFoam.i4f-coarse",
+      "source_sha256": "a6bbb923d188586fac124333e0551d5438914f3837c8c0c3dd1e945381543aab",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:04.586133+00:00"
+    },
+    {
+      "archive_bytes": 72280,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/2044e73c319f5ed1-log.pressure-floor-replay.zst",
+      "archive_sha256": "609cf10f6d68bc297343253a3dd9ec92efe22533fe035b62ad98c33ceb1fcb41",
+      "archived_utc": "2026-10-26T22:48:05.092153+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:46:59.794360252Z",
+          "id": "c18c3e4442445adcf82856919151a0ec2dfec2078b582d8d591199002a75addc",
+          "name": "i4f-pmin10-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.978328081Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:46:59.794360252Z",
+          "id": "c18c3e4442445adcf82856919151a0ec2dfec2078b582d8d591199002a75addc",
+          "name": "i4f-pmin10-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.978328081Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:46:59.794360252Z",
+          "id": "c18c3e4442445adcf82856919151a0ec2dfec2078b582d8d591199002a75addc",
+          "name": "i4f-pmin10-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.978328081Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-25T09:47:02.001095566Z",
+          "id": "cc5df0eafdbdd89295e4a6ac8e6aa817228b03b12d3f6e2871f7d0b8a236fa39",
+          "name": "i4f-pmin5-replay-20261025T094149Z",
+          "oom_killed": false,
+          "started_at": "2026-10-25T09:46:41.980791631Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1245718,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792921619719643969,
+      "size_bytes": 1317998,
+      "source_path": "results/runs/i4f-pmin-replay-pair-20261025T094149Z/pmin-10k/case/log.pressure-floor-replay",
+      "source_sha256": "e5b083387902b7a4a280e0e7ef57754ee22cf7d55e563764df0fb11112e1b1b3",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:05.256491+00:00"
+    },
+    {
+      "archive_bytes": 143404,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/f002af963badff5d-log.floor-defect-pair.zst",
+      "archive_sha256": "d6393734b1a55f5a0984d2951439aa63ecaec04c22386ffc847c6a3b315fa1b0",
+      "archived_utc": "2026-10-26T22:48:05.756751+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:08:24.821589443Z",
+          "id": "a46055755d218935c4ed5343027c50f18871b2773346530e488af97c9bd6c296",
+          "name": "i4f-first-floor-repro-20261024T070655Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:08:13.984760898Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:08:24.821589443Z",
+          "id": "a46055755d218935c4ed5343027c50f18871b2773346530e488af97c9bd6c296",
+          "name": "i4f-first-floor-repro-20261024T070655Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:08:13.984760898Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1156982,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792827060507410111,
+      "size_bytes": 1300386,
+      "source_path": "results/runs/i4f-first-floor-defect-audit-20261024T070655Z/floor-pair/floor10000/case/log.floor-defect-pair",
+      "source_sha256": "5932ff0bea85c1b4edf0eb4c23901afc517f81fd9af6d6c29ba3aedad821c2d5",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:05.865544+00:00"
+    },
+    {
+      "archive_bytes": 110633,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/193f2b107057fdcd-log.compressibleInterFoamPressureClampTrace.zst",
+      "archive_sha256": "15be355a240017e46036b9e241588276e64680a0f12b49d7d730be3791ad502d",
+      "archived_utc": "2026-10-26T22:48:06.308473+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:16:27.469283603Z",
+          "id": "1248058ee29a696bc55fdf1cd5573abba78df465069652352f240b1c73a3faac",
+          "name": "i4f-fine-cold-pressure-trace-20261024T0712Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:12:37.003772941Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:16:27.469283603Z",
+          "id": "1248058ee29a696bc55fdf1cd5573abba78df465069652352f240b1c73a3faac",
+          "name": "i4f-fine-cold-pressure-trace-20261024T0712Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:12:37.003772941Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1139647,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792826187384255012,
+      "size_bytes": 1250280,
+      "source_path": "results/runs/i4f-fine-cold-pressure-trace-20261024T0712Z/case/log.compressibleInterFoamPressureClampTrace",
+      "source_sha256": "8c94f54393a2ba7cd7ef2e4b0c795229a96e403d9e361b143dd0301e2805e90c",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:06.446998+00:00"
+    },
+    {
+      "archive_bytes": 122335,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/4b3bfdfaf14b9e80-log.floor-defect-pair.zst",
+      "archive_sha256": "462c87537a66cbd4ec9091af17d7277398ba07e00066f92d8fe04c0ed055abd1",
+      "archived_utc": "2026-10-26T22:48:06.815566+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:08:24.821589443Z",
+          "id": "a46055755d218935c4ed5343027c50f18871b2773346530e488af97c9bd6c296",
+          "name": "i4f-first-floor-repro-20261024T070655Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:08:13.984760898Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:08:24.821589443Z",
+          "id": "a46055755d218935c4ed5343027c50f18871b2773346530e488af97c9bd6c296",
+          "name": "i4f-first-floor-repro-20261024T070655Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:08:13.984760898Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1040836,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792827060449410089,
+      "size_bytes": 1163171,
+      "source_path": "results/runs/i4f-first-floor-defect-audit-20261024T070655Z/floor-pair/floor5000/case/log.floor-defect-pair",
+      "source_sha256": "b9481ec9723889c328083d95e5f7d2dbd9848f0a0c16dd9b6e28c226d7b7fa17",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:06.906670+00:00"
+    },
+    {
+      "archive_bytes": 101444,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/e693f1069a0ab1db-log.compressibleInterFoamPressureClampTrace.zst",
+      "archive_sha256": "199f438c19f7c34e97abaed82f35ea260068424511cebc25c1f39d2599bd2aa5",
+      "archived_utc": "2026-10-26T22:48:07.348913+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:45:07.841462251Z",
+          "id": "82c7902ec9a11a9d828dd821c4c6d93dba45e4dcd18c1e044321b3930e63bbfc",
+          "name": "i4f-fine-pre-event-prefix-20261024T0741Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:42:17.79438129Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T07:45:07.841462251Z",
+          "id": "82c7902ec9a11a9d828dd821c4c6d93dba45e4dcd18c1e044321b3930e63bbfc",
+          "name": "i4f-fine-pre-event-prefix-20261024T0741Z",
+          "oom_killed": false,
+          "started_at": "2026-10-24T07:42:17.79438129Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1037814,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792827907755213157,
+      "size_bytes": 1139258,
+      "source_path": "results/runs/i4f-fine-pre-event-prefix-20261024T0741Z/case/log.compressibleInterFoamPressureClampTrace",
+      "source_sha256": "f619963c4e667aa0e8f60535be49c8a5e6b73c345fbbb1196fde357442af9f21",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:07.472643+00:00"
+    },
+    {
+      "archive_bytes": 81766,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/55289f723102cbc1-log.solver.zst",
+      "archive_sha256": "06c65197f56a1def470e2ca84188ee531957f012ee05ffc4fc3f7e2a66ef73de",
+      "archived_utc": "2026-10-26T22:48:08.012663+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:13:00.934953434Z",
+          "id": "0fa651c1b94d57f1250aea6fc4da7f1e471d8b54831b6e5e897045582507a02d",
+          "name": "i4f-frozen-alpha-outer-20261024T221253Z-frozen-16outer",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:12:53.912811434Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:12:46.452282874Z",
+          "id": "07744c9197f5cded668034f67c60d06d1f90814beadb63fce13c7d052ae369d3",
+          "name": "i4f-frozen-alpha-outer-20261024T221242Z-frozen-8outer",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:12:42.371287089Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:12:35.061381113Z",
+          "id": "cb808a863b3590a3a8d1aa4e8bc4643ba5ca0cf17138b4133d0e204dce5ac3d0",
+          "name": "i4f-frozen-alpha-outer-20261024T221233Z-passivity-v2-flag-on",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:12:33.34896372Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1044486,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792879966387545277,
+      "size_bytes": 1126252,
+      "source_path": "results/runs/i4f-frozen-alpha-outer-count-20261024T221020Z/cases/frozen-8outer/log.solver",
+      "source_sha256": "e0fed76edb04b46d9d85ab03ac82772d59eccede2591828c18ea31e6cb0a7b46",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:08.184076+00:00"
+    },
+    {
+      "archive_bytes": 74633,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/77c82cc75d4b22a1-log.solver.zst",
+      "archive_sha256": "b4f0913d1998ce85a7623e0c03b0b0dd6d829c763ba7692ba1388eb065f931f4",
+      "archived_utc": "2026-10-26T22:48:08.915914+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 134,
+          "finished_at": "2026-10-24T21:56:40.690515178Z",
+          "id": "f613f625e6ed6bf6c6bf862a93a6e8f3e3632b2714f29f0ebf5958bb7d3b675c",
+          "name": "i4f-frozen-alpha-20261024T215640Z-passivity-v7-control",
+          "oom_killed": false,
+          "started_at": "2026-10-24T21:56:40.26068002Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T21:57:31.599309373Z",
+          "id": "6375f234dba891ce5ae853d29101ecaf3172cbea75806dfb678dca296d6e1bbf",
+          "name": "i4f-frozen-alpha-20261024T215724Z-pulse-frozen-sp",
+          "oom_killed": false,
+          "started_at": "2026-10-24T21:57:24.221061122Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T21:57:04.11526147Z",
+          "id": "ee886bc5f1c016f9e8a05164e7cfae1dbdd25e4a1ea763d2aa88b3634ba00f59",
+          "name": "i4f-frozen-alpha-20261024T215701Z-passivity-v7-control-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T21:57:01.273471649Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T21:57:09.092302879Z",
+          "id": "ea4a2102cb4dabf6e4735e9416fc29d5d0ff84741a9487c4b4ced1195ab2a76a",
+          "name": "i4f-frozen-alpha-20261024T215706Z-passivity-flag-off",
+          "oom_killed": false,
+          "started_at": "2026-10-24T21:57:06.324142996Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 1002737,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792879051523117970,
+      "size_bytes": 1077370,
+      "source_path": "results/runs/i4f-frozen-alpha-source-20261024T215100Z/cases/pulse-frozen-sp/log.solver",
+      "source_sha256": "979992ef8db08860a559f8d5ff3797c22cd727737f116d22878acc043f2b16ce",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:09.017943+00:00"
+    },
+    {
+      "archive_bytes": 100621,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/da26563820cde01b-log.compressibleInterFoamWaterEosPair.zst",
+      "archive_sha256": "6a6d9759194715eea08f8e0a493b674f67a0331ac0c80733b17f873ca0835acc",
+      "archived_utc": "2026-10-26T22:48:09.669359+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T06:37:02.413465859Z",
+          "id": "4144d0f98bc374416b418cd3b320f5710a01c642d7b51001aef062b20601dba0",
+          "name": "i4f-water-eos-pair-20261024T062507Z-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:37:01.108880181Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T06:37:02.412224359Z",
+          "id": "edaaff06c4f67e3b5d92ec8967964d03393387240151f78496a79616f34ef671",
+          "name": "i4f-water-eos-pair-20261024T062507Z-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:37:00.853296509Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T06:37:02.413465859Z",
+          "id": "4144d0f98bc374416b418cd3b320f5710a01c642d7b51001aef062b20601dba0",
+          "name": "i4f-water-eos-pair-20261024T062507Z-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:37:01.108880181Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 1,
+          "finished_at": "2026-10-24T06:37:02.412224359Z",
+          "id": "edaaff06c4f67e3b5d92ec8967964d03393387240151f78496a79616f34ef671",
+          "name": "i4f-water-eos-pair-20261024T062507Z-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:37:00.853296509Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T06:41:05.92056874Z",
+          "id": "07a7d3d8f16b2ec8dbcac418983f4779907236a0932a739162633d8aed33f4e8",
+          "name": "i4f-water-eos-pair-20261024T062507Z-attempt2-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:40:45.321951054Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T06:40:50.879466108Z",
+          "id": "05f336062604f125b11251f38eea34fc269b31b8b5583db662451facb3bede24",
+          "name": "i4f-water-eos-pair-20261024T062507Z-attempt2-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:40:45.071294051Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T06:41:05.92056874Z",
+          "id": "07a7d3d8f16b2ec8dbcac418983f4779907236a0932a739162633d8aed33f4e8",
+          "name": "i4f-water-eos-pair-20261024T062507Z-attempt2-weakEOS",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:40:45.321951054Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T06:40:50.879466108Z",
+          "id": "05f336062604f125b11251f38eea34fc269b31b8b5583db662451facb3bede24",
+          "name": "i4f-water-eos-pair-20261024T062507Z-attempt2-rhoConst",
+          "oom_killed": false,
+          "started_at": "2026-10-24T06:40:45.071294051Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 934806,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792824065857387107,
+      "size_bytes": 1035427,
+      "source_path": "results/runs/i4f-water-eos-pair-20261024T062507Z/attempt2/case-adiabaticPerfectFluid/log.compressibleInterFoamWaterEosPair",
+      "source_sha256": "15f02369f373a4efaf1c085ddfdc000171f4d0275610f3dc6e724f5e5f82ce79",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:09.763979+00:00"
+    },
+    {
+      "archive_bytes": 62018,
+      "archive_path": "results/archives/i4f-closed-log-retention-20261026T2240Z/4d958276a4644456-log.cold-coupled.zst",
+      "archive_sha256": "b58db68398d9221934e36167ce2edf0bbe2b382abf0ec00d282b57bbc6b8b972",
+      "archived_utc": "2026-10-26T22:48:10.210438+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; decompressed SHA/size verified",
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:23:21.219727742Z",
+          "id": "c87281d719f4dcb868bd8a3f3f235b46201427ddd3fe7285952af791ffb5d405",
+          "name": "i4f-twooutlet-air-water-phi-scaled-tail-20261024T220016Z-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:23:11.248150292Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:23:21.219727742Z",
+          "id": "c87281d719f4dcb868bd8a3f3f235b46201427ddd3fe7285952af791ffb5d405",
+          "name": "i4f-twooutlet-air-water-phi-scaled-tail-20261024T220016Z-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:23:11.248150292Z",
+          "status": "exited"
+        },
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-24T22:23:21.219727742Z",
+          "id": "c87281d719f4dcb868bd8a3f3f235b46201427ddd3fe7285952af791ffb5d405",
+          "name": "i4f-twooutlet-air-water-phi-scaled-tail-20261024T220016Z-attempt2",
+          "oom_killed": false,
+          "started_at": "2026-10-24T22:23:11.248150292Z",
+          "status": "exited"
+        }
+      ],
+      "estimated_net_bytes_freed": 972061,
+      "gid": 1000,
+      "inventory_status": "eligible",
+      "inventory_terminal_marker": {
+        "End_in_last_128KiB": true,
+        "failure_marker_in_last_128KiB": false
+      },
+      "mode": 420,
+      "mtime_ns": 1792880601151929444,
+      "size_bytes": 1034079,
+      "source_path": "results/runs/i4f-twooutlet-air-water-phi-scaled-tail-20261024T220016Z-attempt2/case/log.cold-coupled",
+      "source_sha256": "d316491b50989bc689166e6f5371c1783396bf635a037e2414332ed4041b4909",
+      "source_unlinked": true,
+      "uid": 1000,
+      "unlinked_utc": "2026-10-26T22:48:10.349727+00:00"
+    }
+  ],
+  "restore_command": "python3 results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py --manifest results/archives/manifests/i4f-closed-log-retention-20261026T2240Z.json --archive-root . --destination-root . --path <exact_source_path_from_manifest>",
+  "restore_helper": "results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py",
+  "restore_helper_sha256": "9ed92ab427a876a24e1cf6940a625d00c044346b848636e40b3cd870663c1076",
+  "schema": "i4f-closed-solver-log-restore-manifest/v1",
+  "scope": "Lossless raw zstd frames for closed pre-2026-10-26 I4F text solver logs. No fields, meshes, dictionaries, sources, or unrelated projects included."
+}

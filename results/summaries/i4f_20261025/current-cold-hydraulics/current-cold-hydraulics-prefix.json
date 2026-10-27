@@ -1,0 +1,1516 @@
+{
+  "analysis_command": ".venv/bin/python scripts/run_local.py --threads 1 --timeout 300 -- nice -n 19 .venv/bin/python results/runs/i4f-current-cold-hydraulics-20261026T2126Z/scripts/analyze_current_cold_hydraulics.py",
+  "analysis_source": {
+    "private_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/scripts/analyze_current_cold_hydraulics.py",
+    "sha256": "a497f53885390e68eb40e5bc0a2141228cf5b10ab4a9f08110a5e1104e38671e"
+  },
+  "capture_command": ".venv/bin/python scripts/run_local.py --threads 1 --timeout 300 -- nice -n 19 .venv/bin/python results/runs/i4f-current-cold-hydraulics-20261026T2126Z/scripts/analyze_current_cold_hydraulics.py --capture",
+  "capture_manifest_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/capture-manifest.json",
+  "capture_manifest_sha256": "c735fa8cc6587585fdd3b8610e7865b607d2d6d5c536126f62a7904613a90375",
+  "caveats": [
+    "The current run remains a prefix at the stated cutoff; absence of a later checkpoint is not run completion.",
+    "The current full-source predictor-off continuation and earlier standard-source CFD differ in solver/source lineage; their differences are descriptive and not a one-factor causal estimate.",
+    "The n=gamma and n=1 arms share the model's assumed compact geometry and Cd; agreement is an internal consistency check, not independent experimental validation.",
+    "The reduced ODE has one representative tank and two branches; CFD reports both tanks separately and the table averages their native seat flows and withdrawals.",
+    "CFD tank inventory and withdrawal use VOF alpha volume. They are not water-mass measurements for the finite-water EOS run.",
+    "Headspace p/T values are local probes, not volume-weighted gas means. The pressure comparison therefore mixes local CFD samples with bulk-model pressure and is a screening comparison.",
+    "No fit, valve coefficient adjustment, or thermal-exponent fit was performed. No validation gate is claimed."
+  ],
+  "complete_current_native_times_compared_s": [
+    0.100021166664,
+    0.150021166664,
+    0.200021166664,
+    0.250021166664
+  ],
+  "created_utc": "2026-10-26T21:33:27.503178+00:00",
+  "current_solver": {
+    "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "bundle": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "container_id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+    "container_name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "container_running_at_capture": true,
+    "momentum_predictor_enabled": false,
+    "native_process_prefix_has_14_fields_plus_dgdt": true,
+    "restart_qualification": "Cold-derived predictor-off history resumed operationally from the accepted 0.090771166664 s checkpoint after the prior bundle hit its disk guard. The continuation retained 14 native fields plus dgdt and uniform/time; full-apparatus bitwise continuity is not claimed.",
+    "started_at_utc": "2026-10-26T20:50:36.466720222Z",
+    "static_case_tree_sha256": "88ad17ef9dd980bb18fb01e2a42c07988fcf359d352f3fe5ef3924aa81a47f89",
+    "static_input_tree_sha256": "d4e5b458bbd5581a265021704f3809b4689a1808b144dc7dcb631186c6ef604c"
+  },
+  "current_solver_guard_time_at_capture_s": 0.295021166664,
+  "current_solver_prefix_cutoff_s": 0.294771166664,
+  "current_solver_status_at_capture": "running",
+  "measurement_definitions": {
+    "native_Q": "Sum the second numeric data column, sum(alphaPhi0.water), over seat A1+A2 and B1+B2; the first data column after time is face area and is excluded. Positive seat-zone flux is read from the frozen face-zone convention. Mean Q is the average of the two tank totals.",
+    "pressure": "Mean of two local p point probes in tank headspaces. CFD point probes are not tank-volume means; reduced-model pressure is bulk gas pressure.",
+    "probe_alignment": "Every p/T probe is interpolated to the exact full-precision tank/seat sample time; at a prefix endpoint only, the nearest probe row is accepted within its 8-digit printed-time rounding bound (5.1 ns). No extrapolation beyond that representation bound. Model histories are bracket-interpolated at the same time.",
+    "probe_fields": [
+      "p",
+      "T",
+      "alpha.water",
+      "U"
+    ],
+    "probe_locations_m": [
+      [
+        1.25,
+        -0.55,
+        1.6
+      ],
+      [
+        1.25,
+        0.55,
+        1.6
+      ]
+    ],
+    "tank_inventory": "Native volFieldValue volIntegrate(alpha.water) in each tank cellZone. Reported as VOF volume, not EOS water mass.",
+    "withdrawal": "Initial native tank alpha.water volume minus sampled tank alpha.water volume; mean of tanks A and B, converted to litres. The reduced model uses its own t=0 tank-water volume."
+  },
+  "measurement_source_dictionaries": {
+    "path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/measurement-source-dictionaries.json",
+    "record": {
+      "captured_utc": "2026-10-26T21:32:31.534658+00:00",
+      "files": {
+        "current.fv_solution": {
+          "bytes": 1920,
+          "label": "current.fv_solution",
+          "mtime_ns": 1793046161854564487,
+          "sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff",
+          "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-fvSolution.txt",
+          "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/system/fvSolution",
+          "stable_read_attempt": 1
+        },
+        "current.numerical_health_objects": {
+          "bytes": 1827,
+          "label": "current.numerical_health_objects",
+          "mtime_ns": 1792926839746519164,
+          "sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f",
+          "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-i4fNumericalHealthObjects.txt",
+          "source_path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/system/i4fNumericalHealthObjects",
+          "stable_read_attempt": 1
+        },
+        "prior.fv_solution": {
+          "bytes": 1920,
+          "label": "prior.fv_solution",
+          "mtime_ns": 1792926103995583270,
+          "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+          "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-fvSolution.txt",
+          "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/fvSolution",
+          "stable_read_attempt": 1
+        },
+        "prior.numerical_health_objects": {
+          "bytes": 1827,
+          "label": "prior.numerical_health_objects",
+          "mtime_ns": 1792926839746519164,
+          "sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f",
+          "snapshot_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-i4fNumericalHealthObjects.txt",
+          "source_path": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z/case/system/i4fNumericalHealthObjects",
+          "stable_read_attempt": 1
+        }
+      },
+      "purpose": "Hash-frozen source for momentumPredictor setting and headspace-probe fields/locations.",
+      "schema": "i4f-hydraulics-measurement-source-dictionaries/v1"
+    },
+    "sha256": "184d6a113ad7c49c84a2f3ce538ec81b1363c65be704e56d25b8725c253d3176"
+  },
+  "prefix_curve_rows": 816,
+  "prefix_only": true,
+  "prior_cfd": {
+    "binary_sha256": "dcecb2950004d7c133f1433bba00b619649468ec373072f73aed48ae390be0b5",
+    "bundle": "results/runs/i4f-flush-stock-cold-stage01-20261026T064444Z",
+    "container_id": "23c2bb49e6e4e8e7aeda5c786d9a1d6bf3911d1206f8498357e7b406946f55dc",
+    "momentum_predictor_enabled": true,
+    "source_family": "earlier standard-source DCEC cold case; not a matched momentum-predictor-only control for this full-source Pno continuation",
+    "started_at_utc": "2026-10-26T06:44:49.045490597Z"
+  },
+  "private_csv_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/analysis/current-cold-hydraulics-common-times.csv",
+  "private_csv_sha256": "cc24c4d6a38f00d8b5cdb0b40d8ff3af7b428da473964aea8622da8dba7cb1b6",
+  "public_artifacts": {
+    "analysis_script": {
+      "bytes": 40165,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/analyze_current_cold_hydraulics.py",
+      "sha256": "a497f53885390e68eb40e5bc0a2141228cf5b10ab4a9f08110a5e1104e38671e",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/scripts/analyze_current_cold_hydraulics.py",
+      "source_sha256": "a497f53885390e68eb40e5bc0a2141228cf5b10ab4a9f08110a5e1104e38671e"
+    },
+    "capture_manifest": {
+      "bytes": 23267,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/capture-manifest.json",
+      "sha256": "c735fa8cc6587585fdd3b8610e7865b607d2d6d5c536126f62a7904613a90375",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/capture-manifest.json",
+      "source_sha256": "c735fa8cc6587585fdd3b8610e7865b607d2d6d5c536126f62a7904613a90375"
+    },
+    "comparison_csv": {
+      "bytes": 4516,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/matched-time-comparison.csv",
+      "sha256": "cc24c4d6a38f00d8b5cdb0b40d8ff3af7b428da473964aea8622da8dba7cb1b6",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/analysis/current-cold-hydraulics-common-times.csv",
+      "source_sha256": "cc24c4d6a38f00d8b5cdb0b40d8ff3af7b428da473964aea8622da8dba7cb1b6"
+    },
+    "current_continuation_lineage": {
+      "bytes": 3684,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-continuation-lineage.json",
+      "sha256": "d217f6e4adc25573864c60d62f4c92e835207a49ab37ada220e4758151c77e30",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-continuation_lineage.json",
+      "source_sha256": "d217f6e4adc25573864c60d62f4c92e835207a49ab37ada220e4758151c77e30"
+    },
+    "current_continuation_seed": {
+      "bytes": 4607,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-continuation-seed.json",
+      "sha256": "280d70bbfccc9ecf399543ad71368a2028a3f06791c27abb240a8dd3bd6ad39a",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-continuation_seed.json",
+      "source_sha256": "280d70bbfccc9ecf399543ad71368a2028a3f06791c27abb240a8dd3bd6ad39a"
+    },
+    "current_fvSolution": {
+      "bytes": 1920,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-fvSolution.txt",
+      "sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-fvSolution.txt",
+      "source_sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff"
+    },
+    "current_i4fNumericalHealthObjects": {
+      "bytes": 1827,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-i4fNumericalHealthObjects.txt",
+      "sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-i4fNumericalHealthObjects.txt",
+      "source_sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f"
+    },
+    "current_input_freeze": {
+      "bytes": 8208,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-input-freeze.json",
+      "sha256": "3b1c06ddc7bd4d3848deb00a1ec31914ed2b91b2387002b16a8e0fe0e82cc87f",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-input_freeze.json",
+      "source_sha256": "3b1c06ddc7bd4d3848deb00a1ec31914ed2b91b2387002b16a8e0fe0e82cc87f"
+    },
+    "current_launch_manifest": {
+      "bytes": 9499,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-launch-manifest.json",
+      "sha256": "51e6dcc0ac643e303a92931459ec03541352b135a8500df21ffcd2329bd518fd",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-launch_manifest.json",
+      "source_sha256": "51e6dcc0ac643e303a92931459ec03541352b135a8500df21ffcd2329bd518fd"
+    },
+    "current_parent_input_freeze": {
+      "bytes": 7245,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-parent-input-freeze.json",
+      "sha256": "e1786af8ad6ae94ab24df910e51273b2f0d828295cd5129590dd3bfa3484fd22",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-parent_input_freeze.json",
+      "source_sha256": "e1786af8ad6ae94ab24df910e51273b2f0d828295cd5129590dd3bfa3484fd22"
+    },
+    "current_source_tree_manifest": {
+      "bytes": 20760,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/current-source-tree-manifest.json",
+      "sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/current-source_tree_manifest.json",
+      "source_sha256": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83"
+    },
+    "measurement_source_dictionaries": {
+      "bytes": 2282,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/measurement-source-dictionaries.json",
+      "sha256": "184d6a113ad7c49c84a2f3ce538ec81b1363c65be704e56d25b8725c253d3176",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/measurement-source-dictionaries.json",
+      "source_sha256": "184d6a113ad7c49c84a2f3ce538ec81b1363c65be704e56d25b8725c253d3176"
+    },
+    "model_definitions": {
+      "bytes": 46716,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/model-definitions.json",
+      "sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/model_comparison.json",
+      "source_sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab"
+    },
+    "native_initial_readiness": {
+      "bytes": 9955,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/native-initial-readiness.json",
+      "sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/native_initial_readiness.json",
+      "source_sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c"
+    },
+    "prefix_plot": {
+      "bytes": 300554,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/current-cold-hydraulics-prefix.png",
+      "sha256": "4818358d22b18fb01a99bac4956f7240e2a569d081d75084ab58bc566bf95eb5",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/analysis/current-cold-hydraulics-prefix.png",
+      "source_sha256": "4818358d22b18fb01a99bac4956f7240e2a569d081d75084ab58bc566bf95eb5"
+    },
+    "prior_experiment": {
+      "bytes": 9131,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/prior-experiment.json",
+      "sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-experiment.json",
+      "source_sha256": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446"
+    },
+    "prior_fvSolution": {
+      "bytes": 1920,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/prior-fvSolution.txt",
+      "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-fvSolution.txt",
+      "source_sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d"
+    },
+    "prior_i4fNumericalHealthObjects": {
+      "bytes": 1827,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/prior-i4fNumericalHealthObjects.txt",
+      "sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-i4fNumericalHealthObjects.txt",
+      "source_sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f"
+    },
+    "prior_input_freeze": {
+      "bytes": 46287,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/prior-input-freeze.json",
+      "sha256": "d81f983e0aa7ff8c5ac885aaeafaf61484cd743cbab1cba2b7be3a8bf79bbcec",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-input_freeze.json",
+      "source_sha256": "d81f983e0aa7ff8c5ac885aaeafaf61484cd743cbab1cba2b7be3a8bf79bbcec"
+    },
+    "prior_launch_manifest": {
+      "bytes": 9391,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/prior-launch-manifest.json",
+      "sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-launch_manifest.json",
+      "source_sha256": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588"
+    },
+    "prior_source_lock": {
+      "bytes": 3590,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/prior-run-source-lock.json",
+      "sha256": "94ec657c9d5d8dce3fff89be31a2493fc4998e7903b4f24bf52adb58ca9653e1",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/prior-source_lock.json",
+      "source_sha256": "94ec657c9d5d8dce3fff89be31a2493fc4998e7903b4f24bf52adb58ca9653e1"
+    },
+    "published_model_comparison": {
+      "bytes": 56930,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/published-flush-early-cfd-model-comparison.json",
+      "sha256": "c738a05fb91c799917dd65a1a6417bc3efd3e335c979d3c19dc22059ab5a0c73",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/inputs/provenance/published_summary.json",
+      "source_sha256": "c738a05fb91c799917dd65a1a6417bc3efd3e335c979d3c19dc22059ab5a0c73"
+    },
+    "source_closure_qualification": {
+      "bytes": 2883,
+      "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/source-parent-closure-qualification.json",
+      "sha256": "f80672a33013e50169425b1829eddedb24320fe7cd09dfe7fad7bc725ddbacdf",
+      "source_path": "results/runs/i4f-current-cold-hydraulics-20261026T2126Z/analysis/source-parent-closure-qualification.json",
+      "source_sha256": "f80672a33013e50169425b1829eddedb24320fe7cd09dfe7fad7bc725ddbacdf"
+    }
+  },
+  "public_packet_path": "results/summaries/i4f_20261025/current-cold-hydraulics/current-cold-hydraulics-prefix.json",
+  "reduced_model_sources": {
+    "common_geometry_and_Cd_assumptions_across_n_arms": true,
+    "comparisons_are_non_fitted": true,
+    "histories": {
+      "n1_isothermal": {
+        "bytes": 11039854,
+        "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/history.csv",
+        "polytropic_n": 1.0,
+        "sha256": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f",
+        "source_summary_run": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z",
+        "time_step_s": 5e-05
+      },
+      "n_gamma": {
+        "bytes": 13069324,
+        "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/history.csv",
+        "polytropic_n": 1.3998145383348455,
+        "sha256": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e",
+        "source_summary_run": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z",
+        "time_step_s": 5e-05
+      }
+    },
+    "model_definitions_json": "results/runs/i4f-flush-early-model-cfd-20261026T081148Z/inputs-snapshot/model/comparison.json",
+    "model_definitions_sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+    "n1_isothermal": 1.0,
+    "n_gamma": 1.3998145383348455,
+    "one_representative_tank_with_two_branches": true,
+    "published_comparison_json": "results/summaries/i4f_20261025/flush-early-cfd-model-comparison.json",
+    "published_comparison_sha256": "c738a05fb91c799917dd65a1a6417bc3efd3e335c979d3c19dc22059ab5a0c73"
+  },
+  "repository": {
+    "dirty": true,
+    "porcelain_sha256": "08b8ced917c2a66923442480183497e05403de8a4c3bb7c00aee40ec77cbfb52",
+    "porcelain_status_at_capture": [
+      "?? results/summaries/i4f_20261025/firststep-energy/"
+    ],
+    "revision": "af96c1ba45de4465889cd01a17d703ebedd21351"
+  },
+  "requested_times_not_available": [
+    {
+      "label": "0.300021166664",
+      "reason": "beyond frozen current native-row prefix cutoff",
+      "requested_time_s": 0.300021166664
+    }
+  ],
+  "rows": [
+    {
+      "current_mean_local_probe_T_K": 289.9184401374415,
+      "current_mean_local_probe_p_abs_Pa": 1153884.1519475335,
+      "current_mean_tank_seat_flux_Q_m3_s": 0.12639540999999999,
+      "current_mean_tank_withdrawal_from_native_initial_L": 9.438465001320061,
+      "current_minus_ngamma_Q_m3_s": 0.0006553245139162833,
+      "current_minus_ngamma_probe_vs_bulk_gas_T_K": 0.3874646442766334,
+      "current_minus_ngamma_probe_vs_bulk_pressure_Pa": 4955.757939415285,
+      "current_minus_ngamma_withdrawal_L": 0.018655411982203773,
+      "current_minus_prior_mean_Q_m3_s": 1.10126499999752e-05,
+      "current_minus_prior_mean_withdrawal_L": -0.03595499999997642,
+      "current_tankA_alpha_volume_m3": 1.34056154,
+      "current_tankA_local_probe_T_K": 289.9184601374415,
+      "current_tankA_local_probe_p_abs_Pa": 1153884.2019482006,
+      "current_tankA_seat_flux_Q_m3_s": 0.1263952759,
+      "current_tankB_alpha_volume_m3": 1.34056153,
+      "current_tankB_local_probe_T_K": 289.91842013744156,
+      "current_tankB_local_probe_p_abs_Pa": 1153884.1019468664,
+      "current_tankB_seat_flux_Q_m3_s": 0.12639554409999998,
+      "current_vs_ngamma_Q_percent": 0.5211739051893769,
+      "current_vs_ngamma_probe_vs_bulk_pressure_percent": 0.43133740668787657,
+      "current_vs_prior_Q_percent": 0.008713615154153519,
+      "native_sampling": {
+        "current": {
+          "QA_m3_s": 0.1263952759,
+          "QB_m3_s": 0.12639554409999998,
+          "flux_A1": 0.06319316,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "flux_A2": 0.0632021159,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "flux_B1": 0.0631933938,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "flux_B2": 0.0632021503,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "mean_probe_T_K": 289.9184401374415,
+          "mean_probe_p_abs_Pa": 1153884.1519475335,
+          "mean_tank_Q_m3_s": 0.12639540999999999,
+          "probe_T_A": 289.9184601374415,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "probe_T_B": 289.91842013744156,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "probe_p_A": 1153884.2019482006,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "probe_p_B": 1153884.1019468664,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "tankA": 1.34056154,
+          "tankA_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "tankB": 1.34056153,
+          "tankB_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          }
+        },
+        "ode_n1": {
+          "largest_offset_s": 2.8833335997138776e-05,
+          "lower_time_s": 0.09999999999999715,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.10004999999999714
+        },
+        "ode_ngamma": {
+          "largest_offset_s": 2.8833335997138776e-05,
+          "lower_time_s": 0.09999999999999715,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.10004999999999714
+        },
+        "prior": {
+          "QA_m3_s": 0.1263842851,
+          "QB_m3_s": 0.1263845096,
+          "flux_A1": 0.0631875488,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "flux_A2": 0.0631967363,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "flux_B1": 0.063187833,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "flux_B2": 0.0631966766,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "mean_probe_T_K": 289.9057401379753,
+          "mean_probe_p_abs_Pa": 1153734.3019542056,
+          "mean_tank_Q_m3_s": 0.12638439735,
+          "probe_T_A": 289.9057601379753,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "probe_T_B": 289.90572013797527,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "probe_p_A": 1153734.3019548727,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "probe_p_B": 1153734.3019535383,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499996640000085,
+            "lower_time_s": 0.099771167,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.10002117
+          },
+          "tankA": 1.34052558,
+          "tankA_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          },
+          "tankB": 1.34052558,
+          "tankB_bracket": {
+            "lower_time_s": 0.100021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.100021166664
+          }
+        }
+      },
+      "ode_n1_bulk_gas_T_K": 293.15,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 1163170.4301324496,
+      "ode_n1_tank_water_volume_m3": 1.340548656286905,
+      "ode_n1_total_branch_Q_m3_s": 0.12658680083896762,
+      "ode_n1_withdrawal_L": 9.45134371523082,
+      "ode_ngamma_bulk_gas_T_K": 289.5309754931649,
+      "ode_ngamma_bulk_gas_pressure_abs_Pa": 1148928.3940081182,
+      "ode_ngamma_tank_water_volume_m3": 1.3405801904127979,
+      "ode_ngamma_total_branch_Q_m3_s": 0.1257400854860837,
+      "ode_ngamma_withdrawal_L": 9.419809589337858,
+      "ode_values": {
+        "n1": {
+          "air_mach_lower": 0.00260898253725855,
+          "air_mach_upper": 0.0026089331670535896,
+          "air_pressure_drop_lower_Pa": 0.09454110356099193,
+          "air_pressure_drop_upper_Pa": 0.09730148201112342,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": 1.6653345369377348e-16,
+          "branch_volume_balance_residual_upper_m3": 3.3306690738754696e-16,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.0632939992808546,
+          "flow_upper_m3_s": 0.06329280155811302,
+          "front_froude_lower": 0.5219573480680664,
+          "front_froude_upper": 0.5219474709834611,
+          "front_s_lower_m": 1.8527857845417208,
+          "front_s_upper_m": 1.8551659771261069,
+          "front_z_lower_m": 0.5,
+          "front_z_upper_m": 0.5,
+          "gas_pressure_abs_Pa": 1163170.4301324496,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.30794854412147504,
+          "inertance_lower_kg_m4": 26164.376184109322,
+          "inertance_upper_kg_m4": 26197.988409919824,
+          "integrated_branch_inflow_lower_m3": 0.004725701740484822,
+          "integrated_branch_inflow_upper_m3": 0.004725641974746718,
+          "liquid_drive_lower_Pa": 1072787.8377562875,
+          "liquid_drive_upper_Pa": 1072787.8377562875,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.340548656286905,
+          "time_s": 0.100021166664,
+          "total_branch_flow_m3_s": 0.12658680083896762,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.262099665322222,
+          "water_volume_balance_residual_m3": 2.220446049250313e-16,
+          "wet_line_volume_lower_m3": 0.13096570971131713,
+          "wet_line_volume_upper_m3": 0.13113395561090493
+        },
+        "ngamma": {
+          "air_mach_lower": 0.00259153159346833,
+          "air_mach_upper": 0.002591482452000914,
+          "air_pressure_drop_lower_Pa": 0.09345193799812505,
+          "air_pressure_drop_upper_Pa": 0.09618014536116891,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": 1.942890293094024e-16,
+          "branch_volume_balance_residual_upper_m3": -1.3877787807814457e-16,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.06287063882982258,
+          "flow_upper_m3_s": 0.06286944665626111,
+          "front_froude_lower": 0.5184660834804546,
+          "front_froude_upper": 0.5184562521574596,
+          "front_s_lower_m": 1.8525627245357303,
+          "front_s_upper_m": 1.8549429205088028,
+          "front_z_lower_m": 0.5,
+          "front_z_upper_m": 0.5,
+          "gas_pressure_abs_Pa": 1148928.3940081182,
+          "gas_temperature_K": 289.5309754931649,
+          "gas_volume_m3": 0.3079170099955821,
+          "inertance_lower_kg_m4": 26161.226210724886,
+          "inertance_upper_kg_m4": 26194.8384843892,
+          "integrated_branch_inflow_lower_m3": 0.004709934557771941,
+          "integrated_branch_inflow_upper_m3": 0.004709875031565467,
+          "liquid_drive_lower_Pa": 1058545.9561933111,
+          "liquid_drive_upper_Pa": 1058545.9561933111,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.3405801904127979,
+          "time_s": 0.100021166664,
+          "total_branch_flow_m3_s": 0.1257400854860837,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.2620681311963283,
+          "water_volume_balance_residual_m3": -4.440892098500626e-16,
+          "wet_line_volume_lower_m3": 0.1309499425286042,
+          "wet_line_volume_upper_m3": 0.13111818866772415
+        }
+      },
+      "prior_mean_local_probe_T_K": 289.9057401379753,
+      "prior_mean_local_probe_p_abs_Pa": 1153734.3019542056,
+      "prior_mean_tank_seat_flux_Q_m3_s": 0.12638439735,
+      "prior_mean_tank_withdrawal_from_native_initial_L": 9.474420001320038,
+      "prior_tankA_alpha_volume_m3": 1.34052558,
+      "prior_tankA_local_probe_T_K": 289.9057601379753,
+      "prior_tankA_local_probe_p_abs_Pa": 1153734.3019548727,
+      "prior_tankA_seat_flux_Q_m3_s": 0.1263842851,
+      "prior_tankB_alpha_volume_m3": 1.34052558,
+      "prior_tankB_local_probe_T_K": 289.90572013797527,
+      "prior_tankB_local_probe_p_abs_Pa": 1153734.3019535383,
+      "prior_tankB_seat_flux_Q_m3_s": 0.1263845096,
+      "target_label": "0.100021166664",
+      "time_s": 0.100021166664
+    },
+    {
+      "current_mean_local_probe_T_K": 286.79775028175857,
+      "current_mean_local_probe_p_abs_Pa": 1110571.7038410704,
+      "current_mean_tank_seat_flux_Q_m3_s": 0.2653836605,
+      "current_mean_tank_withdrawal_from_native_initial_L": 19.057075001320033,
+      "current_minus_ngamma_Q_m3_s": 0.0009504838272105243,
+      "current_minus_ngamma_probe_vs_bulk_gas_T_K": 0.7980704756000705,
+      "current_minus_ngamma_probe_vs_bulk_pressure_Pa": 9961.388677479234,
+      "current_minus_ngamma_withdrawal_L": 0.03976440199304676,
+      "current_minus_prior_mean_Q_m3_s": 3.233850000000649e-05,
+      "current_minus_prior_mean_withdrawal_L": -0.07035999999993692,
+      "current_tankA_alpha_volume_m3": 1.33094294,
+      "current_tankA_local_probe_T_K": 286.7978202816918,
+      "current_tankA_local_probe_p_abs_Pa": 1110571.8038417376,
+      "current_tankA_seat_flux_Q_m3_s": 0.265383312,
+      "current_tankB_alpha_volume_m3": 1.33094291,
+      "current_tankB_local_probe_T_K": 286.7976802818253,
+      "current_tankB_local_probe_p_abs_Pa": 1110571.6038404033,
+      "current_tankB_seat_flux_Q_m3_s": 0.26538400900000003,
+      "current_vs_ngamma_Q_percent": 0.35944197289081325,
+      "current_vs_ngamma_probe_vs_bulk_pressure_percent": 0.9050786223095324,
+      "current_vs_prior_Q_percent": 0.01218705064525983,
+      "native_sampling": {
+        "current": {
+          "QA_m3_s": 0.265383312,
+          "QB_m3_s": 0.26538400900000003,
+          "flux_A1": 0.132676411,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "flux_A2": 0.132706901,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "flux_B1": 0.132677102,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "flux_B2": 0.132706907,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "mean_probe_T_K": 286.79775028175857,
+          "mean_probe_p_abs_Pa": 1110571.7038410704,
+          "mean_tank_Q_m3_s": 0.2653836605,
+          "probe_T_A": 286.7978202816918,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "probe_T_B": 286.7976802818253,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "probe_p_A": 1110571.8038417376,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "probe_p_B": 1110571.6038404033,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "tankA": 1.33094294,
+          "tankA_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "tankB": 1.33094291,
+          "tankB_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          }
+        },
+        "ode_n1": {
+          "largest_offset_s": 2.8833335991629294e-05,
+          "lower_time_s": 0.14999999999999164,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.15004999999999163
+        },
+        "ode_ngamma": {
+          "largest_offset_s": 2.8833335991629294e-05,
+          "lower_time_s": 0.14999999999999164,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.15004999999999163
+        },
+        "prior": {
+          "QA_m3_s": 0.265351047,
+          "QB_m3_s": 0.265351597,
+          "flux_A1": 0.13266187,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "flux_A2": 0.132689177,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "flux_B1": 0.132662331,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "flux_B2": 0.132689266,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "mean_probe_T_K": 286.77386028275936,
+          "mean_probe_p_abs_Pa": 1110273.65385308,
+          "mean_tank_Q_m3_s": 0.265351322,
+          "probe_T_A": 286.77393028275935,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "probe_T_B": 286.77379028275936,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "probe_p_A": 1110273.8038524128,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "probe_p_B": 1110273.5038537472,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.14977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.15002117
+          },
+          "tankA": 1.33087258,
+          "tankA_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          },
+          "tankB": 1.33087255,
+          "tankB_bracket": {
+            "lower_time_s": 0.150021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.150021166664
+          }
+        }
+      },
+      "ode_n1_bulk_gas_T_K": 293.15,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 1127673.2094436546,
+      "ode_n1_tank_water_volume_m3": 1.3308549635942455,
+      "ode_n1_total_branch_Q_m3_s": 0.26794092977307865,
+      "ode_n1_withdrawal_L": 19.145036407890224,
+      "ode_ngamma_bulk_gas_T_K": 285.9996798061585,
+      "ode_ngamma_bulk_gas_pressure_abs_Pa": 1100610.3151635912,
+      "ode_ngamma_tank_water_volume_m3": 1.3309826894028087,
+      "ode_ngamma_total_branch_Q_m3_s": 0.2644331766727895,
+      "ode_ngamma_withdrawal_L": 19.017310599326986,
+      "ode_values": {
+        "n1": {
+          "air_mach_lower": 0.005522343591793382,
+          "air_mach_upper": 0.005522197987778349,
+          "air_pressure_drop_lower_Pa": 0.34139105199595576,
+          "air_pressure_drop_upper_Pa": 0.3517062322159975,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": -2.220446049250313e-16,
+          "branch_volume_balance_residual_upper_m3": 8.326672684688674e-17,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.13397223106555572,
+          "flow_upper_m3_s": 0.13396869870752298,
+          "front_froude_lower": 1.1048091641586584,
+          "front_froude_upper": 1.1047800343793404,
+          "front_s_lower_m": 1.9213554299869973,
+          "front_s_upper_m": 1.923734030245339,
+          "front_z_lower_m": 0.5,
+          "front_z_upper_m": 0.5,
+          "gas_pressure_abs_Pa": 1127673.2094436546,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.3176422368141346,
+          "inertance_lower_kg_m4": 27132.692118530726,
+          "inertance_upper_kg_m4": 27166.281858084058,
+          "integrated_branch_inflow_lower_m3": 0.009572604364262516,
+          "integrated_branch_inflow_upper_m3": 0.009572432043628992,
+          "liquid_drive_lower_Pa": 1037243.2820139101,
+          "liquid_drive_upper_Pa": 1037243.2820139101,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.3308549635942455,
+          "time_s": 0.150021166664,
+          "total_branch_flow_m3_s": 0.26794092977307865,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.27179335801488264,
+          "water_volume_balance_residual_m3": 1.3322676295501878e-15,
+          "wet_line_volume_lower_m3": 0.1358126123350952,
+          "wet_line_volume_upper_m3": 0.13598074567978746
+        },
+        "ngamma": {
+          "air_mach_lower": 0.00545004764229883,
+          "air_mach_upper": 0.005449904139066908,
+          "air_pressure_drop_lower_Pa": 0.3336790687302313,
+          "air_pressure_drop_upper_Pa": 0.3437564599205446,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": 3.768281997505077e-16,
+          "branch_volume_balance_residual_upper_m3": -1.3877787807814457e-16,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.13221832903287858,
+          "flow_upper_m3_s": 0.1322148476399109,
+          "front_froude_lower": 1.0903455173019452,
+          "front_froude_upper": 1.0903168078087602,
+          "front_s_lower_m": 1.9204519451854747,
+          "front_s_upper_m": 1.9228305644874386,
+          "front_z_lower_m": 0.5,
+          "front_z_upper_m": 0.5,
+          "gas_pressure_abs_Pa": 1100610.3151635912,
+          "gas_temperature_K": 285.9996798061585,
+          "gas_volume_m3": 0.3175145110055713,
+          "inertance_lower_kg_m4": 27119.933430278208,
+          "inertance_upper_kg_m4": 27153.52343875874,
+          "integrated_branch_inflow_lower_m3": 0.009508740786923514,
+          "integrated_branch_inflow_upper_m3": 0.009508569812403493,
+          "liquid_drive_lower_Pa": 1010181.0091652047,
+          "liquid_drive_upper_Pa": 1010181.0091652047,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.3309826894028087,
+          "time_s": 0.150021166664,
+          "total_branch_flow_m3_s": 0.2644331766727895,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.27166563220631773,
+          "water_volume_balance_residual_m3": -3.1604347587140827e-16,
+          "wet_line_volume_lower_m3": 0.1357487487577556,
+          "wet_line_volume_upper_m3": 0.13591688344856218
+        }
+      },
+      "prior_mean_local_probe_T_K": 286.77386028275936,
+      "prior_mean_local_probe_p_abs_Pa": 1110273.65385308,
+      "prior_mean_tank_seat_flux_Q_m3_s": 0.265351322,
+      "prior_mean_tank_withdrawal_from_native_initial_L": 19.12743500131997,
+      "prior_tankA_alpha_volume_m3": 1.33087258,
+      "prior_tankA_local_probe_T_K": 286.77393028275935,
+      "prior_tankA_local_probe_p_abs_Pa": 1110273.8038524128,
+      "prior_tankA_seat_flux_Q_m3_s": 0.265351047,
+      "prior_tankB_alpha_volume_m3": 1.33087255,
+      "prior_tankB_local_probe_T_K": 286.77379028275936,
+      "prior_tankB_local_probe_p_abs_Pa": 1110273.5038537472,
+      "prior_tankB_seat_flux_Q_m3_s": 0.265351597,
+      "target_label": "0.150021166664",
+      "time_s": 0.150021166664
+    },
+    {
+      "current_mean_local_probe_T_K": 281.45837042680785,
+      "current_mean_local_probe_p_abs_Pa": 1039677.3055257504,
+      "current_mean_tank_seat_flux_Q_m3_s": 0.4327433255,
+      "current_mean_tank_withdrawal_from_native_initial_L": 36.39499500132004,
+      "current_minus_ngamma_Q_m3_s": 0.0019910106715734233,
+      "current_minus_ngamma_probe_vs_bulk_gas_T_K": 1.4637834610834375,
+      "current_minus_ngamma_probe_vs_bulk_pressure_Pa": 17874.240373554872,
+      "current_minus_ngamma_withdrawal_L": 0.07015039614888252,
+      "current_minus_prior_mean_Q_m3_s": 5.731849999995875e-05,
+      "current_minus_prior_mean_withdrawal_L": -0.12506000000001194,
+      "current_tankA_alpha_volume_m3": 1.31360504,
+      "current_tankA_local_probe_T_K": 281.45851042687457,
+      "current_tankA_local_probe_p_abs_Pa": 1039677.6055257504,
+      "current_tankA_seat_flux_Q_m3_s": 0.432742902,
+      "current_tankB_alpha_volume_m3": 1.31360497,
+      "current_tankB_local_probe_T_K": 281.4582304267411,
+      "current_tankB_local_probe_p_abs_Pa": 1039677.0055257505,
+      "current_tankB_seat_flux_Q_m3_s": 0.432743749,
+      "current_vs_ngamma_Q_percent": 0.4622170567711203,
+      "current_vs_ngamma_probe_vs_bulk_pressure_percent": 1.7492842782667264,
+      "current_vs_prior_Q_percent": 0.013247135121695475,
+      "native_sampling": {
+        "current": {
+          "QA_m3_s": 0.432742902,
+          "QB_m3_s": 0.432743749,
+          "flux_A1": 0.216341973,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "flux_A2": 0.216400929,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "flux_B1": 0.216342946,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "flux_B2": 0.216400803,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "mean_probe_T_K": 281.45837042680785,
+          "mean_probe_p_abs_Pa": 1039677.3055257504,
+          "mean_tank_Q_m3_s": 0.4327433255,
+          "probe_T_A": 281.45851042687457,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "probe_T_B": 281.4582304267411,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "probe_p_A": 1039677.6055257504,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "probe_p_B": 1039677.0055257505,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "tankA": 1.31360504,
+          "tankA_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "tankB": 1.31360497,
+          "tankB_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          }
+        },
+        "ode_n1": {
+          "largest_offset_s": 2.883333598613369e-05,
+          "lower_time_s": 0.19999999999998613,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.20004999999998613
+        },
+        "ode_ngamma": {
+          "largest_offset_s": 2.883333598613369e-05,
+          "lower_time_s": 0.19999999999998613,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.20004999999998613
+        },
+        "prior": {
+          "QA_m3_s": 0.432685426,
+          "QB_m3_s": 0.43268658800000004,
+          "flux_A1": 0.216315302,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "flux_A2": 0.216370124,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "flux_B1": 0.21631627,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "flux_B2": 0.216370318,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "mean_probe_T_K": 281.41713042820896,
+          "mean_probe_p_abs_Pa": 1039188.6055390944,
+          "mean_tank_Q_m3_s": 0.43268600700000004,
+          "probe_T_A": 281.41729042820896,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "probe_T_B": 281.41697042820897,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "probe_p_A": 1039188.9055390945,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "probe_p_B": 1039188.3055390945,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.19977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.20002117
+          },
+          "tankA": 1.31347999,
+          "tankA_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          },
+          "tankB": 1.3134799,
+          "tankB_bracket": {
+            "lower_time_s": 0.200021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.200021166664
+          }
+        }
+      },
+      "ode_n1_bulk_gas_T_K": 293.15,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 1068360.3220778431,
+      "ode_n1_tank_water_volume_m3": 1.3132202030658118,
+      "ode_n1_total_branch_Q_m3_s": 0.44127399199900125,
+      "ode_n1_withdrawal_L": 36.77979693632394,
+      "ode_ngamma_bulk_gas_T_K": 279.9945869657244,
+      "ode_ngamma_bulk_gas_pressure_abs_Pa": 1021803.0651521955,
+      "ode_ngamma_tank_water_volume_m3": 1.3136751553969646,
+      "ode_ngamma_total_branch_Q_m3_s": 0.4307523148284266,
+      "ode_ngamma_withdrawal_L": 36.32484460517116,
+      "ode_values": {
+        "n1": {
+          "air_mach_lower": 0.009094817015134055,
+          "air_mach_upper": 0.009094524033820734,
+          "air_pressure_drop_lower_Pa": 0.7790551992603709,
+          "air_pressure_drop_upper_Pa": 0.804086308382636,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": -3.0531133177191805e-16,
+          "branch_volume_balance_residual_upper_m3": 3.0531133177191805e-16,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.22064054986748746,
+          "flow_upper_m3_s": 0.2206334421315138,
+          "front_froude_lower": 1.8195240874903797,
+          "front_froude_upper": 1.8194654731657722,
+          "front_s_lower_m": 2.0460976942957623,
+          "front_s_upper_m": 2.0484725933447465,
+          "front_z_lower_m": 0.5,
+          "front_z_upper_m": 0.5,
+          "gas_pressure_abs_Pa": 1068360.3220778431,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.3352769973425682,
+          "inertance_lower_kg_m4": 28894.25762527354,
+          "inertance_upper_kg_m4": 28927.795097676095,
+          "integrated_branch_inflow_lower_m3": 0.018390115440015318,
+          "integrated_branch_inflow_upper_m3": 0.018389681496309238,
+          "liquid_drive_lower_Pa": 977845.1490491951,
+          "liquid_drive_upper_Pa": 977845.1490491951,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.3132202030658118,
+          "time_s": 0.200021166664,
+          "total_branch_flow_m3_s": 0.44127399199900125,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.28942811854331557,
+          "water_volume_balance_residual_m3": 5.721349438043116e-16,
+          "wet_line_volume_lower_m3": 0.14463012341084808,
+          "wet_line_volume_upper_m3": 0.14479799513246747
+        },
+        "ngamma": {
+          "air_mach_lower": 0.008877960387652074,
+          "air_mach_upper": 0.008877676482192566,
+          "air_pressure_drop_lower_Pa": 0.7474825020762359,
+          "air_pressure_drop_upper_Pa": 0.7714590182388251,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": -2.7755575615628914e-17,
+          "branch_volume_balance_residual_upper_m3": -5.551115123125783e-17,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.2153796011919491,
+          "flow_upper_m3_s": 0.21537271363647745,
+          "front_froude_lower": 1.7761393930453122,
+          "front_froude_upper": 1.7760825944509828,
+          "front_s_lower_m": 2.042879512597818,
+          "front_s_upper_m": 2.0452545161649405,
+          "front_z_lower_m": 0.5,
+          "front_z_upper_m": 0.5,
+          "gas_pressure_abs_Pa": 1021803.0651521955,
+          "gas_temperature_K": 279.9945869657244,
+          "gas_volume_m3": 0.3348220450114154,
+          "inertance_lower_kg_m4": 28848.81161782014,
+          "inertance_upper_kg_m4": 28882.35056619035,
+          "integrated_branch_inflow_lower_m3": 0.01816263558046156,
+          "integrated_branch_inflow_upper_m3": 0.01816220902470669,
+          "liquid_drive_lower_Pa": 931290.0779243885,
+          "liquid_drive_upper_Pa": 931290.0779243885,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.3136751553969646,
+          "time_s": 0.200021166664,
+          "total_branch_flow_m3_s": 0.4307523148284266,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.28897316621215935,
+          "water_volume_balance_residual_m3": -2.6645352591003757e-15,
+          "wet_line_volume_lower_m3": 0.14440264355129406,
+          "wet_line_volume_upper_m3": 0.14457052266086529
+        }
+      },
+      "prior_mean_local_probe_T_K": 281.41713042820896,
+      "prior_mean_local_probe_p_abs_Pa": 1039188.6055390944,
+      "prior_mean_tank_seat_flux_Q_m3_s": 0.43268600700000004,
+      "prior_mean_tank_withdrawal_from_native_initial_L": 36.52005500132005,
+      "prior_tankA_alpha_volume_m3": 1.31347999,
+      "prior_tankA_local_probe_T_K": 281.41729042820896,
+      "prior_tankA_local_probe_p_abs_Pa": 1039188.9055390945,
+      "prior_tankA_seat_flux_Q_m3_s": 0.432685426,
+      "prior_tankB_alpha_volume_m3": 1.3134799,
+      "prior_tankB_local_probe_T_K": 281.41697042820897,
+      "prior_tankB_local_probe_p_abs_Pa": 1039188.3055390945,
+      "prior_tankB_seat_flux_Q_m3_s": 0.43268658800000004,
+      "target_label": "0.200021166664",
+      "time_s": 0.200021166664
+    },
+    {
+      "current_mean_local_probe_T_K": 274.1089355458363,
+      "current_mean_local_probe_p_abs_Pa": 947686.6116044794,
+      "current_mean_tank_seat_flux_Q_m3_s": 0.6087776885,
+      "current_mean_tank_withdrawal_from_native_initial_L": 62.38509000132009,
+      "current_minus_ngamma_Q_m3_s": 0.0045772375695352086,
+      "current_minus_ngamma_probe_vs_bulk_gas_T_K": 2.3277029230266635,
+      "current_minus_ngamma_probe_vs_bulk_pressure_Pa": 27032.267450550105,
+      "current_minus_ngamma_withdrawal_L": 0.17537545330892357,
+      "current_minus_prior_mean_Q_m3_s": -2.5130499999859168e-05,
+      "current_minus_prior_mean_withdrawal_L": -0.19610500000000286,
+      "current_tankA_alpha_volume_m3": 1.28761497,
+      "current_tankA_local_probe_T_K": 274.1091705457696,
+      "current_tankA_local_probe_p_abs_Pa": 947687.0766043459,
+      "current_tankA_seat_flux_Q_m3_s": 0.608776991,
+      "current_tankB_alpha_volume_m3": 1.28761485,
+      "current_tankB_local_probe_T_K": 274.10870054590305,
+      "current_tankB_local_probe_p_abs_Pa": 947686.1466046128,
+      "current_tankB_seat_flux_Q_m3_s": 0.608778386,
+      "current_vs_ngamma_Q_percent": 0.7575693732909818,
+      "current_vs_ngamma_probe_vs_bulk_pressure_percent": 2.93620158555733,
+      "current_vs_prior_Q_percent": -0.004127855393497968,
+      "native_sampling": {
+        "current": {
+          "QA_m3_s": 0.608776991,
+          "QB_m3_s": 0.608778386,
+          "flux_A1": 0.304378563,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "flux_A2": 0.304398428,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "flux_B1": 0.304379714,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "flux_B2": 0.304398672,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "mean_probe_T_K": 274.1089355458363,
+          "mean_probe_p_abs_Pa": 947686.6116044794,
+          "mean_tank_Q_m3_s": 0.6087776885,
+          "probe_T_A": 274.1091705457696,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "probe_T_B": 274.10870054590305,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "probe_p_A": 947687.0766043459,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "probe_p_B": 947686.1466046128,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "tankA": 1.28761497,
+          "tankA_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "tankB": 1.28761485,
+          "tankB_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          }
+        },
+        "ode_n1": {
+          "largest_offset_s": 2.8833335980638086e-05,
+          "lower_time_s": 0.24999999999998063,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.2500499999999806
+        },
+        "ode_ngamma": {
+          "largest_offset_s": 2.8833335980638086e-05,
+          "lower_time_s": 0.24999999999998063,
+          "method": "linear_interpolation_bracketed_no_extrapolation",
+          "upper_time_s": 0.2500499999999806
+        },
+        "prior": {
+          "QA_m3_s": 0.6088022719999999,
+          "QB_m3_s": 0.608803366,
+          "flux_A1": 0.304392746,
+          "flux_A1_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "flux_A2": 0.304409526,
+          "flux_A2_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "flux_B1": 0.304393198,
+          "flux_B1_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "flux_B2": 0.304410168,
+          "flux_B2_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "mean_probe_T_K": 274.03641554890544,
+          "mean_probe_p_abs_Pa": 946934.4266294327,
+          "mean_tank_Q_m3_s": 0.6088028189999999,
+          "probe_T_A": 274.03671054883876,
+          "probe_T_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "probe_T_B": 274.0361205489721,
+          "probe_T_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "probe_p_A": 946934.9666294326,
+          "probe_p_A_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "probe_p_B": 946933.8866294327,
+          "probe_p_B_bracket": {
+            "largest_offset_s": 0.0002499966639999962,
+            "lower_time_s": 0.24977117,
+            "method": "linear_interpolation_bracketed_no_extrapolation",
+            "upper_time_s": 0.25002117
+          },
+          "tankA": 1.28741888,
+          "tankA_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          },
+          "tankB": 1.28741873,
+          "tankB_bracket": {
+            "lower_time_s": 0.250021166664,
+            "method": "exact_native_row",
+            "upper_time_s": 0.250021166664
+          }
+        }
+      },
+      "ode_n1_bulk_gas_T_K": 293.15,
+      "ode_n1_bulk_gas_pressure_abs_Pa": 989501.2128161357,
+      "ode_n1_tank_water_volume_m3": 1.286500027987905,
+      "ode_n1_total_branch_Q_m3_s": 0.6283006846208719,
+      "ode_n1_withdrawal_L": 63.499972014230636,
+      "ode_ngamma_bulk_gas_T_K": 271.7812326228096,
+      "ode_ngamma_bulk_gas_pressure_abs_Pa": 920654.3441539293,
+      "ode_ngamma_tank_water_volume_m3": 1.2877902854541246,
+      "ode_ngamma_total_branch_Q_m3_s": 0.6042004509304648,
+      "ode_ngamma_withdrawal_L": 62.20971454801116,
+      "ode_values": {
+        "n1": {
+          "air_mach_lower": 0.012949642536423589,
+          "air_mach_upper": 0.012948950267764806,
+          "air_pressure_drop_lower_Pa": 1.3275563564341075,
+          "air_pressure_drop_upper_Pa": 1.3746221743959992,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": -1.942890293094024e-16,
+          "branch_volume_balance_residual_upper_m3": 5.113502199557189e-16,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.3141587395402689,
+          "flow_upper_m3_s": 0.31414194508060295,
+          "front_froude_lower": 2.5907268370770447,
+          "front_froude_upper": 2.590588340667763,
+          "front_s_lower_m": 2.2351077891554283,
+          "front_s_upper_m": 2.237475649056558,
+          "front_z_lower_m": 0.5029033474307865,
+          "front_z_upper_m": 0.5076913713153614,
+          "gas_pressure_abs_Pa": 989501.2128161357,
+          "gas_temperature_K": 293.15,
+          "gas_volume_m3": 0.361997172420475,
+          "inertance_lower_kg_m4": 31563.39037972508,
+          "inertance_upper_kg_m4": 31596.828447806834,
+          "integrated_branch_inflow_lower_m3": 0.03175045176298776,
+          "integrated_branch_inflow_upper_m3": 0.03174952025124006,
+          "liquid_drive_lower_Pa": 898830.3911417782,
+          "liquid_drive_upper_Pa": 898783.5051743963,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.286500027987905,
+          "time_s": 0.250021166664,
+          "total_branch_flow_m3_s": 0.6283006846208719,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.3161482936212185,
+          "water_volume_balance_residual_m3": -3.236670202880282e-15,
+          "wet_line_volume_lower_m3": 0.15799045973382042,
+          "wet_line_volume_upper_m3": 0.1581578338873981
+        },
+        "ngamma": {
+          "air_mach_lower": 0.012452904300044764,
+          "air_mach_upper": 0.012452275391423146,
+          "air_pressure_drop_lower_Pa": 1.243963228545847,
+          "air_pressure_drop_upper_Pa": 1.287846167063799,
+          "ambient_front_screen_pass_lower": 0.0,
+          "ambient_front_screen_pass_upper": 0.0,
+          "branch_volume_balance_residual_lower_m3": -6.778836736494924e-16,
+          "branch_volume_balance_residual_upper_m3": 3.3306690738754696e-16,
+          "external_water_volume_lower_m3": 0.0,
+          "external_water_volume_upper_m3": 0.0,
+          "flow_lower_m3_s": 0.30210785413680763,
+          "flow_upper_m3_s": 0.30209259679365724,
+          "front_froude_lower": 2.4913485664900974,
+          "front_froude_upper": 2.4912227459943184,
+          "front_s_lower_m": 2.2259808346399086,
+          "front_s_upper_m": 2.228349194362268,
+          "front_z_lower_m": 0.5024053714409819,
+          "front_z_upper_m": 0.5063783709855458,
+          "gas_pressure_abs_Pa": 920654.3441539293,
+          "gas_temperature_K": 271.7812326228096,
+          "gas_volume_m3": 0.3607069149542554,
+          "inertance_lower_kg_m4": 31434.502802244886,
+          "inertance_upper_kg_m4": 31467.947928622754,
+          "integrated_branch_inflow_lower_m3": 0.03110530536473618,
+          "integrated_branch_inflow_upper_m3": 0.031104409183269614,
+          "liquid_drive_lower_Pa": 829994.4917563085,
+          "liquid_drive_upper_Pa": 829955.5867860023,
+          "outlet_flow_lower_m3_s": 0.0,
+          "outlet_flow_upper_m3_s": 0.0,
+          "tank_water_volume_m3": 1.2877902854541246,
+          "time_s": 0.250021166664,
+          "total_branch_flow_m3_s": 0.6042004509304648,
+          "total_external_water_volume_m3": 0.0,
+          "total_wet_line_water_volume_m3": 0.31485803615499713,
+          "water_volume_balance_residual_m3": -4.884981308350689e-15,
+          "wet_line_volume_lower_m3": 0.1573453133355693,
+          "wet_line_volume_upper_m3": 0.15751272281942783
+        }
+      },
+      "prior_mean_local_probe_T_K": 274.03641554890544,
+      "prior_mean_local_probe_p_abs_Pa": 946934.4266294327,
+      "prior_mean_tank_seat_flux_Q_m3_s": 0.6088028189999999,
+      "prior_mean_tank_withdrawal_from_native_initial_L": 62.58119500132009,
+      "prior_tankA_alpha_volume_m3": 1.28741888,
+      "prior_tankA_local_probe_T_K": 274.03671054883876,
+      "prior_tankA_local_probe_p_abs_Pa": 946934.9666294326,
+      "prior_tankA_seat_flux_Q_m3_s": 0.6088022719999999,
+      "prior_tankB_alpha_volume_m3": 1.28741873,
+      "prior_tankB_local_probe_T_K": 274.0361205489721,
+      "prior_tankB_local_probe_p_abs_Pa": 946933.8866294327,
+      "prior_tankB_seat_flux_Q_m3_s": 0.608803366,
+      "target_label": "0.250021166664",
+      "time_s": 0.250021166664
+    }
+  ],
+  "schema": "i4f-current-cold-hydraulics-prefix-comparison/v1",
+  "source_closure_qualification": {
+    "conclusion": "The public closure record cited by the first-step energy packet describes the 07 ancestor lineage. It is not an exact, verified source closure of the immediate 12d8 binary parent. The 12d8 run has its own frozen source-tree and reused-binary records, but this packet does not include a complete patch/diff chain from the 07 closure to every compiled 12d8 source path.",
+    "exact_12d8_closure_bridge_included": false,
+    "path": "results/summaries/i4f_20261025/current-cold-hydraulics/provenance/source-parent-closure-qualification.json",
+    "sha256": "f80672a33013e50169425b1829eddedb24320fe7cd09dfe7fad7bc725ddbacdf"
+  },
+  "source_input_sha256": {
+    "current.continuation_lineage": "d217f6e4adc25573864c60d62f4c92e835207a49ab37ada220e4758151c77e30",
+    "current.continuation_seed": "280d70bbfccc9ecf399543ad71368a2028a3f06791c27abb240a8dd3bd6ad39a",
+    "current.control_dict": "7374b1a4276cc502941d28f4446b7ef67c6afc4057707594f678f3a27f60b403",
+    "current.experiment": "c9b55196c40c699235462d4ba700f9999952538800bb9afa8803de222c791384",
+    "current.flux_A1": "b144f86d242419c6310a7f2baf546a6521a18fd0413fc7ccbeced105685f8e25",
+    "current.flux_A2": "b13d6a0a5a4dca5c28f66ddd2d7bbc6f064c8446de7d0f3d314e59656f561bb3",
+    "current.flux_B1": "ad7719216bf10ec66005273706992922ebcf33b6479d6df7ec2fe2bb4e8ab2f3",
+    "current.flux_B2": "23ee10d26f1cf42a5661534ab590249da3695fa3627824c0da736d01601e85d6",
+    "current.guardian_status": "a89bf993df568cb8eceb19f23afca71c29d1b558bc2c2f207f2b4fc911a16c81",
+    "current.input_freeze": "3b1c06ddc7bd4d3848deb00a1ec31914ed2b91b2387002b16a8e0fe0e82cc87f",
+    "current.launch_manifest": "51e6dcc0ac643e303a92931459ec03541352b135a8500df21ffcd2329bd518fd",
+    "current.ledger_objects": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+    "current.parent_input_freeze": "e1786af8ad6ae94ab24df910e51273b2f0d828295cd5129590dd3bfa3484fd22",
+    "current.probe_T": "b0755047337ba234959ca006861b32e241e9f32bf2b14e265eb593ff8d5bcd64",
+    "current.probe_p": "296e964ff435a33e5251c0cbb296d1415d42ae6a365b5f00c1d6aec294ab7d8e",
+    "current.reused_binary_build_reference": "235d872a1efeab2d94502d3d74570892a718d020c1339ee47f943b83f920ce9b",
+    "current.seat_flux_objects": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+    "current.source_tree_manifest": "e2de156fa38a9d2515f4da5881cc335cc5eb5eed15a6f8494500f21081f20b83",
+    "current.tankA": "daa857e04af91f8ed6ad4e7abac86d9726c444bbfecf39446676ffa8b95a5ec8",
+    "current.tankB": "a3c0f5c1b5abeefd935a05a5e1a6fc269c67bd5fc240ff6590ea6541425bb663",
+    "model_comparison": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+    "native_initial_readiness": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+    "prior.control_dict": "7c5afc9969b6e58d9e6f157f7f3ce09158f221fdf1d85defb23def2a152f53e1",
+    "prior.experiment": "0bc61bb37fb1a59e8cdfd09992f99cc482ae188187f0d37c9029f977a2958446",
+    "prior.flux_A1": "d0627d9d05aea4f15178fb7a471141732205ad876a3b1aa90dddd8870c29d3e6",
+    "prior.flux_A2": "29f1b338754af7124ad03f0c1a7178706af7d733d068393fdd92afc3958259a3",
+    "prior.flux_B1": "d82ef7940712598cfb44cc23c0a80cd108426c62a2b826a070e99e82e368aef7",
+    "prior.flux_B2": "3ee0cb0c66b051e3c4b5893a7d9daa93e67b4e7b18256717b56aadcab8ef91c5",
+    "prior.guardian_status": "c9bece1002e28c9bebfa36777e7519dfde130b0cd81f17a77523ede7ec11fd1b",
+    "prior.input_freeze": "d81f983e0aa7ff8c5ac885aaeafaf61484cd743cbab1cba2b7be3a8bf79bbcec",
+    "prior.launch_manifest": "32e730f3087c7a2f7d711eb0de7a41141677c80aff145952380dc75604399588",
+    "prior.ledger_objects": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+    "prior.probe_T": "5c44a68bd3939751158fbdcb424cdb2480a3ace82ad52f2ceaeb257abcad08f1",
+    "prior.probe_p": "cb62f455199ab53020ed33be79c1aa96804135ef3a120ad0279b40845bf43cbc",
+    "prior.seat_flux_objects": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+    "prior.source_lock": "94ec657c9d5d8dce3fff89be31a2493fc4998e7903b4f24bf52adb58ca9653e1",
+    "prior.tankA": "97dd6baf7f00996116f30ebd147a2acd88ada7a7ae8edb176c8ef9c209f784b2",
+    "prior.tankB": "cdd60ecbd07bb3a5dd1060aa3562ad902e1655256b5b41d45f7779be815b404c",
+    "published_summary": "c738a05fb91c799917dd65a1a6417bc3efd3e335c979d3c19dc22059ab5a0c73"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "created_utc": "2026-10-27T05:23:06.729542+00:00",
+  "disk_free_bytes_now": 21300576256,
+  "operation_status": "complete",
+  "records": [
+    {
+      "archive_allocated_bytes": 11399168,
+      "archive_bytes": 11397093,
+      "archive_path": "results/archives/i4f-terminal-log-compression-20261027T0522Z/d1315a36eea0ab06-log.cold-coupled.zst",
+      "archive_sha256": "c00a85c53f64c971173dad68a59e150108cc6a4c1ecf4d2b5aa5d5e857da2e4c",
+      "archived_utc": "2026-10-27T05:23:05.315810+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; streamed decompression SHA-256 and byte count matched",
+      "decompressed_bytes": 141896045,
+      "decompressed_sha256": "b96b22117c3a80316dc6aad4c6c5cf6030bddaa57ef14d30a57d9b6bf83c8e3c",
+      "disk_free_bytes_after_unlink": 21044609024,
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-27T04:23:37.627894255Z",
+          "id": "3b3d4b5c8159f8019d9860893b004b876d26714e544ed3ca8d1ced790f69e17e",
+          "name": "i4f-phys-a050-o8-20261027t024711z",
+          "oom_killed": false,
+          "started_at": "2026-10-27T03:35:28.999921713Z",
+          "status": "exited"
+        }
+      ],
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1793075017527554112,
+      "net_allocated_bytes_released": 130502656,
+      "size_bytes": 141896045,
+      "source_allocated_bytes": 141901824,
+      "source_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/log.cold-coupled",
+      "source_sha256": "b96b22117c3a80316dc6aad4c6c5cf6030bddaa57ef14d30a57d9b6bf83c8e3c",
+      "source_unlinked": true,
+      "status": "archived_and_unlinked",
+      "terminal_reason": "Docker exit 0; complete text log ends in OpenFOAM End and Finalising parallel run.",
+      "uid": 1000,
+      "unlinked_utc": "2026-10-27T05:23:05.460459+00:00"
+    },
+    {
+      "archive_allocated_bytes": 21069824,
+      "archive_bytes": 21068464,
+      "archive_path": "results/archives/i4f-terminal-log-compression-20261027T0522Z/7d91b109bdb306ed-log.cold-coupled.zst",
+      "archive_sha256": "2bbcde4696dc17d4397cde6ef1837631ca6fd8f3e6792cdd7f2c77a9b2231ccd",
+      "archived_utc": "2026-10-27T05:23:06.454828+00:00",
+      "compression": "zstd -1 -T1 with frame checksum; streamed decompression SHA-256 and byte count matched",
+      "decompressed_bytes": 277179700,
+      "decompressed_sha256": "d8494366323c890f12077bd9ea1aca997e025305c15e8d809f329f23e6b3d654",
+      "disk_free_bytes_after_unlink": 21300580352,
+      "docker_terminal_evidence": [
+        {
+          "exit_code": 0,
+          "finished_at": "2026-10-27T05:00:32.738133047Z",
+          "id": "de0cc3d2a13034485c2415a7bbf744355f37c583a381df5f5fddff90a18bc3f3",
+          "name": "i4f-phys-a050-o16-20261027t024711z-r007",
+          "oom_killed": false,
+          "started_at": "2026-10-27T03:37:59.016670377Z",
+          "status": "exited"
+        }
+      ],
+      "gid": 1000,
+      "mode": 420,
+      "mtime_ns": 1793077232639698452,
+      "net_allocated_bytes_released": 256114688,
+      "size_bytes": 277179700,
+      "source_allocated_bytes": 277184512,
+      "source_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/log.cold-coupled",
+      "source_sha256": "d8494366323c890f12077bd9ea1aca997e025305c15e8d809f329f23e6b3d654",
+      "source_unlinked": true,
+      "status": "archived_and_unlinked",
+      "terminal_reason": "Docker exit 0; complete text log ends in OpenFOAM End and Finalising parallel run.",
+      "uid": 1000,
+      "unlinked_utc": "2026-10-27T05:23:06.711438+00:00"
+    }
+  ],
+  "restore_command": ".venv/bin/python results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py --manifest results/archives/manifests/i4f-terminal-log-compression-20261027T0522Z.json --archive-root . --destination-root . --path <original_path>",
+  "restore_helper": "results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py",
+  "schema": "i4f-closed-solver-log-restore-manifest/v1",
+  "scope": "Lossless zstd archives of exactly two terminal I4F physical pilot solver text logs; no fields, mesh, dictionaries, source, or active-run files are included."
+}

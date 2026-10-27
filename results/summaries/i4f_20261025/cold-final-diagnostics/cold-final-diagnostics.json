@@ -1,0 +1,239 @@
+{
+  "schema": "i4f-cold-final-diagnostics-public/v1",
+  "created_utc": "2026-10-26T22:25:43.112559+00:00",
+  "scope": "compact index to preserved exploratory source and rendered evidence; no validation claim",
+  "apparatus": "corrected 299214-cell four-mouth internal pressure-discharge apparatus",
+  "cold_predictor_off_terminal": {
+    "run_bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "docker_id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+    "docker_name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "started_at": "2026-10-26T20:50:36.466720222Z",
+    "finished_at": "2026-10-26T21:59:19.36122318Z",
+    "terminal_time_s": 0.484006034892,
+    "terminal_status": "normal_End_complete_native10_checkpoint",
+    "terminal_health": {
+      "persistent_pressure_update_streak_steps": 5,
+      "final_outer_max_abs_dp_Pa": 394.0971,
+      "penultimate_outer_max_abs_dp_Pa": 394.14748,
+      "final_outer_max_abs_dU_m_s": 2.4930851,
+      "raw_pressure_floor_contacts_total": 0,
+      "raw_pressure_minimum_this_step_Pa": 45115.254,
+      "raw_clipped_liquid_mass_peak_kg": 0.0
+    },
+    "max_dp_controller": {
+      "rank": 7,
+      "rank_local_cell": 17666,
+      "global_cell": 184634,
+      "center_m": [
+        4.255145881186893,
+        0.2968588568473095,
+        0.580462055246008
+      ],
+      "signed_last_delta_p_Pa": 394.097,
+      "alpha_water": 0.0022254487576832934,
+      "p_Pa": 99693.91822924279,
+      "p_rgh_Pa": 99713.30161214831,
+      "U_m_s": [
+        -1.3704591828289996,
+        -0.8779547880009055,
+        2.4023936322431845
+      ],
+      "T_K": {
+        "common_T": 293.04730570463386,
+        "T_air": 293.04730570463386,
+        "T_water": 293.04730570463386,
+        "last_logger_T_before": 293.047,
+        "last_logger_T_after": 293.047
+      },
+      "model_k_m2_s2": 0.5771676892176646,
+      "resolved_0p5_U_squared_m2_s2": 4.210229072908323
+    },
+    "distinct_p_minimum_cell": {
+      "pmin_Pa": 45262.177,
+      "global_cell_from_native_mapping": 78182,
+      "location_m": [
+        4.220497,
+        0.71860126,
+        0.97706896
+      ]
+    },
+    "controller_geometry": {
+      "native_direct_wall_patches": [
+        "apparatusWall",
+        "lamellaSlave"
+      ],
+      "distance_to_lamellaSlave_patch_m": 0.006400617358391478,
+      "distance_to_apparatusWall_patch_m": 0.005460837531337418,
+      "lamellaSlave_bounds_m": [
+        [
+          4.216666698,
+          -0.9107597925,
+          0.5718395492
+        ],
+        [
+          4.800000191,
+          0.9107597874,
+          0.9781603146
+        ]
+      ],
+      "controller_x_from_global_patch_x_min_m": 0.03847918318689292,
+      "warm_controller_global_cell": 31926,
+      "warm_cold_controller_center_separation_m": 0.15926172237395916,
+      "interpretation": "native patch and cell geometry localizes the cell; proximity is not causal evidence"
+    },
+    "global_alpha_source_summary": {
+      "time_s": 0.484006034892,
+      "outer_iteration": 14720,
+      "alpha_corrector": 1,
+      "min_rDeltaT_minus_C_s-1": 10864.354,
+      "full_R_max_s-1": 0.00049317627,
+      "full_R_volume_L1_m3_s": 1.5898268e-08,
+      "full_R_signed_volume_integral_m3_s": -5.2224028e-09,
+      "predicted_Sp_only_lag_max_s-1": 3.0735826,
+      "predicted_Sp_only_lag_volume_L1_m3_s": 0.00063477382,
+      "predicted_Sp_only_lag_signed_volume_integral_m3_s": 0.00022455138,
+      "alpha_residual_claim": "discrete_local_equation_only"
+    },
+    "source_scope": "discrete alpha-equation residual only; local Su/Sp/divU0 were not logged at the controller, so dgdt is kept separate",
+    "phase_ledger": {
+      "campaign_initial_time_s": 0.0,
+      "campaign_initial_water_kg": 3198.008370828781,
+      "campaign_initial_gas_kg": 33.87656607230728,
+      "restart_checkpoint_time_s": 0.09077116666404433,
+      "restart_checkpoint_water_kg": 3198.008420141514,
+      "restart_checkpoint_gas_kg": 33.85728903342834,
+      "endpoint_logged_water_kg": 3198.0072,
+      "endpoint_logged_gas_kg": 33.202449,
+      "inventory_delta_from_campaign_initial_water_kg": -0.0011708287811416085,
+      "inventory_delta_from_campaign_initial_gas_kg": -0.6741170723072756,
+      "inventory_delta_from_restart_water_kg": -0.0012201415138406446,
+      "inventory_delta_from_restart_gas_kg": -0.6548400334283357,
+      "water_boundary_flux_kg_s_last_step": 2.1798248e-23,
+      "water_step_defect_kg_last_step": 3.2230259421339724e-06,
+      "water_cumulative_defect_kg_campaign_origin": -0.0011909702948287304,
+      "gas_boundary_flux_kg_s_last_step": 2.8654188,
+      "gas_step_defect_kg_last_step": 4.519783509816084e-07,
+      "gas_cumulative_defect_kg_campaign_origin": 6.269370946646034e-07,
+      "source": "trajectory step_health.csv; campaign and restart inventories from frozen continuation seed manifest",
+      "inventory_precision_qualification": "water/gas inventory values read from terminal step_health.csv retain only the solver-Pout reported precision (seven significant digits in the last row); cumulative and step defects retain the precision recorded by the diagnostic stream"
+    },
+    "trajectory_prefix_byte_identical_to_recorded_parent": true,
+    "private_detailed_json": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-final-diagnostics-20261026T2203Z/terminal-diagnostics.json",
+    "private_detailed_json_sha256": "df3a9085e0b2af3eba6962964d4bb9ca5fe92337486fec8ba1b85ac01fbf6a3d",
+    "renderer": {
+      "healthy_state_time_s": 0.390705595007,
+      "terminal_state_time_s": 0.484006034892,
+      "healthy_preview": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-final-diagnostics-20261026T2203Z/renders/t-0.390705595007/v2-preview.png",
+      "healthy_preview_sha256": "e7a03d20bc73b1c73a657d78c8d688ceb1a6a0f73905f41067ad6bccaed054dc",
+      "terminal_preview": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-final-diagnostics-20261026T2203Z/renders/t-0.484006034892/v2-preview.png",
+      "terminal_preview_sha256": "8c821f4191d7e83f73eb2cac679cb94b957c76f352d86bf48f83352f3caee0de",
+      "controller_stencil_image": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-final-diagnostics-20261026T2203Z/renders/controller-cell-184634/controller-native-alpha-pressure-stencil-v2.png",
+      "controller_stencil_image_sha256": "fdd9755a0be1cfe9a0de510512279b5f61680078139d9708435654400713a2d7",
+      "controller_vs_pmin_image": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-final-diagnostics-20261026T2203Z/renders/controller-cell-184634/controller-vs-pmin-pressure-overview-v2.png",
+      "controller_vs_pmin_image_sha256": "fe6ec4e70bfdb7c1d8863abdd92bf237fda95218a10b85bf2d7a1eb38be1af00",
+      "backend": "CPU Mesa llvmpipe"
+    }
+  },
+  "pressure_laplacian_sensitivity": {
+    "private_bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-pressure-laplacian-pno-20261026T2207Z/laplacian-limited05-on",
+    "container_id": "09366119582b687601dc9e92e3b0ed4452bc24778b7e316f7130008f1ec1a983",
+    "container_name": "i4f-pressure-laplacian-pno-warm-20261026T2210Z",
+    "started_at": "2026-10-26T22:11:46.285828924Z",
+    "finished_at": "2026-10-26T22:15:59.434785353Z",
+    "captured_time_s": 0.474986456548,
+    "stop_reason": "sustained final-outer pressure updates exceeded 100 Pa and remained at least 90% of the penultimate update for 3 completed steps after 2 ms cold-start settling",
+    "only_operator_change": "named laplacian(rAUf,p_rgh): Gauss linear limited 0.5; default laplacian and gravity snGrad unchanged",
+    "matched_checkpoint_hashes_identical": true,
+    "trigger_controller": {
+      "time_s": 0.474558587882,
+      "rank": 9,
+      "rank_local_cell": 20810,
+      "global_cell": 207251,
+      "raw_logger_line": "I4F_OUTER_DP_CELL time_s=0.474558587882 time_index=2543 outer_iteration=968 rank=9 local_cell=20810 global_max_update=143.461 C_m=(4.26894 0.792868 0.841868) nativeV_m3=6.00857e-07 in_valve_zone=0 p_before_Pa=99261.8 p_after_Pa=99405.3 signed_delta_p_Pa=143.461 alpha_before=0.0134747 alpha_after=0.0137741 signed_delta_alpha=0.000299402 U_before_m_s=(6.43758 -1.44978 -0.100128) U_after_m_s=(6.51456 -1.42545 -0.0844416) T_before_K=293.213 T_after_K=293.213 rho1_before_kg_m3=998.2 rho1_after_kg_m3=998.2 rho2_before_kg_m3=1.17932 rho2_after_kg_m3=1.18109 gamma_entry_per_s=-0.245021 gamma_raw_outgoing_per_s=-0.0568236 gamma_applied_for_next_outer_per_s=-0.0568236 gamma_raw_minus_entry_per_s=0.188198 gamma_raw_minus_applied_per_s=0 alpha_before_predictor=0.0134747 alpha_predictor_before_MULES=0.0374926 alpha_after_MULES=0.0137741 gamma_applied_at_predictor_per_s=-0.245021 Sp_at_alpha_predictor_per_s=-18.1839 Su_at_alpha_predictor_per_s=0 divU_at_alpha_predictor_per_s=17.8229 incident_native_faces=[67057:owner=20810:neighbour=20812:patch=internal:outward_phi_m3_s=-0.000345177:outward_alphaPhi_water_m3_s=-2.36468e-06;94177:owner=20810:neighbour=-1:patch=lamellaMaster:outward_phi_m3_s=0:outward_alphaPhi_water_m3_s=0;94591:owner=20810:neighbour=-1:patch=lamellaMaster:outward_phi_m3_s=0:outward_alphaPhi_water_m3_s=0;95946:owner=20810:neighbour=-1:patch=lamellaMaster:outward_phi_m3_s=0:outward_alphaPhi_water_m3_s=0;53174:owner=14901:neighbour=20810:patch=internal:outward_phi_m3_s=0.000691001:outward_alphaPhi_water_m3_s=2.8401e-05;58181:owner=17532:neighbour=20810:patch=internal:outward_phi_m3_s=-0.000342979:outward_alphaPhi_water_m3_s=-4.68692e-05] incident_phi_outward_sum_m3_s=2.84489e-06 incident_alphaPhi_water_outward_sum_m3_s=-2.08329e-05",
+      "location_m": [
+        4.26894,
+        0.792868,
+        0.841868
+      ],
+      "source_terms_stage": "alpha predictor before MULES, as written by per-rank observer",
+      "note": "the pressure-Laplacian variant's max-|dp| controller is not the default-scheme run's later baffle cell31926; cells are not conflated"
+    },
+    "matched_windows": {
+      "first_persistent_screen_trigger": {
+        "variant_time_s": 0.474558587882,
+        "default_laplacian_time_s": 0.474611998443,
+        "default_minus_variant_time_offset_s": 5.341056100000019e-05,
+        "variant": {
+          "max_abs_dp_Pa": 143.4607567086496,
+          "max_abs_dU_m_s": 1.051211141668637,
+          "max_abs_dphi_m3_s": 5.102295872086015e-05,
+          "min_p_Pa": 54644.18960035248,
+          "water_step_defect_kg": -6.228787122243948e-07,
+          "water_cumulative_defect_kg": 0.13318278546765397,
+          "gas_step_defect_kg": 7.822561493421414e-10,
+          "gas_cumulative_defect_kg": 0.0003940696745257534,
+          "full_R_max_s-1": 0.0001795229798319219,
+          "full_R_volume_L1_m3_s": 1.097561472229035e-08,
+          "persistent_screen": true
+        },
+        "default_laplacian": {
+          "max_abs_dp_Pa": 0.5222622781002428,
+          "max_abs_dU_m_s": 0.01395674182367946,
+          "max_abs_dphi_m3_s": 2.519608796192757e-05,
+          "min_p_Pa": 55216.6174234225,
+          "water_step_defect_kg": -5.827110984994037e-07,
+          "water_cumulative_defect_kg": 0.13317985453970804,
+          "gas_step_defect_kg": 4.5896343984445226e-10,
+          "gas_cumulative_defect_kg": 0.0003940841502708589,
+          "full_R_max_s-1": 0.0002080338950538517,
+          "full_R_volume_L1_m3_s": 1.228266252309313e-08,
+          "persistent_screen": false
+        },
+        "p_rgh_linear_residual_scope": "available in the private matched-window JSON; normalized linear residuals are not a coupled pressure fixed-point test"
+      },
+      "writeNow_terminal_checkpoint": {
+        "variant_time_s": 0.474986456548,
+        "default_laplacian_time_s": 0.474939490518,
+        "default_minus_variant_time_offset_s": -4.6966029999984116e-05,
+        "variant": {
+          "max_abs_dp_Pa": 42.796886,
+          "max_abs_dU_m_s": 0.43933228,
+          "max_abs_dphi_m3_s": 1.5945982e-05,
+          "min_p_Pa": 54398.216,
+          "water_step_defect_kg": -4.3524899236024915e-05,
+          "water_cumulative_defect_kg": 0.13313713427993273,
+          "gas_step_defect_kg": 4.2151773663482925e-07,
+          "gas_cumulative_defect_kg": 0.00039449352691557036,
+          "full_R_max_s-1": 0.00013023383,
+          "full_R_volume_L1_m3_s": 9.520531e-09,
+          "persistent_screen": false
+        },
+        "default_laplacian": {
+          "max_abs_dp_Pa": 0.3365003262442769,
+          "max_abs_dU_m_s": 0.009148267980951303,
+          "max_abs_dphi_m3_s": 9.622143467719405e-06,
+          "min_p_Pa": 55028.70120513243,
+          "water_step_defect_kg": -6.357909701064707e-07,
+          "water_cumulative_defect_kg": 0.13317786727287775,
+          "gas_step_defect_kg": 6.865179771236088e-10,
+          "gas_cumulative_defect_kg": 0.000394086415527484,
+          "full_R_max_s-1": 0.0002131637684332444,
+          "full_R_volume_L1_m3_s": 1.09681680273948e-08,
+          "persistent_screen": false
+        },
+        "p_rgh_linear_residual_scope": "available in the private matched-window JSON; normalized linear residuals are not a coupled pressure fixed-point test"
+      }
+    },
+    "interpretation": "variant reached the existing persistent pressure-update screen before .505. Its global discrete alpha residual was modestly lower at the two windows, while coupled pressure updates and outer flux changes were larger; the terminal step phase-mass defects were also larger. This is a diagnostic sensitivity, not an adopted scheme or causal proof.",
+    "private_comparison_json": "/home/v/proj/bene/fire-track2/results/runs/i4f-pressure-laplacian-pno-20261026T2207Z/laplacian-limited05-on/analysis/matched-window-comparison.json",
+    "private_comparison_json_sha256": "6f142ab5277d956fc10fc4caa93f388bf3ca0a0b037a966d01834641961a84c7",
+    "private_comparison_csv": "/home/v/proj/bene/fire-track2/results/runs/i4f-pressure-laplacian-pno-20261026T2207Z/laplacian-limited05-on/analysis/matched-window-comparison.csv",
+    "private_comparison_csv_sha256": "8b722b23a376c822ec0d13ff488e4b832bd364e01b9b423f787607eeb38b3502"
+  },
+  "limitations": [
+    "Cold terminal endpoint is underconverged in the pressure outer loop; it is not a physical validation result.",
+    "The terminal phase inventories in the step-health stream are rounded to seven significant digits; raw step/cumulative defect columns retain their stream precision.",
+    "The source residual is the instrumented discrete alpha equation and is not an overall water/gas mass or pressure convergence proof.",
+    "Pressure-Laplacian variant was health-screen-limited at .4745586 s; its final .4749865 s checkpoint followed the trigger and does not imply the earlier screen passed."
+  ]
+}

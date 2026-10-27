@@ -1,0 +1,472 @@
+{
+  "all_16_fields_plus_uniform_time_byte_identical": true,
+  "archive_scope": "the 15 native fields plus uniform/time only",
+  "archive_verification": "zstd -t then tar extraction in /dev/shm and per-file hash/size equality for each full output tree",
+  "archives": {
+    "common": {
+      "bytes": 51952448,
+      "decompressed_tree": [
+        {
+          "bytes": 2658642,
+          "mode": "0o644",
+          "path": "T",
+          "sha256": "a6b6102bd05e37670257c8657b69067b0d0ee78d41387704bedeff2ff15ea31c"
+        },
+        {
+          "bytes": 2658650,
+          "mode": "0o644",
+          "path": "T.air",
+          "sha256": "fa14627aa06ad3df07a527f790ab0e5795557fa7936a67e424419a67a427a270"
+        },
+        {
+          "bytes": 2658654,
+          "mode": "0o644",
+          "path": "T.water",
+          "sha256": "08a3ee729358f354f04f5d925cefcfe15efa0e67d4d21eab5074d1fe49850ac6"
+        },
+        {
+          "bytes": 7938894,
+          "mode": "0o644",
+          "path": "U",
+          "sha256": "4cfc11b52b28d114bae4e41430030b12e6472a19cbeb7d164034ab12105d13aa"
+        },
+        {
+          "bytes": 2652298,
+          "mode": "0o644",
+          "path": "alpha.water",
+          "sha256": "b29a809fc2f9fe7fe077abbf87f5c102e3d6761e5c54ba8bcd731e77b657f21e"
+        },
+        {
+          "bytes": 7722877,
+          "mode": "0o644",
+          "path": "alphaPhi0.water",
+          "sha256": "fac0922eef7907a20d02d869f6fe917358f7ebc20974e6c37eebb6d4c808a704"
+        },
+        {
+          "bytes": 3207527,
+          "mode": "0o644",
+          "path": "alphat",
+          "sha256": "5e65cfaa73bd15d1acb6b0233d5669010448233f2e246dffcae8560755ecce5b"
+        },
+        {
+          "bytes": 3203676,
+          "mode": "0o644",
+          "path": "dgdt",
+          "sha256": "c5dfb137506de720d787cc2071246617b1e281077738d12c0590c229cd0209b9"
+        },
+        {
+          "bytes": 3204683,
+          "mode": "0o644",
+          "path": "k",
+          "sha256": "1112d60f3f0428fc08cd0d828fb6a8ca6937639246b1a763a16ea18af6d3d1d4"
+        },
+        {
+          "bytes": 3208051,
+          "mode": "0o644",
+          "path": "nut",
+          "sha256": "b64d0247caf56f2f46c3bb9eed8042d245585397ef8cae40f3a3d9bc384005c2"
+        },
+        {
+          "bytes": 3206553,
+          "mode": "0o644",
+          "path": "omega",
+          "sha256": "e82112d2dc166cac7674f72d32ba35a94effd2f645b962ffed1526b20eed01b0"
+        },
+        {
+          "bytes": 3206857,
+          "mode": "0o644",
+          "path": "p",
+          "sha256": "8da43c8df8dcf5eddaaeacd6715f7aef4b97ecf45fd6dc6c6ef35e3cbb76181b"
+        },
+        {
+          "bytes": 3796238,
+          "mode": "0o644",
+          "path": "p_rgh",
+          "sha256": "bf3903a1dc729e809f38e0863093a68e540471258e5b4db66f6aa3eab8b55d0c"
+        },
+        {
+          "bytes": 7726577,
+          "mode": "0o644",
+          "path": "phi",
+          "sha256": "50d261beb30183ca344a7b9d3ce9d5815559049bfd03d378f5e21714258d197a"
+        },
+        {
+          "bytes": 3206851,
+          "mode": "0o644",
+          "path": "rho",
+          "sha256": "442b3f455db19c00ee975bc3f345363dd5b6cca4c78e5ad9e9d84bf5662cc1b8"
+        },
+        {
+          "bytes": 1062,
+          "mode": "0o644",
+          "path": "uniform/time",
+          "sha256": "8d4cb91faca1d2afd5d56e04e3695ca4f22b8abd045b13abb3f5edb513c7525f"
+        }
+      ],
+      "path": "arms/weight1-disabled-identity/identity-attempt007-baseline-output.tar.zst",
+      "sha256": "deac43760f289a6a45d270370924367e936502c497a19a9f1422386e6a40a804"
+    }
+  },
+  "arm_archive_mapping": {
+    "baseline": "common",
+    "candidate": "common",
+    "enabled-omega1": "common"
+  },
+  "compared_fields": {
+    "T": {
+      "baseline": {
+        "bytes": 2658642,
+        "mode": "0o644",
+        "mtime_ns": 1793071028944814335,
+        "sha256": "a6b6102bd05e37670257c8657b69067b0d0ee78d41387704bedeff2ff15ea31c"
+      },
+      "candidate": {
+        "bytes": 2658642,
+        "mode": "0o644",
+        "mtime_ns": 1793071047318807642,
+        "sha256": "a6b6102bd05e37670257c8657b69067b0d0ee78d41387704bedeff2ff15ea31c"
+      },
+      "enabled-omega1": {
+        "bytes": 2658642,
+        "mode": "0o644",
+        "mtime_ns": 1793071064903801348,
+        "sha256": "a6b6102bd05e37670257c8657b69067b0d0ee78d41387704bedeff2ff15ea31c"
+      }
+    },
+    "T.air": {
+      "baseline": {
+        "bytes": 2658650,
+        "mode": "0o644",
+        "mtime_ns": 1793071028931814340,
+        "sha256": "fa14627aa06ad3df07a527f790ab0e5795557fa7936a67e424419a67a427a270"
+      },
+      "candidate": {
+        "bytes": 2658650,
+        "mode": "0o644",
+        "mtime_ns": 1793071047303807647,
+        "sha256": "fa14627aa06ad3df07a527f790ab0e5795557fa7936a67e424419a67a427a270"
+      },
+      "enabled-omega1": {
+        "bytes": 2658650,
+        "mode": "0o644",
+        "mtime_ns": 1793071064891801352,
+        "sha256": "fa14627aa06ad3df07a527f790ab0e5795557fa7936a67e424419a67a427a270"
+      }
+    },
+    "T.water": {
+      "baseline": {
+        "bytes": 2658654,
+        "mode": "0o644",
+        "mtime_ns": 1793071028937814338,
+        "sha256": "08a3ee729358f354f04f5d925cefcfe15efa0e67d4d21eab5074d1fe49850ac6"
+      },
+      "candidate": {
+        "bytes": 2658654,
+        "mode": "0o644",
+        "mtime_ns": 1793071047309807645,
+        "sha256": "08a3ee729358f354f04f5d925cefcfe15efa0e67d4d21eab5074d1fe49850ac6"
+      },
+      "enabled-omega1": {
+        "bytes": 2658654,
+        "mode": "0o644",
+        "mtime_ns": 1793071064897801350,
+        "sha256": "08a3ee729358f354f04f5d925cefcfe15efa0e67d4d21eab5074d1fe49850ac6"
+      }
+    },
+    "U": {
+      "baseline": {
+        "bytes": 7938894,
+        "mode": "0o644",
+        "mtime_ns": 1793071028935814339,
+        "sha256": "4cfc11b52b28d114bae4e41430030b12e6472a19cbeb7d164034ab12105d13aa"
+      },
+      "candidate": {
+        "bytes": 7938894,
+        "mode": "0o644",
+        "mtime_ns": 1793071047307807646,
+        "sha256": "4cfc11b52b28d114bae4e41430030b12e6472a19cbeb7d164034ab12105d13aa"
+      },
+      "enabled-omega1": {
+        "bytes": 7938894,
+        "mode": "0o644",
+        "mtime_ns": 1793071064895801351,
+        "sha256": "4cfc11b52b28d114bae4e41430030b12e6472a19cbeb7d164034ab12105d13aa"
+      }
+    },
+    "alpha.water": {
+      "baseline": {
+        "bytes": 2652298,
+        "mode": "0o644",
+        "mtime_ns": 1793071028930814340,
+        "sha256": "b29a809fc2f9fe7fe077abbf87f5c102e3d6761e5c54ba8bcd731e77b657f21e"
+      },
+      "candidate": {
+        "bytes": 2652298,
+        "mode": "0o644",
+        "mtime_ns": 1793071047302807648,
+        "sha256": "b29a809fc2f9fe7fe077abbf87f5c102e3d6761e5c54ba8bcd731e77b657f21e"
+      },
+      "enabled-omega1": {
+        "bytes": 2652298,
+        "mode": "0o644",
+        "mtime_ns": 1793071064868801360,
+        "sha256": "b29a809fc2f9fe7fe077abbf87f5c102e3d6761e5c54ba8bcd731e77b657f21e"
+      }
+    },
+    "alphaPhi0.water": {
+      "baseline": {
+        "bytes": 7722877,
+        "mode": "0o644",
+        "mtime_ns": 1793071028948814334,
+        "sha256": "fac0922eef7907a20d02d869f6fe917358f7ebc20974e6c37eebb6d4c808a704"
+      },
+      "candidate": {
+        "bytes": 7722877,
+        "mode": "0o644",
+        "mtime_ns": 1793071047322807641,
+        "sha256": "fac0922eef7907a20d02d869f6fe917358f7ebc20974e6c37eebb6d4c808a704"
+      },
+      "enabled-omega1": {
+        "bytes": 7722877,
+        "mode": "0o644",
+        "mtime_ns": 1793071064907801347,
+        "sha256": "fac0922eef7907a20d02d869f6fe917358f7ebc20974e6c37eebb6d4c808a704"
+      }
+    },
+    "alphat": {
+      "baseline": {
+        "bytes": 3207527,
+        "mode": "0o644",
+        "mtime_ns": 1793071028942814336,
+        "sha256": "5e65cfaa73bd15d1acb6b0233d5669010448233f2e246dffcae8560755ecce5b"
+      },
+      "candidate": {
+        "bytes": 3207527,
+        "mode": "0o644",
+        "mtime_ns": 1793071047316807643,
+        "sha256": "5e65cfaa73bd15d1acb6b0233d5669010448233f2e246dffcae8560755ecce5b"
+      },
+      "enabled-omega1": {
+        "bytes": 3207527,
+        "mode": "0o644",
+        "mtime_ns": 1793071064902801348,
+        "sha256": "5e65cfaa73bd15d1acb6b0233d5669010448233f2e246dffcae8560755ecce5b"
+      }
+    },
+    "dgdt": {
+      "baseline": {
+        "bytes": 3203676,
+        "mode": "0o644",
+        "mtime_ns": 1793071028949814333,
+        "sha256": "c5dfb137506de720d787cc2071246617b1e281077738d12c0590c229cd0209b9"
+      },
+      "candidate": {
+        "bytes": 3203676,
+        "mode": "0o644",
+        "mtime_ns": 1793071047323807640,
+        "sha256": "c5dfb137506de720d787cc2071246617b1e281077738d12c0590c229cd0209b9"
+      },
+      "enabled-omega1": {
+        "bytes": 3203676,
+        "mode": "0o644",
+        "mtime_ns": 1793071064908801346,
+        "sha256": "c5dfb137506de720d787cc2071246617b1e281077738d12c0590c229cd0209b9"
+      }
+    },
+    "k": {
+      "baseline": {
+        "bytes": 3204683,
+        "mode": "0o644",
+        "mtime_ns": 1793071028936814338,
+        "sha256": "1112d60f3f0428fc08cd0d828fb6a8ca6937639246b1a763a16ea18af6d3d1d4"
+      },
+      "candidate": {
+        "bytes": 3204683,
+        "mode": "0o644",
+        "mtime_ns": 1793071047308807646,
+        "sha256": "1112d60f3f0428fc08cd0d828fb6a8ca6937639246b1a763a16ea18af6d3d1d4"
+      },
+      "enabled-omega1": {
+        "bytes": 3204683,
+        "mode": "0o644",
+        "mtime_ns": 1793071064896801350,
+        "sha256": "1112d60f3f0428fc08cd0d828fb6a8ca6937639246b1a763a16ea18af6d3d1d4"
+      }
+    },
+    "nut": {
+      "baseline": {
+        "bytes": 3208051,
+        "mode": "0o644",
+        "mtime_ns": 1793071028929814341,
+        "sha256": "b64d0247caf56f2f46c3bb9eed8042d245585397ef8cae40f3a3d9bc384005c2"
+      },
+      "candidate": {
+        "bytes": 3208051,
+        "mode": "0o644",
+        "mtime_ns": 1793071047301807648,
+        "sha256": "b64d0247caf56f2f46c3bb9eed8042d245585397ef8cae40f3a3d9bc384005c2"
+      },
+      "enabled-omega1": {
+        "bytes": 3208051,
+        "mode": "0o644",
+        "mtime_ns": 1793071064867801361,
+        "sha256": "b64d0247caf56f2f46c3bb9eed8042d245585397ef8cae40f3a3d9bc384005c2"
+      }
+    },
+    "omega": {
+      "baseline": {
+        "bytes": 3206553,
+        "mode": "0o644",
+        "mtime_ns": 1793071028945814335,
+        "sha256": "e82112d2dc166cac7674f72d32ba35a94effd2f645b962ffed1526b20eed01b0"
+      },
+      "candidate": {
+        "bytes": 3206553,
+        "mode": "0o644",
+        "mtime_ns": 1793071047319807642,
+        "sha256": "e82112d2dc166cac7674f72d32ba35a94effd2f645b962ffed1526b20eed01b0"
+      },
+      "enabled-omega1": {
+        "bytes": 3206553,
+        "mode": "0o644",
+        "mtime_ns": 1793071064904801348,
+        "sha256": "e82112d2dc166cac7674f72d32ba35a94effd2f645b962ffed1526b20eed01b0"
+      }
+    },
+    "p": {
+      "baseline": {
+        "bytes": 3206857,
+        "mode": "0o644",
+        "mtime_ns": 1793071028943814335,
+        "sha256": "8da43c8df8dcf5eddaaeacd6715f7aef4b97ecf45fd6dc6c6ef35e3cbb76181b"
+      },
+      "candidate": {
+        "bytes": 3206857,
+        "mode": "0o644",
+        "mtime_ns": 1793071047317807643,
+        "sha256": "8da43c8df8dcf5eddaaeacd6715f7aef4b97ecf45fd6dc6c6ef35e3cbb76181b"
+      },
+      "enabled-omega1": {
+        "bytes": 3206857,
+        "mode": "0o644",
+        "mtime_ns": 1793071064903801348,
+        "sha256": "8da43c8df8dcf5eddaaeacd6715f7aef4b97ecf45fd6dc6c6ef35e3cbb76181b"
+      }
+    },
+    "p_rgh": {
+      "baseline": {
+        "bytes": 3796238,
+        "mode": "0o644",
+        "mtime_ns": 1793071028938814337,
+        "sha256": "bf3903a1dc729e809f38e0863093a68e540471258e5b4db66f6aa3eab8b55d0c"
+      },
+      "candidate": {
+        "bytes": 3796238,
+        "mode": "0o644",
+        "mtime_ns": 1793071047311807645,
+        "sha256": "bf3903a1dc729e809f38e0863093a68e540471258e5b4db66f6aa3eab8b55d0c"
+      },
+      "enabled-omega1": {
+        "bytes": 3796238,
+        "mode": "0o644",
+        "mtime_ns": 1793071064898801350,
+        "sha256": "bf3903a1dc729e809f38e0863093a68e540471258e5b4db66f6aa3eab8b55d0c"
+      }
+    },
+    "phi": {
+      "baseline": {
+        "bytes": 7726577,
+        "mode": "0o644",
+        "mtime_ns": 1793071028941814336,
+        "sha256": "50d261beb30183ca344a7b9d3ce9d5815559049bfd03d378f5e21714258d197a"
+      },
+      "candidate": {
+        "bytes": 7726577,
+        "mode": "0o644",
+        "mtime_ns": 1793071047315807643,
+        "sha256": "50d261beb30183ca344a7b9d3ce9d5815559049bfd03d378f5e21714258d197a"
+      },
+      "enabled-omega1": {
+        "bytes": 7726577,
+        "mode": "0o644",
+        "mtime_ns": 1793071064901801349,
+        "sha256": "50d261beb30183ca344a7b9d3ce9d5815559049bfd03d378f5e21714258d197a"
+      }
+    },
+    "rho": {
+      "baseline": {
+        "bytes": 3206851,
+        "mode": "0o644",
+        "mtime_ns": 1793071028932814340,
+        "sha256": "442b3f455db19c00ee975bc3f345363dd5b6cca4c78e5ad9e9d84bf5662cc1b8"
+      },
+      "candidate": {
+        "bytes": 3206851,
+        "mode": "0o644",
+        "mtime_ns": 1793071047304807647,
+        "sha256": "442b3f455db19c00ee975bc3f345363dd5b6cca4c78e5ad9e9d84bf5662cc1b8"
+      },
+      "enabled-omega1": {
+        "bytes": 3206851,
+        "mode": "0o644",
+        "mtime_ns": 1793071064892801352,
+        "sha256": "442b3f455db19c00ee975bc3f345363dd5b6cca4c78e5ad9e9d84bf5662cc1b8"
+      }
+    },
+    "uniform/time": {
+      "baseline": {
+        "bytes": 1062,
+        "mode": "0o644",
+        "mtime_ns": 1793071028928814341,
+        "sha256": "8d4cb91faca1d2afd5d56e04e3695ca4f22b8abd045b13abb3f5edb513c7525f"
+      },
+      "candidate": {
+        "bytes": 1062,
+        "mode": "0o644",
+        "mtime_ns": 1793071047300807648,
+        "sha256": "8d4cb91faca1d2afd5d56e04e3695ca4f22b8abd045b13abb3f5edb513c7525f"
+      },
+      "enabled-omega1": {
+        "bytes": 1062,
+        "mode": "0o644",
+        "mtime_ns": 1793071064866801361,
+        "sha256": "8d4cb91faca1d2afd5d56e04e3695ca4f22b8abd045b13abb3f5edb513c7525f"
+      }
+    }
+  },
+  "complete_endpoint_trees_byte_and_mode_identical": true,
+  "created_utc": "2026-10-27T03:17:45.779093+00:00",
+  "field_count": 16,
+  "one_common_endpoint_archive": true,
+  "other_endpoint_files_by_arm": {
+    "baseline": [
+      {
+        "bytes": 9023,
+        "mode": "0o644",
+        "path": "uniform/functionObjects/functionObjectProperties",
+        "sha256": "f608e72ba3d18629227f8870f4f8a2700239dde6eca9979b2fe959e600786eed"
+      }
+    ],
+    "candidate": [
+      {
+        "bytes": 9023,
+        "mode": "0o644",
+        "path": "uniform/functionObjects/functionObjectProperties",
+        "sha256": "f608e72ba3d18629227f8870f4f8a2700239dde6eca9979b2fe959e600786eed"
+      }
+    ],
+    "enabled-omega1": [
+      {
+        "bytes": 9023,
+        "mode": "0o644",
+        "path": "uniform/functionObjects/functionObjectProperties",
+        "sha256": "f608e72ba3d18629227f8870f4f8a2700239dde6eca9979b2fe959e600786eed"
+      }
+    ]
+  },
+  "per_arm_metadata": "file mode and source mtime_ns are recorded per arm; the common archive preserves the baseline representative metadata while byte-identical payload files are shared",
+  "ram_output_root": "/dev/shm/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/identity-attempt007",
+  "schema": "i4f-physical-alpha-flux-relax-output-capture/v1",
+  "source_outputs_kept_in_tmpfs": true,
+  "time_folder": "0.390717595007"
+}

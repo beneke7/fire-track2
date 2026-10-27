@@ -1,4 +1,64 @@
-# I4F discharge: published results, 25–26 October 2026
+# I4F discharge: published results, 25–27 October 2026
+
+**27 October current result:** all three half-weight continuations stopped near
+.512-.518 s; sixteen outer iterations and the tested lower maxDeltaT did not
+cure the local pressure/velocity problem. [Frozen common-time data and terminal
+addenda](physical-pilot-comparison/) show close bulk tank/valve hydraulics before
+failure. [Native cutaways](physical-pilot-spatial-inspection/) localize low
+pressure beside divider entrances, with a nearby mesh transition. Two matched
+cold-start meshes are now running to investigate that region without a
+mid-trajectory restart; see [live status](../../../docs/STATUS.md).
+
+The [hydraulic scale check](engineering-hydraulic-scale-check/) predicts first
+water delivery around .62 s under provisional inputs and explains why early
+valve transfer is not nozzle discharge. It agrees with the CFD's early valve
+flow to about 3%, with model geometry/physics qualifications. The [saved-state
+audit](restart-state-compatibility/) and natural-timestep proof distinguish
+restart compatibility from an artificial very-short-step pressure undershoot.
+The [source-budget observer](alpha-mass-budget-observer/) now reproduces the
+original solver’s natural-step fields byte-for-byte and separates the actual
+cached source terms. Its accounting identity does not establish coupled
+convergence. No complete trustworthy CFD discharge, hardware validation or
+accepted 1.0/0.8 m geometry benefit is claimed.
+
+The matched [source-cutoff sensitivity](source-cutoff-sensitivity/) reduces the
+final signed water-mass residual by 4.44 times in one natural timestep while
+leaving the pressure/velocity iteration almost unchanged. This identifies a
+conservation sensitivity without establishing a cure for the later failure.
+
+The [native outlet geometry audit](native-control-surface-geometry/geometry_audit.json)
+checks the actual four opening rims independently of selected flux surfaces.
+The holes match 0.15 m2 each; the larger nearby control surfaces measure a
+different boundary. The reader runs directly on processor-only cold checkpoints.
+
+The [water-only branch comparison](wet-branch-hydraulic-reference/summary.json)
+is a negative result: both convection schemes diverged near the truncated
+outlet. This smaller test has no accepted hydraulic pressure or head loss,
+and has not reproduced the full case's divider-region failure mechanism.
+
+The [extended local branch comparison](local-outlet-mitigation/summary.json)
+remains bounded through 9,000 steady iterations after moving the artificial
+pressure boundary and adding a short numerical duct. It does not meet the
+original SIMPLE convergence criteria; pressure and head loss are unsettled.
+The native-face pressure-profile control still diverges at the original outlet.
+
+**27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
+isolates a sufficient feedback path at one fixed state: pressure updates settle
+below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it
+evolves, with shared temperature and transported turbulence held in both arms.
+Both source deltas were reconstructed against the published parent and all
+72 declared source hashes per arm verified. This is not a physical-time run
+or a proven remedy. Doubling physical outer iterations did not cure the late
+mismatch. Later 5 kPa-floor and matched water/flux relaxation results are recorded in
+the current-result links above and live status; this packet preserves the
+earlier diagnostic capture.
+
+The [pressure residual audit](pressure-normalization-audit/pressure-audit-results.json)
+and [independent source review](pressure-normalization-audit/residual-source-and-review.json)
+explain the near-zero periodic system's misleading normalized/raw residuals;
+they do not erase the apparatus's actual coupled updates. The [0.8 m input packet](short08-cold-start-input/README.md)
+contains inspected geometry/mesh views and checked cold fields, with no candidate
+flow calculation or geometry-performance result yet.
 
 **26 October run state:** the finite-water first-step case contacted the
 pressure floor at .409998 s and saved at .410223 s. The uninterrupted
@@ -26,6 +86,46 @@ and [grid figure](source-active-withdrawal/grid-trend.png) separate the improved
 water-volume balance from the remaining thermal/refinement error. All eight
 grid/source runs and one passive audit reached .4 s; these simplified cases
 do not validate the apparatus.
+The [startup field/energy data](firststep-energy/firststep-energy-evidence.json)
+and [local matrix addendum](firststep-energy/firststep-temperature-matrix-evidence.json)
+resolve the two selected first-step temperature balances: an unprojected air
+predictor near 713 m/s supplies about -354 K, offset by +73 K from implicit
+diffusion. The replay is field-identical to its observer control. This is local
+numerical evidence; the raw full case and immediate parent source remain local.
+The frozen metadata's matrix units are corrected in a separate record.
+The [exact immediate parent source](immediate-parent-source/README.md) now
+supplements the ancestor-only reference, including the pinned build environment
+and original script. The [fresh rebuild and one-step check](immediate-parent-source/rebuild-equivalence-addendum.json)
+now reproduce the exact executable and all 14 native fields plus uniform/time
+byte-for-byte at 12 microseconds. This does not certify longer evolution.
+The [real-apparatus staging evidence](case-staging/integration-report.json)
+shows rejection of mutated runtime phase caches and a successful hash-verified
+174-file stage from the immutable checkpoint. This is preparation evidence,
+not a physical restart execution.
+
+The new cold trajectory's [healthy .3907 s cutaway](cold-final-diagnostics/healthy-0391-cutaway.png)
+and [underconverged .484 s endpoint](cold-final-diagnostics/underconverged-0484-cutaway.png)
+use the same camera and native 299,214-cell mesh. Neither shows dense water
+outside the mouths. The [diagnostics](cold-final-diagnostics/cold-final-diagnostics.json)
+separate the pressure-update controller from the minimum-pressure cell.
+
+The [current early hydraulic figure](current-cold-hydraulics/current-cold-hydraulics-prefix.png)
+and [matched table](current-cold-hydraulics/matched-time-comparison.csv)
+cover a frozen prefix through .294771 s, with exact comparison samples through
+.250021 s. Mean flow at .2 s is .432743 m3/s per tank, .462% above the
+adiabatic reduced model. Local probe pressure and model bulk pressure differ
+by 1.749%. These shared-assumption comparisons are descriptive. The underlying
+cold-derived CFD later stopped at .484006 s; this is not completed discharge.
+[New negative outcomes](gamma-outer-relaxation/gamma-outer-relaxation-negative-outcomes.json)
+retain the warm source/predictor comparisons and the failed smaller-timestep
+replay. Latest compute state belongs in live status.
+The [tight frozen-pressure map](tight-pressure-map/summary.json) settled its
+unperturbed solves and damped the selected outer-disturbance direction to
+about .032 of its input norm at both 1 and 10 Pa. Their response vectors
+still differ by 23.2%; no global stability or complete-discharge claim follows.
+The packet includes a source-reconstructible patch from the published channel
+v8 base, build inputs, scalar tables and hashed local raw-vector references.
+
 The [Euler restart-history packet](restart-history/README.md) includes the
 small A/C/D inputs, native split/end states and both source snapshots. Saving
 the expansion source alone did not restore the uninterrupted step; initializing

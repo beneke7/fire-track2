@@ -1,0 +1,291 @@
+{
+  "classification": "Exploratory warm-restart pressure-cycle diagnostics. Gamma omega=0.5 and momentumPredictor-off omega=1 both stopped at the same persistent pressure-update mode. The 25us cap follow-up is active and has not reached that window.",
+  "common_setup": {
+    "PIMPLE": {
+      "nCorrectors": 2,
+      "nOuterCorrectors": 8
+    },
+    "alpha_water_solver": {
+      "relTol": 0.0,
+      "tolerance": 1e-12
+    },
+    "instrumented_binary_sha256": "9390298e8397f41397f1a3e4a2a6d634b2b95572a1e0ae2410ccc9f1149e0fb5",
+    "mesh_cells": 299214,
+    "phase_source": "full C0=Sp0+divU0; MULES Su=-C0*alphaP",
+    "seed": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z/case/processors10/0.460047515286",
+    "seed_copy": "14 native fields plus uniform/time copied from immutable original before freeze; dgdt absent and reconstructed on restart",
+    "seed_time_s": 0.4600475152857613,
+    "source_patch_sha256": "3ba2cb30b5c715cc3b0961ab084239a859e6576b1659649d6537c2d27b21656e"
+  },
+  "created_utc": "2026-10-26T21:45:10.060984+00:00",
+  "maxDeltaT_25us_followup": {
+    "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-retry01-on",
+    "change_from_PNO_omega1": "only maxDeltaT 250 us -> 25 us; initial deltaT 10 us; PNO and Gamma identity retained",
+    "completed_steps": 75,
+    "container_name": "i4f-gamma-mpno-omega1-dt25us-warm-retry01-20261026T2139Z",
+    "diagnostic_errors": [],
+    "docker_id": "c3eedf2f3a2f9e020e38a243e91a09342a0b741bc2b26c9299ea9d684852d564",
+    "docker_inspect_state": "running 2026-10-26T21:41:14.997704764Z 0",
+    "finished_at": "2026-10-26T21:47:03.684869702Z",
+    "first_actual_deltaT_s": 2.5e-05,
+    "first_native_phase_mass_state": {
+      "gas_continuity_L1_nativeV_kg_s": 2.175839175277217,
+      "gas_inventory_kg": 33.26923843349745,
+      "gas_signed_boundary_flux_kg_s": 2.748905914272615,
+      "stage": "after_correctRho",
+      "time_s": 0.460072515286,
+      "water_continuity_L1_nativeV_kg_s": 318.611850722512,
+      "water_inventory_kg": 3198.149002249416,
+      "water_signed_boundary_flux_kg_s": 0.0001492731357215307
+    },
+    "first_solver_time_s": 0.460072515286,
+    "floor_contacts": 0,
+    "guard_snapshot_utc": "2026-10-26T21:45:09.834327+00:00",
+    "guard_status": "running",
+    "guard_unit": "i4f-gamma-mpno-omega1-dt25us-warm-retry01-20261026t2139z-guard",
+    "input_freeze_sha256": "dd462eb1ee5b4dd0e2579327acc495db923bcac110e6fb971526e58e2587b573",
+    "interpretation": "Smaller timestep did not cure the warm replay. Two raw updates became negative before the saved state recovered. Water support is not water removed; this is not a time-convergence pass.",
+    "last_completed_time_s": 0.461322515286,
+    "native_mouth_plane_flux_status": "Four-mouth alphaPhi0 plane observer is enabled; its first scheduled runTime write has not yet occurred. Native pEqn phase mass boundary flux/state records are already present.",
+    "parser_errors": [],
+    "phase_rows_seen": 826,
+    "pre_GO_mesh_check": {
+      "evidence_path": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-retry01-on/provenance/mesh-copy-verification.json",
+      "files_verified": 53,
+      "scope": "Every file recursively under processors10/constant/polyMesh; matched to intact PNO parent including points/faces/owner/neighbour/boundary and all processor addressings."
+    },
+    "raw_contacts": [
+      {
+        "cell_count": 1,
+        "outer": 583.0,
+        "pressure_pass": 1166.0,
+        "raw_minimum_Pa": -2670.927232115844,
+        "time_s": 0.461872515286,
+        "water_support_kg": 0.01562429360734622
+      },
+      {
+        "cell_count": 1,
+        "outer": 584.0,
+        "pressure_pass": 1168.0,
+        "raw_minimum_Pa": -62001.07060559,
+        "time_s": 0.461872515286,
+        "water_support_kg": 0.01563264428697251
+      }
+    ],
+    "raw_pressure_contact_count": 2,
+    "same_cell_rank7_local1779_status": "No row yet in the early warm interval; the same-cell signed dp and raw Gamma source comparison is declared and pending the native observer event.",
+    "saved_time_s": 0.461922515286,
+    "started_at": "2026-10-26T21:41:14.997704764Z",
+    "static_case_tree_sha256": "b85d7e6e29eb3b7c7e6a2ee4f616270c176ac57af4f74e7a2b1594fca67457cc",
+    "status": "terminal_raw_pressure_floor_failure",
+    "write_now_reason": "raw pressure update contacted the configured 10 kPa floor"
+  },
+  "native_cell_map": {
+    "centroid_m": [
+      4.231531313260921,
+      0.18254589728156081,
+      0.6888096240732371
+    ],
+    "centroid_to_nearest_lamellaSlave_face_distance_m": 0.011051393991186098,
+    "centroid_x_downstream_m": 0.014864614805110143,
+    "directly_owns_lamellaSlave_wall_face": true,
+    "evidence_path": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-retry01-on/analysis/native-cell31926-quality-neighborhood.json",
+    "global_cell_id": 31926,
+    "mesh_quality_at_cell": {
+      "aspectRatio": 1.2040351957543314,
+      "cellAspectRatio": 0.7232959148836131,
+      "cellDeterminant": 20.922648671188682,
+      "cellShapes": 0.0,
+      "cellVolume": 1.7750273676785093e-05,
+      "cellVolumeRatio": 0.1087019508204587,
+      "minPyrVolume": 7.357466858075938e-07,
+      "minTetVolume": 0.05093899818547368,
+      "nonOrthoAngle": 34.14525089526152,
+      "skewness": 0.5464328377356148,
+      "wallDistance": 0.011094022993909788
+    },
+    "native_lamella_min_x_m": 4.2166666984558105,
+    "neighbor_global_cell_ids": [
+      29207,
+      31920,
+      31922,
+      31923,
+      62270,
+      206017,
+      206018,
+      206019,
+      208617,
+      208618,
+      208620
+    ],
+    "neighbor_quality_ranges": {
+      "aspectRatio": {
+        "max": 1.6879692826462798,
+        "min": 1.1093854814257111
+      },
+      "cellAspectRatio": {
+        "max": 2.0233701810614946,
+        "min": 1.0191694352306095
+      },
+      "cellDeterminant": {
+        "max": 0.9924298185409979,
+        "min": 0.3592602017899217
+      },
+      "cellShapes": {
+        "max": 3.0,
+        "min": 0.0
+      },
+      "cellVolume": {
+        "max": 2.0139099479809134e-05,
+        "min": 1.929489376263576e-06
+      },
+      "cellVolumeRatio": {
+        "max": 0.8285301018321166,
+        "min": 0.1087019508204587
+      },
+      "minPyrVolume": {
+        "max": 3.2474739253786644e-06,
+        "min": 2.6853363465172926e-07
+      },
+      "minTetVolume": {
+        "max": 0.39057025386666505,
+        "min": 0.00365506018331678
+      },
+      "nonOrthoAngle": {
+        "max": 51.606714167746716,
+        "min": 6.583011936786865
+      },
+      "skewness": {
+        "max": 0.5464328377356148,
+        "min": 0.07420540780226986
+      },
+      "wallDistance": {
+        "max": 0.035801754135053175,
+        "min": 0.00410506643288766
+      }
+    },
+    "qualification": "Centroid is 11.05 mm from nearest lamellaSlave wall face but cell directly owns a wall face. Mesh-quality fields are static diagnostics, not evidence of causation.",
+    "rank": 7,
+    "rank_local_cell_id": 1779,
+    "wall_face_area_m2": 0.0007704623597593357,
+    "wall_face_global_id": 946891
+  },
+  "negative_sensitivities": [
+    {
+      "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-relaxation-on",
+      "case": "Gamma outer relaxation omega=0.5, PIMPLE momentumPredictor=yes",
+      "completed_steps": 316,
+      "docker_id": "d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7",
+      "dp_ratio": 1.000016431578111,
+      "final_dU_m_s": 5.5124275,
+      "final_dp_Pa": 1253.7042,
+      "floor_contacts": 0,
+      "interpretation": "No pressure-cycle cure; raw source fixed-point defect remains substantial, and water mass-ledger increment rose by about 0.000947 kg.",
+      "mass_increment_since_seed_kg": {
+        "gas": -3.3155605765224213e-07,
+        "water": 0.000947309555223097
+      },
+      "penultimate_dp_Pa": 1253.6836,
+      "persistent_dp_steps": 5,
+      "raw_gamma_fixedpoint": {
+        "dt_times_max": 0.0015600828,
+        "max_s-1": 16.439491,
+        "raw_minus_applied_max_s-1": 8.2197457,
+        "signed_volume_integral_m3_s": 0.00050630639,
+        "volume_L1_m3_s": 0.0006816326
+      },
+      "same_cell_31926_rank7_local1779": {
+        "Sp_s-1": -16.3936,
+        "alpha_after": 0.782688,
+        "divU_s-1": 26.88,
+        "p_after_Pa": 97311.9,
+        "p_before_Pa": 96058.2,
+        "raw_gamma_minus_entry_s-1": 16.4395,
+        "signed_dp_Pa": 1253.7,
+        "time_s": 0.494129725325
+      },
+      "started_at": "2026-10-26T20:43:55.431189317Z",
+      "terminal_pmin_Pa": 36510.602,
+      "terminal_time_s": 0.494129725325
+    },
+    {
+      "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-on",
+      "case": "Warm momentumPredictor=no, Gamma omega=1 identity",
+      "completed_steps": 317,
+      "docker_id": "4b8ad34317097acf9faab3af80ccfdbb09b39bef2ba6ffc00ee8121cede57069",
+      "dp_ratio": 1.0001268674473598,
+      "final_dU_m_s": 5.4854922,
+      "final_dp_Pa": 1254.2239,
+      "floor_contacts": 0,
+      "interpretation": "No pressure-cycle cure. Omega=1 makes raw-minus-applied zero by identity; raw-minus-entry remains the relevant fixed-point defect. The warm-run gas-ledger change is numerical sensitivity, not physical improvement.",
+      "mass_increment_since_seed_kg": {
+        "gas": 1.0027411294088757e-06,
+        "water": -0.0007526918999879451
+      },
+      "penultimate_dp_Pa": 1254.0648,
+      "persistent_dp_steps": 5,
+      "raw_gamma_fixedpoint": {
+        "dt_times_max": 0.0023201175,
+        "max_s-1": 24.448102,
+        "raw_minus_applied_max_s-1": 0.0,
+        "signed_volume_integral_m3_s": 0.00079556214,
+        "volume_L1_m3_s": 0.00088605456
+      },
+      "same_cell_31926_rank7_local1779": {
+        "Sp_s-1": -25.843,
+        "alpha_after": 0.779641,
+        "divU_s-1": 25.8679,
+        "p_after_Pa": 97262.6,
+        "p_before_Pa": 96008.4,
+        "raw_gamma_minus_entry_s-1": 24.4481,
+        "signed_dp_Pa": 1254.22,
+        "time_s": 0.494129418057
+      },
+      "started_at": "2026-10-26T21:06:10.557383444Z",
+      "terminal_pmin_Pa": 36510.635,
+      "terminal_time_s": 0.494129418057
+    }
+  ],
+  "preserved_no_step_predecessor": {
+    "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-on",
+    "container_id": "e5c4d1228f89493b0c8e5248977c66804289514a3e2f3ac7963f9b8b5ad43014",
+    "error": "Preparation cleanup removed processors10/constant; OpenFOAM exited before its first step because polyMesh/points was missing. This is an operator preparation failure, not a physics outcome.",
+    "physical_steps": 0,
+    "started_at": "2026-10-26T21:38:39.827103252Z"
+  },
+  "publication_identity_verification": {
+    "method": "Resolve each runtime ID and StartedAt from its launch manifest and compare with the exact Docker object; correct a prepublication transcription error in the PNO export only. Run records and solver inputs are unchanged.",
+    "records": [
+      {
+        "StartedAt_matches_docker_object": true,
+        "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-relaxation-on",
+        "container_id_matches_docker_object": true,
+        "export_identifier_corrected": false,
+        "launch_manifest_sha256": "a9ca337103dc997c7c953e7912ab8bd30a21ae1736e18adc8ec649a6dfd9902c"
+      },
+      {
+        "StartedAt_matches_docker_object": true,
+        "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-on",
+        "container_id_matches_docker_object": true,
+        "export_identifier_corrected": true,
+        "launch_manifest_sha256": "b1a09bc4f6167adc2a8c1a53ec41a223180bb7bb0d1040401688f79d071c71ae"
+      },
+      {
+        "StartedAt_matches_docker_object": true,
+        "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-retry01-on",
+        "container_id_matches_docker_object": true,
+        "export_identifier_corrected": false,
+        "launch_manifest_sha256": "4c7c389e5ca2c1e5428aa81e15def80df27521c89e3db7203ea8ec0562f3b25b"
+      },
+      {
+        "StartedAt_matches_docker_object": true,
+        "bundle": "results/runs/i4f-gamma-outer-relaxation-20261026T2027Z/gamma-mpno-omega1-dt25us-on",
+        "container_id_matches_docker_object": true,
+        "export_identifier_corrected": false,
+        "launch_manifest_sha256": "f918cd389c52091333bcba2308bfbd93fab094daa91e637e96bc59cc4a7abbb9"
+      }
+    ],
+    "verified_utc": "2026-10-26T21:47:49.789310+00:00"
+  },
+  "schema": "i4f-gamma-outer-relaxation-negative-outcomes/v1"
+}

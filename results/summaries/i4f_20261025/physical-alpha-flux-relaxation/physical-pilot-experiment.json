@@ -1,0 +1,81 @@
+{
+  "acceptance_scope": "Exploratory; not a validation or adoption pass.",
+  "arms": {
+    "outer16": {
+      "nOuterCorrectors": 16
+    },
+    "outer8": {
+      "nOuterCorrectors": 8
+    }
+  },
+  "candidate_binary_sha256": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+  "candidate_source_patch_sha256": "494872e98a9c77bed57d0a6f79e6146d040175df43cb176bb9b72b3841d60dad",
+  "common_controls": {
+    "adaptive_time_step": true,
+    "ddt": "Euler",
+    "full_phase_sources_valve_ramp_finite_water_EOS_SST_and_boundary_inputs": "unchanged from frozen candidate cold input",
+    "i4fPhysicalAlphaFluxRelax": true,
+    "i4fPhysicalAlphaFluxRelaxOmega": 0.5,
+    "maxAlphaCo": 0.25,
+    "maxCo": 0.5,
+    "maxDeltaT_s": 0.00025,
+    "nAlphaCorr": 1,
+    "nAlphaSubCycles": 1,
+    "nCorrectors": 2,
+    "pMin_Pa": 10000,
+    "pressure_update_diagnostic": "advisory; original threshold and classification retained",
+    "target_end_s": 0.65,
+    "write_interval_s": 0.1
+  },
+  "common_physical_comparison_note": "Adaptive deltaT histories may differ; compare matched physical times and report the actual time brackets rather than treating output indices as matched.",
+  "created_utc": "2026-10-27T03:27:40.557278+00:00",
+  "only_declared_input_difference": "system/fvSolution PIMPLE.nOuterCorrectors (8 versus 16)",
+  "planned_milestone": "0.56 s only if supported by the existing checkpoint mechanism; existing finalStepCheckpoint writes at target endTime, so no new milestone controller was added.",
+  "purpose": "Exploratory physical-time comparison of 8 and 16 PIMPLE outer correctors under the enabled joint alpha.water/alphaPhi10 physical relaxation branch.",
+  "resource_plan": {
+    "cpu_quota_equivalents_each": 9,
+    "declared_incremental_output_allowance_bytes": 2147483648,
+    "disk_stop_reserve_bytes": 17179869184,
+    "expected_full_field_times_s": [
+      0.5,
+      0.6,
+      0.65
+    ],
+    "graceful_save_s_from_Docker_StartedAt": 7200,
+    "hard_wall_s_from_Docker_StartedAt": 8100,
+    "memory_limit_bytes_each": 34359738368,
+    "mpi_ranks_each": 10,
+    "output_policy": "full 3D fields only at existing sparse 0.1 s cadence and independent terminal checkpoint; compact diagnostics remain in the existing per-step solver log"
+  },
+  "run_log_source_hashes_replaced_by_empty_independent_files": {
+    "alpha-su-sp-rank2.log": "025ec98084000498af882e768426239579ecba5dc4873912fe4db391ec85bc69",
+    "valve-ueqn-rank2.log": "80101ffebbf629d3c0fef8fd15d3ac0b2c5cc795ac074b013dd050f4d2a25ef5"
+  },
+  "schema": "i4f-physical-alpha-flux-relax-omega050-matched-outer-pair/v1",
+  "seed": {
+    "aggregate_sha256": "5dde33893ab648d1fb80f63f244a68e12cf7367b7d163ffa3e02d0e183f74ffe",
+    "all_seed_members_independent_inodes_in_each_arm": true,
+    "member_count": 16,
+    "member_sha256": {
+      "T": "adbd0ba67e1f2ed532fd26382d5e4b25fa3cb4b4320850845d419afc1d307ea4",
+      "T.air": "b8f596a64179db42419ade7e9f3a909512d7523302d8fe01ea924044a56ad3a0",
+      "T.water": "c04b252d81ceeb048f0f52df5eaa4039c8fdb34704d7722bdd6afec74f386d20",
+      "U": "c1b34d2f8bfc55ea9a6d8b1e4478ef32db08068445b102c2ae3745e3542654e0",
+      "alpha.water": "4be0f8ca08f02fffeb2f8a865c9480858055c25d75184f7c0e5afb0c346868b6",
+      "alphaPhi0.water": "e27bffb018fe85b8d6f30cb63b4b448daf6c63a8a3b3c708967e8078969cc5fc",
+      "alphat": "5f5ee6ceb0a41e32ff1378ea56cc16af8e7b5be962af77c44a2cb1efddfbb1b4",
+      "dgdt": "346d35d50ffa9fbad68b35020668d0b242802ba9bbc98d6582d2ddd681cd7470",
+      "k": "472342333f39c68e33ad0f5de91091f02693b8422cf671ff23aa3650940f1816",
+      "nut": "f75b142ddf9a87a6254072524e7bbcb0c70dd87759082b7942cd3fa9167c7384",
+      "omega": "fce44328ed3db543f21cc059d87a15f1bcc7bc96e3f524a4f1340e770c489fbd",
+      "p": "0744d26d8c155082c023b47b168f9359e2de8ffabe3d97e82f419c81a445f6fe",
+      "p_rgh": "f52e88762e32c06fc19dc6c2e12edacad413d765c85de4da8bf1aefbcb622c93",
+      "phi": "0be27eed5c77ddcbf20dc5c1175ea6ab70ad8c24d05f3beb56c10b453d34b38e",
+      "rho": "fb30998ac87102881c3716dee91e0cb8870f3ac9e734993ece1628a10cee2eb3",
+      "uniform/time": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672"
+    },
+    "source_bundle": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "source_time": "0.390705595007"
+  },
+  "status": "prepared_not_yet_released"
+}

@@ -1,0 +1,111 @@
+{
+  "classification": "Warm-restart diagnostic. The original source path runs continuously to the .4938 s trigger; then eight same-time alpha/MULES, momentum/thermo-refresh/pressure maps execute. This is not a physical continuation or discharge prediction.",
+  "mechanical_map": {
+    "alpha_operator": "At each sweep reuse stock alphaControls.H and compressibleAlphaEqnSubCycle.H, including the configured alpha predictor, full Sp+divU source, compression flux and MULES correction.",
+    "assertions": [
+      "nAlphaSubCycles == 1",
+      "LTS == false",
+      "unchanged Time value/index/deltaT",
+      "PIMPLE corr remains 8 and finalIter remains true",
+      "exactly two pressure correctors per sweep"
+    ],
+    "classification": "diagnostic only; do not accumulate same-time iterations as elapsed time or discharged mass",
+    "evolving": [
+      "alpha1/alpha2 through stock MULES",
+      "water alphaPhi1 and complementary alphaPhi2",
+      "rhoPhi and mixture contErr",
+      "pressure, velocity, phi, phase densities/psi, K, and Gamma as derived by source order"
+    ],
+    "held": [
+      "shared common T exact field hash",
+      "SST transported k/omega/nut/alphat values",
+      "all materialized Euler oldTime histories, including alpha1 and alpha2",
+      "timeIndex, physical time, deltaT",
+      "alphaPhi1 old-time level count; no alphaPhi1.oldTime accessor is invoked"
+    ],
+    "phase_continuity": "Capture stock pEqn pre/post-EOS water/gas continuity records for each pressure pass and label map sweep; report per-sweep phase inventory state changes separately, without treating repeated maps as physical mass transfer.",
+    "phase_temperature_rule": "Every internal and boundary phase-T value must remain within 128*epsilon*max(1,abs(trigger value)); common T remains exact. Re-derived phase T differences are recorded numerically rather than required byte-identical.",
+    "physical_checkpoint_written": false,
+    "raw_floor": "At first raw pressure below unchanged pMin, use the existing no-clamp diagnostic censor path, preserve trigger/offending raw records, and stop; no stock clamp or continued map.",
+    "source_order": [
+      "stock alphaControls and alpha/MULES update",
+      "stock alphaPhi1, alpha2, rhoPhi, rho, and contErr construction",
+      "turbulence.correctPhasePhi()",
+      "UEqn assembly/relaxation and fvOptions",
+      "fixed-common-T mixture.correctThermo()/mixture.correct() at the original post-TEqn slot, with phase-T bound assessment",
+      "two stock transonic pressure correctors and EOS/U/K/Gamma updates"
+    ],
+    "sweeps": 8,
+    "time_advancement": false
+  },
+  "output_metrics": [
+    "max abs delta alpha1/alpha2",
+    "max abs delta alphaPhi1, phi, and rhoPhi including boundaries",
+    "max abs delta p/U/rho1/rho2/Gamma",
+    "same-time water/gas inventory changes (not accumulated discharge)",
+    "stock pEqn phase continuity L1/max pre/post-EOS by mapped sweep",
+    "T phase delta, common-T hash, held-state hashes, oldTime levels"
+  ],
+  "parent_seed": {
+    "bundle": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z",
+    "same_seed_as_completed_phaseT_map": true,
+    "source_phase_temperature_fields_restored_before_GO": true,
+    "stored_fields": 14,
+    "time_s": 0.460047515286
+  },
+  "physical_case": {
+    "before_trigger": "No intended governing-equation or input change from the original healthy .460047515286 warm parent.",
+    "mesh": "Corrected native I4F apparatus, 299214 cells, original ten-rank decomposition.",
+    "pimple": {
+      "alpha_relTol": 0,
+      "alpha_tolerance": 1e-12,
+      "gamma_outer_relaxation": 1.0,
+      "momentum_advection": "Gauss upwind",
+      "momentum_predictor": false,
+      "nonorthogonal_correctors": 0,
+      "outer_correctors": 8,
+      "pressure_correctors": 2,
+      "transonic": true
+    },
+    "solver": "Isolated v2512-derived DCEC compressibleInterFoam with original Sp=true and full-source=true alpha source.",
+    "time_controls": "Unchanged adaptive Euler controls from the healthy warm parent: maxDeltaT 2.5e-4 s, maxCo 0.5, maxAlphaCo 0.25; 8 PIMPLE outer loops and 2 pressure correctors."
+  },
+  "predeclared_utc": "2026-10-27T00:35:32.075211+00:00",
+  "purpose": "Discriminate water-transport feedback from the previously measured frozen-alpha mechanical map while shared T and SST state remain held.",
+  "qualification": "A bounded same-time coupling diagnostic. It does not validate the apparatus, demonstrate outlet flow, or replace the continuous physical trajectory. The prior completed map reduced the frozen mechanical update from 16.47 Pa to a small 0.42-0.48 Pa alternating residual; this arm introduces stock water transport to test its feedback.",
+  "resources": {
+    "case_stage_minimum_basis": "20 GiB hard floor plus 475209728 bytes measured by du for the exact prior static-template+case staging output; no additional reserve",
+    "case_stage_minimum_free_disk_bytes": 21950046208,
+    "disk_floor_bytes": 21474836480,
+    "docker_log_driver": "none",
+    "hard_wall_s_from_StartedAt": 7200,
+    "initial_cpu_quota": 6,
+    "memory_limit_bytes": 34359738368,
+    "mpi_ranks": 10
+  },
+  "schema": "i4f-water-feedback-map-phaseT-bound/v1",
+  "solver": {
+    "Gamma_outer_relaxation": 1.0,
+    "PIMPLE_outer_correctors": 8,
+    "Sp": true,
+    "binary_name": "compressibleInterFoamI4FWaterFeedbackMap",
+    "binary_sha256": "0e66b65fa5d15b5040cdd94ce31a09ec34576e04b56c2d1d27163c6d822c0509",
+    "full_source": true,
+    "momentum_predictor": false,
+    "physical_fvSolution_unchanged": true,
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "pressure_correctors": 2,
+    "source_parent_binary_sha256": "4b2bfb2c95be5bb7a18973eb3b0aafb774a3aeb62a0a3f67fbf44e65f7ba274f",
+    "source_parent_bundle": "results/runs/i4f-frozen-water-mechanical-phaseT-20261026T2335Z",
+    "source_parent_tree_manifest_sha256": "a9510b826d792239c44b3314ea595a8fc8c2a68c9050227f4025a8934a5b874a",
+    "source_patch_sha256": "c9c3dfe2716ea6985efbea60b4aee5605d696feb2ea1e1a4157ebced6d626cb6",
+    "source_tree_manifest_sha256": "2f9cc1d71cf7f5ef7cbe538b721b6c33a89a80678354c65e693d0918f672a38d",
+    "transonic": true
+  },
+  "trigger": {
+    "physical_checkpoint_written": false,
+    "state": "after original PIMPLE outer-8, pressure-corrector-2, EOS/U/K updates",
+    "time_advancement_during_map": false,
+    "time_s_min": 0.4938
+  }
+}

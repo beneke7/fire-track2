@@ -1,0 +1,86 @@
+{
+  "schema": "i4f-physical-pilot-spatial-inspection-artifact-manifest-v1",
+  "created_utc": "2026-10-27T05:16:07.746940+00:00",
+  "hash_algorithm": "SHA-256",
+  "public_artifacts": [
+    {
+      "path": "spatial-cutaway.png",
+      "size_bytes": 346701,
+      "sha256": "36eddeaea185b48227627e1242e50ed821aadef14914fdd20210aa7b5320938b"
+    },
+    {
+      "path": "spatial-cutaway-xy.png",
+      "size_bytes": 599966,
+      "sha256": "08658076afdb16c40b0be69a5adcc0319d79759edb7c86f283ec44e965604379"
+    },
+    {
+      "path": "spatial-inspection.json",
+      "size_bytes": 39051,
+      "sha256": "f14f400aecc93006b685557ce638ce42b627bab34cca6eba03e2c17cd187a9a5"
+    },
+    {
+      "path": "full-observed-horizon.png",
+      "size_bytes": 422948,
+      "sha256": "8145e87ce3fba920370e07813967460268d7016024a9b3f829c6581449d46f55"
+    },
+    {
+      "path": "full-observed-horizon.json",
+      "size_bytes": 8499,
+      "sha256": "74d8e9449307b0e99448116bab28ec83517d0c2941d6802adf4fea45bf926624"
+    },
+    {
+      "path": "native-pressure-minimum-verification.json",
+      "size_bytes": 6502,
+      "sha256": "7294b17fbf258049333a45ff8e71be5e583d13bab7551caf2727c9f8d9e52511"
+    }
+  ],
+  "private_reproduction_support": [
+    {
+      "path": "results/runs/i4f-pilot-spatial-inspection-20261027T045855Z/scripts/render_spatial_cutaways.py",
+      "size_bytes": 36959,
+      "sha256": "4c4bf2917a779442b5bc2a2d14b000f5bd37b99d72a1ff0369110d14029c62d6"
+    },
+    {
+      "path": "results/runs/i4f-pilot-spatial-inspection-20261027T045855Z/scripts/plot_full_observed_horizon.py",
+      "size_bytes": 12655,
+      "sha256": "373f8d04228c4b0c2e40bff0ccf4ea3c05bcb662ef263b386b982361f7a0643e"
+    },
+    {
+      "path": "results/runs/i4f-pilot-spatial-inspection-20261027T045855Z/scripts/verify_native_pressure_min.py",
+      "size_bytes": 12916,
+      "sha256": "459688ee86a4a498a9ca7add4de641bb6abad3c72c445683c53781e08668f032"
+    },
+    {
+      "path": "results/runs/i4f-pilot-spatial-inspection-20261027T045855Z/scripts/write_packet_manifest.py",
+      "size_bytes": 4431,
+      "sha256": "c33358055f405f0f872c322b0abbb6fd9a272cc2f015bf6f55084553948d6a23"
+    },
+    {
+      "path": "results/runs/i4f-pilot-spatial-inspection-20261027T045855Z/analysis/reconstruction-commands.json",
+      "size_bytes": 3630,
+      "sha256": "66b4acc5e008054310a6e0ea7bd803b48ea97f409c30bac4adb07f6b10d6cd8b"
+    }
+  ],
+  "source_integrity": {
+    "native_spatial_inputs_unchanged_before_after": true,
+    "native_pressure_verification_method": "Read collated processor p internal fields with repository native binary64 scalar reader; map each local minimum through cellProcAddressing; read native global C at that global ID.",
+    "native_pressure_minima_match_vtk_after_float32_conversion": true,
+    "global_cell_id_to_native_C_minimum_coordinate_mapping_verified": true,
+    "pressure_observer_discrepancy_scope": "Comparison CSV min_raw_water_pressure and final_field_min_p are retained separately; their differences from saved native processor p remain unresolved."
+  },
+  "observed_horizon_filter": {
+    "update_panels_plot_only_complete_outer_groups": true,
+    "per_arm_expected_outer_rows": {
+      "outer8": 8,
+      "outer16": 16,
+      "dtcap_half_outer16": 16
+    },
+    "incomplete_update_tail_counts": {
+      "outer8": 0,
+      "outer16": 1,
+      "dtcap_half_outer16": 1
+    },
+    "no_interpolation_or_extension": true
+  },
+  "scope": "Read-only field reconstruction, native processor pressure/address verification, and CSV plotting; no CFD, mesh, or shared solver changes."
+}

@@ -1,0 +1,471 @@
+{
+  "case": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case",
+  "configuration_separation": {
+    "PIMPLE": {
+      "nCorrectors": 2,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "controlDict_i4fFrozenPredictorSp": false,
+    "expected_solver_binary_sha256_if_selected_later": "12d8 binary identity remains outside this input-only case; no binary was copied",
+    "no_constructor_derived_fields_fabricated": [
+      "rho",
+      "psi",
+      "T.air",
+      "T.water",
+      "phi",
+      "alphaPhi0.water"
+    ],
+    "physical_0_state_fields": [
+      "alpha.water",
+      "p",
+      "p_rgh",
+      "T",
+      "U",
+      "k",
+      "omega",
+      "nut",
+      "alphat"
+    ],
+    "physical_input_case_contains_no_solver_binary_or_dynamicCode": true,
+    "runtime_settings_copied_from_current_1p0m_baseline": [
+      "system/controlDict",
+      "system/fvSchemes",
+      "system/fvSolution",
+      "constant/fvOptions"
+    ],
+    "source_choice_is_provisional_and_may_change_after_coupling_evidence": true
+  },
+  "created_utc": "2026-10-27T00:18:31.597451+00:00",
+  "field_audit": {
+    "all_field_values_finite": true,
+    "alpha_range": [
+      0.0,
+      1.0
+    ],
+    "global_field_sha256": {
+      "T": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+      "U": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+      "alpha.water": "7a93ad503d859129758759c92a66bde8a53c1a36406119d073509a8397050e6b",
+      "alphat": "8e515a1618970553e6e1058db4b58cbd822167460a3cbac59ecc887b5a9cd455",
+      "k": "ef644b4f58c25b669c64b5cbe83f2ccda43dc03e442bca2abaeadf0608c74247",
+      "nut": "2a443276542f6729f00ffbe12f40650f27678ba727c02996ddb8b0c5db458071",
+      "omega": "e6fc3fc82dd2af150c1a6be2a01e4c6de3583cd839f3b291e731c7fc21dd434d",
+      "p": "4d578e1ed3643e68b80fc1b056ecc818e2c192ebce930b73226aa9c0ad88d749",
+      "p_rgh": "2c5dcaf77d8eea201a796f6c659297b0135ce3829bf9535b04f1aae8304f8246"
+    },
+    "p_abs_range_Pa": [
+      100000.0,
+      1211011.7121941703
+    ],
+    "p_rgh_formula_max_abs_residual_Pa": 2.3283064365386963e-10,
+    "p_rgh_range_Pa": [
+      99994.3975326913,
+      1214540.4116440897
+    ],
+    "physical_field_count": 9,
+    "rhoMix_range_kg_m3": [
+      1.1883827696045983,
+      998.7048297974923
+    ],
+    "rhoWater_range_kg_m3": [
+      998.2,
+      998.7048297974923
+    ]
+  },
+  "geometry_and_mesh": {
+    "candidate": "SHORT2",
+    "cells": 317814,
+    "domain_volume_m3": 25.05920567174719,
+    "fixed_upstream_tanks_ports_valves_and_rise_bend_through_x3p8": true,
+    "generic_mesh_quality": "Mesh OK; max skewness 3.913254466; all nine configured rows zero",
+    "lengths_are_provisional_not_photo_measurements": true,
+    "mesh_native_cellVolume_sha256": "2874f113a988e6ac9515d49c7dd15c6752833c85bb0f5c4eff0a822bd719ae6a",
+    "mesh_native_centres_sha256": "891e55376e01e797dbf7dcfccc960ebe12b464f133db94fb886cf7edbe3fb0b9",
+    "mesh_topology_sha256": {
+      "boundary": "bf2d76440eda0a4b964c715448c224aa2f6ab7052569a770d385d9e25cf9144a",
+      "cellMap": "094f0045d3e4aad49c3a72abcdf76814b4382a2bda68e0530d065285d90cd118",
+      "cellZones": "dc72dac807e8c36f7fad7ec764e83c271a4e4f00d9375c2efc81a56ab8b629b1",
+      "faceZones": "9ef6a11d28126957c22f38b338f5f23481130fce5439d4d421fb2eb30c771851",
+      "faces": "cbad85efdc1d78cc44f618f713a4eb34948bbcfbbfc614d056b0b622dff5f870",
+      "neighbour": "e2c62490a8b33cf29e30ee79f8af0f731d608fac7e99b67c7bbddee56da7dd97",
+      "owner": "a056e85bf31b6ceb13bb8e024f2f99eb44723d4677d2e1cf03d5ff57c98b86f9",
+      "pointZones": "238d8abdf00c148db67e38b1836125e1ffb89c9290344509c1e52d635b8d47c4",
+      "points": "e3a48aa37779f197ed6909c4af917accd0f7cfc0d5802a77d9cdbd06f79af966"
+    },
+    "mouth_x_m": 4.6,
+    "optional_allGeometry": "7,141 concave cells / 869 concave faces; one optional extra check fails. This is reported separately from generic/configured quality.",
+    "post_rise_straight_m": 0.0,
+    "same_resolution_qualification": "The upstream and valve source bands are kept at 48 axial layers per branch; this 317,814-cell short mesh differs from the 299,214-cell 1.0 m mesh and has additional local refinement, so no accuracy-matched geometry comparison is established.",
+    "transition_and_mouth_length_m": 0.8,
+    "transition_inlet_x_m": 3.8
+  },
+  "initial_state_assumptions": {
+    "ambient_pressure_abs_Pa": 100000.0,
+    "downstream_lines_and_mouths_initially_air": true,
+    "nominal_headspace_ratio_to_liquid": 0.225,
+    "tank_pressure_abs_Pa": 1200000.0,
+    "tank_to_valve_feed_wet_x_lt_m": 2.25,
+    "temperature_K": 293.15,
+    "valve_source_at_t0": "all four effective source bands are on the wetted upstream side and fully water-filled; 2% minimum numerical opening remains an unmeasured modeling assumption",
+    "water_surface_interface_width_m": 0.025,
+    "water_volume_m3_each_tank": 1.35,
+    "zero_initial_velocity": true
+  },
+  "input_hashes": {
+    "case_file_count": 47,
+    "files": {
+      "0/C": {
+        "sha256": "ff047ae3750c76e1492eafb5b082336305a2b826d88a5e780fd2af0d96f95d26",
+        "size_bytes": 18309347
+      },
+      "0/Cx": {
+        "sha256": "39b37304367f8773313e856420e2bc2eb943c5388d854961a014ff2d0f9ccc00",
+        "size_bytes": 5673135
+      },
+      "0/Cy": {
+        "sha256": "6b307673fec9c2bf2f0f2081d432fc99d3afe1f6f10ccd93df638aa8a62fb37c",
+        "size_bytes": 6088961
+      },
+      "0/Cz": {
+        "sha256": "cddfd942b93a3376a12a4a9544a4c76a0f98e3dbdb77b1a1b47326957afebf3f",
+        "size_bytes": 5912946
+      },
+      "0/T": {
+        "sha256": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+        "size_bytes": 824
+      },
+      "0/U": {
+        "sha256": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+        "size_bytes": 550
+      },
+      "0/V": {
+        "sha256": "596ae13fc5ddac77e4febfa283cc118f5d4e876e3eac1bf40104f6630cb2d4e1",
+        "size_bytes": 6595683
+      },
+      "0/alpha.water": {
+        "sha256": "7a93ad503d859129758759c92a66bde8a53c1a36406119d073509a8397050e6b",
+        "size_bytes": 667182
+      },
+      "0/alphat": {
+        "sha256": "8e515a1618970553e6e1058db4b58cbd822167460a3cbac59ecc887b5a9cd455",
+        "size_bytes": 634
+      },
+      "0/k": {
+        "sha256": "ef644b4f58c25b669c64b5cbe83f2ccda43dc03e442bca2abaeadf0608c74247",
+        "size_bytes": 700
+      },
+      "0/nut": {
+        "sha256": "2a443276542f6729f00ffbe12f40650f27678ba727c02996ddb8b0c5db458071",
+        "size_bytes": 582
+      },
+      "0/omega": {
+        "sha256": "e6fc3fc82dd2af150c1a6be2a01e4c6de3583cd839f3b291e731c7fc21dd434d",
+        "size_bytes": 690
+      },
+      "0/p": {
+        "sha256": "4d578e1ed3643e68b80fc1b056ecc818e2c192ebce930b73226aa9c0ad88d749",
+        "size_bytes": 3234302
+      },
+      "0/p_rgh": {
+        "sha256": "2c5dcaf77d8eea201a796f6c659297b0135ce3829bf9535b04f1aae8304f8246",
+        "size_bytes": 6007731
+      },
+      "constant/C": {
+        "sha256": "fc51327a8f7e8934a70e658badd7595ea0082bbcf4259f8abd065885e93a3a5f",
+        "size_bytes": 18309354
+      },
+      "constant/Cx": {
+        "sha256": "e3eb7172b072708924acba96a03a0b53a1264a684056bd22a46470915730b2d9",
+        "size_bytes": 5673142
+      },
+      "constant/Cy": {
+        "sha256": "f6e9de999f275fee90922eb344ca6b68f4cd0b686cd7ecc49397a86cb933d583",
+        "size_bytes": 6088968
+      },
+      "constant/Cz": {
+        "sha256": "8b84b88ad013da75980362e53c8301808fe612d37aec04f5bbd3b004ed83b8cd",
+        "size_bytes": 5912953
+      },
+      "constant/V": {
+        "sha256": "4378a49146908282b1f030e41e4065031688218d27aa0a391c9c68b9616597c4",
+        "size_bytes": 6595690
+      },
+      "constant/cellVolume": {
+        "sha256": "bc625d0938c5d0e3594abe28f55f59170a7f4ca1198caf179f8e7db5c477b9ac",
+        "size_bytes": 6595699
+      },
+      "constant/fvOptions": {
+        "sha256": "ea844c28ef47315da62bcdd8bc04ec624df31f44b5ae0e1f250cf8e44770b0f0",
+        "size_bytes": 1889
+      },
+      "constant/g": {
+        "sha256": "d804fb8237e3d43e2bc905c06f69010fd52d84592fc955b05cb415c10e3a7196",
+        "size_bytes": 835
+      },
+      "constant/polyMesh/boundary": {
+        "sha256": "bf2d76440eda0a4b964c715448c224aa2f6ab7052569a770d385d9e25cf9144a",
+        "size_bytes": 1771
+      },
+      "constant/polyMesh/cellMap": {
+        "sha256": "094f0045d3e4aad49c3a72abcdf76814b4382a2bda68e0530d065285d90cd118",
+        "size_bytes": 2109491
+      },
+      "constant/polyMesh/cellZones": {
+        "sha256": "dc72dac807e8c36f7fad7ec764e83c271a4e4f00d9375c2efc81a56ab8b629b1",
+        "size_bytes": 3425984
+      },
+      "constant/polyMesh/faceZones": {
+        "sha256": "9ef6a11d28126957c22f38b338f5f23481130fce5439d4d421fb2eb30c771851",
+        "size_bytes": 183389
+      },
+      "constant/polyMesh/faces": {
+        "sha256": "cbad85efdc1d78cc44f618f713a4eb34948bbcfbbfc614d056b0b622dff5f870",
+        "size_bytes": 30381140
+      },
+      "constant/polyMesh/neighbour": {
+        "sha256": "e2c62490a8b33cf29e30ee79f8af0f731d608fac7e99b67c7bbddee56da7dd97",
+        "size_bytes": 6287235
+      },
+      "constant/polyMesh/owner": {
+        "sha256": "a056e85bf31b6ceb13bb8e024f2f99eb44723d4677d2e1cf03d5ff57c98b86f9",
+        "size_bytes": 6620454
+      },
+      "constant/polyMesh/pointZones": {
+        "sha256": "238d8abdf00c148db67e38b1836125e1ffb89c9290344509c1e52d635b8d47c4",
+        "size_bytes": 1066
+      },
+      "constant/polyMesh/points": {
+        "sha256": "e3a48aa37779f197ed6909c4af917accd0f7cfc0d5802a77d9cdbd06f79af966",
+        "size_bytes": 14856130
+      },
+      "constant/thermophysicalProperties": {
+        "sha256": "3834b3aa09f26cdc434a9fd0e81c5d6d43ae357a4d23f8e661f2320f8ce77ae0",
+        "size_bytes": 837
+      },
+      "constant/thermophysicalProperties.air": {
+        "sha256": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "size_bytes": 1104
+      },
+      "constant/thermophysicalProperties.water": {
+        "sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "size_bytes": 1240
+      },
+      "constant/turbulenceProperties": {
+        "sha256": "060fc4dc109eab7a9ef3d923cf8e1e08fa014c3ea546b15dee4a5992e4411383",
+        "size_bytes": 879
+      },
+      "system/branchColdstartTopoSetDict": {
+        "sha256": "a2cac55161779df8e82a125da86d56ecc57bb742975800ffb1e24f7c44cedc97",
+        "size_bytes": 1141
+      },
+      "system/controlDict": {
+        "sha256": "0d9037486fcbad2fddd45bda570a84c408e3258f637476493d6813fa98df2c1a",
+        "size_bytes": 729
+      },
+      "system/decomposeParDict": {
+        "sha256": "21bc6540a2497b77cdde35c4be8609eb6bfcd2e38f6acf6e6824f1e7729355ba",
+        "size_bytes": 186
+      },
+      "system/finalStepCheckpoint": {
+        "sha256": "92b967045a8fa693bfef82e9f716f6bc647835babfb5800aca79725b57afc9b2",
+        "size_bytes": 975
+      },
+      "system/fourMouthObserverObjects": {
+        "sha256": "2c88c864cbc07ef56efa8689ad51aefdfa91a27f264a605830c4cca1e147ca06",
+        "size_bytes": 1689
+      },
+      "system/fvSchemes": {
+        "sha256": "171ee0528eeab2b849134c7d027a1454f09d7e5d089614b2d6d89cceeb8d7b83",
+        "size_bytes": 1419
+      },
+      "system/fvSolution": {
+        "sha256": "dfc70a830d1d862e105f161a988dc2e5ea8a55d170a01413376aa60da399ec6d",
+        "size_bytes": 1920
+      },
+      "system/i4fNumericalHealthObjects": {
+        "sha256": "24725bd73b77cd73090544d57d8e6af5fabded766d237c6c029deda2d723271f",
+        "size_bytes": 1827
+      },
+      "system/meshQualityDict": {
+        "sha256": "105d2e6748af96b8911232e1c1524f9181432e1035e67fc8c450a2a8eedc506d",
+        "size_bytes": 2998
+      },
+      "system/topoSetDict": {
+        "sha256": "31934c932701efae8de467d840cd90cd35738f27cb53307220f3593b17c3afe5",
+        "size_bytes": 4846
+      },
+      "system/twoTankLedgerObjects": {
+        "sha256": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+        "size_bytes": 2841
+      },
+      "system/valveBandFluxObjects": {
+        "sha256": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+        "size_bytes": 4255
+      }
+    }
+  },
+  "limits": [
+    "Input preparation only; no flow solver launched and no successful physical trajectory is claimed.",
+    "The 0.8 m mesh has a different cell count and local refinement from the 1.0 m mesh; it is not an accuracy-matched comparison.",
+    "Tank volume comes from the provisional CAD/STL mesh; 1.35 m3 liquid is matched but available native headspace ratio is 22.11%, slightly below the 22.5% nominal ratio because the approximate tank mesh capacity is short.",
+    "The finite-water EOS is the provisional 20 C pressure-only adiabaticPerfectFluid model with assumed gamma=7.15, not a complete IAPWS closure.",
+    "The current 12d8 solver binary/source choice is not included; only current baseline inputs were staged, so source coupling can be changed in a future stage without altering this physical initialization."
+  ],
+  "native_cellzone_reconciliation": {
+    "corrected_zone_counts": {
+      "externalAirZone": 122381,
+      "lineAInitialZone": 74595,
+      "lineAMouthBoundaryZone": 1152,
+      "lineBInitialZone": 74856,
+      "lineBMouthBoundaryZone": 1152,
+      "short08LineAZone": 75747,
+      "short08LineBZone": 76008,
+      "tankAZone": 21839,
+      "tankBZone": 21839,
+      "valveBandA1": 5376,
+      "valveBandA2": 5376,
+      "valveBandB1": 5376,
+      "valveBandB2": 5376,
+      "valveSourceBand": 21504
+    },
+    "new_case_zone_edit": "Only cellZones labels were repaired in this new case: tank cells selected from its own tank interior STL surfaces; remove those from line A/B; rebuild externalAirZone as the complement of tank + line cells; retain four valve bands and valveSourceBand unchanged. No mesh topology/coordinates or old source case changed.",
+    "partition_cells": 317814,
+    "partition_unique": 317814,
+    "raw_line_tank_overlap_cells": {
+      "tankA_in_rawLineA": 1356,
+      "tankB_in_rawLineB": 1357
+    },
+    "source_mesh_externalAirZone_included_tank_cells": true,
+    "source_mesh_had_tankA_tankB_zones": false
+  },
+  "native_inventory": {
+    "downstreamDryLineA": {
+      "air_volume_m3": 0.3858274743135029,
+      "cells": 54043,
+      "gas_mass_kg": 0.4585107225142276,
+      "water_volume_m3": 0.0
+    },
+    "downstreamDryLineB": {
+      "air_volume_m3": 0.3858280648881376,
+      "cells": 54199,
+      "gas_mass_kg": 0.4585114243429479,
+      "water_volume_m3": 0.0
+    },
+    "externalAmbient": {
+      "air_volume_m3": 20.472720038331698,
+      "cells": 122381,
+      "gas_mass_kg": 24.329427740492175,
+      "water_volume_m3": 0.0
+    },
+    "mouthA": {
+      "air_volume_m3": 0.007834424337581,
+      "cells": 1152,
+      "gas_mass_kg": 0.009310294892552178,
+      "water_volume_m3": 0.0
+    },
+    "mouthB": {
+      "air_volume_m3": 0.007835711962787,
+      "cells": 1152,
+      "gas_mass_kg": 0.009311825084160699,
+      "water_volume_m3": 0.0
+    },
+    "tankA": {
+      "cells": 21839,
+      "headspace_m3": 0.29849719595901925,
+      "headspace_to_water_ratio_actual": 0.22110903404371798,
+      "surface_z_m": 1.4841395062190088,
+      "tank_total_volume_m3": 1.6484971959590191,
+      "water_m3": 1.3499999999999999,
+      "water_mass_finiteEOS_kg": 1348.24660808447
+    },
+    "tankB": {
+      "cells": 21839,
+      "headspace_m3": 0.298496768323508,
+      "headspace_to_water_ratio_actual": 0.22110871727667258,
+      "surface_z_m": 1.484140481317243,
+      "tank_total_volume_m3": 1.648496768323508,
+      "water_m3": 1.35,
+      "water_mass_finiteEOS_kg": 1348.246608089083
+    },
+    "totalFiniteEOSWaterMass_kg": 3198.008371353195,
+    "totalWaterVolume_m3": 3.2021659936309494,
+    "wetted_feedA": {
+      "cells": 20552,
+      "finiteEOS_water_mass_kg": 250.73145896939303,
+      "volume_water_m3": 0.25105684432195113
+    },
+    "wetted_feedB": {
+      "cells": 20657,
+      "finiteEOS_water_mass_kg": 250.78369621025294,
+      "volume_water_m3": 0.25110914930899797
+    }
+  },
+  "schema": "i4f-short08-native-cold-initialization/v1",
+  "scope": "Input-only case for provisional 0.8 m post-rise train; no warm field mapping, no CFD, no GO, no binary or dynamicCode. It is not a grid-matched engineering comparison.",
+  "solver_launched": false,
+  "source": {
+    "baseline_case": "results/runs/i4f-physical-water-eos-cold-input-20261026T1104Z/case",
+    "baseline_readiness_sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+    "baseline_water_thermo_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+    "mesh_container_exit_code": 0,
+    "mesh_container_id": "45d5e79c9d49bf9ac671d5511fc415a6a1e2a13c939f01e168d76cff8276551d",
+    "mesh_container_started_at": "2026-10-26T23:58:50.022591816Z",
+    "mesh_quality_handoff_sha256": "f0b258e66739e27f8c2da01c042135fe470640b58adbdb3c48528a7bd662ae1d",
+    "mesh_source": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path/case-mesh/2e-05"
+  },
+  "status": "COLD_INPUT_READY_NO_SOLVER_GO_OR_QUEUE",
+  "valve_source_coverage": {
+    "branch_metrics": {
+      "valveBandA1": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "median_dx_m": 0.006299999999999972,
+        "volume_m3": 0.021026149483552,
+        "x_max_m": 2.246875328,
+        "x_min_m": 1.953124681
+      },
+      "valveBandA2": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "median_dx_m": 0.006299999999999972,
+        "volume_m3": 0.021026985561423,
+        "x_max_m": 2.246875335,
+        "x_min_m": 1.953124799
+      },
+      "valveBandB1": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "median_dx_m": 0.006299999999999972,
+        "volume_m3": 0.021026149666315,
+        "x_max_m": 2.246875328,
+        "x_min_m": 1.953124681
+      },
+      "valveBandB2": {
+        "axial_layers": 48,
+        "cells": 5376,
+        "median_dx_m": 0.006299999999999972,
+        "volume_m3": 0.021026985519596,
+        "x_max_m": 2.246875336,
+        "x_min_m": 1.953124799
+      }
+    },
+    "fvOptions_cellZone": "valveSourceBand",
+    "mesh_cellZones_sha256": "dc72dac807e8c36f7fad7ec764e83c271a4e4f00d9375c2efc81a56ab8b629b1",
+    "source_cells": 21504,
+    "source_cells_all_inside_tank_to_valve_feed": true,
+    "source_volume_m3": 0.084106270230886,
+    "source_water_volume_m3": 0.08410627023088602
+  },
+  "water_eos": {
+    "B_Pa": 306667767.13022316,
+    "air_molecular_weight_kg_per_kmol": 28.96546,
+    "formula": "rhoWater=rho0*((p+B)/(p0+B))^(1/gamma); rhoMix=alpha*rhoWater+(1-alpha)*p*MW/(Ru*T)",
+    "gamma_exponent_assumed_not_Cp_over_Cv": 7.15,
+    "model": "OpenFOAM adiabaticPerfectFluid pressure-only rho(p), hConst sensibleInternalEnergy",
+    "p0_Pa": 100000.0,
+    "p_hydrostatic_initialization": "Matches the 1.0 m cold initializer: rho0 constant is used for hydrostatic liquid pressure and ideal-air density for headspace gradient. p_rgh alone is recomputed with the selected pressure-dependent water rho and ideal-air rho.",
+    "p_rgh_formula": "p_rgh=p-rhoMix*(g dot C), g=(0,0,-9.81), hRef=0",
+    "rho0_kg_m3": 998.2
+  }
+}

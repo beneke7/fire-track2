@@ -1,0 +1,227 @@
+{
+  "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+  "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+  "container_id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+  "container_name": "i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+  "container_uid_gid": "1000:1000",
+  "continuation_seed_sha256": "280d70bbfccc9ecf399543ad71368a2028a3f06791c27abb240a8dd3bd6ad39a",
+  "created_utc": "2026-10-26T20:50:36.315279+00:00",
+  "docker_started_at": "2026-10-26T20:50:36.466720222Z",
+  "docker_state_at_launch": {
+    "ExitCode": 0,
+    "FinishedAt": "0001-01-01T00:00:00Z",
+    "Running": true,
+    "StartedAt": "2026-10-26T20:50:36.466720222Z",
+    "Status": "running"
+  },
+  "experiment_record_sha256": "c9b55196c40c699235462d4ba700f9999952538800bb9afa8803de222c791384",
+  "geometry_bundle": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z",
+  "go_sha256": "ed5d9912df5794abd07ad46c3f95e32a38501d3c3bc5b30a8957e826938681a6",
+  "guard_hard_wall_s_from_StartedAt": 28800,
+  "guard_sha256": "79cfbe061fb203cf5b8084a89fff374a10579e06ae1ba739a65b3633c4d56521",
+  "guard_writeNow_s_from_StartedAt": 27000,
+  "hard_wall_s_from_StartedAt": 27244,
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "image_id_and_digests": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+  "initial_field_contract_sha256": "7f3f7e6f86349f5367570f84b78dce12c0c34db46f70945b09ab33a3ed35971e",
+  "initial_mesh_source": "results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+  "inner_timeout_s": 28815,
+  "input_freeze_sha256": "3b1c06ddc7bd4d3848deb00a1ec31914ed2b91b2387002b16a8e0fe0e82cc87f",
+  "launcher_sha256": "1b5b40e8925c53147c9b888e4ed3d97ca823ca7d8243e88292cef4a5a556766a",
+  "log": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/log.cold-coupled",
+  "mandatory_initial_fields": [
+    "alpha.water",
+    "p",
+    "p_rgh",
+    "T",
+    "U",
+    "k",
+    "omega",
+    "nut",
+    "alphat"
+  ],
+  "memory_limit_bytes": 34359738368,
+  "mesh_variant": "corrected flush-join / 48 source layers / 299214 cells (provisional geometry)",
+  "original_campaign_graceful_save_deadline_utc": "2026-10-27T03:54:41.025680+00:00",
+  "original_campaign_hard_deadline_utc": "2026-10-27T04:24:41.025680+00:00",
+  "pause_flags_prelaunch": [],
+  "pilot_first_write_s": 0.1,
+  "pilot_horizon_s": 1.0,
+  "preflight": {
+    "alpha_water_relTol": 0,
+    "alpha_water_tolerance": 1e-12,
+    "binary_sha256": "12d8ed3e808deffa56a8d21e8e23227af65c27c76e57122a48986e732089da3a",
+    "dictionary_preflight_sha256": "aafaa39a4184bc4a9ef5cea087a844ab43e29b253fec9caadf703ec4b9835176",
+    "endTime": "1.000000000000",
+    "i4fFrozenPredictorFullSource": true,
+    "i4fFrozenPredictorSp": true,
+    "i4fFullPressureAudit": false,
+    "matching_log_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/log.cold-coupled",
+    "mesh_cells": 299214,
+    "mesh_load_preflight_sha256": "995477ebf96783f0b487fb166bf54714c6b5688cbf40b0e236be0900b89c4088",
+    "momentum_convection": "Gauss upwind",
+    "pimple": {
+      "momentumPredictor": false,
+      "nCorrectors": 2,
+      "nNonOrthogonalCorrectors": 0,
+      "nOuterCorrectors": 8,
+      "transonic": true
+    },
+    "startFrom": "latestTime",
+    "startTime": "0.090771166664044334",
+    "status": "passed_operational_restart_full_source_no_momentum_predictor_preflight",
+    "water_overlay_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+    "writeInterval": "0.1"
+  },
+  "ranks": 10,
+  "release_resource_sample": {
+    "active_solver_process_count": 10,
+    "available_memory_bytes": 124446101504,
+    "effective_cpu_allocation": 20,
+    "fits_by_solver_rank_count": true,
+    "free_disk_bundle_bytes": 31997145088,
+    "progressing_solver_processes": [
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 161,
+        "pid": 2957266,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 161,
+        "pid": 2957267,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 161,
+        "pid": 2957268,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 162,
+        "pid": 2957269,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 162,
+        "pid": 2957270,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 160,
+        "pid": 2957271,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 160,
+        "pid": 2957272,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 162,
+        "pid": 2957273,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 161,
+        "pid": 2957274,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 159,
+        "pid": 2957275,
+        "state": "R"
+      }
+    ],
+    "requested_mpi_ranks": 10,
+    "sampled_utc": "2026-10-26T20:50:39.185434+00:00"
+  },
+  "released_utc": "2026-10-26T20:50:39.185520+00:00",
+  "resource_sample_prelaunch": {
+    "active_solver_process_count": 10,
+    "available_memory_bytes": 124440358912,
+    "effective_cpu_allocation": 20,
+    "fits_by_solver_rank_count": true,
+    "free_disk_bundle_bytes": 31997632512,
+    "progressing_solver_processes": [
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 159,
+        "pid": 2957266,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 161,
+        "pid": 2957267,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 160,
+        "pid": 2957268,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 160,
+        "pid": 2957269,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 158,
+        "pid": 2957270,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 161,
+        "pid": 2957271,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 159,
+        "pid": 2957272,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 159,
+        "pid": 2957273,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 160,
+        "pid": 2957274,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d353e078c78c988aec226b635681babdadc735b58fc19622f740a386a5aa5db7.scope\n",
+        "cpu_tick_delta_2s": 160,
+        "pid": 2957275,
+        "state": "R"
+      }
+    ],
+    "requested_mpi_ranks": 10,
+    "sampled_utc": "2026-10-26T20:50:36.125093+00:00"
+  },
+  "runner_sha256": "dcc4e4b6b3a70c1c95352d1446f247acb30ca5cd5779a71be14e3a5bab829fbb",
+  "schema": "i4f-cold-operational-continuation-launch/v1",
+  "stage_record_sha256": "944000f53d3a2643cba7701870cbaa0c41c352dad93f71e34d7d2c01a8fbf62a",
+  "static_case_tree_sha256": "88ad17ef9dd980bb18fb01e2a42c07988fcf359d352f3fe5ef3924aa81a47f89",
+  "static_input_tree_sha256": "d4e5b458bbd5581a265021704f3809b4689a1808b144dc7dcb631186c6ef604c",
+  "status": "solver_released_under_exact_guard",
+  "writeNow_s_from_StartedAt": 25444
+}
