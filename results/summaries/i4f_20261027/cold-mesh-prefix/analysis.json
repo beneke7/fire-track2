@@ -1,0 +1,968 @@
+{
+  "artifacts": {
+    "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/analysis/corridor-front-check.json": {
+      "bytes": 4926,
+      "sha256": "068a71095ccd399ef1927068a186f06fe6767127d0c6ebb4f267381d244d9225"
+    },
+    "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/analysis/finalize_prefix_packet-v2.py": {
+      "bytes": 25855,
+      "sha256": "2d9ec100b922ffabe80edeba8f8f249be33d32ac917fbe778c2087901a78491a"
+    },
+    "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/analyze_prefix.py": {
+      "bytes": 34204,
+      "sha256": "b7fd0bcffdbf2c1de133d910ee63bcfa73ab22f0526e8a992037a41df3a20aa2"
+    },
+    "results/runs/i4f-uniform-interface-corridor-20261027T015002Z/pre-baffle-attempt-006-source-roi-2x4x/analysis/source-roi-audit.json": {
+      "bytes": 11364,
+      "sha256": "bfb757763c1f26f88a605ca5880d50addb329bf33a90e3ea159aca34cccd2071"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/capture-provenance.json": {
+      "bytes": 62893,
+      "sha256": "36a6427cbf0cb2cbfccbe71db51146ccb53ed6bc7c583efc54e5d43d65e9330d"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/changed-region-front-check.json": {
+      "bytes": 5498,
+      "sha256": "54cddd910b3af0053d15d8d3557edc64ddd5ca436acbd80904e969c452c22a7a"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/figures/prefix-engineering-comparison.png": {
+      "bytes": 332037,
+      "sha256": "13d4068c1a5fc06e8a17320d297f9c745bbd474a7d6cf88b9989128715d1155e"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/gas-expansion-probe.csv": {
+      "bytes": 5881,
+      "sha256": "b2c7474656bb9db425f40e90a54bb36f012b41c16a8bfad6f443b8c7a3dadaf4"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/gas-expansion-probe.png": {
+      "bytes": 174868,
+      "sha256": "28e132c21a87647ae8931e030600247794fadec42c4336270cd9896a08bc8a5a"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/interpolation-brackets.csv": {
+      "bytes": 59084,
+      "sha256": "7b932bc251b955c9eee39f3661860d5f08d266f2be9723202df74704281d44ab"
+    },
+    "results/summaries/i4f_20261027/cold-mesh-prefix/prefix-timeseries.csv": {
+      "bytes": 70292,
+      "sha256": "ac8974d71024fa3c444765dc9736e0743111ee1bae4fb65d7094680c4560dcec"
+    }
+  },
+  "common_time": {
+    "arm_latest_required_series_cutoffs_s": {
+      "baseline": 0.381581959232,
+      "corridor": 0.331581959232
+    },
+    "common_cutoff_reason": "Minimum complete output time across required native compartment, valve-seat, probe, and boundary-flux series on both arms. Guard current time may be one solver step beyond the sampled function-object rows.",
+    "interpolation": "Only scalar compact function-object and reduced-model time series were linearly interpolated by bracketing rows. No field-time interpolation or extrapolation was done; every bracket and weight is exported.",
+    "pair_common_cutoff_s": 0.331581959232,
+    "target_times_s": [
+      0.050021166664,
+      0.100021166664,
+      0.150021166664,
+      0.200021166664,
+      0.250021166664,
+      0.300021166664,
+      0.325021166664,
+      0.331581959232
+    ]
+  },
+  "created_utc": "2026-10-27T12:15:52.402822+00:00",
+  "gas_expansion_diagnostic": {
+    "artifacts": {
+      "csv": "results/summaries/i4f_20261027/cold-mesh-prefix/gas-expansion-probe.csv",
+      "figure": "results/summaries/i4f_20261027/cold-mesh-prefix/gas-expansion-probe.png"
+    },
+    "captured_native_volFieldValue_tank_zone_volume_headers_m3": {
+      "baseline": {
+        "A": 1.6484972,
+        "B": 1.64849677
+      },
+      "corridor": {
+        "A": 1.6484972,
+        "B": 1.64849677
+      }
+    },
+    "formula": "n_app = -[ln(p_probe,end)-ln(p_probe,start)]/[ln(Vgas,end)-ln(Vgas,start)]",
+    "gas_volume_definition": "Derived Vgas(t) = static total native tankAZone/tankBZone cell volume - native volIntegrate(alpha.water) in that tank zone. This treats the tank zone as the vessel control volume; the wet feed line is a separate zone.",
+    "input_series": {
+      "processed_scalar_series_csv": "results/summaries/i4f_20261027/cold-mesh-prefix/prefix-timeseries.csv",
+      "processed_scalar_series_sha256": "ac8974d71024fa3c444765dc9736e0743111ee1bae4fb65d7094680c4560dcec",
+      "raw_probe_alpha_series_sha256": {
+        "baseline": "e1fb0b71c4d3d55f80aa2b3c3256a23fc085368de5ed3c954530accd4923a5f1",
+        "corridor": "220e2023abf4e729f196c722d02b5a4fbd1e6c3fd9b287f857637445a063654f"
+      },
+      "raw_probe_pressure_series_sha256": {
+        "baseline": "671fff7a8cfd09141082ef53f49b68f6c49d296a2fd35fd2d9647482373d61e9",
+        "corridor": "a64ab013ac13f0dcbdd6d490c6e7027af6e787951c4e30e348a4f7f0732cae7a"
+      }
+    },
+    "interpretation_limitations": [
+      "The interval begins at 0.050021 s rather than near t=0 to avoid a small-denominator exponent estimate.",
+      "The pressure is a point sample, the gas volume is derived from mesh zone volume minus water-volume integral, and the system is flowing with coupled gas/water/thermal evolution.",
+      "Differences from gamma=1.3998 cannot be assigned to heat transfer or another mechanism from these scalars alone; the exponent is exploratory, not a fitted property or acceptance gate."
+    ],
+    "interval_s": [
+      0.050021166664,
+      0.331581959232
+    ],
+    "per_arm_and_tank": {
+      "baseline": {
+        "A": {
+          "apparent_minus_delta_log_p_over_delta_log_Vgas": 1.2357259966668974,
+          "derived_gas_volume_end_m3": 0.42141358040838006,
+          "derived_gas_volume_start_m3": 0.30306979803847445,
+          "end_time_s": 0.331581959232,
+          "gas_volume_ratio_end_over_start": 1.3904835887173488,
+          "p_probe_end_abs_Pa": 783029.2715274598,
+          "p_probe_start_abs_Pa": 1176770.5240374783,
+          "pressure_ratio_end_over_start": 0.6654052387723824,
+          "sealed_adiabatic_air_gamma_reference": 1.3998145383348455,
+          "start_time_s": 0.050021166664
+        },
+        "B": {
+          "apparent_minus_delta_log_p_over_delta_log_Vgas": 1.2357282779886414,
+          "derived_gas_volume_end_m3": 0.42141320832620277,
+          "derived_gas_volume_start_m3": 0.303069371092892,
+          "end_time_s": 0.331581959232,
+          "gas_volume_ratio_end_over_start": 1.3904843198326298,
+          "p_probe_end_abs_Pa": 783028.1415273984,
+          "p_probe_start_abs_Pa": 1176770.4754036097,
+          "pressure_ratio_end_over_start": 0.6654043060171396,
+          "sealed_adiabatic_air_gamma_reference": 1.3998145383348455,
+          "start_time_s": 0.050021166664
+        },
+        "pressure_probe_alpha_water_max_0p05_to_0p331": {
+          "A": 2.6976839e-22,
+          "B": 2.7051018e-22
+        }
+      },
+      "corridor": {
+        "A": {
+          "apparent_minus_delta_log_p_over_delta_log_Vgas": 1.2357263634381006,
+          "derived_gas_volume_end_m3": 0.421413590403654,
+          "derived_gas_volume_start_m3": 0.30306979803374845,
+          "end_time_s": 0.331581959232,
+          "gas_volume_ratio_end_over_start": 1.3904836217191372,
+          "p_probe_end_abs_Pa": 783029.1215274598,
+          "p_probe_start_abs_Pa": 1176770.4754036097,
+          "pressure_ratio_end_over_start": 0.6654051388049108,
+          "sealed_adiabatic_air_gamma_reference": 1.3998145383348455,
+          "start_time_s": 0.050021166664
+        },
+        "B": {
+          "apparent_minus_delta_log_p_over_delta_log_Vgas": 1.235728927638855,
+          "derived_gas_volume_end_m3": 0.42141316868364886,
+          "derived_gas_volume_start_m3": 0.30306937631374353,
+          "end_time_s": 0.331581959232,
+          "gas_volume_ratio_end_over_start": 1.3904841650757662,
+          "p_probe_end_abs_Pa": 783028.0815274598,
+          "p_probe_start_abs_Pa": 1176770.4754036097,
+          "pressure_ratio_end_over_start": 0.6654042550301886,
+          "sealed_adiabatic_air_gamma_reference": 1.3998145383348455,
+          "start_time_s": 0.050021166664
+        },
+        "pressure_probe_alpha_water_max_0p05_to_0p331": {
+          "A": 2.6979283e-22,
+          "B": 2.7051065e-22
+        }
+      }
+    },
+    "pressure_source": "The native i4fTankHeadspaceProbes p field: one gas-phase point sample per tank at A=(1.25,-0.55,1.60) m and B=(1.25,+0.55,1.60) m. The matching alpha.water probe remains near zero over the interval.",
+    "pressure_weighting_limit": "This is not a volume-weighted spatial average of headspace pressure; the two probes are separate point samples. Each tank pressure is paired only with that same tank's derived gas volume.",
+    "reference": {
+      "curve_anchor_time_s": 0.050021166664,
+      "curve_note": "Illustrative p proportional to Vgas^(-gamma) reference anchored at the first selected sample; not a model fit or a sealed-system validation.",
+      "sealed_ideal_air_adiabatic_gamma": 1.3998145383348455
+    },
+    "status": "probe_based_apparent_exponent_available; volume_weighted_headspace_pressure_not_available",
+    "tank_zone_volume_mesh_hashes_verified": {
+      "baseline": {
+        "C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+        "V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99"
+      },
+      "corridor": {
+        "C": "294634346bf84e2b056da528e9e5d125020c2a8ce551d3d0245616e8ad850e4f",
+        "V": "df1609f606dd979da0887efc2a417f24ece05c52f3d0657db1724b92868dbdeb"
+      }
+    },
+    "tank_zone_volume_source": "results/runs/i4f-uniform-interface-corridor-20261027T015002Z/pre-baffle-attempt-006-source-roi-2x4x/analysis/source-roi-audit.json",
+    "tank_zone_volume_source_sha256": "bfb757763c1f26f88a605ca5880d50addb329bf33a90e3ea159aca34cccd2071"
+  },
+  "guard_endpoint_health": {
+    "baseline": {
+      "completed_steps": 974,
+      "diagnostic_errors": [],
+      "gas_cumulative_defect_fraction_initial": 1.370546366487169e-06,
+      "gas_cumulative_defect_kg": -4.642940453946325e-05,
+      "guard_time_s": 0.381706959232,
+      "last_final_p_min_Pa": 96538.41106745476,
+      "last_step_final_min_p_Pa": 96538.41106745476,
+      "last_step_final_outer_max_abs_dU_m_s": 0.002826971416969859,
+      "last_step_final_outer_max_abs_dp_Pa": 0.7863450954318978,
+      "last_step_health_time_s": 0.381581959232,
+      "last_step_raw_p_min_Pa": 96483.49140260633,
+      "last_step_status": "running",
+      "maximum_clipped_liquid_mass_kg": 0.0,
+      "parser_errors": [],
+      "persistent_final_floor_steps": 0,
+      "raw_pressure_contact_count": 0,
+      "wall_elapsed_s_at_capture": 5525.508987,
+      "water_cumulative_defect_fraction_initial": 3.9343028156955243e-07,
+      "water_cumulative_defect_kg": 0.001258193333796953
+    },
+    "corridor": {
+      "completed_steps": 738,
+      "diagnostic_errors": [],
+      "gas_cumulative_defect_fraction_initial": 1.0381683390755648e-06,
+      "gas_cumulative_defect_kg": -3.516949699130261e-05,
+      "guard_time_s": 0.331706959232,
+      "last_final_p_min_Pa": 98108.01355643211,
+      "last_step_final_min_p_Pa": 98108.01355643211,
+      "last_step_final_outer_max_abs_dU_m_s": 0.00840097286160842,
+      "last_step_final_outer_max_abs_dp_Pa": 1.730875903216656,
+      "last_step_health_time_s": 0.331581959232,
+      "last_step_raw_p_min_Pa": 98032.76634555197,
+      "last_step_status": "running",
+      "maximum_clipped_liquid_mass_kg": 0.0,
+      "parser_errors": [],
+      "persistent_final_floor_steps": 0,
+      "raw_pressure_contact_count": 0,
+      "wall_elapsed_s_at_capture": 5001.037575,
+      "water_cumulative_defect_fraction_initial": 4.206074235967211e-07,
+      "water_cumulative_defect_kg": 0.0013451060608531407
+    }
+  },
+  "input_capture": {
+    "addendum_created_utc": "2026-10-27T12:17:19.773066+00:00",
+    "analysis_helper_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/analyze_prefix.py",
+    "analysis_helper_sha256": "b7fd0bcffdbf2c1de133d910ee63bcfa73ab22f0526e8a992037a41df3a20aa2",
+    "append_only_function_rows_are_exact_prefix_snapshots": true,
+    "capture_completed_utc": "2026-10-27T12:07:40.565416+00:00",
+    "capture_helper_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/capture_prefix.py",
+    "capture_helper_sha256": "32bba5fa920ce4985913644fbafb5d717e0460609dae8a20e8efd7baa0202ce3",
+    "capture_manifest_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/inputs/capture-manifest.json",
+    "capture_manifest_sha256": "be33df49d5b13983a97d4a8c23583529fbbe6457bf42b8d1d8a735dfea449dde",
+    "enrichment_note": "This final JSON adds verified mesh/run identities for the three native-mouth checks, existing reduced-model first-arrival predictions, paired mesh deltas, and active-child rate context. The original first-pass analysis JSON is preserved in ignored scratch.",
+    "final_addendum_created_utc": "2026-10-27T12:28:09+00:00",
+    "original_analysis_json_preserved_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/analysis-pre-enrichment.json",
+    "public_compact_capture_provenance_path": "results/summaries/i4f_20261027/cold-mesh-prefix/capture-provenance.json",
+    "public_compact_capture_provenance_sha256": "36a6427cbf0cb2cbfccbe71db51146ccb53ed6bc7c583efc54e5d43d65e9330d",
+    "raw_input_bytes": 19317087,
+    "raw_input_file_count": 208,
+    "raw_input_file_manifest_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/raw-input-file-manifest.json",
+    "raw_input_file_manifest_sha256": "44a415745776a3ef445aade911d5e9d952ac4db157b54c7c3ea52a0e80eeeb76",
+    "raw_snapshot_storage": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/inputs",
+    "snapshots_preserve_restart_instance_files": true,
+    "solver_log_slices_are_only_suffixes": true
+  },
+  "limits": [
+    "Both cases are at a common prefix ending near 0.332 s, before the .70 s target and before first mouth delivery.",
+    "The corridor mesh has 24468 more cells (+8.18%) than the 299214-cell baseline. It is a localized corridor-resolution sensitivity, not formal spatial convergence.",
+    "The two arms are restarted continuations from distinct earlier checkpoints (baseline .2598319592322597 s; corridor .23933195923226194 s); createFields reconstructs dgdt on restart. This is not a single uninterrupted bitwise trajectory.",
+    "The reduced model is an approximate one-tank/two-branch line model with assumed Cd/opening, finite line losses, constant water density, and nominal line volume. The model initial feed differs by about 0.634% from the native reference; model equivalent full line volume differs by about 2.08%.",
+    "Tank pressure probes are local samples, so their difference from reduced-model bulk gas pressure includes spatial sampling as well as model discrepancy.",
+    "No water at mouth/external zones in this cold prefix is a pre-delivery result, not a device failure. The separate historical primed-line check is not cold-start evidence.",
+    "The corridor mesh comparison is only an early upstream check: native alpha.water remains below 0.01 in all four predeclared corridor boxes at the available later sparse field snapshots (baseline 0.359832 s; corridor 0.339332 s). The water front has not tested the locally modified region, so the small scalar deltas do not establish whole-discharge mesh robustness."
+  ],
+  "measurement_definitions": {
+    "inventories": "volIntegrate(alpha.water) in tank, feed-line, mouth, external, and all-domain cell zones; these are water volumes, not mass. Cell-zone compartment sum minus all-domain total is a partition/reporting closure only. EOS expansion means total water volume itself need not be conserved.",
+    "mass_conservation": "Only the branch guard's cumulative finite-EOS phase mass defects are available here, at the exact captured guard endpoint. They are not interpolated to the common output time.",
+    "mouth_sample": "The x=4.79 m sampled-surface integral of alpha.water*U_x is secondary quadrature, not conservative native alphaPhi flux or physical aperture discharge.",
+    "outer_boundary_flux": "Signed alphaPhi0.water sums on ambientAnnulus, externalSides, and farOutlet patches. Their time integral is volumetric; do not interpret it as a mass balance for finite-EOS water.",
+    "tank_pressure": "Probe0 at (1.25,-0.55,1.60) m in Tank A and probe1 at (1.25,+0.55,1.60) m in Tank B; these are point samples, not volume averages.",
+    "valve_flux": "Native signed sum(alphaPhi0.water) over each valve-seat faceZone; units m3/s, normals point +x. A1+A2 and B1+B2 are per-tank net water-volume throughput, not mass flow."
+  },
+  "mesh_changed_region_front_status": {
+    "arms": {
+      "baseline": {
+        "alpha_ge_0p5_cells_across_all_boxes": 0,
+        "alpha_gt_0p01_cells_across_all_boxes": 0,
+        "changed_region_front_summary": {
+          "A_lower": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 6.658088002106353e-34,
+            "selected_cells": 3256,
+            "selected_volume_m3": 0.016872799287633567
+          },
+          "A_upper": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 2.2092395275045959e-35,
+            "selected_cells": 3266,
+            "selected_volume_m3": 0.01685762236529526
+          },
+          "B_lower": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 4.700156376528489e-34,
+            "selected_cells": 3256,
+            "selected_volume_m3": 0.01687342534859532
+          },
+          "B_upper": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 2.0981668741639224e-35,
+            "selected_cells": 3266,
+            "selected_volume_m3": 0.01685564320134582
+          }
+        },
+        "field_hashes": {
+          "C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+          "V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+          "alpha.water": "b2fee5313711aa855a8206d7c642c8cd1698dd209d5968b529ad38c4399389e3",
+          "cellProcAddressing": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33"
+        },
+        "field_time_s": 0.359831959232,
+        "mesh_cells": 299214
+      },
+      "corridor": {
+        "alpha_ge_0p5_cells_across_all_boxes": 0,
+        "alpha_gt_0p01_cells_across_all_boxes": 0,
+        "changed_region_front_summary": {
+          "A_lower": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 6.191549707827013e-44,
+            "selected_cells": 8482,
+            "selected_volume_m3": 0.0167373881368702
+          },
+          "A_upper": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 9.898153437401722e-46,
+            "selected_cells": 8482,
+            "selected_volume_m3": 0.016735542251698002
+          },
+          "B_lower": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 5.766028779269751e-44,
+            "selected_cells": 8482,
+            "selected_volume_m3": 0.016736934635032
+          },
+          "B_upper": {
+            "alpha_ge_0p5_cells": 0,
+            "alpha_gt_0p01_cells": 0,
+            "furthest_x_alpha_ge_0p5_m": null,
+            "furthest_x_alpha_gt_0p01_m": null,
+            "max_alpha": 4.8952530199373275e-46,
+            "selected_cells": 8482,
+            "selected_volume_m3": 0.0167360046892005
+          }
+        },
+        "field_hashes": {
+          "C": "294634346bf84e2b056da528e9e5d125020c2a8ce551d3d0245616e8ad850e4f",
+          "V": "df1609f606dd979da0887efc2a417f24ece05c52f3d0657db1724b92868dbdeb",
+          "alpha.water": "0ac1a3a249e4bc699e6186998df3b758376b2af70f02681bc71be5115551aa3e",
+          "cellProcAddressing": "e7abe80a950e2a48c15f47fe8d326324d23b0ed2850934e4de7cd0606b2b5879"
+        },
+        "field_time_s": 0.339331959232,
+        "mesh_cells": 323682
+      }
+    },
+    "changed_region_boxes_m": {
+      "A_lower": {
+        "y": [
+          -0.9,
+          -0.6
+        ],
+        "z": [
+          0.5,
+          0.76
+        ]
+      },
+      "A_upper": {
+        "y": [
+          -0.5,
+          -0.2
+        ],
+        "z": [
+          0.76,
+          1.0
+        ]
+      },
+      "B_lower": {
+        "y": [
+          0.2,
+          0.5
+        ],
+        "z": [
+          0.5,
+          0.76
+        ]
+      },
+      "B_upper": {
+        "y": [
+          0.6,
+          0.9
+        ],
+        "z": [
+          0.76,
+          1.0
+        ]
+      },
+      "x": [
+        4.1,
+        4.45
+      ]
+    },
+    "field_times_are_actual_sparse_snapshots_not_common_time": true,
+    "interpretation": "At each arm\u2019s own sparse saved snapshot (baseline 0.359831959232 s; corridor 0.339331959232 s), all four predeclared refined boxes have zero cells with alpha.water > 0.01 and zero cells with alpha.water >= 0.5. The native scalar comparison cutoff is 0.331581959232 s. Thus the very small prefix mesh deltas test upstream behavior before the water interface reaches the modified region; they do not establish interface-region mesh robustness or convergence.",
+    "predeclared_corridor_definition_path": "results/runs/i4f-uniform-interface-corridor-20261027T015002Z/provenance/experiment-predeclaration-v2.json",
+    "predeclared_corridor_definition_sha256": "c97270a405ac4874141c84e6462173e4ea7ccd2baffe3a56f5d34fd74a0ad0fb",
+    "result_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/analysis/corridor-front-check.json",
+    "result_sha256": "068a71095ccd399ef1927068a186f06fe6767127d0c6ebb4f267381d244d9225",
+    "schema": "i4f-cold-mesh-prefix-changed-region-front-status/v1"
+  },
+  "model_reference": {
+    "comparison_csv_snapshot_sha256": "78dadb9fc8b104026a415b280ddc54209bca6d099eb385902331ff250afb9235",
+    "comparison_scope": "Representative one-tank/two-branch equivalent-line model; native tank mean/probes are shown beside it, not asserted identical to a volume-averaged bulk-gas pressure.",
+    "equivalent_full_line_volume_model_m3_per_tank": 0.7005877945113135,
+    "equivalent_full_line_volume_model_minus_native_m3_per_tank": null,
+    "equivalent_full_line_volume_model_minus_native_percent": 2.0806978670324217,
+    "first_outlet_arrival_prediction_s_by_branch": {
+      "gamma_dt50us": {
+        "lower": 0.6169999999999403,
+        "upper": 0.6251999999999394
+      },
+      "isothermal_dt50us": {
+        "lower": 0.5845999999999438,
+        "upper": 0.5914499999999431
+      }
+    },
+    "initial_wet_feed_model_m3_per_tank": 0.252648321606991,
+    "initial_wet_feed_model_minus_native_m3": 0.0015914778111367212,
+    "initial_wet_feed_native_reference_m3_per_tank": 0.2510568437958543,
+    "isothermal_n": 1.0,
+    "model_caveats": [
+      "current branch centerlines use the packet's direct compact CAD-generator coordinates",
+      "current dry-line native initialization supplies tank capacity, water, pressure, temperature, air thermo and wetted upstream-feed reference; Tank A is modeled as representative",
+      "compact line areas and transition losses remain an equivalent-line approximation; the network line volume is compared against current compact CAD and native zones",
+      "single full-bore water front per branch; no stratification, slugs, or trapped pockets",
+      "front Froude number is reported as a diagnostic and does not validate piston-front kinematics",
+      "front pressure is held at ambient only as a declared approximation and has an air-loss screen",
+      "unknown valve seat, Cd, opening history, bend loss, and actual branch geometry remain provisional",
+      "tank-to-line water entering the branch is stored until the front reaches the open mouth"
+    ],
+    "model_definition_sha256": "9f62332fc7e978ef30dd0d4e050551b03ab7295f7e6ea253b4720cd4d1b5bfab",
+    "native_full_line_zone_volume_m3_per_tank": null,
+    "polytropic_gamma": 1.3998145383348455,
+    "runs": {
+      "gamma_dt50us": {
+        "bytes": 13069324,
+        "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/history.csv",
+        "polytropic_n": 1.3998145383348455,
+        "rows": 22533,
+        "sha256": "9b52153522adc3156b8c4d721241ea51d6032b5298b4b41946f3a328c84b0d4e",
+        "source_run": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z",
+        "stop": {
+          "reason": "tank_intake_crown_reached",
+          "time_s": 1.1265521234050802
+        },
+        "summary_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072345.014266Z/summary.json",
+        "summary_sha256_expected": "8827aa49e201459823e8be4ea8fa5c297aaf9e1db87b74cab8a5881100429f16",
+        "time_step_s": 5e-05
+      },
+      "isothermal_dt50us": {
+        "bytes": 11039854,
+        "path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/history.csv",
+        "polytropic_n": 1.0,
+        "rows": 19397,
+        "sha256": "5af9d048f079e28f733cfeec44aa7d80d0d4f903c58adae085deece71747479f",
+        "source_run": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z",
+        "stop": {
+          "reason": "tank_intake_crown_reached",
+          "time_s": 0.9697910060343804
+        },
+        "summary_path": "results/runs/i4f-flush-filling-model-corrected299214/i4f-filling-network-20261026T072407.705611Z/summary.json",
+        "summary_sha256_expected": "b762d73ae9ae78626c3e02a5ea3c64404a738423cb026f1cf5b936c43da472e6",
+        "time_step_s": 5e-05
+      }
+    },
+    "water_density_kg_m3": 998.2,
+    "water_model": "constant-density one-dimensional filling model; no VOF stratification or finite-water EOS."
+  },
+  "native_mouth_check_qualification": "Reader reports alphaPhi0.water volume flux on an offset apparatus/external FV control surface, with positive sign apparatus-to-external. It does not convert to phase mass flow and is not the physical aperture flux. The historical primed pilot additionally compares to a native interior x=4.8 m cut; these two native surfaces differ materially there.",
+  "native_mouth_checks": {
+    "cold_baseline_saved_0p359832": {
+      "binary_sha256": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+      "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case",
+      "current_stage_container_id": "cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3",
+      "current_stage_started_at": "2026-10-27T10:35:32.750776123Z",
+      "label": "cold baseline saved checkpoint; later than common scalar-series cutoff",
+      "mouths": [
+        {
+          "mouth": "A_lower",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 3.4181930228022963e-75,
+          "native_offset_surface_net_water_volume_flux_m3_s": 3.4124089472135654e-75,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 5.78407558873067e-78,
+          "offset_minus_xplane_Q_m3_s": null,
+          "offset_surface_magnitude_area_m2": 0.32528713444405716,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "unavailable_missing_legacy_geometry",
+          "xplane_cut_x_m": null,
+          "xplane_face_count": null,
+          "xplane_native_water_Q_m3_s": null
+        },
+        {
+          "mouth": "A_upper",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 2.542880969377885e-77,
+          "native_offset_surface_net_water_volume_flux_m3_s": 2.536565765047024e-77,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 6.3152043308610314e-80,
+          "offset_minus_xplane_Q_m3_s": null,
+          "offset_surface_magnitude_area_m2": 0.32529596427331414,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "unavailable_missing_legacy_geometry",
+          "xplane_cut_x_m": null,
+          "xplane_face_count": null,
+          "xplane_native_water_Q_m3_s": null
+        },
+        {
+          "mouth": "B_lower",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 8.914732766337671e-76,
+          "native_offset_surface_net_water_volume_flux_m3_s": 8.898085482266815e-76,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 1.6647284070855564e-78,
+          "offset_minus_xplane_Q_m3_s": null,
+          "offset_surface_magnitude_area_m2": 0.3252947021080599,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "unavailable_missing_legacy_geometry",
+          "xplane_cut_x_m": null,
+          "xplane_face_count": null,
+          "xplane_native_water_Q_m3_s": null
+        },
+        {
+          "mouth": "B_upper",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 2.9964021461460647e-77,
+          "native_offset_surface_net_water_volume_flux_m3_s": 2.9871233913080106e-77,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 9.278754838053986e-80,
+          "offset_minus_xplane_Q_m3_s": null,
+          "offset_surface_magnitude_area_m2": 0.3253089390832658,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "unavailable_missing_legacy_geometry",
+          "xplane_cut_x_m": null,
+          "xplane_face_count": null,
+          "xplane_native_water_Q_m3_s": null
+        }
+      ],
+      "native_control_quantity": {
+        "face_area_definition": "per-face magnitude of OpenFOAM-compatible face::areaNormal; absolute first-vertex fan area is a separate diagnostic",
+        "field": "alphaPhi0.water",
+        "mass_storage_note": "instantaneous inter-zone throughput is not stored or escaped mass",
+        "phase_mass_conversion": "not provided; phase density is not saved directly on selected faces",
+        "projected_offset_integral_note": "sum((OpenFOAM face-centre x - reference-plane x) * outward Sf_x); diagnostic only and not claimed as enclosed buffer volume when surface projections differ",
+        "sign": "positive from apparatus cell zone into externalAirZone",
+        "surface_scope": "offset apparatus/external finite-volume control surface; does not by itself represent physical branch-cap discharge",
+        "units": "m3/s"
+      },
+      "native_mesh_cells": 299214,
+      "reader_code_sha256": {
+        "module": "d980b314fea38a2a1a449dfed9f39606c9c1b21986e52495972babf4885fd0b7",
+        "script": "e6e1f4f00ea5762fef9f19fe291c7fe495a9f5a6e06dd9f3c0be370ec6596eec"
+      },
+      "saved_checkpoint_time_matches_reader_s": 0.35983195923198896,
+      "source_output_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/cold-baseline-native-mouth-0359831959232/native-apparatus-control-surface-flux.json",
+      "source_output_sha256": "396bb798ff795012e52d2d93905f2436ce0d2efa41267440c8feb94e95ac4394",
+      "time_s": 0.35983195923198896
+    },
+    "cold_corridor_saved_0p239332": {
+      "binary_sha256": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+      "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case",
+      "current_stage_container_id": "c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96",
+      "current_stage_started_at": "2026-10-27T10:44:17.110030278Z",
+      "label": "cold corridor saved checkpoint; earlier than common scalar-series cutoff",
+      "mouths": [
+        {
+          "mouth": "A_lower",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 7.921120001628077e-150,
+          "native_offset_surface_net_water_volume_flux_m3_s": 7.819733755181141e-150,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 1.0138624644693573e-151,
+          "offset_minus_xplane_Q_m3_s": -8.880055880348297e-151,
+          "offset_surface_magnitude_area_m2": 0.32529184345480877,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "near_zero_traces_relative_difference_withheld",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 8.707739343215971e-150
+        },
+        {
+          "mouth": "A_upper",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 3.6920483088896694e-153,
+          "native_offset_surface_net_water_volume_flux_m3_s": 3.5887374580971477e-153,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 1.0331085079252133e-154,
+          "offset_minus_xplane_Q_m3_s": -2.461351136761563e-153,
+          "offset_surface_magnitude_area_m2": 0.3253090461854146,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "near_zero_traces_relative_difference_withheld",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 6.050088594858711e-153
+        },
+        {
+          "mouth": "B_lower",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 7.719628693871763e-150,
+          "native_offset_surface_net_water_volume_flux_m3_s": 7.65675527747101e-150,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 6.2873416400754916e-152,
+          "offset_minus_xplane_Q_m3_s": -1.494328866627753e-150,
+          "offset_surface_magnitude_area_m2": 0.3252853360314769,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "near_zero_traces_relative_difference_withheld",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 9.151084144098763e-150
+        },
+        {
+          "mouth": "B_upper",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 1.9021557824280747e-153,
+          "native_offset_surface_net_water_volume_flux_m3_s": 1.8509389390463923e-153,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 5.121684338168267e-155,
+          "offset_minus_xplane_Q_m3_s": -7.806190460900109e-154,
+          "offset_surface_magnitude_area_m2": 0.32531647193458324,
+          "relative_offset_difference": null,
+          "xplane_comparison_state": "near_zero_traces_relative_difference_withheld",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 2.631557985136403e-153
+        }
+      ],
+      "native_control_quantity": {
+        "face_area_definition": "per-face magnitude of OpenFOAM-compatible face::areaNormal; absolute first-vertex fan area is a separate diagnostic",
+        "field": "alphaPhi0.water",
+        "mass_storage_note": "instantaneous inter-zone throughput is not stored or escaped mass",
+        "phase_mass_conversion": "not provided; phase density is not saved directly on selected faces",
+        "projected_offset_integral_note": "sum((OpenFOAM face-centre x - reference-plane x) * outward Sf_x); diagnostic only and not claimed as enclosed buffer volume when surface projections differ",
+        "sign": "positive from apparatus cell zone into externalAirZone",
+        "surface_scope": "offset apparatus/external finite-volume control surface; does not by itself represent physical branch-cap discharge",
+        "units": "m3/s"
+      },
+      "native_mesh_cells": 323682,
+      "reader_code_sha256": {
+        "module": "d980b314fea38a2a1a449dfed9f39606c9c1b21986e52495972babf4885fd0b7",
+        "script": "e6e1f4f00ea5762fef9f19fe291c7fe495a9f5a6e06dd9f3c0be370ec6596eec"
+      },
+      "saved_checkpoint_time_matches_reader_s": 0.23933195923226194,
+      "source_output_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/cold-corridor-native-mouth-0239331959232/native-apparatus-control-surface-flux.json",
+      "source_output_sha256": "116e04e889ac7957af29052a7203d8df9e7361bcd37243653e181f6882b58448",
+      "time_s": 0.23933195923226194
+    },
+    "historical_primed_short1_0p050021": {
+      "binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+      "case": "/home/v/proj/bene/fire-track2/results/runs/i4f-short1-coldstart-pilot-20261025T152415Z/case",
+      "container_id": "9d73e14fb678171178db9571a7ce8fc4a5313b554a7f9ab6486e6976ad1773fd",
+      "docker_started_at": "2026-10-25T15:37:08.914284578Z",
+      "initial_state_description": "Historical primed-line startup, with native primed line water approximately 0.68136/0.68141 m3 in tanks A/B; not the current dry-downstream cold-start condition.",
+      "label": "historical primed-line short1 pilot; nonzero reader check only",
+      "launch_manifest_path": "results/runs/i4f-short1-coldstart-pilot-20261025T152415Z/launch-manifest.json",
+      "launch_manifest_sha256": "f9cadabbadfcce73cbe14f3275faf744c601ce2eb85a5a5e395c4ea9ba4feb4c",
+      "mesh_count_source_path": "results/runs/i4f-short1-coldstart-pilot-20261025T152415Z/experiment.json",
+      "mesh_count_source_sha256": "ffca9eca6eeb71ac4083f656e63777273800fb624fcea911404f5ffc6d7dee3f",
+      "mouths": [
+        {
+          "mouth": "A_lower",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 0.051729589582457505,
+          "native_offset_surface_net_water_volume_flux_m3_s": 0.0441350801757849,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 0.007594509406672604,
+          "offset_minus_xplane_Q_m3_s": -0.012107377106563857,
+          "offset_surface_magnitude_area_m2": 0.3252966580771348,
+          "relative_offset_difference": -0.21527112597129822,
+          "xplane_comparison_state": "resolved_flux_comparison",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 0.05624245728234876
+        },
+        {
+          "mouth": "A_upper",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 0.05124695809347721,
+          "native_offset_surface_net_water_volume_flux_m3_s": 0.04373058081251861,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 0.007516377280958601,
+          "offset_minus_xplane_Q_m3_s": -0.012244188035055593,
+          "offset_surface_magnitude_area_m2": 0.3253052061937103,
+          "relative_offset_difference": -0.2187447717452472,
+          "xplane_comparison_state": "resolved_flux_comparison",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 0.055974768847574206
+        },
+        {
+          "mouth": "B_lower",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 0.0517281007099981,
+          "native_offset_surface_net_water_volume_flux_m3_s": 0.044136881175006706,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 0.007591219534991388,
+          "offset_minus_xplane_Q_m3_s": -0.012112298140270206,
+          "offset_surface_magnitude_area_m2": 0.3253017372796648,
+          "relative_offset_difference": -0.2153328864120971,
+          "xplane_comparison_state": "resolved_flux_comparison",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 0.05624917931527691
+        },
+        {
+          "mouth": "B_upper",
+          "native_face_count": 856,
+          "native_offset_surface_forward_water_volume_flux_m3_s": 0.05123925067810261,
+          "native_offset_surface_net_water_volume_flux_m3_s": 0.0437241357901276,
+          "native_offset_surface_reverse_water_volume_flux_m3_s": 0.0075151148879750145,
+          "offset_minus_xplane_Q_m3_s": -0.0122453799447549,
+          "offset_surface_magnitude_area_m2": 0.32529681599109483,
+          "relative_offset_difference": -0.21878659809670423,
+          "xplane_comparison_state": "resolved_flux_comparison",
+          "xplane_cut_x_m": 4.8,
+          "xplane_face_count": 384,
+          "xplane_native_water_Q_m3_s": 0.0559695157348825
+        }
+      ],
+      "native_control_quantity": {
+        "face_area_definition": "per-face magnitude of OpenFOAM-compatible face::areaNormal; absolute first-vertex fan area is a separate diagnostic",
+        "field": "alphaPhi0.water",
+        "mass_storage_note": "instantaneous inter-zone throughput is not stored or escaped mass",
+        "phase_mass_conversion": "not provided; phase density is not saved directly on selected faces",
+        "projected_offset_integral_note": "sum((OpenFOAM face-centre x - reference-plane x) * outward Sf_x); diagnostic only and not claimed as enclosed buffer volume when surface projections differ",
+        "sign": "positive from apparatus cell zone into externalAirZone",
+        "surface_scope": "offset apparatus/external finite-volume control surface; does not by itself represent physical branch-cap discharge",
+        "units": "m3/s"
+      },
+      "native_control_surface_net_total_Q_m3_s": 0.17572667795343783,
+      "native_mesh_cells": 269680,
+      "native_xplane_net_total_Q_m3_s": 0.22443592118008238,
+      "reader_code_sha256": {
+        "module": "d980b314fea38a2a1a449dfed9f39606c9c1b21986e52495972babf4885fd0b7",
+        "script": "e6e1f4f00ea5762fef9f19fe291c7fe495a9f5a6e06dd9f3c0be370ec6596eec"
+      },
+      "run_experiment_path": "results/runs/i4f-short1-coldstart-pilot-20261025T152415Z/experiment.json",
+      "run_experiment_sha256": "ffca9eca6eeb71ac4083f656e63777273800fb624fcea911404f5ffc6d7dee3f",
+      "source_output_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/primed-short1-native-mouth-050021166664/native-apparatus-control-surface-flux.json",
+      "source_output_sha256": "b898f4f5ecd79d82e22fb4c1d03ec2d3dbb6484bc65fb9642677a566a549f42a",
+      "time_s": 0.050021166664044305,
+      "total_offset_minus_xplane_relative": -0.2170296223997109
+    }
+  },
+  "paired_inputs": {
+    "baseline": {
+      "binary_sha256": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+      "case_static_tree_sha256": "1387dda4aab90b48fd3799bfc591caac187da6780f754d8ee745220b07699576",
+      "child_control_sha256": "af218184ea435483a831a36543a01f114ea4c8f7559561e6f5095f1ecb2bfbfb",
+      "container_id": "cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3",
+      "container_name": "i4f-coldmesh-cont-v5-20261027t101135z-base299214",
+      "docker_started_at": "2026-10-27T10:35:32.750776123Z",
+      "guard_clipped_liquid_mass_kg": 0.0,
+      "guard_completed_steps": 974,
+      "guard_current_time_s": 0.381706959232,
+      "guard_gas_cumulative_defect_kg": -4.642940453946325e-05,
+      "guard_raw_pressure_contact_count": 0,
+      "guard_water_cumulative_defect_kg": 0.001258193333796953,
+      "input_freeze_sha256": "987260c7efea481c92ce7f425492750632e9545d578dd4e49025d56a671f8016",
+      "mesh_cells": 299214,
+      "previous_checkpoint_time_s": 0.19995695923226628,
+      "restart_qualification": "Restart from a complete captured native checkpoint, not bitwise continuation: createFields.H reconstructs dgdt on restart. The full precision time/uniform state, last two saved native checkpoints, native fields, phase ledgers and actual deltaT context are preserved.",
+      "restart_time_s": 0.2598319592322597,
+      "running_at_capture": true,
+      "same_binary_physics_mesh_and_dictionaries": true,
+      "series_latest_times_s": {
+        "ambient_annulus_water_flux": 0.381581959232,
+        "external_sides_water_flux": 0.381581959232,
+        "external_water_volume": 0.381581959232,
+        "far_outlet_water_flux": 0.381581959232,
+        "lineA_water_volume": 0.381581959232,
+        "lineB_water_volume": 0.381581959232,
+        "mouthA_water_volume": 0.381581959232,
+        "mouthB_water_volume": 0.381581959232,
+        "mouth_sample_alphaU": 0.381581959232,
+        "probe_T": 0.38158196,
+        "probe_p": 0.38158196,
+        "seat_A1_pressure": 0.381581959232,
+        "seat_A2_pressure": 0.381581959232,
+        "seat_B1_pressure": 0.381581959232,
+        "seat_B2_pressure": 0.381581959232,
+        "source_A1_flux": 0.381581959232,
+        "source_A2_flux": 0.381581959232,
+        "source_B1_flux": 0.381581959232,
+        "source_B2_flux": 0.381581959232,
+        "tankA_water_volume": 0.381581959232,
+        "tankB_water_volume": 0.381581959232,
+        "total_water_volume": 0.381581959232,
+        "valve_A1_flux": 0.381581959232,
+        "valve_A2_flux": 0.381581959232,
+        "valve_B1_flux": 0.381581959232,
+        "valve_B2_flux": 0.381581959232
+      },
+      "series_rows": {
+        "ambient_annulus_water_flux": 3061,
+        "external_sides_water_flux": 3061,
+        "external_water_volume": 3061,
+        "far_outlet_water_flux": 3061,
+        "lineA_water_volume": 3061,
+        "lineB_water_volume": 3061,
+        "mouthA_water_volume": 3061,
+        "mouthB_water_volume": 3061,
+        "mouth_sample_U": 3061,
+        "mouth_sample_alpha": 380,
+        "mouth_sample_alphaU": 3061,
+        "probe_T": 3061,
+        "probe_U": 3061,
+        "probe_alpha_water": 3061,
+        "probe_p": 3061,
+        "seat_A1_pressure": 3061,
+        "seat_A2_pressure": 3061,
+        "seat_B1_pressure": 3061,
+        "seat_B2_pressure": 3061,
+        "source_A1_flux": 3061,
+        "source_A2_flux": 3061,
+        "source_B1_flux": 3061,
+        "source_B2_flux": 3061,
+        "tankA_water_volume": 3061,
+        "tankB_water_volume": 3061,
+        "total_water_volume": 3061,
+        "valve_A1_flux": 3061,
+        "valve_A2_flux": 3061,
+        "valve_B1_flux": 3061,
+        "valve_B2_flux": 3061
+      }
+    },
+    "corridor": {
+      "binary_sha256": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+      "case_static_tree_sha256": "150214ac92bf966791a172974807abe7c73e8caff519fed8bf742dcd2d1a44a2",
+      "child_control_sha256": "8d3fffce4cc5873d992e2a1ce5de3e84fe007512c911c4d343a8fffb10cecad8",
+      "container_id": "c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96",
+      "container_name": "i4f-coldmesh-cont-v5-20261027t101135z-corridor323682-a003-go-path-fix",
+      "docker_started_at": "2026-10-27T10:44:17.110030278Z",
+      "guard_clipped_liquid_mass_kg": 0.0,
+      "guard_completed_steps": 738,
+      "guard_current_time_s": 0.331706959232,
+      "guard_gas_cumulative_defect_kg": -3.516949699130261e-05,
+      "guard_raw_pressure_contact_count": 0,
+      "guard_water_cumulative_defect_kg": 0.0013451060608531407,
+      "input_freeze_sha256": "d6f6fb6ba50fca281d6a7e47bb0cd20447e604fb688c025d12d6cef8e1385c16",
+      "mesh_cells": 323682,
+      "previous_checkpoint_time_s": 0.19995695923226628,
+      "restart_qualification": "Restart from a complete captured native checkpoint, not bitwise continuation: createFields.H reconstructs dgdt on restart. The full precision time/uniform state, last two saved native checkpoints, native fields, phase ledgers and actual deltaT context are preserved.",
+      "restart_time_s": 0.23933195923226194,
+      "running_at_capture": true,
+      "same_binary_physics_mesh_and_dictionaries": true,
+      "series_latest_times_s": {
+        "ambient_annulus_water_flux": 0.331706959232,
+        "external_sides_water_flux": 0.331706959232,
+        "external_water_volume": 0.331706959232,
+        "far_outlet_water_flux": 0.331706959232,
+        "lineA_water_volume": 0.331581959232,
+        "lineB_water_volume": 0.331581959232,
+        "mouthA_water_volume": 0.331706959232,
+        "mouthB_water_volume": 0.331706959232,
+        "mouth_sample_alphaU": 0.331706959232,
+        "probe_T": 0.33170696,
+        "probe_p": 0.33170696,
+        "seat_A1_pressure": 0.331706959232,
+        "seat_A2_pressure": 0.331706959232,
+        "seat_B1_pressure": 0.331706959232,
+        "seat_B2_pressure": 0.331706959232,
+        "source_A1_flux": 0.331706959232,
+        "source_A2_flux": 0.331706959232,
+        "source_B1_flux": 0.331706959232,
+        "source_B2_flux": 0.331706959232,
+        "tankA_water_volume": 0.331581959232,
+        "tankB_water_volume": 0.331581959232,
+        "total_water_volume": 0.331706959232,
+        "valve_A1_flux": 0.331706959232,
+        "valve_A2_flux": 0.331706959232,
+        "valve_B1_flux": 0.331706959232,
+        "valve_B2_flux": 0.331706959232
+      },
+      "series_rows": {
+        "ambient_annulus_water_flux": 2662,
+        "external_sides_water_flux": 2662,
+        "external_water_volume": 2662,
+        "far_outlet_water_flux": 2662,
+        "lineA_water_volume": 2661,
+        "lineB_water_volume": 2661,
+        "mouthA_water_volume": 2662,
+        "mouthB_water_volume": 2662,
+        "mouth_sample_U": 2662,
+        "mouth_sample_alpha": 331,
+        "mouth_sample_alphaU": 2662,
+        "probe_T": 2662,
+        "probe_U": 2662,
+        "probe_alpha_water": 2662,
+        "probe_p": 2662,
+        "seat_A1_pressure": 2662,
+        "seat_A2_pressure": 2662,
+        "seat_B1_pressure": 2662,
+        "seat_B2_pressure": 2662,
+        "source_A1_flux": 2662,
+        "source_A2_flux": 2662,
+        "source_B1_flux": 2662,
+        "source_B2_flux": 2662,
+        "tankA_water_volume": 2661,
+        "tankB_water_volume": 2661,
+        "total_water_volume": 2662,
+        "valve_A1_flux": 2662,
+        "valve_A2_flux": 2662,
+        "valve_B1_flux": 2662,
+        "valve_B2_flux": 2662
+      }
+    }
+  },
+  "pairwise_mesh_delta_at_common_cutoff": {
+    "baseline_minus_corridor": {
+      "lineA_initial_zone_water_volume_m3": 2.300000001564939e-08,
+      "lineB_initial_zone_water_volume_m3": -7.999999995789153e-09,
+      "mean_probe_T_K": 2.5000000050567905e-05,
+      "mean_probe_p_abs_Pa": 0.10499996936414391,
+      "mean_tank_seat_water_Q_m3_s": 2.4999999959085528e-08,
+      "mean_tank_water_volume_m3": -1.500000013088254e-08,
+      "total_domain_alpha_water_volume_m3": -1.999999987845058e-08
+    },
+    "definition": "baseline minus corridor in output quantities at the same interpolated physical time; exploratory local-mesh sensitivity, not convergence.",
+    "relative_difference_percent_using_baseline_denominator": {
+      "lineA_initial_zone_water_volume_m3": 6.144345397176534e-06,
+      "lineB_initial_zone_water_volume_m3": -2.136865028763847e-06,
+      "mean_probe_T_K": 9.632037125035512e-06,
+      "mean_probe_p_abs_Pa": 1.340946615224327e-05,
+      "mean_tank_seat_water_Q_m3_s": 2.8659048357263005e-06,
+      "mean_tank_water_volume_m3": -1.2224106208512284e-06,
+      "total_domain_alpha_water_volume_m3": -6.244389163701343e-07
+    },
+    "time_s": 0.331581959232
+  },
+  "run_rate_context": {
+    "baseline": {
+      "child_physical_advance_s_at_capture": 0.12187499999974027,
+      "child_restart_time_s": 0.2598319592322597,
+      "guard_campaign_time_s_at_capture": 0.381706959232,
+      "guard_wall_elapsed_s_at_capture": 5525.508987,
+      "observed_child_physical_s_per_wall_hour": 0.07940444962288955,
+      "wall_rate_scope": "Single active continuation child elapsed wall; includes initialization/solver time and is not projected to .70 s."
+    },
+    "corridor": {
+      "child_physical_advance_s_at_capture": 0.09237499999973806,
+      "child_restart_time_s": 0.23933195923226194,
+      "guard_campaign_time_s_at_capture": 0.331706959232,
+      "guard_wall_elapsed_s_at_capture": 5001.037575,
+      "observed_child_physical_s_per_wall_hour": 0.06649620104065244,
+      "wall_rate_scope": "Single active continuation child elapsed wall; includes initialization/solver time and is not projected to .70 s."
+    }
+  },
+  "schema": "i4f-cold-mesh-prefix-engineering-comparison/v1",
+  "scope": "Exploratory cold-start prefix comparison of the corrected 1.0 m 299214-cell baseline and a local interface-corridor 323682-cell mesh; common saved time-series prefix only. This is not a full discharge, a mesh-convergence result, or hardware validation."
+}
