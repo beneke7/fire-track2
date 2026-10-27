@@ -1,0 +1,141 @@
+{
+  "allGeometry_comparison_to_attempt03": {
+    "concave_cells_attempt03": 6894,
+    "concave_cells_retry03": 7141,
+    "concave_faces_attempt03": 825,
+    "concave_faces_retry03": 869,
+    "path": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path/analysis-v6/allGeometry-comparison-to-attempt03.json",
+    "relative_fraction_change_pp": 0.03245575744122847,
+    "sha256": "a30c88bbee92563958c189e0747c9e3f9ceb7802d86bb374ad01ab162816dcbf"
+  },
+  "decision": "Mesh-only targeted repair produced a generic/configured-quality pass. No 0.8 m CFD ran. Review the higher allGeometry concavity count before calling the geometry comparison ready.",
+  "guard_sha256": "3d1ecb0444d017c87da6c55ebc290a3334c088b1e0b5004fcc06b8da26df1d94",
+  "hashes": {
+    "final_boundary": "bf2d76440eda0a4b964c715448c224aa2f6ab7052569a770d385d9e25cf9144a",
+    "final_cellZones": "181a87e62ec103dddedb0a48c54c7fd7ab642d0d64b3123a99f98346a3303ee9",
+    "final_centres": "891e55376e01e797dbf7dcfccc960ebe12b464f133db94fb886cf7edbe3fb0b9",
+    "final_faces": "cbad85efdc1d78cc44f618f713a4eb34948bbcfbbfc614d056b0b622dff5f870",
+    "final_neighbour": "e2c62490a8b33cf29e30ee79f8af0f731d608fac7e99b67c7bbddee56da7dd97",
+    "final_owner": "a056e85bf31b6ceb13bb8e024f2f99eb44723d4677d2e1cf03d5ff57c98b86f9",
+    "final_points": "e3a48aa37779f197ed6909c4af917accd0f7cfc0d5802a77d9cdbd06f79af966"
+  },
+  "launch_manifest_sha256": "061e5744abf93b8fd63d26169759f92fc07026cb6865d05f29b7c65f80f3f19e",
+  "launcher_sha256": "b41f63c7b20965484e20c62f916366d27c7f3832f2eb71bd32ec66bf4c75c8b3",
+  "mesh_quality_summary": {
+    "allGeometry_concave_cells": 7141,
+    "allGeometry_concave_faces": 869,
+    "allGeometry_failed_extra_checks": 1,
+    "cell_count": 317814,
+    "domain_volume_m3": 25.05920567,
+    "generic_mesh_ok": true,
+    "max_skewness": 3.913254466,
+    "maximum_non_orthogonality_deg": 64.88767316,
+    "minimum_cell_determinant": 0.01187670212,
+    "minimum_cell_volume_m3": 7.120767052e-08,
+    "nine_configured_rows_all_zero": true,
+    "path": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path/analysis-v6/mesh-quality-and-source-coverage.json",
+    "sha256": "22df09daa1b5af1307c8c42835a391e37fbcb83ba0989934b9063d3e41d187cc"
+  },
+  "preflight_sha256": "36c9856392f65cbf0985a5c95733d5fbe25d8502e0795c884d3e64030cb060d8",
+  "recorded_utc": "2026-10-27T00:05:39.376529+00:00",
+  "resource_admission_sha256": "6c2dbfa123014b2aff1eee63c6d27969e23d3807b45280d8f757c4e70d513605",
+  "retry_history": [
+    {
+      "cause": "Missing /usr/bin/time before blockMesh.",
+      "container_id": "a313ff52612973bcc0d1524e4d4b7f32e78d019b74213e1e71df1cf1fa5be4bd",
+      "exit_code": 127
+    },
+    {
+      "cause": "Container path to guard incorrect; no mesh stage.",
+      "container_id": "b4f5bdfeeee57a7cd02d4d7e75d7daa5ce93585fd0dfa44783093a5476e3e32f",
+      "exit_code": 127
+    },
+    {
+      "cause": "Guard path to runner incorrect; no mesh stage.",
+      "container_id": "e28d8e49a672d73daaaa350fe97bd63420ba99fe568f1871ffec1af7f568a960",
+      "exit_code": 127
+    }
+  ],
+  "runner_sha256": "0949b4b2822bbe46c5e51e22e886971f73b5b40ab6576ba347c8eb9dfa42ed32",
+  "runtime_capture_sha256": "3d84bc49b402cedd4266b69a03d8a37b8edcd605a9a3025952dc49c6e6284cbf",
+  "schema": "i4f-short08-targeted-mesh-final-handoff/v1",
+  "scope": "No geometry/STL dimensions, mesh-quality thresholds, physical inputs, solver dictionaries or initial fields were changed by the retry. The single extra local level-4 box was the declared mesh change.",
+  "successful_mesh_attempt": {
+    "container_id": "45d5e79c9d49bf9ac671d5511fc415a6a1e2a13c939f01e168d76cff8276551d",
+    "container_name": "i4f-short08-targeted-mesh-attempt04-retry03-20261026T235930Z",
+    "cpu_quota": 3.0,
+    "exit_code": 0,
+    "finished_at": "2026-10-27T00:01:39.371431515Z",
+    "flow_solver_launched": false,
+    "host_wall_seconds": 169.34884,
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "max_rss": "Unavailable because image lacks /usr/bin/time; Bash time captured elapsed/user/system only. Docker memory samples during snappyHexMesh were 475 MiB and 386.6 MiB; these are samples, not peak.",
+    "memory_limit_bytes": 17179869184,
+    "memory_swap_limit_bytes": 17179869184,
+    "path": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path",
+    "started_at": "2026-10-26T23:58:50.022591816Z",
+    "sum_timed_stage_elapsed_s": 161.999,
+    "sum_timed_stage_system_s": 2.877,
+    "sum_timed_stage_user_s": 158.184,
+    "timed_stage_count": 21
+  },
+  "tool_preflight": {
+    "result": "container_bundle_paths=verified\nprofiler=bash_time_max_rss_unavailable",
+    "sha256": "09609fc5803a1203a4ef1934e70d6d674bf536d46abf5c691711a0d10e9facb7"
+  },
+  "valve_source_coverage": {
+    "cellZones_sha256": "181a87e62ec103dddedb0a48c54c7fd7ab642d0d64b3123a99f98346a3303ee9",
+    "expected_four_branches_48_layers_each": true,
+    "note": "This mesh-only attempt does not create/copy alpha.water; it measures the unchanged source/valve cell-zone coverage and 48 axial layers, not water occupancy.",
+    "per_branch": {
+      "valveBandA1": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      },
+      "valveBandA2": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      },
+      "valveBandB1": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      },
+      "valveBandB2": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      }
+    },
+    "source_cell_centres_sha256": "891e55376e01e797dbf7dcfccc960ebe12b464f133db94fb886cf7edbe3fb0b9",
+    "valve_source_band_cell_count": 21504,
+    "valve_source_cells_missing_from_lineA_or_lineB": 0
+  },
+  "visual": {
+    "distance_from_original_bad_face_m": 0.0007543347343568134,
+    "image": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path/analysis-v6/after-target-local-projection.png",
+    "image_sha256": "45485c4032e42e69a99af886b14bc8a8ab16c287406c9b9e3eecff40caf4982c",
+    "local_owner_vertex_count": 8,
+    "local_projection_face_count": 26,
+    "matching_baffle_pair_face_ids_zero_based": [
+      999097,
+      1008055
+    ],
+    "selected_boundary_face_zero_based": 999097,
+    "selected_face_center_xyz_m": [
+      4.1349057445,
+      -0.8120712411000001,
+      0.65937685185
+    ],
+    "selected_owner_global_cell": 103411,
+    "selected_owner_volume_centroid_xyz_m": [
+      4.134771787384169,
+      -0.8099503259434566,
+      0.6593863545296131
+    ],
+    "selected_patch": "lamellaMaster"
+  }
+}

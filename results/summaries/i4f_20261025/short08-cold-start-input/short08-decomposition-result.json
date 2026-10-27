@@ -1,0 +1,39 @@
+{
+  "attempt_history": [
+    "preparation-attempt01.json",
+    "preparation-attempt02.json",
+    "attempt03/analysis/preparation-attempt03.json",
+    "attempt04/analysis/attempt04.json",
+    "attempt05/analysis/attempt05.json"
+  ],
+  "case": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case",
+  "container": {
+    "exit_code": 0,
+    "finished_at": "2026-10-27T00:22:06.242858748Z",
+    "id": "f36c32649a032feeb5895a9391a04a9718f8a26fe6c06934a28d167e91906ada",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "memory_bytes": 4294967296,
+    "name": "i4f-short08-cold-input-decompose-20261027T0023Z",
+    "nano_cpus": 1000000000,
+    "started_at": "2026-10-27T00:21:57.547469989Z",
+    "uid": "1000:1000"
+  },
+  "final_input_case_record": "analysis/native-cold-initialization.json",
+  "final_verification_report": "analysis/processor-and-inventory-verification.json",
+  "global_input_files": 47,
+  "global_input_files_exactly_match_frozen_manifest": true,
+  "global_input_manifest_sha256": "1e4693658ca2772bf6a87143682177a5022b2560d513c567b95401960b324ac6",
+  "mesh_cells": 317814,
+  "no_case_dynamicCode_cache": true,
+  "preflight_and_roundtrip": "All 14 nonuniform/uniform global 0/ fields, all 6 constant geometry fields, all declared list lengths and parsed counts checked. Cell addressing is a bijection over 317,814 cells. Nine physical fields round-trip bit-exact over ten ranks. Fourteen cellZone memberships round-trip to global labels. Native tanks, feeds, dry downstream lines, valve coverage and p_rgh EOS relation independently verified.",
+  "processor_files": 26,
+  "processor_files_total_bytes": 71472612,
+  "processor_manifest": "results/runs/i4f-short08-cold-ready-20261027T001147Z/provenance/processors10-files.sha256",
+  "processor_manifest_sha256": "85debb4e4a3da65daf6effa326d7064ce5ca029fc96af7c8ea8e42d21e0ae975",
+  "processor_verification_report": "results/runs/i4f-short08-cold-ready-20261027T001147Z/analysis/processor-and-inventory-verification.json",
+  "processor_verification_sha256": "6ed604e73b713fc2d570284ec6977a4bfc5f71efdbc5153879fc15b604a8570b",
+  "recorded_utc": "2026-10-27T00:26:11.308525+00:00",
+  "schema": "i4f-short08-cold-input-decomposition-result/v1",
+  "solver_launched": false,
+  "status": "PASS_INPUT_CASE_AND_STATIC_DECOMPOSITION"
+}

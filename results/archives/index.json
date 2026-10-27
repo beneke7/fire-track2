@@ -2425,6 +2425,22 @@
       "free_change_scope": "Original batch measurement includes concurrent filesystem activity and precedes the two restore checks; not an exact net retained-byte figure.",
       "restore_strategy": "Use the public portable helper and dedup-plan.json; copy from retained canonical with SHA/size and metadata checks, atomic no-clobber install; never modify canonical.",
       "recovery_packet_created_utc": "2026-10-26T20:55:03.607368+00:00"
+    },
+    {
+      "allocated_bytes_released": 4612132864,
+      "completed_utc": "2026-10-26T23:51:02.378664+00:00",
+      "deduplication_path": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore-manifest.json",
+      "deduplication_sha256": "445534170b5c584020ed59e9a202c08269643350f87fdd48354c5e60d65a0bd6",
+      "file_count": 798,
+      "logical_bytes_released": 4610512322,
+      "packet_manifest": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/manifest.json",
+      "packet_manifest_sha256": "87a77bf39acc522ac5a5ad6c35e209d5644fcab6a21949cc84d2317478038624",
+      "restore_helper": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore_polymesh.py",
+      "restore_helper_sha256": "ed35b22c71d88bab18eea622cf77b96664e8c8451fb8dcee34358bdc9fe65ff1",
+      "restore_policy": "Copy from retained canonical without explicit canonical mutation; verify bytes/metadata; reject symlinks and existing targets; independent temporary inode and atomic no-clobber install.",
+      "retained_canonical_file_count": 48,
+      "source_type": "exact_duplicate_static_polyMesh",
+      "status": "duplicate_paths_removed_canonical_retained"
     }
   ],
   "log_compressions": [
@@ -2474,6 +2490,44 @@
       "restore_helper": "results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py",
       "restore_helper_sha256": "9ed92ab427a876a24e1cf6940a625d00c044346b848636e40b3cd870663c1076",
       "restore_policy": "Verify archive and decompressed SHA/size and original ownership/mode/mtime; atomic no-clobber installation beneath an explicit destination root."
+    }
+  ],
+  "field_compressions": [
+    {
+      "archive_bytes": 1539809872,
+      "manifest_path": "results/archives/manifests/i4f-aerial-normalhead-20261017-fields-20261027T0121Z.members.json",
+      "manifest_sha256": "a5e4a6166f3a34cc0d808e25f3360439aba751b364093414a2669e534372cadc",
+      "operation_id": "i4f-aerial-normalhead-20261017-fields-20261027T0121Z",
+      "operation_path": "results/archives/manifests/i4f-aerial-normalhead-20261017-fields-20261027T0121Z.operation.json",
+      "operation_sha256": "81df4826084a84e70c7aab3ffffe8185e476de8b4d2cf5c75872756e5b26d252",
+      "preserved_time_directories": [
+        "0",
+        "0.5",
+        "1"
+      ],
+      "restore_helper": "scripts/restore_i4f_archived_field.py",
+      "restore_helper_sha256": "8cf40b6e8ee566b6326f952b8c734c5a9d152145ff3bca0b791b24c3739695ae",
+      "scope": "Lossless compression of terminal old aerial intermediate fields; payloads stay local and are restored using the indexed helper, with original hashes and metadata.",
+      "source_file_count": 1100,
+      "source_logical_bytes": 3777951845
+    }
+  ],
+  "vector_compressions": [
+    {
+      "accounting_scope": "Thirty unique archive frames recover forty distinct source inodes; descriptor-summed archive sizes in the original private summary double-count ten shared frames.",
+      "completed_utc": "2026-10-26T23:35:11.482215+00:00",
+      "estimated_net_allocated_release_bytes": 398651392,
+      "file_count": 40,
+      "manifest_path": "results/archives/manifests/i4f-pressure-probe-vectors-20261027T2330Z.json",
+      "manifest_sha256": "436970b2df5a6f77e4b358533d5d07dd9753be132454419bbe9f6e519bf4f1e7",
+      "restore_command": "python results/archives/manifests/i4f-pressure-probe-vectors-20261027T2330Z-restore.py --manifest results/archives/manifests/i4f-pressure-probe-vectors-20261027T2330Z.json --archive-root . --destination-root <root> --path <original_path>",
+      "restore_helper": "results/archives/manifests/i4f-pressure-probe-vectors-20261027T2330Z-restore.py",
+      "restore_helper_sha256": "ee5eacc27bb81d60bcf8a94d7a788c81da4f73ccac481d32b180c431392831ad",
+      "source_allocated_bytes": 777814016,
+      "source_type": "terminal_pressure_probe_binary_vectors",
+      "status": "complete_with_lossless_archives",
+      "unique_archive_allocated_bytes": 379162624,
+      "unique_archive_frame_count": 30
     }
   ]
 }

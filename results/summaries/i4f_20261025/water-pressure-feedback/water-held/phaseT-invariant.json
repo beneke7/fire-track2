@@ -1,0 +1,27 @@
+{
+  "PDE_terms_changed": false,
+  "failure_policy": "write trigger, sweep-1, and offending phase-T/common-T arrays to rank-local binary snapshots; abort before held-field integrity check and before pressure sweep continuation",
+  "pass_policy": "log phase-T hashes and numeric deltas, then continue all eight declared mechanical sweeps; do not require phase-T hashes to remain byte-identical",
+  "predeclared_utc": "2026-10-26T23:35:00Z",
+  "rule": {
+    "diagnostic_metrics": [
+      "internal global max absolute delta K",
+      "internal native-cell-volume-weighted RMS delta K",
+      "boundary max absolute delta K",
+      "maximum delta divided by epsilon*max(1,abs(Tphase_trigger))",
+      "internal and boundary out-of-bound counts"
+    ],
+    "fields": {
+      "thermo1": "T.water",
+      "thermo2": "T.air"
+    },
+    "if_out_of_bound": "write trigger, sweep-1, and offending phase-T/common-T arrays to rank-local binary snapshots; abort before held-field integrity check and before pressure sweep continuation",
+    "if_within_bound": "log phase-T hashes and numeric deltas, then continue all eight declared mechanical sweeps; do not require phase-T hashes to remain byte-identical",
+    "independent_shared_T": "exact full-field hash unchanged",
+    "per_element_rule": "abs(Tphase_current - Tphase_trigger) <= 128 * numeric_limits<scalar>::epsilon() * max(1, abs(Tphase_trigger)) for every internal cell and boundary value",
+    "reference": "each phase temperature at physical map trigger, after the original physical outer-8/corrector-2/EOS/U/K completion and before any mechanical-map operation"
+  },
+  "schema": "i4f-mechanical-phaseT-invariant/v1",
+  "source_order_unchanged": true,
+  "source_parent_tree_sha256": "2ecdcee51d57140ef958fd48bd61a151b6cf7ba98c68f1bfaa1c100a536e0b1d"
+}

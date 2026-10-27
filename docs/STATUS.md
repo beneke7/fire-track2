@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-26 23:36 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-27 01:29 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -15,19 +15,43 @@ No new scientific gate passed.
 
 ## Current execution
 
-No complete credible tank-to-nozzle trajectory exists yet. The advisory
-continuation saved at .528211 s after raw pressure crossed the stock 10 kPa
-floor; its .65 s target was not reached. The mechanical map aborted on a
-derived phase-temperature invariant, so it supplied no completed map result.
-A thermo-only seed test was idempotent but does not explain that later hash
-change. An instrumented mechanical retry is preparing.
+No complete credible tank-to-nozzle trajectory exists yet. The latest evidence
+supersedes the preparation states in the historical detail below:
 
-The matched 16-outer case is staged behind a durable dispatcher/review gate.
-Its parser grouping, exact checkpoint and single 8→16 dictionary change passed
-review. It may launch at at least 21 GiB free while archiving continues; the 20 GiB
-hard guard is unchanged. New mechanical/mesh jobs await larger combined disk
-headroom. No new physical solver was verified live at this update; distinguish
-preparation agents/dispatchers from actual CFD processes.
+- The completed frozen-water mechanical test settled from 16.47 to about
+  0.42–0.48 Pa pressure updates. Restoring water transport while holding shared
+  temperature, transported turbulence and old-time history fixed instead gave
+  827→1064 Pa over eight same-time sweeps. This isolates a sufficient feedback
+  path, not a global instability proof or a physical-time continuation.
+- The matched 16-outer physical trial also reached the stock floor near .528 s,
+  with final pressure updates about 1351 Pa. More outer iterations alone did
+  not cure the problem. Its terminal authority is
+  `results/runs/i4f-cold-nouter16-advisory-20261026T2320Z/attempts/attempt-006-executable-mode-retry/guardian-status.json`.
+- A separate exploratory 5 kPa-floor sensitivity is running, ten MPI ranks:
+  Docker `71d34a2df7df1ade47e18ed17d431464a1b59c27f0364c46fcf5c7715ef4f793`.
+  At 01:28:59 UTC it had reached .477987 s with small pressure updates and no
+  floor or water-supported saturation-margin event. It has not yet crossed
+  the earlier .484–.528 s failure window. Guard and immutable inputs:
+  `results/runs/i4f-pressure-floor5k-20261027T005941Z/`.
+- Luna is preparing a matched same-time water-fraction/actual-water-flux
+  relaxation pair, weights 1 and .5. Both quantities must be treated together;
+  smaller applied updates alone will not establish convergence or conservation.
+  The weight-1 arm started at 01:32:43 UTC, Docker
+  `14025bd519fc126d99e321ce514a6b1a09b3f156cc20f07b3792a33c7847be09`,
+  ten MPI ranks with six CPU equivalents; the paired arm follows terminal capture.
+  The completed [water-feedback evidence](../results/summaries/i4f_20261025/water-pressure-feedback/README.md)
+  includes source deltas reconstructed against the public parent, with all
+  72 declared files per arm verified. A third Luna task is locating the feedback
+  against existing geometry and fields; it launches no physical calculation.
+- The 0.8 m candidate has an initialized 317,814-cell mesh and round-trip
+  checked cold fields. It remains input-only: current solver controls are not
+  bound and no candidate CFD comparison has run.
+- Lossless archival of 1,100 old aerial intermediate fields is complete;
+  initial, .5 s restart and 1 s final checkpoints remain in place. Current free
+  storage is about 22 GiB. The 20 GiB hard disk guard remains active.
+
+The entries below retain earlier trial details; their staged/preparing labels
+are historical where superseded above. No new scientific gate passed.
 
 | Latest test | Saved time (s) | Actual outcome |
 | --- | ---: | --- |

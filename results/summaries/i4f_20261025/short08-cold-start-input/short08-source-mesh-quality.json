@@ -1,0 +1,159 @@
+{
+  "allGeometry_diagnostics": {
+    "checkMesh_exit_code": 0,
+    "concave_cell_count": 7141,
+    "failed_extra_check_reason": "Concave cells (using face planes); 7,141 cells reported. The nine configured criteria all pass.",
+    "failed_extra_mesh_checks": 1,
+    "maximum_cell_volume_m3": 0.00131313393,
+    "maximum_non_orthogonality_deg": 64.88767316,
+    "mean_cell_determinant_from_log": 1.315247497,
+    "mean_non_orthogonality_deg": 8.266210606,
+    "minimum_cell_determinant_from_log": 0.01187670212,
+    "minimum_cell_volume_m3": 7.120767052e-08,
+    "qualification": "Concavity and allGeometry extra failures are reported separately from the nine configured rows.",
+    "quality_field_quantiles": {
+      "cell_determinant": {
+        "max": 80.72383912,
+        "median": 0.9980537665,
+        "min": 0.01187670212,
+        "p01": 0.0866109152749,
+        "p99": 21.6705352808
+      },
+      "cell_volume_m3": {
+        "max": 0.00131313393,
+        "median": 1.567958327e-05,
+        "min": 7.120767052e-08,
+        "p01": 2.4617334092e-07,
+        "p99": 0.0010464588687599998
+      },
+      "non_orthogonality_deg": {
+        "max": 64.88767316,
+        "median": 3.2770726464999997,
+        "min": 0.0040863156,
+        "p01": 0.015544111315,
+        "p99": 37.50042696
+      }
+    },
+    "total_domain_volume_m3": 25.05920567
+  },
+  "case": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path/case-mesh",
+  "configured_quality": {
+    "all_nine_rows_zero": true,
+    "cells": 317814,
+    "checkMesh_exit_code": 0,
+    "configured_rows": [
+      {
+        "criterion": "non-orthogonality >  65 degrees",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with face pyramid volume < 1e-13",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with face-decomposition tet quality < 1e-15",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with concavity >  80 degrees",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with skewness >   4 (internal) or  20 (boundary)",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with interpolation weights (0..1)  <  0.05",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with volume ratio of neighbour cells <  0.01",
+        "failures": 0
+      },
+      {
+        "criterion": "faces with face twist <  0.02",
+        "failures": 0
+      },
+      {
+        "criterion": "faces on cells with determinant < 0.001",
+        "failures": 0
+      }
+    ],
+    "max_skewness": 3.913254466,
+    "mesh_ok_marker": true
+  },
+  "inputs": {
+    "allGeometry_log_sha256": "2a2d534d6740b693f06fe99b6658cb168e8260753cc27923022365ac26d7239f",
+    "boundary_sha256": "bf2d76440eda0a4b964c715448c224aa2f6ab7052569a770d385d9e25cf9144a",
+    "configured_log_sha256": "3957f02b75d7b383f23ca66022ee826cb8d55bd19616306f8c3ce73305715fcd",
+    "faces_sha256": "cbad85efdc1d78cc44f618f713a4eb34948bbcfbbfc614d056b0b622dff5f870",
+    "neighbour_sha256": "e2c62490a8b33cf29e30ee79f8af0f731d608fac7e99b67c7bbddee56da7dd97",
+    "owner_sha256": "a056e85bf31b6ceb13bb8e024f2f99eb44723d4677d2e1cf03d5ff57c98b86f9",
+    "points_sha256": "e3a48aa37779f197ed6909c4af917accd0f7cfc0d5802a77d9cdbd06f79af966"
+  },
+  "local_visual_inspection": {
+    "distance_from_original_bad_face_m": 0.0007543347343568134,
+    "image": "results/runs/i4f-short08-targeted-mesh-20261026T232710Z/attempt04-retry03-runner-path/analysis-v6/after-target-local-projection.png",
+    "image_sha256": "45485c4032e42e69a99af886b14bc8a8ab16c287406c9b9e3eecff40caf4982c",
+    "local_owner_vertex_count": 8,
+    "local_projection_face_count": 26,
+    "matching_baffle_pair_face_ids_zero_based": [
+      999097,
+      1008055
+    ],
+    "selected_boundary_face_zero_based": 999097,
+    "selected_face_center_xyz_m": [
+      4.1349057445,
+      -0.8120712411000001,
+      0.65937685185
+    ],
+    "selected_owner_global_cell": 103411,
+    "selected_owner_volume_centroid_xyz_m": [
+      4.134771787384169,
+      -0.8099503259434566,
+      0.6593863545296131
+    ],
+    "selected_patch": "lamellaMaster"
+  },
+  "run_provenance": {
+    "all_geometry_failed_extra_checks": 1,
+    "all_geometry_invocation_exit_code": 0,
+    "container_exit_code": 0,
+    "container_finished_at": "2026-10-27T00:01:39.371431515Z",
+    "container_id": "45d5e79c9d49bf9ac671d5511fc415a6a1e2a13c939f01e168d76cff8276551d",
+    "container_started_at": "2026-10-26T23:58:50.022591816Z",
+    "flow_solver_launched": false
+  },
+  "schema": "i4f-short08-targeted-mesh-attempt04-retry03-result/v2",
+  "scope": "Private mesh-only outcome; no solver was launched; even a quality pass does not establish a matched engineering comparison.",
+  "source_resolution_and_coverage": {
+    "cellZones_sha256": "181a87e62ec103dddedb0a48c54c7fd7ab642d0d64b3123a99f98346a3303ee9",
+    "expected_four_branches_48_layers_each": true,
+    "note": "This mesh-only attempt does not create/copy alpha.water; it measures the unchanged source/valve cell-zone coverage and 48 axial layers, not water occupancy.",
+    "per_branch": {
+      "valveBandA1": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      },
+      "valveBandA2": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      },
+      "valveBandB1": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      },
+      "valveBandB2": {
+        "axial_layers": 48,
+        "cell_count": 5376,
+        "median_axial_spacing_m": 0.006250000000000089
+      }
+    },
+    "source_cell_centres_sha256": "891e55376e01e797dbf7dcfccc960ebe12b464f133db94fb886cf7edbe3fb0b9",
+    "valve_source_band_cell_count": 21504,
+    "valve_source_cells_missing_from_lineA_or_lineB": 0
+  }
+}

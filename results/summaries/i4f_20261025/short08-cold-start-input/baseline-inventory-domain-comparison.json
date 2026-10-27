@@ -1,0 +1,745 @@
+{
+  "analysis_provenance": {
+    "baseline_case_mesh_source": "/home/v/proj/bene/fire-track2/results/runs/i4f-flush-join-stock-cold-mesh-prep-20261026T055615Z/case",
+    "binary_cellZone_reader": {
+      "function": "read_cell_zone_ids",
+      "path": "results/runs/i4f-advisory-prefix-audit-20261027T230316Z/scripts/analyze_prefix.py",
+      "sha256": "8bc6188a6f5996c5cbe8575ce1d40f152b45238e6bdec337c8b313f333d5e818"
+    },
+    "candidate_global_input_manifest_sha256": "1e4693658ca2772bf6a87143682177a5022b2560d513c567b95401960b324ac6",
+    "candidate_init_record_sha256": "ffea3ee8103c153400ebb0ca21f4be4f89874328904a946d5a23762c1a865ada",
+    "candidate_static_verification_sha256": "6ed604e73b713fc2d570284ec6977a4bfc5f71efdbc5153879fc15b604a8570b",
+    "live_inputs_modified": false,
+    "method": "Read native scalar64 V and alpha.water, vector C, and cellZone label32 masks in global cell order. Tank volumes are native zone sums; feeds are line-zone cells with Cx<2.25m excluding tank zones. External patch bounds are reconstructed from native points/faces/boundary using the checked mesh reader.",
+    "native_mesh_reader": {
+      "path": "src/aerial_drop/i4f_native_face_reader.py",
+      "sha256": "04c62413a9e36a4a8a7d0bdf025bf93d6cb9d1009985af20092d40802c3e5291"
+    },
+    "solver_launched": false
+  },
+  "baseline_1p0m": {
+    "case": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case",
+    "cell_count": 299214,
+    "exterior_domain": {
+      "all_patches": [
+        {
+          "bounds_xyz_m": [
+            [
+              0.0,
+              -1.049999952,
+              0.3500618874
+            ],
+            [
+              4.798999786,
+              1.049999952,
+              1.699997431
+            ]
+          ],
+          "faces": 51720,
+          "name": "apparatusWall",
+          "type": "wall"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.794836882,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              4.818577612,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 7562,
+          "name": "ambientAnnulus",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.80967057,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              6.78022624,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 3432,
+          "name": "externalSides",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              6.762539573,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              6.800000191,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 1025,
+          "name": "farOutlet",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.216666698,
+              -0.9107597925,
+              0.5718395492
+            ],
+            [
+              4.800000191,
+              0.9107597874,
+              0.9781603146
+            ]
+          ],
+          "faces": 8552,
+          "name": "lamellaMaster",
+          "type": "wall"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.216666698,
+              -0.9107597925,
+              0.5718395492
+            ],
+            [
+              4.800000191,
+              0.9107597874,
+              0.9781603146
+            ]
+          ],
+          "faces": 8552,
+          "name": "lamellaSlave",
+          "type": "wall"
+        }
+      ],
+      "external_patch_bounds": [
+        {
+          "bounds_xyz_m": [
+            [
+              4.794836882,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              4.818577612,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 7562,
+          "name": "ambientAnnulus",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.80967057,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              6.78022624,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 3432,
+          "name": "externalSides",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              6.762539573,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              6.800000191,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 1025,
+          "name": "farOutlet",
+          "type": "patch"
+        }
+      ],
+      "farOutlet_patch_x_bounds_m": [
+        6.762539573,
+        6.800000191
+      ],
+      "mesh_boundary_sha256": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d",
+      "mesh_faces_sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460",
+      "mesh_point_bounds_xyz_m": [
+        [
+          0.0,
+          -2.049999952,
+          -0.5
+        ],
+        [
+          6.800000191,
+          2.049999952,
+          2.0
+        ]
+      ],
+      "mesh_points_sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779",
+      "mouth_envelope_y_m": [
+        -1.05,
+        1.05
+      ],
+      "mouth_envelope_z_m": [
+        0.575,
+        0.975
+      ],
+      "mouth_plane_reference_x_m": 4.8,
+      "mouth_to_farOutlet_x_clearance_bounds_m": [
+        1.962539573,
+        2.000000191
+      ],
+      "mouth_to_mesh_aabb_clearances_m": {
+        "above_z": 1.025,
+        "below_z": 1.075,
+        "downstream_x": 2.000000191,
+        "lower_y": 0.9999999519999998,
+        "upper_y": 0.9999999519999998,
+        "upstream_x": 4.8
+      }
+    },
+    "field_ranges": {
+      "absolute_pressure_Pa": [
+        100000.0,
+        1211011.7118868
+      ],
+      "alpha_water": [
+        0.0,
+        1.0
+      ]
+    },
+    "global_alpha_water_total_m3": 3.202165993106066,
+    "input_hashes": {
+      "0_T": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/0/T",
+        "sha256": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+        "size_bytes": 824
+      },
+      "0_U": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/0/U",
+        "sha256": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+        "size_bytes": 550
+      },
+      "0_alpha.water": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/0/alpha.water",
+        "sha256": "8cd4bb09ef5a5bffad6cbe1bda7eb98b3fe43644d8c573046709debe93652277",
+        "size_bytes": 629541
+      },
+      "0_p": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/0/p",
+        "sha256": "f4e820b90d9a9ef16c60ceac0ace0b8c1ba86f95b2eee9dd952278d8fb107710",
+        "size_bytes": 2999834
+      },
+      "0_p_rgh": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/0/p_rgh",
+        "sha256": "5121a0df468dffe69672ee8743fb0900a4cd173634eda390435040a0f26120e3",
+        "size_bytes": 5656051
+      },
+      "constant_C": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/C",
+        "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+        "size_bytes": 9123116
+      },
+      "constant_V": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/V",
+        "sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+        "size_bytes": 2395321
+      },
+      "mesh_boundary": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/boundary",
+        "sha256": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d",
+        "size_bytes": 1771
+      },
+      "mesh_cellZones": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/cellZones",
+        "sha256": "2d4744095f2e9c9e47c3b8bb04fdaf4dd4a5a3f810581a4c9a3355a420436664",
+        "size_bytes": 2165098
+      },
+      "mesh_faceZones": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/faceZones",
+        "sha256": "e9c928c629e5c257c8eb89b1d93a571fec697252a058e1299d72ef4babbc8177",
+        "size_bytes": 92384
+      },
+      "mesh_faces": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/faces",
+        "sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460",
+        "size_bytes": 19216782
+      },
+      "mesh_neighbour": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/neighbour",
+        "sha256": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8",
+        "size_bytes": 3495612
+      },
+      "mesh_owner": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/owner",
+        "sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47",
+        "size_bytes": 3818980
+      },
+      "mesh_pointZones": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/pointZones",
+        "sha256": "195c7cfa14388482dfaf8791596548e847931befae79beb6ea5ecd189d3305e1",
+        "size_bytes": 1065
+      },
+      "mesh_points": {
+        "path": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z/case/constant/polyMesh/points",
+        "sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779",
+        "size_bytes": 8468240
+      }
+    },
+    "tank_inventories": {
+      "A": {
+        "cell_zone_mask_sha256_sorted_global_ids_le_i32": "67da9c64d9b3ee814156a51025a309ac55d05dacaaedd6c8d5ea5038e96cb77b",
+        "cells": 21839,
+        "headspace_to_liquid_ratio": 0.22110903733760914,
+        "headspace_volume_m3": 0.29849720040624456,
+        "liquid_volume_m3": 1.3500000000021357,
+        "total_tank_volume_m3": 1.64849720040838,
+        "zone": "tankAZone"
+      },
+      "B": {
+        "cell_zone_mask_sha256_sorted_global_ids_le_i32": "bf61920cc5b36c0f3f25857027a3fb816977ee5070aab388a69585129dcc4db0",
+        "cells": 21839,
+        "headspace_to_liquid_ratio": 0.22110871727821216,
+        "headspace_volume_m3": 0.29849676832569794,
+        "liquid_volume_m3": 1.3500000000005044,
+        "total_tank_volume_m3": 1.6484967683262028,
+        "zone": "tankBZone"
+      }
+    },
+    "wet_feed_inventories": {
+      "A": {
+        "all_feed_cells_pure_water": true,
+        "feed_geometric_volume_m3": 0.2510568437958542,
+        "feed_mask_sha256_sorted_global_ids_le_i32": "712d1c64d887aa1309ddbc029a416ecfea8391634b8d0c2b36a85113ec3f8968",
+        "feed_water_volume_m3": 0.2510568437958543,
+        "line_tank_overlap_cells": 0,
+        "line_zone": "lineAZone",
+        "mouth_zone_cells": 448,
+        "wet_feed_cells_x_lt_2p25m_excluding_tank": 20552
+      },
+      "B": {
+        "all_feed_cells_pure_water": true,
+        "feed_geometric_volume_m3": 0.25110914930757156,
+        "feed_mask_sha256_sorted_global_ids_le_i32": "6042b158e573de3eaa69853e436a34b4ecf6769ce7f12521bad8b00b2d8e6d46",
+        "feed_water_volume_m3": 0.2511091493075716,
+        "line_tank_overlap_cells": 0,
+        "line_zone": "lineBZone",
+        "mouth_zone_cells": 448,
+        "wet_feed_cells_x_lt_2p25m_excluding_tank": 20657
+      }
+    },
+    "zone_name_hashes": {
+      "lineAMouthBoundaryZone": "efdff83a5094be4b984166da318d192368773cf2b3afd54fc3b67eb74f316e03",
+      "lineAZone": "1142766f3b5dad84c0c1e916f452bc4235d12f2e90b0b676a6ed961154b9e8ce",
+      "lineBMouthBoundaryZone": "4b30758fdc1c6ac70bdcfc21bb4a6f4bca99db8f85b85837f3ca9022f9e15537",
+      "lineBZone": "18e333bfb83cb7784c05c5b9315ed30edc19c11336d8bfdc5fce01d7933190cb",
+      "tankAZone": "67da9c64d9b3ee814156a51025a309ac55d05dacaaedd6c8d5ea5038e96cb77b",
+      "tankBZone": "bf61920cc5b36c0f3f25857027a3fb816977ee5070aab388a69585129dcc4db0"
+    }
+  },
+  "candidate": {
+    "case": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case",
+    "cell_count": 317814,
+    "exterior_domain": {
+      "all_patches": [
+        {
+          "bounds_xyz_m": [
+            [
+              0.0,
+              -1.049999952,
+              0.3500618874
+            ],
+            [
+              4.598999977,
+              1.049999952,
+              1.699997431
+            ]
+          ],
+          "faces": 49885,
+          "name": "apparatusWall",
+          "type": "wall"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.594879349,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              4.618577642,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 7658,
+          "name": "ambientAnnulus",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.6096706,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              6.599999905,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 3432,
+          "name": "externalSides",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              6.599999905,
+              -2.029766711,
+              -0.4772609161
+            ],
+            [
+              6.599999905,
+              2.029766711,
+              1.977260916
+            ]
+          ],
+          "faces": 1025,
+          "name": "farOutlet",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.133223875,
+              -0.9107599026,
+              0.5717542841
+            ],
+            [
+              4.599999905,
+              0.9107591819,
+              0.9782371965
+            ]
+          ],
+          "faces": 8958,
+          "name": "lamellaMaster",
+          "type": "wall"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.133223875,
+              -0.9107599026,
+              0.5717542841
+            ],
+            [
+              4.599999905,
+              0.9107591819,
+              0.9782371965
+            ]
+          ],
+          "faces": 8958,
+          "name": "lamellaSlave",
+          "type": "wall"
+        }
+      ],
+      "external_patch_bounds": [
+        {
+          "bounds_xyz_m": [
+            [
+              4.594879349,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              4.618577642,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 7658,
+          "name": "ambientAnnulus",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              4.6096706,
+              -2.049999952,
+              -0.5
+            ],
+            [
+              6.599999905,
+              2.049999952,
+              2.0
+            ]
+          ],
+          "faces": 3432,
+          "name": "externalSides",
+          "type": "patch"
+        },
+        {
+          "bounds_xyz_m": [
+            [
+              6.599999905,
+              -2.029766711,
+              -0.4772609161
+            ],
+            [
+              6.599999905,
+              2.029766711,
+              1.977260916
+            ]
+          ],
+          "faces": 1025,
+          "name": "farOutlet",
+          "type": "patch"
+        }
+      ],
+      "farOutlet_patch_x_bounds_m": [
+        6.599999905,
+        6.599999905
+      ],
+      "mesh_boundary_sha256": "bf2d76440eda0a4b964c715448c224aa2f6ab7052569a770d385d9e25cf9144a",
+      "mesh_faces_sha256": "cbad85efdc1d78cc44f618f713a4eb34948bbcfbbfc614d056b0b622dff5f870",
+      "mesh_point_bounds_xyz_m": [
+        [
+          0.0,
+          -2.049999952,
+          -0.5
+        ],
+        [
+          6.599999905,
+          2.049999952,
+          2.0
+        ]
+      ],
+      "mesh_points_sha256": "e3a48aa37779f197ed6909c4af917accd0f7cfc0d5802a77d9cdbd06f79af966",
+      "mouth_envelope_y_m": [
+        -1.05,
+        1.05
+      ],
+      "mouth_envelope_z_m": [
+        0.575,
+        0.975
+      ],
+      "mouth_plane_reference_x_m": 4.6,
+      "mouth_to_farOutlet_x_clearance_bounds_m": [
+        1.9999999050000001,
+        1.9999999050000001
+      ],
+      "mouth_to_mesh_aabb_clearances_m": {
+        "above_z": 1.025,
+        "below_z": 1.075,
+        "downstream_x": 1.9999999050000001,
+        "lower_y": 0.9999999519999998,
+        "upper_y": 0.9999999519999998,
+        "upstream_x": 4.6
+      }
+    },
+    "field_ranges": {
+      "absolute_pressure_Pa": [
+        100000.0,
+        1211011.7121941703
+      ],
+      "alpha_water": [
+        0.0,
+        1.0
+      ]
+    },
+    "global_alpha_water_total_m3": 3.2021659936309472,
+    "input_hashes": {
+      "0_T": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/0/T",
+        "sha256": "c1860cd8a1349ba119386eb49497858cfa72a9f241a02272514a9959544bc82f",
+        "size_bytes": 824
+      },
+      "0_U": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/0/U",
+        "sha256": "a0509abb7242b48e689f522eb04917d0d4d078bafe20c4b694dcfd3912de8dd4",
+        "size_bytes": 550
+      },
+      "0_alpha.water": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/0/alpha.water",
+        "sha256": "7a93ad503d859129758759c92a66bde8a53c1a36406119d073509a8397050e6b",
+        "size_bytes": 667182
+      },
+      "0_p": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/0/p",
+        "sha256": "4d578e1ed3643e68b80fc1b056ecc818e2c192ebce930b73226aa9c0ad88d749",
+        "size_bytes": 3234302
+      },
+      "0_p_rgh": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/0/p_rgh",
+        "sha256": "2c5dcaf77d8eea201a796f6c659297b0135ce3829bf9535b04f1aae8304f8246",
+        "size_bytes": 6007731
+      },
+      "constant_C": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/C",
+        "sha256": "fc51327a8f7e8934a70e658badd7595ea0082bbcf4259f8abd065885e93a3a5f",
+        "size_bytes": 18309354
+      },
+      "constant_V": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/V",
+        "sha256": "4378a49146908282b1f030e41e4065031688218d27aa0a391c9c68b9616597c4",
+        "size_bytes": 6595690
+      },
+      "mesh_boundary": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/boundary",
+        "sha256": "bf2d76440eda0a4b964c715448c224aa2f6ab7052569a770d385d9e25cf9144a",
+        "size_bytes": 1771
+      },
+      "mesh_cellZones": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/cellZones",
+        "sha256": "dc72dac807e8c36f7fad7ec764e83c271a4e4f00d9375c2efc81a56ab8b629b1",
+        "size_bytes": 3425984
+      },
+      "mesh_faceZones": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/faceZones",
+        "sha256": "9ef6a11d28126957c22f38b338f5f23481130fce5439d4d421fb2eb30c771851",
+        "size_bytes": 183389
+      },
+      "mesh_faces": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/faces",
+        "sha256": "cbad85efdc1d78cc44f618f713a4eb34948bbcfbbfc614d056b0b622dff5f870",
+        "size_bytes": 30381140
+      },
+      "mesh_neighbour": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/neighbour",
+        "sha256": "e2c62490a8b33cf29e30ee79f8af0f731d608fac7e99b67c7bbddee56da7dd97",
+        "size_bytes": 6287235
+      },
+      "mesh_owner": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/owner",
+        "sha256": "a056e85bf31b6ceb13bb8e024f2f99eb44723d4677d2e1cf03d5ff57c98b86f9",
+        "size_bytes": 6620454
+      },
+      "mesh_pointZones": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/pointZones",
+        "sha256": "238d8abdf00c148db67e38b1836125e1ffb89c9290344509c1e52d635b8d47c4",
+        "size_bytes": 1066
+      },
+      "mesh_points": {
+        "path": "results/runs/i4f-short08-cold-ready-20261027T001147Z/case/constant/polyMesh/points",
+        "sha256": "e3a48aa37779f197ed6909c4af917accd0f7cfc0d5802a77d9cdbd06f79af966",
+        "size_bytes": 14856130
+      }
+    },
+    "tank_inventories": {
+      "A": {
+        "cell_zone_mask_sha256_sorted_global_ids_le_i32": "e88eecaeec8b604008916f192582219fff4fcb711147e20b99d5d89e124a9bb4",
+        "cells": 21839,
+        "headspace_to_liquid_ratio": 0.22110903404371782,
+        "headspace_volume_m3": 0.298497195959019,
+        "liquid_volume_m3": 1.3499999999999999,
+        "total_tank_volume_m3": 1.6484971959590191,
+        "zone": "tankAZone"
+      },
+      "B": {
+        "cell_zone_mask_sha256_sorted_global_ids_le_i32": "9421eea329c97303142c2cb755f319edaf0a9544dfffd2af9fe288c29edc4aba",
+        "cells": 21839,
+        "headspace_to_liquid_ratio": 0.22110871727667228,
+        "headspace_volume_m3": 0.2984967683235076,
+        "liquid_volume_m3": 1.35,
+        "total_tank_volume_m3": 1.648496768323508,
+        "zone": "tankBZone"
+      }
+    },
+    "wet_feed_inventories": {
+      "A": {
+        "all_feed_cells_pure_water": true,
+        "feed_geometric_volume_m3": 0.25105684432195097,
+        "feed_mask_sha256_sorted_global_ids_le_i32": "0e1c3b0d08589a9ffd21b7eb094dc3ab36dc9b5884a3b83db1bc277e91ecd8e9",
+        "feed_water_volume_m3": 0.25105684432195113,
+        "line_tank_overlap_cells": 0,
+        "line_zone": "lineAInitialZone",
+        "mouth_zone_cells": 1152,
+        "wet_feed_cells_x_lt_2p25m_excluding_tank": 20552
+      },
+      "B": {
+        "all_feed_cells_pure_water": true,
+        "feed_geometric_volume_m3": 0.25110914930899797,
+        "feed_mask_sha256_sorted_global_ids_le_i32": "f59ffc01c21df12b059f9bd3c0c4c0277b2692af0581022c2df10f12dc5e8b0e",
+        "feed_water_volume_m3": 0.25110914930899797,
+        "line_tank_overlap_cells": 0,
+        "line_zone": "lineBInitialZone",
+        "mouth_zone_cells": 1152,
+        "wet_feed_cells_x_lt_2p25m_excluding_tank": 20657
+      }
+    },
+    "zone_name_hashes": {
+      "lineAInitialZone": "12bf98018ff5341ae6f3a36f8f8969ddb6d4dc73823c770e3e890939bef45924",
+      "lineAMouthBoundaryZone": "979693f8580829874a40b1aa82004492548c6757da623fe57b0bba465ea05e97",
+      "lineBInitialZone": "15a1ee2ed2b700d901c88d3b8480c849241d6fc502b60461cd4fedcd181436f9",
+      "lineBMouthBoundaryZone": "a3139cbd625e8355f319baad2a934f3a5c361779b2fb83f2df43063859a3a1b1",
+      "tankAZone": "e88eecaeec8b604008916f192582219fff4fcb711147e20b99d5d89e124a9bb4",
+      "tankBZone": "9421eea329c97303142c2cb755f319edaf0a9544dfffd2af9fe288c29edc4aba"
+    }
+  },
+  "candidate_minus_baseline_m3": {
+    "A": {
+      "candidate_minus_baseline_geometric_feed_m3": 5.260967772535707e-10,
+      "candidate_minus_baseline_tank_headspace_m3": -4.447225532278054e-09,
+      "candidate_minus_baseline_tank_liquid_m3": -2.135847054773876e-12,
+      "candidate_minus_baseline_total_tank_capacity_m3": -4.449360879732467e-09,
+      "candidate_minus_baseline_wet_feed_water_m3": 5.26096832764722e-10
+    },
+    "B": {
+      "candidate_minus_baseline_geometric_feed_m3": 1.4264145420384011e-12,
+      "candidate_minus_baseline_tank_headspace_m3": -2.1903590052829713e-12,
+      "candidate_minus_baseline_tank_liquid_m3": -5.042632977847461e-13,
+      "candidate_minus_baseline_total_tank_capacity_m3": -2.69473332537018e-12,
+      "candidate_minus_baseline_wet_feed_water_m3": 1.4263590308871699e-12
+    }
+  },
+  "created_utc": "2026-10-27T00:33:41.557022+00:00",
+  "interpretation": {
+    "domain_clearances": "Boundary clearances use the mesh point AABB and axis-aligned mouth envelope as conservative geometric descriptors; patch-specific boxes identify external boundary movement. They are not nearest-surface distances.",
+    "geometry_matching": "The tank/wet-feed volumes are compared from their own discrete cell-volume fields. If capacity/feed differences persist beyond extraction precision, preserve the mismatch as remeshing/tessellation sensitivity; no fill or pressure was adjusted to force agreement.",
+    "headspace_and_capacity": "Headspace is the cell-volume integral of 1-alpha within each native tank zone; total capacity is the zone sum of native cell volumes.",
+    "tank_liquid_match": "Compare exact t=0 native alpha*V in each tank; both are targeted to 1.35 m3. Any residual should be read against the reported extraction precision and cell-zone masks.",
+    "wet_feed": "Measured in each case's native line zone at cell-centres x<2.25 m, excluding tank-zone cells; report both geometric feed volume and alpha*V water volume."
+  },
+  "reference_selection": {
+    "baseline_campaign_initial_time_s": 0.0,
+    "baseline_cold_readiness_sha256": "a846ddefba50e88ab7e75164e4d8d3f5b64ba7a6b0d94d11edf4c257bcc49f4c",
+    "baseline_continuation_seed_sha256": "1a4bf5e1638fb702a49e8337c98a59b6d346ecab690af3fc96f7d5a9f47133dc",
+    "baseline_input_freeze_sha256": "3b1c06ddc7bd4d3848deb00a1ec31914ed2b91b2387002b16a8e0fe0e82cc87f",
+    "baseline_mesh_cell_count": 299214,
+    "baseline_parent_bundle": "results/runs/i4f-cold-momentum-predictor-off-continuation-20261026T2048Z",
+    "baseline_parent_checkpoint_field_aggregate_sha256": "5dde33893ab648d1fb80f63f244a68e12cf7367b7d163ffa3e02d0e183f74ffe",
+    "baseline_parent_checkpoint_folder": "0.390705595007",
+    "baseline_parent_checkpoint_time_s": 0.39070559500735114,
+    "baseline_parent_container_id": "f960b72b804919d8216462a2f4049a85f7abc3ab75a014067e93624b31c1af48",
+    "baseline_parent_docker_started_at": "2026-10-26T20:50:36.466720222Z",
+    "baseline_stage_record_sha256": "5e462b95bcf8c5396cb17d75c76c78b31c57b24012060c77276582e403ff8423",
+    "baseline_static_mesh_files_match_canonical_case": true,
+    "baseline_t0_case_fields_match_canonical_cold_source": true,
+    "comparison_state": "Each case's own cold t=0 state; the candidate is input-only, so the dynamic .390705 state is not compared as if it were t=0."
+  },
+  "schema": "i4f-short08-vs-current1m-cold-inventory-domain-comparison/v1",
+  "scope": "Read-only comparison of the two immutable t=0 cold input states and their mesh-domain boundaries. No geometry, fields, fill, pressure, or live solver inputs were changed."
+}

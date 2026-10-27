@@ -1,0 +1,160 @@
+{
+  "archive_payload_location": "results/runs/i4f-old-aerial-field-retention-20261026T2347Z/attempt-20261027T01-{14,18}-utc/payload/",
+  "attempts": [
+    {
+      "attempt": "attempt-20261027T-retention",
+      "error": "FileExistsError writing preflight.json because --plan had already created that immutable path",
+      "execute_exit_code": 1,
+      "status": "preflight-only planning attempt preserved; execute rejected duplicate preflight record before touching source files"
+    },
+    {
+      "attempt": "attempt-20261027T01-14-utc",
+      "hold_error": "It conservatively treated the read-only results/runs ancestor as an overlapping mount; no target file was open and the active solver used a separate bundle.",
+      "runner_path": "results/runs/i4f-old-aerial-field-retention-20261026T2347Z/archive_fields-attempt-20261027T01-14-utc.py",
+      "runner_sha256": "d7504c6251541c724deeb1f0703588e6cf97d0180e42be523e50f8ef85f99a86",
+      "status": "partial; 379 files safely archived and source-unlinked before a strict pre-existing helper rule held on a newly active broad RO results/runs mount"
+    },
+    {
+      "attempt": "attempt-20261027T01-18-utc",
+      "mount_policy": "Permit only the exact read-only results/runs ancestor after excluding the active solver own RW bundle and no-open-FD checks; reject overlapping writable and direct case/subtree mounts.",
+      "preflight_containers": [
+        {
+          "id": "a319a75136638a27e6dca41365ccbcebe069dbfbd4bf7c716525b1c0578e5753",
+          "mounts": [
+            {
+              "destination": "/pair",
+              "rw": true,
+              "source": "/home/v/proj/bene/fire-track2/results/runs/i4f-alpha-flux-relax-map-20261027T010936Z"
+            }
+          ],
+          "name": "jovial_taussig",
+          "status": "running"
+        },
+        {
+          "id": "71d34a2df7df1ade47e18ed17d431464a1b59c27f0364c46fcf5c7715ef4f793",
+          "mounts": [
+            {
+              "destination": "/pair",
+              "rw": true,
+              "source": "/home/v/proj/bene/fire-track2/results/runs/i4f-pressure-floor5k-20261027T005941Z"
+            },
+            {
+              "destination": "/global-runs",
+              "rw": false,
+              "source": "/home/v/proj/bene/fire-track2/results/runs"
+            }
+          ],
+          "name": "i4f-pressure-floor5k-20261027t005941z-a001",
+          "status": "running"
+        }
+      ],
+      "runner_path": "results/runs/i4f-old-aerial-field-retention-20261026T2347Z/archive_fields-attempt-20261027T01-18-utc.py",
+      "runner_sha256": "d58590c4962f021a6eb656d4a374ffd1b59560582fd540f34a77155f02ff13f3",
+      "status": "completed; remaining 721 files archived and source-unlinked, with full per-file pre-unlink checks",
+      "summary_path": "results/runs/i4f-old-aerial-field-retention-20261026T2347Z/attempt-20261027T01-18-utc/records/summary.json"
+    }
+  ],
+  "created_utc": "2026-10-27T01:24:14.514161+00:00",
+  "free_space": {
+    "after_archive_batch_bytes": 23885959168,
+    "batch_boundary_df_delta_bytes": 2059841536,
+    "batch_boundary_df_delta_gib": 1.9183769226074219,
+    "before_first_execute_preflight_bytes": 21826117632,
+    "close_df_delta_vs_before_bytes": 1922813952,
+    "free_at_operation_close_after_validation_smoke_bytes": 23748931584,
+    "hard_runtime_floor_bytes": 21474836480,
+    "minimum_recorded_file_boundary_free_bytes": 21825667072,
+    "qualification": "Two project solvers ran during the operation; filesystem free-space deltas include their concurrent writes. Per-file archive-minus-compressed sizes are independently recorded; no guard floor was crossed."
+  },
+  "operation_id": "i4f-aerial-normalhead-20261017-fields-20261027T0121Z",
+  "restore": {
+    "ctime_restoration_supported": false,
+    "destination_root": "results/runs/i4f-old-aerial-field-retention-20261026T2347Z/restore-smoke-temp",
+    "hash_size_mode_uid_gid_atime_mtime_verified": true,
+    "helper_path": "scripts/restore_i4f_archived_field.py",
+    "helper_sha256": "8cf40b6e8ee566b6326f952b8c734c5a9d152145ff3bca0b791b24c3739695ae",
+    "members_manifest_bytes": 1294624,
+    "members_manifest_path": "results/archives/manifests/i4f-aerial-normalhead-20261017-fields-20261027T0121Z.members.json",
+    "members_manifest_sha256": "a5e4a6166f3a34cc0d808e25f3360439aba751b364093414a2669e534372cadc",
+    "original_source_remains_absent": true,
+    "parent_directory_metadata_recorded": true,
+    "preexisting_target_refusal_exit_code": 1,
+    "restore_succeeded": true,
+    "smoke_copy_retained": true,
+    "source_bytes": 597436,
+    "source_path": "results/runs/normalhead-water-continuation-20261017T1648Z/case/processor4/0.05/alpha.water",
+    "source_sha256": "c439bd9592d0892a12e0b9c4dc9cac3c1dbe2524d5112692b349805483783b9c",
+    "symlink_parent_refusal_exit_code": 1
+  },
+  "root_index_owner": "root; this operation file does not edit results/archives/index.json",
+  "schema": "i4f-old-aerial-intermediate-field-retention-operation/v1",
+  "source_identity": {
+    "container_exit_code": 0,
+    "container_finished_at": "2026-10-17T19:12:36.625916017Z",
+    "container_id": "7802a93bbeac8f9e052990b78f23ed7957ffa72c449dff6a0c3fec5513a62e07",
+    "container_mounts": [
+      {
+        "destination": "/case",
+        "rw": true,
+        "source": "/home/v/proj/bene/fire-track2/results/runs/normalhead-water-continuation-20261017T1648Z/case"
+      },
+      {
+        "destination": "/diag",
+        "rw": false,
+        "source": "/home/v/proj/bene/fire-track2/results/runs/air-only-pressure-trace-20261017T075649Z/source"
+      }
+    ],
+    "container_name": "rr-normalhead-water100-cont-20261017T1648Z",
+    "container_started_at": "2026-10-17T16:49:55.195134309Z",
+    "container_status": "exited",
+    "run_state_exit_code": 0,
+    "run_state_finished_utc": "2026-10-17T19:12:37.190960+00:00",
+    "run_state_path": "results/runs/normalhead-water-continuation-20261017T1648Z/run-state.json",
+    "run_state_solver_endpoint_s": 1.0,
+    "run_state_status": "completed_declared_horizon",
+    "systemd_unit": "fire-track2-normalhead-water100-cont-20261017T1648Z.service",
+    "systemd_unit_state": "MainPID=0\nResult=success\nExecMainStatus=0\nActiveState=inactive\nSubState=dead"
+  },
+  "source_selection": {
+    "all_nonselected_case_contents_left_in_place": true,
+    "case": "results/runs/normalhead-water-continuation-20261017T1648Z/case",
+    "extra_fields": "k, epsilon, nut only at t=0.25",
+    "fields": [
+      "alpha.water",
+      "U",
+      "p_rgh",
+      "p"
+    ],
+    "initial_final_and_0p5_seed_preserved": true,
+    "intermediate_time_directories": [
+      "0.05",
+      "0.1",
+      "0.15",
+      "0.2",
+      "0.25",
+      "0.3",
+      "0.35",
+      "0.4",
+      "0.45",
+      "0.6",
+      "0.7",
+      "0.8",
+      "0.9"
+    ],
+    "preserved_time_directories": [
+      "0",
+      "0.5",
+      "1"
+    ]
+  },
+  "verified_results": {
+    "all_archive_and_decompressed_hash_checks_passed": true,
+    "all_archives_decompressed_during_manifest_validation": true,
+    "all_original_intermediate_paths_absent_after_archive": true,
+    "archive_bytes": 1539809872,
+    "logical_bytes_saved_minus_archives": 2238141973,
+    "source_allocated_bytes": 3780235264,
+    "source_file_count": 1100,
+    "source_logical_bytes": 3777951845
+  }
+}

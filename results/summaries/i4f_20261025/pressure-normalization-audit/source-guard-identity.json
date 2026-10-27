@@ -1,0 +1,99 @@
+{
+  "binary_qualification": {
+    "guard_patch_path": "provenance/optional-laminar-history-guard.patch",
+    "guard_patch_sha256": "225486bb9d893fd4caa0d3d2f96cff80d53b5b9a8a8aa7d2c1cae9d3264a4825",
+    "mode_octal": "0755",
+    "path": "results/runs/i4f-pressure-audit-normalization-20261027T0035Z/bin/compressibleInterFoamI4FColdRestartConsistentLaminarOptionalHistory",
+    "qualified_as": "full-source v8 solver plus already-qualified optional laminar k/omega oldTime observer guard",
+    "sha256": "e0812b08b64e21db37f2bc4bc01157df546397d44e7a9d33970ecf24b4214fbb"
+  },
+  "binary_sha256": "e0812b08b64e21db37f2bc4bc01157df546397d44e7a9d33970ecf24b4214fbb",
+  "contact_source_summary": {
+    "binary_qualification": "observer-compatible laminar variant; SST one-step identity verified separately; not the literal unmodified 12d8 executable",
+    "interpretation_limit": "Exploratory periodic translating-contact check only. These uniform-flow invariants do not validate acoustic waves, apparatus dynamics or formal solver gates.",
+    "n120_n240_0p1s_comparison": {
+      "air_mass_eos_error_kg_n120": -4.621411760219463e-18,
+      "air_mass_eos_error_kg_n240": -5.149960319306146e-18,
+      "alpha_translation_L1_volume_m3_n120": 4.5776882615662225e-07,
+      "alpha_translation_L1_volume_m3_n240": 2.3614946676144768e-07,
+      "max_abs_pressure_drift_Pa_n120": 1.0666553862392902e-08,
+      "max_abs_pressure_drift_Pa_n240": 1.6894773580133915e-08,
+      "max_abs_temperature_drift_K_n120": 2.7341684472048655e-11,
+      "max_abs_temperature_drift_K_n240": 4.718003765447065e-11,
+      "max_abs_velocity_drift_m_s_n120": 3.0038194154258235e-12,
+      "max_abs_velocity_drift_m_s_n240": 2.319922032256727e-12,
+      "max_saved_checkpoint_U_vector_drift_m_s_n120": 3.0038194154258235e-12,
+      "max_saved_checkpoint_U_vector_drift_m_s_n240": 5.606182185147191e-12,
+      "water_mass_eos_error_kg_n120": 1.124100812432971e-15,
+      "water_mass_eos_error_kg_n240": 9.492406860545088e-15,
+      "water_volume_error_m3_n120": 1.1250259982868252e-18,
+      "water_volume_error_m3_n240": 9.509430280256007e-18,
+      "whole_run_U_magnitude_drift_m_s_n120": 3.650413304967515e-12,
+      "whole_run_U_magnitude_drift_m_s_n240": 8.590461675339611e-12
+    },
+    "path": "results/runs/i4f-pressure-audit-normalization-20261027T0035Z/provenance/contact-paired-metrics-v2.json",
+    "sha256": "20d47ba29152aed1b2390e1b811faa38e05873694b8cce786fc261cb9033bdbc",
+    "source_binary_sha256": "e0812b08b64e21db37f2bc4bc01157df546397d44e7a9d33970ecf24b4214fbb"
+  },
+  "created_utc": "2026-10-27T00:45:31.818192+00:00",
+  "experiment_sha256": "a18b1f76a5fa5f3748b559fa28d17f5b538b70a9354090a8267c6b702b7b03bf",
+  "pre_go_input_freeze_sha256": "87cde7f7d106d247a48354276d6f0f875d9a210151b02d052af434a725036ceb",
+  "prior_sst_identity_result_sha256": "88055616662b4ce73f014edf45ea3913c38139a63bbc4f933225c47115bbb381",
+  "run_identifiers": {
+    "off": {
+      "docker_id": "dc24e3775129480302d27bb857c0b60b2904bd9b46f8c758de980c8a0fb2b2fa",
+      "guard": {
+        "GO_contains_exact_id_and_startedAt": true,
+        "container_runner_ready": "PRE_GO_INPUT_HASHES_OK=1",
+        "exact_docker_id_and_startedAt_checked_before_GO": true,
+        "pause_flags_at_GO": [],
+        "user_systemd_controller_expected": true
+      },
+      "started_at": "2026-10-27T00:41:35.855468526Z"
+    },
+    "on": {
+      "docker_id": "06924923fd80ccb571cf295afd1669edc4e97d63e9dd36440c1dfa04ab1f7a80",
+      "guard": {
+        "GO_contains_exact_id_and_startedAt": true,
+        "container_runner_ready": "PRE_GO_INPUT_HASHES_OK=1",
+        "exact_docker_id_and_startedAt_checked_before_GO": true,
+        "pause_flags_at_GO": [],
+        "user_systemd_controller_expected": true
+      },
+      "started_at": "2026-10-27T00:42:19.939462559Z"
+    }
+  },
+  "schema": "i4f-pressure-audit-source-guard-evidence/v1",
+  "source_identity": {
+    "normalized_residual_source": {
+      "GAMGSolverSolve.C_sha256": "309ba9d02f9ec48a17ca12341d2af1557cd98f1005ffd172859dbb7387b9be3b",
+      "formula_summary": "GAMG initialResidual = global sum magnitude of finest residual divided by normFactor; default normFactor = global sum[(|Apsi - A*average(psi)| + |source - A*average(psi)|)] + solverPerformance::small_. The source only prints normFactor if log_>=2 or debug>=2.",
+      "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+      "lduMatrixSolver.C_sha256": "862fe16f0069b21e199298c43771d486794cdf0ae2588bedf69b9dfeb9baface",
+      "norm_factor_lines": "lduMatrixSolver.C:235-274",
+      "normalization_factor_emitted_by_current_case": false,
+      "normalized_residual_lines": "GAMGSolverSolve.C:57-84, 145-149",
+      "normalized_residual_source_record_sha256": "471a88023a1ad4a26a85fa5780c81da4f8021e5f1ff07df5b892160053a021ee",
+      "source_path_in_image": "/usr/lib/openfoam/openfoam2512/src/OpenFOAM/matrices/lduMatrix/lduMatrix/lduMatrixSolver.C and /usr/lib/openfoam/openfoam2512/src/OpenFOAM/matrices/lduMatrix/solvers/GAMG/GAMGSolverSolve.C"
+    },
+    "observer_binary": {
+      "guard_patch_path": "provenance/optional-laminar-history-guard.patch",
+      "guard_patch_sha256": "225486bb9d893fd4caa0d3d2f96cff80d53b5b9a8a8aa7d2c1cae9d3264a4825",
+      "mode_octal": "0755",
+      "path": "results/runs/i4f-pressure-audit-normalization-20261027T0035Z/bin/compressibleInterFoamI4FColdRestartConsistentLaminarOptionalHistory",
+      "qualified_as": "full-source v8 solver plus already-qualified optional laminar k/omega oldTime observer guard",
+      "sha256": "e0812b08b64e21db37f2bc4bc01157df546397d44e7a9d33970ecf24b4214fbb"
+    },
+    "pressure_source": {
+      "audit_boolean_existing_and_default_off_in_contact_case": true,
+      "audit_helper_source_lines": "1-58 raw matrix residual; 61-162 corrected raw residual versus operator-and-pressure identity",
+      "compiled_binary_contains_audit_strings": true,
+      "i4fDefectAudit.H_sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85",
+      "pEqn.H_sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6",
+      "pEqn_source_lines": "102-132 audit switch and pre-solve component/full residuals; 285-315 post-solve residual/defect records; 453-481 after-stock-floor records",
+      "pressure_matrix_solve_site": "pEqn.H:159-163 solves p_rghEqnComp1()+p_rghEqnComp2()+p_rghEqnIncomp as a single matrix, matching full_comp1_plus_comp2_plus_incomp audit rows.",
+      "source_tree": "results/runs/i4f-cold-momentum-predictor-off-20261026T2022Z/build/source/v8-restart-cold"
+    },
+    "schema": "i4f-pressure-audit-normalization-source-identity/v1"
+  }
+}

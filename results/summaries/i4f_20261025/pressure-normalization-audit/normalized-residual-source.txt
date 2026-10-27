@@ -1,0 +1,15 @@
+OpenFOAM v2512 normalized-residual source excerpt (read-only from pinned container image)
+
+lduMatrixSolver.C:235-274
+DEFAULT_NORM and L1_SCALED_NORM compute A dot the global average of psi, then return
+  gSum( |Apsi - A*average(psi)| + |source - A*average(psi)| ) + solverPerformance::small_.
+
+GAMGSolverSolve.C:57-88
+The GAMG initial residual is
+  gSumMag(finestResidual) / normFactor.
+The factor is printed only when log_ >= 2 or debug >= 2.
+
+GAMGSolverSolve.C:145-149
+The final residual uses the same global sum-magnitude divided by normFactor.
+
+This source inspection does not change the solver. It identifies the normalization denominator that is absent from the ordinary GAMG log; the audit records raw matrix residual magnitudes and operator defects separately.

@@ -1,0 +1,35 @@
+{
+  "bytes": 990398,
+  "canonical_path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+  "duplicate_path": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+  "isolated_restore_target_verified": true,
+  "overwrite_refusal_error": "re-track2/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/restore_polymesh.py\", line 57, in restore\n    raise FileExistsError(f\"refusing to overwrite existing restore path: {target}\")\nFileExistsError: refusing to overwrite existing restore path: /home/v/proj/bene/fire-track2/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/mesh-restore-smoke-1c_5wg2b/results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+  "overwrite_refusal_return_code": 1,
+  "restore_command": [
+    "/home/v/proj/bene/fire-track2/.venv/bin/python",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/restore_polymesh.py",
+    "--manifest",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/mesh-restore-smoke-1c_5wg2b/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/polymesh-dedup-restore-manifest.json",
+    "--root",
+    "/home/v/proj/bene/fire-track2/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/mesh-restore-smoke-1c_5wg2b",
+    "--path",
+    "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/constant/polyMesh/sets/multiZoneCells"
+  ],
+  "restore_output": {
+    "bytes": 990398,
+    "canonical_path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+    "destination": "/home/v/proj/bene/fire-track2/results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/mesh-restore-smoke-1c_5wg2b/results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+    "duplicate_path": "results/runs/i4f-cold-finite-water-eos-n2-20261026T1108Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+    "gid": 1000,
+    "mode": 420,
+    "mtime_ns": 1792995344689194126,
+    "sha256": "1cb9b4ae1d380224be137552ab76667b6326bd4448c6e047994c0b410acf6534",
+    "status": "restored_verified",
+    "uid": 1000
+  },
+  "result": "PASS",
+  "retained_canonical_unchanged": true,
+  "schema": "i4f-polymesh-restore-smoke/v1",
+  "sha256": "1cb9b4ae1d380224be137552ab76667b6326bd4448c6e047994c0b410acf6534",
+  "temporary_root_removed_after_check": true
+}

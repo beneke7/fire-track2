@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-10-27T00:14:25.441079+00:00",
+  "original_private_helper_path": "results/runs/i4f-disk-recovery-nouter16-20261026T2330Z/operations/restore_polymesh.py",
+  "original_private_helper_sha256": "5784d6ffbe53ca5921e3ab58cbc939d75d9b60fbde3c405c674fcbac4b24bd10",
+  "public_helper_changes": [
+    "Never explicitly mutates retained canonical bytes or metadata",
+    "Rejects lexical symlinks and follows source via no-follow descriptors",
+    "Historical filesystem device is provenance, not a restore-host requirement",
+    "Atomic no-clobber destination; original target metadata where permitted"
+  ],
+  "public_helper_safety_report": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/safety-test-report.json",
+  "public_helper_sha256": "ed35b22c71d88bab18eea622cf77b96664e8c8451fb8dcee34358bdc9fe65ff1",
+  "records_verified_against_retained_canonical_hashes": 798,
+  "restore_command": ".venv/bin/python results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore_polymesh.py --manifest results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore-manifest.json --root . --path <recorded duplicate_path>",
+  "scope": "Recovery requires the retained local canonical files; those raw files are not Git payloads.",
+  "unique_retained_canonical_files_verified": 48
+}

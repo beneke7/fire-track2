@@ -1,0 +1,202 @@
+{
+  "actual_nano_cpus": 6000000000,
+  "binary_sha256": "4b2bfb2c95be5bb7a18973eb3b0aafb774a3aeb62a0a3f67fbf44e65f7ba274f",
+  "bundle": "/home/v/proj/bene/fire-track2/results/runs/i4f-frozen-water-mechanical-phaseT-20261026T2335Z",
+  "case_freeze_sha256": "a3a9e8066daa8ab6af7c5c05a8281f0a1888d207010bd5d713aab11a80228f3a",
+  "container_id": "8e0f3283e013868ab85712a388fcb60bad1c9e041f2431b377977a65b3939151",
+  "container_name": "i4f-frozen-water-mechanical-phaseT-20261026t2335z",
+  "container_status_before_GO": "running",
+  "cpu_quota_equivalent": 6,
+  "created_utc": "2026-10-26T23:49:58.581592+00:00",
+  "docker_started_at": "2026-10-26T23:49:58.762355173Z",
+  "experiment_sha256": "50d671b79040d8d1ce4e72c7c666262955466e4da2c06d9b2c572a991396499f",
+  "go_sha256": "a7428e87b068bc7d4da2e2b5f11fd6f36a0746b606bba0e18396b4fe6eacfc11",
+  "guard_sha256": "688b59afa2272b994d086e3b5f4d3526aaf9df87b5c341d314707531b5feb0fb",
+  "hard_wall_s_from_StartedAt": 7200,
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "launcher_sha256": "b749cee7fce5c8773b37c7cd9f7645368d89b3289299e4bc779f71cd5eb21f35",
+  "log_path": "/home/v/proj/bene/fire-track2/results/runs/i4f-frozen-water-mechanical-phaseT-20261026T2335Z/logs/mechanical-solver.log",
+  "memory_limit_bytes": 34359738368,
+  "mpi_ranks": 10,
+  "pause_flags_prelaunch": [],
+  "preflight": {
+    "binary_bytes": 1942384,
+    "binary_sha256": "4b2bfb2c95be5bb7a18973eb3b0aafb774a3aeb62a0a3f67fbf44e65f7ba274f",
+    "case_input_files_checked": 173,
+    "freeze_sha256": "a3a9e8066daa8ab6af7c5c05a8281f0a1888d207010bd5d713aab11a80228f3a",
+    "image_inspect": "\"sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b\" [\"opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319\"]",
+    "physical_fvSolution_sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff",
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "seed_time_directories": [
+      "0.460047515286"
+    ],
+    "source_files_checked": 72,
+    "source_manifest_sha256": "a9510b826d792239c44b3314ea595a8fc8c2a68c9050227f4025a8934a5b874a",
+    "status": "passed_original_seed_static_mesh_addressing_source_binary_and_dictionary_checks"
+  },
+  "release_resource_sample": {
+    "active_containers": [
+      {
+        "container_id": "d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032",
+        "name": "i4f-cold-nouter16-advisory-20261026T2320Z-retry006",
+        "nano_cpus": 10000000000,
+        "started_at": "2026-10-26T23:44:32.173495091Z"
+      }
+    ],
+    "active_solver_rank_count": 10,
+    "available_memory_bytes": 124627492864,
+    "effective_cpus": 20,
+    "fits_by_rank_count": true,
+    "free_disk_bytes": 25737715712,
+    "host_busy_cpu_equivalents_2s": 12.035,
+    "progressing_solver_ranks": [
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 200,
+        "pid": 3223143,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223144,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223145,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223146,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223147,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223148,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 200,
+        "pid": 3223149,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 202,
+        "pid": 3223150,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223151,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223152,
+        "state": "R"
+      }
+    ],
+    "sampled_utc": "2026-10-26T23:50:01.508105+00:00"
+  },
+  "released_utc": "2026-10-26T23:50:01.508278+00:00",
+  "resource_sample_prelaunch": {
+    "active_containers": [
+      {
+        "container_id": "d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032",
+        "name": "i4f-cold-nouter16-advisory-20261026T2320Z-retry006",
+        "nano_cpus": 10000000000,
+        "started_at": "2026-10-26T23:44:32.173495091Z"
+      }
+    ],
+    "active_solver_rank_count": 10,
+    "available_memory_bytes": 124636618752,
+    "effective_cpus": 20,
+    "fits_by_rank_count": true,
+    "free_disk_bytes": 25703833600,
+    "host_busy_cpu_equivalents_2s": 12.028007001750439,
+    "progressing_solver_ranks": [
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 200,
+        "pid": 3223143,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 200,
+        "pid": 3223144,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223145,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223146,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223147,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223148,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 200,
+        "pid": 3223149,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223150,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 200,
+        "pid": 3223151,
+        "state": "R"
+      },
+      {
+        "cgroup": "0::/system.slice/docker-d0adc7e1e8e026b805876347f27edde59d39c1c15e9fb1ff3be269f003713032.scope",
+        "cpu_ticks_2s": 201,
+        "pid": 3223152,
+        "state": "R"
+      }
+    ],
+    "sampled_utc": "2026-10-26T23:49:58.571944+00:00"
+  },
+  "runner_sha256": "fe8bf4e1a7ee3a52ae0adf102d01bf3dada1cdedb9edd02194bcb553f5354e55",
+  "schema": "i4f-frozen-water-mechanical-launch/v1",
+  "source_manifest_sha256": "a9510b826d792239c44b3314ea595a8fc8c2a68c9050227f4025a8934a5b874a",
+  "source_patch_sha256": "6b1f420a0c46daf139ce4ca5cb9ed8a1e2b3efd058d927c0a6637fd3eea0939a",
+  "status": "solver_released_under_exact_guard",
+  "terminal_contract": "I4F_MECH_MAP_COMPLETE with eight sweeps, two correctors, exact common T and phase T within the 128-epsilon invariant; or a preserved raw-state abort/censor. No continuation."
+}

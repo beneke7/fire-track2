@@ -1,0 +1,2372 @@
+--- a/applications/solvers/multiphase/VoF/alphaEqn.H
++++ b/applications/solvers/multiphase/VoF/alphaEqn.H
+@@ -207,6 +207,12 @@
+     {
+         #include "alphaSuSp.H"
+ 
++        i4fGammaAppliedAtPredictorSnapshot = dgdt.primitiveField();
++        i4fSpAtPredictorSnapshot = Sp;
++        i4fSuAtPredictorSnapshot = Su;
++        i4fDivUAtPredictorSnapshot = divU;
++        i4fAlphaBeforePredictorSnapshot = alpha1.primitiveField();
++
+         i4fSpPredictor = Sp;
+         i4fSuPredictor = Su;
+         i4fDivUPredictor = divU;
+@@ -233,6 +239,8 @@
+         );
+ 
+         alpha1Eqn.solve();
++
++        i4fAlphaPredictorSnapshot = alpha1.primitiveField();
+ 
+         Info<< "Phase-1 volume fraction = "
+             << alpha1.weightedAverage(mesh.Vsc()).value()
+@@ -498,6 +506,10 @@
+                 alpha1 = 0.5*alpha1 + 0.5*alpha10;
+                 alphaPhi10 += 0.5*talphaPhi1Corr();
+             }
++
++            // For the configured single alpha corrector this is exactly the
++            // post-MULES state; the snapshot remains distinct from alphaP.
++            i4fAlphaAfterMULESSnapshot = alpha1.primitiveField();
+ 
+             if (i4fFrozenPredictorSp)
+             {
+--- a/applications/solvers/multiphase/compressibleInterFoam/Make/files
++++ b/applications/solvers/multiphase/compressibleInterFoam/Make/files
+@@ -1,3 +1,3 @@
+ compressibleInterFoam.C
+ 
+-EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamI4FColdRestartConsistent
++EXE = $(FOAM_USER_APPBIN)/compressibleInterFoamI4FFrozenWaterMechPhaseTBound
+--- a/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
++++ b/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C
+@@ -58,6 +58,15 @@
+ #include <fstream>
+ #include <iomanip>
+ #include <string>
++#include <fstream>
++#include <cmath>
++#include <algorithm>
++#include <cstdint>
++#include <limits>
++#include <sstream>
++#include <tuple>
++#include <type_traits>
++#include <vector>
+ 
+ // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+@@ -79,6 +88,63 @@
+     #include "createTimeControls.H"
+     #include "createFields.H"
+ 
++    const scalar i4fGammaOuterRelaxation
++    (
++        runTime.controlDict().lookupOrDefault<scalar>
++        (
++            "i4fGammaOuterRelaxation",
++            1.0
++        )
++    );
++
++    if
++    (
++        !std::isfinite(i4fGammaOuterRelaxation)
++     || !(i4fGammaOuterRelaxation > 0)
++     || i4fGammaOuterRelaxation > 1
++    )
++    {
++        FatalErrorInFunction
++            << "i4fGammaOuterRelaxation must satisfy 0 < omega <= 1; got "
++            << i4fGammaOuterRelaxation << exit(FatalError);
++    }
++
++    Info<< "I4F_GAMMA_OUTER_RELAXATION_CONTROL"
++        << " omega=" << i4fGammaOuterRelaxation
++        << " accepted_field=dgdt"
++        << " raw_field=dgdtRaw"
++        << " update_location=after_complete_pressure_corrector_loop"
++        << " updates_skipped_at_omega_1="
++        << (i4fGammaOuterRelaxation == 1.0)
++        << nl;
++
++    volScalarField i4fGammaRaw
++    (
++        IOobject
++        (
++            "dgdtRaw",
++            runTime.timeName(),
++            mesh,
++            IOobject::NO_READ,
++            IOobject::AUTO_WRITE
++        ),
++        dgdt
++    );
++
++    volScalarField i4fGammaOuterEntry
++    (
++        IOobject
++        (
++            "i4fGammaOuterEntry",
++            runTime.timeName(),
++            mesh,
++            IOobject::NO_READ,
++            IOobject::NO_WRITE,
++            false
++        ),
++        dgdt
++    );
++
+     // Private experiment control. Missing entry defaults OFF, preserving the
+     // stock v7 source path in the disabled passivity arm.
+     const Switch i4fFrozenPredictorSp
+@@ -97,6 +163,65 @@
+             false
+         )
+     );
++
++    // One-shot, pressure-only local stability probe. Disabled by default.
++    const Switch i4fFrozenPressureOperatorProbe
++    (
++        runTime.controlDict().lookupOrDefault<Switch>
++        (
++            "i4fFrozenPressureOperatorProbe",
++            false
++        )
++    );
++    const scalar i4fFrozenPressureOperatorProbeStartTime
++    (
++        runTime.controlDict().lookupOrDefault<scalar>
++        (
++            "i4fFrozenPressureOperatorProbeStartTime",
++            0.4938
++        )
++    );
++    if
++    (
++        !std::isfinite(i4fFrozenPressureOperatorProbeStartTime)
++     || i4fFrozenPressureOperatorProbeStartTime < 0
++    )
++    {
++        FatalErrorInFunction
++            << "Invalid i4fFrozenPressureOperatorProbeStartTime="
++            << i4fFrozenPressureOperatorProbeStartTime << exit(FatalError);
++    }
++    Info<< "I4F_FROZEN_PRESSURE_OPERATOR_PROBE_CONTROL"
++        << " enabled=" << i4fFrozenPressureOperatorProbe
++        << " first_target_time_s=" << i4fFrozenPressureOperatorProbeStartTime
++        << " mode=post-original-pressure-solve-pre-floor-pre-EOS"
++        << " target=final_outer_second_pressure_equation"
++        << nl;
++
++    const Switch i4fFrozenWaterMechanicalMap
++    (
++        runTime.controlDict().lookupOrDefault<Switch>
++        (
++            "i4fFrozenWaterMechanicalMap",
++            false
++        )
++    );
++    const scalar i4fFrozenWaterMechanicalMapStartTime
++    (
++        runTime.controlDict().lookupOrDefault<scalar>
++        (
++            "i4fFrozenWaterMechanicalMapStartTime",
++            0.4938
++        )
++    );
++    bool i4fMechanicalMapActive = false;
++    label i4fMechanicalMapSweep = 0;
++    Info<< "I4F_FROZEN_WATER_MECHANICAL_MAP_CONTROL"
++        << " enabled=" << i4fFrozenWaterMechanicalMap
++        << " first_target_time_s=" << i4fFrozenWaterMechanicalMapStartTime
++        << " mode=post-complete-original-final-pEqn-EOS-U-K"
++        << " diagnostic_sweeps=8"
++        << nl;
+ 
+     if (i4fFrozenPredictorFullSource && !i4fFrozenPredictorSp)
+     {
+@@ -145,17 +270,19 @@
+         #include "setInitialDeltaT.H"
+     }
+ 
++    scalarField i4fProbeOuter7PrghAtPressureSolve;
++    bool i4fProbeHasOuter7PrghAtPressureSolve = false;
++
+     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+     Info<< "\nStarting time loop\n" << endl;
+ 
+-    // The SST model owns these registered transported fields. Capture their
+-    // Euler old-time state with the other restart fields before the first
+-    // alpha/EOS/UEqn/TEqn mutation.
+-    const volScalarField& kTransport =
+-        mesh.lookupObject<volScalarField>("k");
+-    const volScalarField& omegaTransport =
+-        mesh.lookupObject<volScalarField>("omega");
++    // SST owns these optional registered transported fields. Initialize their
++    // Euler old-time state when present; laminar cases have neither field.
++    const bool i4fHasKTransport =
++        mesh.foundObject<volScalarField>("k");
++    const bool i4fHasOmegaTransport =
++        mesh.foundObject<volScalarField>("omega");
+ 
+     auto i4fLogOldTimeState =
+     [&]
+@@ -223,8 +350,18 @@
+             K.oldTime(); K.oldTime();
+             p_rgh.oldTime(); p_rgh.oldTime();
+             phi.oldTime(); phi.oldTime();
+-            kTransport.oldTime(); kTransport.oldTime();
+-            omegaTransport.oldTime(); omegaTransport.oldTime();
++            if (i4fHasKTransport)
++            {
++                const volScalarField& kTransport =
++                    mesh.lookupObject<volScalarField>("k");
++                kTransport.oldTime(); kTransport.oldTime();
++            }
++            if (i4fHasOmegaTransport)
++            {
++                const volScalarField& omegaTransport =
++                    mesh.lookupObject<volScalarField>("omega");
++                omegaTransport.oldTime(); omegaTransport.oldTime();
++            }
+ 
+             i4fLogOldTimeState("alpha1", alpha1);
+             i4fLogOldTimeState("alpha2", alpha2);
+@@ -236,8 +373,20 @@
+             i4fLogOldTimeState("K", K);
+             i4fLogOldTimeState("p_rgh", p_rgh);
+             i4fLogOldTimeState("phi", phi);
+-            i4fLogOldTimeState("k", kTransport);
+-            i4fLogOldTimeState("omega", omegaTransport);
++            if (i4fHasKTransport)
++            {
++                i4fLogOldTimeState
++                (
++                    "k", mesh.lookupObject<volScalarField>("k")
++                );
++            }
++            if (i4fHasOmegaTransport)
++            {
++                i4fLogOldTimeState
++                (
++                    "omega", mesh.lookupObject<volScalarField>("omega")
++                );
++            }
+             i4fPreallocationProbePending = false;
+         }
+ 
+@@ -246,9 +395,11 @@
+         // --- Pressure-velocity PIMPLE corrector loop
+         static label i4fOuterLoop = 0;
+         static label i4fAlphaSuSpCallIndex = 0;
++        label i4fPimpleOuterIteration = 0;
+         while (pimple.loop())
+         {
+             ++i4fOuterLoop;
++            ++i4fPimpleOuterIteration;
+ 
+             // Internal-cell snapshots at the start of this outer iteration.
+             // The first row compares with the previous time-step state; later
+@@ -261,6 +412,18 @@
+             const scalarField i4fRho1OuterStart(rho1.primitiveField());
+             const scalarField i4fRho2OuterStart(rho2.primitiveField());
+ 
++            // Stage snapshots are filled by the alpha predictor/MULES source
++            // header. They are local read-only copies; no oldTime() observer
++            // is called here.
++            i4fGammaOuterEntry = dgdt;
++            scalarField i4fAlphaBeforePredictorSnapshot(mesh.nCells(), Zero);
++            scalarField i4fAlphaPredictorSnapshot(mesh.nCells(), Zero);
++            scalarField i4fAlphaAfterMULESSnapshot(mesh.nCells(), Zero);
++            scalarField i4fGammaAppliedAtPredictorSnapshot(mesh.nCells(), Zero);
++            scalarField i4fSpAtPredictorSnapshot(mesh.nCells(), Zero);
++            scalarField i4fSuAtPredictorSnapshot(mesh.nCells(), Zero);
++            scalarField i4fDivUAtPredictorSnapshot(mesh.nCells(), Zero);
++
+             #include "alphaControls.H"
+             #include "compressibleAlphaEqnSubCycle.H"
+ 
+@@ -271,9 +434,122 @@
+             #include "TEqn.H"
+ 
+             // --- Pressure corrector loop
++            label i4fPressureCorrectorIndex = 0;
+             while (pimple.correct())
+             {
++                ++i4fPressureCorrectorIndex;
+                 #include "pEqn.H"
++            }
++
++            // pEqn.H has produced raw pressure-derived Gamma after both
++            // configured pressure correctors. Relax only the field consumed
++            // by the next outer alpha solve.
++            i4fGammaRaw = dgdt;
++            if (i4fGammaOuterRelaxation != 1.0)
++            {
++                dgdt =
++                    (1.0 - i4fGammaOuterRelaxation)*i4fGammaOuterEntry
++                  + i4fGammaOuterRelaxation*i4fGammaRaw;
++            }
++
++            if
++            (
++                i4fFrozenWaterMechanicalMap
++             && runTime.value() >= i4fFrozenWaterMechanicalMapStartTime
++             && i4fPimpleOuterIteration == 8
++             && i4fPressureCorrectorIndex == 2
++             && pimple.finalIter()
++            )
++            {
++                #include "i4fFrozenWaterMechanicalMap.H"
++                return 0;
++            }
++
++            scalar i4fGammaRawEntryMax = 0;
++            scalar i4fGammaRawEntryL1 = 0;
++            scalar i4fGammaRawEntrySigned = 0;
++            scalar i4fGammaRawAppliedMax = 0;
++            scalar i4fGammaRawAppliedL1 = 0;
++            scalar i4fGammaRawAppliedSigned = 0;
++            scalar i4fGammaAppliedEntryMax = 0;
++            scalar i4fGammaAppliedEntryL1 = 0;
++            scalar i4fGammaAppliedEntrySigned = 0;
++
++            forAll(dgdt, celli)
++            {
++                const scalar cellVolume = mesh.V()[celli];
++                const scalar gammaEntry = i4fGammaOuterEntry[celli];
++                const scalar gammaRaw = i4fGammaRaw[celli];
++                const scalar gammaApplied = dgdt[celli];
++                const scalar rawEntryDefect = gammaRaw - gammaEntry;
++                const scalar rawAppliedDifference =
++                    gammaRaw - gammaApplied;
++                const scalar appliedUpdate = gammaApplied - gammaEntry;
++
++                i4fGammaRawEntryMax = max
++                (
++                    i4fGammaRawEntryMax,
++                    mag(rawEntryDefect)
++                );
++                i4fGammaRawEntryL1 += mag(rawEntryDefect)*cellVolume;
++                i4fGammaRawEntrySigned += rawEntryDefect*cellVolume;
++                i4fGammaRawAppliedMax = max
++                (
++                    i4fGammaRawAppliedMax,
++                    mag(rawAppliedDifference)
++                );
++                i4fGammaRawAppliedL1 +=
++                    mag(rawAppliedDifference)*cellVolume;
++                i4fGammaRawAppliedSigned +=
++                    rawAppliedDifference*cellVolume;
++                i4fGammaAppliedEntryMax = max
++                (
++                    i4fGammaAppliedEntryMax,
++                    mag(appliedUpdate)
++                );
++                i4fGammaAppliedEntryL1 += mag(appliedUpdate)*cellVolume;
++                i4fGammaAppliedEntrySigned += appliedUpdate*cellVolume;
++            }
++
++            reduce(i4fGammaRawEntryMax, maxOp<scalar>());
++            reduce(i4fGammaRawEntryL1, sumOp<scalar>());
++            reduce(i4fGammaRawEntrySigned, sumOp<scalar>());
++            reduce(i4fGammaRawAppliedMax, maxOp<scalar>());
++            reduce(i4fGammaRawAppliedL1, sumOp<scalar>());
++            reduce(i4fGammaRawAppliedSigned, sumOp<scalar>());
++            reduce(i4fGammaAppliedEntryMax, maxOp<scalar>());
++            reduce(i4fGammaAppliedEntryL1, sumOp<scalar>());
++            reduce(i4fGammaAppliedEntrySigned, sumOp<scalar>());
++
++            if (Pstream::master())
++            {
++                Info<< "I4F_GAMMA_OUTER_RELAXATION_SUMMARY"
++                    << " time_s=" << runTime.timeName()
++                    << " outer_iteration=" << i4fOuterLoop
++                    << " omega=" << i4fGammaOuterRelaxation
++                    << " raw_minus_entry_fixedpoint_max_abs_s-1="
++                    << i4fGammaRawEntryMax
++                    << " raw_minus_entry_volume_L1_m3_s="
++                    << i4fGammaRawEntryL1
++                    << " raw_minus_entry_signed_volume_integral_m3_s="
++                    << i4fGammaRawEntrySigned
++                    << " dt_times_raw_minus_entry_max_abs="
++                    << runTime.deltaTValue()*i4fGammaRawEntryMax
++                    << " raw_minus_applied_max_abs_s-1="
++                    << i4fGammaRawAppliedMax
++                    << " raw_minus_applied_volume_L1_m3_s="
++                    << i4fGammaRawAppliedL1
++                    << " raw_minus_applied_signed_volume_integral_m3_s="
++                    << i4fGammaRawAppliedSigned
++                    << " accepted_applied_minus_entry_max_abs_s-1="
++                    << i4fGammaAppliedEntryMax
++                    << " accepted_applied_minus_entry_volume_L1_m3_s="
++                    << i4fGammaAppliedEntryL1
++                    << " accepted_applied_minus_entry_signed_volume_integral_m3_s="
++                    << i4fGammaAppliedEntrySigned
++                    << " fixedpoint_metric=raw_minus_outer_entry"
++                    << " raw_minus_applied_is_not_fixedpoint_metric=1"
++                    << nl << endl;
+             }
+ 
+             if (pimple.turbCorr())
+@@ -432,28 +708,86 @@
+                     << " rho1_after_kg_m3=" << rho1[celli]
+                     << " rho2_before_kg_m3=" << i4fRho2OuterStart[celli]
+                     << " rho2_after_kg_m3=" << rho2[celli]
+-                    << " native_faces=[";
++                    << " gamma_entry_per_s="
++                    << i4fGammaOuterEntry[celli]
++                    << " gamma_raw_outgoing_per_s="
++                    << i4fGammaRaw[celli]
++                    << " gamma_applied_for_next_outer_per_s="
++                    << dgdt[celli]
++                    << " gamma_raw_minus_entry_per_s="
++                    << i4fGammaRaw[celli] - i4fGammaOuterEntry[celli]
++                    << " gamma_raw_minus_applied_per_s="
++                    << i4fGammaRaw[celli] - dgdt[celli]
++                    << " alpha_before_predictor="
++                    << i4fAlphaBeforePredictorSnapshot[celli]
++                    << " alpha_predictor_before_MULES="
++                    << i4fAlphaPredictorSnapshot[celli]
++                    << " alpha_after_MULES="
++                    << i4fAlphaAfterMULESSnapshot[celli]
++                    << " gamma_applied_at_predictor_per_s="
++                    << i4fGammaAppliedAtPredictorSnapshot[celli]
++                    << " Sp_at_alpha_predictor_per_s="
++                    << i4fSpAtPredictorSnapshot[celli]
++                    << " Su_at_alpha_predictor_per_s="
++                    << i4fSuAtPredictorSnapshot[celli]
++                    << " divU_at_alpha_predictor_per_s="
++                    << i4fDivUAtPredictorSnapshot[celli]
++                    << " incident_native_faces=[";
++
++                scalar i4fIncidentPhiOutward = 0;
++                scalar i4fIncidentAlphaPhiOutward = 0;
+ 
+                 const cell& cellFaces = mesh.cells()[celli];
+                 forAll(cellFaces, faceLocali)
+                 {
+                     const label facei = cellFaces[faceLocali];
++                    const bool internalFace =
++                        facei < mesh.nInternalFaces();
++                    label patchi = -1;
++                    label patchFacei = -1;
++                    if (!internalFace)
++                    {
++                        patchi = mesh.boundaryMesh().whichPatch(facei);
++                        patchFacei =
++                            facei - mesh.boundaryMesh()[patchi].start();
++                    }
++
++                    const scalar facePhi =
++                        internalFace
++                      ? phi.primitiveField()[facei]
++                      : phi.boundaryField()[patchi][patchFacei];
++                    const scalar faceAlphaPhi =
++                        internalFace
++                      ? alphaPhi10.primitiveField()[facei]
++                      : alphaPhi10.boundaryField()[patchi][patchFacei];
++                    const scalar orientation =
++                        mesh.owner()[facei] == celli ? 1.0 : -1.0;
++                    const scalar orientedPhi = orientation*facePhi;
++                    const scalar orientedAlphaPhi = orientation*faceAlphaPhi;
++                    i4fIncidentPhiOutward += orientedPhi;
++                    i4fIncidentAlphaPhiOutward += orientedAlphaPhi;
+                     cellOutput<< facei << ":owner=" << mesh.owner()[facei];
+-                    if (facei < mesh.nInternalFaces())
++                    if (internalFace)
+                     {
+                         cellOutput<< ":neighbour=" << mesh.neighbour()[facei]
+                             << ":patch=internal";
+                     }
+                     else
+                     {
+-                        const label patchi =
+-                            mesh.boundaryMesh().whichPatch(facei);
+                         cellOutput<< ":neighbour=-1:patch="
+                             << mesh.boundaryMesh()[patchi].name();
+                     }
++                    cellOutput<< ":outward_phi_m3_s=" << orientedPhi
++                        << ":outward_alphaPhi_water_m3_s="
++                        << orientedAlphaPhi;
+                     if (faceLocali + 1 < cellFaces.size()) cellOutput<< ";";
+                 }
+-                cellOutput<< "]\n";
++                cellOutput<< "]"
++                    << " incident_phi_outward_sum_m3_s="
++                    << i4fIncidentPhiOutward
++                    << " incident_alphaPhi_water_outward_sum_m3_s="
++                    << i4fIncidentAlphaPhiOutward
++                    << "\n";
+                 cellOutput.flush();
+             };
+ 
+--- /dev/null
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fFrozenPressureProbe.H
+@@ -0,0 +1,958 @@
++// One-shot diagnostic, included after the original final outer/second pressure
++// solve and before the stock pressure floor, EOS update, phi/U update, or write.
++// It changes only p_rgh while applying the frozen pressure map.
++
++if (!pimple.transonic())
++{
++    FatalErrorInFunction
++        << "The frozen pressure probe requires the declared transonic branch"
++        << exit(FatalError);
++}
++
++const label i4fProbeRank = Pstream::myProcNo();
++const label i4fProbeCellA = 1779;   // global cell 31926 on partition 7
++const label i4fProbeCellB = 3759;   // global cell 62270 on partition 7
++const label i4fProbeFace = 8995;    // global face 136938; raw faceProcAddressing=136939
++
++std::ostringstream i4fProbeRankName;
++i4fProbeRankName << "rank" << i4fProbeRank;
++const std::string i4fProbeStem
++(
++    "i4f_frozen_pressure_probe/" + i4fProbeRankName.str()
++);
++std::ofstream i4fProbeState
++(
++    i4fProbeStem + ".state.bin",
++    std::ios::out | std::ios::binary | std::ios::trunc
++);
++std::ofstream i4fProbeStateIndex(i4fProbeStem + ".state-index.csv");
++std::ofstream i4fProbeSweeps
++(
++    i4fProbeStem + ".sweeps.bin",
++    std::ios::out | std::ios::binary | std::ios::trunc
++);
++std::ofstream i4fProbeSweepIndex(i4fProbeStem + ".sweeps-index.csv");
++if
++(
++    !i4fProbeState.good()
++ || !i4fProbeStateIndex.good()
++ || !i4fProbeSweeps.good()
++ || !i4fProbeSweepIndex.good()
++)
++{
++    FatalErrorInFunction
++        << "Unable to create frozen-pressure diagnostic outputs under "
++        << i4fProbeStem << exit(FatalError);
++}
++
++i4fProbeStateIndex
++    << "name,section,count,byte_offset,value_bytes,encoding\n";
++i4fProbeSweepIndex
++    << "name,section,count,byte_offset,value_bytes,encoding\n";
++
++auto i4fProbeWriteValues =
++[&]
++(const std::string& name, const std::string& section, const auto& values)
++{
++    using Value = std::decay_t<decltype(values[0])>;
++    const std::streamoff offset = i4fProbeState.tellp();
++    const std::streamsize bytes =
++        static_cast<std::streamsize>(values.size()*sizeof(Value));
++    if (bytes)
++    {
++        i4fProbeState.write
++        (
++            reinterpret_cast<const char*>(values.begin()),
++            bytes
++        );
++    }
++    i4fProbeStateIndex
++        << name << ',' << section << ',' << values.size() << ','
++        << offset << ',' << sizeof(Value) << ",host-native-raw\n";
++};
++
++auto i4fProbeWriteSweepValues =
++[&]
++(const std::string& name, const std::string& section, const auto& values)
++{
++    using Value = std::decay_t<decltype(values[0])>;
++    const std::streamoff offset = i4fProbeSweeps.tellp();
++    const std::streamsize bytes =
++        static_cast<std::streamsize>(values.size()*sizeof(Value));
++    if (bytes)
++    {
++        i4fProbeSweeps.write
++        (
++            reinterpret_cast<const char*>(values.begin()),
++            bytes
++        );
++    }
++    i4fProbeSweepIndex
++        << name << ',' << section << ',' << values.size() << ','
++        << offset << ',' << sizeof(Value) << ",host-native-raw\n";
++};
++
++auto i4fProbeWriteGeometric =
++[&]
++(const std::string& name, const auto& field)
++{
++    i4fProbeWriteValues(name, "internal", field.primitiveField());
++    forAll(field.boundaryField(), patchi)
++    {
++        const std::string patchSection
++        (
++            "patch_" + std::to_string(patchi)
++        );
++        i4fProbeWriteValues
++        (
++            name,
++            patchSection,
++            field.boundaryField()[patchi]
++        );
++    }
++};
++
++auto i4fProbeWriteMatrix =
++[&]
++(const std::string& name, const fvScalarMatrix& matrix)
++{
++    i4fProbeWriteValues(name + "_diag", "internal", matrix.diag());
++    i4fProbeWriteValues(name + "_upper", "internal_faces", matrix.upper());
++    i4fProbeWriteValues(name + "_lower", "internal_faces", matrix.lower());
++    i4fProbeWriteValues(name + "_source", "internal", matrix.source());
++    forAll(matrix.internalCoeffs(), patchi)
++    {
++        i4fProbeWriteValues
++        (
++            name + "_internalCoeffs",
++            "patch_" + std::to_string(patchi),
++            matrix.internalCoeffs()[patchi]
++        );
++        i4fProbeWriteValues
++        (
++            name + "_boundaryCoeffs",
++            "patch_" + std::to_string(patchi),
++            matrix.boundaryCoeffs()[patchi]
++        );
++    }
++};
++
++auto i4fProbeHashValues =
++[](const auto& values)
++{
++    using Value = std::decay_t<decltype(values[0])>;
++    const unsigned char* bytes =
++        reinterpret_cast<const unsigned char*>(values.begin());
++    const std::size_t byteCount = values.size()*sizeof(Value);
++    std::uint64_t hash = 14695981039346656037ull;
++    for (std::size_t bytei = 0; bytei < byteCount; ++bytei)
++    {
++        hash ^= bytes[bytei];
++        hash *= 1099511628211ull;
++    }
++    return hash;
++};
++
++auto i4fProbeHashGeometric =
++[&]
++(const auto& field)
++{
++    std::uint64_t hash = i4fProbeHashValues(field.primitiveField());
++    forAll(field.boundaryField(), patchi)
++    {
++        hash ^= i4fProbeHashValues(field.boundaryField()[patchi]);
++        hash *= 1099511628211ull;
++    }
++    return hash;
++};
++
++auto i4fProbeHashMatrix =
++[&]
++(const fvScalarMatrix& matrix)
++{
++    std::uint64_t hash = i4fProbeHashValues(matrix.diag());
++    hash ^= i4fProbeHashValues(matrix.upper());
++    hash *= 1099511628211ull;
++    hash ^= i4fProbeHashValues(matrix.lower());
++    hash *= 1099511628211ull;
++    hash ^= i4fProbeHashValues(matrix.source());
++    hash *= 1099511628211ull;
++    forAll(matrix.internalCoeffs(), patchi)
++    {
++        hash ^= i4fProbeHashValues(matrix.internalCoeffs()[patchi]);
++        hash *= 1099511628211ull;
++        hash ^= i4fProbeHashValues(matrix.boundaryCoeffs()[patchi]);
++        hash *= 1099511628211ull;
++    }
++    return hash;
++};
++
++auto i4fProbeHashMatrixCoefficients =
++[&]
++(const fvScalarMatrix& matrix)
++{
++    std::uint64_t hash = i4fProbeHashValues(matrix.diag());
++    hash ^= i4fProbeHashValues(matrix.upper());
++    hash *= 1099511628211ull;
++    hash ^= i4fProbeHashValues(matrix.lower());
++    hash *= 1099511628211ull;
++    forAll(matrix.internalCoeffs(), patchi)
++    {
++        hash ^= i4fProbeHashValues(matrix.internalCoeffs()[patchi]);
++        hash *= 1099511628211ull;
++        hash ^= i4fProbeHashValues(matrix.boundaryCoeffs()[patchi]);
++        hash *= 1099511628211ull;
++    }
++    return hash;
++};
++
++auto i4fProbeHashFixedFluxGradients =
++[&]()
++{
++    std::uint64_t hash = 14695981039346656037ull;
++    forAll(p_rgh.boundaryField(), patchi)
++    {
++        if (p_rgh.boundaryField()[patchi].type() == "fixedFluxPressure")
++        {
++            tmp<Field<scalar>> tSnGrad
++            (
++                p_rgh.boundaryField()[patchi].snGrad()
++            );
++            hash ^= i4fProbeHashValues(tSnGrad());
++            hash *= 1099511628211ull;
++        }
++    }
++    return hash;
++};
++
++if
++(
++    i4fProbeRank == 7
++ && (mesh.nCells() <= i4fProbeCellA || mesh.nCells() <= i4fProbeCellB)
++)
++{
++    FatalErrorInFunction
++        << "Partition 7 no longer contains the frozen probe cells"
++        << exit(FatalError);
++}
++if
++(
++    i4fProbeRank == 7
++ && mesh.nInternalFaces() <= i4fProbeFace
++)
++{
++    FatalErrorInFunction
++        << "Partition 7 no longer contains the frozen probe face"
++        << exit(FatalError);
++}
++
++if (i4fProbeRank == 7)
++{
++    Pout<< "I4F_FROZEN_PRESSURE_PROBE_CAPTURE"
++        << " rank=" << i4fProbeRank
++        << " time_s=" << runTime.timeName()
++        << " time_index=" << runTime.timeIndex()
++        << " deltaT_s=" << runTime.deltaTValue()
++        << " rank_count=" << Pstream::nProcs()
++        << " global_cell_31926_local=1779"
++        << " global_cell_62270_local=3759"
++        << " global_face_136938_local=8995_raw_address=136939"
++        << " face_owner_local=" << mesh.faceOwner()[i4fProbeFace]
++        << " face_neighbour_local=" << mesh.faceNeighbour()[i4fProbeFace]
++        << " processor_pressure_neighbours=live_each_solve"
++        << nl;
++}
++Info<< "I4F_FROZEN_PRESSURE_PROBE_MATRIX_DIMENSIONS"
++    << " comp1=" << p_rghEqnComp1().dimensions()
++    << " comp2=" << p_rghEqnComp2().dimensions()
++    << " incompressible=" << p_rghEqnIncomp.dimensions()
++    << " residual_units_interpreted_as_integrated_m3_s"
++    << nl;
++
++// Freeze the two transonic compressibility matrices by copy. Their coefficient
++// arrays and source vectors are serialized and hash-checked before/after.
++fvScalarMatrix i4fFrozenComp1(p_rghEqnComp1());
++fvScalarMatrix i4fFrozenComp2(p_rghEqnComp2());
++const std::uint64_t i4fComp1BeforeHash =
++    i4fProbeHashMatrix(i4fFrozenComp1);
++const std::uint64_t i4fComp2BeforeHash =
++    i4fProbeHashMatrix(i4fFrozenComp2);
++const std::uint64_t i4fOriginalComp1BeforeHash =
++    i4fProbeHashMatrix(p_rghEqnComp1());
++const std::uint64_t i4fOriginalComp2BeforeHash =
++    i4fProbeHashMatrix(p_rghEqnComp2());
++const std::uint64_t i4fOriginalIncompCoefficientHash =
++    i4fProbeHashMatrixCoefficients(p_rghEqnIncomp);
++
++// Preserve a separate pre-probe p_rgh, including boundary values. The map
++// perturbations are applied to its internal field only; coupled processor
++// neighbours remain live and exchange the current iterate.
++volScalarField i4fProbeBasePrgh
++(
++    IOobject
++    (
++        "i4fProbeBasePrgh",
++        runTime.timeName(),
++        mesh,
++        IOobject::NO_READ,
++        IOobject::NO_WRITE
++    ),
++    p_rgh
++);
++const scalarField i4fProbeBasePrghInternal(p_rgh.primitiveField());
++scalarField i4fProbeV
++(
++    p_rgh.primitiveField() - i4fProbeOuter7PrghAtPressureSolve
++);
++scalar i4fProbeVMaxLocal = 0;
++forAll(i4fProbeV, celli)
++{
++    i4fProbeVMaxLocal = max(i4fProbeVMaxLocal, mag(i4fProbeV[celli]));
++}
++scalar i4fProbeVMax = i4fProbeVMaxLocal;
++reduce(i4fProbeVMax, maxOp<scalar>());
++if (!(i4fProbeVMax > VSMALL))
++{
++    FatalErrorInFunction
++        << "Observed outer-7 to outer-8 p_rgh vector has zero magnitude"
++        << exit(FatalError);
++}
++scalarField i4fProbeVNormalized(i4fProbeV/i4fProbeVMax);
++
++// Reconstruct phid fields using the exact frozen source formula from the
++// transonic branch. All operands are still the original captured fields.
++surfaceScalarField i4fProbePhid1
++(
++    "i4fProbePhid1",
++    fvc::interpolate(psi1)*phi
++);
++surfaceScalarField i4fProbePhid2
++(
++    "i4fProbePhid2",
++    fvc::interpolate(psi2)*phi
++);
++
++// Hash every field consumed by the frozen pressure operation, along with the
++// momentum coefficients and their flux construction. p_rgh is intentionally
++// excluded because it is the probe's sole iterated state.
++std::vector<std::pair<std::string, std::uint64_t>> i4fProbeHeldHashes;
++tmp<volScalarField> i4fProbeUEqnA(UEqn.A());
++tmp<volVectorField> i4fProbeUEqnH(UEqn.H());
++auto i4fProbeRememberHeld =
++[&]
++(const std::string& name, const auto& field)
++{
++    i4fProbeHeldHashes.emplace_back(name, i4fProbeHashGeometric(field));
++};
++i4fProbeRememberHeld("alpha1", alpha1);
++i4fProbeRememberHeld("alpha2", alpha2);
++i4fProbeRememberHeld("alphaPhi1", alphaPhi1);
++i4fProbeRememberHeld("alphaPhi2", alphaPhi2);
++i4fProbeRememberHeld("rhoPhi", rhoPhi);
++i4fProbeRememberHeld("T", T);
++i4fProbeRememberHeld("T_water", mixture.thermo1().T());
++i4fProbeRememberHeld("T_air", mixture.thermo2().T());
++i4fProbeRememberHeld("rho", rho);
++i4fProbeRememberHeld("rho1", rho1);
++i4fProbeRememberHeld("rho2", rho2);
++i4fProbeRememberHeld("psi1", psi1);
++i4fProbeRememberHeld("psi2", psi2);
++i4fProbeRememberHeld("U", U);
++i4fProbeRememberHeld("phi", phi);
++i4fProbeRememberHeld("K", K);
++i4fProbeRememberHeld("p_absolute", p);
++i4fProbeRememberHeld("UEqn_A", i4fProbeUEqnA());
++i4fProbeRememberHeld("UEqn_H", i4fProbeUEqnH());
++i4fProbeRememberHeld("rAU", rAU);
++i4fProbeRememberHeld("rAUf", rAUf);
++i4fProbeRememberHeld("HbyA", HbyA);
++i4fProbeRememberHeld("phiHbyA", phiHbyA);
++i4fProbeRememberHeld("phig", phig);
++i4fProbeRememberHeld("phid1", i4fProbePhid1);
++i4fProbeRememberHeld("phid2", i4fProbePhid2);
++i4fProbeRememberHeld("alpha1_oldTime", alpha1.oldTime());
++i4fProbeRememberHeld("alpha2_oldTime", alpha2.oldTime());
++i4fProbeRememberHeld("rho_oldTime", rho.oldTime());
++i4fProbeRememberHeld("rho1_oldTime", rho1.oldTime());
++i4fProbeRememberHeld("rho2_oldTime", rho2.oldTime());
++i4fProbeRememberHeld("T_oldTime", T.oldTime());
++i4fProbeRememberHeld("U_oldTime", U.oldTime());
++i4fProbeRememberHeld("K_oldTime", K.oldTime());
++i4fProbeRememberHeld("p_rgh_oldTime", p_rgh.oldTime());
++i4fProbeRememberHeld("phi_oldTime", phi.oldTime());
++if (i4fHasKTransport)
++{
++    i4fProbeRememberHeld
++    (
++        "k_oldTime",
++        mesh.lookupObject<volScalarField>("k").oldTime()
++    );
++}
++if (i4fHasOmegaTransport)
++{
++    i4fProbeRememberHeld
++    (
++        "omega_oldTime",
++        mesh.lookupObject<volScalarField>("omega").oldTime()
++    );
++}
++const std::uint64_t i4fFixedFluxGradientBeforeHash =
++    i4fProbeHashFixedFluxGradients();
++
++// Save exact state and equation arrays outside OpenFOAM numeric time
++// directories. These files are diagnostic data, not restart checkpoints.
++i4fProbeWriteGeometric("p_rgh_base", i4fProbeBasePrgh);
++i4fProbeWriteGeometric("p_rgh_outer8_original_solved_state", p_rgh);
++i4fProbeWriteValues
++(
++    "p_rgh_outer7_preprobe_internal",
++    "internal",
++    i4fProbeOuter7PrghAtPressureSolve
++);
++i4fProbeWriteValues("outer7_to_outer8_v_Pa", "internal", i4fProbeV);
++i4fProbeWriteValues("v_normalized_max1Pa", "internal", i4fProbeVNormalized);
++i4fProbeWriteGeometric("alpha1", alpha1);
++i4fProbeWriteGeometric("alpha2", alpha2);
++i4fProbeWriteGeometric("alphaPhi1", alphaPhi1);
++i4fProbeWriteGeometric("alphaPhi2", alphaPhi2);
++i4fProbeWriteGeometric("rhoPhi", rhoPhi);
++i4fProbeWriteGeometric("p_absolute", p);
++i4fProbeWriteGeometric("T", T);
++i4fProbeWriteGeometric("T_water", mixture.thermo1().T());
++i4fProbeWriteGeometric("T_air", mixture.thermo2().T());
++i4fProbeWriteGeometric("rho", rho);
++i4fProbeWriteGeometric("rho1", rho1);
++i4fProbeWriteGeometric("rho2", rho2);
++i4fProbeWriteGeometric("psi1", psi1);
++i4fProbeWriteGeometric("psi2", psi2);
++i4fProbeWriteGeometric("U", U);
++i4fProbeWriteGeometric("phi", phi);
++i4fProbeWriteGeometric("K", K);
++i4fProbeWriteGeometric("alpha1_oldTime", alpha1.oldTime());
++i4fProbeWriteGeometric("alpha2_oldTime", alpha2.oldTime());
++i4fProbeWriteGeometric("rho_oldTime", rho.oldTime());
++i4fProbeWriteGeometric("rho1_oldTime", rho1.oldTime());
++i4fProbeWriteGeometric("rho2_oldTime", rho2.oldTime());
++i4fProbeWriteGeometric("T_oldTime", T.oldTime());
++i4fProbeWriteGeometric("U_oldTime", U.oldTime());
++i4fProbeWriteGeometric("K_oldTime", K.oldTime());
++i4fProbeWriteGeometric("p_rgh_oldTime", p_rgh.oldTime());
++i4fProbeWriteGeometric("phi_oldTime", phi.oldTime());
++if (i4fHasKTransport)
++{
++    i4fProbeWriteGeometric
++    (
++        "k_oldTime",
++        mesh.lookupObject<volScalarField>("k").oldTime()
++    );
++}
++if (i4fHasOmegaTransport)
++{
++    i4fProbeWriteGeometric
++    (
++        "omega_oldTime",
++        mesh.lookupObject<volScalarField>("omega").oldTime()
++    );
++}
++i4fProbeWriteGeometric("UEqn_A", i4fProbeUEqnA());
++i4fProbeWriteGeometric("UEqn_H", i4fProbeUEqnH());
++i4fProbeWriteGeometric("rAU", rAU);
++i4fProbeWriteGeometric("rAUf", rAUf);
++i4fProbeWriteGeometric("HbyA", HbyA);
++i4fProbeWriteGeometric("phiHbyA", phiHbyA);
++i4fProbeWriteGeometric("phig", phig);
++i4fProbeWriteGeometric("phid1", i4fProbePhid1);
++i4fProbeWriteGeometric("phid2", i4fProbePhid2);
++tmp<surfaceScalarField> i4fProbePrghSnGrad(fvc::snGrad(p_rgh));
++i4fProbeWriteGeometric("p_rgh_snGrad", i4fProbePrghSnGrad());
++i4fProbeWriteMatrix("p_rghEqnComp1", i4fFrozenComp1);
++i4fProbeWriteMatrix("p_rghEqnComp2", i4fFrozenComp2);
++i4fProbeWriteMatrix("p_rghEqnIncomp_original", p_rghEqnIncomp);
++
++std::ofstream i4fProbeSelected;
++if (i4fProbeRank == 7)
++{
++    i4fProbeSelected.open
++    (
++        "i4f_frozen_pressure_probe/selected-pressure-rows.csv",
++        std::ios::out | std::ios::trunc
++    );
++    i4fProbeSelected
++        << "phase,amplitude_Pa,sign,sweep,physical_time_s,deltaT_s,"
++        << "global_cell,local_cell,p_rgh_Pa,v_Pa,v_normalized_Pa,"
++        << "comp1_source_m3_s,comp2_source_m3_s,incomp_source_m3_s,"
++        << "laplacian_matrix_source_m3_s,comp1_residual_m3_s,"
++        << "comp2_residual_m3_s,incomp_residual_m3_s,full_residual_m3_s,"
++        << "linear_iterations,linear_initial_normalized_residual,"
++        << "linear_final_normalized_residual,"
++        << "pEqnIncomp_source_m3_s,laplacian_nonorth_flux_at_global_face_136938_m3_s,"
++        << "pEqnIncomp_flux_at_global_face_136938_m3_s\n";
++    if (!i4fProbeSelected.good())
++    {
++        FatalErrorInFunction
++            << "Unable to open selected-cell pressure-probe CSV"
++            << exit(FatalError);
++    }
++    i4fProbeSelected << std::setprecision(17);
++}
++
++auto i4fProbeLogPressureRows =
++[&]
++(
++    const std::string& phase,
++    const scalar amplitude,
++    const label sign,
++    const label sweep,
++    const fvScalarMatrix& incomp,
++    fvScalarMatrix& laplacian,
++    const fvScalarMatrix& full,
++    const solverPerformance* performance
++)
++{
++    // Every rank evaluates the same matrix residuals/reductions before the
++    // selected rank writes rows, preserving collective order.
++    tmp<scalarField> tComp1Residual(p_rghEqnComp1().residual());
++    tmp<scalarField> tComp2Residual(p_rghEqnComp2().residual());
++    tmp<scalarField> tIncompResidual(incomp.residual());
++    tmp<scalarField> tFullResidual(full.residual());
++    const scalarField& comp1Residual = tComp1Residual();
++    const scalarField& comp2Residual = tComp2Residual();
++    const scalarField& incompResidual = tIncompResidual();
++    const scalarField& fullResidual = tFullResidual();
++    auto globalMax = [](const scalarField& residual)
++    {
++        scalar maximum = 0;
++        forAll(residual, celli)
++        {
++            maximum = max(maximum, mag(residual[celli]));
++        }
++        reduce(maximum, maxOp<scalar>());
++        return maximum;
++    };
++    const scalar comp1Max = globalMax(comp1Residual);
++    const scalar comp2Max = globalMax(comp2Residual);
++    const scalar incompMax = globalMax(incompResidual);
++    const scalar fullMax = globalMax(fullResidual);
++    tmp<surfaceScalarField> tIncompFlux(incomp.flux());
++    if (i4fProbeRank != 7)
++    {
++        return;
++    }
++
++    scalar nonOrthFaceFlux = std::numeric_limits<scalar>::quiet_NaN();
++    if (laplacian.faceFluxCorrectionPtr())
++    {
++        nonOrthFaceFlux =
++            laplacian.faceFluxCorrectionPtr()->primitiveField()[i4fProbeFace];
++    }
++    const scalar incompFaceFlux =
++        tIncompFlux().primitiveField()[i4fProbeFace];
++
++    for (label cellNumber = 0; cellNumber < 2; ++cellNumber)
++    {
++        const label celli = cellNumber == 0 ? i4fProbeCellA : i4fProbeCellB;
++        const label globalCell = cellNumber == 0 ? 31926 : 62270;
++        i4fProbeSelected
++            << phase << ',' << amplitude << ',' << sign << ',' << sweep << ','
++            << runTime.timeName() << ',' << runTime.deltaTValue() << ','
++            << globalCell << ',' << celli << ','
++            << p_rgh.primitiveField()[celli] << ','
++            << i4fProbeV[celli] << ','
++            << i4fProbeVNormalized[celli] << ','
++            << p_rghEqnComp1().source()[celli] << ','
++            << p_rghEqnComp2().source()[celli] << ','
++            << incomp.source()[celli] << ','
++            << laplacian.source()[celli] << ','
++            << comp1Residual[celli] << ','
++            << comp2Residual[celli] << ','
++            << incompResidual[celli] << ','
++            << fullResidual[celli] << ','
++            << (performance ? performance->nIterations() : -1) << ','
++            << (performance ? performance->initialResidual() : -1) << ','
++            << (performance ? performance->finalResidual() : -1) << ','
++            << incomp.source()[celli] << ','
++            << nonOrthFaceFlux << ','
++            << incompFaceFlux << '\n';
++    }
++    Info<< "I4F_FROZEN_PRESSURE_MATRIX_RESIDUAL"
++        << " phase=" << phase
++        << " amplitude_Pa=" << amplitude
++        << " sign=" << sign
++        << " sweep=" << sweep
++        << " comp1_max_abs_m3_s=" << comp1Max
++        << " comp2_max_abs_m3_s=" << comp2Max
++        << " incomp_max_abs_m3_s=" << incompMax
++        << " full_max_abs_m3_s=" << fullMax
++        << " linear_iterations=" << (performance ? performance->nIterations() : -1)
++        << " linear_initial_normalized_residual="
++        << (performance ? performance->initialResidual() : -1)
++        << " linear_final_normalized_residual="
++        << (performance ? performance->finalResidual() : -1)
++        << " residual_dimensions=" << full.dimensions()
++        << " global_cell_rows=31926,62270"
++        << " face_global_zero_based=136938"
++        << nl;
++};
++
++// Log the post-original-solve state and original pressure-equation defects.
++fvScalarMatrix i4fProbeOriginalLap(fvm::laplacian(rAUf, p_rgh));
++fvScalarMatrix i4fProbeOriginalFull
++(
++    p_rghEqnComp1() + p_rghEqnComp2() + p_rghEqnIncomp
++);
++i4fProbeLogPressureRows
++(
++    "original_solved_pre_floor",
++    0,
++    0,
++    0,
++    p_rghEqnIncomp,
++    i4fProbeOriginalLap,
++    i4fProbeOriginalFull,
++    nullptr
++);
++
++scalarField i4fProbePlus;
++scalarField i4fProbeMinus;
++scalarField i4fProbeAmplitude1Response;
++scalarField i4fProbeAmplitude10Response;
++label i4fHeldMismatchLocal = 0;
++
++auto i4fProbeVolumeNorms =
++[&]
++(const scalarField& plus, const scalarField& minus, const scalar amplitude)
++{
++    scalar localInputSquared = 0;
++    scalar localOutputSquared = 0;
++    scalar localSignedDot = 0;
++    scalarField centered(plus.size(), Zero);
++    forAll(centered, celli)
++    {
++        centered[celli] =
++            0.5*(plus[celli] - minus[celli])/amplitude;
++        const scalar volume = mesh.V()[celli];
++        const scalar v = i4fProbeVNormalized[celli];
++        localInputSquared += volume*sqr(v);
++        localOutputSquared += volume*sqr(centered[celli]);
++        localSignedDot += volume*centered[celli]*v;
++    }
++    reduce(localInputSquared, sumOp<scalar>());
++    reduce(localOutputSquared, sumOp<scalar>());
++    reduce(localSignedDot, sumOp<scalar>());
++    const scalar gain =
++        Foam::sqrt(localOutputSquared/max(localInputSquared, VSMALL));
++    const scalar alignment =
++        localSignedDot
++       /Foam::sqrt(max(localInputSquared*localOutputSquared, VSMALL));
++    const scalar projection =
++        localSignedDot/max(localInputSquared, VSMALL);
++    return std::tuple<scalar, scalar, scalar, scalarField>
++    (
++        gain,
++        alignment,
++        projection,
++        centered
++    );
++};
++
++auto i4fProbeApplyMap =
++[&]
++(
++    const scalarField& input,
++    const std::string& phase,
++    const scalar amplitude,
++    const label sign,
++    const label sweep
++)
++{
++    p_rgh = i4fProbeBasePrgh;
++    p_rgh.primitiveFieldRef() = input;
++    // The fixedFluxPressure gradients were evaluated by original
++    // constrainPressure. Re-evaluate patch values using those retained
++    // gradients; coupled processor values are then exchanged live by the solve.
++    p_rgh.correctBoundaryConditions();
++
++    fvScalarMatrix laplacian(fvm::laplacian(rAUf, p_rgh));
++    fvScalarMatrix incomp(fvc::div(phiHbyA) - fvm::laplacian(rAUf, p_rgh));
++    const std::uint64_t coefficientsHash =
++        i4fProbeHashMatrixCoefficients(incomp);
++    if (coefficientsHash != i4fOriginalIncompCoefficientHash)
++    {
++        ++i4fHeldMismatchLocal;
++    }
++    fvScalarMatrix full(i4fFrozenComp1 + i4fFrozenComp2 + incomp);
++    dictionary i4fTightMapSolverControls
++    (
++        mesh.solverDict(p_rgh.select(pimple.finalInnerIter()))
++    );
++    i4fTightMapSolverControls.set("tolerance", scalar(1e-14));
++    i4fTightMapSolverControls.set("relTol", scalar(0));
++    i4fTightMapSolverControls.set("maxIter", label(1000));
++    i4fTightMapSolverControls.set("log", label(1));
++    if
++    (
++        phase == "baseline_iteration"
++     && sweep == 1
++     && Pstream::master()
++    )
++    {
++        Info<< "I4F_FROZEN_PRESSURE_MAP_SOLVER_CONTROLS"
++            << " selected_dictionary="
++            << p_rgh.select(pimple.finalInnerIter())
++            << " solver=GAMG"
++            << " tolerance=1e-14 relTol=0 maxIter=1000 log=1"
++            << " physical_fvSolution_unchanged=true"
++            << nl;
++    }
++    const solverPerformance performance =
++        full.solve(i4fTightMapSolverControls);
++
++    const scalarField solvedPrgh(p_rgh.primitiveField());
++    const std::string prefix
++    (
++        phase + "_amp" + std::to_string(static_cast<label>(amplitude))
++      + "_sign" + std::to_string(sign)
++      + "_sweep" + std::to_string(sweep)
++    );
++    i4fProbeWriteSweepValues(prefix + "_input_p_rgh", "internal", input);
++    i4fProbeWriteSweepValues(prefix + "_p_rgh", "internal", solvedPrgh);
++    i4fProbeWriteSweepValues
++    (
++        prefix + "_pEqnIncomp_source",
++        "internal",
++        incomp.source()
++    );
++    i4fProbeWriteSweepValues
++    (
++        prefix + "_laplacian_source",
++        "internal",
++        laplacian.source()
++    );
++    i4fProbeLogPressureRows
++    (
++        phase,
++        amplitude,
++        sign,
++        sweep,
++        incomp,
++        laplacian,
++        full,
++        &performance
++    );
++    return solvedPrgh;
++};
++
++// First measure the unperturbed frozen iteration itself: p^(j+1)=F(p^j),
++// beginning at the original solved pressure, for eight sequential maps.
++scalarField baselineInput(i4fProbeBasePrghInternal);
++for (label sweep = 1; sweep <= 8; ++sweep)
++{
++    baselineInput = i4fProbeApplyMap
++    (
++        baselineInput,
++        "baseline_iteration",
++        0,
++        0,
++        sweep
++    );
++}
++
++// Separately estimate the one-map centered response around the identical
++// original base state. Each +/- arm receives p_base +/- a*v and is mapped
++// exactly once; these are not the eight-sweep baseline iterations above.
++for (label amplitudeIndex = 0; amplitudeIndex < 2; ++amplitudeIndex)
++{
++    const scalar amplitude = amplitudeIndex == 0 ? 1.0 : 10.0;
++    scalarField plusInput
++    (
++        i4fProbeBasePrghInternal + amplitude*i4fProbeVNormalized
++    );
++    scalarField minusInput
++    (
++        i4fProbeBasePrghInternal - amplitude*i4fProbeVNormalized
++    );
++    i4fProbePlus = i4fProbeApplyMap
++    (
++        plusInput,
++        "one_map_response",
++        amplitude,
++        +1,
++        1
++    );
++    i4fProbeMinus = i4fProbeApplyMap
++    (
++        minusInput,
++        "one_map_response",
++        amplitude,
++        -1,
++        1
++    );
++
++    auto metrics =
++        i4fProbeVolumeNorms(i4fProbePlus, i4fProbeMinus, amplitude);
++    const scalar gain = std::get<0>(metrics);
++    const scalar alignment = std::get<1>(metrics);
++    const scalar signedProjection = std::get<2>(metrics);
++    const scalarField& centeredResponse = std::get<3>(metrics);
++    if (amplitudeIndex == 0)
++    {
++        i4fProbeAmplitude1Response = centeredResponse;
++    }
++    else
++    {
++        i4fProbeAmplitude10Response = centeredResponse;
++    }
++    if (Pstream::master())
++    {
++        Info<< "I4F_FROZEN_PRESSURE_MAP_RESPONSE"
++            << " amplitude_Pa=" << amplitude
++            << " maps_per_arm=1"
++            << " volume_weighted_L2_gain=" << gain
++            << " signed_alignment_cosine=" << alignment
++            << " signed_projection_along_v=" << signedProjection
++            << " normalization=V_weighted_internal_cells"
++            << nl;
++    }
++}
++
++scalar localAmplitudeDifferenceSquared = 0;
++scalar localAmplitude1Squared = 0;
++forAll(i4fProbeAmplitude1Response, celli)
++{
++    const scalar delta =
++        i4fProbeAmplitude1Response[celli] - i4fProbeAmplitude10Response[celli];
++    localAmplitudeDifferenceSquared += mesh.V()[celli]*sqr(delta);
++    localAmplitude1Squared +=
++        mesh.V()[celli]*sqr(i4fProbeAmplitude1Response[celli]);
++}
++reduce(localAmplitudeDifferenceSquared, sumOp<scalar>());
++reduce(localAmplitude1Squared, sumOp<scalar>());
++const scalar amplitudeLinearityRelativeL2 =
++    Foam::sqrt
++    (
++        localAmplitudeDifferenceSquared
++       /max(localAmplitude1Squared, VSMALL)
++    );
++
++auto i4fProbeVerifyHeld =
++[&]
++(const std::string& name, const auto& field)
++{
++    const auto found = std::find_if
++    (
++        i4fProbeHeldHashes.begin(),
++        i4fProbeHeldHashes.end(),
++        [&name](const auto& row){ return row.first == name; }
++    );
++    if
++    (
++        found == i4fProbeHeldHashes.end()
++     || found->second != i4fProbeHashGeometric(field)
++    )
++    {
++        ++i4fHeldMismatchLocal;
++    }
++};
++i4fProbeVerifyHeld("alpha1", alpha1);
++i4fProbeVerifyHeld("alpha2", alpha2);
++i4fProbeVerifyHeld("alphaPhi1", alphaPhi1);
++i4fProbeVerifyHeld("alphaPhi2", alphaPhi2);
++i4fProbeVerifyHeld("rhoPhi", rhoPhi);
++i4fProbeVerifyHeld("T", T);
++i4fProbeVerifyHeld("T_water", mixture.thermo1().T());
++i4fProbeVerifyHeld("T_air", mixture.thermo2().T());
++i4fProbeVerifyHeld("rho", rho);
++i4fProbeVerifyHeld("rho1", rho1);
++i4fProbeVerifyHeld("rho2", rho2);
++i4fProbeVerifyHeld("psi1", psi1);
++i4fProbeVerifyHeld("psi2", psi2);
++i4fProbeVerifyHeld("U", U);
++i4fProbeVerifyHeld("phi", phi);
++i4fProbeVerifyHeld("K", K);
++i4fProbeVerifyHeld("p_absolute", p);
++tmp<volScalarField> i4fProbeUEqnAVerify(UEqn.A());
++tmp<volVectorField> i4fProbeUEqnHVerify(UEqn.H());
++i4fProbeVerifyHeld("UEqn_A", i4fProbeUEqnAVerify());
++i4fProbeVerifyHeld("UEqn_H", i4fProbeUEqnHVerify());
++i4fProbeVerifyHeld("rAU", rAU);
++i4fProbeVerifyHeld("rAUf", rAUf);
++i4fProbeVerifyHeld("HbyA", HbyA);
++i4fProbeVerifyHeld("phiHbyA", phiHbyA);
++i4fProbeVerifyHeld("phig", phig);
++i4fProbeVerifyHeld("phid1", i4fProbePhid1);
++i4fProbeVerifyHeld("phid2", i4fProbePhid2);
++i4fProbeVerifyHeld("alpha1_oldTime", alpha1.oldTime());
++i4fProbeVerifyHeld("alpha2_oldTime", alpha2.oldTime());
++i4fProbeVerifyHeld("rho_oldTime", rho.oldTime());
++i4fProbeVerifyHeld("rho1_oldTime", rho1.oldTime());
++i4fProbeVerifyHeld("rho2_oldTime", rho2.oldTime());
++i4fProbeVerifyHeld("T_oldTime", T.oldTime());
++i4fProbeVerifyHeld("U_oldTime", U.oldTime());
++i4fProbeVerifyHeld("K_oldTime", K.oldTime());
++i4fProbeVerifyHeld("p_rgh_oldTime", p_rgh.oldTime());
++i4fProbeVerifyHeld("phi_oldTime", phi.oldTime());
++if (i4fHasKTransport)
++{
++    i4fProbeVerifyHeld
++    (
++        "k_oldTime",
++        mesh.lookupObject<volScalarField>("k").oldTime()
++    );
++}
++if (i4fHasOmegaTransport)
++{
++    i4fProbeVerifyHeld
++    (
++        "omega_oldTime",
++        mesh.lookupObject<volScalarField>("omega").oldTime()
++    );
++}
++if
++(
++    i4fProbeHashMatrix(i4fFrozenComp1) != i4fComp1BeforeHash
++ || i4fProbeHashMatrix(i4fFrozenComp2) != i4fComp2BeforeHash
++ || i4fProbeHashMatrix(p_rghEqnComp1()) != i4fOriginalComp1BeforeHash
++ || i4fProbeHashMatrix(p_rghEqnComp2()) != i4fOriginalComp2BeforeHash
++ || i4fProbeHashMatrixCoefficients(p_rghEqnIncomp)
++    != i4fOriginalIncompCoefficientHash
++ || i4fProbeHashFixedFluxGradients() != i4fFixedFluxGradientBeforeHash
++)
++{
++    ++i4fHeldMismatchLocal;
++}
++label i4fHeldMismatchGlobal = i4fHeldMismatchLocal;
++reduce(i4fHeldMismatchGlobal, sumOp<label>());
++
++Info<< "I4F_FROZEN_PRESSURE_PROBE_INTEGRITY"
++    << " held_field_count=" << i4fProbeHeldHashes.size()
++    << " local_mismatches=" << i4fHeldMismatchLocal
++    << " global_mismatch_checks=" << i4fHeldMismatchGlobal
++    << " comp1_coeff_source_hash_unchanged="
++    << (i4fProbeHashMatrix(i4fFrozenComp1) == i4fComp1BeforeHash)
++    << " comp2_coeff_source_hash_unchanged="
++    << (i4fProbeHashMatrix(i4fFrozenComp2) == i4fComp2BeforeHash)
++    << " original_comp_matrices_unchanged="
++    << (
++           i4fProbeHashMatrix(p_rghEqnComp1()) == i4fOriginalComp1BeforeHash
++        && i4fProbeHashMatrix(p_rghEqnComp2()) == i4fOriginalComp2BeforeHash
++       )
++    << " fixedFluxPressure_gradient_hash_unchanged="
++    << (i4fProbeHashFixedFluxGradients() == i4fFixedFluxGradientBeforeHash)
++    << " amplitude_1_vs_10_relative_centered_response_L2="
++    << amplitudeLinearityRelativeL2
++    << nl;
++
++i4fProbeState.flush();
++i4fProbeStateIndex.flush();
++i4fProbeSweeps.flush();
++i4fProbeSweepIndex.flush();
++i4fProbeSelected.flush();
++i4fProbeState.close();
++i4fProbeStateIndex.close();
++i4fProbeSweeps.close();
++i4fProbeSweepIndex.close();
++i4fProbeSelected.close();
++
++// Restore the original solved pressure in memory before returning. No
++// OpenFOAM numeric-time write or solver continuation occurs after the probe.
++p_rgh = i4fProbeBasePrgh;
+--- /dev/null
++++ b/applications/solvers/multiphase/compressibleInterFoam/i4fFrozenWaterMechanicalMap.H
+@@ -0,0 +1,752 @@
++// Frozen-water mechanical feedback map. This is entered only after the
++// original physical PIMPLE outer-8/pressure-corrector-2 path has completed.
++// It holds alpha, water alphaPhi, common T, turbulence state, Time and
++// oldTime fixed. Phase T is re-derived by stock thermo and checked against a
++// strict per-element floating-arithmetic bound before held-field checks.
++{
++    if
++    (
++        !pimple.finalIter()
++     || i4fPimpleOuterIteration != 8
++     || i4fPressureCorrectorIndex != 2
++    )
++    {
++        FatalErrorInFunction
++            << "Mechanical map trigger is not the completed original outer-8/corrector-2 state"
++            << exit(FatalError);
++    }
++
++    const label i4fMechanicalTriggerTimeIndex = runTime.timeIndex();
++    const scalar i4fMechanicalTriggerTime = runTime.value();
++    const scalar i4fMechanicalTriggerDeltaT = runTime.deltaTValue();
++    const scalarField i4fMechanicalAlpha1AtTrigger(alpha1.primitiveField());
++    const scalarField i4fMechanicalAlpha2AtTrigger(alpha2.primitiveField());
++    const scalarField i4fMechanicalPAtTrigger(p.primitiveField());
++    const vectorField i4fMechanicalUAtTrigger(U.primitiveField());
++    const scalarField i4fMechanicalRho1AtTrigger(rho1.primitiveField());
++    const scalarField i4fMechanicalRho2AtTrigger(rho2.primitiveField());
++    const scalarField i4fMechanicalTAtTrigger(T.primitiveField());
++    volScalarField i4fMechanicalTWaterAtTrigger
++    (
++        IOobject
++        (
++            "i4fMechanicalTWaterAtTrigger",
++            runTime.timeName(),
++            mesh,
++            IOobject::NO_READ,
++            IOobject::NO_WRITE,
++            false
++        ),
++        mixture.thermo1().T()
++    );
++    volScalarField i4fMechanicalTAirAtTrigger
++    (
++        IOobject
++        (
++            "i4fMechanicalTAirAtTrigger",
++            runTime.timeName(),
++            mesh,
++            IOobject::NO_READ,
++            IOobject::NO_WRITE,
++            false
++        ),
++        mixture.thermo2().T()
++    );
++
++    std::vector<std::pair<std::string, std::uint64_t>> i4fMechanicalHeldHashes;
++    auto i4fMechanicalHashField =
++    [&]
++    (const std::string& name, const auto& field)
++    {
++        std::uint64_t hash = 1469598103934665603ULL;
++        auto addValues =
++        [&]
++        (const auto& values)
++        {
++            forAll(values, valuei)
++            {
++                const auto* bytes = reinterpret_cast<const unsigned char*>
++                (
++                    &values[valuei]
++                );
++                for (std::size_t bytei = 0; bytei < sizeof(values[valuei]); ++bytei)
++                {
++                    hash ^= bytes[bytei];
++                    hash *= 1099511628211ULL;
++                }
++            }
++        };
++        addValues(field.primitiveField());
++        forAll(field.boundaryField(), patchi)
++        {
++            addValues(field.boundaryField()[patchi]);
++        }
++        return hash;
++    };
++
++    const std::uint64_t i4fMechanicalCommonTHashAtTrigger =
++        i4fMechanicalHashField("T_common", T);
++    const scalar i4fMechanicalPhaseTBoundEpsilonUnits = 128.0;
++    const scalar i4fMechanicalMachineEpsilon =
++        std::numeric_limits<scalar>::epsilon();
++    scalar i4fMechanicalPhaseTMaxScaledEpsilonUnits = 0;
++    label i4fMechanicalPhaseTAssessmentCount = 0;
++    label i4fMechanicalCommonTHashMismatchCount = 0;
++
++    auto i4fMechanicalWritePhaseSnapshot =
++    [&]
++    (
++        const std::string& stage,
++        const std::string& fieldName,
++        const volScalarField& field
++    )
++    {
++        std::ostringstream path;
++        path
++            << "i4f_frozen_water_mechanical/phaseT_"
++            << stage << '_' << fieldName
++            << "_rank" << Pstream::myProcNo() << ".bin";
++        std::ofstream snapshot(path.str().c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
++        if (!snapshot.good())
++        {
++            FatalErrorInFunction
++                << "Could not create phase-T snapshot " << path.str()
++                << exit(FatalError);
++        }
++
++        const char magic[16] =
++        {
++            'I', '4', 'F', 'P', 'H', 'A', 'S', 'E', 'T', 'V', '1',
++            '\0', '\0', '\0', '\0', '\0'
++        };
++        const std::uint64_t nInternal =
++            static_cast<std::uint64_t>(field.primitiveField().size());
++        const std::uint64_t nPatches =
++            static_cast<std::uint64_t>(field.boundaryField().size());
++        snapshot.write(magic, sizeof(magic));
++        snapshot.write(reinterpret_cast<const char*>(&nInternal), sizeof(nInternal));
++        snapshot.write(reinterpret_cast<const char*>(&nPatches), sizeof(nPatches));
++        std::uint64_t nBoundaryValues = 0;
++        forAll(field.boundaryField(), patchi)
++        {
++            const std::uint64_t patchSize =
++                static_cast<std::uint64_t>(field.boundaryField()[patchi].size());
++            snapshot.write(reinterpret_cast<const char*>(&patchSize), sizeof(patchSize));
++            nBoundaryValues += patchSize;
++        }
++        auto writeValues =
++        [&](const auto& values)
++        {
++            forAll(values, valuei)
++            {
++                const scalar value = values[valuei];
++                snapshot.write(reinterpret_cast<const char*>(&value), sizeof(value));
++            }
++        };
++        writeValues(field.primitiveField());
++        forAll(field.boundaryField(), patchi)
++        {
++            writeValues(field.boundaryField()[patchi]);
++        }
++        snapshot.flush();
++        if (!snapshot.good())
++        {
++            FatalErrorInFunction
++                << "Incomplete phase-T snapshot " << path.str()
++                << exit(FatalError);
++        }
++        snapshot.close();
++        Pout<< "I4F_MECH_PHASE_T_SNAPSHOT"
++            << " stage=" << stage
++            << " field=" << fieldName
++            << " rank=" << Pstream::myProcNo()
++            << " internal_values=" << nInternal
++            << " boundary_patches=" << nPatches
++            << " boundary_values=" << nBoundaryValues
++            << " bytes=" << (sizeof(magic) + 2*sizeof(std::uint64_t)
++                + nPatches*sizeof(std::uint64_t)
++                + (nInternal + nBoundaryValues)*sizeof(scalar))
++            << " path=" << path.str()
++            << nl;
++    };
++
++    auto i4fMechanicalAssessPhaseT =
++    [&]
++    (
++        const label sweep,
++        const std::string& phaseName,
++        const volScalarField& current,
++        const volScalarField& trigger
++    ) -> label
++    {
++        if
++        (
++            current.primitiveField().size()
++         != trigger.primitiveField().size()
++         || current.boundaryField().size() != trigger.boundaryField().size()
++        )
++        {
++            FatalErrorInFunction
++                << "Phase-T field layout changed for " << phaseName
++                << exit(FatalError);
++        }
++
++        scalar maxInternal = 0;
++        scalar maxBoundary = 0;
++        scalar maxScaledEpsilonUnits = 0;
++        scalar sumSqVolume = 0;
++        scalar totalVolume = 0;
++        label internalOutside = 0;
++        label boundaryOutside = 0;
++        forAll(current.primitiveField(), celli)
++        {
++            const scalar reference = trigger.primitiveField()[celli];
++            const scalar delta = mag(current.primitiveField()[celli] - reference);
++            const scalar scale = max(scalar(1), mag(reference));
++            const scalar epsilonUnits = delta/(i4fMechanicalMachineEpsilon*scale);
++            maxInternal = max(maxInternal, delta);
++            maxScaledEpsilonUnits = max(maxScaledEpsilonUnits, epsilonUnits);
++            if (delta > i4fMechanicalPhaseTBoundEpsilonUnits*i4fMechanicalMachineEpsilon*scale)
++            {
++                ++internalOutside;
++            }
++            const scalar cellVolume = mesh.V()[celli];
++            sumSqVolume += sqr(delta)*cellVolume;
++            totalVolume += cellVolume;
++        }
++        forAll(current.boundaryField(), patchi)
++        {
++            if (current.boundaryField()[patchi].size() != trigger.boundaryField()[patchi].size())
++            {
++                FatalErrorInFunction
++                    << "Phase-T boundary layout changed for " << phaseName
++                    << " patch " << patchi << exit(FatalError);
++            }
++            forAll(current.boundaryField()[patchi], facei)
++            {
++                const scalar reference = trigger.boundaryField()[patchi][facei];
++                const scalar delta = mag(current.boundaryField()[patchi][facei] - reference);
++                const scalar scale = max(scalar(1), mag(reference));
++                const scalar epsilonUnits = delta/(i4fMechanicalMachineEpsilon*scale);
++                maxBoundary = max(maxBoundary, delta);
++                maxScaledEpsilonUnits = max(maxScaledEpsilonUnits, epsilonUnits);
++                if (delta > i4fMechanicalPhaseTBoundEpsilonUnits*i4fMechanicalMachineEpsilon*scale)
++                {
++                    ++boundaryOutside;
++                }
++            }
++        }
++
++        reduce(maxInternal, maxOp<scalar>());
++        reduce(maxBoundary, maxOp<scalar>());
++        reduce(maxScaledEpsilonUnits, maxOp<scalar>());
++        reduce(sumSqVolume, sumOp<scalar>());
++        reduce(totalVolume, sumOp<scalar>());
++        reduce(internalOutside, sumOp<label>());
++        reduce(boundaryOutside, sumOp<label>());
++        i4fMechanicalPhaseTMaxScaledEpsilonUnits = max
++        (
++            i4fMechanicalPhaseTMaxScaledEpsilonUnits,
++            maxScaledEpsilonUnits
++        );
++        ++i4fMechanicalPhaseTAssessmentCount;
++        const scalar rmsVolume =
++            totalVolume > VSMALL ? Foam::sqrt(sumSqVolume/totalVolume) : 0;
++        if (Pstream::master())
++        {
++            Info<< "I4F_MECH_PHASE_T_DELTA"
++                << " sweep=" << sweep
++                << " phase=" << phaseName
++                << " internal_max_abs_K=" << maxInternal
++                << " internal_volume_weighted_rms_K=" << rmsVolume
++                << " boundary_max_abs_K=" << maxBoundary
++                << " max_scaled_epsilon_units=" << maxScaledEpsilonUnits
++                << " bound_scaled_epsilon_units=" << i4fMechanicalPhaseTBoundEpsilonUnits
++                << " out_of_bound_internal_cells=" << internalOutside
++                << " out_of_bound_boundary_values=" << boundaryOutside
++                << nl << endl;
++        }
++        label totalOutside = internalOutside + boundaryOutside;
++        return totalOutside;
++    };
++
++    auto i4fMechanicalRecordPhaseTDelta =
++    [&](const label sweep)
++    {
++        const label waterOutside = i4fMechanicalAssessPhaseT
++        (
++            sweep, "water_thermo1", mixture.thermo1().T(),
++            i4fMechanicalTWaterAtTrigger
++        );
++        const label airOutside = i4fMechanicalAssessPhaseT
++        (
++            sweep, "air_thermo2", mixture.thermo2().T(),
++            i4fMechanicalTAirAtTrigger
++        );
++        label commonHashMismatch =
++            i4fMechanicalHashField("T_common", T)
++         != i4fMechanicalCommonTHashAtTrigger;
++        reduce(commonHashMismatch, sumOp<label>());
++        i4fMechanicalCommonTHashMismatchCount += commonHashMismatch;
++
++        if (sweep == 1 || waterOutside || airOutside || commonHashMismatch)
++        {
++            const std::string stage =
++                sweep == 1
++              ? "sweep1_after_refresh"
++              : "sweep" + std::to_string(sweep) + "_violation_after_refresh";
++            i4fMechanicalWritePhaseSnapshot(stage, "T_common", T);
++            i4fMechanicalWritePhaseSnapshot
++            (
++                stage, "T_water_thermo1", mixture.thermo1().T()
++            );
++            i4fMechanicalWritePhaseSnapshot
++            (
++                stage, "T_air_thermo2", mixture.thermo2().T()
++            );
++        }
++        if (commonHashMismatch)
++        {
++            FatalErrorInFunction
++                << "Shared common T changed during frozen mechanical map"
++                << exit(FatalError);
++        }
++        if (waterOutside || airOutside)
++        {
++            FatalErrorInFunction
++                << "Phase-T rederivation exceeded the predeclared 128-epsilon bound; "
++                   "trigger and current phase arrays were saved before abort"
++                << " water_outside=" << waterOutside
++                << " air_outside=" << airOutside
++                << exit(FatalError);
++        }
++    };
++
++    auto i4fMechanicalCaptureHeld =
++    [&](const label sweep, const bool captureBaseline)
++    {
++        std::vector<std::pair<std::string, std::uint64_t>> current;
++        auto capture =
++        [&](const std::string& name, const auto& field)
++        {
++            const std::uint64_t value = i4fMechanicalHashField(name, field);
++            current.emplace_back(name, value);
++        };
++        capture("alpha1", alpha1);
++        capture("alpha2", alpha2);
++        capture("alphaPhi1_water", alphaPhi1);
++        capture("T_common", T);
++        capture("T_water_thermo1", mixture.thermo1().T());
++        capture("T_air_thermo2", mixture.thermo2().T());
++        capture("nut", mesh.lookupObject<volScalarField>("nut"));
++        capture("alphat", mesh.lookupObject<volScalarField>("alphat"));
++        if (i4fHasKTransport)
++        {
++            capture("k", mesh.lookupObject<volScalarField>("k"));
++        }
++        if (i4fHasOmegaTransport)
++        {
++            capture("omega", mesh.lookupObject<volScalarField>("omega"));
++        }
++        capture("alpha1_oldTime", alpha1.oldTime());
++        capture("alpha2_oldTime", alpha2.oldTime());
++        capture("rho_oldTime", rho.oldTime());
++        capture("rho1_oldTime", rho1.oldTime());
++        capture("rho2_oldTime", rho2.oldTime());
++        capture("U_oldTime", U.oldTime());
++        capture("T_oldTime", T.oldTime());
++        capture("K_oldTime", K.oldTime());
++        capture("p_rgh_oldTime", p_rgh.oldTime());
++        capture("phi_oldTime", phi.oldTime());
++        if (i4fHasKTransport)
++        {
++            capture("k_oldTime", mesh.lookupObject<volScalarField>("k").oldTime());
++        }
++        if (i4fHasOmegaTransport)
++        {
++            capture("omega_oldTime", mesh.lookupObject<volScalarField>("omega").oldTime());
++        }
++
++        label mismatchLocal = 0;
++        if (captureBaseline)
++        {
++            i4fMechanicalHeldHashes = current;
++        }
++        else
++        {
++            if (current.size() != i4fMechanicalHeldHashes.size())
++            {
++                ++mismatchLocal;
++            }
++            else
++            {
++                for (std::size_t i = 0; i < current.size(); ++i)
++                {
++                    const bool phaseTRederivation
++                    (
++                        current[i].first == i4fMechanicalHeldHashes[i].first
++                     &&
++                        (
++                            current[i].first == "T_water_thermo1"
++                         || current[i].first == "T_air_thermo2"
++                        )
++                    );
++                    if
++                    (
++                        current[i].first != i4fMechanicalHeldHashes[i].first
++                     ||
++                        (
++                            !phaseTRederivation
++                         && current[i].second != i4fMechanicalHeldHashes[i].second
++                        )
++                    )
++                    {
++                        ++mismatchLocal;
++                    }
++                }
++            }
++        }
++        label mismatchGlobal = mismatchLocal;
++        reduce(mismatchGlobal, sumOp<label>());
++        for (const auto& row : current)
++        {
++            Pout<< "I4F_MECH_HELD_HASH"
++                << " sweep=" << sweep
++                << " baseline=" << captureBaseline
++                << " rank=" << Pstream::myProcNo()
++                << " field=" << row.first
++                << " fnv1a64=" << row.second
++                << nl;
++        }
++        Info<< "I4F_MECH_HELD_INTEGRITY"
++            << " sweep=" << sweep
++            << " held_field_count=" << current.size()
++            << " rank_local_mismatches=" << mismatchLocal
++            << " all_rank_mismatches=" << mismatchGlobal
++            << " phase_T_hash_differences_checked_numerically=true"
++            << nl << endl;
++        if (mismatchGlobal)
++        {
++            FatalErrorInFunction
++                << "A field declared frozen changed during the mechanical map"
++                << exit(FatalError);
++        }
++    };
++
++    // Every measured sweep is deliberately kept at the original final outer
++    // iteration state: pimple.corr()==8 and finalIter()==true throughout.
++    // Only the PISO/corrector counter is reset by its normal two-pass loop.
++    i4fMechanicalMapActive = true;
++    Info<< "I4F_MECH_MAP_BEGIN"
++        << " time_s=" << i4fMechanicalTriggerTime
++        << " time_index=" << i4fMechanicalTriggerTimeIndex
++        << " deltaT_s=" << i4fMechanicalTriggerDeltaT
++        << " physical_outer_iteration=" << i4fPimpleOuterIteration
++        << " physical_pressure_correctors=" << i4fPressureCorrectorIndex
++        << " diagnostic_sweeps=8"
++        << " alpha_water_held=true"
++        << " alphaPhi1_water_held=true"
++        << " common_T_held_exact=true"
++        << " phase_T_rederived_numeric_bound=true"
++        << " phase_T_bound_scaled_epsilon_units="
++        << i4fMechanicalPhaseTBoundEpsilonUnits
++        << " turbulence_correct_disabled=true"
++        << " no_time_advance=true"
++        << " no_physical_checkpoint=true"
++        << " pimple_finalIter_held_true=true"
++        << " finalSolver_selection_matches_original_outer8=true"
++        << nl << endl;
++    i4fMechanicalWritePhaseSnapshot("trigger", "T_common", T);
++    i4fMechanicalWritePhaseSnapshot
++    (
++        "trigger", "T_water_thermo1", mixture.thermo1().T()
++    );
++    i4fMechanicalWritePhaseSnapshot
++    (
++        "trigger", "T_air_thermo2", mixture.thermo2().T()
++    );
++    i4fMechanicalRecordPhaseTDelta(0);
++    i4fMechanicalCaptureHeld(0, true);
++
++    for (label i4fMechanicalSweep = 1; i4fMechanicalSweep <= 8; ++i4fMechanicalSweep)
++    {
++        i4fMechanicalMapSweep = i4fMechanicalSweep;
++        if
++        (
++            !pimple.finalIter()
++         || pimple.corr() != 8
++         || pimple.corrPISO() != 0
++         || runTime.timeIndex() != i4fMechanicalTriggerTimeIndex
++         || runTime.value() != i4fMechanicalTriggerTime
++         || runTime.deltaTValue() != i4fMechanicalTriggerDeltaT
++        )
++        {
++            FatalErrorInFunction
++                << "PIMPLE final-iteration or Time state changed during diagnostic sweep "
++                << i4fMechanicalSweep << exit(FatalError);
++        }
++
++        const scalarField pBeforeSweep(p.primitiveField());
++        const vectorField UBeforeSweep(U.primitiveField());
++        const scalarField rho1BeforeSweep(rho1.primitiveField());
++        const scalarField rho2BeforeSweep(rho2.primitiveField());
++        const scalarField dgdtBeforeSweep(dgdt.primitiveField());
++        const scalarField alpha1BeforeSweep(alpha1.primitiveField());
++        const scalarField alpha2BeforeSweep(alpha2.primitiveField());
++        const scalarField TBeforeSweep(T.primitiveField());
++
++        // Stock alpha/mixture-derived fields at the top of an outer iteration.
++        // Phase fraction and water flux remain held; air complement and mass
++        // flux follow the stock Euler formulas using the current phi/densities.
++        rho == alpha1*rho1 + alpha2*rho2;
++        surfaceScalarField i4fMechanicalRho1f
++        (
++            "i4fMechanicalRho1f", fvc::interpolate(rho1)
++        );
++        surfaceScalarField i4fMechanicalRho2f
++        (
++            "i4fMechanicalRho2f", fvc::interpolate(rho2)
++        );
++        alphaPhi2 = phi - alphaPhi1;
++        rhoPhi = alphaPhi1*(i4fMechanicalRho1f - i4fMechanicalRho2f)
++               + phi*i4fMechanicalRho2f;
++        contErr =
++        (
++            (
++                fvc::ddt(rho) + fvc::div(rhoPhi)
++              - (fvOptions(alpha1, mixture.thermo1().rho())&rho1)
++              - (fvOptions(alpha2, mixture.thermo2().rho())&rho2)
++            )()
++        );
++
++        // Match the stock source order: alpha/flux, phase flux, UEqn, then the
++        // post-TEqn thermo refresh at unchanged T before pressure correctors.
++        turbulence.correctPhasePhi();
++        fvVectorMatrix UEqn
++        (
++            fvm::ddt(rho, U) + fvm::div(rhoPhi, U)
++          - fvm::Sp(contErr, U)
++          + MRF.DDt(rho, U)
++          + turbulence.divDevRhoReff(U)
++         ==
++            fvOptions(rho, U)
++        );
++        UEqn.relax();
++        fvOptions.constrain(UEqn);
++
++        const scalarField pBeforeThermoRefresh(p_rgh.primitiveField());
++        const scalarField rho1BeforeThermoRefresh(rho1.primitiveField());
++        const scalarField rho2BeforeThermoRefresh(rho2.primitiveField());
++        const scalarField psi1BeforeThermoRefresh(psi1.primitiveField());
++        const scalarField psi2BeforeThermoRefresh(psi2.primitiveField());
++        mixture.correctThermo();
++        mixture.correct();
++        i4fMechanicalRecordPhaseTDelta(i4fMechanicalSweep);
++        scalar thermoRho1DeltaLocal = 0;
++        scalar thermoRho2DeltaLocal = 0;
++        scalar thermoPsi1DeltaLocal = 0;
++        scalar thermoPsi2DeltaLocal = 0;
++        scalar thermoPrghDeltaLocal = 0;
++        forAll(rho1, celli)
++        {
++            thermoRho1DeltaLocal = max
++            (
++                thermoRho1DeltaLocal,
++                mag(rho1[celli] - rho1BeforeThermoRefresh[celli])
++            );
++            thermoRho2DeltaLocal = max
++            (
++                thermoRho2DeltaLocal,
++                mag(rho2[celli] - rho2BeforeThermoRefresh[celli])
++            );
++            thermoPsi1DeltaLocal = max
++            (
++                thermoPsi1DeltaLocal,
++                mag(psi1[celli] - psi1BeforeThermoRefresh[celli])
++            );
++            thermoPsi2DeltaLocal = max
++            (
++                thermoPsi2DeltaLocal,
++                mag(psi2[celli] - psi2BeforeThermoRefresh[celli])
++            );
++            thermoPrghDeltaLocal = max
++            (
++                thermoPrghDeltaLocal,
++                mag(p_rgh[celli] - pBeforeThermoRefresh[celli])
++            );
++        }
++        reduce(thermoRho1DeltaLocal, maxOp<scalar>());
++        reduce(thermoRho2DeltaLocal, maxOp<scalar>());
++        reduce(thermoPsi1DeltaLocal, maxOp<scalar>());
++        reduce(thermoPsi2DeltaLocal, maxOp<scalar>());
++        reduce(thermoPrghDeltaLocal, maxOp<scalar>());
++        Info<< "I4F_MECH_THERMO_REFRESH"
++            << " sweep=" << i4fMechanicalSweep
++            << " T_held=true"
++            << " max_abs_drho1_kg_m3=" << thermoRho1DeltaLocal
++            << " max_abs_drho2_kg_m3=" << thermoRho2DeltaLocal
++            << " max_abs_dpsi1=" << thermoPsi1DeltaLocal
++            << " max_abs_dpsi2=" << thermoPsi2DeltaLocal
++            << " max_abs_dp_rgh_Pa=" << thermoPrghDeltaLocal
++            << " rhoPhi_recomputed_before_UEqn=true"
++            << " UEqn_assembled_before_thermo_refresh=true"
++            << nl << endl;
++
++        i4fPressureCorrectorIndex = 0;
++        label i4fMechanicalCorrectorCount = 0;
++        while (pimple.correct())
++        {
++            ++i4fMechanicalCorrectorCount;
++            i4fPressureCorrectorIndex = i4fMechanicalCorrectorCount;
++            if (!pimple.finalIter())
++            {
++                FatalErrorInFunction
++                    << "Diagnostic pressure sweep left original final outer state"
++                    << exit(FatalError);
++            }
++            #include "pEqn.H"
++        }
++        if (i4fMechanicalCorrectorCount != 2 || pimple.corrPISO() != 0)
++        {
++            FatalErrorInFunction
++                << "Mechanical sweep ran " << i4fMechanicalCorrectorCount
++                << " pressure correctors; expected exactly two"
++                << exit(FatalError);
++        }
++        i4fGammaRaw = dgdt;
++        if (i4fGammaOuterRelaxation != 1.0)
++        {
++            dgdt =
++                (1.0 - i4fGammaOuterRelaxation)*i4fGammaOuterEntry
++              + i4fGammaOuterRelaxation*i4fGammaRaw;
++        }
++
++        i4fMechanicalCaptureHeld(i4fMechanicalSweep, false);
++        if
++        (
++            runTime.timeIndex() != i4fMechanicalTriggerTimeIndex
++         || runTime.value() != i4fMechanicalTriggerTime
++         || runTime.deltaTValue() != i4fMechanicalTriggerDeltaT
++        )
++        {
++            FatalErrorInFunction
++                << "Physical time advanced during the frozen-water mechanical map"
++                << exit(FatalError);
++        }
++
++        scalar pMinSweepLocal = GREAT;
++        scalar pMaxSweepLocal = -GREAT;
++        scalar pDeltaLocal = 0;
++        scalar UDeltaLocal = 0;
++        scalar rho1DeltaLocal = 0;
++        scalar rho2DeltaLocal = 0;
++        scalar gammaDeltaLocal = 0;
++        scalar alpha1DeltaLocal = 0;
++        scalar alpha2DeltaLocal = 0;
++        scalar TDeltaLocal = 0;
++        forAll(p, celli)
++        {
++            pMinSweepLocal = min(pMinSweepLocal, p[celli]);
++            pMaxSweepLocal = max(pMaxSweepLocal, p[celli]);
++            pDeltaLocal = max(pDeltaLocal, mag(p[celli] - pBeforeSweep[celli]));
++            UDeltaLocal = max(UDeltaLocal, mag(U[celli] - UBeforeSweep[celli]));
++            rho1DeltaLocal = max(rho1DeltaLocal, mag(rho1[celli] - rho1BeforeSweep[celli]));
++            rho2DeltaLocal = max(rho2DeltaLocal, mag(rho2[celli] - rho2BeforeSweep[celli]));
++            gammaDeltaLocal = max(gammaDeltaLocal, mag(dgdt[celli] - dgdtBeforeSweep[celli]));
++            alpha1DeltaLocal = max(alpha1DeltaLocal, mag(alpha1[celli] - alpha1BeforeSweep[celli]));
++            alpha2DeltaLocal = max(alpha2DeltaLocal, mag(alpha2[celli] - alpha2BeforeSweep[celli]));
++            TDeltaLocal = max(TDeltaLocal, mag(T[celli] - TBeforeSweep[celli]));
++        }
++        reduce(pMinSweepLocal, minOp<scalar>());
++        reduce(pMaxSweepLocal, maxOp<scalar>());
++        reduce(pDeltaLocal, maxOp<scalar>());
++        reduce(UDeltaLocal, maxOp<scalar>());
++        reduce(rho1DeltaLocal, maxOp<scalar>());
++        reduce(rho2DeltaLocal, maxOp<scalar>());
++        reduce(gammaDeltaLocal, maxOp<scalar>());
++        reduce(alpha1DeltaLocal, maxOp<scalar>());
++        reduce(alpha2DeltaLocal, maxOp<scalar>());
++        reduce(TDeltaLocal, maxOp<scalar>());
++
++        if (Pstream::master())
++        {
++            std::ofstream summary
++            (
++                "i4f_frozen_water_mechanical/summary.csv",
++                i4fMechanicalSweep == 1 ? std::ios::out : std::ios::app
++            );
++            if (i4fMechanicalSweep == 1)
++            {
++                summary
++                    << "sweep,time_s,time_index,deltaT_s,original_outer,"
++                       "diagnostic_pressure_correctors,finalIter,"
++                       "max_abs_dp_Pa,max_abs_dU_m_s,max_abs_drho1_kg_m3,"
++                       "max_abs_drho2_kg_m3,max_abs_dGamma_s-1,"
++                       "min_p_abs_Pa,max_p_abs_Pa,max_abs_dalpha1,"
++                       "max_abs_dalpha2,max_abs_dT_K,held_hash_mismatches\n";
++            }
++            summary.precision(17);
++            summary
++                << i4fMechanicalSweep << ','
++                << runTime.value() << ','
++                << runTime.timeIndex() << ','
++                << runTime.deltaTValue() << ','
++                << pimple.corr() << ','
++                << i4fMechanicalCorrectorCount << ','
++                << pimple.finalIter() << ','
++                << pDeltaLocal << ','
++                << UDeltaLocal << ','
++                << rho1DeltaLocal << ','
++                << rho2DeltaLocal << ','
++                << gammaDeltaLocal << ','
++                << pMinSweepLocal << ','
++                << pMaxSweepLocal << ','
++                << alpha1DeltaLocal << ','
++                << alpha2DeltaLocal << ','
++                << TDeltaLocal << ",0\n";
++        }
++
++        Info<< "I4F_MECH_MAP_SWEEP"
++            << " sweep=" << i4fMechanicalSweep
++            << " time_s=" << runTime.value()
++            << " time_index=" << runTime.timeIndex()
++            << " deltaT_s=" << runTime.deltaTValue()
++            << " physical_outer_iteration=8"
++            << " pimple_corr=" << pimple.corr()
++            << " finalIter=" << pimple.finalIter()
++            << " pressure_correctors=" << i4fMechanicalCorrectorCount
++            << " max_abs_dp_Pa=" << pDeltaLocal
++            << " max_abs_dU_m_s=" << UDeltaLocal
++            << " max_abs_drho1_kg_m3=" << rho1DeltaLocal
++            << " max_abs_drho2_kg_m3=" << rho2DeltaLocal
++            << " max_abs_dGamma_s-1=" << gammaDeltaLocal
++            << " min_p_abs_Pa=" << pMinSweepLocal
++            << " max_p_abs_Pa=" << pMaxSweepLocal
++            << " max_abs_dalpha1=" << alpha1DeltaLocal
++            << " max_abs_dalpha2=" << alpha2DeltaLocal
++            << " max_abs_dT_K=" << TDeltaLocal
++            << " held_hash_mismatches=0"
++            << nl << endl;
++    }
++
++    i4fMechanicalMapActive = false;
++    Info<< "I4F_MECH_MAP_COMPLETE"
++        << " classification=diagnostic_complete_no_pressure_floor"
++        << " time_s=" << runTime.value()
++        << " time_index=" << runTime.timeIndex()
++        << " deltaT_s=" << runTime.deltaTValue()
++        << " sweeps=8"
++        << " pressure_correctors_per_sweep=2"
++        << " original_physical_checkpoint_written=false"
++        << " continuation_after_probe=false"
++        << " pimple_finalIter_held_true=true"
++        << " phase_T_numeric_assessments="
++        << i4fMechanicalPhaseTAssessmentCount
++        << " phase_T_max_scaled_epsilon_units="
++        << i4fMechanicalPhaseTMaxScaledEpsilonUnits
++        << " phase_T_bound_scaled_epsilon_units="
++        << i4fMechanicalPhaseTBoundEpsilonUnits
++        << " common_T_hash_mismatch_count="
++        << i4fMechanicalCommonTHashMismatchCount
++        << nl << endl;
++}
+--- a/applications/solvers/multiphase/compressibleInterFoam/pEqn.H
++++ b/applications/solvers/multiphase/compressibleInterFoam/pEqn.H
+@@ -162,8 +162,84 @@
+             p_rgh.select(pimple.finalInnerIter())
+         );
+ 
++        if (i4fMechanicalMapActive)
++        {
++            Pout<< "I4F_MECH_PEQN_PASS"
++                << " sweep=" << i4fMechanicalMapSweep
++                << " physical_pimple_outer=" << pimple.corr()
++                << " physical_finalIter=" << pimple.finalIter()
++                << " pressure_corrector=" << pimple.corrPISO()
++                << " finalInnerIter=" << pimple.finalInnerIter()
++                << " finalNonOrthogonalIter=" << pimple.finalNonOrthogonalIter()
++                << " selected_final_solver=" << pimple.finalInnerIter()
++                << nl;
++        }
++
+         if (pimple.finalNonOrthogonalIter())
+         {
++            if
++            (
++                i4fFrozenPressureOperatorProbe
++             && runTime.value() >= i4fFrozenPressureOperatorProbeStartTime
++             && i4fPimpleOuterIteration == 7
++             && i4fPressureCorrectorIndex == 2
++            )
++            {
++                i4fProbeOuter7PrghAtPressureSolve = p_rgh.primitiveField();
++                i4fProbeHasOuter7PrghAtPressureSolve = true;
++                Info<< "I4F_FROZEN_PRESSURE_OPERATOR_OUTER7_CAPTURED"
++                    << " time_s=" << runTime.timeName()
++                    << " time_index=" << runTime.timeIndex()
++                    << " outer_in_step=" << i4fPimpleOuterIteration
++                    << " pressure_corrector=" << i4fPressureCorrectorIndex
++                    << " stage=after_pressure_solve_before_floor_or_EOS"
++                    << nl;
++            }
++
++            if
++            (
++                i4fFrozenPressureOperatorProbe
++             && runTime.value() >= i4fFrozenPressureOperatorProbeStartTime
++             && pimple.finalIter()
++             && i4fPimpleOuterIteration == 8
++             && i4fPressureCorrectorIndex == 2
++            )
++            {
++                if
++                (
++                    !i4fProbeHasOuter7PrghAtPressureSolve
++                 || i4fProbeOuter7PrghAtPressureSolve.size()
++                    != p_rgh.primitiveField().size()
++                )
++                {
++                    FatalErrorInFunction
++                        << "Frozen pressure probe reached target without the"
++                           " same-step outer-7 pressure snapshot"
++                        << exit(FatalError);
++                }
++
++                #include "i4fFrozenPressureProbe.H"
++                Info<< "I4F_FROZEN_PRESSURE_PROBE_COMPLETE"
++                    << " time_s=" << runTime.timeName()
++                    << " time_index=" << runTime.timeIndex()
++                    << " deltaT_s=" << runTime.deltaTValue()
++                    << " outer_in_step=" << i4fPimpleOuterIteration
++                    << " pressure_corrector=" << i4fPressureCorrectorIndex
++                    << " baseline_unperturbed_maps=8"
++                    << " response_maps_per_sign_amplitude=1"
++                    << " amplitudes_Pa=1,10"
++                    << " diagnostic_map_solver=GAMG"
++                    << " diagnostic_map_tolerance=1e-14"
++                    << " diagnostic_map_relTol=0"
++                    << " diagnostic_map_maxIter=1000"
++                    << " physical_p_rgh_tolerance=1e-10"
++                    << " physical_fvSolution_unchanged=true"
++                    << " physical_checkpoint_written=false"
++                    << " continuation_after_probe=false"
++                    << nl << endl;
++                return 0;
++            }
++
+             // Read-only diagnostic: inspect absolute pressure immediately before
+             // the stock floor and preserve all original equations below.
+             static label pressureClampTracePass = 0;
+@@ -455,6 +531,61 @@
+             }
+ 
+ 
++
++            if (i4fMechanicalMapActive)
++            {
++                scalar i4fMechanicalRawPressureMinLocal = GREAT;
++                label i4fMechanicalRawPressureMinCell = -1;
++                forAll(p_rgh, celli)
++                {
++                    const scalar rawPressure =
++                        p_rgh[celli]
++                      + (alpha1[celli]*rho1[celli] + alpha2[celli]*rho2[celli])
++                       *gh[celli];
++                    if (rawPressure < i4fMechanicalRawPressureMinLocal)
++                    {
++                        i4fMechanicalRawPressureMinLocal = rawPressure;
++                        i4fMechanicalRawPressureMinCell = celli;
++                    }
++                }
++                scalar i4fMechanicalRawPressureMinGlobal =
++                    i4fMechanicalRawPressureMinLocal;
++                reduce(i4fMechanicalRawPressureMinGlobal, minOp<scalar>());
++                if (i4fMechanicalRawPressureMinGlobal < pMin.value())
++                {
++                    Pout<< "I4F_MECH_RAW_FLOOR_OWNER"
++                        << " sweep=" << i4fMechanicalMapSweep
++                        << " pimple_outer=" << pimple.corr()
++                        << " pressure_corrector=" << pimple.corrPISO()
++                        << " rank=" << Pstream::myProcNo()
++                        << " local_cell=" << i4fMechanicalRawPressureMinCell
++                        << " local_min_raw_p_abs_Pa="
++                        << i4fMechanicalRawPressureMinLocal
++                        << " p_rgh_Pa=" << p_rgh[i4fMechanicalRawPressureMinCell]
++                        << " alpha_water=" << alpha1[i4fMechanicalRawPressureMinCell]
++                        << " rho_water_kg_m3=" << rho1[i4fMechanicalRawPressureMinCell]
++                        << " alpha_air=" << alpha2[i4fMechanicalRawPressureMinCell]
++                        << " rho_air_kg_m3=" << rho2[i4fMechanicalRawPressureMinCell]
++                        << " gh_m2_s-2=" << gh[i4fMechanicalRawPressureMinCell]
++                        << " p_min_Pa=" << pMin.value()
++                        << nl;
++                    if (Pstream::master())
++                    {
++                        Info<< "I4F_MECH_MAP_CENSORED"
++                            << " classification=raw_pressure_floor_before_stock_clamp"
++                            << " sweep=" << i4fMechanicalMapSweep
++                            << " pressure_corrector=" << pimple.corrPISO()
++                            << " raw_global_min_p_abs_Pa="
++                            << i4fMechanicalRawPressureMinGlobal
++                            << " p_min_Pa=" << pMin.value()
++                            << " stock_floor_applied=false"
++                            << " physical_checkpoint_written=false"
++                            << " continuation_after_probe=false"
++                            << nl << endl;
++                    }
++                    return 0;
++                }
++            }
+ 
+             // Original solver clamp and hydrostatic reconstruction, unchanged.
+             p = max(p_rgh + (alpha1*rho1 + alpha2*rho2)*gh, pMin);

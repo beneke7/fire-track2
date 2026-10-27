@@ -1,4 +1,21 @@
-# I4F discharge: published results, 25–26 October 2026
+# I4F discharge: published results, 25–27 October 2026
+
+**27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
+isolates a sufficient feedback path at one fixed state: pressure updates settle
+below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it
+evolves, with shared temperature and transported turbulence held in both arms.
+Both source deltas were reconstructed against the published parent and all
+72 declared source hashes per arm verified. This is not a physical-time run
+or a proven remedy. Doubling physical outer iterations did not cure the late
+mismatch. A separate 5 kPa-floor sensitivity and a matched water/flux relaxation
+diagnostic are in progress; their current state belongs in live status.
+
+The [pressure residual audit](pressure-normalization-audit/pressure-audit-results.json)
+and [independent source review](pressure-normalization-audit/residual-source-and-review.json)
+explain the near-zero periodic system's misleading normalized/raw residuals;
+they do not erase the apparatus's actual coupled updates. The [0.8 m input packet](short08-cold-start-input/README.md)
+contains inspected geometry/mesh views and checked cold fields, with no candidate
+flow calculation or geometry-performance result yet.
 
 **26 October run state:** the finite-water first-step case contacted the
 pressure floor at .409998 s and saved at .410223 s. The uninterrupted

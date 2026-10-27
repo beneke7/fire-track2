@@ -1,0 +1,60 @@
+{
+  "actual_canonical_read_only_check": {
+    "atime_note": "read-only source hashing may update OS-managed atime; it is not restored",
+    "mode_unchanged": true,
+    "mtime_unchanged": true,
+    "sha256_unchanged": true,
+    "size_unchanged": true,
+    "uid_gid_unchanged": true
+  },
+  "cases": {
+    "canonical_symlink_refused": {
+      "outcome": "ValueError: symlink component is not allowed: results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+      "symlink_preserved": true,
+      "target_absent": true
+    },
+    "changed_canonical_rejected_without_mutation": {
+      "bytes_unchanged": true,
+      "mtime_unchanged": true,
+      "outcome": "RuntimeError: retained canonical copy does not match recorded SHA-256"
+    },
+    "target_parent_symlink_refused": {
+      "outcome": "ValueError: symlink component is not allowed: results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+      "outside_directory_empty": true
+    },
+    "valid_restore_and_overwrite_refusal": {
+      "historical_device_mismatch_accepted": true,
+      "overwrite_refusal": "FileExistsError: refusing to overwrite existing restore path: /tmp/i4f-restore-safety-06voaoxn/results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+      "restore": {
+        "bytes": 990398,
+        "canonical_atime_note": "canonical atime is OS-managed and is never changed by this helper",
+        "canonical_device_note": "historical manifest device is retained as provenance and is not required to match this host",
+        "canonical_path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+        "destination": "/tmp/i4f-restore-safety-06voaoxn/results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+        "duplicate_path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+        "gid": 1000,
+        "mode": 420,
+        "mtime_ns": 1700000100987654321,
+        "sha256": "1cb9b4ae1d380224be137552ab76667b6326bd4448c6e047994c0b410acf6534",
+        "status": "restored_verified",
+        "uid": 1000
+      },
+      "target_digest": "1cb9b4ae1d380224be137552ab76667b6326bd4448c6e047994c0b410acf6534",
+      "target_mtime_ns": 1700000100987654321,
+      "target_size": 990398
+    }
+  },
+  "command": ".venv/bin/python results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/test_restore_polymesh_safety.py",
+  "fixture_source": {
+    "all_restore_attempts_used_temporary_roots": true,
+    "bytes": 990398,
+    "canonical_path": "results/runs/i4f-frozen-predictor-sp-diagnostic-20261026T173557Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+    "duplicate_path": "results/runs/i4f-flush-one-pressure-corrector-retry1-20261026T103608Z/case/processors10/constant/polyMesh/sets/multiZoneCells",
+    "sha256": "1cb9b4ae1d380224be137552ab76667b6326bd4448c6e047994c0b410acf6534"
+  },
+  "helper_sha256": "ed35b22c71d88bab18eea622cf77b96664e8c8451fb8dcee34358bdc9fe65ff1",
+  "journal_sha256": "45eb857095e967ca86686c9aab214812466b1208aed9992d74b7592b1a17241e",
+  "manifest_sha256": "445534170b5c584020ed59e9a202c08269643350f87fdd48354c5e60d65a0bd6",
+  "schema": "i4f-polymesh-restore-safety-test-report/v1",
+  "status": "passed"
+}

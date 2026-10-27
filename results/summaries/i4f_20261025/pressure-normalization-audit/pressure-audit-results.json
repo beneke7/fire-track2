@@ -1,0 +1,309 @@
+{
+  "arm_pair": {
+    "binary_sha256": "e0812b08b64e21db37f2bc4bc01157df546397d44e7a9d33970ecf24b4214fbb",
+    "both_exit_zero": true,
+    "both_normal_End": {
+      "off": true,
+      "on": true
+    },
+    "both_target_reached": true,
+    "container_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "delta_t_s": 0.0001,
+    "effective_cpu_count_at_GO": 20,
+    "end_time_s": 0.0001,
+    "off_container": {
+      "corrected_terminal_classification_evidence": "analysis/off-terminal-classification-correction.json",
+      "finished_at": "2026-10-27T00:41:37.230529664Z",
+      "guard": {
+        "GO_contains_exact_id_and_startedAt": true,
+        "container_runner_ready": "PRE_GO_INPUT_HASHES_OK=1",
+        "exact_docker_id_and_startedAt_checked_before_GO": true,
+        "pause_flags_at_GO": [],
+        "user_systemd_controller_expected": true
+      },
+      "id": "dc24e3775129480302d27bb857c0b60b2904bd9b46f8c758de980c8a0fb2b2fa",
+      "preserved_original_controller_classification": "terminal_incomplete_or_solver_failure",
+      "started_at": "2026-10-27T00:41:35.855468526Z"
+    },
+    "on_container": {
+      "finished_at": "2026-10-27T00:42:21.010792227Z",
+      "guard": {
+        "GO_contains_exact_id_and_startedAt": true,
+        "container_runner_ready": "PRE_GO_INPUT_HASHES_OK=1",
+        "exact_docker_id_and_startedAt_checked_before_GO": true,
+        "pause_flags_at_GO": [],
+        "user_systemd_controller_expected": true
+      },
+      "id": "06924923fd80ccb571cf295afd1669edc4e97d63e9dd36440c1dfa04ab1f7a80",
+      "started_at": "2026-10-27T00:42:19.939462559Z"
+    },
+    "resource_admission_total_cpu_at_GO": 17.0,
+    "resource_cpu_quota_each": 1.0,
+    "single_control_difference": "i4fFullPressureAudit false versus true; all other physical/numerical inputs identical",
+    "solver_log_hashes": {
+      "off": "86604bbed0c92301eef75d89e3039aef1e7d8d47cb40c4ccc28f810f3cd41782",
+      "on": "bbe64352bbff976c06f2923c1b1fd2fa9f5beee12aa749b9d6e95316560f4989"
+    }
+  },
+  "artifact_hashes": {
+    "audit_off_log_sha256": "86604bbed0c92301eef75d89e3039aef1e7d8d47cb40c4ccc28f810f3cd41782",
+    "audit_on_log_sha256": "bbe64352bbff976c06f2923c1b1fd2fa9f5beee12aa749b9d6e95316560f4989",
+    "off_endpoint_manifest_sha256": "d6ae359dab49851be9af837ba26a21ba0e03f7844cefd1826d6ac0431ff8622e",
+    "off_terminal_correction_sha256": "e44017c216e5fa952fbd96ef99bd861f3168cf2b45c77e7ae8d21e84d88472a8",
+    "on_endpoint_manifest_sha256": "9db5bf53f8afb3c8ce2f95a0f6ff6dbc296198e3c314b591a70d342b0a554aa6"
+  },
+  "contact_evidence": {
+    "binary_qualification": "observer-compatible laminar variant; SST one-step identity verified separately; not the literal unmodified 12d8 executable",
+    "interpretation_limit": "Exploratory periodic translating-contact check only. These uniform-flow invariants do not validate acoustic waves, apparatus dynamics or formal solver gates.",
+    "n120_n240_0p1s_comparison": {
+      "air_mass_eos_error_kg_n120": -4.621411760219463e-18,
+      "air_mass_eos_error_kg_n240": -5.149960319306146e-18,
+      "alpha_translation_L1_volume_m3_n120": 4.5776882615662225e-07,
+      "alpha_translation_L1_volume_m3_n240": 2.3614946676144768e-07,
+      "max_abs_pressure_drift_Pa_n120": 1.0666553862392902e-08,
+      "max_abs_pressure_drift_Pa_n240": 1.6894773580133915e-08,
+      "max_abs_temperature_drift_K_n120": 2.7341684472048655e-11,
+      "max_abs_temperature_drift_K_n240": 4.718003765447065e-11,
+      "max_abs_velocity_drift_m_s_n120": 3.0038194154258235e-12,
+      "max_abs_velocity_drift_m_s_n240": 2.319922032256727e-12,
+      "max_saved_checkpoint_U_vector_drift_m_s_n120": 3.0038194154258235e-12,
+      "max_saved_checkpoint_U_vector_drift_m_s_n240": 5.606182185147191e-12,
+      "water_mass_eos_error_kg_n120": 1.124100812432971e-15,
+      "water_mass_eos_error_kg_n240": 9.492406860545088e-15,
+      "water_volume_error_m3_n120": 1.1250259982868252e-18,
+      "water_volume_error_m3_n240": 9.509430280256007e-18,
+      "whole_run_U_magnitude_drift_m_s_n120": 3.650413304967515e-12,
+      "whole_run_U_magnitude_drift_m_s_n240": 8.590461675339611e-12
+    },
+    "path": "results/runs/i4f-pressure-audit-normalization-20261027T0035Z/provenance/contact-paired-metrics-v2.json",
+    "sha256": "20d47ba29152aed1b2390e1b811faa38e05873694b8cce786fc261cb9033bdbc",
+    "source_binary_sha256": "e0812b08b64e21db37f2bc4bc01157df546397d44e7a9d33970ecf24b4214fbb"
+  },
+  "created_utc": "2026-10-27T00:45:31.817047+00:00",
+  "experiment_path": "results/runs/i4f-pressure-audit-normalization-20261027T0035Z/experiment.json",
+  "experiment_sha256": "a18b1f76a5fa5f3748b559fa28d17f5b538b70a9354090a8267c6b702b7b03bf",
+  "interpretation": {
+    "limits": "One time step on a 120-cell periodic uniform-velocity contact verifies this normalization interpretation and the audit observer's passivity only. It does not validate apparatus pressure cycles, discharge flow, or general pressure-solver behavior on nonuniform full-apparatus fields.",
+    "normalization_factor_limitation": "The v2512 source confirms the GAMG normalized residual divides sum-magnitude residual by normFactor, but the current GAMG log level does not emit normFactor. Ratios computed from the audit's absolute operator L1 residual are a rough estimate only; cancellation at machine precision produces pass-to-pass spread. No solver/source, tolerance or maxIter changes were made.",
+    "raw_residual_caveat": "The diagnostic's raw fvMatrix::residual L1 is about 14.82 m3/s because the periodic coupled neighbour source is counted twice in this raw path; the audit identifies an extra coupled-source L1 of the same magnitude. The corrected direct operator residual is the appropriate algebraic defect here.",
+    "statement": "All 16 GAMG solves hit 1000 iterations and retained normalized final residuals of roughly 0.067-0.453, so the configured normalized tolerance was not attained. However, the corrected integrated operator defects for the assembled full pressure equation remained at roundoff scale (max per-cell O(1e-16) m3/s; unweighted L1 O(1e-15) m3/s), while p stayed uniform within about 5e-9 Pa. This is consistent with normalization of a nearly-zero periodic pressure system, not a materially unsolved pressure field in this one-step contact case."
+  },
+  "passivity": {
+    "endpoint_fields_and_uniform_time_byte_identical": true,
+    "field_hashes": [
+      {
+        "byte_identical": true,
+        "bytes_off": 2290,
+        "bytes_on": 2290,
+        "off_sha256": "7cda207d71d019283b02d86666ba17fb6fe0f3f0dc758039271ba5552cb0bb55",
+        "on_sha256": "7cda207d71d019283b02d86666ba17fb6fe0f3f0dc758039271ba5552cb0bb55",
+        "path": "alpha.water"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 6485,
+        "bytes_on": 6485,
+        "off_sha256": "3fce6a04e389af1076cf4c84e03ad958a235d818695d4e7d5284ef5fe17ff37d",
+        "on_sha256": "3fce6a04e389af1076cf4c84e03ad958a235d818695d4e7d5284ef5fe17ff37d",
+        "path": "alphaPhi0.water"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 2282,
+        "bytes_on": 2282,
+        "off_sha256": "bad87e1b141d91d6bf9e7d5314720f2b394d1d04c8deb65db1c3ea670d2ff791",
+        "on_sha256": "bad87e1b141d91d6bf9e7d5314720f2b394d1d04c8deb65db1c3ea670d2ff791",
+        "path": "p"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 2286,
+        "bytes_on": 2286,
+        "off_sha256": "4796a92057007ed925d0af8d06969732ce35904f924e0376b1ad668ef4abd9f5",
+        "on_sha256": "4796a92057007ed925d0af8d06969732ce35904f924e0376b1ad668ef4abd9f5",
+        "path": "p_rgh"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 6453,
+        "bytes_on": 6453,
+        "off_sha256": "08476be5a2fc10c5164ba87d77a1252d348e25b970a428da01d682f82a8e42bf",
+        "on_sha256": "08476be5a2fc10c5164ba87d77a1252d348e25b970a428da01d682f82a8e42bf",
+        "path": "phi"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 2283,
+        "bytes_on": 2283,
+        "off_sha256": "a432c8ba85bb642c5a96612c81b0931f282a75be3a522a282f457fb1c8e03cde",
+        "on_sha256": "a432c8ba85bb642c5a96612c81b0931f282a75be3a522a282f457fb1c8e03cde",
+        "path": "rho"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 2280,
+        "bytes_on": 2280,
+        "off_sha256": "5928138babd01eb2f8d46e270590133332154cd842d8e59a9b2ba44f7d3982a2",
+        "on_sha256": "5928138babd01eb2f8d46e270590133332154cd842d8e59a9b2ba44f7d3982a2",
+        "path": "T"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 2284,
+        "bytes_on": 2284,
+        "off_sha256": "6057a0c0562e5077805b9ec5581a364ab313ddd06648c7b6890cb7a9102fcc2c",
+        "on_sha256": "6057a0c0562e5077805b9ec5581a364ab313ddd06648c7b6890cb7a9102fcc2c",
+        "path": "T.air"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 2286,
+        "bytes_on": 2286,
+        "off_sha256": "5b41c90aa31144611e12b60fb7db3b99ae5c6e2c77443c236713778f6143fc2e",
+        "on_sha256": "5b41c90aa31144611e12b60fb7db3b99ae5c6e2c77443c236713778f6143fc2e",
+        "path": "T.water"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 4201,
+        "bytes_on": 4201,
+        "off_sha256": "1947c8484b3cad00d95410bc09dc3f85b8d6af8b3b85de8c91511223206beb9d",
+        "on_sha256": "1947c8484b3cad00d95410bc09dc3f85b8d6af8b3b85de8c91511223206beb9d",
+        "path": "U"
+      },
+      {
+        "byte_identical": true,
+        "bytes_off": 1044,
+        "bytes_on": 1044,
+        "off_sha256": "bc88491364046a80e161dcc92311ff2858dbc0085841916e1c8fb700ae55f4aa",
+        "on_sha256": "bc88491364046a80e161dcc92311ff2858dbc0085841916e1c8fb700ae55f4aa",
+        "path": "uniform/time"
+      }
+    ]
+  },
+  "physical_contact_equilibrium": {
+    "T_initial_K": 293.15,
+    "T_max_K": 293.1500000000015,
+    "T_max_abs_deviation_from_initial_K": 1.5347723092418164e-12,
+    "T_min_K": 293.1499999999988,
+    "gas_mass_kg": 5.941908525077948e-05,
+    "mag_U_max_m_s": 10.00000000000074,
+    "mag_U_min_m_s": 9.999999999999284,
+    "minimum_raw_pressure_Pa": 99999.99999999133,
+    "p_max_Pa": 100000.0,
+    "p_max_abs_deviation_from_initial_Pa": 4.642060957849026e-09,
+    "p_min_Pa": 99999.99999999536,
+    "p_rgh_max_Pa": 100000.0,
+    "p_rgh_min_Pa": 99999.99999999536,
+    "physical_setup_note": "periodic translating finite-water/ideal-air contact, laminar, zero gravity and zero surface tension; no hardware-discharge claim",
+    "pressure_initial_Pa": 100000.0,
+    "raw_pressure_floor_contact_count": 0,
+    "velocity_initial_m_s": [
+      10.0,
+      0.0,
+      0.0
+    ],
+    "water_mass_kg": 0.04991000000000002,
+    "water_volume_m3": 4.999999999999999e-05
+  },
+  "schema": "i4f-pressure-audit-normalization-results/v1",
+  "solver_behavior": {
+    "corrected_observer_passivity": "all 16 GAMG normalized residual records and iteration counts are identical between arms",
+    "corrected_operator_defect": {
+      "definition": "corrected raw residual and direct fvMatrix operator-and-pressure evaluation, multiplied by native cell volume; full p_rgh matrix that the solver solves",
+      "max_abs_per_cell_after_m3_s_range": [
+        9.71445146547012e-17,
+        1.249000902703301e-16
+      ],
+      "max_abs_per_cell_before_m3_s_range": [
+        1.110223024625157e-16,
+        3.05311331771918e-16
+      ],
+      "max_corrected_minus_operator_identity_error_m3_s": 2.081668171172169e-16,
+      "unweighted_l1_after_m3_s_range": [
+        1.372071401807562e-15,
+        2.045984367170239e-15
+      ],
+      "unweighted_l1_before_m3_s_range": [
+        2.142735858537415e-15,
+        4.270441964458749e-15
+      ]
+    },
+    "final_residual_per_pass": [
+      0.4527009895556905,
+      0.1667940438174174,
+      0.1198924737494255,
+      0.1106197446678756,
+      0.1100243553573632,
+      0.07447807700693197,
+      0.06686007065559142,
+      0.09545458176365046,
+      0.1143162189500101,
+      0.1152395352534558,
+      0.1151684632952174,
+      0.10583349522621,
+      0.1312298315231387,
+      0.1244248924395719,
+      0.09680890877277554,
+      0.1457040584197878
+    ],
+    "initial_residual_per_pass": [
+      0.6066854371280459,
+      0.3063775835635725,
+      0.2742897314830334,
+      0.1633799912804338,
+      0.2580638752563308,
+      0.1172631538806608,
+      0.1370868888012272,
+      0.1390868760445461,
+      0.2782405249664271,
+      0.1552538168402476,
+      0.297987294212092,
+      0.1465370176517874,
+      0.2704711987945316,
+      0.1791703005821665,
+      0.3084753671115445,
+      0.2065678800996147
+    ],
+    "iterations_each": [
+      1000
+    ],
+    "normalization_factor_formula_source": "OpenFOAM v2512 lduMatrixSolver.C:235-274; GAMGSolverSolve.C:57-88 and 145-149",
+    "normalization_factor_printed_by_solver": false,
+    "normalization_factor_scale_inferred_from_operator_sum_over_normalized_residual": {
+      "post_solve_max_m3_s": 2.926215760947282e-14,
+      "post_solve_median_m3_s": 1.464222495286888e-14,
+      "post_solve_min_m3_s": 3.704259514214916e-15,
+      "pre_solve_max_m3_s": 2.607553934547173e-14,
+      "pre_solve_median_m3_s": 1.4521172319789893e-14,
+      "pre_solve_min_m3_s": 3.5318729071210145e-15,
+      "status": "rough cross-check only; not directly logged and roundoff-sensitive because the absolute residuals are near machine precision"
+    },
+    "normalized_final_residual_range": [
+      0.06686007065559142,
+      0.4527009895556905
+    ],
+    "normalized_initial_residual_range": [
+      0.1172631538806608,
+      0.6066854371280459
+    ],
+    "pressure_solve_count_per_arm": 16,
+    "raw_fvMatrix_full_residual": {
+      "extra_coupled_source_l1_unweighted_m3_s_range": [
+        14.82156510792462,
+        14.82156510792468
+      ],
+      "interpretation": "raw fvMatrix::residual includes a duplicated cyclic/coupled neighbour contribution in this implementation; it is not the physical/operator defect by itself",
+      "l1_unweighted_before_m3_s_range": [
+        14.82156510792462,
+        14.82156510792468
+      ],
+      "max_before_m3_s_range": [
+        0.3415673756393526,
+        0.3415673756393569
+      ]
+    }
+  },
+  "source_identity_path": "results/runs/i4f-pressure-audit-normalization-20261027T0035Z/provenance/source-identity.json",
+  "source_identity_sha256": "1430ed283182422ace803e903ff1068dc12eae9ed42711fe7845f4ed235f844e"
+}
