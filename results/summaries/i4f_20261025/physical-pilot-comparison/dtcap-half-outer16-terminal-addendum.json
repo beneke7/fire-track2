@@ -1,0 +1,791 @@
+{
+  "arm": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16",
+  "attempt": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/attempts/attempt-002-dtcap-half",
+  "binary_sha256": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+  "captured_utc": "2026-10-27T05:52:23.706240+00:00",
+  "container": {
+    "exit_code": 0,
+    "finished_at": "2026-10-27T05:47:02.736468355Z",
+    "id": "27cf3bd28cfe9366869a74e149bdd3974a7eab448c34915f08b5e12d8e2601c8",
+    "log_driver": "none",
+    "name": "i4f-phys-a050-o16-dt125-20261027t0400z-r002",
+    "oom_killed": false,
+    "started_at": "2026-10-27T04:38:33.788407218Z",
+    "status": "exited"
+  },
+  "control_and_runtime_hashes": [
+    {
+      "bytes": 9090,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/attempts/attempt-002-dtcap-half/launch-manifest.json",
+      "sha256": "8429d184ecfdac8f1eb0f645f91fe17061a01b3dd0c479680ba6ae8e6eb2bc97"
+    },
+    {
+      "bytes": 13553,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/attempts/attempt-002-dtcap-half/guardian-status.json",
+      "sha256": "4fa4fd891f9c6f11c06e6b3d132c4e9b441a79b01c2bdd2ceb48ef0b379ecdbe"
+    },
+    {
+      "bytes": 934,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/system/controlDict",
+      "sha256": "04937e32d9147d781f70c2357e6025ef21c343624ff074f92dfe800a0ecb089e"
+    },
+    {
+      "bytes": 1921,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/system/fvSolution",
+      "sha256": "c241a2d93c2e22518b61bdc9b033ff959c493c925a96bed33fed364d27bf0ba9"
+    },
+    {
+      "bytes": 1405,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/system/fvSchemes",
+      "sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e"
+    },
+    {
+      "bytes": 975,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/system/finalStepCheckpoint",
+      "sha256": "92b967045a8fa693bfef82e9f716f6bc647835babfb5800aca79725b57afc9b2"
+    },
+    {
+      "bytes": 1104,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/constant/thermophysicalProperties.air",
+      "sha256": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab"
+    },
+    {
+      "bytes": 1240,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/constant/thermophysicalProperties.water",
+      "sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197"
+    },
+    {
+      "bytes": 869352,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/attempts/attempt-002-dtcap-half/step_health.csv",
+      "sha256": "4ec4dca32cc84dece9b86ed9d556b2d78f5c51a2319624534da5bff40dabd662"
+    }
+  ],
+  "guard": {
+    "branch_status": "normal_End_complete_native10_checkpoint",
+    "completed_steps": 996,
+    "current_time_s": 0.512058798356,
+    "diagnostic_error_count": 0,
+    "last_step_health": {
+      "coldstart_age_s": 0.42128763169195566,
+      "deltaT_from_printed_times_s": 0.00012500000000004174,
+      "deltaT_logged_s": 0.000125,
+      "final_field_min_T_K": 225.80897,
+      "final_field_min_p_Pa": 15622.314,
+      "final_field_min_rho_kg_m3": 1.180578,
+      "final_min_p_cell": 5794,
+      "final_min_p_location": "4.220575 0.48025885 0.7266526",
+      "final_outer_max_abs_dT_K": 0.0,
+      "final_outer_max_abs_dU_m_s": 1.2496367,
+      "final_outer_max_abs_dalpha1": 0.00029785486,
+      "final_outer_max_abs_dp_Pa": 5698.5446,
+      "final_outer_max_abs_dphi_m3_s": 8.7415569e-05,
+      "final_outer_max_abs_drho2_kg_m3": 0.067725547,
+      "gas_boundary_flux_kg_s": 2.9028374,
+      "gas_cumulative_defect_fraction_initial": 6.40758387072044e-07,
+      "gas_cumulative_defect_kg": -2.170669383603114e-05,
+      "gas_inventory_kg": 33.121762,
+      "gas_step_defect_fraction_initial": 1.4274293100054389e-08,
+      "gas_step_defect_kg": -4.835640333394724e-07,
+      "outer_iteration": 16,
+      "penultimate_outer_max_abs_dT_K": 0.0,
+      "penultimate_outer_max_abs_dU_m_s": 0.80644634,
+      "penultimate_outer_max_abs_dalpha1": 0.00027666053,
+      "penultimate_outer_max_abs_dp_Pa": 5739.4908,
+      "penultimate_outer_max_abs_dphi_m3_s": 5.7144435e-05,
+      "penultimate_outer_max_abs_drho2_kg_m3": 0.068211318,
+      "phase_mass_pass": 31872,
+      "phi_scaled_screen_advisory_pass": null,
+      "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+      "phi_scaled_screen_threshold_m3_s": null,
+      "pressure_update_consecutive_steps": 7,
+      "pressure_update_final_to_penultimate_ratio": 0.9928658828061891,
+      "pressure_update_persistent_condition": true,
+      "pressure_update_ratio_threshold": 0.9,
+      "pressure_update_settled": true,
+      "pressure_update_stop_action": "advisory_record_only",
+      "pressure_update_stop_after_steps": 3,
+      "pressure_update_threshold_Pa": 100.0,
+      "pressure_update_triggered_this_step": true,
+      "raw_clip_cells_at_peak_single_pass": 2,
+      "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0025915882,
+      "raw_clipped_liquid_volume_peak_single_pass_m3": 2.5963673e-06,
+      "raw_corrector_min_pressure_Pa_this_step": 8598.4998,
+      "time_s": 0.512058798356,
+      "water_boundary_flux_kg_s": 1.0375425e-18,
+      "water_cumulative_defect_fraction_initial": 9.665297699745767e-07,
+      "water_cumulative_defect_kg": -0.0030909702950339124,
+      "water_inventory_kg": 3198.0053,
+      "water_step_defect_fraction_initial": 7.4566007723626e-09,
+      "water_step_defect_kg": 2.3846271687943954e-05
+    },
+    "parser_error_count": 0,
+    "status": "solver_terminal",
+    "terminal_capture": null,
+    "thermo_envelope_error_count": 0,
+    "write_now_reason": "raw pressure update contacted the configured 10 kPa floor"
+  },
+  "guard_manifest_sha256": "4fa4fd891f9c6f11c06e6b3d132c4e9b441a79b01c2bdd2ceb48ef0b379ecdbe",
+  "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+  "latest_apparatus_outputs": {
+    "seatFluxA1": {
+      "header": "Time          \tArea\tsum(alphaPhi0.water)",
+      "path": "seatFluxA1/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700857244,
+        0.611646026
+      ]
+    },
+    "seatFluxA2": {
+      "header": "Time          \tArea\tsum(alphaPhi0.water)",
+      "path": "seatFluxA2/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700877114,
+        0.609310882
+      ]
+    },
+    "seatFluxB1": {
+      "header": "Time          \tArea\tsum(alphaPhi0.water)",
+      "path": "seatFluxB1/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700857253,
+        0.611698711
+      ]
+    },
+    "seatFluxB2": {
+      "header": "Time          \tArea\tsum(alphaPhi0.water)",
+      "path": "seatFluxB2/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700877118,
+        0.609316212
+      ]
+    },
+    "seatPressureA1": {
+      "header": "Time          \tArea\tareaAverage(p)\tareaAverage(p_rgh)",
+      "path": "seatPressureA1/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700857244,
+        122904.381,
+        127800.61
+      ]
+    },
+    "seatPressureA2": {
+      "header": "Time          \tArea\tareaAverage(p)\tareaAverage(p_rgh)",
+      "path": "seatPressureA2/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700877114,
+        129665.229,
+        134561.423
+      ]
+    },
+    "seatPressureB1": {
+      "header": "Time          \tArea\tareaAverage(p)\tareaAverage(p_rgh)",
+      "path": "seatPressureB1/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700857253,
+        122762.295,
+        127658.524
+      ]
+    },
+    "seatPressureB2": {
+      "header": "Time          \tArea\tareaAverage(p)\tareaAverage(p_rgh)",
+      "path": "seatPressureB2/0.390705595007/surfaceFieldValue.dat",
+      "values": [
+        0.512058798356,
+        0.0700877118,
+        129621.982,
+        134518.176
+      ]
+    },
+    "tankAWaterVolume": {
+      "header": "Time          \tvolIntegrate(alpha.water)",
+      "path": "tankAWaterVolume/0.390705595007/volFieldValue.dat",
+      "values": [
+        0.512058798356,
+        1.03285216
+      ]
+    },
+    "tankBWaterVolume": {
+      "header": "Time          \tvolIntegrate(alpha.water)",
+      "path": "tankBWaterVolume/0.390705595007/volFieldValue.dat",
+      "values": [
+        0.512058798356,
+        1.03285417
+      ]
+    },
+    "totalWaterVolume": {
+      "header": "Time          \tvolIntegrate(alpha.water)",
+      "path": "totalWaterVolume/0.390705595007/volFieldValue.dat",
+      "values": [
+        0.512058798356,
+        3.20332926
+      ]
+    }
+  },
+  "latest_field_extrema": {
+    "T": {
+      "field": "T",
+      "max": 293.618493,
+      "max_location": [
+        4.3554398,
+        -0.693638658,
+        0.886361355
+      ],
+      "min": 225.80897,
+      "min_location": [
+        2.58978472,
+        0.764033581,
+        1.56381669
+      ],
+      "source_file": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+      "time_s": 0.512058798356
+    },
+    "alpha.water": {
+      "field": "alpha.water",
+      "max": 1.0,
+      "max_location": [
+        2.52804154,
+        0.92996211,
+        1.12317827
+      ],
+      "min": -4.56217872e-08,
+      "min_location": [
+        4.41225235,
+        -0.16115341,
+        0.963824222
+      ],
+      "source_file": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+      "time_s": 0.512058798356
+    },
+    "mag(U)": {
+      "field": "mag(U)",
+      "max": 20.3901443,
+      "max_location": [
+        4.29182754,
+        -0.790005194,
+        0.719479873
+      ],
+      "min": 0.0,
+      "min_location": [
+        3.86739156,
+        -0.337253009,
+        0.762915658
+      ],
+      "source_file": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureSpeedExtrema/0.390705595007/fieldMinMax.dat",
+      "time_s": 0.512058798356
+    },
+    "p": {
+      "field": "p",
+      "max": 498170.069,
+      "max_location": [
+        2.58843371,
+        0.56243881,
+        0.800479837
+      ],
+      "min": 15622.3143,
+      "min_location": [
+        4.22057497,
+        0.480258845,
+        0.726652604
+      ],
+      "source_file": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+      "time_s": 0.512058798356
+    },
+    "p_rgh": {
+      "field": "p_rgh",
+      "max": 506109.954,
+      "max_location": [
+        2.5668833,
+        0.20820831,
+        1.41449696
+      ],
+      "min": 22734.8278,
+      "min_location": [
+        4.22119734,
+        0.485666781,
+        0.718644591
+      ],
+      "source_file": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+      "time_s": 0.512058798356
+    },
+    "rho": {
+      "field": "rho",
+      "max": 998.381104,
+      "max_location": [
+        2.58843371,
+        0.56243881,
+        0.800479837
+      ],
+      "min": 1.18057797,
+      "min_location": [
+        4.29079431,
+        -0.782576007,
+        0.592960372
+      ],
+      "source_file": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+      "time_s": 0.512058798356
+    }
+  },
+  "manifest_sha256": "8429d184ecfdac8f1eb0f645f91fe17061a01b3dd0c479680ba6ae8e6eb2bc97",
+  "native_checkpoint_times_s": [
+    0.390705595007,
+    0.490701509212,
+    0.512058798356
+  ],
+  "postprocessing_file_count": 35,
+  "postprocessing_files": [
+    {
+      "bytes": 22927,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/ambientAnnulusAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "e51c8b380c44f84be612148ae2831e1dd038f7d211e44ab6ae4f9703f5da6281"
+    },
+    {
+      "bytes": 32036,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/ambientAnnulusWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "64929390d7eeaf3548ab3e9d8c95be33605cf0c4feae690e9787b85c5d3bac8c"
+    },
+    {
+      "bytes": 32016,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/externalAirWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "d4ca6193700ec5b7a3d0e76c82e52ba9896366daf0508463e5ddbc7b3e236c8e"
+    },
+    {
+      "bytes": 22795,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/externalSidesAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "458f02006f60b78bd0cefe1c882cd7f3f57e625af525f074648ba8777cb27589"
+    },
+    {
+      "bytes": 32035,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/externalSidesWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "4f3bf86b2052663ef400de98f46828b0a1258999871ef2fe7797118199f2868d"
+    },
+    {
+      "bytes": 23217,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/farOutletAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "95a49da7bec79cf8bcc4ae8f862e655dbf1d0a19fc08f49805552d1a1f3a9392"
+    },
+    {
+      "bytes": 33027,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/farOutletWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "25ff0c9a2f47ee398087b6c7e7383205b13d743d9ffd81f808ea95601559daa3"
+    },
+    {
+      "bytes": 15489,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/fourMouthPlaneAreaAlpha/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "f69a3ecb471e83037452ec2d3a8958ce435e87c68f30843905b4568428009ec2"
+    },
+    {
+      "bytes": 80743,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/fourMouthPlaneTotalUIntegral/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "5bffb1647d1905c21dd8d7158abddc395896b5c07bfd971cb1815e818de28f6f"
+    },
+    {
+      "bytes": 80888,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "356d04caad7dc0256c03572be76996e8cdc7ba356ffef2ee0243a1ba1c853b0c"
+    },
+    {
+      "bytes": 811726,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+      "sha256": "eb7f01d7aa76ace83c517e5c674e946884767d1e82b0d60836b70220a4e864f7"
+    },
+    {
+      "bytes": 163151,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/i4fPimpleCaptureSpeedExtrema/0.390705595007/fieldMinMax.dat",
+      "sha256": "f2f8701e23eb9f1d6b9ec2e835d02e806a8b5b25ea65b4e7aa5f5a6dd665c8d1"
+    },
+    {
+      "bytes": 32016,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/lineAInitialWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "7ef075ceb3a7c4da7b12f5a9aa9aba66f92b3c00021f41e1893c4489bb414a06"
+    },
+    {
+      "bytes": 32020,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/lineAMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "7740352ed3769a7c44ba4ea74eca822f451b3e514d7358e38f8400aff4eedd72"
+    },
+    {
+      "bytes": 32016,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/lineBInitialWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "adc49acf0cd8650ad401c736aea5572a730ee24a4c0e9b11583bfd9f69c4af29"
+    },
+    {
+      "bytes": 32020,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/lineBMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "09536454016b7e00fedd2c400b6b17a225f0bdde6d89e51311ef62d5ab2a5c8c"
+    },
+    {
+      "bytes": 46980,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatFluxA1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "9f3645b950ee5555a46ffc92937a2b511df101a28c8de9767dc37445992fcf07"
+    },
+    {
+      "bytes": 46980,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatFluxA2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "bdbfbc2655b5afec3fb6af4ce24db00b9cf0359424906f2b263ebbda8a990433"
+    },
+    {
+      "bytes": 46980,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatFluxB1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "420e34f84531b491c3bc399235638c28d4374329c88e32a29abbadb5ec0ef2c2"
+    },
+    {
+      "bytes": 46980,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatFluxB2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "9989d056c6a324add75ccc64fb5cfc44d0acc5172b9e59914dcd67c5ef3a4213"
+    },
+    {
+      "bytes": 61933,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatPressureA1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "2ee0eaf4b61f336828ddf2361f8fb97297b4aa052c0052f17c11987491ed610e"
+    },
+    {
+      "bytes": 61933,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatPressureA2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "77d51eaf7f9037232005b687b40de6eeafb02e8c82822f5502d278383db5dcc3"
+    },
+    {
+      "bytes": 61933,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatPressureB1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "cec438f35b493d17c472181fa027cbffcd720b830e34f902058ffc090127af5a"
+    },
+    {
+      "bytes": 61933,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/seatPressureB2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "62ddb991bedfefcb31013f9e1aeec902e2a5beb97b6623c6288e7613220092e8"
+    },
+    {
+      "bytes": 46982,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartFluxA1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "4bb42dc771612310aaaca22a8d046a85a9800ee01514d2a9d9e23ef973c51a05"
+    },
+    {
+      "bytes": 46982,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartFluxA2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "b500228592ab2ec7bfed7b24d54dfa993c2ad627782a117b8065c7725b303d8d"
+    },
+    {
+      "bytes": 46982,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartFluxB1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "b29805119dbffa3d4913b42572094d0a8e8c9e6ba00fae8c74f9f093f7a87779"
+    },
+    {
+      "bytes": 46982,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartFluxB2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "9d4e25f65ad6b873b9bca3900fa7f14773f85ca8d21bd76ebbda8990cdbe94f0"
+    },
+    {
+      "bytes": 61935,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartPressureA1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "75c79f910110ef15bdfe93082a493b3eacb08095e8e2981e646d088f2a59c997"
+    },
+    {
+      "bytes": 61935,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartPressureA2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "cf42abdfd9a974e8768314f3185ad9935799f957ddf8a362bb3eaae313176ad9"
+    },
+    {
+      "bytes": 61935,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartPressureB1/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "947a38c6c1fb1c2afe9958f9a4c96e90feb7e8829c1038db4c6a78983d2555dc"
+    },
+    {
+      "bytes": 61935,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/sourceStartPressureB2/0.390705595007/surfaceFieldValue.dat",
+      "sha256": "7fbb835563a3e2e9f4cb608158f7a7c315db9bb896c9a53f4f9de98814fab378"
+    },
+    {
+      "bytes": 32009,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/tankAWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "9911cb5ef7c4df45a1496c9b2cc28c6811e7152dce5d491205116f81a9fe8d10"
+    },
+    {
+      "bytes": 32009,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/tankBWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "2eead90859b4dfb267df3f1cb68ceac052d6d5ec15e2ba034682d4f751a745bd"
+    },
+    {
+      "bytes": 32003,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/postProcessing/totalWaterVolume/0.390705595007/volFieldValue.dat",
+      "sha256": "09dba66fb0aac8caaeac798dd39fe57d175ed94ff4b84ba15654c1980150100d"
+    }
+  ],
+  "preserves_prior_snapshot": "results/runs/i4f-physical-pilot-comparison-20261027T044453Z/comparison.json",
+  "prior_snapshot_sha256": "dca78430aa211e5f8260ccd36ccc1e554c7b301f4c94591192f1851a186c16ba",
+  "raw_log": {
+    "bytes": 329824375,
+    "final_time_outer_updates": [
+      {
+        "max_abs_dU_m_s": 1.1905265,
+        "max_abs_dalpha1": 0.05457787,
+        "max_abs_dp_Pa": 6584.2639,
+        "max_abs_dphi_m3_s": 0.00024484696,
+        "outer_iteration": 15921.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.91441143,
+        "max_abs_dalpha1": 0.027202899,
+        "max_abs_dp_Pa": 5542.3548,
+        "max_abs_dphi_m3_s": 6.4819985e-05,
+        "outer_iteration": 15922.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.50253076,
+        "max_abs_dalpha1": 0.013627342,
+        "max_abs_dp_Pa": 5542.3548,
+        "max_abs_dphi_m3_s": 3.5611633e-05,
+        "outer_iteration": 15923.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 1.2977054,
+        "max_abs_dalpha1": 0.0068193678,
+        "max_abs_dp_Pa": 5672.6614,
+        "max_abs_dphi_m3_s": 9.098787e-05,
+        "outer_iteration": 15924.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 1.3356748,
+        "max_abs_dalpha1": 0.0034105183,
+        "max_abs_dp_Pa": 5672.6614,
+        "max_abs_dphi_m3_s": 9.3057671e-05,
+        "outer_iteration": 15925.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.93554702,
+        "max_abs_dalpha1": 0.0017051619,
+        "max_abs_dp_Pa": 5647.9428,
+        "max_abs_dphi_m3_s": 6.6309767e-05,
+        "outer_iteration": 15926.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 1.2754395,
+        "max_abs_dalpha1": 0.00085233279,
+        "max_abs_dp_Pa": 5647.9428,
+        "max_abs_dphi_m3_s": 8.9311463e-05,
+        "outer_iteration": 15927.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.82010403,
+        "max_abs_dalpha1": 0.00042600187,
+        "max_abs_dp_Pa": 5636.1103,
+        "max_abs_dphi_m3_s": 5.7571574e-05,
+        "outer_iteration": 15928.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.78356578,
+        "max_abs_dalpha1": 0.00026706057,
+        "max_abs_dp_Pa": 5636.1103,
+        "max_abs_dphi_m3_s": 5.5488021e-05,
+        "outer_iteration": 15929.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 1.2468606,
+        "max_abs_dalpha1": 0.00029291108,
+        "max_abs_dp_Pa": 5752.1516,
+        "max_abs_dphi_m3_s": 8.7220994e-05,
+        "outer_iteration": 15930.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.8175678,
+        "max_abs_dalpha1": 0.0002792615,
+        "max_abs_dp_Pa": 5752.1516,
+        "max_abs_dphi_m3_s": 5.7266311e-05,
+        "outer_iteration": 15931.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.9275823,
+        "max_abs_dalpha1": 0.0002763356,
+        "max_abs_dp_Pa": 5683.9364,
+        "max_abs_dphi_m3_s": 6.4476082e-05,
+        "outer_iteration": 15932.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 1.2827542,
+        "max_abs_dalpha1": 0.00030629921,
+        "max_abs_dp_Pa": 5683.9364,
+        "max_abs_dphi_m3_s": 8.9733803e-05,
+        "outer_iteration": 15933.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.82872257,
+        "max_abs_dalpha1": 0.00026845124,
+        "max_abs_dp_Pa": 5739.4908,
+        "max_abs_dphi_m3_s": 5.8051923e-05,
+        "outer_iteration": 15934.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 0.80644634,
+        "max_abs_dalpha1": 0.00027666053,
+        "max_abs_dp_Pa": 5739.4908,
+        "max_abs_dphi_m3_s": 5.7144435e-05,
+        "outer_iteration": 15935.0,
+        "time_s": 0.512058798356
+      },
+      {
+        "max_abs_dU_m_s": 1.2496367,
+        "max_abs_dalpha1": 0.00029785486,
+        "max_abs_dp_Pa": 5698.5446,
+        "max_abs_dphi_m3_s": 8.7415569e-05,
+        "outer_iteration": 15936.0,
+        "time_s": 0.512058798356
+      }
+    ],
+    "final_time_phase_mass": {
+      "gas_inventory_kg": 33.121762,
+      "gas_signed_boundary_flux_kg_s": 2.9028374,
+      "pass": 31872.0,
+      "time_s": 0.512058798356,
+      "water_inventory_kg": 3198.0053,
+      "water_signed_boundary_flux_kg_s": 1.0375425e-18
+    },
+    "first_sub_10kPa_pass": {
+      "max_water_supported_T_K": 293.4357677729781,
+      "min_raw_water_pressure_Pa": 9004.671556574307,
+      "outer_iteration": "15889",
+      "pass": "31778",
+      "saturation_margin_Pa": 6626.251840893643,
+      "time_s": 0.511808798356
+    },
+    "global_raw_pressure_minimum": {
+      "max_water_supported_T_K": 293.49944,
+      "min_raw_water_pressure_Pa": 8598.4998,
+      "min_saturation_margin_Pa": 6210.7026,
+      "passes": 32,
+      "time_s": 0.512058798356
+    },
+    "last_Time_line_s": 0.512058798356,
+    "last_deltaT_line_s": 0.000125,
+    "last_thermo_state": {
+      "max_water_supported_T_K": 293.49944,
+      "min_raw_water_pressure_Pa": 8598.4998,
+      "min_saturation_margin_Pa": 6210.7026,
+      "passes": 32,
+      "time_s": 0.512058798356
+    },
+    "last_thermo_time_s": 0.512058798356,
+    "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/log.cold-coupled",
+    "sha256": "39f4b5f1b2bd621959777b3c4cafc7a8184ead43caf53772601426e0178b8075",
+    "sub_10kPa_pass_count": 23,
+    "terminal_checkpoint_requests": [
+      {
+        "deltaT_s": "0.000125",
+        "endTime_s": "0.5120588",
+        "time": "0.512058798356",
+        "value_s": "0.5120588"
+      }
+    ]
+  },
+  "schema": "i4f-physical-pilot-terminal-arm-addendum/v1",
+  "terminal_native_checkpoint": {
+    "file_count": 17,
+    "files": [
+      {
+        "bytes": 2658642,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/T",
+        "sha256": "dd50407e0dc3705e469c25685bbc5967644ffd14ba7b41da91c96586318f8343"
+      },
+      {
+        "bytes": 2658650,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/T.air",
+        "sha256": "5ba3af626a5266fe1f96ba757fb8b809b42f488c3a88aa0f3153030e3fa50b84"
+      },
+      {
+        "bytes": 2658654,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/T.water",
+        "sha256": "f456abc8ee50d6cff78ec0f1178b0506e2c9dd5ac3e9ee20e48438992b6846e9"
+      },
+      {
+        "bytes": 7938894,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/U",
+        "sha256": "d3171456f701840a95d97cae591019ce9006560bc257aad236f0c60eecb19a19"
+      },
+      {
+        "bytes": 2652298,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/alpha.water",
+        "sha256": "d49eff19d7497ec7e650184869552340b20e10378426c3a4341a8f66f337b36d"
+      },
+      {
+        "bytes": 7722877,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/alphaPhi0.water",
+        "sha256": "ee8d469a081e3eb7e833f77b4e3e994b1363fcdea43c36b00ffb6b3eddb31b58"
+      },
+      {
+        "bytes": 3207527,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/alphat",
+        "sha256": "70520715331e30ce99346e4bf17a81401bc892dd790b3fe5c7dcd6c3b40f5e09"
+      },
+      {
+        "bytes": 3203849,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/dgdt",
+        "sha256": "100a6638898a5b565b3eecaef5aa92b4be5503278c961bffa38f20541bc79fd5"
+      },
+      {
+        "bytes": 3204683,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/k",
+        "sha256": "ab567ba7c702b470b12328e437196be3892276bb90c1cc9af45d955b751915b3"
+      },
+      {
+        "bytes": 3208051,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/nut",
+        "sha256": "b1aa85254c1f5ac0a4844ea59ea942502e4f86e609f5c862c018e48312fd0891"
+      },
+      {
+        "bytes": 3206553,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/omega",
+        "sha256": "61ac08d97667d82e1875d4a82ac9cf53860dde86a4cd04ef1fe5ba8e1b850150"
+      },
+      {
+        "bytes": 3206857,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/p",
+        "sha256": "9319fa172d8371afe7b6b2be11eca0ecf743aad1720dde0023f7dea1465b6fc4"
+      },
+      {
+        "bytes": 3796238,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/p_rgh",
+        "sha256": "79b78edc7809806246c2e74280a400728d4907871a0152a1fcfc8416bf8b95c1"
+      },
+      {
+        "bytes": 7726577,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/phi",
+        "sha256": "7a935a739c9406b355da08ff7c0c06377349e81aaf739389d545d5121a802bfa"
+      },
+      {
+        "bytes": 3206851,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/rho",
+        "sha256": "0f9be76458467e59dca55aa1cba64ee610f87d292c187d1258c9e1e14d9c3280"
+      },
+      {
+        "bytes": 12004,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/uniform/functionObjects/functionObjectProperties",
+        "sha256": "4e99d8b383583bdd0b4739aa5328f225740a70208524ef1be64026522a878f24"
+      },
+      {
+        "bytes": 1064,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356/uniform/time",
+        "sha256": "7fdbf5f01db26f432bcddc5f274e40ca3d279361732da07a681eb464609f5bc8"
+      }
+    ],
+    "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.512058798356",
+    "time_s": 0.512058798356
+  }
+}

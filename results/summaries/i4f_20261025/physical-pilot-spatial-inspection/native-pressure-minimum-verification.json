@@ -1,0 +1,134 @@
+{
+  "schema": "i4f-native-pressure-minimum-verification-v1",
+  "observed_utc": "2026-10-27T05:15:33.760595+00:00",
+  "method": "Read collated processor p internal fields with repository native binary64 scalar reader; map each local minimum through cellProcAddressing; read native global C at that global ID.",
+  "source_pair": "physical-alpha-flux-relax-candidate-20261027T024711Z/physical-omega-050-outer-pair",
+  "vtk_cell_center_warning": "The earlier max difference against vtk geometric cell centers compares native C with VTK-reconstructed geometry centers and is not a p-to-C ordering/alignment test. Here local p index is paired to local cellProcAddressing, all IDs cover dense global [0,N), and native root C at that global ID reproduces the rendered minimum coordinate after float32 cast.",
+  "arms": [
+    {
+      "arm": "outer8",
+      "time_name": "0.490698039854",
+      "rank_count": 10,
+      "global_cell_count": 299214,
+      "native_minimum_p_Pa_binary64": 34026.15516461977,
+      "native_minimum_location": {
+        "processor_rank": 9,
+        "rank_local_cell_index_zero_based": 7545,
+        "global_cellProcAddressing_id_zero_based": 78287,
+        "native_C_xyz_m_binary64": [
+          4.2200059470152445,
+          0.8178923405339487,
+          0.9709145708077865
+        ]
+      },
+      "vtk_reconstruction_check": {
+        "vtk_minimum_p_Pa": 34026.15625,
+        "float32_cast_of_native_p_Pa": 34026.15625,
+        "pressure_values_match_after_float32_cast": true,
+        "vtk_location_matches_float32_cast_of_native_C_at_global_id": true,
+        "vtk_p_value_absolute_difference_Pa": 0.0010853802305064164
+      },
+      "comparison_observer_minima_Pa": {
+        "min_raw_water_pressure_Pa": 33993.93960467066,
+        "final_field_min_p_Pa": 33966.1446
+      },
+      "comparison_observer_minus_native_p_Pa": {
+        "min_raw_water_pressure_Pa": -32.215559949108865,
+        "final_field_min_p_Pa": -60.010564619769866
+      },
+      "functionobject_comparison_scope": "CSV min_raw_water_pressure and final_field_min_p are retained separately. The saved processor p agrees with the rendered p after float32 conversion; both CSV observer differences remain stage-distinct and unresolved.",
+      "processor_local_cell_counts": [
+        29657,
+        29853,
+        29853,
+        30209,
+        29921,
+        29639,
+        29678,
+        30120,
+        30156,
+        30128
+      ],
+      "input_hashes": {
+        "collated_p": {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/p",
+          "sha256": "7c7d5839a16308da4903c645d775d6d3b40ae9a2fbd055a47684c9fa83bd75f0",
+          "size_bytes": 3206857
+        },
+        "collated_cellProcAddressing": {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/constant/polyMesh/cellProcAddressing",
+          "sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+          "size_bytes": 1198298
+        },
+        "native_global_C": {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/C",
+          "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+          "size_bytes": 9123116
+        }
+      }
+    },
+    {
+      "arm": "outer16",
+      "time_name": "0.490706656519",
+      "rank_count": 10,
+      "global_cell_count": 299214,
+      "native_minimum_p_Pa_binary64": 33095.64204638731,
+      "native_minimum_location": {
+        "processor_rank": 0,
+        "rank_local_cell_index_zero_based": 4399,
+        "global_cellProcAddressing_id_zero_based": 77657,
+        "native_C_xyz_m_binary64": [
+          4.220087803507014,
+          -0.3808156806577422,
+          0.9709147146145044
+        ]
+      },
+      "vtk_reconstruction_check": {
+        "vtk_minimum_p_Pa": 33095.640625,
+        "float32_cast_of_native_p_Pa": 33095.640625,
+        "pressure_values_match_after_float32_cast": true,
+        "vtk_location_matches_float32_cast_of_native_C_at_global_id": true,
+        "vtk_p_value_absolute_difference_Pa": 0.0014213873073458672
+      },
+      "comparison_observer_minima_Pa": {
+        "min_raw_water_pressure_Pa": 33092.07737861139,
+        "final_field_min_p_Pa": 33035.5536
+      },
+      "comparison_observer_minus_native_p_Pa": {
+        "min_raw_water_pressure_Pa": -3.564667775914131,
+        "final_field_min_p_Pa": -60.08844638730807
+      },
+      "functionobject_comparison_scope": "CSV min_raw_water_pressure and final_field_min_p are retained separately. The saved processor p agrees with the rendered p after float32 conversion; both CSV observer differences remain stage-distinct and unresolved.",
+      "processor_local_cell_counts": [
+        29657,
+        29853,
+        29853,
+        30209,
+        29921,
+        29639,
+        29678,
+        30120,
+        30156,
+        30128
+      ],
+      "input_hashes": {
+        "collated_p": {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/p",
+          "sha256": "24f7de11fa3a8608c0167f7d88701a8459d1f9e99b2c2d49fd10b8e22dfac9b3",
+          "size_bytes": 3206857
+        },
+        "collated_cellProcAddressing": {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/constant/polyMesh/cellProcAddressing",
+          "sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+          "size_bytes": 1198298
+        },
+        "native_global_C": {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/C",
+          "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+          "size_bytes": 9123116
+        }
+      }
+    }
+  ],
+  "conclusion": "Saved native processor p minima agree with the rendered values after float32 conversion, and global address mapping agrees with native C. Same-time comparison CSV min_raw_water_pressure and final_field_min_p differ from native p by distinct amounts (about 32/60 Pa for outer8 and 4/60 Pa for outer16); these observer differences remain unresolved and no cause is assigned."
+}

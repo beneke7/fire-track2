@@ -1,180 +1,144 @@
 # Live project status
 
-Updated: 2026-10-27 04:45 UTC. Workstation priority: **I4F internal tank-to-nozzle discharge**.
-Aerial/Rouaix/HPC execution belongs to the separate server agent; see
-[HPC_STATUS.md](HPC_STATUS.md). Do not resume historical aerial queues here.
+Updated: 2026-10-27 06:25 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
+No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
+or hardware validation exists yet. The objective remains a publishable provisional
+hydraulic calculation with supported engineering conclusions.
 
-No complete trustworthy current discharge, accepted geometry-performance
-comparison, hardware validation or new scientific gate pass exists yet.
-The target remains a credible complete provisional trajectory and a supported
-engineering comparison of the 1.0 m and 0.8 m outlet trains.
+## Running now
 
-## Actual execution
+Both matched **cold t=0** mesh cases are advancing under their exact guards.
+They use the same executed physical candidate, joint half-weight water/flux
+updates, full predictor source, momentum predictor off, SST, finite-water EOS,
+ideal-gas air, Euler/MULES, sixteen outer iterations and maxDeltaT=125 microseconds.
+Each has ten MPI ranks/nine CPU equivalents and 32 GiB memory allowance.
 
-Two matched physical-time half-weight water/flux pilots were launched on the
-299,214-cell baseline, with ordinary temperature/turbulence evolution. The
-eight-outer arm is now terminal; the sixteen-outer arm remains running. Each
-uses ten MPI ranks/nine CPU equivalents, finite-water EOS, the same healthy
-cold-derived .390705595007 s seed, pMin=10 kPa and target .65 s. Only outer
-iteration count differs: eight versus sixteen. Existing .5/.6 s writes and
-an independent .65 s terminal checkpoint are configured; two-hour budgets
-and checkpoint grace are anchored to actual container starts.
+| Case | Exact container | Latest independently checked state |
+| --- | --- | --- |
+| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.031332 s, 258 completed steps, last pressure correction 0.0007221 Pa; 0 diagnostic and 0 parser errors. |
+| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.044957 s, 367 completed steps, last pressure correction 0.006872 Pa; 0 diagnostic and 0 parser errors. |
 
-- Eight-outer Docker `3b3d4b5c8159f8019d9860893b004b876d26714e544ed3ca8d1ced790f69e17e`,
-  StartedAt 03:35:28 UTC; saved and ended normally at .518390228794 s.
-  The diagnostic stop requested a save after water-supported intermediate raw
-  pressure crossed 10 kPa (first contact 9,608 Pa at .518046 s). Last complete
-  health record at .517875 s had final pressure update 5,082 Pa versus 4,860 Pa
-  penultimate, final minimum 15,944 Pa and cumulative water defect -.014313 kg.
-  This is renewed nonlinear nonconvergence, not a cavitation finding. Terminal
-  partial diagnostic records have three explicitly recorded completeness gaps;
-  native endpoint capture is complete. The smaller-step follow-up runs from the
-  original healthy seed, never from this censored endpoint.
-- Sixteen-outer Docker `de0cc3d2a13034485c2415a7bbf744355f37c583a381df5f5fddff90a18bc3f3`,
-  StartedAt 03:37:59 UTC. At 04:45 UTC: t=.499687 s, no raw floor contacts.
-  Last complete health record: pressure update 53.65 Pa, final minimum 29.61 kPa,
-  cumulative water defect -.001902 kg. This earlier physical time cannot be
-  compared directly with the eight-outer terminal state.
-  Guard: `outer16/attempts/attempt-007-readiness-marker-retry/guardian-status.json`.
-  Earlier no-GO attempts remain preserved. Its top-level readiness label can
-  be stale; Docker state and advancing parsed physical time are authoritative.
-- Pair root:
-  `results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/`.
-  These are exploratory continuations, not uninterrupted cold starts, an
-  adopted remedy, or a complete hardware discharge. Pressure warnings remain
-  advisory; phase/bounds/nonfinite/raw-floor/material/resource guards remain.
+Baseline StartedAt 05:56:04 UTC; corridor StartedAt 05:47:27 UTC. Each targets
+.65 physical seconds with six hours to save and another fifteen minutes hard
+limit, anchored separately to its own Docker start. These are targets, not ETA
+promises. Current early health does not predict survival through the failing region.
 
-The [physical candidate](../results/summaries/i4f_20261025/physical-alpha-flux-relaxation/README.md)
-reproduced original/default-off/enabled-weight-one fields in one fixed 12 µs
-step: 15 native fields plus uniform/time, 16 members total. Its actual enabled
-half-weight branch also completed an eight-outer smoke with bounded alpha,
-finite diagnostics and unchanged canonical inputs. Large local water residuals
-remain relevant. All declared source files were reconstructed from the public
-parent and hash-verified; no fresh executable rebuild from that packet is claimed.
+Run root: `results/runs/i4f-cold-mesh-pair-20261027T050932Z/`.
+The bounded PAUSE-aware dispatcher `i4f-coldmesh-pair-dispatcher-r002.service`
+adopts exact running identities and captures native endpoints. It uses allocated
+CPU quotas plus measured unrelated CPU use rather than a misleading MPI-process
+count; admission examples were tested. Both guards and the dispatcher survive
+agent exit. A cold-start deadline-variable scoping bug stopped attempt 001
+before GO; its scripts/hashes and terminal identity are preserved. Cold and warm
+guard startup paths were mock-executed before attempt 002. No physics input changed.
 
-The 1.0 m interface-corridor mesh is now cold-input ready at 323,682 cells,
-with baseline 48-layer source resolution and corrected branch/mouth/exterior
-zone definitions. No CFD has run on it. Runtime binding remains pending.
-The separate 0.8 m candidate remains input-only as described below.
+The same 1.0 m geometry is used on both meshes. Corridor adds 24,468 cells
+(+8.1774%), retaining 48 source layers/branch and .15 m2 gross mouth area/outlet.
+Nine configured quality criteria pass; an additional final allGeometry check is
+not claimed. Prescribed cold fields, tank/feed inventories, mapped addressing
+and roundtrip checks are recorded. Writable fields are independent; exact
+immutable mesh files share verified retained copies. This is a cold-start mesh
+sensitivity, not a matched comparison with earlier mid-trajectory restarts.
+The separate 317,814-cell 0.8 m alternative now has a modern runtime stage at
+`results/runs/i4f-short08-modern-runtime-stage-20261027T0605Z/`, with corrected
+x=4.6 m mouth diagnostics and preserved cold inventories. It remains input only;
+its nominal diagnostic windows are not conservative native-face flux measures,
+and its different mesh is not a resolution-matched accuracy comparison.
 
-Twenty effective CPUs are shared with unrelated work. The sixteen-outer arm
-and the smaller-step follow-up each have nine CPU equivalents. Follow-up
-attempt 002 passed GO after a preserved no-GO missing-log-directory failure.
-Exact Docker `27cf3bd28cfe9366869a74e149bdd3974a7eab448c34915f08b5e12d8e2601c8`
-is advancing (.397206 s at 04:45 UTC). Raw logs verify dt=.000125 s from the
-first physical increment; the previously questioned guard time was its second
-step. Its only case-input change from outer16 is maxDeltaT .00025→.000125 s.
-A common-physical-time scalar comparison and exact source-budget observer are
-being prepared in parallel; neither is a completed result. Current work is CPU-only. New bounded jobs use a 16 GiB disk
-stop reserve plus declared incremental output allowance at admission, replacing
-an agent-selected 20 GiB reserve that blocked small tests despite substantial
-free storage. Historical guards/records are unchanged. Lossless log recovery
-and exact-mesh dedup have restored several GiB; account for concurrent writers.
+## Completed results that guide the work
 
-## Findings that determine the next action
+**Iteration count and the tested timestep cap did not cure the continuation.**
+The half-weight eight-outer trial stopped at .518390 s; sixteen-outer at
+.517939 s; sixteen-outer with half maxDeltaT at .512059 s. Each saved and ended
+on the configured intermediate raw-pressure floor. Final pressure corrections
+were still about 5.7-6.1 kPa. These are numerical failures to resolve, not
+cavitation findings or complete discharge results. The maxDeltaT change did not
+halve every adaptive timestep and does not exhaust temporal refinement.
+[Common-time data and separate terminal addenda](../results/summaries/i4f_20261025/physical-pilot-comparison/).
 
-1. **A specific alternating mode is measured and damped.** At fixed .493844 s,
-   restoring water transport produces max pressure changes 827→1064 Pa;
-   successive increments have cosine −.999997 and volume-norm ratio about one.
-   Joint half-weight alpha/actual-water-flux updates reduce the pressure change
-   453→46→9.88→1.39→about .42 Pa, ending .576 Pa. Unrelaxed candidates shrink,
-   but a small late mode drifts and water continuity L1 remains near .078 kg/s.
-   This is mode damping, not full convergence. The [figure, raw tables and source](../results/summaries/i4f_20261025/alpha-flux-relaxation/README.md)
-   preserve the fixed physical time and residual normalization. All 73 declared
-   diagnostic source files and 71 physical-candidate source files were reconstructed.
-   Independent read-only review supported the bounded physical eight/sixteen
-   comparison with water-budget analysis in parallel; no scientific gate passed.
-2. **More outer iterations alone did not cure it.** Matched 8/16-outer physical
-   trials reached the stock 10 kPa floor near .528 s, with final updates around
-   1347/1351 Pa. The successful 16-outer retry's terminal authority is
-   `results/runs/i4f-cold-nouter16-advisory-20261026T2320Z/attempts/attempt-006-executable-mode-retry/guardian-status.json`.
-   Earlier top-level failed-launch records are preserved and are not its result.
-3. **The floor does not cause the earlier coupling mismatch.** Lowering only
-   pMin 10→5 kPa allowed passage beyond the previous .528 s censor, but the
-   coupled updates remained large. First new raw contact was .537268 s,
-   about 4999.99 Pa; 21 pressure-pass contacts occurred. Last fully completed
-   step had pressure updates 1293.74/1293.75 Pa and velocity update 10.74 m/s.
-   Water-supported saturation margin remained about 2.65 kPa in the declared
-   temperature envelope; no cavitation or physical acceptance is established.
-   The complete endpoint contains 15 fields plus uniform/time, while terminal
-   partial-step records have explicitly reported sequence gaps. Affected-cell
-   liquid support is not removed mass.
-4. **There are distinct locations.** The late largest-update cell is in mixed
-   water/air beside an apparatus wall, outside the valve source; adjacent cells
-   have about 9× its volume. This is roughly 2× linear size, not proof of a bad
-   mesh. The saved minimum-pressure cell instead touches a divider and wall.
-   The [localization](../results/summaries/i4f_20261025/water-pressure-feedback/localization/localization.json)
-   distinguishes these from earlier failure cells. Selected final-outer records
-   across physical steps do not establish an alternating within-step cycle.
-5. **Linear residuals require careful interpretation.** The periodic contact
-   preserves p/U/T near roundoff despite unattained normalized GAMG tolerances.
-   Direct assembled pressure defects are tiny; the raw residual observer has a
-   coupled-boundary accounting artefact in that test. This does not invalidate
-   the apparatus's real between-iteration field changes.
-   [Audit and independent source review](../results/summaries/i4f_20261025/pressure-normalization-audit/residual-source-and-review.json).
+**Bulk hydraulics agree better than the local iteration.** Near .4907 s,
+eight/sixteen-outer valve-seat water flow differs .00698%, each tank water volume
+about .446 L, despite local convergence problems. Valve-seat flow is internal
+transfer, not nozzle delivery. The snapshots differ by 8.62 microseconds.
+[Full observed-horizon plot](../results/summaries/i4f_20261025/physical-pilot-spatial-inspection/full-observed-horizon.png).
 
-## Prepared comparison and physical limits
+**The pressure minimum is beside a divider entrance.** Direct binary64 native
+reads give 34.026/33.096 kPa in nearly pure water, 3.3-3.4 mm downstream of the
+divider STL start; nearest transitional-alpha cell centres are 30-39 mm away.
+A mesh-size transition is nearby, so one snapshot does not establish cause.
+Native addressing/coordinates were verified; VTK float32 values were qualified.
+Some function-object pressure minima differ by about 60 Pa from saved native p;
+this observer-stage discrepancy remains unresolved and is recorded separately.
+[Inspected cutaways and native verification](../results/summaries/i4f_20261025/physical-pilot-spatial-inspection/).
 
-The same-geometry 1.0 m corridor case adds 8.18% cells while retaining the
-original two upstream ROI refinements (48 layers/5,376 source cells per branch).
-Its configured nine quality rows pass; optional allGeometry still reports
-7,304 concave cells. Fixed-coordinate neighbor volume ratios drop about 9.27→1.24.
-Cold tank/feed inventories match closely, domain bounds match, and ten-way
-mapping/reconstruction passed with pressure serialization differences at most
-2.33e−10 Pa. The corrected case/phase pictures were inspected by its worker.
-It is a mesh sensitivity, not the 0.8 m alternative or a flow result.
-Readiness record:
-`results/runs/i4f-uniform-interface-corridor-20261027T015002Z/pre-baffle-attempt-010-corridor-roundtrip-retry-20261027T0356Z/analysis/corridor-cold-input-readiness.json`.
+**One numerical mode is identified, but damping is not a complete remedy.**
+At fixed .493844 s, pressure increments alternate with cosine -.999997 and
+near-unit norm ratio. Joint half-weight alpha/actual-flux updates suppress that
+mode by roughly three orders of magnitude, but water continuity does not thereby
+converge. Source reconstructions and actual branch execution are preserved.
+[Fixed-state evidence](../results/summaries/i4f_20261025/alpha-flux-relaxation/).
 
-The 0.8 m candidate has 317,814 cells, generic/configured mesh checks passing,
-max skewness 3.9133, and a separate all-geometry concavity qualification.
-Cold fields and ten-way decomposition were checked; no candidate flow solver
-has run. Legacy runtime controls must be bound to the selected source before GO.
-Native initial inventory differences from the baseline are negligible, not an
-operational blocker; mesh and exterior-domain accuracy remain unmatched.
-[Input packet and inspected CAD/mesh views](../results/summaries/i4f_20261025/short08-cold-start-input/README.md).
-CAD views show provisional 4 mm divider solids; CFD currently uses zero-thickness
-paired baffles, a declared geometric difference.
+**Restart tests must preserve the timestep context.** A 12 microsecond restart
+from the .490707 s snapshot produced raw undershoots in every solver arm.
+Using the original next timestep (106.687 microseconds) produced no raw floor
+contact and closely reproduced the continuous step's scalar pressure/velocity
+updates. Observer-on versus original endpoint files were byte-identical.
+Saved rho, phase temperatures and p/p_rgh hydrostatics independently match their
+EOS relations closely; gross saved-state inconsistency is not supported.
+[Saved-state audit](../results/summaries/i4f_20261025/restart-state-compatibility/).
+The natural-step proof is private at
+`results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/arms/native-natural-dt-attempt001-20261027T0542Z/`.
+It is one-step passivity/scalar restart evidence, not full trajectory equivalence.
 
-Current hardware interpretation: two .9 m diameter tanks, 1.35 m³ water per tank,
-20–25% additional headspace, two .3 m valve branches per tank and four horizontal
-outlets. Downstream passages initially contain air; upstream feeds are wetted.
-Use 12 bar absolute provisionally, 13 bar as a separate convention sensitivity.
-The reported five seconds is discharge duration, not measured valve-opening time.
-Gas composition, valve motion and several geometry details remain unmeasured.
-The air-headspace/water model does not validate CO₂ loading, dissolved gas or foam.
-A distributed valve loss and 2% minimum-opening regularization do not resolve
-butterfly-disk geometry, actual leakage or its wake. Frozen per-run inputs govern;
-never silently substitute current assumptions into historical experiments.
+**Source-cutoff attribution needs the actual staged coefficients.** The old
+endpoint estimate of roughly 76-81% of signed water residual used later dgdt and
+approximate density. It is not an exact attribution. The default-off observer
+now captures the actual full predictor source; a singular uncapped counterfactual
+partition was rejected and replaced by a finite assembly/state-change identity.
+[Healthy native execution, source reconstruction and synthetic checks](../results/summaries/i4f_20261025/alpha-mass-budget-observer/)
+passed. In that one step the assembly-cutoff term is 94-97% of the final signed
+water residual, with exact staged accounting; this is not a causal explanation
+of the pressure instability or a retroactive validation of the old estimate.
+A bounded 1e-4/1e-5 numerical-cutoff sensitivity probe is being prepared; live
+cold-case cutoffs are unchanged. No conservation gate passes by this diagnostic.
 
-The [sealed gas pressure-volume reference](../results/summaries/i4f_20261025/sealed-gas-pressure-budget/pressure-budget.json)
-explains the cost of filling dry lines but is not an emptying-time prediction.
-The [early hydraulic comparison](../results/summaries/i4f_20261025/current-cold-hydraulics/matched-time-comparison.csv)
-is internal consistency with shared assumptions, not experimental validation.
-Restart-history, local startup energy closure and exact-parent rebuild evidence
-remain linked in the [results index](../results/summaries/i4f_20261025/README.md).
+## Provisional engineering reference and limits
 
-## Next decision and publication requirements
+The [reduced filling-network check](../results/summaries/i4f_20261025/engineering-hydraulic-scale-check/)
+uses the same provisional Cd=.7, 1 s opening and native headspace. At .4907 s,
+its per-tank seat flow is 1.166 m3/s versus CFD mean 1.202 m3/s (3.06% difference);
+water is still accumulating in initially dry lines. First modeled outlet water
+arrives around .617/.625 s. The model stops when air can reach the intake crown
+at 1.12655 s with .296 m3 remaining in the representative tank. It does not
+predict subsequent gas ingestion, complete emptying or a five-second discharge.
+Its line geometry differs from native CFD by about 2.9% in dry capacity;
+shared assumptions and a closed volume ledger are not experimental validation.
 
-- Analyze the matched physical pilots at common times, including adaptive-step
-  differences, unrelaxed candidates, phase ledgers, signed/local residuals and
-  four-nozzle observables. Smaller pressure changes alone are insufficient.
-- The offline native source-cutoff estimate has the same sign and about 81%/76%
-  of the signed residual magnitude in the separate one-step reference/half-weight
-  endpoints. Endpoint-versus-cached-source timing and approximate density prevent
-  treating this as an identity. Do not change its cutoff to manufacture acceptance.
-- Establish the complete startup/outlet trajectory, then extend the horizon as
-  required by the discharge claim. Check selected timestep, mesh and exterior
-  domain sensitivities and the effect of iteration error on engineering observables.
-- Compare matched 1.0/0.8 m inputs using per-tank pressure/inventory and four nozzle
-  mass-flow/velocity histories. Do not claim outlet uniformity from a scalar
-  valve model, or a geometry benefit from preparation/appearance alone.
+Hardware interpretation remains two .9 m tanks, 1.35 m3 water each, two .3 m
+valve branches/tank and four horizontal outlets. The current 1.0 m train has no
+added post-rise straight; downstream passages start air-filled, feeds wetted.
+Native total initial water is 3.202 m3 including about .502 m3 in feeds, not
+2.7 m3 total. Gas headspace is about .2985 m3/tank. Use 12 bar absolute
+provisionally, with the gauge convention unresolved. The reported five seconds
+is discharge duration, not valve motion. The valve loss/opening and 2% minimum
+opening are assumptions; zero-thickness CFD dividers differ from provisional
+4 mm CAD display plates. CO2 dissolution, foaming and cavitation are not validated.
 
-Completed evidence is committed in the shared repository; later local changes, if any,
-remain visible in Git. [Archive index](../results/archives/index.json) records
-reversible mesh deduplication, probe-vector compression and lossless compression
-of 1,100 old aerial intermediate fields plus recent closed internal logs. A further
-1,008 exact duplicate mesh paths have tested retained-canonical recovery maps.
-Initial, .5 s restart and 1 s endpoints
-were preserved. Restore helpers and packet hashes were checked; archive payloads
-remain local. Software checks and recovery success are not CFD acceptance.
+Next: compare the matched cold trajectories at common physical times, establish
+first outlet delivery, then extend the healthy calculation toward gas ingestion
+and full discharge. Check selected time/mesh/domain sensitivities before a
+matched 1.0/0.8 m engineering comparison. Hardware measurements remain necessary
+for claims about the built system; provisional numerical work can continue.
+
+## Storage and reproducibility
+
+New bounded jobs retain a 16 GiB free-disk reserve plus declared incremental
+output allowance. Lossless closed-log/old-field archives and exact mesh sharing
+preserve recoverable evidence. About 1.115 GiB of separately verified generated
+reconstruction caches was removed after matching retained native processor
+fields; rebuild commands are recorded. Native CFD outputs were not deleted by
+that cache operation. See the [archive index](../results/archives/index.json).
+Public packets contain compact evidence/source locks; local native meshes and
+restart fields remain prerequisites where a packet says it is not standalone.
+No new apparatus validation or aerial E0-E6 gate pass is claimed.

@@ -1,17 +1,25 @@
 # I4F discharge: published results, 25–27 October 2026
 
-**27 October next step:** the [paired damping maps](alpha-flux-relaxation/README.md)
-confirm a sign-alternating pressure mode and suppress it with joint half-weight
-water-fraction/flux updates. The [computed figure](alpha-flux-relaxation/paired-map-convergence.png)
-also shows that water continuity does not thereby converge. Source reconstruction
-was verified for all 73 declared diagnostic files. The [physical-time implementation](physical-alpha-flux-relaxation/README.md)
-has a 71-file verified source reconstruction, a one-step original/default-off/
-enabled-weight-one parity check, and an enabled half-weight branch smoke.
-The eight-outer physical pilot stopped near .518 s after renewed large
-pressure corrections and an intermediate pressure-floor contact. The sixteen-outer
-and reduced-timestep follow-up remain in progress; no complete credible discharge
-or conservation acceptance is claimed. See live status for
-actual process identities and results.
+**27 October current result:** all three half-weight continuations stopped near
+.512-.518 s; sixteen outer iterations and the tested lower maxDeltaT did not
+cure the local pressure/velocity problem. [Frozen common-time data and terminal
+addenda](physical-pilot-comparison/) show close bulk tank/valve hydraulics before
+failure. [Native cutaways](physical-pilot-spatial-inspection/) localize low
+pressure beside divider entrances, with a nearby mesh transition. Two matched
+cold-start meshes are now running to investigate that region without a
+mid-trajectory restart; see [live status](../../../docs/STATUS.md).
+
+The [hydraulic scale check](engineering-hydraulic-scale-check/) predicts first
+water delivery around .62 s under provisional inputs and explains why early
+valve transfer is not nozzle discharge. It agrees with the CFD's early valve
+flow to about 3%, with model geometry/physics qualifications. The [saved-state
+audit](restart-state-compatibility/) and natural-timestep proof distinguish
+restart compatibility from an artificial very-short-step pressure undershoot.
+The [source-budget observer](alpha-mass-budget-observer/) now reproduces the
+original solver’s natural-step fields byte-for-byte and separates the actual
+cached source terms. Its accounting identity does not establish coupled
+convergence. No complete trustworthy CFD discharge, hardware validation or
+accepted 1.0/0.8 m geometry benefit is claimed.
 
 **27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
 isolates a sufficient feedback path at one fixed state: pressure updates settle
@@ -20,8 +28,9 @@ evolves, with shared temperature and transported turbulence held in both arms.
 Both source deltas were reconstructed against the published parent and all
 72 declared source hashes per arm verified. This is not a physical-time run
 or a proven remedy. Doubling physical outer iterations did not cure the late
-mismatch. A separate 5 kPa-floor sensitivity and a matched water/flux relaxation
-diagnostic are in progress; their current state belongs in live status.
+mismatch. Later 5 kPa-floor and matched water/flux relaxation results are recorded in
+the current-result links above and live status; this packet preserves the
+earlier diagnostic capture.
 
 The [pressure residual audit](pressure-normalization-audit/pressure-audit-results.json)
 and [independent source review](pressure-normalization-audit/residual-source-and-review.json)

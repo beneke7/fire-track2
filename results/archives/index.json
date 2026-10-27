@@ -2550,6 +2550,17 @@
       "payload_root": "results/runs/i4f-closed-log-recovery-20261027T022839Z",
       "restore_helper": "results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/restore_archived_logs.py",
       "scope": "Second immutable closed-log batch. All compressed/decompressed hashes were verified; native fields and unique meshes retained."
+    },
+    {
+      "manifest_path": "results/archives/manifests/i4f-terminal-log-compression-20261027T0522Z.json",
+      "manifest_sha256": "f7d9cacc4882661f9e663a6f03357df777234ee7d3ba55d3a6d376ec2bf56130",
+      "source_file_count": 2,
+      "source_logical_bytes": 419075745,
+      "archive_bytes": 32465557,
+      "restore_helper": "results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py",
+      "restore_helper_sha256": "9ed92ab427a876a24e1cf6940a625d00c044346b848636e40b3cd870663c1076",
+      "observed_free_space_gain_bytes_at_completion": 377708544,
+      "scope": "Both terminal original physical half-weight eight/sixteen-outer logs. Exact container termination/no open FDs checked; decompressed SHA/size verified before unlink and representative metadata restore smoke passed. Live reduced-step log untouched."
     }
   ],
   "field_compressions": [
@@ -2570,6 +2581,27 @@
       "scope": "Lossless compression of terminal old aerial intermediate fields; payloads stay local and are restored using the indexed helper, with original hashes and metadata.",
       "source_file_count": 1100,
       "source_logical_bytes": 3777951845
+    },
+    {
+      "operation_id": "i4f-internal-fine-full-discharge-intermediate-fields-20261027T043401Z",
+      "manifest_path": "results/archives/manifests/i4f-internal-fine-full-discharge-intermediate-fields-20261027T043401Z.json",
+      "manifest_sha256": "9d837537a256c9e2628d66adc53c9d87fef06a8863a4b61d3971188f7e2fd002",
+      "source_file_count": 980,
+      "source_logical_bytes": 7993664556,
+      "archive_bytes": 6854481066,
+      "preserved_processor_time_directories": [
+        "0",
+        "0.080508211",
+        "0.385393470561"
+      ],
+      "preserved_case_root_time_directories": [
+        "0",
+        "0.080508211"
+      ],
+      "restore_helper": "scripts/restore_i4f_archived_field.py",
+      "restore_helper_sha256": "8cf40b6e8ee566b6326f952b8c734c5a9d152145ff3bca0b791b24c3739695ae",
+      "observed_free_space_gain_bytes_at_completion": 693866496,
+      "scope": "Lossless compression of terminal internal fine-discharge intermediate native fields only; original/start/latest-complete checkpoints, sidecars, controls, mesh and logs preserved. All source and decompressed archive hashes verified before unlink; restore smoke passed. Payloads remain local; schema retains its historical aerial name with explicit internal scope."
     }
   ],
   "vector_compressions": [
@@ -2588,6 +2620,17 @@
       "status": "complete_with_lossless_archives",
       "unique_archive_allocated_bytes": 379162624,
       "unique_archive_frame_count": 30
+    }
+  ],
+  "derived_cache_removals": [
+    {
+      "manifest_path": "results/archives/manifests/i4f-derived-reconstruction-cache-recovery-20261027T0538Z.json",
+      "manifest_sha256": "fa18cc9c684ccb8ee05dcc7e5f92f40b51a68abd9d9ccf6cd693a4d2430704c6",
+      "observed_free_space_gain_bytes": 1197477888,
+      "deleted_scope": "Only reconstructed global time directories for two terminal analysis clones at 1.2e-05 and 2.64e-05. Native processor fields, meshes, controls, logs and original cases remain.",
+      "rebuild": "From each recorded reconstruction working directory, source /usr/lib/openfoam/openfoam2512/etc/bashrc then run the recorded `reconstructPar -fileHandler collated -time <time>` command. Rebuild was not run during cleanup.",
+      "rebuild_verified_by_execution": false,
+      "qualification": "Predelete original/native-clone time-tree path/size/SHA equivalence and terminal/no-FD state verified; source hashes unchanged after cleanup. Reconstructed caches are derived, not unique raw CFD output."
     }
   ]
 }

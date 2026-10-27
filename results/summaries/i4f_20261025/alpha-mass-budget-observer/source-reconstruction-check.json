@@ -1,0 +1,41 @@
+{
+  "added": [
+    "applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetAlphaObserve.H",
+    "applications/solvers/multiphase/compressibleInterFoam/i4fAlphaMassBudgetEosObserve.H",
+    "applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/lnInclude/liquidPropertiesSurfaceTension.C",
+    "applications/solvers/multiphase/compressibleInterFoam/surfaceTensionModels/lnInclude/liquidPropertiesSurfaceTension.H"
+  ],
+  "direct_patch_sha256": "2b92b5f7f1ea3fe6a5581b3dd6122f9d11e558e1bde6ccef5c9c1a63a57aad8a",
+  "direct_v3_patch_applied": true,
+  "modified": [
+    "applications/solvers/multiphase/VoF/alphaEqn.H",
+    "applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+    "applications/solvers/multiphase/compressibleInterFoam/pEqn.H"
+  ],
+  "physical_71_entry_manifest_matched": true,
+  "physical_parent_public_patch_applied": true,
+  "removed": [],
+  "schema": "i4f-alpha-mass-budget-observer-public-source-reconstruction/v1",
+  "selected_budget_max_signed_closure_error_kg_s": 1.1535439270460301e-11,
+  "selected_budget_rows": [
+    1,
+    2,
+    29,
+    30,
+    31,
+    32
+  ],
+  "standalone_reconstruction_verifier": {
+    "direct_patch_sha256": "2b92b5f7f1ea3fe6a5581b3dd6122f9d11e558e1bde6ccef5c9c1a63a57aad8a",
+    "last_run_exit_code": 0,
+    "path": "verify_public_v3_source.py",
+    "sha256": "ece756625e24acacb5567dae622b455a1dcb1ed699941bea5a2de9c42678e0fb",
+    "verified_parent_physical_and_target_counts": [
+      90,
+      71,
+      75
+    ]
+  },
+  "target_75_paths_and_hashes_matched": true,
+  "target_tree_digest_sha256": "4b9cbedfba9d62e6f6e811ee5e43eb699ca904b798883a50d6d68ce584027add"
+}

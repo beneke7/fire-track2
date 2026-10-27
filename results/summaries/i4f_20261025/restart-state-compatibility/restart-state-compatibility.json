@@ -1,0 +1,656 @@
+{
+  "checkpoints": [
+    {
+      "air_eos": {
+        "RR_J_kmol_K": 8314.47006650545,
+        "R_air_J_kg_K": 287.0477481284761,
+        "R_from_RR_over_MW_J_kg_K": 287.0477481284761,
+        "dimensioned_constants_override_files": [],
+        "equation": "rho_air=p/(R_air*T.air); psi_air=1/(R_air*T.air)",
+        "molecular_weight_kg_kmol": 28.96546,
+        "source_audit_air_dictionary_matches": true,
+        "v2512_source_audit": "results/runs/i4f-energy-observer-dryline-step-20261025T190159Z/analysis/openfoam-v2512-air-thermo-source-check.json",
+        "v2512_source_audit_sha256": "cca00091374d9d7a6a2dfb841b998006e95c01aae26c62237211cdc1abf53d27"
+      },
+      "case_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case",
+      "cells": 299214,
+      "checkpoint_time_directory": "0.390705595007",
+      "density_compatibility": {
+        "absolute_integrated_mass_difference_kg": 4.573649096458384e-13,
+        "alpha_outside_unit_interval_cell_count": 21288,
+        "alpha_water_range": [
+          -4.958515265582342e-14,
+          1.000000000001426
+        ],
+        "expected_eos_blend_mass_kg": 3231.4581797720975,
+        "integrated_abs_difference_relative_to_eos_mass": 1.4153514735508496e-16,
+        "key_cells": {
+          "max_abs_density_delta": {
+            "C_xyz_m": [
+              3.3596186795539977,
+              0.8412194690156146,
+              0.8926235107037973
+            ],
+            "T_air_K": 293.29334247556324,
+            "T_common_K": 293.29334247556324,
+            "T_water_K": 293.29334247556324,
+            "alpha_water": 0.0007974940996603266,
+            "delta_rho_kg_m3": 4.039366618968643e-10,
+            "gh_m2_s2": -8.756636640004253,
+            "global_cell_id": 105648,
+            "hydro_identity_residual_Pa": 5.041300710217911e-12,
+            "linearized_delta_p_Pa": 3.4033203175998294e-05,
+            "p_Pa": 100048.4186071254,
+            "p_rgh_Pa": 100065.78728140192,
+            "rho_eos_blend_kg_m3": 1.9834869239232333,
+            "rho_native_kg_m3": 1.98348692432717
+          },
+          "max_abs_hydrostatic_identity_residual": {
+            "C_xyz_m": [
+              1.4376944414614297,
+              0.637389055600168,
+              0.4118064276020548
+            ],
+            "T_air_K": 293.14927322976496,
+            "T_common_K": 293.14927322976496,
+            "T_water_K": 293.14927322976496,
+            "alpha_water": 0.9999999999999982,
+            "delta_rho_kg_m3": -1.1368683772161603e-13,
+            "gh_m2_s2": -4.039821054776158,
+            "global_cell_id": 162162,
+            "hydro_identity_residual_Pa": -5.95719029661268e-11,
+            "linearized_delta_p_Pa": -2.5016799539222025e-07,
+            "p_Pa": 612339.789829303,
+            "p_rgh_Pa": 616373.2804676538,
+            "rho_eos_blend_kg_m3": 998.4329958333145,
+            "rho_native_kg_m3": 998.4329958333144
+          },
+          "max_negative_density_delta": {
+            "C_xyz_m": [
+              3.3362634579987294,
+              0.6618375753802995,
+              0.8893707148128684
+            ],
+            "T_air_K": 293.29156109143145,
+            "T_common_K": 293.29156109143145,
+            "T_water_K": 293.29156109143145,
+            "alpha_water": 0.058808401886653885,
+            "delta_rho_kg_m3": -2.0259705024727737e-10,
+            "gh_m2_s2": -8.72472671231424,
+            "global_cell_id": 99246,
+            "hydro_identity_residual_Pa": 5.6843418860808015e-12,
+            "linearized_delta_p_Pa": -1.807883106931525e-05,
+            "p_Pa": 100033.63645880339,
+            "p_rgh_Pa": 100555.55727735531,
+            "rho_eos_blend_kg_m3": 59.82087872357633,
+            "rho_native_kg_m3": 59.82087872337373
+          },
+          "max_positive_density_delta": {
+            "C_xyz_m": [
+              3.3596186795539977,
+              0.8412194690156146,
+              0.8926235107037973
+            ],
+            "T_air_K": 293.29334247556324,
+            "T_common_K": 293.29334247556324,
+            "T_water_K": 293.29334247556324,
+            "alpha_water": 0.0007974940996603266,
+            "delta_rho_kg_m3": 4.039366618968643e-10,
+            "gh_m2_s2": -8.756636640004253,
+            "global_cell_id": 105648,
+            "hydro_identity_residual_Pa": 5.041300710217911e-12,
+            "linearized_delta_p_Pa": 3.4033203175998294e-05,
+            "p_Pa": 100048.4186071254,
+            "p_rgh_Pa": 100065.78728140192,
+            "rho_eos_blend_kg_m3": 1.9834869239232333,
+            "rho_native_kg_m3": 1.98348692432717
+          },
+          "minimum_native_pressure": {
+            "C_xyz_m": [
+              3.6113737525314478,
+              -0.41146892925959216,
+              0.7366033646784422
+            ],
+            "T_air_K": 293.23339925445515,
+            "T_common_K": 293.23339925445515,
+            "T_water_K": 293.23339925445515,
+            "alpha_water": 0.9781081812048228,
+            "delta_rho_kg_m3": -1.1368683772161603e-13,
+            "gh_m2_s2": -7.226079007495518,
+            "global_cell_id": 80743,
+            "hydro_identity_residual_Pa": 9.094947017729282e-13,
+            "linearized_delta_p_Pa": -1.6120668879908988e-07,
+            "p_Pa": 93730.05002756785,
+            "p_rgh_Pa": 100785.37081374764,
+            "rho_eos_blend_kg_m3": 976.3691732212441,
+            "rho_native_kg_m3": 976.369173221244
+          }
+        },
+        "linearized_pressure_equivalent_Pa": {
+          "abs_max": 3.4033203175998294e-05,
+          "abs_p50": 0.0,
+          "abs_p95": 2.502128900419704e-07,
+          "abs_p99": 5.00421178650857e-07,
+          "at_max_abs_density_difference": 3.4033203175998294e-05,
+          "at_native_minimum_pressure": -1.6120668879908988e-07
+        },
+        "native_pressure_range_Pa": [
+          93730.05002756785,
+          677781.6883568943
+        ],
+        "saved_native_mass_kg": 3231.458179772097,
+        "saved_rho_minus_eos_blend_kg_m3": {
+          "max": 4.039366618968643e-10,
+          "max_abs": 4.039366618968643e-10,
+          "mean_unweighted": -6.747829083014705e-15,
+          "min": -2.0259705024727737e-10,
+          "rms_unweighted": 1.8801347523573293e-12,
+          "volume_weighted_l1": 4.573649096458384e-13,
+          "volume_weighted_mean": 4.2688191963932806e-16
+        },
+        "signed_integrated_mass_difference_kg": 1.0732565725468683e-14
+      },
+      "hydrostatic_identity": {
+        "identity": "p - p_rgh - rho*(g dot C) = 0; g and C are from this case's v2512 fields",
+        "max_abs_cell": {
+          "C_xyz_m": [
+            1.4376944414614297,
+            0.637389055600168,
+            0.4118064276020548
+          ],
+          "T_air_K": 293.14927322976496,
+          "T_common_K": 293.14927322976496,
+          "T_water_K": 293.14927322976496,
+          "alpha_water": 0.9999999999999982,
+          "delta_rho_kg_m3": -1.1368683772161603e-13,
+          "gh_m2_s2": -4.039821054776158,
+          "global_cell_id": 162162,
+          "hydro_identity_residual_Pa": -5.95719029661268e-11,
+          "linearized_delta_p_Pa": -2.5016799539222025e-07,
+          "p_Pa": 612339.789829303,
+          "p_rgh_Pa": 616373.2804676538,
+          "rho_eos_blend_kg_m3": 998.4329958333145,
+          "rho_native_kg_m3": 998.4329958333144
+        },
+        "residual_Pa": {
+          "max": 5.820766091346741e-11,
+          "max_abs": 5.95719029661268e-11,
+          "mean_unweighted": -3.102033199220599e-15,
+          "min": -5.95719029661268e-11,
+          "rms_unweighted": 1.66563062117354e-11,
+          "volume_weighted_l1": 1.8713219564919633e-10,
+          "volume_weighted_mean": -9.104733707870756e-15
+        }
+      },
+      "input_hashes_after_read": {
+        "constant/C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+        "constant/V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+        "constant/g": "d804fb8237e3d43e2bc905c06f69010fd52d84592fc955b05cb415c10e3a7196",
+        "constant/thermophysicalProperties": "c8a491c92e8a1cabc21b34bb25925a520d24523c5638d1c7e6e29987631fdd60",
+        "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "constant/thermophysicalProperties.water": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "processors10/0.390705595007/T": "adbd0ba67e1f2ed532fd26382d5e4b25fa3cb4b4320850845d419afc1d307ea4",
+        "processors10/0.390705595007/T.air": "b8f596a64179db42419ade7e9f3a909512d7523302d8fe01ea924044a56ad3a0",
+        "processors10/0.390705595007/T.water": "c04b252d81ceeb048f0f52df5eaa4039c8fdb34704d7722bdd6afec74f386d20",
+        "processors10/0.390705595007/alpha.water": "4be0f8ca08f02fffeb2f8a865c9480858055c25d75184f7c0e5afb0c346868b6",
+        "processors10/0.390705595007/p": "0744d26d8c155082c023b47b168f9359e2de8ffabe3d97e82f419c81a445f6fe",
+        "processors10/0.390705595007/p_rgh": "f52e88762e32c06fc19dc6c2e12edacad413d765c85de4da8bf1aefbcb622c93",
+        "processors10/0.390705595007/rho": "fb30998ac87102881c3716dee91e0cb8870f3ac9e734993ece1628a10cee2eb3",
+        "processors10/0.390705595007/uniform/time": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672",
+        "processors10/constant/polyMesh/cellProcAddressing": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+        "system/controlDict": "664e31c0ee1bab6ba832e53a25f5bd4e2cc37220898914bee9fbda1c6d0a2acb"
+      },
+      "input_hashes_before_read": {
+        "constant/C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+        "constant/V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+        "constant/g": "d804fb8237e3d43e2bc905c06f69010fd52d84592fc955b05cb415c10e3a7196",
+        "constant/thermophysicalProperties": "c8a491c92e8a1cabc21b34bb25925a520d24523c5638d1c7e6e29987631fdd60",
+        "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "constant/thermophysicalProperties.water": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "processors10/0.390705595007/T": "adbd0ba67e1f2ed532fd26382d5e4b25fa3cb4b4320850845d419afc1d307ea4",
+        "processors10/0.390705595007/T.air": "b8f596a64179db42419ade7e9f3a909512d7523302d8fe01ea924044a56ad3a0",
+        "processors10/0.390705595007/T.water": "c04b252d81ceeb048f0f52df5eaa4039c8fdb34704d7722bdd6afec74f386d20",
+        "processors10/0.390705595007/alpha.water": "4be0f8ca08f02fffeb2f8a865c9480858055c25d75184f7c0e5afb0c346868b6",
+        "processors10/0.390705595007/p": "0744d26d8c155082c023b47b168f9359e2de8ffabe3d97e82f419c81a445f6fe",
+        "processors10/0.390705595007/p_rgh": "f52e88762e32c06fc19dc6c2e12edacad413d765c85de4da8bf1aefbcb622c93",
+        "processors10/0.390705595007/rho": "fb30998ac87102881c3716dee91e0cb8870f3ac9e734993ece1628a10cee2eb3",
+        "processors10/0.390705595007/uniform/time": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672",
+        "processors10/constant/polyMesh/cellProcAddressing": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+        "system/controlDict": "664e31c0ee1bab6ba832e53a25f5bd4e2cc37220898914bee9fbda1c6d0a2acb"
+      },
+      "input_hashes_unchanged_during_read": true,
+      "label": "healthy_original_warm_seed",
+      "mesh_volume_m3": 25.141766918909596,
+      "phase_order_from_dictionary": [
+        "water",
+        "air"
+      ],
+      "temperature_cache_comparison": {
+        "air": {
+          "delta_phase_minus_common_K": {
+            "max": 5.684341886080802e-14,
+            "max_abs": 5.684341886080802e-14,
+            "mean_unweighted": 8.453923076146024e-18,
+            "min": -5.684341886080802e-14,
+            "rms_unweighted": 3.079628393145155e-15,
+            "volume_weighted_l1": 5.2576572629167186e-15,
+            "volume_weighted_mean": -1.490498185422173e-18
+          },
+          "max_abs_difference_cell": {
+            "C_xyz_m": [
+              5.0477677085698165,
+              -1.500919128917637,
+              -0.3602163017119218
+            ],
+            "T_air_K": 293.1429626521414,
+            "T_common_K": 293.1429626521415,
+            "delta_K": -5.684341886080802e-14,
+            "global_cell_id": 922
+          },
+          "max_abs_difference_in_common_T_ulps": 1.0,
+          "phase_temperature_range_K": [
+            247.54477436388183,
+            293.3497061152527
+          ]
+        },
+        "water": {
+          "delta_phase_minus_common_K": {
+            "max": 0.0,
+            "max_abs": 0.0,
+            "mean_unweighted": 0.0,
+            "min": 0.0,
+            "rms_unweighted": 0.0,
+            "volume_weighted_l1": 0.0,
+            "volume_weighted_mean": 0.0
+          },
+          "max_abs_difference_cell": {
+            "C_xyz_m": [
+              4.83166654012228,
+              -2.0291068637138405,
+              -0.47358721944494236
+            ],
+            "T_common_K": 293.1412890350172,
+            "T_water_K": 293.1412890350172,
+            "delta_K": 0.0,
+            "global_cell_id": 0
+          },
+          "max_abs_difference_in_common_T_ulps": 0.0,
+          "phase_temperature_range_K": [
+            247.54477436388183,
+            293.3497061152527
+          ]
+        }
+      },
+      "uniform_time_s": 0.39070559500735114,
+      "water_eos": {
+        "density_equation": "rho0*((p+B)/(p0+B))**(1/gamma); p is absolute pressure",
+        "model": "adiabaticPerfectFluid",
+        "parameters": {
+          "B": 306667767.13022316,
+          "gamma": 7.15,
+          "p0": 100000.0,
+          "rho0": 998.2
+        },
+        "reference_packet": "experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json",
+        "reference_packet_sha256": "357c7b8e4c24438cb3b3d3b21122ce6382e0259767cf77b38f957bc62d90c962",
+        "source_path": "constant/thermophysicalProperties.water",
+        "source_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "temperature_argument_role": "T is not used by the v2512 adiabaticPerfectFluid rho(p,T) implementation"
+      }
+    },
+    {
+      "air_eos": {
+        "RR_J_kmol_K": 8314.47006650545,
+        "R_air_J_kg_K": 287.0477481284761,
+        "R_from_RR_over_MW_J_kg_K": 287.0477481284761,
+        "dimensioned_constants_override_files": [],
+        "equation": "rho_air=p/(R_air*T.air); psi_air=1/(R_air*T.air)",
+        "molecular_weight_kg_kmol": 28.96546,
+        "source_audit_air_dictionary_matches": true,
+        "v2512_source_audit": "results/runs/i4f-energy-observer-dryline-step-20261025T190159Z/analysis/openfoam-v2512-air-thermo-source-check.json",
+        "v2512_source_audit_sha256": "cca00091374d9d7a6a2dfb841b998006e95c01aae26c62237211cdc1abf53d27"
+      },
+      "case_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case",
+      "cells": 299214,
+      "checkpoint_time_directory": "0.490706656519",
+      "density_compatibility": {
+        "absolute_integrated_mass_difference_kg": 5.442085391434969e-10,
+        "alpha_outside_unit_interval_cell_count": 12437,
+        "alpha_water_range": [
+          -1.0887099542761036e-09,
+          1.0000000000000513
+        ],
+        "expected_eos_blend_mass_kg": 3231.190284504508,
+        "integrated_abs_difference_relative_to_eos_mass": 1.6842355021717622e-13,
+        "key_cells": {
+          "max_abs_density_delta": {
+            "C_xyz_m": [
+              4.255145881186893,
+              0.2968588568473095,
+              0.580462055246008
+            ],
+            "T_air_K": 293.2585072571729,
+            "T_common_K": 293.2585072571729,
+            "T_water_K": 293.2585072571729,
+            "alpha_water": 0.00010263612278902656,
+            "delta_rho_kg_m3": -6.8991305310905915e-06,
+            "gh_m2_s2": -5.694332761963339,
+            "global_cell_id": 184634,
+            "hydro_identity_residual_Pa": 3.4132696669075813e-12,
+            "linearized_delta_p_Pa": -0.5808205777058181,
+            "p_Pa": 99370.64928596138,
+            "p_rgh_Pa": 99377.9539132008,
+            "rho_eos_blend_kg_m3": 1.2827958657719027,
+            "rho_native_kg_m3": 1.2827889666413717
+          },
+          "max_abs_hydrostatic_identity_residual": {
+            "C_xyz_m": [
+              1.5250020500983004,
+              0.47641660314113426,
+              0.8252666282695138
+            ],
+            "T_air_K": 293.14991702010536,
+            "T_common_K": 293.14991702010536,
+            "T_water_K": 293.14991702010536,
+            "alpha_water": 0.9999999999893765,
+            "delta_rho_kg_m3": -1.1368683772161603e-13,
+            "gh_m2_s2": -8.095865623323931,
+            "global_cell_id": 12450,
+            "hydro_identity_residual_Pa": 5.820766091346741e-11,
+            "linearized_delta_p_Pa": -2.501061403945985e-07,
+            "p_Pa": 524011.6229361789,
+            "p_rgh_Pa": 532094.4772958106,
+            "rho_eos_blend_kg_m3": 998.3928508330636,
+            "rho_native_kg_m3": 998.3928508330634
+          },
+          "max_negative_density_delta": {
+            "C_xyz_m": [
+              4.255145881186893,
+              0.2968588568473095,
+              0.580462055246008
+            ],
+            "T_air_K": 293.2585072571729,
+            "T_common_K": 293.2585072571729,
+            "T_water_K": 293.2585072571729,
+            "alpha_water": 0.00010263612278902656,
+            "delta_rho_kg_m3": -6.8991305310905915e-06,
+            "gh_m2_s2": -5.694332761963339,
+            "global_cell_id": 184634,
+            "hydro_identity_residual_Pa": 3.4132696669075813e-12,
+            "linearized_delta_p_Pa": -0.5808205777058181,
+            "p_Pa": 99370.64928596138,
+            "p_rgh_Pa": 99377.9539132008,
+            "rho_eos_blend_kg_m3": 1.2827958657719027,
+            "rho_native_kg_m3": 1.2827889666413717
+          },
+          "max_positive_density_delta": {
+            "C_xyz_m": [
+              4.255133440330839,
+              0.2965514876720318,
+              0.5926834806199592
+            ],
+            "T_air_K": 293.25890911630273,
+            "T_common_K": 293.25890911630273,
+            "T_water_K": 293.25890911630273,
+            "alpha_water": 0.772770277991285,
+            "delta_rho_kg_m3": 1.1868792171298992e-06,
+            "gh_m2_s2": -5.814224944881801,
+            "global_cell_id": 61620,
+            "hydro_identity_residual_Pa": -5.4569682106375694e-12,
+            "linearized_delta_p_Pa": 0.38900831150069304,
+            "p_Pa": 99064.12739427546,
+            "p_rgh_Pa": 103550.652982794,
+            "rho_eos_blend_kg_m3": 771.6463714681669,
+            "rho_native_kg_m3": 771.6463726550461
+          },
+          "minimum_native_pressure": {
+            "C_xyz_m": [
+              4.220087803507014,
+              -0.3808156806577422,
+              0.9709147146145044
+            ],
+            "T_air_K": 293.3084040681953,
+            "T_common_K": 293.3084040681953,
+            "T_water_K": 293.3084040681953,
+            "alpha_water": 0.9971157338980321,
+            "delta_rho_kg_m3": 1.3869794202037156e-11,
+            "gh_m2_s2": -9.524673350368289,
+            "global_cell_id": 77657,
+            "hydro_identity_residual_Pa": 1.8189894035458565e-12,
+            "linearized_delta_p_Pa": 2.8414441038689662e-05,
+            "p_Pa": 33095.64204638731,
+            "p_rgh_Pa": 42575.47034393174,
+            "rho_eos_blend_kg_m3": 995.2916965050298,
+            "rho_native_kg_m3": 995.2916965050437
+          }
+        },
+        "linearized_pressure_equivalent_Pa": {
+          "abs_max": 0.6389782557037446,
+          "abs_p50": 0.0,
+          "abs_p95": 9.999522700448263e-07,
+          "abs_p99": 0.00017961117976283739,
+          "at_max_abs_density_difference": -0.5808205777058181,
+          "at_native_minimum_pressure": 2.8414441038689662e-05
+        },
+        "native_pressure_range_Pa": [
+          33095.64204638731,
+          524684.9726582726
+        ],
+        "saved_native_mass_kg": 3231.190284504394,
+        "saved_rho_minus_eos_blend_kg_m3": {
+          "max": 1.1868792171298992e-06,
+          "max_abs": 6.8991305310905915e-06,
+          "mean_unweighted": 7.325451113585769e-11,
+          "min": -6.8991305310905915e-06,
+          "rms_unweighted": 1.4500845183716776e-08,
+          "volume_weighted_l1": 5.442085391434969e-10,
+          "volume_weighted_mean": -4.505608808714901e-12
+        },
+        "signed_integrated_mass_difference_kg": -1.1327896649649598e-10
+      },
+      "hydrostatic_identity": {
+        "identity": "p - p_rgh - rho*(g dot C) = 0; g and C are from this case's v2512 fields",
+        "max_abs_cell": {
+          "C_xyz_m": [
+            1.5250020500983004,
+            0.47641660314113426,
+            0.8252666282695138
+          ],
+          "T_air_K": 293.14991702010536,
+          "T_common_K": 293.14991702010536,
+          "T_water_K": 293.14991702010536,
+          "alpha_water": 0.9999999999893765,
+          "delta_rho_kg_m3": -1.1368683772161603e-13,
+          "gh_m2_s2": -8.095865623323931,
+          "global_cell_id": 12450,
+          "hydro_identity_residual_Pa": 5.820766091346741e-11,
+          "linearized_delta_p_Pa": -2.501061403945985e-07,
+          "p_Pa": 524011.6229361789,
+          "p_rgh_Pa": 532094.4772958106,
+          "rho_eos_blend_kg_m3": 998.3928508330636,
+          "rho_native_kg_m3": 998.3928508330634
+        },
+        "residual_Pa": {
+          "max": 5.820766091346741e-11,
+          "max_abs": 5.820766091346741e-11,
+          "mean_unweighted": 2.174760134688285e-13,
+          "min": -5.820766091346741e-11,
+          "rms_unweighted": 1.4825694838091233e-11,
+          "volume_weighted_l1": 1.7592867546276958e-10,
+          "volume_weighted_mean": 1.997363824691051e-13
+        }
+      },
+      "input_hashes_after_read": {
+        "constant/C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+        "constant/V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+        "constant/g": "d804fb8237e3d43e2bc905c06f69010fd52d84592fc955b05cb415c10e3a7196",
+        "constant/thermophysicalProperties": "3834b3aa09f26cdc434a9fd0e81c5d6d43ae357a4d23f8e661f2320f8ce77ae0",
+        "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "constant/thermophysicalProperties.water": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "processors10/0.490706656519/T": "3c218b601c6d160439f8df2accd55d1e155e54b23cc4232f9ffc5dd4ac3cb320",
+        "processors10/0.490706656519/T.air": "284e1c035cd51039c506d905357471ab300166f999215412d693f54add79523c",
+        "processors10/0.490706656519/T.water": "490b225b2a11fb2cef70dcb27fa5466804b8c41fcfb42bd5762d516a498631b0",
+        "processors10/0.490706656519/alpha.water": "6e48ffd2eddcfedcc6535dd37d129e6bc4bf9dedd7b2ba365662c1fe73142a8f",
+        "processors10/0.490706656519/p": "24f7de11fa3a8608c0167f7d88701a8459d1f9e99b2c2d49fd10b8e22dfac9b3",
+        "processors10/0.490706656519/p_rgh": "f39ba5d715c9a60c586fc86cc6e874449ba5387533f421452362c349b24cfef6",
+        "processors10/0.490706656519/rho": "4387558befb3a41cb9435a03dbab5a57f409a9b156c99717d7349ce79df6d884",
+        "processors10/0.490706656519/uniform/time": "c277a8935dade8a9c33d1c258073d809a4fb3a291ea14bb2155e65da0f6f8fa5",
+        "processors10/constant/polyMesh/cellProcAddressing": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+        "system/controlDict": "2672ae6c2e10fe999b5679fb4e0e4f246036d865a7089dee521d0068cc27c60e"
+      },
+      "input_hashes_before_read": {
+        "constant/C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+        "constant/V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+        "constant/g": "d804fb8237e3d43e2bc905c06f69010fd52d84592fc955b05cb415c10e3a7196",
+        "constant/thermophysicalProperties": "3834b3aa09f26cdc434a9fd0e81c5d6d43ae357a4d23f8e661f2320f8ce77ae0",
+        "constant/thermophysicalProperties.air": "2b209fd8d32a82edd583baab73245772c837c8def804feabbf958b04f15a63ab",
+        "constant/thermophysicalProperties.water": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "processors10/0.490706656519/T": "3c218b601c6d160439f8df2accd55d1e155e54b23cc4232f9ffc5dd4ac3cb320",
+        "processors10/0.490706656519/T.air": "284e1c035cd51039c506d905357471ab300166f999215412d693f54add79523c",
+        "processors10/0.490706656519/T.water": "490b225b2a11fb2cef70dcb27fa5466804b8c41fcfb42bd5762d516a498631b0",
+        "processors10/0.490706656519/alpha.water": "6e48ffd2eddcfedcc6535dd37d129e6bc4bf9dedd7b2ba365662c1fe73142a8f",
+        "processors10/0.490706656519/p": "24f7de11fa3a8608c0167f7d88701a8459d1f9e99b2c2d49fd10b8e22dfac9b3",
+        "processors10/0.490706656519/p_rgh": "f39ba5d715c9a60c586fc86cc6e874449ba5387533f421452362c349b24cfef6",
+        "processors10/0.490706656519/rho": "4387558befb3a41cb9435a03dbab5a57f409a9b156c99717d7349ce79df6d884",
+        "processors10/0.490706656519/uniform/time": "c277a8935dade8a9c33d1c258073d809a4fb3a291ea14bb2155e65da0f6f8fa5",
+        "processors10/constant/polyMesh/cellProcAddressing": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+        "system/controlDict": "2672ae6c2e10fe999b5679fb4e0e4f246036d865a7089dee521d0068cc27c60e"
+      },
+      "input_hashes_unchanged_during_read": true,
+      "label": "physical_omega050_outer16_checkpoint",
+      "mesh_volume_m3": 25.141766918909596,
+      "phase_order_from_dictionary": [
+        "water",
+        "air"
+      ],
+      "temperature_cache_comparison": {
+        "air": {
+          "delta_phase_minus_common_K": {
+            "max": 5.684341886080802e-14,
+            "max_abs": 5.684341886080802e-14,
+            "mean_unweighted": 1.1493535867569315e-17,
+            "min": -5.684341886080802e-14,
+            "rms_unweighted": 3.650823217212957e-15,
+            "volume_weighted_l1": 9.361124822779736e-15,
+            "volume_weighted_mean": 6.020663876302854e-18
+          },
+          "max_abs_difference_cell": {
+            "C_xyz_m": [
+              5.549975888207509,
+              0.30000160551999655,
+              -0.45824917888024375
+            ],
+            "T_air_K": 293.137915949063,
+            "T_common_K": 293.13791594906303,
+            "delta_K": -5.684341886080802e-14,
+            "global_cell_id": 467
+          },
+          "max_abs_difference_in_common_T_ulps": 2.0,
+          "phase_temperature_range_K": [
+            229.32220927986614,
+            293.4612533633968
+          ]
+        },
+        "water": {
+          "delta_phase_minus_common_K": {
+            "max": 0.0,
+            "max_abs": 0.0,
+            "mean_unweighted": 0.0,
+            "min": 0.0,
+            "rms_unweighted": 0.0,
+            "volume_weighted_l1": 0.0,
+            "volume_weighted_mean": 0.0
+          },
+          "max_abs_difference_cell": {
+            "C_xyz_m": [
+              4.83166654012228,
+              -2.0291068637138405,
+              -0.47358721944494236
+            ],
+            "T_common_K": 293.1437648515908,
+            "T_water_K": 293.1437648515908,
+            "delta_K": 0.0,
+            "global_cell_id": 0
+          },
+          "max_abs_difference_in_common_T_ulps": 0.0,
+          "phase_temperature_range_K": [
+            229.32220927986614,
+            293.4612533633968
+          ]
+        }
+      },
+      "uniform_time_s": 0.49070665651918166,
+      "water_eos": {
+        "density_equation": "rho0*((p+B)/(p0+B))**(1/gamma); p is absolute pressure",
+        "model": "adiabaticPerfectFluid",
+        "parameters": {
+          "B": 306667767.13022316,
+          "gamma": 7.15,
+          "p0": 100000.0,
+          "rho0": 998.2
+        },
+        "reference_packet": "experiments/i4f_physical_water_eos_reference/i4f-physical-water-eos-reference.json",
+        "reference_packet_sha256": "357c7b8e4c24438cb3b3d3b21122ce6382e0259767cf77b38f957bc62d90c962",
+        "source_path": "constant/thermophysicalProperties.water",
+        "source_sha256": "cce5e513ea2525daa992d54c54e0b335e1d5ddbb072f0750e5c6a3e93a7cf197",
+        "temperature_argument_role": "T is not used by the v2512 adiabaticPerfectFluid rho(p,T) implementation"
+      }
+    }
+  ],
+  "method": {
+    "air_EOS": "perfectGas::rho(p,T)=p/(specie::R()*T); specie::R()=RR/molWeight; RR=1e3*NA*k from v2512 defaults",
+    "density_metrics": "per-cell unweighted signed/mean-absolute/RMS/max and volume-integrated signed/absolute mass difference using case constant/V",
+    "hydrostatic_identity": "p = p_rgh + rho*(g dot C), as in the frozen main compressibleInterFoam pEqn.H; residual computed using native p, p_rgh, rho, g, C",
+    "linearized_delta_p": "(rho_native-rho_EOS_blend)/phase_density_slope, a local fixed-alpha/T diagnostic only",
+    "phase_density_slope": "alpha.water*psi_water(p) + (1-alpha.water)*psi_air(T.air)",
+    "rho_mix": "rho_native - [alpha.water*rho_water_EOS(p) + (1-alpha.water)*rho_air_EOS(p,T.air)]",
+    "temperature_metrics": "native T.air and T.water compared elementwise against common native T; differences are reported, not normalized away",
+    "water_EOS": "rho0*((p+B)/(p0+B))^(1/gamma); T is unused by the v2512 adiabaticPerfectFluid rho(p,T) implementation"
+  },
+  "observed_utc_finished": "2026-10-27T05:35:10.069944Z",
+  "observed_utc_started": "2026-10-27T05:35:09.807445Z",
+  "openfoam_source": {
+    "air_eos_source_equations": {
+      "HtoEthermo.H": "Es = Hs - p/rho",
+      "hConstThermo.C": "Tref defaults to Tstd; Href defaults to 0",
+      "hConstThermoI.H": "Hs = Cp*(T-Tref) + Href + EOS::H",
+      "perfectGasI.H": "rho(p,T) = p/(R*T)",
+      "perfectGasI.H_H": "EOS::H(p,T) = 0 for perfectGas",
+      "physicoChemicalConstants.C": "R = NA*k (default constants; case has no DimensionedConstants override)",
+      "specieI.H": "specie::R() = RR/molWeight_",
+      "thermodynamicConstants.C": "RR = 1e3*physicoChemical::R.value()"
+    },
+    "binary_sha256_from_runtime_source_audit": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "source_paths": {
+      "createFields.H": "results/runs/i4f-full-predictor-source-20261026T180031Z/build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/createFields.H",
+      "pEqn.H": "results/runs/i4f-full-predictor-source-20261026T180031Z/build/source/v7-frozen-sp-v2-full-predictor-prototype/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "perfectGasI.H": "results/runs/i4f-turbulence-thermal-transport-audit-20261025T210023Z/source/thermophysicalModels/specie/equationOfState/perfectGas/perfectGasI.H",
+      "specieI.H": "results/runs/i4f-turbulence-thermal-transport-audit-20261025T210023Z/source/thermophysicalModels/specie/specie/specieI.H"
+    },
+    "source_tree_hashes": {
+      "main_createFields.H": "c8def77f6558fefe36e74ef4438d98be6232698179ccdb2d693bec16d303ec61",
+      "main_pEqn.H": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6",
+      "perfectGasI.H": "b844404fc58d534aa5ded530d3627410640335d7d8f4c480311ff0cd33f9f80a",
+      "specieI.H": "6afd1bcf6731cea63e7b53da316a19311e2d32fff765bcc312555473b9960175"
+    },
+    "version": "OpenCFD OpenFOAM v2512"
+  },
+  "schema": "i4f-restart-state-compatibility/v1",
+  "scope_and_limits": [
+    "The comparison checks algebraic compatibility of saved rho with the stated phase EOS at the same saved p, alpha and phase temperatures; it does not establish why a later restart diverged.",
+    "The linearized pressure-equivalent density difference holds alpha and temperatures fixed; it is not a reconstructed pressure correction or a causal estimate.",
+    "This audits two saved checkpoints, not all intermediate physical steps or all restart caches.",
+    "Native checkpoints were read without modifying either case; per-input SHA256 values were identical before and after each read."
+  ],
+  "shared_native_geometry": {
+    "cell_count": 299214,
+    "hashes": {
+      "cellProcAddressing": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+      "constant/C": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+      "constant/V": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99"
+    },
+    "mesh_volume_m3": 25.141766918909596,
+    "processor_cell_addressing_is_bijection": true
+  }
+}

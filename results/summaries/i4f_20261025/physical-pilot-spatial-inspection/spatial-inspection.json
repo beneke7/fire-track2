@@ -1,0 +1,947 @@
+{
+  "schema": "i4f-physical-pilot-spatial-inspection-v1",
+  "observed_utc_start": "2026-10-27T05:10:54.939031+00:00",
+  "task_scope": "read-only spatial inspection; no CFD/mesh/source edits",
+  "source_pair": "physical-alpha-flux-relax-candidate-20261027T024711Z/physical-omega-050-outer-pair",
+  "input_cases": {
+    "outer8": {
+      "case_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case",
+      "native_processor_directory": "case/processors10",
+      "native_time": "0.490698039854"
+    },
+    "outer16": {
+      "case_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case",
+      "native_processor_directory": "case/processors10",
+      "native_time": "0.490706656519"
+    }
+  },
+  "physical_time_delta_s": 8.616664999960832e-06,
+  "fields": {
+    "alpha.water": "native cell-centred water volume fraction",
+    "p": "native cell-centred absolute thermodynamic pressure, Pa",
+    "U": "native cell-centred velocity vector, m/s; speed is |U|",
+    "C": "native OpenFOAM cell-centre coordinate field copied to scratch time dirs for coordinate mapping",
+    "V": "native OpenFOAM cell-volume field copied to scratch time dirs for mesh-size metrics"
+  },
+  "reconstruction": {
+    "method": "pinned OpenFOAM v2512 reconstructPar, selected fields only, output in /dev/shm",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "image_digest_from_launch_manifest": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+    "memory_limit_bytes": 2147483648,
+    "cpu_limit": 1,
+    "source_mount_read_only": true,
+    "reconstructed_fields": [
+      "alpha.water",
+      "p",
+      "U"
+    ],
+    "native_static_mapping_fields": [
+      "C",
+      "V"
+    ],
+    "target_mesh_cell_count": 299214
+  },
+  "sampling": {
+    "method": "native reconstructed cell-centre samples; no field interpolation on display cut",
+    "plane_normal": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "y_cut_m": 0.8175,
+    "half_band_m": 0.01,
+    "x_bounds_m": [
+      4.1,
+      4.9
+    ],
+    "z_bounds_m": [
+      0.52,
+      1.06
+    ],
+    "cross_lane_plane_normal": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "cross_lane_z_cut_m": 0.9707,
+    "cross_lane_half_band_m": 0.01,
+    "cross_lane_y_bounds_m": [
+      -1.05,
+      1.05
+    ]
+  },
+  "source_files_before": {
+    "outer8/0.490698039854/alpha.water": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/alpha.water",
+      "size_bytes": 2652298,
+      "sha256": "2b4e7f49693d37e1b33add9f2a1fb45bf441b8e16c3a2b2a6b2ada5a51356c06"
+    },
+    "outer8/0.490698039854/p": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/p",
+      "size_bytes": 3206857,
+      "sha256": "7c7d5839a16308da4903c645d775d6d3b40ae9a2fbd055a47684c9fa83bd75f0"
+    },
+    "outer8/0.490698039854/U": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/U",
+      "size_bytes": 7938894,
+      "sha256": "5dae2fc10fa29be465201c173fd3b769a5ae0ac55a9cd61676c36f230506cfc6"
+    },
+    "outer16/0.490706656519/alpha.water": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/alpha.water",
+      "size_bytes": 2652298,
+      "sha256": "6e48ffd2eddcfedcc6535dd37d129e6bc4bf9dedd7b2ba365662c1fe73142a8f"
+    },
+    "outer16/0.490706656519/p": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/p",
+      "size_bytes": 3206857,
+      "sha256": "24f7de11fa3a8608c0167f7d88701a8459d1f9e99b2c2d49fd10b8e22dfac9b3"
+    },
+    "outer16/0.490706656519/U": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/U",
+      "size_bytes": 7938894,
+      "sha256": "cddd6327b2a455bd7f1922b3f634ef1add07d71069285c6c154c130857f769bd"
+    },
+    "outer8/constant/C": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/C",
+      "size_bytes": 9123116,
+      "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c"
+    },
+    "outer8/constant/V": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/V",
+      "size_bytes": 2395321,
+      "sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99"
+    },
+    "outer16/constant/C": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/C",
+      "size_bytes": 9123116,
+      "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c"
+    },
+    "outer16/constant/V": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/V",
+      "size_bytes": 2395321,
+      "sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99"
+    },
+    "outer8/constant/polyMesh/points": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/points",
+      "size_bytes": 8468240,
+      "sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779"
+    },
+    "outer8/constant/polyMesh/faces": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/faces",
+      "size_bytes": 19216782,
+      "sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460"
+    },
+    "outer8/constant/polyMesh/owner": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/owner",
+      "size_bytes": 3818980,
+      "sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47"
+    },
+    "outer8/constant/polyMesh/neighbour": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/neighbour",
+      "size_bytes": 3495612,
+      "sha256": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8"
+    },
+    "outer8/constant/polyMesh/boundary": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/boundary",
+      "size_bytes": 1771,
+      "sha256": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d"
+    },
+    "outer16/constant/polyMesh/points": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/points",
+      "size_bytes": 8468240,
+      "sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779"
+    },
+    "outer16/constant/polyMesh/faces": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/faces",
+      "size_bytes": 19216782,
+      "sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460"
+    },
+    "outer16/constant/polyMesh/owner": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/owner",
+      "size_bytes": 3818980,
+      "sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47"
+    },
+    "outer16/constant/polyMesh/neighbour": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/neighbour",
+      "size_bytes": 3495612,
+      "sha256": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8"
+    },
+    "outer16/constant/polyMesh/boundary": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/boundary",
+      "size_bytes": 1771,
+      "sha256": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d"
+    },
+    "outer8/constant/triSurface/apparatusWall.stl": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/triSurface/apparatusWall.stl",
+      "size_bytes": 8381765,
+      "sha256": "72fda09da621c78cd6dc0df1a239e5564ab7dad66900b0560a859ee22135bde3"
+    },
+    "outer8/constant/triSurface/finalLamellaMidSurfaces.stl": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/triSurface/finalLamellaMidSurfaces.stl",
+      "size_bytes": 30336,
+      "sha256": "a319fb493e12f904c984f97fea83f4e314825b00343ce446b470b7e83e9c4142"
+    },
+    "outer8/system/controlDict": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/controlDict",
+      "size_bytes": 933,
+      "sha256": "2672ae6c2e10fe999b5679fb4e0e4f246036d865a7089dee521d0068cc27c60e"
+    },
+    "outer8/system/fvSchemes": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/fvSchemes",
+      "size_bytes": 1405,
+      "sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e"
+    },
+    "outer8/system/fvSolution": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/fvSolution",
+      "size_bytes": 1920,
+      "sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff"
+    },
+    "outer8/system/meshPreparationProvenance.json": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/meshPreparationProvenance.json",
+      "size_bytes": 2083,
+      "sha256": "f89703fc9449e5fc6b2618e251f3cb6a68ec5ff8135cb86b0cf8af0b399c0e4b"
+    }
+  },
+  "plot_scales": {
+    "alpha_water": [
+      0.0,
+      1.0
+    ],
+    "absolute_p_kPa_quantile_0_5_to_99_5": [
+      72.62833984375001,
+      116.3956309375
+    ],
+    "speed_m_s_0_to_quantile_99_5": [
+      0.0,
+      10.74290350466848
+    ],
+    "sample_cell_center_count_by_arm": [
+      561,
+      561
+    ],
+    "same_xy_scales_for_all_panels": true,
+    "x_bounds_m": [
+      4.1,
+      4.9
+    ],
+    "z_bounds_m": [
+      0.52,
+      1.06
+    ],
+    "xy_cross_lane": {
+      "alpha_water": [
+        0.0,
+        1.0
+      ],
+      "absolute_p_kPa_quantile_0_5_to_99_5": [
+        91.46050375,
+        121.611553671875
+      ],
+      "speed_m_s_0_to_quantile_99_5": [
+        0.0,
+        14.245740431947002
+      ],
+      "sample_cell_center_count_by_arm": [
+        3432,
+        3432
+      ],
+      "same_scales_for_both_arms": true,
+      "x_bounds_m": [
+        4.1,
+        4.9
+      ],
+      "y_bounds_m": [
+        -1.05,
+        1.05
+      ],
+      "z_cut_m": 0.9707,
+      "z_half_band_m": 0.01
+    }
+  },
+  "arms": [
+    {
+      "arm": "outer8",
+      "time_s": 0.490698039854,
+      "cell_count": 299214,
+      "native_C_array_alignment": {
+        "coordinate_array_field": "constant/C copied to scratch time directory; same global cell ordering as reconstructed alpha.water,p,U",
+        "max_abs_difference_from_vtk_cell_centers_m": 0.007479591672953477,
+        "p99_abs_difference_from_vtk_cell_centers_m": 0.0013504202426262294
+      },
+      "bounds_xyz_m": [
+        [
+          0.0,
+          6.800000190734863
+        ],
+        [
+          -2.049999952316284,
+          2.049999952316284
+        ],
+        [
+          -0.5,
+          2.0
+        ]
+      ],
+      "global_raw_extrema": {
+        "alpha_water_min": -4.2624737073282404e-10,
+        "alpha_water_max": 1.0,
+        "alpha_water_min_location_xyz_m": [
+          4.304379940032959,
+          0.3099164664745331,
+          0.6051349639892578
+        ],
+        "alpha_water_max_location_xyz_m": [
+          1.9093753099441528,
+          -0.8429029583930969,
+          0.407072514295578
+        ],
+        "p_min_abs_Pa": 34026.15625,
+        "p_min_abs_location_xyz_m": [
+          4.220005989074707,
+          0.81789231300354,
+          0.9709145426750183
+        ],
+        "alpha_water_at_p_min": 0.9950025081634521,
+        "speed_at_p_min_m_s": 11.336693576324672,
+        "p_max_abs_Pa": 524662.375,
+        "p_max_abs_location_xyz_m": [
+          2.5660276412963867,
+          0.5624029040336609,
+          0.8104774951934814
+        ],
+        "speed_min_m_s": 0.001679468513301813,
+        "speed_min_location_xyz_m": [
+          2.5895836353302,
+          0.5623818635940552,
+          0.8105578422546387
+        ],
+        "speed_max_m_s": 20.427418941292938,
+        "speed_max_location_xyz_m": [
+          4.343908309936523,
+          -0.8818209171295166,
+          0.6948980689048767
+        ],
+        "p_min_in_alpha_ge_0_5_Pa": 34026.15625,
+        "p_min_in_alpha_ge_0_5_location_xyz_m": [
+          4.220005989074707,
+          0.81789231300354,
+          0.9709145426750183
+        ],
+        "alpha_at_p_min_in_alpha_ge_0_5": 0.9950025081634521
+      },
+      "display_band": {
+        "coordinate": "cell-center sample band |y - y_cut| <= y_half_band",
+        "y_cut_m": 0.8175,
+        "y_half_band_m": 0.01,
+        "x_bounds_m": [
+          4.1,
+          4.9
+        ],
+        "z_bounds_m": [
+          0.52,
+          1.06
+        ],
+        "native_cell_count": 561,
+        "alpha_min_max": [
+          -1.4848747073340778e-39,
+          0.999998927116394
+        ],
+        "p_min_max_abs_Pa": [
+          34026.15625,
+          118657.703125
+        ],
+        "speed_min_max_m_s": [
+          0.49743396979894067,
+          11.497145376000972
+        ],
+        "local_min_p_abs_Pa": 34026.15625,
+        "local_min_p_location_xyz_m": [
+          4.220005989074707,
+          0.81789231300354,
+          0.9709145426750183
+        ],
+        "alpha_at_local_min_p": 0.9950025081634521,
+        "speed_at_local_min_p_m_s": 11.336693576324672
+      },
+      "cross_lane_band": {
+        "coordinate": "cell-center sample band |z - z_cut| <= z_half_band",
+        "z_cut_m": 0.9707,
+        "z_half_band_m": 0.01,
+        "x_bounds_m": [
+          4.1,
+          4.9
+        ],
+        "y_bounds_m": [
+          -1.05,
+          1.05
+        ],
+        "native_cell_count": 3432,
+        "alpha_min_max": [
+          -2.2060931640505155e-12,
+          0.999998927116394
+        ],
+        "p_min_max_abs_Pa": [
+          34026.15625,
+          148208.65625
+        ],
+        "speed_min_max_m_s": [
+          0.05129693074531593,
+          17.00716850357111
+        ],
+        "local_min_p_abs_Pa": 34026.15625,
+        "local_min_p_location_xyz_m": [
+          4.220005989074707,
+          0.81789231300354,
+          0.9709145426750183
+        ],
+        "alpha_at_local_min_p": 0.9950025081634521,
+        "speed_at_local_min_p_m_s": 11.336693576324672
+      },
+      "minimum_location_spatial_checks": {
+        "nearest_transitional_alpha_cell_center_distance_m": 0.030469636609255623,
+        "nearest_transitional_alpha_cell_center_xyz_m": [
+          4.243645668029785,
+          0.8046457171440125,
+          0.9569828510284424
+        ],
+        "distance_to_apparatus_wall_stl_m": 0.007932616027226166,
+        "distance_to_lamella_mid_surface_stl_m": 0.005870008125257885,
+        "x_offset_from_lamella_mid_surface_start_m": 0.0033392906188964844,
+        "equivalent_cubic_native_cell_width_mm": 11.466927925611188,
+        "neighboring_x_band_median_equivalent_width_mm": {
+          "before": 12.91173076736376,
+          "after": 13.374221981365338,
+          "before_cell_count": 33,
+          "after_cell_count": 28,
+          "selection": "within 20 mm of global p-minimum y and 100 mm of its z; x offsets 10-40 mm"
+        },
+        "thin_band_median_equivalent_width_by_x_bin": [
+          {
+            "x_min_m": 4.1,
+            "x_max_m": 4.16,
+            "native_cell_count": 16,
+            "median_equivalent_cubic_cell_width_mm": 25.230840595433133
+          },
+          {
+            "x_min_m": 4.16,
+            "x_max_m": 4.2,
+            "native_cell_count": 22,
+            "median_equivalent_cubic_cell_width_mm": 16.915557295763826
+          },
+          {
+            "x_min_m": 4.2,
+            "x_max_m": 4.22,
+            "native_cell_count": 21,
+            "median_equivalent_cubic_cell_width_mm": 13.196921682540928
+          },
+          {
+            "x_min_m": 4.22,
+            "x_max_m": 4.24,
+            "native_cell_count": 20,
+            "median_equivalent_cubic_cell_width_mm": 13.21684016571283
+          },
+          {
+            "x_min_m": 4.24,
+            "x_max_m": 4.28,
+            "native_cell_count": 20,
+            "median_equivalent_cubic_cell_width_mm": 13.028609810104342
+          },
+          {
+            "x_min_m": 4.28,
+            "x_max_m": 4.36,
+            "native_cell_count": 32,
+            "median_equivalent_cubic_cell_width_mm": 12.885894583914245
+          },
+          {
+            "x_min_m": 4.36,
+            "x_max_m": 4.5,
+            "native_cell_count": 54,
+            "median_equivalent_cubic_cell_width_mm": 25.496203247307538
+          },
+          {
+            "x_min_m": 4.5,
+            "x_max_m": 4.7,
+            "native_cell_count": 220,
+            "median_equivalent_cubic_cell_width_mm": 12.843796517073656
+          },
+          {
+            "x_min_m": 4.7,
+            "x_max_m": 4.9,
+            "native_cell_count": 156,
+            "median_equivalent_cubic_cell_width_mm": 24.637103959828348
+          }
+        ],
+        "minimum_centered_median_equivalent_width_by_x_offset_bin": [
+          {
+            "x_offset_min_from_pmin_m": -0.040000000000000036,
+            "x_offset_max_from_pmin_m": -0.019999999999999574,
+            "native_cell_count": 19,
+            "median_equivalent_cubic_cell_width_mm": 12.759947929902799
+          },
+          {
+            "x_offset_min_from_pmin_m": -0.019999999999999574,
+            "x_offset_max_from_pmin_m": -0.009999999999999787,
+            "native_cell_count": 14,
+            "median_equivalent_cubic_cell_width_mm": 13.346398048050656
+          },
+          {
+            "x_offset_min_from_pmin_m": -0.009999999999999787,
+            "x_offset_max_from_pmin_m": 0.0,
+            "native_cell_count": 15,
+            "median_equivalent_cubic_cell_width_mm": 12.465751159667638
+          },
+          {
+            "x_offset_min_from_pmin_m": 0.0,
+            "x_offset_max_from_pmin_m": 0.009999999999999787,
+            "native_cell_count": 13,
+            "median_equivalent_cubic_cell_width_mm": 12.763634102622929
+          },
+          {
+            "x_offset_min_from_pmin_m": 0.009999999999999787,
+            "x_offset_max_from_pmin_m": 0.019999999999999574,
+            "native_cell_count": 11,
+            "median_equivalent_cubic_cell_width_mm": 13.509232651430198
+          },
+          {
+            "x_offset_min_from_pmin_m": 0.019999999999999574,
+            "x_offset_max_from_pmin_m": 0.040000000000000036,
+            "native_cell_count": 17,
+            "median_equivalent_cubic_cell_width_mm": 13.030882055428584
+          }
+        ]
+      }
+    },
+    {
+      "arm": "outer16",
+      "time_s": 0.490706656519,
+      "cell_count": 299214,
+      "native_C_array_alignment": {
+        "coordinate_array_field": "constant/C copied to scratch time directory; same global cell ordering as reconstructed alpha.water,p,U",
+        "max_abs_difference_from_vtk_cell_centers_m": 0.007479591672953477,
+        "p99_abs_difference_from_vtk_cell_centers_m": 0.0013504202426262294
+      },
+      "bounds_xyz_m": [
+        [
+          0.0,
+          6.800000190734863
+        ],
+        [
+          -2.049999952316284,
+          2.049999952316284
+        ],
+        [
+          -0.5,
+          2.0
+        ]
+      ],
+      "global_raw_extrema": {
+        "alpha_water_min": -1.0887099000100875e-09,
+        "alpha_water_max": 1.0,
+        "alpha_water_min_location_xyz_m": [
+          4.304379940032959,
+          0.3099164664745331,
+          0.6051349639892578
+        ],
+        "alpha_water_max_location_xyz_m": [
+          1.1108040809631348,
+          -0.8406528234481812,
+          0.40784183144569397
+        ],
+        "p_min_abs_Pa": 33095.640625,
+        "p_min_abs_location_xyz_m": [
+          4.220088005065918,
+          -0.38081568479537964,
+          0.9709147214889526
+        ],
+        "alpha_water_at_p_min": 0.9971157312393188,
+        "speed_at_p_min_m_s": 12.2067413841736,
+        "p_max_abs_Pa": 524685.0,
+        "p_max_abs_location_xyz_m": [
+          2.5660276412963867,
+          0.5624029040336609,
+          0.8104774951934814
+        ],
+        "speed_min_m_s": 0.0016797582328244105,
+        "speed_min_location_xyz_m": [
+          2.5895836353302,
+          0.5623818635940552,
+          0.8105578422546387
+        ],
+        "speed_max_m_s": 19.940587984636178,
+        "speed_max_location_xyz_m": [
+          4.3561296463012695,
+          -0.8810819983482361,
+          0.6949105262756348
+        ],
+        "p_min_in_alpha_ge_0_5_Pa": 33095.640625,
+        "p_min_in_alpha_ge_0_5_location_xyz_m": [
+          4.220088005065918,
+          -0.38081568479537964,
+          0.9709147214889526
+        ],
+        "alpha_at_p_min_in_alpha_ge_0_5": 0.9971157312393188
+      },
+      "display_band": {
+        "coordinate": "cell-center sample band |y - y_cut| <= y_half_band",
+        "y_cut_m": 0.8175,
+        "y_half_band_m": 0.01,
+        "x_bounds_m": [
+          4.1,
+          4.9
+        ],
+        "z_bounds_m": [
+          0.52,
+          1.06
+        ],
+        "native_cell_count": 561,
+        "alpha_min_max": [
+          -1.1210387714598537e-44,
+          1.0
+        ],
+        "p_min_max_abs_Pa": [
+          33610.9296875,
+          117989.8515625
+        ],
+        "speed_min_max_m_s": [
+          0.502150989035832,
+          11.475887320615684
+        ],
+        "local_min_p_abs_Pa": 33610.9296875,
+        "local_min_p_location_xyz_m": [
+          4.220005989074707,
+          0.81789231300354,
+          0.9709145426750183
+        ],
+        "alpha_at_local_min_p": 0.9944613575935364,
+        "speed_at_local_min_p_m_s": 11.322483915867382
+      },
+      "cross_lane_band": {
+        "coordinate": "cell-center sample band |z - z_cut| <= z_half_band",
+        "z_cut_m": 0.9707,
+        "z_half_band_m": 0.01,
+        "x_bounds_m": [
+          4.1,
+          4.9
+        ],
+        "y_bounds_m": [
+          -1.05,
+          1.05
+        ],
+        "native_cell_count": 3432,
+        "alpha_min_max": [
+          -1.4029452079233895e-11,
+          1.0
+        ],
+        "p_min_max_abs_Pa": [
+          33095.640625,
+          147208.5625
+        ],
+        "speed_min_max_m_s": [
+          0.05335647852300481,
+          16.314669978292592
+        ],
+        "local_min_p_abs_Pa": 33095.640625,
+        "local_min_p_location_xyz_m": [
+          4.220088005065918,
+          -0.38081568479537964,
+          0.9709147214889526
+        ],
+        "alpha_at_local_min_p": 0.9971157312393188,
+        "speed_at_local_min_p_m_s": 12.2067413841736
+      },
+      "minimum_location_spatial_checks": {
+        "nearest_transitional_alpha_cell_center_distance_m": 0.03888876554464008,
+        "nearest_transitional_alpha_cell_center_xyz_m": [
+          4.215719223022461,
+          -0.3803211450576782,
+          0.9322752952575684
+        ],
+        "distance_to_apparatus_wall_stl_m": 0.007919352725811828,
+        "distance_to_lamella_mid_surface_stl_m": 0.005183037014842665,
+        "x_offset_from_lamella_mid_surface_start_m": 0.003421306610107422,
+        "equivalent_cubic_native_cell_width_mm": 11.220193079855378,
+        "neighboring_x_band_median_equivalent_width_mm": {
+          "before": 13.096173866196445,
+          "after": 13.482753434039388,
+          "before_cell_count": 37,
+          "after_cell_count": 27,
+          "selection": "within 20 mm of global p-minimum y and 100 mm of its z; x offsets 10-40 mm"
+        },
+        "thin_band_median_equivalent_width_by_x_bin": [
+          {
+            "x_min_m": 4.1,
+            "x_max_m": 4.16,
+            "native_cell_count": 16,
+            "median_equivalent_cubic_cell_width_mm": 25.230840595433133
+          },
+          {
+            "x_min_m": 4.16,
+            "x_max_m": 4.2,
+            "native_cell_count": 22,
+            "median_equivalent_cubic_cell_width_mm": 16.915557295763826
+          },
+          {
+            "x_min_m": 4.2,
+            "x_max_m": 4.22,
+            "native_cell_count": 21,
+            "median_equivalent_cubic_cell_width_mm": 13.196921682540928
+          },
+          {
+            "x_min_m": 4.22,
+            "x_max_m": 4.24,
+            "native_cell_count": 20,
+            "median_equivalent_cubic_cell_width_mm": 13.21684016571283
+          },
+          {
+            "x_min_m": 4.24,
+            "x_max_m": 4.28,
+            "native_cell_count": 20,
+            "median_equivalent_cubic_cell_width_mm": 13.028609810104342
+          },
+          {
+            "x_min_m": 4.28,
+            "x_max_m": 4.36,
+            "native_cell_count": 32,
+            "median_equivalent_cubic_cell_width_mm": 12.885894583914245
+          },
+          {
+            "x_min_m": 4.36,
+            "x_max_m": 4.5,
+            "native_cell_count": 54,
+            "median_equivalent_cubic_cell_width_mm": 25.496203247307538
+          },
+          {
+            "x_min_m": 4.5,
+            "x_max_m": 4.7,
+            "native_cell_count": 220,
+            "median_equivalent_cubic_cell_width_mm": 12.843796517073656
+          },
+          {
+            "x_min_m": 4.7,
+            "x_max_m": 4.9,
+            "native_cell_count": 156,
+            "median_equivalent_cubic_cell_width_mm": 24.637103959828348
+          }
+        ],
+        "minimum_centered_median_equivalent_width_by_x_offset_bin": [
+          {
+            "x_offset_min_from_pmin_m": -0.040000000000000036,
+            "x_offset_max_from_pmin_m": -0.019999999999999574,
+            "native_cell_count": 23,
+            "median_equivalent_cubic_cell_width_mm": 12.838532123717906
+          },
+          {
+            "x_offset_min_from_pmin_m": -0.019999999999999574,
+            "x_offset_max_from_pmin_m": -0.009999999999999787,
+            "native_cell_count": 14,
+            "median_equivalent_cubic_cell_width_mm": 13.147285330042028
+          },
+          {
+            "x_offset_min_from_pmin_m": -0.009999999999999787,
+            "x_offset_max_from_pmin_m": 0.0,
+            "native_cell_count": 15,
+            "median_equivalent_cubic_cell_width_mm": 12.283137094298011
+          },
+          {
+            "x_offset_min_from_pmin_m": 0.0,
+            "x_offset_max_from_pmin_m": 0.009999999999999787,
+            "native_cell_count": 14,
+            "median_equivalent_cubic_cell_width_mm": 12.661837033464668
+          },
+          {
+            "x_offset_min_from_pmin_m": 0.009999999999999787,
+            "x_offset_max_from_pmin_m": 0.019999999999999574,
+            "native_cell_count": 10,
+            "median_equivalent_cubic_cell_width_mm": 13.538551116185413
+          },
+          {
+            "x_offset_min_from_pmin_m": 0.019999999999999574,
+            "x_offset_max_from_pmin_m": 0.040000000000000036,
+            "native_cell_count": 17,
+            "median_equivalent_cubic_cell_width_mm": 13.08918404157453
+          }
+        ]
+      }
+    }
+  ],
+  "source_files_after": {
+    "outer8/0.490698039854/alpha.water": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/alpha.water",
+      "size_bytes": 2652298,
+      "sha256": "2b4e7f49693d37e1b33add9f2a1fb45bf441b8e16c3a2b2a6b2ada5a51356c06"
+    },
+    "outer8/0.490698039854/p": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/p",
+      "size_bytes": 3206857,
+      "sha256": "7c7d5839a16308da4903c645d775d6d3b40ae9a2fbd055a47684c9fa83bd75f0"
+    },
+    "outer8/0.490698039854/U": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854/U",
+      "size_bytes": 7938894,
+      "sha256": "5dae2fc10fa29be465201c173fd3b769a5ae0ac55a9cd61676c36f230506cfc6"
+    },
+    "outer16/0.490706656519/alpha.water": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/alpha.water",
+      "size_bytes": 2652298,
+      "sha256": "6e48ffd2eddcfedcc6535dd37d129e6bc4bf9dedd7b2ba365662c1fe73142a8f"
+    },
+    "outer16/0.490706656519/p": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/p",
+      "size_bytes": 3206857,
+      "sha256": "24f7de11fa3a8608c0167f7d88701a8459d1f9e99b2c2d49fd10b8e22dfac9b3"
+    },
+    "outer16/0.490706656519/U": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519/U",
+      "size_bytes": 7938894,
+      "sha256": "cddd6327b2a455bd7f1922b3f634ef1add07d71069285c6c154c130857f769bd"
+    },
+    "outer8/constant/C": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/C",
+      "size_bytes": 9123116,
+      "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c"
+    },
+    "outer8/constant/V": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/V",
+      "size_bytes": 2395321,
+      "sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99"
+    },
+    "outer16/constant/C": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/C",
+      "size_bytes": 9123116,
+      "sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c"
+    },
+    "outer16/constant/V": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/V",
+      "size_bytes": 2395321,
+      "sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99"
+    },
+    "outer8/constant/polyMesh/points": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/points",
+      "size_bytes": 8468240,
+      "sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779"
+    },
+    "outer8/constant/polyMesh/faces": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/faces",
+      "size_bytes": 19216782,
+      "sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460"
+    },
+    "outer8/constant/polyMesh/owner": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/owner",
+      "size_bytes": 3818980,
+      "sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47"
+    },
+    "outer8/constant/polyMesh/neighbour": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/neighbour",
+      "size_bytes": 3495612,
+      "sha256": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8"
+    },
+    "outer8/constant/polyMesh/boundary": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/polyMesh/boundary",
+      "size_bytes": 1771,
+      "sha256": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d"
+    },
+    "outer16/constant/polyMesh/points": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/points",
+      "size_bytes": 8468240,
+      "sha256": "d8f8b1ced61a976e884ee5cc30e6d602cdc5651a26eeeae2c2e6fe4f82a85779"
+    },
+    "outer16/constant/polyMesh/faces": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/faces",
+      "size_bytes": 19216782,
+      "sha256": "1223a748c933cf25f5a7e5ac46cc79ac64a4bd3f044734f8f2085c2d0e94a460"
+    },
+    "outer16/constant/polyMesh/owner": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/owner",
+      "size_bytes": 3818980,
+      "sha256": "ee9fa6e5f469cab2d12e835a184c0bf5f2127e69c457085ab2cd8c6c87f70b47"
+    },
+    "outer16/constant/polyMesh/neighbour": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/neighbour",
+      "size_bytes": 3495612,
+      "sha256": "014b5cdc0ba6f3ad23fe1d2b62b64c53af5dfec0c181bfed18e327deef687bc8"
+    },
+    "outer16/constant/polyMesh/boundary": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/constant/polyMesh/boundary",
+      "size_bytes": 1771,
+      "sha256": "b75f8c05918d72fc6de2269a60025e1acb996073ba142477e280167a010a655d"
+    },
+    "outer8/constant/triSurface/apparatusWall.stl": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/triSurface/apparatusWall.stl",
+      "size_bytes": 8381765,
+      "sha256": "72fda09da621c78cd6dc0df1a239e5564ab7dad66900b0560a859ee22135bde3"
+    },
+    "outer8/constant/triSurface/finalLamellaMidSurfaces.stl": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/constant/triSurface/finalLamellaMidSurfaces.stl",
+      "size_bytes": 30336,
+      "sha256": "a319fb493e12f904c984f97fea83f4e314825b00343ce446b470b7e83e9c4142"
+    },
+    "outer8/system/controlDict": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/controlDict",
+      "size_bytes": 933,
+      "sha256": "2672ae6c2e10fe999b5679fb4e0e4f246036d865a7089dee521d0068cc27c60e"
+    },
+    "outer8/system/fvSchemes": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/fvSchemes",
+      "size_bytes": 1405,
+      "sha256": "61460eb3b364143b7624ed823cd8da3ca9f0f4a04d186c4e4ce39e7648b7622e"
+    },
+    "outer8/system/fvSolution": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/fvSolution",
+      "size_bytes": 1920,
+      "sha256": "699341d677b881b9c07e65dfd14b8fcc498e18a9136914049e96f2dfdd955fff"
+    },
+    "outer8/system/meshPreparationProvenance.json": {
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/system/meshPreparationProvenance.json",
+      "size_bytes": 2083,
+      "sha256": "f89703fc9449e5fc6b2618e251f3cb6a68ec5ff8135cb86b0cf8af0b399c0e4b"
+    }
+  },
+  "source_hashes_unchanged": true,
+  "stl_bounds_xyz_m": {
+    "apparatus_wall": [
+      [
+        0.0,
+        4.798999786376953
+      ],
+      [
+        -1.0499999523162842,
+        1.0499999523162842
+      ],
+      [
+        0.3500228524208069,
+        1.7000000476837158
+      ]
+    ],
+    "lamella_mid_surface": [
+      [
+        4.2166666984558105,
+        4.800000190734863
+      ],
+      [
+        -0.9107599854469299,
+        0.9107599854469299
+      ],
+      [
+        0.5703725218772888,
+        0.9796274900436401
+      ]
+    ]
+  },
+  "interpretation_scope": "Spatial correspondence at two near-common-time snapshots only; no causal or convergence claim. The 8.617 microsecond physical-time offset is retained.",
+  "spatial_assessment": {
+    "summary": "Both global low-pressure cells are nearly pure water and lie about 3.3-3.4 mm downstream of the lamella STL streamwise start, close to the wall and divider-edge geometry. Their nearest transitional-alpha cell centers are 30-39 mm away. The minima at x\u22484.220 m are well downstream of the documented valve-source band x=1.95-2.25 m and valve seat x=2.25 m. Cell widths in min-centered bins are about 12-13.5 mm. In the positive-y sampled band, the median equivalent width changes from 16.9 mm over x=4.16-4.20 m to 13.2 mm over x=4.20-4.22 m, near the divider entrance. The low-pressure cells sit beside the divider edge in liquid, but the interface and a nearby refinement transition cannot be separated as causes by these two snapshots.",
+    "divider_reference": "lamella mid-surface STL x-minimum; not a measured plate edge",
+    "mesh_width_metric": "cube root of native OpenFOAM cell volume; equivalent width, not an edge length",
+    "limitations": [
+      "Only two snapshots, offset by 8.616665e-6 s, are compared.",
+      "The outer16 global p-min lies at y=-0.3808 m; positive-y thin-band bins characterize a nearby section, not that exact lateral location.",
+      "Spatial association does not establish why pressure is low or whether the transient is physical.",
+      "Valve source band and seat locations are read from the recorded apparatus inputs; this inspection does not revisit their construction."
+    ]
+  },
+  "image_sha256": {
+    "spatial-cutaway.png": "36eddeaea185b48227627e1242e50ed821aadef14914fdd20210aa7b5320938b",
+    "spatial-cutaway-xy.png": "08658076afdb16c40b0be69a5adcc0319d79759edb7c86f283ec44e965604379"
+  },
+  "observed_utc_finish": "2026-10-27T05:11:00.735268+00:00"
+}

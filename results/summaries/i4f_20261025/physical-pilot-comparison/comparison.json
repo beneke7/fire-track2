@@ -1,0 +1,2283 @@
+{
+  "analysis_bundle": "results/runs/i4f-physical-pilot-comparison-20261027T044453Z",
+  "arms": {
+    "dtcap_half_outer16": {
+      "arm": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16",
+      "attempt": "attempts/attempt-002-dtcap-half",
+      "branch_completed_steps": 170,
+      "branch_current_deltaT_s": 0.000125,
+      "branch_current_time_s": 0.412080595007,
+      "branch_status": "running",
+      "branch_stop_reason": null,
+      "container": {
+        "exit_code": 0,
+        "finished_at": "0001-01-01T00:00:00Z",
+        "id": "27cf3bd28cfe9366869a74e149bdd3974a7eab448c34915f08b5e12d8e2601c8",
+        "log_driver": "none",
+        "name": "i4f-phys-a050-o16-dt125-20261027t0400z-r002",
+        "oom_killed": false,
+        "paused": false,
+        "running": true,
+        "started_at": "2026-10-27T04:38:33.788407218Z",
+        "status": "running"
+      },
+      "control": {
+        "adjustTimeStep": "yes",
+        "endTime": "0.65",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT": "0.000125",
+        "startTime": "0.390705595007"
+      },
+      "dt_series": {
+        "count": 172,
+        "first_deltaT_s": 0.000125,
+        "first_time_s": 0.390830595007,
+        "last_deltaT_s": 0.000125,
+        "last_time_s": 0.412205595007,
+        "max_abs_deltaT_vs_printed_time_s": 3.511218009052963e-13,
+        "max_deltaT_s": 0.000125,
+        "min_deltaT_s": 0.000125
+      },
+      "first_raw_pressure_floor_contact": null,
+      "guard_diagnostic_counts": {
+        "diagnostic_error_samples": [],
+        "diagnostic_errors": 0,
+        "parser_error_samples": [],
+        "parser_errors": 0,
+        "thermo_envelope_errors": 0,
+        "thermo_error_samples": []
+      },
+      "guard_service": {
+        "active_state": "active",
+        "error": null,
+        "id": "i4f-phys-a050-o16-dt125-20261027t0400z-r002-guard.service",
+        "query_returncode": 0,
+        "runtime_max_usec": "4h 15min 59s",
+        "sub_state": "running",
+        "timeout_start_usec": "1min 30s",
+        "unit": "i4f-phys-a050-o16-dt125-20261027t0400z-r002-guard.service"
+      },
+      "guard_status": "guard_verified_waiting_for_GO_release",
+      "initial_phase_mass": {
+        "gas_inventory_kg": 33.44994441190634,
+        "water_inventory_kg": 3198.008235360192
+      },
+      "latest_guard_mass_budget": {
+        "gas_boundary_flux_kg_s": 2.549158175253158,
+        "gas_cumulative_defect_fraction_initial": 1.5336001114197705e-07,
+        "gas_cumulative_defect_kg": -5.195310550300966e-06,
+        "gas_inventory_kg": 33.39695460858773,
+        "water_boundary_flux_kg_s": 7.067813303570587e-23,
+        "water_cumulative_defect_fraction_initial": 1.0332202907278954e-07,
+        "water_cumulative_defect_kg": -0.00033042471386579564,
+        "water_inventory_kg": 3198.008060545581
+      },
+      "latest_guard_step_health": {
+        "coldstart_age_s": 0.3211844283429557,
+        "deltaT_from_printed_times_s": 0.00012500000000004174,
+        "deltaT_logged_s": 0.000125,
+        "final_field_min_T_K": 243.49647648397,
+        "final_field_min_p_Pa": 90615.16612773518,
+        "final_field_min_rho_kg_m3": 1.187304717912322,
+        "final_min_p_cell": 4954,
+        "final_min_p_location": "3.611373752531448 -0.4114689292595922 0.7366033646784422",
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_dU_m_s": 0.01094396163807008,
+        "final_outer_max_abs_dalpha1": 7.709804487054939e-07,
+        "final_outer_max_abs_dp_Pa": 0.61797171930084,
+        "final_outer_max_abs_dphi_m3_s": 1.517132927990675e-05,
+        "final_outer_max_abs_drho2_kg_m3": 7.342841636948094e-06,
+        "gas_boundary_flux_kg_s": 2.549158175253158,
+        "gas_cumulative_defect_fraction_initial": 1.5336001114197705e-07,
+        "gas_cumulative_defect_kg": -5.195310550300966e-06,
+        "gas_inventory_kg": 33.39695460858773,
+        "gas_step_defect_fraction_initial": 6.842312584201993e-10,
+        "gas_step_defect_kg": -2.3179405434609838e-08,
+        "outer_iteration": 16,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_dU_m_s": 0.01053942692970675,
+        "penultimate_outer_max_abs_dalpha1": 1.555875885572711e-06,
+        "penultimate_outer_max_abs_dp_Pa": 0.8148187857004814,
+        "penultimate_outer_max_abs_dphi_m3_s": 1.99955931108331e-05,
+        "penultimate_outer_max_abs_drho2_kg_m3": 9.681664963068215e-06,
+        "phase_mass_pass": 5440,
+        "phi_scaled_screen_advisory_pass": null,
+        "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+        "phi_scaled_screen_threshold_m3_s": null,
+        "pressure_update_consecutive_steps": 0,
+        "pressure_update_final_to_penultimate_ratio": 0.7584161412891134,
+        "pressure_update_persistent_condition": false,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_settled": true,
+        "pressure_update_stop_action": "advisory_record_only",
+        "pressure_update_stop_after_steps": 3,
+        "pressure_update_threshold_Pa": 100.0,
+        "pressure_update_triggered_this_step": false,
+        "raw_clip_cells_at_peak_single_pass": 0,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 90576.91865662627,
+        "time_s": 0.411955595007,
+        "water_boundary_flux_kg_s": 7.067813303570587e-23,
+        "water_cumulative_defect_fraction_initial": 1.0332202907278954e-07,
+        "water_cumulative_defect_kg": -0.00033042471386579564,
+        "water_inventory_kg": 3198.008060545581,
+        "water_step_defect_fraction_initial": 6.573297450384242e-10,
+        "water_step_defect_kg": -2.1021460270276293e-06
+      },
+      "latest_raw_phase_mass_state": {
+        "gas_inventory_kg": 33.39631049191232,
+        "gas_signed_boundary_flux_kg_s": 2.55001074172509,
+        "pass": 5488.0,
+        "time_s": 0.412205595007,
+        "water_inventory_kg": 3198.008048566707,
+        "water_signed_boundary_flux_kg_s": -1.374970698004514e-24
+      },
+      "latest_recorded_field_extrema": {
+        "T": {
+          "field": "T",
+          "max": 293.347539,
+          "min": 243.472764,
+          "time_s": 0.412080595007
+        },
+        "mag(U)": {
+          "field": "mag(U)",
+          "max": 10.511373,
+          "min": 0.0,
+          "time_s": 0.412080595007
+        },
+        "p": {
+          "field": "p",
+          "max": 641247.278,
+          "min": 90603.1838,
+          "time_s": 0.412080595007
+        }
+      },
+      "native_checkpoint_time_dirs": [
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/processors10/0.390705595007",
+          "time_s": 0.390705595007
+        }
+      ],
+      "postprocessing_file_count": 39,
+      "postprocessing_files": [
+        {
+          "path": "ambientAnnulusAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "de48b92909261a3a2042f348fd07c0cd473bedb900daacbf9db0711a6cdbdf52",
+          "snapshot_bytes": 4227
+        },
+        {
+          "path": "ambientAnnulusWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "30f32afdd9ec84c34a21c8dafc4dd0772f563a15dc438cddcd64bf0d2995cdcb",
+          "snapshot_bytes": 5636
+        },
+        {
+          "path": "externalAirWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "6a2ea57db7d981bcd8f029d0b357950ac8e3682b4e5975a199a3e0e20925800e",
+          "snapshot_bytes": 5616
+        },
+        {
+          "path": "externalSidesAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5306cccb951a54e6fccb4a2f5cc881ed6c2250cccbda8c2d89a993e22caf12b7",
+          "snapshot_bytes": 4205
+        },
+        {
+          "path": "externalSidesWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "af5ab08024b553c46021f384c1a10a3a4a71252f58fc96969b9c9f4fcb706053",
+          "snapshot_bytes": 5635
+        },
+        {
+          "path": "farOutletAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "1cb4cb0d6cfbe70814064ebf2cd4bc9831e2753ff098a7eaa2ae6f0bbaa85d60",
+          "snapshot_bytes": 4275
+        },
+        {
+          "path": "farOutletWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "63077b9fe78b23668e29b75ae0c2416e8e31e9a016e711ec5356614ecf37534e",
+          "snapshot_bytes": 5802
+        },
+        {
+          "path": "fourMouthPlaneAreaAlpha/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "923350bc25988c268bf067c011d9e838bfb1ac85aa2218d1f8ac8f0cfe878b19",
+          "snapshot_bytes": 2889
+        },
+        {
+          "path": "fourMouthPlaneTotalUIntegral/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "0a0bbdfd1035c697ba59f38e4469f4d90df354dfecd7258575c7a7f5f2b4dfbe",
+          "snapshot_bytes": 13918
+        },
+        {
+          "path": "fourMouthPlaneWaterWeightedUIntegral/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5d6c2a648b878005e79173477ff5489cca384417ed17aa443ee5b047c54de99d",
+          "snapshot_bytes": 14063
+        },
+        {
+          "path": "i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+          "sha256": "f40f1aa49d04824338341c7203ade4f75e204fa1475adddaec763ab429ee7bfd",
+          "snapshot_bytes": 140020
+        },
+        {
+          "path": "i4fPimpleCaptureSpeedExtrema/0.390705595007/fieldMinMax.dat",
+          "sha256": "fec2b2cd1671de90a23fd7e47473eff400c9980c864666f6b70fed4111923231",
+          "snapshot_bytes": 28206
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/T",
+          "sha256": "a94aef5cbb6c2ab1487cfa94a452e531f08b7e98c94eedf35aeedf5db19960bf",
+          "snapshot_bytes": 8309
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/U",
+          "sha256": "da39e1bb9edff68a99459a4d439b67c4914b6ab5dd9403231d56919f6e5108f2",
+          "snapshot_bytes": 15710
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/alpha.water",
+          "sha256": "5a027bcca9d0d4e09b6e11731165d76393ac49fc04111fc075a1c627acb833cc",
+          "snapshot_bytes": 8309
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/p",
+          "sha256": "5e89ea7bd2ad754bf27783aae1a22f66331325c7e269c0f30040bca0d784484f",
+          "snapshot_bytes": 8309
+        },
+        {
+          "path": "lineAInitialWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "e2bec3daf851dc46851a1c00ef989c0b137e625db0d7c8c9408b4498938eec33",
+          "snapshot_bytes": 5616
+        },
+        {
+          "path": "lineAMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "17d7d6ddde620d1535f8ef544aa13b4a75248f57028031b725890bebaadb02de",
+          "snapshot_bytes": 5620
+        },
+        {
+          "path": "lineBInitialWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "33331337149ef94b20d2d53a8969e28fa62e157618514233200e652ad7709534",
+          "snapshot_bytes": 5616
+        },
+        {
+          "path": "lineBMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "e14e4e06273d838141f83bf454f195864a299da8d0a7745278db9e1fff055767",
+          "snapshot_bytes": 5620
+        },
+        {
+          "path": "seatFluxA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "f768fad576929b12e9fc7ef2e1fa604e1e6c39434a3926e45ced63a2523cea70",
+          "snapshot_bytes": 8205
+        },
+        {
+          "path": "seatFluxA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "a4624b3c244894ab04d8e8f45d3ce0853b7c341a91c05b7aa15361a171d0b400",
+          "snapshot_bytes": 8205
+        },
+        {
+          "path": "seatFluxB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "76a19a7f2a0e2e9c020ea15e2110418abb4ec3ed504e37058a0527b6e7eb90e1",
+          "snapshot_bytes": 8205
+        },
+        {
+          "path": "seatFluxB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "9f7b50cff8cee816b269608e9e991e2bfcb2e1f033a272b2ea8734651a873330",
+          "snapshot_bytes": 8205
+        },
+        {
+          "path": "seatPressureA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "490001aec44288143ea683df1d4e8ccbf53dafb26a87e803a9058035537e5a20",
+          "snapshot_bytes": 10783
+        },
+        {
+          "path": "seatPressureA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "f5ea38376b469617f91cf0f92249c2c94a39463a7a8dedee6d33fa595cbef4b6",
+          "snapshot_bytes": 10783
+        },
+        {
+          "path": "seatPressureB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "ef022a0600ff5a27e2fd265715c635624f7e82ac4b118a1a09d1ee6f58516d0d",
+          "snapshot_bytes": 10783
+        },
+        {
+          "path": "seatPressureB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "420c4f9970f42a68992adabbad7515b000ab1038884a33ff5b25bb4df40eda5e",
+          "snapshot_bytes": 10783
+        },
+        {
+          "path": "sourceStartFluxA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "dfbc8b204e00fc43cc7dc9096fd3b6f8cd26a57f7cfc736b3b29887a3822cdc5",
+          "snapshot_bytes": 8207
+        },
+        {
+          "path": "sourceStartFluxA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "c00098a57b9c28ea651f6fa9e972b4657ff2ed386978a22250dbf640f9eb8694",
+          "snapshot_bytes": 8207
+        },
+        {
+          "path": "sourceStartFluxB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "212dd6e78a678efba3e433a54ca9f1947057bf85fbe5a7bf3d8bb915cd90a367",
+          "snapshot_bytes": 8207
+        },
+        {
+          "path": "sourceStartFluxB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "2adac95b955b8a1c96a27fdcf08d733859ed5dab496adf4f28726407937761d6",
+          "snapshot_bytes": 8207
+        },
+        {
+          "path": "sourceStartPressureA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "a604319124beac154b3baaa3525e150c1ee3e7a4b14c38db3620e456a7da7de6",
+          "snapshot_bytes": 10785
+        },
+        {
+          "path": "sourceStartPressureA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "4cac4e587eddf8b786015d5b39302de5c7ae6c32cd9c8512643547e35b28e257",
+          "snapshot_bytes": 10785
+        },
+        {
+          "path": "sourceStartPressureB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "b334d23ad36a0cdc1437f7e724d70dbbeaa259b111142ff62041b92e90e53146",
+          "snapshot_bytes": 10785
+        },
+        {
+          "path": "sourceStartPressureB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5353cd0c4431dfb4bb9745b9b5aa511eb5d24fa9b27b629ff1aec4be0a923e62",
+          "snapshot_bytes": 10785
+        },
+        {
+          "path": "tankAWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "02c668d4dc9103bcf6dc06e452a5b6cadff4f116d1aa08b5a986332d881c2511",
+          "snapshot_bytes": 5609
+        },
+        {
+          "path": "tankBWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "0700b8b0c47b22d5ce8f013ddd20d4e73ae092522111c83d3d0e681aa7ec2a26",
+          "snapshot_bytes": 5609
+        },
+        {
+          "path": "totalWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "9dddbe44b1334df4c8dd91f21026b2fe71746ab26959aa34df103f7cdd86430b",
+          "snapshot_bytes": 5603
+        }
+      ],
+      "postprocessing_snapshot_bytes": 466342,
+      "raw_log": {
+        "incomplete_final_line": false,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/case/log.cold-coupled",
+        "snapshot_bytes": 56749375,
+        "snapshot_sha256": "394c025b0f8e987a646e3d3707b5700ba0e6a41ca6686ced93a0f72bb73b7a2c"
+      },
+      "raw_log_last_time_minus_guard_current_time_s": 0.00012499999999998623,
+      "raw_log_time_rows_minus_guard_completed_steps": 2,
+      "raw_minimum_pressure_state": {
+        "T_envelope_ok": 1.0,
+        "max_water_supported_T_K": 293.3475439857111,
+        "min_raw_water_pressure_Pa": 90553.5479557324,
+        "min_saturation_margin_Pa": 88188.06882127302,
+        "passes": 16,
+        "time_s": 0.412205595007
+      },
+      "raw_parser_coverage": {
+        "after_correctRho_mass_times": 172,
+        "log_time_rows": 172,
+        "outer_partial_or_unexpected_samples": [],
+        "outer_rows_per_time_histogram": {
+          "8": 1,
+          "16": 171
+        },
+        "outer_update_times": 172,
+        "phase_state_partial_or_unexpected_samples": [],
+        "phase_state_records_per_time_histogram": {
+          "32": 1,
+          "64": 171
+        },
+        "thermo_passes_per_time_histogram": {
+          "16": 1,
+          "32": 171
+        },
+        "thermo_times": 172,
+        "time_without_mass_count": 0,
+        "time_without_outer_delta_count": 0,
+        "time_without_thermo_count": 0
+      },
+      "raw_phase_inventory_delta_from_seed_kg": {
+        "gas": -0.05363391999402012,
+        "water": -0.0001867934847723518
+      },
+      "raw_pressure_floor_crossing_pass_count": 0,
+      "raw_token_counts": {
+        "I4F_ALPHA_SOURCE_MODE": 1,
+        "I4F_FROZEN_ALPHA_SOURCE": 5488,
+        "I4F_FULL_PREDICTOR_SOURCE_CELL": 5488,
+        "I4F_FULL_PREDICTOR_SOURCE_SUMMARY": 2744,
+        "I4F_INITIAL_PHASE_MASS": 1,
+        "I4F_OUTER_STATE_DELTA": 2744,
+        "I4F_PHASE_BOUNDARY_MASS_FLUX": 131712,
+        "I4F_PHASE_BOUNDARY_MASS_FLUX_SUM": 21952,
+        "I4F_PHASE_MASS_STATE": 10976,
+        "I4F_PHYSICAL_ALPHA_FLUX_RELAX": 2744,
+        "I4F_RESTART_OLDTIME_INITIAL": 12,
+        "I4F_THERMO_ENVELOPE": 5488
+      },
+      "runtime_budget_and_forecast": {
+        "branch_current_time_s": 0.412080595007,
+        "branch_reported_hard_deadline_matches_derived": true,
+        "branch_status": "running",
+        "declared_graceful_save_wall_s_from_StartedAt": 14400,
+        "declared_hard_wall_s_from_StartedAt": 15300,
+        "derived_graceful_save_deadline_utc": "2026-10-27T08:38:33.788407218Z",
+        "derived_hard_deadline_utc": "2026-10-27T08:53:33.788407218Z",
+        "docker_startedAt_matches_manifest": true,
+        "docker_started_at": "2026-10-27T04:38:33.788407218Z",
+        "eta_to_0_55": {
+          "before_graceful_save_deadline": true,
+          "before_hard_deadline": true,
+          "estimated_arrival_utc": "2026-10-27T07:07:56.744895+00:00",
+          "estimated_wall_hours_at_recent_rate": 2.1434685221135705,
+          "remaining_physical_time_s": 0.13779440499300005,
+          "target_time_s": 0.55
+        },
+        "eta_to_0_65": {
+          "before_graceful_save_deadline": false,
+          "before_hard_deadline": true,
+          "estimated_arrival_utc": "2026-10-27T08:41:16.744895+00:00",
+          "estimated_wall_hours_at_recent_rate": 3.699024077669297,
+          "remaining_physical_time_s": 0.23779440499300003,
+          "target_time_s": 0.65
+        },
+        "forecast_assumption": "recent solver ClockTime throughput persists; pressure-driven slowdown or changing MPI/I/O load can invalidate extrapolation",
+        "guard_reported_hard_deadline_utc": "2026-10-27T08:53:33.788407+00:00",
+        "guard_reported_hard_wall_s_from_StartedAt": 15300,
+        "guard_service": {
+          "active_state": "active",
+          "error": null,
+          "id": "i4f-phys-a050-o16-dt125-20261027t0400z-r002-guard.service",
+          "query_returncode": 0,
+          "runtime_max_usec": "4h 15min 59s",
+          "sub_state": "running",
+          "timeout_start_usec": "1min 30s",
+          "unit": "i4f-phys-a050-o16-dt125-20261027t0400z-r002-guard.service"
+        },
+        "guard_status": "guard_verified_waiting_for_GO_release",
+        "latest_log_time_s": 0.412205595007,
+        "manifest_deadlines_match_derived": true,
+        "manifest_docker_started_at": "2026-10-27T04:38:33.788407218Z",
+        "manifest_graceful_save_deadline_utc": "2026-10-27T08:38:33.788407+00:00",
+        "manifest_hard_deadline_utc": "2026-10-27T08:53:33.788407+00:00",
+        "recent_clock_sample": {
+          "association": "ExecutionTime/ClockTime row paired with latest preceding Time line; median of up to five recent positive intervals",
+          "clock_end_s": 1238.0,
+          "clock_start_s": 1203.0,
+          "intervals": 5,
+          "median_physical_s_per_wall_hour": 0.0642857142857072,
+          "rate_samples_physical_s_per_wall_hour": [
+            0.0642857142857072,
+            0.0642857142857072,
+            0.0642857142857072,
+            0.06428571428573575,
+            0.0642857142857072
+          ],
+          "time_end_s": 0.412080595007,
+          "time_start_s": 0.411455595007
+        },
+        "snapshot_utc": "2026-10-27T04:59:20.258215+00:00"
+      },
+      "seed_deltaT0_s": 0.00019254043,
+      "seed_deltaT_s": 0.00019241556,
+      "source_snapshot_sha256": {
+        "controlDict": "33d3daa7f71bf7d9b3c7612691e086aa1a4cd6edbc3c5b1654e04173cea7a265",
+        "guard_manifest": "8c2e60dce067ba6b7f1e674e538bbbf0d17c48c466301a997680d4f6740243f6",
+        "launch_manifest": "8429d184ecfdac8f1eb0f645f91fe17061a01b3dd0c479680ba6ae8e6eb2bc97",
+        "seed_time": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672",
+        "step_health_csv": null
+      },
+      "step_health_csv": {
+        "buffering_note": "live guard flushes step_health.csv every 256 rows; zero bytes can be buffered before that threshold",
+        "first_time_s": null,
+        "last_time_s": null,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-dtcap-half-outer16/attempts/attempt-002-dtcap-half/step_health.csv",
+        "rows": 0,
+        "snapshot_bytes": 0
+      }
+    },
+    "outer16": {
+      "arm": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16",
+      "attempt": "attempts/attempt-007-readiness-marker-retry",
+      "branch_completed_steps": 825,
+      "branch_current_deltaT_s": 0.0001684501863181984,
+      "branch_current_time_s": 0.51621220623,
+      "branch_status": "running",
+      "branch_stop_reason": null,
+      "container": {
+        "exit_code": 0,
+        "finished_at": "0001-01-01T00:00:00Z",
+        "id": "de0cc3d2a13034485c2415a7bbf744355f37c583a381df5f5fddff90a18bc3f3",
+        "log_driver": "none",
+        "name": "i4f-phys-a050-o16-20261027t024711z-r007",
+        "oom_killed": false,
+        "paused": false,
+        "running": true,
+        "started_at": "2026-10-27T03:37:59.016670377Z",
+        "status": "running"
+      },
+      "control": {
+        "adjustTimeStep": "yes",
+        "endTime": "0.65",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT": "0.00025",
+        "startTime": "0.390705595007"
+      },
+      "dt_series": {
+        "count": 826,
+        "first_deltaT_s": 0.0001922883635987606,
+        "first_time_s": 0.390897883371,
+        "last_deltaT_s": 0.0001684501863181984,
+        "last_time_s": 0.51621220623,
+        "max_abs_deltaT_vs_printed_time_s": 9.596351491225619e-13,
+        "max_deltaT_s": 0.0001922883635987606,
+        "min_deltaT_s": 9.197308360388619e-05
+      },
+      "first_raw_pressure_floor_contact": null,
+      "guard_diagnostic_counts": {
+        "diagnostic_error_samples": [],
+        "diagnostic_errors": 0,
+        "parser_error_samples": [],
+        "parser_errors": 0,
+        "thermo_envelope_errors": 0,
+        "thermo_error_samples": []
+      },
+      "guard_service": {
+        "active_state": "active",
+        "error": null,
+        "id": "i4f-phys-a050-o16-20261027t024711z-r007-guard.service",
+        "query_returncode": 0,
+        "runtime_max_usec": "2h 15min 59s",
+        "sub_state": "running",
+        "timeout_start_usec": "1min 30s",
+        "unit": "i4f-phys-a050-o16-20261027t024711z-r007-guard.service"
+      },
+      "guard_status": "guard_verified_waiting_for_GO_release",
+      "initial_phase_mass": {
+        "gas_inventory_kg": 33.44994441190634,
+        "water_inventory_kg": 3198.008235360192
+      },
+      "latest_guard_mass_budget": {
+        "gas_boundary_flux_kg_s": 2.905099086104878,
+        "gas_cumulative_defect_fraction_initial": 6.168748410126047e-07,
+        "gas_cumulative_defect_kg": -2.089760130990755e-05,
+        "gas_inventory_kg": 33.11025987922147,
+        "water_boundary_flux_kg_s": 2.210251242871173e-17,
+        "water_cumulative_defect_fraction_initial": 1.2040307467276184e-06,
+        "water_cumulative_defect_kg": -0.003850500406770152,
+        "water_inventory_kg": 3198.004540469888
+      },
+      "latest_guard_step_health": {
+        "coldstart_age_s": 0.42527258937995566,
+        "deltaT_from_printed_times_s": 0.00016760717200003938,
+        "deltaT_logged_s": 0.0001676071720059987,
+        "final_field_min_T_K": 225.1751812308082,
+        "final_field_min_p_Pa": 16268.99035429057,
+        "final_field_min_rho_kg_m3": 1.179057272197493,
+        "final_min_p_cell": 6813,
+        "final_min_p_location": "4.220574539836829 -0.6197414728830086 0.7266526537912908",
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_dU_m_s": 1.94124538922191,
+        "final_outer_max_abs_dalpha1": 0.0005209133728951709,
+        "final_outer_max_abs_dp_Pa": 303.3217938288399,
+        "final_outer_max_abs_dphi_m3_s": 0.0001361550410098215,
+        "final_outer_max_abs_drho2_kg_m3": 0.003605855933080021,
+        "gas_boundary_flux_kg_s": 2.905099086104878,
+        "gas_cumulative_defect_fraction_initial": 6.168748410126047e-07,
+        "gas_cumulative_defect_kg": -2.089760130990755e-05,
+        "gas_inventory_kg": 33.11025987922147,
+        "gas_step_defect_fraction_initial": 3.817644904580271e-10,
+        "gas_step_defect_kg": -1.2932869985062077e-08,
+        "outer_iteration": 16,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_dU_m_s": 1.192718827195161,
+        "penultimate_outer_max_abs_dalpha1": 0.0002658900332859204,
+        "penultimate_outer_max_abs_dp_Pa": 303.8928655023083,
+        "penultimate_outer_max_abs_dphi_m3_s": 8.385761550828156e-05,
+        "penultimate_outer_max_abs_drho2_kg_m3": 0.003612639368801657,
+        "phase_mass_pass": 26400,
+        "phi_scaled_screen_advisory_pass": null,
+        "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+        "phi_scaled_screen_threshold_m3_s": null,
+        "pressure_update_consecutive_steps": 3,
+        "pressure_update_final_to_penultimate_ratio": 0.998120812502378,
+        "pressure_update_persistent_condition": true,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_settled": true,
+        "pressure_update_stop_action": "advisory_record_only",
+        "pressure_update_stop_after_steps": 3,
+        "pressure_update_threshold_Pa": 100.0,
+        "pressure_update_triggered_this_step": true,
+        "raw_clip_cells_at_peak_single_pass": 0,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 16101.60690511906,
+        "time_s": 0.516043756044,
+        "water_boundary_flux_kg_s": 2.210251242871173e-17,
+        "water_cumulative_defect_fraction_initial": 1.2040307467276184e-06,
+        "water_cumulative_defect_kg": -0.003850500406770152,
+        "water_inventory_kg": 3198.004540469888,
+        "water_step_defect_fraction_initial": 4.658598410664304e-09,
+        "water_step_defect_kg": -1.4898236713634102e-05
+      },
+      "latest_raw_phase_mass_state": {
+        "gas_inventory_kg": 33.10976600588501,
+        "gas_signed_boundary_flux_kg_s": 2.909922224105618,
+        "pass": 26418.0,
+        "time_s": 0.51621220623,
+        "water_inventory_kg": 3198.004517099299,
+        "water_signed_boundary_flux_kg_s": 2.4468656279849e-17
+      },
+      "latest_recorded_field_extrema": {
+        "T": {
+          "field": "T",
+          "max": 293.371431,
+          "min": 225.148494,
+          "time_s": 0.51621220623
+        },
+        "mag(U)": {
+          "field": "mag(U)",
+          "max": 20.349607,
+          "min": 0.0,
+          "time_s": 0.51621220623
+        },
+        "p": {
+          "field": "p",
+          "max": 493237.563,
+          "min": 16248.9354,
+          "time_s": 0.51621220623
+        }
+      },
+      "native_checkpoint_time_dirs": [
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.390705595007",
+          "time_s": 0.390705595007
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/processors10/0.490706656519",
+          "time_s": 0.490706656519
+        }
+      ],
+      "postprocessing_file_count": 39,
+      "postprocessing_files": [
+        {
+          "path": "ambientAnnulusAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "a580f8735888887c78bd78540861ce7ffa4b7b13b7c2736ca4972bd48d2bad30",
+          "snapshot_bytes": 23675
+        },
+        {
+          "path": "ambientAnnulusWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "1dfe72957341168702e8e2f11832c6fbd0acf501c88c13978e2e38d14b82a5bc",
+          "snapshot_bytes": 26596
+        },
+        {
+          "path": "externalAirWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "19fd61471bb7f6fccb4e8added7f7e8914444fbc3d1de9453c75b27f3a7cd3c3",
+          "snapshot_bytes": 26576
+        },
+        {
+          "path": "externalSidesAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "635a71f8e64f969ce6cec483d01c45e8484556c0754c7720564233b91449ec33",
+          "snapshot_bytes": 23531
+        },
+        {
+          "path": "externalSidesWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "e5e37602e36ff54c752e7f93b467c327b2858fbdff042306a97fd6ee2d3067df",
+          "snapshot_bytes": 26595
+        },
+        {
+          "path": "farOutletAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "7d9081365155da796dde80633971f434dfe45d2fe538163a765cba7342a52305",
+          "snapshot_bytes": 23986
+        },
+        {
+          "path": "farOutletWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "2831cecef0ba6584cea2262a6e056f3080c4840420ec6b0ee1ff3639846a5bbe",
+          "snapshot_bytes": 27363
+        },
+        {
+          "path": "fourMouthPlaneAreaAlpha/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "9eb542a123a188c7ed668a377c1d8ab94640e7166b71e1e3affd4ff578db332e",
+          "snapshot_bytes": 15993
+        },
+        {
+          "path": "fourMouthPlaneTotalUIntegral/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "17feca458ef4ba9bda1eb2cf6acf58a02bdb22deedbb87f43b99e1bf17e083d4",
+          "snapshot_bytes": 67010
+        },
+        {
+          "path": "fourMouthPlaneWaterWeightedUIntegral/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "1eb750d765f9512860a39521b01bc9eadbec0158ec8fb38290a34920062bb6ba",
+          "snapshot_bytes": 67118
+        },
+        {
+          "path": "i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+          "sha256": "d38a2725ce979a72f7b08c6702adc5772c7577210b8904ac3cc9d88964620ea1",
+          "snapshot_bytes": 673019
+        },
+        {
+          "path": "i4fPimpleCaptureSpeedExtrema/0.390705595007/fieldMinMax.dat",
+          "sha256": "911c722fae8c87a2d0c812cc6b8cea2b3bf949a7cff12213b8797a8043542b79",
+          "snapshot_bytes": 135270
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/T",
+          "sha256": "8fb478f37f1dfe25c3131491e6d2a336da58df95e8677131b352b6af11f30a8a",
+          "snapshot_bytes": 39749
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/U",
+          "sha256": "a87c5c59d5817641d4f4a46cf933c67423350924ecc6090b2210df7e294bf733",
+          "snapshot_bytes": 75553
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/alpha.water",
+          "sha256": "5904eb58af4fc5b552499fe0523aacd24581471b42b716349ae6fb8ed47b5dae",
+          "snapshot_bytes": 39749
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/p",
+          "sha256": "46ddee15f6394c538e32df5c9514a84741872e684a65ea68b8d84eeefa133fb1",
+          "snapshot_bytes": 39749
+        },
+        {
+          "path": "lineAInitialWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "1d911b27e0189bb41627cd896a018db4dfd978c5c15cc69b6ecd746bb59954be",
+          "snapshot_bytes": 26576
+        },
+        {
+          "path": "lineAMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "3dc325e2e654f6e1fc7fec48dc452a8564a441d75b591d3d4703b10a85e52b63",
+          "snapshot_bytes": 26580
+        },
+        {
+          "path": "lineBInitialWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "62a27126e787a2a05aa4f0e3f625dbadf7c8b51d53c88fa37616f40d5c18bf66",
+          "snapshot_bytes": 26576
+        },
+        {
+          "path": "lineBMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "0e6df1b7bbbeedae467c16c0315ba11cd2e220b4e9bccba3d22757113b433789",
+          "snapshot_bytes": 26580
+        },
+        {
+          "path": "seatFluxA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "0323bbdfa408e94d6058b2ff36430d31f22eb154f044a23cda62c55f5982a86d",
+          "snapshot_bytes": 38990
+        },
+        {
+          "path": "seatFluxA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "73a89ae0cc00f13713c7c53f30b95080b9cd0e9c7d996edae922999f03c4010b",
+          "snapshot_bytes": 38990
+        },
+        {
+          "path": "seatFluxB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5e27b11cde6a86a1c6c3888927d7748012aa073847adbbd1b8720817e181befb",
+          "snapshot_bytes": 38990
+        },
+        {
+          "path": "seatFluxB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5bd07a273ee17b105eaf1db9250c03dcdc1a76fe75895fceccfe8ba36c1945e1",
+          "snapshot_bytes": 38990
+        },
+        {
+          "path": "seatPressureA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "184473f8e7a01ac118c7f1567e442d77cefc38e120789ece3234e763c0c92fcc",
+          "snapshot_bytes": 51393
+        },
+        {
+          "path": "seatPressureA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "01f7782ba3a52e16b16511725c5baccd2af11627a13b824f2e40f65a18031c2a",
+          "snapshot_bytes": 51393
+        },
+        {
+          "path": "seatPressureB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "212afad566a28eb7992349613d664737c683f371ef556e10e111f48e4f501dbb",
+          "snapshot_bytes": 51393
+        },
+        {
+          "path": "seatPressureB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "edaca8a99c6a15f3ae2739b615ab9924019271131c58bf6bd3bb1400d24cfcc6",
+          "snapshot_bytes": 51393
+        },
+        {
+          "path": "sourceStartFluxA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "b51ba7793eeb7606d83092e71821178b4ef336576eb5072a8acf0140d5d0980a",
+          "snapshot_bytes": 38992
+        },
+        {
+          "path": "sourceStartFluxA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "b2511a08a39820e5216b102a9f3cf4219de795384cfce8d15f9df1dfb1dba63b",
+          "snapshot_bytes": 38992
+        },
+        {
+          "path": "sourceStartFluxB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "c1ab0435629888df16e275f18196ddabf94f6ea16e8f171c69543c51f1f46bd0",
+          "snapshot_bytes": 38992
+        },
+        {
+          "path": "sourceStartFluxB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "e03e55816e53a4beabeaf4d7badcffae77b6581f265dbda7ba8db97c61b413ca",
+          "snapshot_bytes": 38992
+        },
+        {
+          "path": "sourceStartPressureA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "febd456561824fad9761a6c44a23385b3d2ff47b9f4913161fe4dacf33f2930d",
+          "snapshot_bytes": 51395
+        },
+        {
+          "path": "sourceStartPressureA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "1d49bbe585d791c5a293a3713188946c2f5b8a7e4cd55045025ea18fe6c9ce9b",
+          "snapshot_bytes": 51395
+        },
+        {
+          "path": "sourceStartPressureB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "78e6523f4aa216d70f55f622320038caf7067b9cd74c107e9e2b78c6bdeb4317",
+          "snapshot_bytes": 51395
+        },
+        {
+          "path": "sourceStartPressureB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "0e5b4202bff2675cdc22db7ff80e0012a13b96aa37914958cef97707ce80929f",
+          "snapshot_bytes": 51395
+        },
+        {
+          "path": "tankAWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "b3c6a2135b898595c7d4a55ad3d16d42fa9f3dec69bf40ec725d4c322fdd8c72",
+          "snapshot_bytes": 26569
+        },
+        {
+          "path": "tankBWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "9a4c80fe06347d22663ea64a5ef05c217d22b54f608e682c270a9abed941064c",
+          "snapshot_bytes": 26569
+        },
+        {
+          "path": "totalWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "a8855743334b37662758513a8de3da1d0a6e1d9a0c7e35b5206421c340e58a32",
+          "snapshot_bytes": 26563
+        }
+      ],
+      "postprocessing_snapshot_bytes": 2240625,
+      "raw_log": {
+        "incomplete_final_line": false,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/case/log.cold-coupled",
+        "snapshot_bytes": 273692543,
+        "snapshot_sha256": "a492802116ef3c5e7950daa12fbd4d915efd60a817d82822435db71d1e6eff07"
+      },
+      "raw_log_last_time_minus_guard_current_time_s": 0.0,
+      "raw_log_time_rows_minus_guard_completed_steps": 1,
+      "raw_minimum_pressure_state": {
+        "T_envelope_ok": 1.0,
+        "max_water_supported_T_K": 293.3461703107748,
+        "min_raw_water_pressure_Pa": 15986.22584570492,
+        "min_saturation_margin_Pa": 13621.32674011829,
+        "passes": 18,
+        "time_s": 0.51621220623
+      },
+      "raw_parser_coverage": {
+        "after_correctRho_mass_times": 826,
+        "log_time_rows": 826,
+        "outer_partial_or_unexpected_samples": [
+          {
+            "rows": 9,
+            "time_s": 0.51621220623
+          }
+        ],
+        "outer_rows_per_time_histogram": {
+          "9": 1,
+          "16": 825
+        },
+        "outer_update_times": 826,
+        "phase_state_partial_or_unexpected_samples": [
+          {
+            "records": 36,
+            "time_s": 0.51621220623
+          }
+        ],
+        "phase_state_records_per_time_histogram": {
+          "36": 1,
+          "64": 825
+        },
+        "thermo_passes_per_time_histogram": {
+          "18": 1,
+          "32": 825
+        },
+        "thermo_times": 826,
+        "time_without_mass_count": 0,
+        "time_without_outer_delta_count": 0,
+        "time_without_thermo_count": 0
+      },
+      "raw_phase_inventory_delta_from_seed_kg": {
+        "gas": -0.3401784060213302,
+        "water": -0.00371826089303795
+      },
+      "raw_pressure_floor_crossing_pass_count": 0,
+      "raw_token_counts": {
+        "I4F_ALPHA_SOURCE_MODE": 1,
+        "I4F_FROZEN_ALPHA_SOURCE": 26420,
+        "I4F_FULL_PREDICTOR_SOURCE_CELL": 26420,
+        "I4F_FULL_PREDICTOR_SOURCE_SUMMARY": 13209,
+        "I4F_INITIAL_PHASE_MASS": 1,
+        "I4F_OUTER_STATE_DELTA": 13209,
+        "I4F_PHASE_BOUNDARY_MASS_FLUX": 634032,
+        "I4F_PHASE_BOUNDARY_MASS_FLUX_SUM": 105672,
+        "I4F_PHASE_MASS_STATE": 52836,
+        "I4F_PHYSICAL_ALPHA_FLUX_RELAX": 13210,
+        "I4F_RESTART_OLDTIME_INITIAL": 12,
+        "I4F_THERMO_ENVELOPE": 26418
+      },
+      "runtime_budget_and_forecast": {
+        "branch_current_time_s": 0.51621220623,
+        "branch_reported_hard_deadline_matches_derived": true,
+        "branch_status": "running",
+        "declared_graceful_save_wall_s_from_StartedAt": 7200,
+        "declared_hard_wall_s_from_StartedAt": 8100,
+        "derived_graceful_save_deadline_utc": "2026-10-27T05:37:59.016670377Z",
+        "derived_hard_deadline_utc": "2026-10-27T05:52:59.016670377Z",
+        "docker_startedAt_matches_manifest": true,
+        "docker_started_at": "2026-10-27T03:37:59.016670377Z",
+        "eta_to_0_55": {
+          "before_graceful_save_deadline": true,
+          "before_hard_deadline": true,
+          "estimated_arrival_utc": "2026-10-27T05:26:21.077347+00:00",
+          "estimated_wall_hours_at_recent_rate": 0.4502275366560174,
+          "remaining_physical_time_s": 0.033787793770000074,
+          "target_time_s": 0.55
+        },
+        "eta_to_0_65": {
+          "before_graceful_save_deadline": false,
+          "before_hard_deadline": false,
+          "estimated_arrival_utc": "2026-10-27T06:46:18.132588+00:00",
+          "estimated_wall_hours_at_recent_rate": 1.782742881460125,
+          "remaining_physical_time_s": 0.13378779377000005,
+          "target_time_s": 0.65
+        },
+        "forecast_assumption": "recent solver ClockTime throughput persists; pressure-driven slowdown or changing MPI/I/O load can invalidate extrapolation",
+        "guard_reported_hard_deadline_utc": "2026-10-27T05:52:59.016670+00:00",
+        "guard_reported_hard_wall_s_from_StartedAt": 8100,
+        "guard_service": {
+          "active_state": "active",
+          "error": null,
+          "id": "i4f-phys-a050-o16-20261027t024711z-r007-guard.service",
+          "query_returncode": 0,
+          "runtime_max_usec": "2h 15min 59s",
+          "sub_state": "running",
+          "timeout_start_usec": "1min 30s",
+          "unit": "i4f-phys-a050-o16-20261027t024711z-r007-guard.service"
+        },
+        "guard_status": "guard_verified_waiting_for_GO_release",
+        "latest_log_time_s": 0.51621220623,
+        "manifest_deadlines_match_derived": true,
+        "manifest_docker_started_at": "2026-10-27T03:37:59.016670377Z",
+        "manifest_graceful_save_deadline_utc": "2026-10-27T05:37:59.016670+00:00",
+        "manifest_hard_deadline_utc": "2026-10-27T05:52:59.016670+00:00",
+        "recent_clock_sample": {
+          "association": "ExecutionTime/ClockTime row paired with latest preceding Time line; median of up to five recent positive intervals",
+          "clock_end_s": 4864.0,
+          "clock_start_s": 4826.0,
+          "intervals": 5,
+          "median_physical_s_per_wall_hour": 0.07504604009997418,
+          "rate_samples_physical_s_per_wall_hour": [
+            0.07377962714996689,
+            0.07423671150003641,
+            0.0853482491999775,
+            0.07504604009997418,
+            0.08619797417144882
+          ],
+          "time_end_s": 0.516043756044,
+          "time_start_s": 0.515214499768
+        },
+        "snapshot_utc": "2026-10-27T04:59:20.258215+00:00"
+      },
+      "seed_deltaT0_s": 0.00019254043,
+      "seed_deltaT_s": 0.00019241556,
+      "source_snapshot_sha256": {
+        "controlDict": "8540ef4028fc8aa5840336fa097f63ff2a5bb1ba5ef4c13a87cd1f1ae11fc6e6",
+        "guard_manifest": "6f354cc1003dee2f7b7114a49697217db7fe2412dd333929ce4e7781f9d4b655",
+        "launch_manifest": "6407726edf2220d2813368ff3422e7bb429975db4c28498a259c0928027e1393",
+        "seed_time": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672",
+        "step_health_csv": "87082b3074f6b11b53b41f5f0ccc1969fb6fae3b3532dc3dbf1cee34c12d8ee4"
+      },
+      "step_health_csv": {
+        "buffering_note": "live guard flushes step_health.csv every 256 rows; zero bytes can be buffered before that threshold",
+        "first_time_s": 0.390897883371,
+        "last_time_s": 0.507347798565,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer16/attempts/attempt-007-readiness-marker-retry/step_health.csv",
+        "rows": 768,
+        "snapshot_bytes": 678460
+      }
+    },
+    "outer8": {
+      "arm": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8",
+      "attempt": null,
+      "branch_completed_steps": 836,
+      "branch_current_deltaT_s": 0.00017240555,
+      "branch_current_time_s": 0.518390228794,
+      "branch_status": "normal_End_complete_native10_checkpoint",
+      "branch_stop_reason": "thermo-envelope hard stop: water-supported raw pressure crossed the configured 10 kPa floor",
+      "container": {
+        "exit_code": 0,
+        "finished_at": "2026-10-27T04:23:37.627894255Z",
+        "id": "3b3d4b5c8159f8019d9860893b004b876d26714e544ed3ca8d1ced790f69e17e",
+        "log_driver": "none",
+        "name": "i4f-phys-a050-o8-20261027t024711z",
+        "oom_killed": false,
+        "paused": false,
+        "running": false,
+        "started_at": "2026-10-27T03:35:28.999921713Z",
+        "status": "exited"
+      },
+      "control": {
+        "adjustTimeStep": "yes",
+        "endTime": "0.65",
+        "maxAlphaCo": "0.25",
+        "maxCo": "0.5",
+        "maxDeltaT": "0.00025",
+        "startTime": "0.390705595007"
+      },
+      "dt_series": {
+        "count": 839,
+        "first_deltaT_s": 0.0001922883635987606,
+        "first_time_s": 0.390897883371,
+        "last_deltaT_s": 0.00017240555,
+        "last_time_s": 0.518390228794,
+        "max_abs_deltaT_vs_printed_time_s": 1.9999323377928313e-12,
+        "max_deltaT_s": 0.0001922883635987606,
+        "min_deltaT_s": 9.143370194746706e-05
+      },
+      "first_raw_pressure_floor_contact": {
+        "T_envelope_ok": 1.0,
+        "max_water_supported_T_K": 293.3512527708905,
+        "min_raw_water_pressure_Pa": 9608.110512183106,
+        "outer_iteration": 6691.0,
+        "pass": 13382.0,
+        "saturation_margin_Pa": 7242.088621721417,
+        "time_s": 0.518046177102
+      },
+      "guard_diagnostic_counts": {
+        "diagnostic_error_samples": [
+          {
+            "error": "missing terminal outer/phase mass/deltaT/thermo-envelope record for completed step",
+            "thermo_passes_seen": 5,
+            "time_s": 0.518046177102,
+            "utc": "2026-10-27T04:23:31.024401+00:00"
+          },
+          {
+            "error": "missing terminal outer/phase mass/deltaT/thermo-envelope record for completed step",
+            "thermo_passes_seen": 1,
+            "time_s": 0.518217823242,
+            "utc": "2026-10-27T04:23:36.047278+00:00"
+          },
+          {
+            "error": "missing terminal outer/phase mass/deltaT/thermo-envelope record for completed step",
+            "thermo_passes_seen": 1,
+            "time_s": 0.518390228794,
+            "utc": "2026-10-27T04:23:41.077421+00:00"
+          }
+        ],
+        "diagnostic_errors": 3,
+        "parser_error_samples": [],
+        "parser_errors": 0,
+        "thermo_envelope_errors": 20,
+        "thermo_error_samples": [
+          {
+            "error": "thermo envelope pressure-pass sequence has a gap or duplicate",
+            "line": "I4F_THERMO_ENVELOPE time_s=0.518217823242 outer=6702 pass=13404 alpha_cutoff=0.001 water_supported_cells=140693 min_raw_p_water_Pa=15961.05639567259 min_p_rank=7 min_p_local_cell=5794 min_p_alpha_water=0.9994889970786436 min_p_T_K=293.3343632581408 min_p_Cx_m=4.220419949051456 min_p_Cy_m=0.479711058170839 min_p_Cz_m=0.7208472958538508 max_T_water_supported_K=293.3610141717233 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2367.450928139677 saturation_margin_Pa=13593.60546753291 saturation_margin_ok=1",
+            "utc": "2026-10-27T04:23:36.045704+00:00"
+          },
+          {
+            "error": "thermo envelope pressure-pass sequence has a gap or duplicate",
+            "line": "I4F_THERMO_ENVELOPE time_s=0.518217823242 outer=6703 pass=13405 alpha_cutoff=0.001 water_supported_cells=140694 min_raw_p_water_Pa=10900.02476739043 min_p_rank=7 min_p_local_cell=5794 min_p_alpha_water=0.999140170279301 min_p_T_K=293.3343632581408 min_p_Cx_m=4.220419949051456 min_p_Cy_m=0.479711058170839 min_p_Cz_m=0.7208472958538508 max_T_water_supported_K=293.3610141717233 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2367.450928139677 saturation_margin_Pa=8532.573839250757 saturation_margin_ok=1",
+            "utc": "2026-10-27T04:23:36.046004+00:00"
+          },
+          {
+            "error": "water-supported raw pressure crossed the configured 10 kPa floor",
+            "line": "I4F_THERMO_ENVELOPE time_s=0.518217823242 outer=6703 pass=13406 alpha_cutoff=0.001 water_supported_cells=140694 min_raw_p_water_Pa=9803.231926737666 min_p_rank=7 min_p_local_cell=5794 min_p_alpha_water=0.999140170279301 min_p_T_K=293.3343632581408 min_p_Cx_m=4.220419949051456 min_p_Cy_m=0.479711058170839 min_p_Cz_m=0.7208472958538508 max_T_water_supported_K=293.3610141717233 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2367.450928139677 saturation_margin_Pa=7435.780998597989 saturation_margin_ok=1",
+            "utc": "2026-10-27T04:23:36.046197+00:00"
+          },
+          {
+            "error": "thermo envelope pressure-pass sequence has a gap or duplicate",
+            "line": "I4F_THERMO_ENVELOPE time_s=0.518217823242 outer=6704 pass=13407 alpha_cutoff=0.001 water_supported_cells=140694 min_raw_p_water_Pa=16656.68905249247 min_p_rank=2 min_p_local_cell=6813 min_p_alpha_water=0.9998196726745264 min_p_T_K=293.3339838180048 min_p_Cx_m=4.22040054652718 min_p_Cy_m=-0.6203066098742935 min_p_Cz_m=0.7208520932593586 max_T_water_supported_K=293.3610141717233 saturation_T_lower_K=273.15 saturation_T_upper_K=300 saturation_margin_limit_Pa=1000 T_envelope_ok=1 p_sat_Pa=2367.450928139677 saturation_margin_Pa=14289.23812435279 saturation_margin_ok=1",
+            "utc": "2026-10-27T04:23:36.046561+00:00"
+          }
+        ]
+      },
+      "guard_service": {
+        "active_state": "inactive",
+        "error": null,
+        "id": "i4f-phys-a050-o8-20261027t024711z-guard.service",
+        "query_returncode": 0,
+        "runtime_max_usec": "infinity",
+        "sub_state": "dead",
+        "timeout_start_usec": "1min 30s",
+        "unit": "i4f-phys-a050-o8-20261027t024711z-guard.service"
+      },
+      "guard_status": "solver_terminal",
+      "initial_phase_mass": {
+        "gas_inventory_kg": 33.44994441190634,
+        "water_inventory_kg": 3198.008235360192
+      },
+      "latest_guard_mass_budget": {
+        "gas_boundary_flux_kg_s": 2.941466803936247,
+        "gas_cumulative_defect_fraction_initial": 0.00018626730714709552,
+        "gas_cumulative_defect_kg": -0.0063100967376793346,
+        "gas_inventory_kg": 33.09859471826687,
+        "water_boundary_flux_kg_s": 5.186287876623641e-17,
+        "water_cumulative_defect_fraction_initial": 4.475558539257406e-06,
+        "water_cumulative_defect_kg": -0.014312873672679416,
+        "water_inventory_kg": 3197.994078096622
+      },
+      "latest_guard_step_health": {
+        "coldstart_age_s": 0.12716966524164885,
+        "deltaT_from_printed_times_s": 0.0001702410239999841,
+        "deltaT_logged_s": 0.0001702410242972013,
+        "final_field_min_T_K": 224.8773445504818,
+        "final_field_min_p_Pa": 15943.7745690331,
+        "final_field_min_rho_kg_m3": 1.179157379970981,
+        "final_min_p_cell": 6813,
+        "final_min_p_location": "4.220574539836829 -0.6197414728830086 0.7266526537912908",
+        "final_outer_max_abs_dT_K": 0.0,
+        "final_outer_max_abs_dU_m_s": 0.8911056109633909,
+        "final_outer_max_abs_dalpha1": 0.0005275270596877268,
+        "final_outer_max_abs_dp_Pa": 5082.184513057635,
+        "final_outer_max_abs_dphi_m3_s": 6.241348459353228e-05,
+        "final_outer_max_abs_drho2_kg_m3": 0.06040467935212676,
+        "gas_boundary_flux_kg_s": 2.941466803936247,
+        "gas_cumulative_defect_fraction_initial": 0.00018626730714709552,
+        "gas_cumulative_defect_kg": -0.0063100967376793346,
+        "gas_inventory_kg": 33.09859471826687,
+        "gas_step_defect_fraction_initial": 2.2014072615925005e-07,
+        "gas_step_defect_kg": -7.457611854939537e-06,
+        "outer_iteration": 8,
+        "penultimate_outer_max_abs_dT_K": 0.0,
+        "penultimate_outer_max_abs_dU_m_s": 1.279044422274057,
+        "penultimate_outer_max_abs_dalpha1": 0.001058060755948498,
+        "penultimate_outer_max_abs_dp_Pa": 4860.242862471694,
+        "penultimate_outer_max_abs_dphi_m3_s": 8.948386337530995e-05,
+        "penultimate_outer_max_abs_drho2_kg_m3": 0.05776639758641242,
+        "phase_mass_pass": 13376,
+        "phi_scaled_screen_advisory_pass": null,
+        "phi_scaled_screen_policy": "disabled because the inherited reference scale belongs to a different mesh; raw outer dphi is retained",
+        "phi_scaled_screen_threshold_m3_s": null,
+        "pressure_update_consecutive_steps": 34,
+        "pressure_update_final_to_penultimate_ratio": 1.0456647243494066,
+        "pressure_update_persistent_condition": true,
+        "pressure_update_ratio_threshold": 0.9,
+        "pressure_update_settled": true,
+        "pressure_update_stop_action": "advisory_record_only",
+        "pressure_update_stop_after_steps": 3,
+        "pressure_update_threshold_Pa": 100.0,
+        "pressure_update_triggered_this_step": true,
+        "raw_clip_cells_at_peak_single_pass": 0,
+        "raw_clipped_liquid_mass_peak_single_pass_kg": 0.0,
+        "raw_clipped_liquid_volume_peak_single_pass_m3": 0.0,
+        "raw_corrector_min_pressure_Pa_this_step": 11792.29173736763,
+        "thermo_envelope_pass_count": 16,
+        "thermo_max_water_supported_T_K": 293.3417422914752,
+        "thermo_min_margin_controller": {
+          "alpha_cutoff": 0.001,
+          "max_T_water_supported_K": 293.3417422914752,
+          "min_p_Cx_m": 4.220419949051456,
+          "min_p_Cy_m": 0.479711058170839,
+          "min_p_Cz_m": 0.7208472958538508,
+          "min_p_T_K": 293.3337941521551,
+          "min_p_alpha_water": 0.9994034502038556,
+          "min_p_local_cell": 5794,
+          "min_p_rank": 7,
+          "min_raw_p_water_Pa": 11792.29173736763,
+          "outer": 6687,
+          "p_sat_Pa": 2364.630314018196,
+          "pass": 13374,
+          "saturation_T_lower_K": 273.15,
+          "saturation_T_upper_K": 300.0,
+          "saturation_margin_Pa": 9427.661423349433,
+          "saturation_margin_limit_Pa": 1000.0,
+          "time_s": 0.517875260249,
+          "water_supported_cells": 140555
+        },
+        "thermo_min_raw_water_pressure_Pa": 11792.29173736763,
+        "thermo_min_saturation_margin_Pa": 9427.661423349433,
+        "time_s": 0.517875260249,
+        "water_boundary_flux_kg_s": 5.186287876623641e-17,
+        "water_cumulative_defect_fraction_initial": 4.475558539257406e-06,
+        "water_cumulative_defect_kg": -0.014312873672679416,
+        "water_inventory_kg": 3197.994078096622,
+        "water_step_defect_fraction_initial": 9.142413186410385e-09,
+        "water_step_defect_kg": -2.923751389971584e-05
+      },
+      "latest_raw_phase_mass_state": {
+        "gas_inventory_kg": 33.097055,
+        "gas_signed_boundary_flux_kg_s": 2.9471918,
+        "pass": 13424.0,
+        "time_s": 0.518390228794,
+        "water_inventory_kg": 3197.994,
+        "water_signed_boundary_flux_kg_s": 7.007439e-17
+      },
+      "latest_recorded_field_extrema": {
+        "T": {
+          "field": "T",
+          "max": 293.428927,
+          "min": 224.796222,
+          "time_s": 0.518390228794
+        },
+        "mag(U)": {
+          "field": "mag(U)",
+          "max": 23.4406725,
+          "min": 0.0,
+          "time_s": 0.518390228794
+        },
+        "p": {
+          "field": "p",
+          "max": 490629.466,
+          "min": 16054.988,
+          "time_s": 0.518390228794
+        }
+      },
+      "native_checkpoint_time_dirs": [
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.390705595007",
+          "time_s": 0.390705595007
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.490698039854",
+          "time_s": 0.490698039854
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/processors10/0.518390228794",
+          "time_s": 0.518390228794
+        }
+      ],
+      "postprocessing_file_count": 39,
+      "postprocessing_files": [
+        {
+          "path": "ambientAnnulusAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "e5c639179041fa91dfe55ba2d187b97ffd0f6537d99c747ba193cf0e280f718e",
+          "snapshot_bytes": 24049
+        },
+        {
+          "path": "ambientAnnulusWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "84edb7a19196936e900945fbbb0fcf8959dbfff96f24b2080f46c10742645641",
+          "snapshot_bytes": 27012
+        },
+        {
+          "path": "externalAirWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "49328916427002cbd8e39c6f7a152e2aaf4e047a50a954c006ac39a00f4c5779",
+          "snapshot_bytes": 26992
+        },
+        {
+          "path": "externalSidesAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "7fe7b5e12b9c7d5686ff2b72ae614919fb03d0ef5de34bc2ada9a4139b526abb",
+          "snapshot_bytes": 23905
+        },
+        {
+          "path": "externalSidesWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5723590ab223597743f5add98798d37c039ea2f697ef8c1430d6b7430ffb6d77",
+          "snapshot_bytes": 27011
+        },
+        {
+          "path": "farOutletAmbientGasDiagnostics/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "eb60768e2d117e89877ce6b58d6d24281e8ba9b24a874bf68e3628e0a5415dc6",
+          "snapshot_bytes": 24347
+        },
+        {
+          "path": "farOutletWaterPhaseFlux/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "8073a675c92bd70cb38442e7bea52bc7405a77eda6f8a32370fa386d375eef57",
+          "snapshot_bytes": 27781
+        },
+        {
+          "path": "fourMouthPlaneAreaAlpha/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "bc4675f0c3000bcfe93d35b3df85e4521bded79499aed674d5d4b68a93ae13b7",
+          "snapshot_bytes": 16245
+        },
+        {
+          "path": "fourMouthPlaneTotalUIntegral/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "d0498c25c395050f126d830ac2e82c7becf993df73fd368dd09ce55f144ce199",
+          "snapshot_bytes": 68063
+        },
+        {
+          "path": "fourMouthPlaneWaterWeightedUIntegral/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "091f98d8590a4c3635cb44baa613d3dad5cd218a0a6740d5c8ea0eaa6ecb8534",
+          "snapshot_bytes": 68171
+        },
+        {
+          "path": "i4fPimpleCaptureExtrema/0.390705595007/fieldMinMax.dat",
+          "sha256": "810d858e68eea01e4d94674fc45723bc62974fa2cab8755dee45bb20906dad97",
+          "snapshot_bytes": 683462
+        },
+        {
+          "path": "i4fPimpleCaptureSpeedExtrema/0.390705595007/fieldMinMax.dat",
+          "sha256": "0adbcbe2014e59612467ad8975a528a4da53f59052158dd72d9378d24a422fc8",
+          "snapshot_bytes": 137393
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/T",
+          "sha256": "fb40df5b18b304da2054cb45c4a05a7ec25eed38481eef3935d9870e1818b7ce",
+          "snapshot_bytes": 40373
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/U",
+          "sha256": "43c4867903d523edc98562c2f2a417ec8c38c0489cb09e76f4b77d43a9075d39",
+          "snapshot_bytes": 76727
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/alpha.water",
+          "sha256": "57f2cee655c76c8d903450252ddf39e44813a7118778bef05e85b690559e914d",
+          "snapshot_bytes": 40373
+        },
+        {
+          "path": "i4fTankHeadspaceProbes/0.390705595007/p",
+          "sha256": "8ced33e98f2185e4c02a06b4d915a7c49788d245a88c7ccc62185991f11f6fa6",
+          "snapshot_bytes": 40373
+        },
+        {
+          "path": "lineAInitialWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "f8a14acde90a51f039a884024218955af3e5fc2a78a9508142e320b400ecde3a",
+          "snapshot_bytes": 26992
+        },
+        {
+          "path": "lineAMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "ffd5ed76d3d81306e59c4f9da05703b55a20551bbb82fc01eee6dda99ba850a9",
+          "snapshot_bytes": 26996
+        },
+        {
+          "path": "lineBInitialWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "b894c66f542843573f9ed5212823d41f86b7ed00a6adb1260f7ba2e0a56e2cb1",
+          "snapshot_bytes": 26992
+        },
+        {
+          "path": "lineBMouthBoundaryWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "7fbe1de89d35da2bd1e5a822ba5d4dbadc409365f48d2aabc5ec0ad6214a1961",
+          "snapshot_bytes": 26996
+        },
+        {
+          "path": "seatFluxA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "04c84285955f1b848af4aed0992ff373b30425f1977cb0f7c284963f23af7be7",
+          "snapshot_bytes": 39601
+        },
+        {
+          "path": "seatFluxA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "01ebfe585237a5190aba46dc73961122a3f34218915e53b827f50e09179f47eb",
+          "snapshot_bytes": 39601
+        },
+        {
+          "path": "seatFluxB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "771c4e1489f72c4630500d1769da27df59686951cd65628bc0975d12bc40b227",
+          "snapshot_bytes": 39601
+        },
+        {
+          "path": "seatFluxB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "23aaaead116b121abd4d41c291a430a341bf64838a4ccc6a3aa6fc266fbbf861",
+          "snapshot_bytes": 39601
+        },
+        {
+          "path": "seatPressureA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "2cb6a91fc3dcf98fa342de5227763a534597c0236fd0e0cf76041f233c0baeca",
+          "snapshot_bytes": 52199
+        },
+        {
+          "path": "seatPressureA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "0a916ba2c3ae8eefa99d62f6727de387812ed7b42687044d89bc70b231f1ea22",
+          "snapshot_bytes": 52199
+        },
+        {
+          "path": "seatPressureB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "26e51a6a45c1ff8d2a08c43efda50c3a8858e8988e1ba3573299056be13aae2b",
+          "snapshot_bytes": 52199
+        },
+        {
+          "path": "seatPressureB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "1fe14ab613e30adbf3085171f3f048ea42dfd7b995a2f2909c156c6594932763",
+          "snapshot_bytes": 52199
+        },
+        {
+          "path": "sourceStartFluxA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "59eb7d1e5a39c3c3a95f82c1434dff0c11a8db07da53719eb76c230a10e0ff89",
+          "snapshot_bytes": 39603
+        },
+        {
+          "path": "sourceStartFluxA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "ec1d4f50970e6cb3780cae4f03695fc58ed5623d9d8c0d6282e84753fab03fb4",
+          "snapshot_bytes": 39603
+        },
+        {
+          "path": "sourceStartFluxB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "80d5afaca31252c0fef4707080271b176dcc2e02fb2f587a1bf199c81d00818c",
+          "snapshot_bytes": 39603
+        },
+        {
+          "path": "sourceStartFluxB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "8fa8471cf9419a6cdee1f13278b296e610d8db19e0f0d6f8494c3bd93a7a0918",
+          "snapshot_bytes": 39603
+        },
+        {
+          "path": "sourceStartPressureA1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "5e92520d7deecb015b626b29081cdf164bce3e5a69a245174dcbc284aeffd82f",
+          "snapshot_bytes": 52201
+        },
+        {
+          "path": "sourceStartPressureA2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "b9118ec4ede4e383737007100e11ce38f40bb6a7ed15a89356fc499b1c00c0ec",
+          "snapshot_bytes": 52201
+        },
+        {
+          "path": "sourceStartPressureB1/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "d5e495cbdc5ce44e0b3efb2e3e918263e3f682d53a303c22f39c3d56ddad802a",
+          "snapshot_bytes": 52201
+        },
+        {
+          "path": "sourceStartPressureB2/0.390705595007/surfaceFieldValue.dat",
+          "sha256": "196b142588b634f134a83da44f216eaa93bf5971ce7692aac80d6eccb4e9cee9",
+          "snapshot_bytes": 52201
+        },
+        {
+          "path": "tankAWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "931461e8e221dc05d549cc34a60e162ddd81a23f67953b34cfc6ab7355594b59",
+          "snapshot_bytes": 26985
+        },
+        {
+          "path": "tankBWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "95be66e3ce02e0c80c7005709ee14af4243d1b166762d64354dc429084ce5230",
+          "snapshot_bytes": 26985
+        },
+        {
+          "path": "totalWaterVolume/0.390705595007/volFieldValue.dat",
+          "sha256": "f4aef64266ac1949fd8b689713ef7a278e72b6e35f27b05a616ca1b40f1cc6dc",
+          "snapshot_bytes": 26979
+        }
+      ],
+      "postprocessing_snapshot_bytes": 2275618,
+      "raw_log": {
+        "incomplete_final_line": false,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/case/log.cold-coupled",
+        "snapshot_bytes": 141896045,
+        "snapshot_sha256": "b96b22117c3a80316dc6aad4c6c5cf6030bddaa57ef14d30a57d9b6bf83c8e3c"
+      },
+      "raw_log_last_time_minus_guard_current_time_s": 0.0,
+      "raw_log_time_rows_minus_guard_completed_steps": 3,
+      "raw_minimum_pressure_state": {
+        "T_envelope_ok": 1.0,
+        "max_water_supported_T_K": 293.3630299034511,
+        "min_raw_water_pressure_Pa": 8891.12717976374,
+        "min_saturation_margin_Pa": 6523.381060771346,
+        "passes": 16,
+        "time_s": 0.518217823242
+      },
+      "raw_parser_coverage": {
+        "after_correctRho_mass_times": 839,
+        "log_time_rows": 839,
+        "outer_partial_or_unexpected_samples": [],
+        "outer_rows_per_time_histogram": {
+          "8": 839
+        },
+        "outer_update_times": 839,
+        "phase_state_partial_or_unexpected_samples": [],
+        "phase_state_records_per_time_histogram": {
+          "32": 839
+        },
+        "thermo_passes_per_time_histogram": {
+          "16": 839
+        },
+        "thermo_times": 839,
+        "time_without_mass_count": 0,
+        "time_without_outer_delta_count": 0,
+        "time_without_thermo_count": 0
+      },
+      "raw_phase_inventory_delta_from_seed_kg": {
+        "gas": -0.3528894119063395,
+        "water": -0.014235360191833024
+      },
+      "raw_pressure_floor_crossing_pass_count": 10,
+      "raw_token_counts": {
+        "I4F_ALPHA_SOURCE_MODE": 1,
+        "I4F_FROZEN_ALPHA_SOURCE": 13424,
+        "I4F_FULL_PREDICTOR_SOURCE_CELL": 13424,
+        "I4F_FULL_PREDICTOR_SOURCE_SUMMARY": 6712,
+        "I4F_INITIAL_PHASE_MASS": 1,
+        "I4F_OUTER_STATE_DELTA": 6712,
+        "I4F_PHASE_BOUNDARY_MASS_FLUX": 322176,
+        "I4F_PHASE_BOUNDARY_MASS_FLUX_SUM": 53696,
+        "I4F_PHASE_MASS_STATE": 26848,
+        "I4F_PHYSICAL_ALPHA_FLUX_RELAX": 6712,
+        "I4F_RESTART_OLDTIME_INITIAL": 12,
+        "I4F_TERMINAL_CHECKPOINT_REQUEST": 1,
+        "I4F_THERMO_ENVELOPE": 13424
+      },
+      "runtime_budget_and_forecast": {
+        "branch_current_time_s": 0.518390228794,
+        "branch_reported_hard_deadline_matches_derived": true,
+        "branch_status": "normal_End_complete_native10_checkpoint",
+        "declared_graceful_save_wall_s_from_StartedAt": 7200,
+        "declared_hard_wall_s_from_StartedAt": 8100,
+        "derived_graceful_save_deadline_utc": "2026-10-27T05:35:28.999921713Z",
+        "derived_hard_deadline_utc": "2026-10-27T05:50:28.999921713Z",
+        "docker_startedAt_matches_manifest": true,
+        "docker_started_at": "2026-10-27T03:35:28.999921713Z",
+        "eta_to_0_55": null,
+        "eta_to_0_65": null,
+        "forecast_assumption": "recent solver ClockTime throughput persists; pressure-driven slowdown or changing MPI/I/O load can invalidate extrapolation",
+        "guard_reported_hard_deadline_utc": "2026-10-27T05:50:28.999921+00:00",
+        "guard_reported_hard_wall_s_from_StartedAt": 8100,
+        "guard_service": {
+          "active_state": "inactive",
+          "error": null,
+          "id": "i4f-phys-a050-o8-20261027t024711z-guard.service",
+          "query_returncode": 0,
+          "runtime_max_usec": "infinity",
+          "sub_state": "dead",
+          "timeout_start_usec": "1min 30s",
+          "unit": "i4f-phys-a050-o8-20261027t024711z-guard.service"
+        },
+        "guard_status": "solver_terminal",
+        "latest_log_time_s": 0.518390228794,
+        "manifest_deadlines_match_derived": true,
+        "manifest_docker_started_at": "2026-10-27T03:35:28.999921713Z",
+        "manifest_graceful_save_deadline_utc": "2026-10-27T05:35:28.999921+00:00",
+        "manifest_hard_deadline_utc": "2026-10-27T05:50:28.999921+00:00",
+        "recent_clock_sample": {
+          "association": "ExecutionTime/ClockTime row paired with latest preceding Time line; median of up to five recent positive intervals",
+          "clock_end_s": 2885.0,
+          "clock_start_s": 2865.0,
+          "intervals": 5,
+          "median_physical_s_per_wall_hour": 0.15382516769997245,
+          "rate_samples_physical_s_per_wall_hour": [
+            0.15262853580000346,
+            0.15321692159998568,
+            0.15382516769997245,
+            0.15448152600008314,
+            0.15516499679993911
+          ],
+          "time_end_s": 0.518390228794,
+          "time_start_s": 0.517535431963
+        },
+        "snapshot_utc": "2026-10-27T04:59:20.258215+00:00"
+      },
+      "seed_deltaT0_s": 0.00019254043,
+      "seed_deltaT_s": 0.00019241556,
+      "source_snapshot_sha256": {
+        "controlDict": "2672ae6c2e10fe999b5679fb4e0e4f246036d865a7089dee521d0068cc27c60e",
+        "guard_manifest": "ecfe3b0e0eac9f435b82ce28fbcf031e131820326567d175532fd6635bf83f62",
+        "launch_manifest": "1d4e90ba12fe874fb414007a9ae926cc75e18b142428923b59e2364b5e88bf77",
+        "seed_time": "2902800f854c10016e0480cbfe8170c616b9de40933e18df85e85046a389a672",
+        "step_health_csv": "ff280cfbf7288492b4a50bf082438730069cfedf42d15968f9f77e8ab227dfa2"
+      },
+      "step_health_csv": {
+        "buffering_note": "live guard flushes step_health.csv every 256 rows; zero bytes can be buffered before that threshold",
+        "first_time_s": 0.390897883371,
+        "last_time_s": 0.517875260249,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-outer-pair/outer8/step_health.csv",
+        "rows": 836,
+        "snapshot_bytes": 1287600
+      }
+    }
+  },
+  "common_time_coverage": {
+    "0.391": {
+      "available_in_dtcap_snapshot": true,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": null
+    },
+    "0.392": {
+      "available_in_dtcap_snapshot": true,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": null
+    },
+    "0.394": {
+      "available_in_dtcap_snapshot": true,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": null
+    },
+    "0.395": {
+      "available_in_dtcap_snapshot": true,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": null
+    },
+    "0.42": {
+      "available_in_dtcap_snapshot": false,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": "live dt-cap arm had not reached this physical time at snapshot"
+    },
+    "0.46": {
+      "available_in_dtcap_snapshot": false,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": "live dt-cap arm had not reached this physical time at snapshot"
+    },
+    "0.48": {
+      "available_in_dtcap_snapshot": false,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": "live dt-cap arm had not reached this physical time at snapshot"
+    },
+    "0.4907023481865": {
+      "available_in_dtcap_snapshot": false,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": "live dt-cap arm had not reached this physical time at snapshot"
+    },
+    "0.5": {
+      "available_in_dtcap_snapshot": false,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": "live dt-cap arm had not reached this physical time at snapshot"
+    },
+    "0.51": {
+      "available_in_dtcap_snapshot": false,
+      "bound_basis": "0.1 ms, approximately half the largest observed early adaptive step (0.1923 ms)",
+      "dtcap_latest_logged_time_s": 0.412205595007,
+      "nearest_sample_error_bound_s": 0.0001,
+      "reason_unavailable": "live dt-cap arm had not reached this physical time at snapshot"
+    }
+  },
+  "comparison_method": "nearest physical-time samples; no wall-time alignment or interpolation",
+  "comparison_window_end_s": 0.412205595007,
+  "created_utc": "2026-10-27T04:59:07.555160+00:00",
+  "late_outer8_vs_outer16_common_time_samples": [
+    {
+      "both_within_0_1ms_target_bound": true,
+      "outer16": {
+        "field_min_p_Pa": 89855.3687,
+        "final_max_abs_dU_m_s": 0.01917252724683154,
+        "final_max_abs_dp_Pa": 0.5747716550395126,
+        "four_valve_seat_water_flux_m3_s": 2.175169942,
+        "gas_inventory_kg": 33.37643428508071,
+        "max_water_T_K": 293.346714043634,
+        "penultimate_max_abs_dU_m_s": 0.005709772100347955,
+        "penultimate_max_abs_dp_Pa": 0.7753918539383449,
+        "raw_min_water_pressure_Pa": 89781.56431792935,
+        "water_inventory_kg": 3198.007901578771
+      },
+      "outer16_nearest_error_s": 4.613668799996473e-05,
+      "outer16_sample_time_s": 0.419953863312,
+      "outer8": {
+        "field_min_p_Pa": 89862.1836,
+        "final_max_abs_dU_m_s": 0.01751351794991085,
+        "final_max_abs_dp_Pa": 20.73025525111007,
+        "four_valve_seat_water_flux_m3_s": 2.175150524,
+        "gas_inventory_kg": 33.37487597082611,
+        "max_water_T_K": 293.3467140503943,
+        "penultimate_max_abs_dU_m_s": 0.01715478888916208,
+        "penultimate_max_abs_dp_Pa": 37.36255201249151,
+        "raw_min_water_pressure_Pa": 89788.8845476299,
+        "water_inventory_kg": 3198.005784692394
+      },
+      "outer8_minus_outer16": {
+        "field_min_p_Pa": 6.814899999997579,
+        "four_valve_seat_water_flux_m3_s": -1.9417999999937763e-05,
+        "gas_inventory_kg": -0.0015583142546020667,
+        "raw_min_water_pressure_Pa": 7.320229700548225,
+        "tank_A_water_volume_m3": 0.00012123000000019424,
+        "tank_B_water_volume_m3": 0.00012122000000003297,
+        "water_inventory_kg": -0.0021168863768252777
+      },
+      "outer8_nearest_error_s": 4.680670999995806e-05,
+      "outer8_sample_time_s": 0.41995319329,
+      "pairwise_sample_separation_s": 6.70021999993331e-07,
+      "tank_water_volume_m3": {
+        "outer16": {
+          "tankA": 1.13988243,
+          "tankB": 1.13988321
+        },
+        "outer8": {
+          "tankA": 1.14000366,
+          "tankB": 1.14000443
+        }
+      },
+      "target_time_s": 0.42,
+      "valve_seat_water_flux_by_nozzle_m3_s": {
+        "outer16": {
+          "seatFluxA1": 0.543998145,
+          "seatFluxA2": 0.543594195,
+          "seatFluxB1": 0.543985956,
+          "seatFluxB2": 0.543591646
+        },
+        "outer8": {
+          "seatFluxA1": 0.543993162,
+          "seatFluxA2": 0.54359067,
+          "seatFluxB1": 0.543979602,
+          "seatFluxB2": 0.54358709
+        }
+      }
+    },
+    {
+      "both_within_0_1ms_target_bound": true,
+      "outer16": {
+        "field_min_p_Pa": 84309.4795,
+        "final_max_abs_dU_m_s": 0.01718542189776037,
+        "final_max_abs_dp_Pa": 0.54238608929154,
+        "four_valve_seat_water_flux_m3_s": 2.314791211,
+        "gas_inventory_kg": 33.26941772735512,
+        "max_water_T_K": 293.3893337106066,
+        "penultimate_max_abs_dU_m_s": 0.01497284355754516,
+        "penultimate_max_abs_dp_Pa": 0.9518774243188091,
+        "raw_min_water_pressure_Pa": 84298.50767145562,
+        "water_inventory_kg": 3198.007352197105
+      },
+      "outer16_nearest_error_s": 1.5819214999990283e-05,
+      "outer16_sample_time_s": 0.460015819215,
+      "outer8": {
+        "field_min_p_Pa": 84339.7996,
+        "final_max_abs_dU_m_s": 0.01378111400162249,
+        "final_max_abs_dp_Pa": 11.15690978284692,
+        "four_valve_seat_water_flux_m3_s": 2.3148702940000003,
+        "gas_inventory_kg": 33.26575582344036,
+        "max_water_T_K": 293.3917224104025,
+        "penultimate_max_abs_dU_m_s": 0.0177268565659302,
+        "penultimate_max_abs_dp_Pa": 20.20132049813401,
+        "raw_min_water_pressure_Pa": 84328.32389875868,
+        "water_inventory_kg": 3198.002184813478
+      },
+      "outer8_minus_outer16": {
+        "field_min_p_Pa": 30.320099999997183,
+        "four_valve_seat_water_flux_m3_s": 7.908300000014634e-05,
+        "gas_inventory_kg": -0.0036619039147609556,
+        "raw_min_water_pressure_Pa": 29.81622730306117,
+        "tank_A_water_volume_m3": 0.0002716099999999777,
+        "tank_B_water_volume_m3": 0.0002716000000000385,
+        "water_inventory_kg": -0.005167383626940136
+      },
+      "outer8_nearest_error_s": 3.631056499997509e-05,
+      "outer8_sample_time_s": 0.460036310565,
+      "pairwise_sample_separation_s": 2.049134999998481e-05,
+      "tank_water_volume_m3": {
+        "outer16": {
+          "tankA": 1.09490749,
+          "tankB": 1.09490898
+        },
+        "outer8": {
+          "tankA": 1.0951791,
+          "tankB": 1.09518058
+        }
+      },
+      "target_time_s": 0.46,
+      "valve_seat_water_flux_by_nozzle_m3_s": {
+        "outer16": {
+          "seatFluxA1": 0.580138002,
+          "seatFluxA2": 0.577270015,
+          "seatFluxB1": 0.580117487,
+          "seatFluxB2": 0.577265707
+        },
+        "outer8": {
+          "seatFluxA1": 0.580154707,
+          "seatFluxA2": 0.577293239,
+          "seatFluxB1": 0.580132237,
+          "seatFluxB2": 0.577290111
+        }
+      }
+    },
+    {
+      "both_within_0_1ms_target_bound": true,
+      "outer16": {
+        "field_min_p_Pa": 62796.7428,
+        "final_max_abs_dU_m_s": 0.01291351771246624,
+        "final_max_abs_dp_Pa": 1.718757367489161,
+        "four_valve_seat_water_flux_m3_s": 2.376656097,
+        "gas_inventory_kg": 33.21379235718733,
+        "max_water_T_K": 293.4350126409242,
+        "penultimate_max_abs_dU_m_s": 0.0139713410803033,
+        "penultimate_max_abs_dp_Pa": 1.104914018913405,
+        "raw_min_water_pressure_Pa": 62814.27044521391,
+        "water_inventory_kg": 3198.007231543525
+      },
+      "outer16_nearest_error_s": 1.275167399999999e-05,
+      "outer16_sample_time_s": 0.479987248326,
+      "outer8": {
+        "field_min_p_Pa": 63258.3516,
+        "final_max_abs_dU_m_s": 0.01327250304998447,
+        "final_max_abs_dp_Pa": 46.7751878946583,
+        "four_valve_seat_water_flux_m3_s": 2.376652882,
+        "gas_inventory_kg": 33.20923598507852,
+        "max_water_T_K": 293.4183218710057,
+        "penultimate_max_abs_dU_m_s": 0.01418698651800427,
+        "penultimate_max_abs_dp_Pa": 49.95970172698435,
+        "raw_min_water_pressure_Pa": 63276.23121372201,
+        "water_inventory_kg": 3198.000946314982
+      },
+      "outer8_minus_outer16": {
+        "field_min_p_Pa": 461.6088000000018,
+        "four_valve_seat_water_flux_m3_s": -3.215000000000856e-06,
+        "gas_inventory_kg": -0.0045563721088086595,
+        "raw_min_water_pressure_Pa": 461.96076850809914,
+        "tank_A_water_volume_m3": 0.0003944099999999562,
+        "tank_B_water_volume_m3": 0.00039440000000001696,
+        "water_inventory_kg": -0.006285228543220001
+      },
+      "outer8_nearest_error_s": 1.965166699996468e-05,
+      "outer8_sample_time_s": 0.479980348333,
+      "pairwise_sample_separation_s": 6.899992999964688e-06,
+      "tank_water_volume_m3": {
+        "outer16": {
+          "tankA": 1.07149688,
+          "tankB": 1.0714989
+        },
+        "outer8": {
+          "tankA": 1.07189129,
+          "tankB": 1.0718933
+        }
+      },
+      "target_time_s": 0.48,
+      "valve_seat_water_flux_by_nozzle_m3_s": {
+        "outer16": {
+          "seatFluxA1": 0.595757124,
+          "seatFluxA2": 0.592584087,
+          "seatFluxB1": 0.595734903,
+          "seatFluxB2": 0.592579983
+        },
+        "outer8": {
+          "seatFluxA1": 0.59576508,
+          "seatFluxA2": 0.5925758,
+          "seatFluxB1": 0.595739588,
+          "seatFluxB2": 0.592572414
+        }
+      }
+    },
+    {
+      "both_within_0_1ms_target_bound": true,
+      "outer16": {
+        "field_min_p_Pa": 33035.5536,
+        "final_max_abs_dU_m_s": 0.4383100398528308,
+        "final_max_abs_dp_Pa": 67.10116521563032,
+        "four_valve_seat_water_flux_m3_s": 2.403519642,
+        "gas_inventory_kg": 33.18340844412155,
+        "max_water_T_K": 293.4229039801472,
+        "penultimate_max_abs_dU_m_s": 0.4390787927665775,
+        "penultimate_max_abs_dp_Pa": 60.50138932294794,
+        "raw_min_water_pressure_Pa": 33092.07737861139,
+        "water_inventory_kg": 3198.006876060242
+      },
+      "outer16_nearest_error_s": 4.308332499980416e-06,
+      "outer16_sample_time_s": 0.490706656519,
+      "outer8": {
+        "field_min_p_Pa": 33966.1446,
+        "final_max_abs_dU_m_s": 0.4836408351929942,
+        "final_max_abs_dp_Pa": 59.13290807203157,
+        "four_valve_seat_water_flux_m3_s": 2.403687524,
+        "gas_inventory_kg": 33.17836089687403,
+        "max_water_T_K": 293.4079677694253,
+        "penultimate_max_abs_dU_m_s": 0.5805458566691307,
+        "penultimate_max_abs_dp_Pa": 83.14207019942114,
+        "raw_min_water_pressure_Pa": 33993.93960467066,
+        "water_inventory_kg": 3197.999606739067
+      },
+      "outer8_minus_outer16": {
+        "field_min_p_Pa": 930.5910000000003,
+        "four_valve_seat_water_flux_m3_s": 0.00016788199999995257,
+        "gas_inventory_kg": -0.005047547247514217,
+        "raw_min_water_pressure_Pa": 901.8622260592674,
+        "tank_A_water_volume_m3": 0.00044573999999997227,
+        "tank_B_water_volume_m3": 0.00044573000000003304,
+        "water_inventory_kg": -0.007269321175044752
+      },
+      "outer8_nearest_error_s": 4.308332499980416e-06,
+      "outer8_sample_time_s": 0.490698039854,
+      "pairwise_sample_separation_s": 8.616664999960832e-06,
+      "tank_water_volume_m3": {
+        "outer16": {
+          "tankA": 1.05869355,
+          "tankB": 1.05869583
+        },
+        "outer8": {
+          "tankA": 1.05913929,
+          "tankB": 1.05914156
+        }
+      },
+      "target_time_s": 0.4907023481865,
+      "valve_seat_water_flux_by_nozzle_m3_s": {
+        "outer16": {
+          "seatFluxA1": 0.601955753,
+          "seatFluxA2": 0.599812435,
+          "seatFluxB1": 0.601942087,
+          "seatFluxB2": 0.599809367
+        },
+        "outer8": {
+          "seatFluxA1": 0.602014427,
+          "seatFluxA2": 0.599835938,
+          "seatFluxB1": 0.60200214,
+          "seatFluxB2": 0.599835019
+        }
+      }
+    },
+    {
+      "both_within_0_1ms_target_bound": true,
+      "outer16": {
+        "field_min_p_Pa": 29003.8888,
+        "final_max_abs_dU_m_s": 0.2243992791599069,
+        "final_max_abs_dp_Pa": 23.93660870863823,
+        "four_valve_seat_water_flux_m3_s": 2.420628036,
+        "gas_inventory_kg": 33.15679456828423,
+        "max_water_T_K": 293.3982646711939,
+        "penultimate_max_abs_dU_m_s": 0.3662111529097684,
+        "penultimate_max_abs_dp_Pa": 39.5112301708723,
+        "raw_min_water_pressure_Pa": 29060.35326902597,
+        "water_inventory_kg": 3198.006468664507
+      },
+      "outer16_nearest_error_s": 3.623204199998398e-05,
+      "outer16_sample_time_s": 0.499963767958,
+      "outer8": {
+        "field_min_p_Pa": 29752.0581,
+        "final_max_abs_dU_m_s": 0.6983966368602107,
+        "final_max_abs_dp_Pa": 78.50549051442067,
+        "four_valve_seat_water_flux_m3_s": 2.420737746,
+        "gas_inventory_kg": 33.15131683627249,
+        "max_water_T_K": 293.3901332402374,
+        "penultimate_max_abs_dU_m_s": 0.3759998618444261,
+        "penultimate_max_abs_dp_Pa": 46.83366586796183,
+        "raw_min_water_pressure_Pa": 29810.14163254708,
+        "water_inventory_kg": 3197.998200784513
+      },
+      "outer8_minus_outer16": {
+        "field_min_p_Pa": 748.1692999999977,
+        "four_valve_seat_water_flux_m3_s": 0.00010970999999981856,
+        "gas_inventory_kg": -0.0054777320117409545,
+        "raw_min_water_pressure_Pa": 749.7883635211074,
+        "tank_A_water_volume_m3": 0.00048250000000016335,
+        "tank_B_water_volume_m3": 0.0004824999999999413,
+        "water_inventory_kg": -0.008267879994036775
+      },
+      "outer8_nearest_error_s": 4.024955300002686e-05,
+      "outer8_sample_time_s": 0.499959750447,
+      "pairwise_sample_separation_s": 4.017511000042884e-06,
+      "tank_water_volume_m3": {
+        "outer16": {
+          "tankA": 1.04753547,
+          "tankB": 1.04753785
+        },
+        "outer8": {
+          "tankA": 1.04801797,
+          "tankB": 1.04802035
+        }
+      },
+      "target_time_s": 0.5,
+      "valve_seat_water_flux_by_nozzle_m3_s": {
+        "outer16": {
+          "seatFluxA1": 0.605683882,
+          "seatFluxA2": 0.604638143,
+          "seatFluxB1": 0.60567018,
+          "seatFluxB2": 0.604635831
+        },
+        "outer8": {
+          "seatFluxA1": 0.60568581,
+          "seatFluxA2": 0.604692382,
+          "seatFluxB1": 0.605672468,
+          "seatFluxB2": 0.604687086
+        }
+      }
+    },
+    {
+      "both_within_0_1ms_target_bound": true,
+      "outer16": {
+        "field_min_p_Pa": 20282.4896,
+        "final_max_abs_dU_m_s": 0.9946281287147497,
+        "final_max_abs_dp_Pa": 125.4099827565224,
+        "four_valve_seat_water_flux_m3_s": 2.43792546,
+        "gas_inventory_kg": 33.1277010272971,
+        "max_water_T_K": 293.4246043039843,
+        "penultimate_max_abs_dU_m_s": 1.503963234687134,
+        "penultimate_max_abs_dp_Pa": 183.0560974644904,
+        "raw_min_water_pressure_Pa": 20329.15634684491,
+        "water_inventory_kg": 3198.005452749362
+      },
+      "outer16_nearest_error_s": 1.1963074999954415e-05,
+      "outer16_sample_time_s": 0.510011963075,
+      "outer8": {
+        "field_min_p_Pa": 19717.1507,
+        "final_max_abs_dU_m_s": 0.8491854445151884,
+        "final_max_abs_dp_Pa": 105.2591727559775,
+        "four_valve_seat_water_flux_m3_s": 2.437985487,
+        "gas_inventory_kg": 33.12181460257168,
+        "max_water_T_K": 293.3892299855971,
+        "penultimate_max_abs_dU_m_s": 0.9149200045558482,
+        "penultimate_max_abs_dp_Pa": 105.398945173496,
+        "raw_min_water_pressure_Pa": 19753.4481208634,
+        "water_inventory_kg": 3197.996042180015
+      },
+      "outer8_minus_outer16": {
+        "field_min_p_Pa": -565.3389000000025,
+        "four_valve_seat_water_flux_m3_s": 6.002699999996253e-05,
+        "gas_inventory_kg": -0.005886424725417783,
+        "raw_min_water_pressure_Pa": -575.7082259815106,
+        "tank_A_water_volume_m3": 0.0005525600000000352,
+        "tank_B_water_volume_m3": 0.0005525799999999137,
+        "water_inventory_kg": -0.009410569346982811
+      },
+      "outer8_nearest_error_s": 1.1282377999966009e-05,
+      "outer8_sample_time_s": 0.509988717622,
+      "pairwise_sample_separation_s": 2.3245452999920424e-05,
+      "tank_water_volume_m3": {
+        "outer16": {
+          "tankA": 1.03534014,
+          "tankB": 1.03534261
+        },
+        "outer8": {
+          "tankA": 1.0358927,
+          "tankB": 1.03589519
+        }
+      },
+      "target_time_s": 0.51,
+      "valve_seat_water_flux_by_nozzle_m3_s": {
+        "outer16": {
+          "seatFluxA1": 0.610581883,
+          "seatFluxA2": 0.608383511,
+          "seatFluxB1": 0.610573852,
+          "seatFluxB2": 0.608386214
+        },
+        "outer8": {
+          "seatFluxA1": 0.610603776,
+          "seatFluxA2": 0.608391399,
+          "seatFluxB1": 0.610594612,
+          "seatFluxB2": 0.6083957
+        }
+      }
+    }
+  ],
+  "nearest_sample_policy": {
+    "basis": "0.1 ms bound is approximately half the largest observed early adaptive timestep (0.1923 ms); each row carries an explicit in-bound flag, and pairwise sample separation is also reported",
+    "maximum_absolute_target_error_s": 0.0001,
+    "method": "independent nearest physical-time sample per arm; no wall-time matching and no interpolation"
+  },
+  "parser_diagnostic_gap_assessment": {
+    "live_outer16_and_dtcap": {
+      "guard_errors": "No diagnostic, parser, or thermo-envelope guard errors in the snapshot.",
+      "interpretation": "Each live log has one trailing partial timestep group at snapshot, visible as the nonmodal row count in each histogram (complete groups have 16 outer, 32 thermo, and 64 phase-state records for nOuter=16). Earlier groups are complete. The tail is a concurrent log-read boundary, not a solver diagnostic.",
+      "snapshot_tail_partial_groups": {
+        "dtcap_half_outer16": {
+          "outer_rows_histogram": {
+            "8": 1,
+            "16": 171
+          },
+          "phase_state_rows_histogram": {
+            "32": 1,
+            "64": 171
+          },
+          "thermo_passes_histogram": {
+            "16": 1,
+            "32": 171
+          }
+        },
+        "outer16": {
+          "outer_rows_histogram": {
+            "9": 1,
+            "16": 825
+          },
+          "phase_state_rows_histogram": {
+            "36": 1,
+            "64": 825
+          },
+          "thermo_passes_histogram": {
+            "18": 1,
+            "32": 825
+          }
+        }
+      }
+    },
+    "outer8_guard_errors": {
+      "interpretation": "The terminal guard records 3 missing-record events and 20 thermo pass-sequence errors; the completed raw log snapshot nevertheless parses complete 8-row outer, 16-row thermo, and 32-row phase-state groups for every one of 839 time records. Preserve both facts; the reason for the guard/raw-log discrepancy is unresolved.",
+      "parser_error_count": 0,
+      "raw_log_full_step_group_histograms": {
+        "after_correctRho_mass_times": 839,
+        "log_time_rows": 839,
+        "outer_partial_or_unexpected_samples": [],
+        "outer_rows_per_time_histogram": {
+          "8": 839
+        },
+        "outer_update_times": 839,
+        "phase_state_partial_or_unexpected_samples": [],
+        "phase_state_records_per_time_histogram": {
+          "32": 839
+        },
+        "thermo_passes_per_time_histogram": {
+          "16": 839
+        },
+        "thermo_times": 839,
+        "time_without_mass_count": 0,
+        "time_without_outer_delta_count": 0,
+        "time_without_thermo_count": 0
+      },
+      "terminal_diagnostic_errors": [
+        {
+          "error": "missing terminal outer/phase mass/deltaT/thermo-envelope record for completed step",
+          "thermo_passes_seen": 5,
+          "time_s": 0.518046177102,
+          "utc": "2026-10-27T04:23:31.024401+00:00"
+        },
+        {
+          "error": "missing terminal outer/phase mass/deltaT/thermo-envelope record for completed step",
+          "thermo_passes_seen": 1,
+          "time_s": 0.518217823242,
+          "utc": "2026-10-27T04:23:36.047278+00:00"
+        },
+        {
+          "error": "missing terminal outer/phase mass/deltaT/thermo-envelope record for completed step",
+          "thermo_passes_seen": 1,
+          "time_s": 0.518390228794,
+          "utc": "2026-10-27T04:23:41.077421+00:00"
+        }
+      ],
+      "thermo_envelope_sequence_error_count": 20
+    }
+  },
+  "runtime_snapshot_utc": "2026-10-27T04:59:20.258215+00:00",
+  "schema": "i4f-physical-pilot-common-time-analysis/v1",
+  "seed_time_s": 0.39070559500735114,
+  "source_bundle": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z",
+  "target_times_s": [
+    0.391,
+    0.392,
+    0.394,
+    0.395,
+    0.42,
+    0.46,
+    0.48,
+    0.4907023481865,
+    0.5,
+    0.51
+  ],
+  "time_step_cap_assessment": {
+    "conclusion": "The arm with half the maxDeltaT cap is binding at 0.000125 s for every observed step; 78.7% of baseline outer16 steps exceed that cap. The snapshot ends before the low-pressure regime, so this does not establish late-time behavior.",
+    "dtcap_actual_dt_latest_s": 0.000125,
+    "dtcap_actual_dt_max_s": 0.000125,
+    "dtcap_actual_dt_min_s": 0.000125,
+    "dtcap_control_maxDeltaT_s": "0.000125",
+    "fraction_dtcap_steps_equal_to_declared_half_cap": 1.0,
+    "fraction_outer16_steps_above_half_cap": 0.7869249394673123,
+    "iteration_vs_trajectory": {
+      "interpretation_limit": "At available early common physical times, pressure and inventory trajectories are close but not identical; smaller per-step outer deltas are not by themselves evidence of iteration damping because maxDeltaT is the changed physical intervention. Final/penultimate dp and dU ratios move differently, and no late-time common endpoint is available.",
+      "only_declared_case_change": "maxDeltaT",
+      "same_nOuterCorrectors": 16,
+      "same_omega": 0.5,
+      "state_differences_at_available_common_targets": [
+        {
+          "dtcap_minus_outer16": -625.327420871894,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "thermo_min_raw_water_pressure_Pa",
+          "outer16_sample_error_s": 9.004292999997832e-05,
+          "target_time_s": 0.391
+        },
+        {
+          "dtcap_minus_outer16": 6.372806637955364e-07,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "water_inventory_kg",
+          "outer16_sample_error_s": 9.004292999997832e-05,
+          "target_time_s": 0.391
+        },
+        {
+          "dtcap_minus_outer16": 0.0003275447518902297,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "gas_inventory_kg",
+          "outer16_sample_error_s": 9.004292999997832e-05,
+          "target_time_s": 0.391
+        },
+        {
+          "dtcap_minus_outer16": -647.3506000000052,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "final_field_min_p_Pa",
+          "outer16_sample_error_s": 9.004292999997832e-05,
+          "target_time_s": 0.391
+        },
+        {
+          "dtcap_minus_outer16": -383.02482462185435,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "thermo_min_raw_water_pressure_Pa",
+          "outer16_sample_error_s": 4.889371599997583e-05,
+          "target_time_s": 0.392
+        },
+        {
+          "dtcap_minus_outer16": -5.0265043682884425e-08,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "water_inventory_kg",
+          "outer16_sample_error_s": 4.889371599997583e-05,
+          "target_time_s": 0.392
+        },
+        {
+          "dtcap_minus_outer16": 0.0002291149454833885,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "gas_inventory_kg",
+          "outer16_sample_error_s": 4.889371599997583e-05,
+          "target_time_s": 0.392
+        },
+        {
+          "dtcap_minus_outer16": -428.1574999999866,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "final_field_min_p_Pa",
+          "outer16_sample_error_s": 4.889371599997583e-05,
+          "target_time_s": 0.392
+        },
+        {
+          "dtcap_minus_outer16": -236.66053526458563,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "thermo_min_raw_water_pressure_Pa",
+          "outer16_sample_error_s": 4.1986672000005054e-05,
+          "target_time_s": 0.394
+        },
+        {
+          "dtcap_minus_outer16": 1.7167658370453864e-06,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "water_inventory_kg",
+          "outer16_sample_error_s": 4.1986672000005054e-05,
+          "target_time_s": 0.394
+        },
+        {
+          "dtcap_minus_outer16": 7.820611330089378e-06,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "gas_inventory_kg",
+          "outer16_sample_error_s": 4.1986672000005054e-05,
+          "target_time_s": 0.394
+        },
+        {
+          "dtcap_minus_outer16": -276.4183000000048,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "final_field_min_p_Pa",
+          "outer16_sample_error_s": 4.1986672000005054e-05,
+          "target_time_s": 0.394
+        },
+        {
+          "dtcap_minus_outer16": -216.94326985126827,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "thermo_min_raw_water_pressure_Pa",
+          "outer16_sample_error_s": 9.082004100002816e-05,
+          "target_time_s": 0.395
+        },
+        {
+          "dtcap_minus_outer16": 2.3274651539395563e-06,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "water_inventory_kg",
+          "outer16_sample_error_s": 9.082004100002816e-05,
+          "target_time_s": 0.395
+        },
+        {
+          "dtcap_minus_outer16": -0.00011277582893853833,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "gas_inventory_kg",
+          "outer16_sample_error_s": 9.082004100002816e-05,
+          "target_time_s": 0.395
+        },
+        {
+          "dtcap_minus_outer16": -256.90929999999935,
+          "dtcap_sample_error_s": 4.440499300001344e-05,
+          "field": "final_field_min_p_Pa",
+          "outer16_sample_error_s": 9.082004100002816e-05,
+          "target_time_s": 0.395
+        }
+      ]
+    },
+    "outer16_actual_dt_latest_s": 0.0001684501863181984,
+    "outer16_actual_dt_max_s": 0.0001922883635987606,
+    "outer16_actual_dt_min_s": 9.197308360388619e-05,
+    "outer16_control_maxDeltaT_s": "0.00025"
+  }
+}

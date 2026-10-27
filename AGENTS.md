@@ -210,6 +210,8 @@ separate review memos unless a hard decision needs one.
   supervision without relaunching it. Anchor deadlines to the original
   container start, honor PAUSE, and expose the active controller through the
   documented status/event paths while preserving prior attempts.
+  Short compile/read-only utility containers may run directly with bounded
+  timeouts and provenance; the GO/guardian protocol below applies to solvers.
   For a new Docker launch, hold the solver behind a GO sentinel until its
   exact container ID/StartedAt and manifest exist and the guard is verified.
   Source the OpenFOAM bashrc before enabling shell nounset/pipefail, then set
@@ -253,8 +255,11 @@ separate review memos unless a hard decision needs one.
   Terminal checks must use the branch's configured log path, not a fixed log
   basename. A missing expected filename is not evidence that the solver failed.
   Compare numerical dictionary values numerically, not by printed notation
-  (`1e-05` and `1e-5` are equal). Formatting or cosmetic labels must not block
-  an otherwise verified launch. If Docker exits before the guard records its
+  (`1e-05` and `1e-5` are equal). For checkpoint times, parse the original
+  dictionary value at full precision: default `foamDictionary -value` output
+  can round a valid restart time to six significant digits. Do not validate
+  rounded tool output against an exact checkpoint timestamp. Formatting or
+  cosmetic labels must not block an otherwise verified launch. If Docker exits before the guard records its
   final checkpoint, a dispatcher must wait for capture until its bounded
   deadline; pending metadata is not a failed solver or permission to relaunch.
   Keep internal and external wall deadlines consistent, checkpoint before the

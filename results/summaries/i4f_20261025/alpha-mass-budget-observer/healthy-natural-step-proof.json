@@ -1,0 +1,287 @@
+{
+  "continuous_step_scalar_comparison": {
+    "final_outer_max_abs_dU_m_s": {
+      "original_continuous_step": 0.4372251595435677,
+      "restart_baseline": 0.4371354503943826,
+      "restart_minus_continuous": -8.970914918510209e-05
+    },
+    "final_outer_max_abs_dp_Pa": {
+      "original_continuous_step": 49.80447405240557,
+      "restart_baseline": 49.79422833706485,
+      "restart_minus_continuous": -0.010245715340715833
+    },
+    "raw_corrector_min_pressure_Pa_this_step": {
+      "original_continuous_step": 32867.91937697024,
+      "qualification": "restart observer reports raw minimum only over water-supported cells; continuous step-health field uses its captured raw-corrector minimum. Compare with this scope difference in mind.",
+      "restart_baseline_water_supported_min": 32867.91873340428,
+      "restart_minus_continuous": -0.0006435659597627819
+    }
+  },
+  "execution": {
+    "container_exit_code": 0,
+    "container_id": "865d3dcc8e567bef57b093285395f8199929da1a5d9f656e54f85dd06698b5b8",
+    "container_name": "i4f-alpha-source-natural-dt-attempt001-20261027t0542z",
+    "durable_controller": "i4f-alpha-source-natural-dt-attempt001-20261027t0542z-controller.service",
+    "finished_at_utc": "2026-10-27T05:55:10.501966437Z",
+    "mpi_ranks": 10,
+    "normal_End_both_arms": true,
+    "openfoam_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "quota_cpu_equivalents": 1.0,
+    "started_at_utc": "2026-10-27T05:47:19.168385062Z"
+  },
+  "instrumentation": {
+    "alpha_v3_records": 16,
+    "eos_v3_records": 32,
+    "equations_and_physics_changed": false,
+    "max_alpha_source_partition_identity_error_s_inv": 3.563371819836902e-12,
+    "max_eos_mass_identity_L1_kg_s": 8.56903585536569e-10,
+    "max_eos_mass_identity_error_kg_m3_s": 1.123666493185738e-09,
+    "max_eos_source_partition_identity_error_kg_m3_s": 3.556920592398152e-09,
+    "mode": "frozen_predictor_full_source; i4fFrozenPredictorSp=true; i4fFrozenPredictorFullSource=true",
+    "nonfinite_observer_tokens": [],
+    "source_denominator_floor_active_cell_counts_min_max": [
+      109170,
+      115203
+    ],
+    "source_denominator_floor_is_not_pressure_floor": true,
+    "v3_binary_sha256": "3ce4de143cdef18274df61bb2fa83c585452acdd41feec003b8473a7fda6a035",
+    "v3_compile_record_path": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/source/observer-v3-stable/compile-result-v3.json",
+    "v3_compile_record_sha256": "41cb069ea2d4673f0efdd706458f2ae6caea86de2608897342107fcd147e6328",
+    "v3_source_manifest_private_path": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/source/observer-v3-stable/source-manifest-v3.json",
+    "v3_source_manifest_sha256": "b4c3b71104d737cd2f92ecf8cfb0d436482ed20959780453e8430cc99d20b648",
+    "v3_source_tree_digest_sha256": "4b9cbedfba9d62e6f6e811ee5e43eb699ca904b798883a50d6d68ce584027add"
+  },
+  "limitations": [
+    "Only one native timestep from a restart checkpoint was tested; this is not trajectory equivalence or solver validation.",
+    "No full native field checkpoint exists for the original continuous run at this same physical time; only its scalar step-health row is compared.",
+    "The original .390717 endpoint estimate and this .490813 natural-step capture are different states/times; the former's exact cached source timing remains unmeasured.",
+    "Source partition terms are algebraic diagnostics and do not establish causal contribution to mass-flow behavior or explain subsequent convergence.",
+    "Full field snapshots and raw solver logs are preserved in the private run bundle, not copied into this compact summary packet."
+  ],
+  "mass_budget": {
+    "actual_cached_source_call_index_is_recorded": true,
+    "all_signed_component_closure_abs_max_kg_s": 1.1535439270460301e-11,
+    "csv": "natural-step-mass-budget.csv",
+    "csv_rows": 6,
+    "equation": "Rmass = rho_new*Ralpha + rho_new*S_actual + alpha_old*ddt(rho) + [div(alphaPhi*rho_face)-rho_new*div(alphaPhi)]",
+    "pass_summary": [
+      {
+        "Rmass_signed_kg_s": -1.385156103415381,
+        "cutoff_at_assembly_signed_kg_s": -0.02333374471067162,
+        "cutoff_signed_magnitude_over_abs_Rmass": 0.016845570440138537,
+        "outer_iteration": 1,
+        "pressure_pass": 1,
+        "source_state_change_signed_kg_s": -0.4717711047800394
+      },
+      {
+        "Rmass_signed_kg_s": -1.391547055013855,
+        "cutoff_at_assembly_signed_kg_s": -0.02333374463600927,
+        "cutoff_signed_magnitude_over_abs_Rmass": 0.016768203814550093,
+        "outer_iteration": 1,
+        "pressure_pass": 2,
+        "source_state_change_signed_kg_s": -0.4717711040022148
+      },
+      {
+        "Rmass_signed_kg_s": -0.02276896222623176,
+        "cutoff_at_assembly_signed_kg_s": -0.0214033429034432,
+        "cutoff_signed_magnitude_over_abs_Rmass": 0.9400227683097805,
+        "outer_iteration": 15,
+        "pressure_pass": 29,
+        "source_state_change_signed_kg_s": -6.9684677539462e-05
+      },
+      {
+        "Rmass_signed_kg_s": -0.02276646668267027,
+        "cutoff_at_assembly_signed_kg_s": -0.02140334290271137,
+        "cutoff_signed_magnitude_over_abs_Rmass": 0.9401258087625647,
+        "outer_iteration": 15,
+        "pressure_pass": 30,
+        "source_state_change_signed_kg_s": -6.9684677538452e-05
+      },
+      {
+        "Rmass_signed_kg_s": -0.0219949710930534,
+        "cutoff_at_assembly_signed_kg_s": -0.02141722184709366,
+        "cutoff_signed_magnitude_over_abs_Rmass": 0.9737326662756011,
+        "outer_iteration": 16,
+        "pressure_pass": 31,
+        "source_state_change_signed_kg_s": -3.38250630292515e-05
+      },
+      {
+        "Rmass_signed_kg_s": -0.02200597706847616,
+        "cutoff_at_assembly_signed_kg_s": -0.02141722184782923,
+        "cutoff_signed_magnitude_over_abs_Rmass": 0.9732456678103909,
+        "outer_iteration": 16,
+        "pressure_pass": 32,
+        "source_state_change_signed_kg_s": -3.382506302954089e-05
+      }
+    ],
+    "term_semantics": {
+      "alpha_old_drho": "Old-time alpha times the density time derivative evaluated from the native Euler state.",
+      "cutoff_at_assembly": "Finite algebraic source partition term at source assembly; not a counterfactual uncut source or a causal mass-flow attribution.",
+      "face_density_noncommutation": "Difference between face-interpolated alphaPhi*rho and rho_new times divergence(alphaPhi).",
+      "rho_Ralpha": "Observer-evaluated density times the phase-fraction transport residual using the actual source record and alpha flux at that pressure pass.",
+      "rho_actual_source": "Density-weighted actual configured full-predictor source at its cached source call; includes the mode-specific divU contribution.",
+      "source_state_change": "Change from assembly gamma to gamma at the evaluated alpha state, separately reported from the assembly cutoff term."
+    }
+  },
+  "native_field_passivity": {
+    "all_endpoint_files_byte_identical_across_two_restart_arms": true,
+    "fields_including_uniform_time": [
+      {
+        "byte_identical": true,
+        "bytes": 2652298,
+        "field": "alpha.water",
+        "sha256": "e4147608cd80fc9535983b630060eb3fe35dbd6a58cb09392ceee659dd3611d2"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3206857,
+        "field": "p",
+        "sha256": "e78c6c2d62a359f000d1daeb2caa27f5db5ec7b35e4b5dbd7ac494910906022d"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3796238,
+        "field": "p_rgh",
+        "sha256": "7346a2b964df79c5e1f5fe599fa420b19abb626ed74f623d244d8f93d2de106b"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 2658642,
+        "field": "T",
+        "sha256": "3541d9145adec68be553659da0fa36aee2b2d0ab601cd885eecdb35dd698918d"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 7938894,
+        "field": "U",
+        "sha256": "65fc9cd847f60a8f994fc617fe89f13aec38e8c40b0ae04bbb8a23d707dee241"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3204683,
+        "field": "k",
+        "sha256": "966dc58830877f4ef22e2dcc0dafc630301736e278dda3ff7d8d2d0f5426cbb2"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3206553,
+        "field": "omega",
+        "sha256": "f13dc10ce2ab6114364afa4bfe220eb98eff0c6212479b595559d884957fb3d7"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3208051,
+        "field": "nut",
+        "sha256": "3ba820cabbbd7d6fa062028ad428bb991513483ca11360e6bb142f6881f67b00"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3207527,
+        "field": "alphat",
+        "sha256": "b17390c5e93a63f135f2be22115a1c98360d6b014a73b1764cebfdfdf280253f"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 2658650,
+        "field": "T.air",
+        "sha256": "80dab8fda525dc4807b44fd56c6dc50cc36399828684595977fba7f5dce2f25a"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 2658654,
+        "field": "T.water",
+        "sha256": "fa9374728c20fa8251f0aa105864eb0f456ac2dcaa4f762839d9f29a6c1aa28c"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3206851,
+        "field": "rho",
+        "sha256": "13cb256018e30b2b51f45f643dd9be11800b2e4684d325d20fe71fc580af10e4"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 7726577,
+        "field": "phi",
+        "sha256": "f38d0120536837f074380492600fd717a79b54c179606f60e3cafd9600d8258b"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 7722877,
+        "field": "alphaPhi0.water",
+        "sha256": "a8ef461ad3490d8c6bc0cbe3011efa0290533a071a8ca5a19f1532d36a62aa3e"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 3203849,
+        "field": "dgdt",
+        "sha256": "157b16914112a6582265183002d330f3b91a8d9487973aca78ba2f69068c33dd"
+      },
+      {
+        "byte_identical": true,
+        "bytes": 1074,
+        "field": "uniform/time",
+        "sha256": "12767bafcb056b0c27e107da9b7d331896d2c436c6c3764aa1875533f7a4a873"
+      }
+    ],
+    "final_outer16_max_abs_dU_m_s": 0.4371354503943826,
+    "final_outer16_max_abs_dp_Pa": 49.79422833706485,
+    "restart_baseline_clipped_water_mass_kg": 0.0,
+    "restart_baseline_raw_cell_pressure_min_Pa": 32869.10121543532,
+    "restart_baseline_raw_pressure_contacts": 0,
+    "restart_baseline_water_supported_raw_pressure_min_Pa": 32867.91873340428
+  },
+  "preserved_v2_counterfactual_qualification": {
+    "line_number": 2316,
+    "log_path": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/arms/native-passivity-attempt002-20261027T052308Z/logs/observer-v2-explicit-on-solver.log",
+    "outer_iteration": 14,
+    "qualification": "The 3.73e41 m3/s-scale v2 uncapped/near-singular reference split is an ill-conditioned counterfactual diagnostic, not a realized physical source flux. It is retained as original evidence and excluded from v3 mass-budget interpretation.",
+    "reported_actual_MULES_cutoff_delta_L1_m3_s": 7.46424675928524e+41,
+    "reported_applied_gamma_cutoff_delta_L1_m3_s": 3.73212337964262e+41,
+    "uncapped_reference_undefined_cells": 3957,
+    "version": "v2 observer; fixed 12 microsecond restart step, not this natural-dt step"
+  },
+  "prior_80_percent_endpoint_estimate": {
+    "estimated_floor_delta_kg_s": -0.019145789147451974,
+    "natural_step_cached_source_comparison": "At .490813343913 the v3 observer's actual assembly cutoff ratio varies across the selected passes: about 0.0168 in outer 1 and 0.940-0.973 in outer 15-16. This later restart step does not validate the earlier .390717 endpoint's 80.6% number; source timing and state change matter, and no same-time cached source record exists for that endpoint.",
+    "pass": 16,
+    "qualification": "Postprocessing of saved alpha.water and dgdt with constant rho=998.2 kg/m3 at .390717595007; it did not use the actual source assembly/cache timing. It is not established as a physical or causal attribution.",
+    "ratio": 0.8060014860714255,
+    "source_floor_analysis": "results/summaries/i4f_20261025/alpha-flux-relaxation/water-balance/source-floor-analysis.json",
+    "time_s": 0.390717595007,
+    "water_residual_kg_s": -0.02375403703133536
+  },
+  "private_capture": {
+    "bundle": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/arms/native-natural-dt-attempt001-20261027T0542Z",
+    "natural_step_result_sha256": "b35b47c91676bee3395cf9435bf27b9789bb1302f60f0863857f24a9ea0725eb",
+    "previous_endpoint_analysis": "results/summaries/i4f_20261025/alpha-flux-relaxation/water-balance/source-floor-analysis.json",
+    "previous_endpoint_analysis_sha256": "73c1e1a946dc9366e5e53dd60cc10ae5872218426738b8aa65729c07ef7dbd0b",
+    "v2_invalid_counterfactual_log": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/arms/native-passivity-attempt002-20261027T052308Z/logs/observer-v2-explicit-on-solver.log",
+    "v2_invalid_counterfactual_log_sha256": "8f4d052fb1c35f0939b958cc90988aea951ff2a63377b283e0845c6a5ad8ca8c",
+    "v3_solver_log": "results/runs/i4f-alpha-source-mass-observer-gap-20261027T044519Z/arms/native-natural-dt-attempt001-20261027T0542Z/logs/restart-observer-v3-explicit-on-solver.log",
+    "v3_solver_log_sha256": "87fff798a344956df5fe54f3f7016ae0ea57a6ed868aa85701a1753bc09bd526"
+  },
+  "schema": "i4f-alpha-mass-budget-observer-natural-dt-proof/v1",
+  "scope": "Single natural-dt restarted step; observer passivity and discrete source/mass accounting, not a trajectory or physical validation.",
+  "time_step": {
+    "actual_endpoint_directory": "0.490813343913",
+    "actual_uniform_time_s": 0.4908133439132807,
+    "arm_configuration": {
+      "Euler": true,
+      "MULESCorr": true,
+      "PIMPLE_nCorrectors": 2,
+      "PIMPLE_nOuterCorrectors": 16,
+      "i4fFrozenPredictorFullSource": true,
+      "i4fFrozenPredictorSp": true,
+      "i4fPhysicalAlphaFluxRelax": true,
+      "i4fPhysicalAlphaFluxRelaxOmega": 0.5,
+      "nAlphaCorr": 1,
+      "nAlphaSubCycles": 1,
+      "source": "full frozen predictor source; equation/physics unchanged",
+      "switch_difference": "only i4fAlphaMassBudgetAudit absent/default false in 4d1 vs explicit true in v3 observer arm"
+    },
+    "computed_target_time_s": 0.4908133439134624,
+    "natural_deltaT_s": 0.0001066873942806877,
+    "seed_time_directory": "0.490706656519",
+    "seed_uniform_time_s": 0.49070665651918166
+  }
+}
