@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 11:01 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 13:10 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -23,8 +23,8 @@ equivalents and 32 GiB memory allowance. Exact container identities:
 
 | Case | Container | Verified continuation progress |
 | --- | --- | --- |
-| 299,214-cell baseline | `cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3` | Started 10:35:32 UTC from .259831959 s; 300 steps completed through .297457 s. |
-| 323,682-cell corridor mesh | `c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96` | Started 10:44:17 UTC from .239331959 s; 140 steps completed through .256957 s. |
+| 299,214-cell baseline | `cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3` | Started 10:35:32 UTC from .259831959 s; 1,561 steps completed through .455082 s. |
+| 323,682-cell corridor mesh | `c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96` | Started 10:44:17 UTC from .239331959 s; 1,271 steps completed through .398332 s. |
 
 Both first-step checks have zero raw pressure-floor contacts, clipped mass,
 parser errors or diagnostic errors. This early health does not predict survival
@@ -127,7 +127,12 @@ finds four .15 m2 mesh holes matching their STL caps. The zone-boundary control
 surfaces have larger projections and do not coincide with the physical mouths.
 Their reader now runs directly on processor-only cold checkpoints; a missing
 legacy global mesh disables only that optional comparison. Face centres match
-the pinned v2512 source. Nonzero water-throughput validation remains outstanding.
+the pinned v2512 source. A first nonzero primed-pilot comparison finds the offset control surface about
+21.7% below the native x-cut flux. A native-topology audit closes that difference
+to buffer divergence at roundoff; 896 intervening mouth-zone cells are storing
+water. These surfaces must not be treated as interchangeable aperture discharge.
+The short saved-time interval storage comparison still has 1.3–1.8% residual
+with unsaved source/pressure-stage terms, so this is not a phase-mass gate pass.
 
 The [fully wet branch trials](../results/summaries/i4f_20261025/wet-branch-hydraulic-reference/summary.json)
 both diverged: linearUpwind exceeded 200 m/s at steady iteration 186, upwind
@@ -153,29 +158,32 @@ walls and cells, so boundary distance alone is not isolated. The native-face
 pressure-profile control still diverged at iteration 197.
 [Hash-locked comparison and inspected geometry](../results/summaries/i4f_20261025/local-outlet-mitigation/).
 
-**Small two-phase replay now supplies a faster discriminator.** The 22,918-cell
-crop maps thirteen cell fields and 64,716 internal face fluxes exactly from the
-near-failure parent. One natural step reproduces pressure at the critical cell
-within .103 Pa of the full run, although crop-wide pressure differences reach
-1.69 kPa near the cut inlet. Its continuation reached .525061585 s normally,
-with a 17.435 kPa critical-cell probe minimum, no pressure-floor contacts and no
-clipped-water volume. At the full run's .517939363 s terminal time, local probe
-pressure is about 19.981 kPa versus 17.279 kPa in the full saved field.
-This is a conditional crop with a fixed inlet and truncated exterior.
-A second replay seeded directly from the full .490813 s endpoint verified all
-thirteen mapped cell fields and both flux fields exactly and also reached
-.525061393 s without a floor contact. Crucially, spatial auditing found that
-the full-domain intermediate floor/update cells 71998 and 72683 lie OUTSIDE
-this selected branch. Thus crop survival cannot reproduce or clear the actual
-full-domain hotspots. At nearby .5179 s times, final-outer dp/dU are about
-86.6 Pa/.816 m/s locally versus 6,120 Pa/1.631 m/s in the full case; these are
-still materially different coupled problems. The full step's worst intermediate
-raw minimum was 9.285 kPa/two cells below floor, while its final pass recovered
-to 16.090 kPa/zero. Do not equate intermediate updates with saved-field minima.
-Next local replay must include an actual offending branch before a remedy sweep.
-Evidence: `results/runs/i4f-local-coupled-replay-to-0525-20261027T095254Z/attempts/attempt004-direct-full-seed/analysis/`.
-Successful runs use UID 1000 and a tested fatal parser exempting the benign
-OpenFOAM trapFpe startup banner; rejected attempts remain recorded.
+**The lower-branch failure is reproduced locally.** The 22,589-cell lower-A
+crop reaches 8,687.704 Pa at .523261430359367 s versus the historical full
+case's first contact at .517596951034 s. Direct pre-clamp argmin logging identifies
+local cell 7114→parent71998 beside the apparatus wall/divider tip. The conditional
+crop's inlet/outlet and adaptive history still differ from the whole apparatus.
+The recorder preserves 202 Time/deltaT rows and 6,464 raw-floor rows byte-for-byte
+through contact; 15 fields+uniform/time match at two late saved states.
+[Local evidence](../results/runs/i4f-local-coupled-observer-20261027T121156Z/analysis/observer-replay-attempt002-passivity-floor-evidence.json).
+
+Independent Astra review confirms consistent frozen predictor/MULES algebra;
+the unrelaxed candidate satisfies its actual Euler assembly to roundoff. An
+apparent 2.5/s defect was a postprocessing oldTime error, now corrected. Existing
+helper residuals use outer-increment storage/stale source splits and must not
+be called physical continuity. Applied and nonlinear residuals still expose an
+unsettled pressure/phase cycle. The dramatic fresh-source cutoff switch follows
+the first clamp, so it is not established as its cause. No conservation cure exists.
+
+Next: matched omega=.5/.25 solves of ONE physical step, from a clean captured
+pre-failure state with dgdt/oldTime and natural 179.288 microsecond step retained;
+64 outer iterations maximum, unchanged EOS/cutoff/mesh/BCs/floor. Compare unrelaxed
+defects and physical phase balances before any clamp. The older .55 s quarter-
+weight continuation remains staged/no GO. Full-case settings are unchanged.
+The clean pre-step capture is actually running under exact Docker
+`9afa2d61a2c9667367b8ef1ac5117f7a820bf3f44e897010791e94ca2fc0fd17`
+(StartedAt 13:05:35 UTC; one CPU/4 GiB). The 64-outer A/B arms are not yet launched;
+the new read-only trace and checkpoint-dgdt restoration hook are being checked.
 
 A read-only companion restores the historical native x-plane reader for the
 processor-only baseline: all 53 processor mesh/map files match the retained
@@ -185,6 +193,23 @@ global geometry; its .099957 s snapshot has independent field inodes. It reads
 No nonzero-throughput or exact mass-flux validation is claimed.
 
 ## Provisional engineering reference and limits
+
+The new [cold-prefix comparison](../results/summaries/i4f_20261027/cold-mesh-prefix/analysis.json)
+compares the two native histories through their shared .331582 s cutoff. Mean
+per-tank pressure is 0.783 MPa absolute, tank water volume 1.22708 m3, and
+valve-seat water volume flow .872325 m3/s; no water has reached the mouths.
+The reduced adiabatic model's flow is 1.58% lower, while its bulk pressure is
+about 40.9 kPa lower than the CFD point probes. Shared assumptions and distinct
+pressure observers limit this comparison. The probe-derived apparent expansion
+exponent is about 1.236 over .0500–.3316 s, versus the anchored ideal-air 1.400
+reference; these scalars do not identify heat transfer or a numerical cause.
+
+Mesh-prefix differences are tiny (.105 Pa pressure), but native alpha/C checks
+show the changed x=4.1–4.45 m corridor is still dry at .359832/.339332 s. This is
+an upstream agreement check, not convergence of the liquid/divider dynamics.
+Both figures were inspected; all 11 artifact hashes, 16 CSV rows' algebra and
+interpolation brackets were independently checked. Raw 19.3 MB capture remains
+ignored; the public result packet is about .76 MB.
 
 The [reduced filling-network check](../results/summaries/i4f_20261025/engineering-hydraulic-scale-check/)
 uses the same provisional Cd=.7, 1 s opening and native headspace. At .4907 s,

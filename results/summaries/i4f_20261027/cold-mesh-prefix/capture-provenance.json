@@ -1,0 +1,1066 @@
+{
+  "arm_identity": {
+    "baseline": {
+      "container_id": "cb6f5ac4df2cf773db51bf194a01daa25d09aa9a17e388455f6430ae6315b6f3",
+      "guard_current_time_s": 0.381706959232,
+      "series_count": 30,
+      "started_at": "2026-10-27T10:35:32.750776123Z"
+    },
+    "corridor": {
+      "container_id": "c7bf540ac23b9dc1dde7fc52add31672b4cffcbbbce7cb579240bd94e8e9fc96",
+      "guard_current_time_s": 0.331706959232,
+      "series_count": 30,
+      "started_at": "2026-10-27T10:44:17.110030278Z"
+    }
+  },
+  "created_utc": "2026-10-27T12:28:09+00:00",
+  "log_capture": {
+    "baseline": {
+      "sha256": "70784119b369b4e923483427b1e92ade429a325a8359af317dc99ecca54c8e0e",
+      "source_end_byte_exclusive": 322627452,
+      "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/log.cold-coupled",
+      "source_start_byte": 321578939
+    },
+    "corridor": {
+      "sha256": "575e90b96d874ea4229da1a62f302ed28642dc9dfadf82b6c1bb9a529d2a42b6",
+      "source_end_byte_exclusive": 244904820,
+      "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/log.cold-coupled",
+      "source_start_byte": 243856268
+    }
+  },
+  "merged_series_summary": {
+    "baseline": {
+      "ambient_annulus_water_flux": {
+        "rows": 3061,
+        "sha256": "83f62cedad4c7c32024904f8f697ef4cce4dd5f92c4e4e9e1b7869a961b3db3d",
+        "source_instances": [
+          {
+            "prefix_bytes": 68981,
+            "sha256": "042f638fe900edd0047e05d145fe2ea88e3a694bf1a213ab7f7e19ae869a012c",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/ambientAnnulusWaterPhaseFlux/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31925,
+            "sha256": "b22e413669aa7d188e2be7886afa54a8a92a32b57a7e664dd1c6963356c4c19e",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/ambientAnnulusWaterPhaseFlux/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/ambient_annulus_water_flux.dat"
+      },
+      "external_sides_water_flux": {
+        "rows": 3061,
+        "sha256": "f999f69a102c902abffb7eb23a42339d738afc7d282182d21061303f5f9cf061",
+        "source_instances": [
+          {
+            "prefix_bytes": 68880,
+            "sha256": "210cec99ffee9febb549fe36122892db138a47cd4e4b061f96d051f5355e3c36",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/externalSidesWaterPhaseFlux/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 32305,
+            "sha256": "7d82cb772dcb29124d565db4cf211ca6ac0c6cc7831f06fa45eb6a5645ccfad8",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/externalSidesWaterPhaseFlux/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/external_sides_water_flux.dat"
+      },
+      "external_water_volume": {
+        "rows": 3061,
+        "sha256": "816e6a98fb02578e5ba59101d03319b71db8d62eff6a9de7a5da61ac4d7be511",
+        "source_instances": [
+          {
+            "prefix_bytes": 68963,
+            "sha256": "23c3d8e8e5e38a3738097a457e865c8b25a0552c21ef0e8ce51e45ce49ffa7a0",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/externalAirWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31821,
+            "sha256": "a70f682e0ca26edddfe858c0095a7ed1fd01f70f18f7f4502e5c4b369ff71016",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/externalAirWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/external_water_volume.dat"
+      },
+      "far_outlet_water_flux": {
+        "rows": 3061,
+        "sha256": "573b828f0064e3fe7c0cb88ce282a8629547b86054a271686dc49274af6231f1",
+        "source_instances": [
+          {
+            "prefix_bytes": 68316,
+            "sha256": "742756c3216df0704ef094059ae2176d34dfe5cc11252e9fd37dd5385cbf41c6",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/farOutletWaterPhaseFlux/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 32301,
+            "sha256": "04357f50bca6d41e268eaa9aa67c1bf042629902df68f956eadedcabe600afa1",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/farOutletWaterPhaseFlux/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/far_outlet_water_flux.dat"
+      },
+      "lineA_water_volume": {
+        "rows": 3061,
+        "sha256": "c0638ff02774a7bf8d8f133b0f25af7cdc707dbd8ce0949f6ae5513da34c862c",
+        "source_instances": [
+          {
+            "prefix_bytes": 66935,
+            "sha256": "967dc6ba122aeedf4f967970702bc514507456534494758a9dc4f1221b3056cf",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineAInitialWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31312,
+            "sha256": "f750f03c23cc8c8fedf10a1ce8b6c8586c7d4745d7dc25609db50adb6c90fb9c",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineAInitialWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/lineA_water_volume.dat"
+      },
+      "lineB_water_volume": {
+        "rows": 3061,
+        "sha256": "d95dae1890caab604ef047d03766e6b8a9a516e86f227af9c8515001d8500d6a",
+        "source_instances": [
+          {
+            "prefix_bytes": 66935,
+            "sha256": "11c1f75dca7b9c564a6dd38423535453c4fc7a229cc22a85b7243d1d8ff368b5",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineBInitialWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31312,
+            "sha256": "3ff91c22370d7c067457e23894e87b598f4eec3ae27bde57d0dbad86200dd5b6",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineBInitialWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/lineB_water_volume.dat"
+      },
+      "mouthA_water_volume": {
+        "rows": 3061,
+        "sha256": "b95966406fe5d4343e50474800779b47576bd614e191fd5a2371dd2148523090",
+        "source_instances": [
+          {
+            "prefix_bytes": 68966,
+            "sha256": "07c25d3137e65e92b0809b960db413fa11d776668ed90704f0089ec13befdf67",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineAMouthBoundaryWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31860,
+            "sha256": "01d4f0ed9a3f9b6f4d48a693cc17ef4bded7966ee5d855aecbb3ddedca04ef1f",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineAMouthBoundaryWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/mouthA_water_volume.dat"
+      },
+      "mouthB_water_volume": {
+        "rows": 3061,
+        "sha256": "effbcc0ccfea4306dbb5ab57b7676ad431748e1ca6eeac21d2208caa280fffd6",
+        "source_instances": [
+          {
+            "prefix_bytes": 68966,
+            "sha256": "3bfd1e93c3d2cb66c9db86a5e16f74b2ecbcb27b69d11fb7529a1e5d487ed97e",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineBMouthBoundaryWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31867,
+            "sha256": "ad63919f11a12bb88a28efa853d28d9d0e856f2fa329c15e512876793b7e04c1",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/lineBMouthBoundaryWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/mouthB_water_volume.dat"
+      },
+      "mouth_sample_U": {
+        "rows": 3061,
+        "sha256": "1fa2c26c11a243b1901e25b139ba5b05182c907e872a61b7e40607afc15b9990",
+        "source_instances": [
+          {
+            "prefix_bytes": 167897,
+            "sha256": "eddefdc2e3c992e714c660df068e24ca4e54505fe086ef81876982a0e6ab97de",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/fourMouthPlaneTotalUIntegral/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 78094,
+            "sha256": "69a6c98fa1d1f0b44de535dc8c42f1e5d891d7969a2cdb8f67da3fa8a7c02d4c",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/fourMouthPlaneTotalUIntegral/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/mouth_sample_U.dat"
+      },
+      "mouth_sample_alpha": {
+        "rows": 380,
+        "sha256": "f79186184e56954c1ff59a5ed18453abfe1547fa66221d96ce67581e3814166a",
+        "source_instances": [
+          {
+            "prefix_bytes": 32977,
+            "sha256": "0e2553bbabebaeac05dbcbf415653742ee787fa0aca98eff2834a2c042f35226",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/fourMouthPlaneAreaAlpha/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 15438,
+            "sha256": "b0b254427619048d3c4c4b3eaf7041a75346a70214dd338cc6080547fa74a146",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/fourMouthPlaneAreaAlpha/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/mouth_sample_alpha.dat"
+      },
+      "mouth_sample_alphaU": {
+        "rows": 3061,
+        "sha256": "ea964dd6407c7175a6632af22eb7d1d2d56dc568f7f69dcabd1ae34e22d7094b",
+        "source_instances": [
+          {
+            "prefix_bytes": 174950,
+            "sha256": "89c32024feebcaa6929eb5a225507390c9e4471b8b85b85fc31bfb069ef3c710",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 79539,
+            "sha256": "897d9d496c89728421f19eaca3c149ba9c5a0735fef7b4708d1fb21676fb4171",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/mouth_sample_alphaU.dat"
+      },
+      "probe_T": {
+        "rows": 3061,
+        "sha256": "34f937e201e99b06c23790d4ae1651bc889be31ecb2696ad1d22782bd24fc850",
+        "source_instances": [
+          {
+            "prefix_bytes": 100277,
+            "sha256": "308897aed16832c75c40446f5f1928abafac4743de1e7d22c96668ee52dcf664",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0/T"
+          },
+          {
+            "prefix_bytes": 46853,
+            "sha256": "7a7858b48506a43da9c705ac06463b1a5078b5d411f3c8d6c8af6a62d8fad519",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0.259831959232/T"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/probe_T.dat"
+      },
+      "probe_U": {
+        "rows": 3061,
+        "sha256": "c6ffb519e674f132fdeebd77fddaee45cdf6621e6cb17c04082efc31a1f85aeb",
+        "source_instances": [
+          {
+            "prefix_bytes": 197778,
+            "sha256": "67e4fb1cfa6daf2b8736680a33be33056de0f5a52552a9e87267380bce2f3872",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0/U"
+          },
+          {
+            "prefix_bytes": 88988,
+            "sha256": "21892506116421ac5ebb69274e2dbe18d05648b55d6e0f67ad9ef0822552e9f4",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0.259831959232/U"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/probe_U.dat"
+      },
+      "probe_alpha_water": {
+        "rows": 3061,
+        "sha256": "e1fb0b71c4d3d55f80aa2b3c3256a23fc085368de5ed3c954530accd4923a5f1",
+        "source_instances": [
+          {
+            "prefix_bytes": 100277,
+            "sha256": "23bb3d95f600a682217d9b68082450f9d6b17d03ea5325f327492ee8e6bd12a6",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0/alpha.water"
+          },
+          {
+            "prefix_bytes": 46853,
+            "sha256": "9466e11622c463fa9d832c000fdd939073f85c6198ec4ce93f6f0ea75e074638",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0.259831959232/alpha.water"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/probe_alpha_water.dat"
+      },
+      "probe_p": {
+        "rows": 3061,
+        "sha256": "671fff7a8cfd09141082ef53f49b68f6c49d296a2fd35fd2d9647482373d61e9",
+        "source_instances": [
+          {
+            "prefix_bytes": 100277,
+            "sha256": "4e3fe609b61c9a6bdd0687bc2e91d0062e2665194e421311b14d4a9d11bfef6a",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0/p"
+          },
+          {
+            "prefix_bytes": 46853,
+            "sha256": "66b2856ad461193c53e604fed5f01495d15cecfdaee80067d7f65bb5f808e0c0",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/i4fTankHeadspaceProbes/0.259831959232/p"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/probe_p.dat"
+      },
+      "seat_A1_pressure": {
+        "rows": 3061,
+        "sha256": "c31d4f7eecbe43bbcc67be5d202ed70d21a6c8580ec18934cc2b8d3b372e4bcf",
+        "source_instances": [
+          {
+            "prefix_bytes": 129582,
+            "sha256": "9a1ac4cf4303479a28881b33bb40110529143a3de4b45c8b6609bb43f139487d",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureA1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 60569,
+            "sha256": "4041b4dec364d9262ad045a6230055bb663efe6684522b728a40cb6be207fb3e",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureA1/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/seat_A1_pressure.dat"
+      },
+      "seat_A2_pressure": {
+        "rows": 3061,
+        "sha256": "1ee1f162f4715243a43980110a2b40568e0814f4f730f6996a95ffba5d9f138c",
+        "source_instances": [
+          {
+            "prefix_bytes": 129582,
+            "sha256": "e7bd130e304b50091e2cc4faedfb6a2b569153bb5c37724ab9e4255a7aa42788",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureA2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 60569,
+            "sha256": "0bec84ab9700b1d65410e6bc96236abcbead00d553646bf339b2fab1622da138",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureA2/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/seat_A2_pressure.dat"
+      },
+      "seat_B1_pressure": {
+        "rows": 3061,
+        "sha256": "a20be6b959104ed1b265ca8ca37198c15eff1cbdb695cb8e75ccdeb202b52bb8",
+        "source_instances": [
+          {
+            "prefix_bytes": 129582,
+            "sha256": "2fc8d731655e4006a84750000479980240fa136e41c79298a778b3385cf1289e",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureB1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 60569,
+            "sha256": "4f4cc85bd693a712158a10470feef965fb93d0090da516706569715fd457cadb",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureB1/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/seat_B1_pressure.dat"
+      },
+      "seat_B2_pressure": {
+        "rows": 3061,
+        "sha256": "360cc3d7de6714aa6dc94780edbc4a9cbec147285a8e087d69d94dd94fa9c17c",
+        "source_instances": [
+          {
+            "prefix_bytes": 129582,
+            "sha256": "b3adc8b1cecdd99c22639eb690ffce54ac86de6cae21c658e966d69f3d00fca1",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureB2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 60569,
+            "sha256": "93977447aae8d6e6c0978c55c925957796371b42ad81dd2994bd4a7df1e9b372",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatPressureB2/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/seat_B2_pressure.dat"
+      },
+      "source_A1_flux": {
+        "rows": 3061,
+        "sha256": "3139a06c32c1bcc6f65c30b24a0edd57c6ec3aabcc5719b2226722e2f6dcf35a",
+        "source_instances": [
+          {
+            "prefix_bytes": 98266,
+            "sha256": "42463ee6fffcc6e8694f271b67c71c1985b40a83ddc9c483076de4554856a91f",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxA1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45948,
+            "sha256": "19f880f17efa8cf98151c79ed831b667085f9825e64a5244f40c49919319e0d0",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxA1/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/source_A1_flux.dat"
+      },
+      "source_A2_flux": {
+        "rows": 3061,
+        "sha256": "9a57629c5f3a8921cfe8590af8f4ba673f55eb41da98f1b456345e82e19a46d1",
+        "source_instances": [
+          {
+            "prefix_bytes": 98266,
+            "sha256": "c5fda4d923e0ad5d0e8f5ff3e2c22e8d6b9b4809b960ec475c7b6b67aea33c0e",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxA2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45948,
+            "sha256": "ce8439a327e13e3baabb5a9c58be3b17edb8e4cd4db8b45ee243ba0530e50552",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxA2/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/source_A2_flux.dat"
+      },
+      "source_B1_flux": {
+        "rows": 3061,
+        "sha256": "bebbf3f2d508b1754b53d52fb84f57d8624fc53a7fd4f9b7be75b7d1c89c85da",
+        "source_instances": [
+          {
+            "prefix_bytes": 98266,
+            "sha256": "bf88474883864a271ac8f37801975e2d6700763ba25ac4f1d81672e24a899814",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxB1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45948,
+            "sha256": "8fc013ac87b94a89eebbe6330f91fedf9d42c935b7887fba644950241bddadd7",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxB1/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/source_B1_flux.dat"
+      },
+      "source_B2_flux": {
+        "rows": 3061,
+        "sha256": "2221d0318f9398794912c62be7bc2922940d6b4eed9db5064b34dba1cd267f15",
+        "source_instances": [
+          {
+            "prefix_bytes": 98266,
+            "sha256": "0ded6c476b8d8a4563f49e60322fe77dda9bdf7f7fa56ea227daa53fb88f5096",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxB2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45948,
+            "sha256": "22281636b6bf4d6393117c5d5981499ff7d3ddf9cee3b9052831aef2bda86b8c",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/sourceStartFluxB2/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/source_B2_flux.dat"
+      },
+      "tankA_water_volume": {
+        "rows": 3061,
+        "sha256": "1421e06ded82bc6d1875d4ee56a4fb7105a70656d5f09e4ca4a4ab3af1f3e79c",
+        "source_instances": [
+          {
+            "prefix_bytes": 66928,
+            "sha256": "08f5ac48276891df7500398442d5dc7bb09b1af8f6a2fc77a6d54649e48a33c3",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/tankAWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31305,
+            "sha256": "49ffdba8350a9be3d3e84b1e62ab2041b16fc63e8501efbebb6a15e4da07a699",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/tankAWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/tankA_water_volume.dat"
+      },
+      "tankB_water_volume": {
+        "rows": 3061,
+        "sha256": "cf0aec7865814aadb2278a174000a0ae4b566a5dfe9bc37ef10340c717f90c99",
+        "source_instances": [
+          {
+            "prefix_bytes": 66928,
+            "sha256": "6b86da29d2c7472ac00a1fe7a8cf4ee3cf93b5ed858ba77c211dcce44faa14d0",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/tankBWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31305,
+            "sha256": "c6d0d78bc4c2e86b0064f0a2aa851c2f65e447f26bf515a56de5a7812bb172b3",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/tankBWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/tankB_water_volume.dat"
+      },
+      "total_water_volume": {
+        "rows": 3061,
+        "sha256": "5b24ea14183df1c5e5c220e546f17b2ee373504ebf4d44ccf7e9cbe1853c3c7b",
+        "source_instances": [
+          {
+            "prefix_bytes": 66922,
+            "sha256": "e50f214f18bbe7df7e0fb4156784480dca3b73ceb5d2176e3885420ac6068416",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/totalWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 31299,
+            "sha256": "dd260db4b36d426366b9b23bffa1e02b80750f11343d2f4d936cb0e21e766b6d",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/totalWaterVolume/0.259831959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/total_water_volume.dat"
+      },
+      "valve_A1_flux": {
+        "rows": 3061,
+        "sha256": "b3102f5fc502ed508094ec25998b4a06302d6e47c83d0f9249d8cd67e109f1e6",
+        "source_instances": [
+          {
+            "prefix_bytes": 98264,
+            "sha256": "df8e2945ee4c727a57a8912967fd382ac6600f61e5f49e7a13508708f5de2530",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxA1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45946,
+            "sha256": "6f2a4c00c87d2095035f8e17636e724aae878accf863cf6e4db49249accb0b2f",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxA1/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/valve_A1_flux.dat"
+      },
+      "valve_A2_flux": {
+        "rows": 3061,
+        "sha256": "c3b1c19ee23b07e9fa1bceee3eba14aeb2ded09be25191b8882bde4bb2b44256",
+        "source_instances": [
+          {
+            "prefix_bytes": 98264,
+            "sha256": "924201270edb341704f20b3d1e903f5ede36ee57e64e1a384cc9ec92f9f5e351",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxA2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45946,
+            "sha256": "3066d19b0f471e16a0b298a6678a749e3a9177bd453122c29479f6c86b79ca54",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxA2/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/valve_A2_flux.dat"
+      },
+      "valve_B1_flux": {
+        "rows": 3061,
+        "sha256": "fbba66f730bb044d4d4871b1737d4fc8ba8f054139028cbab435b066b25a2b20",
+        "source_instances": [
+          {
+            "prefix_bytes": 98264,
+            "sha256": "7ac65230352b5eb48d6909722daf754200b7f6b7446f12af948432932811c122",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxB1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45946,
+            "sha256": "9b8b8aef665d433186cd91f293d0122a95fe9704b046b989f720c3a60ad21343",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxB1/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/valve_B1_flux.dat"
+      },
+      "valve_B2_flux": {
+        "rows": 3061,
+        "sha256": "b0f577953646a289841061e4137eded52a56ea1deda709248c32bdfbfea72c2e",
+        "source_instances": [
+          {
+            "prefix_bytes": 98264,
+            "sha256": "f13c4a8384f7984c7235aa68ee223588f92a980777a8dce6c21c310b6b075d69",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxB2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45946,
+            "sha256": "1eb4a7bbbd163bd8bef6089873dbb0fa7ab9bb72297a9dc88391d094d9c013f5",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-baseline/arms/baseline-1p0m-299214/case/postProcessing/seatFluxB2/0.259831959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/baseline/native-series/valve_B2_flux.dat"
+      }
+    },
+    "corridor": {
+      "ambient_annulus_water_flux": {
+        "rows": 2662,
+        "sha256": "3ed43d7f7d855df809519c19efbdbf08fc219643a12c6f3626e441f3355e9198",
+        "source_instances": [
+          {
+            "prefix_bytes": 63568,
+            "sha256": "224757146a842e79773c2c67fc544f8c2da017df315ce16785b58c601ceec240",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/ambientAnnulusWaterPhaseFlux/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 24551,
+            "sha256": "ba9d9c1a19a007b4640e6c95de0fcce0c838f6e73d30865c6ba394e29bc37d3d",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/ambientAnnulusWaterPhaseFlux/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/ambient_annulus_water_flux.dat"
+      },
+      "external_sides_water_flux": {
+        "rows": 2662,
+        "sha256": "027e923ee99ce0b169051ff6cb5123aeb9994993a90708bd525636f2754cc6c6",
+        "source_instances": [
+          {
+            "prefix_bytes": 63461,
+            "sha256": "f90967ff49fda834c3955c0633ec3662003c8e1b96384c59150072fe66341e50",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/externalSidesWaterPhaseFlux/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 24550,
+            "sha256": "e3847a3a6688dc47f21a8cab5586a31f0c0a23940d7de7efb7c90dfcce4fcdc3",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/externalSidesWaterPhaseFlux/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/external_sides_water_flux.dat"
+      },
+      "external_water_volume": {
+        "rows": 2662,
+        "sha256": "e102f3185bf2c9124f29b0fc5ebcbae07981b3de308f1a9edc1c1496d882fa3d",
+        "source_instances": [
+          {
+            "prefix_bytes": 63550,
+            "sha256": "22fcd8c70ffef09ef53bf4c0ea72bf263e3ef547e77e0d180dd1ff862b31de15",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/externalAirWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 24531,
+            "sha256": "e28abf00d40d41c7c5525bc8d0efcfc79f868c8e62a996ba8a7cc1a308e1dd34",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/externalAirWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/external_water_volume.dat"
+      },
+      "far_outlet_water_flux": {
+        "rows": 2662,
+        "sha256": "dff66644a990ea4ba0d99fcf0f7bc224f68e340795d4cf775c1c62dbf05e4884",
+        "source_instances": [
+          {
+            "prefix_bytes": 62889,
+            "sha256": "fba1aab3d4a7fb724c808cd03c78496c4f5ff7d6472fe7d7df2b7e22e1808730",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/farOutletWaterPhaseFlux/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 24546,
+            "sha256": "67c343b937304bf9330d500a6cc4bf57d4b8018dafaf9949dd15e9ad92854ebb",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/farOutletWaterPhaseFlux/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/far_outlet_water_flux.dat"
+      },
+      "lineA_water_volume": {
+        "rows": 2661,
+        "sha256": "c736aeae986fcc99374d0c4edc6584d7d922faee4446353854c76e8ef2e8eac0",
+        "source_instances": [
+          {
+            "prefix_bytes": 61687,
+            "sha256": "8c8697dff6c2424029cb7929a88a9bfd6e7d9b7c7b0d4a6c01c85488ce6e84f3",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineAInitialWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 23760,
+            "sha256": "b2066ad2649b464bd9b27eaef3d3a8b173b1665218922d02f4bfd3f49cb73e5c",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineAInitialWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/lineA_water_volume.dat"
+      },
+      "lineB_water_volume": {
+        "rows": 2661,
+        "sha256": "15f738697b4049f9dd2b4d1dd9a3fb6e6b4e866a57b38fe01fa7e8a1af2e3fb2",
+        "source_instances": [
+          {
+            "prefix_bytes": 61687,
+            "sha256": "7782ecd9704091974dcf7215e6f48edfc0758ff7e6deed8f1a45d21db34c43f9",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineBInitialWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 23760,
+            "sha256": "2583c413985797c45111cbb8b06e633cb51a802615bff88f2e0c18deaa0a8484",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineBInitialWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/lineB_water_volume.dat"
+      },
+      "mouthA_water_volume": {
+        "rows": 2662,
+        "sha256": "3737f9f8ad56b2a6458b60612f70a88fdd28f444190565ec5d161b1b9c743300",
+        "source_instances": [
+          {
+            "prefix_bytes": 63553,
+            "sha256": "f4d64f45b8a2169b6681a797d839dd49846788e19b099c1e31bda46e8b3ece53",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineAMouthBoundaryWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 24535,
+            "sha256": "8be0431e85f78288aba12f075cd201cf9eb62209c9a3bb2815521e6da9fd2481",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineAMouthBoundaryWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/mouthA_water_volume.dat"
+      },
+      "mouthB_water_volume": {
+        "rows": 2662,
+        "sha256": "feaa2e8efd7d5997ffc83c6e69b592cd83deae955b9870fc86f5f83b85349867",
+        "source_instances": [
+          {
+            "prefix_bytes": 63553,
+            "sha256": "2b6ec07f5922648dad72158fa355cb87c87b74294c0987590d06573d657454ab",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineBMouthBoundaryWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 24535,
+            "sha256": "bff2978cd0e8d396ca07b11e547c25a68f6fc6a3addd3809268b7343a1ee0429",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/lineBMouthBoundaryWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/mouthB_water_volume.dat"
+      },
+      "mouth_sample_U": {
+        "rows": 2662,
+        "sha256": "d0245e1c85710381a28cdf78e76d3ce32eb16d7364e8e4afbadf510390604770",
+        "source_instances": [
+          {
+            "prefix_bytes": 154756,
+            "sha256": "71e4c611cacde5c00441f551f32558def732829145ad31cacf86c340cd2f0fcb",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/fourMouthPlaneTotalUIntegral/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 59294,
+            "sha256": "1edb6f61916cb50c043570eba1b7e9016c3e9061924cebab59015c35d85ab199",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/fourMouthPlaneTotalUIntegral/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/mouth_sample_U.dat"
+      },
+      "mouth_sample_alpha": {
+        "rows": 331,
+        "sha256": "7d6a3db0293b7d9d2ca51fac02eac7196bd77d40adef7b5518096f8665cf65ac",
+        "source_instances": [
+          {
+            "prefix_bytes": 30456,
+            "sha256": "8633f2978a7ec84767b32950592d799de0e0927e34aa56b858e861bf8c1b3936",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/fourMouthPlaneAreaAlpha/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 11839,
+            "sha256": "012f6ad8961d47416cec15f0bdbd51c4a889511a25bbd884046f32f7c2201c87",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/fourMouthPlaneAreaAlpha/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/mouth_sample_alpha.dat"
+      },
+      "mouth_sample_alphaU": {
+        "rows": 2662,
+        "sha256": "dfa025d8e5cb99862bc826448d6eec0c10df5a5b8ce324909471c3d6ccad9355",
+        "source_instances": [
+          {
+            "prefix_bytes": 161456,
+            "sha256": "2e77441f0382ae8d72b293dd14975a559f8f9c5869234821f238f3123016e137",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 62094,
+            "sha256": "2c37adb0812749424888d61ab49b9fe74028587f0c2c743ab542109cae17dcf8",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/fourMouthPlaneWaterWeightedUIntegral/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/mouth_sample_alphaU.dat"
+      },
+      "probe_T": {
+        "rows": 2662,
+        "sha256": "001e5dd8ea1fa530f9fd5baada973dd3688e998c56161cd66a4e592ca705e07f",
+        "source_instances": [
+          {
+            "prefix_bytes": 92405,
+            "sha256": "bf2109ddcc636e0d1c957b140ca819e30eda527ba89fd057027d038a913e62ed",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0/T"
+          },
+          {
+            "prefix_bytes": 35573,
+            "sha256": "6d248470623a568566b799ab72d6b300018f51d6ad0a1eea074fee846341ee8a",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0.239331959232/T"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/probe_T.dat"
+      },
+      "probe_U": {
+        "rows": 2662,
+        "sha256": "73a6a9181d64ba0c5108fea025fae843a104cf60b5ec34a56277d3680e8363b3",
+        "source_instances": [
+          {
+            "prefix_bytes": 182714,
+            "sha256": "50958163b9b89ee1ba47c11edd2cb7f9c9b410de897be69635afdfb486310408",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0/U"
+          },
+          {
+            "prefix_bytes": 67550,
+            "sha256": "35b5d7a93fb6add324326bbeaabcbdfa8504f3a162b87891f45f1e03bc0f23de",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0.239331959232/U"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/probe_U.dat"
+      },
+      "probe_alpha_water": {
+        "rows": 2662,
+        "sha256": "220e2023abf4e729f196c722d02b5a4fbd1e6c3fd9b287f857637445a063654f",
+        "source_instances": [
+          {
+            "prefix_bytes": 92405,
+            "sha256": "da4379bc12e1199ef877c5d44215768adce7fdd393b6ef9bec600af43112b375",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0/alpha.water"
+          },
+          {
+            "prefix_bytes": 35573,
+            "sha256": "9c3220cdc0dfccc752b0fe0b1d45177419200063881418329093a74e5406804a",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0.239331959232/alpha.water"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/probe_alpha_water.dat"
+      },
+      "probe_p": {
+        "rows": 2662,
+        "sha256": "a64ab013ac13f0dcbdd6d490c6e7027af6e787951c4e30e348a4f7f0732cae7a",
+        "source_instances": [
+          {
+            "prefix_bytes": 92405,
+            "sha256": "89303d0a6b41649834c6793242890bf92608ff742f185cf042c23f651496590f",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0/p"
+          },
+          {
+            "prefix_bytes": 35573,
+            "sha256": "2c060fb316dfa61c860ff8c01ec9ed5d06478ba0b18733abf60e9b2de0f2e8ef",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/i4fTankHeadspaceProbes/0.239331959232/p"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/probe_p.dat"
+      },
+      "seat_A1_pressure": {
+        "rows": 2662,
+        "sha256": "ca287e14b79eb536dbdad4a81920fdd9cc01f7e6275c29985f841f2b47748700",
+        "source_instances": [
+          {
+            "prefix_bytes": 119414,
+            "sha256": "98ba6928cf0218808e9177403c3d17d6d83993de7a1f4dab39ddb3de8c25fb66",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureA1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45999,
+            "sha256": "a1131d1f94ea0a4ec5147cd92e8e1cb48bf7388da80a44d8f12560b9359cdd1b",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureA1/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/seat_A1_pressure.dat"
+      },
+      "seat_A2_pressure": {
+        "rows": 2662,
+        "sha256": "0eb23fb4c93e06739cfd3c4b45a7270c33bbc4c83422713a9a1dea973154a25d",
+        "source_instances": [
+          {
+            "prefix_bytes": 119414,
+            "sha256": "3701b5950e00debf0e332e70db13a2c8301480ee4d590c92cef2596e0eeea31c",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureA2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45999,
+            "sha256": "2d9f9048bcb12a059eceb98816639f6dd7d701bc847f64220016cbd989aa5c48",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureA2/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/seat_A2_pressure.dat"
+      },
+      "seat_B1_pressure": {
+        "rows": 2662,
+        "sha256": "c0471b913ca1a584afdf677023a78d79ca066ab7ae4a864b5ee03b4d9687ebf7",
+        "source_instances": [
+          {
+            "prefix_bytes": 119414,
+            "sha256": "33ff27c67f14ad098c258e561dd44ed97bc26d626acb50b456b3ac577a6167ac",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureB1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45999,
+            "sha256": "91f48e1714f01196a02166eb756fc6a2cf0d0ceb4eb88a5dad0ad089d1603e2e",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureB1/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/seat_B1_pressure.dat"
+      },
+      "seat_B2_pressure": {
+        "rows": 2662,
+        "sha256": "05ea353125b92e14f97a5bd087e26122ee2550a3f5428885f1250d9023c214dc",
+        "source_instances": [
+          {
+            "prefix_bytes": 119414,
+            "sha256": "17caf2fa411cf4f1c15b9aa447cda13fff8998cd062edc45a2bcf3391708fd13",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureB2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 45999,
+            "sha256": "73b779b266531ee1ec14ba76ba371d4c16ecee06e20a540936bafcf13e5a84fe",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatPressureB2/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/seat_B2_pressure.dat"
+      },
+      "source_A1_flux": {
+        "rows": 2662,
+        "sha256": "0d8bafe5dab98eccd2c7f600423b8ea31078c0d32d70f9d581185c06f4782e4b",
+        "source_instances": [
+          {
+            "prefix_bytes": 90558,
+            "sha256": "99c94138d47e946be3cf0270a72b527907cee02b07c87bffe8b60d139769dade",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxA1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34903,
+            "sha256": "e8870616f49231a324b0752569f048a2314eb6f8f2b0e2604982bae34354e8b9",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxA1/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/source_A1_flux.dat"
+      },
+      "source_A2_flux": {
+        "rows": 2662,
+        "sha256": "9aa3d9b828af9d13016f601268f0bed0121c6843566da0c260636db1a2ca7c02",
+        "source_instances": [
+          {
+            "prefix_bytes": 90558,
+            "sha256": "b5f8dcdeddc19f03624f1f1134ca67c117a6ee5b632a5fc08a6d411995349623",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxA2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34903,
+            "sha256": "2bb6938343f77770eb3f37c0e59fd9ef93201f04bdd3c667c032298f65b5fa0f",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxA2/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/source_A2_flux.dat"
+      },
+      "source_B1_flux": {
+        "rows": 2662,
+        "sha256": "98512c2ccfa17f83e84aa0e8ad7703f092e98aad6d368cdabf57624c645c05fe",
+        "source_instances": [
+          {
+            "prefix_bytes": 90558,
+            "sha256": "d8a1dc1f589bb11f216c2cfddbaf1b8e6c39af9a9f3d6b65aa15647fc4cbbd35",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxB1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34903,
+            "sha256": "6bf0a7db247eee5829317d39340f5b4f5f68e25efcc5df286082d40ecc618711",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxB1/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/source_B1_flux.dat"
+      },
+      "source_B2_flux": {
+        "rows": 2662,
+        "sha256": "8529d74d92a999bb3105f8cef44fbf2afe31ca07d4a0fdfe339d760b29a01949",
+        "source_instances": [
+          {
+            "prefix_bytes": 90558,
+            "sha256": "9b5b8d3c7ef13db3a9b08557fc4fe3253a87e41e844b2d8d198ec7cf83c815ea",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxB2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34903,
+            "sha256": "37215d3430010432ed9b20bf95b9dc98d5f76968c6baa9733c0debdb82e79efe",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/sourceStartFluxB2/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/source_B2_flux.dat"
+      },
+      "tankA_water_volume": {
+        "rows": 2661,
+        "sha256": "e90ce93589c1d00c2d319f6dd009299752cc92ac8adf24e9456ff3fd74c625fa",
+        "source_instances": [
+          {
+            "prefix_bytes": 61680,
+            "sha256": "56d5a88a8c5b684cdb5a8ceb4790ce9676b9c4461d2b7d08a97e73ae25fe580b",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/tankAWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 23753,
+            "sha256": "6da9171124abf5572bec122fa1019802dc7594515011889a9586ff4846a96b57",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/tankAWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/tankA_water_volume.dat"
+      },
+      "tankB_water_volume": {
+        "rows": 2661,
+        "sha256": "aaefb9cdabd9d779403a2b177a2ae5add43b75c3ccf80c835ec7df6f93b6a371",
+        "source_instances": [
+          {
+            "prefix_bytes": 61680,
+            "sha256": "3ab2f0f7698612b63a9e48fae65cde40309710578cf1d33c7f8ecae0ad0b5722",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/tankBWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 23753,
+            "sha256": "af077975fcbd7628e2ea189f686717d8bc2540262c04cc0b9c37ae9802b50488",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/tankBWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/tankB_water_volume.dat"
+      },
+      "total_water_volume": {
+        "rows": 2662,
+        "sha256": "45c32219d6defa889b509bbbd03046050a884ebef8f9cc1ab260009f3db4bf52",
+        "source_instances": [
+          {
+            "prefix_bytes": 61674,
+            "sha256": "f684e7ca63db3eb45f3b1a191f2a2e780362b218d4dd3217d53a2b85bc5eee55",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/totalWaterVolume/0/volFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 23779,
+            "sha256": "ae0b5a49578afbb0b72cacfab966fa6476fd45b59f4a0d878f41bdbe50c10e34",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/totalWaterVolume/0.239331959232/volFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/total_water_volume.dat"
+      },
+      "valve_A1_flux": {
+        "rows": 2662,
+        "sha256": "7cf0b5475f83bdda32df14a647b41e8f9aaf5a83f92690f29f47672ce7cab355",
+        "source_instances": [
+          {
+            "prefix_bytes": 90556,
+            "sha256": "f85733c8e009eb040e0e629bd72676589ef397bab717a8d41578be14a231091f",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxA1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34901,
+            "sha256": "3964bb1e9aaa6d536b721c72ceff22aed67f7bb947f66a2f98854d125e00b4b3",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxA1/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/valve_A1_flux.dat"
+      },
+      "valve_A2_flux": {
+        "rows": 2662,
+        "sha256": "acff6d2f3f2755d1d8a59b950693d822c6fac90dc6c4881efeb1d974b68a2e52",
+        "source_instances": [
+          {
+            "prefix_bytes": 90556,
+            "sha256": "478d4f3f15b43db6a0e75ad7ce4d8fd25c8d5dcf44192b1d3a6008c05e762a06",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxA2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34901,
+            "sha256": "020fb4f2eb50501be4158b4d109b43ffaddd52d9d6e0ff16038dc6c2b64fdb10",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxA2/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/valve_A2_flux.dat"
+      },
+      "valve_B1_flux": {
+        "rows": 2662,
+        "sha256": "fa8288275f7b269e2d46f5e5333f9a546fc975d95eaba02a1599e2e99eef6b49",
+        "source_instances": [
+          {
+            "prefix_bytes": 90556,
+            "sha256": "769eb6f8c06158f603f8275e7bf848215b6d5d7f6b7d53f58369df5f267a72a9",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxB1/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34901,
+            "sha256": "b418191b66261c1c2857a245ab27255e6ca33e27af16204af9f11514db740166",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxB1/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/valve_B1_flux.dat"
+      },
+      "valve_B2_flux": {
+        "rows": 2662,
+        "sha256": "2e6bbfdd5781b6f97e050464b5c7b0340a8f9f16e2062360dcb559eb5e29d34f",
+        "source_instances": [
+          {
+            "prefix_bytes": 90556,
+            "sha256": "5d2f6ad51a693001eab9b1b5028fb01d054174fa28850538548021d65383ff23",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxB2/0/surfaceFieldValue.dat"
+          },
+          {
+            "prefix_bytes": 34901,
+            "sha256": "c97317a69edfaa24217fb9ac8be321e410cef618c939cfd3b9bcfc10edc88a0a",
+            "source_path": "results/runs/i4f-coldmesh-continuation-v5-20261027T101135Z-corridor/arms/corridor-1p0m-323682/case/postProcessing/seatFluxB2/0.239331959232/surfaceFieldValue.dat"
+          }
+        ],
+        "stored_path_in_original_capture": "results/summaries/i4f_20261027/cold-mesh-prefix/inputs/corridor/native-series/valve_B2_flux.dat"
+      }
+    }
+  },
+  "original_full_capture_manifest_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/inputs/capture-manifest.json",
+  "original_full_capture_manifest_sha256": "be33df49d5b13983a97d4a8c23583529fbbe6457bf42b8d1d8a735dfea449dde",
+  "raw_input_bytes": 19317087,
+  "raw_input_file_count": 208,
+  "raw_input_file_manifest_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/raw-input-file-manifest.json",
+  "raw_input_file_manifest_sha256": "44a415745776a3ef445aade911d5e9d952ac4db157b54c7c3ea52a0e80eeeb76",
+  "raw_input_relocation_record_path": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/raw-input-relocation.json",
+  "raw_input_snapshot_root": "results/runs/i4f-cold-mesh-prefix-analysis-20261027T120507Z/input-capture-original/inputs/",
+  "schema": "i4f-cold-mesh-prefix-capture-provenance/v1"
+}

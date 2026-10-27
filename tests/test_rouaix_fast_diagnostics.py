@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -12,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from cases.e1_rouaix_fast_diagnostics import build_cases  # noqa: E402
+from cases.e1_rouaix_hpc.snapshot_inventory import snapshot_inventory  # noqa: E402
 
 
 def test_all_air_pair_has_frozen_inputs_and_single_convection_change(tmp_path: Path) -> None:
@@ -164,15 +164,6 @@ def test_all_air_pair_has_frozen_inputs_and_single_convection_change(tmp_path: P
 def test_collated_snapshot_inventory_accepts_guard_time_not_future_field_time(
     tmp_path: Path,
 ) -> None:
-    runner_path = (
-        ROOT / "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/run_remote.py"
-    )
-    spec = importlib.util.spec_from_file_location("rouaix_fast_local_runner", runner_path)
-    assert spec and spec.loader
-    runner = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(runner)
-    runner.RUN = tmp_path
-
     case = tmp_path / "case"
     case.mkdir()
     (case / "case-inputs.json").write_text(json.dumps({"field_write_times_s": [0.0, 0.3]}))
@@ -185,7 +176,7 @@ def test_collated_snapshot_inventory_accepts_guard_time_not_future_field_time(
             (snapshot / field).write_text("field")
     (output / "terminal-status.json").write_text(json.dumps({"solver_time_s": "0.262800000000"}))
 
-    inventory = runner._snapshot_inventory(output, "case")
+    inventory = snapshot_inventory(output, case)
     assert inventory["passed"] is True
     assert inventory["reached_declared_times_s"] == ["0"]
     assert inventory["unreached_declared_times_s"] == ["0.3"]
