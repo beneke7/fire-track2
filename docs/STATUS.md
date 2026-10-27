@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 01:29 UTC. Priority: **I4F internal pressure-driven discharge**.
+Updated: 2026-10-27 01:40 UTC. Priority: **I4F internal pressure-driven discharge**.
 Aerial/HPC work belongs to the separate server agent. No complete trustworthy
 current discharge, exterior sheet, hardware validation or scientific gate pass yet.
 User reaffirms workstation scope: tank → valves → pipes → four nozzles.
@@ -29,11 +29,12 @@ supersedes the preparation states in the historical detail below:
   `results/runs/i4f-cold-nouter16-advisory-20261026T2320Z/attempts/attempt-006-executable-mode-retry/guardian-status.json`.
 - A separate exploratory 5 kPa-floor sensitivity is running, ten MPI ranks:
   Docker `71d34a2df7df1ade47e18ed17d431464a1b59c27f0364c46fcf5c7715ef4f793`.
-  At 01:28:59 UTC it had reached .477987 s with small pressure updates and no
-  floor or water-supported saturation-margin event. It has not yet crossed
-  the earlier .484–.528 s failure window. Guard and immutable inputs:
+  At 01:40:24 UTC it had reached .522654 s, with renewed noncontracting pressure
+  updates around 1510 Pa. Raw minimum pressure remained about 13.1 kPa with
+  a conservative saturation margin of 10.7 kPa and no floor event. Lowering the
+  floor has not cured the coupled-update mode. Guard and immutable inputs:
   `results/runs/i4f-pressure-floor5k-20261027T005941Z/`.
-- Luna is preparing a matched same-time water-fraction/actual-water-flux
+- Luna is running a matched same-time water-fraction/actual-water-flux
   relaxation pair, weights 1 and .5. Both quantities must be treated together;
   smaller applied updates alone will not establish convergence or conservation.
   The weight-1 arm started at 01:32:43 UTC, Docker

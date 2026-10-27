@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import importlib.util
 import json
@@ -90,6 +91,14 @@ def expect_raises(exception: type[BaseException], callback: Any, message: str) -
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--report",
+        type=Path,
+        help="write the report to a new path (refuses to overwrite an existing path)",
+    )
+    args = parser.parse_args()
+
     helper = load_helper()
     manifest = json.loads(MANIFEST_PATH.read_text())
     rows = sorted(manifest["records"], key=lambda item: item["bytes"])
@@ -252,8 +261,12 @@ def main() -> None:
         "manifest_sha256": digest(MANIFEST_PATH),
         "journal_sha256": digest(JOURNAL_PATH),
     }
-    report_path = PACKET / "safety-test-report.json"
-    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    report_text = json.dumps(report, indent=2, sort_keys=True) + "\n"
+    if args.report is not None:
+        report_path = args.report
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with report_path.open("x", encoding="utf-8") as stream:
+            stream.write(report_text)
     print(json.dumps(report, sort_keys=True))
 
 
