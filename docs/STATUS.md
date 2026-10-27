@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 07:51 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 08:43 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -16,8 +16,8 @@ Each has ten MPI ranks/nine CPU equivalents and 32 GiB memory allowance.
 
 | Case | Exact container | Latest independently checked state |
 | --- | --- | --- |
-| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.126957 s, 1023 completed steps, last completed-step pressure correction 0.0018548 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
-| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.132207 s, 1065 completed steps, last completed-step pressure correction 0.0017538 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.192457 s, 1547 completed steps, last completed-step pressure correction 0.003749 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.189832 s, 1526 completed steps, last completed-step pressure correction 0.0040836 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
 
 Baseline StartedAt 05:56:04 UTC; corridor StartedAt 05:47:27 UTC. Each targets
 .65 physical seconds with six hours to save and another fifteen minutes hard
@@ -119,13 +119,32 @@ Their reader now runs directly on processor-only cold checkpoints; a missing
 legacy global mesh disables only that optional comparison. Face centres match
 the pinned v2512 source. Nonzero water-throughput validation remains outstanding.
 
-A fully wet 22,918-cell native upper branch is being prepared with stock
-simpleFoam to isolate hydraulic geometry from interface coupling. It retains
-the divider entrances and one connected fluid region. The exploratory mesh
-has 872 concave cells despite passing non-orthogonality/skewness limits; this
-is recorded rather than treated as a mesh-acceptance result. The live VOF
-cases remain unchanged. An explicit restarted-continuation queue is being
-implemented to cover the current wall-budget shortfall; it is not yet armed.
+The [fully wet branch trials](../results/summaries/i4f_20261025/wet-branch-hydraulic-reference/summary.json)
+both diverged: linearUpwind exceeded 200 m/s at steady iteration 186, upwind
+at 197. The latter saved and stopped on its declared runaway limit. These
+are not physical seconds or accepted pressure/head-loss results. The first
+runaway is near the truncated outlet (x=4.794 m), distinct from the full-case
+divider-region minimum (x=4.22 m); a shared cause is unproven. The extracted
+22,918-cell branch retains the divider entrances and has one connected region,
+but 872 concave cells. Boundary/mesh interpretation is being audited before
+another discriminating trial. Both live VOF cases remain unchanged.
+
+The bounded continuation service
+`i4f-coldmesh-continuation-20261027t073946z.service` is armed and waiting for
+both exact parents' clean normal-End checkpoint captures. It targets .70 s,
+with new six-hour save/six-hour-fifteen-minute hard limits per child and an
+absolute controller deadline of 23:01:30 UTC. Parent failures or PAUSE hold
+queued stages; this is a restarted continuation with preserved lineage, not
+bitwise trajectory equivalence. Its config and thirteen execution-source files
+were independently hash-checked; no child has launched yet.
+Status: `results/runs/i4f-coldmesh-continuation-20261027T073946Z/analysis/continuation-status.json`.
+
+A read-only companion restores the historical native x-plane reader for the
+processor-only baseline: all 53 processor mesh/map files match the retained
+global geometry; its .099957 s snapshot has independent field inodes. It reads
+1,536 native faces with effectively zero outlet water flux. Provenance:
+`results/runs/i4f-native-xcut-companion-20261027T0800Z/companion-provenance.json`.
+No nonzero-throughput or exact mass-flux validation is claimed.
 
 ## Provisional engineering reference and limits
 

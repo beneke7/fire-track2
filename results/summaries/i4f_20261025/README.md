@@ -31,6 +31,11 @@ checks the actual four opening rims independently of selected flux surfaces.
 The holes match 0.15 m2 each; the larger nearby control surfaces measure a
 different boundary. The reader runs directly on processor-only cold checkpoints.
 
+The [water-only branch comparison](wet-branch-hydraulic-reference/summary.json)
+is a negative result: both convection schemes diverged near the truncated
+outlet. This smaller test has no accepted hydraulic pressure or head loss,
+and has not reproduced the full case's divider-region failure mechanism.
+
 **27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
 isolates a sufficient feedback path at one fixed state: pressure updates settle
 below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it

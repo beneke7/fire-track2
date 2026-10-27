@@ -1,0 +1,156 @@
+{
+  "arms": {
+    "linearUpwind": {
+      "div_phi_U": "bounded Gauss linearUpwind grad(U)",
+      "first_runaway_crossing": {
+        "criterion": "max_magnitude_U_m_s > 200",
+        "location_xyz_m": [
+          4.7939507864068425,
+          -0.2424492738698738,
+          0.9683886767154217
+        ],
+        "observed": 203.93149725669022,
+        "steady_iteration": 186
+      },
+      "stop": "normal End at iteration cap; no SIMPLE convergence message",
+      "terminal_native_fields_valid_as_hydraulic_result": false,
+      "terminal_steady_iteration": 3000
+    },
+    "upwind": {
+      "div_phi_U": "bounded Gauss upwind",
+      "first_runaway_crossing": {
+        "criterion": "max_magnitude_U_m_s > 200",
+        "location_xyz_m": [
+          4.7939507864068425,
+          -0.2424492738698738,
+          0.9683886767154217
+        ],
+        "observed": 202.8845125551205,
+        "steady_iteration": 197
+      },
+      "stop": "runTimeControl wrote fields and ended when max|U| exceeded 200 m/s",
+      "terminal_native_fields_valid_as_hydraulic_result": false,
+      "terminal_steady_iteration": 197
+    }
+  },
+  "branch_mesh": {
+    "checkMesh_concave_cells": 872,
+    "checkMesh_failed_checks": 1,
+    "checkMesh_max_nonorthogonality_deg": 64.83675994120208,
+    "connected_regions": 1,
+    "inlet_x_m": 2.25,
+    "mesh_qualification": "Concave-cell/checkMesh warning retained; no geometry repair or mesh acceptance is claimed.",
+    "near_mouth_outlet_face_center_x_range_m": [
+      4.799504878210939,
+      4.806499726008478
+    ],
+    "selected_branch_cells": 22918,
+    "source_parent_mesh_cells": 299214,
+    "zero_thickness_divider_retained": true
+  },
+  "common_inputs": {
+    "comparison_window_steady_iterations": [
+      1,
+      197
+    ],
+    "dynamic_viscosity_pa_s": 0.001002,
+    "initial_fields_mesh_boundaries_transport_turbulence_and_linear_controls_matched": true,
+    "prescribed_inlet_flow_m3_s": 0.599812435,
+    "runs": {
+      "linearUpwind": {
+        "container_id": "f77c9a588923301a4801822c9087df614bdf114c9dbb1eae26d49db5ac7988a3",
+        "cpu_quota_equivalents": 0.75,
+        "docker_oom_killed": false,
+        "exit_code": 0,
+        "finished_at_utc": "2026-10-27T07:58:36.731400734Z",
+        "input_freeze_sha256": "e9313196591bf9cc77d5b7a13e0559f5182a52035e112b67d4c259d74bec95ab",
+        "memory_limit_bytes": 4294967296,
+        "normal_solver_End": true,
+        "openfoam_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+        "openfoam_image_reference": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "solver": "stock serial simpleFoam",
+        "solver_log_sha256": "ce6100a52936cf9b564eea04e7bda2a774f3bb955dea7e43912205191dd26939",
+        "started_at_utc": "2026-10-27T07:54:03.556548829Z"
+      },
+      "upwind": {
+        "container_id": "417d9a83148dcf7faa10bc7f20d4c8afcf1b9584aff0fae55e932cc420db99f7",
+        "cpu_quota_equivalents": 0.75,
+        "docker_oom_killed": false,
+        "exit_code": 0,
+        "finished_at_utc": "2026-10-27T08:07:58.632862883Z",
+        "input_freeze_sha256": "95a4fb9c0635032a19826b8469230623c9274ef59c81c38500e227db23379a21",
+        "memory_limit_bytes": 4294967296,
+        "normal_solver_End": true,
+        "openfoam_image_id": "sha256:f5080db350a74a6130f248e2fd4d4fd1a8bd9309054b49ca160afe45a4d0c45b",
+        "openfoam_image_reference": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+        "solver": "stock serial simpleFoam",
+        "solver_log_sha256": "092966ad8cf794c06709685d16b005d1841415333b7d7c11404be6593219b7a2",
+        "started_at_utc": "2026-10-27T08:07:41.204072637Z"
+      }
+    },
+    "solver": "stock OpenCFD v2512 simpleFoam",
+    "time_label_note": "simpleFoam Time labels here are steady iteration indices, not physical seconds.",
+    "turbulence": "RAS kOmegaSST",
+    "upwind_preflight": {
+      "changed_input_paths": [
+        "system/controlDict",
+        "system/fvSchemes"
+      ],
+      "equation_change": "div(phi,U): bounded Gauss linearUpwind grad(U) -> bounded Gauss upwind",
+      "input_file_count": 104,
+      "schema": "i4f-wet-branch-upwind-preflight/v1",
+      "shared_inodes": [],
+      "unchanged_input_file_count": 102
+    },
+    "water_density_kg_m3": 998.2
+  },
+  "common_iteration_197": {
+    "linearUpwind_max_mag_U_m_s": 264.25524368972873,
+    "linearUpwind_native_phi_Qin_m3_s": -0.5998124350000001,
+    "linearUpwind_native_phi_Qin_plus_Qout_m3_s": -0.004114549509648069,
+    "linearUpwind_native_phi_Qout_m3_s": 0.5956978854903521,
+    "linearUpwind_raw_logged_p_abs_min_pa": -5974212.647259198,
+    "qualification": "Iteration diagnostics from an unsettled, runaway SIMPLE calculation. Flux imbalance, pressure extrema and speed are not accepted hydraulic outputs.",
+    "steady_iteration_index_not_physical_time": 197,
+    "upwind_first_runaway_crossing_delay_iterations": 11,
+    "upwind_max_mag_U_m_s": 202.8845125551205,
+    "upwind_native_phi_Qin_m3_s": -0.5998124350000001,
+    "upwind_native_phi_Qin_plus_Qout_m3_s": -0.0014783029962412986,
+    "upwind_native_phi_Qout_m3_s": 0.5983341320037588,
+    "upwind_over_linearUpwind_max_U": 0.7677596467804978,
+    "upwind_raw_logged_p_abs_min_pa": -3711927.658160294
+  },
+  "interpretation": "Upwind lowers the max-speed diagnostic at the shared iteration and delays the declared 200 m/s crossing by 11 iterations, but both schemes run away and neither converges. This numerical comparison does not identify a physical root cause. Pressure-corrected native phi is used for flux; U dot Sf is a separate boundary-velocity estimate and is not used as a phi substitute.",
+  "model_scope": {
+    "excluded_physics": [
+      "tank and valve losses",
+      "gas headspace",
+      "two-phase interface",
+      "cavitation"
+    ],
+    "flow_source": "derived from prior CFD; not measured and not an outlet history",
+    "incompressible_single_phase_water": true,
+    "not_a_predictive_tank_valve_or_four_nozzle_discharge_model": true,
+    "not_validation_or_cavitation_evidence": true,
+    "prescribed_inlet_flow_m3_s": 0.599812435
+  },
+  "private_artifacts": {
+    "comparison_figure": "figures/convection-runaway-common-window.png",
+    "comparison_figure_sha256": "7bf39f10e2a3e6c86149105f3cc07cf5904297b47f5d094d5cb0ff05c12b6343",
+    "paired_history_csv": "paired-convection-common-iterations.csv",
+    "paired_history_csv_sha256": "322c38f2af59620bb198c33cf09e7df8ae9e1abc9b2c14e4b141bc5b43f5c0b5"
+  },
+  "provenance": {
+    "comparison_script_sha256": "803d2cbda66dc0a76c91db82eb189cde633dfaaa7aa47f74fd9a2df4de042de8",
+    "linearUpwind_analysis_sha256": "4e9bef07cc78cc0191849b21fbaec3b7bf8875075b66ee1124c1a73ca85c37be",
+    "linearUpwind_history_sha256": "95f75aeef395a82e07985859d7ce3356374c1921619db2452640ec8e8681c584",
+    "linearUpwind_input_freeze_sha256": "e9313196591bf9cc77d5b7a13e0559f5182a52035e112b67d4c259d74bec95ab",
+    "linearUpwind_preparation_sha256": "481d3c0a27d337bd56705a42a8a7250816f00b3cf9ff898b959977c8726c67fa",
+    "mesh_preparation_attempt003_sha256": "f897a7f3e1b2c808b250f93a160f4d3ebe3cdcda0a3a215380ccfcf706435fa7",
+    "upwind_analysis_sha256": "95e44e6f921b93cbc898f80e9ac2251fc0314fd27a8d64e77e9a880466a3aee0",
+    "upwind_history_sha256": "908952ac90d7fe5807d163cb2f1133b1481baf87fe3003c9cf128f845f1b73d6",
+    "upwind_input_freeze_sha256": "95a4fb9c0635032a19826b8469230623c9274ef59c81c38500e227db23379a21"
+  },
+  "purpose": "bounded single-phase, fully water-filled one-branch solver-behavior comparison",
+  "schema": "i4f-wet-branch-hydraulic-reference/v1"
+}
