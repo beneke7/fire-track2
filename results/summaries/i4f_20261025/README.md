@@ -26,6 +26,11 @@ final signed water-mass residual by 4.44 times in one natural timestep while
 leaving the pressure/velocity iteration almost unchanged. This identifies a
 conservation sensitivity without establishing a cure for the later failure.
 
+The [native outlet geometry audit](native-control-surface-geometry/geometry_audit.json)
+checks the actual four opening rims independently of selected flux surfaces.
+The holes match 0.15 m2 each; the larger nearby control surfaces measure a
+different boundary. The reader runs directly on processor-only cold checkpoints.
+
 **27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
 isolates a sufficient feedback path at one fixed state: pressure updates settle
 below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it

@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 07:25 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 07:51 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -16,8 +16,8 @@ Each has ten MPI ranks/nine CPU equivalents and 32 GiB memory allowance.
 
 | Case | Exact container | Latest independently checked state |
 | --- | --- | --- |
-| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.095457 s, 771 completed steps, last completed-step pressure correction 0.0010773 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
-| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.104457 s, 843 completed steps, last completed-step pressure correction 0.0021049 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.126957 s, 1023 completed steps, last completed-step pressure correction 0.0018548 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.132207 s, 1065 completed steps, last completed-step pressure correction 0.0017538 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
 
 Baseline StartedAt 05:56:04 UTC; corridor StartedAt 05:47:27 UTC. Each targets
 .65 physical seconds with six hours to save and another fifteen minutes hard
@@ -110,6 +110,22 @@ pressure/velocity updates were essentially unchanged. This separates a measured
 conservation bias from an unproven pressure-instability mechanism; it supplies
 no long-trajectory cure. See [cutoff sensitivity](../results/summaries/i4f_20261025/source-cutoff-sensitivity/).
 Live cold-case cutoffs are unchanged. No conservation gate passes by this diagnostic.
+
+**Outlet geometry and flux surfaces are now distinguished.** The independent
+[native rim audit](../results/summaries/i4f_20261025/native-control-surface-geometry/geometry_audit.json)
+finds four .15 m2 mesh holes matching their STL caps. The zone-boundary control
+surfaces have larger projections and do not coincide with the physical mouths.
+Their reader now runs directly on processor-only cold checkpoints; a missing
+legacy global mesh disables only that optional comparison. Face centres match
+the pinned v2512 source. Nonzero water-throughput validation remains outstanding.
+
+A fully wet 22,918-cell native upper branch is being prepared with stock
+simpleFoam to isolate hydraulic geometry from interface coupling. It retains
+the divider entrances and one connected fluid region. The exploratory mesh
+has 872 concave cells despite passing non-orthogonality/skewness limits; this
+is recorded rather than treated as a mesh-acceptance result. The live VOF
+cases remain unchanged. An explicit restarted-continuation queue is being
+implemented to cover the current wall-budget shortfall; it is not yet armed.
 
 ## Provisional engineering reference and limits
 
