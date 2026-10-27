@@ -70,3 +70,19 @@ results/summaries/i4f_20261025/restart-history/**/*.csv whitespace=cr-at-eol
 results/summaries/i4f_20261025/restart-history/**/*.patch whitespace=-blank-at-eol
 results/summaries/i4f_20261025/restart-history/solver-source/** whitespace=-blank-at-eol,-blank-at-eof
 results/summaries/i4f_20261025/restart-history/cases/** whitespace=-blank-at-eol,-blank-at-eof
+
+# Preserve hash-bound Rouaix diagnostic payloads byte for byte.
+results/summaries/rouaix_upwind_20261027/** -text
+results/summaries/rouaix_upwind_20261027/**/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_long_stop_20261027/** -text
+results/summaries/rouaix_long_stop_20261027/**/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_peak_probe_20261027/** -text
+results/summaries/rouaix_peak_probe_20261027/**/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_failure_timeline_20261027/** -text
+results/summaries/rouaix_failure_timeline_20261027/**/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_healthy_seed_20261027/** -text
+results/summaries/rouaix_healthy_seed_20261027/**/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_fast_local_20261027/** -text
+results/summaries/rouaix_fast_local_20261027/**/*.csv whitespace=cr-at-eol
+results/summaries/rouaix_long_stop_20261027/slurm-step-accounting.txt whitespace=-blank-at-eol,-blank-at-eof
+results/summaries/rouaix_upwind_20261027/evidence/scontrol-node-x1000c5s4b1n1.raw.txt whitespace=-blank-at-eol,-blank-at-eof

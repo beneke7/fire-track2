@@ -247,6 +247,25 @@ def test_default_pilot_configuration_preserves_frozen_first_capsule() -> None:
     )
 
 
+def test_healthy_seed_horizon_accepts_exact_2000_step_endpoint_only_case() -> None:
+    config = run_pilot.PilotConfig(
+        ranks=120,
+        nodes=1,
+        wall_budget_s=7200,
+        horizon_s=0.2,
+        delta_t_s=0.0001,
+        write_interval_s=0.2,
+        numerical_variant="original",
+        memory_gib=64,
+        profiling=False,
+    ).validate()
+
+    assert config.horizon_s / config.delta_t_s == 2000
+    assert config.write_interval_s == 0.2
+    with pytest.raises(run_pilot.PilotError, match="0.01, 0.05, 0.2, 0.5, or 5.0"):
+        run_pilot.PilotConfig(horizon_s=0.3).validate()
+
+
 @pytest.mark.parametrize("memory_gib", [True, 31, 65, 32.0])
 def test_pilot_memory_declaration_requires_integer_32_through_64(memory_gib: object) -> None:
     with pytest.raises(run_pilot.PilotError, match="integer from 32 through 64"):

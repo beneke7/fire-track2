@@ -8,10 +8,12 @@ Rouaix/aerial experiments remain owned by the HPC thread; local outputs are
 tank pressure/inventory and per-nozzle discharge/velocity histories.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-At 21:43 UTC the corrected 120-rank trial and its automatic terminal audit
-have completed successfully. Upwind and 5 s cases wait on Priority; no CFD
-cores are allocated. Two dependent terminal inspectors remain armed.
-No new scientific gate passed.
+At 2026-10-27 11:41 UTC, the 120-rank pre-instability checkpoint job 14669440
+is running toward 0.20 s; auditor 14669459 waits on completion. The old five-second
+run failed its speed guard at 0.2628 s; the short upwind comparison completed
+only 0.05 s. A four-CPU local all-air diagnostic completed 100 steps on a
+299,520-cell mesh. Follow-ups wait for shared CPU capacity and measured cost;
+I4F jobs are not changed. No new scientific gate passed.
 
 ## Current execution
 

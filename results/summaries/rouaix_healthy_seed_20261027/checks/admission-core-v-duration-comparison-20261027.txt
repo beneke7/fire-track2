@@ -1,0 +1,23 @@
+Read-only test-only admission probe, 2026-10-27. Neither command submitted a job. All printed numeric job IDs below are forecasts, not real IDs.
+
+Comparison: same staged pilot.sbatch, account nk_meshapplied, partition cpu, qos normal, 1 node, 64G, one CPU per rank, no requeue, same shared root/mesh/original variant/end-time=0.2/deltaT=0.0001; 120 ranks at 01:59:00 vs 64 ranks at 02:00:00.
+
+120 CPUs / 1:59:00:
+- Return code 0.
+- stdout was empty.
+- stderr: `sbatch: Job 14669551 to start at 2026-10-30T23:20:36 using 120 processors on nodes x1000c1s1b0n0 in partition cpu`
+- No cpu-short auto-queue notice.
+
+64 CPUs / 2:00:00:
+- Return code 0.
+- stdout was empty.
+- stderr: `sbatch: Your job (≤2h) was also queued in ‘cpu-short’ partition`
+- stderr: `sbatch: Job 14669552 to start at 2026-10-30T20:48:12 using 64 processors on nodes x1000c4s2b1n0 in partition cpu`
+- 14669552 is a forecast only; no real Slurm job was created.
+
+Partition readback:
+- `sinfo -p cpu,cpu-short`: `cpu* up 7-00:00:00 184 22633/407/512/23552 256000`; `cpu-short up 2:00:00 57 2386/1262/0/3648 256000`.
+- `scontrol show partition cpu`: State=UP, TotalCPUs=23552, MaxTime=7-00:00:00, MaxCPUsPerNode=UNLIMITED.
+- `scontrol show partition cpu-short`: `Partition cpu-short not found`; plugin-visible cpu-short appears in `sinfo` and its sbatch stderr notice, but is not a directly queryable configured partition via scontrol.
+
+Interpretation: the ≤2h notice appears for 64 CPUs / 2h but not 120 CPUs / 1h59, so the observed behavior is consistent with a cpu-count threshold as well as a duration condition; it does not prove the site policy. Do not claim that the 120-CPU parent is cpu-short eligible. No held job was modified, released, reprioritized, or requeued.

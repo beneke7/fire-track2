@@ -1,0 +1,576 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-27T10:27:11Z",
+  "case_id": "L1-ORIG-120-01MS-5S",
+  "job_id": "14650641",
+  "purpose": "Postmortem of the original 120-rank, 5-second Rouaix case. Retain the guard-triggered failure classification; the solver step reached a graceful End marker after the operational stop.",
+  "outcome": {
+    "parent_slurm_state": "FAILED",
+    "parent_exit_code": "1:0",
+    "solver_step_state": "COMPLETED",
+    "solver_step_exit_code": 0,
+    "solver_End_marker": true,
+    "audit_analysis_status": "complete",
+    "audit_capture_status": "verified",
+    "failure_classification": "Operational U-guard stop; requested 5 s horizon incomplete. The parent Slurm job is FAILED 1:0 even though the solver step finalized at 0.2628 s with exit 0 and End.",
+    "guard": {
+      "threshold_max_abs_U_m_s": 1000.0,
+      "guard_poll_trigger_time_s": 0.2625,
+      "guard_poll_trigger_U_m_s": 1045.53344847,
+      "stop_requested_utc": "2026-10-27T03:09:47.136468+00:00",
+      "stop_signal": 12,
+      "stop_reason": "operational stop: max|U|=1045.53 m/s exceeds 1000 m/s"
+    },
+    "solver_terminal": {
+      "logged_time_s": 0.2628,
+      "steps": 2628,
+      "logged_final_max_U_m_s": 1260.03773268,
+      "solver_wall_s": 9166.528624958126,
+      "solver_elapsed_s": 9166.493753029034,
+      "last_OpenFOAM_ExecutionTime_s": 8971.06,
+      "last_OpenFOAM_ClockTime_s": 9159.0
+    },
+    "requested_horizon_s": 5.0,
+    "coverage_time_s": 0.2628,
+    "coverage_fraction": 0.052559999999999996,
+    "started_utc": "2026-10-27T00:35:13.134988+00:00",
+    "solver_started_utc": "2026-10-27T00:37:00.645996+00:00",
+    "run_state_updated_utc": "2026-10-27T03:11:27.249500+00:00",
+    "scheduler_elapsed_s": 9380,
+    "solver_step_elapsed_s": 9166,
+    "scheduler_start_local_from_sacct": "2026-10-27T01:35:07",
+    "scheduler_end_local_from_sacct": "2026-10-27T04:11:27",
+    "sacct_host_timezone": "CET +0100 (UTC equivalents agree with run-state timestamps)"
+  },
+  "case": {
+    "solver": "interIsoFoam",
+    "solver_build": "_87ed40d256-20251219",
+    "mesh_cells": 10099265,
+    "mesh_type": "static polyhedral",
+    "ranks": 120,
+    "nodes": 1,
+    "node": "x1000c4s4b1n1",
+    "requested_memory_gib": 64,
+    "delta_t_s": 0.0001,
+    "requested_horizon_s": 5.0,
+    "actual_first_last_time_s": [
+      0.0001,
+      0.2628
+    ],
+    "coordinate_frame": {
+      "x": "crossflow +",
+      "y": "upward +",
+      "z": "spanwise +"
+    },
+    "source_velocity_m_s": [
+      0.0,
+      -10.0,
+      0.0
+    ],
+    "air_speed_m_s": 70.0,
+    "gravity_m_s2": [
+      0.0,
+      -9.81,
+      0.0
+    ],
+    "turbulence_model": "realizable k-epsilon RANS",
+    "interface_method": "OpenCFD v2512 interIsoFoam isoAdvector; one alpha subcycle",
+    "momentum_convection": "limitedLinearV 1",
+    "turbulence_convection": "upwind",
+    "mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "run_manifest_revision": "unknown",
+    "run_manifest_dirty": null,
+    "mesh_bounds_m": {
+      "min": [
+        -2.5,
+        -10.0,
+        -8.0
+      ],
+      "max": [
+        17.5,
+        0.0,
+        8.0
+      ],
+      "provenance": "Parent-confirmed qualified mesh checkMesh.log line 96; the checkMesh log itself is not in the compact capture."
+    },
+    "formal_validation_decision": null,
+    "solver_version": "v2512",
+    "positive_span_boundary": {
+      "plane_equation": "z_m = 3.5 - 0.45*y_m",
+      "provenance": "Parent inspection of qualified mesh-input.json and blockMeshDict; the plane reaches z=8 m at y=-10 m and z=3.5 m at y=0."
+    }
+  },
+  "onset_diagnostics": {
+    "max_U_before_0_05_s": {
+      "time_s": 0.0497,
+      "max_U_m_s": 103.293547802,
+      "inclusive_upper_time_s": 0.05,
+      "sample_count": 500
+    },
+    "isolated_U_excursion": {
+      "time_s": 0.2341,
+      "U_m_s": 274.2861449384,
+      "location_m": "(1.138268156425e+00 -1.959313183228e+00 8.945972226264e-01)",
+      "processor": 82,
+      "next_time_s": 0.2342,
+      "next_U_m_s": 108.0789130943,
+      "next_location_m": "(1.012569832402e+00 -1.973331084427e+00 7.861831385137e-01)",
+      "interpretation": "One-step maximum-speed excursion; max U falls back on the next sample. It is spatially distinct from the later sustained outlet-edge ramp."
+    },
+    "bulk_courant_first_above_1": {
+      "time_s": 0.0136,
+      "mean": 0.0686859959668,
+      "max": 1.00416844619,
+      "U_at_same_time_m_s": 94.2280729626
+    },
+    "interface_courant_first_above_1": {
+      "time_s": 0.2342,
+      "mean": 8.54366391107e-06,
+      "max": 1.36921503584,
+      "U_previous_step_m_s": 274.2861449384
+    },
+    "sustained_U_ramp": {
+      "start_marker_time_s": 0.2511,
+      "U_m_s": 120.245661163,
+      "monotone_from_0_2511_through_terminal": true,
+      "first_U_ge_150_after_spike_s": 0.2542,
+      "first_U_ge_200_after_spike_s": 0.2568,
+      "first_U_ge_500_after_spike_s": 0.261,
+      "guard_sample_time_s": 0.2625,
+      "guard_sample_U_m_s": 1045.533448471,
+      "guard_location_m": "(1.744413407821e+01 -5.617977528090e-02 3.525280898876e+00)",
+      "final_logged_time_s": 0.2628,
+      "final_logged_U_m_s": 1260.037732681,
+      "final_location_m": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+      "processor": 10,
+      "guard_location_boundary_gaps_m": {
+        "downstream_x_max": 0.0558659217900015,
+        "top_y_zero": 0.0561797752809,
+        "positive_span_plane": 4.05009359383257e-13,
+        "positive_span_plane_note": "Coincident with the boundary plane to printed coordinate precision."
+      },
+      "final_location_boundary_gaps_m": {
+        "downstream_x_max": 0.0558659217900015,
+        "top_y_zero": 0.05631406956444,
+        "positive_span_plane_inward": 0.0391704592369981
+      }
+    },
+    "courant_peaks": {
+      "bulk": {
+        "time_s": 0.2628,
+        "mean": 0.0709427271039,
+        "max": 1.82102603385
+      },
+      "interface": {
+        "time_s": 0.2342,
+        "mean": 8.54366391107e-06,
+        "max": 1.36921503584
+      },
+      "sample_count_per_series": 2628,
+      "alignment_note": "Solver log Co values are paired with the next printed Time line; repeated startup Co output is resolved to the final record for that timestamp."
+    },
+    "alpha": {
+      "conservative_bounding_series_rows": 2628,
+      "minimum_alpha": -0.00134050819557,
+      "minimum_alpha_time_s": 0.2281,
+      "minimum_after_0_05_s": -0.00134050819557,
+      "minimum_after_0_05_time_s": 0.2281,
+      "minimum_alpha_water_reported_by_auditor": -1.55559006169e-10,
+      "alpha_water_min_max_file_range": {
+        "min_of_min": 0.0,
+        "max_of_max": 1.0,
+        "rows": 2628
+      },
+      "alpha_water_solver_log_range": {
+        "min_of_min": -1.55559006169e-10,
+        "min_time_s": 0.2067,
+        "max_of_max": 1.0,
+        "max_time_s": 0.0001,
+        "rows": 2628,
+        "printed_phase_line_note": "The solver phase line reports the same tiny negative minimum as the auditor at 0.2067 s; the alphaExtrema file reports min=0 at that time."
+      },
+      "scope_mismatch_note": "The auditor summary reports alpha.water minimum −1.55559006169e−10 without a time, and the solver phase line records that same minimum at 0.2067 s. The alphaExtrema fieldMinMax file reports 0/1 at every written time, including 0.2067 s; this difference between the solver log/auditor and fieldMinMax output remains unresolved. Separately, isoAdvection conservative-bounding diagnostics report min(alpha)=−0.00134050819557 at 0.2281 s.",
+      "local_alpha_at_U_extrema": "Not captured; do not infer phase at either recorded velocity maximum."
+    }
+  },
+  "global_field_extrema": {
+    "mag_U": {
+      "min": {
+        "time_s": 0.0001,
+        "field": "mag(U)",
+        "min": 0.0,
+        "loc_min": "(2.695530726257e+00 0.000000000000e+00 -1.672222222222e+00)",
+        "proc_min": 0,
+        "max": 82.57965915824,
+        "loc_max": "(1.885474860335e-01 -2.108427741654e-02 4.877178433670e-03)",
+        "proc_max": 71
+      },
+      "max": {
+        "time_s": 0.2628,
+        "field": "mag(U)",
+        "min": 0.0,
+        "loc_min": "(2.695530726257e+00 0.000000000000e+00 -1.672222222222e+00)",
+        "proc_min": 0,
+        "max": 1260.037732681,
+        "loc_max": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+        "proc_max": 10
+      },
+      "last": {
+        "time_s": 0.2628,
+        "field": "mag(U)",
+        "min": 0.0,
+        "loc_min": "(2.695530726257e+00 0.000000000000e+00 -1.672222222222e+00)",
+        "proc_min": 0,
+        "max": 1260.037732681,
+        "loc_max": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+        "proc_max": 10
+      }
+    },
+    "epsilon": {
+      "min": {
+        "time_s": 0.1275,
+        "field": "epsilon",
+        "min": 0.01061437480972,
+        "loc_min": "(9.078212290503e-02 -2.317615714494e-01 4.505361051629e-02)",
+        "proc_min": 65,
+        "max": 160993.4454919,
+        "loc_max": "(2.164804469274e-01 -4.143775741357e-01 -3.123298219635e-01)",
+        "proc_max": 73
+      },
+      "max": {
+        "time_s": 0.0706,
+        "field": "epsilon",
+        "min": 0.01064966884083,
+        "loc_min": "(7.681564245810e-02 -2.317579675916e-01 -6.507460563692e-02)",
+        "proc_min": 68,
+        "max": 498332.1854086,
+        "loc_max": "(6.913407821229e-01 -7.031854365581e-03 4.868487916389e-03)",
+        "proc_max": 71
+      },
+      "last": {
+        "time_s": 0.2628,
+        "field": "epsilon",
+        "min": 0.01062433874329,
+        "loc_min": "(1.047486033520e-01 -2.317506923170e-01 -5.008937142547e-03)",
+        "proc_min": 68,
+        "max": 173177.2321218,
+        "loc_max": "(5.935754189944e-01 -1.425633366080e+00 7.880449365450e-01)",
+        "proc_max": 85
+      }
+    },
+    "k": {
+      "min": {
+        "time_s": 0.0595,
+        "field": "k",
+        "min": 0.006229222120327,
+        "loc_min": "(2.094972067039e-02 -4.424353279983e-01 1.900905308628e-01)",
+        "proc_min": 65,
+        "max": 1184.13403779,
+        "loc_max": "(3.002793296089e-01 -1.194023044314e-01 -2.813369921881e-01)",
+        "proc_max": 71
+      },
+      "max": {
+        "time_s": 0.1614,
+        "field": "k",
+        "min": 0.00705236645224,
+        "loc_min": "(-3.491620111732e-02 -3.581980723144e-01 -1.881484012359e-01)",
+        "proc_min": 68,
+        "max": 1631.981455166,
+        "loc_max": "(1.159217877095e+00 -4.775917856330e-01 2.064624445494e-02)",
+        "proc_max": 87
+      },
+      "last": {
+        "time_s": 0.2628,
+        "field": "k",
+        "min": 0.007613955783205,
+        "loc_min": "(-6.983240223464e-03 -3.722644579623e-01 -1.884766526797e-01)",
+        "proc_min": 68,
+        "max": 1287.61732802,
+        "loc_max": "(7.472067039106e-01 -1.523893678060e+00 5.639138204754e-01)",
+        "proc_max": 85
+      }
+    },
+    "nut": {
+      "min": {
+        "time_s": 0.0001,
+        "field": "nut",
+        "min": 0.0,
+        "loc_min": "(2.136871508380e+00 -9.943820224719e+00 -7.974719101124e+00)",
+        "proc_min": 1,
+        "max": 0.03652025094937,
+        "loc_max": "(1.733240223464e+01 -9.606802089847e+00 5.649988456978e+00)",
+        "proc_max": 8
+      },
+      "max": {
+        "time_s": 0.2608,
+        "field": "nut",
+        "min": 0.0,
+        "loc_min": "(2.807262569832e+00 -5.561797752809e+00 -6.002808988764e+00)",
+        "proc_min": 0,
+        "max": 3.676413229736,
+        "loc_max": "(9.008379888268e-01 -1.200909470876e+00 -6.565596638159e-01)",
+        "proc_max": 81
+      },
+      "last": {
+        "time_s": 0.2628,
+        "field": "nut",
+        "min": 0.0,
+        "loc_min": "(2.807262569832e+00 -5.561797752809e+00 -6.002808988764e+00)",
+        "proc_min": 0,
+        "max": 3.010456706574,
+        "loc_max": "(9.008379888268e-01 -1.172849072619e+00 -6.768881316777e-01)",
+        "proc_max": 81
+      }
+    },
+    "p_rgh": {
+      "min": {
+        "time_s": 0.2628,
+        "field": "p_rgh",
+        "min": -89913.41600233,
+        "loc_min": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+        "proc_min": 10,
+        "max": 67148.14203567,
+        "loc_max": "(1.733240223464e+01 -1.686717212283e-01 3.218312047097e+00)",
+        "proc_max": 10
+      },
+      "max": {
+        "time_s": 0.2628,
+        "field": "p_rgh",
+        "min": -89913.41600233,
+        "loc_min": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+        "proc_min": 10,
+        "max": 67148.14203567,
+        "loc_max": "(1.733240223464e+01 -1.686717212283e-01 3.218312047097e+00)",
+        "proc_max": 10
+      },
+      "last": {
+        "time_s": 0.2628,
+        "field": "p_rgh",
+        "min": -89913.41600233,
+        "loc_min": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+        "proc_min": 10,
+        "max": 67148.14203567,
+        "loc_max": "(1.733240223464e+01 -1.686717212283e-01 3.218312047097e+00)",
+        "proc_max": 10
+      }
+    },
+    "units": {
+      "mag(U)": "m/s",
+      "k": "m^2/s^2",
+      "epsilon": "m^2/s^3",
+      "nut": "m^2/s",
+      "p_rgh": "Pa reduced pressure, not absolute pressure"
+    },
+    "important_locations": {
+      "final_max_U_location_m": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+      "final_min_p_rgh_location_m": "(1.744413407821e+01 -5.631406956444e-02 3.486170872067e+00)",
+      "same_cell_location_at_final_time": true,
+      "first_spike_location_m": "(1.138268156425e+00 -1.959313183228e+00 8.945972226264e-01)",
+      "guard_location_m": "(1.744413407821e+01 -5.617977528090e-02 3.525280898876e+00)",
+      "distance_final_max_U_to_downstream_xmax_m": 0.055865921790001494,
+      "distance_final_max_U_to_ymax_m": 0.05631406956444,
+      "interpretation": "The final U maximum and minimum p_rgh occupy the same recorded cell at 0.2628 s. The first one-step U excursion at 0.2341 s is elsewhere and its minimum p_rgh is not co-located. The final point is about 56 mm upstream of x=17.5 and 56 mm below y=0; boundary-corner interaction is a candidate, not a proven cause."
+    }
+  },
+  "linear_solve_audit": {
+    "all_converged": true,
+    "solver_record_count": 21025,
+    "failed_record_count": 0,
+    "by_field": {
+      "Ux": {
+        "failed_count": 0,
+        "max_final_residual": 9.99122257193e-09,
+        "max_iterations": 6,
+        "solve_count": 2628
+      },
+      "Uy": {
+        "failed_count": 0,
+        "max_final_residual": 9.99861513363e-09,
+        "max_iterations": 7,
+        "solve_count": 2628
+      },
+      "Uz": {
+        "failed_count": 0,
+        "max_final_residual": 9.9977703668e-09,
+        "max_iterations": 8,
+        "solve_count": 2628
+      },
+      "epsilon": {
+        "failed_count": 0,
+        "max_final_residual": 9.99524982659e-09,
+        "max_iterations": 18,
+        "solve_count": 2628
+      },
+      "k": {
+        "failed_count": 0,
+        "max_final_residual": 9.98937725446e-09,
+        "max_iterations": 22,
+        "solve_count": 2628
+      },
+      "p_rgh": {
+        "failed_count": 0,
+        "max_final_residual": 0.000290661812029,
+        "max_iterations": 19,
+        "solve_count": 7884
+      },
+      "pcorr": {
+        "failed_count": 0,
+        "max_final_residual": 9.77976034462e-11,
+        "max_iterations": 803,
+        "solve_count": 1
+      }
+    },
+    "p_rgh_iteration_total": 46246,
+    "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+    "interpretation": "All recorded linear solves passed configured criteria; this does not rule out the high-speed/local instability observed."
+  },
+  "phase_and_mass": {
+    "phase_volume_fraction_samples": 2628,
+    "phase_volume_fraction_first": 5.45502388471e-08,
+    "phase_volume_fraction_at_0_05_s": 2.72751194235e-05,
+    "phase_volume_fraction_at_0_2341_s": 0.000127658190195,
+    "phase_volume_fraction_final": 0.000143279918784,
+    "alpha_water_fieldMinMax_all_samples_0_to_1": true,
+    "ledger": {
+      "rows": 2628,
+      "first_time_s": 0.0001,
+      "last_time_s": 0.2628,
+      "configured_horizon_s": 5.0,
+      "horizon_reached": false,
+      "coverage_fraction": 0.052559999999999996,
+      "injected_kg": 328.9321273742234,
+      "final_inventory_kg": 328.7529080514126,
+      "final_inventory_m3": 0.3295438132031,
+      "signed_net_escape_kg": 0.179231298563926,
+      "closure_residual_kg": 1.1975754603099631e-05,
+      "max_abs_per_step_residual_kg": 3.18560949095e-06,
+      "max_abs_cumulative_residual_kg": 1.19764272881e-05,
+      "samples": {
+        "0.05": {
+          "printed_time_s": 0.05,
+          "injected_cumulative_kg": 62.5822160149,
+          "native_inventory_kg": 62.5822160149,
+          "signed_net_escape_cumulative_kg": 1.43394530326e-99,
+          "closure_residual_cumulative_kg": 1.04662944977e-11
+        },
+        "0.1": {
+          "printed_time_s": 0.1,
+          "injected_cumulative_kg": 125.16443203,
+          "native_inventory_kg": 125.16443203,
+          "signed_net_escape_cumulative_kg": 5.78802832435e-39,
+          "closure_residual_cumulative_kg": 1.20792265079e-12
+        },
+        "0.2": {
+          "printed_time_s": 0.2,
+          "injected_cumulative_kg": 250.32886406,
+          "native_inventory_kg": 250.295422966,
+          "signed_net_escape_cumulative_kg": 0.033442764117,
+          "closure_residual_cumulative_kg": 1.67032473541e-06
+        },
+        "0.234": {
+          "printed_time_s": 0.234,
+          "injected_cumulative_kg": 292.88477095,
+          "native_inventory_kg": 292.783999807,
+          "signed_net_escape_cumulative_kg": 0.100781567689,
+          "closure_residual_cumulative_kg": 1.04252800384e-05
+        },
+        "0.25": {
+          "printed_time_s": 0.25,
+          "injected_cumulative_kg": 312.911080074,
+          "native_inventory_kg": 312.758173284,
+          "signed_net_escape_cumulative_kg": 0.152918274177,
+          "closure_residual_cumulative_kg": 1.14839337471e-05
+        },
+        "0.2625": {
+          "printed_time_s": 0.2625,
+          "injected_cumulative_kg": 328.556634078,
+          "native_inventory_kg": 328.377414755,
+          "signed_net_escape_cumulative_kg": 0.179231298454,
+          "closure_residual_cumulative_kg": 1.1975788766e-05
+        },
+        "0.2628": {
+          "printed_time_s": 0.2628,
+          "injected_cumulative_kg": 328.932127374,
+          "native_inventory_kg": 328.752908051,
+          "signed_net_escape_cumulative_kg": 0.179231298564,
+          "closure_residual_cumulative_kg": 1.19757546031e-05
+        }
+      },
+      "interpretation": "At 0.2628 s, nearly all injected water is still in the domain ledger; global phase volume fraction remains about 1.43e−4. This is observed inventory, not evidence that the domain is globally filled or that stored water caused the U spike.",
+      "closure_caveat": "Pinned isoAdvection applies conservative limitFluxes before direct alpha snap/clipping; alphaPhi_ reflects the conservative flux-limited sweep but later nonconservative alpha changes can appear in the residual."
+    }
+  },
+  "resources": {
+    "scheduler_wall_s": 9380,
+    "solver_step_wall_s": 9166,
+    "solver_wall_s": 9166.528624958126,
+    "job_totalCPU_raw": "12-15:20:39",
+    "job_totalCPU_seconds": 1092039,
+    "job_totalCPU_core_hours": 303.3441666666667,
+    "solver_step_totalCPU_raw": "12-15:15:03",
+    "solver_step_totalCPU_seconds": 1091703,
+    "solver_step_totalCPU_core_hours": 303.25083333333333,
+    "job_allocated_core_hours": 312.6666666666667,
+    "job_cpu_fraction": 0.9701839019189765,
+    "solver_step_allocated_core_hours": 305.53333333333336,
+    "solver_step_cpu_fraction": 0.9925294566877592,
+    "parent_MaxRSS_raw": "",
+    "batch_MaxRSS_raw": "9440696K",
+    "solver_step_MaxRSS_raw": "1447244K",
+    "solver_step_AveRSS_raw": "308295714",
+    "memory_scope_note": "Job-level MaxRSS is blank. Slurm .batch and .0 RSS rows are distinct scopes; .0 is per-task, not node-total. AveRSS is retained without a unit suffix. No aggregate node RSS or cgroup time series is available; sstat readback in the retained native log reports connection refused.",
+    "batch_TotalCPU_raw": "05:35.948",
+    "extern_TotalCPU_raw": "00:00.001"
+  },
+  "archive": {
+    "native_auditor_status": "verified",
+    "analysis_status": "complete",
+    "audit_bundle_sha256": "33839cf36ee2e033dd2ae884c475e5189d5a655a3ec8f249baa7165f826e20d2",
+    "compact_archive_sha256": "92358d44ecfe70d1388cc0ccd2cbc541e423c73a2d41a789b8c42b7ad3d90ae0",
+    "result_archive_sha256": "bcd35bef1fa8ec47ff28aadf0cc3f19de41c144ce95d14ff9c90dc2a52a49cec",
+    "result_archive_status": "verified_crc_hash_and_member_list",
+    "result_archive_members": 129,
+    "full_archive_transferred": false,
+    "full_3d_fields_transferred": false,
+    "selected_compact_files": 13,
+    "selected_compact_uncompressed_bytes": 12038865,
+    "additional_original_archive_members": 2,
+    "additional_files": [
+      "failureLocations.fieldMinMax.dat.xz",
+      "alphaExtrema.fieldMinMax.dat.xz"
+    ],
+    "verification_record": "archive-verification.json"
+  },
+  "plotting": {
+    "requested_if_available": true,
+    "matplotlib_available": false,
+    "checked_environments": [
+      ".venv/bin/python",
+      "system python3"
+    ],
+    "plot_created": false,
+    "check_command": ".venv/bin/python -c 'import matplotlib' || python3 -c 'import matplotlib'",
+    "result": "ModuleNotFoundError in both environments; no dependency installed."
+  },
+  "next_discriminating_trial": {
+    "recommendation": "Keep the planned one-factor upwind momentum-convection run through 0.5 s at fixed 0.1 ms and 120 ranks.",
+    "basis": "The original limitedLinearV run stays below 104 m/s through 0.05 s, has an isolated 0.2341 s spike at one location, then a monotone ramp from about 0.2511 s at a distinct point 55.9 mm from the downstream plane, 56.2 mm below the top, and coincident to printed precision with the positive-span boundary plane; the final U maximum is 39.2 mm inward of that plane and shares its cell with minimum p_rgh. A matched scheme change tests sensitivity to momentum convection while preserving the rest of the case.",
+    "interpretation_guardrail": "A successful 0.5 s run would establish only that this one-factor case extended to 0.5 s. It would not prove long-horizon stability. A repeated corner surge should prompt targeted boundary/corner and local-alpha inspection; local alpha was not captured here.",
+    "estimated_solver_wall_hours_to_0_5_s": 4.844478598510763,
+    "estimate_caveat": "Linear extrapolation from the measured 3.488 s/step average: about 4.844 solver wall-hours for a fresh 0.5 s run, or 2.298 additional hours from this stop at 0.2628 s. Solver cost may change as the flow enters a different regime.",
+    "estimated_additional_solver_wall_hours_from_stop_to_0_5_s": 2.298220647133506,
+    "measured_average_solver_seconds_per_step": 3.4880245909277496
+  },
+  "remaining_limits": [
+    "This run ended at 0.2628 of 5 s and is an exploratory partial prefix, not an E1 result or a solver-validation pass.",
+    "Local alpha at the U maxima was not recorded; do not attribute the spike to a liquid/gas cell or phase buildup.",
+    "The auditor and solver log agree on alpha.water minimum −1.55559006169e−10 at 0.2067 s; the alphaExtrema fieldMinMax file reports 0 at that sample. This small output-scope difference remains unresolved.",
+    "p_rgh extrema are reduced pressure in Pa, not absolute pressure, and are not physically validated here.",
+    "The archive and solver diagnostics do not establish the cause of the outlet-edge surge. The measured location makes positive-span/downstream/top boundary adjacency worth checking, but does not prove it.",
+    "No aggregate node RSS/cgroup trace or full field-write duration/I/O share was captured.",
+    "Mesh extents are from the parent-confirmed checkMesh log line 96; the positive-span plane is from parent inspection of mesh-input.json and blockMeshDict; these geometry sources are not in the compact audit bundle."
+  ],
+  "curation_revision": 2,
+  "curation_note": "Revision 2 corrects alpha.water scope wording and adds qualified positive-span boundary proximity; underlying solver/auditor measurements are unchanged."
+}

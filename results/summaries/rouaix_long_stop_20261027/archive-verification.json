@@ -1,0 +1,89 @@
+{
+  "verified_utc": "2026-10-27T10:27:11Z",
+  "native_audit_bundle": {
+    "remote_path": "/project/nk_meshapplied/bene/fire-track2-hpc/hpc-finished-audit-reports-v3-20261026/14650641/jobs/14650641/bcd35bef1fa8ec47ff28aadf0cc3f19de41c144ce95d14ff9c90dc2a52a49cec/audit-bundle.tar.gz",
+    "bytes": 2203320,
+    "sha256": "33839cf36ee2e033dd2ae884c475e5189d5a655a3ec8f249baa7165f826e20d2",
+    "sidecar_sha256": "33839cf36ee2e033dd2ae884c475e5189d5a655a3ec8f249baa7165f826e20d2",
+    "remote_hash_matches_sidecar": true,
+    "local_full_bundle_copy": false,
+    "members": [
+      "compact.tar.gz",
+      "selection.json",
+      "audit.json"
+    ],
+    "member_count": 3,
+    "member_types": "all regular files; no unsafe paths observed",
+    "all_members_regular_files": true,
+    "unsafe_paths": []
+  },
+  "nested_compact_archive": {
+    "sha256": "92358d44ecfe70d1388cc0ccd2cbc541e423c73a2d41a789b8c42b7ad3d90ae0",
+    "bytes": 2197158,
+    "selection_json_sha256": "f5841c62b249a1ef217a4bce8c97a11dd430f50a6abd6ef11b90ea2c878cb488",
+    "selected_files": 13,
+    "selected_uncompressed_bytes": 12038865,
+    "all_13_files_passed_remote_sha256_check": true,
+    "all_13_files_passed_local_sha256_check": true,
+    "members": [
+      "attempt/case/case-inputs.json",
+      "attempt/case/system/controlDict",
+      "attempt/case/system/fvSchemes",
+      "attempt/case/system/fvSolution",
+      "attempt/ledger/ledger.csv",
+      "attempt/ledger/summary.json",
+      "attempt/ledger-audit.log",
+      "attempt/manifest.json",
+      "attempt/max-speed.csv",
+      "attempt/native-source-evidence.json",
+      "attempt/slurm-step-accounting.txt",
+      "attempt/solver-convergence.json",
+      "attempt/solver.log"
+    ],
+    "member_types": "13 regular files, no directory traversal/absolute paths",
+    "member_count": 13,
+    "inventory_matches_selection": true,
+    "all_members_regular_files": true,
+    "unsafe_paths": []
+  },
+  "original_result_archive": {
+    "remote_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1-hpc-pilot-14650641/result.tar.gz",
+    "sha256": "bcd35bef1fa8ec47ff28aadf0cc3f19de41c144ce95d14ff9c90dc2a52a49cec",
+    "members": 129,
+    "run_state_verification_status": "verified_crc_hash_and_member_list",
+    "archive_copy_transferred": false,
+    "note": "The native audit records CRC/hash/member-list verification. I did not re-transfer or recompute the full result archive hash."
+  },
+  "additional_specific_members_from_original_archive": [
+    {
+      "path": "attempt/case/postProcessing/failureLocations/0.000000000000/fieldMinMax.dat",
+      "bytes": 2722546,
+      "remote_sha256": "965ced2aa9870774397656e546bc811b9087468def68c5e01466daa0f2b8b2f1",
+      "local_sha256": "965ced2aa9870774397656e546bc811b9087468def68c5e01466daa0f2b8b2f1",
+      "match": true
+    },
+    {
+      "path": "attempt/case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat",
+      "bytes": 155141,
+      "remote_sha256": "c98af150bf28f97f81b723ee5c11f31726fbb59493d54a880dba87df0e68166b",
+      "local_sha256": "c98af150bf28f97f81b723ee5c11f31726fbb59493d54a880dba87df0e68166b",
+      "match": true
+    }
+  ],
+  "audit_json_standalone_sha256_remote": "f6785f112c6d5aa94cdba5b959da32d2a0b0ff46cb5ed6cea10b2e0cd599a3e0",
+  "audit_json_standalone_sha256_local": "f6785f112c6d5aa94cdba5b959da32d2a0b0ff46cb5ed6cea10b2e0cd599a3e0",
+  "commands": [
+    "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sha256sum <audit-bundle.tar.gz>; cat audit-bundle.tar.gz.sha256'",
+    "ssh ... 'tar -tzf <audit-bundle.tar.gz>' and 'tar -tvzf <audit-bundle.tar.gz>'",
+    "ssh ... 'tar -xOf <audit-bundle.tar.gz> compact.tar.gz | sha256sum'",
+    "ssh ... 'tar -xOf <audit-bundle.tar.gz> compact.tar.gz | tar -tzf -' and -tvzf",
+    "tar --no-same-owner --no-same-permissions -xzf <compact.tar.gz> -C <remote temporary payload> -T selected-members.txt",
+    "cd <remote temporary payload> && sha256sum -c selected-files.sha256",
+    "rsync -avP --files-from=selected-members.txt -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' <remote temporary payload>/ results/runs/rouaix-long-postmortem-20261027/metrics/",
+    "ssh ... 'tar -xOf <original result.tar.gz> <failureLocations member> > /tmp/.../failureLocations.dat && sha256sum /tmp/.../failureLocations.dat'",
+    "ssh ... 'tar -xOf <original result.tar.gz> <alphaExtrema member> > /tmp/.../alphaExtrema.dat && sha256sum /tmp/.../alphaExtrema.dat'",
+    "rsync -avP -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' <each selected diagnostic member> <inspection metrics path>",
+    "ssh ... 'sacct -j 14650641 --format=JobID,JobIDRaw,JobName,State,ExitCode,AllocCPUS,Elapsed,TotalCPU,CPUTimeRAW,MaxRSS,AveRSS,ReqMem,Start,End,NodeList -P'"
+  ],
+  "selection_json_sha256_remote": "f5841c62b249a1ef217a4bce8c97a11dd430f50a6abd6ef11b90ea2c878cb488"
+}

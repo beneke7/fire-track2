@@ -36,7 +36,7 @@ WALL_TIME_S = 1200
 HORIZON_S = 0.05
 DELTA_T_S = 0.001
 SUPPORTED_DELTA_T_S = (0.001, 0.0005, 0.0001)
-SUPPORTED_HORIZONS_S = (0.01, HORIZON_S, 0.5, 5.0)
+SUPPORTED_HORIZONS_S = (0.01, HORIZON_S, 0.2, 0.5, 5.0)
 NUMERICAL_VARIANTS = ("original", "upwind", "u_gradient_limited")
 MOMENTUM_CONVECTION_BY_VARIANT = {
     "original": "limitedLinearV 1",
@@ -129,7 +129,7 @@ class PilotConfig:
             raise PilotError("fixed deltaT must be one of 0.001, 0.0005, or 0.0001 s")
         if self.horizon_s not in SUPPORTED_HORIZONS_S:
             raise PilotError(
-                "end time must be one of the declared 0.01, 0.05, 0.5, or 5.0 s horizons"
+                "end time must be one of the declared 0.01, 0.05, 0.2, 0.5, or 5.0 s horizons"
             )
         if self.numerical_variant not in NUMERICAL_VARIANTS:
             raise PilotError(f"numerical variant must be one of {NUMERICAL_VARIANTS}")

@@ -35,7 +35,7 @@ CONCAVE_EXCEPTION_STATUS = "qualified_with_exact_concave_set_exception"
 CONCAVE_EXCEPTION_COUNT = 114_008
 HORIZON_S = 0.05
 DELTA_T_OPTIONS_S = (0.001, 0.0005, 0.0001)
-HORIZON_OPTIONS_S = (0.01, HORIZON_S, 0.5, 5.0)
+HORIZON_OPTIONS_S = (0.01, HORIZON_S, 0.2, 0.5, 5.0)
 NUMERICAL_VARIANTS = ("original", "upwind", "u_gradient_limited")
 MOMENTUM_CONVECTION_BY_VARIANT = {
     "original": "limitedLinearV 1",
@@ -756,7 +756,7 @@ def prepare_case(
         raise ValueError(f"deltaT must be one of {DELTA_T_OPTIONS_S}")
     if isinstance(end_time_s, bool) or end_time_s not in HORIZON_OPTIONS_S:
         raise ValueError(
-            "end_time_s must be one of the declared 0.01, 0.05, 0.5, or 5.0 s horizons"
+            "end_time_s must be one of the declared 0.01, 0.05, 0.2, 0.5, or 5.0 s horizons"
         )
     if numerical_variant not in NUMERICAL_VARIANTS:
         raise ValueError(f"numerical_variant must be one of {NUMERICAL_VARIANTS}")

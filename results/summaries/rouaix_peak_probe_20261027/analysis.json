@@ -1,0 +1,219 @@
+{
+  "analysis_utc": "2026-10-27T10:47:25Z",
+  "cross_checks": {
+    "all_six_field_arrays_have_83526_values": true,
+    "rank10_local_U_max_matches_native_audit_1260_037732681_m_s": true,
+    "rank10_p_rgh_minimum_index_equals_U_max_index": true,
+    "rank10_p_rgh_minimum_matches_native_audit_minus89913_41600233_Pa": true,
+    "rank_block_hashes_match_remote_extraction_manifest": true,
+    "raw_data_scope": "Only processor 10 blocks for U, alpha.water, p_rgh, k, epsilon, nut were transferred (6,178,067 bytes of selected rank-block payload inside a 6,195,200-byte tar bundle); no full-domain field or archive was transferred."
+  },
+  "format_and_method": {
+    "bounded_header_bytes": 2048,
+    "bounded_header_path": "results/runs/rouaix-fast-local-20261027/peak-probe/U-file-header-2048.bin",
+    "bounded_header_sha256": "c33db005ed23d878b3ee526304f7a21a25f3215c3f5ecff0c69abd5edc6cfa83",
+    "extraction_manifest": {
+      "expected_ranks": 120,
+      "rank": 10,
+      "source_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1-hpc-pilot-14650641/result.tar.gz",
+      "source_archive_sha256_from_native_audit": "bcd35bef1fa8ec47ff28aadf0cc3f19de41c144ce95d14ff9c90dc2a52a49cec",
+      "source_members": {
+        "U": {
+          "archive_member_bytes": 280345072,
+          "declared_rank_payload_bytes": 2285552,
+          "path": "attempt/case/processors120/0.262800000000/U",
+          "rank_block_bytes": 2285579,
+          "rank_block_sha256": "02b2018016d42a10e93c9a7336549ff23487cfee8b26098a6bdb67e58af814e0"
+        },
+        "alpha.water": {
+          "archive_member_bytes": 93189947,
+          "declared_rank_payload_bytes": 785094,
+          "path": "attempt/case/processors120/0.262800000000/alpha.water",
+          "rank_block_bytes": 785120,
+          "rank_block_sha256": "4351a29e45031cbf303debcfa8061f91adf9c4533e8ee43114ca31c970e3d382"
+        },
+        "epsilon": {
+          "archive_member_bytes": 93784571,
+          "declared_rank_payload_bytes": 774065,
+          "path": "attempt/case/processors120/0.262800000000/epsilon",
+          "rank_block_bytes": 774091,
+          "rank_block_sha256": "42bde8f4d147a613cdae94914ea09a3406137868e38844b71cf3e1c9897a3b42"
+        },
+        "k": {
+          "archive_member_bytes": 93779691,
+          "declared_rank_payload_bytes": 774013,
+          "path": "attempt/case/processors120/0.262800000000/k",
+          "rank_block_bytes": 774039,
+          "rank_block_sha256": "30a1266862a01bd29e9c9855d5668969e5e418cacd05f7cd58158c938292bf23"
+        },
+        "nut": {
+          "archive_member_bytes": 93855390,
+          "declared_rank_payload_bytes": 774040,
+          "path": "attempt/case/processors120/0.262800000000/nut",
+          "rank_block_bytes": 774066,
+          "rank_block_sha256": "ff98f81038cb5e9532b9777ef6f44d374ae8e87c20f468df8fab1ae08244507e"
+        },
+        "p_rgh": {
+          "archive_member_bytes": 94232248,
+          "declared_rank_payload_bytes": 785146,
+          "path": "attempt/case/processors120/0.262800000000/p_rgh",
+          "rank_block_bytes": 785172,
+          "rank_block_sha256": "cebdd8a761505879d2a497f1c98e30c73a5589a655f99decf6d5faec1a963023"
+        }
+      }
+    },
+    "local_decoder": {
+      "existing_functions": [
+        "_COLLATED_FIELD_RE",
+        "_parse_internal"
+      ],
+      "note": "Reused existing OpenFOAM field parser; no new binary decoder was created.",
+      "path": "src/aerial_drop/i4f_native_face_reader.py",
+      "sha256": "04c62413a9e36a4a8a7d0bdf025bf93d6cb9d1009985af20092d40802c3e5291"
+    },
+    "observed_header": "OpenFOAM v2512; binary class decomposedBlockData; LSB, 32-bit labels, 64-bit scalars; U data class volVectorField.",
+    "outer_collated_processor_count_verified_on_remote": 120,
+    "rank_block_bundle_bytes": 6195200,
+    "rank_block_bundle_path": "results/runs/rouaix-fast-local-20261027/peak-probe/processor10-fields.tar",
+    "rank_block_bundle_sha256": "d021a864e5e1eec685893c31e9747130e65193d2df5fcc1a19052df2175085b7",
+    "selected_fields": {
+      "U": {
+        "local_cell_count": 83526,
+        "rank_block_bytes": 2285579,
+        "rank_block_sha256": "02b2018016d42a10e93c9a7336549ff23487cfee8b26098a6bdb67e58af814e0",
+        "units": "m/s"
+      },
+      "alpha.water": {
+        "local_cell_count": 83526,
+        "rank_block_bytes": 785120,
+        "rank_block_sha256": "4351a29e45031cbf303debcfa8061f91adf9c4533e8ee43114ca31c970e3d382",
+        "units": "1"
+      },
+      "epsilon": {
+        "local_cell_count": 83526,
+        "rank_block_bytes": 774091,
+        "rank_block_sha256": "42bde8f4d147a613cdae94914ea09a3406137868e38844b71cf3e1c9897a3b42",
+        "units": "m^2/s^3"
+      },
+      "k": {
+        "local_cell_count": 83526,
+        "rank_block_bytes": 774039,
+        "rank_block_sha256": "30a1266862a01bd29e9c9855d5668969e5e418cacd05f7cd58158c938292bf23",
+        "units": "m^2/s^2"
+      },
+      "nut": {
+        "local_cell_count": 83526,
+        "rank_block_bytes": 774066,
+        "rank_block_sha256": "ff98f81038cb5e9532b9777ef6f44d374ae8e87c20f468df8fab1ae08244507e",
+        "units": "m^2/s"
+      },
+      "p_rgh": {
+        "local_cell_count": 83526,
+        "rank_block_bytes": 785172,
+        "rank_block_sha256": "cebdd8a761505879d2a497f1c98e30c73a5589a655f99decf6d5faec1a963023",
+        "units": "Pa (reduced pressure)"
+      }
+    },
+    "selected_processor": 10,
+    "selected_time_directory": "0.262800000000"
+  },
+  "interpretation_and_limits": [
+    "At the final checkpoint t=0.2628 s, the stored alpha.water at the maximum-speed cell is approximately 3.19e-143, effectively zero water fraction in the stored scalar field (gas-dominated cell).",
+    "This describes only the final retained checkpoint. It does not establish the phase at the earlier guard trigger at t=0.2625 s, nor explain the origin of the velocity spike.",
+    "p_rgh is reduced pressure in Pa; it is not absolute thermodynamic pressure.",
+    "The parent job ended early at 0.2628 s and did not reach the requested 5 s horizon. No scientific validation gate is claimed.",
+    "The source archive was not locally copied or fully rehashed; its SHA/member verification is inherited from the native audit report."
+  ],
+  "peak_cell": {
+    "coordinate_frame": {
+      "x": "crossflow +",
+      "y": "upward +",
+      "z": "spanwise +"
+    },
+    "coordinate_provenance": "Native field extrema report both final mag(U) maximum and final p_rgh minimum at this coordinate on processor 10; geometry was not reconstructed locally.",
+    "fields": {
+      "alpha.water": 3.1934980037034703e-143,
+      "epsilon_m2_s3": 4.761710960020589,
+      "k_m2_s2": 0.7650390563381958,
+      "nut_m2_s": 3.521548509166299e-05,
+      "p_rgh_Pa_reduced": -89913.41600233233
+    },
+    "native_audit_coordinate_m": [
+      17.44413407821,
+      -0.05631406956444,
+      3.486170872067
+    ],
+    "processor": 10,
+    "processor_local_cell_count": 83526,
+    "velocity_magnitude_m_s": 1260.0377326811738,
+    "velocity_vector_m_s": [
+      50.70759103789079,
+      -470.22046814894,
+      -1167.9111864029896
+    ],
+    "zero_based_processor_local_cell_index": 83525
+  },
+  "purpose": "Read only the collated processor-10 checkpoint block at the final recorded maximum-|U| cell of the 14650641 early-stop run.",
+  "schema_version": 1,
+  "source": {
+    "archive_bytes_remote_stat": 1786413898,
+    "archive_remote_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-5s-source-v1-20261026/rouaix-e1-hpc-pilot-14650641/result.tar.gz",
+    "archive_sha256": "bcd35bef1fa8ec47ff28aadf0cc3f19de41c144ce95d14ff9c90dc2a52a49cec",
+    "archive_verification": "Native audit records verified_crc_hash_and_member_list; original archive was not re-transferred or rehashed locally.",
+    "archive_verification_record": "results/summaries/rouaix_long_stop_20261027/archive-verification.json",
+    "archive_verification_record_sha256": "593fb90f6df8502d3a8077501884465222021e7ff9e5cc3df7ca397f8bc7dfee",
+    "job_id": "14650641",
+    "native_audit_summary": "results/summaries/rouaix_long_stop_20261027/postmortem-analysis.json",
+    "native_audit_summary_sha256": "470a086984d031137312e16ae133a625037eda7ed067cfbf4bc940a9efab0afe",
+    "run_id": "rouaix-e1-hpc-pilot-14650641",
+    "source_members": {
+      "U": {
+        "full_member_bytes": 280345072,
+        "path": "attempt/case/processors120/0.262800000000/U"
+      },
+      "alpha.water": {
+        "full_member_bytes": 93189947,
+        "path": "attempt/case/processors120/0.262800000000/alpha.water"
+      },
+      "epsilon": {
+        "full_member_bytes": 93784571,
+        "path": "attempt/case/processors120/0.262800000000/epsilon"
+      },
+      "k": {
+        "full_member_bytes": 93779691,
+        "path": "attempt/case/processors120/0.262800000000/k"
+      },
+      "nut": {
+        "full_member_bytes": 93855390,
+        "path": "attempt/case/processors120/0.262800000000/nut"
+      },
+      "p_rgh": {
+        "full_member_bytes": 94232248,
+        "path": "attempt/case/processors120/0.262800000000/p_rgh"
+      }
+    },
+    "time_s": 0.2628
+  },
+  "source_file_hashes": {
+    "results/summaries/rouaix_long_stop_20261027/archive-verification.json": {
+      "bytes": 4908,
+      "sha256": "593fb90f6df8502d3a8077501884465222021e7ff9e5cc3df7ca397f8bc7dfee"
+    },
+    "results/summaries/rouaix_long_stop_20261027/audit.json": {
+      "bytes": 30301,
+      "sha256": "f6785f112c6d5aa94cdba5b959da32d2a0b0ff46cb5ed6cea10b2e0cd599a3e0"
+    },
+    "results/summaries/rouaix_long_stop_20261027/postmortem-analysis.json": {
+      "bytes": 24399,
+      "sha256": "470a086984d031137312e16ae133a625037eda7ed067cfbf4bc940a9efab0afe"
+    },
+    "results/summaries/rouaix_long_stop_20261027/run-state.json": {
+      "bytes": 17073,
+      "sha256": "0adb12083554e1d752367d5221e4fd4bb8ac808c5e34527d4f4be3b6821a98a3"
+    },
+    "src/aerial_drop/i4f_native_face_reader.py": {
+      "bytes": 47126,
+      "sha256": "04c62413a9e36a4a8a7d0bdf025bf93d6cb9d1009985af20092d40802c3e5291"
+    }
+  }
+}

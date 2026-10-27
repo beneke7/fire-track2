@@ -1,0 +1,948 @@
+{
+  "analysis_complete": true,
+  "analysis_status": "complete",
+  "archive_sha256": "8a224b2a075be5b98e7454a5c3b3d96726e55cc9100793d2114208edb6477284",
+  "auditor_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+  "capture_limits": {
+    "max_file_bytes": 536870912,
+    "max_files": 64,
+    "max_selected_bytes": 1073741824
+  },
+  "capture_status": "verified",
+  "case_id": "S1-UPWIND-120-01MS-005",
+  "compact_archive_sha256": "97e6c6e83b74d70c1648d7676ccdc6cd107d052fd2a4ea5ea640a0347c7f4acf",
+  "created_utc": "2026-10-26T22:39:21Z",
+  "expected_delta_t_s": 0.0001,
+  "expected_horizon_s": 0.05,
+  "expected_ranks": 120,
+  "job_id": "14651178",
+  "manifest_sha256": "ce9c5bc22e1cde98c81a7d66b881642f2c1e3cd4c3b0444ecb42d1df6cf0c1a9",
+  "metrics": {
+    "alpha_min_max": {
+      "alpha": {
+        "max": {
+          "last": 1.0,
+          "max": 1.0,
+          "min": 1.0
+        },
+        "min": {
+          "last": -1.38777878078e-17,
+          "max": 0.0,
+          "min": -1.17961196366e-16
+        }
+      },
+      "alpha.water": {
+        "max": {
+          "last": 1.0,
+          "max": 1.0,
+          "min": 1.0
+        },
+        "min": {
+          "last": 0.0,
+          "max": 0.0,
+          "min": 0.0
+        }
+      }
+    },
+    "analysis_status": "complete",
+    "attempt_manifest_inputs": {
+      "case_id": "S1-UPWIND-120-01MS-005",
+      "delta_t_s": 0.0001,
+      "horizon_s": 0.05,
+      "job_id": "14651178",
+      "ranks": 120
+    },
+    "classification": "completed_horizon_converged_exploratory_only",
+    "conservation": {
+      "closure_residual_kg": -4.783515805684146e-10,
+      "final_inventory_m3": 0.06273277467362,
+      "initial_inventory_kg": 0.0,
+      "injected_kg": 62.582216014881666,
+      "max_abs_cumulative_closure_residual_kg": 4.78351580568e-10,
+      "max_abs_per_step_closure_residual_kg": 3.81063791632e-11,
+      "signed_net_escape_kg": 3.832336397662741e-99
+    },
+    "courant_number": {
+      "max": {
+        "last": 1.01728692891,
+        "max": 1.02016153774,
+        "min": 0.66183839087
+      },
+      "mean": {
+        "last": 0.0691020777365,
+        "max": 0.0691020777365,
+        "min": 0.0685356885172
+      }
+    },
+    "cpu_accounting": {
+      "note": "scontrol provided parent state only; CPU totals, memory and step accounting are unavailable.",
+      "parent": {
+        "allocated_cpus": "120",
+        "elapsed_raw": "00:31:36",
+        "exit_code": "0:0",
+        "job_id": "14651178",
+        "max_rss": "Unknown",
+        "state": "COMPLETED",
+        "total_cpu": "Unknown"
+      },
+      "steps": []
+    },
+    "diagnostic_gaps": {
+      "aggregate_memory": {
+        "note": "Parent and step MaxRSS values are shown separately; no aggregate memory value is inferred.",
+        "parent_max_rss": "Unknown",
+        "status": "not_aggregated",
+        "step_max_rss_rows": []
+      },
+      "ledger": {
+        "audit_log_present": true,
+        "formal_validation_decision": null,
+        "status": "raw_summary_captured",
+        "summary_present": true
+      },
+      "native_profiling_interpretation": {
+        "interpretation_performed": false,
+        "raw_files": [],
+        "status": "not_captured"
+      },
+      "tke_extrema": {
+        "note": "k/epsilon residuals do not provide TKE extrema.",
+        "status": "not_exposed_by_current_parser",
+        "value": null
+      }
+    },
+    "divergence_detected": false,
+    "expected_delta_t_s": 0.0001,
+    "expected_horizon_s": 0.05,
+    "expected_inputs": {
+      "case_id": "S1-UPWIND-120-01MS-005",
+      "delta_t_s": 0.0001,
+      "horizon_s": 0.05,
+      "job_id": "14651178",
+      "ranks": 120
+    },
+    "expected_inputs_match": true,
+    "fatal_errors": [],
+    "formal_validation_decision": null,
+    "interface_courant_number": {
+      "max": {
+        "last": 0.301060656544,
+        "max": 0.471036191788,
+        "min": 0.0
+      },
+      "mean": {
+        "last": 5.42008500975e-07,
+        "max": 5.42008500975e-07,
+        "min": 0.0
+      }
+    },
+    "ledger_status": "configured_horizon_reached_exploratory_only",
+    "linear_residuals": {
+      "Ux": {
+        "final_max": 9.91406690583e-09,
+        "final_min": 4.93136173817e-10,
+        "initial_max": 0.999999999997,
+        "initial_min": 3.67060142453e-05,
+        "iterations_max": 3,
+        "iterations_total": 1004,
+        "last_final": 5.05097085331e-09,
+        "last_initial": 3.88837630308e-05,
+        "solves": 500
+      },
+      "Uy": {
+        "final_max": 9.98331113761e-09,
+        "final_min": 7.65478236443e-10,
+        "initial_max": 1.0,
+        "initial_min": 0.000984818299195,
+        "iterations_max": 3,
+        "iterations_total": 1002,
+        "last_final": 1.55619717676e-09,
+        "last_initial": 0.000984818299195,
+        "solves": 500
+      },
+      "Uz": {
+        "final_max": 9.84113440641e-09,
+        "final_min": 3.26636132563e-10,
+        "initial_max": 1.0,
+        "initial_min": 0.00135455678042,
+        "iterations_max": 3,
+        "iterations_total": 1049,
+        "last_final": 5.89822016149e-09,
+        "last_initial": 0.00136779125257,
+        "solves": 500
+      },
+      "epsilon": {
+        "final_max": 7.15608696009e-09,
+        "final_min": 1.24074916956e-09,
+        "initial_max": 0.040378430308,
+        "initial_min": 0.000104786732013,
+        "iterations_max": 6,
+        "iterations_total": 3000,
+        "last_final": 4.44575550977e-09,
+        "last_initial": 0.000105260123401,
+        "solves": 500
+      },
+      "k": {
+        "final_max": 9.63139502051e-09,
+        "final_min": 2.75566110567e-10,
+        "initial_max": 0.999999997585,
+        "initial_min": 0.000218290453746,
+        "iterations_max": 8,
+        "iterations_total": 3066,
+        "last_final": 7.08710857158e-09,
+        "last_initial": 0.000218290453746,
+        "solves": 500
+      },
+      "p_rgh": {
+        "final_max": 0.000566735631337,
+        "final_min": 4.78362237891e-09,
+        "initial_max": 0.0623257791409,
+        "initial_min": 1.36373492259e-05,
+        "iterations_max": 18,
+        "iterations_total": 9557,
+        "last_final": 7.23368527486e-09,
+        "last_initial": 9.62973818446e-05,
+        "solves": 1500
+      },
+      "pcorr": {
+        "final_max": 9.77976034462e-11,
+        "final_min": 9.77976034462e-11,
+        "initial_max": 1.0,
+        "initial_min": 1.0,
+        "iterations_max": 803,
+        "iterations_total": 803,
+        "last_final": 9.77976034462e-11,
+        "last_initial": 1.0,
+        "solves": 1
+      }
+    },
+    "logged_step_count": 500,
+    "pressure_solve_iterations": {
+      "fields": {
+        "p_rgh": 9557
+      },
+      "total": 9557
+    },
+    "reached_horizon": true,
+    "reached_time_s": 0.05,
+    "scheduler_accounting_source": "scontrol",
+    "scheduler_state_available": true,
+    "scientific_scope": "Exploratory per-run audit only; no E1 or field-validation gate decision.",
+    "slurm_state": "COMPLETED",
+    "solver_clock_time_s": 1685.0,
+    "solver_convergence": {
+      "all_converged": true,
+      "by_field": {
+        "Ux": {
+          "failed_count": 0,
+          "max_final_residual": 9.91406690583e-09,
+          "max_iterations": 3,
+          "solve_count": 500
+        },
+        "Uy": {
+          "failed_count": 0,
+          "max_final_residual": 9.98331113761e-09,
+          "max_iterations": 3,
+          "solve_count": 500
+        },
+        "Uz": {
+          "failed_count": 0,
+          "max_final_residual": 9.84113440641e-09,
+          "max_iterations": 3,
+          "solve_count": 500
+        },
+        "epsilon": {
+          "failed_count": 0,
+          "max_final_residual": 7.15608696009e-09,
+          "max_iterations": 6,
+          "solve_count": 500
+        },
+        "k": {
+          "failed_count": 0,
+          "max_final_residual": 9.63139502051e-09,
+          "max_iterations": 8,
+          "solve_count": 500
+        },
+        "p_rgh": {
+          "failed_count": 0,
+          "max_final_residual": 0.000566735631337,
+          "max_iterations": 18,
+          "solve_count": 1500
+        },
+        "pcorr": {
+          "failed_count": 0,
+          "max_final_residual": 9.77976034462e-11,
+          "max_iterations": 803,
+          "solve_count": 1
+        }
+      },
+      "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+      "failed_record_count": 0,
+      "failure_examples": [],
+      "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "pimple": {
+        "nCorrectors": 3,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 1
+      },
+      "schema_version": 1,
+      "solver_record_count": 4001
+    },
+    "solver_exit_code": 0,
+    "solver_log_status": "completed",
+    "solver_wall_time_s": 1692.688718935009,
+    "timing_scope": "OpenFOAM ClockTime and launcher wall time only; no full I/O timing is inferred.",
+    "u_peak": {
+      "last_m_s": 96.3851145471,
+      "max_m_s": 96.3851145471
+    }
+  },
+  "run_dir": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1-hpc-pilot-14651178",
+  "run_state": {
+    "allocation": {
+      "cpus_on_node": 120,
+      "cpus_per_task": 1,
+      "memory_gib_per_node": 64,
+      "memory_gib_total": 64,
+      "memory_mb_per_node": 65536,
+      "node_list": "x1000c5s4b1n1",
+      "nodes": 1,
+      "ranks": 120,
+      "slurm_job_end_time": "1793055121",
+      "slurm_job_start_time": "1793052421",
+      "tasks_per_node": [
+        120
+      ],
+      "wall_budget_s_declared": 2700
+    },
+    "attempt_archive_status": "verified_crc_hash_and_member_list",
+    "case_id": "S1-UPWIND-120-01MS-005",
+    "checkpoint_retention": {
+      "initial_global_t0_preserved": true,
+      "positive_checkpoint_times_s": [
+        0.05
+      ],
+      "retained_positive_checkpoint_count": 1,
+      "retained_positive_checkpoint_limit": null
+    },
+    "delta_t_s": 0.0001,
+    "dirty": null,
+    "execution_backend": "slurm-native",
+    "free_disk_bytes": 3399013720064,
+    "free_disk_bytes_at_workspace_start": {
+      "shared_run_free_bytes": 3403388469248,
+      "workspace_free_bytes": 3403388469248
+    },
+    "free_disk_bytes_last": {
+      "shared_run_free_bytes": 3398004842496,
+      "workspace_free_bytes": 3398004842496
+    },
+    "free_disk_bytes_min_observed": 3396294197248,
+    "hard_deadline_utc": "",
+    "horizon_s": 0.05,
+    "input_archive_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/inputs/qualified-mesh-input.tar.gz",
+    "input_archive_sha256": "8da7141c4fc72fe1f8903e1952d8119f5f079e523da6e80b7ab8a5d6b8a12787",
+    "job_id": "14651178",
+    "job_name": "ml-vof",
+    "ledger_audit_command": [
+      "/opt/cray/pe/python/3.11.7/bin/python3",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/scripts/audit_iso_vof_ledger.py",
+      "--run-dir",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1hpc-14651178.nlnvhfyk/attempt",
+      "--solver-log",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1hpc-14651178.nlnvhfyk/attempt/solver.log",
+      "--output-dir",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1hpc-14651178.nlnvhfyk/attempt/ledger",
+      "--verified-source-evidence",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1hpc-14651178.nlnvhfyk/attempt/native-source-evidence.json"
+    ],
+    "ledger_audit_exit_code": 0,
+    "ledger_audit_status": "raw_exploratory_ledger_written",
+    "max_speed_csv_sha256": "831d46785617bda65d22f106b982d96121b106995bbb4e82eb68b45baf78e836",
+    "max_u_seen_m_s": 96.3851145471,
+    "memory_gib_per_node": 64,
+    "memory_gib_total": 64,
+    "memory_mb_per_node": 65536,
+    "minimum_free_disk_bytes": 12884901888,
+    "minimum_free_disk_gib": 12,
+    "node_local_workspace_removed_after_verified_archive": true,
+    "nodes": 1,
+    "numerical_variant": "upwind",
+    "pause_paths": [
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1-hpc-pilot-14651178/PAUSE",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/PAUSE",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/PAUSE"
+    ],
+    "primary_experiment_declaration": {
+      "path": "experiment-progression.md",
+      "sha256": "0f2de31ae934d23506595e166110343d82a67a4b9ebf0c8e8b7aa7ce5961c188"
+    },
+    "purge_write": 0,
+    "ranks": 120,
+    "result_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1-hpc-pilot-14651178/result.tar.gz",
+    "result_archive_member_sizes": [
+      {
+        "bytes": 1826,
+        "path": "attempt/case/0/U"
+      },
+      {
+        "bytes": 1681,
+        "path": "attempt/case/0/alpha.water"
+      },
+      {
+        "bytes": 1687,
+        "path": "attempt/case/0/epsilon"
+      },
+      {
+        "bytes": 1628,
+        "path": "attempt/case/0/k"
+      },
+      {
+        "bytes": 1603,
+        "path": "attempt/case/0/nut"
+      },
+      {
+        "bytes": 80796097,
+        "path": "attempt/case/0/p_rgh"
+      },
+      {
+        "bytes": 11404,
+        "path": "attempt/case/case-inputs.json"
+      },
+      {
+        "bytes": 732,
+        "path": "attempt/case/constant/g"
+      },
+      {
+        "bytes": 755,
+        "path": "attempt/case/constant/hRef"
+      },
+      {
+        "bytes": 1648,
+        "path": "attempt/case/constant/polyMesh/boundary"
+      },
+      {
+        "bytes": 614667938,
+        "path": "attempt/case/constant/polyMesh/faces"
+      },
+      {
+        "bytes": 122238906,
+        "path": "attempt/case/constant/polyMesh/neighbour"
+      },
+      {
+        "bytes": 122614462,
+        "path": "attempt/case/constant/polyMesh/owner"
+      },
+      {
+        "bytes": 250857142,
+        "path": "attempt/case/constant/polyMesh/points"
+      },
+      {
+        "bytes": 881,
+        "path": "attempt/case/constant/transportProperties"
+      },
+      {
+        "bytes": 952,
+        "path": "attempt/case/constant/turbulenceProperties"
+      },
+      {
+        "bytes": 30137,
+        "path": "attempt/case/postProcessing/aircraftWallFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29589,
+        "path": "attempt/case/postProcessing/alphaExtrema/0.000000000000/fieldMinMax.dat"
+      },
+      {
+        "bytes": 29770,
+        "path": "attempt/case/postProcessing/bottomOutletFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29979,
+        "path": "attempt/case/postProcessing/downstreamOutletFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 517841,
+        "path": "attempt/case/postProcessing/failureLocations/0.000000000000/fieldMinMax.dat"
+      },
+      {
+        "bytes": 30189,
+        "path": "attempt/case/postProcessing/gasInletFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 30686,
+        "path": "attempt/case/postProcessing/nozzleFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 30192,
+        "path": "attempt/case/postProcessing/spanwiseMinusFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 30191,
+        "path": "attempt/case/postProcessing/spanwisePlusFlux/0.000000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29589,
+        "path": "attempt/case/postProcessing/speedExtrema/0.000000000000/fieldMinMax.dat"
+      },
+      {
+        "bytes": 20153,
+        "path": "attempt/case/postProcessing/waterVolume/0.000000000000/volFieldValue.dat"
+      },
+      {
+        "bytes": 275359,
+        "path": "attempt/case/processors120/0.000000000000/U"
+      },
+      {
+        "bytes": 294672,
+        "path": "attempt/case/processors120/0.000000000000/alpha.water"
+      },
+      {
+        "bytes": 304187,
+        "path": "attempt/case/processors120/0.000000000000/epsilon"
+      },
+      {
+        "bytes": 292520,
+        "path": "attempt/case/processors120/0.000000000000/k"
+      },
+      {
+        "bytes": 286256,
+        "path": "attempt/case/processors120/0.000000000000/nut"
+      },
+      {
+        "bytes": 93546072,
+        "path": "attempt/case/processors120/0.000000000000/p_rgh"
+      },
+      {
+        "bytes": 280345076,
+        "path": "attempt/case/processors120/0.050000000000/U"
+      },
+      {
+        "bytes": 92976902,
+        "path": "attempt/case/processors120/0.050000000000/alpha.water"
+      },
+      {
+        "bytes": 93652404,
+        "path": "attempt/case/processors120/0.050000000000/epsilon"
+      },
+      {
+        "bytes": 93647466,
+        "path": "attempt/case/processors120/0.050000000000/k"
+      },
+      {
+        "bytes": 93723134,
+        "path": "attempt/case/processors120/0.050000000000/nut"
+      },
+      {
+        "bytes": 93500700,
+        "path": "attempt/case/processors120/0.050000000000/p"
+      },
+      {
+        "bytes": 94232250,
+        "path": "attempt/case/processors120/0.050000000000/p_rgh"
+      },
+      {
+        "bytes": 251579442,
+        "path": "attempt/case/processors120/0.050000000000/phi"
+      },
+      {
+        "bytes": 1016,
+        "path": "attempt/case/processors120/0.050000000000/uniform/cumulativeContErr"
+      },
+      {
+        "bytes": 5511,
+        "path": "attempt/case/processors120/0.050000000000/uniform/functionObjects/functionObjectProperties"
+      },
+      {
+        "bytes": 1059,
+        "path": "attempt/case/processors120/0.050000000000/uniform/time"
+      },
+      {
+        "bytes": 530651,
+        "path": "attempt/case/processors120/constant/polyMesh/boundary"
+      },
+      {
+        "bytes": 13606,
+        "path": "attempt/case/processors120/constant/polyMesh/boundaryProcAddressing"
+      },
+      {
+        "bytes": 40402372,
+        "path": "attempt/case/processors120/constant/polyMesh/cellProcAddressing"
+      },
+      {
+        "bytes": 125645804,
+        "path": "attempt/case/processors120/constant/polyMesh/faceProcAddressing"
+      },
+      {
+        "bytes": 629897118,
+        "path": "attempt/case/processors120/constant/polyMesh/faces"
+      },
+      {
+        "bytes": 119217148,
+        "path": "attempt/case/processors120/constant/polyMesh/neighbour"
+      },
+      {
+        "bytes": 125645948,
+        "path": "attempt/case/processors120/constant/polyMesh/owner"
+      },
+      {
+        "bytes": 44956136,
+        "path": "attempt/case/processors120/constant/polyMesh/pointProcAddressing"
+      },
+      {
+        "bytes": 269710334,
+        "path": "attempt/case/processors120/constant/polyMesh/points"
+      },
+      {
+        "bytes": 2401,
+        "path": "attempt/case/setExprFields.log"
+      },
+      {
+        "bytes": 4340,
+        "path": "attempt/case/system/controlDict"
+      },
+      {
+        "bytes": 164,
+        "path": "attempt/case/system/decomposeParDict"
+      },
+      {
+        "bytes": 1149,
+        "path": "attempt/case/system/fvSchemes"
+      },
+      {
+        "bytes": 2111,
+        "path": "attempt/case/system/fvSolution"
+      },
+      {
+        "bytes": 842,
+        "path": "attempt/case/system/setExprFieldsDict"
+      },
+      {
+        "bytes": 197043,
+        "path": "attempt/decompose.log"
+      },
+      {
+        "bytes": 46534,
+        "path": "attempt/experiment-progression.md"
+      },
+      {
+        "bytes": 14855,
+        "path": "attempt/experiment.md"
+      },
+      {
+        "bytes": 35402,
+        "path": "attempt/input-evidence/audit_binary_mesh.py"
+      },
+      {
+        "bytes": 17735,
+        "path": "attempt/input-evidence/audit_concavity.py"
+      },
+      {
+        "bytes": 5774,
+        "path": "attempt/input-evidence/checkMesh.log"
+      },
+      {
+        "bytes": 24700,
+        "path": "attempt/input-evidence/independent-audit.json"
+      },
+      {
+        "bytes": 862,
+        "path": "attempt/input-evidence/input-archive.json"
+      },
+      {
+        "bytes": 992,
+        "path": "attempt/input-evidence/mesh-manifest.json"
+      },
+      {
+        "bytes": 903938,
+        "path": "attempt/input-evidence/native-concave-ids.txt"
+      },
+      {
+        "bytes": 904870,
+        "path": "attempt/input-evidence/native-concaveCells"
+      },
+      {
+        "bytes": 2330,
+        "path": "attempt/input-evidence/native-qualification-exception.json"
+      },
+      {
+        "bytes": 8530,
+        "path": "attempt/input-evidence/native-v2512-review.md"
+      },
+      {
+        "bytes": 830,
+        "path": "attempt/input-evidence/nozzle-audit.json"
+      },
+      {
+        "bytes": 1430,
+        "path": "attempt/input-evidence/raw-nozzle-audit.json"
+      },
+      {
+        "bytes": 903938,
+        "path": "attempt/input-evidence/reference-concave-ids.txt"
+      },
+      {
+        "bytes": 1018646,
+        "path": "attempt/input-evidence/reference-concaveCells"
+      },
+      {
+        "bytes": 167262,
+        "path": "attempt/ledger/ledger.csv"
+      },
+      {
+        "bytes": 26459,
+        "path": "attempt/ledger/summary.json"
+      },
+      {
+        "bytes": 371,
+        "path": "attempt/ledger-audit.log"
+      },
+      {
+        "bytes": 6646,
+        "path": "attempt/manifest.json"
+      },
+      {
+        "bytes": 10923,
+        "path": "attempt/max-speed.csv"
+      },
+      {
+        "bytes": 2639,
+        "path": "attempt/native-source-evidence.json"
+      },
+      {
+        "bytes": 928,
+        "path": "attempt/native-source-evidence.solver-banner.log"
+      },
+      {
+        "bytes": 133,
+        "path": "attempt/prepare-case.log"
+      },
+      {
+        "bytes": 468,
+        "path": "attempt/slurm-step-accounting.txt"
+      },
+      {
+        "bytes": 1490,
+        "path": "attempt/solver-convergence.json"
+      },
+      {
+        "bytes": 17,
+        "path": "attempt/solver-step-identity.txt"
+      },
+      {
+        "bytes": 307,
+        "path": "attempt/solver-step.sh"
+      },
+      {
+        "bytes": 2039185,
+        "path": "attempt/solver.log"
+      },
+      {
+        "bytes": 10632,
+        "path": "attempt/source/collect_native_provenance.py"
+      },
+      {
+        "bytes": 45099,
+        "path": "attempt/source/prepare_case.py"
+      },
+      {
+        "bytes": 92705,
+        "path": "attempt/source/run_pilot.py"
+      }
+    ],
+    "result_archive_members": 130,
+    "result_archive_sha256": "8a224b2a075be5b98e7454a5c3b3d96726e55cc9100793d2114208edb6477284",
+    "retention_mode": "full",
+    "revision": "unknown",
+    "run_id": "rouaix-e1-hpc-pilot-14651178",
+    "schema_version": 1,
+    "setup_command": "decomposePar",
+    "solver_clock_samples_count": 500,
+    "solver_clock_windows": {
+      "0.010..0.049s": {
+        "end_s": 0.049,
+        "physical_seconds": 0.039,
+        "physical_seconds_per_solver_clock_second": 3.0139103554868623e-05,
+        "solver_clock_seconds": 1294.0,
+        "start_s": 0.01,
+        "status": "measured"
+      }
+    },
+    "solver_convergence": {
+      "all_converged": true,
+      "by_field": {
+        "Ux": {
+          "failed_count": 0,
+          "max_final_residual": 9.91406690583e-09,
+          "max_iterations": 3,
+          "solve_count": 500
+        },
+        "Uy": {
+          "failed_count": 0,
+          "max_final_residual": 9.98331113761e-09,
+          "max_iterations": 3,
+          "solve_count": 500
+        },
+        "Uz": {
+          "failed_count": 0,
+          "max_final_residual": 9.84113440641e-09,
+          "max_iterations": 3,
+          "solve_count": 500
+        },
+        "epsilon": {
+          "failed_count": 0,
+          "max_final_residual": 7.15608696009e-09,
+          "max_iterations": 6,
+          "solve_count": 500
+        },
+        "k": {
+          "failed_count": 0,
+          "max_final_residual": 9.63139502051e-09,
+          "max_iterations": 8,
+          "solve_count": 500
+        },
+        "p_rgh": {
+          "failed_count": 0,
+          "max_final_residual": 0.000566735631337,
+          "max_iterations": 18,
+          "solve_count": 1500
+        },
+        "pcorr": {
+          "failed_count": 0,
+          "max_final_residual": 9.77976034462e-11,
+          "max_iterations": 803,
+          "solve_count": 1
+        }
+      },
+      "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+      "failed_record_count": 0,
+      "failure_examples": [],
+      "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "pimple": {
+        "nCorrectors": 3,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 1
+      },
+      "schema_version": 1,
+      "solver_record_count": 4001
+    },
+    "solver_elapsed_s": 1686.5766380489804,
+    "solver_end_marker": true,
+    "solver_exit_code": 0,
+    "solver_log_sha256": "23b4270e771b2f2d9568cdffc07f26dad501ff8fb9193e48b6d0328ae8629539",
+    "solver_max_u_m_s": 96.3851145471,
+    "solver_started_monotonic": 1851853.589437791,
+    "solver_started_utc": "2026-10-26T22:08:55.635598+00:00",
+    "solver_time_s": 0.05,
+    "solver_time_steps_recorded": 500,
+    "solver_version": "v2512",
+    "solver_wall_s": 1692.688718935009,
+    "started_utc": "2026-10-26T22:07:08.211725+00:00",
+    "status": "solver_complete_exploratory",
+    "status_porcelain": [],
+    "stop_reason": null,
+    "stop_signal": 12,
+    "stop_signals": [],
+    "tasks_per_node": [
+      120
+    ],
+    "updated_utc": "2026-10-26T22:38:37.976563+00:00",
+    "wall_time_s": 2700,
+    "workspace_storage": {
+      "filesystem_source": "171@kfi:43@kfi:/project",
+      "filesystem_type": "lustre",
+      "free_bytes_at_selection": 3403388477440,
+      "path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026",
+      "storage_class": "shared-project-scratch-required",
+      "workspace": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-one-node-campaign-source-v1-20261026/rouaix-e1hpc-14651178.nlnvhfyk"
+    },
+    "write_interval_s": 0.05
+  },
+  "scheduler_accounting": {
+    "cpu_accounting": "unavailable",
+    "sacct_error": "RuntimeError: sacct exit 1: sacct: error: _open_persist_conn: failed to open persistent connection to host:localhost:6819: Connection refused\nsacct: error: Sending PersistInit msg: Connection refused\nsacct: error: Problem talking to the database: Connection refused\n",
+    "source": "scontrol",
+    "status": "partial"
+  },
+  "schema_version": 1,
+  "selected_files": [
+    {
+      "bytes": 11404,
+      "path": "attempt/case/case-inputs.json",
+      "sha256": "0d1d298074d29a9d4d2b2e41866bd5bf38c2d68ae1d2e438e1b681435156d28a"
+    },
+    {
+      "bytes": 4340,
+      "path": "attempt/case/system/controlDict",
+      "sha256": "26c64f134d78a82de7dc5c51f1a5c775feb8875118e0374b1cf96fdb277b548c"
+    },
+    {
+      "bytes": 1149,
+      "path": "attempt/case/system/fvSchemes",
+      "sha256": "adcf88d3a7ea05ab44fba30b61ef3cfb2ff27de599cf5ee82618e6bfee07579f"
+    },
+    {
+      "bytes": 2111,
+      "path": "attempt/case/system/fvSolution",
+      "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+    },
+    {
+      "bytes": 167262,
+      "path": "attempt/ledger/ledger.csv",
+      "sha256": "f33eb4abb554c9e1f32825c34d56c9a7872c80c7e475110f2a10977112430657"
+    },
+    {
+      "bytes": 26459,
+      "path": "attempt/ledger/summary.json",
+      "sha256": "a21bf0f39b98ce68af5b4145ec06da9054b18fc085e90f8f0d49d61dc01483d1"
+    },
+    {
+      "bytes": 371,
+      "path": "attempt/ledger-audit.log",
+      "sha256": "f2339b9971686755ab9b3b4cc107863f3fe5b433103e86561eac06029a89ac9f"
+    },
+    {
+      "bytes": 6646,
+      "path": "attempt/manifest.json",
+      "sha256": "92fb5dfa8683fc7535e588286b22671557edd04e9deecfe47164bd85623fded4"
+    },
+    {
+      "bytes": 10923,
+      "path": "attempt/max-speed.csv",
+      "sha256": "831d46785617bda65d22f106b982d96121b106995bbb4e82eb68b45baf78e836"
+    },
+    {
+      "bytes": 2639,
+      "path": "attempt/native-source-evidence.json",
+      "sha256": "252411fc2ca47f031fa08dda368aff66a80690526cd3d52703f1eb1ee210c646"
+    },
+    {
+      "bytes": 468,
+      "path": "attempt/slurm-step-accounting.txt",
+      "sha256": "2086579b5b9f0bc138733f0f03f0c8a32ecc9a5bfdb37ef15819f59d8a8bda37"
+    },
+    {
+      "bytes": 1490,
+      "path": "attempt/solver-convergence.json",
+      "sha256": "0fe2cca765d18adf4638907db31ea225f719d16d864abb1df2cc706b2bbc5ff4"
+    },
+    {
+      "bytes": 2039185,
+      "path": "attempt/solver.log",
+      "sha256": "23b4270e771b2f2d9568cdffc07f26dad501ff8fb9193e48b6d0328ae8629539"
+    }
+  ],
+  "slurm": {
+    "accounting_source": "scontrol",
+    "parent": {
+      "allocated_cpus": "120",
+      "elapsed_raw": "00:31:36",
+      "exit_code": "0:0",
+      "job_id": "14651178",
+      "max_rss": "Unknown",
+      "state": "COMPLETED",
+      "total_cpu": "Unknown"
+    },
+    "steps": []
+  }
+}

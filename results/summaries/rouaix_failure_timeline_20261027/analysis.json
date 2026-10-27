@@ -1,0 +1,140 @@
+{
+  "created_utc": "2026-10-27T10:58:50.574249+00:00",
+  "plot": {
+    "backend": "agg",
+    "bytes": 422398,
+    "dpi": 220,
+    "event_markers_s": [
+      {
+        "label": "short trial end",
+        "time_s": 0.05
+      },
+      {
+        "label": "isolated interior spike",
+        "time_s": 0.2341
+      },
+      {
+        "label": "sustained corner growth",
+        "time_s": 0.2511
+      },
+      {
+        "label": "operational U-guard trigger",
+        "time_s": 0.2625
+      },
+      {
+        "label": "final checkpoint",
+        "time_s": 0.2628
+      }
+    ],
+    "format": "PNG",
+    "matplotlib_version": "3.7.2",
+    "path": "results/summaries/rouaix_failure_timeline_20261027/failure_timeline.png",
+    "python_executable": "/Applications/ParaView-6.1.1.app/Contents/Libraries/vtkpython",
+    "sha256": "d930ffe2ead116112be2436e83a4d4b625dca1a225a34d5eab073475e3492338",
+    "u_axis": "logarithmic"
+  },
+  "purpose": "Bounded descriptive plot of the hash-bound 14650641 partial solver timeline.",
+  "run": {
+    "case_id": "L1-ORIG-120-01MS-5S",
+    "job_id": "14650641",
+    "plot_qualification": "Computed diagnostics from an exploratory partial run; no solver-validation gate or cause is inferred.",
+    "reached_time_s": 0.2628,
+    "recorded_steps": 2628,
+    "requested_horizon_s": 5.0,
+    "status": "Operational U-guard stop; requested 5 s horizon incomplete. The parent Slurm job is FAILED 1:0 even though the solver step finalized at 0.2628 s with exit 0 and End."
+  },
+  "schema_version": 1,
+  "source_hashes": {
+    "hpc_metrics_parser": {
+      "bytes": 37319,
+      "path": "scripts/hpc_metrics.py",
+      "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+    },
+    "max_speed_csv_xz": {
+      "bytes": 16004,
+      "path": "results/summaries/rouaix_long_stop_20261027/max-speed.csv.xz",
+      "sha256": "a1d17f524bcfad1b5dff7e064b9ce954233aa812bee005c84cc9e72e2854e3d6"
+    },
+    "postmortem_analysis": {
+      "bytes": 24399,
+      "path": "results/summaries/rouaix_long_stop_20261027/postmortem-analysis.json",
+      "sha256": "470a086984d031137312e16ae133a625037eda7ed067cfbf4bc940a9efab0afe"
+    },
+    "solver_log_xz": {
+      "bytes": 1047512,
+      "path": "results/summaries/rouaix_long_stop_20261027/solver.log.xz",
+      "sha256": "9672db8e88af0075fa5e35f65bd9c3c58ec3273ef2bbf4783fff2515aceb86e8"
+    },
+    "source_files_sha256_manifest": {
+      "bytes": 5116,
+      "path": "results/summaries/rouaix_long_stop_20261027/files.sha256.json",
+      "sha256": "3f33fa1706d10c0320b75a9f8a27a08c857a6608e34b9030c1eca4ccc1d03de5"
+    }
+  },
+  "temporary_input": {
+    "compressed_solver_log_sha256": "9672db8e88af0075fa5e35f65bd9c3c58ec3273ef2bbf4783fff2515aceb86e8",
+    "compressed_source_payloads_copied": false,
+    "decompressed_copy": "Temporary file under ignored timeline run directory, removed after parsing.",
+    "decompressed_solver_log_sha256": "8fceef30bd32015b7d496ff8fa4d154cd737b39d06d85b229e4c5cd74c505919"
+  },
+  "verified_series": {
+    "courant": {
+      "alignment": "Bulk/interface values pair to the next printed Time line; repeated values before a timestamp resolve to the final pending record.",
+      "bulk_max": {
+        "max": 1.82102603385,
+        "time_s": 0.2628
+      },
+      "first_bulk_above_1": {
+        "U_at_same_time_m_s": 94.2280729626,
+        "max": 1.00416844619,
+        "mean": 0.0686859959668,
+        "time_s": 0.0136
+      },
+      "first_interface_above_1": {
+        "U_previous_step_m_s": 274.2861449384,
+        "max": 1.36921503584,
+        "mean": 8.54366391107e-06,
+        "time_s": 0.2342
+      },
+      "interface_max": {
+        "max": 1.36921503584,
+        "time_s": 0.2342
+      },
+      "reference_line": "Co = 1, shown for context only; not a gate.",
+      "rows_each_series": 2628,
+      "source": "solver.log.xz parsed with scripts/hpc_metrics.py",
+      "units": "dimensionless"
+    },
+    "maximum_speed": {
+      "final_sample": {
+        "max_u_m_s": 1260.03773268,
+        "time_s": 0.2628
+      },
+      "guard_sample": {
+        "max_u_m_s": 1045.53344847,
+        "time_s": 0.2625
+      },
+      "isolated_spike": {
+        "max_u_m_s": 274.286144938,
+        "time_s": 0.2341
+      },
+      "maximum": 1260.03773268,
+      "maximum_through_0_05_s_m_s": 103.293547802,
+      "maximum_through_0_05_s_time_s": 0.0497,
+      "maximum_time_s": 0.2628,
+      "monotone_from_ramp_start": true,
+      "next_sample_after_spike": {
+        "max_u_m_s": 108.078913094,
+        "time_s": 0.2342
+      },
+      "operational_guard_threshold_m_s": 1000.0,
+      "rows": 2628,
+      "source": "max-speed.csv.xz",
+      "sustained_ramp_start": {
+        "max_u_m_s": 120.245661163,
+        "time_s": 0.2511
+      },
+      "units": "m/s"
+    }
+  }
+}

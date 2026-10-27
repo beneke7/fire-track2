@@ -1,0 +1,8 @@
+ACTUAL_HELD_AUDITOR_JOB_ID=14669459
+scontrol show job -o readback:
+JobId=14669459 JobName=ml-aud UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A Priority=0 Nice=0 Account=nk_meshapplied QOS=normal JobState=PENDING Reason=JobHeldUser Dependency=afterany:14669440(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=00:10:00 TimeMin=N/A SubmitTime=2026-10-27T12:01:13 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-27T12:01:13 Scheduler=Main Partition=cpu,cpu-short AllocNode:Sid=10.150.1.134:1158170 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqTRES=cpu=1,mem=1800M,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:1 CoreSpec=* MinCPUsNode=1 MinMemoryNode=1800M MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=(null) WorkDir=/project/home/nk_memj StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-audit-reports-v1-20261027/logs/auditor-14669459.slurm.out StdIn=/dev/null StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-audit-reports-v1-20261027/logs/auditor-14669459.slurm.out TresPerTask=cpu=1
+
+Queue readback:
+14669459 PENDING cpu,cpu-short priority=0 CPUs=1 memory=1800M wall=00:10:00 reason=(JobHeldUser)
+
+Slurm's job JSON/readback has no submitted environment field and `Command=(null)` for an inline `--wrap` job; the exact frozen script, manifest, job ID, output, Python module and wrapped command are recorded in auditor-submit-command-job-14669459.txt.
