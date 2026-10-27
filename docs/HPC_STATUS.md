@@ -1,6 +1,6 @@
 # Komondor Rouaix status
 
-Updated 2026-10-27 11:41 UTC (12:41 CET). Analytical E0 remains the only
+Updated 2026-10-27 12:05 UTC (13:05 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
@@ -8,8 +8,9 @@ passed gate. All CFD runs here are exploratory.
 SSH access is restored. **14669440 (`ml-vof`) is RUNNING on one node,
 120 CPU ranks**, x1000c1s1b0n1, since 11:35:09 UTC. It targets a fresh
 original-scheme checkpoint at **0.20 s**, fixed 0.1 ms, on the unchanged
-10,099,265-cell mesh. At 11:40:33 UTC its guard readback was 0.0062 s,
-max speed 86.30 m/s; the newer solver sample was around 87.39 m/s.
+10,099,265-cell mesh. At 12:05:10 UTC its guard readback was 0.0523 s,
+max recorded speed 103.29355 m/s, with no guard stop. This equals the prior
+original short-trial peak; full-field equivalence has not been checked.
 The two-hour allocation ends at 13:35:09 UTC; completion within that cap is
 not guaranteed. Native auditor **14669459** waits on `afterany:14669440`.
 A captured checkpoint is a candidate donor until its terminal audit passes.
@@ -59,8 +60,11 @@ It does not establish phase at the earlier spike or identify the cause.
 [computed timeline](../results/summaries/rouaix_failure_timeline_20261027/README.md).
 
 The Mac produced the timeline using installed ParaView Python/Matplotlib,
-one CPU, in 3.7 s. Goblin's cached native v2512 solver completed a **100-step
-all-air pilot** on a 299,520-cell full trapezoidal domain with native
+one CPU, in 3.7 s. Its existing OpenFOAM VM started but guest commands failed
+with `No route to host`; it was returned to its prior stopped state. No guest
+solver version or compute availability is inferred from VM startup.
+
+Goblin's cached native v2512 solver completed a **100-step all-air pilot** on a 299,520-cell full trapezoidal domain with native
 `Mesh OK`, all seven patches and nozzle area within 0.577%. Fixed 0.1 ms,
 four MPI ranks, no GPU: 0.01 s reached, maximum speed 75.642 m/s, bulk Co
 0.1743, alpha and water volume zero. This is a composition negative control,
@@ -72,10 +76,27 @@ has not launched. Its compact metrics and raw log are verified; an output
 selector omitted the pilot's final 3D snapshot. That gap is recorded and the
 selector is corrected for follow-ups.
 [Local pilot](../results/summaries/rouaix_fast_local_20261027/README.md).
-At the latest resource check the unrelated I4F jobs used about 17 of Goblin's
-20 CPU equivalents. An eight-rank reprofile and shorter 0.30 s matched air
-pair are being prepared to wait for capacity and pass a measured affordability
-gate before GO. No GPU solver work or changes to I4F jobs are authorized here.
+The finite local dispatcher is **armed and waiting**, launchd label
+`com.firetrack.rouaix-fast-q20261027`, PID 60998. At 12:02:13 UTC its live
+sample measured 18.249 busy CPU equivalents on Goblin; no Rouaix solver was
+active. It has a shared six-hour capacity-wait budget and requires two samples
+at or below 11 busy CPUs plus a final recheck before each eight-rank launch.
+All three project PAUSE paths are checked; unavailable checks defer launch.
+
+Its finite sequence is an eight-rank 100-step reprofile, then fresh matched
+original/upwind air branches to **0.30 s** only if measured 3000-step solver
+wall projects within 1680 s. Each branch has a 1680 s cap and 120 s stop grace,
+with no automatic retries. A clean, captured speed-guard terminal permits the
+independent sibling; pause, timeout, nonfinite or archive failures stop the
+sequence. Fields are collated, terminal snapshots inventoried, and remote
+failure data retained if transfer fails. The queued sources are frozen in the
+compact local summary. No GPU work or changes to I4F jobs were made.
+
+Independent read-only review found no blocker for these declared cases.
+The 94 affected case/runner/local-generator tests, Ruff and formatting checks
+passed. Frozen queue scripts also passed syntax and self-checks; the live
+resource gate was exercised without launching compute. Full repository checks
+were not rerun; unrelated known failures are outside this change.
 
 ## Interpretation and earlier performance
 

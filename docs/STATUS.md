@@ -7,12 +7,14 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-At 2026-10-27 11:41 UTC, the 120-rank pre-instability checkpoint job 14669440
-is running toward 0.20 s; auditor 14669459 waits on completion. The old five-second
+At 2026-10-27 12:05 UTC, the 120-rank pre-instability checkpoint job 14669440
+is running toward 0.20 s (0.0523 s at the last readback); auditor 14669459 waits
+on completion. The old five-second
 run failed its speed guard at 0.2628 s; the short upwind comparison completed
 only 0.05 s. A four-CPU local all-air diagnostic completed 100 steps on a
-299,520-cell mesh. Follow-ups wait for shared CPU capacity and measured cost;
-I4F jobs are not changed. No new scientific gate passed.
+299,520-cell mesh. A finite local queue is armed (PID 60998), waiting for shared
+CPU capacity before an eight-rank reprofile and measured-cost-gated 0.30 s
+matched air pair. I4F jobs are not changed. No new scientific gate passed.
 
 ## Running now
 
