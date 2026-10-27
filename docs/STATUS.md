@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 08:43 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 09:27 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -16,8 +16,8 @@ Each has ten MPI ranks/nine CPU equivalents and 32 GiB memory allowance.
 
 | Case | Exact container | Latest independently checked state |
 | --- | --- | --- |
-| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.192457 s, 1547 completed steps, last completed-step pressure correction 0.003749 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
-| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.189832 s, 1526 completed steps, last completed-step pressure correction 0.0040836 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.243957 s, 1959 completed steps, last completed-step pressure correction 0.001636 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.235832 s, 1894 completed steps, last completed-step pressure correction 0.0015281 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
 
 Baseline StartedAt 05:56:04 UTC; corridor StartedAt 05:47:27 UTC. Each targets
 .65 physical seconds with six hours to save and another fifteen minutes hard
@@ -126,8 +126,28 @@ are not physical seconds or accepted pressure/head-loss results. The first
 runaway is near the truncated outlet (x=4.794 m), distinct from the full-case
 divider-region minimum (x=4.22 m); a shared cause is unproven. The extracted
 22,918-cell branch retains the divider entrances and has one connected region,
-but 872 concave cells. Boundary/mesh interpretation is being audited before
-another discriminating trial. Both live VOF cases remain unchanged.
+but 872 concave cells. The audited inlet/outlet signs and hydrostatic law have no gross error; a
+SIMPLE-only control also diverged at the same terminal junction. A later
+native-face-centre correction of about 6 Pa did not prevent the original
+upwind runaway. Both live VOF cases remain unchanged.
+
+**Moving the local pressure boundary improves boundedness.** The numerical
+.30 m extension adds 4,608 cells and a flat outlet while preserving the original
+22,918 cell centres and divider faces. This water-only trial completed 3,000
+steady iterations without runaway: max speed 11.784 m/s, relative inlet/outlet
+flux imbalance 2.12e-6. It did not meet the original SIMPLE convergence criteria;
+its 5.91 kPa pressure minimum and 2.088 m head loss remain unsettled diagnostics.
+The pressure minimum is at the full-case divider hot spot, but this does not
+identify the transient two-phase failure mechanism. A declared continuation to
+iteration 9,000 is running on 0.5 CPU with unchanged convergence criteria.
+Evidence: `results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/` and
+`results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/`.
+
+A real near-failure VOF checkpoint has also been cut to the same 22,918-cell
+branch. Thirteen cell fields and 64,716 internal face fluxes match the mapped
+parent exactly; cut boundary conditions are being prepared for one natural-step
+screening against the whole-domain control. No local VOF solver has launched.
+Input: `results/runs/i4f-local-coupled-replay-20261027T085846Z/`.
 
 The bounded continuation service
 `i4f-coldmesh-continuation-20261027t073946z.service` is armed and waiting for
