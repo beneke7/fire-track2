@@ -1,0 +1,64 @@
+{
+  "alpha_flux_relaxation_map": {
+    "blend": "Apply same omega to alpha1 and alphaPhi10; reconstruct alpha2/rhoPhi/contErr in source order.",
+    "candidate": "Stock alphaControls.H and compressibleAlphaEqnSubCycle.H MULES candidate and water alphaPhi10.",
+    "held": [
+      "common T exact hash",
+      "SST transported state",
+      "Euler oldTime arrays",
+      "Time value/index/deltaT"
+    ],
+    "omega": 1.0,
+    "pressure_correctors_per_sweep": 2,
+    "raw_pressure_floor": "Censor before stock pressure clamp and preserve raw state.",
+    "source_residual_identity_checks": 16,
+    "sweeps": 16,
+    "time_advancement": false,
+    "trigger_time_s": 0.4938
+  },
+  "arm": "omega-100",
+  "arm_case_input_manifest_sha256": "76aed7497f9fce0de4b2315a717f5467a43a1157b4e30a724b5915a2babba157",
+  "classification": "Warm restart, same-time diagnostic from the original .460047515286 seed. Physical pre-trigger inputs and equations match the water-feedback parent. Sixteen stock alpha/MULES, phase-flux, UEqn, fixed-T thermo-refresh, and two-pressure-corrector maps execute at the completed outer8/corrector2 state >=.4938; no time advancement, physical checkpoint, or continuation.",
+  "metrics": [
+    "unrelaxed/applied alpha and water-flux deltas",
+    "entry/candidate/applied L/S/R residuals and source lag",
+    "source and blend identities",
+    "floor counts and alpha>1 counts",
+    "post-EOS phase continuity and inventories",
+    "signed pressure increment projection/alignment/norm ratio"
+  ],
+  "parent_seed": {
+    "bundle": "results/runs/i4f-upwind-momentum-warm-20261026T130013Z",
+    "fields": 14,
+    "time_s": 0.460047515286,
+    "uniform_time": true
+  },
+  "physical_case": {
+    "mesh": "Corrected native I4F mesh, 299214 cells, ten-rank decomposition.",
+    "pimple": {
+      "outer_correctors": 8,
+      "pressure_correctors": 2
+    },
+    "solver": "Pinned v2512 DCEC compressibleInterFoam; finite-water EOS; SST; Sp=true/full-source=true; Gauss upwind momentum; momentumPredictor=false; transonic; 8 PIMPLE outer/2 pressure correctors.",
+    "time_controls": "Original adaptive Euler controls; maxDeltaT 2.5e-4 s, maxCo 0.5, maxAlphaCo 0.25; .505 s endTime only bounds the pre-trigger replay."
+  },
+  "predeclared_utc": "2026-10-27T02:24:40.604679+00:00",
+  "qualification": "The omega=.5 arm changes only the same-time diagnostic alpha/alphaPhi blend. Neither arm validates the apparatus or establishes a production setting.",
+  "resources": {
+    "disk_floor_bytes": 21474836480,
+    "docker_log_driver": "none",
+    "hard_wall_s_from_StartedAt": 7200,
+    "initial_cpu_quota": 9,
+    "memory_limit_bytes": 34359738368,
+    "mpi_ranks": 10,
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319"
+  },
+  "schema": "i4f-alpha-flux-relax-map/v1",
+  "solver": {
+    "binary_name": "compressibleInterFoamI4FAlphaFluxRelaxMap",
+    "binary_sha256": "2128a3b8e000271d20bb754a2c6a112e8aafcc724eddc0009444200ba74c3de0",
+    "pinned_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "source_manifest_sha256": "3fcb2cd64bae40841c76db14dc2f73c6d96f72385acdc1cb672dfdccebb74166",
+    "source_patch_sha256": "71472eadbead0557f13657021857ba1f444035a699ccedc242cc67101939e0d4"
+  }
+}

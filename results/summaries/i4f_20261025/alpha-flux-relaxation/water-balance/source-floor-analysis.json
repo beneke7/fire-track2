@@ -1,0 +1,690 @@
+{
+  "schema": "i4f-alpha-source-floor-check/v1",
+  "created_utc": "2026-10-27T03:42:52.574973+00:00",
+  "method": "Read-only postprocessing of verified saved alpha.water and dgdt endpoints; rank-local values aligned to global V and C by processors10 cellProcAddressing.",
+  "equation_source": {
+    "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/build/source/v8-restart-cold/applications/solvers/multiphase/compressibleInterFoam/alphaSuSp.H",
+    "sha256": "fc1dce13303b83586d2b24b185bfa23e31843f640678cd2a1e78d5e4eaa455f3",
+    "positive_gamma_net_source": "Gamma*(1-alpha)/max(1-alpha,1e-4)",
+    "negative_gamma_net_source": "Gamma*alpha/max(alpha,1e-4)",
+    "net_source_definition": "Su + Sp*alpha from the native alphaSuSp.H split",
+    "floor": 0.0001
+  },
+  "mesh": {
+    "native_cells": 299214,
+    "ranks": 10,
+    "V_sha256": "d05f73e9feb4beed8e311daa4b60695e1242cb076576645223e646abdea7be99",
+    "C_sha256": "dde1b72ceb1fac86e35199a8b22f223a42c0fc5fb452c6f7f6d3c5f77556c46c",
+    "volume_sum_m3": 25.141766918909596
+  },
+  "analysis_script_sha256": "2d7d48381c7fee51f404d2f70c682722c4493f6cafd4cce3e19cbd9b986d19d0",
+  "input_hashes": {
+    "omega1_identity": {
+      "archive_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/identity-attempt007-baseline-output.tar.zst",
+      "archive_sha256": "deac43760f289a6a45d270370924367e936502c497a19a9f1422386e6a40a804",
+      "capture_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/output-capture-attempt007.json",
+      "capture_sha256": "f6f3802b5f379b9700d44b12fc0a43b68ffc58f602bd9a405b615da50d402b73",
+      "solver_log_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/baseline-attempt007-solver.log",
+      "solver_log_sha256": "c153fc833276f443f5db0da821fad659747e1c90ae1870d671f9709d64f5b0ec",
+      "alpha_water_sha256": "b29a809fc2f9fe7fe077abbf87f5c102e3d6761e5c54ba8bcd731e77b657f21e",
+      "dgdt_sha256": "c5dfb137506de720d787cc2071246617b1e281077738d12c0590c229cd0209b9",
+      "cell_proc_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33"
+    },
+    "omega050_smoke": {
+      "archive_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-early-smoke/omega050-attempt001-output.tar.zst",
+      "archive_sha256": "cec3cb1dd8ce1a9241e3bf173d5ee0e0f1dd134d80a5f67d88898492fee71a45",
+      "capture_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-early-smoke/output-capture-attempt001.json",
+      "capture_sha256": "8553f4293b0a56c108fea77c60d7b043d5cd60c92a3b5d0626f51c4d1dfbdab4",
+      "solver_log_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/physical-omega-050-early-smoke/logs/omega050-attempt001-solver.log",
+      "solver_log_sha256": "2e6e1e4941aaab997d7598301f87f80e63c4fa34582bdfbab56edfa138673409",
+      "alpha_water_sha256": "c183f58bf864f97f162d1d91c6f4db5d3f4804ddabfbe9fe4ecab13717368ea4",
+      "dgdt_sha256": "8b490f4ddc0242594a72dd1fc6daee5f52a9e047e54ab80962b793124c9cec3a",
+      "cell_proc_addressing_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33"
+    }
+  },
+  "arms": [
+    {
+      "arm": "omega1_identity",
+      "endpoint": {
+        "time_s": 0.390717595007,
+        "pass": 16,
+        "water_signed_residual_kg_s": -0.02375403703133536,
+        "water_l1_residual_kg_s": 0.1066449484261004,
+        "water_inventory_kg": 3198.008235075122,
+        "gas_inventory_kg": 33.44991502866756
+      },
+      "cells": 299214,
+      "native_volume_sum_m3": 25.141766918909596,
+      "alpha_water_range": [
+        -3.2943864149315137e-16,
+        1.000000000001424
+      ],
+      "dgdt_range_s_inv": [
+        -4.6894429850671715,
+        2.791050539962464
+      ],
+      "floor_active": {
+        "positive_gamma_near_pure_water": 29551,
+        "negative_gamma_near_pure_gas": 64671,
+        "total": 94222,
+        "positive_gamma_affected_volume_m3": 0.5920106567476595,
+        "negative_gamma_affected_volume_m3": 6.225503880509263,
+        "positive_gamma_count_below_floor": 29551,
+        "negative_gamma_count_below_floor": 64671
+      },
+      "source_delta": {
+        "formula": "Gamma_eff-Gamma, with Gamma_eff=Gamma*(1-alpha)/max(1-alpha,1e-4) if Gamma>0 else Gamma*alpha/max(alpha,1e-4) if Gamma<0",
+        "gamma_volume_integral_m3_s": -0.14845506864298533,
+        "gamma_eff_volume_integral_m3_s": -0.14847424895669747,
+        "signed_delta_volume_integral_m3_s": -1.9180313712133815e-05,
+        "l1_delta_volume_integral_m3_s": 1.921414200353388e-05,
+        "signed_delta_mass_rate_approx_kg_s": -0.019145789147451974,
+        "l1_delta_mass_rate_approx_kg_s": 0.01917955654792752,
+        "positive_gamma_pure_water_signed_delta_volume_m3_s": -1.91972278578331e-05,
+        "positive_gamma_pure_water_l1_delta_volume_m3_s": 1.91972278578331e-05,
+        "negative_gamma_pure_gas_signed_delta_volume_m3_s": 1.6914145699170576e-08,
+        "negative_gamma_pure_gas_l1_delta_volume_m3_s": 1.6914145699170576e-08,
+        "residual_minus_approx_source_delta_kg_s": -0.004608247883883386,
+        "water_density_approximation_kg_m3": 998.2,
+        "signed_delta_to_logged_water_residual_ratio": 0.8060014860714255,
+        "absolute_delta_to_logged_water_residual_ratio": 0.8060014860714255,
+        "delta_sign_matches_logged_water_residual": true
+      },
+      "largest_cell_contributions": [
+        {
+          "global_cell": 97118,
+          "center_m": [
+            3.613706511759947,
+            0.711582964806069,
+            0.7335953014349278
+          ],
+          "alpha_water": 0.9999875407142581,
+          "dgdt_s_inv": 0.15754207383960384,
+          "gamma_eff_minus_gamma_s_inv": -0.13791345669622068,
+          "volume_m3": 1.2649688020455985e-05,
+          "signed_volume_rate_m3_s": -1.7445622010298581e-06,
+          "approx_signed_mass_rate_kg_s": -0.0017414219890680045,
+          "floor_active": true
+        },
+        {
+          "global_cell": 96219,
+          "center_m": [
+            3.6137065150026766,
+            -0.38841703079703294,
+            0.7335953026078544
+          ],
+          "alpha_water": 0.999987553822065,
+          "dgdt_s_inv": 0.15728552830551637,
+          "gamma_eff_minus_gamma_s_inv": -0.1377094915865207,
+          "volume_m3": 1.2649696216407315e-05,
+          "signed_volume_rate_m3_s": -1.741983234685386e-06,
+          "approx_signed_mass_rate_kg_s": -0.0017388476648629524,
+          "floor_active": true
+        },
+        {
+          "global_cell": 80931,
+          "center_m": [
+            3.613687447106754,
+            0.7884442308805489,
+            0.7337671434356421
+          ],
+          "alpha_water": 0.999988082878866,
+          "dgdt_s_inv": 0.12726332713284721,
+          "gamma_eff_minus_gamma_s_inv": -0.11209720227924211,
+          "volume_m3": 1.2515985089803525e-05,
+          "signed_volume_rate_m3_s": -1.4030069123356839e-06,
+          "approx_signed_mass_rate_kg_s": -0.0014004814998934798,
+          "floor_active": true
+        },
+        {
+          "global_cell": 80765,
+          "center_m": [
+            3.6136874489316604,
+            -0.3115557651024234,
+            0.7337671470780306
+          ],
+          "alpha_water": 0.9999880921189751,
+          "dgdt_s_inv": 0.12705946615994015,
+          "gamma_eff_minus_gamma_s_inv": -0.11192937609874475,
+          "volume_m3": 1.2515986272021768e-05,
+          "signed_volume_rate_m3_s": -1.4009065346878507e-06,
+          "approx_signed_mass_rate_kg_s": -0.0013983849029254125,
+          "floor_active": true
+        },
+        {
+          "global_cell": 79143,
+          "center_m": [
+            3.5379758719590266,
+            -0.8137813869657237,
+            0.5082428745600951
+          ],
+          "alpha_water": 0.99995993344751,
+          "dgdt_s_inv": 0.038620481773877446,
+          "gamma_eff_minus_gamma_s_inv": -0.02314658617205462,
+          "volume_m3": 1.3494393188190079e-05,
+          "signed_volume_rate_m3_s": -3.1234913477002854e-07,
+          "approx_signed_mass_rate_kg_s": -0.0003117869063274425,
+          "floor_active": true
+        },
+        {
+          "global_cell": 79469,
+          "center_m": [
+            3.5379758761145963,
+            0.2862186027496517,
+            0.508242868884078
+          ],
+          "alpha_water": 0.9999596742392428,
+          "dgdt_s_inv": 0.038776175299406336,
+          "gamma_eff_minus_gamma_s_inv": -0.023139387617380224,
+          "volume_m3": 1.3494388218859403e-05,
+          "signed_volume_rate_m3_s": -3.122518796555969e-07,
+          "approx_signed_mass_rate_kg_s": -0.0003116898262722168,
+          "floor_active": true
+        },
+        {
+          "global_cell": 96356,
+          "center_m": [
+            3.5395753793315907,
+            -0.2612567894290555,
+            0.7346228398300508
+          ],
+          "alpha_water": 0.9999301043343377,
+          "dgdt_s_inv": 0.11029510404989536,
+          "gamma_eff_minus_gamma_s_inv": -0.03320360688130612,
+          "volume_m3": 8.66655036085338e-06,
+          "signed_volume_rate_m3_s": -2.8776073119881736e-07,
+          "approx_signed_mass_rate_kg_s": -0.0002872427618826595,
+          "floor_active": true
+        },
+        {
+          "global_cell": 97252,
+          "center_m": [
+            3.539575378254374,
+            0.8387432041097023,
+            0.7346228445252677
+          ],
+          "alpha_water": 0.9999300823033153,
+          "dgdt_s_inv": 0.11031683723438451,
+          "gamma_eff_minus_gamma_s_inv": -0.03318584558464886,
+          "volume_m3": 8.666548973195859e-06,
+          "signed_volume_rate_m3_s": -2.8760675597627493e-07,
+          "approx_signed_mass_rate_kg_s": -0.0002870890638155176,
+          "floor_active": true
+        },
+        {
+          "global_cell": 79141,
+          "center_m": [
+            3.5137717056077364,
+            -0.8152287717770578,
+            0.5080216075763944
+          ],
+          "alpha_water": 0.9999622601070786,
+          "dgdt_s_inv": 0.029166900402329287,
+          "gamma_eff_minus_gamma_s_inv": -0.018159343421987134,
+          "volume_m3": 1.3476011917951915e-05,
+          "signed_volume_rate_m3_s": -2.4471552837688034e-07,
+          "approx_signed_mass_rate_kg_s": -0.00024427504042580194,
+          "floor_active": true
+        },
+        {
+          "global_cell": 175789,
+          "center_m": [
+            3.614189802050211,
+            -0.33666529560704195,
+            0.7567464893997867
+          ],
+          "alpha_water": 0.9999907668939754,
+          "dgdt_s_inv": 0.01615049049092225,
+          "gamma_eff_minus_gamma_s_inv": -0.014659298580397467,
+          "volume_m3": 1.6678362428875816e-05,
+          "signed_volume_rate_m3_s": -2.444930946769737e-07,
+          "approx_signed_mass_rate_kg_s": -0.00024405300710655516,
+          "floor_active": true
+        }
+      ],
+      "top_50_global_cell_ids_by_absolute_source_delta": [
+        97118,
+        96219,
+        80931,
+        80765,
+        79143,
+        79469,
+        96356,
+        97252,
+        79141,
+        175789,
+        176631,
+        79467,
+        87424,
+        79159,
+        96352,
+        97248,
+        175550,
+        176392,
+        79485,
+        85762,
+        87224,
+        80741,
+        80914,
+        97378,
+        95179,
+        93308,
+        85562,
+        96482,
+        46489,
+        46992,
+        96492,
+        97388,
+        176395,
+        175553,
+        174625,
+        172516,
+        96083,
+        96982,
+        97008,
+        96109,
+        96340,
+        97236,
+        175793,
+        176635,
+        90637,
+        88925,
+        44765,
+        45677,
+        96353,
+        97249
+      ]
+    },
+    {
+      "arm": "omega050_smoke",
+      "endpoint": {
+        "time_s": 0.390717595007,
+        "pass": 16,
+        "water_signed_residual_kg_s": -0.07476769994886467,
+        "water_l1_residual_kg_s": 16.28054188864735,
+        "water_inventory_kg": 3198.008234462964,
+        "gas_inventory_kg": 33.44991437587355
+      },
+      "cells": 299214,
+      "native_volume_sum_m3": 25.141766918909596,
+      "alpha_water_range": [
+        -3.2943892727528013e-16,
+        1.000000000001414
+      ],
+      "dgdt_range_s_inv": [
+        -4.6622851834941486,
+        2.822665453923419
+      ],
+      "floor_active": {
+        "positive_gamma_near_pure_water": 36070,
+        "negative_gamma_near_pure_gas": 65463,
+        "total": 101533,
+        "positive_gamma_affected_volume_m3": 1.617249854940039,
+        "negative_gamma_affected_volume_m3": 6.310906369894788,
+        "positive_gamma_count_below_floor": 36070,
+        "negative_gamma_count_below_floor": 65463
+      },
+      "source_delta": {
+        "formula": "Gamma_eff-Gamma, with Gamma_eff=Gamma*(1-alpha)/max(1-alpha,1e-4) if Gamma>0 else Gamma*alpha/max(alpha,1e-4) if Gamma<0",
+        "gamma_volume_integral_m3_s": -0.1484115239562735,
+        "gamma_eff_volume_integral_m3_s": -0.14846852704851465,
+        "signed_delta_volume_integral_m3_s": -5.700309224115698e-05,
+        "l1_delta_volume_integral_m3_s": 5.703693528221149e-05,
+        "signed_delta_mass_rate_approx_kg_s": -0.0569004866751229,
+        "l1_delta_mass_rate_approx_kg_s": 0.05693426879870351,
+        "positive_gamma_pure_water_signed_delta_volume_m3_s": -5.702001376168353e-05,
+        "positive_gamma_pure_water_l1_delta_volume_m3_s": 5.702001376168353e-05,
+        "negative_gamma_pure_gas_signed_delta_volume_m3_s": 1.6921520526596684e-08,
+        "negative_gamma_pure_gas_l1_delta_volume_m3_s": 1.6921520526596684e-08,
+        "residual_minus_approx_source_delta_kg_s": -0.017867213273741772,
+        "water_density_approximation_kg_m3": 998.2,
+        "signed_delta_to_logged_water_residual_ratio": 0.7610303207673693,
+        "absolute_delta_to_logged_water_residual_ratio": 0.7610303207673693,
+        "delta_sign_matches_logged_water_residual": true
+      },
+      "largest_cell_contributions": [
+        {
+          "global_cell": 33472,
+          "center_m": [
+            0.7627491893714237,
+            0.3131418882160915,
+            0.860103686937708
+          ],
+          "alpha_water": 0.9999916222208864,
+          "dgdt_s_inv": 1.894245151589871,
+          "gamma_eff_minus_gamma_s_inv": -1.7355494769204407,
+          "volume_m3": 3.0780820776469103e-06,
+          "signed_volume_rate_m3_s": -5.342163739778279e-06,
+          "approx_signed_mass_rate_kg_s": -0.005332547845046678,
+          "floor_active": true
+        },
+        {
+          "global_cell": 32744,
+          "center_m": [
+            0.762725336429151,
+            -0.786886439608602,
+            0.860103524043401
+          ],
+          "alpha_water": 0.99999207678039,
+          "dgdt_s_inv": 1.850856190857739,
+          "gamma_eff_minus_gamma_s_inv": -1.7042087901915008,
+          "volume_m3": 3.104973414064633e-06,
+          "signed_volume_rate_m3_s": -5.2915229855598624e-06,
+          "approx_signed_mass_rate_kg_s": -0.005281998244185855,
+          "floor_active": true
+        },
+        {
+          "global_cell": 33453,
+          "center_m": [
+            0.7655013070781171,
+            0.31268291899530154,
+            0.8449428962386518
+          ],
+          "alpha_water": 0.9999992861778448,
+          "dgdt_s_inv": 0.10574311684229414,
+          "gamma_eff_minus_gamma_s_inv": -0.10498829904671415,
+          "volume_m3": 1.766873928182933e-05,
+          "signed_volume_rate_m3_s": -1.8550108834991233e-06,
+          "approx_signed_mass_rate_kg_s": -0.001851671863908825,
+          "floor_active": true
+        },
+        {
+          "global_cell": 32725,
+          "center_m": [
+            0.7655051569688551,
+            -0.7873461138541645,
+            0.8449110665019368
+          ],
+          "alpha_water": 0.9999993263601137,
+          "dgdt_s_inv": 0.10393252548281032,
+          "gamma_eff_minus_gamma_s_inv": -0.10323239453630133,
+          "volume_m3": 1.7741715513411803e-05,
+          "signed_volume_rate_m3_s": -1.8315197756313451e-06,
+          "approx_signed_mass_rate_kg_s": -0.0018282230400352088,
+          "floor_active": true
+        },
+        {
+          "global_cell": 97118,
+          "center_m": [
+            3.613706511759947,
+            0.711582964806069,
+            0.7335953014349278
+          ],
+          "alpha_water": 0.9999871961950256,
+          "dgdt_s_inv": 0.15816408023516873,
+          "gamma_eff_minus_gamma_s_inv": -0.13791305986235067,
+          "volume_m3": 1.2649688020455985e-05,
+          "signed_volume_rate_m3_s": -1.7445571812052064e-06,
+          "approx_signed_mass_rate_kg_s": -0.0017414169782790372,
+          "floor_active": true
+        },
+        {
+          "global_cell": 96219,
+          "center_m": [
+            3.6137065150026766,
+            -0.38841703079703294,
+            0.7335953026078544
+          ],
+          "alpha_water": 0.9999872100820784,
+          "dgdt_s_inv": 0.1579054553987706,
+          "gamma_eff_minus_gamma_s_inv": -0.13770947725947497,
+          "volume_m3": 1.2649696216407315e-05,
+          "signed_volume_rate_m3_s": -1.7419830534526098e-06,
+          "approx_signed_mass_rate_kg_s": -0.001738847483956395,
+          "floor_active": true
+        },
+        {
+          "global_cell": 33838,
+          "center_m": [
+            0.8083097846756417,
+            0.7117981812896883,
+            0.8198183079143181
+          ],
+          "alpha_water": 0.9999999999999881,
+          "dgdt_s_inv": 0.1503296433022246,
+          "gamma_eff_minus_gamma_s_inv": -0.15032964328436635,
+          "volume_m3": 1.1234875972348514e-05,
+          "signed_volume_rate_m3_s": -1.6889348972672506e-06,
+          "approx_signed_mass_rate_kg_s": -0.0016858948144521696,
+          "floor_active": true
+        },
+        {
+          "global_cell": 33103,
+          "center_m": [
+            0.8083091075955359,
+            -0.38822043022517566,
+            0.8198088143092961
+          ],
+          "alpha_water": 0.9999999999999732,
+          "dgdt_s_inv": 0.1488291767340848,
+          "gamma_eff_minus_gamma_s_inv": -0.14882917669426352,
+          "volume_m3": 1.122522394734407e-05,
+          "signed_volume_rate_m3_s": -1.6706408382919486e-06,
+          "approx_signed_mass_rate_kg_s": -0.0016676336847830232,
+          "floor_active": true
+        },
+        {
+          "global_cell": 80931,
+          "center_m": [
+            3.613687447106754,
+            0.7884442308805489,
+            0.7337671434356421
+          ],
+          "alpha_water": 0.9999876596076055,
+          "dgdt_s_inv": 0.12810740513141433,
+          "gamma_eff_minus_gamma_s_inv": -0.11229844865177913,
+          "volume_m3": 1.2515985089803525e-05,
+          "signed_volume_rate_m3_s": -1.4055257089337342e-06,
+          "approx_signed_mass_rate_kg_s": -0.0014029957626576536,
+          "floor_active": true
+        },
+        {
+          "global_cell": 80765,
+          "center_m": [
+            3.6136874489316604,
+            -0.3115557651024234,
+            0.7337671470780306
+          ],
+          "alpha_water": 0.9999876696600295,
+          "dgdt_s_inv": 0.12789985165365494,
+          "gamma_eff_minus_gamma_s_inv": -0.11212936512299279,
+          "volume_m3": 1.2515986272021768e-05,
+          "signed_volume_rate_m3_s": -1.4034095945698942e-06,
+          "approx_signed_mass_rate_kg_s": -0.0014008834572996685,
+          "floor_active": true
+        }
+      ],
+      "top_50_global_cell_ids_by_absolute_source_delta": [
+        33472,
+        32744,
+        33453,
+        32725,
+        97118,
+        96219,
+        33838,
+        33103,
+        80931,
+        80765,
+        32814,
+        33542,
+        33476,
+        32748,
+        33465,
+        32737,
+        30432,
+        30619,
+        148156,
+        147667,
+        79143,
+        79469,
+        32818,
+        33546,
+        96356,
+        97252,
+        29290,
+        29029,
+        79141,
+        175789,
+        79467,
+        176631,
+        71817,
+        72502,
+        33841,
+        33106,
+        87424,
+        79159,
+        32729,
+        96352,
+        97248,
+        175550,
+        176392,
+        79485,
+        33457,
+        85762,
+        26827,
+        13429,
+        26436,
+        13881
+      ]
+    }
+  ],
+  "spatial_overlap_of_largest_contributors": {
+    "top10_common_global_cell_ids": [
+      80765,
+      80931,
+      96219,
+      97118
+    ],
+    "top50_common_global_cell_ids": [
+      79141,
+      79143,
+      79159,
+      79467,
+      79469,
+      79485,
+      80765,
+      80931,
+      85762,
+      87424,
+      96219,
+      96352,
+      96356,
+      97118,
+      97248,
+      97252,
+      175550,
+      175789,
+      176392,
+      176631
+    ],
+    "top50_common_count": 20,
+    "common_top50_centers_m": {
+      "79141": [
+        3.5137717056077364,
+        -0.8152287717770578,
+        0.5080216075763944
+      ],
+      "79143": [
+        3.5379758719590266,
+        -0.8137813869657237,
+        0.5082428745600951
+      ],
+      "79159": [
+        3.538751099955667,
+        -0.7098341351514178,
+        0.5048006488090269
+      ],
+      "79467": [
+        3.5137717091087737,
+        0.2847712191667384,
+        0.5080216007546888
+      ],
+      "79469": [
+        3.5379758761145963,
+        0.2862186027496517,
+        0.508242868884078
+      ],
+      "79485": [
+        3.538751108991619,
+        0.3901658490480473,
+        0.5048006490143716
+      ],
+      "80765": [
+        3.6136874489316604,
+        -0.3115557651024234,
+        0.7337671470780306
+      ],
+      "80931": [
+        3.613687447106754,
+        0.7884442308805489,
+        0.7337671434356421
+      ],
+      "85762": [
+        3.4629748503089433,
+        -0.712839811730696,
+        0.4846001398174468
+      ],
+      "87424": [
+        3.4629748497972495,
+        0.38716018883384595,
+        0.48460013864679535
+      ],
+      "96219": [
+        3.6137065150026766,
+        -0.38841703079703294,
+        0.7335953026078544
+      ],
+      "96352": [
+        3.514229461303092,
+        -0.28612498793634084,
+        0.7092244569854328
+      ],
+      "96356": [
+        3.5395753793315907,
+        -0.2612567894290555,
+        0.7346228398300508
+      ],
+      "97118": [
+        3.613706511759947,
+        0.711582964806069,
+        0.7335953014349278
+      ],
+      "97248": [
+        3.5142294614563236,
+        0.8138750123693468,
+        0.7092244550208806
+      ],
+      "97252": [
+        3.539575378254374,
+        0.8387432041097023,
+        0.7346228445252677
+      ],
+      "175550": [
+        3.6141924671717174,
+        -0.36326493203240556,
+        0.7566971781908884
+      ],
+      "175789": [
+        3.614189802050211,
+        -0.33666529560704195,
+        0.7567464893997867
+      ],
+      "176392": [
+        3.6141924450814984,
+        0.7367350176188419,
+        0.7566971418546986
+      ],
+      "176631": [
+        3.614189782160578,
+        0.7633346574167181,
+        0.7567464557226158
+      ]
+    }
+  },
+  "limitations": [
+    "The compared Gamma field is the saved endpoint dgdt field; the alpha equation used a cached Gamma/Sp/Su at source assembly, which can differ in time and value.",
+    "The reported postEOS phase-continuity residual is evaluated later in the outer-step ordering than the saved endpoint source field; this is a magnitude/sign comparison, not an identity.",
+    "Water-mass-rate scaling uses the declared approximate constant density 998.2 kg/m3; phase-resolved water density was not present in these archives.",
+    "Top contributors include native cell IDs and centers; no nearest-wall distance was calculated, so spatial proximity is not labeled as a wall attribution."
+  ]
+}

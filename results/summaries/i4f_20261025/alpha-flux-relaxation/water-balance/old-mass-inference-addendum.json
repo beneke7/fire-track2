@@ -1,0 +1,347 @@
+{
+  "calculation": {
+    "Fout_kg_s": "-2.667518834962356E-24",
+    "Mnew_kg_from_final_after_correctRho": "3198.008235075122",
+    "Mold_kg_from_I4F_INITIAL_PHASE_MASS": "3198.008235360192",
+    "Rwater_minus_derived_balance_kg_s": "0.00000179630199797333333600085",
+    "Rwater_reported_kg_s": "-0.02375403703133536",
+    "boundary_sign": "outward-positive; boundary observer sums non-coupled physical patches",
+    "conservation_formula": "Rwater = (Mnew - Mold)/dt + Fout",
+    "deltaM_kg": "-2.85070E-7",
+    "deltaM_over_dt_kg_s": "-0.02375583333333333333333333333",
+    "derived_balance_kg_s": "-0.02375583333333333333333600085",
+    "dt_s_from_actual_terminal_marker": "0.000012",
+    "last_postEOS_water_patch_fluxes": [
+      {
+        "patch": "apparatusWall",
+        "signed_outward_kg_s": "-2.667518834962356e-24"
+      },
+      {
+        "patch": "ambientAnnulus",
+        "signed_outward_kg_s": "5.322240862406399e-58"
+      },
+      {
+        "patch": "externalSides",
+        "signed_outward_kg_s": "1.127159026264558e-90"
+      },
+      {
+        "patch": "farOutlet",
+        "signed_outward_kg_s": "6.055711159200755e-141"
+      },
+      {
+        "patch": "lamellaMaster",
+        "signed_outward_kg_s": "3.810119294731401e-48"
+      },
+      {
+        "patch": "lamellaSlave",
+        "signed_outward_kg_s": "-1.849692890158153e-48"
+      }
+    ],
+    "mass_equivalent_discrepancy_kg": "2.155562397568000003201020E-11",
+    "relative_discrepancy_over_abs_Rwater": "0.00007562091427253922201694370367"
+  },
+  "identity_arms_agree": true,
+  "interpretation_limit": "The original qualification's unevaluable status is amended by this direct initial-mass plus verified oldTime identity. It remains a scalar aggregate consistency comparison with a deliberately loose double-sum bound, not cellwise independent validation.",
+  "mold_source_order_verified": true,
+  "observed_utc": "2026-10-27T03:36:34.864910+00:00",
+  "per_arm_evidence": {
+    "baseline": {
+      "final_after_correctRho": {
+        "pass": 16,
+        "time_s": "0.390717595007",
+        "water_cont_L1_nativeV_kg_s": "0.1066449484261004",
+        "water_cont_signed_nativeV_kg_s": "-0.02375403703133536",
+        "water_inventory_kg": "3198.008235075122",
+        "water_signed_boundary_flux_kg_s": "-2.667518834962356e-24"
+      },
+      "initial_old_time_internal_field_identity": {
+        "alpha1": {
+          "current_time_index": 1638,
+          "max_abs_current_minus_old": 0.0,
+          "old_time_index": 1637,
+          "old_time_levels": 1
+        },
+        "comparison_scope": "all internal primitive cells; one global max reduction per field",
+        "rho1": {
+          "current_time_index": 1638,
+          "max_abs_current_minus_old": 0.0,
+          "old_time_index": 1637,
+          "old_time_levels": 1
+        }
+      },
+      "initial_phase_mass": {
+        "definition": "sum(alpha_phase*rho_phase*native_cellV)",
+        "time_s": "0.390705595007",
+        "water_inventory_kg": "3198.008235360192"
+      },
+      "last_postEOS_water_patch_fluxes": [
+        {
+          "patch": "apparatusWall",
+          "signed_outward_kg_s": "-2.667518834962356e-24"
+        },
+        {
+          "patch": "ambientAnnulus",
+          "signed_outward_kg_s": "5.322240862406399e-58"
+        },
+        {
+          "patch": "externalSides",
+          "signed_outward_kg_s": "1.127159026264558e-90"
+        },
+        {
+          "patch": "farOutlet",
+          "signed_outward_kg_s": "6.055711159200755e-141"
+        },
+        {
+          "patch": "lamellaMaster",
+          "signed_outward_kg_s": "3.810119294731401e-48"
+        },
+        {
+          "patch": "lamellaSlave",
+          "signed_outward_kg_s": "-1.849692890158153e-48"
+        }
+      ],
+      "solver_log": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/baseline-attempt007-solver.log",
+      "solver_log_normal_End": true,
+      "solver_log_sha256": "c153fc833276f443f5db0da821fad659747e1c90ae1870d671f9709d64f5b0ec",
+      "terminal_deltaT_s": "1.2e-05"
+    },
+    "candidate": {
+      "final_after_correctRho": {
+        "pass": 16,
+        "time_s": "0.390717595007",
+        "water_cont_L1_nativeV_kg_s": "0.1066449484261004",
+        "water_cont_signed_nativeV_kg_s": "-0.02375403703133536",
+        "water_inventory_kg": "3198.008235075122",
+        "water_signed_boundary_flux_kg_s": "-2.667518834962356e-24"
+      },
+      "initial_old_time_internal_field_identity": {
+        "alpha1": {
+          "current_time_index": 1638,
+          "max_abs_current_minus_old": 0.0,
+          "old_time_index": 1637,
+          "old_time_levels": 1
+        },
+        "comparison_scope": "all internal primitive cells; one global max reduction per field",
+        "rho1": {
+          "current_time_index": 1638,
+          "max_abs_current_minus_old": 0.0,
+          "old_time_index": 1637,
+          "old_time_levels": 1
+        }
+      },
+      "initial_phase_mass": {
+        "definition": "sum(alpha_phase*rho_phase*native_cellV)",
+        "time_s": "0.390705595007",
+        "water_inventory_kg": "3198.008235360192"
+      },
+      "last_postEOS_water_patch_fluxes": [
+        {
+          "patch": "apparatusWall",
+          "signed_outward_kg_s": "-2.667518834962356e-24"
+        },
+        {
+          "patch": "ambientAnnulus",
+          "signed_outward_kg_s": "5.322240862406399e-58"
+        },
+        {
+          "patch": "externalSides",
+          "signed_outward_kg_s": "1.127159026264558e-90"
+        },
+        {
+          "patch": "farOutlet",
+          "signed_outward_kg_s": "6.055711159200755e-141"
+        },
+        {
+          "patch": "lamellaMaster",
+          "signed_outward_kg_s": "3.810119294731401e-48"
+        },
+        {
+          "patch": "lamellaSlave",
+          "signed_outward_kg_s": "-1.849692890158153e-48"
+        }
+      ],
+      "solver_log": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/candidate-attempt007-solver.log",
+      "solver_log_normal_End": true,
+      "solver_log_sha256": "44c901ef631fc38eaece93f0e538a8875f39ff5358104b2dfcba4bd422febf44",
+      "terminal_deltaT_s": "1.2e-05"
+    },
+    "enabled-omega1": {
+      "final_after_correctRho": {
+        "pass": 16,
+        "time_s": "0.390717595007",
+        "water_cont_L1_nativeV_kg_s": "0.1066449484261004",
+        "water_cont_signed_nativeV_kg_s": "-0.02375403703133536",
+        "water_inventory_kg": "3198.008235075122",
+        "water_signed_boundary_flux_kg_s": "-2.667518834962356e-24"
+      },
+      "initial_old_time_internal_field_identity": {
+        "alpha1": {
+          "current_time_index": 1638,
+          "max_abs_current_minus_old": 0.0,
+          "old_time_index": 1637,
+          "old_time_levels": 1
+        },
+        "comparison_scope": "all internal primitive cells; one global max reduction per field",
+        "rho1": {
+          "current_time_index": 1638,
+          "max_abs_current_minus_old": 0.0,
+          "old_time_index": 1637,
+          "old_time_levels": 1
+        }
+      },
+      "initial_phase_mass": {
+        "definition": "sum(alpha_phase*rho_phase*native_cellV)",
+        "time_s": "0.390705595007",
+        "water_inventory_kg": "3198.008235360192"
+      },
+      "last_postEOS_water_patch_fluxes": [
+        {
+          "patch": "apparatusWall",
+          "signed_outward_kg_s": "-2.667518834962356e-24"
+        },
+        {
+          "patch": "ambientAnnulus",
+          "signed_outward_kg_s": "5.322240862406399e-58"
+        },
+        {
+          "patch": "externalSides",
+          "signed_outward_kg_s": "1.127159026264558e-90"
+        },
+        {
+          "patch": "farOutlet",
+          "signed_outward_kg_s": "6.055711159200755e-141"
+        },
+        {
+          "patch": "lamellaMaster",
+          "signed_outward_kg_s": "3.810119294731401e-48"
+        },
+        {
+          "patch": "lamellaSlave",
+          "signed_outward_kg_s": "-1.849692890158153e-48"
+        }
+      ],
+      "solver_log": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/enabled-omega1-attempt007-solver.log",
+      "solver_log_normal_End": true,
+      "solver_log_sha256": "f5897675e3965cbbeacdfa5c00a2a0f03af67014ab40ffabc7da3c7d6fd79340",
+      "terminal_deltaT_s": "1.2e-05"
+    }
+  },
+  "qualification": "The captured initial phase mass is a direct logged Mold candidate. The solver source order and zero old/current internal differences show it is the same alpha1/rho1 state consumed by the first Euler ddt. This adds a derived-source-order cross-check; it is not a separately logged Mold integral or cellwise independent proof.",
+  "run_provenance": {
+    "candidate_source_tree_declared_manifest_sha256": "76d66232bd3548edaffcd95325255b7193b00f20e5eba14125624cfed1ae1591",
+    "candidate_source_tree_sha256": "6954ff4e4a615388035f57b32973fdc7dbbd05373eec5f1acf190328486b879c",
+    "compiled_binary_sha256_by_arm": {
+      "baseline": "df444d86f1d50d5d4591a28cbe78df7280692a39f3eed4261e051ba0aa0c2a83",
+      "candidate": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+      "enabled-omega1": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6"
+    },
+    "docker_id": "7a44649fa48fbd841907e074508e6d900f683ea0a77b5733317c516834c7fa64",
+    "finished_at": "2026-10-27T03:17:44.985961929Z",
+    "mesh_preparation_provenance": {
+      "final_canonical_mesh_cells": 299214,
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/meshPreparationProvenance.json",
+      "sha256": "f89703fc9449e5fc6b2618e251f3cb6a68ec5ff8135cb86b0cf8af0b399c0e4b"
+    },
+    "source_files": {
+      "compressibleInterFoam.C": {
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/build/source/v8-restart-cold/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+        "sha256": "cdd4a3006fea6177fa18794971e1124bce434dcf9b52eed97d2fe69c8ab466c0"
+      },
+      "i4fDefectAudit.H": {
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/build/source/v8-restart-cold/applications/solvers/multiphase/compressibleInterFoam/i4fDefectAudit.H",
+        "sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85"
+      },
+      "pEqn.H": {
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/build/source/v8-restart-cold/applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+        "sha256": "17b60c5296f71455d213e0440e174672803e8c1371cfea787e50a6aef97c6fe2"
+      }
+    },
+    "started_at": "2026-10-27T03:17:04.995605984Z"
+  },
+  "schema": "i4f-water-Mold-source-order-addendum/v1",
+  "source_order": {
+    "configured_function_objects": {
+      "coded_object": "finalStepCheckpoint tests time and requests writeAndEnd; it contains no alpha/rho assignment",
+      "files": [
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/controlDict",
+          "sha256": "664e31c0ee1bab6ba832e53a25f5bd4e2cc37220898914bee9fbda1c6d0a2acb",
+          "types": [
+            "controlDict include declarations"
+          ]
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/twoTankLedgerObjects",
+          "sha256": "3ec5552659315e9a585199a93454991a0e2f4a3913bf8f293c7443f953240daf",
+          "types": [
+            "volFieldValue",
+            "surfaceFieldValue"
+          ]
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/fourMouthObserverObjects",
+          "sha256": "c088f2fceca799aca871e7e764b81075225ee32f5413111dfae7b26e73a184f8",
+          "types": [
+            "surfaceFieldValue"
+          ]
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/valveBandFluxObjects",
+          "sha256": "0d72254156c48b420d1430616af267a5788d74f0736720bd47aa21d63f60b17d",
+          "types": [
+            "surfaceFieldValue"
+          ]
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/i4fNumericalHealthObjects",
+          "sha256": "de7c86913896337d41e53743cd77c6a55c90fa4c44f8b354049d1afbbbc18386",
+          "types": [
+            "fieldMinMax",
+            "probes",
+            "surfaceFieldValue"
+          ]
+        },
+        {
+          "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/system/finalStepCheckpoint",
+          "sha256": "92b967045a8fa693bfef82e9f716f6bc647835babfb5800aca79725b57afc9b2",
+          "types": [
+            "coded: checks time threshold and calls Time::writeAndEnd()"
+          ]
+        }
+      ],
+      "output_order_evidence": "solver log shows the first function-object write records after the physical PIMPLE loop; terminal checkpoint request is near normal End",
+      "read_only_diagnostics": "volFieldValue, surfaceFieldValue, fieldMinMax, and probes only read the solver fields and log/sample/write diagnostic output",
+      "start_execute_hook": "The main loop calls runTime.run() between the initial mass record and time increment; the configured start/execute hooks can run there. The frozen function-object dictionaries contain no internal alpha1 or rho1 mutation."
+    },
+    "initial_mass_log": {
+      "definition": "sum(alpha1[cell]*rho1[cell]*mesh.V()[cell]) followed by MPI sum reduction",
+      "lines": "155-170",
+      "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/build/source/v8-restart-cold/applications/solvers/multiphase/compressibleInterFoam/compressibleInterFoam.C",
+      "source_sha256": "cdd4a3006fea6177fa18794971e1124bce434dcf9b52eed97d2fe69c8ab466c0"
+    },
+    "no_equation_between_initial_mass_and_first_old_time_check": {
+      "alpha_equation_first_occurs": "main lines 295-296",
+      "first_explicit_runTime_write": "main line 541, after the pressure-velocity loop and diagnostics",
+      "increment_and_old_time_preallocation": "main lines 236-273",
+      "old_time_comparison": "main lines 191-217 and 247-271; calls oldTime() twice, then max-reduces internal primitive current-old difference",
+      "source_sha256": "cdd4a3006fea6177fa18794971e1124bce434dcf9b52eed97d2fe69c8ab466c0",
+      "time_controls_and_courant": "main lines 172-177, 221-236"
+    }
+  },
+  "summation_error_bound": {
+    "bound_on_deltaM_from_two_mass_sums_kg": "2.124791045791235759844118594E-7",
+    "bound_on_deltaM_over_dt_kg_s": "0.01770659204826029799870098828",
+    "bound_quality": "Very conservative and much wider than the observed difference; compatibility with floating accumulation is supported, but it does not prove exact conservation or a cellwise identity. Printed aggregate precision and unlogged per-face absolute boundary flux are additional limits.",
+    "conservative_operation_count": 299224,
+    "continuity_signed_sum_bound_from_logged_L1_kg_s": "3.542802501245340847474541388E-12",
+    "gamma_n": "3.322053743314738696291048446E-11",
+    "machine_epsilon": "2.220446049250313E-16",
+    "mesh_cells": 299214,
+    "method": "Standard gamma_n bound for a worst-case sequential double-precision sum over all cells plus a 10-rank reduction path; apply to the two positive mass sums using sum(abs(terms))=mass.",
+    "mpi_ranks": 10,
+    "observed_rate_difference_inside_mass_sum_bound": true,
+    "scalar_storage_bits": 64,
+    "unit_roundoff": "1.1102230246251565E-16"
+  },
+  "supplements_without_overwriting": "results/runs/i4f-water-global-balance-audit-20261027T0325Z/analysis/physical-step-water-balance-qualification.json"
+}

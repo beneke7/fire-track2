@@ -1,5 +1,18 @@
 # I4F discharge: published results, 25–27 October 2026
 
+**27 October next step:** the [paired damping maps](alpha-flux-relaxation/README.md)
+confirm a sign-alternating pressure mode and suppress it with joint half-weight
+water-fraction/flux updates. The [computed figure](alpha-flux-relaxation/paired-map-convergence.png)
+also shows that water continuity does not thereby converge. Source reconstruction
+was verified for all 73 declared diagnostic files. The [physical-time implementation](physical-alpha-flux-relaxation/README.md)
+has a 71-file verified source reconstruction, a one-step original/default-off/
+enabled-weight-one parity check, and an enabled half-weight branch smoke.
+The eight-outer physical pilot stopped near .518 s after renewed large
+pressure corrections and an intermediate pressure-floor contact. The sixteen-outer
+and reduced-timestep follow-up remain in progress; no complete credible discharge
+or conservation acceptance is claimed. See live status for
+actual process identities and results.
+
 **27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
 isolates a sufficient feedback path at one fixed state: pressure updates settle
 below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it

@@ -2441,6 +2441,42 @@
       "retained_canonical_file_count": 48,
       "source_type": "exact_duplicate_static_polyMesh",
       "status": "duplicate_paths_removed_canonical_retained"
+    },
+    {
+      "deduplication_path": "results/archives/manifests/i4f-polymesh-dedup-followup-20261027T0300Z/restore-manifest.json",
+      "deduplication_sha256": "2bf86764a20cd48d0e5462aa3be6819320fd37b1f448c58ba488b4c99391f936",
+      "file_count": 206,
+      "logical_bytes_released": 177763822,
+      "allocated_bytes_released": 178233344,
+      "operation_summary": "results/archives/manifests/i4f-polymesh-dedup-followup-20261027T0300Z/operation-summary.json",
+      "operation_summary_sha256": "fbe03a5da0dd6182bdfdf1bd32385598156b625ae17055ecf45fd470476d4bce",
+      "restore_helper": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore_polymesh.py",
+      "restore_helper_sha256": "ed35b22c71d88bab18eea622cf77b96664e8c8451fb8dcee34358bdc9fe65ff1",
+      "scope": "Exact duplicate static meshes only; canonical copies retained; all-record tmpfs restoration and overwrite refusal tested."
+    },
+    {
+      "deduplication_path": "results/archives/manifests/i4f-polymesh-dedup-followup-group2b-20261027T0310Z/restore-manifest.json",
+      "deduplication_sha256": "441ffd1539b09e928b96104f7d6f2e644da010dddc77b7f477bc3a6730484420",
+      "file_count": 754,
+      "logical_bytes_released": 3212798724,
+      "allocated_bytes_released": 3214483456,
+      "operation_summary": "results/archives/manifests/i4f-polymesh-dedup-followup-20261027T0300Z/operation-summary.json",
+      "operation_summary_sha256": "fbe03a5da0dd6182bdfdf1bd32385598156b625ae17055ecf45fd470476d4bce",
+      "restore_helper": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore_polymesh.py",
+      "restore_helper_sha256": "ed35b22c71d88bab18eea622cf77b96664e8c8451fb8dcee34358bdc9fe65ff1",
+      "scope": "Exact duplicate static meshes only; canonical copies retained; all-record tmpfs restoration and overwrite refusal tested."
+    },
+    {
+      "deduplication_path": "results/archives/manifests/i4f-polymesh-dedup-followup-group3-20261027T0315Z/restore-manifest.json",
+      "deduplication_sha256": "f31275e966912333b7de86ed58ab86211f0d916c1638cba554e0a8b5ec0d184a",
+      "file_count": 48,
+      "logical_bytes_released": 723165255,
+      "allocated_bytes_released": 723283968,
+      "operation_summary": "results/archives/manifests/i4f-polymesh-dedup-followup-20261027T0300Z/operation-summary.json",
+      "operation_summary_sha256": "fbe03a5da0dd6182bdfdf1bd32385598156b625ae17055ecf45fd470476d4bce",
+      "restore_helper": "results/archives/manifests/i4f-polymesh-dedup-20261027T2330Z/restore_polymesh.py",
+      "restore_helper_sha256": "ed35b22c71d88bab18eea622cf77b96664e8c8451fb8dcee34358bdc9fe65ff1",
+      "scope": "Exact duplicate static meshes only; canonical copies retained; all-record tmpfs restoration and overwrite refusal tested."
     }
   ],
   "log_compressions": [
@@ -2504,6 +2540,16 @@
       "payload_root": "results/runs/i4f-recent-closed-log-recovery-20261027T021433Z",
       "restore_command": "python3 results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/restore_archived_logs.py --manifest results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/recovery-manifest.json --repo-root <repo-root> --source-path <source-path> [--destination-root <new-or-empty-tree>]",
       "scope": "Closed internal CFD text logs; full decompressed hashes/sizes verified before unlink. Logical reduction differs from filesystem free-space change; concurrent writes also occurred."
+    },
+    {
+      "manifest_path": "results/archives/manifests/i4f-closed-log-recovery-20261027T022839Z/recovery-manifest.json",
+      "manifest_sha256": "3fddf6cc807ee28dde7bb5f4efe1708181f8a171c1e6b87c8fbacc157e90b5fa",
+      "source_file_count": 108,
+      "source_logical_bytes": 1053480849,
+      "archive_bytes": 71770329,
+      "payload_root": "results/runs/i4f-closed-log-recovery-20261027T022839Z",
+      "restore_helper": "results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/restore_archived_logs.py",
+      "scope": "Second immutable closed-log batch. All compressed/decompressed hashes were verified; native fields and unique meshes retained."
     }
   ],
   "field_compressions": [

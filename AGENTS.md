@@ -195,6 +195,11 @@ separate review memos unless a hard decision needs one.
 - Run `make doctor` before assigning compute. Detect CPU affinity/cgroup limits,
   current free RAM, GPU memory and disk; do not assume the workstation or a
   remote cluster is available from the plan's hardware description.
+- Current bounded internal-apparatus jobs use a 16 GiB free-disk stop reserve
+  plus their declared incremental output/temporary allowance at admission.
+  This replaces the earlier agent-selected 20 GiB reserve for new jobs only;
+  preserve historical guards/records, continue lossless recovery, and account
+  for concurrent writers. Do not change physical tolerances to gain headroom.
 - Use `scripts/run_local.py` for local jobs. Allocate a **shared total** CPU
   budget across workers, processes and MPI ranks; keep BLAS/OpenMP threads at
   one inside process-parallel sweeps. Avoid nested oversubscription.

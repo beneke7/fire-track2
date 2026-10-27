@@ -1,0 +1,353 @@
+{
+  "arms": {
+    "all_three_arms_have_identical_final_phase_state_metrics": true,
+    "container_name": "i4f-physical-alpha-flux-relax-disabled-identity-attempt007-20261027t0429z",
+    "cpu_equivalents": 8.0,
+    "docker_id": "7a44649fa48fbd841907e074508e6d900f683ea0a77b5733317c516834c7fa64",
+    "exit_code": 0,
+    "finished_at": "2026-10-27T03:17:44.985961929Z",
+    "identity_pass": true,
+    "mpi_ranks_per_arm": 10,
+    "output_archive_scope": "the 15 native fields plus uniform/time only",
+    "output_fields_byte_identical": true,
+    "per_arm": {
+      "baseline": {
+        "after_correctRho_passes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "before_correctRho_passes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "final_after_correctRho": {
+          "continuity_definition": "ddt(alpha*rho)+div(alphaPhi*rhoFace)",
+          "pass": 16,
+          "phase_density_definition": "EOS_rho1_and_rho2_after_correctRho",
+          "phase_flux_definition": "alphaPhi1_and_alphaPhi2",
+          "time_s": 0.390717595007,
+          "water_cont_L1_nativeV_kg_s": 0.1066449484261004,
+          "water_cont_max_kg_m3_s": 138.6138142160289,
+          "water_cont_signed_nativeV_kg_s": -0.02375403703133536,
+          "water_inventory_kg": 3198.008235075122,
+          "water_signed_boundary_flux_kg_s": -2.667518834962356e-24
+        },
+        "old_time_initial_water_fields": {
+          "alpha1": {
+            "max_abs_current_minus_old": 0.0,
+            "old_time_index": 1637,
+            "old_time_levels": 1,
+            "time_index": 1638
+          },
+          "rho1": {
+            "max_abs_current_minus_old": 0.0,
+            "old_time_index": 1637,
+            "old_time_levels": 1,
+            "time_index": 1638
+          }
+        },
+        "one_step_end_marker": false,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/baseline-attempt007-solver.log",
+        "phase_state_row_count": 32,
+        "physical_times_s": [
+          0.390717595007
+        ],
+        "sha256": "c153fc833276f443f5db0da821fad659747e1c90ae1870d671f9709d64f5b0ec",
+        "unique_stages": [
+          "after_correctRho",
+          "before_correctRho"
+        ]
+      },
+      "candidate": {
+        "after_correctRho_passes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "before_correctRho_passes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "final_after_correctRho": {
+          "continuity_definition": "ddt(alpha*rho)+div(alphaPhi*rhoFace)",
+          "pass": 16,
+          "phase_density_definition": "EOS_rho1_and_rho2_after_correctRho",
+          "phase_flux_definition": "alphaPhi1_and_alphaPhi2",
+          "time_s": 0.390717595007,
+          "water_cont_L1_nativeV_kg_s": 0.1066449484261004,
+          "water_cont_max_kg_m3_s": 138.6138142160289,
+          "water_cont_signed_nativeV_kg_s": -0.02375403703133536,
+          "water_inventory_kg": 3198.008235075122,
+          "water_signed_boundary_flux_kg_s": -2.667518834962356e-24
+        },
+        "old_time_initial_water_fields": {
+          "alpha1": {
+            "max_abs_current_minus_old": 0.0,
+            "old_time_index": 1637,
+            "old_time_levels": 1,
+            "time_index": 1638
+          },
+          "rho1": {
+            "max_abs_current_minus_old": 0.0,
+            "old_time_index": 1637,
+            "old_time_levels": 1,
+            "time_index": 1638
+          }
+        },
+        "one_step_end_marker": false,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/candidate-attempt007-solver.log",
+        "phase_state_row_count": 32,
+        "physical_times_s": [
+          0.390717595007
+        ],
+        "sha256": "44c901ef631fc38eaece93f0e538a8875f39ff5358104b2dfcba4bd422febf44",
+        "unique_stages": [
+          "after_correctRho",
+          "before_correctRho"
+        ]
+      },
+      "enabled-omega1": {
+        "after_correctRho_passes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "before_correctRho_passes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "final_after_correctRho": {
+          "continuity_definition": "ddt(alpha*rho)+div(alphaPhi*rhoFace)",
+          "pass": 16,
+          "phase_density_definition": "EOS_rho1_and_rho2_after_correctRho",
+          "phase_flux_definition": "alphaPhi1_and_alphaPhi2",
+          "time_s": 0.390717595007,
+          "water_cont_L1_nativeV_kg_s": 0.1066449484261004,
+          "water_cont_max_kg_m3_s": 138.6138142160289,
+          "water_cont_signed_nativeV_kg_s": -0.02375403703133536,
+          "water_inventory_kg": 3198.008235075122,
+          "water_signed_boundary_flux_kg_s": -2.667518834962356e-24
+        },
+        "old_time_initial_water_fields": {
+          "alpha1": {
+            "max_abs_current_minus_old": 0.0,
+            "old_time_index": 1637,
+            "old_time_levels": 1,
+            "time_index": 1638
+          },
+          "rho1": {
+            "max_abs_current_minus_old": 0.0,
+            "old_time_index": 1637,
+            "old_time_levels": 1,
+            "time_index": 1638
+          }
+        },
+        "one_step_end_marker": false,
+        "path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/logs/enabled-omega1-attempt007-solver.log",
+        "phase_state_row_count": 32,
+        "physical_times_s": [
+          0.390717595007
+        ],
+        "sha256": "f5897675e3965cbbeacdfa5c00a2a0f03af67014ab40ffabc7da3c7d6fd79340",
+        "unique_stages": [
+          "after_correctRho",
+          "before_correctRho"
+        ]
+      }
+    },
+    "started_at": "2026-10-27T03:17:04.995605984Z"
+  },
+  "conservation_definition": {
+    "boundary_flux_sign": "positive outward; the observer skips coupled processor patches and sums external boundary face fluxes",
+    "continuity_operator": "ddt(alpha1,rho1) + div(alphaPhi1 * interpolate(rho1))",
+    "equation": "R_water_signed_nativeV = (Mnew - Mold)/dt + Fout",
+    "no_phase_source_terms": true,
+    "signed_integral": "sum(continuity[cell] * cellVolume), kg/s"
+  },
+  "git_head_at_analysis": "ec16f8f5e7e4c5403f824b6d4e4e7a8fae161120",
+  "log_search": {
+    "old_inventory_or_Mold_value_present": false,
+    "phase_mass_rows_per_arm": {
+      "baseline": 32,
+      "candidate": 32,
+      "enabled-omega1": 32
+    },
+    "same_physical_time_rows_per_arm": {
+      "baseline": [
+        0.390717595007
+      ],
+      "candidate": [
+        0.390717595007
+      ],
+      "enabled-omega1": [
+        0.390717595007
+      ]
+    },
+    "scope_note": "Each arm logs before_correctRho and after_correctRho for passes 1\u201316 at the same output time. These are 32 diagnostics from one physical timestep, not 16 timesteps."
+  },
+  "observed_utc": "2026-10-27T03:29:05.395673+00:00",
+  "physical_step": {
+    "PIMPLE_pass_count": 16,
+    "deltaT_s": 1.2e-05,
+    "end_time_s": 0.39071759500735115,
+    "nAlphaSubCycles": 1,
+    "native_input_field_names": [
+      "T",
+      "T.air",
+      "T.water",
+      "U",
+      "alpha.water",
+      "alphaPhi0.water",
+      "alphat",
+      "dgdt",
+      "k",
+      "nut",
+      "omega",
+      "p",
+      "p_rgh",
+      "phi",
+      "rho"
+    ],
+    "native_input_time_folder": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/baseline/case/processors10/0.390705595007",
+    "observed_unique_phase_state_time_s": [
+      0.390717595007
+    ],
+    "separate_phase_density_file_names": [],
+    "separate_phase_density_file_present": false,
+    "start_time_s": 0.390705595007
+  },
+  "provenance": {
+    "binary_sha256_by_arm": {
+      "baseline": "df444d86f1d50d5d4591a28cbe78df7280692a39f3eed4261e051ba0aa0c2a83",
+      "candidate": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6",
+      "enabled-omega1": "4d1b5b47ca92e20092e3377afa2b89191472c865ccf9c99825fc52f4bdaa09b6"
+    },
+    "candidate_source_tree_base_manifest_sha256": "76d66232bd3548edaffcd95325255b7193b00f20e5eba14125624cfed1ae1591",
+    "candidate_source_tree_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/provenance/candidate-source-tree.json",
+    "candidate_source_tree_sha256": "6954ff4e4a615388035f57b32973fdc7dbbd05373eec5f1acf190328486b879c",
+    "case_input_manifest_file_sha256": "100211048b67e3a76b266fbf6a4811f6c17c4758ccd06519edce7400fb157dd1",
+    "case_input_manifest_logical_sha256": "fac0953ac87a8744e8dbd5a99fba4a64eceb14819420f209a6a30344ebf82f0a",
+    "case_input_manifest_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/case-inputs.json",
+    "case_input_rows": 522,
+    "compiled_binary_claim_scope": "The per-arm executable hashes and frozen source-tree manifest are the run provenance; current workspace source hashes are recorded only as analysis-time references.",
+    "compiled_candidate_i4fDefectAudit_entry": {
+      "bytes": 6423,
+      "kind": "file",
+      "mode": "0o664",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/i4fDefectAudit.H",
+      "sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85"
+    },
+    "compiled_candidate_pEqn_entry": {
+      "bytes": 43213,
+      "kind": "file",
+      "mode": "0o644",
+      "path": "applications/solvers/multiphase/compressibleInterFoam/pEqn.H",
+      "sha256": "17b60c5296f71455d213e0440e174672803e8c1371cfea787e50a6aef97c6fe2"
+    },
+    "current_workspace_reference_sources": {
+      "base_pEqn_H_sha256": "63e340d710120a61b74c98c8b41731feecc6fe641f4d3f17363c040d07c63d2f",
+      "i4fDefectAudit_H_sha256": "38996a8e95212623d541148a9181b91c25081e8f15f664f9f353bc56bd9d5e85",
+      "variant_pEqn_H_sha256": "49662f9f9033a4b87fca41a11e1ffcc9f06a0b355a0462d01bc45bf6d19af6b6"
+    },
+    "guardian_status_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/guardian-status-attempt007.json",
+    "guardian_status_sha256": "14d4d2002135bb9de5ac22f207d48f91b62830771f2bd4d3643dd4519ab9a17e",
+    "output_capture_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/arms/weight1-disabled-identity/output-capture-attempt007.json",
+    "output_capture_sha256": "f6f3802b5f379b9700d44b12fc0a43b68ffc58f602bd9a405b615da50d402b73",
+    "solver_image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "source_lineage_path": "results/runs/i4f-physical-alpha-flux-relax-candidate-20261027T024711Z/provenance/source-lineage.json",
+    "source_lineage_sha256": "82096babf77dc6cbe79939063d35218035864e6909411f36c5df93ec24a1e621",
+    "source_patch_sha256": "494872e98a9c77bed57d0a6f79e6146d040175df43cb176bb9b72b3841d60dad"
+  },
+  "result": {
+    "available_old_time_evidence": "The restart logger reports one old-time level and zero max current-minus-old for alpha1 and rho1 at step initialization in all arms; it does not report the integrated old-time phase mass.",
+    "check_status": "not_evaluable_missing_direct_old_time_phase_mass",
+    "global_water_balance_verified": null,
+    "not_a_physical_conservation_failure_claim": true,
+    "reason": "The logs contain the post-EOS mass, signed boundary flux, and signed integrated continuity residual, but no direct global Mold = sum(alpha1.oldTime*rho1.oldTime*V) measurement. Mold is intentionally not back-solved from the residual.",
+    "required_additional_observer": "At the naturally used final-step old-time state, reduce and log sum(alpha1.oldTime()*rho1.oldTime()*mesh.V()) on all ranks, alongside dt, Mnew, and signed external-boundary flux."
+  },
+  "schema": "i4f-one-step-water-global-balance-qualification/v1",
+  "scope": "Read-only qualification of one completed physical timestep from three terminal identity arms; repeated PIMPLE rows are same-step diagnostics."
+}

@@ -1,0 +1,71 @@
+{
+  "arms": [
+    {
+      "arm": "omega-100",
+      "binary_sha256": "2128a3b8e000271d20bb754a2c6a112e8aafcc724eddc0009444200ba74c3de0",
+      "container_id": "907448d75a13757f3d6a63ddc1c2d275deb872a4a62806553e069b5140aff347",
+      "docker_started_at": "2026-10-27T02:24:49.529747021Z",
+      "max_dp_first_Pa": 827.3002793900814,
+      "max_dp_last_Pa": 1063.855592636828,
+      "terminal_marker": {
+        "fields": {
+          "alpha_flux_relaxation_omega": "1",
+          "classification": "diagnostic_complete_no_pressure_floor",
+          "common_T_hash_mismatch_count": "0",
+          "continuation_after_probe": "false",
+          "deltaT_s": "9.514090971421265e-05",
+          "original_physical_checkpoint_written": "false",
+          "phase_T_bound_scaled_epsilon_units": "128",
+          "phase_T_max_scaled_epsilon_units": "0.8733615694749091",
+          "phase_T_numeric_assessments": "34",
+          "pimple_finalIter_held_true": "true",
+          "pressure_correctors_per_sweep": "2",
+          "source_residual_identity_checks": "16",
+          "sweeps": "16",
+          "time_index": "2736",
+          "time_s": "0.4938444922371094"
+        },
+        "kind": "complete",
+        "line": "I4F_ALPHA_FLUX_RELAX_MAP_COMPLETE classification=diagnostic_complete_no_pressure_floor time_s=0.4938444922371094 time_index=2736 deltaT_s=9.514090971421265e-05 sweeps=16 alpha_flux_relaxation_omega=1 source_residual_identity_checks=16 pressure_correctors_per_sweep=2 original_physical_checkpoint_written=false continuation_after_probe=false pimple_finalIter_held_true=true phase_T_numeric_assessments=34 phase_T_max_scaled_epsilon_units=0.8733615694749091 phase_T_bound_scaled_epsilon_units=128 common_T_hash_mismatch_count=0",
+        "observed_utc": "2026-10-27T02:42:23.639068+00:00"
+      }
+    },
+    {
+      "arm": "omega-050",
+      "binary_sha256": "2128a3b8e000271d20bb754a2c6a112e8aafcc724eddc0009444200ba74c3de0",
+      "container_id": "f8ed92f548d5dd13fcd16c76da8e5b40b24fdc9cadbc2d4598d03d61a6b41b12",
+      "docker_started_at": "2026-10-27T02:26:28.429000935Z",
+      "max_dp_first_Pa": 453.0666311227251,
+      "max_dp_last_Pa": 0.5757565401727334,
+      "terminal_marker": {
+        "fields": {
+          "alpha_flux_relaxation_omega": "0.5",
+          "classification": "diagnostic_complete_no_pressure_floor",
+          "common_T_hash_mismatch_count": "0",
+          "continuation_after_probe": "false",
+          "deltaT_s": "9.514090971421265e-05",
+          "original_physical_checkpoint_written": "false",
+          "phase_T_bound_scaled_epsilon_units": "128",
+          "phase_T_max_scaled_epsilon_units": "0.8733773029069615",
+          "phase_T_numeric_assessments": "34",
+          "pimple_finalIter_held_true": "true",
+          "pressure_correctors_per_sweep": "2",
+          "source_residual_identity_checks": "16",
+          "sweeps": "16",
+          "time_index": "2736",
+          "time_s": "0.4938444922371094"
+        },
+        "kind": "complete",
+        "line": "I4F_ALPHA_FLUX_RELAX_MAP_COMPLETE classification=diagnostic_complete_no_pressure_floor time_s=0.4938444922371094 time_index=2736 deltaT_s=9.514090971421265e-05 sweeps=16 alpha_flux_relaxation_omega=0.5 source_residual_identity_checks=16 pressure_correctors_per_sweep=2 original_physical_checkpoint_written=false continuation_after_probe=false pimple_finalIter_held_true=true phase_T_numeric_assessments=34 phase_T_max_scaled_epsilon_units=0.8733773029069615 phase_T_bound_scaled_epsilon_units=128 common_T_hash_mismatch_count=0",
+        "observed_utc": "2026-10-27T02:44:07.306128+00:00"
+      }
+    }
+  ],
+  "created_utc": "2026-10-27T03:43:27.941265+00:00",
+  "direct_patch_sha256": "8d45a8a9325084bbcb357363f8c82028e921642a92f03369c38fc12c9a41e0a5",
+  "metadata_label_caveat": "Historical parent_seed.case_manifest_sha256 labels can refer to each arm frozen input manifest including its controls. Use the original per-file seed verification rather than treating that label as a separate canonical-parent manifest.",
+  "schema": "i4f-alpha-flux-map-public-source-reconstruction/v1",
+  "scope": "Fixed-time diagnostic solver source and scalar data; not the separately prepared physical-time implementation. All declared source files reconstructed; no fresh binary rebuild or full physical-trajectory identity claimed. Full native seeds/mesh/raw logs remain separate local inputs.",
+  "source_base": "results/summaries/i4f_20261025/immediate-parent-source/build/source/v8-restart-cold",
+  "target_source_files_verified": 73
+}
