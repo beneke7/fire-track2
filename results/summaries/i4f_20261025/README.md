@@ -36,6 +36,12 @@ is a negative result: both convection schemes diverged near the truncated
 outlet. This smaller test has no accepted hydraulic pressure or head loss,
 and has not reproduced the full case's divider-region failure mechanism.
 
+The [extended local branch comparison](local-outlet-mitigation/summary.json)
+remains bounded through 9,000 steady iterations after moving the artificial
+pressure boundary and adding a short numerical duct. It does not meet the
+original SIMPLE convergence criteria; pressure and head loss are unsettled.
+The native-face pressure-profile control still diverges at the original outlet.
+
 **27 October diagnostic update:** the [water/pressure feedback comparison](water-pressure-feedback/README.md)
 isolates a sufficient feedback path at one fixed state: pressure updates settle
 below 0.5 Pa when water transport is held, but grow to about 1,064 Pa when it

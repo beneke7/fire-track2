@@ -612,7 +612,7 @@ def prepare_d_continuation(bundle: Path, end_iteration: int = 9000) -> dict[str,
         raise RuntimeError("D iteration-3000 checkpoint lacks required simpleFoam fields")
 
     case = bundle / "case"
-    for name in ("logs", "analysis", "source", "scripts", "lineage"):
+    for name in ("logs", "analysis", "figures", "source", "scripts", "lineage"):
         (bundle / name).mkdir(parents=True, exist_ok=True)
     shutil.copytree(D_PARENT / "case", case, copy_function=shutil.copy2)
     control = case / "system/controlDict"

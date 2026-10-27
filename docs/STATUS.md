@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 09:27 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 10:21 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,
 or hardware validation exists yet. The objective remains a publishable provisional
@@ -8,34 +8,32 @@ hydraulic calculation with supported engineering conclusions.
 
 ## Running now
 
-Both matched **cold t=0** mesh cases are advancing under their exact guards.
-They use the same executed physical candidate, joint half-weight water/flux
-updates, full predictor source, momentum predictor off, SST, finite-water EOS,
-ideal-gas air, Euler/MULES, sixteen outer iterations and maxDeltaT=125 microseconds.
-Each has ten MPI ranks/nine CPU equivalents and 32 GiB memory allowance.
+Both matched **cold t=0** mesh cases saved normal-End checkpoints without
+raw pressure-floor contacts, clipping or parser/diagnostic errors. They are
+currently stopped; restart infrastructure is being repaired, not a live solver.
 
-| Case | Exact container | Latest independently checked state |
+| Case | Saved physical time | Reason for capture |
 | --- | --- | --- |
-| 299,214-cell baseline | `085ceade2df3e31537459037420080bdcc3f53144e7c7de795ac6d900c29a6be` | Running; t=0.243957 s, 1959 completed steps, last completed-step pressure correction 0.001636 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
-| 323,682-cell corridor mesh | `cb6dc7256e876ede52ee2e78b27b520d160bc359f533efa57038b9c0b6479ef8` | Running; t=0.235832 s, 1894 completed steps, last completed-step pressure correction 0.0015281 Pa; 0 diagnostic and 0 parser errors, 0 raw floor contacts. |
+| 299,214-cell baseline | 0.2598319592322597 s | Coordinated graceful save for storage/restart recovery; water defect +1.229 g, gas defect −0.0214 g. |
+| 323,682-cell corridor mesh | 0.23933195923226194 s | Incremental output allowance reached; normal End. |
 
-Baseline StartedAt 05:56:04 UTC; corridor StartedAt 05:47:27 UTC. Each targets
-.65 physical seconds with six hours to save and another fifteen minutes hard
-limit, anchored separately to its own Docker start. These are targets, not ETA
-promises. At the 07:25 UTC observed throughput, a linear projection gives about
-.38 s after six hours and roughly ten hours to .65 s, before any later slowdown.
-Thus the existing wall budget does not presently cover the intended endpoint;
-continuation/resource planning must account for this. Current early health does
-not predict survival through the failing region.
+Parent run: `results/runs/i4f-cold-mesh-pair-20261027T050932Z/`.
+The physical settings remain joint half-weight water/flux updates, full predictor
+source, momentum predictor off, SST, finite-water EOS, ideal-gas air, Euler/MULES,
+sixteen outer iterations and maxDeltaT=125 microseconds. Neither cold case has
+yet reached the earlier failing .51 s region.
 
-Run root: `results/runs/i4f-cold-mesh-pair-20261027T050932Z/`.
-The bounded PAUSE-aware dispatcher `i4f-coldmesh-pair-dispatcher-r002.service`
-adopts exact running identities and captures native endpoints. It uses allocated
-CPU quotas plus measured unrelated CPU use rather than a misleading MPI-process
-count; admission examples were tested. Both guards and the dispatcher survive
-agent exit. A cold-start deadline-variable scoping bug stopped attempt 001
-before GO; its scripts/hashes and terminal identity are preserved. Cold and warm
-guard startup paths were mock-executed before attempt 002. No physics input changed.
+Continuation target is .70 s, ten MPI ranks/nine CPU equivalents and 32 GiB per
+case, with six-hour save/six-hour-fifteen-minute hard limits per child.
+Launch attempts exposed checkpoint-record, inherited cache and GO-identity
+handshake defects before any continuation solver steps. Failed attempts remain
+preserved. Recovery now reuses independently writable staged inputs only after
+lossless archival and full restoration verification of the zero-step attempt;
+no new field copy is charged unnecessarily. The recovering controller is under
+`results/runs/i4f-coldmesh-continuation-v4-20261027T095800Z/` with its successor
+being prepared. Do not infer running compute from a dispatcher or worker alone.
+The shared incremental output allowance is 2 GiB, retaining the 16 GiB reserve;
+this allowance may require another clean segment before .70 s.
 
 The same 1.0 m geometry is used on both meshes. Corridor adds 24,468 cells
 (+8.1774%), retaining 48 source layers/branch and .15 m2 gross mouth area/outlet.
@@ -129,35 +127,35 @@ divider-region minimum (x=4.22 m); a shared cause is unproven. The extracted
 but 872 concave cells. The audited inlet/outlet signs and hydrostatic law have no gross error; a
 SIMPLE-only control also diverged at the same terminal junction. A later
 native-face-centre correction of about 6 Pa did not prevent the original
-upwind runaway. Both live VOF cases remain unchanged.
+upwind runaway. The two-phase cold-case physical settings remain unchanged.
 
-**Moving the local pressure boundary improves boundedness.** The numerical
-.30 m extension adds 4,608 cells and a flat outlet while preserving the original
-22,918 cell centres and divider faces. This water-only trial completed 3,000
-steady iterations without runaway: max speed 11.784 m/s, relative inlet/outlet
-flux imbalance 2.12e-6. It did not meet the original SIMPLE convergence criteria;
-its 5.91 kPa pressure minimum and 2.088 m head loss remain unsettled diagnostics.
-The pressure minimum is at the full-case divider hot spot, but this does not
-identify the transient two-phase failure mechanism. A declared continuation to
-iteration 9,000 is running on 0.5 CPU with unchanged convergence criteria.
-Evidence: `results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/` and
-`results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/`.
+**Moving the local pressure boundary improves boundedness, not convergence.**
+The numerical .30 m extension adds 4,608 cells and a flat outlet while preserving
+the original 22,918 cell centres and divider faces. The water-only case and its
+continuation reached steady iterations 3,000 and 9,000 without runaway, but
+neither met the original SIMPLE convergence criteria. At 9,000, max speed is
+about 11.78 m/s, relative flux imbalance 1.68e-7, pressure minimum 5.779 kPa
+and apparent head loss 2.082 m. Pressure/head remain unsettled diagnostics.
+The minimum is at the full-case divider hot spot. Moving the boundary also adds
+walls and cells, so boundary distance alone is not isolated. The native-face
+pressure-profile control still diverged at iteration 197.
+[Hash-locked comparison and inspected geometry](../results/summaries/i4f_20261025/local-outlet-mitigation/).
 
-A real near-failure VOF checkpoint has also been cut to the same 22,918-cell
-branch. Thirteen cell fields and 64,716 internal face fluxes match the mapped
-parent exactly; cut boundary conditions are being prepared for one natural-step
-screening against the whole-domain control. No local VOF solver has launched.
-Input: `results/runs/i4f-local-coupled-replay-20261027T085846Z/`.
-
-The bounded continuation service
-`i4f-coldmesh-continuation-20261027t073946z.service` is armed and waiting for
-both exact parents' clean normal-End checkpoint captures. It targets .70 s,
-with new six-hour save/six-hour-fifteen-minute hard limits per child and an
-absolute controller deadline of 23:01:30 UTC. Parent failures or PAUSE hold
-queued stages; this is a restarted continuation with preserved lineage, not
-bitwise trajectory equivalence. Its config and thirteen execution-source files
-were independently hash-checked; no child has launched yet.
-Status: `results/runs/i4f-coldmesh-continuation-20261027T073946Z/analysis/continuation-status.json`.
+**Small two-phase replay now supplies a faster discriminator.** The 22,918-cell
+crop maps thirteen cell fields and 64,716 internal face fluxes exactly from the
+near-failure parent. One natural step reproduces pressure at the critical cell
+within .103 Pa of the full run, although crop-wide pressure differences reach
+1.69 kPa near the cut inlet. Its continuation reached .525061585 s normally,
+with a 17.435 kPa critical-cell probe minimum, no pressure-floor contacts and no
+clipped-water volume. At the full run's .517939363 s terminal time, local probe
+pressure is about 19.981 kPa versus 17.279 kPa in the full saved field.
+This is a conditional crop with a fixed inlet and truncated exterior, and its
+seed already differs after the first step; it does not establish a full-system
+cure. A new crop seeded directly from the full endpoint is being prepared to
+remove that initial-state confound before changing physical/numerical parameters.
+Evidence: `results/runs/i4f-local-coupled-replay-to-0525-20261027T095254Z/attempts/attempt003-fpe-banner-filter/analysis/`.
+The successful retry ran under UID 1000 and a tested fatal parser that exempts
+the benign OpenFOAM trapFpe startup banner; the rejected attempts are retained.
 
 A read-only companion restores the historical native x-plane reader for the
 processor-only baseline: all 53 processor mesh/map files match the retained
@@ -197,8 +195,12 @@ for claims about the built system; provisional numerical work can continue.
 ## Storage and reproducibility
 
 New bounded jobs retain a 16 GiB free-disk reserve plus declared incremental
-output allowance. Lossless closed-log/old-field archives and exact mesh sharing
-preserve recoverable evidence. About 1.115 GiB of separately verified generated
+output allowance. The mounted 4 TB NVMe has only about 19 GB free; a second
+4 TB NVMe and a 12 TB HDD are unmounted and their ownership/use remains
+unconfirmed. They have not been formatted or mounted. The two stopped cold-run
+logs were losslessly compressed with verified roundtrips, recovering about
+1.22 GB without removing restart fields. Lossless closed-log/old-field archives
+and exact mesh sharing preserve recoverable evidence. About 1.115 GiB of separately verified generated
 reconstruction caches was removed after matching retained native processor
 fields; rebuild commands are recorded. Native CFD outputs were not deleted by
 that cache operation. See the [archive index](../results/archives/index.json).

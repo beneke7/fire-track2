@@ -1,0 +1,96 @@
+{
+  "schema": "i4f-local-outlet-mitigation-artifacts/v1",
+  "created_utc": "2026-10-27T10:00:13.085852+00:00",
+  "public_artifacts": [
+    {
+      "path": "summary.json",
+      "bytes": 38719,
+      "sha256": "b1701cfea18abb840c1bf7c83f757484effddd80812fded84b4ea2d0a662cc85"
+    },
+    {
+      "path": "comparison.csv",
+      "bytes": 155034,
+      "sha256": "c20a0261ec85201061fba9e44ca31605bb2a03a17914c5346a62797ccbe0472a"
+    },
+    {
+      "path": "comparison-csv-provenance.json",
+      "bytes": 1716,
+      "sha256": "7883739470bea670ad0b2288bfef9ac5d21592cddac8b60c0a09ea7529f83f86"
+    },
+    {
+      "path": "comparison.png",
+      "bytes": 183560,
+      "sha256": "8032f4564f1b2148d35fa95698d6697a9eb5591db6b28ed28b88876acea8bedd"
+    },
+    {
+      "path": "outlet-extension-native-geometry.png",
+      "bytes": 199180,
+      "sha256": "a849da5e0173c78131927ec8b757e4346b18d02ce1c0ce00c58489d6e5e0ae3c"
+    },
+    {
+      "path": "build_comparison_csv.py",
+      "bytes": 5055,
+      "sha256": "08f071c1e75162f6f7bde6e3426d20dec3ac6bba24aaa7383de030657eb838cf"
+    },
+    {
+      "path": "plot_comparison.py",
+      "bytes": 3890,
+      "sha256": "71e3bbb9aa3f036a6f6adcf89576d08200c2be6d6b67cb8ed458dc093c65b06c"
+    }
+  ],
+  "source_run_evidence": [
+    {
+      "label": "B_original_upwind",
+      "run_id": "i4f-wet-branch-upwind-20261027T080629Z",
+      "bundle": "results/runs/i4f-wet-branch-upwind-20261027T080629Z",
+      "container_id": "417d9a83148dcf7faa10bc7f20d4c8afcf1b9584aff0fae55e932cc420db99f7",
+      "started_at_utc": "2026-10-27T08:07:41.204072637Z",
+      "finished_at_utc": "2026-10-27T08:07:58.632862883Z",
+      "input_freeze_sha256": "95a4fb9c0635032a19826b8469230623c9274ef59c81c38500e227db23379a21",
+      "frozen_file_count": 104,
+      "solver_log_sha256": "092966ad8cf794c06709685d16b005d1841415333b7d7c11404be6593219b7a2",
+      "history_sha256": "908952ac90d7fe5807d163cb2f1133b1481baf87fe3003c9cf128f845f1b73d6",
+      "native_hash_count": 10
+    },
+    {
+      "label": "B_native_Cf_control",
+      "run_id": "i4f-wet-branch-v2512-cf-control-20261027T0917Z",
+      "bundle": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z",
+      "container_id": "652301d9f0ecbabbf7490e17d6f888b2906af9e26ea85e7175f2aba9997ad5c1",
+      "started_at_utc": "2026-10-27T09:18:37.703188193Z",
+      "finished_at_utc": "2026-10-27T09:18:54.035055923Z",
+      "input_freeze_sha256": "fc57502d6a9dc1ef0bde92aad0e4066f94dc5e11e7f1eb52828f55cd16e22c7f",
+      "frozen_file_count": 104,
+      "solver_log_sha256": "7b03f6b4469f2214a318e5f06f15c2e586188e34792795eb43fb1a62d92b4399",
+      "history_sha256": "e41c2f31202e5799621af8f64e1c9f7a00cadf7b63af634342630c1f5e3441d1",
+      "native_hash_count": 10
+    },
+    {
+      "label": "D_outlet_extension",
+      "run_id": "i4f-wet-branch-outlet-extension-20261027T085020Z",
+      "bundle": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z",
+      "container_id": "a0cd0ec25b0566be3024b1920122d8138059875c7a843f012afb592d61ee8322",
+      "started_at_utc": "2026-10-27T09:09:22.189039494Z",
+      "finished_at_utc": "2026-10-27T09:14:04.931542432Z",
+      "input_freeze_sha256": "9fb2608add93219b868cbd667b39e99a624d4e5cefd8bfc49c77fe9bef24dca5",
+      "frozen_file_count": 120,
+      "solver_log_sha256": "d0cebbe3d531657d6e1649635f6bdb4a665033305ecb25982c8e3e1873e5b549",
+      "history_sha256": "ad54d3bca6f5936f071380031d59f5d20c9a5e9b3e9116a357a2ef4240cc2bc9",
+      "native_hash_count": 10
+    },
+    {
+      "label": "E_D_continuation",
+      "run_id": "i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z",
+      "bundle": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z",
+      "container_id": "315138a324aa998bd65ea0aba2dbe07049a4d8014016226584702247f38ec457",
+      "started_at_utc": "2026-10-27T09:20:56.094196719Z",
+      "finished_at_utc": "2026-10-27T09:36:24.434099879Z",
+      "input_freeze_sha256": "7453b4431d5393309f4baa8be37c7dbb72ddbe420461067a521b9b4ff11de45b",
+      "frozen_file_count": 123,
+      "solver_log_sha256": "bd37a2b10ef92ea2be77bbbcc1d0d5f9148eb1579dc7960d3d12258a41be652f",
+      "history_sha256": "dbe46a8875eafb56095ca476f76f37042d1760168d007efe427a57875c904538",
+      "native_hash_count": 10
+    }
+  ],
+  "note": "Source run bundles and raw logs remain in ignored results/runs; the public packet records their paths and checksums without copying large cases."
+}

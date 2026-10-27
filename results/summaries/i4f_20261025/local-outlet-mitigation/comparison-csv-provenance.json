@@ -1,0 +1,36 @@
+{
+  "schema": "i4f-local-outlet-mitigation-csv-build/v1",
+  "time_interpretation": "steady SIMPLE iteration labels, not physical seconds",
+  "pressure_column_qualification": "per-iteration absolute pressure evaluated at the logged min(p) cell; it is not the global minimum absolute pressure",
+  "decimation": "B control retains all source rows (197). D and E retain every tenth iteration, plus first and last rows. Full source histories remain in their ignored run bundles.",
+  "source_histories": {
+    "B_native_Cf_control": {
+      "source_history": "results/runs/i4f-wet-branch-v2512-cf-control-20261027T0917Z/analysis/steady-iteration-history.csv",
+      "source_history_sha256": "e41c2f31202e5799621af8f64e1c9f7a00cadf7b63af634342630c1f5e3441d1",
+      "source_rows": 197,
+      "exported_rows": 197,
+      "iteration_first": 1,
+      "iteration_last": 197,
+      "stride": 1
+    },
+    "D_outlet_extension": {
+      "source_history": "results/runs/i4f-wet-branch-outlet-extension-20261027T085020Z/analysis/steady-iteration-history.csv",
+      "source_history_sha256": "ad54d3bca6f5936f071380031d59f5d20c9a5e9b3e9116a357a2ef4240cc2bc9",
+      "source_rows": 3000,
+      "exported_rows": 301,
+      "iteration_first": 1,
+      "iteration_last": 3000,
+      "stride": 10
+    },
+    "E_D_continuation": {
+      "source_history": "results/runs/i4f-wet-branch-outlet-extension-continue-9000-20261027T0920Z/analysis/steady-iteration-history.csv",
+      "source_history_sha256": "dbe46a8875eafb56095ca476f76f37042d1760168d007efe427a57875c904538",
+      "source_rows": 6000,
+      "exported_rows": 601,
+      "iteration_first": 3001,
+      "iteration_last": 9000,
+      "stride": 10
+    }
+  },
+  "output_rows": 1099
+}
