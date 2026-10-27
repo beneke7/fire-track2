@@ -226,6 +226,10 @@ separate review memos unless a hard decision needs one.
   then regenerate and recheck its unreleased manifests. Repeated preparation
   errors do not require another full copy of unchanged mesh/checkpoint files.
   Released runs remain immutable; preserve their executed inputs and failures.
+  Hardlinks may share genuinely immutable static mesh inputs, but detach all
+  restart fields, `uniform/time`, control files and any runtime-written inputs
+  before GO. Verify independent inodes as well as bytes. Never hardlink writable
+  seed fields to bypass a disk limit; recover storage first.
   In the current v2512 internal solver, the mixture-thermo constructor rewrites
   `T.air` and `T.water` from common `T` after GO. These are derived startup
   outputs, as documented in the corrected finite-water capsule. Verify the
@@ -283,6 +287,12 @@ separate review memos unless a hard decision needs one.
   also authorizes larger exploratory tests when measured memory, disk and
   solver support make them viable; size is not itself a review gate. GPU
   visibility is not proof that a solver supports this problem.
+- Before repeating an expensive replay with a changed diagnostic hook, exercise
+  that hook at an early trigger on the actual apparatus and each relevant
+  control arm. Confirm its runtime assertions, output schema and terminal parser
+  execute; compilation and source inspection alone do not cover a late branch.
+  Use the existing launcher/guard and a short pilot, without another review memo
+  or approval gate. Preserve the pilot separately from the target experiment.
 - Keep full 3D snapshots sparse; routinely save compact flux, impact, ledger,
   and scoring data. Checkpoint expensive jobs; measure CPU/MPI scaling before
   requesting cluster resources. Stop failed or unaffordable runs with evidence.

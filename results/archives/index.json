@@ -2490,6 +2490,20 @@
       "restore_helper": "results/archives/manifests/i4f-closed-log-retention-20261026T2240Z-restore.py",
       "restore_helper_sha256": "9ed92ab427a876a24e1cf6940a625d00c044346b848636e40b3cd870663c1076",
       "restore_policy": "Verify archive and decompressed SHA/size and original ownership/mode/mtime; atomic no-clobber installation beneath an explicit destination root."
+    },
+    {
+      "manifest_path": "results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/recovery-manifest.json",
+      "manifest_sha256": "09d95fea782fda55ee9300311dfdd44eb16803c1b5da25eb05b48d1c6f87c517",
+      "packet_manifest": "results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/packet-manifest.json",
+      "packet_manifest_sha256": "f5357bda426680276b38784e0e528f6ff7bf39136433b2e272da0175235b6566",
+      "restore_helper": "results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/restore_archived_logs.py",
+      "restore_helper_sha256": "e70d6d285fe9dd66d787fa88f9ee8e3f07970e9c0a2240b86d2dc490686516ef",
+      "source_file_count": 10,
+      "source_logical_bytes": 1883575234,
+      "archive_bytes": 124266041,
+      "payload_root": "results/runs/i4f-recent-closed-log-recovery-20261027T021433Z",
+      "restore_command": "python3 results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/restore_archived_logs.py --manifest results/archives/manifests/i4f-recent-closed-log-recovery-20261027T021433Z/recovery-manifest.json --repo-root <repo-root> --source-path <source-path> [--destination-root <new-or-empty-tree>]",
+      "scope": "Closed internal CFD text logs; full decompressed hashes/sizes verified before unlink. Logical reduction differs from filesystem free-space change; concurrent writes also occurred."
     }
   ],
   "field_compressions": [

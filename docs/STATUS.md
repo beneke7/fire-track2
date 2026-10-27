@@ -1,6 +1,6 @@
 # Live project status
 
-Updated: 2026-10-27 01:49 UTC. Workstation priority: **I4F internal tank-to-nozzle discharge**.
+Updated: 2026-10-27 02:30 UTC. Workstation priority: **I4F internal tank-to-nozzle discharge**.
 Aerial/Rouaix/HPC execution belongs to the separate server agent; see
 [HPC_STATUS.md](HPC_STATUS.md). Do not resume historical aerial queues here.
 
@@ -11,33 +11,46 @@ engineering comparison of the 1.0 m and 0.8 m outlet trains.
 
 ## Actual execution
 
-- Luna is running the matched same-time water-fraction/actual-water-flux
-  relaxation diagnostic: weights 1 and .5, ten MPI ranks per arm, same source,
-  mesh and immutable .460047515286 s seed. The physical replay reaches the
-  .493844 s trigger; diagnostic sweeps then hold physical time fixed.
-  Weight 1 Docker `14025bd519fc126d99e321ce514a6b1a09b3f156cc20f07b3792a33c7847be09`
-  started 01:32:43 UTC; its quota was raised 6→10 CPU equivalents after the
-  physical trial finished, with protected input hashes unchanged.
-  Weight .5 Docker `7a8264ea3a636513fe96e231f34eaf1e36c3e5090e8dafe1a297e32e2b6ef022`
-  started 01:46:44 UTC with nine CPU equivalents. Both have independent durable
-  exact-ID guards. The previous sequential dispatcher was stopped before the
-  parallel release, preventing a duplicate launch.
-  Runtime bundle: `results/runs/i4f-alpha-flux-relax-map-20261027T010936Z/`.
-- A third Luna prepares one baseline-geometry interface-corridor mesh sensitivity
-  from the localized front/disturbance. Actual meshing waits until the weight-1
-  container is terminal and capacity is measured again. No third physical CFD
-  calculation is authorized by that assignment; no geometry or thresholds change.
+- Luna is running the full-trigger water-fraction/actual-water-flux relaxation
+  diagnostic: weights 1 and .5, ten MPI ranks and nine CPU equivalents per arm,
+  same source/binary and independent copies of the immutable .460047515286 s
+  seed. Physical replay reaches .493844 s; sixteen diagnostic sweeps then hold
+  physical time fixed. Weight-1 Docker
+  `907448d75a13757f3d6a63ddc1c2d275deb872a4a62806553e069b5140aff347`
+  started 02:24:49 UTC; weight-.5 Docker
+  `f8ed92f548d5dd13fcd16c76da8e5b40b24fdc9cadbc2d4598d03d61a6b41b12`
+  started 02:26:28 UTC. Both exact-ID guards confirm advancing replay with no
+  fatal/floor event at the latest 02:29:52 UTC snapshot (.47328/.46597 s).
+  Bundle: `results/runs/i4f-alpha-flux-relax-map-full-trigger-20261027T0230Z/`.
+- Both early-trigger smoke arms completed sixteen sweeps with this same fixed
+  binary before full replay. Earlier diagnostic attempts failed on an incorrect
+  source-call assertion, an incorrectly scaled roundoff check, and an illegal
+  write through a const-borrowed OpenFOAM tmp alias. These are tooling failures,
+  not completed relaxation measurements. A hardlinked smoke also rewrote the
+  canonical derived phase-temperature files; exact original bytes were restored
+  from detached matching copies. Root independently verified all fifteen seed
+  hashes afterward. All failed inputs/logs remain preserved. Current arm seed
+  fields use independent inodes. No production relaxation remedy is established.
+- A third Luna prepares the baseline-geometry pre-baffle corridor remesh from
+  the recovered original 1.0 m generator and declared local refinement boxes.
+  Post-mesh splitting reduced the local size jump but failed six configured
+  quality checks; that mesh is not used for CFD. Pre-baffle inputs are frozen;
+  meshing waits for measured output space above the 20 GiB floor. No third
+  physical calculation, changed geometry or relaxed quality threshold is involved.
+- A storage Luna recovered ten closed internal raw logs losslessly and published
+  a tested restore-only helper. A separate additional closed-log batch is in
+  progress to provide practical headroom; no native fields or meshes are deleted.
 - The 5 kPa physical sensitivity is **terminal**, saved at .537437801153 s.
   Docker `71d34a2df7df1ade47e18ed17d431464a1b59c27f0364c46fcf5c7715ef4f793`
   ran 01:15:56–01:43:59 UTC, exit 0/normal End after a requested checkpoint,
   not successful completion of its .65 s target. Exact audit:
   `results/runs/i4f-pressure-floor5k-20261027T005941Z/analysis/terminal-capture.json`.
-  The owner is extracting existing 8/16-outer bulk-observable comparisons;
-  there is no automatic repeat of the censored case.
+  The completed matched-prefix comparison has floor/binary confounds and is
+  not a clean isolated iteration study; no automatic repeat is scheduled.
 
 Twenty effective CPUs are shared with unrelated work; inspect actual processes,
 not agent activity, before allocating more. Current work is CPU-only. Disk has
-about 21–22 GiB free; the hard 20 GiB floor remains. Guards, Docker state and
+about 20.2 GiB free at the latest run admission; the hard 20 GiB floor remains. Guards, Docker state and
 native checkpoints are runtime authorities, not stale launcher labels.
 
 ## Findings that determine the next action
@@ -125,9 +138,9 @@ remain linked in the [results index](../results/summaries/i4f_20261025/README.md
   mass-flow/velocity histories. Do not claim outlet uniformity from a scalar
   valve model, or a geometry benefit from preparation/appearance alone.
 
-Completed evidence is pushed through `322387e`; later local changes, if any,
+Completed physical/localization evidence is pushed through `5be7f98`; later local changes, if any,
 remain visible in Git. [Archive index](../results/archives/index.json) records
 reversible mesh deduplication, probe-vector compression and lossless compression
-of 1,100 old aerial intermediate fields. Initial, .5 s restart and 1 s endpoints
+of 1,100 old aerial intermediate fields plus recent closed internal logs. Initial, .5 s restart and 1 s endpoints
 were preserved. Restore helpers and packet hashes were checked; archive payloads
 remain local. Software checks and recovery success are not CFD acceptance.
