@@ -309,6 +309,15 @@ separate review memos unless a hard decision needs one.
   Docker helpers that stream binary archives must use `--log-driver=none`,
   verified before export; the default JSON logger can exhaust disk by recording
   the binary stream. Verify lossless archives before removing their sources.
+- User retention direction (2026-10-27): concluded exploratory trials do not
+  require permanent full 3D histories. Keep inputs/source, compact findings,
+  plots/videos, selected representative evidence and required restart/source
+  states; remove superseded raw histories, redundant output copies and unused
+  intermediate archives with a compact deletion record. Preserve failed-attempt
+  identities and outcomes, rather than every raw field. Protect active jobs and
+  shared input meshes, and mark discarded archive payloads unavailable. Leave
+  unmounted drives alone. This supersedes blanket raw-output retention for
+  concluded trials; lossless archival is not required for obsolete output.
 
 ## Completion and autonomy
 
