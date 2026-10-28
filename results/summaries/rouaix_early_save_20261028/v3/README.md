@@ -9,3 +9,5 @@ Native job 14700599 was submitted held, read back with 3 nodes/120 tasks/40 per 
 The helper implementation separately passed actual owned-step signal probe 14700561 (signal 12 accepted, SIGUSR2 receipt and acknowledgement before `srun` returned). V2 native job 14700456 and audit 14700457 remain preserved as the prior no-ack attempt.
 
 Artifacts: `early-save-source-v3.tar.gz`, `source-capsule-index.json`, `source-sha256sum.txt`, `preflight.json`, held/released Slurm readbacks, and audit manifest/batch script.
+
+The duplicated local unpacked source tree is retained in ignored local preparation storage; the verified 20-file capsule is the published recoverable source. Python bytecode caches are excluded from publication. The active remote source tree is unchanged.
