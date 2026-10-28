@@ -42,6 +42,7 @@ from OCP.BRepMesh import BRepMesh_IncrementalMesh
 from OCP.BRepOffsetAPI import BRepOffsetAPI_MakePipe, BRepOffsetAPI_ThruSections
 from OCP.BRepPrimAPI import BRepPrimAPI_MakeCylinder, BRepPrimAPI_MakePrism
 from OCP.collections import Array1_gp_Pnt, HSequence_TopoDS_Shape
+from OCP.GC import GC_MakeArcOfCircle
 from OCP.Geom import Geom_BezierCurve
 from OCP.gp import gp_Ax2, gp_Circ, gp_Dir, gp_Pln, gp_Pnt, gp_Trsf, gp_Vec
 from OCP.GProp import GProp_GProps
@@ -90,12 +91,16 @@ BRANCHES = (
     {"name": "upper", "port_y_offset_m": 0.370, "pipe_lateral_offset_m": 0.200, "mouth_z_m": 0.900},
 )
 BEND_X_M = (2.600, 3.000, 3.400, 3.800)
+LEGACY_RISE_BEND_RUN_M = BEND_X_M[-1] - BEND_X_M[0]
 
 
 @dataclass(frozen=True)
 class DownstreamStations:
     """Stations after the fixed rise bend, without mutating module globals."""
 
+    rise_bend_start_x_m: float
+    rise_bend_end_x_m: float
+    rise_bend_run_m: float
     transition_inlet_x_m: float
     lamella_start_x_m: float
     transition_intermediate_x_m: float
@@ -184,11 +189,20 @@ def require_fuse(a, b):
     return shape
 
 
-def downstream_stations(post_rise_straight_m: float, transition_and_mouth_length_m: float):
-    """Scale every original downstream station from the fixed bend endpoint."""
+def downstream_stations(
+    post_rise_straight_m: float,
+    transition_and_mouth_length_m: float,
+    rise_bend_run_m: float = LEGACY_RISE_BEND_RUN_M,
+):
+    """Scale downstream stations from the selected rise-bend endpoint."""
     scale = transition_and_mouth_length_m / REFERENCE_TRANSITION_AND_MOUTH_LENGTH_M
-    inlet = BEND_X_M[-1] + post_rise_straight_m
+    rise_start = BEND_X_M[0]
+    rise_end = rise_start + rise_bend_run_m
+    inlet = rise_end + post_rise_straight_m
     return DownstreamStations(
+        rise_bend_start_x_m=rise_start,
+        rise_bend_end_x_m=rise_end,
+        rise_bend_run_m=rise_bend_run_m,
         transition_inlet_x_m=inlet,
         lamella_start_x_m=inlet + LAMELLA_START_OFFSET_M * scale,
         transition_intermediate_x_m=inlet + TRANSITION_XMID_OFFSET_M * scale,
@@ -233,6 +247,7 @@ def branch_pipe(
     pipe_diameter_m: float,
     stations: DownstreamStations,
     pipe_transition_join: str,
+    rise_bend_shape: str = "legacy-bezier",
 ):
     radius = pipe_diameter_m / 2
     y_pipe = y_tank + branch["pipe_lateral_offset_m"]
@@ -244,16 +259,79 @@ def branch_pipe(
     p1 = [0.550, y_tank + port_offset, z_port]
     p2 = [0.800, y_pipe, PIPE_RUN_Z]
     p3 = [1.300, y_pipe, PIPE_RUN_Z]
-    q0, q1, q2, q3 = [
-        [BEND_X_M[0], y_pipe, PIPE_RUN_Z],
-        [BEND_X_M[1], y_pipe, PIPE_RUN_Z],
-        [BEND_X_M[2], y_pipe, z_out],
-        [BEND_X_M[3], y_pipe, z_out],
-    ]
+    q0 = [stations.rise_bend_start_x_m, y_pipe, PIPE_RUN_Z]
+    q3 = [stations.rise_bend_end_x_m, y_pipe, z_out]
     spine = BRepBuilderAPI_MakeWire()
     spine.Add(make_bezier_edge([p0, p1, p2, p3]))
     spine.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(*p3), gp_Pnt(*q0)).Edge())
-    spine.Add(make_bezier_edge([q0, q1, q2, q3]))
+    bend_record = {
+        "shape": rise_bend_shape,
+        "axial_run_m": stations.rise_bend_run_m,
+        "start_xyz_m": q0,
+        "end_xyz_m": q3,
+        "rise_m": z_out - PIPE_RUN_Z,
+    }
+    if rise_bend_shape == "legacy-bezier":
+        if not math.isclose(
+            stations.rise_bend_run_m, LEGACY_RISE_BEND_RUN_M, rel_tol=0, abs_tol=1e-12
+        ):
+            raise ValueError(
+                "legacy-bezier preserves the historical 1.2 m bend; choose circular-s "
+                "for a different run length"
+            )
+        q0, q1, q2, q3 = [
+            [BEND_X_M[0], y_pipe, PIPE_RUN_Z],
+            [BEND_X_M[1], y_pipe, PIPE_RUN_Z],
+            [BEND_X_M[2], y_pipe, z_out],
+            [BEND_X_M[3], y_pipe, z_out],
+        ]
+        spine.Add(make_bezier_edge([q0, q1, q2, q3]))
+    elif rise_bend_shape == "circular-s":
+        rise = z_out - PIPE_RUN_Z
+        run = stations.rise_bend_run_m
+        theta = 2 * math.atan(rise / run)
+        bend_radius = (run**2 + rise**2) / (4 * rise)
+        x_mid = stations.rise_bend_start_x_m + bend_radius * math.sin(theta)
+        z_mid = PIPE_RUN_Z + bend_radius * (1 - math.cos(theta))
+        midpoint = (x_mid, y_pipe, z_mid)
+        # First circular arc turns upward from horizontal; the second turns
+        # back to horizontal. Their shared tangent is continuous at midpoint.
+        arc1_mid_angle = -math.pi / 2 + theta / 2
+        arc1_midpoint = (
+            stations.rise_bend_start_x_m + bend_radius * math.cos(arc1_mid_angle),
+            y_pipe,
+            PIPE_RUN_Z + bend_radius + bend_radius * math.sin(arc1_mid_angle),
+        )
+        arc2_center_x = x_mid + bend_radius * math.sin(theta)
+        arc2_center_z = z_mid - bend_radius * math.cos(theta)
+        arc2_mid_angle = math.pi / 2 + theta / 2
+        arc2_midpoint = (
+            arc2_center_x + bend_radius * math.cos(arc2_mid_angle),
+            y_pipe,
+            arc2_center_z + bend_radius * math.sin(arc2_mid_angle),
+        )
+        arc1 = GC_MakeArcOfCircle(gp_Pnt(*q0), gp_Pnt(*arc1_midpoint), gp_Pnt(*midpoint))
+        arc2 = GC_MakeArcOfCircle(gp_Pnt(*midpoint), gp_Pnt(*arc2_midpoint), gp_Pnt(*q3))
+        if not arc1.IsDone() or not arc2.IsDone():
+            raise RuntimeError(f"Could not construct circular-S bend for {branch['name']}")
+        edge1 = BRepBuilderAPI_MakeEdge(arc1.Value())
+        edge2 = BRepBuilderAPI_MakeEdge(arc2.Value())
+        if not edge1.IsDone() or not edge2.IsDone():
+            raise RuntimeError(f"Could not make circular-S bend edges for {branch['name']}")
+        spine.Add(edge1.Edge())
+        spine.Add(edge2.Edge())
+        bend_record.update(
+            {
+                "radius_m": bend_radius,
+                "sweep_angle_each_arc_rad": theta,
+                "midpoint_xyz_m": list(midpoint),
+                "minimum_centerline_radius_exceeds_pipe_radius": bend_radius > radius,
+            }
+        )
+        if bend_radius <= radius:
+            raise ValueError("Circular-S rise-bend radius must exceed the pipe radius")
+    else:
+        raise ValueError(f"Unsupported rise-bend shape: {rise_bend_shape}")
     if pipe_transition_join == "legacy-overlap":
         pipe_end_x = stations.pipe_overlap_end_x_m
     elif pipe_transition_join == "flush-at-inlet":
@@ -263,7 +341,7 @@ def branch_pipe(
     if pipe_end_x > q3[0] + 1e-12:
         spine.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(*q3), gp_Pnt(pipe_end_x, y_pipe, z_out)).Edge())
     elif pipe_end_x < q3[0] - 1e-12:
-        raise ValueError("Pipe end must not lie upstream of the fixed rise-bend endpoint")
+        raise ValueError("Pipe end must not lie upstream of the selected rise-bend endpoint")
     if not spine.IsDone():
         raise RuntimeError("Could not form connected branch centerline")
     tangent = np.asarray(p1, dtype=float) - np.asarray(p0, dtype=float)
@@ -272,7 +350,7 @@ def branch_pipe(
     pipe = BRepOffsetAPI_MakePipe(spine.Wire(), profile)
     if not pipe.IsDone() or len(solids(pipe.Shape())) != 1:
         raise RuntimeError("Could not sweep a single connected branch pipe")
-    return pipe.Shape(), y_pipe
+    return pipe.Shape(), y_pipe, bend_record
 
 
 def make_tank(y_tank: float, radius: float, length: float, tank_axis: str):
@@ -762,10 +840,13 @@ def render_branch_join_sections(
     join_mode: str,
     post_rise_straight_m: float,
     transition_and_mouth_length_m: float,
+    rise_bend_run_m: float = LEGACY_RISE_BEND_RUN_M,
 ):
     """Render true STL longitudinal sections through all four pipe/loft joins."""
     mesh = pv.read(str(envelope_stl)).extract_surface().triangulate().clean()
-    stations = downstream_stations(post_rise_straight_m, transition_and_mouth_length_m)
+    stations = downstream_stations(
+        post_rise_straight_m, transition_and_mouth_length_m, rise_bend_run_m
+    )
     pipe_end = (
         stations.pipe_overlap_end_x_m
         if join_mode == "legacy-overlap"
@@ -1082,7 +1163,11 @@ def render_mouth_channel_dimensions(output: Path, thickness: float, divider_coun
 
 
 def generate(args) -> dict:
-    stations = downstream_stations(args.post_rise_straight_m, args.transition_and_mouth_length_m)
+    stations = downstream_stations(
+        args.post_rise_straight_m,
+        args.transition_and_mouth_length_m,
+        args.rise_bend_run_m,
+    )
     output = args.output_dir.resolve()
     rounded_candidate = args.lamella_leading_edge == "rounded"
     step_coordinate_scale = 1000.0 if rounded_candidate else 1.0
@@ -1121,6 +1206,7 @@ def generate(args) -> dict:
     branch_join_records = []
     line_volume_records = []
     connection_records = []
+    branch_bend_records = []
     plate_solids = []
     mid_faces = []
     divider_records = []
@@ -1156,13 +1242,17 @@ def generate(args) -> dict:
                     f"Pipe start is not fully inside own tank: tank{tank_index}/{branch['name']} "
                     f"clearance={start_check['minimum_conservative_full_start_clearance_m']:.9g} m"
                 )
-            branch_shape, y_pipe = branch_pipe(
+            branch_shape, y_pipe, bend_record = branch_pipe(
                 y_tank,
                 branch,
                 args.tank_diameter_m,
                 PIPE_ID_M,
                 stations,
                 args.pipe_transition_join,
+                args.rise_bend_shape,
+            )
+            branch_bend_records.append(
+                {"tank_index": tank_index, "branch": branch["name"], **bend_record}
             )
             y_mouth = y_tank
             transition = aligned_ruled_transition(
@@ -1296,6 +1386,7 @@ def generate(args) -> dict:
                     "inclusion_exclusion_volume_relative_error": joined_volume_relative_error,
                     "inclusion_exclusion_volume_relative_tolerance": BREP_UNION_VOLUME_REL_TOLERANCE,
                     "x_normal_section_samples": section_samples,
+                    "rise_bend": bend_record,
                 }
             )
             train_volume = pipe_volume + transition_volume - overlap_volume
@@ -1478,13 +1569,21 @@ def generate(args) -> dict:
             raise RuntimeError(
                 f"Rounded candidate STEP does not declare millimetres: {step_units_validation}"
             )
-        if abs(step_units_validation["full_assembly_imported_bounds_mm"][1] - 4800.0) > 0.1:
+        expected_mouth_x_mm = stations.mouth_x_m * step_coordinate_scale
+        nose_radius_mm = args.effective_lamella_nose_radius_m * step_coordinate_scale
+        divider_start_x_mm = stations.lamella_start_x_m * step_coordinate_scale
+        single_bounds_mm = step_units_validation["single_outlet_imported_bounds_mm"]
+        if (
+            abs(step_units_validation["full_assembly_imported_bounds_mm"][1] - expected_mouth_x_mm)
+            > 0.1
+        ):
             raise RuntimeError(
                 f"Rounded candidate STEP scale check failed: {step_units_validation}"
             )
         if (
-            abs(step_units_validation["single_outlet_imported_bounds_mm"][1] - 4800.0) > 0.1
-            or step_units_validation["single_outlet_imported_bounds_mm"][0] < 4210.0
+            abs(single_bounds_mm[1] - expected_mouth_x_mm) > 0.1
+            or single_bounds_mm[0] < divider_start_x_mm - 2 * nose_radius_mm
+            or single_bounds_mm[0] > divider_start_x_mm + nose_radius_mm
         ):
             raise RuntimeError(
                 f"Single-outlet STEP scale/start check failed: {step_units_validation}"
@@ -1594,6 +1693,7 @@ def generate(args) -> dict:
         args.pipe_transition_join,
         args.post_rise_straight_m,
         args.transition_and_mouth_length_m,
+        args.rise_bend_run_m,
     )
     render_sections(
         sections_png,
@@ -1680,6 +1780,11 @@ def generate(args) -> dict:
             "pipe_id_basis": "assumed equal to reported valve diameter",
             "mouth_width_m": MOUTH_W_M,
             "mouth_height_m": MOUTH_H_M,
+            "rise_bend_shape": args.rise_bend_shape,
+            "rise_bend_run_m_assumed": stations.rise_bend_run_m,
+            "rise_bend_start_x_m": stations.rise_bend_start_x_m,
+            "rise_bend_end_x_m": stations.rise_bend_end_x_m,
+            "rise_bend_records_by_branch": branch_bend_records,
             "post_rise_straight_m_assumed": args.post_rise_straight_m,
             "transition_and_mouth_length_m_assumed": args.transition_and_mouth_length_m,
             "pipe_transition_join_mode": args.pipe_transition_join,
@@ -1695,7 +1800,7 @@ def generate(args) -> dict:
                 "one valid solid with a circular shared interface."
             ),
             "downstream_stations_x_m": {
-                "rise_bend_end": BEND_X_M[-1],
+                "rise_bend_end": stations.rise_bend_end_x_m,
                 "transition_inlet": stations.transition_inlet_x_m,
                 "divider_start": stations.lamella_start_x_m,
                 "transition_intermediate": stations.transition_intermediate_x_m,
@@ -1704,7 +1809,7 @@ def generate(args) -> dict:
                 "pipe_overlap_end": stations.pipe_overlap_end_x_m,
             },
             "station_mapping": (
-                "Transition inlet = fixed rise-bend end + post-rise straight. All original downstream "
+                "Transition inlet = selected rise-bend end + post-rise straight. All original downstream "
                 "offsets from x=4.0 m scale by transition_and_mouth_length/1.8 m. The legacy overlap "
                 "station at 0.2 m after the inlet scales by the same factor and is used only in "
                 "legacy-overlap mode; flush-at-inlet terminates the pipe at the inlet."
@@ -1896,6 +2001,18 @@ def parse_args():
     )
     parser.add_argument("--intermediate-width-m", type=float, default=0.500)
     parser.add_argument("--lamella-count", type=int, default=4)
+    parser.add_argument(
+        "--rise-bend-shape",
+        choices=("legacy-bezier", "circular-s"),
+        default="legacy-bezier",
+        help="legacy-bezier preserves the historical bend; circular-s uses two tangent circular arcs",
+    )
+    parser.add_argument(
+        "--rise-bend-run-m",
+        type=float,
+        default=LEGACY_RISE_BEND_RUN_M,
+        help="axial run from the fixed bend start x=2.6 m; legacy-bezier requires 1.2 m",
+    )
     parser.add_argument("--lamella-thickness-m", type=float, default=0.004)
     parser.add_argument(
         "--lamella-leading-edge",
@@ -1913,7 +2030,7 @@ def parse_args():
         "--post-rise-straight-m",
         type=float,
         default=POST_RISE_STRAIGHT_DEFAULT_M,
-        help="straight distance after the fixed rise-bend end at x=3.8 m",
+        help="straight distance after the selected rise-bend end",
     )
     parser.add_argument(
         "--transition-and-mouth-length-m",
@@ -1952,6 +2069,7 @@ def validate_inputs(args) -> list[str]:
         ("--headspace-ratio", args.headspace_ratio),
         ("--intermediate-width-m", args.intermediate_width_m),
         ("--lamella-thickness-m", args.lamella_thickness_m),
+        ("--rise-bend-run-m", args.rise_bend_run_m),
         ("--transition-and-mouth-length-m", args.transition_and_mouth_length_m),
     )
     errors = [
@@ -1961,6 +2079,20 @@ def validate_inputs(args) -> list[str]:
     ]
     if args.lamella_count < 1:
         errors.append("--lamella-count must be at least 1")
+    if args.rise_bend_shape == "legacy-bezier" and not math.isclose(
+        args.rise_bend_run_m, LEGACY_RISE_BEND_RUN_M, rel_tol=0, abs_tol=1e-12
+    ):
+        errors.append(
+            "legacy-bezier preserves the historical 1.2 m run; use circular-s for a shorter run"
+        )
+    if args.rise_bend_shape == "circular-s" and math.isfinite(args.rise_bend_run_m):
+        for branch in BRANCHES:
+            rise = branch["mouth_z_m"] - PIPE_RUN_Z
+            radius = (args.rise_bend_run_m**2 + rise**2) / (4 * rise)
+            if radius <= PIPE_ID_M / 2:
+                errors.append(
+                    f"circular-s radius for {branch['name']} branch must exceed pipe radius"
+                )
     if args.lamella_leading_edge == "rounded":
         radius = args.effective_lamella_nose_radius_m
         if not math.isfinite(radius) or radius <= 0:
@@ -1980,7 +2112,9 @@ def validate_inputs(args) -> list[str]:
         and args.transition_and_mouth_length_m > 0
     ):
         stations = downstream_stations(
-            args.post_rise_straight_m, args.transition_and_mouth_length_m
+            args.post_rise_straight_m,
+            args.transition_and_mouth_length_m,
+            args.rise_bend_run_m,
         )
         ordered_x = (
             stations.transition_inlet_x_m,
@@ -1991,8 +2125,8 @@ def validate_inputs(args) -> list[str]:
         )
         if any(right <= left for left, right in zip(ordered_x, ordered_x[1:])):
             errors.append("downstream stations must be finite and strictly increasing")
-        if stations.transition_inlet_x_m < BEND_X_M[-1]:
-            errors.append("transition inlet must not be upstream of the fixed rise-bend end")
+        if stations.transition_inlet_x_m < stations.rise_bend_end_x_m:
+            errors.append("transition inlet must not be upstream of the selected rise-bend end")
         if args.pipe_transition_join == "legacy-overlap" and not (
             stations.transition_inlet_x_m < stations.pipe_overlap_end_x_m < stations.mouth_x_m
         ):

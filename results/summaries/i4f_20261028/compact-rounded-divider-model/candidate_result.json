@@ -1,0 +1,490 @@
+{
+  "status": "completed exploratory compact geometry candidate; no fluid mesh or CFD",
+  "run_id": "i4f-compact-rounded-candidate-20261028T171131Z",
+  "created_utc": "2026-10-28T17:13:43.535046+00:00",
+  "source_sha256": "353879a66a5269f9d8860cbd8a3a8bd26f9c3d3830abab5c7e858f31ce74da1d",
+  "source_snapshot": "results/runs/i4f-compact-rounded-candidate-20261028T171131Z/source/generate.py",
+  "source_snapshot_sha256": "353879a66a5269f9d8860cbd8a3a8bd26f9c3d3830abab5c7e858f31ce74da1d",
+  "comparison_baseline": {
+    "run_id": "i4f-rounded-divider-candidate-20261028T163928Z",
+    "rise_shape": "legacy Bezier",
+    "rise_axial_run_m": 1.2,
+    "rise_start_x_m": 2.6,
+    "rise_end_x_m": 3.8,
+    "transition_mouth_length_m": 1.0,
+    "mouth_x_m": 4.8
+  },
+  "compact_geometry": {
+    "rise_shape": "two opposite tangent circular arcs in X-Z plane",
+    "rise_axial_run_m": 0.75,
+    "rise_start_x_m": 2.6,
+    "rise_end_x_m": 3.35,
+    "transition_inlet_x_m": 3.35,
+    "transition_mouth_length_m": 1.0,
+    "mouth_x_m": 4.35,
+    "post_rise_straight_m": 0.0,
+    "same_circular_pipe_id_m": 0.3,
+    "branch_radii_m": {
+      "lower": 0.975,
+      "upper": 0.4515625
+    },
+    "minimum_radius_exceeds_pipe_radius": true,
+    "rise_bend_record_by_branch": [
+      {
+        "tank_index": 1,
+        "branch": "lower",
+        "shape": "circular-s",
+        "axial_run_m": 0.75,
+        "start_xyz_m": [
+          2.6,
+          -0.75,
+          0.5
+        ],
+        "end_xyz_m": [
+          3.35,
+          -0.75,
+          0.65
+        ],
+        "rise_m": 0.15000000000000002,
+        "radius_m": 0.9749999999999998,
+        "sweep_angle_each_arc_rad": 0.3947911196997616,
+        "midpoint_xyz_m": [
+          2.975,
+          -0.75,
+          0.5750000000000001
+        ],
+        "minimum_centerline_radius_exceeds_pipe_radius": true
+      },
+      {
+        "tank_index": 1,
+        "branch": "upper",
+        "shape": "circular-s",
+        "axial_run_m": 0.75,
+        "start_xyz_m": [
+          2.6,
+          -0.35000000000000003,
+          0.5
+        ],
+        "end_xyz_m": [
+          3.35,
+          -0.35000000000000003,
+          0.9
+        ],
+        "rise_m": 0.4,
+        "radius_m": 0.4515625,
+        "sweep_angle_each_arc_rad": 0.9799146525074566,
+        "midpoint_xyz_m": [
+          2.975,
+          -0.35000000000000003,
+          0.7
+        ],
+        "minimum_centerline_radius_exceeds_pipe_radius": true
+      },
+      {
+        "tank_index": 2,
+        "branch": "lower",
+        "shape": "circular-s",
+        "axial_run_m": 0.75,
+        "start_xyz_m": [
+          2.6,
+          0.35000000000000003,
+          0.5
+        ],
+        "end_xyz_m": [
+          3.35,
+          0.35000000000000003,
+          0.65
+        ],
+        "rise_m": 0.15000000000000002,
+        "radius_m": 0.9749999999999998,
+        "sweep_angle_each_arc_rad": 0.3947911196997616,
+        "midpoint_xyz_m": [
+          2.975,
+          0.35000000000000003,
+          0.5750000000000001
+        ],
+        "minimum_centerline_radius_exceeds_pipe_radius": true
+      },
+      {
+        "tank_index": 2,
+        "branch": "upper",
+        "shape": "circular-s",
+        "axial_run_m": 0.75,
+        "start_xyz_m": [
+          2.6,
+          0.75,
+          0.5
+        ],
+        "end_xyz_m": [
+          3.35,
+          0.75,
+          0.9
+        ],
+        "rise_m": 0.4,
+        "radius_m": 0.4515625,
+        "sweep_angle_each_arc_rad": 0.9799146525074566,
+        "midpoint_xyz_m": [
+          2.975,
+          0.75,
+          0.7
+        ],
+        "minimum_centerline_radius_exceeds_pipe_radius": true
+      }
+    ]
+  },
+  "unchanged_divider_geometry": {
+    "per_outlet_count": 4,
+    "outlets": 4,
+    "thickness_nominal_m": 0.015,
+    "thickness_basis": "user-reported 10\u201320 mm range; nominal is provisional",
+    "rounded_nose_radius_m": 0.0075,
+    "nose_basis": "selected as half nominal gauge; not measured"
+  },
+  "checks": {
+    "full_assembly_step_roundtrip": {
+      "solid_count": 26,
+      "validity": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    },
+    "full_assembly_step_units": {
+      "declared_length_unit": "mm",
+      "coordinate_scale_to_mm": 1000.0,
+      "full_assembly_imported_bounds_mm": [
+        0.0,
+        4350.0000001,
+        -1050.0000001,
+        1050.0000001,
+        349.99999989996695,
+        1700.0
+      ],
+      "single_outlet_imported_bounds_mm": [
+        3765.402741929223,
+        4350.0000001,
+        -919.1193156376876,
+        -237.99999989992395,
+        570.2310736813852,
+        729.7689262394618
+      ]
+    },
+    "joined_pipe_transition_solids": {
+      "solid_count": 4,
+      "validity": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_solids_valid": true
+    },
+    "pipe_transition_interface_first_branch": {
+      "tank_index": 1,
+      "branch": "lower",
+      "join_mode": "flush-at-inlet",
+      "pipe_end_x_m": 3.35,
+      "transition_inlet_x_m": 3.35,
+      "interface_common_volume_m3": 0.0,
+      "interface_common_surface_area_m2": 0.0,
+      "expected_circular_interface_area_m2": 0.07068583470577035,
+      "pipe_interface_plane_section_area_m2": 0.07068583470577038,
+      "transition_interface_plane_section_area_m2": 0.07068583470577036,
+      "joined_brep_valid": true,
+      "joined_brep_solid_count": 1,
+      "joined_volume_m3": 0.340909539755289,
+      "inclusion_exclusion_volume_error_m3": 6.601958868479585e-09,
+      "inclusion_exclusion_volume_relative_error": 1.9365720516998702e-08,
+      "inclusion_exclusion_volume_relative_tolerance": 1e-05,
+      "x_normal_section_samples": [
+        {
+          "x_m": 3.33,
+          "offset_from_transition_inlet_m": -0.02,
+          "area_m2": 0.07119000379931197
+        },
+        {
+          "x_m": 3.3400000000000003,
+          "offset_from_transition_inlet_m": -0.01,
+          "area_m2": 0.07117856411951631
+        },
+        {
+          "x_m": 3.35,
+          "offset_from_transition_inlet_m": 0.0,
+          "area_m2": 0.07068583470577036
+        },
+        {
+          "x_m": 3.36,
+          "offset_from_transition_inlet_m": 0.01,
+          "area_m2": 0.071439872765062
+        },
+        {
+          "x_m": 3.37,
+          "offset_from_transition_inlet_m": 0.02,
+          "area_m2": 0.07216377890708665
+        },
+        {
+          "x_m": 3.38,
+          "offset_from_transition_inlet_m": 0.03,
+          "area_m2": 0.07285743564956307
+        },
+        {
+          "x_m": 3.39,
+          "offset_from_transition_inlet_m": 0.04,
+          "area_m2": 0.07352084299249018
+        },
+        {
+          "x_m": 3.4,
+          "offset_from_transition_inlet_m": 0.05,
+          "area_m2": 0.0741409423251162
+        },
+        {
+          "x_m": 3.41,
+          "offset_from_transition_inlet_m": 0.06,
+          "area_m2": 0.07474379818724133
+        },
+        {
+          "x_m": 3.42,
+          "offset_from_transition_inlet_m": 0.07,
+          "area_m2": 0.07531640695928091
+        },
+        {
+          "x_m": 3.43,
+          "offset_from_transition_inlet_m": 0.08,
+          "area_m2": 0.07585876864123461
+        },
+        {
+          "x_m": 3.44,
+          "offset_from_transition_inlet_m": 0.09,
+          "area_m2": 0.07637088323310343
+        },
+        {
+          "x_m": 3.45,
+          "offset_from_transition_inlet_m": 0.1,
+          "area_m2": 0.07685275073488586
+        },
+        {
+          "x_m": 3.46,
+          "offset_from_transition_inlet_m": 0.11,
+          "area_m2": 0.07730437114658206
+        },
+        {
+          "x_m": 3.47,
+          "offset_from_transition_inlet_m": 0.12,
+          "area_m2": 0.07772574446819427
+        },
+        {
+          "x_m": 3.48,
+          "offset_from_transition_inlet_m": 0.13,
+          "area_m2": 0.07811687069971734
+        },
+        {
+          "x_m": 3.49,
+          "offset_from_transition_inlet_m": 0.14,
+          "area_m2": 0.07847774984115669
+        },
+        {
+          "x_m": 3.5,
+          "offset_from_transition_inlet_m": 0.15,
+          "area_m2": 0.0788083818925103
+        },
+        {
+          "x_m": 3.5100000000000002,
+          "offset_from_transition_inlet_m": 0.16,
+          "area_m2": 0.07910876685377637
+        },
+        {
+          "x_m": 3.52,
+          "offset_from_transition_inlet_m": 0.17,
+          "area_m2": 0.07937890472495843
+        },
+        {
+          "x_m": 3.5300000000000002,
+          "offset_from_transition_inlet_m": 0.18,
+          "area_m2": 0.07961879550605357
+        },
+        {
+          "x_m": 3.54,
+          "offset_from_transition_inlet_m": 0.19,
+          "area_m2": 0.07982843919706259
+        },
+        {
+          "x_m": 3.5500000000000003,
+          "offset_from_transition_inlet_m": 0.2,
+          "area_m2": 0.08000783579798668
+        },
+        {
+          "x_m": 3.56,
+          "offset_from_transition_inlet_m": 0.21,
+          "area_m2": 0.08015698530882427
+        },
+        {
+          "x_m": 3.5700000000000003,
+          "offset_from_transition_inlet_m": 0.22,
+          "area_m2": 0.08033091721270483
+        },
+        {
+          "x_m": 3.58,
+          "offset_from_transition_inlet_m": 0.23,
+          "area_m2": 0.08036708123345436
+        },
+        {
+          "x_m": 3.59,
+          "offset_from_transition_inlet_m": 0.24,
+          "area_m2": 0.08075948786439484
+        },
+        {
+          "x_m": 3.349,
+          "offset_from_transition_inlet_m": -0.001,
+          "area_m2": 0.07117478985213133
+        },
+        {
+          "x_m": 3.351,
+          "offset_from_transition_inlet_m": 0.001,
+          "area_m2": 0.07076249400062264
+        }
+      ],
+      "rise_bend": {
+        "shape": "circular-s",
+        "axial_run_m": 0.75,
+        "start_xyz_m": [
+          2.6,
+          -0.75,
+          0.5
+        ],
+        "end_xyz_m": [
+          3.35,
+          -0.75,
+          0.65
+        ],
+        "rise_m": 0.15000000000000002,
+        "radius_m": 0.9749999999999998,
+        "sweep_angle_each_arc_rad": 0.3947911196997616,
+        "midpoint_xyz_m": [
+          2.975,
+          -0.75,
+          0.5750000000000001
+        ],
+        "minimum_centerline_radius_exceeds_pipe_radius": true
+      }
+    },
+    "divider_stl_closedness": {
+      "path": "rounded_finite_dividers.stl",
+      "triangle_count": 4320,
+      "point_count_after_welding": 2192,
+      "connected_component_count": 16,
+      "expected_component_count": 16,
+      "boundary_edge_count": 0,
+      "nonmanifold_edge_count": 0,
+      "watertight_components": true
+    },
+    "single_outlet_stl_closedness": {
+      "path": "single_outlet_plates.stl",
+      "triangle_count": 1370,
+      "point_count_after_welding": 693,
+      "connected_component_count": 4,
+      "expected_component_count": 4,
+      "boundary_edge_count": 0,
+      "nonmanifold_edge_count": 0,
+      "watertight_components": true
+    },
+    "full_assembly_binary_stl": {
+      "triangle_count": 34096,
+      "bounds_m": [
+        0.0,
+        4.349999904632568,
+        -1.0499999523162842,
+        1.0499999523162842,
+        0.3500041663646698,
+        1.7000000476837158
+      ],
+      "binary_conversion_preserved_triangle_count": true
+    }
+  },
+  "dimensions": {
+    "step_full_bounds_mm": [
+      0.0,
+      4350.0000001,
+      -1050.0000001,
+      1050.0000001,
+      349.99999989996695,
+      1700.0
+    ],
+    "mouth_x_m": 4.35,
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15,
+    "nominal_equal_clear_mouth_gap_m": 0.188,
+    "nominal_exit_area_blockage_fraction": 0.06000000000000005
+  },
+  "limitations": [
+    "0.75 m rise run, circular-S form, and branch radii are a provisional geometry choice, not measured hardware dimensions.",
+    "The upstream feed and tank-to-bend routing remains from the existing provisional geometry; only the final rise bend and transition stationing changed.",
+    "The previous 1.2 m candidate and its 406,173-cell mesh are unchanged and remain tied to the prior geometry; this run produced no CFD mesh or solver result.",
+    "Envelope solids depict the fluid boundary, not a measured physical shell or wall thickness."
+  ],
+  "files": {
+    "all_16_dividers.stl": {
+      "path": "model/all_16_dividers.stl",
+      "bytes": 1364357,
+      "sha256": "d2b548b731eeb961620137b5f7d9875b1e46c433e833841a6c9c8b93579faf3c"
+    },
+    "before_after_full_assembly.png": {
+      "path": "model/before_after_full_assembly.png",
+      "bytes": 553828,
+      "sha256": "dfc60a5167042f14d9fc63d342cf2c630bf685b9b0bbd0a764ea9316c4cbd64d"
+    },
+    "compact_overview.png": {
+      "path": "model/compact_overview.png",
+      "bytes": 437967,
+      "sha256": "6c09a0dad93cdb576b47e9ae1a17fc1e8f294c1b13db523d14387eaaa61b97ca"
+    },
+    "compact_transition_sections.png": {
+      "path": "model/compact_transition_sections.png",
+      "bytes": 76312,
+      "sha256": "78571e4b7e28099e42590adb44a30d0ab732bdea2f73639e4faf66abd0fce77a"
+    },
+    "full_assembly.step": {
+      "path": "model/full_assembly.step",
+      "bytes": 1643625,
+      "sha256": "23380cdb464a1f45c9c42ea633314d7eafa247dfe2e7275fb49124bb34d161d1"
+    },
+    "full_assembly.stl": {
+      "path": "model/full_assembly.stl",
+      "bytes": 1704884,
+      "sha256": "696373d812ac87a9d7985363ab9e5af911352b0affe012c5235b2abfd5484a73"
+    },
+    "one_outlet_four_dividers.stl": {
+      "path": "model/one_outlet_four_dividers.stl",
+      "bytes": 434739,
+      "sha256": "f70a87e4d83e85d96d7f1f0d38ade3c36742dda976af15d6e2975f9e3f8511e7"
+    },
+    "rounded_nose_closeup.png": {
+      "path": "model/rounded_nose_closeup.png",
+      "bytes": 173728,
+      "sha256": "da9abaa8e5b15fb91fb1efd34187504e073e1d82248b0302da823ae3123f5aa2"
+    }
+  }
+}

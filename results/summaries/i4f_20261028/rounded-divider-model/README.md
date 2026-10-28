@@ -1,5 +1,7 @@
 # Rounded divider geometry candidate
 
+For the physically shortened rise candidate, see [the compact assembly](../compact-rounded-divider-model/README.md). This folder preserves the prior 1.20 m rise.
+
 This is a provisional, inspectable CAD candidate for the current two-tank, four-outlet I4F apparatus. It is **not** a CFD result or a validated hardware reconstruction.
 
 ## Model files

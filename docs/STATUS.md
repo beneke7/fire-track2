@@ -1,5 +1,22 @@
 # Live project status
 
+## Compact geometry update — 2026-10-28 17:26 UTC
+
+The user's shortening request applies to the actual round pipe, not a cropped
+view. The [new complete compact CAD candidate](../results/summaries/i4f_20261028/compact-rounded-divider-model/README.md)
+reduces the rise run from 1.20 to a provisional 0.75 m, with a 300 mm bore,
+no added post-rise straight, and the same 1.00 m transition/mouth. Overall
+mouth position moves from x=4.80 to 4.35 m. Four 15 mm nominal rounded dividers
+per outlet are retained. Before/after uses matched camera/axis limits; STEP
+units, connected branches and closed solids were checked. No full CFD case or
+historical mesh is changed by this CAD export.
+
+The cold time-resolution baseline saved at .350951 s with zero pressure-floor
+contacts when its output allowance was reached. A larger-budget clean restart
+is being prepared; a local single-phase hydraulic pilot is also being prepared.
+The prior .519709 s pressure failure remains unresolved. Older workstation
+execution statements below are historical snapshots; HPC work remains separate.
+
 ## Workstation update — 2026-10-28 16:47 UTC
 
 The user confirmed four vertical dividers per outlet and estimated 10–20 mm

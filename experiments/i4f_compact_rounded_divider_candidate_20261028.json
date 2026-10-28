@@ -1,0 +1,146 @@
+{
+  "experiment_id": "i4f-compact-rounded-divider-candidate-20261028",
+  "status": "completed exploratory geometry candidate; valid CAD exports and inspected comparison image; no CFD or fluid mesh",
+  "recorded_utc": "2026-10-28T17:11:31Z",
+  "purpose": "Make a compact whole-apparatus visual candidate that shortens the rise bend itself and joins directly to the same 1.0 m transition/mouth assembly.",
+  "relationship_to_existing_candidate": {
+    "preserved_candidate": "results/runs/i4f-rounded-divider-candidate-20261028T163928Z",
+    "preserved_dimensions": "1.2 m legacy Bezier rise bend + 1.0 m transition/mouth + 0 m added straight; mouth x=4.8 m",
+    "change": "This candidate replaces only the rise-bend centerline with a shorter 0.75 m axial circular-S pair and moves the unchanged 1.0 m transition to start at the bend endpoint. It is a separate geometry branch."
+  },
+  "selected_provisional_geometry": {
+    "rise_bend_shape": "two opposite tangent circular arcs in the X-Z plane; same 0.300 m circular pipe section",
+    "rise_bend_start_x_m": 2.6,
+    "rise_bend_axial_run_m": 0.75,
+    "rise_bend_end_x_m": 3.35,
+    "post_rise_straight_m": 0.0,
+    "transition_and_mouth_length_m": 1.0,
+    "transition_inlet_x_m": 3.35,
+    "mouth_x_m": 4.35,
+    "rise_by_branch_m": {
+      "lower": 0.15,
+      "upper": 0.4
+    },
+    "minimum_centerline_radii_m": {
+      "lower": 0.975,
+      "upper": 0.4515625
+    },
+    "pipe_radius_m": 0.15,
+    "radius_check": "Both circular centerline radii exceed the 0.15 m pipe radius.",
+    "divider_geometry": "Retain four vertical closed rounded dividers per outlet; nominal thickness 0.015 m and semicircle radius 0.0075 m, both provisional. Existing aligned ruled transition and station-relative divider layout are otherwise retained."
+  },
+  "provenance": {
+    "source_path": "scripts/i4f_four_outlet_geometry/generate.py",
+    "source_snapshot": "results/summaries/i4f_20261028/compact-rounded-divider-model/source/generate.py",
+    "source_sha256": "353879a66a5269f9d8860cbd8a3a8bd26f9c3d3830abab5c7e858f31ce74da1d",
+    "source_is_uncommitted_worktree_snapshot": true,
+    "source_review_reference_revision": "723fd40 (published rounded-candidate source baseline; compare this extension against that baseline)",
+    "local_workspace_head_at_preparation": "4e54f09; generator contained uncommitted prior rounded-geometry work and this compact extension; no reset or overwrite performed"
+  },
+  "command": {
+    "program": "scripts/i4f_four_outlet_geometry/.venv/bin/python",
+    "argv": [
+      "scripts/i4f_four_outlet_geometry/generate.py",
+      "--output-dir",
+      "results/runs/i4f-compact-rounded-candidate-20261028T171131Z",
+      "--pipe-transition-join",
+      "flush-at-inlet",
+      "--post-rise-straight-m",
+      "0",
+      "--transition-and-mouth-length-m",
+      "1.0",
+      "--lamella-count",
+      "4",
+      "--lamella-thickness-m",
+      "0.015",
+      "--lamella-leading-edge",
+      "rounded",
+      "--lamella-nose-radius-m",
+      "0.0075",
+      "--rise-bend-shape",
+      "circular-s",
+      "--rise-bend-run-m",
+      "0.75"
+    ]
+  },
+  "acceptance_checks_for_geometry_generation": [
+    "Pipe/transition union connected and valid at the flush circular interface.",
+    "No added straight remains between bend end x=3.35 m and transition inlet.",
+    "Transition inlet x=3.35 m and mouth x=4.35 m; mouth x is 0.45 m earlier than the preserved candidate.",
+    "Four vertical rounded finite-thickness divider solids per outlet remain valid and watertight in STL.",
+    "STEP exports declare millimetres and dynamic bounds match 4350 mm mouth x.",
+    "Full assembly STL remains under 10 MB and an inspected before/after comparison shows actual shortening with identical camera and axes."
+  ],
+  "limitations": [
+    "The 0.75 m rise run and circular-S radii are selected assumptions to show a compact interpretation, not measured hardware dimensions.",
+    "No physical bend radius, exact centerline profile, transition shape, divider mounting or housing-wall dimensions were supplied.",
+    "No CFD was run and no existing mesh or solver state was modified. The 406,173-cell mesh is for the earlier 1.2 m bend and must remain tied to that layout."
+  ],
+  "result": {
+    "run_bundle": "results/runs/i4f-compact-rounded-candidate-20261028T171131Z",
+    "summary_directory": "results/summaries/i4f_20261028/compact-rounded-divider-model",
+    "candidate_result": "results/summaries/i4f_20261028/compact-rounded-divider-model/candidate_result.json",
+    "generator_sha256": "353879a66a5269f9d8860cbd8a3a8bd26f9c3d3830abab5c7e858f31ce74da1d",
+    "full_assembly_solids": 26,
+    "full_assembly_all_solids_valid": true,
+    "step_length_unit": "mm",
+    "step_full_bounds_mm": [
+      0.0,
+      4350.0000001,
+      -1050.0000001,
+      1050.0000001,
+      349.99999989996695,
+      1700.0
+    ],
+    "mouth_x_m": 4.35,
+    "rise_bend_end_x_m": 3.35,
+    "pipe_end_equals_transition_inlet": true,
+    "joined_pipe_transition_all_valid": true,
+    "divider_solids_watertight": true,
+    "full_assembly_stl_bytes": 1704884,
+    "full_assembly_stl_triangles": 34096,
+    "before_after_preview": "results/summaries/i4f_20261028/compact-rounded-divider-model/model/before_after_full_assembly.png",
+    "files": {
+      "all_16_dividers.stl": {
+        "path": "model/all_16_dividers.stl",
+        "bytes": 1364357,
+        "sha256": "d2b548b731eeb961620137b5f7d9875b1e46c433e833841a6c9c8b93579faf3c"
+      },
+      "before_after_full_assembly.png": {
+        "path": "model/before_after_full_assembly.png",
+        "bytes": 553828,
+        "sha256": "dfc60a5167042f14d9fc63d342cf2c630bf685b9b0bbd0a764ea9316c4cbd64d"
+      },
+      "compact_overview.png": {
+        "path": "model/compact_overview.png",
+        "bytes": 437967,
+        "sha256": "6c09a0dad93cdb576b47e9ae1a17fc1e8f294c1b13db523d14387eaaa61b97ca"
+      },
+      "compact_transition_sections.png": {
+        "path": "model/compact_transition_sections.png",
+        "bytes": 76312,
+        "sha256": "78571e4b7e28099e42590adb44a30d0ab732bdea2f73639e4faf66abd0fce77a"
+      },
+      "full_assembly.step": {
+        "path": "model/full_assembly.step",
+        "bytes": 1643625,
+        "sha256": "23380cdb464a1f45c9c42ea633314d7eafa247dfe2e7275fb49124bb34d161d1"
+      },
+      "full_assembly.stl": {
+        "path": "model/full_assembly.stl",
+        "bytes": 1704884,
+        "sha256": "696373d812ac87a9d7985363ab9e5af911352b0affe012c5235b2abfd5484a73"
+      },
+      "one_outlet_four_dividers.stl": {
+        "path": "model/one_outlet_four_dividers.stl",
+        "bytes": 434739,
+        "sha256": "f70a87e4d83e85d96d7f1f0d38ade3c36742dda976af15d6e2975f9e3f8511e7"
+      },
+      "rounded_nose_closeup.png": {
+        "path": "model/rounded_nose_closeup.png",
+        "bytes": 173728,
+        "sha256": "da9abaa8e5b15fb91fb1efd34187504e073e1d82248b0302da823ae3123f5aa2"
+      }
+    }
+  }
+}
