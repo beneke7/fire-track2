@@ -1,0 +1,62 @@
+{
+  "jobs": {
+    "14688329": {
+      "bootstrap_diagnostics": [],
+      "classification": "cancelled_no_archive_cpu_unavailable",
+      "diagnostic_gaps": {
+        "aggregate_memory": {
+          "note": "Parent and step MaxRSS values are shown separately; no aggregate memory value is inferred.",
+          "parent_max_rss": "Unknown",
+          "status": "not_aggregated",
+          "step_max_rss_rows": []
+        },
+        "ledger": {
+          "audit_log_present": false,
+          "formal_validation_decision": null,
+          "status": "missing",
+          "summary_present": false
+        },
+        "native_profiling_interpretation": {
+          "interpretation_performed": false,
+          "raw_files": [],
+          "status": "not_captured"
+        },
+        "tke_extrema": {
+          "note": "k/epsilon residuals do not provide TKE extrema.",
+          "status": "not_exposed_by_current_parser",
+          "value": null
+        }
+      },
+      "job_id": "14688329",
+      "mode": "slurm-afterany",
+      "parent_cpu_seconds": null,
+      "phase": "inspected_no_archive",
+      "reason": "No archive was visible at this afterany invocation; this is not a physical solver verdict.",
+      "run_state": null,
+      "sacct": {
+        "accounting_source": "scontrol",
+        "parent": {
+          "allocated_cpus": "120",
+          "elapsed_raw": "00:00:00",
+          "exit_code": "0:0",
+          "job_id": "14688329",
+          "max_rss": "Unknown",
+          "state": "CANCELLED",
+          "total_cpu": "Unknown"
+        },
+        "steps": []
+      },
+      "scheduler_accounting": {
+        "cpu_accounting": "unavailable",
+        "sacct_error": "RuntimeError: sacct exit 1: sacct: error: _open_persist_conn: failed to open persistent connection to host:localhost:6819: Connection refused\nsacct: error: Sending PersistInit msg: Connection refused\nsacct: error: Problem talking to the database: Connection refused\n",
+        "source": "scontrol",
+        "status": "partial"
+      },
+      "scheduler_state": "CANCELLED",
+      "updated_utc": "2026-10-28T09:06:40Z"
+    }
+  },
+  "phase": "inspected_no_archive",
+  "schema_version": 1,
+  "updated_utc": "2026-10-28T09:06:40Z"
+}

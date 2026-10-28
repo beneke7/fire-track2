@@ -61,6 +61,17 @@ freeze a new v3 source with only launcher/path corrections and regression
 checks. Repeat the same declared smoke/control once with no physics changes,
 and retain the actual-smoke success gate and bounded afterany captures.
 
+Checkpoint-time correction (28 October09:07 UTC): v3 smoke14688328 passed
+native module/bootstrap and source loading but rejected the donor before CFD.
+Its exact saved time is0.199999999999994293 s, name0.200000000000, index2000,
+and deltaT/deltaT0=0.0001 s. Literal0.2 text matching incorrectly rejects normal
+floating-point accumulation (difference5.7e-15 s). V4 must parse the full raw
+scalar, require a finite time within1e-12 s of0.2 (one hundred-millionth of
+the1e-4 s step), and retain unchanged source/field hash checks. This is metadata
+validation repair, not a physical/numerical tolerance change. Preserve v3
+failure and zero-allocation control14688329. Repeat the unchanged bounded
+smoke/control once only after regression against this exact native value.
+
 ## Finite job sequence
 
 1. **RSMOKE-ORIG:** 0.2000 to 0.2010 s, exactly ten fixed steps, unchanged

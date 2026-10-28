@@ -7,14 +7,13 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-At2026-10-28 09:04 UTC, replacement smoke14688328 and original control14688329
-are released; smoke is running donor verification/extraction with its full
-allocation (three nodes ×40 ranks, fixed0.1 ms). Control waits
-for actual verified smoke success; auditors14688330/14688331 are armed.
-V2 smoke14676288 failed before CFD because of shell/source-path defects;
-its control cancelled without allocation. Corrected v3 passes actual native
-module startup, runner imports and119 affected tests. Native restart success
-is unproven; the pressure candidate remains unsubmitted. I4F work is unchanged.
+At2026-10-28 09:11 UTC, v4 smoke14689395 and original control14689396 are
+released and pending (three nodes ×40 ranks, fixed0.1 ms). Control requires
+verified smoke success; auditors14689397/14689398 are armed. V3 passed shell
+startup but rejected ordinary checkpoint-time roundoff before CFD; its numeric
+metadata check is corrected and tested against the exact saved file. V2/v3
+failures and source are preserved. All126 affected tests pass. Native restart
+success is unproven; the pressure candidate remains unsubmitted. I4F is unchanged.
 
 ## Running now
 

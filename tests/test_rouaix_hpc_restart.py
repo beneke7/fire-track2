@@ -21,6 +21,7 @@ from cases.e1_rouaix_hpc_restart.run_restart import (
     rewrite_control_dict,
     select_seed_members,
     validate_allocation,
+    validate_checkpoint_time,
     validate_smoke_preflight,
 )
 
@@ -37,7 +38,7 @@ def test_restart_sbatch_openfoam_bootstrap_preserves_module_args_and_reports_fai
         text = script_path.read_text(encoding="utf-8")
         assert (
             "SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/"
-            "rouaix-restart-source-v3-20261028/unpacked"
+            "rouaix-restart-source-v4-20261028/unpacked"
         ) in text
         start = text.index('read -r -a foam_bash_args <<< "$FOAM_BASH"')
         end = text.index("\n[[ ${WM_PROJECT_VERSION:-} == v2512 ]]", start)
@@ -87,6 +88,41 @@ def test_restart_sbatch_openfoam_bootstrap_preserves_module_args_and_reports_fai
     assert failed.returncode == 23
     assert "OpenFOAM environment setup failed" in failed.stderr
     assert "modules-test.log" in failed.stderr
+
+
+NATIVE_PARENT_TIME = (
+    "value 0.199999999999994293;\n"
+    'name "0.200000000000";\n'
+    "index 2000;\n"
+    "deltaT 0.0001;\n"
+    "deltaT0 0.0001;\n"
+)
+
+
+def test_checkpoint_time_accepts_native_roundoff_and_equivalent_notation() -> None:
+    validate_checkpoint_time(NATIVE_PARENT_TIME)
+    equivalent = (
+        NATIVE_PARENT_TIME.replace("0.199999999999994293", "2e-1")
+        .replace("deltaT 0.0001", "deltaT 1e-4")
+        .replace("deltaT0 0.0001", "deltaT0 1E-4")
+    )
+    validate_checkpoint_time(equivalent)
+
+
+@pytest.mark.parametrize(
+    ("bad_text", "message"),
+    [
+        (NATIVE_PARENT_TIME.replace("0.199999999999994293", "0.20000000001"), "exactly 0.2"),
+        (NATIVE_PARENT_TIME.replace("deltaT 0.0001", "deltaT 0.0002"), "timestep"),
+        (NATIVE_PARENT_TIME.replace("value 0.199999999999994293", "value nan"), "nonfinite"),
+        (NATIVE_PARENT_TIME + "value 0.2;\n", "duplicate value"),
+        (NATIVE_PARENT_TIME.replace("index 2000", "index 1999"), "index"),
+        (NATIVE_PARENT_TIME.replace('name "0.200000000000"', 'name "0.199900000000"'), "name"),
+    ],
+)
+def test_checkpoint_time_rejects_invalid_native_fields(bad_text: str, message: str) -> None:
+    with pytest.raises(RestartError, match=message):
+        validate_checkpoint_time(bad_text)
 
 
 def test_restart_configs_have_frozen_smoke_and_control_horizons() -> None:

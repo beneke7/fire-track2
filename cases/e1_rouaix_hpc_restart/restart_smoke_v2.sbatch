@@ -16,7 +16,7 @@
 
 set -eo pipefail
 
-SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v3-20261028/unpacked
+SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v4-20261028/unpacked
 RUN_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027
 
 module load cray-python/3.11.7 > "$RUN_ROOT/modules-$SLURM_JOB_ID.log" 2>&1

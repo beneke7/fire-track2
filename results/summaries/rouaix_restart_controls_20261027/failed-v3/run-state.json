@@ -1,0 +1,195 @@
+{
+  "allocation": {
+    "cpus_per_task": 1,
+    "gpu_request": null,
+    "memory_mb_per_node": 22528,
+    "nodelist": "x1001c4s1b0n[0-1],x1001c4s2b0n0",
+    "nodes": 3,
+    "partition": "cpu-short",
+    "ranks": 120,
+    "tasks_per_node": [
+      40,
+      40,
+      40
+    ]
+  },
+  "attempt_archive_status": "verified_crc_hash_and_member_list",
+  "case_id": "rouaix-restart-original-smoke-0201",
+  "delta_t_s": 0.0001,
+  "error": "RestartError: checkpoint uniform/time does not record exactly 0.2 s",
+  "execution_backend": "native-slurm-openfoam",
+  "job_id": "14688328",
+  "job_name": "ml-vof",
+  "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+  "parent_checkpoint_time_s": 0.2,
+  "parent_smoke_job_id": null,
+  "pause_paths": [
+    "/project/nk_meshapplied/bene/fire-track2-hpc/PAUSE",
+    "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/rouaix-restart-original-smoke-14688328/PAUSE",
+    "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/PAUSE"
+  ],
+  "result_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/rouaix-restart-original-smoke-14688328/result.tar.gz",
+  "result_archive_member_sizes": [
+    {
+      "bytes": 11397,
+      "path": "attempt/case/case-inputs.json"
+    },
+    {
+      "bytes": 732,
+      "path": "attempt/case/constant/g"
+    },
+    {
+      "bytes": 755,
+      "path": "attempt/case/constant/hRef"
+    },
+    {
+      "bytes": 1648,
+      "path": "attempt/case/constant/polyMesh/boundary"
+    },
+    {
+      "bytes": 614667938,
+      "path": "attempt/case/constant/polyMesh/faces"
+    },
+    {
+      "bytes": 122238906,
+      "path": "attempt/case/constant/polyMesh/neighbour"
+    },
+    {
+      "bytes": 122614462,
+      "path": "attempt/case/constant/polyMesh/owner"
+    },
+    {
+      "bytes": 250857142,
+      "path": "attempt/case/constant/polyMesh/points"
+    },
+    {
+      "bytes": 881,
+      "path": "attempt/case/constant/transportProperties"
+    },
+    {
+      "bytes": 952,
+      "path": "attempt/case/constant/turbulenceProperties"
+    },
+    {
+      "bytes": 280345074,
+      "path": "attempt/case/processors120/0.200000000000/U"
+    },
+    {
+      "bytes": 93113216,
+      "path": "attempt/case/processors120/0.200000000000/alpha.water"
+    },
+    {
+      "bytes": 93708944,
+      "path": "attempt/case/processors120/0.200000000000/epsilon"
+    },
+    {
+      "bytes": 93704028,
+      "path": "attempt/case/processors120/0.200000000000/k"
+    },
+    {
+      "bytes": 93779707,
+      "path": "attempt/case/processors120/0.200000000000/nut"
+    },
+    {
+      "bytes": 93500698,
+      "path": "attempt/case/processors120/0.200000000000/p"
+    },
+    {
+      "bytes": 94232250,
+      "path": "attempt/case/processors120/0.200000000000/p_rgh"
+    },
+    {
+      "bytes": 251579442,
+      "path": "attempt/case/processors120/0.200000000000/phi"
+    },
+    {
+      "bytes": 1016,
+      "path": "attempt/case/processors120/0.200000000000/uniform/cumulativeContErr"
+    },
+    {
+      "bytes": 5527,
+      "path": "attempt/case/processors120/0.200000000000/uniform/functionObjects/functionObjectProperties"
+    },
+    {
+      "bytes": 1060,
+      "path": "attempt/case/processors120/0.200000000000/uniform/time"
+    },
+    {
+      "bytes": 530651,
+      "path": "attempt/case/processors120/constant/polyMesh/boundary"
+    },
+    {
+      "bytes": 13606,
+      "path": "attempt/case/processors120/constant/polyMesh/boundaryProcAddressing"
+    },
+    {
+      "bytes": 40402372,
+      "path": "attempt/case/processors120/constant/polyMesh/cellProcAddressing"
+    },
+    {
+      "bytes": 125645804,
+      "path": "attempt/case/processors120/constant/polyMesh/faceProcAddressing"
+    },
+    {
+      "bytes": 629897118,
+      "path": "attempt/case/processors120/constant/polyMesh/faces"
+    },
+    {
+      "bytes": 119217148,
+      "path": "attempt/case/processors120/constant/polyMesh/neighbour"
+    },
+    {
+      "bytes": 125645948,
+      "path": "attempt/case/processors120/constant/polyMesh/owner"
+    },
+    {
+      "bytes": 44956136,
+      "path": "attempt/case/processors120/constant/polyMesh/pointProcAddressing"
+    },
+    {
+      "bytes": 269710334,
+      "path": "attempt/case/processors120/constant/polyMesh/points"
+    },
+    {
+      "bytes": 4338,
+      "path": "attempt/case/system/controlDict"
+    },
+    {
+      "bytes": 164,
+      "path": "attempt/case/system/decomposeParDict"
+    },
+    {
+      "bytes": 1159,
+      "path": "attempt/case/system/fvSchemes"
+    },
+    {
+      "bytes": 2111,
+      "path": "attempt/case/system/fvSolution"
+    },
+    {
+      "bytes": 842,
+      "path": "attempt/case/system/setExprFieldsDict"
+    },
+    {
+      "bytes": 26288,
+      "path": "attempt/ledger/summary.json"
+    },
+    {
+      "bytes": 6678,
+      "path": "attempt/manifest.json"
+    }
+  ],
+  "result_archive_members": 48,
+  "result_archive_sha256": "369155eed42d0c153f4918e5628dcacab3c9747340f60e874c31760cbc1cea20",
+  "run_wall_s": 42.73881487105973,
+  "schema_version": 1,
+  "solver_version": "v2512",
+  "start_time_s": 0.2,
+  "started_utc": "2026-10-28T09:03:58.160354+00:00",
+  "status": "failed_preserved",
+  "target_time_s": 0.201,
+  "traceback": "Traceback (most recent call last):\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v3-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 742, in run\n    case, manifest = prepare_case(attempt, config)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v3-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 397, in prepare_case\n    seed_receipt = extract_seed_archive(PARENT_ARCHIVE, attempt)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v3-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 272, in extract_seed_archive\n    raise RestartError(\"checkpoint uniform/time does not record exactly 0.2 s\")\nRestartError: checkpoint uniform/time does not record exactly 0.2 s\n",
+  "updated_utc": "2026-10-28T09:06:16.400577+00:00",
+  "variant": "original-smoke",
+  "wall_budget_s": 1200
+}

@@ -17,7 +17,7 @@
 
 set -eo pipefail
 
-SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v3-20261028/unpacked
+SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v4-20261028/unpacked
 RUN_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027
 : "${ROUAIX_PARENT_SMOKE_JOB_ID:?submit with the v2 smoke job ID}"
 

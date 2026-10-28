@@ -1,18 +1,30 @@
 # Komondor Rouaix status
 
-Updated 2026-10-28 09:04 UTC (10:04 CET). Analytical E0 remains the only
+Updated 2026-10-28 09:11 UTC (10:11 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-**Replacement smoke14688328 and gated control14688329 are released.**
-At28 October09:04:26 UTC, smoke is RUNNING with all120 CPUs and is verifying/
-extracting the donor checkpoint. Control waits on afterok:14688328. Both request120 ranks on three nodes,
-40/node and22 GiB/node in cpu-short. Smoke targets0.20→0.201 s in ten fixed
-0.1 ms steps (20-minute cap); control targets0.20→0.30 s (90-minute cap).
-Auditors14688330/14688331 are armed afterany. Runtime control gating still
-requires actual successful smoke/time/ledger/convergence/archive evidence.
-Native restart success remains unproven.
+**V4 smoke14689395 and gated control14689396 are released.**
+At28 October09:10:58 UTC, smoke is pending scheduler evaluation and control
+waits on afterok:14689395. Auditors14689397/14689398 are armed afterany.
+Both request120 ranks on three nodes,40/node and22 GiB/node in cpu-short.
+Smoke targets0.20→0.201 s, ten fixed0.1 ms steps,20-minute cap; control targets
+0.20→0.30 s,90-minute cap, gated by actual smoke/ledger/convergence/archive
+success. Native restart compatibility and survival through the failure window
+remain unproven.
+
+V3 smoke14688328 passed native startup but failed before CFD on literal
+checkpoint-time matching. Its saved value0.199999999999994293 differs from0.2
+by5.7e-15 s; this is ordinary accumulated floating-point roundoff. V4 parses
+the original raw scalar with1e-12 s absolute metadata tolerance, checks finite
+values, saved name/index and unchanged deltaT/deltaT0, while retaining source
+and field hashes. Control14688329 cancelled without allocation. Both audits
+completed; v3 used120 allocated CPUs for2m23s, no solver steps. Compact failure,
+raw native time file, accounting and hash-verified audit bundle are preserved.
+V4 changes metadata checks/source paths only, with no physics/timestep changes.
+The126 affected tests, Ruff, formatting and shell syntax pass; its native
+parser accepts the actual saved checkpoint-time file and source hashes match.
 
 V2 smoke14676288 FAILED1:0 in three seconds at27 October18:15:24 UTC,
 before Python or CFD. Its launcher quoted the module's argument-bearing

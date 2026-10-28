@@ -72,11 +72,41 @@ REQUIRED_CHECKPOINT_FIELDS = (
 )
 REQUIRED_ENDPOINT_FIELDS = ("U", "alpha.water", "p_rgh", "k", "epsilon", "nut", "p", "phi")
 MESH_FILES = ("points", "faces", "owner", "neighbour", "boundary")
-TIME_LINE = re.compile(r"^\s*value\s+0\.2(?:0*)?\s*;\s*$", re.MULTILINE)
+TIME_FIELD_LINE = re.compile(r"^\s*(value|name|index|deltaT|deltaT0)\s+([^;]+);\s*$", re.MULTILINE)
 
 
 class RestartError(RuntimeError):
     """The immutable checkpoint or bounded restart contract did not verify."""
+
+
+def validate_checkpoint_time(time_text: str) -> None:
+    fields: dict[str, str] = {}
+    for match in TIME_FIELD_LINE.finditer(time_text):
+        key, value = match.groups()
+        if key in fields:
+            raise RestartError(f"checkpoint uniform/time contains duplicate {key}")
+        fields[key] = value.strip()
+    for key in ("value", "name", "index", "deltaT", "deltaT0"):
+        if key not in fields:
+            raise RestartError(f"checkpoint uniform/time lacks {key}")
+
+    try:
+        value_s = float(fields["value"])
+        delta_t_s = float(fields["deltaT"])
+        delta_t0_s = float(fields["deltaT0"])
+        index = int(fields["index"])
+    except ValueError as error:
+        raise RestartError("checkpoint uniform/time has a nonnumeric scalar") from error
+    if not all(math.isfinite(number) for number in (value_s, delta_t_s, delta_t0_s)):
+        raise RestartError("checkpoint uniform/time has a nonfinite scalar")
+    if fields["name"] != f'"{PARENT_TIME_DIR.rsplit("/", 1)[-1]}"':
+        raise RestartError("checkpoint uniform/time name differs from the checkpoint directory")
+    if index != round(PARENT_TIME_S / DT_S):
+        raise RestartError("checkpoint uniform/time index does not match 0.2 s")
+    if delta_t_s != DT_S or delta_t0_s != DT_S:
+        raise RestartError("checkpoint uniform/time timestep does not equal 0.0001 s")
+    if not math.isclose(value_s, PARENT_TIME_S, rel_tol=0.0, abs_tol=1e-12):
+        raise RestartError("checkpoint uniform/time does not record exactly 0.2 s")
 
 
 @dataclass(frozen=True)
@@ -268,8 +298,7 @@ def extract_seed_archive(archive: Path, attempt: Path) -> dict[str, Any]:
     if not set(MESH_FILES).issubset(decomposed_mesh):
         raise RestartError("collated 120-rank decomposition mesh is incomplete")
     time_text = (endpoint / "uniform/time").read_text(encoding="ascii", errors="strict")
-    if TIME_LINE.search(time_text) is None:
-        raise RestartError("checkpoint uniform/time does not record exactly 0.2 s")
+    validate_checkpoint_time(time_text)
     ledger = json.loads(parent_ledger.read_text(encoding="utf-8"))
     inventory = float(ledger["integration"]["final_inventory_m3"])
     if not math.isclose(inventory, PARENT_INVENTORY_M3, rel_tol=0.0, abs_tol=1e-13):

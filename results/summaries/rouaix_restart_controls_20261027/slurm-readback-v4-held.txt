@@ -1,0 +1,57 @@
+JobId=14689395 JobName=ml-vof
+   UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A
+   Priority=0 Nice=0 Account=nk_meshapplied QOS=normal
+   JobState=PENDING Reason=JobHeldUser Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:20:00 TimeMin=N/A
+   SubmitTime=2026-10-28T10:10:38 EligibleTime=Unknown
+   AccrueTime=Unknown
+   StartTime=Unknown EndTime=Unknown Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-28T10:10:38 Scheduler=Main
+   Partition=cpu-short AllocNode:Sid=10.150.1.134:372758
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=
+   NumNodes=3-3 NumCPUs=120 NumTasks=120 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=120,mem=66G,node=3,billing=120
+   AllocTRES=(null)
+   Socks/Node=* NtasksPerN:B:S:C=40:0:*:1 CoreSpec=*
+   MinCPUsNode=40 MinMemoryNode=22G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v4-20261028/unpacked/cases/e1_rouaix_hpc_restart/restart_smoke_v2.sbatch
+   WorkDir=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027
+   StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/slurm-14689395.out
+   StdIn=/dev/null
+   StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/slurm-14689395.out
+   TresPerTask=cpu=1
+   
+
+JobId=14689396 JobName=ml-vof
+   UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A
+   Priority=0 Nice=0 Account=nk_meshapplied QOS=normal
+   JobState=PENDING Reason=JobHeldUser Dependency=afterok:14689395(unfulfilled)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=01:30:00 TimeMin=N/A
+   SubmitTime=2026-10-28T10:10:38 EligibleTime=Unknown
+   AccrueTime=Unknown
+   StartTime=Unknown EndTime=Unknown Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-28T10:10:38 Scheduler=Main
+   Partition=cpu-short AllocNode:Sid=10.150.1.134:372758
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=
+   NumNodes=3-3 NumCPUs=120 NumTasks=120 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=120,mem=66G,node=3,billing=120
+   AllocTRES=(null)
+   Socks/Node=* NtasksPerN:B:S:C=40:0:*:1 CoreSpec=*
+   MinCPUsNode=40 MinMemoryNode=22G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v4-20261028/unpacked/cases/e1_rouaix_hpc_restart/restart_control.sbatch
+   WorkDir=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027
+   StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/slurm-14689396.out
+   StdIn=/dev/null
+   StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/slurm-14689396.out
+   KillOInInvalidDependent=Yes
+   TresPerTask=cpu=1
+   
+
