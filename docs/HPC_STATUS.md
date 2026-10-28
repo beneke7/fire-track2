@@ -1,11 +1,23 @@
 # Komondor Rouaix status
 
-Updated 2026-10-28 13:45 UTC (14:45 CET). Analytical E0 remains the only
+Updated 2026-10-28 15:27 UTC (16:27 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-Targeted diagnosis (28 October13:45 UTC): coarse PTOTAL0 air and water both
+**14702499 (`ml-vof`) is RUNNING**, checked at15:27 UTC:120 MPI ranks on
+three CPU nodes,40 ranks/node, fixed0.1 ms,10,099,265 cells. The pressure-only
+restart starts from the verified0.20 s donor and targets0.30 s, with0.25 s
+diagnostic output and a90-minute limit. Native collated changeDictionary
+preflight verified the intended four boundary changes, unchanged internal
+pressure arrays and unchanged other checkpoint fields. At15:26 UTC it had
+advanced to0.2052 s with max speed about109 m/s. This precedes the previous
+failure window; fine-grid stability is not established yet. Auditor14702500
+is pending on afterany. A verified-parent0.30→0.50 s continuation is being
+implemented; it is not yet armed. No local Rouaix CFD is active.
+[Frozen source, submission and live receipts](../results/summaries/rouaix_pressure_total_restart_20261028/).
+
+Targeted diagnosis: coarse PTOTAL0 air and water both
 completed0.30 s with End/exit0 and verified endpoint archives. The matched
 original static-pressure water control reached its200 m/s guard around0.17 s.
 Only the four pressure patches differ; injected volume is matched. This is a
@@ -15,8 +27,11 @@ alpha[0,1], bulk/interface Co0.262/0.168, phase residual-3.65e-10 kg.
 A fixed0.3 ms water pilot also reached0.30 s in1,000 steps and274 solver seconds
 (276 supervisor seconds),peak105.32 m/s,Co0.776/0.491,alpha[0,1]. The observed
 wall ratio3.72 is not a controlled attribution: the reference overlapped another
-8-rank case. Field-level timestep convergence remains untested. No local CFD
-is active after the completed bounded cases.
+8-rank case. The completed matched-field comparison finds a0.08742 m water
+centroid shift and0.190118 m3 volume-weighted alpha L1 difference. Half-L1 is
+about25.1% of the water inventory redistributed between cells, not mass lost.
+Thus the larger timestep is not an accuracy baseline; the fine run keeps0.1 ms.
+[Exact mapped fields and alpha≥0.01 view](../results/summaries/rouaix_water_view_20261028/README.md).
 [Matched results and provenance](../results/summaries/rouaix_backflow_local_20261028/README.md).
 
 Native early-save14700220/v2 14700456 finished0.202 s without a signal ack;
@@ -27,13 +42,12 @@ live-job/owner/task/rank-zero identity checks. V3 native early-save14700599 COMP
 It acknowledged signal12, saved at0.2005 s after5 complete continuation steps,
 verified all endpoint fields, End/exit0, incremental ledger and archive.
 Auditor14700602 completed in46s. The recovered tested source used only the
-helper/test/launcher patch;
-the fine pressure candidate remains prepared but unsubmitted. Its actual native
-changeDictionary boundary edit/field-hash preflight is still required.
+helper/test/launcher patch. The fine pressure candidate subsequently passed
+the actual native boundary edit/field-hash preflight and started as14702499.
 [Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All150 affected tests pass;
 Ruff/format pass. Full suite collection is blocked by missingmatplotlib locally.
 
-**No Rouaix solver or follow-up job is running or pending at28 October11:17 UTC.**
+Historical restart controls below are terminal; current execution is above.
 V4 smoke14689395 COMPLETED0:0: ten fixed0.1 ms steps from0.20 to0.201 s,
 peak111.97527 m/s, all81 configured linear solves converged. Its incremental
 mass residual is-6.33e-10 kg, with terminal fields and verified archive. Whole
@@ -57,7 +71,8 @@ so it cannot establish signal-send timing relative to the FPE. The new early-sav
 source persists request initiation and successful Slurm acknowledgement before
 waiting, and does not list an unacknowledged signal as sent.
 The target0.30 s was not reached; this did not fix the prior instability near0.26 s.
-No identical retry or pressure candidate has been submitted.
+No identical failed-control retry was submitted; the pressure intervention
+now runs separately as14702499.
 [Verified terminal logs, metrics and audits](../results/summaries/rouaix_restart_controls_20261027/terminal-v4/README.md).
 
 V3 smoke14688328 passed native startup but failed before CFD on literal

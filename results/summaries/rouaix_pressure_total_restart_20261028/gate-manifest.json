@@ -1,0 +1,115 @@
+{
+  "created_utc": "2026-10-28T15:20:24.719803+00:00",
+  "eligibility_evidence": {
+    "coarse_dt_sensitivity": {
+      "alpha_l1_difference_m3_approx": 0.19,
+      "decision": "retain matched fixed deltaT=0.0001 s for this fine candidate",
+      "dt_s": 0.0003,
+      "source": "results/summaries/rouaix_water_view_20261028/",
+      "water_centroid_shift_m": 0.087
+    },
+    "coarse_matched_static_water_guard": {
+      "guard_terminal_time_s": 0.1703,
+      "source": "results/summaries/rouaix_backflow_local_20261028/water-static-control-diagnostics.json",
+      "trigger_speed_m_s": 200.697
+    },
+    "coarse_pressure_total_air": {
+      "peak_speed_m_s": 85.0362,
+      "reached_0_3_with_End_exit0": true,
+      "source": "results/summaries/rouaix_backflow_local_20261028/air-result-summary.json",
+      "terminal_speed_m_s": 75.7689
+    },
+    "coarse_pressure_total_water": {
+      "endpoint_water_volume_m3": 0.379166666663,
+      "mass_residual_kg": -3.65e-10,
+      "peak_speed_m_s": 103.1456,
+      "reached_0_3_with_End_exit0": true,
+      "source": "results/summaries/rouaix_backflow_local_20261028/water-total-pressure-diagnostics.json",
+      "terminal_speed_m_s": 100.2184
+    },
+    "early_save_signal_validation": {
+      "audit_job_id": "14700602",
+      "clean_end_and_archive": true,
+      "solver_job_id": "14700599",
+      "solver_status": "diagnostic_early_save_complete",
+      "source": "results/summaries/rouaix_early_save_20261028/v3/terminal/run-state.json",
+      "steps": 5,
+      "terminal_time_s": 0.2005
+    },
+    "focused_test_command": "./.venv/bin/python -m pytest -q tests/test_rouaix_hpc_restart.py",
+    "focused_test_result": "22 passed in 0.19s",
+    "native_io_fixture_caveat": "The .2 utility directory was copied from the static case time-zero fields solely to test -time 0.2; it is an I/O fixture, not a physical checkpoint.",
+    "native_io_receipt": "results/summaries/rouaix_pressure_total_restart_20261028/native-io/native-utility-receipt.json",
+    "native_io_receipt_sha256": "c6eb7b44ef83bddd3d220409e2b1bcf0943afc42d480f7923dffdef699af52fd",
+    "native_io_result": "PASS: actual v2512 changeDictionary -parallel -fileHandler collated; four patches changed; p_rgh internal array and other present fields remained unchanged; 299520 cells; 2 ranks; no CFD solver."
+  },
+  "experiment": "E1_ROUAIX_PRESSURE_TOTAL_RESTART_20261028",
+  "parent": {
+    "archive_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-source-v1-20261027/rouaix-e1-hpc-pilot-14669440/result.tar.gz",
+    "archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+    "checkpoint_time_s": 0.2,
+    "ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+    "water_density_kg_m3": 997.6,
+    "water_inventory_m3": 0.2508975771509
+  },
+  "remote_roots": {
+    "run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028",
+    "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-source-20261028"
+  },
+  "run_directory_template": "rouaix-restart-pressure-total-p0-zero-{job_id}",
+  "runtime": {
+    "execution": "native Slurm CPU-only",
+    "machine": "Komondor",
+    "numpy": "1.24.4",
+    "python_module": "cray-python/3.11.7",
+    "solver": "OpenCFD v2512 DP32 Cray MPICH"
+  },
+  "schema_version": 1,
+  "scope": "Exploratory fine-grid conditional continuation; four p_rgh open-boundary pressure sensitivity. Not an E1 acceptance run or paper BC correction.",
+  "source": {
+    "capsule": "results/summaries/rouaix_pressure_total_restart_20261028/pressure-total-source-20261028.tar.gz",
+    "capsule_sha256": "6397c52e5f097d80644d63ae0a6d93a825e0b9eaa7f9a7b98e8b2bf90a1aa235",
+    "dirty": true,
+    "index": "results/summaries/rouaix_pressure_total_restart_20261028/source-capsule-index.json",
+    "native_helper_sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88",
+    "revision": "4918df20a5c3e8eae4ecbac577f481072dbc179a",
+    "sha256_manifest": "results/summaries/rouaix_pressure_total_restart_20261028/source-sha256sum.txt"
+  },
+  "stop_conditions": [
+    "existing max|U|=1000 m/s guard",
+    "Slurm 90-minute wall limit with TERM 180s before limit",
+    "PAUSE sentinel handled by runner",
+    "pre-solver immutable checkpoint or native patch validation failure"
+  ],
+  "variant": {
+    "account": "nk_meshapplied",
+    "boundary_condition": {
+      "U": "U",
+      "p0_gauge_pa": 0.0,
+      "phi": "phi",
+      "rho": "rho",
+      "type": "prghTotalPressure",
+      "value": "uniform 0"
+    },
+    "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+    "changed_field": "p_rgh boundaryField on downstreamOutlet, bottomOutlet, spanwiseMinus, spanwisePlus only",
+    "delta_t_s": 0.0001,
+    "end_time_s": 0.3,
+    "gpu": false,
+    "memory_gib_per_node": 22,
+    "nodes": 3,
+    "partition": "cpu-short",
+    "ranks": 120,
+    "requeue": false,
+    "start_time_s": 0.2,
+    "tasks_per_node": 40,
+    "unchanged_operational_guard_m_s": 1000,
+    "variant": "pressure-total-p0-zero",
+    "wall_time": "01:30:00",
+    "write_interval_s": 0.05,
+    "write_times_s": [
+      0.25,
+      0.3
+    ]
+  }
+}

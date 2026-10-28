@@ -1,0 +1,62 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d2-20251219 OPENFOAM=2512 version=2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : changeDictionary -parallel -fileHandler collated -case /case -time 0.2 -dict system/changeDictionaryDict
+Date   : Oct 28 2026
+Time   : 15:12:02
+Host   : 24ecc3c810ff
+PID    : 492
+I/O    : collated [unthreaded] (maxThreadFileBufferSize = 0).
+         With non-blocking transfer, buffer-size = 1e+09
+Case   : /case
+nProcs : 2
+Hosts  :
+(
+    (24ecc3c810ff 2)
+)
+Pstream initialized with:
+    node communication : off [type=host] (2 ranks, 1 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStamp (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Overriding OptimisationSwitches according to controlDict
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Create mesh for time = 0.200000000000
+
+Read dictionary changeDictionaryDict with replacements for dictionaries 1(p_rgh)
+Reading polyMesh/boundary file to extract patch names
+Loaded dictionary boundary with entries 8(gasInlet downstreamOutlet bottomOutlet aircraftWall spanwiseMinus spanwisePlus nozzle procBoundary0to1)
+Extracted patch groups:
+    group inlet with patches 1(nozzle)
+    group processor with patches 1(procBoundary0to1)
+    group wall with patches 1(aircraftWall)
+Replacing entries in dictionary p_rgh
+Loading dictionary p_rgh
+Loaded dictionary p_rgh with entries 3(dimensions internalField boundaryField)
+Merging entries from 1(boundaryField)
+Writing modified fieldDict p_rgh
+
+End
+
+Finalising parallel run

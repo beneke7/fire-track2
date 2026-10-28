@@ -1,6 +1,6 @@
 # Rouaix failure diagnosis and next tests
 
-Updated 28 October 2026, 14:00 UTC. This is the ranked working diagnosis for
+Updated 28 October 2026, 15:27 UTC. This is the ranked working diagnosis for
 the numerical failures, with separate notes on reproduction fidelity. It is
 not an E1 acceptance decision.
 
@@ -16,8 +16,11 @@ original-pressure water control reached the200 m/s operational guard around
 0.17 s. These controlled results establish a practical stability improvement
 on this coarse mesh, while fine-grid transfer and paper agreement remain open. A separate fixed0.3 ms
 water trial also completed0.30 s:1,000 steps in274 solver seconds, peak105.32 m/s,
-alpha[0,1] and bulk/interface Co maxima0.776/0.491. Its field-level time-accuracy
-comparison is still open. The0.1 ms reference remains preserved.
+alpha[0,1] and bulk/interface Co maxima0.776/0.491. The exact mapped field
+comparison finds0.190118 m3 alpha L1 difference and0.08742 m water-centroid
+shift at0.30 s. Half-L1 corresponds to about25.1% of water redistributed,
+despite nearly equal total inventory. This is substantial temporal sensitivity;
+the fine reference retains0.1 ms. It does not establish convergence at0.1 ms.
 
 ## Physical and numerical causes
 
@@ -166,15 +169,21 @@ comparison is still open. The0.1 ms reference remains preserved.
 
 ## Current sequence
 
-Complete and audit the matched coarse water pressure pair. In parallel, repair
-and verify native early-save delivery, then prepare the fine-grid pressure-only
-restart from the same 0.20 s donor, with a 0.25 s diagnostic checkpoint and
-0.30 s target. If the pressure change fails, use the matched laminar air control
+The matched coarse pair and native early-save tests are complete. Fine-grid
+pressure-only restart14702499 is running from the same0.20 s donor, with a
+0.25 s diagnostic checkpoint and0.30 s target. Native preflight passed on
+the actual120-rank checkpoint; the prior failure window remains ahead.
+Prepare a bounded0.30→0.50 s continuation conditional on a verified healthy
+parent endpoint and incremental mass ledger. Beyond0.50 s, use measured cost
+and field diagnostics to choose the next horizon and matched timestep/scaling
+pilots before a roughly5 s commitment. If the pressure change fails, use the matched laminar air control
 and a separate two-outer-iteration control to distinguish turbulence and coupling.
 No field clipping or changed physical acceptance tolerance is part of this plan.
 
 ## Evidence
 
+- [Fine native pressure restart receipts](../results/summaries/rouaix_pressure_total_restart_20261028/).
+- [Mapped timestep comparison and alpha view](../results/summaries/rouaix_water_view_20261028/README.md).
 - [Native restart terminal logs and audits](../results/summaries/rouaix_restart_controls_20261027/terminal-v4/README.md).
 - [Historical matched air results](../results/summaries/rouaix_fast_local_20261027/terminal-local/README.md).
 - [New boundary trial declaration](../experiments/E1_ROUAIX_BACKFLOW_LOCAL_20261028.md)

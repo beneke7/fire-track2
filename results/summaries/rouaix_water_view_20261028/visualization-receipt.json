@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "software": "ParaView 6.1.1; VTK 9.6.2; CPU only; Matplotlib Agg",
+  "render_backend": "Matplotlib Agg CPU; no ParaView Render/SaveScreenshot/OpenGL call",
+  "threshold_definition": "cell alpha.water >= 0.01; opaque exterior surface of selected cells",
+  "camera": {
+    "projection": "orthographic, fixed projection axes",
+    "focal_point_m": [
+      7.25,
+      -3.0,
+      0.0
+    ],
+    "view_direction_from_focal_to_camera": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "camera_up_world": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "screen_axes": {
+      "horizontal": "absolute x crossflow (m)",
+      "vertical": "absolute y upward (m)"
+    },
+    "shared_bounds_m": {
+      "x": [
+        -0.5,
+        15.5
+      ],
+      "y": [
+        -6.2,
+        0.65
+      ]
+    },
+    "nozzle_reference_m": [
+      0.0,
+      0.0
+    ],
+    "same_in_both_panels": true
+  },
+  "native_mesh_cell_order_check": {
+    "cells": 299520,
+    "max_abs_center_difference_m": 0.0,
+    "max_abs_volume_difference_m3": 0.0,
+    "volume_sum_m3": 2300.000026079747
+  },
+  "field_vtu": {
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-water-view-20261028/staging/native-mesh-alpha-fields-t030.vtu",
+    "sha256": "ad938e63a68caef4d922a46d6cc72f0f48297cead20951086b0a8f407ce22521",
+    "bytes": 13807287
+  },
+  "threshold_surfaces": [
+    {
+      "field": "alpha_dt0001",
+      "threshold": 0.01,
+      "cells_ge_threshold": 1680,
+      "surface_points": 1803,
+      "surface_polygons": 1774,
+      "surface_vtp": "/Users/bene/fire-track2/results/runs/rouaix-water-view-20261028/surfaces/alpha-ge-001-dt0001.vtp",
+      "surface_vtp_sha256": "2b4c0a8ff3b408676607127df8aac20f4cc7896aac8275fd9cc2320fdf2206d7",
+      "surface_vtp_bytes": 58903
+    },
+    {
+      "field": "alpha_dt0003",
+      "threshold": 0.01,
+      "cells_ge_threshold": 1695,
+      "surface_points": 1848,
+      "surface_polygons": 1816,
+      "surface_vtp": "/Users/bene/fire-track2/results/runs/rouaix-water-view-20261028/surfaces/alpha-ge-001-dt0003.vtp",
+      "surface_vtp_sha256": "56e311e48a7e04fa70798ea0c396c505d1a1feb9c96580f65dcf30e7d2b3a6ad",
+      "surface_vtp_bytes": 59990
+    }
+  ],
+  "png": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_water_view_20261028/water-alpha-001-matched-fields-030.png",
+    "sha256": "d6d4066ac194e3f8bb805bae3aa7d6cf0ca3d680969961b30e132c7282d5f933",
+    "bytes": 100747,
+    "dpi": 180
+  },
+  "pvsm": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_water_view_20261028/water-alpha-threshold-comparison.pvsm",
+    "sha256": "c89aa14fa9f91e40c1a638309c4239a64ed581ec10ce5a94779afb5d61393807",
+    "bytes": 29414,
+    "saved_without_render": true
+  },
+  "provenance": {
+    "global_alpha_fields_sha256": "0c5fa0639d8e07488f70ba267c2ca6860f61ba97cdd41e246f4bd5264858e7e0",
+    "native_mesh_case": "/Users/bene/fire-track2/results/runs/rouaix-backflow-local-20261028/air-backflow-water-030",
+    "field_comparison_json": "/Users/bene/fire-track2/results/summaries/rouaix_water_view_20261028/field-comparison.json",
+    "field_comparison_sha256": "589f10d151ead6f1a8809d74846f164ca6ad3d5def4115d1854940f1ae01b827"
+  },
+  "alpha_threshold_support_metrics": {
+    "dt0001": {
+      "alpha_ge_0.01": {
+        "cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            14.949999809265137
+          ],
+          "y": [
+            -5.799999952316284,
+            -0.02500000037252903
+          ],
+          "z": [
+            -1.2379216253757477,
+            1.287475198507309
+          ]
+        },
+        "cell_count": 1680,
+        "cell_support_volume_m3": 1.6459341928224638,
+        "cell_support_volume_with_x_ge_10_m_m3": 0.20432979370528262,
+        "cells_with_x_ge_10_m": 4
+      },
+      "alpha_ge_0.1": {
+        "cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            4.388888835906982
+          ],
+          "y": [
+            -4.599999904632568,
+            -0.02500000037252903
+          ],
+          "z": [
+            -1.1710069179534912,
+            1.287475198507309
+          ]
+        },
+        "cell_count": 1399,
+        "cell_support_volume_m3": 0.7178130660836826,
+        "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+        "cells_with_x_ge_10_m": 0
+      },
+      "alpha_ge_0.9": {
+        "cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            0.4749999940395355
+          ],
+          "y": [
+            -2.5,
+            -0.02500000037252903
+          ],
+          "z": [
+            -0.36530258506536484,
+            0.36530258506536484
+          ]
+        },
+        "cell_count": 811,
+        "cell_support_volume_m3": 0.14995151165909607,
+        "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+        "cells_with_x_ge_10_m": 0
+      }
+    },
+    "dt0003": {
+      "alpha_ge_0.01": {
+        "cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            14.949999809265137
+          ],
+          "y": [
+            -5.799999952316284,
+            -0.02500000037252903
+          ],
+          "z": [
+            -1.287475198507309,
+            1.3570684492588043
+          ]
+        },
+        "cell_count": 1695,
+        "cell_support_volume_m3": 2.038555165172231,
+        "cell_support_volume_with_x_ge_10_m_m3": 0.3701213008286624,
+        "cells_with_x_ge_10_m": 4
+      },
+      "alpha_ge_0.1": {
+        "cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            3.7222222089767456
+          ],
+          "y": [
+            -3.785714268684387,
+            -0.02500000037252903
+          ],
+          "z": [
+            -1.0371776074171066,
+            1.287475198507309
+          ]
+        },
+        "cell_count": 1394,
+        "cell_support_volume_m3": 0.6535202359494693,
+        "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+        "cells_with_x_ge_10_m": 0
+      },
+      "alpha_ge_0.9": {
+        "cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            0.375
+          ],
+          "y": [
+            -2.071428596973419,
+            -0.02500000037252903
+          ],
+          "z": [
+            -0.4001240134239197,
+            0.36530258506536484
+          ]
+        },
+        "cell_count": 806,
+        "cell_support_volume_m3": 0.14565863277188784,
+        "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+        "cells_with_x_ge_10_m": 0
+      }
+    }
+  }
+}

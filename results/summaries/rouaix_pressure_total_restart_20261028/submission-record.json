@@ -1,0 +1,36 @@
+{
+  "audit_job_id": "14702500",
+  "audit_source_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+  "audit_submission": "sbatch --hold --dependency=afterany:14702499 --parsable <run-root>/audit-afterany-14702499.sbatch",
+  "interpretation": "Submitted and released after unique capsule, frozen helper hash, native I/O utility, tests, donor archive, and exact Slurm readbacks passed. No solver outcome exists yet.",
+  "native_io_receipt_sha256": "c6eb7b44ef83bddd3d220409e2b1bcf0943afc42d480f7923dffdef699af52fd",
+  "readback_files": {
+    "audit-job-id.txt": "c9dcf4115ba0fb65c5b6f1c9a8e8f577c212ed2858fdc2c5a5265bc547a5d36f",
+    "scheduler-status-current.txt": "5f31a4eb64456f7d20d26b534a68f120aae88b3edd06679cd561fb32ffabfc5a",
+    "slurm-readback-held-audit.txt": "cb872600918fba34fad72b339dbadb99a6b78d36a18098ae938322b6c9330e43",
+    "slurm-readback-held-solver.txt": "006c0ce6f64848526cc5255c72e43cb67db3ccdfeb330e78a63fe4710ee53d18",
+    "slurm-readback-released-audit.txt": "f28e2e43901df58feac680867e56e5f9410f0192fae89908147a96f86ea8c716",
+    "slurm-readback-released-solver.txt": "4459da2b0fe92f5968ca807db23a8db6b24146b1d804802035de31def4ace22c",
+    "solver-job-id.txt": "5c3d5722bf90839671b77755a95b04d2c4009fce9a7a093923c2839018a08882"
+  },
+  "recorded_utc": "2026-10-28T15:23:10.834454+00:00",
+  "release_commands": [
+    "scontrol release 14702499",
+    "scontrol release 14702500"
+  ],
+  "released_state": {
+    "audit": "PENDING",
+    "audit_dependency": "afterany:14702499",
+    "captured_utc": "2026-10-28T15:23:10.834556+00:00",
+    "pause_sentinel": "absent",
+    "solver": "PENDING",
+    "solver_reason": "Nodes required for job are DOWN, DRAINED or reserved for jobs in higher priority partitions"
+  },
+  "remote_roots": {
+    "run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028",
+    "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-source-20261028"
+  },
+  "solver_job_id": "14702499",
+  "solver_submission": "sbatch --hold --parsable <frozen source>/unpacked/cases/e1_rouaix_hpc_restart/restart_pressure.sbatch",
+  "source_archive_sha256": "6397c52e5f097d80644d63ae0a6d93a825e0b9eaa7f9a7b98e8b2bf90a1aa235"
+}

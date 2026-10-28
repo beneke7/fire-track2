@@ -7,25 +7,20 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-Targeted Rouaix diagnosis (28 October13:45 UTC): coarse PTOTAL0 air and water
-completed0.30 s; matched static-pressure water guarded near0.17 s. A fixed0.3 ms
-water pilot also completed in274 solver seconds versus1018 at0.1 ms; measured
-cost comparison is affected by different concurrent load. This establishes a
-working coarse VOF setup and a pressure-boundary stability effect; fine-grid,
-time-convergence and paper agreement remain unproved. Actual native helper
-probe14700561 passed; v3 early-save14700599/audit14700602 both completed: signal acknowledged,
-verified0.2005 s endpoint/End0/ledger/archive. The native save path now passes. Fine pressure candidate
-is prepared/unsubmitted pending native preflight. All150 affected tests pass.
-I4F is untouched. [Diagnosis](ROUAIX_FAILURE_DIAGNOSIS.md),
-[metrics](../results/summaries/rouaix_backflow_local_20261028/README.md).
-At2026-10-28 11:18 UTC, no Rouaix job is running or pending. Smoke14689395
-completed ten fixed0.1 ms steps through0.201 s (Umax111.98 m/s,81 linear solves
-converged, terminal archive/ledger verified). Control14689396 ran120 ranks on
-three nodes, then failed near0.266 s with unphysical U growth and a pressure
-GAMG floating-point exception. No clean final checkpoint or new interval ledger
-exists for that branch. Both afterany audits completed. Terminal evidence and
-guard behavior are being inspected; no identical retry or pressure candidate
-is submitted. Short native restart works; instability is unresolved. I4F is unchanged.
+Rouaix update (28 October15:27 UTC): fine pressure-boundary restart14702499
+is RUNNING on120 CPU ranks across three nodes, fixed0.1 ms, from0.20 to0.30 s.
+Native preflight verified unchanged internal pressure and other checkpoint
+fields. At15:26 UTC it reached0.2052 s with max speed about109 m/s; the prior
+failure window is still ahead. Auditor14702500 is pending afterany. A bounded
+verified-parent0.30→0.50 s continuation is being implemented, not yet armed.
+Coarse pressure-only air/water controls completed0.30 s; matched original
+pressure water guarded near0.17 s. The faster0.3 ms water case has a measured
+0.08742 m centroid shift and about25.1% half-L1 redistribution relative to
+the0.1 ms field, so the fine reference retains0.1 ms. Native early-save14700599
+and its auditor passed. No local Rouaix solver is active; unrelated I4F jobs
+remain untouched. Fine stability, timestep convergence and paper agreement
+remain unproved. [Diagnosis](ROUAIX_FAILURE_DIAGNOSIS.md),
+[field comparison](../results/summaries/rouaix_water_view_20261028/README.md).
 
 ## Running now
 

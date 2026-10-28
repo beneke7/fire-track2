@@ -1,0 +1,126 @@
+{
+  "capsule": "pressure-total-source-20261028.tar.gz",
+  "created_utc": "2026-10-28T15:18:32.249163+00:00",
+  "dirty": true,
+  "dirty_files": [
+    " M experiments/E1_ROUAIX_PRESSURE_TOTAL_RESTART_20261028.md",
+    "?? results/summaries/rouaix_pressure_total_restart_20261028/",
+    "?? results/summaries/rouaix_water_view_20261028/"
+  ],
+  "files": [
+    {
+      "bytes": 54850,
+      "path": "cases/e1_rouaix_hpc_restart/run_restart.py",
+      "sha256": "e4e7402c8cc1122a4a10bc7559abb8489d540f45f08b1ec83f2695302d0943f6"
+    },
+    {
+      "bytes": 2105,
+      "path": "cases/e1_rouaix_hpc_restart/restart_pressure.sbatch",
+      "sha256": "318dbff4d292d8c033028ce965793a88f5244e917e87fdaeaa23a45348db76e0"
+    },
+    {
+      "bytes": 29296,
+      "path": "cases/e1_rouaix_hpc_restart/audit_restart.py",
+      "sha256": "ee5df5670271a084263db88e591bb23ae1c0f8b4e2bf8e300d5c8d45599b7742"
+    },
+    {
+      "bytes": 103275,
+      "path": "cases/e1_rouaix_hpc/run_pilot.py",
+      "sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88"
+    },
+    {
+      "bytes": 10632,
+      "path": "cases/e1_rouaix_hpc/collect_native_provenance.py",
+      "sha256": "c1ad1f7dd8ae5118ad9ba36b7cca3a362b85fb38b3058a351eb46eb9d8d9ca35"
+    },
+    {
+      "bytes": 45698,
+      "path": "cases/e1_rouaix_hpc/prepare_case.py",
+      "sha256": "d117fa7d0a08ccbadb1dc38c515a0f55f1a9dde6812d689d8458a4c506c2e7dc"
+    },
+    {
+      "bytes": 2631,
+      "path": "cases/e1_rouaix_hpc/source-provenance.json",
+      "sha256": "947a39931ceb724795f1305194ae6309aa3216730baf231b8bebc4df2896e751"
+    },
+    {
+      "bytes": 37319,
+      "path": "scripts/hpc_metrics.py",
+      "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+    },
+    {
+      "bytes": 105688,
+      "path": "scripts/audit_iso_vof_ledger.py",
+      "sha256": "4df8cc2088a5115290a709c90a2ea746b06d29e10935608f1f0c4857e1dacc80"
+    },
+    {
+      "bytes": 72383,
+      "path": "scripts/continue_rouaix_case.py",
+      "sha256": "bd0c867e3f3e158b3cbb715c429b80d607602368eb7afe707f198074a915c656"
+    },
+    {
+      "bytes": 45655,
+      "path": "scripts/audit_interface_wave_flux.py",
+      "sha256": "1338ee5939157ccba37c700a3c09a83ee58c31d4aa66328d3b9cb04385ef3f3f"
+    },
+    {
+      "bytes": 279,
+      "path": "src/aerial_drop/__init__.py",
+      "sha256": "900382be61a5f7a3e5a08cccac0cd37eb391215b0b55474a361bf5520866a1a9"
+    },
+    {
+      "bytes": 47126,
+      "path": "src/aerial_drop/i4f_native_face_reader.py",
+      "sha256": "04c62413a9e36a4a8a7d0bdf025bf93d6cb9d1009985af20092d40802c3e5291"
+    },
+    {
+      "bytes": 6225,
+      "path": "experiments/E1_ROUAIX_PRESSURE_TOTAL_RESTART_20261028.md",
+      "sha256": "d48ae5108d6033f0c40505c5559cc6f251ce42c86e5c270d2627bd6c5fd2a0a1"
+    },
+    {
+      "bytes": 9354,
+      "path": "experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md",
+      "sha256": "158178241e3d89912eaa405d749978a60587dcb0640fc6c1da0bf1446fdaf225"
+    },
+    {
+      "bytes": 27500,
+      "path": "tests/test_rouaix_hpc_restart.py",
+      "sha256": "e413d466e67bb0e38d3cc900f08ca2d604380c2c102dd185fff18e8943112bf4"
+    },
+    {
+      "bytes": 11383,
+      "path": "tests/test_rouaix_hpc_restart_audit.py",
+      "sha256": "9b39151826119f52cf2876df2f17512c38b263520b142881cb7374ff134429b2"
+    },
+    {
+      "bytes": 67901,
+      "path": "tests/test_rouaix_hpc_runner.py",
+      "sha256": "b924ec0aa6d2de5ff22e8c043b0fad6e7ba0394533b2e77104ceae545b17ee09"
+    },
+    {
+      "bytes": 8190,
+      "path": "results/runs/rouaix-restart-controls-20261027/research/outlet-control-review.md",
+      "sha256": "db43d7e9e657ec070bcc46ae39ca52451abf2ee00999ce452811850344ab2a3a"
+    },
+    {
+      "bytes": 1060,
+      "path": "results/summaries/rouaix_restart_controls_20261027/failed-v3/checkpoint-time.txt",
+      "sha256": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+    }
+  ],
+  "prelaunch_checks": {
+    "focused_command": "./.venv/bin/python -m pytest -q tests/test_rouaix_hpc_restart.py",
+    "focused_result": "22 passed in 0.19s",
+    "native_utility_receipt": "native-io/native-utility-receipt.json"
+  },
+  "purpose": "Self-contained CPU Rouaix restart source for the declared four-patch p_rgh total-pressure sensitivity.",
+  "revision": "4918df20a5c3e8eae4ecbac577f481072dbc179a",
+  "runtime": {
+    "backend": "native Slurm OpenCFD v2512 DP32 Cray MPICH",
+    "numpy_version": "1.24.4",
+    "python_module": "cray-python/3.11.7",
+    "python_version": "3.11",
+    "runtime_numpy_consumer": "src/aerial_drop/i4f_native_face_reader.py"
+  }
+}

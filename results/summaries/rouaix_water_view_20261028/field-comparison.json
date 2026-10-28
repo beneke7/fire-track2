@@ -1,0 +1,419 @@
+{
+  "case_sources": {
+    "dt0001": {
+      "archive_path": "/Users/bene/fire-track2/results/runs/rouaix-backflow-local-20261028/container-runs/air-backflow-water-030/result.tar.gz",
+      "archive_sha256": "4cf036931475fbed0452107173e4b8c44f0a07c8753512d67edc3e247437930a",
+      "archive_terminal_volume_ledger_m3": 0.3791666666628,
+      "run_id": "air-backflow-water-030",
+      "solver_clock_s": "ExecutionTime = 1012.16 s  ClockTime = 1018 s"
+    },
+    "dt0003": {
+      "archive_path": "/Users/bene/fire-track2/results/runs/rouaix-backflow-local-20261028/container-runs/air-backflow-water-dt0003-030/result.tar.gz",
+      "archive_sha256": "a7d0963990430d277a59bd2f32fe9ae63c50831f7ba82ea8826c4a09304d16b8",
+      "archive_terminal_volume_ledger_m3": 0.37916647617,
+      "run_id": "air-backflow-water-dt0003-030",
+      "solver_clock_s": "ExecutionTime = 273.49 s  ClockTime = 274 s"
+    }
+  },
+  "cases": {
+    "dt0001": {
+      "delta_t_s": 0.0001,
+      "field_extraction": {
+        "alpha_max": 1.0,
+        "alpha_min": 0.0,
+        "mapped_cells": 299520,
+        "rank_fields": [
+          {
+            "alpha_field_sha256": "769a5fc8242516effd45c826a68072999ae5fa15ab1494f626c252f0a2b85a24",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 0
+          },
+          {
+            "alpha_field_sha256": "5e5c51e0d9b9d9b926141e2d9163369f72b435d4332cbe468b69cd146d92737d",
+            "alpha_max": 0.1442137560630781,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 1
+          },
+          {
+            "alpha_field_sha256": "076d253ba371dc5801233320176150b06dbd017571f37811852a49b7b618a839",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 2
+          },
+          {
+            "alpha_field_sha256": "aa78d65c4897d1f53e7f30ee91a5047deb2b81ece78e96189e693d8e8c0bd3b2",
+            "alpha_max": 2.9852951833560867e-12,
+            "alpha_min": 4.917472278321376e-67,
+            "cells": 37440,
+            "rank": 3
+          },
+          {
+            "alpha_field_sha256": "d58b6c6c2317fac87e5b214d644116ca1244ee5c25cc94ccdc267d9038a73a4b",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 4
+          },
+          {
+            "alpha_field_sha256": "4d099e226fed7095a7fdc7d238f1ff15326484b04552e2379a2f4626919bd079",
+            "alpha_max": 0.1729712714924948,
+            "alpha_min": 8.720087208803704e-92,
+            "cells": 37440,
+            "rank": 5
+          },
+          {
+            "alpha_field_sha256": "a59f68e8512fe7300c555bacf65b667c09d1b6f2380f867b5cd796b013d4e38e",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 6
+          },
+          {
+            "alpha_field_sha256": "1678b212670725cde6a42a30595328680360e180106f456a54b37faa9f83ac6f",
+            "alpha_max": 2.5987647154636666e-12,
+            "alpha_min": 2.862919534471672e-66,
+            "cells": 37440,
+            "rank": 7
+          }
+        ]
+      },
+      "metrics": {
+        "alpha_ge_0_01_cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            14.949999809265137
+          ],
+          "y": [
+            -5.799999952316284,
+            -0.02500000037252903
+          ],
+          "z": [
+            -1.2379216253757477,
+            1.287475198507309
+          ]
+        },
+        "alpha_ge_0_01_cell_count": 1680,
+        "alpha_ge_0_01_cell_volume_m3": 1.6459341928224638,
+        "alpha_ge_0_01_max_abs_z_m": 1.287475198507309,
+        "alpha_ge_0_01_max_center_x_m": 14.949999809265137,
+        "alpha_ge_0_01_min_center_y_m": -5.799999952316284,
+        "alpha_threshold_cell_support": {
+          "alpha_ge_0.01": {
+            "cell_center_extents_m": {
+              "x": [
+                -0.17500000447034836,
+                14.949999809265137
+              ],
+              "y": [
+                -5.799999952316284,
+                -0.02500000037252903
+              ],
+              "z": [
+                -1.2379216253757477,
+                1.287475198507309
+              ]
+            },
+            "cell_count": 1680,
+            "cell_support_volume_m3": 1.6459341928224638,
+            "cell_support_volume_with_x_ge_10_m_m3": 0.20432979370528262,
+            "cells_with_x_ge_10_m": 4
+          },
+          "alpha_ge_0.1": {
+            "cell_center_extents_m": {
+              "x": [
+                -0.17500000447034836,
+                4.388888835906982
+              ],
+              "y": [
+                -4.599999904632568,
+                -0.02500000037252903
+              ],
+              "z": [
+                -1.1710069179534912,
+                1.287475198507309
+              ]
+            },
+            "cell_count": 1399,
+            "cell_support_volume_m3": 0.7178130660836826,
+            "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+            "cells_with_x_ge_10_m": 0
+          },
+          "alpha_ge_0.9": {
+            "cell_center_extents_m": {
+              "x": [
+                -0.17500000447034836,
+                0.4749999940395355
+              ],
+              "y": [
+                -2.5,
+                -0.02500000037252903
+              ],
+              "z": [
+                -0.36530258506536484,
+                0.36530258506536484
+              ]
+            },
+            "cell_count": 811,
+            "cell_support_volume_m3": 0.14995151165909607,
+            "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+            "cells_with_x_ge_10_m": 0
+          }
+        },
+        "mass_centroid_m": [
+          0.9891903990709537,
+          -1.7778514543412307,
+          0.006626521226757919
+        ],
+        "water_mass_kg_at_997_6_kg_m3": 378.25667865356627,
+        "water_volume_m3": 0.37916667868240406
+      },
+      "mpi_ranks": 8
+    },
+    "dt0003": {
+      "delta_t_s": 0.0003,
+      "field_extraction": {
+        "alpha_max": 1.0,
+        "alpha_min": 0.0,
+        "mapped_cells": 299520,
+        "rank_fields": [
+          {
+            "alpha_field_sha256": "91ed148580498dafe93d5e6c04ad1aa83e404740cc1ffa1c4d70f34261e7d286",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 0
+          },
+          {
+            "alpha_field_sha256": "cda784f0c3780bdc8cda5001c2604d8d542aa343efa0bbcbf36696f200e7cdf1",
+            "alpha_max": 0.08796631465790038,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 1
+          },
+          {
+            "alpha_field_sha256": "b2d11c64f4a6e042ad132b3919852eb75781c6e528da0213224e2d28bf08bed0",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 2
+          },
+          {
+            "alpha_field_sha256": "87faeb78fddb0d0181ea55faa0f4fda4d8c1e9c3185ef862e2a3838dd4a9ab2a",
+            "alpha_max": 5.549256486025672e-12,
+            "alpha_min": 8.061188927909756e-61,
+            "cells": 37440,
+            "rank": 3
+          },
+          {
+            "alpha_field_sha256": "6a515c2b7de3822cbfad49219800a1bf700091029c694667af03d337856d07e5",
+            "alpha_max": 1.0,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 4
+          },
+          {
+            "alpha_field_sha256": "44eb13e5d48314fe64cfc25f601947030eca0f3e69ddc03e3c9628cd61897615",
+            "alpha_max": 0.246738078309953,
+            "alpha_min": 7.450051912782334e-86,
+            "cells": 37440,
+            "rank": 5
+          },
+          {
+            "alpha_field_sha256": "282545caf216e549bc912fc922fa5720bcab3ff6a8a424b678caa6c20cdd88d4",
+            "alpha_max": 0.9999999999999905,
+            "alpha_min": 0.0,
+            "cells": 37440,
+            "rank": 6
+          },
+          {
+            "alpha_field_sha256": "25e6c28f33a630d6190af75c57368a1524c1fd91b38c1b42a3ca13595772d57b",
+            "alpha_max": 1.8179369387898273e-12,
+            "alpha_min": 2.1729206686339286e-61,
+            "cells": 37440,
+            "rank": 7
+          }
+        ]
+      },
+      "metrics": {
+        "alpha_ge_0_01_cell_center_extents_m": {
+          "x": [
+            -0.17500000447034836,
+            14.949999809265137
+          ],
+          "y": [
+            -5.799999952316284,
+            -0.02500000037252903
+          ],
+          "z": [
+            -1.287475198507309,
+            1.3570684492588043
+          ]
+        },
+        "alpha_ge_0_01_cell_count": 1695,
+        "alpha_ge_0_01_cell_volume_m3": 2.038555165172231,
+        "alpha_ge_0_01_max_abs_z_m": 1.3570684492588043,
+        "alpha_ge_0_01_max_center_x_m": 14.949999809265137,
+        "alpha_ge_0_01_min_center_y_m": -5.799999952316284,
+        "alpha_threshold_cell_support": {
+          "alpha_ge_0.01": {
+            "cell_center_extents_m": {
+              "x": [
+                -0.17500000447034836,
+                14.949999809265137
+              ],
+              "y": [
+                -5.799999952316284,
+                -0.02500000037252903
+              ],
+              "z": [
+                -1.287475198507309,
+                1.3570684492588043
+              ]
+            },
+            "cell_count": 1695,
+            "cell_support_volume_m3": 2.038555165172231,
+            "cell_support_volume_with_x_ge_10_m_m3": 0.3701213008286624,
+            "cells_with_x_ge_10_m": 4
+          },
+          "alpha_ge_0.1": {
+            "cell_center_extents_m": {
+              "x": [
+                -0.17500000447034836,
+                3.7222222089767456
+              ],
+              "y": [
+                -3.785714268684387,
+                -0.02500000037252903
+              ],
+              "z": [
+                -1.0371776074171066,
+                1.287475198507309
+              ]
+            },
+            "cell_count": 1394,
+            "cell_support_volume_m3": 0.6535202359494693,
+            "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+            "cells_with_x_ge_10_m": 0
+          },
+          "alpha_ge_0.9": {
+            "cell_center_extents_m": {
+              "x": [
+                -0.17500000447034836,
+                0.375
+              ],
+              "y": [
+                -2.071428596973419,
+                -0.02500000037252903
+              ],
+              "z": [
+                -0.4001240134239197,
+                0.36530258506536484
+              ]
+            },
+            "cell_count": 806,
+            "cell_support_volume_m3": 0.14565863277188784,
+            "cell_support_volume_with_x_ge_10_m_m3": 0.0,
+            "cells_with_x_ge_10_m": 0
+          }
+        },
+        "mass_centroid_m": [
+          0.9019600872609087,
+          -1.7745322064591118,
+          0.011249597831623994
+        ],
+        "water_mass_kg_at_997_6_kg_m3": 378.2564787540075,
+        "water_volume_m3": 0.3791664783019321
+      },
+      "mpi_ranks": 8
+    }
+  },
+  "field_difference_dt0003_minus_dt0001": {
+    "absolute_difference_relative_to_dt0001_water_volume": 0.5014096761291369,
+    "cells_abs_delta_ge_0_01": 839,
+    "cells_abs_delta_ge_0_05": 321,
+    "centroid_shift_dt0003_minus_dt0001_m": [
+      -0.08723031181004504,
+      0.003319247882118903,
+      0.004623076604866075
+    ],
+    "centroid_shift_magnitude_m": 0.08741577399002477,
+    "domain_volume_weighted_mean_absolute_alpha_difference": 8.265993017450203e-05,
+    "half_difference_as_minimum_redistributed_volume_m3": 0.09505892077855237,
+    "max_abs_alpha_difference": 0.9818705325325681,
+    "note": "Weights use native cell volumes in global OpenFOAM cell order. The address maps came from serial v2512 decomposePar using the source case's unchanged 8-rank 2x2x2 hierarchical decomposition.",
+    "rms_volume_weighted_alpha_difference": 0.003804709715552219,
+    "volume_abs_delta_ge_0_01_m3": 2.7632115911683077,
+    "volume_abs_delta_ge_0_05_m3": 0.9274663655154803,
+    "volume_difference_m3": -2.003804719374891e-07,
+    "volume_weighted_absolute_alpha_difference_m3": 0.19011784155710473
+  },
+  "field_integral_map_checks": {
+    "dt0001": {
+      "field_volume_m3": 0.37916667868240406,
+      "passes_mapping_gate": true,
+      "relative_residual": 3.1700054596270885e-08,
+      "signed_residual_m3": 1.2019604034296805e-08,
+      "solver_ledger_volume_m3": 0.3791666666628
+    },
+    "dt0003": {
+      "field_volume_m3": 0.3791664783019321,
+      "passes_mapping_gate": true,
+      "relative_residual": 5.622680972136988e-09,
+      "signed_residual_m3": 2.1319321308332917e-09,
+      "solver_ledger_volume_m3": 0.37916647617
+    }
+  },
+  "interpretation": "The fixed 0.0003 s case reached the same coarse 0.3000 s horizon. This exploratory same-grid comparison is not a timestep-convergence or E1 validation decision.",
+  "mesh": {
+    "cells": 299520,
+    "centre_volume_order_validated_by_solver_ledger": true,
+    "coordinate_frame": {
+      "x": "crossflow +",
+      "y": "upward +",
+      "z": "spanwise +"
+    },
+    "domain_volume_m3": 2300.000026079747,
+    "native_mesh_center_volume_npz": "/Users/bene/fire-track2/results/runs/rouaix-water-view-20261028/staging/native-cell-centres-volumes.npz",
+    "native_mesh_source": "/Users/bene/fire-track2/results/runs/rouaix-backflow-local-20261028/native-mesh"
+  },
+  "prepared_figure_arrays": {
+    "bytes": 7250657,
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-water-view-20261028/staging/global-alpha-fields-t030.npz",
+    "sha256": "0c5fa0639d8e07488f70ba267c2ca6860f61ba97cdd41e246f4bd5264858e7e0"
+  },
+  "processor_cell_addressing": {
+    "cellProcAddressing_sha256": "2c15f02e350e8632a407a1d9bfaca0b159ef7bd63a9597bab48f9ad9b8139b53",
+    "cell_counts": [
+      37440,
+      37440,
+      37440,
+      37440,
+      37440,
+      37440,
+      37440,
+      37440
+    ],
+    "coeffs": "2 2 2",
+    "global_cell_id_exact_cover": true,
+    "map_archive": "/Users/bene/fire-track2/results/runs/rouaix-pressure-total-restart-20261028/native-utility/map8/map8-processor-mesh.tar.gz",
+    "map_archive_sha256": "ebf1b2d5873086f4dd1a06ca70ab880fbfc93857c82b55373bf61b0836a4dd62",
+    "method": "hierarchical",
+    "native_mesh_source_hashes_match": true,
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-pressure-total-restart-20261028/native-utility/map8/processor-mesh/processors8/constant/polyMesh/cellProcAddressing",
+    "ranks": 8,
+    "receipt_created_utc": "2026-10-28T15:08:40.827983+00:00"
+  },
+  "purpose": "Matched-cell field comparison of the two fresh total-pressure water-nozzle cases.",
+  "release_gate": {
+    "all_cases_match_solver_ledger": true,
+    "does_not_approve_continuation_launch": true,
+    "ready_for_primary_review": true,
+    "volume_relative_tolerance": 1e-06
+  },
+  "schema_version": 1,
+  "time_s": 0.3
+}

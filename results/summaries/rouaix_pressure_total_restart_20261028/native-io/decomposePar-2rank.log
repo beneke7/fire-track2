@@ -1,0 +1,121 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d2-20251219 OPENFOAM=2512 version=2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : decomposePar -force -time 0.2
+Date   : Oct 28 2026
+Time   : 15:09:11
+Host   : 8e727ea61b63
+PID    : 488
+I/O    : collated [unthreaded] (maxThreadFileBufferSize = 0).
+         With non-blocking transfer, buffer-size = 1e+09
+Case   : /case
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStamp (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Overriding OptimisationSwitches according to controlDict
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+
+
+Decomposing mesh
+
+Removing 2 existing processor directories
+Create mesh
+
+Calculating distribution of cells
+Decomposition method hierarchical [2] (region region0)
+
+Finished decomposition in 0.1 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+sigWriteNow : Enabling writing upon signal 10
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Overriding OptimisationSwitches according to controlDict
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+
+Processor 0
+    Number of cells = 149760
+    Number of points = 160386
+    Number of faces shared with processor 1 = 4741
+    Number of processor patches = 1
+    Number of processor faces = 4741
+    Number of boundary faces = 16091
+sigWriteNow : Enabling writing upon signal 10
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Overriding OptimisationSwitches according to controlDict
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+
+Processor 1
+    Number of cells = 149760
+    Number of points = 160343
+    Number of faces shared with processor 0 = 4741
+    Number of processor patches = 1
+    Number of processor faces = 4741
+    Number of boundary faces = 16005
+
+Number of processor faces = 4741
+Max number of cells = 149760 (0% above average 149760)
+Max number of processor patches = 1 (0% above average 1)
+Max number of faces between processors = 4741 (0% above average 4741)
+
+Time = 0.200000000000
+
+Processor 0: field transfer
+sigWriteNow : Enabling writing upon signal 10
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Overriding OptimisationSwitches according to controlDict
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Detected additional non-decomposed files in "/case/0.200000000000/uniform"
+Processor 1: field transfer
+sigWriteNow : Enabling writing upon signal 10
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Overriding OptimisationSwitches according to controlDict
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Detected additional non-decomposed files in "/case/0.200000000000/uniform"
+
+End
+
