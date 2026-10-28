@@ -1,33 +1,44 @@
 # Komondor Rouaix status
 
-Updated 2026-10-28 16:37 UTC (17:37 CET). Analytical E0 remains the only
+Updated 2026-10-28 17:41 UTC. Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-**14705632 (`ml-vof`) is RUNNING** on 120 CPU ranks across three nodes.
-The matched pressure-solver sensitivity uses PCG/DIC, unchanged 0.1 ms step,
-mesh, physics and total-pressure boundaries, targeting 0.255 s from 0.20 s.
-Actual native donor/boundary/field-integrity preflight passed. The first 20
-steps reached 0.2020 s with bounded alpha and speed around 110 m/s. Final
-pressure corrections converged to the configured 1e-8 tolerance in 466–518
-iterations; none hit the 1000 cap. The cap increase from 100 is therefore
-material to this solver policy. Mean early cost is 4.93 s/step, projecting
-about 45 minutes for 550 steps, within the two-hour allocation. This precedes
-the failure window and does not establish a cure. Rolling 5 ms writes retain
-two checkpoints. Auditor 14705633 is pending afterany. Controller **14706859**
-is released and pending afterany:14705632. It will verify the clean .255 s
-parent, freeze its actual contract, then submit the unchanged PCG/DIC child
-for .255→.30 s (450 fixed steps) with its own afterany auditor. It refuses
-guarded, failed, incomplete or unconverged parents. The memory policy required
-two CPU slots for its 4 GiB request; computation remains one thread, capped
-at 15 minutes. Both superseded held/probe jobs were canceled with receipts.
-[Source, declaration, scheduler receipts and profile](../results/summaries/rouaix_pressure_pcgdic_20261028/README.md).
-[Armed continuation and release receipt](../results/summaries/rouaix_pressure_pcgdic_continuation_20261028/README.md).
-The running trial's closed 0.215 s alpha field was copied with unchanged
-before/after metadata and matching remote/local SHA before rolling purge.
-Its mapped water volume agrees with the native history to 1.14e-8 relative.
-[Computed 3D figures, native-cell detail and interpolation comparison](../results/summaries/rouaix_repro_figures_20261028/README.md).
+**14705632 (ml-vof) COMPLETED 0:0**, reaching 0.255 s from 0.20 s
+in 550 fixed 0.1 ms steps on 120 CPU ranks across three nodes. Native End,
+all 4,401 recorded linear solves converged, no guard/pause, and a verified
+archive and incremental ledger were captured. Peak speed was 118.5703 m/s.
+Whole-job wall time was 47m02s; the solver step used 42m54s. Auditor 14705633
+also completed 0:0. This crosses the earlier .2495 s pressure failure window;
+it does not establish long-horizon stability or paper agreement. The changed
+policy includes both PCG/DIC and a 1000-iteration cap versus GAMG/100, so their
+effects are not isolated. [Terminal evidence](../results/summaries/rouaix_pressure_pcgdic_20261028/terminal-14705632/).
+
+**No continuation is running or queued.** Dispatcher 14706859 failed before
+submission because its history parser did not accept the native metadata
+preamble. Actual verification utility 14708344 then exposed solver-written
+empty local pressure patches and omitted default entries; dependent held
+controller 14708349 was canceled. These are workflow failures, not new CFD
+failures. V4 is frozen locally with semantic runtime-patch checks and an
+actual-parent dry-preparation utility; it has not been staged or executed.
+Fresh SSH requires eduID authentication. The intended unchanged child remains
+.255 to .300 s, 450 fixed steps, 120 ranks, three nodes, two-hour bound.
+[Dispatch attempts and preparation](../results/summaries/rouaix_pressure_pcgdic_continuation_20261028/README.md).
+
+The closed 0.215 s alpha checkpoint is retained locally and backed up on HPC;
+its mapped volume agrees with native history to 1.14e-8 relative.
+[Computed field figures](../results/summaries/rouaix_repro_figures_20261028/README.md).
+The mesh plate and gallery central section now use exact native z=0 faces:
+coplanar vtkCutter output created false looping polygons. Independent native
+point/face checks support tested VTK cell identities and alpha mapping; the
+simulation mesh was unchanged. The kinked refinement corridor is assumed,
+with its tail extrapolated beyond x=1.95 m, not source-exact geometry.
+[Corrected mesh plate and audits](../results/summaries/rouaix_mesh_plate_20261028/README.md).
+[Deep Yumeng VOF audit](YUMENG_VOF_REFERENCE_AUDIT.md) identifies useful
+interface/AMR scales and hybrid methods, missing reproduction inputs and
+unverified conservation/performance claims. It does not change physics or
+pass a validation gate.
 
 **14702499 (`ml-vof`) FAILED 1:0**, ending at 15:51:46 UTC after 28m46s.
 It obtained all 120 ranks on three nodes and completed 495 fixed 0.1 ms steps
@@ -39,7 +50,7 @@ the endpoint write. No 0.25/0.30 s field or new ledger exists. The finalized
 1.739 GB archive has verified CRC/member/SHA evidence; no solver remains active.
 Auditor 14702500 COMPLETED 0:0 with verified failure capture. The 0.30→0.50 s continuation is
 unsubmitted and this failed parent cannot qualify. Its matched PCG/DIC
-sensitivity now runs separately as 14705632.
+sensitivity completed separately as 14705632.
 Native collated changeDictionary preflight had verified only the intended four
 boundary changes, unchanged internal pressure and other checkpoint fields.
 The coarse pressure fix therefore does not establish fine-grid stability.
@@ -80,7 +91,7 @@ verified all endpoint fields, End/exit0, incremental ledger and archive.
 Auditor14700602 completed in46s. The recovered tested source used only the
 helper/test/launcher patch. The fine pressure candidate subsequently passed
 the actual native boundary edit/field-hash preflight and started as14702499.
-[Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All 207 affected tests pass;
+[Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All 214 affected tests pass;
 Ruff/format pass. Full suite collection is blocked by missing matplotlib locally.
 
 Historical restart controls below are terminal; current execution is above.

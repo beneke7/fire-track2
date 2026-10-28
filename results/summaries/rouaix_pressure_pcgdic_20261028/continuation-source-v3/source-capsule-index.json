@@ -1,0 +1,168 @@
+{
+  "archive": "rouaix-pressure-pcgdic-continuation-source-20261028-v3.tar.gz",
+  "archive_sha256": "b854bd0a0fad6a81e3eb9bf3c905fa21b6e09cac85cbd72c97d9ca26c870373e",
+  "created_utc": "2026-10-28T17:08:14.165079+00:00",
+  "dirty": true,
+  "dirty_files": [
+    " M cases/e1_rouaix_hpc_restart/audit_restart.py",
+    " M cases/e1_rouaix_hpc_restart/dispatch_pressure_continue.py",
+    " M cases/e1_rouaix_hpc_restart/dispatch_pressure_continue.sbatch",
+    " M cases/e1_rouaix_hpc_restart/run_restart.py",
+    " M tests/test_rouaix_hpc_restart.py",
+    " M tests/test_rouaix_hpc_restart_audit.py",
+    "?? docs/YUMENG_VOF_REFERENCE_AUDIT.md",
+    "?? results/summaries/rouaix_mesh_plate_20261028/",
+    "?? results/summaries/rouaix_pressure_pcgdic_20261028/terminal-14705632/",
+    "?? results/summaries/rouaix_pressure_pcgdic_continuation_20261028/attempts/dispatch-output-failed-14706859.txt",
+    "?? results/summaries/rouaix_pressure_pcgdic_continuation_20261028/attempts/dispatch-receipt-failed-14706859.json",
+    "?? results/summaries/rouaix_pressure_pcgdic_continuation_20261028/attempts/dispatcher-claim-check-14706859.txt",
+    "?? results/summaries/rouaix_pressure_pcgdic_continuation_20261028/attempts/readback-failed-14706859.txt"
+  ],
+  "file_count": 28,
+  "files": [
+    {
+      "bytes": 10632,
+      "path": "cases/e1_rouaix_hpc/collect_native_provenance.py",
+      "sha256": "c1ad1f7dd8ae5118ad9ba36b7cca3a362b85fb38b3058a351eb46eb9d8d9ca35"
+    },
+    {
+      "bytes": 45698,
+      "path": "cases/e1_rouaix_hpc/prepare_case.py",
+      "sha256": "d117fa7d0a08ccbadb1dc38c515a0f55f1a9dde6812d689d8458a4c506c2e7dc"
+    },
+    {
+      "bytes": 103275,
+      "path": "cases/e1_rouaix_hpc/run_pilot.py",
+      "sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88"
+    },
+    {
+      "bytes": 2631,
+      "path": "cases/e1_rouaix_hpc/source-provenance.json",
+      "sha256": "947a39931ceb724795f1305194ae6309aa3216730baf231b8bebc4df2896e751"
+    },
+    {
+      "bytes": 37702,
+      "path": "cases/e1_rouaix_hpc_restart/audit_restart.py",
+      "sha256": "e57e7688ba737b5e81941a5380b65b8971f1029794fc9570a8f767fa8ea92312"
+    },
+    {
+      "bytes": 33199,
+      "path": "cases/e1_rouaix_hpc_restart/dispatch_pressure_continue.py",
+      "sha256": "a8d8dde3213cc618044b07661ad0a789b79699b980aa1907ac9ea5b7200e446a"
+    },
+    {
+      "bytes": 1279,
+      "path": "cases/e1_rouaix_hpc_restart/dispatch_pressure_continue.sbatch",
+      "sha256": "f9ef99810e5484bdf58791a60528c968efa66a3e80366c0a36e0290c87f9194e"
+    },
+    {
+      "bytes": 2105,
+      "path": "cases/e1_rouaix_hpc_restart/restart_pressure.sbatch",
+      "sha256": "318dbff4d292d8c033028ce965793a88f5244e917e87fdaeaa23a45348db76e0"
+    },
+    {
+      "bytes": 2122,
+      "path": "cases/e1_rouaix_hpc_restart/restart_pressure_pcgdic.sbatch",
+      "sha256": "767d11bb8a168ef51e42b5b35f51c2b8586a1a8daf2b3ee7d1ccf5b3a4c18871"
+    },
+    {
+      "bytes": 2159,
+      "path": "cases/e1_rouaix_hpc_restart/restart_pressure_pcgdic_continue.sbatch",
+      "sha256": "3bd7f019828f3856b881412e4bf4801747ebac7cd62e52bc057853bee14ef3b2"
+    },
+    {
+      "bytes": 113130,
+      "path": "cases/e1_rouaix_hpc_restart/run_restart.py",
+      "sha256": "39fa156a9768bd21317ee15809a5e2505e2a6cec8b9ff86c286b985ff877134c"
+    },
+    {
+      "bytes": 2268,
+      "path": "experiments/E1_ROUAIX_PRESSURE_PCGDIC_CONTINUATION_20261028.md",
+      "sha256": "2b34f36042b5ac70ad55df112981b55d7d8627656ba54157d9968fd480528f68"
+    },
+    {
+      "bytes": 4214,
+      "path": "experiments/E1_ROUAIX_PRESSURE_TOTAL_PCGDIC_20261028.md",
+      "sha256": "35b4d57c92ff57b6040a05ee8715f9be8b5a57baab6888cdf2bde9bddcad39ce"
+    },
+    {
+      "bytes": 6225,
+      "path": "experiments/E1_ROUAIX_PRESSURE_TOTAL_RESTART_20261028.md",
+      "sha256": "d48ae5108d6033f0c40505c5559cc6f251ce42c86e5c270d2627bd6c5fd2a0a1"
+    },
+    {
+      "bytes": 9354,
+      "path": "experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md",
+      "sha256": "158178241e3d89912eaa405d749978a60587dcb0640fc6c1da0bf1446fdaf225"
+    },
+    {
+      "bytes": 8190,
+      "path": "results/runs/rouaix-restart-controls-20261027/research/outlet-control-review.md",
+      "sha256": "db43d7e9e657ec070bcc46ae39ca52451abf2ee00999ce452811850344ab2a3a"
+    },
+    {
+      "bytes": 1060,
+      "path": "results/summaries/rouaix_restart_controls_20261027/failed-v3/checkpoint-time.txt",
+      "sha256": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+    },
+    {
+      "bytes": 45655,
+      "path": "scripts/audit_interface_wave_flux.py",
+      "sha256": "1338ee5939157ccba37c700a3c09a83ee58c31d4aa66328d3b9cb04385ef3f3f"
+    },
+    {
+      "bytes": 105688,
+      "path": "scripts/audit_iso_vof_ledger.py",
+      "sha256": "4df8cc2088a5115290a709c90a2ea746b06d29e10935608f1f0c4857e1dacc80"
+    },
+    {
+      "bytes": 72383,
+      "path": "scripts/continue_rouaix_case.py",
+      "sha256": "bd0c867e3f3e158b3cbb715c429b80d607602368eb7afe707f198074a915c656"
+    },
+    {
+      "bytes": 37319,
+      "path": "scripts/hpc_metrics.py",
+      "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+    },
+    {
+      "bytes": 279,
+      "path": "src/aerial_drop/__init__.py",
+      "sha256": "900382be61a5f7a3e5a08cccac0cd37eb391215b0b55474a361bf5520866a1a9"
+    },
+    {
+      "bytes": 47126,
+      "path": "src/aerial_drop/i4f_native_face_reader.py",
+      "sha256": "04c62413a9e36a4a8a7d0bdf025bf93d6cb9d1009985af20092d40802c3e5291"
+    },
+    {
+      "bytes": 44546,
+      "path": "tests/test_rouaix_hpc_restart.py",
+      "sha256": "cd2aef359db4434fc66ba2c37c11ef09534c97314dcf65adf0ced8215eecd330"
+    },
+    {
+      "bytes": 17789,
+      "path": "tests/test_rouaix_hpc_restart_audit.py",
+      "sha256": "41388130f1c3eb42f825cb894b7134c91eb4cbafd93b0e894a03441a0e4f17d0"
+    },
+    {
+      "bytes": 15500,
+      "path": "tests/test_rouaix_hpc_restart_dispatch.py",
+      "sha256": "93a4f69aed916226623225ae2673bf534fb74d384ac2faea0bfbce80011023ac"
+    },
+    {
+      "bytes": 67901,
+      "path": "tests/test_rouaix_hpc_runner.py",
+      "sha256": "b924ec0aa6d2de5ff22e8c043b0fad6e7ba0394533b2e77104ceae545b17ee09"
+    },
+    {
+      "bytes": 6294,
+      "path": "dispatch-source-index.json",
+      "sha256": "3e80e7c71e1a24c084e496d6d40bd4fcf3ef55a880d5caeb0a888373877ceb42"
+    }
+  ],
+  "parent_source_capsule_sha256": "7aace13b3723147cc242cffc13bd472476c713f6727e68d53e53ca3829e2e862",
+  "parent_source_index_sha256": "e639af4d52c844cb330a4130f972855f7f4ec46ac30f2c4ef1df8b8ab01c94de",
+  "revision": "4c88c28bde72ff52b83d78b2c8773479790b09ec",
+  "schema_version": 1
+}

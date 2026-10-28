@@ -24,13 +24,23 @@ figure.
 The same thresholded native exterior faces, zoomed to show their actual cell
 facets. No smoothing, decimation, or interface reconstruction was applied.
 
-### Exact central cut plane
+### Central native-face cross-section
 
-![Exact z equals zero native-cell cut plane](03-native-cell-cut-z0-t0215.png)
+![Exact native internal faces at z equals zero, colored by their positive-z side cell](03-native-cell-cut-z0-t0215.png)
 
-The filled polygons are intersections of native volume cells with the `z = 0 m`
-plane. They show the complete downrange extent on the `x` crossflow and `y`
-upward axes. Color is the original cell-associated alpha value.
+Each filled polygon is an original native internal face whose vertices lie
+exactly in `z = 0 m`. Its color is the original `alpha.water` value in the
+adjacent cell with the greater cell-centre `z` coordinate (the `+z` side), and
+only faces with that value at least `0.01` are shown. The value is piecewise
+constant; no cutter reconstruction or interpolation is used. The full plane has
+94,837 native faces and covers 200 m². The shown water support contains 2,848
+faces with 0.61456 m² total projected area.
+
+The previous exact-plane `vtkCutter` attempt is superseded: its polygons did
+not match the native face topology at this coplanar plane. The corrected PNG is
+rendered directly from raw `points`, `faces`, `owner`, and `neighbour` arrays.
+The superseded image is retained in ignored run staging with its original hash
+in `figure-provenance.json`.
 
 ### Interpolated contour alternative
 
@@ -67,6 +77,7 @@ solver or establish an experimental comparison.
 - [Field, job, mesh, and retrieval identity](checkpoint-source-receipt.json)
 - [Lossless input archive manifest](checkpoint-inputs-manifest.json)
 - [Quantitative figure and filter provenance](figure-provenance.json)
+- [Native cell identity cross-check](../rouaix_mesh_plate_20261028/vtk-native-cell-identity-crosscheck.json)
 - [Figure-generation helpers](source-helpers.tar.gz) and [member hashes](source-helpers-manifest.json)
 - [Ignored local input archive](../../runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-t0215.tar.gz) (95,945,812 bytes; SHA-256 `f94a1bc96d477149659302cb45f0b6858463c1c667ea0dc4ae0d2e9c4f288aa7`)
 - [Run record and exact commands](../../runs/rouaix-repro-figures-20261028/README.md)
@@ -86,7 +97,9 @@ the solver's rolling purge.
 The commands below use this qualified workspace's recorded mesh/cache paths
 and restored helper scripts. The public helper archive preserves the renderer
 and mapper sources. Extract the retained source-state archive, map the collated
-alpha values to global cell order, then run the renderer:
+alpha values to global cell order, then run the renderer. The full renderer now
+creates Figure 03 from raw native faces. The separate Figure 03 helper command
+produces a reviewable candidate in ignored staging only. The full-renderer integration check was run into a separate staging directory and matched all public PNG hashes:
 
 ```sh
 tar -xzf results/runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-t0215.tar.gz -C results/runs/rouaix-repro-figures-20261028/staging
@@ -94,11 +107,16 @@ tar -xzf results/runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-t0
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python scripts/run_local.py --threads 1 --timeout 600 -- .venv/bin/python results/runs/rouaix-fine-water-view-20261028/map_collated_alpha.py --alpha results/runs/rouaix-repro-figures-20261028/staging/pcg-alpha.water-t0215 --cell-proc-addressing results/runs/rouaix-repro-figures-20261028/staging/pcg-cellProcAddressing --nprocs 120 --expected-cells 10099265 --time-s 0.215 --output-npz results/runs/rouaix-repro-figures-20261028/staging/global-alpha-t0215.npz --output-json results/runs/rouaix-repro-figures-20261028/staging/global-alpha-t0215.json
 
 VTK_SMP_MAX_THREADS=4 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python scripts/run_local.py --threads 4 --timeout 1200 -- /Applications/ParaView-6.1.1.app/Contents/bin/pvpython results/runs/rouaix-repro-figures-20261028/render_repro_figures.py
+
+# Corrected Figure 03 only (uses the already mapped global alpha and native mesh)
+VTK_SMP_MAX_THREADS=4 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python scripts/run_local.py --threads 4 --timeout 1200 -- /Applications/ParaView-6.1.1.app/Contents/bin/pvpython results/runs/rouaix-repro-figures-20261028/render_native_z0_midplane.py
 ```
 
-The renderer reads the already-qualified native mesh and geometry cache at
-`results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core`
-and `results/runs/rouaix-fine-water-view-20261028/staging`. Their mesh identity
-is recorded in the provenance JSON. The source-helper archive contains the
-renderer, global field mapper, native mesh reader/view helper, and geometry
-extractor; it does not duplicate mesh or field payloads.
+The original renderer reads the already-qualified native mesh and geometry
+cache at `results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core`
+and `results/runs/rouaix-fine-water-view-20261028/staging`. The corrected
+Figure 03 uses `render_native_z0_midplane.py` to read the binary native mesh
+faces directly and color the selected `+z` side from the mapped `.215 s` field.
+The source-helper archive contains both renderers, the mapper, native mesh
+reader/view helper, and geometry extractor; it does not duplicate the mesh or
+checkpoint payloads.

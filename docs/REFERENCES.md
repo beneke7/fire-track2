@@ -45,8 +45,11 @@ PDF p. 2 gives the bibliographic record. Added in commit `d23b73d`; SHA-256
 PDF pp. 7–8 provide a small jet-in-crossflow validation case and VOF-to-DPM
 transfer sensitivities. Its AMR, SST k–omega and transfer criteria are inputs
 for controlled numerical comparisons, not adopted project physics or a
-passed conservation/field gate. Printed timestep and AG600 height-sweep
-inconsistencies require explicit treatment before using those cases.
+passed conservation/field gate. The timestep history is under-specified
+(the table value lies within the prose range); AG600 height labels, property
+units and transfer accounting require explicit treatment. The full
+[VOF and hybrid-method audit](YUMENG_VOF_REFERENCE_AUDIT.md) records page-level
+inputs, validation scope, unit issues and proposed checks.
 
 ## E1 source: Rouaix et al.
 

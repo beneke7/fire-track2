@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import struct
 import subprocess
 import tarfile
 from pathlib import Path
@@ -284,12 +285,158 @@ def test_pressure_checkpoint_integrity_uses_existing_native_reader(tmp_path: Pat
     restart.verify_pressure_total_patches(case, source_dir)
 
 
+def _write_runtime_processor_boundary(boundary_path: Path) -> None:
+    boundary_path.parent.mkdir(parents=True, exist_ok=True)
+    with boundary_path.open("wb") as stream:
+        for rank in range(120):
+            patch_entries = []
+            for patch in PRESSURE_TOTAL_PATCHES:
+                count = 2 if rank == 1 else 0
+                patch_entries.append(
+                    f"{patch}\n{{\n    type patch;\n    nFaces {count};\n    startFace 0;\n}}"
+                )
+            stream.write(
+                (
+                    f"// processor{rank}\n1\n(\nFoamFile\n{{\n    object boundary;\n}}\n4\n(\n"
+                    + "\n".join(patch_entries)
+                    + "\n)\n)\n"
+                ).encode("ascii")
+            )
+
+
+def _write_runtime_pressure_fixture(
+    case: Path, source_dir: Path, mutation: str | None = None
+) -> None:
+    endpoint = case / "processors120/0.255000000000"
+    endpoint.mkdir(parents=True, exist_ok=True)
+    boundary_path = case / "processors120/constant/polyMesh/boundary"
+    _write_runtime_processor_boundary(boundary_path)
+    reader_path = Path(__file__).resolve().parents[1] / "src/aerial_drop/i4f_native_face_reader.py"
+    source_dir.mkdir(parents=True, exist_ok=True)
+    (source_dir / "i4f_native_face_reader.py").write_bytes(reader_path.read_bytes())
+
+    field_path = endpoint / "p_rgh"
+    with field_path.open("wb") as stream:
+        for rank in range(120):
+            patch_blocks = []
+            for patch in PRESSURE_TOTAL_PATCHES:
+                count = 2 if rank == 1 else 0
+                serialized_value_count = count + (
+                    1
+                    if mutation == "value_count" and rank == 1 and patch == "downstreamOutlet"
+                    else 0
+                )
+                p0_text = "p0 uniform 0;\n" if count else "p0 nonuniform List<scalar> 0;\n"
+                value_text = (
+                    f"value nonuniform List<scalar>\n{serialized_value_count}\n(".encode("ascii")
+                    if count
+                    else b"value nonuniform List<scalar> 0;\n"
+                )
+                if mutation == "p0_nonzero" and rank == 1 and patch == "downstreamOutlet":
+                    p0_text = "p0 uniform 1;\n"
+                if mutation == "bad_empty_count" and rank == 0 and patch == "downstreamOutlet":
+                    p0_text = "p0 nonuniform List<scalar> 1;\n"
+                    value_text = b"value nonuniform List<scalar> 1;\n"
+                wrong_rho = (
+                    "rho wrongDensity;\n"
+                    if mutation == "wrong_rho" and rank == 1 and patch == "downstreamOutlet"
+                    else ""
+                )
+                patch_blocks.append(
+                    f"{patch}\n{{\n    type prghTotalPressure;\n    {p0_text}    ".encode("ascii")
+                    + wrong_rho.encode("ascii")
+                    + b"    "
+                    + value_text
+                    + (
+                        struct.pack(
+                            f"<{serialized_value_count}d",
+                            *(
+                                (float("nan"), 2.0)
+                                if mutation == "value_nan"
+                                and rank == 1
+                                and patch == "downstreamOutlet"
+                                else (
+                                    (1.0, 2.0, 3.0)
+                                    if mutation == "value_count"
+                                    and rank == 1
+                                    and patch == "downstreamOutlet"
+                                    else (4.0, 5.0)
+                                )
+                            ),
+                        )
+                        + b");\n"
+                        if count
+                        else b""
+                    )
+                    + b"}\n"
+                )
+            stream.write(
+                b"// processor"
+                + str(rank).encode("ascii")
+                + b"\n1\n(\nFoamFile\n{\n    format binary;\n    object p_rgh;\n}\n"
+                + b"dimensions [0 2 -2 0 0 0 0];\ninternalField nonuniform List<scalar>\n1\n("
+                + struct.pack("<d", 1.0)
+                + b");\nboundaryField\n{\n"
+                + b"".join(patch_blocks)
+                + b"}\n)\n"
+            )
+
+
+def test_runtime_pressure_checkpoint_accepts_native_empty_and_computed_patch_values(
+    tmp_path: Path,
+) -> None:
+    case = tmp_path / "case"
+    source_dir = tmp_path / "source"
+    _write_runtime_pressure_fixture(case, source_dir)
+
+    restart.verify_pressure_total_patches(
+        case,
+        source_dir,
+        checkpoint_time_dir="processors120/0.255000000000",
+        runtime_checkpoint=True,
+    )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("p0_nonzero", "runtime pressure values or face counts"),
+        ("value_count", "runtime pressure values or face counts"),
+        ("value_nan", "runtime pressure values or face counts"),
+        ("wrong_rho", "rho default differs"),
+        ("bad_empty_count", "empty p_rgh patch"),
+    ],
+)
+def test_runtime_pressure_checkpoint_rejects_nonzero_p0_bad_value_or_face_counts(
+    tmp_path: Path, mutation: str, message: str
+) -> None:
+    case = tmp_path / "case"
+    source_dir = tmp_path / "source"
+    _write_runtime_pressure_fixture(case, source_dir, mutation=mutation)
+
+    with pytest.raises(RestartError, match=message):
+        restart.verify_pressure_total_patches(
+            case,
+            source_dir,
+            checkpoint_time_dir="processors120/0.255000000000",
+            runtime_checkpoint=True,
+        )
+
+
 NATIVE_PARENT_TIME = (
     "value 0.199999999999994293;\n"
     'name "0.200000000000";\n'
     "index 2000;\n"
     "deltaT 0.0001;\n"
     "deltaT0 0.0001;\n"
+)
+# Exact header/endpoint bytes captured from parent job 14705632; see its terminal summary.
+PCGDIC_NATIVE_VOLUME_EXCERPT = (
+    b"# Region            : all region0\n"
+    b"# Cells             : 10099265\n"
+    b"# Volume            : 2.300000000000e+03\n"
+    b"# Time              \tvolIntegrate(alpha.water)\n"
+    b"0.255000000000       \t3.197941351801e-01\n"
 )
 
 
@@ -792,7 +939,7 @@ def _completed_pressure_parent(
     start_time_s = spec["start_time_s"]
     target_time_s = spec["target_time_s"]
     step_count = spec["step_count"]
-    inventory_m3 = 0.379166666663 if variant == "pressure-total-p0-zero" else 0.36123456789
+    inventory_m3 = 0.379166666663 if variant == "pressure-total-p0-zero" else 0.3197941351801
     write_interval_s = 0.05 if variant == "pressure-total-p0-zero" else 0.005
     job_id = "14709991" if variant == "pressure-total-p0-zero" else "14709993"
     run_dir = tmp_path / f"rouaix-restart-{variant}-{job_id}"
@@ -841,18 +988,20 @@ def _completed_pressure_parent(
         f"index {round(target_time_s / 0.0001)};\ndeltaT 0.0001;\ndeltaT0 0.0001;\n",
         encoding="ascii",
     )
-    patch_text = "\n".join(
-        f"{patch}\n{{\ntype prghTotalPressure;\np0 uniform 0;\nrho rho;\n"
-        "U U;\nphi phi;\nvalue uniform 0;\n}"
-        for patch in restart.PRESSURE_TOTAL_PATCHES
-    )
-    (endpoint / "p_rgh").write_text(
-        "".join(
-            f"// processor{rank}\n1\n(\nboundaryField\n{{\n{patch_text}\n}}\n)\n"
-            for rank in range(restart.EXPECTED_RANKS)
-        ),
-        encoding="ascii",
-    )
+    with (endpoint / "p_rgh").open("w", encoding="ascii") as stream:
+        for rank in range(restart.EXPECTED_RANKS):
+            patch_text = "\n".join(
+                f"{patch}\n{{\ntype prghTotalPressure;\n"
+                + (
+                    "p0 uniform 0;\nvalue uniform 0;\n"
+                    if rank == 1
+                    else "p0 nonuniform List<scalar> 0;\nvalue nonuniform List<scalar> 0;\n"
+                )
+                + "}"
+                for patch in restart.PRESSURE_TOTAL_PATCHES
+            )
+            stream.write(f"// processor{rank}\n1\n(\nboundaryField\n{{\n{patch_text}\n}}\n)\n")
+    _write_runtime_processor_boundary(case / "processors120/constant/polyMesh/boundary")
     manifest = {
         "case_id": spec["case_id"],
         "rank_count": 120,
@@ -884,13 +1033,17 @@ def _completed_pressure_parent(
         "solver_time_steps_recorded": step_count,
     }
     restart.write_json(case / "terminal-status.json", terminal)
-    history_path = case / "postProcessing/waterInventory/0/volFieldValue.dat"
+    history_object = "waterVolume" if variant == "pressure-total-pcgdic" else "waterInventory"
+    history_path = case / f"postProcessing/{history_object}/0.200000000000/volFieldValue.dat"
     history_path.parent.mkdir(parents=True, exist_ok=True)
-    history_path.write_text(
-        f"# Time volIntegrate(alpha.water)\n{start_time_s} 0.2508975771509\n"
-        f"{target_time_s} {inventory_m3}\n",
-        encoding="ascii",
-    )
+    if variant == "pressure-total-pcgdic":
+        history_path.write_bytes(PCGDIC_NATIVE_VOLUME_EXCERPT)
+    else:
+        history_path.write_text(
+            f"# Time volIntegrate(alpha.water)\n{start_time_s} 0.2508975771509\n"
+            f"{target_time_s} {inventory_m3}\n",
+            encoding="ascii",
+        )
     ledger = {
         "coverage": {
             "status": "requested_horizon_reached_exploratory_only",
@@ -937,6 +1090,15 @@ def _completed_pressure_parent(
         state["solver_convergence"] = {"all_converged": True}
     restart.write_json(run_dir / "run-state.json", state)
     return run_dir, job_id
+
+
+def test_parent_inventory_reader_uses_captured_native_water_volume_sample() -> None:
+    raw = PCGDIC_NATIVE_VOLUME_EXCERPT
+    assert restart._parent_inventory_sample(raw, 0.255) == pytest.approx(0.3197941351801)
+
+    malformed = raw.replace(b"volIntegrate(alpha.water)", b"sum(alpha.water)")
+    with pytest.raises(RestartError, match="named Time and"):
+        restart._parent_inventory_sample(malformed, 0.255)
 
 
 def test_dynamic_parent_contract_accepts_verified_030_checkpoint_and_rejects_mutations(
@@ -1017,7 +1179,7 @@ def test_pcgdic_parent_contract_prepares_only_the_255_to_300_inherited_policy_ch
     )
     assert manifest["start_time_s"] == pytest.approx(0.255)
     assert manifest["horizon_s"] == pytest.approx(0.3)
-    assert manifest["parent_checkpoint_inventory_m3"] == pytest.approx(0.36123456789)
+    assert manifest["parent_checkpoint_inventory_m3"] == pytest.approx(0.3197941351801)
     assert manifest["parent_checkpoint_inventory_m3"] != restart.PARENT_INVENTORY_M3
     assert manifest["numerical_variant"] == "inherited-pcg-dic"
     assert (

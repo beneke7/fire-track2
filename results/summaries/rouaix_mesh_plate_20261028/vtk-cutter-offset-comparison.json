@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T17:07:17.212128+00:00",
+  "source_geometry_npz_sha256": "f98e9b71773d871ba11d2a751931ab96dc3d262f25e480e9d3c47d40f69a1add",
+  "native_reader_cell_order_check": {
+    "cells": 10099265,
+    "max_abs_centre_difference_m": 0.0,
+    "max_abs_volume_difference_m3": 0.0,
+    "volume_sum_m3": 2300.0000008438396
+  },
+  "offsets_m": [
+    0.0,
+    1e-06,
+    -1e-06
+  ],
+  "offset_results": [
+    {
+      "plane_z_m": 0.0,
+      "cut_polygons": 119288,
+      "unique_native_cells": 117910,
+      "native_cells_with_multiple_polygons": 1378,
+      "repeated_cell_types": {
+        "VTK_HEXAHEDRON": 1352,
+        "VTK_POLYHEDRON": 26
+      },
+      "duplicate_polygon_geometry_groups_at_1nm": 0,
+      "duplicate_polygon_instances": 0,
+      "local_edges": {
+        "fine_nozzle": {
+          "unique_edge_segments": 7076,
+          "edge_length_p10_median_p90_m": [
+            0.012615014798939228,
+            0.013966485857963562,
+            0.014044944196939468
+          ],
+          "segments_le_1e-6m_removed": 26
+        },
+        "coarse_downstream": {
+          "unique_edge_segments": 196,
+          "edge_length_p10_median_p90_m": [
+            0.019514083862304688,
+            0.055866241455078125,
+            0.08054256439208984
+          ],
+          "segments_le_1e-6m_removed": 26
+        }
+      },
+      "local_cells": {
+        "fine_nozzle": {
+          "cut_polygons": 3501,
+          "unique_native_cells": 3501,
+          "cells_with_multiple_cut_polygons": 0,
+          "native_cells_with_a_bbox_face_on_requested_plane": 3501,
+          "unique_native_cells_with_a_bbox_face_on_requested_plane": 3501,
+          "native_cell_types_by_unique_cell": {
+            "VTK_HEXAHEDRON": 3464,
+            "VTK_POLYHEDRON": 37
+          },
+          "cut_polygon_span_x_p10_median_p90_m": [
+            0.013966470956802368,
+            0.013966478407382965,
+            0.013966500759124756
+          ],
+          "cut_polygon_span_y_p10_median_p90_m": [
+            0.01404494047164917,
+            0.01404494047164917,
+            0.014044947922229767
+          ],
+          "largest_polygon_span_m": [
+            0.02793295681476593,
+            0.028089940547943115
+          ],
+          "largest_polygon_native_cell": {
+            "native_global_cell_id": 8317342,
+            "vtk_type": "VTK_POLYHEDRON",
+            "native_cell_centre_m": [
+              -0.1396648064255714,
+              -0.6320606983116728,
+              -0.010510402614894688
+            ],
+            "native_cell_volume_m3": 1.6493566510196714e-05,
+            "native_cell_bounds_m": {
+              "x": [
+                -0.1536312848329544,
+                -0.12569832801818848
+              ],
+              "y": [
+                -0.6461299061775208,
+                -0.617977499961853
+              ],
+              "z": [
+                -0.021051984280347824,
+                3.0023532801681904e-17
+              ]
+            },
+            "native_cell_point_count": 14,
+            "native_cell_face_count": 9,
+            "native_cell_edge_count": 21,
+            "native_faces_coplanar_with_z0": [
+              {
+                "face_index": 0,
+                "point_count": 5,
+                "bounds_xy_m": [
+                  [
+                    -0.1536312848329544,
+                    -0.12569832801818848
+                  ],
+                  [
+                    -0.6460674405097961,
+                    -0.617977499961853
+                  ]
+                ]
+              }
+            ],
+            "cut_polygon_matches_native_z0_face": false
+          }
+        },
+        "coarse_downstream": {
+          "cut_polygons": 84,
+          "unique_native_cells": 84,
+          "cells_with_multiple_cut_polygons": 0,
+          "native_cells_with_a_bbox_face_on_requested_plane": 84,
+          "unique_native_cells_with_a_bbox_face_on_requested_plane": 84,
+          "native_cell_types_by_unique_cell": {
+            "VTK_HEXAHEDRON": 76,
+            "VTK_POLYHEDRON": 8
+          },
+          "cut_polygon_span_x_p10_median_p90_m": [
+            0.02831497192382813,
+            0.05586576461791992,
+            0.06507539749145512
+          ],
+          "cut_polygon_span_y_p10_median_p90_m": [
+            0.024374723434448242,
+            0.05617952346801758,
+            0.11235952377319336
+          ],
+          "largest_polygon_span_m": [
+            0.06902217864990234,
+            0.11235952377319336
+          ],
+          "largest_polygon_native_cell": {
+            "native_global_cell_id": 587633,
+            "vtk_type": "VTK_POLYHEDRON",
+            "native_cell_centre_m": [
+              6.2709496023229,
+              -6.460747935589735,
+              -0.07119262963605938
+            ],
+            "native_cell_volume_m3": 0.0017875173123491365,
+            "native_cell_bounds_m": {
+              "x": [
+                6.215083599090576,
+                6.326815605163574
+              ],
+              "y": [
+                -6.5168538093566895,
+                -6.404494285583496
+              ],
+              "z": [
+                -0.14294631779193878,
+                1.9104788420651342e-17
+              ]
+            },
+            "native_cell_point_count": 13,
+            "native_cell_face_count": 9,
+            "native_cell_edge_count": 20,
+            "native_faces_coplanar_with_z0": [
+              {
+                "face_index": 4,
+                "point_count": 5,
+                "bounds_xy_m": [
+                  [
+                    6.215083599090576,
+                    6.326815605163574
+                  ],
+                  [
+                    -6.5168538093566895,
+                    -6.404494285583496
+                  ]
+                ]
+              }
+            ],
+            "cut_polygon_matches_native_z0_face": false
+          }
+        }
+      }
+    },
+    {
+      "plane_z_m": 1e-06,
+      "cut_polygons": 94837,
+      "unique_native_cells": 94837,
+      "native_cells_with_multiple_polygons": 0,
+      "repeated_cell_types": {},
+      "duplicate_polygon_geometry_groups_at_1nm": 0,
+      "duplicate_polygon_instances": 0,
+      "local_edges": {
+        "fine_nozzle": {
+          "unique_edge_segments": 6344,
+          "edge_length_p10_median_p90_m": [
+            0.013966470956802368,
+            0.013966500759124756,
+            0.014044944196939468
+          ],
+          "segments_le_1e-6m_removed": 0
+        },
+        "coarse_downstream": {
+          "unique_edge_segments": 120,
+          "edge_length_p10_median_p90_m": [
+            0.05586576461791992,
+            0.05617952346801758,
+            0.06173515319824266
+          ],
+          "segments_le_1e-6m_removed": 0
+        }
+      },
+      "local_cells": {
+        "fine_nozzle": {
+          "cut_polygons": 3189,
+          "unique_native_cells": 3189,
+          "cells_with_multiple_cut_polygons": 0,
+          "native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "unique_native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "native_cell_types_by_unique_cell": {
+            "VTK_HEXAHEDRON": 3156,
+            "VTK_POLYHEDRON": 33
+          },
+          "cut_polygon_span_x_p10_median_p90_m": [
+            0.013966470956802368,
+            0.013966478407382965,
+            0.013966500759124756
+          ],
+          "cut_polygon_span_y_p10_median_p90_m": [
+            0.01404494047164917,
+            0.01404494047164917,
+            0.014044947922229767
+          ],
+          "largest_polygon_span_m": [
+            0.02793295681476593,
+            0.028089940547943115
+          ],
+          "largest_polygon_native_cell": {
+            "native_global_cell_id": 8227139,
+            "vtk_type": "VTK_POLYHEDRON",
+            "native_cell_centre_m": [
+              -0.13966480642557141,
+              -0.6320606983116729,
+              0.01051040261489471
+            ],
+            "native_cell_volume_m3": 1.6493566510196683e-05,
+            "native_cell_bounds_m": {
+              "x": [
+                -0.1536312848329544,
+                -0.12569832801818848
+              ],
+              "y": [
+                -0.6461299061775208,
+                -0.617977499961853
+              ],
+              "z": [
+                7.114060979143908e-18,
+                0.021051984280347824
+              ]
+            },
+            "native_cell_point_count": 14,
+            "native_cell_face_count": 9,
+            "native_cell_edge_count": 21,
+            "native_faces_coplanar_with_z0": [
+              {
+                "face_index": 2,
+                "point_count": 5,
+                "bounds_xy_m": [
+                  [
+                    -0.1536312848329544,
+                    -0.12569832801818848
+                  ],
+                  [
+                    -0.6460674405097961,
+                    -0.617977499961853
+                  ]
+                ]
+              }
+            ],
+            "cut_polygon_matches_native_z0_face": false
+          }
+        },
+        "coarse_downstream": {
+          "cut_polygons": 62,
+          "unique_native_cells": 62,
+          "cells_with_multiple_cut_polygons": 0,
+          "native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "unique_native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "native_cell_types_by_unique_cell": {
+            "VTK_HEXAHEDRON": 55,
+            "VTK_POLYHEDRON": 7
+          },
+          "cut_polygon_span_x_p10_median_p90_m": [
+            0.05586576461791992,
+            0.05586576461791992,
+            0.11173152923583984
+          ],
+          "cut_polygon_span_y_p10_median_p90_m": [
+            0.05617952346801758,
+            0.05618000030517578,
+            0.11235952377319336
+          ],
+          "largest_polygon_span_m": [
+            0.11173200607299805,
+            0.11235952377319336
+          ],
+          "largest_polygon_native_cell": {
+            "native_global_cell_id": 587822,
+            "vtk_type": "VTK_POLYHEDRON",
+            "native_cell_centre_m": [
+              6.270949602322902,
+              -6.460747935589734,
+              0.0711926296360593
+            ],
+            "native_cell_volume_m3": 0.0017875173123491368,
+            "native_cell_bounds_m": {
+              "x": [
+                6.215083599090576,
+                6.326815605163574
+              ],
+              "y": [
+                -6.5168538093566895,
+                -6.404494285583496
+              ],
+              "z": [
+                -5.71267871688066e-17,
+                0.14294631779193878
+              ]
+            },
+            "native_cell_point_count": 13,
+            "native_cell_face_count": 9,
+            "native_cell_edge_count": 20,
+            "native_faces_coplanar_with_z0": [
+              {
+                "face_index": 0,
+                "point_count": 5,
+                "bounds_xy_m": [
+                  [
+                    6.215083599090576,
+                    6.326815605163574
+                  ],
+                  [
+                    -6.5168538093566895,
+                    -6.404494285583496
+                  ]
+                ]
+              }
+            ],
+            "cut_polygon_matches_native_z0_face": false
+          }
+        }
+      }
+    },
+    {
+      "plane_z_m": -1e-06,
+      "cut_polygons": 94837,
+      "unique_native_cells": 94837,
+      "native_cells_with_multiple_polygons": 0,
+      "repeated_cell_types": {},
+      "duplicate_polygon_geometry_groups_at_1nm": 0,
+      "duplicate_polygon_instances": 0,
+      "local_edges": {
+        "fine_nozzle": {
+          "unique_edge_segments": 6344,
+          "edge_length_p10_median_p90_m": [
+            0.013966470956802368,
+            0.013966500759124756,
+            0.014044944196939468
+          ],
+          "segments_le_1e-6m_removed": 0
+        },
+        "coarse_downstream": {
+          "unique_edge_segments": 120,
+          "edge_length_p10_median_p90_m": [
+            0.05586576461791992,
+            0.05617952346801758,
+            0.06173515319824266
+          ],
+          "segments_le_1e-6m_removed": 0
+        }
+      },
+      "local_cells": {
+        "fine_nozzle": {
+          "cut_polygons": 3189,
+          "unique_native_cells": 3189,
+          "cells_with_multiple_cut_polygons": 0,
+          "native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "unique_native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "native_cell_types_by_unique_cell": {
+            "VTK_HEXAHEDRON": 3156,
+            "VTK_POLYHEDRON": 33
+          },
+          "cut_polygon_span_x_p10_median_p90_m": [
+            0.013966470956802368,
+            0.013966478407382965,
+            0.013966500759124756
+          ],
+          "cut_polygon_span_y_p10_median_p90_m": [
+            0.01404494047164917,
+            0.01404494047164917,
+            0.014044947922229767
+          ],
+          "largest_polygon_span_m": [
+            0.02793295681476593,
+            0.028089940547943115
+          ],
+          "largest_polygon_native_cell": {
+            "native_global_cell_id": 8317342,
+            "vtk_type": "VTK_POLYHEDRON",
+            "native_cell_centre_m": [
+              -0.1396648064255714,
+              -0.6320606983116728,
+              -0.010510402614894688
+            ],
+            "native_cell_volume_m3": 1.6493566510196714e-05,
+            "native_cell_bounds_m": {
+              "x": [
+                -0.1536312848329544,
+                -0.12569832801818848
+              ],
+              "y": [
+                -0.6461299061775208,
+                -0.617977499961853
+              ],
+              "z": [
+                -0.021051984280347824,
+                3.0023532801681904e-17
+              ]
+            },
+            "native_cell_point_count": 14,
+            "native_cell_face_count": 9,
+            "native_cell_edge_count": 21,
+            "native_faces_coplanar_with_z0": [
+              {
+                "face_index": 0,
+                "point_count": 5,
+                "bounds_xy_m": [
+                  [
+                    -0.1536312848329544,
+                    -0.12569832801818848
+                  ],
+                  [
+                    -0.6460674405097961,
+                    -0.617977499961853
+                  ]
+                ]
+              }
+            ],
+            "cut_polygon_matches_native_z0_face": false
+          }
+        },
+        "coarse_downstream": {
+          "cut_polygons": 62,
+          "unique_native_cells": 62,
+          "cells_with_multiple_cut_polygons": 0,
+          "native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "unique_native_cells_with_a_bbox_face_on_requested_plane": 0,
+          "native_cell_types_by_unique_cell": {
+            "VTK_HEXAHEDRON": 55,
+            "VTK_POLYHEDRON": 7
+          },
+          "cut_polygon_span_x_p10_median_p90_m": [
+            0.05586576461791992,
+            0.05586576461791992,
+            0.11173152923583984
+          ],
+          "cut_polygon_span_y_p10_median_p90_m": [
+            0.05617952346801758,
+            0.05618000030517578,
+            0.11235952377319336
+          ],
+          "largest_polygon_span_m": [
+            0.11173200607299805,
+            0.11235952377319336
+          ],
+          "largest_polygon_native_cell": {
+            "native_global_cell_id": 587633,
+            "vtk_type": "VTK_POLYHEDRON",
+            "native_cell_centre_m": [
+              6.2709496023229,
+              -6.460747935589735,
+              -0.07119262963605938
+            ],
+            "native_cell_volume_m3": 0.0017875173123491365,
+            "native_cell_bounds_m": {
+              "x": [
+                6.215083599090576,
+                6.326815605163574
+              ],
+              "y": [
+                -6.5168538093566895,
+                -6.404494285583496
+              ],
+              "z": [
+                -0.14294631779193878,
+                1.9104788420651342e-17
+              ]
+            },
+            "native_cell_point_count": 13,
+            "native_cell_face_count": 9,
+            "native_cell_edge_count": 20,
+            "native_faces_coplanar_with_z0": [
+              {
+                "face_index": 4,
+                "point_count": 5,
+                "bounds_xy_m": [
+                  [
+                    6.215083599090576,
+                    6.326815605163574
+                  ],
+                  [
+                    -6.5168538093566895,
+                    -6.404494285583496
+                  ]
+                ]
+              }
+            ],
+            "cut_polygon_matches_native_z0_face": false
+          }
+        }
+      }
+    }
+  ],
+  "interpretation": "Each ROI cut polygon carries its source native cell ID. Plane offsets test whether the visible edge pattern depends on the exact central plane. Repeated native cell IDs mean one native cell emitted more than one cut polygon; geometric duplicates are checked separately.",
+  "processing": {
+    "elapsed_s": 21.37
+  }
+}

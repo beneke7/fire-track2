@@ -189,8 +189,8 @@
     },
     {
       "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/03-native-cell-cut-z0-t0215.png",
-      "sha256": "c1f47ac88cbdf0642b66d6a8f42a7591b9c158fd6099f7848b1220c54fa8eb17",
-      "bytes": 256530,
+      "sha256": "1f0e52f5c8ed3f32ca183200b58f19b9655be1fbc3508c3628f600a6406c94f6",
+      "bytes": 254944,
       "plane_origin_m": [
         0.0,
         0.0,
@@ -201,14 +201,40 @@
         0.0,
         1.0
       ],
-      "threshold": 0.01,
-      "threshold_semantics": "native volume cells with alpha.water >= 0.01",
-      "selected_native_cells": 130689,
-      "cut_polygons": 3181,
-      "alpha_min": 0.010668508846354674,
-      "alpha_max": 1.0,
-      "geometry_method": "vtkCutter on thresholded native volume cells; cell alpha values retained",
-      "gpu_or_opengl_used": false
+      "geometry_method": "raw binary native internal faces at z=0; one-to-one exact native face polygons; no vtkCutter or reconstructed intersections",
+      "native_internal_faces_on_plane": 94837,
+      "native_face_vertex_label_keys_unique": true,
+      "all_face_projected_area_sum_m2": 200.00000000057912,
+      "expected_complete_section_area_m2": 200.0,
+      "section_area_relative_residual": 2.89560375676956e-12,
+      "adjacent_cell_selection": "for each exact z=0 internal face, choose owner or neighbour with the greater cached native-cell-centre z coordinate; alpha is taken directly from that cell's mapped global value",
+      "selected_side_by_face_count": {
+        "owner": 20527,
+        "neighbour": 74310
+      },
+      "smallest_abs_owner_neighbour_centre_dz_m": 0.009733946528285742,
+      "centre_side_ties_within_1e_12m": 0,
+      "threshold_alpha_water": 0.01,
+      "threshold_semantics": "+z-adjacent native cell has alpha.water >= 0.01",
+      "selected_native_face_count": 2848,
+      "selected_distinct_adjacent_native_cell_count": 2848,
+      "selected_face_area_sum_m2": 0.6145643713514821,
+      "alpha_min_all_plus_z_cells": 0.0,
+      "alpha_max_all_plus_z_cells": 1.0,
+      "alpha_min_selected": 0.010501680571007262,
+      "alpha_max_selected": 1.0,
+      "coordinate_frame": {
+        "x": "crossflow",
+        "y": "upward",
+        "z": "lateral"
+      },
+      "cell_value_to_face_value": "piecewise constant from the +z-adjacent cell; no interpolation",
+      "panel_title": "Central z=0 m section \u2022 native faces colored by +z-side cell \u03b1.water",
+      "crop_note": "x=[\u22120.45, 12.8] m, y=[\u22123.0, 0.28] m \u2022 filled polygons are existing internal faces; +z-adjacent cell \u03b1.water \u2265 0.01 (piecewise constant).",
+      "gpu_or_opengl_used": false,
+      "color_semantics": "+z-adjacent native cell alpha.water value, piecewise constant without interpolation",
+      "vtk_cutter_used": false,
+      "corrected_from_vtk_cutter_attempt": true
     },
     {
       "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/04-interpolated-isosurface-t0215.png",
@@ -239,7 +265,7 @@
     }
   ],
   "rendering": {
-    "method": "Matplotlib Agg orthographic polygon projection and exact native-cell cut plane",
+    "method": "Matplotlib Agg; direct raw native z=0 internal-face polygons for Figure 03 and native polygon surfaces for the other views",
     "paraview_render_called": false,
     "opengl_or_gpu_used": false,
     "source_thresholds": "native volume cells alpha.water >= 0.01 and >= 0.1",
@@ -247,9 +273,12 @@
     "surface_smoothing_or_decimation": false,
     "alternative_contour": "vtkCellDataToPointData cell-to-point averaging then vtkContourFilter at alpha.water=0.01; visualization only",
     "peak_rss_gib": 2.9444580078125,
-    "renderer_sha256": "3f81fe907bd85132330a526829e1e7fbd0b829b46dac927d9797dd65953c6846",
+    "renderer_sha256": "65ac7e4d8248dc3f8cf007bb2caa5889e5e727126f8cc5e78964107f8e8fc5bd",
     "launcher": "scripts/run_local.py --threads 4 --timeout 1200",
-    "observed_wall_time_s_approx": 20
+    "observed_wall_time_s_approx": 20,
+    "figure03_renderer_sha256": "5734842844f19c51ca372874dc436f10502442f16c7e914dded377d87dc128f2",
+    "figure03_peak_rss_gib": 1.8293609619140625,
+    "figure03_elapsed_s": 5.34
   },
   "source_archives": {
     "checkpoint_inputs": {
@@ -263,15 +292,90 @@
     },
     "helper_source": {
       "path": "results/summaries/rouaix_repro_figures_20261028/source-helpers.tar.gz",
-      "bytes": 19736,
-      "sha256": "2a93a15e8944ca9a42d281043b450a6d8c5b83767212282e80647ee4d032f794",
-      "manifest_sha256": "8429ae0eb4ae44e7b65e83c2476d5468e8eacc902b61b6ddd4782b29ea816d81"
+      "bytes": 22541,
+      "sha256": "fece63530649027ad3b020842974474e4f33c6b2e118f2e0604c49d239aed4b3",
+      "manifest_sha256": "af157116c9ea6316f7f1329a6dbcf897ef8acba3acaacdbe63055f950ba35758"
     },
     "retention_cleanup": {
       "record_path": "results/runs/rouaix-repro-figures-20261028/staging/source-stage-cleanup.json",
-      "record_sha256": "4683fdec1cceb89453e9a3fb7784c0caef3e2d4153dbbccc0fc12d53a7d25b36",
-      "raw_alpha_cpa_archived_mapped_npz_regenerable": true
+      "record_sha256": "db10d33abe10ada0db03c086e2307fcc60e9e10f72748936b0f12cd2bb78f2f4",
+      "raw_alpha_cpa_archived_mapped_npz_regenerable": true,
+      "mapped_alpha_npz_retained": false,
+      "mapped_alpha_npz_path": "results/runs/rouaix-repro-figures-20261028/staging/global-alpha-t0215.npz (transient regenerated file; removed after rendering)",
+      "mapped_alpha_npz_sha256": "aec3876e6019c8ec77f4cef2ea4e0537c00d473829b674a6ba696f2189ac1dcf",
+      "recreated_from_lossless_checkpoint_archive": true
     },
     "mapped_alpha_npz_retained": false
+  },
+  "superseded_figure03_vtkcutter_attempt": {
+    "original_summary_path": "results/summaries/rouaix_repro_figures_20261028/03-native-cell-cut-z0-t0215.png",
+    "retained_ignored_path": "results/runs/rouaix-repro-figures-20261028/staging/figure03-superseded-vtkcutter.png",
+    "sha256": "c1f47ac88cbdf0642b66d6a8f42a7591b9c158fd6099f7848b1220c54fa8eb17",
+    "bytes": 256530,
+    "old_cut_polygons": 3181,
+    "reason": "at exact z=0, vtkCutter output did not match raw native face connectivity/point sets; direct native plane faces replace this panel. Other gallery figures were left unchanged."
+  },
+  "native_z0_face_slice_receipt": {
+    "plane_origin_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plane_normal": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "geometry_method": "raw binary native internal faces whose every vertex has abs(z)<=1e-12 m; no cutter/intersection reconstruction",
+    "native_internal_faces_on_plane": 94837,
+    "native_face_vertex_label_keys_unique": true,
+    "all_face_projected_area_sum_m2": 200.00000000057912,
+    "expected_complete_section_area_m2": 200.0,
+    "section_area_relative_residual": 2.89560375676956e-12,
+    "adjacent_cell_selection": "for each exact z=0 internal face, choose owner or neighbour with the greater cached native-cell-centre z coordinate; alpha is taken directly from that cell's mapped global value",
+    "selected_side_by_face_count": {
+      "owner": 20527,
+      "neighbour": 74310
+    },
+    "smallest_abs_owner_neighbour_centre_dz_m": 0.009733946528285742,
+    "centre_side_ties_within_1e_12m": 0,
+    "threshold_alpha_water": 0.01,
+    "threshold_semantics": "+z-adjacent native cell has alpha.water >= 0.01",
+    "selected_native_face_count": 2848,
+    "selected_distinct_adjacent_native_cell_count": 2848,
+    "selected_face_area_sum_m2": 0.6145643713514821,
+    "alpha_min_all_plus_z_cells": 0.0,
+    "alpha_max_all_plus_z_cells": 1.0,
+    "alpha_min_selected": 0.010501680571007262,
+    "alpha_max_selected": 1.0,
+    "coordinate_frame": {
+      "x": "crossflow",
+      "y": "upward",
+      "z": "lateral"
+    },
+    "cell_value_to_face_value": "piecewise constant from the +z-adjacent cell; no interpolation",
+    "render_helper": "results/runs/rouaix-repro-figures-20261028/render_native_z0_midplane.py",
+    "render_helper_sha256": "5734842844f19c51ca372874dc436f10502442f16c7e914dded377d87dc128f2",
+    "corrected_figure_sha256": "1f0e52f5c8ed3f32ca183200b58f19b9655be1fbc3508c3628f600a6406c94f6",
+    "corrected_figure_bytes": 254944,
+    "independent_cell_order_identity_check": "results/summaries/rouaix_mesh_plate_20261028/vtk-native-cell-identity-crosscheck.json",
+    "independent_cell_order_identity_check_sha256": "aea7a492bea84d5bf38a03e1919a274c5f937f67041a01b8e9cc51fcfcb2f631",
+    "mapped_alpha_npz_path": "/Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028/staging/global-alpha-t0215.npz",
+    "mapped_alpha_npz_sha256": "aec3876e6019c8ec77f4cef2ea4e0537c00d473829b674a6ba696f2189ac1dcf",
+    "mapping_receipt_path": "/Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028/staging/global-alpha-t0215.json",
+    "mapping_receipt_sha256": "bb1a089acc68ded8641ddd7fc693f7c158394793df28b606ceb9937e29b3bbe8",
+    "mapped_alpha_npz_retained": false,
+    "mapped_alpha_regeneration": "recover the lossless checkpoint input archive, then execute the mapper command in the run README"
+  },
+  "integration_rerender_validation": {
+    "receipt_path": "results/runs/rouaix-repro-figures-20261028/staging/full-renderer-integration-002.json",
+    "receipt_sha256": "7f195b3f59a9d135dbe33cafb81ab75e607993eb41bc852ae23a5a7c1efe4138",
+    "cleanup_record_path": "results/runs/rouaix-repro-figures-20261028/staging/full-renderer-integration-002-cleanup.json",
+    "cleanup_record_sha256": "732c170132a64bc933af04d91d9423901b85ea4c7a6fb5696397e18eb8fc4260",
+    "all_four_regenerated_png_hashes_match_public_gallery": true,
+    "renderer_peak_rss_gib": 3.78167724609375,
+    "renderer_source_sha256": "65ac7e4d8248dc3f8cf007bb2caa5889e5e727126f8cc5e78964107f8e8fc5bd",
+    "native_face_helper_sha256": "5734842844f19c51ca372874dc436f10502442f16c7e914dded377d87dc128f2",
+    "public_files_changed_by_integration_render": false
   }
 }

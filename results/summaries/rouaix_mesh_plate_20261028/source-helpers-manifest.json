@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T17:27:18.642315+00:00",
+  "repository_revision": "4c88c28bde72ff52b83d78b2c8773479790b09ec",
+  "worktree_was_dirty": true,
+  "source_archive": {
+    "path": "results/summaries/rouaix_mesh_plate_20261028/source-helpers.tar.gz",
+    "sha256": "102e91c193f99cdf0763c8e0682ab24200dfb2bda4adfcafd5bfa12825e4e88a",
+    "bytes": 27008,
+    "members": [
+      "render_mesh_plate.py",
+      "audit_central_cut.py",
+      "compare_cut_offsets.py",
+      "audit_native_z0_faces.py",
+      "audit_vtk_native_cell_identity.py",
+      "render_fine_water_view.py"
+    ],
+    "member_source_paths_and_hashes": [
+      {
+        "member": "render_mesh_plate.py",
+        "source_path": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/render_mesh_plate.py",
+        "sha256": "b4bd352d278c48d49daaef8a1e0cb4f803b26f65e743e38dfe49cb4c2678604d",
+        "bytes": 32154
+      },
+      {
+        "member": "audit_central_cut.py",
+        "source_path": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/audit_central_cut.py",
+        "sha256": "57b444c19f318d66b1f4fac3ca046179ad47c6eae3ca574846fdf81c1621ce9c",
+        "bytes": 8983
+      },
+      {
+        "member": "compare_cut_offsets.py",
+        "source_path": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/compare_cut_offsets.py",
+        "sha256": "bf0bd784a1f392d723ed3d7057d01db6e0bcb78e8bcffedb315cc044ee0a279f",
+        "bytes": 11009
+      },
+      {
+        "member": "audit_native_z0_faces.py",
+        "source_path": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/audit_native_z0_faces.py",
+        "sha256": "348cc863506f1a80bccbc8c6031db016e39f368917b7bd03e1482af0457ccf8b",
+        "bytes": 11497
+      },
+      {
+        "member": "audit_vtk_native_cell_identity.py",
+        "source_path": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/audit_vtk_native_cell_identity.py",
+        "sha256": "2a721a71aa83090103728d3dd927d63aa7be4c1656f5d75bee5052d5c3a39c36",
+        "bytes": 21184
+      },
+      {
+        "member": "render_fine_water_view.py",
+        "source_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/render_fine_water_view.py",
+        "sha256": "da7004857e7077b44ac5aa907f8f3ec4c4213ce0c00932adb4518ad918c82586",
+        "bytes": 24386
+      }
+    ]
+  },
+  "inputs": {
+    "qualified_mesh": "results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core/constant/polyMesh",
+    "mapped_alpha": "results/runs/rouaix-mesh-plate-20261028/staging/global-alpha-t0215.npz",
+    "cell_geometry_cache": "results/runs/rouaix-fine-water-view-20261028/staging/native-cell-centres-volumes.npz"
+  },
+  "commands": {
+    "cell_identity_crosscheck": "VTK_SMP_MAX_THREADS=2 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python scripts/run_local.py --threads 2 --timeout 1200 -- /Applications/ParaView-6.1.1.app/Contents/bin/pvpython results/runs/rouaix-mesh-plate-20261028/audit_vtk_native_cell_identity.py",
+    "native_face_audit": "VTK_SMP_MAX_THREADS=4 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python scripts/run_local.py --threads 4 --timeout 1200 -- .venv/bin/python results/runs/rouaix-mesh-plate-20261028/audit_native_z0_faces.py",
+    "compile_check": ".venv/bin/python -m py_compile results/runs/rouaix-mesh-plate-20261028/render_mesh_plate.py results/runs/rouaix-mesh-plate-20261028/audit_central_cut.py results/runs/rouaix-mesh-plate-20261028/compare_cut_offsets.py results/runs/rouaix-mesh-plate-20261028/audit_native_z0_faces.py results/runs/rouaix-mesh-plate-20261028/audit_vtk_native_cell_identity.py"
+  },
+  "checks": {
+    "cell_identity_crosscheck": "pass for fixed polyhedron 587633, wet hexahedron 4297652 and wet polyhedron 4325302",
+    "maximum_vtk_native_coordinate_delta_m": 1.9979210552634186e-07,
+    "maximum_raw_native_vs_cached_vtk_volume_relative_delta": 1.3755984726730956e-05,
+    "vtk_point_order": "exact native labels and sampled global coordinates match within 5e-7 m",
+    "cutter_diagnostic": "exact-plane vtkCutter output is geometrically discrepant from raw native z=0 face topology"
+  },
+  "cpu_only": true,
+  "excluded": [
+    "native mesh files",
+    "checkpoint fields",
+    "full solver history"
+  ]
+}

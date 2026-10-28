@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T17:25:16.036669+00:00",
+  "purpose": "read-only representative-cell check of ParaView reconstructed internalMesh ordering and geometry against raw binary native polyMesh points/faces/owner/neighbour",
+  "source_mesh": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core/constant/polyMesh",
+  "source_case_marker": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core/case.foam",
+  "source_mesh_hashes": {
+    "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+    "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+    "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+    "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc"
+  },
+  "mapped_alpha_npz": {
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/staging/global-alpha-t0215.npz",
+    "sha256": "aec3876e6019c8ec77f4cef2ea4e0537c00d473829b674a6ba696f2189ac1dcf",
+    "time_s": 0.215,
+    "field_mapping_receipt": "/Users/bene/fire-track2/results/runs/rouaix-mesh-plate-20261028/staging/global-alpha-t0215.json"
+  },
+  "native_cell_geometry_cache": {
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/native-cell-centres-volumes.npz",
+    "sha256": "f98e9b71773d871ba11d2a751931ab96dc3d262f25e480e9d3c47d40f69a1add",
+    "cells": 10099265
+  },
+  "paraView": {
+    "reader": "OpenFOAMReader, Reconstructed Case, internalMesh, at time 0 geometry",
+    "reader_cell_count": 10099265,
+    "reader_point_count_by_block": [
+      10452352
+    ],
+    "cell_order_assumption_under_test": "flatten nonempty composite blocks in iterator order; preserve cell order within each block; map flattened index to native global cell ID",
+    "blocks": [
+      {
+        "block": 0,
+        "first_global_index": 0,
+        "cell_count": 10099265,
+        "last_global_index": 10099264,
+        "vtk_class": "vtkUnstructuredGrid",
+        "point_count": 10452352
+      }
+    ]
+  },
+  "targets": {
+    "suspect_cell_587633": {
+      "assumed_global_cell_id_from_paraView_order": 587633,
+      "native_face_owner_neighbour_incidence": {
+        "face_count": 9,
+        "owner_face_count": 7,
+        "neighbour_face_count": 2,
+        "native_point_count": 13
+      },
+      "vtk_cell": {
+        "vtk_type_id": 42,
+        "vtk_classification": "polyhedron",
+        "point_count": 13,
+        "face_count": 9,
+        "bounds_m": {
+          "x": [
+            6.215083599090576,
+            6.326815605163574
+          ],
+          "y": [
+            -6.5168538093566895,
+            -6.404494285583496
+          ],
+          "z": [
+            -0.14294631779193878,
+            1.9104788420651342e-17
+          ]
+        },
+        "coordinates_array_type": "float"
+      },
+      "native_face_union": {
+        "bounds_m": {
+          "x": [
+            6.215083798882681,
+            6.3268156424581
+          ],
+          "y": [
+            -6.516853932584271,
+            -6.404494382022473
+          ],
+          "z": [
+            -0.14294631710362038,
+            1.9104788798094793e-17
+          ]
+        },
+        "raw_oriented_face_volume_m3": 0.0017875151509736988
+      },
+      "cached_reader_order_geometry": {
+        "centre_m": [
+          6.2709496023229,
+          -6.460747935589735,
+          -0.07119262963605938
+        ],
+        "cell_size_volume_m3": 0.0017875173123491365
+      },
+      "mapped_alpha_water_t0215": 2.6599598114726996e-40,
+      "comparisons": {
+        "vtk_point_ids_equal_native_global_point_labels": true,
+        "max_abs_vtk_vs_native_vertex_coordinate_delta_m": 1.9979210552634186e-07,
+        "vtk_point_coordinates_match_native_global_point_order_5e_7m": true,
+        "max_abs_vtk_vs_native_bounds_delta_m": 1.9979210463816344e-07,
+        "vtk_bounds_match_native_face_union_5e_7m": true,
+        "vtk_face_count_matches_native_incident_face_count": true,
+        "vtk_faces_match_native_face_coordinate_sets": true,
+        "raw_vs_cached_volume_relative_delta": 1.2091493731847326e-06,
+        "raw_native_volume_matches_cached_reader_volume_rel_2e_5": true,
+        "vtk_cell_order_matches_native_cell_id_for_sample": true
+      }
+    },
+    "wet_hexahedron": {
+      "assumed_global_cell_id_from_paraView_order": 4297652,
+      "native_face_owner_neighbour_incidence": {
+        "face_count": 6,
+        "owner_face_count": 6,
+        "neighbour_face_count": 0,
+        "native_point_count": 8
+      },
+      "vtk_cell": {
+        "vtk_type_id": 12,
+        "vtk_classification": "hexahedron",
+        "point_count": 8,
+        "face_count": 6,
+        "bounds_m": {
+          "x": [
+            0.7402234673500061,
+            0.7541899681091309
+          ],
+          "y": [
+            -2.471909999847412,
+            -2.4578652381896973
+          ],
+          "z": [
+            -0.40998750925064087,
+            -0.39663779735565186
+          ]
+        },
+        "coordinates_array_type": "float"
+      },
+      "native_face_union": {
+        "bounds_m": {
+          "x": [
+            0.7402234636871505,
+            0.754189944134078
+          ],
+          "y": [
+            -2.4719101123595513,
+            -2.4578651685393265
+          ],
+          "z": [
+            -0.40998751560549335,
+            -0.39663778576834025
+          ]
+        },
+        "raw_oriented_face_volume_m3": 2.5091218650927283e-06
+      },
+      "cached_reader_order_geometry": {
+        "centre_m": [
+          0.7472067177295685,
+          -2.464892625808716,
+          -0.40330660343170166
+        ],
+        "cell_size_volume_m3": 2.509087350125462e-06
+      },
+      "mapped_alpha_water_t0215": 1.0,
+      "comparisons": {
+        "vtk_point_ids_equal_native_global_point_labels": true,
+        "max_abs_vtk_vs_native_vertex_coordinate_delta_m": 1.1251213916096958e-07,
+        "vtk_point_coordinates_match_native_global_point_order_5e_7m": true,
+        "max_abs_vtk_vs_native_bounds_delta_m": 1.1251213916096958e-07,
+        "vtk_bounds_match_native_face_union_5e_7m": true,
+        "vtk_face_count_matches_native_incident_face_count": true,
+        "vtk_faces_match_native_face_coordinate_sets": true,
+        "raw_vs_cached_volume_relative_delta": 1.3755984726730956e-05,
+        "raw_native_volume_matches_cached_reader_volume_rel_2e_5": true,
+        "vtk_cell_order_matches_native_cell_id_for_sample": true
+      }
+    },
+    "wet_polyhedron": {
+      "assumed_global_cell_id_from_paraView_order": 4325302,
+      "native_face_owner_neighbour_incidence": {
+        "face_count": 9,
+        "owner_face_count": 6,
+        "neighbour_face_count": 3,
+        "native_point_count": 13
+      },
+      "vtk_cell": {
+        "vtk_type_id": 42,
+        "vtk_classification": "polyhedron",
+        "point_count": 13,
+        "face_count": 9,
+        "bounds_m": {
+          "x": [
+            0.6005586385726929,
+            0.6284916400909424
+          ],
+          "y": [
+            -2.5842697620391846,
+            -2.5561797618865967
+          ],
+          "z": [
+            -7.577104112905782e-17,
+            0.025905119255185127
+          ]
+        },
+        "coordinates_array_type": "float"
+      },
+      "native_face_union": {
+        "bounds_m": {
+          "x": [
+            0.6005586592178769,
+            0.6284916201117319
+          ],
+          "y": [
+            -2.584269662921348,
+            -2.5561797752808983
+          ],
+          "z": [
+            -7.57710430758131e-17,
+            0.02590511860174766
+          ]
+        },
+        "raw_oriented_face_volume_m3": 2.027705152628011e-05
+      },
+      "cached_reader_order_geometry": {
+        "centre_m": [
+          0.6145251393318174,
+          -2.570244562057295,
+          0.012929173125053917
+        ],
+        "cell_size_volume_m3": 2.027712523952818e-05
+      },
+      "mapped_alpha_water_t0215": 1.0,
+      "comparisons": {
+        "vtk_point_ids_equal_native_global_point_labels": true,
+        "max_abs_vtk_vs_native_vertex_coordinate_delta_m": 9.911783704907862e-08,
+        "vtk_point_coordinates_match_native_global_point_order_5e_7m": true,
+        "max_abs_vtk_vs_native_bounds_delta_m": 9.911783660498941e-08,
+        "vtk_bounds_match_native_face_union_5e_7m": true,
+        "vtk_face_count_matches_native_incident_face_count": true,
+        "vtk_faces_match_native_face_coordinate_sets": true,
+        "raw_vs_cached_volume_relative_delta": 3.63529086099895e-06,
+        "raw_native_volume_matches_cached_reader_volume_rel_2e_5": true,
+        "vtk_cell_order_matches_native_cell_id_for_sample": true
+      }
+    }
+  },
+  "point_order_check": {
+    "audited_native_point_ids_checked": 34,
+    "audited_point_id_coordinates_match_native_order_5e_7m": true,
+    "max_audited_point_coordinate_delta_m": 1.9979210552634186e-07,
+    "fixed_global_point_ids": [
+      0,
+      1,
+      5226176,
+      10452351
+    ],
+    "fixed_global_point_max_abs_coordinate_deltas_m": [
+      9.456826299825138e-08,
+      9.456826299825138e-08,
+      5.3277894762615574e-08,
+      1.1188357929015069e-07
+    ],
+    "fixed_global_point_coordinates_match_native_order_5e_7m": true
+  },
+  "all_geometry_and_order_checks_passed": true,
+  "elapsed_s": 5.1,
+  "peak_rss_gib": 2.7655029296875
+}

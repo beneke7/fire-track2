@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T17:14:32.472394+00:00",
+  "source_mesh": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core/constant/polyMesh",
+  "source_mesh_sha256": {
+    "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+    "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+    "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+    "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+    "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+  },
+  "geometry_cache_sha256": "f98e9b71773d871ba11d2a751931ab96dc3d262f25e480e9d3c47d40f69a1add",
+  "binary_counts": {
+    "points": 10452352,
+    "faces": 30653419,
+    "internal_faces": 30559529,
+    "native_cells_from_qualified_mesh": 10099265
+  },
+  "plane": {
+    "z_m": 0.0,
+    "criterion": "every face vertex satisfies abs(z) <= 1e-12 m",
+    "selected_internal_face_count": 94837,
+    "unique_native_face_edges": 191470,
+    "face_vertex_histogram": {
+      "4": 93123,
+      "5": 671,
+      "6": 901,
+      "7": 78,
+      "8": 64
+    },
+    "projected_area_sum_m2": 199.99999999999977,
+    "expected_rectangular_section_area_m2": 200.0,
+    "projected_area_relative_residual": -1.1368683772161603e-15,
+    "face_centroid_bounds_m": {
+      "x": [
+        -2.444134078212291,
+        17.444134078212294
+      ],
+      "y": [
+        -9.9438202247191,
+        -0.007022471910112368
+      ]
+    },
+    "duplicate_face_geometry_groups_at_1nm": 0,
+    "duplicate_face_instances": 0
+  },
+  "regions": {
+    "fine_nozzle": {
+      "roi_bounds_m": {
+        "x": [
+          -0.4,
+          0.4
+        ],
+        "y": [
+          -0.8,
+          0.0
+        ]
+      },
+      "native_internal_faces": 3189,
+      "unique_native_cells_on_faces": 6378,
+      "native_face_vertex_count_min_max": [
+        4,
+        8
+      ],
+      "face_span_x_p10_median_p90_m": [
+        0.013966480446927346,
+        0.013966480446927387,
+        0.013966480446927443
+      ],
+      "face_span_y_p10_median_p90_m": [
+        0.014044943820224615,
+        0.014044943820224753,
+        0.014044943820224809
+      ],
+      "unique_edge_segments_in_roi": 6344,
+      "edge_length_p10_median_p90_m": [
+        0.013966480446927332,
+        0.013966480446927498,
+        0.014044943820224767
+      ],
+      "largest_face_in_roi": {
+        "native_face_id": 26283509,
+        "span_xy_m": [
+          0.02793296089385472,
+          0.02808988764044973
+        ],
+        "area_m2": 0.0007846337329734387,
+        "point_count": 6,
+        "polygon_xy_m": [
+          [
+            -0.09776536312849156,
+            -0.6179775280898882
+          ],
+          [
+            -0.08379888268156421,
+            -0.617977528089888
+          ],
+          [
+            -0.06983240223463685,
+            -0.617977528089888
+          ],
+          [
+            -0.06983240223463688,
+            -0.5898876404494384
+          ],
+          [
+            -0.08379888268156423,
+            -0.5898876404494385
+          ],
+          [
+            -0.09776536312849157,
+            -0.5898876404494386
+          ]
+        ],
+        "owner_cell_id": 8518580,
+        "neighbour_cell_id": 8529096,
+        "owner_cell_centre_m": [
+          -0.08379888162016869,
+          -0.6039709509680283,
+          -0.010479195427083107
+        ],
+        "owner_cell_volume_m3": 1.644456611165195e-05,
+        "neighbour_cell_centre_m": [
+          -0.08379888162016869,
+          -0.6039709509680283,
+          0.010479195427083093
+        ],
+        "neighbour_cell_volume_m3": 1.644456611165197e-05
+      }
+    },
+    "coarse_downstream": {
+      "roi_bounds_m": {
+        "x": [
+          1.5,
+          2.0
+        ],
+        "y": [
+          -4.5,
+          -4.0
+        ]
+      },
+      "native_internal_faces": 81,
+      "unique_native_cells_on_faces": 162,
+      "native_face_vertex_count_min_max": [
+        4,
+        4
+      ],
+      "face_span_x_p10_median_p90_m": [
+        0.05586592178770933,
+        0.05586592178770955,
+        0.05586592178770999
+      ],
+      "face_span_y_p10_median_p90_m": [
+        0.05617977528089835,
+        0.056179775280899236,
+        0.056179775280900124
+      ],
+      "unique_edge_segments_in_roi": 162,
+      "edge_length_p10_median_p90_m": [
+        0.05586592178770933,
+        0.056022848534303726,
+        0.056179775280899236
+      ],
+      "largest_face_in_roi": {
+        "native_face_id": 692452,
+        "span_xy_m": [
+          0.05586592178770977,
+          0.05617977528090101
+        ],
+        "area_m2": 0.003138534931894199,
+        "point_count": 4,
+        "polygon_xy_m": [
+          [
+            1.7458100558659215,
+            -4.382022471910111
+          ],
+          [
+            1.7458100558659218,
+            -4.43820224719101
+          ],
+          [
+            1.8016759776536313,
+            -4.438202247191012
+          ],
+          [
+            1.8016759776536309,
+            -4.382022471910112
+          ]
+        ],
+        "owner_cell_id": 230985,
+        "neighbour_cell_id": 231023,
+        "owner_cell_centre_m": [
+          1.7737430334091187,
+          -4.4101338386535645,
+          -0.03046983294188978
+        ],
+        "owner_cell_volume_m3": 0.00019140808050172563,
+        "neighbour_cell_centre_m": [
+          1.7737430334091187,
+          -4.4101338386535645,
+          0.030469832941889746
+        ],
+        "neighbour_cell_volume_m3": 0.00019140808050172595
+      }
+    }
+  },
+  "interpretation": "This diagnostic selects internal native polyMesh faces whose vertices lie on z=0; it does not use vtkCutter. Unique section edges are deduplicated by their native point-label pairs.",
+  "processing": {
+    "elapsed_s": 2.85
+  }
+}

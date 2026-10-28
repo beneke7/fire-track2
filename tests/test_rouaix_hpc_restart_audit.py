@@ -333,7 +333,11 @@ def test_pressure_continuation_audits_only_post_checkpoint_rows_and_records_inve
         "ledger_sha256": ledger_sha,
         "manifest_sha256": "b" * 64,
         "terminal_sha256": "c" * 64,
-        "inventory_history_member": "attempt/case/postProcessing/waterInventory/0/volFieldValue.dat",
+        "inventory_history_member": (
+            "attempt/case/postProcessing/waterVolume/0.200000000000/volFieldValue.dat"
+            if parent_variant == "pressure-total-pcgdic"
+            else "attempt/case/postProcessing/waterInventory/0/volFieldValue.dat"
+        ),
         "inventory_history_sha256": "d" * 64,
         "inventory_history_time_s": checkpoint_time_s,
         "inventory_history_m3": 0.4,

@@ -31,7 +31,7 @@ PARENT_RUN = (
     / "rouaix-pressure-pcgdic-restart-20261028"
     / "rouaix-restart-pressure-total-pcgdic-14705632"
 )
-SOURCE_ROOT = PROJECT_ROOT / "rouaix-pressure-pcgdic-continuation-source-20261028/unpacked"
+SOURCE_ROOT = PROJECT_ROOT / "rouaix-pressure-pcgdic-continuation-source-v4-20261028/unpacked"
 AUDITOR = PROJECT_ROOT / "hpc-finished-audit-source-v3-20261026/scripts/hpc_finished_audit.py"
 AUDITOR_SHA256 = "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989"
 DISK_RESERVE_BYTES = 16 * 1024**3
@@ -39,14 +39,14 @@ MIN_INCREMENTAL_OUTPUT_BYTES = 8 * 1024**3
 PARENT_SOURCE_INDEX = "results/summaries/rouaix_pressure_pcgdic_20261028/source-capsule-index.json"
 PARENT_SOURCE_CAPSULE = "rouaix-pressure-pcgdic-source-20261028.tar.gz"
 CONTINUATION_SOURCE_SUMMARY = (
-    "results/summaries/rouaix_pressure_pcgdic_20261028/continuation-source"
+    "results/summaries/rouaix_pressure_pcgdic_20261028/continuation-source-v4"
 )
-CONTINUATION_SOURCE_CAPSULE = "rouaix-pressure-pcgdic-continuation-source-20261028.tar.gz"
+CONTINUATION_SOURCE_CAPSULE = "rouaix-pressure-pcgdic-continuation-source-20261028-v4.tar.gz"
 SOURCE_HASH_OVERRIDES = {
-    "cases/e1_rouaix_hpc_restart/run_restart.py": "892f8034f3ce798f130fa6cde29a4dda54f6762bda5d5c24e21da7b76d259845",
-    "cases/e1_rouaix_hpc_restart/audit_restart.py": "b620f91848e5a773e08c0960afc6b75ff01c1a70a59b87dcf0b3f83972c88899",
-    "tests/test_rouaix_hpc_restart.py": "74f3e31fd17267db2d153ab2577b7a5a9d44c48091ff92a12d9fbb7d91bbd774",
-    "tests/test_rouaix_hpc_restart_audit.py": "f0d487a0591e8850382b8c34816608b4accf6ca7408b4bb39ea749876155cd09",
+    "cases/e1_rouaix_hpc_restart/run_restart.py": "aab639a9d1f489e730c3268f84db7797f1f519eec80f6ccb97ebe37b7bb8024b",
+    "cases/e1_rouaix_hpc_restart/audit_restart.py": "e57e7688ba737b5e81941a5380b65b8971f1029794fc9570a8f767fa8ea92312",
+    "tests/test_rouaix_hpc_restart.py": "e324a3a820ea9fcc510e5825357797cba3f32c20e63837461f2dabca70911e71",
+    "tests/test_rouaix_hpc_restart_audit.py": "41388130f1c3eb42f825cb894b7134c91eb4cbafd93b0e894a03441a0e4f17d0",
 }
 EXTRA_SOURCE_PATHS = (
     "cases/e1_rouaix_hpc_restart/dispatch_pressure_continue.py",

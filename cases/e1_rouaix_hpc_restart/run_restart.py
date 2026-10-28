@@ -390,7 +390,10 @@ def validate_parent_contract(
             "legacy total-pressure contract must not add a solver-dictionary override"
         )
     history_member = safe_member_path(str(contract["inventory_history_member"])).as_posix()
-    if not history_member.startswith("attempt/case/postProcessing/waterInventory/"):
+    if not any(
+        history_member.startswith(f"attempt/case/postProcessing/{name}/")
+        for name in ("waterInventory", "waterVolume")
+    ):
         raise RestartError("parent contract inventory-history member path is unexpected")
     for key in ("parent_run_dir", "run_state_path", "archive_path"):
         if not isinstance(contract[key], str) or not contract[key]:
@@ -400,19 +403,38 @@ def validate_parent_contract(
 
 def _parent_inventory_sample(raw: bytes, checkpoint_time_s: float) -> float:
     lines = raw.decode("ascii", errors="strict").splitlines()
-    if not lines or "Time" not in lines[0] or "alpha.water" not in lines[0]:
+    header_index = None
+    header_fields: list[str] = []
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        if not stripped.startswith("#"):
+            continue
+        fields = stripped[1:].split()
+        if fields and fields[0].casefold() in {"time", "t"}:
+            header_index = index
+            header_fields = fields
+            break
+    time_columns = [
+        index for index, name in enumerate(header_fields) if name.casefold() in {"time", "t"}
+    ]
+    inventory_columns = [
+        index for index, name in enumerate(header_fields) if name == "volIntegrate(alpha.water)"
+    ]
+    if header_index is None or len(time_columns) != 1 or len(inventory_columns) != 1:
         raise RestartError(
-            "parent native inventory history header is not volIntegrate(alpha.water)"
+            "parent native inventory history lacks its named Time and "
+            "volIntegrate(alpha.water) columns"
         )
     samples: list[tuple[float, float]] = []
-    for line in lines[1:]:
+    for line in lines[header_index + 1 :]:
         if not line.strip() or line.lstrip().startswith("#"):
             continue
         columns = line.split()
-        if len(columns) != 2:
+        if len(columns) != len(header_fields):
             raise RestartError("parent native inventory history row is malformed")
         try:
-            time_s, inventory_m3 = map(float, columns)
+            time_s = float(columns[time_columns[0]])
+            inventory_m3 = float(columns[inventory_columns[0]])
         except ValueError as error:
             raise RestartError(
                 "parent native inventory history contains nonnumeric values"
@@ -864,7 +886,10 @@ def verify_completed_parent(run_dir: Path, job_id: str) -> dict[str, Any]:
     if manifest.get("pressure_total_p0_zero_sensitivity", {}).get("p0_gauge_pa") != 0.0:
         raise RestartError("parent manifest does not preserve the declared total-pressure p0=0 BC")
     verify_pressure_total_patches(
-        endpoint.parent.parent, ROOT / "src/aerial_drop", checkpoint_time_dir=checkpoint_time_dir
+        endpoint.parent.parent,
+        ROOT / "src/aerial_drop",
+        checkpoint_time_dir=checkpoint_time_dir,
+        runtime_checkpoint=True,
     )
     fv_solution_receipt = None
     if parent_variant == "pressure-total-pcgdic":
@@ -1029,13 +1054,114 @@ def pressure_checkpoint_integrity(case: Path, source_dir: Path) -> dict[str, Any
 
 
 def verify_pressure_total_patches(
-    case: Path, source_dir: Path, checkpoint_time_dir: str = PARENT_TIME_DIR
+    case: Path,
+    source_dir: Path,
+    checkpoint_time_dir: str = PARENT_TIME_DIR,
+    runtime_checkpoint: bool = False,
 ) -> None:
     reader = _native_field_reader(source_dir)
     chunks = reader._field_chunks(case / checkpoint_time_dir / "p_rgh", EXPECTED_RANKS)
+    rank_face_counts: dict[int, dict[str, int]] = {}
+    if runtime_checkpoint:
+        boundary_path = case / f"processors{EXPECTED_RANKS}/constant/polyMesh/boundary"
+        boundary_chunks = reader._field_chunks(boundary_path, EXPECTED_RANKS)
+        global_face_counts = dict.fromkeys(PRESSURE_TOTAL_PATCHES, 0)
+        for rank, chunk in sorted(boundary_chunks.items()):
+            try:
+                expected_entries, start = reader._block_list_start(chunk, boundary_path)
+                entries = reader._parse_boundary_entries(chunk[start:].decode("latin1"))
+            except (ValueError, UnicodeDecodeError) as error:
+                raise RestartError(f"processor boundary is malformed on rank {rank}") from error
+            if len(entries) != expected_entries:
+                raise RestartError(f"processor boundary patch count differs on rank {rank}")
+            counts: dict[str, int] = {}
+            for patch in PRESSURE_TOTAL_PATCHES:
+                matches = [entry for entry in entries if entry[0] == patch]
+                if len(matches) != 1 or matches[0][2] < 0:
+                    raise RestartError(f"processor boundary has invalid {patch} on rank {rank}")
+                counts[patch] = matches[0][2]
+                global_face_counts[patch] += matches[0][2]
+            rank_face_counts[rank] = counts
+        for patch, face_count in global_face_counts.items():
+            if face_count <= 0:
+                raise RestartError(f"global pressure-total patch {patch} has no faces")
+
     for rank, chunk in sorted(chunks.items()):
-        text = chunk.decode("latin1")
         for patch in PRESSURE_TOTAL_PATCHES:
+            if runtime_checkpoint:
+                face_count = rank_face_counts[rank][patch]
+                patch_match = re.search(
+                    rb"(?m)^\s*" + re.escape(patch.encode("ascii")) + rb"\s*\{", chunk
+                )
+                if patch_match is None:
+                    raise RestartError(f"p_rgh is missing {patch} on rank {rank}")
+                patch_data = chunk[patch_match.start() :]
+                value_match = re.search(rb"(?m)^\s*value\s+(?:uniform|nonuniform)\b", patch_data)
+                if value_match is None:
+                    raise RestartError(f"p_rgh is missing computed value on {patch}, rank {rank}")
+                before_value = patch_data[: value_match.start()]
+                entries = re.findall(rb"(?m)^\s*(type|p0|rho|U|phi)\s+([^;\r\n]+);", before_value)
+                by_name: dict[str, list[str]] = {}
+                for name, value in entries:
+                    by_name.setdefault(name.decode("ascii"), []).append(
+                        value.decode("latin1").strip()
+                    )
+                if by_name.get("type") != ["prghTotalPressure"]:
+                    raise RestartError(f"p_rgh total-pressure type differs on {patch}, rank {rank}")
+                for name, default in (("rho", "rho"), ("U", "U"), ("phi", "phi")):
+                    if by_name.get(name, [default]) != [default]:
+                        raise RestartError(f"p_rgh {name} default differs on {patch}, rank {rank}")
+                p0_matches = list(
+                    re.finditer(rb"(?m)^\s*p0\s+(?:uniform|nonuniform)\b", before_value)
+                )
+                if len(p0_matches) != 1 or len(by_name.get("p0", [])) > 1:
+                    raise RestartError(f"p_rgh p0 is missing or duplicated on {patch}, rank {rank}")
+
+                if face_count == 0:
+                    if not re.search(
+                        rb"(?m)^\s*p0\s+nonuniform\s+List<scalar>\s+0\s*;\s*$",
+                        before_value,
+                    ) or not re.search(
+                        rb"(?m)^\s*value\s+nonuniform\s+List<scalar>\s+0\s*;\s*$",
+                        patch_data,
+                    ):
+                        raise RestartError(
+                            f"empty p_rgh patch {patch} has nonempty or malformed values on rank {rank}"
+                        )
+                    p0_values = reader.np.empty(0, dtype=reader.np.float64)
+                    value_values = reader.np.empty(0, dtype=reader.np.float64)
+                else:
+                    p0_start = p0_matches[0]
+                    p0_as_value = patch_data[: p0_start.start()] + re.sub(
+                        rb"(?m)(^\s*)p0(?=\s)",
+                        rb"\1value",
+                        patch_data[p0_start.start() :],
+                        count=1,
+                    )
+                    try:
+                        p0_values = reader._parse_patch_scalar_values(
+                            p0_as_value, patch, face_count
+                        )
+                        value_values = reader._parse_patch_scalar_values(
+                            patch_data, patch, face_count
+                        )
+                    except (ValueError, TypeError, IndexError) as error:
+                        raise RestartError(
+                            f"p_rgh runtime pressure values or face counts are invalid on {patch}, rank {rank}"
+                        ) from error
+                if (
+                    len(p0_values) != face_count
+                    or not reader.np.isfinite(p0_values).all()
+                    or not reader.np.equal(p0_values, 0.0).all()
+                    or len(value_values) != face_count
+                    or not reader.np.isfinite(value_values).all()
+                ):
+                    raise RestartError(
+                        f"p_rgh runtime pressure values or face counts are invalid on {patch}, rank {rank}"
+                    )
+                continue
+
+            text = chunk.decode("latin1")
             match = re.search(rf"(?ms)^\s*{re.escape(patch)}\s*\{{(.*?)^\s*\}}", text)
             if match is None:
                 raise RestartError(f"p_rgh is missing {patch} on rank {rank}")
@@ -1309,7 +1435,10 @@ def extract_seed_archive(
         ):
             raise RestartError("parent solver dictionary differs from the hash-bound contract")
         verify_pressure_total_patches(
-            case, ROOT / "src/aerial_drop", checkpoint_time_dir=checkpoint_time_dir
+            case,
+            ROOT / "src/aerial_drop",
+            checkpoint_time_dir=checkpoint_time_dir,
+            runtime_checkpoint=True,
         )
     receipt = {
         "archive_sha256": actual_sha,
@@ -1717,7 +1846,10 @@ def prepare_case(
         write_json(case_inputs_path, case_inputs)
     elif config.variant in {"pressure-total-continuation", "pressure-pcgdic-continuation"}:
         verify_pressure_total_patches(
-            case, ROOT / "src/aerial_drop", checkpoint_time_dir=parent_time_dir
+            case,
+            ROOT / "src/aerial_drop",
+            checkpoint_time_dir=parent_time_dir,
+            runtime_checkpoint=True,
         )
         if config.variant == "pressure-pcgdic-continuation":
             if parent_contract["variant"] != "pressure-total-pcgdic":

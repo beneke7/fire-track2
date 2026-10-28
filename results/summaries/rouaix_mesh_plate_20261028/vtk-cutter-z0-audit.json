@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T17:03:54.308247+00:00",
+  "mesh_cells": 10099265,
+  "source_mesh_geometry_npz_sha256": "f98e9b71773d871ba11d2a751931ab96dc3d262f25e480e9d3c47d40f69a1add",
+  "native_reader_cell_order_check": {
+    "cells": 10099265,
+    "max_abs_centre_difference_m": 0.0,
+    "max_abs_volume_difference_m3": 0.0,
+    "volume_sum_m3": 2300.0000008438396
+  },
+  "cut": {
+    "plane_origin_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plane_normal": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "native_cut_polygons": 119288,
+    "cut_polygons_with_valid_native_cell_id": 119288,
+    "cut_polygons_unique_native_cell_ids": 117910,
+    "native_cell_types_by_cut_polygon": {
+      "VTK_HEXAHEDRON": 115861,
+      "VTK_POLYHEDRON": 3427
+    },
+    "native_cell_types_by_unique_cut_cell": {
+      "VTK_HEXAHEDRON": 114509,
+      "VTK_POLYHEDRON": 3401
+    },
+    "native_cells_with_multiple_cut_polygons": 1378,
+    "repeated_polygon_native_cell_types": {
+      "VTK_HEXAHEDRON": 1352,
+      "VTK_POLYHEDRON": 26
+    },
+    "duplicate_polygon_geometry_groups_at_1nm_quantization": 0,
+    "duplicate_polygon_instances": 0,
+    "duplicate_geometry_examples": [],
+    "polygons_per_native_cell_max": 2
+  },
+  "local_regions": {
+    "fine_nozzle": {
+      "bounds_m": {
+        "x": [
+          -0.4,
+          0.4
+        ],
+        "y": [
+          -0.8,
+          0.0
+        ]
+      },
+      "cut_polygons": 3501,
+      "unique_native_cells": 3501,
+      "native_cells_with_multiple_cut_polygons": 0,
+      "native_cell_types": {
+        "VTK_HEXAHEDRON": 3464,
+        "VTK_POLYHEDRON": 37
+      },
+      "polygon_vertex_count_min_max": [
+        3,
+        8
+      ],
+      "cut_polygon_x_span_p10_median_p90": [
+        0.013966470956802368,
+        0.013966478407382965,
+        0.013966500759124756
+      ],
+      "cut_polygon_y_span_p10_median_p90": [
+        0.01404494047164917,
+        0.01404494047164917,
+        0.014044947922229767
+      ]
+    },
+    "coarse_downstream": {
+      "bounds_m": {
+        "x": [
+          6.0,
+          6.5
+        ],
+        "y": [
+          -6.5,
+          -6.0
+        ]
+      },
+      "cut_polygons": 84,
+      "unique_native_cells": 84,
+      "native_cells_with_multiple_cut_polygons": 0,
+      "native_cell_types": {
+        "VTK_HEXAHEDRON": 76,
+        "VTK_POLYHEDRON": 8
+      },
+      "polygon_vertex_count_min_max": [
+        3,
+        7
+      ],
+      "cut_polygon_x_span_p10_median_p90": [
+        0.02831497192382813,
+        0.05586576461791992,
+        0.06507539749145512
+      ],
+      "cut_polygon_y_span_p10_median_p90": [
+        0.024374723434448242,
+        0.05617952346801758,
+        0.11235952377319336
+      ]
+    }
+  },
+  "interpretation": "The plotted curves are unique edges of exact vtkCutter plane-intersection polygons, each carrying a native global cell ID. They include edges of irregular/polyhedral cell intersections; they are not an interpolated alpha/interface contour. Identical polygon geometry is counted separately to detect coincident cut faces.",
+  "processing": {
+    "elapsed_s": 12.56
+  }
+}

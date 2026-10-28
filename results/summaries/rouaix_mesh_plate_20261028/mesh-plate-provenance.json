@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T17:15:28.161286+00:00",
+  "source_mesh": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core/constant/polyMesh",
+  "source_mesh_files_sha256": {
+    "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+    "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+    "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+    "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+    "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+  },
+  "geometry_cache": {
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/native-cell-centres-volumes.npz",
+    "sha256": "f98e9b71773d871ba11d2a751931ab96dc3d262f25e480e9d3c47d40f69a1add",
+    "receipt_sha256": "f74b787944d7bc434b4f3d50e35c33dd0b20059744a30589ece01afb020309b1"
+  },
+  "mesh_cells": 10099265,
+  "native_reader_cell_order_check": {
+    "cells": 10099265,
+    "max_abs_centre_difference_m": 0.0,
+    "max_abs_volume_difference_m3": 0.0,
+    "volume_sum_m3": 2300.0000008438396
+  },
+  "cut": {
+    "plane_origin_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plane_normal": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "selection": "native internal polyMesh faces whose every vertex has abs(z) <= 1e-12 m",
+    "native_internal_face_count": 94837,
+    "unique_native_point_label_edges": 191470,
+    "native_face_vertex_histogram": {
+      "4": 93123,
+      "5": 671,
+      "6": 901,
+      "7": 78,
+      "8": 64
+    },
+    "projected_face_area_sum_m2": 199.99999999999957,
+    "expected_x_y_section_area_m2": 200.0,
+    "projected_area_relative_residual": -2.1316282072803005e-15,
+    "duplicate_face_geometry_groups_at_1nm": 0,
+    "edge_length_min_m": 0.013966083526611328,
+    "edge_length_max_m": 0.11236000061035156,
+    "section_edge_bounds_m": {
+      "x": [
+        -2.5,
+        17.5
+      ],
+      "y": [
+        -10.0,
+        0.0
+      ]
+    }
+  },
+  "patch_bounds": {
+    "gasInlet": {
+      "face_count": 8010,
+      "bounds_m": {
+        "x": [
+          -2.5000000000000004,
+          -2.4999999999999996
+        ],
+        "y": [
+          -10.000000000000002,
+          0.0
+        ],
+        "z": [
+          -8.0,
+          8.0
+        ]
+      },
+      "point_references": 32040
+    },
+    "downstreamOutlet": {
+      "face_count": 8010,
+      "bounds_m": {
+        "x": [
+          17.499999999999996,
+          17.500000000000004
+        ],
+        "y": [
+          -10.000000000000002,
+          0.0
+        ],
+        "z": [
+          -8.0,
+          8.0
+        ]
+      },
+      "point_references": 32040
+    },
+    "aircraftWall": {
+      "face_count": 28974,
+      "bounds_m": {
+        "x": [
+          -2.5000000000000004,
+          17.500000000000004
+        ],
+        "y": [
+          0.0,
+          0.0
+        ],
+        "z": [
+          -3.5000000000000004,
+          3.5000000000000004
+        ]
+      },
+      "point_references": 116450
+    },
+    "bottomOutlet": {
+      "face_count": 16110,
+      "bounds_m": {
+        "x": [
+          -2.5000000000000004,
+          17.500000000000004
+        ],
+        "y": [
+          -10.000000000000004,
+          -9.999999999999998
+        ],
+        "z": [
+          -8.000000000000002,
+          8.000000000000002
+        ]
+      },
+      "point_references": 64440
+    },
+    "spanwiseMinus": {
+      "face_count": 15931,
+      "bounds_m": {
+        "x": [
+          -2.5000000000000004,
+          17.500000000000004
+        ],
+        "y": [
+          -10.000000000000002,
+          0.0
+        ],
+        "z": [
+          -8.000000000000002,
+          -3.4999999999999996
+        ]
+      },
+      "point_references": 63724
+    },
+    "spanwisePlus": {
+      "face_count": 15931,
+      "bounds_m": {
+        "x": [
+          -2.5000000000000004,
+          17.500000000000004
+        ],
+        "y": [
+          -10.000000000000002,
+          0.0
+        ],
+        "z": [
+          3.4999999999999996,
+          8.000000000000002
+        ]
+      },
+      "point_references": 63724
+    },
+    "nozzle": {
+      "face_count": 924,
+      "bounds_m": {
+        "x": [
+          -0.19553072625698326,
+          0.1955307262569833
+        ],
+        "y": [
+          0.0,
+          0.0
+        ],
+        "z": [
+          -0.20416666666666652,
+          0.20416666666666672
+        ]
+      },
+      "point_references": 3696
+    }
+  },
+  "nozzle_centre_x_y_m": [
+    2.7755575615628914e-17,
+    0.0
+  ],
+  "nominal_refinement_spacing_m": {
+    "L3_fine": 0.014,
+    "L1_medium": 0.056
+  },
+  "spacing_grid_tile_m": 0.5,
+  "selected_spacing_windows": {
+    "fine": {
+      "x_bounds_m": [
+        0.0,
+        0.5
+      ],
+      "y_bounds_m": [
+        -0.5,
+        0.0
+      ],
+      "edge_count": 2556,
+      "median_edge_length_m": 0.01404494047164917,
+      "p10_edge_length_m": 0.013966470956802368,
+      "p90_edge_length_m": 0.014044944196939468
+    },
+    "coarse": {
+      "x_bounds_m": [
+        1.5,
+        2.0
+      ],
+      "y_bounds_m": [
+        -4.5,
+        -4.0
+      ],
+      "edge_count": 162,
+      "median_edge_length_m": 0.0560227632522583,
+      "p10_edge_length_m": 0.05586588382720947,
+      "p90_edge_length_m": 0.05618000030517578
+    }
+  },
+  "probe_processing": {
+    "elapsed_s": 11.32,
+    "peak_rss_gib": 3.35675048828125
+  },
+  "zoom_regions": {
+    "fine": {
+      "roi_bounds_m": {
+        "x": [
+          -0.4,
+          0.4
+        ],
+        "y": [
+          -0.8,
+          0.0
+        ]
+      },
+      "unique_edge_segments": 6344,
+      "median_segment_length_m": 0.013966500759124756,
+      "p10_segment_length_m": 0.013966470956802368,
+      "p90_segment_length_m": 0.014044944196939468,
+      "mean_segment_length_m": 0.014126783236861229,
+      "native_face_metrics": {
+        "roi_bounds_m": {
+          "x": [
+            -0.4,
+            0.4
+          ],
+          "y": [
+            -0.8,
+            0.0
+          ]
+        },
+        "native_internal_faces": 3189,
+        "unique_adjacent_native_cells": 6378,
+        "native_face_area_sum_m2": 0.6484997803025536,
+        "face_vertex_count_min_max": [
+          4,
+          8
+        ],
+        "face_span_x_p10_median_p90_m": [
+          0.013966480446927346,
+          0.013966480446927387,
+          0.013966480446927443
+        ],
+        "face_span_y_p10_median_p90_m": [
+          0.014044943820224615,
+          0.014044943820224753,
+          0.014044943820224809
+        ],
+        "unique_edge_segments_in_roi": 6344,
+        "edge_length_p10_median_p90_m": [
+          0.013966470956802368,
+          0.013966500759124756,
+          0.014044944196939468
+        ]
+      },
+      "circle_center_m": [
+        2.7755575615628914e-17,
+        -0.4
+      ],
+      "circle_radius_m": 0.44,
+      "measured_tile": {
+        "x_bounds_m": [
+          0.0,
+          0.5
+        ],
+        "y_bounds_m": [
+          -0.5,
+          0.0
+        ],
+        "edge_count": 2556,
+        "median_edge_length_m": 0.01404494047164917,
+        "p10_edge_length_m": 0.013966470956802368,
+        "p90_edge_length_m": 0.014044944196939468
+      }
+    },
+    "coarse": {
+      "roi_bounds_m": {
+        "x": [
+          1.5,
+          2.0
+        ],
+        "y": [
+          -4.5,
+          -4.0
+        ]
+      },
+      "unique_edge_segments": 162,
+      "median_segment_length_m": 0.0560227632522583,
+      "p10_segment_length_m": 0.05586588382720947,
+      "p90_segment_length_m": 0.05618000030517578,
+      "mean_segment_length_m": 0.05602283775806427,
+      "native_face_metrics": {
+        "roi_bounds_m": {
+          "x": [
+            1.5,
+            2.0
+          ],
+          "y": [
+            -4.5,
+            -4.0
+          ]
+        },
+        "native_internal_faces": 81,
+        "unique_adjacent_native_cells": 162,
+        "native_face_area_sum_m2": 0.25422132948340526,
+        "face_vertex_count_min_max": [
+          4,
+          4
+        ],
+        "face_span_x_p10_median_p90_m": [
+          0.05586592178770933,
+          0.05586592178770955,
+          0.05586592178770999
+        ],
+        "face_span_y_p10_median_p90_m": [
+          0.05617977528089835,
+          0.056179775280899236,
+          0.056179775280900124
+        ],
+        "unique_edge_segments_in_roi": 162,
+        "edge_length_p10_median_p90_m": [
+          0.05586588382720947,
+          0.0560227632522583,
+          0.05618000030517578
+        ]
+      },
+      "circle_center_m": [
+        1.75,
+        -4.25
+      ],
+      "circle_radius_m": 0.5,
+      "measured_tile": {
+        "x_bounds_m": [
+          1.5,
+          2.0
+        ],
+        "y_bounds_m": [
+          -4.5,
+          -4.0
+        ],
+        "edge_count": 162,
+        "median_edge_length_m": 0.0560227632522583,
+        "p10_edge_length_m": 0.05586588382720947,
+        "p90_edge_length_m": 0.05618000030517578
+      }
+    }
+  },
+  "figure": {
+    "png": {
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_mesh_plate_20261028/rouaix-mesh-z0-plate.png",
+      "sha256": "9e8a418c964046b91678e7e0694bd9066d56cf5dbc45641b9bb3fd41fcec3222",
+      "bytes": 422641,
+      "dpi": 260
+    },
+    "pdf": {
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_mesh_plate_20261028/rouaix-mesh-z0-plate.pdf",
+      "sha256": "3b6064f4f5925bf01cb79a05f2aaeb0feedf884b6836620ae6daf2f6e740ab0a",
+      "bytes": 64774,
+      "rasterized_mesh_edges": true
+    },
+    "backend": "Matplotlib Agg CPU; ParaView Render and OpenGL not invoked"
+  },
+  "processing": {
+    "elapsed_s": 12.62,
+    "peak_rss_gib": 3.35675048828125,
+    "reader": "ParaView OpenFOAMReader on exact reconstructed internalMesh; cell centres/volumes verified against cached native order",
+    "cut_method": "native internal polyMesh faces whose vertex z coordinates are all within 1e-12 m of zero; unique in-plane edges deduplicated by native point-label pairs",
+    "render": "Matplotlib Agg CPU; mesh line collections rasterized for manageable PDF; no field or geometry edits"
+  },
+  "spacing_selection_method": "0.5 m x 0.5 m bins of unique exact z=0 native internal-face edges; choose the nearest nozzle tile with median near nominal 14 mm and a non-overlapping downstream tile near nominal 56 mm. Full bin table is retained only in the ignored probe receipt.",
+  "cut_validation": {
+    "audit_path": "results/summaries/rouaix_mesh_plate_20261028/native-z0-face-audit.json",
+    "audit_sha256": "393917fcbe24cd88d809b995d76913e799c8c37965b407fc6b56e0a14a97a97a",
+    "vtk_cutter_z0_audit_path": "results/summaries/rouaix_mesh_plate_20261028/vtk-cutter-z0-audit.json",
+    "vtk_cutter_z0_audit_sha256": "597c97fd4e21000691d6e92b497746ef48659ff9f4c2cef6fca97a6cad9ff000",
+    "vtk_cutter_offset_comparison_path": "results/summaries/rouaix_mesh_plate_20261028/vtk-cutter-offset-comparison.json",
+    "vtk_cutter_offset_comparison_sha256": "90b02f737db6e6a8a08c13634fd49c7fe1fc525b633f0aefac78945cdc04291b",
+    "interpretation": "The initially rendered vtkCutter z=0 attempt was superseded after direct binary face audit showed z=0 is an exact internal-face plane; the final plate uses the native face polygons directly."
+  },
+  "assumed_refinement_guide_overlay": {
+    "guide_segments_xy_m": [
+      [
+        [
+          1.95,
+          -2.69
+        ],
+        [
+          6.5,
+          -6.0
+        ]
+      ],
+      [
+        [
+          1.95,
+          -1.89
+        ],
+        [
+          6.5,
+          -5.2
+        ]
+      ]
+    ],
+    "tail_extrapolation_start_x_m": 1.95,
+    "interpretation": "source-inspired assumed refinement guide only; not measured device geometry or a computed liquid plume"
+  },
+  "cell_identity_crosscheck": {
+    "path": "results/summaries/rouaix_mesh_plate_20261028/vtk-native-cell-identity-crosscheck.json",
+    "sha256": "aea7a492bea84d5bf38a03e1919a274c5f937f67041a01b8e9cc51fcfcb2f631",
+    "all_checks_passed": true,
+    "sample_global_cell_ids": [
+      587633,
+      4297652,
+      4325302
+    ],
+    "max_sample_coordinate_delta_m": 1.9979210552634186e-07,
+    "max_sample_native_vs_cached_volume_relative_delta": 1.3755984726730956e-05,
+    "interpretation": "VTK cell order and native point-label/topology identity are supported; coordinate/volume differences are within the effect of float32 point storage."
+  },
+  "source_helpers": {
+    "archive_path": "results/summaries/rouaix_mesh_plate_20261028/source-helpers.tar.gz",
+    "archive_sha256": "102e91c193f99cdf0763c8e0682ab24200dfb2bda4adfcafd5bfa12825e4e88a",
+    "archive_bytes": 27008,
+    "manifest_path": "results/summaries/rouaix_mesh_plate_20261028/source-helpers-manifest.json",
+    "manifest_sha256": "cf13611ecfb24060bc42d920f0d6e0e5002147a9179e2776bee9fa4debc0a739",
+    "includes_cell_identity_audit": "audit_vtk_native_cell_identity.py"
+  }
+}

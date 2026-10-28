@@ -1,16 +1,22 @@
 {
   "schema_version": 1,
-  "created_utc": "2026-10-28T16:42:24.377814+00:00",
+  "created_utc": "2026-10-28T17:34:01.823229+00:00",
   "archive": "source-helpers.tar.gz",
-  "archive_bytes": 19736,
-  "archive_sha256": "2a93a15e8944ca9a42d281043b450a6d8c5b83767212282e80647ee4d032f794",
-  "creation_command": "env COPYFILE_DISABLE=1 tar -czf results/summaries/rouaix_repro_figures_20261028/source-helpers.tar.gz -C /Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028 render_repro_figures.py -C /Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028 map_collated_alpha.py render_fine_water_view.py extract_native_cell_geometry.py",
+  "archive_bytes": 22541,
+  "archive_sha256": "fece63530649027ad3b020842974474e4f33c6b2e118f2e0604c49d239aed4b3",
+  "creation_command": "COPYFILE_DISABLE=1 tar -czf results/summaries/rouaix_repro_figures_20261028/source-helpers.tar.gz -C /Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028 render_repro_figures.py render_native_z0_midplane.py -C /Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028 map_collated_alpha.py render_fine_water_view.py extract_native_cell_geometry.py",
   "members": [
     {
       "archive_path": "render_repro_figures.py",
       "source_path": "/Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028/render_repro_figures.py",
-      "bytes": 29858,
-      "sha256": "3f81fe907bd85132330a526829e1e7fbd0b829b46dac927d9797dd65953c6846"
+      "bytes": 28289,
+      "sha256": "65ac7e4d8248dc3f8cf007bb2caa5889e5e727126f8cc5e78964107f8e8fc5bd"
+    },
+    {
+      "archive_path": "render_native_z0_midplane.py",
+      "source_path": "/Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028/render_native_z0_midplane.py",
+      "bytes": 13279,
+      "sha256": "5734842844f19c51ca372874dc436f10502442f16c7e914dded377d87dc128f2"
     },
     {
       "archive_path": "map_collated_alpha.py",
@@ -38,8 +44,9 @@
     "solver history"
   ],
   "verification": [
-    "tar member bytes equal source files",
-    "helper source lint and format check passed",
-    "CPU figures rendered and visually inspected"
+    "archive members byte/hash-verified against source files",
+    "both render helpers py_compile cleanly",
+    "direct native internal-face view inspected and full-renderer integration regenerated into private staging",
+    "Matplotlib Agg only; no ParaView Render, OpenGL, or GPU"
   ]
 }

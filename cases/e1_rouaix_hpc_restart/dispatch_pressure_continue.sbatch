@@ -14,7 +14,7 @@
 #SBATCH --output=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-20261028/dispatch-%j.out
 
 set -euo pipefail
-SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-source-v2-20261028/unpacked
+SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-source-v4-20261028/unpacked
 module load cray-python/3.11.7 > "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-20261028/modules-dispatch-$SLURM_JOB_ID.log" 2>&1
 export PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 exec python3 "$SOURCE_ROOT/cases/e1_rouaix_hpc_restart/dispatch_pressure_continue.py" \

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-20261028/dispatch/verify_parent_contract_once.py", line 61, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-20261028/dispatch/verify_parent_contract_once.py", line 26, in main
+    contract = run_restart.verify_completed_parent(args.parent_run, args.parent_job_id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-source-v3-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py", line 888, in verify_completed_parent
+    verify_pressure_total_patches(
+  File "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-continuation-source-v3-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py", line 1074, in verify_pressure_total_patches
+    raise RestartError(f"p_rgh total-pressure entries differ on {patch}, rank {rank}")
+cases.e1_rouaix_hpc_restart.run_restart.RestartError: p_rgh total-pressure entries differ on downstreamOutlet, rank 0

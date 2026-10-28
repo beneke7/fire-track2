@@ -178,6 +178,7 @@ def _validate_parent(
         profile = PARENT_CONTRACT_PROFILES.get(str(parent_contract.get("variant", "")))
         checkpoint_fields = parent_contract.get("checkpoint_fields", {})
         processor_mesh = parent_contract.get("processor_mesh", {})
+        history_member = str(parent_contract.get("inventory_history_member", ""))
         fv_solution_sha256 = str(parent_contract.get("fv_solution_sha256", ""))
         if (
             profile is None
@@ -211,8 +212,9 @@ def _validate_parent(
             or not re.fullmatch(
                 r"[0-9a-f]{64}", str(parent_contract.get("inventory_history_sha256", ""))
             )
-            or not str(parent_contract.get("inventory_history_member", "")).startswith(
-                "attempt/case/postProcessing/waterInventory/"
+            or not any(
+                history_member.startswith(f"attempt/case/postProcessing/{name}/")
+                for name in ("waterInventory", "waterVolume")
             )
             or not math.isclose(
                 float(parent_contract.get("inventory_history_time_s", math.nan)),
