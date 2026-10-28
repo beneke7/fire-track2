@@ -1,0 +1,88 @@
+{
+  "baseline_guard_event": {
+    "end_marker": true,
+    "hard_deadline_elapsed_s": 631,
+    "latest_max_U_m_s": "1364.74349284",
+    "latest_solver_time_s": "0.175200000000",
+    "log": "interIsoFoam.log",
+    "reason": "max_abs_U_exceeded_1000.0_m_s",
+    "solver_exit_code": 0,
+    "threshold_m_s": 1000.0,
+    "trigger_max_U_m_s": "1091.29438224",
+    "trigger_time_s": "0.175100000000",
+    "write_and_stop_signal": 12
+  },
+  "baseline_run": "rouaix-fast-local-20261027 attempt-003 air-original-030",
+  "baseline_terminal": {
+    "end_marker": true,
+    "guard_reason": "max_abs_U_exceeded_1000.0_m_s",
+    "max_U_m_s": "1364.74349284",
+    "solver_exit_code": 0,
+    "solver_time_s": "0.175200000000",
+    "state": "terminal"
+  },
+  "candidate_guard": "200 m/s operational max|U| stop; none triggered through observed Time=0.2896 s; fields are not clipped.",
+  "candidate_run": "rouaix-backflow-local-20261028 air-backflow-030",
+  "comparison": "matched raw OpenFOAM log Time records for all-air static-p_rgh baseline vs four-patch total-pressure candidate",
+  "created_utc": "2026-10-28T13:00:35.063610+00:00",
+  "evidence": {
+    "baseline_log": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/evidence/interIsoFoam.log",
+    "baseline_run_result": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/container-runs/air-original-030/run-result.json",
+    "candidate_live_container": "rouaix-backflow-air-backflow-030-20261028-q20261028",
+    "candidate_live_log": "/workspace/logs/interIsoFoam.log",
+    "operational_guard_difference": "baseline uses 1000 m/s; candidate uses 200 m/s. The 0.1700 s point precedes either threshold, and 0.1750 s raw baseline records are retained for the near-event trajectory."
+  },
+  "interpretation": "Exploratory boundary-energy sensitivity. Values are raw outputs at matched physical times; a large divergence does not establish paper boundary-condition correctness or validation.",
+  "matched_input_note": "Same saved mesh, initial fields, schemes, physical controls, and timestep. Case hash review found only 0/p_rgh and case-inputs.json differ; metadata difference records BC/guard diagnostics.",
+  "raw_values": {
+    "0.170000000000": {
+      "baseline": {
+        "max_U_m_s": 144.526386282,
+        "max_p_rgh_Pa": 1673.47517179,
+        "min_p_rgh_Pa": -1697.19920953
+      },
+      "candidate": {
+        "max_U_m_s": 76.2086842334,
+        "max_p_rgh_Pa": 1186.93277601,
+        "min_p_rgh_Pa": -3006.84261632
+      }
+    },
+    "0.175000000000": {
+      "baseline": {
+        "max_U_m_s": 1091.29438224,
+        "max_p_rgh_Pa": 52971.576221,
+        "min_p_rgh_Pa": -97841.2645918
+      },
+      "candidate": {
+        "max_U_m_s": 75.8717968752,
+        "max_p_rgh_Pa": 1122.79315587,
+        "min_p_rgh_Pa": -3006.83264152
+      }
+    },
+    "0.175100000000": {
+      "baseline": {
+        "max_U_m_s": 1216.39731355,
+        "max_p_rgh_Pa": 62758.6377771,
+        "min_p_rgh_Pa": -120848.020068
+      },
+      "candidate": {
+        "max_U_m_s": 75.9258207173,
+        "max_p_rgh_Pa": 1101.12969171,
+        "min_p_rgh_Pa": -3006.84112554
+      }
+    },
+    "0.175200000000": {
+      "baseline": {
+        "max_U_m_s": 1364.74349284,
+        "max_p_rgh_Pa": 73767.542833,
+        "min_p_rgh_Pa": -151120.826207
+      },
+      "candidate": {
+        "max_U_m_s": 76.0382386779,
+        "max_p_rgh_Pa": 1076.10784797,
+        "min_p_rgh_Pa": -3006.78443724
+      }
+    }
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,305 @@
+{
+  "adjacent_open_or_wall_patch_faces": [
+    {
+      "area_m2": 0.002438368055555542,
+      "center_m": [
+        17.5,
+        -0.025026699893200464,
+        3.486878250959218
+      ],
+      "distance_cell_center_to_face_center_m": 0.07692307692304112,
+      "face_id": 891727,
+      "owner_cell": 299519,
+      "patch": "downstreamOutlet",
+      "unit_normal_outward": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "area_m2": 0.007478632478632357,
+      "center_m": [
+        17.423076923076923,
+        0.0,
+        3.4756944444444446
+      ],
+      "distance_cell_center_to_face_center_m": 0.027411917767715045,
+      "face_id": 910395,
+      "owner_cell": 299519,
+      "patch": "aircraftWall",
+      "unit_normal_outward": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "area_m2": 0.008435273922869722,
+      "center_m": [
+        17.423076923076923,
+        -0.02499999999999998,
+        3.51125
+      ],
+      "distance_cell_center_to_face_center_m": 0.024371763665994715,
+      "face_id": 914555,
+      "owner_cell": 299519,
+      "patch": "spanwisePlus",
+      "unit_normal_outward": [
+        1.3084552104441384e-15,
+        0.4103646773288004,
+        0.9119215051751053
+      ]
+    }
+  ],
+  "case_root": "results/runs/rouaix-fast-local-20261027/cases-and-runs/attempt-003/air-original-030",
+  "facewise_phi_at_hotspot": {
+    "available": false,
+    "reason": "The retained collated guard snapshot includes phi, but the compact archive omits processors8/constant/polyMesh and cellProcAddressing/faceProcAddressing; local processor face ordering cannot be mapped to these global boundary faces without regenerating decomposition."
+  },
+  "guard_time_integrated_patch_phi_m3_s": {
+    "by_patch": {
+      "original": {
+        "bottomOutlet": 385.013014763,
+        "downstreamOutlet": 8246.24276142,
+        "gasInlet": -8050.0,
+        "nozzle": -1.26388888889,
+        "spanwiseMinus": -289.947952012,
+        "spanwisePlus": -290.043953517
+      },
+      "upwind": {
+        "bottomOutlet": 395.625032937,
+        "downstreamOutlet": 8180.10780552,
+        "gasInlet": -8050.0,
+        "nozzle": -1.26388888889,
+        "spanwiseMinus": -262.225840484,
+        "spanwisePlus": -262.243112666
+      }
+    },
+    "global_signed_sum_m3_s": {
+      "original": -1.8234889415769118e-05,
+      "upwind": -3.581890388293374e-06
+    },
+    "sum_scope": "Terminal signed patch sums from solver log; global closure is subject to printed decimal rounding."
+  },
+  "mesh_qa": {
+    "cells": 299520,
+    "concave_or_planar_cells": 0,
+    "global_min_cell_determinant": 0.001307024566559602,
+    "global_min_face_interpolation_weight": 0.09090909090909001,
+    "global_min_face_volume_ratio": 0.09999999999999672,
+    "local_checkMesh_metrics": "not stored; no cell-local skewness/non-orthogonality metric was recovered",
+    "low_quality_tet_faces": 0,
+    "native_checkMesh_ok": true
+  },
+  "mesh_sha256": {
+    "boundary": "29602eecb93e5cdf7571c868f0a1bd27ca1823bb884297e7c702f72f7687b4ab",
+    "faces": "62dc8bc14df734c3896851a8251296fbd1291b723d7f29c75c9e991ad80591ac",
+    "neighbour": "44c6187dc3d5b5668178847bf4848b3d214e952b0475b3818a0615980f02c569",
+    "owner": "7f107eedc7d4a7d3836e469365f986d1e5483a2d89bfe37ab5faebadf285ffc2",
+    "points": "da7a756ebd96925b75ad40e2df1efbc9e73fbb31c2fe2877d83ef34ffc10f201"
+  },
+  "nearby_boundary_face_candidates_by_patch": {
+    "aircraftWall": [
+      {
+        "area_m2": 0.007478632478632357,
+        "area_vector_m2": [
+          0.0,
+          0.007478632478632357,
+          0.0
+        ],
+        "center_m": [
+          17.423076923076923,
+          0.0,
+          3.4756944444444446
+        ],
+        "distance_from_reported_peak_m": 0.027411917768037888,
+        "face_id": 910395,
+        "owner_cell": 299519
+      },
+      {
+        "area_m2": 0.007478632478632391,
+        "area_vector_m2": [
+          0.0,
+          0.007478632478632391,
+          0.0
+        ],
+        "center_m": [
+          17.423076923076923,
+          0.0,
+          3.427083333333334
+        ],
+        "distance_from_reported_peak_m": 0.06482104505115646,
+        "face_id": 910394,
+        "owner_cell": 299259
+      },
+      {
+        "area_m2": 0.007478632478632631,
+        "area_vector_m2": [
+          0.0,
+          0.007478632478632631,
+          0.0
+        ],
+        "center_m": [
+          17.423076923076923,
+          0.0,
+          3.378472222222222
+        ],
+        "distance_from_reported_peak_m": 0.11125737177481873,
+        "face_id": 910393,
+        "owner_cell": 298999
+      }
+    ],
+    "downstreamOutlet": [
+      {
+        "area_m2": 0.002438368055555542,
+        "area_vector_m2": [
+          0.002438368055555542,
+          0.0,
+          0.0
+        ],
+        "center_m": [
+          17.5,
+          -0.025026699893200464,
+          3.486878250959218
+        ],
+        "distance_from_reported_peak_m": 0.07692307690000177,
+        "face_id": 891727,
+        "owner_cell": 299519
+      },
+      {
+        "area_m2": 0.0024383680555555313,
+        "area_vector_m2": [
+          0.0024383680555555313,
+          0.0,
+          0.0
+        ],
+        "center_m": [
+          17.5,
+          -0.025026699893200423,
+          3.4381107229737746
+        ],
+        "distance_from_reported_peak_m": 0.0910792596898484,
+        "face_id": 891707,
+        "owner_cell": 299259
+      },
+      {
+        "area_m2": 0.002453993055555533,
+        "area_vector_m2": [
+          0.002453993055555533,
+          0.0,
+          0.0
+        ],
+        "center_m": [
+          17.500000000000004,
+          -0.07502652989034311,
+          3.5092219249891916
+        ],
+        "distance_from_reported_peak_m": 0.09442659862893571,
+        "face_id": 891726,
+        "owner_cell": 299506
+      }
+    ],
+    "spanwisePlus": [
+      {
+        "area_m2": 0.008435273922869722,
+        "area_vector_m2": [
+          1.1037178115902455e-17,
+          0.0034615384615384777,
+          0.007692307692307672
+        ],
+        "center_m": [
+          17.423076923076923,
+          -0.02499999999999998,
+          3.51125
+        ],
+        "distance_from_reported_peak_m": 0.024371763665214013,
+        "face_id": 914555,
+        "owner_cell": 299519
+      },
+      {
+        "area_m2": 0.008435273922869694,
+        "area_vector_m2": [
+          2.2070019423114925e-17,
+          0.003461538461538444,
+          0.007692307692307656
+        ],
+        "center_m": [
+          17.42307692307692,
+          -0.07500000000000002,
+          3.5337499999999995
+        ],
+        "distance_from_reported_peak_m": 0.06851490043510981,
+        "face_id": 914554,
+        "owner_cell": 299506
+      },
+      {
+        "area_m2": 0.008435273922869739,
+        "area_vector_m2": [
+          -4.206704429243814e-19,
+          0.003461538461538512,
+          0.007692307692307673
+        ],
+        "center_m": [
+          17.423076923076923,
+          -0.125,
+          3.55625
+        ],
+        "distance_from_reported_peak_m": 0.12168442915637584,
+        "face_id": 914553,
+        "owner_cell": 299493
+      }
+    ]
+  },
+  "purpose": "Read-only geometric mapping of the coarse all-air guard maxima to the native mesh; no CFD or mesh modification.",
+  "reconstructed_nearest_native_cell": {
+    "aabb_lengths_m": [
+      0.15384615384615685,
+      0.050000000000000044,
+      0.07111111111111112
+    ],
+    "aabb_max_m": [
+      17.5,
+      0.0,
+      3.5225000000000004
+    ],
+    "aabb_min_m": [
+      17.346153846153843,
+      -0.050000000000000044,
+      3.4513888888888893
+    ],
+    "approximate_aabb_aspect_ratio": 3.0769230769231344,
+    "cell_id": 299519,
+    "center_m": [
+      17.42307692307696,
+      -0.025026699893195267,
+      3.486878250959219
+    ],
+    "distance_to_reported_fieldMinMax_center_m": 2.3052572404787065e-11,
+    "face_count": 6,
+    "volume_m3": 0.0003751335470085493
+  },
+  "reported_hotspot": {
+    "original": {
+      "local_cell": 37439,
+      "processor": 7,
+      "time_s": 0.1752,
+      "xyz_m": [
+        17.4230769231,
+        -0.0250266998932,
+        3.48687825096
+      ]
+    },
+    "upwind": {
+      "local_cell": 37439,
+      "processor": 7,
+      "time_s": 0.196,
+      "xyz_m": [
+        17.4230769231,
+        -0.0250266998932,
+        3.48687825096
+      ]
+    }
+  },
+  "schema_version": 1
+}

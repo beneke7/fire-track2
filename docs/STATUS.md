@@ -7,6 +7,16 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
+Targeted Rouaix diagnosis (28 October13:45 UTC): coarse PTOTAL0 air and water
+completed0.30 s; matched static-pressure water guarded near0.17 s. A fixed0.3 ms
+water pilot also completed in274 solver seconds versus1018 at0.1 ms; measured
+cost comparison is affected by different concurrent load. This establishes a
+working coarse VOF setup and a pressure-boundary stability effect; fine-grid,
+time-convergence and paper agreement remain unproved. Actual native helper
+probe14700561 passed; v3 early-save14700599/audit14700602 are released and pending. Fine pressure candidate
+is prepared/unsubmitted pending native preflight. All150 affected tests pass.
+I4F is untouched. [Diagnosis](ROUAIX_FAILURE_DIAGNOSIS.md),
+[metrics](../results/summaries/rouaix_backflow_local_20261028/README.md).
 At2026-10-28 11:18 UTC, no Rouaix job is running or pending. Smoke14689395
 completed ten fixed0.1 ms steps through0.201 s (Umax111.98 m/s,81 linear solves
 converged, terminal archive/ledger verified). Control14689396 ran120 ranks on

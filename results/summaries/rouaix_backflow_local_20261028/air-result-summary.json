@@ -1,0 +1,67 @@
+{
+  "case": "air-backflow-030",
+  "created_utc": "2026-10-28T13:04:07.206507+00:00",
+  "delta_t_s": 0.0001,
+  "interpretation": "Exploratory all-air backflow-energy sensitivity only. A smoother/stable output does not establish physical accuracy or validation.",
+  "mesh_cells": 299520,
+  "mpi_ranks": 8,
+  "provenance": {
+    "archive_bytes": 29755705,
+    "archive_members": 86,
+    "archive_sha256": "08f640429749e2816e67ec0563afe8e61582e5cc4fc883ecf9a16d2d7d1d1f8b",
+    "git_dirty": true,
+    "git_revision": "5a46626c2ff11d090099890d2fc311cc16732050",
+    "input_case_sha256": "a655ea13990787c5eeaea531f5a268e0a9bc0d350cabf14071702a4dbf4aa691",
+    "input_manifest_sha256": "46f601fa107cba4d3e2da79016516f9c47a5c9ea1808d5188ef3bba0b4b3310c",
+    "released": true,
+    "remote_local_archive_match": true,
+    "snapshot_inventory_passed": true,
+    "source_snapshot_sha256": "3d6ff02201edadf298fa038dcfe79fb055ce742e1ebbbe9e28a887f18bc1bb97"
+  },
+  "raw_diagnostics": {
+    "alpha_water_extrema": {
+      "max": 0.0,
+      "min": 0.0
+    },
+    "continuity_records": 9001,
+    "integrated_alpha_water_volume_m3": {
+      "max": 0.0,
+      "min": 0.0
+    },
+    "p_rgh_dimensions": "[1 -1 -2 0 0 0 0] = Pa",
+    "p_rgh_max": {
+      "time_s": 0.0001,
+      "value_pa": 14373.64453863
+    },
+    "p_rgh_min": {
+      "time_s": 0.0078,
+      "value_pa": -3007.954464956
+    },
+    "peak_speed": {
+      "time_s": 0.0366,
+      "value_m_s": 85.03617129436
+    },
+    "terminal_continuity_record": "time step continuity errors : sum local = 6.37580878415e-14, global = -1.29541150282e-14, cumulative = 1.95479888058e-05",
+    "terminal_speed_m_s": 75.7688704215
+  },
+  "runtime": {
+    "completed_utc": "2026-10-28T13:01:00.586338+00:00",
+    "container_id": "3fab33475564c8bf553902083a20b97659c6c41821d79fea1979a2977c961e5c",
+    "container_name": "rouaix-backflow-air-backflow-030-20261028-q20261028",
+    "guard_reason": "horizon_end",
+    "guard_threshold_m_s": 200.0,
+    "hard_deadline_elapsed_s": 1021,
+    "started_utc": "2026-10-28T12:43:40.620279417Z"
+  },
+  "schema_version": 1,
+  "solver": "OpenCFD v2512 interIsoFoam",
+  "steps": 3000,
+  "terminal": {
+    "end_marker": true,
+    "guard_reason": "horizon_end",
+    "max_U_m_s": "75.7688704215",
+    "solver_exit_code": 0,
+    "solver_time_s": "0.300000000000",
+    "state": "terminal"
+  }
+}

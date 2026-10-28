@@ -1,0 +1,32 @@
+{
+  "actual_helper_probe_job": "14700561",
+  "allocation": {
+    "memory_gib_per_node": 22,
+    "nodes": 3,
+    "tasks": 120,
+    "tasks_per_node": 40,
+    "wall_limit_s": 1200
+  },
+  "audit_metrics_sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b",
+  "audit_source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/hpc-finished-audit-source-v3-20261026",
+  "audit_source_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+  "auditor_job_id": "14700602",
+  "base_v2_capsule_sha256": "9a4ba40de22ae131f7a968769342b6d1ae32c83a22ac278dab88ce012de24823",
+  "preflight": "saved-time fixture accepted and original-early-save config import passed",
+  "prior_v2_audit_preserved": "14700457",
+  "prior_v2_failed_job_preserved": "14700456",
+  "recorded_utc": "2026-10-28T13:52:04.057398+00:00",
+  "released": true,
+  "remote_run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-early-save-v3-20261028",
+  "remote_source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-early-save-source-v3-20261028/unpacked",
+  "solver_job_id": "14700599",
+  "source_capsule_sha256": "68087a0afe41fa26557329fe1b36f2e0acbf554347e37176926cb68b8821590c",
+  "source_members": 20,
+  "source_members_verified_remote": 20,
+  "submission_commands": [
+    "sbatch --hold --parsable \"$SOURCE_ROOT/cases/e1_rouaix_hpc_restart/restart_early_save.sbatch\"",
+    "sbatch --hold --dependency=afterany:14700599 --parsable ./audit-afterany-14700599.sbatch",
+    "scontrol release 14700599 14700602"
+  ],
+  "trigger": "signal 12 after 3 healthy continuation steps"
+}

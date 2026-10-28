@@ -38,6 +38,7 @@ FLUX_PATCHES = (
     "spanwiseMinus",
     "spanwisePlus",
 )
+BACKFLOW_PRESSURE_PATCHES = ("downstreamOutlet", "bottomOutlet", "spanwiseMinus", "spanwisePlus")
 X_NODES = (-2.5, -0.5, 0.5, 4.5, 15.5, 17.5)
 X_COUNTS = (4, 20, 18, 10, 13)
 Y_NODES = (-10.0, -4.0, -1.0, 0.0)
@@ -393,8 +394,44 @@ def _set_nozzle_air(path: Path) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def _set_backflow_total_pressure(path: Path) -> None:
+    """Switch only the four open pressure patches to v2512 prghTotalPressure."""
+    text = path.read_text(encoding="utf-8")
+    for patch in BACKFLOW_PRESSURE_PATCHES:
+        pattern = re.compile(rf"(?ms)^(    {re.escape(patch)}\s*\{{\s*)(.*?)(^    \}})")
+        matches = list(pattern.finditer(text))
+        if len(matches) != 1:
+            raise ValueError(f"expected one pressure patch block for {patch}")
+        match = matches[0]
+        entries = re.findall(r"(?m)^\s*(\w+)\s+([^;]+);", match.group(2))
+        if entries != [
+            ("type", "prghPressure"),
+            ("p", "uniform 0"),
+            ("rho", "rho"),
+            ("value", "uniform 0"),
+        ]:
+            raise ValueError(f"unexpected source pressure entries for {patch}: {entries}")
+        replacement = (
+            f"{match.group(1)}"
+            "        type            prghTotalPressure;\n"
+            "        p0              uniform 0;\n"
+            "        rho             rho;\n"
+            "        U               U;\n"
+            "        phi             phi;\n"
+            "        value           uniform 0;\n"
+            f"{match.group(3)}"
+        )
+        text = text[: match.start()] + replacement + text[match.end() :]
+    path.write_text(text, encoding="utf-8")
+
+
 def write_case(
-    destination: Path, variant: str, *, horizon_s: float = FULL_HORIZON_S, ranks: int = 4
+    destination: Path,
+    variant: str,
+    *,
+    horizon_s: float = FULL_HORIZON_S,
+    ranks: int = 4,
+    backflow_total_pressure: bool = False,
 ) -> dict[str, Any]:
     if variant not in VARIANTS:
         raise ValueError(f"unknown variant {variant!r}")
@@ -422,18 +459,26 @@ def write_case(
     _set_variant(system / "fvSchemes", variant)
     shutil.copy2(HPC_TEMPLATE / "fvSolution", system / "fvSolution")
     _set_nozzle_air(destination / "0/alpha.water")
+    if backflow_total_pressure:
+        _set_backflow_total_pressure(destination / "0/p_rgh")
     (system / "controlDict").write_text(_control_dict(horizon_s), encoding="utf-8")
     (system / "decomposeParDict").write_text(_decompose_dict(ranks), encoding="utf-8")
     (destination / "case.foam").touch()
     metadata: dict[str, Any] = {
         "schema_version": 1,
         "case_id": f"ROUAIX-AIR-{variant.upper()}-{round(horizon_s / DELTA_T_S):05d}"
+        + ("-BACKFLOW-PTOTAL0" if backflow_total_pressure else "")
         + (f"-{ranks:02d}RANK" if ranks != 4 else ""),
         "scope": "Exploratory all-air negative control; not an E1 reproduction or validation case.",
         "source_mode": "alpha.water=0 in all cells and at nozzle; the prescribed nozzle velocity (0,-10,0) m/s is retained while the source composition is declared gas.",
         "solver": "OpenCFD v2512 interIsoFoam",
         "reference_image_digest": IMAGE_ID,
         "momentum_convection": VARIANTS[variant],
+        "open_pressure_boundary": (
+            "prghTotalPressure p0=0 Pa gauge on four open patches; reverse-flow dynamic-head sensitivity"
+            if backflow_total_pressure
+            else "prghPressure static p=0 Pa gauge on four open patches"
+        ),
         "other_scheme_entries": "Same v2512 Rouaix HPC template in both siblings.",
         "coordinate_frame": {"x": "crossflow +", "y": "upward +", "z": "spanwise +"},
         "nozzle_velocity_m_s": [0.0, -10.0, 0.0],
@@ -456,7 +501,7 @@ def write_case(
             "Both are recorded separately; alphaPhi_ is zero in the all-air state."
         ),
         "runtime_guard": {
-            "max_abs_U_m_s": MAX_U_M_S,
+            "max_abs_U_m_s": 200.0 if backflow_total_pressure else MAX_U_M_S,
             "write_and_stop_signal": 12,
             "hard_wall_seconds": 1680,
             "grace_seconds": 120,

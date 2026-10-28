@@ -1,23 +1,30 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
 import tarfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 from cases.e1_rouaix_hpc import run_pilot as pilot
+from cases.e1_rouaix_hpc_restart import run_restart as restart
 from cases.e1_rouaix_hpc_restart.run_restart import (
     DT_S,
     END_TIME_S,
     PARENT_TIME_S,
+    PRESSURE_TOTAL_PATCHES,
     RestartConfig,
     RestartError,
     RestartOutputMonitor,
     build_terminal_status,
     config_for_variant,
+    pressure_checkpoint_integrity,
+    pressure_total_change_command,
+    pressure_total_dictionary_text,
     rewrite_control_dict,
     select_seed_members,
     validate_allocation,
@@ -90,6 +97,132 @@ def test_restart_sbatch_openfoam_bootstrap_preserves_module_args_and_reports_fai
     assert "modules-test.log" in failed.stderr
 
 
+def test_early_save_sbatch_uses_dedicated_capsule_and_run_root() -> None:
+    script = (
+        Path(__file__).resolve().parents[1]
+        / "cases/e1_rouaix_hpc_restart/restart_early_save.sbatch"
+    ).read_text(encoding="utf-8")
+    assert "rouaix-early-save-source-v2-20261028/unpacked" in script
+    assert "rouaix-early-save-v2-20261028" in script
+    assert "#SBATCH --ntasks=120" in script
+    assert "#SBATCH --time=00:20:00" in script
+    assert "--variant original-early-save" in script
+
+
+def test_pressure_total_sbatch_and_configuration_are_declared_without_submission() -> None:
+    script = (
+        Path(__file__).resolve().parents[1] / "cases/e1_rouaix_hpc_restart/restart_pressure.sbatch"
+    ).read_text(encoding="utf-8")
+    assert "rouaix-pressure-total-restart-source-20261028/unpacked" in script
+    assert "rouaix-pressure-total-restart-20261028" in script
+    assert "#SBATCH --ntasks=120" in script
+    assert "#SBATCH --nodes=3" in script
+    assert "#SBATCH --mem=22G" in script
+    assert "#SBATCH --time=01:30:00" in script
+    assert "--variant pressure-total-p0-zero" in script
+
+    config = config_for_variant("pressure-total-p0-zero")
+    assert config.end_time_s == 0.3
+    assert config.write_interval_s == 0.05
+    assert config.wall_budget_s == 5400
+    assert round((config.end_time_s - config.start_time_s) / config.delta_t_s) == 1000
+    with pytest.raises(RestartError, match="selected frozen variant"):
+        RestartConfig(
+            variant="pressure-total-p0-zero",
+            end_time_s=0.3,
+            write_interval_s=0.1,
+            wall_budget_s=5400,
+        ).validate()
+
+
+def test_pressure_dictionary_and_native_change_command_touch_only_declared_patches(
+    tmp_path: Path,
+) -> None:
+    text = pressure_total_dictionary_text()
+    assert text.startswith("FoamFile\n{")
+    assert "class dictionary;" in text
+    assert "object changeDictionaryDict;" in text
+    assert "\np_rgh\n{" in text
+    assert "internalField" not in text
+    assert "p\n{" not in text
+    assert text.count("type prghTotalPressure;") == 4
+    assert all(f"{patch}\n        {{" in text for patch in PRESSURE_TOTAL_PATCHES)
+    assert "p0 uniform 0;" in text
+    assert "rho rho;" in text and "U U;" in text and "phi phi;" in text
+    assert "value uniform 0;" in text
+
+    case = tmp_path / "private-case"
+    command = pressure_total_change_command(case)
+    assert command == [
+        "srun",
+        "--nodes=3",
+        "--ntasks=120",
+        "--ntasks-per-node=40",
+        "changeDictionary",
+        "-parallel",
+        "-fileHandler",
+        "collated",
+        "-case",
+        str(case),
+        "-time",
+        "0.2",
+        "-dict",
+        "system/changeDictionaryDict",
+    ]
+
+
+def _write_synthetic_collated_pressure(path: Path, patch_type: str) -> None:
+    entries = (
+        "        p0 uniform 0;\n        rho rho;\n"
+        "        U U;\n        phi phi;\n        value uniform 0;\n"
+        if patch_type == "prghTotalPressure"
+        else "        p uniform 0;\n        rho rho;\n        value uniform 0;\n"
+    )
+    patches = "\n".join(
+        f"    {patch}\n    {{\n        type {patch_type};\n{entries}    }}"
+        for patch in PRESSURE_TOTAL_PATCHES
+    )
+    with path.open("wb") as stream:
+        for rank in range(120):
+            text = (
+                f"// processor{rank}\n1\n(\n"
+                "FoamFile\n{\n    format      ascii;\n}\n"
+                "dimensions [0 2 -2 0 0 0 0];\n"
+                "internalField nonuniform List<scalar>\n2\n(\n1.25\n-2.5\n);\n"
+                "boundaryField\n{\n"
+                f"{patches}\n"
+                "}\n)\n"
+            )
+            stream.write(text.encode("ascii"))
+
+
+def test_pressure_checkpoint_integrity_uses_existing_native_reader(tmp_path: Path) -> None:
+    case = tmp_path / "case"
+    endpoint = case / "processors120/0.200000000000"
+    endpoint.mkdir(parents=True)
+    source_dir = tmp_path / "source"
+    source_dir.mkdir()
+    reader_path = Path(__file__).resolve().parents[1] / "src/aerial_drop/i4f_native_face_reader.py"
+    (source_dir / "i4f_native_face_reader.py").write_bytes(reader_path.read_bytes())
+    for relative in restart.REQUIRED_CHECKPOINT_FIELDS:
+        if relative != "p_rgh":
+            target = endpoint / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(f"unchanged:{relative}\n".encode())
+    pressure_path = endpoint / "p_rgh"
+    _write_synthetic_collated_pressure(pressure_path, "prghPressure")
+    before = pressure_checkpoint_integrity(case, source_dir)
+    _write_synthetic_collated_pressure(pressure_path, "prghTotalPressure")
+    after = pressure_checkpoint_integrity(case, source_dir)
+
+    assert before["p_rgh_file_sha256"] != after["p_rgh_file_sha256"]
+    assert before["unchanged_checkpoint_field_sha256"] == after["unchanged_checkpoint_field_sha256"]
+    assert before["p_rgh_internal_sha256"] == after["p_rgh_internal_sha256"]
+    assert before["p_rgh_internal_rank_sha256"] == after["p_rgh_internal_rank_sha256"]
+    assert before["p_rgh_internal_value_count"] == 240
+    restart.verify_pressure_total_patches(case, source_dir)
+
+
 NATIVE_PARENT_TIME = (
     "value 0.199999999999994293;\n"
     'name "0.200000000000";\n'
@@ -138,6 +271,11 @@ def test_restart_configs_have_frozen_smoke_and_control_horizons() -> None:
         RestartConfig(
             variant="original-control", end_time_s=0.301, write_interval_s=0.1, wall_budget_s=5400
         ).validate()
+    early_save = config_for_variant("original-early-save")
+    assert early_save.end_time_s == 0.202
+    assert early_save.write_interval_s == 0.002
+    assert early_save.wall_budget_s == 1200
+    assert round((early_save.end_time_s - early_save.start_time_s) / early_save.delta_t_s) == 20
 
 
 def test_control_dict_changes_only_restart_window(tmp_path) -> None:
@@ -359,6 +497,172 @@ def test_terminal_receipt_requires_verified_u_guard_stop() -> None:
     )
     assert clean_control["state"] == "terminal"
     assert clean_control["target_time_s"] == 0.3
+
+
+def test_terminal_receipt_keeps_diagnostic_early_save_separate_from_u_guard() -> None:
+    early = build_terminal_status(
+        return_code=0,
+        end_marker=True,
+        actual_time_s=0.2004,
+        step_count=4,
+        stop_detail=restart.EARLY_SAVE_STOP_REASON,
+        pause_observed=False,
+        stop_signals=["12"],
+        endpoint_verified=True,
+        variant="original-early-save",
+        target_time_s=0.202,
+        stop_signal_request_utc="2026-10-28T12:00:00+00:00",
+        stop_signal_acknowledged_utc="2026-10-28T12:00:01+00:00",
+        stop_signal_job_id="14700000",
+        stop_signal_job_step="14700000.0",
+        stop_signal_task_count=120,
+        stop_signal_request_solver_time_s=0.2003,
+        early_save_trigger_after_steps=3,
+    )
+
+    assert early["state"] == "diagnostic_early_saved"
+    assert early["stop_reason"] == "diagnostic_early_save_after_3_steps"
+    assert early["write_and_stop_acknowledged"] is True
+    assert early["stop_signals"] == ["12"]
+
+    unacknowledged = build_terminal_status(
+        return_code=1,
+        end_marker=False,
+        actual_time_s=0.2004,
+        step_count=4,
+        stop_detail=restart.EARLY_SAVE_STOP_REASON,
+        pause_observed=False,
+        stop_signals=[],
+        endpoint_verified=False,
+        variant="original-early-save",
+        target_time_s=0.202,
+    )
+    assert unacknowledged["state"] == "incomplete"
+    assert unacknowledged["write_and_stop_requested"] is False
+    assert unacknowledged["write_and_stop_acknowledged"] is False
+
+
+def test_early_save_run_path_verifies_endpoint_and_records_partial_audit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    for key, value in {
+        "SLURM_JOB_ID": "14700001",
+        "SLURM_JOB_NAME": "ml-vof",
+        "SLURM_JOB_ACCOUNT": "nk_meshapplied",
+        "SLURM_JOB_PARTITION": "cpu-short",
+        "SLURM_JOB_NUM_NODES": "3",
+        "SLURM_NTASKS": "120",
+        "SLURM_CPUS_PER_TASK": "1",
+        "SLURM_TASKS_PER_NODE": "40(x3)",
+        "SLURM_MEM_PER_NODE": str(22 * 1024),
+        "SLURM_CPUS_ON_NODE": "40",
+        "SLURM_JOB_NODELIST": "n[01-03]",
+    }.items():
+        monkeypatch.setenv(key, value)
+    monkeypatch.setattr(restart.signal, "signal", lambda *_args: None)
+    monkeypatch.setattr(restart, "PAUSE_FILE", tmp_path / "shared-PAUSE")
+    monkeypatch.setattr(
+        restart.shutil,
+        "disk_usage",
+        lambda _path: SimpleNamespace(free=20 * 1024**3),
+    )
+    monkeypatch.setattr(pilot, "_EXTERNAL_SIGNAL", None)
+
+    def prepare_case(attempt: Path, _config: RestartConfig):
+        case = attempt / "case"
+        case.mkdir()
+        (attempt / "seed-verification.json").write_text("{}\n", encoding="utf-8")
+        (attempt / "manifest.json").write_text("{}\n", encoding="utf-8")
+        endpoint = case / "processors120/0.200400000000"
+        endpoint.mkdir(parents=True)
+        for field in restart.REQUIRED_ENDPOINT_FIELDS:
+            (endpoint / field).write_text("native field\n", encoding="ascii")
+        (endpoint / "uniform").mkdir()
+        (endpoint / "uniform/time").write_text("checkpoint\n", encoding="ascii")
+        return case, {}
+
+    def fake_supervise(**kwargs):
+        state = kwargs["state"]
+        assert kwargs["stop_after_steps"] == 3
+        times = [0.2001, 0.2002, 0.2003, 0.2004]
+        log = (
+            "sigStopAtWriteNow : Enabling writing and stopping upon signal 12\n"
+            + "".join(f"Time = {instant:.12f}\n" for instant in times)
+            + "sigStopAtWriteNow : setting up write and stop at end of the next iteration\n"
+            + "End\n"
+        )
+        (kwargs["attempt"] / "solver.log").write_text(log, encoding="utf-8")
+        (kwargs["attempt"] / "max-speed.csv").write_text(
+            "time_s,max_magnitude_U_m_s\n0.2003,110\n", encoding="ascii"
+        )
+        monitor = restart.RestartOutputMonitor(
+            last_progress_monotonic=0.0, horizon_s=0.202, delta_t_s=DT_S
+        )
+        monitor.feed("Time = 0.2", 1.0)
+        for instant in times:
+            monitor.feed(f"Time = {instant:.12f}", instant)
+            monitor.feed("min / max (mag(U)) = 0 110", instant)
+        monitor.feed(
+            "sigStopAtWriteNow : setting up write and stop at end of the next iteration",
+            2.0,
+        )
+        monitor.feed("End", 2.0)
+        monitor.finish()
+        state.update(
+            solver_log_sha256=restart.sha256_file(kwargs["attempt"] / "solver.log"),
+            max_speed_csv_sha256=restart.sha256_file(kwargs["attempt"] / "max-speed.csv"),
+            stop_requested_utc="2026-10-28T12:00:00+00:00",
+            stop_signal_acknowledged_utc="2026-10-28T12:00:01+00:00",
+            stop_signal_job_step="14700001.0",
+            stop_signal_task_count=120,
+            stop_signal_request_solver_time_s=0.2003,
+            early_save_trigger_after_steps=3,
+            stop_signals=["12"],
+        )
+        return 0, monitor, restart.EARLY_SAVE_STOP_REASON, False
+
+    def fake_pack(_attempt: Path, run_dir: Path):
+        archive = run_dir / "result.tar.gz"
+        archive.write_bytes(b"synthetic verified attempt")
+        return archive, hashlib.sha256(archive.read_bytes()).hexdigest(), 1, []
+
+    monkeypatch.setattr(restart, "prepare_case", prepare_case)
+    monkeypatch.setattr(restart, "verify_stop_contract", lambda *_args: {"signal": 12})
+    monkeypatch.setattr(pilot, "supervise_solver", fake_supervise)
+    monkeypatch.setattr(pilot, "inspect_solver_convergence", lambda *_args: {"all_converged": True})
+    monkeypatch.setattr(pilot, "_write_step_accounting", lambda *_args: {})
+    monkeypatch.setattr(pilot, "pack_attempt", fake_pack)
+    monkeypatch.setattr(
+        restart,
+        "_run_audit",
+        lambda case, _attempt, _config: {
+            "status": "diagnostic_early_save_partial_exploratory_only",
+            "step_count": 4,
+            "case": str(case),
+        },
+    )
+    from cases.e1_rouaix_hpc import collect_native_provenance
+
+    monkeypatch.setattr(
+        collect_native_provenance,
+        "collect_native_provenance",
+        lambda **kwargs: kwargs["output_path"].write_text("{}\n", encoding="utf-8"),
+    )
+
+    run_root = tmp_path / "results/runs/rouaix-early-save-v2-20261028"
+    result = restart.run(run_root, config_for_variant("original-early-save"))
+
+    run_dir = run_root / "rouaix-restart-original-early-save-14700001"
+    state = json.loads((run_dir / "run-state.json").read_text(encoding="utf-8"))
+    terminal = json.loads(
+        (run_dir / "attempt/case/terminal-status.json").read_text(encoding="utf-8")
+    )
+    assert result == 0
+    assert state["status"] == "diagnostic_early_save_complete"
+    assert state["ledger_status"] == "written_from_hash_bound_parent_checkpoint"
+    assert terminal["state"] == "diagnostic_early_saved"
+    assert terminal["solver_time_steps_recorded"] == 4
+    assert terminal["stop_signal_request_solver_time_s"] == 0.2003
 
 
 def test_seed_selection_requires_checkpoint_and_rejects_links() -> None:

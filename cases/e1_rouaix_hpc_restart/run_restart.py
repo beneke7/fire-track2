@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -44,12 +45,26 @@ END_TIME_S = 0.201
 WRITE_INTERVAL_S = 0.001
 VARIANT_SETTINGS = {
     "original-smoke": {"end_time_s": 0.201, "write_interval_s": 0.001, "wall_budget_s": 1200},
+    "original-early-save": {
+        "end_time_s": 0.202,
+        "write_interval_s": 0.002,
+        "wall_budget_s": 1200,
+    },
     "original-control": {"end_time_s": 0.3, "write_interval_s": 0.1, "wall_budget_s": 5400},
+    "pressure-total-p0-zero": {
+        "end_time_s": 0.3,
+        "write_interval_s": 0.05,
+        "wall_budget_s": 5400,
+    },
 }
 CASE_IDS = {
     "original-smoke": "rouaix-restart-original-smoke-0201",
+    "original-early-save": "rouaix-restart-original-early-save-0202",
     "original-control": "rouaix-restart-original-control-0300",
+    "pressure-total-p0-zero": "rouaix-restart-pressure-total-p0-zero-0300",
 }
+EARLY_SAVE_STOP_REASON = "diagnostic early-save requested after 3 completed continuation steps"
+EARLY_SAVE_TERMINAL_REASON = "diagnostic_early_save_after_3_steps"
 EXPECTED_ARCHIVE_MEMBERS = 131
 EXPECTED_RANKS = 120
 EXPECTED_NODES = 3
@@ -71,6 +86,7 @@ REQUIRED_CHECKPOINT_FIELDS = (
     "uniform/time",
 )
 REQUIRED_ENDPOINT_FIELDS = ("U", "alpha.water", "p_rgh", "k", "epsilon", "nut", "p", "phi")
+PRESSURE_TOTAL_PATCHES = ("downstreamOutlet", "bottomOutlet", "spanwiseMinus", "spanwisePlus")
 MESH_FILES = ("points", "faces", "owner", "neighbour", "boundary")
 TIME_FIELD_LINE = re.compile(r"^\s*(value|name|index|deltaT|deltaT0)\s+([^;]+);\s*$", re.MULTILINE)
 
@@ -141,6 +157,12 @@ class RestartConfig:
             raise RestartError("smoke must contain exactly ten continuation steps")
         if self.variant == "original-control" and expected_steps != 1000:
             raise RestartError("original control must contain exactly 1000 continuation steps")
+        if self.variant == "pressure-total-p0-zero" and expected_steps != 1000:
+            raise RestartError(
+                "pressure-total sensitivity must contain exactly 1000 continuation steps"
+            )
+        if self.variant == "original-early-save" and expected_steps < 3:
+            raise RestartError("early-save horizon must allow at least three continuation steps")
         if (self.ranks, self.nodes, self.memory_gib_per_node) != (120, 3, 22):
             raise RestartError(
                 "restart allocation must be three nodes, 40 ranks per node, 22 GiB/node"
@@ -161,6 +183,163 @@ def sha256_file(path: Path) -> str:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def pressure_total_dictionary_text() -> str:
+    patches = "\n".join(
+        f"        {patch}\n"
+        "        {\n"
+        "            type prghTotalPressure;\n"
+        "            p0 uniform 0;\n"
+        "            rho rho;\n"
+        "            U U;\n"
+        "            phi phi;\n"
+        "            value uniform 0;\n"
+        "        }"
+        for patch in PRESSURE_TOTAL_PATCHES
+    )
+    return (
+        "FoamFile\n{\n    version 2.0;\n    format ascii;\n"
+        "    class dictionary;\n    object changeDictionaryDict;\n}\n\n"
+        "p_rgh\n{\n    boundaryField\n    {\n" + patches + "\n    }\n}\n"
+    )
+
+
+def pressure_total_change_command(case: Path) -> list[str]:
+    return [
+        "srun",
+        "--nodes=3",
+        "--ntasks=120",
+        "--ntasks-per-node=40",
+        "changeDictionary",
+        "-parallel",
+        "-fileHandler",
+        "collated",
+        "-case",
+        str(case),
+        "-time",
+        "0.2",
+        "-dict",
+        "system/changeDictionaryDict",
+    ]
+
+
+def _native_field_reader(source_dir: Path) -> Any:
+    reader_path = source_dir / "i4f_native_face_reader.py"
+    spec = importlib.util.spec_from_file_location("rouaix_native_face_reader", reader_path)
+    if spec is None or spec.loader is None:
+        raise RestartError("could not load the existing collated native-field reader")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.modules.pop(spec.name, None)
+    return module
+
+
+def pressure_checkpoint_integrity(case: Path, source_dir: Path) -> dict[str, Any]:
+    endpoint = case / PARENT_TIME_DIR
+    reader = _native_field_reader(source_dir)
+    chunks = reader._field_chunks(endpoint / "p_rgh", EXPECTED_RANKS)
+    rank_hashes: dict[str, str] = {}
+    internal_digest = hashlib.sha256()
+    internal_count = 0
+    for rank, chunk in sorted(chunks.items()):
+        values = reader._parse_internal(chunk, "scalar")
+        canonical = values.astype("<f8", copy=False).tobytes()
+        rank_hash = hashlib.sha256(canonical).hexdigest()
+        rank_hashes[str(rank)] = rank_hash
+        internal_digest.update(rank.to_bytes(4, "little"))
+        internal_digest.update(len(values).to_bytes(8, "little"))
+        internal_digest.update(canonical)
+        internal_count += len(values)
+    unchanged_fields = {
+        relative: sha256_file(endpoint / relative)
+        for relative in REQUIRED_CHECKPOINT_FIELDS
+        if relative != "p_rgh"
+    }
+    return {
+        "unchanged_checkpoint_field_sha256": unchanged_fields,
+        "p_rgh_file_sha256": sha256_file(endpoint / "p_rgh"),
+        "p_rgh_internal_sha256": internal_digest.hexdigest(),
+        "p_rgh_internal_rank_sha256": rank_hashes,
+        "p_rgh_internal_value_count": internal_count,
+    }
+
+
+def verify_pressure_total_patches(case: Path, source_dir: Path) -> None:
+    reader = _native_field_reader(source_dir)
+    chunks = reader._field_chunks(case / PARENT_TIME_DIR / "p_rgh", EXPECTED_RANKS)
+    for rank, chunk in sorted(chunks.items()):
+        text = chunk.decode("latin1")
+        for patch in PRESSURE_TOTAL_PATCHES:
+            match = re.search(rf"(?ms)^\s*{re.escape(patch)}\s*\{{(.*?)^\s*\}}", text)
+            if match is None:
+                raise RestartError(f"p_rgh is missing {patch} on rank {rank}")
+            entries = dict(re.findall(r"(?m)^\s*(\w+)\s+([^;]+);", match.group(1)))
+            expected = {
+                "type": "prghTotalPressure",
+                "p0": "uniform 0",
+                "rho": "rho",
+                "U": "U",
+                "phi": "phi",
+                "value": "uniform 0",
+            }
+            if any(entries.get(key) != value for key, value in expected.items()):
+                raise RestartError(f"p_rgh total-pressure entries differ on {patch}, rank {rank}")
+
+
+def apply_pressure_total_restart(
+    case: Path,
+    attempt: Path,
+    run_dir: Path,
+    run_root: Path,
+    deadline: float,
+    state: dict[str, Any],
+    write_state: Any,
+) -> dict[str, Any]:
+    source_dir = attempt / "source"
+    dictionary = case / "system/changeDictionaryDict"
+    expected_dictionary = pressure_total_dictionary_text()
+    if not dictionary.is_file() or dictionary.read_text(encoding="ascii") != expected_dictionary:
+        raise RestartError("prepared native pressure change dictionary is missing or changed")
+    before = pressure_checkpoint_integrity(case, source_dir)
+    pilot.run_setup_command(
+        pressure_total_change_command(case),
+        cwd=case,
+        log_path=attempt / "pressure-total-change.log",
+        deadline=deadline,
+        run_dir=run_dir,
+        shared_pause=PAUSE_FILE,
+        project_root=run_root,
+        state=state,
+        write_state=write_state,
+        minimum_free_disk_bytes=MIN_FREE_DISK_BYTES,
+    )
+    after = pressure_checkpoint_integrity(case, source_dir)
+    if before["unchanged_checkpoint_field_sha256"] != after["unchanged_checkpoint_field_sha256"]:
+        raise RestartError("native pressure change modified a non-p_rgh checkpoint field")
+    if (
+        before["p_rgh_internal_sha256"] != after["p_rgh_internal_sha256"]
+        or before["p_rgh_internal_rank_sha256"] != after["p_rgh_internal_rank_sha256"]
+    ):
+        raise RestartError("native pressure change modified the p_rgh internal array")
+    if before["p_rgh_file_sha256"] == after["p_rgh_file_sha256"]:
+        raise RestartError("native pressure change did not rewrite the p_rgh boundary data")
+    verify_pressure_total_patches(case, source_dir)
+    receipt = {
+        "utility": "changeDictionary -parallel -fileHandler collated -time 0.2",
+        "command": pressure_total_change_command(case),
+        "dictionary_sha256": sha256_file(dictionary),
+        "patches": list(PRESSURE_TOTAL_PATCHES),
+        "p0_gauge_pa": 0.0,
+        "before": before,
+        "after": after,
+        "status": "native_boundary_change_verified_internal_arrays_and_other_fields_unchanged",
+    }
+    write_json(attempt / "pressure-total-change-receipt.json", receipt)
+    return receipt
 
 
 def write_json(path: Path, value: dict[str, Any]) -> None:
@@ -430,6 +609,7 @@ def prepare_case(attempt: Path, config: RestartConfig) -> tuple[Path, dict[str, 
         "start_time_s": config.start_time_s,
         "end_time_s": config.end_time_s,
         "delta_t_s": config.delta_t_s,
+        "write_interval_s": config.write_interval_s,
         "parent_archive_sha256": PARENT_ARCHIVE_SHA256,
         "parent_checkpoint_time_s": PARENT_TIME_S,
         "parent_checkpoint_inventory_m3": PARENT_INVENTORY_M3,
@@ -437,7 +617,12 @@ def prepare_case(attempt: Path, config: RestartConfig) -> tuple[Path, dict[str, 
         "parent_smoke_job_id": os.environ.get("ROUAIX_PARENT_SMOKE_JOB_ID"),
         "fields_mapped_from_prior_run": True,
     }
-    case_inputs["field_write_times_s"] = [config.end_time_s]
+    write_count = round((config.end_time_s - config.start_time_s) / config.write_interval_s)
+    write_times = [
+        round(config.start_time_s + index * config.write_interval_s, 12)
+        for index in range(1, write_count + 1)
+    ]
+    case_inputs["field_write_times_s"] = write_times
     case_inputs["file_handler"] = "collated"
     case_inputs["rank_count"] = EXPECTED_RANKS
     case_inputs["node_count"] = EXPECTED_NODES
@@ -445,6 +630,20 @@ def prepare_case(attempt: Path, config: RestartConfig) -> tuple[Path, dict[str, 
     write_json(case_inputs_path, case_inputs)
     control_hashes = rewrite_control_dict(case / "system/controlDict", config)
     (case / "system/controlDict").chmod(0o444)
+    pressure_dictionary_sha = None
+    if config.variant == "pressure-total-p0-zero":
+        dictionary_path = case / "system/changeDictionaryDict"
+        dictionary_path.write_text(pressure_total_dictionary_text(), encoding="ascii")
+        dictionary_path.chmod(0o444)
+        pressure_dictionary_sha = sha256_file(dictionary_path)
+        case_inputs["restart"]["pressure_total_p0_zero_sensitivity"] = {
+            "type": "prghTotalPressure",
+            "p0_gauge_pa": 0.0,
+            "patches": list(PRESSURE_TOTAL_PATCHES),
+            "dictionary_sha256": pressure_dictionary_sha,
+            "scope": "four p_rgh open boundaries only; not a paper boundary-condition correction",
+        }
+        write_json(case_inputs_path, case_inputs)
     manifest = {
         "schema_version": 1,
         "case_id": CASE_IDS[config.variant],
@@ -464,22 +663,33 @@ def prepare_case(attempt: Path, config: RestartConfig) -> tuple[Path, dict[str, 
         "parent_ledger_sha256": PARENT_LEDGER_SHA256,
         "parent_checkpoint_time_s": PARENT_TIME_S,
         "parent_checkpoint_inventory_m3": PARENT_INVENTORY_M3,
+        "write_interval_s": config.write_interval_s,
+        "field_write_times_s": write_times,
         "parent_smoke_job_id": os.environ.get("ROUAIX_PARENT_SMOKE_JOB_ID"),
         "parent_checkpoint_receipt_sha256": seed_receipt["checkpoint_receipt_sha256"],
         "controlDict_hashes": control_hashes,
         "file_handler": "collated",
         "formal_validation_decision": None,
     }
+    if pressure_dictionary_sha is not None:
+        manifest["pressure_total_p0_zero_sensitivity"] = {
+            "type": "prghTotalPressure",
+            "p0_gauge_pa": 0.0,
+            "patches": list(PRESSURE_TOTAL_PATCHES),
+            "dictionary_sha256": pressure_dictionary_sha,
+            "scope": "four p_rgh open boundaries only; no paper boundary-condition correction",
+        }
     write_json(attempt / "manifest.json", manifest)
     source_dir = attempt / "source"
     source_dir.mkdir()
-    for source in (
+    sbatch_path = {
+        "original-control": "restart_control.sbatch",
+        "original-early-save": "restart_early_save.sbatch",
+        "pressure-total-p0-zero": "restart_pressure.sbatch",
+    }.get(config.variant, "restart_smoke_v2.sbatch")
+    source_files = (
         Path(__file__),
-        Path(__file__).with_name(
-            "restart_control.sbatch"
-            if config.variant == "original-control"
-            else "restart_smoke_v2.sbatch"
-        ),
+        Path(__file__).with_name(sbatch_path),
         ROOT / "cases/e1_rouaix_hpc/run_pilot.py",
         ROOT / "cases/e1_rouaix_hpc/collect_native_provenance.py",
         ROOT / "cases/e1_rouaix_hpc/prepare_case.py",
@@ -489,7 +699,10 @@ def prepare_case(attempt: Path, config: RestartConfig) -> tuple[Path, dict[str, 
         ROOT / "scripts/continue_rouaix_case.py",
         ROOT / "scripts/audit_interface_wave_flux.py",
         ROOT / "cases/e1_rouaix_hpc_restart/audit_restart.py",
-    ):
+    )
+    if config.variant == "pressure-total-p0-zero":
+        source_files += (ROOT / "src/aerial_drop/i4f_native_face_reader.py",)
+    for source in source_files:
         if source.is_file():
             target = source_dir / source.name
             shutil.copy2(source, target)
@@ -528,16 +741,41 @@ def build_terminal_status(
     target_time_s: float = END_TIME_S,
     solver_log_sha256: str | None = None,
     max_speed_csv_sha256: str | None = None,
+    stop_signal_request_utc: str | None = None,
+    stop_signal_acknowledged_utc: str | None = None,
+    stop_signal_job_id: str | None = None,
+    stop_signal_job_step: str | None = None,
+    stop_signal_task_count: int | None = None,
+    stop_signal_request_solver_time_s: float | None = None,
+    early_save_trigger_after_steps: int | None = None,
 ) -> dict[str, Any]:
     """Build the exact receipt consumed by the restart-ledger audit."""
     reached = actual_time_s is not None and math.isclose(
         actual_time_s, target_time_s, rel_tol=0.0, abs_tol=1e-10
     )
     u_guard = bool(stop_detail and stop_detail.startswith("operational stop: max|U|="))
-    requested = u_guard and "12" in stop_signals
+    diagnostic_early_save = stop_detail == EARLY_SAVE_STOP_REASON
+    requested = (u_guard or diagnostic_early_save) and "12" in stop_signals
     acknowledged = bool(requested and return_code == 0 and end_marker and endpoint_verified)
     if reached and return_code == 0 and end_marker and stop_detail is None and not pause_observed:
         state, stop_reason = "terminal", None
+    elif (
+        diagnostic_early_save
+        and not reached
+        and step_count >= 3
+        and return_code == 0
+        and end_marker
+        and not pause_observed
+        and acknowledged
+        and stop_signal_request_utc
+        and stop_signal_acknowledged_utc
+        and stop_signal_job_id
+        and stop_signal_job_step
+        and stop_signal_task_count == EXPECTED_RANKS
+        and early_save_trigger_after_steps == 3
+        and stop_signal_request_solver_time_s is not None
+    ):
+        state, stop_reason = "diagnostic_early_saved", EARLY_SAVE_TERMINAL_REASON
     elif (
         u_guard
         and not reached
@@ -563,6 +801,14 @@ def build_terminal_status(
         "pause_observed": pause_observed,
         "write_and_stop_requested": requested,
         "write_and_stop_acknowledged": acknowledged,
+        "stop_signals": list(stop_signals),
+        "stop_signal_request_utc": stop_signal_request_utc,
+        "stop_signal_acknowledged_utc": stop_signal_acknowledged_utc,
+        "stop_signal_job_id": stop_signal_job_id,
+        "stop_signal_job_step": stop_signal_job_step,
+        "stop_signal_task_count": stop_signal_task_count,
+        "stop_signal_request_solver_time_s": stop_signal_request_solver_time_s,
+        "early_save_trigger_after_steps": early_save_trigger_after_steps,
         "variant": variant,
         "solver_log_sha256": solver_log_sha256,
         "max_speed_csv_sha256": max_speed_csv_sha256,
@@ -772,6 +1018,19 @@ def run(run_root: Path, config: RestartConfig) -> int:
         state["seed_verification"] = json.loads((attempt / "seed-verification.json").read_text())
         state["manifest_sha256"] = sha256_file(attempt / "manifest.json")
         write_state()
+        if config.variant == "pressure-total-p0-zero":
+            state["status"] = "native_pressure_boundary_preparation"
+            write_state()
+            state["pressure_total_change_receipt"] = apply_pressure_total_restart(
+                case,
+                attempt,
+                run_dir,
+                run_root,
+                solver_deadline,
+                state,
+                write_state,
+            )
+            write_state()
         from cases.e1_rouaix_hpc import collect_native_provenance
 
         collect_native_provenance.collect_native_provenance(
@@ -801,6 +1060,7 @@ def run(run_root: Path, config: RestartConfig) -> int:
                 nodes=config.nodes,
                 horizon_s=config.end_time_s,
                 delta_t_s=config.delta_t_s,
+                start_time_s=config.start_time_s,
                 minimum_free_disk_gib=12,
             )
             return_code, tracker, stop_reason, paused = pilot.supervise_solver(
@@ -814,6 +1074,7 @@ def run(run_root: Path, config: RestartConfig) -> int:
                 deadline=solver_deadline,
                 state=state,
                 write_state=write_state,
+                stop_after_steps=3 if config.variant == "original-early-save" else None,
             )
         finally:
             pilot.OutputMonitor = tracker_class
@@ -836,12 +1097,23 @@ def run(run_root: Path, config: RestartConfig) -> int:
         )
         if return_code == 0 and stop_reason is None and tracker.saw_end_marker:
             terminal_state = "terminal"
+        elif (
+            config.variant == "original-early-save"
+            and stop_reason == EARLY_SAVE_STOP_REASON
+            and return_code == 0
+            and tracker.saw_end_marker
+            and state.get("stop_signal_acknowledged_utc")
+        ):
+            terminal_state = "diagnostic_early_saved"
         elif stop_reason and stop_reason.startswith("operational stop: max|U|="):
             terminal_state = "guarded_partial"
         else:
             terminal_state = "incomplete"
         endpoint = None
-        if terminal_state in {"terminal", "guarded_partial"} and not state["pause_observed"]:
+        if (
+            terminal_state in {"terminal", "guarded_partial", "diagnostic_early_saved"}
+            and not state["pause_observed"]
+        ):
             endpoint = verify_endpoint(case, float(tracker.current_time_s or 0.0))
             state["terminal_snapshot"] = endpoint
         terminal = build_terminal_status(
@@ -857,11 +1129,21 @@ def run(run_root: Path, config: RestartConfig) -> int:
             target_time_s=config.end_time_s,
             solver_log_sha256=state.get("solver_log_sha256"),
             max_speed_csv_sha256=state.get("max_speed_csv_sha256"),
+            stop_signal_request_utc=state.get("stop_requested_utc"),
+            stop_signal_acknowledged_utc=state.get("stop_signal_acknowledged_utc"),
+            stop_signal_job_id=state.get("job_id"),
+            stop_signal_job_step=state.get("stop_signal_job_step"),
+            stop_signal_task_count=state.get("stop_signal_task_count"),
+            stop_signal_request_solver_time_s=state.get("stop_signal_request_solver_time_s"),
+            early_save_trigger_after_steps=state.get("early_save_trigger_after_steps"),
         )
         terminal_state = terminal["state"]
         write_json(case / "terminal-status.json", terminal)
         state["terminal_status_sha256"] = sha256_file(case / "terminal-status.json")
-        if terminal_state in {"terminal", "guarded_partial"} and not state["pause_observed"]:
+        if (
+            terminal_state in {"terminal", "guarded_partial", "diagnostic_early_saved"}
+            and not state["pause_observed"]
+        ):
             try:
                 state["restart_ledger"] = _run_audit(case, attempt, config)
                 state["ledger_status"] = "written_from_hash_bound_parent_checkpoint"
@@ -886,6 +1168,12 @@ def run(run_root: Path, config: RestartConfig) -> int:
             and state.get("solver_convergence", {}).get("all_converged") is True
         ):
             state["status"] = "solver_complete_exploratory"
+        elif (
+            terminal_state == "diagnostic_early_saved"
+            and state.get("ledger_status") == "written_from_hash_bound_parent_checkpoint"
+            and state.get("solver_convergence", {}).get("all_converged") is True
+        ):
+            state["status"] = "diagnostic_early_save_complete"
         elif (
             terminal_state == "guarded_partial"
             and state.get("ledger_status") == "written_from_hash_bound_parent_checkpoint"
@@ -917,7 +1205,7 @@ def run(run_root: Path, config: RestartConfig) -> int:
         write_state()
     return (
         0
-        if state.get("status") == "solver_complete_exploratory"
+        if state.get("status") in {"solver_complete_exploratory", "diagnostic_early_save_complete"}
         and state.get("attempt_archive_status") == "verified_crc_hash_and_member_list"
         else 1
     )

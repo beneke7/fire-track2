@@ -1,9 +1,34 @@
 # Komondor Rouaix status
 
-Updated 2026-10-28 11:18 UTC (12:18 CET). Analytical E0 remains the only
+Updated 2026-10-28 13:45 UTC (14:45 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
+
+Targeted diagnosis (28 October13:45 UTC): coarse PTOTAL0 air and water both
+completed0.30 s with End/exit0 and verified endpoint archives. The matched
+original static-pressure water control reached its200 m/s guard around0.17 s.
+Only the four pressure patches differ; injected volume is matched. This is a
+working pressure-BC fix on the299,520-cell diagnostic mesh, not an E1 gate.
+Water reference:8 ranks,0.1 ms,3,000 steps,1018 solver seconds,peakU103.15 m/s,
+alpha[0,1], bulk/interface Co0.262/0.168, phase residual-3.65e-10 kg.
+A fixed0.3 ms water pilot also reached0.30 s in1,000 steps and274 solver seconds
+(276 supervisor seconds),peak105.32 m/s,Co0.776/0.491,alpha[0,1]. The observed
+wall ratio3.72 is not a controlled attribution: the reference overlapped another
+8-rank case. Field-level timestep convergence remains untested. No local CFD
+is active after the completed bounded cases.
+[Matched results and provenance](../results/summaries/rouaix_backflow_local_20261028/README.md).
+
+Native early-save14700220/v2 14700456 finished0.202 s without a signal ack;
+source fixes exposed site step-query invisibility, then an owner-format parse
+error. Actual public-helper probe14700561 now passed with exact owned-step
+SIGUSR2 receipt and acknowledgement before waiting. The corrected helper retains
+live-job/owner/task/rank-zero identity checks. V3 native healthy early-save14700599 and audit14700602 are released/pending
+from the recovered tested source with only the helper patched;
+the fine pressure candidate remains prepared but unsubmitted. Its actual native
+changeDictionary boundary edit/field-hash preflight is still required.
+[Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All150 affected tests pass;
+Ruff/format pass. Full suite collection is blocked by missingmatplotlib locally.
 
 **No Rouaix solver or follow-up job is running or pending at28 October11:17 UTC.**
 V4 smoke14689395 COMPLETED0:0: ten fixed0.1 ms steps from0.20 to0.201 s,
@@ -24,8 +49,10 @@ point as the prior run (new1033.79 versus old1045.53 m/s). This is not proof of
 identical cells or cause; the old final volume peak was a different point.
 The posthoc audit finds11 linear-solve criterion failures in U/k/epsilon;
 configured p_rgh criterion success does not make the overall run converged.
-The recorded stop_requested_utc is written after a blocking stop call, so it
-cannot establish exact signal-send timing relative to the FPE.
+The historical v4 stop_requested_utc was written after a blocking stop call,
+so it cannot establish signal-send timing relative to the FPE. The new early-save
+source persists request initiation and successful Slurm acknowledgement before
+waiting, and does not list an unacknowledged signal as sent.
 The target0.30 s was not reached; this did not fix the prior instability near0.26 s.
 No identical retry or pressure candidate has been submitted.
 [Verified terminal logs, metrics and audits](../results/summaries/rouaix_restart_controls_20261027/terminal-v4/README.md).

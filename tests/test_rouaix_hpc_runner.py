@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import os
 import signal
 import subprocess
 import sys
@@ -566,6 +567,82 @@ def test_supervisor_runs_declared_one_node_fixed_step_candidate(
     )
 
 
+def test_supervisor_requests_native_early_save_after_three_completed_steps(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    case, attempt, run_dir = (tmp_path / name for name in ("case", "attempt", "run"))
+    case.mkdir()
+    attempt.mkdir()
+    run_dir.mkdir()
+    monkeypatch.setenv("SLURM_JOB_ID", "45678")
+    monkeypatch.setenv("SLURM_STEP_ID", "0")
+    monkeypatch.setenv("SLURM_NTASKS", "120")
+    monkeypatch.setenv("SLURM_PROCID", "0")
+    active: list[object] = []
+
+    class HealthySolver:
+        returncode: int | None = None
+
+        def __init__(self, _command, *, env, stdout, **_kwargs):
+            Path(env["ROUAIX_STEP_IDENTITY"]).write_text("45678 0 120 0\n", encoding="ascii")
+            rows = ["Time = 0.2\n", "max(mag(U)) = 100\n"]
+            for step in range(1, 5):
+                rows.extend(
+                    [
+                        f"Time = {0.2 + step * 0.0001:.4f}\n",
+                        "max(mag(U)) = 110\n",
+                    ]
+                )
+            stdout.writelines([*rows, "End\n"])
+            stdout.flush()
+            active.append(self)
+
+        def poll(self):
+            return self.returncode
+
+        def wait(self, timeout=None):
+            return self.returncode
+
+    def acknowledge_signal(*_args, **_kwargs):
+        active[0].returncode = 0
+        return True
+
+    monkeypatch.setattr(run_pilot.subprocess, "Popen", HealthySolver)
+    monkeypatch.setattr(run_pilot, "signal_owned_step", acknowledge_signal)
+    monkeypatch.setattr(run_pilot, "_record_disk_space", lambda *_args: 100 * 1024**3)
+    config = SimpleNamespace(
+        nodes=3,
+        ranks=120,
+        horizon_s=0.202,
+        delta_t_s=0.0001,
+        start_time_s=0.2,
+        minimum_free_disk_gib=12,
+    )
+    state = {"solver_started_monotonic": time.monotonic()}
+    return_code, monitor, reason, paused = run_pilot.supervise_solver(
+        case=case,
+        attempt=attempt,
+        run_dir=run_dir,
+        shared_pause=tmp_path / "shared-PAUSE",
+        project_root=tmp_path,
+        job_id="45678",
+        config=config,
+        deadline=time.monotonic() + 100,
+        state=state,
+        write_state=lambda _state: None,
+        stop_after_steps=3,
+    )
+
+    assert return_code == 0 and not paused and monitor.saw_end_marker
+    assert reason == "diagnostic early-save requested after 3 completed continuation steps"
+    assert state["stop_signals"] == ["12"]
+    assert state["stop_signal_job_step"] == "45678.0"
+    assert state["stop_signal_acknowledged_utc"]
+    assert state["early_save_trigger_after_steps"] == 3
+    assert state["stop_signal_request_solver_time_s"] == pytest.approx(0.2003)
+    assert monitor.current_time_s == pytest.approx(0.2004)
+
+
 @pytest.mark.parametrize(
     ("ranks", "nodes", "tasks_per_node", "cpus_on_node"),
     [
@@ -838,6 +915,200 @@ def test_cancel_targets_verified_dynamic_rank_step(
     assert run_pilot.signal_owned_step("12345", identity, "12", expected_ranks=ranks)
     assert commands[-1] == ["scancel", "--signal=12", "12345.0"]
     assert run_pilot._tasks_per_node(tasks_per_node) == ((120,) if ranks == 120 else (120, 120))
+
+
+def test_cancel_targets_owned_nonzero_solver_step_after_native_setup_step(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    identity = tmp_path / "step.txt"
+    identity.write_text("12345 1 64 0\n", encoding="ascii")
+    commands = []
+
+    def fake_run(command, **_kwargs):
+        commands.append(command)
+        if command[0] == "scontrol":
+            return SimpleNamespace(
+                returncode=0,
+                stdout="StepId=12345.1 Tasks=64 Name=interIsoFoam State=RUNNING\n",
+                stderr="",
+            )
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr(run_pilot.subprocess, "run", fake_run)
+    assert run_pilot.signal_owned_step("12345", identity, "12")
+    assert commands[-1] == ["scancel", "--signal=12", "12345.1"]
+
+
+@pytest.mark.parametrize(
+    "user_token", [f"{os.getuid()}(test)", f"nk_memj({os.getuid()})", str(os.getuid())]
+)
+def test_cancel_uses_matching_active_job_receipt_when_stepmgr_is_unavailable(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, user_token: str
+) -> None:
+    identity = tmp_path / "step.txt"
+    identity.write_text("12345 7 64 0\n", encoding="ascii")
+    monkeypatch.setenv("SLURM_JOB_ID", "12345")
+    monkeypatch.setenv("SLURM_JOB_NAME", "ml-vof")
+    commands = []
+    receipt: dict[str, object] = {}
+
+    def fake_run(command, **_kwargs):
+        commands.append(command)
+        if command == ["scontrol", "show", "step", "-o", "12345.7"]:
+            return SimpleNamespace(returncode=1, stdout="Job step 12345.7 not found\n", stderr="")
+        if command == ["scontrol", "-o", "show", "step", "12345"]:
+            return SimpleNamespace(returncode=1, stdout="Job step 12345. not found\n", stderr="")
+        if command == ["scontrol", "show", "job", "-o", "12345"]:
+            return SimpleNamespace(
+                returncode=0,
+                stdout=(
+                    f"JobId=12345 JobName=ml-vof UserId={user_token} JobState=RUNNING NumTasks=64\n"
+                ),
+                stderr="",
+            )
+        if command == ["scancel", "--signal=12", "12345.7"]:
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+        pytest.fail(f"unexpected command: {command}")
+
+    monkeypatch.setattr(run_pilot.subprocess, "run", fake_run)
+    assert run_pilot.signal_owned_step("12345", identity, "12", receipt=receipt)
+    assert commands[-1] == ["scancel", "--signal=12", "12345.7"]
+    assert receipt["step_identity"] == ["12345", "7", "64", "0"]
+    assert receipt["verification"]["verified_by"] == (
+        "rank_zero_step_receipt_and_matching_active_job_no_stepmgr"
+    )
+    assert receipt["verification"]["specific_step_query"]["stdout"].strip() == (
+        "Job step 12345.7 not found"
+    )
+
+
+@pytest.mark.parametrize(
+    "job_record",
+    [
+        f"JobId=99999 JobName=ml-vof UserId={os.getuid()}(test) JobState=RUNNING NumTasks=64\n",
+        f"JobId=12345 JobName=ml-vof UserId={os.getuid()}(test) JobState=RUNNING NumTasks=63\n",
+        f"JobId=12345 JobName=ml-vof UserId={os.getuid() + 1}(test) JobState=RUNNING NumTasks=64\n",
+        f"JobId=12345 JobName=ml-vof UserId=nk_memj({os.getuid() + 1}) JobState=RUNNING NumTasks=64\n",
+        f"JobId=12345 JobName=ml-vof UserId={os.getuid()}(test) JobState=COMPLETING NumTasks=64\n",
+    ],
+)
+def test_cancel_refuses_job_record_mismatch_after_step_not_found(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    job_record: str,
+) -> None:
+    identity = tmp_path / "step.txt"
+    identity.write_text("12345 0 64 0\n", encoding="ascii")
+    monkeypatch.setenv("SLURM_JOB_ID", "12345")
+    monkeypatch.setenv("SLURM_JOB_NAME", "ml-vof")
+    commands = []
+
+    def fake_run(command, **_kwargs):
+        commands.append(command)
+        if command[:3] == ["scontrol", "show", "step"]:
+            return SimpleNamespace(returncode=1, stdout="Job step 12345.0 not found\n", stderr="")
+        if command[:4] == ["scontrol", "-o", "show", "step"]:
+            return SimpleNamespace(returncode=1, stdout="Job step 12345. not found\n", stderr="")
+        if command == ["scontrol", "show", "job", "-o", "12345"]:
+            return SimpleNamespace(returncode=0, stdout=job_record, stderr="")
+        pytest.fail(f"unexpected command: {command}")
+
+    monkeypatch.setattr(run_pilot.subprocess, "run", fake_run)
+    assert not run_pilot.signal_owned_step("12345", identity, "12")
+    assert not any(command[0] == "scancel" for command in commands)
+
+
+def test_cancel_does_not_fallback_on_unrelated_scontrol_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    identity = tmp_path / "step.txt"
+    identity.write_text("12345 0 64 0\n", encoding="ascii")
+    monkeypatch.setenv("SLURM_JOB_ID", "12345")
+    commands = []
+
+    def fake_run(command, **_kwargs):
+        commands.append(command)
+        return SimpleNamespace(
+            returncode=1,
+            stdout="",
+            stderr="scontrol: error: Slurmctld connection refused\n",
+        )
+
+    monkeypatch.setattr(run_pilot.subprocess, "run", fake_run)
+    receipt: dict[str, object] = {}
+    assert not run_pilot.signal_owned_step("12345", identity, "12", receipt=receipt)
+    assert commands == [["scontrol", "show", "step", "-o", "12345.0"]]
+    assert receipt["verification"]["specific_step_query"]["stderr"].startswith("scontrol: error")
+
+
+def test_stop_request_receipt_precedes_wait_and_only_acknowledged_signal_is_listed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    identity = tmp_path / "step.txt"
+    identity.write_text("12345 0 120 0\n", encoding="ascii")
+    state: dict[str, object] = {}
+    events: list[str] = []
+
+    def fake_run(command, **_kwargs):
+        events.append("scancel")
+        assert command == ["scancel", "--signal=12", "12345.0"]
+        assert state["stop_requested_utc"]
+        assert "stop_signal_acknowledged_utc" not in state
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    def write_state(snapshot):
+        assert snapshot["stop_requested_utc"]
+        if snapshot["stop_signals"]:
+            assert snapshot["stop_signal_acknowledged_utc"]
+        events.append("state")
+
+    def wait_for_exit(_process, _wait_s):
+        assert state["stop_signal_acknowledged_utc"]
+        assert state["stop_signals"] == ["12"]
+        events.append("wait")
+        return True
+
+    monkeypatch.setattr(run_pilot, "_verify_slurm_step", lambda *_args: True)
+    monkeypatch.setattr(run_pilot.subprocess, "run", fake_run)
+    monkeypatch.setattr(run_pilot, "_wait_step_exit", wait_for_exit)
+    signals = run_pilot.stop_solver_step(
+        SimpleNamespace(),
+        "12345",
+        identity,
+        grace_s=1,
+        expected_ranks=120,
+        state=state,
+        write_state=write_state,
+    )
+
+    assert signals == ["12"]
+    assert state["stop_signal_job_step"] == "12345.0"
+    assert state["stop_signal_task_count"] == 120
+    assert events == ["state", "scancel", "state", "state", "wait"]
+
+
+def test_stop_request_does_not_claim_unacknowledged_signal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    identity = tmp_path / "step.txt"
+    identity.write_text("12345 0 120 0\n", encoding="ascii")
+    state: dict[str, object] = {}
+    monkeypatch.setattr(run_pilot, "_verify_slurm_step", lambda *_args: False)
+    monkeypatch.setattr(run_pilot, "_wait_step_exit", lambda _process, _wait_s: True)
+
+    signals = run_pilot.stop_solver_step(
+        SimpleNamespace(),
+        "12345",
+        identity,
+        grace_s=1,
+        expected_ranks=120,
+        state=state,
+    )
+
+    assert signals == []
+    assert state["stop_requested_utc"]
+    assert state["stop_signals"] == []
+    assert "stop_signal_acknowledged_utc" not in state
 
 
 def test_cancel_refuses_step_identity_mismatch_before_scancel(

@@ -1,0 +1,168 @@
+{
+  "alpha_water_extrema": {
+    "max": 1.0,
+    "min": 0.0,
+    "record_count": 3000
+  },
+  "case": "air-backflow-water-030",
+  "courant_numbers": {
+    "bulk_max": {
+      "kind": "bulk",
+      "max": 0.261648063069,
+      "mean": 0.023148132008,
+      "time_s": 0.0901
+    },
+    "bulk_record_count": 2999,
+    "interface_max": {
+      "kind": "interface",
+      "max": 0.167606886458,
+      "mean": 5.28026282771e-06,
+      "time_s": 0.1775
+    },
+    "interface_record_count": 2999
+  },
+  "created_utc": "2026-10-28T13:14:01.611360+00:00",
+  "interpretation": "Exploratory water-nozzle VOF trial. Water enters through the nozzle and remains within this short computational domain/time interval; this is not a validated physical discharge prediction.",
+  "p_rgh_extrema_pa": {
+    "dimensions": "[1 -1 -2 0 0 0 0]",
+    "run_max": {
+      "time_s": 0.0001,
+      "value_pa": 50277.07435285
+    },
+    "run_min": {
+      "time_s": 0.2083,
+      "value_pa": -32401.65452627
+    },
+    "terminal_max_pa": 3466.595547377,
+    "terminal_min_pa": -26647.87447447
+  },
+  "phase_volume_flux_balance": {
+    "balance": {
+      "closure_relative_to_injected_volume": -9.655280238332653e-13,
+      "initial_water_volume_m3": 0.0,
+      "non_nozzle_net_outward_alphaPhi_volume_m3": 3.5339598077920223e-12,
+      "nozzle_injected_mass_kg": 378.25666666669997,
+      "nozzle_injected_volume_m3": 0.37916666666670007,
+      "quadrature": "sum(alphaPhi_ at each fixed-dt step) * 0.0001 s; signed surfaceFieldValue convention; exploratory diagnostic only",
+      "signed_mass_closure_residual_kg": -3.65217411868457e-10,
+      "signed_volume_closure_residual_m3": -3.6609604237014537e-13,
+      "terminal_water_mass_kg": 378.2566666628093,
+      "terminal_water_volume_m3": 0.3791666666628,
+      "water_density_kg_m3": 997.6
+    },
+    "continuity_record_count": 9001,
+    "patches": {
+      "aircraftWall": {
+        "integrated_alphaPhi_m3": 2.3727513463753985e-43,
+        "max_alphaPhi_m3_s": 1.657251940048e-40,
+        "min_alphaPhi_m3_s": -2.417482925803e-41,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": 1.139368648845e-42,
+        "terminal_sum_phi": -1.951503363227e-40
+      },
+      "bottomOutlet": {
+        "integrated_alphaPhi_m3": 5.29076574451087e-22,
+        "max_alphaPhi_m3_s": 6.284579538523e-20,
+        "min_alphaPhi_m3_s": -2.285149547109e-29,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": 6.284579538523e-20,
+        "terminal_sum_phi": 45.08629699394
+      },
+      "downstreamOutlet": {
+        "integrated_alphaPhi_m3": 3.5339598072629458e-12,
+        "max_alphaPhi_m3_s": 3.823842377757e-10,
+        "min_alphaPhi_m3_s": 0.0,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": 3.823842377757e-10,
+        "terminal_sum_phi": 7824.855009326
+      },
+      "gasInlet": {
+        "integrated_alphaPhi_m3": 0.0,
+        "max_alphaPhi_m3_s": 0.0,
+        "min_alphaPhi_m3_s": 0.0,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": 0.0,
+        "terminal_sum_phi": -8050.0
+      },
+      "nozzle": {
+        "integrated_alphaPhi_m3": -0.37916666666670007,
+        "max_alphaPhi_m3_s": -1.263888888889,
+        "min_alphaPhi_m3_s": -1.263888888889,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": -1.263888888889,
+        "terminal_sum_phi": -1.263888888889
+      },
+      "spanwiseMinus": {
+        "integrated_alphaPhi_m3": 5.3128260112499065e-56,
+        "max_alphaPhi_m3_s": 1.482499605736e-53,
+        "min_alphaPhi_m3_s": -3.341027627799e-191,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": 1.453170180207e-53,
+        "terminal_sum_phi": 87.56353860828
+      },
+      "spanwisePlus": {
+        "integrated_alphaPhi_m3": 1.9499156036861844e-55,
+        "max_alphaPhi_m3_s": 5.209366958077e-53,
+        "min_alphaPhi_m3_s": -7.143022795164e-172,
+        "record_count": 3000,
+        "terminal_sum_alphaPhi_m3_s": 5.020530345026e-53,
+        "terminal_sum_phi": 93.75904235944
+      }
+    },
+    "terminal_mixture_continuity_record": "time step continuity errors : sum local = 2.61929221334e-13, global = -6.95969598468e-14, cumulative = 1.93370780398e-05"
+  },
+  "pre_go_integrity_checks": {
+    "go_references_pre_go_hash": true,
+    "guard_ready_hashes_verified": true,
+    "input_case_hash_matches_pre_go": true,
+    "input_file_manifest_hash_matches_pre_go": true,
+    "revision_and_dirty_match": true,
+    "source_files_match_pre_go": true,
+    "source_manifest_hash_matches_pre_go": true
+  },
+  "provenance": {
+    "archive_bytes": 33418815,
+    "archive_members": 86,
+    "archive_remote_local_match": true,
+    "archive_sha256": "4cf036931475fbed0452107173e4b8c44f0a07c8753512d67edc3e247437930a",
+    "container_id": "6f1b6728ec43109a29a6ab13ba2ebc590ff7fbba7be830a1b38bf9070ee74699",
+    "git_dirty": true,
+    "git_revision": "5a46626c2ff11d090099890d2fc311cc16732050",
+    "input_case_sha256": "a77655f1895decab49fff5a453ba477e75c57789c7189bf33c408c01389b25e1",
+    "input_manifest_sha256": "d82a90c16c7b0e3d15ae5dce062a620defcb45f1a4ac17e929006f7743e2cf52",
+    "snapshot_inventory_passed": true,
+    "source_snapshot_sha256": "68e328ac7312c21955efe72094e55ae5b3d3a13da4532eac29c0b4089bd59c6a"
+  },
+  "result": {
+    "completed_utc": "2026-10-28T13:10:18.319921+00:00",
+    "end_marker": true,
+    "guard_limit_m_s": 200.0,
+    "guard_reason": "horizon_end",
+    "solver_exit_code": 0,
+    "solver_time_s": 0.3,
+    "solver_wall_elapsed_s": 1019,
+    "started_utc": "2026-10-28T12:53:10.447336078Z",
+    "terminal_max_speed_m_s": 100.218363762
+  },
+  "schema_version": 1,
+  "solver": {
+    "delta_t_s": 0.0001,
+    "final_execution_clock_line": "ExecutionTime = 1012.16 s  ClockTime = 1018 s",
+    "mesh_cells": 299520,
+    "mpi_ranks": 8,
+    "name": "OpenCFD v2512 interIsoFoam",
+    "steps": 3000
+  },
+  "speed_extrema": {
+    "global_peak_m_s": 103.1456076255,
+    "global_peak_time_s": 0.0957,
+    "record_count": 3000,
+    "terminal_m_s": 100.218363762
+  },
+  "water_volume_m3": {
+    "initial_internal_field": 0.0,
+    "max_recorded": 0.3791666666628,
+    "min_recorded": 0.0001263888888889,
+    "terminal": 0.3791666666628
+  }
+}

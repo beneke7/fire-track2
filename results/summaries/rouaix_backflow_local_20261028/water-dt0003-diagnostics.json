@@ -1,0 +1,137 @@
+{
+  "alpha_water_extrema": {
+    "max": 1.0,
+    "min": 0.0,
+    "record_count": 1000
+  },
+  "case": "air-backflow-water-dt0003-030",
+  "courant_numbers": {
+    "bulk_max": {
+      "kind": "bulk",
+      "max": 0.776292930642,
+      "time_s": 0.0891
+    },
+    "bulk_record_count": 1001,
+    "interface_max": {
+      "kind": "interface",
+      "max": 0.49123870304,
+      "time_s": 0.2271
+    },
+    "interface_record_count": 1000
+  },
+  "interpretation": "Exploratory fixed-step cost and stability diagnostic. It completed the same coarse 0.3000 s water-nozzle horizon with three times the fixed timestep; this is not a time-resolution study or an E1 result.",
+  "matched_reference_comparison": {
+    "candidate_bulk_courant_max": 0.776292930642,
+    "candidate_clock_time_per_step_fraction_of_reference": 0.8074656188605109,
+    "candidate_interface_courant_max": 0.49123870304,
+    "candidate_to_reference_bulk_courant_ratio": 2.9669355145857947,
+    "candidate_to_reference_interface_courant_ratio": 2.930898087908206,
+    "clock_time_speedup_for_same_horizon": 3.7153284671532845,
+    "peak_speed_difference_m_s": 2.1733317694999954,
+    "reference_bulk_courant_max": 0.261648063069,
+    "reference_case": "air-backflow-water-030",
+    "reference_clock_time_per_step_s": 0.3393333333333333,
+    "reference_clock_time_s": 1018.0,
+    "reference_delta_t_s": 0.0001,
+    "reference_interface_courant_max": 0.167606886458,
+    "reference_peak_speed_m_s": 103.1456076255,
+    "reference_steps": 3000,
+    "same_mesh_fields_boundaries_schemes_ranks_and_horizon": true
+  },
+  "p_rgh_extrema_pa": {
+    "dimensions": "[1 -1 -2 0 0 0 0]",
+    "run_max": {
+      "max": 23516.6987017,
+      "time_s": 0.0435
+    },
+    "run_min": {
+      "time_s": 0.2805,
+      "value_pa": -35569.9649593
+    },
+    "terminal_max_pa": 3078.21917752,
+    "terminal_min_pa": -25743.793177
+  },
+  "phase_volume_flux_balance": {
+    "closure_relative_to_injected_volume": -5.688963027041455e-12,
+    "initial_water_volume_m3": 0.0,
+    "non_nozzle_net_outward_alphaPhi_volume_m3": 1.9049484244297962e-07,
+    "nozzle_injected_volume_m3": 0.3791666666669995,
+    "patches_integrated_alphaPhi_m3": {
+      "aircraftWall": 1.0311142351050707e-42,
+      "bottomOutlet": 1.9048379157099156e-07,
+      "downstreamOutlet": 1.105087198804917e-11,
+      "gasInlet": 0.0,
+      "nozzle": -0.3791666666669995,
+      "spanwiseMinus": 1.9032833623306403e-49,
+      "spanwisePlus": 9.422086786912178e-51
+    },
+    "quadrature": "sum of signed alphaPhi_ patch records at each fixed timestep times 0.0003 s; exploratory diagnostic",
+    "signed_mass_closure_residual_kg": -2.1518881914005e-09,
+    "signed_volume_closure_residual_m3": -2.157065147755112e-12,
+    "terminal_water_mass_kg": 378.256476627192,
+    "terminal_water_volume_m3": 0.37916647617,
+    "water_density_kg_m3": 997.6
+  },
+  "pre_go_integrity_checks": {
+    "archive_remote_local_hash_matches": true,
+    "container_id_matches": true,
+    "go_references_pre_go_hash": true,
+    "guard_ready_and_hashes_verified": true,
+    "input_case_hash_matches": true,
+    "input_manifest_hash_matches": true,
+    "source_files_match_snapshot": true,
+    "source_snapshot_manifest_matches": true,
+    "terminal_snapshot_inventory_passed": true
+  },
+  "provenance": {
+    "archive_bytes": 31797802,
+    "archive_members": 86,
+    "archive_remote_local_match": true,
+    "archive_sha256": "a7d0963990430d277a59bd2f32fe9ae63c50831f7ba82ea8826c4a09304d16b8",
+    "container_id": "c19d371edb4560a7a434e7ee57a46f2d845fe6ee182b635ab0d97fde73dfa467",
+    "git_dirty": true,
+    "git_revision": "5a46626c2ff11d090099890d2fc311cc16732050",
+    "input_case_sha256": "26a11c6414445aff17863f70c0a0831dbba462ff7f9a79d8e3130d391b92a7be",
+    "input_file_manifest_sha256": "8862d54dc24d00da577ecab55e3a98fd19c0960fcbd95d8365b2801ebf4d3eea",
+    "pre_go_manifest_sha256": "6a81e5bc9572f23a96722b3d474e889ab0d1073d6c27da81a818c4748900c762",
+    "snapshot_inventory_passed": true,
+    "source_snapshot_sha256": "0e69320e5416a90f305bea3a6717d7d7ec3ec3c07bddae04e9bfd8e48b59da67"
+  },
+  "result": {
+    "completed_utc": "2026-10-28T13:32:12.457514+00:00",
+    "end_marker": true,
+    "guard_limit_m_s": 200.0,
+    "guard_reason": "horizon_end",
+    "solver_exit_code": 0,
+    "solver_time_s": 0.3,
+    "solver_wall_elapsed_s": 276,
+    "started_utc": "2026-10-28T13:27:25.776739974Z"
+  },
+  "schema_version": 1,
+  "solver": {
+    "clock_time_per_step_s": 0.274,
+    "delta_t_s": 0.0003,
+    "final_execution_clock_line": "ExecutionTime = 273.49 s  ClockTime = 274 s",
+    "mesh_cells": 299520,
+    "mpi_ranks": 8,
+    "name": "OpenCFD v2512 interIsoFoam",
+    "steps_completed": 1000,
+    "target_time_s": 0.3
+  },
+  "speed_extrema": {
+    "global_peak_m_s": 105.318939395,
+    "global_peak_time_s": 0.0555,
+    "record_count": 1000,
+    "terminal_m_s": "99.8498626772"
+  },
+  "terminal_mixture_continuity_record": [
+    5.39519139103e-12,
+    -4.25877422853e-12,
+    6.91740885004e-05
+  ],
+  "water_volume_m3": {
+    "initial_internal_field": 0.0,
+    "record_count": 1000,
+    "terminal": 0.37916647617
+  }
+}

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -181,3 +182,65 @@ def test_collated_snapshot_inventory_accepts_guard_time_not_future_field_time(
     assert inventory["reached_declared_times_s"] == ["0"]
     assert inventory["unreached_declared_times_s"] == ["0.3"]
     assert inventory["expected_captured_times_s"] == ["0", "0.2628"]
+
+
+def test_backflow_pressure_candidate_changes_only_four_open_pressure_patches(
+    tmp_path: Path,
+) -> None:
+    original = tmp_path / "original"
+    candidate = tmp_path / "candidate"
+    original_meta = build_cases.write_case(original, "original", horizon_s=0.30, ranks=8)
+    candidate_meta = build_cases.write_case(
+        candidate,
+        "original",
+        horizon_s=0.30,
+        ranks=8,
+        backflow_total_pressure=True,
+    )
+
+    assert candidate_meta["expected_steps"] == 3000
+    assert candidate_meta["mpi_ranks"] == 8
+    assert candidate_meta["field_write_times_s"] == [0.0, 0.3]
+    assert candidate_meta["runtime_guard"]["max_abs_U_m_s"] == 200
+    assert "reverse-flow dynamic-head sensitivity" in candidate_meta["open_pressure_boundary"]
+    assert original_meta["runtime_guard"]["max_abs_U_m_s"] == 1000
+
+    original_files = {
+        path.relative_to(original).as_posix(): path
+        for path in original.rglob("*")
+        if path.is_file()
+    }
+    candidate_files = {
+        path.relative_to(candidate).as_posix(): path
+        for path in candidate.rglob("*")
+        if path.is_file()
+    }
+    assert set(original_files) == set(candidate_files)
+    assert {
+        name
+        for name in original_files
+        if name not in {"0/p_rgh", "case-inputs.json"}
+        and original_files[name].read_bytes() != candidate_files[name].read_bytes()
+    } == set()
+
+    original_pressure = (original / "0/p_rgh").read_text()
+    candidate_pressure = (candidate / "0/p_rgh").read_text()
+    for patch in build_cases.BACKFLOW_PRESSURE_PATCHES:
+        assert re.search(rf"(?ms)^    {patch}\s*\{{\s*type\s+prghPressure;", original_pressure)
+        assert re.search(
+            rf"(?ms)^    {patch}\s*\{{\s*type\s+prghTotalPressure;", candidate_pressure
+        )
+        assert re.search(rf"(?ms)^    {patch}\s*\{{.*?p0\s+uniform 0;", candidate_pressure)
+        assert re.search(
+            rf"(?ms)^    {patch}\s*\{{.*?rho\s+rho;.*?U\s+U;.*?phi\s+phi;", candidate_pressure
+        )
+
+    velocity = (candidate / "0/U").read_bytes()
+    assert velocity == (original / "0/U").read_bytes()
+    recorded = json.loads((candidate / "case-inputs.json").read_text())
+    actual = {
+        path.relative_to(candidate).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in candidate.rglob("*")
+        if path.is_file() and path.name != "case-inputs.json"
+    }
+    assert recorded["case_files_sha256"] == actual

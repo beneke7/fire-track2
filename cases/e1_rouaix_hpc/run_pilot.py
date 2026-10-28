@@ -978,57 +978,170 @@ def _step_identity(path: Path, job_id: str, expected_ranks: int = RANKS) -> tupl
             f"solver Slurm step identity has an unexpected rank count or writer; "
             f"expected {expected_ranks} rank-0 writer"
         )
-    step_id = fields[1]
-    if step_id != "0":
-        raise PilotError(f"expected the sole solver step to be {job_id}.0, got {job_id}.{step_id}")
-    return step_id, int(fields[2])
+    return fields[1], int(fields[2])
 
 
-def _verify_slurm_step(job_id: str, step_id: str, ranks: int) -> bool:
-    result = subprocess.run(
-        ["scontrol", "show", "step", "-o", f"{job_id}.{step_id}"],
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=15,
-    )
-    if result.returncode != 0:
-        return False
-    lines = [line.split() for line in result.stdout.splitlines() if line.strip()]
-    if len(lines) != 1:
-        raise PilotError("scontrol did not return exactly one Slurm step record")
-    fields: dict[str, str] = {}
-    for token in lines[0]:
-        if "=" not in token:
-            continue
-        key, value = token.split("=", 1)
-        if key in fields:
-            raise PilotError(f"scontrol returned duplicate {key} fields")
-        fields[key] = value
-    if fields.get("StepId") != f"{job_id}.{step_id}" or fields.get("Tasks") != str(ranks):
-        raise PilotError(
-            "scontrol step identity conflicts with this job, step, or 64-task allocation"
+def _scontrol_fields(stdout: str) -> list[dict[str, str]]:
+    records: list[dict[str, str]] = []
+    for line in stdout.splitlines():
+        fields: dict[str, str] = {}
+        for token in line.split():
+            if "=" not in token:
+                continue
+            key, value = token.split("=", 1)
+            if key in fields:
+                raise PilotError(f"scontrol returned duplicate {key} fields")
+            fields[key] = value
+        if fields:
+            records.append(fields)
+    return records
+
+
+def _scontrol_capture(command: list[str]) -> dict[str, Any]:
+    try:
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=15,
         )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return {
+            "command": command,
+            "returncode": None,
+            "stdout": "",
+            "stderr": "",
+            "error": f"{type(error).__name__}: {error}",
+        }
+    return {
+        "command": command,
+        "returncode": result.returncode,
+        "stdout": result.stdout,
+        "stderr": result.stderr,
+    }
+
+
+def _explicit_step_not_found(receipt: dict[str, Any], job_id: str, step_id: str) -> bool:
+    if receipt.get("returncode") != 1 or receipt.get("stderr", "").strip():
+        return False
+    return receipt.get("stdout", "").strip() in {
+        f"Job step {job_id}.{step_id} not found",
+        f"Job step {job_id}. not found",
+    }
+
+
+def _verify_slurm_step(
+    job_id: str,
+    step_id: str,
+    ranks: int,
+    signal_name: str = "12",
+    receipt: dict[str, Any] | None = None,
+) -> bool:
+    expected_step = f"{job_id}.{step_id}"
+    specific = _scontrol_capture(["scontrol", "show", "step", "-o", expected_step])
+    if receipt is not None:
+        receipt["specific_step_query"] = specific
+    if specific.get("returncode") == 0:
+        records = _scontrol_fields(specific["stdout"])
+        if len(records) != 1:
+            raise PilotError("scontrol did not return exactly one Slurm step record")
+        fields = records[0]
+        if fields.get("StepId") != expected_step or fields.get("Tasks") != str(ranks):
+            raise PilotError("scontrol step identity conflicts with the rank-zero step receipt")
+        if fields.get("State") != "RUNNING":
+            return False
+        if receipt is not None:
+            receipt["verified_by"] = "specific_active_step_record"
+        return True
+    if not _explicit_step_not_found(specific, job_id, step_id):
+        return False
+
+    job_wide = _scontrol_capture(["scontrol", "-o", "show", "step", job_id])
+    if receipt is not None:
+        receipt["job_wide_step_query"] = job_wide
+    if job_wide.get("returncode") == 0:
+        matching = [
+            row
+            for row in _scontrol_fields(job_wide["stdout"])
+            if row.get("StepId") == expected_step
+        ]
+        if len(matching) == 1:
+            fields = matching[0]
+            valid = fields.get("Tasks") == str(ranks) and fields.get("State") == "RUNNING"
+            if not valid:
+                raise PilotError("job-wide scontrol step row conflicts with solver identity")
+            if receipt is not None:
+                receipt["verified_by"] = "job_wide_active_step_record"
+            return True
+        return False
+    if not _explicit_step_not_found(job_wide, job_id, step_id):
+        return False
+
+    job_query = _scontrol_capture(["scontrol", "show", "job", "-o", job_id])
+    if receipt is not None:
+        receipt["active_job_query"] = job_query
+    if job_query.get("returncode") != 0:
+        return False
+    records = [row for row in _scontrol_fields(job_query["stdout"]) if row.get("JobId") == job_id]
+    if len(records) != 1:
+        return False
+    fields = records[0]
+    user_token = fields.get("UserId", "")
+    user_id = re.fullmatch(r"[^()\s]+\((\d+)\)", user_token)
+    if user_id is None:
+        user_id = re.fullmatch(r"(\d+)(?:\([^()\s]+\))?", user_token)
+    expected_states = {"RUNNING"} if signal_name == "12" else {"RUNNING", "COMPLETING"}
+    expected_name = os.environ.get("SLURM_JOB_NAME")
+    if (
+        os.environ.get("SLURM_JOB_ID") != job_id
+        or fields.get("JobState") not in expected_states
+        or fields.get("NumTasks") != str(ranks)
+        or user_id is None
+        or int(user_id.group(1)) != os.getuid()
+        or (expected_name is not None and fields.get("JobName") != expected_name)
+    ):
+        return False
+    if receipt is not None:
+        receipt["verified_by"] = "rank_zero_step_receipt_and_matching_active_job_no_stepmgr"
     return True
 
 
 def signal_owned_step(
-    job_id: str, step_path: Path, signal_name: str, expected_ranks: int = RANKS
+    job_id: str,
+    step_path: Path,
+    signal_name: str,
+    expected_ranks: int = RANKS,
+    receipt: dict[str, Any] | None = None,
 ) -> bool:
     step_id, ranks = _step_identity(step_path, job_id, expected_ranks)
-    if not _verify_slurm_step(job_id, step_id, ranks):
+    identity_fields = step_path.read_text(encoding="ascii").split()
+    verification: dict[str, Any] = {}
+    if not _verify_slurm_step(job_id, step_id, ranks, signal_name, verification):
+        if receipt is not None:
+            receipt.update(
+                step_identity=identity_fields,
+                step_id=step_id,
+                task_count=ranks,
+                verification=verification,
+            )
         return False
-    result = subprocess.run(
-        ["scancel", f"--signal={signal_name}", f"{job_id}.{step_id}"],
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=15,
-    )
-    if result.returncode != 0:
+    command = ["scancel", f"--signal={signal_name}", f"{job_id}.{step_id}"]
+    result = _scontrol_capture(command)
+    if receipt is not None:
+        receipt.update(
+            step_identity=identity_fields,
+            step_id=step_id,
+            task_count=ranks,
+            verification=verification,
+            signal_command=result,
+        )
+    if result.get("returncode") is None:
+        raise PilotError(f"could not execute scancel for owned step {job_id}.{step_id}")
+    if result.get("returncode") != 0:
         raise PilotError(
             f"scancel --signal={signal_name} failed for owned step {job_id}.{step_id}: "
-            f"{result.stderr.strip()}"
+            f"{result.get('stderr', '').strip()}"
         )
     return True
 
@@ -1046,11 +1159,42 @@ def stop_solver_step(
     step_path: Path,
     grace_s: float,
     expected_ranks: int = RANKS,
+    state: dict[str, Any] | None = None,
+    write_state: Any = None,
 ) -> list[str]:
     """Request write-and-stop, then escalate only against the verified own step."""
     signals: list[str] = []
-    signal_owned_step(job_id, step_path, "12", expected_ranks)
-    signals.append("12")
+    step_id, ranks = _step_identity(step_path, job_id, expected_ranks)
+    if state is not None:
+        state.update(
+            stop_requested_utc=datetime.now(UTC).isoformat(),
+            stop_signal_job_step=f"{job_id}.{step_id}",
+            stop_signal_task_count=ranks,
+            stop_signals=[],
+        )
+        if write_state is not None:
+            write_state(state)
+    signal_receipt: dict[str, Any] = {}
+    try:
+        sent = signal_owned_step(
+            job_id,
+            step_path,
+            "12",
+            expected_ranks,
+            receipt=signal_receipt,
+        )
+    finally:
+        if state is not None:
+            state["stop_signal_request_receipt"] = signal_receipt
+            if write_state is not None:
+                write_state(state)
+    if sent:
+        signals.append("12")
+        if state is not None:
+            state["stop_signals"] = signals.copy()
+            state["stop_signal_acknowledged_utc"] = datetime.now(UTC).isoformat()
+            if write_state is not None:
+                write_state(state)
     if _wait_step_exit(process, grace_s):
         return signals
     if signal_owned_step(job_id, step_path, "TERM", expected_ranks):
@@ -1098,7 +1242,12 @@ def supervise_solver(
     deadline: float,
     state: dict[str, Any],
     write_state: Any,
+    stop_after_steps: int | None = None,
 ) -> tuple[int, OutputMonitor, str | None, bool]:
+    if stop_after_steps is not None and stop_after_steps < 1:
+        raise PilotError("diagnostic stop_after_steps must be positive")
+    if stop_after_steps is not None and not hasattr(config, "start_time_s"):
+        raise PilotError("diagnostic stop_after_steps requires config.start_time_s")
     identity_path = attempt / "solver-step-identity.txt"
     affinity_path = attempt / "rank0-affinity.txt"
     launcher = attempt / "solver-step.sh"
@@ -1168,6 +1317,7 @@ exec interIsoFoam -parallel
                 now = time.monotonic()
                 line = monitor_stream.readline()
                 parse_fault = None
+                diagnostic_save_due = False
                 if line:
                     parse_fault = tracker.feed(line, now)
                     while tracker.sample_count < len(tracker.rows):
@@ -1177,6 +1327,16 @@ exec interIsoFoam -parallel
                         tracker.sample_count += 1
                     if parse_fault and not requested:
                         stop_reason = parse_fault
+                    if (
+                        not parse_fault
+                        and not stop_reason
+                        and stop_after_steps is not None
+                        and tracker.current_time_s is not None
+                        and tracker.current_max_u_m_s is not None
+                        and round((tracker.current_time_s - config.start_time_s) / config.delta_t_s)
+                        == stop_after_steps
+                    ):
+                        diagnostic_save_due = True
                 if now - last_space_check >= 10.0:
                     free_disk = _record_disk_space(state, attempt, run_dir)
                     last_space_check = now
@@ -1190,8 +1350,19 @@ exec interIsoFoam -parallel
                     external_signal=_EXTERNAL_SIGNAL,
                     minimum_free_disk_bytes=config.minimum_free_disk_gib * 1024**3,
                 )
+                if should_stop is None and diagnostic_save_due:
+                    should_stop = (
+                        "diagnostic early-save requested after "
+                        f"{stop_after_steps} completed continuation steps",
+                        False,
+                    )
                 if should_stop and not requested:
                     stop_reason, paused_stop = should_stop
+                    if stop_after_steps is not None and stop_reason.startswith(
+                        "diagnostic early-save requested after "
+                    ):
+                        state["early_save_trigger_after_steps"] = stop_after_steps
+                        state["stop_signal_request_solver_time_s"] = tracker.current_time_s
                     state.update(status="checkpoint_requested", stop_reason=stop_reason)
                     write_state(state)
                     try:
@@ -1201,6 +1372,8 @@ exec interIsoFoam -parallel
                             identity_path,
                             CHECKPOINT_GRACE_S,
                             config.ranks,
+                            state=state,
+                            write_state=write_state,
                         )
                     except PilotError:
                         # Never guess a step if rank zero has not recorded it.
@@ -1208,7 +1381,6 @@ exec interIsoFoam -parallel
                         raise
                     requested = True
                     state["stop_signals"] = signals
-                    state["stop_requested_utc"] = datetime.now(UTC).isoformat()
                     write_state(state)
                 if now - last_state_write >= STATE_INTERVAL_S:
                     state.update(

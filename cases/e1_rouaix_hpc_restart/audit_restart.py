@@ -7,6 +7,8 @@ import csv
 import hashlib
 import json
 import math
+import re
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -30,6 +32,7 @@ PATCHES = (
 TIME_TOL_S = 1e-10
 DT_TOL_S = 1e-9
 INVENTORY_TOL_M3 = 1e-10
+EARLY_SAVE_REASON = "diagnostic_early_save_after_3_steps"
 
 
 def _sha256(data: bytes) -> str:
@@ -238,13 +241,94 @@ def _validate_terminal(
     if target_reached:
         if terminal.get("state") != "terminal" or stop_reason is not None:
             raise ValueError("target terminal endpoint has a non-natural stop reason")
+    elif stop_reason == EARLY_SAVE_REASON:
+        if (
+            terminal.get("state") != "diagnostic_early_saved"
+            or terminal.get("write_and_stop_requested") is not True
+            or terminal.get("write_and_stop_acknowledged") is not True
+            or not isinstance(terminal.get("stop_signals"), list)
+            or "12" not in terminal.get("stop_signals", [])
+            or terminal.get("early_save_trigger_after_steps") != 3
+            or actual_steps not in {3, 4, 5}
+            or terminal.get("stop_signal_task_count") != 120
+            or not str(terminal.get("stop_signal_job_id", "")).isdigit()
+            or terminal.get("stop_signal_job_step") != f"{terminal.get('stop_signal_job_id')}.0"
+            or not re.fullmatch(r"\d+\.0", str(terminal.get("stop_signal_job_step", "")))
+        ):
+            raise ValueError("diagnostic early save lacks its acknowledged 3-step receipt")
+        try:
+            requested_utc = datetime.fromisoformat(
+                str(terminal["stop_signal_request_utc"]).replace("Z", "+00:00")
+            )
+            acknowledged_utc = datetime.fromisoformat(
+                str(terminal["stop_signal_acknowledged_utc"]).replace("Z", "+00:00")
+            )
+            request_time_s = float(terminal["stop_signal_request_solver_time_s"])
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError(
+                "diagnostic early-save signal receipt has invalid timestamps"
+            ) from error
+        if (
+            requested_utc.utcoffset() is None
+            or acknowledged_utc.utcoffset() is None
+            or requested_utc.utcoffset().total_seconds() != 0
+            or acknowledged_utc.utcoffset().total_seconds() != 0
+            or acknowledged_utc < requested_utc
+            or not math.isclose(
+                request_time_s,
+                start_time_s + 3 * delta_t_s,
+                rel_tol=0.0,
+                abs_tol=TIME_TOL_S,
+            )
+        ):
+            raise ValueError("diagnostic early-save request is not recorded after 3 steps")
+        log_path = run_dir.parent / "solver.log"
+        if log_path.is_symlink() or not log_path.is_file():
+            raise ValueError("diagnostic early save lacks a regular solver log")
+        raw_log = log_path.read_bytes()
+        if hashlib.sha256(raw_log).hexdigest() != terminal.get("solver_log_sha256"):
+            raise ValueError("diagnostic early-save solver-log hash does not match its receipt")
+        log_text = raw_log.decode("utf-8", errors="replace")
+        logged_times = [
+            float(value)
+            for value in re.findall(r"(?m)^\s*(?:\[\d+\]\s*)?Time\s*=\s*([^\s]+)\s*$", log_text)
+        ]
+        post_checkpoint_times = [
+            value for value in logged_times if value > start_time_s + TIME_TOL_S
+        ]
+        expected_times = [start_time_s + index * delta_t_s for index in range(1, actual_steps + 1)]
+        if (
+            not re.search(r"(?m)^\s*(?:\[\d+\]\s*)?End\s*$", log_text)
+            or not re.search(
+                r"sigStopAtWriteNow\s*:\s*setting up write and stop at end of the next iteration",
+                log_text,
+            )
+            or len(post_checkpoint_times) != actual_steps
+            or not math.isclose(
+                post_checkpoint_times[-1], actual_time_s, rel_tol=0.0, abs_tol=TIME_TOL_S
+            )
+            or any(
+                not math.isfinite(actual)
+                or not math.isclose(actual, expected, rel_tol=0.0, abs_tol=TIME_TOL_S)
+                for actual, expected in zip(post_checkpoint_times, expected_times, strict=True)
+            )
+            or not any(
+                math.isclose(value, request_time_s, rel_tol=0.0, abs_tol=TIME_TOL_S)
+                for value in post_checkpoint_times
+            )
+        ):
+            raise ValueError(
+                "diagnostic early-save log does not match its actual fixed-step endpoint"
+            )
     elif (
         terminal.get("state") != "guarded_partial"
         or stop_reason != "max_abs_U_exceeded_1000.0_m_s"
         or terminal.get("write_and_stop_requested") is not True
         or terminal.get("write_and_stop_acknowledged") is not True
     ):
-        raise ValueError("partial target requires the runner's acknowledged U-guard receipt")
+        raise ValueError(
+            "partial target requires an acknowledged U-guard or diagnostic-save receipt"
+        )
     terminal["requested_target_reached"] = target_reached
     terminal["actual_step_count"] = actual_steps
     return {"path": str(path), "sha256": _sha256(raw), **terminal}
@@ -430,7 +514,11 @@ def audit_restart(
     coverage_status = (
         "requested_horizon_reached_exploratory_only"
         if terminal["requested_target_reached"]
-        else "u_guard_partial_exploratory_only"
+        else (
+            "diagnostic_early_save_partial_exploratory_only"
+            if terminal["state"] == "diagnostic_early_saved"
+            else "u_guard_partial_exploratory_only"
+        )
     )
     audit = {
         "schema_version": 1,
@@ -446,7 +534,8 @@ def audit_restart(
             "actual_terminal_endpoint_present": True,
             "solver_end_exit_and_no_pause_verified": True,
             "requested_target_reached": bool(terminal["requested_target_reached"]),
-            "partial_u_guard_stop": not bool(terminal["requested_target_reached"]),
+            "partial_u_guard_stop": terminal["state"] == "guarded_partial",
+            "diagnostic_early_save_stop": terminal["state"] == "diagnostic_early_saved",
         },
         "parent_checkpoint": parent_binding["parent"],
         "parent_checkpoint_receipt": parent_binding["receipt"],
@@ -458,7 +547,7 @@ def audit_restart(
             "actual_end_time_s": actual_end_time_s,
             "coverage_fraction_of_requested_interval": (actual_end_time_s - start_time_s)
             / (end_time_s - start_time_s),
-            "interpretation": "A U-guard stop is retained as an actual partial interval and is not labeled target completion.",
+            "interpretation": "A U-guard or diagnostic early-save stop is retained as its actual partial interval and is not labeled target completion.",
         },
         "integration": {
             "scope": "New restart interval only: start from the hash-bound measured parent .2 s inventory; no parent cumulative source or escape is re-added.",

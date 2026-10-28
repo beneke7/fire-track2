@@ -1,0 +1,108 @@
+{
+  "acknowledged": true,
+  "acknowledged_utc": "2026-10-28T13:42:26.709165+00:00",
+  "finished_utc": "2026-10-28T13:42:26.825178+00:00",
+  "helper_receipt": {
+    "signal_command": {
+      "command": [
+        "scancel",
+        "--signal=12",
+        "14700561.0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "step_id": "0",
+    "step_identity": [
+      "14700561",
+      "0",
+      "1",
+      "0"
+    ],
+    "task_count": 1,
+    "verification": {
+      "active_job_query": {
+        "command": [
+          "scontrol",
+          "show",
+          "job",
+          "-o",
+          "14700561"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "JobId=14700561 JobName=ml-sigprobe3 UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A Priority=2098 Nice=0 Account=nk_meshapplied QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:04 TimeLimit=00:05:00 TimeMin=N/A SubmitTime=2026-10-28T14:41:49 EligibleTime=2026-10-28T14:41:49 AccrueTime=2026-10-28T14:41:49 StartTime=2026-10-28T14:42:22 EndTime=2026-10-28T14:47:22 Deadline=N/A PreemptEligibleTime=2026-10-28T14:42:22 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-28T14:42:22 Scheduler=Backfill Partition=cpu-short AllocNode:Sid=10.150.1.134:73645 ReqNodeList=(null) ExcNodeList=(null) NodeList=x1001c0s0b0n0 BatchHost=x1001c0s0b0n0 NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=2G,node=1,billing=1 AllocTRES=cpu=1,mem=2G,node=1,billing=1 Socks/Node=* NtasksPerN:B:S:C=1:0:*:1 CoreSpec=* MinCPUsNode=1 MinMemoryNode=2G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-step-signal-helper-probe-20261028/source/restart_step_signal_probe.sbatch WorkDir=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-step-signal-helper-probe-20261028 StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-step-signal-helper-probe-20261028/slurm-14700561.out StdIn=/dev/null StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-step-signal-helper-probe-20261028/slurm-14700561.out TresPerTask=cpu=1 \n"
+      },
+      "job_wide_step_query": {
+        "command": [
+          "scontrol",
+          "-o",
+          "show",
+          "step",
+          "14700561"
+        ],
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "Job step 14700561. not found\n"
+      },
+      "specific_step_query": {
+        "command": [
+          "scontrol",
+          "show",
+          "step",
+          "-o",
+          "14700561.0"
+        ],
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "Job step 14700561.0 not found\n"
+      },
+      "verified_by": "rank_zero_step_receipt_and_matching_active_job_no_stepmgr"
+    }
+  },
+  "helper_source_sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88",
+  "identity": [
+    "14700561",
+    "0",
+    "1",
+    "0"
+  ],
+  "job_id": "14700561",
+  "job_name": "ml-sigprobe3",
+  "request_utc": "2026-10-28T13:42:26.653086+00:00",
+  "scancel_path": "/usr/bin/scancel",
+  "schema_version": 1,
+  "scontrol_path": "/usr/bin/scontrol",
+  "signal_receipt": {
+    "global_rank": "0",
+    "job_id": "14700561",
+    "signal_number": 12,
+    "step_id": "0",
+    "task_count": "1",
+    "utc": "2026-10-28T13:42:26.707441+00:00"
+  },
+  "signal_received": true,
+  "slurm_conf": "/scratch/slurm/SlurmdSpoolDir/x1001c0s0b0n0/conf-cache/slurm.conf",
+  "slurm_conf_server": null,
+  "srun_command": [
+    "srun",
+    "--nodes=1",
+    "--ntasks=1",
+    "--ntasks-per-node=1",
+    "/opt/cray/pe/python/3.11.7/bin/python3",
+    "-u",
+    "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-step-signal-helper-probe-20261028/source/step_signal_probe.py",
+    "--worker",
+    "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-step-signal-helper-probe-20261028/probe-14700561"
+  ],
+  "srun_returncode": 0,
+  "srun_started_utc": "2026-10-28T13:42:26.446314+00:00",
+  "started_utc": "2026-10-28T13:42:26.443863+00:00",
+  "status": "passed",
+  "task_allocation": {
+    "cpus_per_task": 1,
+    "nodes": 1,
+    "tasks": 1
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "acknowledged_utc": "2026-10-28T13:42:26.709165Z",
+  "allocation": {
+    "cpus_per_task": 1,
+    "memory_gib": 2,
+    "nodes": 1,
+    "tasks": 1,
+    "wall_limit_s": 300
+  },
+  "created_utc": "2026-10-28T13:41:08.751581+00:00",
+  "expected_step": "jobid.0, one task, rank zero",
+  "finished_utc": "2026-10-28T13:42:26.825178Z",
+  "helper_source_sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88",
+  "job_id": "14700561",
+  "modules": [
+    "cray-python/3.11.7",
+    "openfoam",
+    "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH"
+  ],
+  "public_helper": "source/run_pilot.py:signal_owned_step",
+  "public_helper_sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88",
+  "purpose": "verify the current public signal_owned_step implementation with an owned one-task Slurm step under the v2512 OpenFOAM module environment",
+  "result_files": {
+    "probe-14700561/controller-result.json": {
+      "bytes": 4250,
+      "sha256": "37043315c0b35941c9835825ab0301cb2d467f6300e2eb16fba77f96d59f0398"
+    },
+    "probe-14700561/identity.txt": {
+      "bytes": 15,
+      "sha256": "3a5a7e832718d2d624e388e77bd95d5632e511e2753cf60c4644cc98bbd15381"
+    },
+    "probe-14700561/module-list-14700561.log": {
+      "bytes": 460,
+      "sha256": "eedc0dca886cf7483f2b27acf8d0ee256efd07b7a83270880cda83994acb081e"
+    },
+    "probe-14700561/modules-14700561.log": {
+      "bytes": 329,
+      "sha256": "982e7e4916901d6fd354fb1dd56524857ee88edc9c9ead10ba4eb93b57f9cb14"
+    },
+    "probe-14700561/request-ack.json": {
+      "bytes": 3016,
+      "sha256": "d68b2b36a23971100a76e243551b0c5f84b45120ef7b006a24d6c1150f4443e3"
+    },
+    "probe-14700561/signal-received.json": {
+      "bytes": 156,
+      "sha256": "e607dd070b1d6fb799383cbb5a9fc74a7cee05c9c5538e26666c7f4967d15fef"
+    },
+    "probe-14700561/step.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "probe-14700561/step.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema_version": 1,
+  "signal_number": 12,
+  "signal_received_utc": "2026-10-28T13:42:26.707441Z",
+  "source_files": {
+    "restart_step_signal_probe.sbatch": {
+      "bytes": 1497,
+      "sha256": "88468813fdd1aae0c6db06b4c48a32f3f919c37a8caec73a723d3f9d7a5e5557"
+    },
+    "run_pilot.py": {
+      "bytes": 103275,
+      "sha256": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88"
+    },
+    "step_signal_probe.py": {
+      "bytes": 7168,
+      "sha256": "51f20c14d2baff7c22c4d5a9500c47700a2febdabf408cc929797a7ad9023484"
+    }
+  },
+  "srun_returncode": 0,
+  "started_utc": "2026-10-28T13:42:22Z",
+  "status": "passed",
+  "submitted_utc": "2026-10-28T13:41:49Z"
+}

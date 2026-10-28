@@ -210,3 +210,57 @@ def test_runner_guarded_partial_receipt_is_preserved_without_claiming_target_com
     assert (run_dir / "restart-audit.json").exists()
     with (run_dir / "restart-ledger.csv").open(encoding="utf-8") as stream:
         assert len(list(csv.DictReader(stream))) == 1
+
+
+@pytest.mark.parametrize("actual_steps", [4, 5])
+def test_diagnostic_early_save_accepts_native_iteration_overshoot_and_binds_raw_log(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, actual_steps: int
+) -> None:
+    actual_time_s = 0.2 + actual_steps * 0.0001
+    log_lines = [
+        "sigStopAtWriteNow : Enabling writing and stopping upon signal 12",
+        *[f"Time = {0.2 + step * 0.0001:.12f}" for step in range(1, actual_steps + 1)],
+        "sigStopAtWriteNow : setting up write and stop at end of the next iteration",
+        "End",
+    ]
+    raw_log = ("\n".join(log_lines) + "\n").encode("utf-8")
+    solver_log = tmp_path / "solver.log"
+    solver_log.write_bytes(raw_log)
+    receipt = restart_runner.build_terminal_status(
+        return_code=0,
+        end_marker=True,
+        actual_time_s=actual_time_s,
+        step_count=actual_steps,
+        stop_detail=restart_runner.EARLY_SAVE_STOP_REASON,
+        pause_observed=False,
+        stop_signals=["12"],
+        endpoint_verified=True,
+        variant="original-early-save",
+        target_time_s=0.202,
+        solver_log_sha256=hashlib.sha256(raw_log).hexdigest(),
+        stop_signal_request_utc="2026-10-28T12:00:00+00:00",
+        stop_signal_acknowledged_utc="2026-10-28T12:00:01+00:00",
+        stop_signal_job_id="14700000",
+        stop_signal_job_step="14700000.0",
+        stop_signal_task_count=120,
+        stop_signal_request_solver_time_s=0.2003,
+        early_save_trigger_after_steps=3,
+    )
+    run_dir, parent = _case(
+        tmp_path,
+        monkeypatch,
+        terminal_overrides=receipt,
+        target_time_s=0.202,
+    )
+
+    report = restart_audit.audit_restart(run_dir, parent, 0.2, 0.202, 0.0001)
+
+    assert report["coverage"]["status"] == "diagnostic_early_save_partial_exploratory_only"
+    assert report["coverage"]["requested_target_reached"] is False
+    assert report["interval"]["diagnostic_early_save_stop"] is True
+    assert report["interval"]["partial_u_guard_stop"] is False
+    assert report["interval"]["step_count"] == actual_steps
+    assert report["interval"]["actual_terminal_time_s"] == pytest.approx(actual_time_s)
+    solver_log.write_text("Time = 0.2003\nEnd\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="solver-log hash"):
+        restart_audit.audit_restart(run_dir, parent, 0.2, 0.202, 0.0001)
