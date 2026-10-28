@@ -1,0 +1,278 @@
+{
+  "camera_and_view": {
+    "cutaway": "existing fixed-camera per-train half-section cutaway from the source renderer; two branch interiors omitted as stated in frame caption",
+    "endpoint": "existing all-four-branch outlet view at the same 0.350114456683 s checkpoint; no transverse clipping",
+    "geometry": "the exact source case wall STL/rendered wall; no separate CAD overlay"
+  },
+  "computed_fields": {
+    "blue": "native cell alpha.water >= 0.5 bulk",
+    "cyan": "spatial cell-to-point alpha.water=0.5 display interpolation; not a solved field",
+    "native_field_hashes_rechecked": [
+      "alpha.water",
+      "U"
+    ],
+    "phase": "water-air VOF alpha.water from native saved CFD checkpoints",
+    "temporal_field_interpolation": false,
+    "velocity_vectors_or_foam_added": false
+  },
+  "created_utc": "2026-10-28T15:46:34.231707+00:00",
+  "endpoint_outlet_render": {
+    "external_alpha_ge_0p5_cells": 0,
+    "physical_time_s": 0.350114456683,
+    "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/outlet-all-four-branches-t0.350114456683.png",
+    "render_png_sha256": "e228dbd557a5b564dce22870933ba6daf0a44c078aca09bbbbb331f186cb8556"
+  },
+  "initial_state": "same mapped dry-line fields as compact short1; tank water=1.35 m3 each; downstream of valve dry air; tank-to-valve feeds remain wetted",
+  "mesh_cells": 299248,
+  "mesh_join_qualification": "This 2026-10-25 exploratory case predates the 2026-10-26 flush-at-inlet corrected-junction geometry; it is not the later 299214-cell corrected mesh.",
+  "playback": {
+    "codec": "H.264/AVC",
+    "fps": 24,
+    "frame_count": 324,
+    "native_checkpoint_frames_held": true,
+    "nominal_slow_factor": 30.0,
+    "physical_interval_holds": [
+      {
+        "frames": 36,
+        "next_time_s": 0.100021166664,
+        "output_hold_s": 1.5,
+        "slow_factor": 30.0,
+        "time_s": 0.050021166664
+      },
+      {
+        "frames": 36,
+        "next_time_s": 0.150021166664,
+        "output_hold_s": 1.5,
+        "slow_factor": 30.0,
+        "time_s": 0.100021166664
+      },
+      {
+        "frames": 36,
+        "next_time_s": 0.200021166664,
+        "output_hold_s": 1.5,
+        "slow_factor": 30.0,
+        "time_s": 0.150021166664
+      },
+      {
+        "frames": 36,
+        "next_time_s": 0.250021166664,
+        "output_hold_s": 1.5,
+        "slow_factor": 30.0,
+        "time_s": 0.200021166664
+      },
+      {
+        "frames": 36,
+        "next_time_s": 0.299926664984,
+        "output_hold_s": 1.5,
+        "slow_factor": 30.0,
+        "time_s": 0.250021166664
+      },
+      {
+        "frames": 36,
+        "next_time_s": 0.350114456683,
+        "output_hold_s": 1.5,
+        "slow_factor": 30.0,
+        "time_s": 0.299926664984
+      },
+      {
+        "frames": 24,
+        "next_time_s": null,
+        "output_hold_s": 1.0,
+        "purpose": "brief final full-apparatus hold",
+        "time_s": 0.350114456683
+      },
+      {
+        "frames": 36,
+        "output_hold_s": 1.5,
+        "purpose": "all four outlet branches at the same saved endpoint",
+        "time_s": 0.350114456683
+      }
+    ],
+    "playback_field_interpolation": false,
+    "resolution": "1920x1080",
+    "title_hold_s": 2.0,
+    "total_duration_s": 13.5
+  },
+  "render_script_sha256": "7a5762300e46b0cc9eafb4163d1761cfc8312e78533458f3e99a945d9d76f41f",
+  "resource_note": "Only re-encoded existing native CFD render images; CPU ffmpeg limited to two worker threads; no GPU or solver launched.",
+  "schema": "i4f-demo-native-cfd-video/v1",
+  "selected_source_renders": [
+    {
+      "checkpoint_field_hashes": {
+        "U": "36a74dae61f653921835fe5abd60b8de0d28e6f6da5dd5fd11821333d48409e8",
+        "alpha.water": "315339149cf418442a981079bc10951237d25d13c540929e3cd218421b154674"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.050021166664",
+      "physical_time_s": 0.050021166664,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.050021166664.png",
+      "render_png_sha256": "bec855f6515e47b1a13bc96b065af71e8dfed3e35e0c826f77cf64303724dd4d",
+      "scaled_png_sha256": "b75adea105c5f562d62685adeca8cfd4050f44ca3d139f18632e05f96760bf95",
+      "view": "two-tank half-section cutaway"
+    },
+    {
+      "checkpoint_field_hashes": {
+        "U": "33ae360e67c0afe25f50f2d0d7541ceac4f376356b54734e3e73871d0dc11917",
+        "alpha.water": "d222498f3f5b6034c5cf01e836dc3427591048027f9ad2434a3203d418f29af0"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.100021166664",
+      "physical_time_s": 0.100021166664,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.100021166664.png",
+      "render_png_sha256": "9818071c884699412937ccae0a8a8b897f15073413cd9d703ce95b87dfab16b9",
+      "scaled_png_sha256": "a4d154415499d901ca558bb2dff4358c9e0b259d1e25384201977da47cb722d6",
+      "view": "two-tank half-section cutaway"
+    },
+    {
+      "checkpoint_field_hashes": {
+        "U": "cef8003b18e02d74feedcf99864427c8fe65e74353253f902c522a928985dfbe",
+        "alpha.water": "215982a1df688f7256f246a8b9aac2a887f5613bd9ad22ec151bae89d7f8c374"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.150021166664",
+      "physical_time_s": 0.150021166664,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.150021166664.png",
+      "render_png_sha256": "49585e55cb5cd432ab288cf6df6bf3f4760d49ac7d6789bf8848a753968c2b68",
+      "scaled_png_sha256": "f6e8ba40d45e837a2be320518b04a4c70c1c622c9bbafb60ead8f911f76b9152",
+      "view": "two-tank half-section cutaway"
+    },
+    {
+      "checkpoint_field_hashes": {
+        "U": "28d78c07cea3c9b16f2c062ef8eb7731b584d7e9b451fa63fc05d14b07f73c18",
+        "alpha.water": "5593ffc15d152c718835b9a0458e41520917b5047cd65a25bf39e1ce02e8f126"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.200021166664",
+      "physical_time_s": 0.200021166664,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.200021166664.png",
+      "render_png_sha256": "192cbd150c88c4afb45c65fb7ca8a5705d4a4c5e7b7255dabab15e310b8e7923",
+      "scaled_png_sha256": "388def722d3de04b0b91912d3f435a8cb31c071f49ddb8093c32d90b844632a2",
+      "view": "two-tank half-section cutaway"
+    },
+    {
+      "checkpoint_field_hashes": {
+        "U": "16f067ddf776db56c0a391b0fd3279d731d8139821a590cc9fa6535c5b57f018",
+        "alpha.water": "045bd78c94a88e1de98ba34552227bbb4133a8e3b6b046a423a24b367cc5ffde"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.250021166664",
+      "physical_time_s": 0.250021166664,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.250021166664.png",
+      "render_png_sha256": "9a41c08dfe4d6ebba6e0b8aa257213e02e57655e4bfe2aca18b0eb64a1b8b87c",
+      "scaled_png_sha256": "746b7eda27ce33f007233978b7540037f762e42f3fe4d4156ed05c4be715714b",
+      "view": "two-tank half-section cutaway"
+    },
+    {
+      "checkpoint_field_hashes": {
+        "U": "784ac80b8e3a03d1aa6620daa0c52ff203b335c48a94385d4c833a191ac759cd",
+        "alpha.water": "aa2eef33b1370d1344a1aae331c29e3a0f23b1a4624f766af6aca8ffe0b87ab7"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.299926664984",
+      "physical_time_s": 0.299926664984,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.299926664984.png",
+      "render_png_sha256": "975ad804ef427ba992dd7215abdb5873f9445d39af9bf1b44c03935db8466ce2",
+      "scaled_png_sha256": "ecf9c5dac5b1cd24fcec8c5f2769507f0ba44eb17e8c81a9b994686dc445d9fa",
+      "view": "two-tank half-section cutaway"
+    },
+    {
+      "checkpoint_field_hashes": {
+        "U": "b141f44fe2b337020465e5b815688ec4895b5c457e2dce86ba9e91006755ba2f",
+        "alpha.water": "fa8b133f884d1b81c5b0c741129d65d376af0eb0ad303a4c6bbab03d4abf017c"
+      },
+      "checkpoint_path": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z/case/processors10/0.350114456683",
+      "physical_time_s": 0.350114456683,
+      "render_clip": "per-train midplane; train half-sections; two branch interiors omitted, stated in title",
+      "render_png": "results/runs/i4f-48layer-terminal-render-20261025T204708Z/milestone/frames/cutaway-full-half-sections-t0.350114456683.png",
+      "render_png_sha256": "f668885a492c02abf64de31d8148b6f212652116d49718e6599ee7402d5ad534",
+      "scaled_png_sha256": "d9ba29d3248d1e27ffbf456cb3f0170a633bbfd0bce17b653851a2b399577ac4",
+      "view": "two-tank half-section cutaway"
+    }
+  ],
+  "source_experiment_sha256": "eab80660b5651a060ef68f7b9d6c94c30113aea9bb1581456ea41d05028cc420",
+  "source_input_freeze_sha256": "958d0bdd4ee0757357fc9cbf1fc470f1355a2ec2e69723c47f3783bd88642a78",
+  "source_movie_record": "results/summaries/i4f_20261025/corrected-source-movie-through-0p443.json",
+  "source_movie_record_sha256": "b23cd2adf0556324fa65f9aa0ddcba66b5b298542657683099c443a3ce01e92c",
+  "source_run": "results/runs/i4f-short1-valve-band-4x-continue-20261025T184504Z",
+  "source_run_created_utc": "2026-10-25T18:45:04.532594+00:00",
+  "source_solver": {
+    "application": "compressibleInterFoam",
+    "binary": "bin/compressibleInterFoamFrozenAlphaSourceV2NoPout",
+    "binary_sha256": "d3daff5b3ea223dbf436c72623159baf3f5c5ee55acd3f3345f8467d697fb7c1",
+    "image": "opencfd/openfoam-default@sha256:33fb575aa9980d2bc42fd58c75ae698c489293ba30c991380fe3f899c622f319",
+    "mpi_ranks": 10,
+    "openfoam_release": "v2512",
+    "source_description": "same frozen compressibleInterFoam binary, Cd=0.7, 1 s smoothstep, min effective opening 0.02, |U| regularization 0.10 m/s"
+  },
+  "title_card_text": [
+    "Computed initial filling \u2014 provisional water\u2013air model",
+    "Earlier exploratory case | t=0.05\u20130.35 s | 30\u00d7 slower | saved states held",
+    "Pre-corrected junction geometry; this is not the later corrected mesh.",
+    "Downstream passages start air-filled; not a complete discharge or validation."
+  ],
+  "title_frame": {
+    "path": "results/runs/i4f-demo-render-20261028T154255Z/preview-final.png",
+    "sha256": "288c858f5c0b60c257f39cf57c7440cbafc0d6527a808c2cea9fdd07c72540e1"
+  },
+  "trajectory_scope": {
+    "cold_t0_continuity_claimed": false,
+    "endpoint_note": "At 0.350114456683 s, the source render records zero native exterior cells with alpha.water >= 0.5; the clip shows filling, not a completed discharge.",
+    "excluded_later_checkpoints_s": [
+      0.400086712911,
+      0.443669498426
+    ],
+    "exclusion_reason": "avoid the late pressure-update diagnostic/terminal segment; show only the stable pre-stop filling prefix",
+    "first_checkpoint_s": 0.050021166664,
+    "last_checkpoint_s": 0.350114456683,
+    "source_start": "mapped restart at t=0.050021166664 s from the dry-line cold-start campaign"
+  },
+  "video": {
+    "bytes": 455480,
+    "ffmpeg_command": [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-y",
+      "-threads",
+      "2",
+      "-framerate",
+      "24",
+      "-start_number",
+      "0",
+      "-i",
+      "/home/v/proj/bene/fire-track2/results/runs/i4f-demo-render-20261028T154255Z/work/sequence/frame_%05d.png",
+      "-frames:v",
+      "324",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "fast",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-threads",
+      "2",
+      "-movflags",
+      "+faststart",
+      "/home/v/proj/bene/fire-track2/results/runs/i4f-demo-render-20261028T154255Z/i4f-initial-filling-demo-30x.mp4"
+    ],
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "avg_frame_rate": "24/1",
+          "codec_name": "h264",
+          "duration": "13.500000",
+          "height": 1080,
+          "nb_read_frames": "324",
+          "r_frame_rate": "24/1",
+          "width": 1920
+        }
+      ]
+    },
+    "path": "results/runs/i4f-demo-render-20261028T154255Z/i4f-initial-filling-demo-30x.mp4",
+    "sha256": "19678f48823b51c1741bd65949218ed766dc28feee193ab91376194b5164dd50"
+  }
+}
