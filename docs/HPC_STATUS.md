@@ -1,21 +1,57 @@
 # Komondor Rouaix status
 
-Updated 2026-10-28 15:27 UTC (16:27 CET). Analytical E0 remains the only
+Updated 2026-10-28 16:37 UTC (17:37 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-**14702499 (`ml-vof`) is RUNNING**, checked at15:27 UTC:120 MPI ranks on
-three CPU nodes,40 ranks/node, fixed0.1 ms,10,099,265 cells. The pressure-only
-restart starts from the verified0.20 s donor and targets0.30 s, with0.25 s
-diagnostic output and a90-minute limit. Native collated changeDictionary
-preflight verified the intended four boundary changes, unchanged internal
-pressure arrays and unchanged other checkpoint fields. At15:26 UTC it had
-advanced to0.2052 s with max speed about109 m/s. This precedes the previous
-failure window; fine-grid stability is not established yet. Auditor14702500
-is pending on afterany. A verified-parent0.30→0.50 s continuation is being
-implemented; it is not yet armed. No local Rouaix CFD is active.
+**14705632 (`ml-vof`) is RUNNING** on 120 CPU ranks across three nodes.
+The matched pressure-solver sensitivity uses PCG/DIC, unchanged 0.1 ms step,
+mesh, physics and total-pressure boundaries, targeting 0.255 s from 0.20 s.
+Actual native donor/boundary/field-integrity preflight passed. The first 20
+steps reached 0.2020 s with bounded alpha and speed around 110 m/s. Final
+pressure corrections converged to the configured 1e-8 tolerance in 466–518
+iterations; none hit the 1000 cap. The cap increase from 100 is therefore
+material to this solver policy. Mean early cost is 4.93 s/step, projecting
+about 45 minutes for 550 steps, within the two-hour allocation. This precedes
+the failure window and does not establish a cure. Rolling 5 ms writes retain
+two checkpoints. Auditor 14705633 is pending afterany. Controller **14706859**
+is released and pending afterany:14705632. It will verify the clean .255 s
+parent, freeze its actual contract, then submit the unchanged PCG/DIC child
+for .255→.30 s (450 fixed steps) with its own afterany auditor. It refuses
+guarded, failed, incomplete or unconverged parents. The memory policy required
+two CPU slots for its 4 GiB request; computation remains one thread, capped
+at 15 minutes. Both superseded held/probe jobs were canceled with receipts.
+[Source, declaration, scheduler receipts and profile](../results/summaries/rouaix_pressure_pcgdic_20261028/README.md).
+[Armed continuation and release receipt](../results/summaries/rouaix_pressure_pcgdic_continuation_20261028/README.md).
+The running trial's closed 0.215 s alpha field was copied with unchanged
+before/after metadata and matching remote/local SHA before rolling purge.
+Its mapped water volume agrees with the native history to 1.14e-8 relative.
+[Computed 3D figures, native-cell detail and interpolation comparison](../results/summaries/rouaix_repro_figures_20261028/README.md).
+
+**14702499 (`ml-vof`) FAILED 1:0**, ending at 15:51:46 UTC after 28m46s.
+It obtained all 120 ranks on three nodes and completed 495 fixed 0.1 ms steps
+from the 0.20 s donor. At 0.2494 s max speed was 107.34 m/s; within the next
+step GAMG pressure residuals diverged to 3.45e19 and 8.65e22, followed by
+max speed 3.85e51 m/s. The attempted 0.2496 s step raised an FPE in the U solve.
+The verified signal request was acknowledged, but the FPE preempted End and
+the endpoint write. No 0.25/0.30 s field or new ledger exists. The finalized
+1.739 GB archive has verified CRC/member/SHA evidence; no solver remains active.
+Auditor 14702500 COMPLETED 0:0 with verified failure capture. The 0.30→0.50 s continuation is
+unsubmitted and this failed parent cannot qualify. Its matched PCG/DIC
+sensitivity now runs separately as 14705632.
+Native collated changeDictionary preflight had verified only the intended four
+boundary changes, unchanged internal pressure and other checkpoint fields.
+The coarse pressure fix therefore does not establish fine-grid stability.
+No local Rouaix CFD is active.
+[Fine-mesh saved 0.20 s field, zoom and portable ParaView state](../results/summaries/rouaix_fine_water_view_20261028/README.md).
 [Frozen source, submission and live receipts](../results/summaries/rouaix_pressure_total_restart_20261028/).
+[Failure inspection](../results/summaries/rouaix_pressure_total_restart_20261028/live-14702499/failure-20261028T155146Z/failure-inspection.json).
+Live accounting at 15:39:49 UTC reports 120 tasks, average CPU time 15m42s
+per task over 15m48s step elapsed (about 99.4% occupancy). Average sampled RSS
+is 385 MB/task; maximum reported task RSS is 704 MB. This is CPU occupancy,
+not measured strong-scaling efficiency; MPI waiting can also consume CPU.
+[Raw accounting sample](../results/summaries/rouaix_pressure_total_restart_20261028/performance-live-20261028T153949Z.json).
 
 Targeted diagnosis: coarse PTOTAL0 air and water both
 completed0.30 s with End/exit0 and verified endpoint archives. The matched
@@ -27,10 +63,10 @@ alpha[0,1], bulk/interface Co0.262/0.168, phase residual-3.65e-10 kg.
 A fixed0.3 ms water pilot also reached0.30 s in1,000 steps and274 solver seconds
 (276 supervisor seconds),peak105.32 m/s,Co0.776/0.491,alpha[0,1]. The observed
 wall ratio3.72 is not a controlled attribution: the reference overlapped another
-8-rank case. The completed matched-field comparison finds a0.08742 m water
-centroid shift and0.190118 m3 volume-weighted alpha L1 difference. Half-L1 is
-about25.1% of the water inventory redistributed between cells, not mass lost.
-Thus the larger timestep is not an accuracy baseline; the fine run keeps0.1 ms.
+8-rank case. The completed matched-field comparison finds a 0.08742 m water
+centroid shift and 0.190118 m3 volume-weighted alpha L1 difference. Half-L1 is
+about 25.1% of the water inventory redistributed between cells, not mass lost.
+Thus the larger timestep is not an accuracy baseline; the fine run keeps 0.1 ms.
 [Exact mapped fields and alpha≥0.01 view](../results/summaries/rouaix_water_view_20261028/README.md).
 [Matched results and provenance](../results/summaries/rouaix_backflow_local_20261028/README.md).
 
@@ -44,8 +80,8 @@ verified all endpoint fields, End/exit0, incremental ledger and archive.
 Auditor14700602 completed in46s. The recovered tested source used only the
 helper/test/launcher patch. The fine pressure candidate subsequently passed
 the actual native boundary edit/field-hash preflight and started as14702499.
-[Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All150 affected tests pass;
-Ruff/format pass. Full suite collection is blocked by missingmatplotlib locally.
+[Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All 207 affected tests pass;
+Ruff/format pass. Full suite collection is blocked by missing matplotlib locally.
 
 Historical restart controls below are terminal; current execution is above.
 V4 smoke14689395 COMPLETED0:0: ten fixed0.1 ms steps from0.20 to0.201 s,

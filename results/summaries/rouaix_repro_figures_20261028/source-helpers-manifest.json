@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:42:24.377814+00:00",
+  "archive": "source-helpers.tar.gz",
+  "archive_bytes": 19736,
+  "archive_sha256": "2a93a15e8944ca9a42d281043b450a6d8c5b83767212282e80647ee4d032f794",
+  "creation_command": "env COPYFILE_DISABLE=1 tar -czf results/summaries/rouaix_repro_figures_20261028/source-helpers.tar.gz -C /Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028 render_repro_figures.py -C /Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028 map_collated_alpha.py render_fine_water_view.py extract_native_cell_geometry.py",
+  "members": [
+    {
+      "archive_path": "render_repro_figures.py",
+      "source_path": "/Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028/render_repro_figures.py",
+      "bytes": 29858,
+      "sha256": "3f81fe907bd85132330a526829e1e7fbd0b829b46dac927d9797dd65953c6846"
+    },
+    {
+      "archive_path": "map_collated_alpha.py",
+      "source_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/map_collated_alpha.py",
+      "bytes": 8785,
+      "sha256": "0aa4c639af98e708c5a271f8871db306ffadc3328b62aa4ff36518acc1a7f4ed"
+    },
+    {
+      "archive_path": "render_fine_water_view.py",
+      "source_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/render_fine_water_view.py",
+      "bytes": 24386,
+      "sha256": "da7004857e7077b44ac5aa907f8f3ec4c4213ce0c00932adb4518ad918c82586"
+    },
+    {
+      "archive_path": "extract_native_cell_geometry.py",
+      "source_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/extract_native_cell_geometry.py",
+      "bytes": 8214,
+      "sha256": "25f349dcdcbb38ac3f8b2771528fca221e28df5f285526a398a3132d3e921393"
+    }
+  ],
+  "excluded": [
+    "native mesh files",
+    "raw checkpoint fields",
+    "mapped alpha arrays",
+    "solver history"
+  ],
+  "verification": [
+    "tar member bytes equal source files",
+    "helper source lint and format check passed",
+    "CPU figures rendered and visually inspected"
+  ]
+}

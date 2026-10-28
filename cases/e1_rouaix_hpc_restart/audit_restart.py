@@ -29,10 +29,25 @@ PATCHES = (
     "spanwisePlus",
     "nozzle",
 )
+PARENT_PROCESSOR_MESH_FILES = ("points", "faces", "owner", "neighbour", "boundary")
 TIME_TOL_S = 1e-10
 DT_TOL_S = 1e-9
 INVENTORY_TOL_M3 = 1e-10
 EARLY_SAVE_REASON = "diagnostic_early_save_after_3_steps"
+PARENT_CONTRACT_PROFILES = {
+    "pressure-total-p0-zero": {
+        "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+        "start_time_s": 0.2,
+        "target_time_s": 0.3,
+        "step_count": 1000,
+    },
+    "pressure-total-pcgdic": {
+        "case_id": "rouaix-restart-pressure-total-pcgdic-0255",
+        "start_time_s": 0.2,
+        "target_time_s": 0.255,
+        "step_count": 550,
+    },
+}
 
 
 def _sha256(data: bytes) -> str:
@@ -47,7 +62,9 @@ def _read_json(path: Path) -> tuple[dict[str, Any], bytes]:
     return value, raw
 
 
-def _parent_summary(source: Path | str | dict[str, Any]) -> tuple[dict[str, Any], str, str]:
+def _parent_summary(
+    source: Path | str | dict[str, Any], expected_sha256: str = PARENT_LEDGER_SHA256
+) -> tuple[dict[str, Any], str, str]:
     if isinstance(source, (Path, str)):
         path = Path(source)
         summary, raw = _read_json(path)
@@ -65,8 +82,8 @@ def _parent_summary(source: Path | str | dict[str, Any]) -> tuple[dict[str, Any]
             raise ValueError("parent ledger dict source_sha256 does not match its source file")
     else:
         raise TypeError("parent_ledger must be a Path or a hash-bound source dict")
-    if declared_sha256 != PARENT_LEDGER_SHA256:
-        raise ValueError("parent ledger summary SHA-256 does not match the qualified .2 ledger")
+    if declared_sha256 != expected_sha256:
+        raise ValueError("parent ledger summary SHA-256 does not match its checkpoint contract")
     return summary, declared_sha256, str(path)
 
 
@@ -134,19 +151,122 @@ def _validate_parent(
     parent_sha256: str,
     parent_path: str,
     start_time_s: float,
+    parent_contract: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], str]:
     integration = parent.get("integration", {})
     coverage = parent.get("coverage", {})
-    parent_end = float(coverage.get("last_matched_printed_time_s", math.nan))
+    expected_checkpoint_time_s = (
+        float(parent_contract["checkpoint_time_s"]) if parent_contract is not None else 0.2
+    )
+    expected_archive_sha256 = (
+        str(parent_contract["archive_sha256"])
+        if parent_contract is not None
+        else PARENT_ARCHIVE_SHA256
+    )
+    expected_endpoint_member = (
+        f"attempt/case/processors120/{expected_checkpoint_time_s:.12f}/alpha.water"
+    )
+    parent_end = float(
+        coverage.get(
+            "actual_end_time_s" if parent_contract is not None else "last_matched_printed_time_s",
+            math.nan,
+        )
+    )
     parent_inventory = float(integration.get("final_inventory_m3", math.nan))
     density = float(integration.get("density_kg_m3", math.nan))
-    if (
-        coverage.get("configured_horizon_reached") is not True
-        or coverage.get("requested_end_reached") is not True
+    if parent_contract is not None:
+        profile = PARENT_CONTRACT_PROFILES.get(str(parent_contract.get("variant", "")))
+        checkpoint_fields = parent_contract.get("checkpoint_fields", {})
+        processor_mesh = parent_contract.get("processor_mesh", {})
+        fv_solution_sha256 = str(parent_contract.get("fv_solution_sha256", ""))
+        if (
+            profile is None
+            or parent_contract.get("case_id") != profile["case_id"]
+            or not math.isclose(
+                expected_checkpoint_time_s,
+                profile["target_time_s"],
+                rel_tol=0.0,
+                abs_tol=TIME_TOL_S,
+            )
+            or parent_contract.get("step_count") != profile["step_count"]
+            or (
+                "parent_start_time_s" in parent_contract
+                and not math.isclose(
+                    float(parent_contract["parent_start_time_s"]),
+                    profile["start_time_s"],
+                    rel_tol=0.0,
+                    abs_tol=TIME_TOL_S,
+                )
+            )
+            or (
+                "parent_target_time_s" in parent_contract
+                and not math.isclose(
+                    float(parent_contract["parent_target_time_s"]),
+                    profile["target_time_s"],
+                    rel_tol=0.0,
+                    abs_tol=TIME_TOL_S,
+                )
+            )
+            or not str(parent_contract.get("parent_job_id", "")).isdigit()
+            or not re.fullmatch(
+                r"[0-9a-f]{64}", str(parent_contract.get("inventory_history_sha256", ""))
+            )
+            or not str(parent_contract.get("inventory_history_member", "")).startswith(
+                "attempt/case/postProcessing/waterInventory/"
+            )
+            or not math.isclose(
+                float(parent_contract.get("inventory_history_time_s", math.nan)),
+                expected_checkpoint_time_s,
+                rel_tol=0.0,
+                abs_tol=TIME_TOL_S,
+            )
+            or not math.isclose(
+                float(parent_contract.get("inventory_history_m3", math.nan)),
+                float(parent_contract.get("inventory_m3", math.nan)),
+                rel_tol=0.0,
+                abs_tol=INVENTORY_TOL_M3,
+            )
+            or not isinstance(checkpoint_fields.get("alpha.water"), dict)
+            or not re.fullmatch(
+                r"[0-9a-f]{64}", str(checkpoint_fields.get("alpha.water", {}).get("sha256", ""))
+            )
+            or not isinstance(processor_mesh, dict)
+            or any(
+                not isinstance(processor_mesh.get(name), dict)
+                or not re.fullmatch(
+                    r"[0-9a-f]{64}", str(processor_mesh.get(name, {}).get("sha256", ""))
+                )
+                for name in PARENT_PROCESSOR_MESH_FILES
+            )
+            or (
+                parent_contract.get("variant") == "pressure-total-pcgdic"
+                and (
+                    parent_contract.get("fv_solution_member") != "attempt/case/system/fvSolution"
+                    or not re.fullmatch(r"[0-9a-f]{64}", fv_solution_sha256)
+                )
+            )
+        ):
+            raise ValueError(
+                "new parent contract lacks its exact profile inventory and checkpoint bindings"
+            )
+    if parent_contract is None:
+        if (
+            coverage.get("configured_horizon_reached") is not True
+            or coverage.get("requested_end_reached") is not True
+        ):
+            raise ValueError(
+                "parent ledger does not certify complete coverage through its endpoint"
+            )
+    elif (
+        coverage.get("status") != "requested_horizon_reached_exploratory_only"
+        or coverage.get("requested_target_reached") is not True
+        or parent_contract is None
+        or parent.get("interval", {}).get("step_count")
+        != PARENT_CONTRACT_PROFILES[parent_contract["variant"]]["step_count"]
     ):
-        raise ValueError("parent ledger does not certify complete coverage through its endpoint")
-    if not math.isclose(parent_end, 0.2, rel_tol=0.0, abs_tol=TIME_TOL_S):
-        raise ValueError("hash-bound parent ledger does not end at checkpoint t=0.2 s")
+        raise ValueError("parent ledger does not certify requested-target completion")
+    if not math.isclose(parent_end, expected_checkpoint_time_s, rel_tol=0.0, abs_tol=TIME_TOL_S):
+        raise ValueError("hash-bound parent ledger does not end at its checkpoint time")
     if not math.isclose(start_time_s, parent_end, rel_tol=0.0, abs_tol=TIME_TOL_S):
         raise ValueError("restart start time differs from the audited parent checkpoint")
     if not math.isfinite(parent_inventory) or parent_inventory < 0:
@@ -157,21 +277,35 @@ def _validate_parent(
     receipt_path = run_dir / "parent-checkpoint-receipt.json"
     receipt, raw = _read_json(receipt_path)
     expected = {
-        "archive_sha256": PARENT_ARCHIVE_SHA256,
-        "checkpoint_time_s": 0.2,
+        "archive_sha256": expected_archive_sha256,
+        "checkpoint_time_s": expected_checkpoint_time_s,
         "archive_status": "verified_crc_hash_and_member_list",
-        "selected_endpoint_member": PARENT_ENDPOINT_MEMBER,
+        "selected_endpoint_member": expected_endpoint_member,
     }
+    if parent_contract is not None:
+        expected["ledger_sha256"] = parent_contract["ledger_sha256"]
+        expected["parent_job_id"] = parent_contract["parent_job_id"]
+        expected["manifest_sha256"] = parent_contract["manifest_sha256"]
+        expected["terminal_sha256"] = parent_contract["terminal_sha256"]
+        if parent_contract["variant"] == "pressure-total-pcgdic":
+            expected["fv_solution_sha256"] = fv_solution_sha256
     for key, value in expected.items():
         actual = receipt.get(key)
         if key == "checkpoint_time_s":
             if not math.isclose(float(actual), value, rel_tol=0.0, abs_tol=TIME_TOL_S):
-                raise ValueError("parent checkpoint receipt time is not exactly 0.2 s")
+                raise ValueError("parent checkpoint receipt time differs from its contract")
         elif actual != value:
             raise ValueError(f"parent checkpoint receipt {key} does not match verified evidence")
     receipt_inventory = float(receipt.get("inventory_m3", math.nan))
     if not math.isclose(receipt_inventory, parent_inventory, rel_tol=0.0, abs_tol=INVENTORY_TOL_M3):
         raise ValueError("parent receipt inventory differs from hash-bound parent ledger")
+    if parent_contract is not None and not math.isclose(
+        receipt_inventory,
+        float(parent_contract["inventory_m3"]),
+        rel_tol=0.0,
+        abs_tol=INVENTORY_TOL_M3,
+    ):
+        raise ValueError("parent receipt inventory differs from the hash-bound dispatcher contract")
     receipt_binding = {
         "path": str(receipt_path),
         "sha256": _sha256(raw),
@@ -180,11 +314,14 @@ def _validate_parent(
         "inventory_m3": receipt_inventory,
         "archive_status": receipt["archive_status"],
         "selected_endpoint_member": receipt["selected_endpoint_member"],
+        "ledger_sha256": receipt.get("ledger_sha256"),
+        "parent_job_id": receipt.get("parent_job_id"),
     }
     parent_binding = {
         "summary_path": parent_path,
         "summary_sha256": parent_sha256,
         "checkpoint_time_s": parent_end,
+        "parent_job_id": receipt.get("parent_job_id"),
         "initial_inventory_m3": parent_inventory,
         "initial_inventory_kg": parent_inventory * density,
         "density_kg_m3": density,
@@ -193,6 +330,21 @@ def _validate_parent(
         "prior_residual_kg_context_only": integration.get("closure_residual_kg"),
         "cumulative_offsets_recounted": False,
     }
+    if parent_contract is not None:
+        parent_binding["initial_inventory_evidence"] = {
+            "source": (
+                f"parent exact {expected_checkpoint_time_s:g} native "
+                "volIntegrate(alpha.water) sample cross-checked with its ledger"
+            ),
+            "history_member": parent_contract["inventory_history_member"],
+            "history_sha256": parent_contract["inventory_history_sha256"],
+            "history_time_s": float(parent_contract["inventory_history_time_s"]),
+            "history_inventory_m3": float(parent_contract["inventory_history_m3"]),
+            "restart_checkpoint_alpha_water_sha256": checkpoint_fields["alpha.water"]["sha256"],
+            "restart_checkpoint_processor_mesh_sha256": {
+                name: processor_mesh[name]["sha256"] for name in PARENT_PROCESSOR_MESH_FILES
+            },
+        }
     return {"parent": parent_binding, "receipt": receipt_binding}, _sha256(raw)
 
 
@@ -340,6 +492,7 @@ def audit_restart(
     start_time_s: float,
     end_time_s: float,
     delta_t_s: float,
+    parent_contract: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Audit only the continuation interval, seeded by the parent's measured inventory."""
     run_dir = Path(run_dir)
@@ -355,9 +508,30 @@ def audit_restart(
         target_steps_float, target_steps, rel_tol=0.0, abs_tol=DT_TOL_S
     ):
         raise ValueError("requested restart interval is not an integer number of fixed steps")
+    if parent_contract is not None and (
+        parent_contract.get("schema_version") != 1
+        or not math.isclose(
+            float(parent_contract.get("checkpoint_time_s", math.nan)),
+            start_time_s,
+            rel_tol=0.0,
+            abs_tol=TIME_TOL_S,
+        )
+        or not re.fullmatch(r"[0-9a-f]{64}", str(parent_contract.get("ledger_sha256", "")))
+        or not re.fullmatch(r"[0-9a-f]{64}", str(parent_contract.get("archive_sha256", "")))
+    ):
+        raise ValueError(
+            "new parent checkpoint contract is incomplete or does not match restart start"
+        )
 
-    parent, parent_sha, parent_path = _parent_summary(parent_ledger)
-    parent_binding, _ = _validate_parent(run_dir, parent, parent_sha, parent_path, start_time_s)
+    expected_parent_ledger_sha = (
+        str(parent_contract["ledger_sha256"])
+        if parent_contract is not None
+        else PARENT_LEDGER_SHA256
+    )
+    parent, parent_sha, parent_path = _parent_summary(parent_ledger, expected_parent_ledger_sha)
+    parent_binding, _ = _validate_parent(
+        run_dir, parent, parent_sha, parent_path, start_time_s, parent_contract
+    )
     terminal = _validate_terminal(run_dir, start_time_s, end_time_s, delta_t_s)
     actual_end_time_s = float(terminal["solver_time_s"])
     actual_steps = int(terminal["actual_step_count"])
@@ -396,6 +570,7 @@ def audit_restart(
     parent_inventory_m3 = float(parent["integration"]["final_inventory_m3"])
     all_times: dict[str, list[float]] = {}
     selected: dict[str, dict[float, float]] = {}
+    checkpoint_inventory_sample: float | None = None
     for name, rows in histories.items():
         if any(time_s > actual_end_time_s + TIME_TOL_S for time_s, _ in rows):
             raise ValueError(f"{name} history contains samples after the terminal endpoint")
@@ -412,6 +587,8 @@ def audit_restart(
             raise ValueError(
                 "restart inventory at checkpoint disagrees with parent measured inventory"
             )
+        if name == "inventory" and at_checkpoint:
+            checkpoint_inventory_sample = at_checkpoint[0]
         later = [(instant, value) for instant, value in rows if instant > start_time_s + TIME_TOL_S]
         if len(later) != actual_steps:
             raise ValueError(
@@ -432,6 +609,14 @@ def audit_restart(
             value for instant, value in histories[name] if instant > start_time_s + TIME_TOL_S
         ]
         selected[name] = dict(zip(canonical_times, values_after_start, strict=True))
+    if parent_contract is not None:
+        evidence = parent_binding["parent"]["initial_inventory_evidence"]
+        evidence["child_start_inventory_sample_m3"] = checkpoint_inventory_sample
+        evidence["child_start_inventory_sample_status"] = (
+            "present_and_matches_parent_contract"
+            if checkpoint_inventory_sample is not None
+            else "absent; M0 inferred from the exact parent native history and identical hash-bound checkpoint alpha.water and mesh"
+        )
     intervals = [canonical_times[0] - start_time_s]
     intervals.extend(b - a for a, b in zip(canonical_times[:-1], canonical_times[1:], strict=True))
     if any(abs(interval - delta_t_s) > DT_TOL_S for interval in intervals):
@@ -550,7 +735,7 @@ def audit_restart(
             "interpretation": "A U-guard or diagnostic early-save stop is retained as its actual partial interval and is not labeled target completion.",
         },
         "integration": {
-            "scope": "New restart interval only: start from the hash-bound measured parent .2 s inventory; no parent cumulative source or escape is re-added.",
+            "scope": f"New restart interval only: start from the hash-bound measured parent {start_time_s:g} s inventory; no parent cumulative source or escape is re-added.",
             "method": "Right endpoint: each completed-step alphaPhi_ sample multiplied by the preceding fixed deltaT.",
             "density_kg_m3": density,
             "initial_inventory_kg": parent_binding["parent"]["initial_inventory_kg"],

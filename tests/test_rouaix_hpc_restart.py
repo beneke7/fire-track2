@@ -135,6 +135,67 @@ def test_pressure_total_sbatch_and_configuration_are_declared_without_submission
         ).validate()
 
 
+def test_pressure_pcgdic_variant_keeps_the_physics_and_declares_rolling_writes() -> None:
+    config = config_for_variant("pressure-total-pcgdic")
+    assert (config.start_time_s, config.end_time_s, config.delta_t_s) == (
+        0.2,
+        0.255,
+        0.0001,
+    )
+    assert config.write_interval_s == 0.005
+    assert config.wall_budget_s == 7200
+    assert round((config.end_time_s - config.start_time_s) / config.delta_t_s) == 550
+
+    script = (
+        Path(__file__).resolve().parents[1]
+        / "cases/e1_rouaix_hpc_restart/restart_pressure_pcgdic.sbatch"
+    ).read_text(encoding="utf-8")
+    assert "rouaix-pressure-pcgdic-restart-source-20261028/unpacked" in script
+    assert "rouaix-pressure-pcgdic-restart-20261028" in script
+    assert "#SBATCH --ntasks=120" in script
+    assert "#SBATCH --nodes=3" in script
+    assert "#SBATCH --mem=22G" in script
+    assert "#SBATCH --time=02:00:00" in script
+    assert "--variant pressure-total-pcgdic" in script
+
+
+def test_pressure_pcgdic_rewrite_changes_only_pressure_solver_and_checkpoint_retention(
+    tmp_path: Path,
+) -> None:
+    fv_solution = tmp_path / "fvSolution"
+    fv_solution.write_text(
+        "solvers\n{\n"
+        "    p_rgh\n    {\n        solver GAMG;\n        tolerance 1e-8;\n"
+        "        relTol 0.01;\n        smoother DICGaussSeidel;\n        maxIter 100;\n    }\n"
+        "    p_rghFinal { $p_rgh; relTol 0; }\n"
+        "    U { solver PBiCGStab; preconditioner DILU; tolerance 1e-8; relTol 0.1; }\n"
+        "}\nPIMPLE { nCorrectors 3; }\n",
+        encoding="ascii",
+    )
+    receipt = restart.rewrite_p_rgh_solver_to_pcg_dic(fv_solution)
+    updated = fv_solution.read_text(encoding="ascii")
+    assert receipt["solver"] == "PCG"
+    assert receipt["preconditioner"] == "DIC"
+    assert receipt["tolerance"] == "1e-8"
+    assert receipt["relTol"] == "0.01"
+    assert receipt["p_rgh_maxIter"] == 1000
+    assert "solver PCG;" in updated and "preconditioner DIC;" in updated
+    assert "smoother DICGaussSeidel;" not in updated
+    assert "maxIter 1000;" in updated
+    assert "p_rghFinal { $p_rgh; relTol 0; }" in updated
+    assert "U { solver PBiCGStab; preconditioner DILU; tolerance 1e-8; relTol 0.1; }" in updated
+
+    control = tmp_path / "controlDict"
+    control.write_text(
+        "writeInterval 0.005;\npurgeWrite 0;\nfunctions {\nwriteInterval 1;\n}\n",
+        encoding="ascii",
+    )
+    retention = restart.set_rolling_checkpoint_retention(control, retain_count=2)
+    assert retention["previous_purge_write"] == 0
+    assert retention["retained_checkpoint_count"] == 2
+    assert "purgeWrite 2;" in control.read_text(encoding="ascii")
+
+
 def test_pressure_dictionary_and_native_change_command_touch_only_declared_patches(
     tmp_path: Path,
 ) -> None:
@@ -310,6 +371,15 @@ def test_control_dict_changes_only_restart_window(tmp_path) -> None:
     assert "endTime 0.3;" in control
     assert "writeInterval 0.1;" in control
     assert "deltaT 0.0001;" in control
+
+    equivalent_path = tmp_path / "controlDict-equivalent-dt"
+    equivalent_path.write_text(
+        "startFrom startTime;\nstartTime 0;\nendTime 0.2;\n"
+        "deltaT 1e-4;\nadjustTimeStep no;\nwriteInterval 0.2;\n",
+        encoding="utf-8",
+    )
+    rewrite_control_dict(equivalent_path, config_for_variant("pressure-total-continuation"))
+    assert "deltaT 1e-4;" in equivalent_path.read_text(encoding="utf-8")
 
 
 def test_restart_monitor_counts_absolute_times_after_checkpoint() -> None:
@@ -574,11 +644,14 @@ def test_early_save_run_path_verifies_endpoint_and_records_partial_audit(
         (attempt / "seed-verification.json").write_text("{}\n", encoding="utf-8")
         (attempt / "manifest.json").write_text("{}\n", encoding="utf-8")
         endpoint = case / "processors120/0.200400000000"
-        endpoint.mkdir(parents=True)
-        for field in restart.REQUIRED_ENDPOINT_FIELDS:
-            (endpoint / field).write_text("native field\n", encoding="ascii")
-        (endpoint / "uniform").mkdir()
-        (endpoint / "uniform/time").write_text("checkpoint\n", encoding="ascii")
+        for field in restart.REQUIRED_CHECKPOINT_FIELDS:
+            path = endpoint / field
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("native field\n", encoding="ascii")
+        (endpoint / "uniform/time").write_text(
+            'value 0.2004;\nname "0.200400000000";\nindex 2004;\ndeltaT 0.0001;\ndeltaT0 0.0001;\n',
+            encoding="ascii",
+        )
         return case, {}
 
     def fake_supervise(**kwargs):
@@ -710,3 +783,293 @@ def test_seed_selection_requires_checkpoint_and_rejects_links() -> None:
     link.type = tarfile.SYMTYPE
     with pytest.raises(RestartError, match="link or special file"):
         select_seed_members([*members, link])
+
+
+def _completed_pressure_parent(
+    tmp_path: Path, variant: str = "pressure-total-p0-zero"
+) -> tuple[Path, str]:
+    spec = restart.PARENT_CONTRACT_SPECS[variant]
+    start_time_s = spec["start_time_s"]
+    target_time_s = spec["target_time_s"]
+    step_count = spec["step_count"]
+    inventory_m3 = 0.379166666663 if variant == "pressure-total-p0-zero" else 0.36123456789
+    write_interval_s = 0.05 if variant == "pressure-total-p0-zero" else 0.005
+    job_id = "14709991" if variant == "pressure-total-p0-zero" else "14709993"
+    run_dir = tmp_path / f"rouaix-restart-{variant}-{job_id}"
+    attempt = run_dir / "attempt"
+    case = attempt / "case"
+    checkpoint_time_dir = f"processors120/{target_time_s:.12f}"
+    endpoint = case / checkpoint_time_dir
+    for relative in (
+        "case-inputs.json",
+        "system/controlDict",
+        "system/decomposeParDict",
+        "system/fvSchemes",
+        "system/fvSolution",
+        "constant/transportProperties",
+        "constant/turbulenceProperties",
+        *(f"constant/polyMesh/{name}" for name in restart.MESH_FILES),
+        *(f"processors120/constant/polyMesh/{name}" for name in restart.MESH_FILES),
+    ):
+        path = case / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        content = (
+            '{"rank_count":120}\n'
+            if relative == "case-inputs.json"
+            else f"startFrom latestTime;\nstartTime {start_time_s};\n"
+            f"endTime {target_time_s};\ndeltaT 0.0001;\nadjustTimeStep no;\n"
+            f"writeInterval {write_interval_s};\npurgeWrite 2;\n"
+            if relative == "system/controlDict"
+            else "numberOfSubdomains 120;\n"
+            if relative == "system/decomposeParDict"
+            else (
+                "solvers\n{\n"
+                "    p_rgh { solver PCG; preconditioner DIC; tolerance 1e-8; "
+                "relTol 0.01; maxIter 1000; }\n"
+                "    p_rghFinal { $p_rgh; relTol 0; }\n}\n"
+                if relative == "system/fvSolution" and variant == "pressure-total-pcgdic"
+                else "fixture\n"
+            )
+        )
+        path.write_text(content, encoding="ascii")
+    for field in restart.REQUIRED_CHECKPOINT_FIELDS:
+        path = endpoint / field
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("fixture field\n", encoding="ascii")
+    (endpoint / "uniform/time").write_text(
+        f'value {target_time_s};\nname "{target_time_s:.12f}";\n'
+        f"index {round(target_time_s / 0.0001)};\ndeltaT 0.0001;\ndeltaT0 0.0001;\n",
+        encoding="ascii",
+    )
+    patch_text = "\n".join(
+        f"{patch}\n{{\ntype prghTotalPressure;\np0 uniform 0;\nrho rho;\n"
+        "U U;\nphi phi;\nvalue uniform 0;\n}"
+        for patch in restart.PRESSURE_TOTAL_PATCHES
+    )
+    (endpoint / "p_rgh").write_text(
+        "".join(
+            f"// processor{rank}\n1\n(\nboundaryField\n{{\n{patch_text}\n}}\n)\n"
+            for rank in range(restart.EXPECTED_RANKS)
+        ),
+        encoding="ascii",
+    )
+    manifest = {
+        "case_id": spec["case_id"],
+        "rank_count": 120,
+        "start_time_s": start_time_s,
+        "horizon_s": target_time_s,
+        "delta_t_s": 0.0001,
+        "write_interval_s": write_interval_s,
+        "pressure_total_p0_zero_sensitivity": {"p0_gauge_pa": 0.0},
+    }
+    if variant == "pressure-total-pcgdic":
+        manifest["pressure_linear_solver_sensitivity"] = {
+            "solver": "PCG",
+            "preconditioner": "DIC",
+            "p_rgh_maxIter": 1000,
+            "tolerance": 1e-8,
+            "relTol": 0.01,
+            "p_rghFinal": "inherits PCG/DIC with relTol 0",
+        }
+    restart.write_json(attempt / "manifest.json", manifest)
+    terminal = {
+        "state": "terminal",
+        "solver_exit_code": 0,
+        "solver_end_marker": True,
+        "pause_observed": False,
+        "stop_reason": None,
+        "solver_time_s": target_time_s,
+        "target_time_s": target_time_s,
+        "requested_start_time_s": start_time_s,
+        "solver_time_steps_recorded": step_count,
+    }
+    restart.write_json(case / "terminal-status.json", terminal)
+    history_path = case / "postProcessing/waterInventory/0/volFieldValue.dat"
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+    history_path.write_text(
+        f"# Time volIntegrate(alpha.water)\n{start_time_s} 0.2508975771509\n"
+        f"{target_time_s} {inventory_m3}\n",
+        encoding="ascii",
+    )
+    ledger = {
+        "coverage": {
+            "status": "requested_horizon_reached_exploratory_only",
+            "requested_target_reached": True,
+            "actual_end_time_s": target_time_s,
+        },
+        "interval": {"step_count": step_count},
+        "integration": {"density_kg_m3": 997.6, "final_inventory_m3": inventory_m3},
+        "input_sources": {
+            "native_histories": {
+                "water_inventory": {
+                    "path": str(history_path),
+                    "sha256": restart.sha256_file(history_path),
+                    "header": "Time volIntegrate(alpha.water)",
+                }
+            }
+        },
+    }
+    restart.write_json(attempt / "ledger/summary.json", ledger)
+    archive, archive_sha, member_count, member_sizes = pilot.pack_attempt(attempt, run_dir)
+    state = {
+        "status": "solver_complete_exploratory",
+        "job_id": job_id,
+        "case_id": spec["case_id"],
+        "variant": variant,
+        "solver_exit_code": 0,
+        "solver_end_marker": True,
+        "solver_time_steps_recorded": step_count,
+        "start_time_s": start_time_s,
+        "target_time_s": target_time_s,
+        "delta_t_s": 0.0001,
+        "solver_time_s": target_time_s,
+        "stop_reason": None,
+        "pause_observed": False,
+        "solver_max_u_m_s": 114.2,
+        "ledger_status": "written_from_hash_bound_parent_checkpoint",
+        "attempt_archive_status": "verified_crc_hash_and_member_list",
+        "result_archive": str(archive),
+        "result_archive_sha256": archive_sha,
+        "result_archive_members": member_count,
+        "result_archive_member_sizes": member_sizes,
+    }
+    if variant == "pressure-total-pcgdic":
+        state["solver_convergence"] = {"all_converged": True}
+    restart.write_json(run_dir / "run-state.json", state)
+    return run_dir, job_id
+
+
+def test_dynamic_parent_contract_accepts_verified_030_checkpoint_and_rejects_mutations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("SLURM_JOB_ID", "14709992")
+    run_dir, job_id = _completed_pressure_parent(tmp_path)
+    contract = restart.verify_completed_parent(run_dir, job_id)
+
+    assert restart.validate_parent_contract(contract, expected_time_s=0.3) is contract
+    assert set(contract["checkpoint_fields"]) == set(restart.REQUIRED_CHECKPOINT_FIELDS)
+    assert set(restart.MESH_FILES).issubset(contract["processor_mesh"])
+    assert (
+        restart.verify_parent_contract_archive(contract)["ledger"]["coverage"][
+            "requested_target_reached"
+        ]
+        is True
+    )
+
+    attempt = tmp_path / "child-attempt"
+    _case, child_manifest = restart.prepare_case(
+        attempt, config_for_variant("pressure-total-continuation"), contract
+    )
+    assert child_manifest["parent_checkpoint_inventory_m3"] == pytest.approx(0.379166666663)
+    assert child_manifest["parent_checkpoint_inventory_m3"] != restart.PARENT_INVENTORY_M3
+
+    incomplete = dict(contract)
+    incomplete.pop("ledger_sha256")
+    with pytest.raises(RestartError, match="lacks"):
+        restart.validate_parent_contract(incomplete)
+
+    wrong_time = dict(contract, checkpoint_time_s=0.3001)
+    with pytest.raises(RestartError, match="exact 0.3 s"):
+        restart.validate_parent_contract(wrong_time)
+
+    wrong_hash = dict(contract, archive_sha256="f" * 64)
+    with pytest.raises(RestartError, match="run-state"):
+        restart.verify_parent_contract_archive(wrong_hash)
+
+    wrong_job = dict(contract, parent_job_id="14709992")
+    with pytest.raises(RestartError, match="run-state"):
+        restart.verify_parent_contract_archive(wrong_job)
+
+    wrong_history = dict(contract, inventory_history_sha256="f" * 64)
+    with pytest.raises(RestartError, match="hash-bound parent run-state|member hash"):
+        restart.verify_parent_contract_archive(wrong_history)
+
+    wrong_inventory = dict(contract, inventory_m3=contract["inventory_m3"] + 0.01)
+    with pytest.raises(RestartError, match="inventory"):
+        restart.verify_parent_contract_archive(wrong_inventory)
+
+
+def test_pcgdic_parent_contract_prepares_only_the_255_to_300_inherited_policy_child(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("SLURM_JOB_ID", "14709994")
+    run_dir, job_id = _completed_pressure_parent(tmp_path, "pressure-total-pcgdic")
+    contract = restart.verify_completed_parent(run_dir, job_id)
+
+    assert contract["schema_version"] == 1
+    assert contract["variant"] == "pressure-total-pcgdic"
+    assert contract["parent_start_time_s"] == pytest.approx(0.2)
+    assert contract["parent_target_time_s"] == pytest.approx(0.255)
+    assert contract["checkpoint_time_s"] == pytest.approx(0.255)
+    assert contract["inventory_history_time_s"] == pytest.approx(0.255)
+    assert contract["step_count"] == 550
+    assert contract["fv_solution_member"] == "attempt/case/system/fvSolution"
+    assert contract["fv_solution_sha256"] == restart.sha256_file(
+        run_dir / "attempt/case/system/fvSolution"
+    )
+    assert restart.validate_parent_contract(contract, expected_time_s=0.255) is contract
+    verified = restart.verify_parent_contract_archive(contract)
+    assert verified["terminal"]["solver_time_s"] == pytest.approx(0.255)
+
+    attempt = tmp_path / "pcgdic-child-attempt"
+    case, manifest = restart.prepare_case(
+        attempt, config_for_variant("pressure-pcgdic-continuation"), contract
+    )
+    assert manifest["start_time_s"] == pytest.approx(0.255)
+    assert manifest["horizon_s"] == pytest.approx(0.3)
+    assert manifest["parent_checkpoint_inventory_m3"] == pytest.approx(0.36123456789)
+    assert manifest["parent_checkpoint_inventory_m3"] != restart.PARENT_INVENTORY_M3
+    assert manifest["numerical_variant"] == "inherited-pcg-dic"
+    assert (
+        manifest["pressure_linear_solver_inherited"]["fv_solution_sha256"]
+        == contract["fv_solution_sha256"]
+    )
+    fv_solution = case / "system/fvSolution"
+    assert restart.sha256_file(fv_solution) == contract["fv_solution_sha256"]
+    assert fv_solution.stat().st_mode & 0o222 == 0
+    control = (case / "system/controlDict").read_text(encoding="ascii")
+    assert "startTime 0.255;" in control
+    assert "endTime 0.3;" in control
+    assert "writeInterval 0.005;" in control
+    assert "purgeWrite 2;" in control
+    assert not (case / "system/changeDictionaryDict").exists()
+
+    altered_inventory_time = dict(contract, inventory_history_time_s=0.3)
+    with pytest.raises(RestartError, match="inventory or water density"):
+        restart.validate_parent_contract(altered_inventory_time)
+    altered_solver = dict(contract, fv_solution_sha256="f" * 64)
+    with pytest.raises(RestartError, match="member hash|solver dictionary"):
+        restart.verify_parent_contract_archive(altered_solver)
+
+    state_path = Path(contract["run_state_path"])
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["solver_convergence"] = {"all_converged": False}
+    restart.write_json(state_path, state)
+    wrong_convergence = dict(contract, run_state_sha256=restart.sha256_file(state_path))
+    with pytest.raises(RestartError, match="lacks converged pressure solves"):
+        restart.verify_parent_contract_archive(wrong_convergence)
+
+
+def test_legacy_seed_contract_keeps_the_original_hash_gate(tmp_path: Path) -> None:
+    archive = tmp_path / "wrong-parent.tar.gz"
+    archive.write_bytes(b"not the frozen .2 parent")
+    with pytest.raises(RestartError, match="SHA-256 mismatch"):
+        restart.extract_seed_archive(archive, tmp_path / "attempt")
+
+
+def test_pressure_total_continuation_config_is_frozen_at_030_to_050() -> None:
+    config = config_for_variant("pressure-total-continuation")
+    assert (config.start_time_s, config.end_time_s, config.delta_t_s) == (0.3, 0.5, 0.0001)
+    assert config.write_interval_s == 0.05
+    assert config.wall_budget_s == 7200
+    assert round((config.end_time_s - config.start_time_s) / config.delta_t_s) == 2000
+
+    pcgdic = config_for_variant("pressure-pcgdic-continuation")
+    assert (pcgdic.start_time_s, pcgdic.end_time_s, pcgdic.delta_t_s) == (
+        0.255,
+        0.3,
+        0.0001,
+    )
+    assert pcgdic.write_interval_s == 0.005
+    assert pcgdic.wall_budget_s == 7200
+    assert round((pcgdic.end_time_s - pcgdic.start_time_s) / pcgdic.delta_t_s) == 450

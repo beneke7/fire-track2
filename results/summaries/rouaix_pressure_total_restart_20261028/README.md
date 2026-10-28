@@ -40,14 +40,23 @@ node), and the existing 1000 m/s guard are retained. The requested horizon is
   `/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499`.
 - After-any audit: job `14702500`, released with dependency
   `afterany:14702499`; it runs the existing frozen HPC finished-run auditor.
-- At 2026-10-28 15:28:12 UTC, the solver was `RUNNING` at approximately
-  0.2078 s, with latest max speed 114.13 m/s and minimum observed free project
-  space 2.05 TB. Earlier samples show bulk Courant max about 1.24 and interface
-  Courant max below 0.87. No guard or failure has been recorded. The audit is
-  pending on its dependency.
+- Solver **FAILED 1:0**, ending at 2026-10-28 15:51:46 UTC after 28m46s.
+  It completed 495 steps through 0.2495 s, then failed during the attempted
+  0.2496 s U solve. At 0.2494 s max speed was 107.34 m/s; during 0.2495 s
+  pressure GAMG correctors diverged to 3.45e19 and 8.65e22 residuals before
+  the catastrophic velocity growth. No 0.25/0.30 s field, End or new ledger
+  was written. The guard signal was acknowledged but the FPE preempted saving.
+- Auditor **14702500 COMPLETED 0:0**, with verified compact failure capture.
+  The 110-member full attempt archive remains on Komondor (1,739,238,047 bytes),
+  SHA-256 `959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029`.
+- [Failure inspection and raw logs](live-14702499/failure-20261028T155146Z/)
+  distinguish completed 0.2495 s diagnostics from the attempted 0.2496 s step.
+  This parent cannot qualify for the unsubmitted 0.30→0.50 s continuation.
+  The next matched diagnostic changes the pressure linear solver to PCG/DIC;
+  it is recorded separately and does not overwrite this attempt.
 - Held/released Slurm readbacks and the captured pending/start status are in
   this directory. `gate-manifest.json` preserves the declared input and
   eligibility evidence; `submission-record.json` captures the released jobs.
 
-The current output is an in-progress exploratory sensitivity. No conclusion
-about whether total pressure is more physically accurate is established.
+This failed exploratory sensitivity does not establish fine-grid stability or
+that total pressure is more physically accurate.

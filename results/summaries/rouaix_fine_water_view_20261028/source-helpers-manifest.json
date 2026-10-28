@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:14:31.938080+00:00",
+  "archive": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/source-helpers.tar.gz",
+    "sha256": "597bc6ebf971b98daf603be7a5137b8f2d1f1d6e5e296ab3456664bc0fab085a",
+    "bytes": 14129
+  },
+  "previous_archive_sha256": "0ea389552ad8f78bad97c151516639d905bd63f0926132b6a0333e8baa7a4db2",
+  "update_summary": "Added the static failure-hotspot geometry helper and retained the final zoom title in the reproducible helper capsule.",
+  "creation_command": "env COPYFILE_DISABLE=1 tar -czf results/summaries/rouaix_fine_water_view_20261028/source-helpers.tar.gz -C results/runs/rouaix-fine-water-view-20261028 map_collated_alpha.py extract_native_cell_geometry.py render_fine_water_view.py inspect_failure_cells.py",
+  "members": [
+    {
+      "archive_path": "map_collated_alpha.py",
+      "original_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/map_collated_alpha.py",
+      "sha256": "0aa4c639af98e708c5a271f8871db306ffadc3328b62aa4ff36518acc1a7f4ed",
+      "bytes": 8785
+    },
+    {
+      "archive_path": "extract_native_cell_geometry.py",
+      "original_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/extract_native_cell_geometry.py",
+      "sha256": "25f349dcdcbb38ac3f8b2771528fca221e28df5f285526a398a3132d3e921393",
+      "bytes": 8214
+    },
+    {
+      "archive_path": "render_fine_water_view.py",
+      "original_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/render_fine_water_view.py",
+      "sha256": "da7004857e7077b44ac5aa907f8f3ec4c4213ce0c00932adb4518ad918c82586",
+      "bytes": 24386
+    },
+    {
+      "archive_path": "inspect_failure_cells.py",
+      "original_path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/inspect_failure_cells.py",
+      "sha256": "6bcad54c0dd78804735d1218b42d26afe7c270b5604622bb68d1336c416422fe",
+      "bytes": 9243
+    }
+  ],
+  "excluded": [
+    "mesh files",
+    "raw or mapped fields",
+    "solver outputs"
+  ],
+  "verification": [
+    "archive member bytes match the four owned helper sources",
+    "ruff check and format check passed",
+    "Python compile passed",
+    "synthetic threshold/surface/CPU projection/PVSM checks passed",
+    "summary and relocated PVSM states loaded both VTPs successfully",
+    "static hotspot geometry mapped through the exact 120-rank cell map without reading failed-time fields"
+  ]
+}

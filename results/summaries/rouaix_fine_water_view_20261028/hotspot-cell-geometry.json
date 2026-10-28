@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:12:55.217078+00:00",
+  "purpose": "static geometry only for three reported processor-local failure hotspot addresses",
+  "job_id": "14702499",
+  "failed_solver_time_s": 0.2496,
+  "no_failed_time_fields_read": true,
+  "hotspot_address_source": "max_U address/location from saved failure-inspection receipt; two p_rgh addresses from the primary investigation's follow-up instruction",
+  "mesh": {
+    "native_cells": 10099265,
+    "source_mesh_case": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core",
+    "polyMesh_hashes_match_run_input": true,
+    "polyMesh_component_sha256": {
+      "points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+      "faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+      "owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+      "neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+      "boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+    },
+    "reader_cell_order_check": {
+      "cells": 10099265,
+      "max_abs_centre_difference_m": 0.0,
+      "max_abs_volume_difference_m3": 0.0,
+      "volume_sum_m3": 2300.0000008438396
+    }
+  },
+  "cellProcAddressing": {
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/source-cellProcAddressing",
+    "sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6",
+    "ranks": 120,
+    "exact_global_cell_cover": true
+  },
+  "native_concaveCells_set": {
+    "path": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only/prelayer-immutable/polyMesh/sets/concaveCells",
+    "sha256": "9bf7323f4438d0bcde9999e6c9332a2d0d0a8e52bce614ab5a49f33710190299",
+    "cell_count": 114008,
+    "payload_encoding": "ASCII label payload despite FoamFile format binary header",
+    "geometry_identity_check": "five source polyMesh hashes match the active fine mesh",
+    "interpretation": "native planar warning resolved by independent signed-plane interpretation; no genuine concavity identified",
+    "independent_review": {
+      "flagged_cells": 114008,
+      "classification": "planar subdivisions",
+      "maximum_absolute_plane_excursion_m": 6.224e-15,
+      "positive_out_of_plane_vertex_excursions": 0,
+      "report": "results/runs/rouaix-mesh-convexity-20261025/finecast-binary-review.md",
+      "machine_audit_json": "results/runs/rouaix-mesh-convexity-20261025/finecast-binary-plane-audit.json",
+      "machine_audit_json_sha256": "b8194ee0f417483c54a284d29efc40d33e272fd64c04db179ead20bb712b1ca1",
+      "audit_script_sha256": "c5e73491e2438dfd3941181fab29a1400aa27cf7de4447f96e2b7aa2e8e5d1a8",
+      "scope": "all native flagged cells; not a second all-cell convexity check"
+    }
+  },
+  "hotspots": {
+    "max_U": {
+      "processor": 99,
+      "processor_local_cell_id_zero_based": 84531,
+      "native_global_cell_id": 4998818,
+      "vtk_cell_type_id": 12,
+      "vtk_cell_type": "vtkHexahedron",
+      "native_cell_centre_m": [
+        1.8924580812454224,
+        -2.717735528945923,
+        0.5575785487890244
+      ],
+      "native_cell_volume_m3": 2.5769941840752306e-06,
+      "native_cell_bounds_m": {
+        "x": [
+          1.8854748010635376,
+          1.8994413614273071
+        ],
+        "y": [
+          -2.724769115447998,
+          -2.7106990814208984
+        ],
+        "z": [
+          0.5506489276885986,
+          0.5645158290863037
+        ]
+      },
+      "face_count": 6,
+      "point_count": 8,
+      "in_native_concaveCells_set": false,
+      "claimed_completed_log_location_m": [
+        1.89245810056,
+        -2.7177369562,
+        0.557578179004
+      ],
+      "centre_minus_claimed_location_m": [
+        -1.9314577714979464e-08,
+        1.4272540771465003e-06,
+        3.6978502437889915e-07
+      ],
+      "centre_claim_difference_norm_m": 1.4745060928658516e-06
+    },
+    "p_rgh_extremum_A": {
+      "processor": 97,
+      "processor_local_cell_id_zero_based": 6006,
+      "native_global_cell_id": 4478241,
+      "vtk_cell_type_id": 42,
+      "vtk_cell_type": "vtkPolyhedron",
+      "native_cell_centre_m": [
+        1.8715083597106041,
+        -2.710704793167151,
+        0.5899751795305206
+      ],
+      "native_cell_volume_m3": 2.060750169952837e-05,
+      "native_cell_bounds_m": {
+        "x": [
+          1.8575419187545776,
+          1.8854748010635376
+        ],
+        "y": [
+          -2.724769115447998,
+          -2.696629285812378
+        ],
+        "z": [
+          0.5760923624038696,
+          0.6038886308670044
+        ]
+      },
+      "face_count": 6,
+      "point_count": 11,
+      "in_native_concaveCells_set": false,
+      "claimed_log_location_m_available": false
+    },
+    "p_rgh_extremum_B": {
+      "processor": 99,
+      "processor_local_cell_id_zero_based": 34458,
+      "native_global_cell_id": 4478226,
+      "vtk_cell_type_id": 42,
+      "vtk_cell_type": "vtkPolyhedron",
+      "native_cell_centre_m": [
+        1.8994413020225995,
+        -2.738833470606836,
+        0.5652737374409845
+      ],
+      "native_cell_volume_m3": 2.0644402171375406e-05,
+      "native_cell_bounds_m": {
+        "x": [
+          1.8854748010635376,
+          1.913407802581787
+        ],
+        "y": [
+          -2.752908945083618,
+          -2.724769115447998
+        ],
+        "z": [
+          0.5513915419578552,
+          0.5791877508163452
+        ]
+      },
+      "face_count": 15,
+      "point_count": 20,
+      "in_native_concaveCells_set": true,
+      "claimed_log_location_m_available": false
+    }
+  },
+  "interpretation": "These are mesh identities and static geometric properties only. They do not provide the failed-time phase, pressure, or velocity fields, and concaveCells membership is the historical checkMesh flag set rather than proof of genuine cell concavity."
+}

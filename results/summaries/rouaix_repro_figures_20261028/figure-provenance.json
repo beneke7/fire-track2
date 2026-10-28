@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:41:59.296025+00:00",
+  "purpose": "polished CPU-rendered views of one genuine computed Rouaix checkpoint",
+  "state": {
+    "field_time_s": 0.215,
+    "checkpoint_role": "saved intermediate checkpoint from an active PCG-DIC continuation",
+    "job_id": 14705632,
+    "run_case_id": "rouaix-restart-pressure-total-pcgdic-0255",
+    "not_terminal_or_validated": true,
+    "native_cells": 10099265,
+    "solver_log_water_volume_m3": 0.269713860359,
+    "mapped_field_water_volume_m3": 0.2697138634278991,
+    "water_volume_difference_m3": 3.0688990793059645e-09,
+    "water_volume_relative_difference": 1.1378351395145714e-08,
+    "alpha_raw_min": 0.0,
+    "alpha_raw_max": 1.0,
+    "alpha_values_clipped": false,
+    "water_centroid_m": [
+      0.16493388855707394,
+      -1.1325706579435553,
+      0.00014820400522227176
+    ],
+    "threshold_metrics": {
+      "0.01": {
+        "native_cell_count": 130689,
+        "alpha_weighted_water_volume_m3": 0.26947652421663454,
+        "cell_centre_bounds_m": {
+          "x": [
+            -0.18854748457670212,
+            12.304469585418701
+          ],
+          "y": [
+            -2.745866298675537,
+            -0.007029033033177257
+          ],
+          "z": [
+            -1.2501520216464996,
+            1.2244650423526764
+          ]
+        }
+      },
+      "0.1": {
+        "native_cell_count": 123418,
+        "alpha_weighted_water_volume_m3": 0.2677662194600647,
+        "cell_centre_bounds_m": {
+          "x": [
+            -0.18854748457670212,
+            3.75
+          ],
+          "y": [
+            -2.7318026423454285,
+            -0.007029033033177257
+          ],
+          "z": [
+            -1.2029763460159302,
+            1.176446944475174
+          ]
+        }
+      }
+    },
+    "remote_checkpoint": {
+      "path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028/rouaix-restart-pressure-total-pcgdic-14705632/attempt/case/processors120/0.215000000000/alpha.water",
+      "bytes": 93327552,
+      "sha256": "687a5e7f395825c85ffdc6fc6a919fbd99c0b7b8f7fee7ec526e70dc9f53c56a",
+      "remote_pre_post_stat_identical": true,
+      "remote_pre_post_size_mtime_inode": [
+        93327552,
+        1793204554,
+        144123862232147258
+      ],
+      "local_sha256_matches_remote": true,
+      "exact_solver_log_volume_row": "volIntegrate(region0) of alpha.water = 0.269713860359 at Time = 0.215000000000",
+      "run_manifest_sha256": "020cd8f8056a45594856d25542519f71af7588fd4d87b6a481ac29907ba4ad71",
+      "case_inputs_sha256": "0a24f1eeb69c0ae84bef651437b6a91e870c317dca8045dedfcee54cfb12bb00",
+      "native_source_evidence_sha256": "2e92d4f8374ca04471f3f4abe44b3cfdc5831d29db4e15921f88c7caabe7738e",
+      "solver_binary_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+      "solver": "interIsoFoam v2512; PCG/DIC p_rgh solver sensitivity"
+    }
+  },
+  "mesh_and_mapping": {
+    "native_mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "cellProcAddressing_sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6",
+    "cell_map_exact_global_cover": true,
+    "native_cell_order_check": {
+      "cells": 10099265,
+      "max_abs_centre_difference_m": 0.0,
+      "max_abs_volume_difference_m3": 0.0,
+      "volume_sum_m3": 2300.0000008438396
+    },
+    "source_mesh_path": "/Users/bene/fire-track2/results/runs/rouaix-matched-mesh-mac-20261025/final-cast-only-transfer-core",
+    "coordinate_frame": {
+      "x": "crossflow",
+      "y": "upward",
+      "z": "lateral"
+    }
+  },
+  "surface_vtp": [
+    {
+      "threshold": 0.01,
+      "threshold_semantics": "native cell alpha.water >= threshold; raw values not clipped",
+      "selected_cells": 130689,
+      "surface_points": 59201,
+      "surface_polygons": 57699,
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/surfaces-t0215/alpha-ge-0.01-t0.2150.vtp",
+      "sha256": "09936ebf9343a81b890bbac0533747bc0f066e88a5bb71586dc10b816265aca1",
+      "bytes": 1417135
+    },
+    {
+      "threshold": 0.1,
+      "threshold_semantics": "native cell alpha.water >= threshold; raw values not clipped",
+      "selected_cells": 123418,
+      "surface_points": 54142,
+      "surface_polygons": 52983,
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/surfaces-t0215/alpha-ge-0.1-t0.2150.vtp",
+      "sha256": "97a65785f0e8b6b8431cd6057f57bf9f38570b3ead4ff06643164046363572da",
+      "bytes": 1303549
+    }
+  ],
+  "interpolated_contour_vtp": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/surfaces-t0215/alpha-interpolated-contour-0.01-t0.2150.vtp",
+    "sha256": "eeaa654940057b0fc3e6155d04eb925b7eb31e6a974074a7a57e5fccc8dfc880",
+    "bytes": 3420777,
+    "source": "mapped full-grid alpha.water cell data on exact native volume mesh",
+    "interpolation": "vtkCellDataToPointData cell-to-point averaging; no clipping",
+    "contour_filter": "vtkContourFilter at alpha.water = 0.01",
+    "point_alpha_min_before_contour": 0.0,
+    "point_alpha_max_before_contour": 1.0,
+    "iso_surface_points": 73489,
+    "iso_surface_polygons": 121971,
+    "point_alpha_preserved": true,
+    "normal_calculation": "vtkPolyDataNormals point normals; geometry points unchanged",
+    "geometry_smoothing_or_decimation": false
+  },
+  "figures": [
+    {
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/01-water-plume-oblique-t0215.png",
+      "sha256": "96fbe9b282e4318127c4adab975ce9b9f3f5b348d75ac69910ca55d9eacb2e21",
+      "bytes": 636656,
+      "surface_polygons": 57699,
+      "alpha_min": 0.010000476099820453,
+      "alpha_max": 1.0,
+      "world_crop_bounds_m": {
+        "x": [
+          -0.4,
+          4.2
+        ],
+        "y": [
+          -2.9,
+          0.35
+        ],
+        "z": [
+          -1.3,
+          1.3
+        ]
+      },
+      "camera_projection": "orthographic; 3D vertices projected to an orthonormal screen basis",
+      "facets_visible": false,
+      "nozzle_origin_marker": true,
+      "fixed_surface_material_with_normal_lighting": false,
+      "gpu_or_opengl_used": false
+    },
+    {
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/02-cell-facets-closeup-t0215.png",
+      "sha256": "ef0f971441df94a03468a97d5e8cad43ab58b2a93d1b1fcbaa24f326cced1580",
+      "bytes": 872685,
+      "surface_polygons": 57699,
+      "alpha_min": 0.010000476099820453,
+      "alpha_max": 1.0,
+      "world_crop_bounds_m": {
+        "x": [
+          0.6,
+          3.9
+        ],
+        "y": [
+          -2.9,
+          -1.15
+        ],
+        "z": [
+          -1.25,
+          1.25
+        ]
+      },
+      "camera_projection": "orthographic; 3D vertices projected to an orthonormal screen basis",
+      "facets_visible": true,
+      "nozzle_origin_marker": false,
+      "fixed_surface_material_with_normal_lighting": false,
+      "gpu_or_opengl_used": false
+    },
+    {
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/03-native-cell-cut-z0-t0215.png",
+      "sha256": "c1f47ac88cbdf0642b66d6a8f42a7591b9c158fd6099f7848b1220c54fa8eb17",
+      "bytes": 256530,
+      "plane_origin_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "plane_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "threshold": 0.01,
+      "threshold_semantics": "native volume cells with alpha.water >= 0.01",
+      "selected_native_cells": 130689,
+      "cut_polygons": 3181,
+      "alpha_min": 0.010668508846354674,
+      "alpha_max": 1.0,
+      "geometry_method": "vtkCutter on thresholded native volume cells; cell alpha values retained",
+      "gpu_or_opengl_used": false
+    },
+    {
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028/04-interpolated-isosurface-t0215.png",
+      "sha256": "ccfe247b7c15745a814633466e1c6fd21ac0cc1cb33531e6e9df4dd36ecb04d8",
+      "bytes": 794074,
+      "surface_polygons": 121971,
+      "alpha_min": 0.009999999999999988,
+      "alpha_max": 0.010000000000000031,
+      "world_crop_bounds_m": {
+        "x": [
+          -0.4,
+          4.2
+        ],
+        "y": [
+          -2.9,
+          0.35
+        ],
+        "z": [
+          -1.3,
+          1.3
+        ]
+      },
+      "camera_projection": "orthographic; 3D vertices projected to an orthonormal screen basis",
+      "facets_visible": false,
+      "nozzle_origin_marker": true,
+      "fixed_surface_material_with_normal_lighting": true,
+      "gpu_or_opengl_used": false
+    }
+  ],
+  "rendering": {
+    "method": "Matplotlib Agg orthographic polygon projection and exact native-cell cut plane",
+    "paraview_render_called": false,
+    "opengl_or_gpu_used": false,
+    "source_thresholds": "native volume cells alpha.water >= 0.01 and >= 0.1",
+    "color_scale": "logarithmic from native cell alpha.water 0.01 to 1",
+    "surface_smoothing_or_decimation": false,
+    "alternative_contour": "vtkCellDataToPointData cell-to-point averaging then vtkContourFilter at alpha.water=0.01; visualization only",
+    "peak_rss_gib": 2.9444580078125,
+    "renderer_sha256": "3f81fe907bd85132330a526829e1e7fbd0b829b46dac927d9797dd65953c6846",
+    "launcher": "scripts/run_local.py --threads 4 --timeout 1200",
+    "observed_wall_time_s_approx": 20
+  },
+  "source_archives": {
+    "checkpoint_inputs": {
+      "path": "results/runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-t0215.tar.gz",
+      "bytes": 95945812,
+      "sha256": "f94a1bc96d477149659302cb45f0b6858463c1c667ea0dc4ae0d2e9c4f288aa7",
+      "manifest_path": "results/summaries/rouaix_repro_figures_20261028/checkpoint-inputs-manifest.json",
+      "manifest_sha256": "13093ac8f5251c9e1db292e1abce1fd23af1b6dc94c4e7fb14ea701251efeddd",
+      "source_receipt_sha256": "42f0cea42013543abf5894754616f98e98993094fd7d59f01b9204603c0ccea1",
+      "retained_locally_in_ignored_run_staging": true
+    },
+    "helper_source": {
+      "path": "results/summaries/rouaix_repro_figures_20261028/source-helpers.tar.gz",
+      "bytes": 19736,
+      "sha256": "2a93a15e8944ca9a42d281043b450a6d8c5b83767212282e80647ee4d032f794",
+      "manifest_sha256": "8429ae0eb4ae44e7b65e83c2476d5468e8eacc902b61b6ddd4782b29ea816d81"
+    },
+    "retention_cleanup": {
+      "record_path": "results/runs/rouaix-repro-figures-20261028/staging/source-stage-cleanup.json",
+      "record_sha256": "4683fdec1cceb89453e9a3fb7784c0caef3e2d4153dbbccc0fc12d53a7d25b36",
+      "raw_alpha_cpa_archived_mapped_npz_regenerable": true
+    },
+    "mapped_alpha_npz_retained": false
+  }
+}

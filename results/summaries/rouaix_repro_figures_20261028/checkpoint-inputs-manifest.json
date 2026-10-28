@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:40:41.365892+00:00",
+  "archive_path": "results/runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-t0215.tar.gz",
+  "archive_ignored_local_retention": true,
+  "archive_bytes": 95945812,
+  "archive_sha256": "f94a1bc96d477149659302cb45f0b6858463c1c667ea0dc4ae0d2e9c4f288aa7",
+  "previous_archive_sha256": "5fe61a202899b1d4f58826dec6497c51ffac7d78b1bdc4fe4c727c6619967ea4",
+  "reason_not_in_public_summary": "The lossless source bundle exceeds the requested ~25 MB summary threshold; it is retained in ignored run staging with this public location/hash receipt.",
+  "creation_command": "env COPYFILE_DISABLE=1 tar -czf results/runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-t0215.tar.gz -C /Users/bene/fire-track2/results/runs/rouaix-repro-figures-20261028/staging pcg-alpha.water-t0215 pcg-cellProcAddressing -C /Users/bene/fire-track2/results/summaries/rouaix_repro_figures_20261028 checkpoint-source-receipt.json",
+  "members": [
+    {
+      "archive_path": "pcg-alpha.water-t0215",
+      "bytes": 93327552,
+      "sha256": "687a5e7f395825c85ffdc6fc6a919fbd99c0b7b8f7fee7ec526e70dc9f53c56a"
+    },
+    {
+      "archive_path": "pcg-cellProcAddressing",
+      "bytes": 40402372,
+      "sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6"
+    },
+    {
+      "archive_path": "checkpoint-source-receipt.json",
+      "bytes": 3978,
+      "sha256": "42f0cea42013543abf5894754616f98e98993094fd7d59f01b9204603c0ccea1"
+    }
+  ],
+  "verification": [
+    "exact archive member set verified",
+    "all member SHA-256 values match their source receipts",
+    "alpha hash matches remote pre/post readback",
+    "CPA hash matches the exact global cell map"
+  ],
+  "failed_attempt_record": "results/runs/rouaix-repro-figures-20261028/staging/checkpoint-inputs-attempt-001.json",
+  "hpc_backup": {
+    "host": "komondor.hpc.kifu.hu",
+    "path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-repro-figures-source-20261028/checkpoint-inputs-t0215-f94a1bc96d47.tar.gz",
+    "sha256": "f94a1bc96d477149659302cb45f0b6858463c1c667ea0dc4ae0d2e9c4f288aa7",
+    "verified_utc": "2026-10-28T16:44:47.457427+00:00",
+    "method": "rsync -a; independent remote sha256sum matched retained local archive"
+  }
+}

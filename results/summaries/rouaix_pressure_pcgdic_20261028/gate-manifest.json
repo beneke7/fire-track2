@@ -1,0 +1,156 @@
+{
+  "checks": {
+    "actual_native_changeDictionary_preflight": "prior v2512 utility on same four-patch boundary change passed with no internal p_rgh-array or other-field changes; no PCG solver run has yet been performed",
+    "finished_auditor_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+    "first_20_step_profile": {
+      "any_p_rgh_solve_exceeds_100_iterations": true,
+      "approximate_execution_time_for_550_steps_s": 2711.5,
+      "completed_continuation_steps": 20,
+      "completed_to_time_s": 0.202,
+      "configured_final_corrector": {
+        "all_final_residuals_le_1e-8": true,
+        "hits_1000_iteration_cap": false,
+        "max_final_residual": 9.98550670443e-09,
+        "max_iterations": 518,
+        "mean_iterations": 504.6,
+        "min_iterations": 466
+      },
+      "execution_time_at_step20_s": 98.6,
+      "first_two_correctors": {
+        "all_meet_relTol_0_01": true,
+        "max_iterations": 109,
+        "min_iterations": 9
+      },
+      "job_id": "14705632",
+      "max_u_first20_m_s": 111.99563876,
+      "max_u_first20_time_s": "0.2001",
+      "mean_execution_s_per_step_from_step1_to20": 4.93,
+      "pressure_solves_per_step": 3,
+      "raw_p_rgh_solve_records": 60,
+      "snapshot_utc": "2026-10-28T16:15:32Z",
+      "source": "solver-profile-live-snapshot.tsv and max-speed-first20.csv; raw native output extracted read-only",
+      "step20_clock_time_s": 99.0
+    },
+    "focused_command": "./.venv/bin/python -m pytest -q tests/test_rouaix_hpc_restart.py tests/test_rouaix_hpc_restart_audit.py",
+    "focused_result": "36 passed",
+    "git_diff_check": "passed",
+    "held_job_readback": "PASS: solver 14705632 and afterany audit 14705633 match resources; audit dependency afterany:14705632",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "slurm_cpu_short_other_active_jobs": 0,
+    "slurm_queue_check_utc": "2026-10-28T16:05:41Z",
+    "solver_released_pending": "2026-10-28T16:09:22Z; scheduler readback remained PENDING, no solver started yet",
+    "source_capsule_remote_run_restart_sha256": "e15f2a610e213f59027777cd94e5c17597447b85906f9845808b35d05db43b22",
+    "source_capsule_remote_sbatch_sha256": "767d11bb8a168ef51e42b5b35f51c2b8586a1a8daf2b3ee7d1ccf5b3a4c18871",
+    "source_capsule_remote_stage": "PASS: remote archive SHA, all 22 extracted member hashes, run_restart, SBatch, audit source, and frozen .2 donor verified"
+  },
+  "created_utc": "2026-10-28T16:05:41Z",
+  "created_utc_note": "UTC snapshot from the system clock; submit and release times will be added in separate receipts.",
+  "experiment": "E1_ROUAIX_PRESSURE_TOTAL_PCGDIC_20261028",
+  "failure_context": {
+    "afterany_audit_job_id": "14702500",
+    "afterany_capture_status": "verified",
+    "afterany_classification": "slurm_failed",
+    "attempted_next_time_s": 0.2496,
+    "attempted_step_failure": "vector U PBiCGStab floating-point exception after alpha extrema left [0,1]",
+    "audit_bundle_sha256": "e36e7d099b971bb38ba7d81156f9affff7c676670d11db4a0f5ce1992285658c",
+    "completed_step_max_u_m_s": 3.84612084717e+51,
+    "completed_time_s": 0.2495,
+    "interpretation": "Pressure-correction divergence at completed .2495 precedes the attempted .2496 U FPE. This does not establish that the p_rgh outlet boundary condition caused the instability.",
+    "job_id": "14702499",
+    "pressure_corrector_evidence": [
+      {
+        "corrector": 1,
+        "final_residual": 0.00330612,
+        "initial_residual": 0.35871185,
+        "iterations": 2
+      },
+      {
+        "corrector": 2,
+        "final_residual": 3.452596e+19,
+        "initial_residual": 0.243394,
+        "iterations": 100
+      },
+      {
+        "corrector": 3,
+        "final_residual": 8.650585e+22,
+        "initial_residual": 0.985186,
+        "iterations": 100
+      }
+    ],
+    "result_archive_sha256": "959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029"
+  },
+  "last_updated_utc": "2026-10-28T16:15:32Z",
+  "parent": {
+    "archive_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-healthy-seed-source-v1-20261027/rouaix-e1-hpc-pilot-14669440/result.tar.gz",
+    "archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+    "checkpoint_time_s": 0.2,
+    "ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+    "water_density_kg_m3": 997.6,
+    "water_inventory_m3": 0.2508975771509
+  },
+  "remote_roots": {
+    "run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028",
+    "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-source-20261028"
+  },
+  "scope": "Exploratory matched solver-policy sensitivity from the immutable .2 s water-injection checkpoint; not an E1 acceptance or physical-validation result.",
+  "submission": {
+    "afterany_audit_job_id": "14705633",
+    "solver_job_id": "14705632",
+    "solver_started_utc": "2026-10-28T16:09:55.766975+00:00",
+    "status": "running; afterany audit released and pending dependency"
+  },
+  "variant": {
+    "account": "nk_meshapplied",
+    "boundary_condition": {
+      "U": "U",
+      "field": "p_rgh",
+      "p0_gauge_pa": 0.0,
+      "patches": [
+        "downstreamOutlet",
+        "bottomOutlet",
+        "spanwiseMinus",
+        "spanwisePlus"
+      ],
+      "phi": "phi",
+      "rho": "rho",
+      "type": "prghTotalPressure",
+      "value": "uniform 0"
+    },
+    "case_id": "rouaix-restart-pressure-total-pcgdic-0255",
+    "delta_t_s": 0.0001,
+    "expected_continuation_steps": 550,
+    "memory_gib_per_node": 22,
+    "nodes": 3,
+    "partition": "cpu-short",
+    "platform": "Komondor native Slurm CPU-only",
+    "purge_write": 2,
+    "qos": "normal",
+    "ranks": 120,
+    "requeue": false,
+    "solver": "OpenCFD v2512 interIsoFoam, DP32, Cray MPICH",
+    "solver_change": {
+      "field": "p_rgh",
+      "from": {
+        "maxIter": 100,
+        "smoother": "DICGaussSeidel",
+        "solver": "GAMG"
+      },
+      "p_rghFinal": "inherits p_rgh, relTol 0 unchanged",
+      "relTol": "0.01 unchanged",
+      "to": {
+        "maxIter": 1000,
+        "preconditioner": "DIC",
+        "solver": "PCG"
+      },
+      "tolerance": "1e-8 unchanged"
+    },
+    "source_capsule_sha256": "7aace13b3723147cc242cffc13bd472476c713f6727e68d53e53ca3829e2e862",
+    "start_time_s": 0.2,
+    "target_time_s": 0.255,
+    "tasks_per_node": 40,
+    "unchanged_u_guard_m_s": 1000.0,
+    "wall_time": "02:00:00",
+    "write_interval_s": 0.005
+  }
+}

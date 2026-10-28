@@ -264,3 +264,159 @@ def test_diagnostic_early_save_accepts_native_iteration_overshoot_and_binds_raw_
     solver_log.write_text("Time = 0.2003\nEnd\n", encoding="utf-8")
     with pytest.raises(ValueError, match="solver-log hash"):
         restart_audit.audit_restart(run_dir, parent, 0.2, 0.202, 0.0001)
+
+
+@pytest.mark.parametrize("include_start_sample", [True, False])
+@pytest.mark.parametrize(
+    ("parent_variant", "parent_case_id", "checkpoint_time_s", "parent_steps"),
+    [
+        (
+            "pressure-total-p0-zero",
+            "rouaix-restart-pressure-total-p0-zero-0300",
+            0.3,
+            1000,
+        ),
+        (
+            "pressure-total-pcgdic",
+            "rouaix-restart-pressure-total-pcgdic-0255",
+            0.255,
+            550,
+        ),
+    ],
+)
+def test_pressure_continuation_audits_only_post_checkpoint_rows_and_records_inventory_basis(
+    tmp_path: Path,
+    include_start_sample: bool,
+    parent_variant: str,
+    parent_case_id: str,
+    checkpoint_time_s: float,
+    parent_steps: int,
+) -> None:
+    run_dir = tmp_path / "pressure-continuation"
+    run_dir.mkdir()
+    parent = {
+        "coverage": {
+            "status": "requested_horizon_reached_exploratory_only",
+            "requested_target_reached": True,
+            "actual_end_time_s": checkpoint_time_s,
+        },
+        "integration": {
+            "density_kg_m3": 997.6,
+            "final_inventory_m3": 0.4,
+            "injected_kg": 123.0,
+            "signed_net_escape_kg": 4.5,
+            "closure_residual_kg": 0.002,
+        },
+        "interval": {"step_count": parent_steps},
+    }
+    parent_path = tmp_path / "parent-ledger-030.json"
+    parent_raw = (json.dumps(parent, sort_keys=True) + "\n").encode()
+    parent_path.write_bytes(parent_raw)
+    ledger_sha = hashlib.sha256(parent_raw).hexdigest()
+    mesh = {
+        name: {"sha256": hashlib.sha256(name.encode()).hexdigest()}
+        for name in restart_audit.PARENT_PROCESSOR_MESH_FILES
+    }
+    contract = {
+        "schema_version": 1,
+        "parent_job_id": "14709991",
+        "case_id": parent_case_id,
+        "variant": parent_variant,
+        "parent_start_time_s": 0.2,
+        "parent_target_time_s": checkpoint_time_s,
+        "checkpoint_time_s": checkpoint_time_s,
+        "delta_t_s": 0.0001,
+        "step_count": parent_steps,
+        "inventory_m3": 0.4,
+        "density_kg_m3": 997.6,
+        "archive_sha256": "a" * 64,
+        "ledger_sha256": ledger_sha,
+        "manifest_sha256": "b" * 64,
+        "terminal_sha256": "c" * 64,
+        "inventory_history_member": "attempt/case/postProcessing/waterInventory/0/volFieldValue.dat",
+        "inventory_history_sha256": "d" * 64,
+        "inventory_history_time_s": checkpoint_time_s,
+        "inventory_history_m3": 0.4,
+        "checkpoint_fields": {"alpha.water": {"sha256": "e" * 64}},
+        "processor_mesh": mesh,
+    }
+    if parent_variant == "pressure-total-pcgdic":
+        contract["fv_solution_member"] = "attempt/case/system/fvSolution"
+        contract["fv_solution_sha256"] = "f" * 64
+    endpoint_member = f"attempt/case/processors120/{checkpoint_time_s:.12f}/alpha.water"
+    receipt = {
+        "archive_sha256": contract["archive_sha256"],
+        "checkpoint_time_s": checkpoint_time_s,
+        "inventory_m3": 0.4,
+        "archive_status": "verified_crc_hash_and_member_list",
+        "selected_endpoint_member": endpoint_member,
+        "ledger_sha256": ledger_sha,
+        "parent_job_id": contract["parent_job_id"],
+        "manifest_sha256": contract["manifest_sha256"],
+        "terminal_sha256": contract["terminal_sha256"],
+    }
+    if parent_variant == "pressure-total-pcgdic":
+        receipt["fv_solution_sha256"] = contract["fv_solution_sha256"]
+    (run_dir / "parent-checkpoint-receipt.json").write_text(json.dumps(receipt), encoding="utf-8")
+    terminal = {
+        "state": "terminal",
+        "solver_exit_code": 0,
+        "solver_end_marker": True,
+        "solver_time_s": checkpoint_time_s + 0.0002,
+        "target_time_s": checkpoint_time_s + 0.0002,
+        "requested_start_time_s": checkpoint_time_s,
+        "solver_time_steps_recorded": 2,
+        "stop_reason": None,
+        "pause_observed": False,
+    }
+    (run_dir / "terminal-status.json").write_text(json.dumps(terminal), encoding="utf-8")
+    times = [checkpoint_time_s + 0.0001, checkpoint_time_s + 0.0002]
+    inventory_rows = [(time_s, 0.4 + index * 1e-6) for index, time_s in enumerate(times, 1)]
+    if include_start_sample:
+        inventory_rows.insert(0, (checkpoint_time_s, 0.4))
+    _write_series(
+        run_dir / "postProcessing/waterInventory/0/volFieldValue.dat",
+        "volIntegrate(alpha.water)",
+        inventory_rows,
+    )
+    for patch in restart_audit.PATCHES:
+        _write_series(
+            run_dir / f"postProcessing/liquidFlux_{patch}/0/surfaceFieldValue.dat",
+            "sum(phi) sum(alphaPhi_)",
+            [(time_s, 0.0, 0.0) for time_s in times],
+        )
+
+    report = restart_audit.audit_restart(
+        run_dir,
+        parent_path,
+        checkpoint_time_s,
+        checkpoint_time_s + 0.0002,
+        0.0001,
+        parent_contract=contract,
+    )
+
+    assert report["coverage"]["requested_target_reached"] is True
+    assert report["interval"]["step_count"] == 2
+    assert report["integration"]["initial_inventory_m3"] == pytest.approx(0.4)
+    assert report["integration"]["injected_kg"] == pytest.approx(0.0)
+    assert report["parent_checkpoint"]["prior_injected_kg_context_only"] == pytest.approx(123.0)
+    assert report["parent_checkpoint"]["cumulative_offsets_recounted"] is False
+    evidence = report["parent_checkpoint"]["initial_inventory_evidence"]
+    assert evidence["history_inventory_m3"] == pytest.approx(0.4)
+    assert evidence["history_time_s"] == pytest.approx(checkpoint_time_s)
+    assert evidence["child_start_inventory_sample_status"] == (
+        "present_and_matches_parent_contract"
+        if include_start_sample
+        else "absent; M0 inferred from the exact parent native history and identical hash-bound checkpoint alpha.water and mesh"
+    )
+    receipt["parent_job_id"] = "14700000"
+    (run_dir / "parent-checkpoint-receipt.json").write_text(json.dumps(receipt), encoding="utf-8")
+    with pytest.raises(ValueError, match="receipt parent_job_id"):
+        restart_audit.audit_restart(
+            run_dir,
+            parent_path,
+            checkpoint_time_s,
+            checkpoint_time_s + 0.0002,
+            0.0001,
+            parent_contract=contract,
+        )

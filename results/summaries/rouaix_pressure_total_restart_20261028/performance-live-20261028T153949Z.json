@@ -1,0 +1,18 @@
+{
+  "captured_utc": "2026-10-28T15:39:49Z",
+  "job_step": "14702499.1",
+  "state": "RUNNING",
+  "commands": [
+    "TZ=UTC sstat -j 14702499.1 --noconvert --format=JobID,NTasks,AveCPU,AveRSS%32,MaxRSS%32 --parsable2",
+    "TZ=UTC sacct -j 14702499.1 --format=JobID,State,Elapsed,AllocCPUS,Start --parsable2"
+  ],
+  "sstat_raw": "JobID|NTasks|AveCPU|AveRSS|MaxRSS\n14702499.1|120|00:15:42|385019187|704315392\n",
+  "sacct_raw": "JobID|State|Elapsed|AllocCPUS|Start\n14702499.1|RUNNING|00:15:48|120|2026-10-28T15:24:01\n",
+  "sampled_average_cpu_seconds_per_task": 942,
+  "step_elapsed_seconds": 948,
+  "sampled_average_cpu_fraction": 0.9936708860759493,
+  "memory_raw_unit": "bytes with sstat --noconvert; converted MaxRSS independently reported 687808K in the preceding sample",
+  "sampled_average_rss_bytes_per_task": 385019187,
+  "sampled_max_rss_bytes_one_task": 704315392,
+  "interpretation": "Approximately 99% sampled CPU occupancy per allocated task. This is not a strong-scaling efficiency measurement: MPI waiting can also consume CPU, and accounting samples lag. RSS values are sampled task statistics, not a simultaneous whole-job peak."
+}

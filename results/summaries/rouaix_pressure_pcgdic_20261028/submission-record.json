@@ -1,0 +1,51 @@
+{
+  "afterany_audit": {
+    "auditor_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+    "command": "sbatch --hold --dependency=afterany:14705632 --parsable audit-afterany-14705632.sbatch",
+    "dependency": "afterany:14705632",
+    "held_readback": "slurm-readback-held-audit.txt",
+    "job_id": "14705633",
+    "memory": "1800M",
+    "released_before_solver": true,
+    "released_readback": "slurm-readback-audit-released.txt",
+    "state_at_readback": "PENDING",
+    "tasks": 1,
+    "time_limit": "00:10:00"
+  },
+  "created_utc": "2026-10-28T16:09:22Z",
+  "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+  "readbacks": {
+    "accounting": "remote-sha-and-held-sacct.txt",
+    "audit": "slurm-readback-held-audit.txt",
+    "released_start": "slurm-readback-released-start.txt",
+    "solver": "slurm-readback-held-solver.txt"
+  },
+  "remote_run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028",
+  "remote_source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-source-20261028",
+  "solver": {
+    "command": "sbatch --hold --parsable restart_pressure_pcgdic.sbatch",
+    "gpu": false,
+    "held_readback": "slurm-readback-held-solver.txt",
+    "job_id": "14705632",
+    "memory_per_node": "22G",
+    "nodes": 3,
+    "partition": "cpu-short",
+    "released_readback": "slurm-readback-released-start.txt",
+    "released_utc": "2026-10-28T16:09:22Z",
+    "requeue": false,
+    "state_at_readback": "PENDING",
+    "tasks": 120,
+    "tasks_per_node": 40,
+    "time_limit": "02:00:00"
+  },
+  "source_archive": {
+    "member_count": 22,
+    "path": "rouaix-pressure-pcgdic-source-20261028.tar.gz",
+    "sha256": "7aace13b3723147cc242cffc13bd472476c713f6727e68d53e53ca3829e2e862"
+  },
+  "source_hashes": {
+    "audit_restart.py": "15ae9d534f539d09f9b394e44667d426cca2671ad607b9bb3dea4f28780dbb33",
+    "restart_pressure_pcgdic.sbatch": "767d11bb8a168ef51e42b5b35f51c2b8586a1a8daf2b3ee7d1ccf5b3a4c18871",
+    "run_restart.py": "e15f2a610e213f59027777cd94e5c17597447b85906f9845808b35d05db43b22"
+  }
+}

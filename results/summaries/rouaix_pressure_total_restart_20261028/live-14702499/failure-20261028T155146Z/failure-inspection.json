@@ -1,0 +1,224 @@
+{
+  "captured_utc": "2026-10-28T15:54:14.908616+00:00",
+  "checkpoint_and_capture": {
+    "archive_bytes": 1739238047,
+    "archive_member_count": 110,
+    "archive_not_downloaded_to_workstation": true,
+    "archive_sha256": "959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029",
+    "archive_sha_sidecar_matches_run_state": true,
+    "archive_status": "verified_crc_hash_and_member_list",
+    "closed_time_directories": [
+      "processors120/0.200000000000"
+    ],
+    "missing": [
+      "processors120/0.250000000000",
+      "processors120/0.300000000000",
+      "terminal-status.json",
+      "ledger/summary.json"
+    ],
+    "remote_final_archive_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499/result.tar.gz"
+  },
+  "failure_evidence": {
+    "actual_end_time_s": 0.2496,
+    "attempted_time_0_2496": {
+      "alpha_after_conservative_bounding_max": 1.00002221586,
+      "alpha_after_conservative_bounding_min": -2.22158638801e-05,
+      "diagnostic_time_association": "The alpha overshoot is from the attempted .2496 iteration after the completed .2495 diagnostic; this is not the saved .2495 alphaExtrema sample.",
+      "solver_failure": "Floating point exception in PBiCGStab::scalarSolve for fvMatrix<Vector<double>> during the vector U solve"
+    },
+    "completed_steps": 495,
+    "completed_time_0_2495": {
+      "continuity_global": [
+        -3.64621411829e-07,
+        -19579324.6191,
+        9.15625460443e+31
+      ],
+      "continuity_local": [
+        5.39718825056e-07,
+        5439403411900000.0,
+        2.4472114227e+40
+      ],
+      "diagnostic_time_association": "U/pressure residual and extreme Courant diagnostics belong to the completed .2495 solve; alphaExtrema printed in the same output block remained [0,1].",
+      "epsilon_solver_residual": {
+        "final": 6.30986049227e-09,
+        "initial": 1.0,
+        "iterations": 14
+      },
+      "extrema": {
+        "alpha_water_max": 1.0,
+        "alpha_water_min": 0.0,
+        "bulk_Co_max": 3.18009875525e+49,
+        "interface_Co_max": 6.1491393183e+47,
+        "max_U_cell": 84531,
+        "max_U_location_m": [
+          1.89245810056,
+          -2.7177369562,
+          0.557578179004
+        ],
+        "max_U_m_s": 3.84612084717e+51,
+        "max_U_processor": 99
+      },
+      "fpe_solver_frame": "Foam::PBiCGStab::scalarSolve in fvMatrix<Vector<double>>::solveSegregated",
+      "k_solver_residual": {
+        "final": 2.49245993033e-17,
+        "initial": 1.0,
+        "iterations": 2
+      },
+      "p_rgh_solves": [
+        {
+          "final_residual": 0.00330611899909,
+          "initial_residual": 0.358711849651,
+          "iterations": 2
+        },
+        {
+          "final_residual": 3.45259641825e+19,
+          "initial_residual": 0.243394224983,
+          "iterations": 100
+        },
+        {
+          "final_residual": 8.65058547109e+22,
+          "initial_residual": 0.985185243736,
+          "iterations": 100
+        }
+      ],
+      "velocity_residuals": {
+        "Ux": [
+          0.000266022900816,
+          4.59844695213e-09,
+          3
+        ],
+        "Uy": [
+          0.00216713066595,
+          7.89698891827e-09,
+          4
+        ],
+        "Uz": [
+          0.0070086990848,
+          1.67659846089e-09,
+          6
+        ]
+      }
+    },
+    "end_marker": false,
+    "max_speed_first_exploded_row": [
+      "0.2495",
+      "3.84612084717e+51"
+    ],
+    "max_speed_last_normal_row": [
+      "0.2494",
+      "107.339099158"
+    ],
+    "phase_or_boundary_causality": "not established; the source records a p_rgh total-pressure sensitivity, but these observations alone do not attribute the numerical blow-up to that boundary change"
+  },
+  "frozen_executed_helper_sha256": {
+    "run_pilot.py": "2cb1284e09f184c1c67670f30c198d70d7befe9c5a47c6232ac80dd105a5ea88",
+    "run_restart.py": "e4e7402c8cc1122a4a10bc7559abb8489d540f45f08b1ec83f2695302d0943f6"
+  },
+  "local_raw_capture_sha256": {
+    "manifest.json": "1fc0363f79fb0ab90a4e1ac3b61c5c2e4eb37391b1f09efe8ca1cb4873c25e0e",
+    "max-speed.csv": "fa7a2260dd08e8c422b0cb1de280c5cd56b492c96b2443beaec8b06de07a292f",
+    "result-members.txt": "9764604ef88b262ebf1fab737d2f0850e74eabaee9ceca7c3f3dfbda32fa48f6",
+    "result.tar.gz.sha256": "ca5986d75fe5b81a57750137226a29a0155f7b8cae938ab30b6e7715b84d3536",
+    "run-state.json": "b3c6617e5252118038170231c68dfe273d561af867ea98fefcc11655ebe3fe79",
+    "solver-step.sh": "dac73adfacba5dd6dc677b6d2e2f5a01867c24f6246835eb015fc8935a108a5a",
+    "solver.log": "215d933a024026fe07b1780f5e8370d41c1ac2ce3e497324ec1fd4c7ea10cd1f",
+    "source-capsule-index.json": "c0563374a7360f3b9ab150b0ca02bcc7688d5864f088ee6aca14ac77e5739ee7"
+  },
+  "parent_job_id": "14702499",
+  "parent_run_dir": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499",
+  "run_state": {
+    "attempt_archive_status": "verified_crc_hash_and_member_list",
+    "result_archive_members": 110,
+    "result_archive_sha256": "959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029",
+    "solver_end_marker": false,
+    "solver_exit_code": 143,
+    "solver_max_u_m_s": 3.84612084717e+51,
+    "solver_time_s": 0.2496,
+    "solver_time_steps_recorded": 495,
+    "status": "failed_preserved",
+    "stop_reason": "operational stop: max|U|=3.84612e+51 m/s exceeds 1000 m/s",
+    "stop_requested_utc": "2026-10-28T15:50:05.959082+00:00",
+    "stop_signal_acknowledged_utc": "2026-10-28T15:50:08.461250+00:00",
+    "stop_signal_job_step": "14702499.1",
+    "stop_signal_request_utc": null,
+    "stop_signal_task_count": 120,
+    "stop_signals": [
+      "12"
+    ],
+    "updated_utc": "2026-10-28T15:51:46.183310+00:00"
+  },
+  "scheduler": {
+    "afterany_audit_job_id": "14702500",
+    "afterany_audit_state_at_capture": "PENDING (Priority)",
+    "solver_job": {
+      "elapsed": "00:28:46",
+      "exit_code": "1:0",
+      "state": "FAILED"
+    },
+    "solver_step": {
+      "elapsed": "00:26:08",
+      "exit_code": "0:15",
+      "job_id": "14702499.1",
+      "state": "CANCELLED"
+    },
+    "source_command": "ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes nk_memj@komondor.hpc.kifu.hu 'sacct -j 14702499,14702500 --format=JobID,State,ExitCode,Elapsed,End -P'"
+  },
+  "schema_version": 1,
+  "signal_receipt": {
+    "acknowledged_utc": "2026-10-28T15:50:08.461250+00:00",
+    "command": [
+      "scancel",
+      "--signal=12",
+      "14702499.1"
+    ],
+    "receipt_verification": {
+      "active_job_query": {
+        "command": [
+          "scontrol",
+          "show",
+          "job",
+          "-o",
+          "14702499"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "JobId=14702499 JobName=ml-vof UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A Priority=2092 Nice=0 Account=nk_meshapplied QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:27:07 TimeLimit=01:30:00 TimeMin=N/A SubmitTime=2026-10-28T16:21:00 EligibleTime=2026-10-28T16:22:08 AccrueTime=2026-10-28T16:22:08 StartTime=2026-10-28T16:23:00 EndTime=2026-10-28T17:53:00 Deadline=N/A PreemptEligibleTime=2026-10-28T16:23:00 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-28T16:23:00 Scheduler=Backfill Partition=cpu-short AllocNode:Sid=10.150.1.134:1222027 ReqNodeList=(null) ExcNodeList=(null) NodeList=x1001c4s1b0n[0-1],x1001c4s2b0n0 BatchHost=x1001c4s1b0n0 NumNodes=3 NumCPUs=120 NumTasks=120 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=120,mem=66G,node=3,billing=120 AllocTRES=cpu=120,mem=66G,node=3,billing=120 Socks/Node=* NtasksPerN:B:S:C=40:0:*:1 CoreSpec=* MinCPUsNode=40 MinMemoryNode=22G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-source-20261028/unpacked/cases/e1_rouaix_hpc_restart/restart_pressure.sbatch WorkDir=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028 StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/slurm-14702499.out StdIn=/dev/null StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/slurm-14702499.out TresPerTask=cpu=1 \n"
+      },
+      "job_wide_step_query": {
+        "command": [
+          "scontrol",
+          "-o",
+          "show",
+          "step",
+          "14702499"
+        ],
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "Job step 14702499. not found\n"
+      },
+      "specific_step_query": {
+        "command": [
+          "scontrol",
+          "show",
+          "step",
+          "-o",
+          "14702499.1"
+        ],
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "Job step 14702499.1 not found\n"
+      },
+      "verified_by": "rank_zero_step_receipt_and_matching_active_job_no_stepmgr"
+    },
+    "request_utc": "2026-10-28T15:50:05.959082+00:00",
+    "returncode": 0,
+    "step_id": "1",
+    "step_identity": [
+      "14702499",
+      "1",
+      "120",
+      "0"
+    ],
+    "task_count": 120
+  }
+}

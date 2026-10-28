@@ -1,0 +1,1436 @@
+{
+  "analysis_complete": true,
+  "analysis_status": "complete",
+  "archive_sha256": "959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029",
+  "auditor_sha256": "e49893ce488afe17a0e4536ae6b16f4dc830984fd1b8bd482d8b781fcbdd3989",
+  "capture_limits": {
+    "max_file_bytes": 536870912,
+    "max_files": 64,
+    "max_selected_bytes": 1073741824
+  },
+  "capture_status": "verified",
+  "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+  "compact_archive_sha256": "6e5ae532573f93e13c67eb07472ec03f4a986b520bd15cf1e5dc8f2fb3a8e6d9",
+  "created_utc": "2026-10-28T15:52:53Z",
+  "expected_delta_t_s": 0.0001,
+  "expected_horizon_s": 0.3,
+  "expected_ranks": 120,
+  "job_id": "14702499",
+  "manifest_sha256": "cfbcb4510360e7e77d75a12030e75804ae56f010268eda6acecbfa91eea99e23",
+  "metrics": {
+    "alpha_min_max": {
+      "alpha": {
+        "max": {
+          "last": 1.0,
+          "max": 1.0,
+          "min": 1.0
+        },
+        "min": {
+          "last": -1.97702500316e+45,
+          "max": -1.71123431654e-14,
+          "min": -1.97702500316e+45
+        }
+      },
+      "alpha.water": {
+        "max": {
+          "last": 1.00002221586,
+          "max": 1.00002221586,
+          "min": 1.0
+        },
+        "min": {
+          "last": -2.22158638801e-05,
+          "max": 0.0,
+          "min": -2.22158638801e-05
+        }
+      }
+    },
+    "analysis_status": "complete",
+    "attempt_manifest_inputs": {
+      "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+      "delta_t_s": 0.0001,
+      "horizon_s": 0.3,
+      "job_id": "14702499",
+      "ranks": 120
+    },
+    "classification": "slurm_failed",
+    "conservation": {},
+    "courant_number": {
+      "max": {
+        "last": 3.18009875525e+49,
+        "max": 3.18009875525e+49,
+        "min": 1.22173845898
+      },
+      "mean": {
+        "last": 2.74314949776e+41,
+        "max": 2.74314949776e+41,
+        "min": 0.0681459175844
+      }
+    },
+    "cpu_accounting": {
+      "note": "scontrol provided parent state only; CPU totals, memory and step accounting are unavailable.",
+      "parent": {
+        "allocated_cpus": "120",
+        "elapsed_raw": "00:28:46",
+        "exit_code": "1:0",
+        "job_id": "14702499",
+        "max_rss": "Unknown",
+        "state": "FAILED",
+        "total_cpu": "Unknown"
+      },
+      "steps": []
+    },
+    "diagnostic_gaps": {
+      "aggregate_memory": {
+        "note": "Parent and step MaxRSS values are shown separately; no aggregate memory value is inferred.",
+        "parent_max_rss": "Unknown",
+        "status": "not_aggregated",
+        "step_max_rss_rows": []
+      },
+      "ledger": {
+        "audit_log_present": false,
+        "formal_validation_decision": null,
+        "status": "missing",
+        "summary_present": false
+      },
+      "native_profiling_interpretation": {
+        "interpretation_performed": false,
+        "raw_files": [],
+        "status": "not_captured"
+      },
+      "tke_extrema": {
+        "note": "k/epsilon residuals do not provide TKE extrema.",
+        "status": "not_exposed_by_current_parser",
+        "value": null
+      }
+    },
+    "divergence_detected": false,
+    "expected_delta_t_s": 0.0001,
+    "expected_horizon_s": 0.3,
+    "expected_inputs": {
+      "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+      "delta_t_s": 0.0001,
+      "horizon_s": 0.3,
+      "job_id": "14702499",
+      "ranks": 120
+    },
+    "expected_inputs_match": true,
+    "fatal_errors": [
+      "srun: error: x1001c4s1b0n0: task 2: Floating point exception (core dumped)",
+      "srun: error: x1001c4s1b0n1: task 60: Floating point exception (core dumped)",
+      "srun: error: x1001c4s2b0n0: tasks 90,94: Floating point exception (core dumped)"
+    ],
+    "formal_validation_decision": null,
+    "interface_courant_number": {
+      "max": {
+        "last": 6.1491393183e+47,
+        "max": 6.1491393183e+47,
+        "min": 0.56593996585
+      },
+      "mean": {
+        "last": 6.93033083504e+38,
+        "max": 6.93033083504e+38,
+        "min": 5.5893660044e-06
+      }
+    },
+    "ledger_status": null,
+    "linear_residuals": {
+      "Ux": {
+        "final_max": 9.94639462745e-09,
+        "final_min": 8.75179339343e-10,
+        "initial_max": 0.000575306040717,
+        "initial_min": 5.58009219363e-05,
+        "iterations_max": 6,
+        "iterations_total": 2111,
+        "last_final": 4.59844695213e-09,
+        "last_initial": 0.000266022900816,
+        "solves": 495
+      },
+      "Uy": {
+        "final_max": 9.99867645303e-09,
+        "final_min": 3.18817278836e-10,
+        "initial_max": 0.00517783980032,
+        "initial_min": 0.000484594956725,
+        "iterations_max": 7,
+        "iterations_total": 2583,
+        "last_final": 7.89698891827e-09,
+        "last_initial": 0.00216713066595,
+        "solves": 495
+      },
+      "Uz": {
+        "final_max": 9.94451465563e-09,
+        "final_min": 4.51586894928e-10,
+        "initial_max": 0.0289414451296,
+        "initial_min": 0.00198476962425,
+        "iterations_max": 8,
+        "iterations_total": 3050,
+        "last_final": 1.67659846089e-09,
+        "last_initial": 0.0070086990848,
+        "solves": 495
+      },
+      "epsilon": {
+        "final_max": 8.41592343454e-09,
+        "final_min": 5.00180701587e-09,
+        "initial_max": 1.0,
+        "initial_min": 3.84115728324e-05,
+        "iterations_max": 14,
+        "iterations_total": 6930,
+        "last_final": 6.30986049227e-09,
+        "last_initial": 1.0,
+        "solves": 495
+      },
+      "k": {
+        "final_max": 8.70880607109e-09,
+        "final_min": 2.49245993033e-17,
+        "initial_max": 1.0,
+        "initial_min": 3.11778622752e-05,
+        "iterations_max": 16,
+        "iterations_total": 7906,
+        "last_final": 2.49245993033e-17,
+        "last_initial": 1.0,
+        "solves": 495
+      },
+      "p_rgh": {
+        "final_max": 8.65058547109e+22,
+        "final_min": 5.21030220669e-09,
+        "initial_max": 0.985185243736,
+        "initial_min": 0.0686326585696,
+        "iterations_max": 100,
+        "iterations_total": 10882,
+        "last_final": 8.65058547109e+22,
+        "last_initial": 0.985185243736,
+        "solves": 1485
+      },
+      "pcorr": {
+        "final_max": 9.84895824768e-11,
+        "final_min": 9.84895824768e-11,
+        "initial_max": 1.0,
+        "initial_min": 1.0,
+        "iterations_max": 764,
+        "iterations_total": 764,
+        "last_final": 9.84895824768e-11,
+        "last_initial": 1.0,
+        "solves": 1
+      }
+    },
+    "logged_step_count": 496,
+    "pressure_solve_iterations": {
+      "fields": {
+        "p_rgh": 10882
+      },
+      "total": 10882
+    },
+    "reached_horizon": false,
+    "reached_time_s": 0.2496,
+    "scheduler_accounting_source": "scontrol",
+    "scheduler_state_available": true,
+    "scientific_scope": "Exploratory per-run audit only; no E1 or field-validation gate decision.",
+    "slurm_state": "FAILED",
+    "solver_clock_time_s": 1562.0,
+    "solver_convergence": {
+      "all_converged": false,
+      "by_field": {
+        "Ux": {
+          "failed_count": 0,
+          "max_final_residual": 9.94639462745e-09,
+          "max_iterations": 6,
+          "solve_count": 495
+        },
+        "Uy": {
+          "failed_count": 0,
+          "max_final_residual": 9.99867645303e-09,
+          "max_iterations": 7,
+          "solve_count": 495
+        },
+        "Uz": {
+          "failed_count": 0,
+          "max_final_residual": 9.94451465563e-09,
+          "max_iterations": 8,
+          "solve_count": 495
+        },
+        "epsilon": {
+          "failed_count": 0,
+          "max_final_residual": 8.41592343454e-09,
+          "max_iterations": 14,
+          "solve_count": 495
+        },
+        "k": {
+          "failed_count": 0,
+          "max_final_residual": 8.70880607109e-09,
+          "max_iterations": 16,
+          "solve_count": 495
+        },
+        "p_rgh": {
+          "failed_count": 2,
+          "max_final_residual": 8.65058547109e+22,
+          "max_iterations": 100,
+          "solve_count": 1485
+        },
+        "pcorr": {
+          "failed_count": 0,
+          "max_final_residual": 9.84895824768e-11,
+          "max_iterations": 764,
+          "solve_count": 1
+        }
+      },
+      "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+      "failed_record_count": 2,
+      "failure_examples": [
+        {
+          "active_solver_entry": "p_rgh",
+          "field": "p_rgh",
+          "final_residual": 3.45259641825e+19,
+          "initial_residual": 0.243394224983,
+          "iterations": 100,
+          "line": 34369,
+          "maxIter": 100,
+          "minIter": 0,
+          "reason": "absolute_or_relative_residual_criterion_not_met",
+          "relTol": 0.01,
+          "tolerance": 1e-08
+        },
+        {
+          "active_solver_entry": "p_rghFinal",
+          "field": "p_rgh",
+          "final_residual": 8.65058547109e+22,
+          "initial_residual": 0.985185243736,
+          "iterations": 100,
+          "line": 34371,
+          "maxIter": 100,
+          "minIter": 0,
+          "reason": "absolute_or_relative_residual_criterion_not_met",
+          "relTol": 0.0,
+          "tolerance": 1e-08
+        }
+      ],
+      "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+      "pimple": {
+        "nCorrectors": 3,
+        "nNonOrthogonalCorrectors": 0,
+        "nOuterCorrectors": 1
+      },
+      "schema_version": 1,
+      "solver_record_count": 3961
+    },
+    "solver_exit_code": 143,
+    "solver_log_status": "failed",
+    "solver_wall_time_s": 1569.0582822740544,
+    "timing_scope": "OpenFOAM ClockTime and launcher wall time only; no full I/O timing is inferred.",
+    "u_peak": {
+      "last_m_s": 3.84612084717e+51,
+      "max_m_s": 3.84612084717e+51
+    }
+  },
+  "run_dir": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499",
+  "run_state": {
+    "allocation": {
+      "cpus_per_task": 1,
+      "gpu_request": null,
+      "memory_mb_per_node": 22528,
+      "nodelist": "x1001c4s1b0n[0-1],x1001c4s2b0n0",
+      "nodes": 3,
+      "partition": "cpu-short",
+      "ranks": 120,
+      "tasks_per_node": [
+        40,
+        40,
+        40
+      ]
+    },
+    "attempt_archive_status": "verified_crc_hash_and_member_list",
+    "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+    "current_solver_stop_signal_banner_confirmed": true,
+    "delta_t_s": 0.0001,
+    "error": "RestartError: collated endpoint 0.249600000000 lacks required fields: ['U', 'alpha.water', 'p_rgh', 'k', 'epsilon', 'nut', 'p', 'phi']",
+    "execution_backend": "native-slurm-openfoam",
+    "free_disk_bytes": 2054774386688,
+    "free_disk_bytes_last": {
+      "shared_run_free_bytes": 2054773092352,
+      "workspace_free_bytes": 2054773092352
+    },
+    "free_disk_bytes_min_observed": 2053641773056,
+    "job_id": "14702499",
+    "job_name": "ml-vof",
+    "manifest_sha256": "90860a5e384e8403dadf21072f1e12d87373793293595eb26fc6c3ea8bf78e27",
+    "max_speed_csv_sha256": "fa7a2260dd08e8c422b0cb1de280c5cd56b492c96b2443beaec8b06de07a292f",
+    "max_u_seen_m_s": 3.84612084717e+51,
+    "monitor_fault_after_exit": "missing per-step fieldMinMax max|U| at t=0.2496 s",
+    "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+    "parent_checkpoint_time_s": 0.2,
+    "parent_smoke_job_id": null,
+    "pause_observed": false,
+    "pause_paths": [
+      "/project/nk_meshapplied/bene/fire-track2-hpc/PAUSE",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499/PAUSE",
+      "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/PAUSE"
+    ],
+    "pressure_total_change_receipt": {
+      "after": {
+        "p_rgh_file_sha256": "064e1250e246aa1bdc455e9a332a58246094ec0a6a0a66b5ad7581aeea9892b3",
+        "p_rgh_internal_rank_sha256": {
+          "0": "3ce2829de62889b4759e13a895d71cc2c7ab36ddb6627a740d24f97e4e604c6c",
+          "1": "1757173a19f697cebc50a79946c9a5eee909bfb81dc2c2cea583f934fafe2320",
+          "10": "5d8f04836daeef3509927a1a188ee392615f41470ab5f484cb11752a1cc124ad",
+          "100": "7cc0d04d406384206ad0be4df5d0c94e215a9da866c4ba3603b8cfa999a31ce2",
+          "101": "ce585dc8fdf3b2c7b0149370c52ce73ac93c56eac67f6f0ec80075ca090eb10e",
+          "102": "1640d90e10a3e973bb3d83cccf02890def796a5b62a300a5fab8a7263a1b70b7",
+          "103": "2545beb37051fd6f1c90e760695d286e5dfe044108b7144cb71da5d349cc6f7a",
+          "104": "91d1410458fd187c1f3536e4eefb5b572e09cc250b4ef8e85c421233b3fab0fb",
+          "105": "8669660822f664fd652ee6c7d77b7235d33052396e9bcfe459e44ab9b1e3a942",
+          "106": "3638ff0515df872caa1db5ba9000e63512578f55e9ef24589e065453f98c0f63",
+          "107": "e936b21e213cbe396966cedc7bd6d5fce99fc5a47022a4cdfa16ef744d9c2c00",
+          "108": "8d31b53071c790f842c41e9ef1d7468b10e90189ad02e1556bdc39d3736a542e",
+          "109": "6c7b33297ed652400b91a4ace87ad6afb6fcbea29b6b816bee6336d5ccbb4eb3",
+          "11": "7b8b9a49f2d5282abd741708bd0e455da46c55ff4a82358c86f65825d6c1495e",
+          "110": "292576567c764d0aedceb2f63f59493e210ae54bec39414020f8c8fd7ff11524",
+          "111": "5d60a65e84622765ce98eb77fb846367bb9391436ae2b531d5987f3f5e2c1cbf",
+          "112": "a2764f84ea4c13a80d488d189685c97169a3678ed01ca4a7b387a8649d3e4716",
+          "113": "47ff08d003ac0db00ac6299b27975f257faa6fc8a2e2a486d7af1fa8124b2182",
+          "114": "28d045e1f762ede52f9f8786d48937d29cc0e3f88ed3d968e3599af520ecbf1e",
+          "115": "ccab674fdabd03e14a2740305d73cd1ed5bccf49705c1f15ad0d954bc03af352",
+          "116": "7fa178e513fe6c09036e73e832fce82bb2e68c2e3b3cb3072afa84cb948285e4",
+          "117": "f7832ac46862f6cd927325628c369231fa40067700c6114b4cf399e6717bdaf8",
+          "118": "4d8215f6145c3313b3ea932e4179e2528556f9be9af55cbeebba30da12d07c4d",
+          "119": "76e27ed8ed04ec3911f7c465139f9945bb9ba36af73a87f212f9e721364a6c36",
+          "12": "f79c51a833d46b43e9d31af364e2eef91279ee608818c5845b79a3753cac36f5",
+          "13": "a74b8066d1f147e29fe580fb9f0735a1325e3b074d7ed9b6a4cdc37eae835372",
+          "14": "231022fb1f138a394b8c285d97e53db39ef42576dbac58aed2dd0b4cc2b1f295",
+          "15": "f049c512b577d731a72ed862853d6ccfe7e156f99ebc1fac3e39ed08bcb897db",
+          "16": "e260c4816de583d0d48e57660dbd6b9550494247a0f9de618e0ecc2f00e41441",
+          "17": "897a4449791e000fd5575c99216570523d4473edb2e57766a30684dd5c8e577a",
+          "18": "b49257a9ffbfc5401c7cb43f12360141380967f3d5dd8b3293a00cd9c0675941",
+          "19": "910455ba7460eb1b121630923ee31630855dc492af1827da2c721bc1568ab4a6",
+          "2": "6a93141886c51bd33a35ff1faac7924f9ba5ab91ec3edf1192c8051167d211f7",
+          "20": "e36efdbfa090dd9294968c397c4ed0d600961f304151a53b540fcafe79bb8144",
+          "21": "bc22b9e0839cfedda99aa7ba9d57d0250550fd56a2184229f0452294493f12db",
+          "22": "819d79763c7580c6eb28dfe132677704eea548022722aa64ab4245b211004a76",
+          "23": "d2a02b147008ac2daac47de7dc81e69142facd3684c5be0452be734f4e2b2710",
+          "24": "3e9be8d60c4cfd7914e1e34211b6bed094088099d15f6e585440a6181bf431f1",
+          "25": "ccabb49855eb5ca56471f75491c662a46eba79545f47e4a5b97e380e1eb433a2",
+          "26": "ef8e878576ba27f089dec6ad761617aaac337e5a38baa20da66c3fa8b49d2534",
+          "27": "aff81dd8d9a778c61718da1811a6a997eb0c8704033d527dd10a42d63766d90b",
+          "28": "c189e124850adac0b281624da9b67340323195632206fd5bd4b489a836a294c9",
+          "29": "4721f7ced3beff93bfbf66091e0437f6999b88dc8f4b7801de6e09b087ca2b57",
+          "3": "fca647a58a91c57ce2746e28326112607073172c74f777a5155d2b06b0a84fc8",
+          "30": "009f3eecbf31e6a21865ec6df6afe8607030aac4e39af510ae35482c0bf53710",
+          "31": "6c1616922d4d681d43695e9f0c1e3160ce745abd9c291d65c7ac13507598c655",
+          "32": "728d92b9b45cf198f8c15da979ae59a0785d802dd7185cfbe5e59b3c82f0f8da",
+          "33": "404a1ef2c4335cf6a7e3db564ea423c80df14a29511a18db97337f9914b389e7",
+          "34": "a715bf5d265837fee167bfe56e05375b4b84f7895f1aa42d6aff15c4f409c2d5",
+          "35": "5ca09664e8926ac1fb9e985a796b73b19ab6d1718c10ce275c39492f9d7b647c",
+          "36": "8a6f58ba51745a39c96e8dcdb467d5e512adcffd3e20952215e30b9d34fa091d",
+          "37": "e26ffcee69da26bf708fc957fbeb4230ac5c10a979d758d662e13c39b6fe3657",
+          "38": "30dbbcd5c419f1263a5fa9f1e44b8a7260688c7306e76fe028d0047eb282f752",
+          "39": "3948de9f10f7620f7a583bf3a74236a6776b0ec73e75fd378ca7a5728f4f75fe",
+          "4": "123d45e4e1520a6c657bb0b6388eb556833b663f121f936fec6729ae9063ef02",
+          "40": "33c8470ae311100633eb11b9d52c139b47c4e9c5627ad5896f156aa2e45e75ca",
+          "41": "d93e430edc3c3844386001ded74a397a5330b94da26d06dc515e69df0a3ede16",
+          "42": "14fa0c60220dbbc93025bc0ec53f9024c60d0094a55282e30433b275625ac168",
+          "43": "fefce50c7907f619c3c820b3cf9baba12a5e11e548c6622b3c4de98f8c934815",
+          "44": "c3c6e63504323edc32bd7b854391dcc00c33336bd32f4309c70871ebcb7cb27c",
+          "45": "fc296d6d182b6b7a481b8fcfdd526a294ffd9b3a8282f2ad75072efc6ce842cf",
+          "46": "1b1b99fe3d7b177d79752f9d9ef858f127080461f879f606b9eae9bd38ab3617",
+          "47": "94c763509b3b00581c36fb9b297f79d0e83607db54c45f52bd16126f447816c8",
+          "48": "e04caf636711f3fe2fdc1ed9b568f850addbd98811ac9ff74dfb9726ba719161",
+          "49": "c7bf18b40ce80b12d892350d92a7d38a791e4a16c48ce97a846fc88d64d99429",
+          "5": "8a67d9fca0b86f8c27bba0480c2c00d034a3e5fa76dd8bc73af5869f826d0f7a",
+          "50": "9724cea5227d9ab58d7136be225bf8fc39c052d3265e9727dfafb7b7803efd12",
+          "51": "e3593c3a573a88eb83b4ed8ae539371107f49a05c5651ce06d959860192eec9c",
+          "52": "842a21120603fcd3062babfd77c579d6c71e85ffd78d6b9c6b616db37af66ff8",
+          "53": "e557068300179fb861043af6962b4c5eda8548ac0aa84b830dde9d0d23a5e62d",
+          "54": "d1317b1940f80ab033a64bed21a360a6065f567cd56be4739e03fb8573bc69be",
+          "55": "e5202c4944229339387e6eb9eb4ff49f81d2d16034b7cb85825dd36afc47764d",
+          "56": "33c927f9547e646e346421822d0393068b81a6e2cbcae7cd67c64c42f79e2eca",
+          "57": "25f623fedeb3bfffeec21c5c652caa2543ba00337feb6aff52d8e427c6398c02",
+          "58": "1af765b1be845cc1a641d1c5b96365f8a1ef15126e642cd839b92888f2dc6e3f",
+          "59": "3dde4395e01569445dae598997e037b9f2b6a2ba68a20f0166a1a087fc3c0e6a",
+          "6": "f718ccdc65f1083ec5d7eef55434bcc1a2718052763e20e193d4f6fb86314742",
+          "60": "d9da73c5784f0f7d4094c8970c32222ecaa53ce364a8d760358281e00d6cc3e3",
+          "61": "16f131f27d65a0a19482e9871239894923577790e9bb12679683f9afd529e5e2",
+          "62": "55d3fe3fad00bfc4f1d1522116e34cea6abf5c209c78d8862fe3bb58d73dd2d3",
+          "63": "efdd6f140b77c0403fccbc57deb957ef19b9b530ae26549691d2c02db74b95f4",
+          "64": "1343959989b98a05ad5a32c97d45ac2dfc18fc0a818b2b450a6cb70389a55771",
+          "65": "bac57f9de9dbeaa11e2f8cac2935b79f146788969b4bedebb7d9ffbf45eb865c",
+          "66": "cd0769b951eb15f2ad137fe17c54e55a4ce2eeaa2af083b4ec1e7b0d421dd972",
+          "67": "3b67eb7aae170dd04592577ef8f3e8daf13f1db87cdc2aa989a98550a58169ef",
+          "68": "b34eec58c93179285004baddb065d281756fede7adec7f50afbe8e5ea537936b",
+          "69": "028325c8a9ec525dc152181ebab9e776ac7b06319f0f9bdb2982f5ebd4e36fe4",
+          "7": "34f9f5273b30691702c02bad57de9956836efeffb5ad3eef9acf512dd8086bda",
+          "70": "24a4dd288791874ac36f924c30bef68281919d8be6f3ffcf643159964ff1542a",
+          "71": "1cbf1d77ed952a6fc65392025ecba5f4f75760bd63b94b12369ba3468e74bbd4",
+          "72": "51aba94c49f3de2b7a474b8865202deea5ba4ed1eeeb1e53782b23cb9acbef51",
+          "73": "c61d8291ca5db90650a26892ca73bc0d00b08e361708c3e8dda1a7c44503c7b0",
+          "74": "dd4a15c3ca08eff3e5bb903f90549dfd23c4f97dfcbb0fc09e3492ae03da83c0",
+          "75": "1063b66b5da299a3dc44948178c5a0a90c83d1d40b57f1a2592e7c666b9bc925",
+          "76": "7a61b21086d23c187ea84726e412754175267a31e8def6a72e7b47b730886987",
+          "77": "6b2534a3893d50d928eeddbe8a15ac967cba5321be63aa4439a59cbcc523ee15",
+          "78": "7c757ae8db9fe7a5f1141e03e5fc86607b41e9c9a34a2e2d5e6f7f323f0e35e5",
+          "79": "0eff6fe3a7604f2c425be670422bbab7a62259c79b8bb3e18d3a154ac7455b6a",
+          "8": "30d3b41ada11ee917520df8ddeebe401b670b8de60cee74b1cee112de1ea086c",
+          "80": "44aab00d848349673635f7e306d005b8530219f67986facbce3cba2e715e249d",
+          "81": "603bb473f38855d74f2face44dd23b4cd1c8f92870f4847a9c8de4229482dd34",
+          "82": "709fb9f4d6a3c811019c4a401d590365dee0e8410e612e08c5b8b991fe96df6b",
+          "83": "4b014ceb4117e1a246846457b179994ca2e542d598dc666923a5144427324334",
+          "84": "0a0757ee529ae58761dd57ad65da14105393eb7904cfe85e5bc35d9bf1fba97a",
+          "85": "e54fe119a185e0f7cd7898371d9a1598b99d58bf94ddd0dd5d60ebf4624f05a9",
+          "86": "1a8d22d5961272675bd9b8279e124a60dd5d02e4e3e6d086e1174c6d0ddf919b",
+          "87": "19eb1fe538a5c271f14f672272e65d972ddb0acf2e80d88a7fc5350cf19350ed",
+          "88": "066399a76d3b593184ffed23ee18bba1b21a6c991234eaffb9d9fb9841128e7b",
+          "89": "1a93c40bbbb78473d76248db0f836fd5f2930a6207b6799013590c2f64326c18",
+          "9": "e115969b272c3dbb19128f621e952c7b1e89bd7b57360bb45cfd7e586c5c3c43",
+          "90": "bfccfa46004080cb540cf5d8a27a577dcb8d0b81c16243ae99d1a40cc4023626",
+          "91": "bc6f33f5c79b13696f23603a0ac8b0ae36d1334d12791f12a1ae2bc8a2d60045",
+          "92": "87449eb43d4558dc5c0428ec706dce5ebe105b355b41beb04f43282f47e26f1c",
+          "93": "a72740fc8f4336180856375a363720b892b2f8884ea081411d617817da4386e7",
+          "94": "05f59db2f8aa1a777091e48b6cf2985c6d05885114cdbcfdfc49253d6afbf836",
+          "95": "2d13b361881e22ffb284dc9a65e188b97a4b1c92e6d22b0f3fa8f4072c49bc1b",
+          "96": "bfa89e1ed8ad23b5186c6b85509e307160e68ff3cf432dac4e5575ea87b62864",
+          "97": "3d517a6cb51840411cc99ded3c5a0c877118b57d8c8e542052030d65abdf803d",
+          "98": "af1d76c872e414305c1f0b4ad271729cbf0871e2aca03ef6b082455547194e77",
+          "99": "36840e84ad3a39949b0aa8a8c6c809ce2e111a6ed31a099ec90c9c27ae65b826"
+        },
+        "p_rgh_internal_sha256": "a91640361ea62977bd69130c09da71396d803a622d4714531c8472e1408e148c",
+        "p_rgh_internal_value_count": 10099265,
+        "unchanged_checkpoint_field_sha256": {
+          "U": "2c928e1c126045e4263a48d7cb1a812027ddd3804c9b65d6199d2c0ab9433ac9",
+          "alpha.water": "20540502bf31d352d21e83d8249cecd3c66cd11bb011fd80103b01e2b5e71251",
+          "epsilon": "45dd9225816370ae52dda7c158c008e4f3918ee1f581f82865d40bc98751e44a",
+          "k": "73b735f5441c44fff2c07672a61b9d5b68905ed5187931de7ca897f345c61bc2",
+          "nut": "c538c8277fc5fade90dd2e80f1001140270f0f5508826c46559612fdf3596c3f",
+          "p": "2c544cdc7ed00f3a0c1457d12d067f68b233b48a91e5948c1fb2184a6db0d41c",
+          "phi": "1f3143d846159323063d417203875ab36d859fa75594707f686cb5915b691e66",
+          "uniform/cumulativeContErr": "b9c3d685a3a73a06bd666cdbe61a96b125dd347cdeeec5c375a6ab0578a4a940",
+          "uniform/functionObjects/functionObjectProperties": "5997af1cf8916ebf36d47b179573667e1f4d398dc5e62312a5855f3a8daa74fc",
+          "uniform/time": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+        }
+      },
+      "before": {
+        "p_rgh_file_sha256": "f202668608c245d07c70ac5de24199897a30f5a6680b519b998e3b079a1930e4",
+        "p_rgh_internal_rank_sha256": {
+          "0": "3ce2829de62889b4759e13a895d71cc2c7ab36ddb6627a740d24f97e4e604c6c",
+          "1": "1757173a19f697cebc50a79946c9a5eee909bfb81dc2c2cea583f934fafe2320",
+          "10": "5d8f04836daeef3509927a1a188ee392615f41470ab5f484cb11752a1cc124ad",
+          "100": "7cc0d04d406384206ad0be4df5d0c94e215a9da866c4ba3603b8cfa999a31ce2",
+          "101": "ce585dc8fdf3b2c7b0149370c52ce73ac93c56eac67f6f0ec80075ca090eb10e",
+          "102": "1640d90e10a3e973bb3d83cccf02890def796a5b62a300a5fab8a7263a1b70b7",
+          "103": "2545beb37051fd6f1c90e760695d286e5dfe044108b7144cb71da5d349cc6f7a",
+          "104": "91d1410458fd187c1f3536e4eefb5b572e09cc250b4ef8e85c421233b3fab0fb",
+          "105": "8669660822f664fd652ee6c7d77b7235d33052396e9bcfe459e44ab9b1e3a942",
+          "106": "3638ff0515df872caa1db5ba9000e63512578f55e9ef24589e065453f98c0f63",
+          "107": "e936b21e213cbe396966cedc7bd6d5fce99fc5a47022a4cdfa16ef744d9c2c00",
+          "108": "8d31b53071c790f842c41e9ef1d7468b10e90189ad02e1556bdc39d3736a542e",
+          "109": "6c7b33297ed652400b91a4ace87ad6afb6fcbea29b6b816bee6336d5ccbb4eb3",
+          "11": "7b8b9a49f2d5282abd741708bd0e455da46c55ff4a82358c86f65825d6c1495e",
+          "110": "292576567c764d0aedceb2f63f59493e210ae54bec39414020f8c8fd7ff11524",
+          "111": "5d60a65e84622765ce98eb77fb846367bb9391436ae2b531d5987f3f5e2c1cbf",
+          "112": "a2764f84ea4c13a80d488d189685c97169a3678ed01ca4a7b387a8649d3e4716",
+          "113": "47ff08d003ac0db00ac6299b27975f257faa6fc8a2e2a486d7af1fa8124b2182",
+          "114": "28d045e1f762ede52f9f8786d48937d29cc0e3f88ed3d968e3599af520ecbf1e",
+          "115": "ccab674fdabd03e14a2740305d73cd1ed5bccf49705c1f15ad0d954bc03af352",
+          "116": "7fa178e513fe6c09036e73e832fce82bb2e68c2e3b3cb3072afa84cb948285e4",
+          "117": "f7832ac46862f6cd927325628c369231fa40067700c6114b4cf399e6717bdaf8",
+          "118": "4d8215f6145c3313b3ea932e4179e2528556f9be9af55cbeebba30da12d07c4d",
+          "119": "76e27ed8ed04ec3911f7c465139f9945bb9ba36af73a87f212f9e721364a6c36",
+          "12": "f79c51a833d46b43e9d31af364e2eef91279ee608818c5845b79a3753cac36f5",
+          "13": "a74b8066d1f147e29fe580fb9f0735a1325e3b074d7ed9b6a4cdc37eae835372",
+          "14": "231022fb1f138a394b8c285d97e53db39ef42576dbac58aed2dd0b4cc2b1f295",
+          "15": "f049c512b577d731a72ed862853d6ccfe7e156f99ebc1fac3e39ed08bcb897db",
+          "16": "e260c4816de583d0d48e57660dbd6b9550494247a0f9de618e0ecc2f00e41441",
+          "17": "897a4449791e000fd5575c99216570523d4473edb2e57766a30684dd5c8e577a",
+          "18": "b49257a9ffbfc5401c7cb43f12360141380967f3d5dd8b3293a00cd9c0675941",
+          "19": "910455ba7460eb1b121630923ee31630855dc492af1827da2c721bc1568ab4a6",
+          "2": "6a93141886c51bd33a35ff1faac7924f9ba5ab91ec3edf1192c8051167d211f7",
+          "20": "e36efdbfa090dd9294968c397c4ed0d600961f304151a53b540fcafe79bb8144",
+          "21": "bc22b9e0839cfedda99aa7ba9d57d0250550fd56a2184229f0452294493f12db",
+          "22": "819d79763c7580c6eb28dfe132677704eea548022722aa64ab4245b211004a76",
+          "23": "d2a02b147008ac2daac47de7dc81e69142facd3684c5be0452be734f4e2b2710",
+          "24": "3e9be8d60c4cfd7914e1e34211b6bed094088099d15f6e585440a6181bf431f1",
+          "25": "ccabb49855eb5ca56471f75491c662a46eba79545f47e4a5b97e380e1eb433a2",
+          "26": "ef8e878576ba27f089dec6ad761617aaac337e5a38baa20da66c3fa8b49d2534",
+          "27": "aff81dd8d9a778c61718da1811a6a997eb0c8704033d527dd10a42d63766d90b",
+          "28": "c189e124850adac0b281624da9b67340323195632206fd5bd4b489a836a294c9",
+          "29": "4721f7ced3beff93bfbf66091e0437f6999b88dc8f4b7801de6e09b087ca2b57",
+          "3": "fca647a58a91c57ce2746e28326112607073172c74f777a5155d2b06b0a84fc8",
+          "30": "009f3eecbf31e6a21865ec6df6afe8607030aac4e39af510ae35482c0bf53710",
+          "31": "6c1616922d4d681d43695e9f0c1e3160ce745abd9c291d65c7ac13507598c655",
+          "32": "728d92b9b45cf198f8c15da979ae59a0785d802dd7185cfbe5e59b3c82f0f8da",
+          "33": "404a1ef2c4335cf6a7e3db564ea423c80df14a29511a18db97337f9914b389e7",
+          "34": "a715bf5d265837fee167bfe56e05375b4b84f7895f1aa42d6aff15c4f409c2d5",
+          "35": "5ca09664e8926ac1fb9e985a796b73b19ab6d1718c10ce275c39492f9d7b647c",
+          "36": "8a6f58ba51745a39c96e8dcdb467d5e512adcffd3e20952215e30b9d34fa091d",
+          "37": "e26ffcee69da26bf708fc957fbeb4230ac5c10a979d758d662e13c39b6fe3657",
+          "38": "30dbbcd5c419f1263a5fa9f1e44b8a7260688c7306e76fe028d0047eb282f752",
+          "39": "3948de9f10f7620f7a583bf3a74236a6776b0ec73e75fd378ca7a5728f4f75fe",
+          "4": "123d45e4e1520a6c657bb0b6388eb556833b663f121f936fec6729ae9063ef02",
+          "40": "33c8470ae311100633eb11b9d52c139b47c4e9c5627ad5896f156aa2e45e75ca",
+          "41": "d93e430edc3c3844386001ded74a397a5330b94da26d06dc515e69df0a3ede16",
+          "42": "14fa0c60220dbbc93025bc0ec53f9024c60d0094a55282e30433b275625ac168",
+          "43": "fefce50c7907f619c3c820b3cf9baba12a5e11e548c6622b3c4de98f8c934815",
+          "44": "c3c6e63504323edc32bd7b854391dcc00c33336bd32f4309c70871ebcb7cb27c",
+          "45": "fc296d6d182b6b7a481b8fcfdd526a294ffd9b3a8282f2ad75072efc6ce842cf",
+          "46": "1b1b99fe3d7b177d79752f9d9ef858f127080461f879f606b9eae9bd38ab3617",
+          "47": "94c763509b3b00581c36fb9b297f79d0e83607db54c45f52bd16126f447816c8",
+          "48": "e04caf636711f3fe2fdc1ed9b568f850addbd98811ac9ff74dfb9726ba719161",
+          "49": "c7bf18b40ce80b12d892350d92a7d38a791e4a16c48ce97a846fc88d64d99429",
+          "5": "8a67d9fca0b86f8c27bba0480c2c00d034a3e5fa76dd8bc73af5869f826d0f7a",
+          "50": "9724cea5227d9ab58d7136be225bf8fc39c052d3265e9727dfafb7b7803efd12",
+          "51": "e3593c3a573a88eb83b4ed8ae539371107f49a05c5651ce06d959860192eec9c",
+          "52": "842a21120603fcd3062babfd77c579d6c71e85ffd78d6b9c6b616db37af66ff8",
+          "53": "e557068300179fb861043af6962b4c5eda8548ac0aa84b830dde9d0d23a5e62d",
+          "54": "d1317b1940f80ab033a64bed21a360a6065f567cd56be4739e03fb8573bc69be",
+          "55": "e5202c4944229339387e6eb9eb4ff49f81d2d16034b7cb85825dd36afc47764d",
+          "56": "33c927f9547e646e346421822d0393068b81a6e2cbcae7cd67c64c42f79e2eca",
+          "57": "25f623fedeb3bfffeec21c5c652caa2543ba00337feb6aff52d8e427c6398c02",
+          "58": "1af765b1be845cc1a641d1c5b96365f8a1ef15126e642cd839b92888f2dc6e3f",
+          "59": "3dde4395e01569445dae598997e037b9f2b6a2ba68a20f0166a1a087fc3c0e6a",
+          "6": "f718ccdc65f1083ec5d7eef55434bcc1a2718052763e20e193d4f6fb86314742",
+          "60": "d9da73c5784f0f7d4094c8970c32222ecaa53ce364a8d760358281e00d6cc3e3",
+          "61": "16f131f27d65a0a19482e9871239894923577790e9bb12679683f9afd529e5e2",
+          "62": "55d3fe3fad00bfc4f1d1522116e34cea6abf5c209c78d8862fe3bb58d73dd2d3",
+          "63": "efdd6f140b77c0403fccbc57deb957ef19b9b530ae26549691d2c02db74b95f4",
+          "64": "1343959989b98a05ad5a32c97d45ac2dfc18fc0a818b2b450a6cb70389a55771",
+          "65": "bac57f9de9dbeaa11e2f8cac2935b79f146788969b4bedebb7d9ffbf45eb865c",
+          "66": "cd0769b951eb15f2ad137fe17c54e55a4ce2eeaa2af083b4ec1e7b0d421dd972",
+          "67": "3b67eb7aae170dd04592577ef8f3e8daf13f1db87cdc2aa989a98550a58169ef",
+          "68": "b34eec58c93179285004baddb065d281756fede7adec7f50afbe8e5ea537936b",
+          "69": "028325c8a9ec525dc152181ebab9e776ac7b06319f0f9bdb2982f5ebd4e36fe4",
+          "7": "34f9f5273b30691702c02bad57de9956836efeffb5ad3eef9acf512dd8086bda",
+          "70": "24a4dd288791874ac36f924c30bef68281919d8be6f3ffcf643159964ff1542a",
+          "71": "1cbf1d77ed952a6fc65392025ecba5f4f75760bd63b94b12369ba3468e74bbd4",
+          "72": "51aba94c49f3de2b7a474b8865202deea5ba4ed1eeeb1e53782b23cb9acbef51",
+          "73": "c61d8291ca5db90650a26892ca73bc0d00b08e361708c3e8dda1a7c44503c7b0",
+          "74": "dd4a15c3ca08eff3e5bb903f90549dfd23c4f97dfcbb0fc09e3492ae03da83c0",
+          "75": "1063b66b5da299a3dc44948178c5a0a90c83d1d40b57f1a2592e7c666b9bc925",
+          "76": "7a61b21086d23c187ea84726e412754175267a31e8def6a72e7b47b730886987",
+          "77": "6b2534a3893d50d928eeddbe8a15ac967cba5321be63aa4439a59cbcc523ee15",
+          "78": "7c757ae8db9fe7a5f1141e03e5fc86607b41e9c9a34a2e2d5e6f7f323f0e35e5",
+          "79": "0eff6fe3a7604f2c425be670422bbab7a62259c79b8bb3e18d3a154ac7455b6a",
+          "8": "30d3b41ada11ee917520df8ddeebe401b670b8de60cee74b1cee112de1ea086c",
+          "80": "44aab00d848349673635f7e306d005b8530219f67986facbce3cba2e715e249d",
+          "81": "603bb473f38855d74f2face44dd23b4cd1c8f92870f4847a9c8de4229482dd34",
+          "82": "709fb9f4d6a3c811019c4a401d590365dee0e8410e612e08c5b8b991fe96df6b",
+          "83": "4b014ceb4117e1a246846457b179994ca2e542d598dc666923a5144427324334",
+          "84": "0a0757ee529ae58761dd57ad65da14105393eb7904cfe85e5bc35d9bf1fba97a",
+          "85": "e54fe119a185e0f7cd7898371d9a1598b99d58bf94ddd0dd5d60ebf4624f05a9",
+          "86": "1a8d22d5961272675bd9b8279e124a60dd5d02e4e3e6d086e1174c6d0ddf919b",
+          "87": "19eb1fe538a5c271f14f672272e65d972ddb0acf2e80d88a7fc5350cf19350ed",
+          "88": "066399a76d3b593184ffed23ee18bba1b21a6c991234eaffb9d9fb9841128e7b",
+          "89": "1a93c40bbbb78473d76248db0f836fd5f2930a6207b6799013590c2f64326c18",
+          "9": "e115969b272c3dbb19128f621e952c7b1e89bd7b57360bb45cfd7e586c5c3c43",
+          "90": "bfccfa46004080cb540cf5d8a27a577dcb8d0b81c16243ae99d1a40cc4023626",
+          "91": "bc6f33f5c79b13696f23603a0ac8b0ae36d1334d12791f12a1ae2bc8a2d60045",
+          "92": "87449eb43d4558dc5c0428ec706dce5ebe105b355b41beb04f43282f47e26f1c",
+          "93": "a72740fc8f4336180856375a363720b892b2f8884ea081411d617817da4386e7",
+          "94": "05f59db2f8aa1a777091e48b6cf2985c6d05885114cdbcfdfc49253d6afbf836",
+          "95": "2d13b361881e22ffb284dc9a65e188b97a4b1c92e6d22b0f3fa8f4072c49bc1b",
+          "96": "bfa89e1ed8ad23b5186c6b85509e307160e68ff3cf432dac4e5575ea87b62864",
+          "97": "3d517a6cb51840411cc99ded3c5a0c877118b57d8c8e542052030d65abdf803d",
+          "98": "af1d76c872e414305c1f0b4ad271729cbf0871e2aca03ef6b082455547194e77",
+          "99": "36840e84ad3a39949b0aa8a8c6c809ce2e111a6ed31a099ec90c9c27ae65b826"
+        },
+        "p_rgh_internal_sha256": "a91640361ea62977bd69130c09da71396d803a622d4714531c8472e1408e148c",
+        "p_rgh_internal_value_count": 10099265,
+        "unchanged_checkpoint_field_sha256": {
+          "U": "2c928e1c126045e4263a48d7cb1a812027ddd3804c9b65d6199d2c0ab9433ac9",
+          "alpha.water": "20540502bf31d352d21e83d8249cecd3c66cd11bb011fd80103b01e2b5e71251",
+          "epsilon": "45dd9225816370ae52dda7c158c008e4f3918ee1f581f82865d40bc98751e44a",
+          "k": "73b735f5441c44fff2c07672a61b9d5b68905ed5187931de7ca897f345c61bc2",
+          "nut": "c538c8277fc5fade90dd2e80f1001140270f0f5508826c46559612fdf3596c3f",
+          "p": "2c544cdc7ed00f3a0c1457d12d067f68b233b48a91e5948c1fb2184a6db0d41c",
+          "phi": "1f3143d846159323063d417203875ab36d859fa75594707f686cb5915b691e66",
+          "uniform/cumulativeContErr": "b9c3d685a3a73a06bd666cdbe61a96b125dd347cdeeec5c375a6ab0578a4a940",
+          "uniform/functionObjects/functionObjectProperties": "5997af1cf8916ebf36d47b179573667e1f4d398dc5e62312a5855f3a8daa74fc",
+          "uniform/time": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+        }
+      },
+      "command": [
+        "srun",
+        "--nodes=3",
+        "--ntasks=120",
+        "--ntasks-per-node=40",
+        "changeDictionary",
+        "-parallel",
+        "-fileHandler",
+        "collated",
+        "-case",
+        "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499/attempt/case",
+        "-time",
+        "0.2",
+        "-dict",
+        "system/changeDictionaryDict"
+      ],
+      "dictionary_sha256": "69504e4ebaa2a9bda32cb86f0a7d981d5630aac0f0fdfd06be9a8daf639094a7",
+      "p0_gauge_pa": 0.0,
+      "patches": [
+        "downstreamOutlet",
+        "bottomOutlet",
+        "spanwiseMinus",
+        "spanwisePlus"
+      ],
+      "status": "native_boundary_change_verified_internal_arrays_and_other_fields_unchanged",
+      "utility": "changeDictionary -parallel -fileHandler collated -time 0.2"
+    },
+    "result_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499/result.tar.gz",
+    "result_archive_member_sizes": [
+      {
+        "bytes": 12402,
+        "path": "attempt/case/case-inputs.json"
+      },
+      {
+        "bytes": 732,
+        "path": "attempt/case/constant/g"
+      },
+      {
+        "bytes": 755,
+        "path": "attempt/case/constant/hRef"
+      },
+      {
+        "bytes": 1648,
+        "path": "attempt/case/constant/polyMesh/boundary"
+      },
+      {
+        "bytes": 614667938,
+        "path": "attempt/case/constant/polyMesh/faces"
+      },
+      {
+        "bytes": 122238906,
+        "path": "attempt/case/constant/polyMesh/neighbour"
+      },
+      {
+        "bytes": 122614462,
+        "path": "attempt/case/constant/polyMesh/owner"
+      },
+      {
+        "bytes": 250857142,
+        "path": "attempt/case/constant/polyMesh/points"
+      },
+      {
+        "bytes": 881,
+        "path": "attempt/case/constant/transportProperties"
+      },
+      {
+        "bytes": 952,
+        "path": "attempt/case/constant/turbulenceProperties"
+      },
+      {
+        "bytes": 298,
+        "path": "attempt/case/parent-checkpoint-receipt.json"
+      },
+      {
+        "bytes": 29880,
+        "path": "attempt/case/postProcessing/aircraftWallFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29294,
+        "path": "attempt/case/postProcessing/alphaExtrema/0.200000000000/fieldMinMax.dat"
+      },
+      {
+        "bytes": 29423,
+        "path": "attempt/case/postProcessing/bottomOutletFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29402,
+        "path": "attempt/case/postProcessing/downstreamOutletFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 513018,
+        "path": "attempt/case/postProcessing/failureLocations/0.200000000000/fieldMinMax.dat"
+      },
+      {
+        "bytes": 29889,
+        "path": "attempt/case/postProcessing/gasInletFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 30381,
+        "path": "attempt/case/postProcessing/nozzleFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29738,
+        "path": "attempt/case/postProcessing/spanwiseMinusFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29640,
+        "path": "attempt/case/postProcessing/spanwisePlusFlux/0.200000000000/surfaceFieldValue.dat"
+      },
+      {
+        "bytes": 29294,
+        "path": "attempt/case/postProcessing/speedExtrema/0.200000000000/fieldMinMax.dat"
+      },
+      {
+        "bytes": 19953,
+        "path": "attempt/case/postProcessing/waterVolume/0.200000000000/volFieldValue.dat"
+      },
+      {
+        "bytes": 280345074,
+        "path": "attempt/case/processors120/0.200000000000/U"
+      },
+      {
+        "bytes": 93113216,
+        "path": "attempt/case/processors120/0.200000000000/alpha.water"
+      },
+      {
+        "bytes": 93708944,
+        "path": "attempt/case/processors120/0.200000000000/epsilon"
+      },
+      {
+        "bytes": 93704028,
+        "path": "attempt/case/processors120/0.200000000000/k"
+      },
+      {
+        "bytes": 93779707,
+        "path": "attempt/case/processors120/0.200000000000/nut"
+      },
+      {
+        "bytes": 93500698,
+        "path": "attempt/case/processors120/0.200000000000/p"
+      },
+      {
+        "bytes": 93838983,
+        "path": "attempt/case/processors120/0.200000000000/p_rgh"
+      },
+      {
+        "bytes": 251579442,
+        "path": "attempt/case/processors120/0.200000000000/phi"
+      },
+      {
+        "bytes": 1016,
+        "path": "attempt/case/processors120/0.200000000000/uniform/cumulativeContErr"
+      },
+      {
+        "bytes": 5527,
+        "path": "attempt/case/processors120/0.200000000000/uniform/functionObjects/functionObjectProperties"
+      },
+      {
+        "bytes": 1060,
+        "path": "attempt/case/processors120/0.200000000000/uniform/time"
+      },
+      {
+        "bytes": 530651,
+        "path": "attempt/case/processors120/constant/polyMesh/boundary"
+      },
+      {
+        "bytes": 13606,
+        "path": "attempt/case/processors120/constant/polyMesh/boundaryProcAddressing"
+      },
+      {
+        "bytes": 40402372,
+        "path": "attempt/case/processors120/constant/polyMesh/cellProcAddressing"
+      },
+      {
+        "bytes": 125645804,
+        "path": "attempt/case/processors120/constant/polyMesh/faceProcAddressing"
+      },
+      {
+        "bytes": 629897118,
+        "path": "attempt/case/processors120/constant/polyMesh/faces"
+      },
+      {
+        "bytes": 119217148,
+        "path": "attempt/case/processors120/constant/polyMesh/neighbour"
+      },
+      {
+        "bytes": 125645948,
+        "path": "attempt/case/processors120/constant/polyMesh/owner"
+      },
+      {
+        "bytes": 44956136,
+        "path": "attempt/case/processors120/constant/polyMesh/pointProcAddressing"
+      },
+      {
+        "bytes": 269710334,
+        "path": "attempt/case/processors120/constant/polyMesh/points"
+      },
+      {
+        "bytes": 913,
+        "path": "attempt/case/system/changeDictionaryDict"
+      },
+      {
+        "bytes": 4342,
+        "path": "attempt/case/system/controlDict"
+      },
+      {
+        "bytes": 164,
+        "path": "attempt/case/system/decomposeParDict"
+      },
+      {
+        "bytes": 1159,
+        "path": "attempt/case/system/fvSchemes"
+      },
+      {
+        "bytes": 2111,
+        "path": "attempt/case/system/fvSolution"
+      },
+      {
+        "bytes": 842,
+        "path": "attempt/case/system/setExprFieldsDict"
+      },
+      {
+        "bytes": 3123,
+        "path": "attempt/manifest.json"
+      },
+      {
+        "bytes": 10812,
+        "path": "attempt/max-speed.csv"
+      },
+      {
+        "bytes": 2629,
+        "path": "attempt/native-source-evidence.json"
+      },
+      {
+        "bytes": 928,
+        "path": "attempt/native-source-evidence.solver-banner.log"
+      },
+      {
+        "bytes": 26288,
+        "path": "attempt/parent-ledger-summary.json"
+      },
+      {
+        "bytes": 6678,
+        "path": "attempt/parent-seed-manifest.json"
+      },
+      {
+        "bytes": 22483,
+        "path": "attempt/pressure-total-change-receipt.json"
+      },
+      {
+        "bytes": 4342,
+        "path": "attempt/pressure-total-change.log"
+      },
+      {
+        "bytes": 59,
+        "path": "attempt/rank0-affinity.txt"
+      },
+      {
+        "bytes": 11400,
+        "path": "attempt/seed-verification-copy.json"
+      },
+      {
+        "bytes": 11400,
+        "path": "attempt/seed-verification.json"
+      },
+      {
+        "bytes": 17,
+        "path": "attempt/solver-step-identity.txt"
+      },
+      {
+        "bytes": 459,
+        "path": "attempt/solver-step.sh"
+      },
+      {
+        "bytes": 2069466,
+        "path": "attempt/solver.log"
+      },
+      {
+        "bytes": 45655,
+        "path": "attempt/source/audit_interface_wave_flux.py"
+      },
+      {
+        "bytes": 105688,
+        "path": "attempt/source/audit_iso_vof_ledger.py"
+      },
+      {
+        "bytes": 29296,
+        "path": "attempt/source/audit_restart.py"
+      },
+      {
+        "bytes": 10632,
+        "path": "attempt/source/collect_native_provenance.py"
+      },
+      {
+        "bytes": 72383,
+        "path": "attempt/source/continue_rouaix_case.py"
+      },
+      {
+        "bytes": 37319,
+        "path": "attempt/source/hpc_metrics.py"
+      },
+      {
+        "bytes": 47126,
+        "path": "attempt/source/i4f_native_face_reader.py"
+      },
+      {
+        "bytes": 45698,
+        "path": "attempt/source/prepare_case.py"
+      },
+      {
+        "bytes": 2105,
+        "path": "attempt/source/restart_pressure.sbatch"
+      },
+      {
+        "bytes": 103275,
+        "path": "attempt/source/run_pilot.py"
+      },
+      {
+        "bytes": 54850,
+        "path": "attempt/source/run_restart.py"
+      },
+      {
+        "bytes": 2631,
+        "path": "attempt/source/source-provenance.json"
+      },
+      {
+        "bytes": 1176,
+        "path": "attempt/source-capsule-index.json"
+      }
+    ],
+    "result_archive_members": 110,
+    "result_archive_sha256": "959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029",
+    "run_wall_s": 1625.917340976186,
+    "schema_version": 1,
+    "seed_verification": {
+      "archive_member_count": 131,
+      "archive_members_sha256": "512371d786df18b363ff8969c9a994aff7974d2e80132cec8bd98e310025bc48",
+      "archive_status": "verified_crc_hash_and_member_list",
+      "checkpoint_fields": {
+        "U": {
+          "bytes": 280345074,
+          "sha256": "2c928e1c126045e4263a48d7cb1a812027ddd3804c9b65d6199d2c0ab9433ac9"
+        },
+        "alpha.water": {
+          "bytes": 93113216,
+          "sha256": "20540502bf31d352d21e83d8249cecd3c66cd11bb011fd80103b01e2b5e71251"
+        },
+        "epsilon": {
+          "bytes": 93708944,
+          "sha256": "45dd9225816370ae52dda7c158c008e4f3918ee1f581f82865d40bc98751e44a"
+        },
+        "k": {
+          "bytes": 93704028,
+          "sha256": "73b735f5441c44fff2c07672a61b9d5b68905ed5187931de7ca897f345c61bc2"
+        },
+        "nut": {
+          "bytes": 93779707,
+          "sha256": "c538c8277fc5fade90dd2e80f1001140270f0f5508826c46559612fdf3596c3f"
+        },
+        "p": {
+          "bytes": 93500698,
+          "sha256": "2c544cdc7ed00f3a0c1457d12d067f68b233b48a91e5948c1fb2184a6db0d41c"
+        },
+        "p_rgh": {
+          "bytes": 94232250,
+          "sha256": "f202668608c245d07c70ac5de24199897a30f5a6680b519b998e3b079a1930e4"
+        },
+        "phi": {
+          "bytes": 251579442,
+          "sha256": "1f3143d846159323063d417203875ab36d859fa75594707f686cb5915b691e66"
+        },
+        "uniform/cumulativeContErr": {
+          "bytes": 1016,
+          "sha256": "b9c3d685a3a73a06bd666cdbe61a96b125dd347cdeeec5c375a6ab0578a4a940"
+        },
+        "uniform/functionObjects/functionObjectProperties": {
+          "bytes": 5527,
+          "sha256": "5997af1cf8916ebf36d47b179573667e1f4d398dc5e62312a5855f3a8daa74fc"
+        },
+        "uniform/time": {
+          "bytes": 1060,
+          "sha256": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+        }
+      },
+      "checkpoint_receipt_sha256": "58ed6a4413d56d660b96ef4c5aa4f6031a3125c682a1d4b48217c5dfe3f21008",
+      "collated_decomposition_mesh": {
+        "boundary": {
+          "bytes": 530651,
+          "sha256": "1be8f2a6ec13edee2d795e09a061f3cd87ffe06fa8e1f8104d96894a5dee9ac0"
+        },
+        "boundaryProcAddressing": {
+          "bytes": 13606,
+          "sha256": "39e7d4254365e96ff21c302481e03a5383a02be84ff090fbad8e79e1519f0098"
+        },
+        "cellProcAddressing": {
+          "bytes": 40402372,
+          "sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6"
+        },
+        "faceProcAddressing": {
+          "bytes": 125645804,
+          "sha256": "dd1b41f360d77887b273de29a8b4b8791abd86e8dee51aed95c26d254a06aa99"
+        },
+        "faces": {
+          "bytes": 629897118,
+          "sha256": "8f4a7929dfba9b0b75bac1d8c209d05b04b50f179b4782e8ece1da0cb9376027"
+        },
+        "neighbour": {
+          "bytes": 119217148,
+          "sha256": "9bbdd059721eb026236882eaac7fe8270f4ab41ed36dd75e9a168f316ed68349"
+        },
+        "owner": {
+          "bytes": 125645948,
+          "sha256": "c58d04297282a48e6179fc141406240a8eccca61ccd079e5e954e437c08f528b"
+        },
+        "pointProcAddressing": {
+          "bytes": 44956136,
+          "sha256": "f5c6092911e1a09c5fbd21a4d64ad19a1451116c510287d51d746c9831e12884"
+        },
+        "points": {
+          "bytes": 269710334,
+          "sha256": "c2ed9859fed5ec3a3e9e539b7755f1d7abedbbf8dbbb731338706d332672db0b"
+        }
+      },
+      "parent_case_input_sha256": {
+        "case-inputs.json": "4461b2958f995363945521260cca93ff6142529f0c27753133f43d02b5d8a771",
+        "constant/polyMesh/boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+        "constant/polyMesh/faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+        "constant/polyMesh/neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+        "constant/polyMesh/owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+        "constant/polyMesh/points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+        "constant/transportProperties": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f",
+        "constant/turbulenceProperties": "c6a7d91e95eff3464545922a9baaab454a7da870fbefffc05640fb6c63d4f3ab",
+        "system/controlDict": "47e2c3e66ee4d71d6a18752153ce22155c5dc3b9b7f59cccbea54704afc34dc5",
+        "system/decomposeParDict": "8df44edca8a337353994b51c5084e34d55226838c5a591d4b7d378ae57a2f180",
+        "system/fvSchemes": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+        "system/fvSolution": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+      },
+      "parent_inventory_m3": 0.2508975771509,
+      "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+      "parent_manifest_sha256": "30992c04b1871c3c0204e28ff8fe60ec2cda514a32557e59d97b25559eb09be7",
+      "schema_version": 1,
+      "selected_files": [
+        {
+          "bytes": 11397,
+          "path": "attempt/case/case-inputs.json",
+          "sha256": "4461b2958f995363945521260cca93ff6142529f0c27753133f43d02b5d8a771"
+        },
+        {
+          "bytes": 732,
+          "path": "attempt/case/constant/g",
+          "sha256": "18f0445d263795f548dd7cbe066b74d4fa2458ede883efcd94d95f3c5a89d7d4"
+        },
+        {
+          "bytes": 755,
+          "path": "attempt/case/constant/hRef",
+          "sha256": "f2999e33aeeab37967b295381c225dcb2a0a0f8dbed45a7eb0e66e86867cca82"
+        },
+        {
+          "bytes": 1648,
+          "path": "attempt/case/constant/polyMesh/boundary",
+          "sha256": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+        },
+        {
+          "bytes": 614667938,
+          "path": "attempt/case/constant/polyMesh/faces",
+          "sha256": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160"
+        },
+        {
+          "bytes": 122238906,
+          "path": "attempt/case/constant/polyMesh/neighbour",
+          "sha256": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc"
+        },
+        {
+          "bytes": 122614462,
+          "path": "attempt/case/constant/polyMesh/owner",
+          "sha256": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb"
+        },
+        {
+          "bytes": 250857142,
+          "path": "attempt/case/constant/polyMesh/points",
+          "sha256": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d"
+        },
+        {
+          "bytes": 881,
+          "path": "attempt/case/constant/transportProperties",
+          "sha256": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f"
+        },
+        {
+          "bytes": 952,
+          "path": "attempt/case/constant/turbulenceProperties",
+          "sha256": "c6a7d91e95eff3464545922a9baaab454a7da870fbefffc05640fb6c63d4f3ab"
+        },
+        {
+          "bytes": 280345074,
+          "path": "attempt/case/processors120/0.200000000000/U",
+          "sha256": "2c928e1c126045e4263a48d7cb1a812027ddd3804c9b65d6199d2c0ab9433ac9"
+        },
+        {
+          "bytes": 93113216,
+          "path": "attempt/case/processors120/0.200000000000/alpha.water",
+          "sha256": "20540502bf31d352d21e83d8249cecd3c66cd11bb011fd80103b01e2b5e71251"
+        },
+        {
+          "bytes": 93708944,
+          "path": "attempt/case/processors120/0.200000000000/epsilon",
+          "sha256": "45dd9225816370ae52dda7c158c008e4f3918ee1f581f82865d40bc98751e44a"
+        },
+        {
+          "bytes": 93704028,
+          "path": "attempt/case/processors120/0.200000000000/k",
+          "sha256": "73b735f5441c44fff2c07672a61b9d5b68905ed5187931de7ca897f345c61bc2"
+        },
+        {
+          "bytes": 93779707,
+          "path": "attempt/case/processors120/0.200000000000/nut",
+          "sha256": "c538c8277fc5fade90dd2e80f1001140270f0f5508826c46559612fdf3596c3f"
+        },
+        {
+          "bytes": 93500698,
+          "path": "attempt/case/processors120/0.200000000000/p",
+          "sha256": "2c544cdc7ed00f3a0c1457d12d067f68b233b48a91e5948c1fb2184a6db0d41c"
+        },
+        {
+          "bytes": 94232250,
+          "path": "attempt/case/processors120/0.200000000000/p_rgh",
+          "sha256": "f202668608c245d07c70ac5de24199897a30f5a6680b519b998e3b079a1930e4"
+        },
+        {
+          "bytes": 251579442,
+          "path": "attempt/case/processors120/0.200000000000/phi",
+          "sha256": "1f3143d846159323063d417203875ab36d859fa75594707f686cb5915b691e66"
+        },
+        {
+          "bytes": 1016,
+          "path": "attempt/case/processors120/0.200000000000/uniform/cumulativeContErr",
+          "sha256": "b9c3d685a3a73a06bd666cdbe61a96b125dd347cdeeec5c375a6ab0578a4a940"
+        },
+        {
+          "bytes": 5527,
+          "path": "attempt/case/processors120/0.200000000000/uniform/functionObjects/functionObjectProperties",
+          "sha256": "5997af1cf8916ebf36d47b179573667e1f4d398dc5e62312a5855f3a8daa74fc"
+        },
+        {
+          "bytes": 1060,
+          "path": "attempt/case/processors120/0.200000000000/uniform/time",
+          "sha256": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+        },
+        {
+          "bytes": 530651,
+          "path": "attempt/case/processors120/constant/polyMesh/boundary",
+          "sha256": "1be8f2a6ec13edee2d795e09a061f3cd87ffe06fa8e1f8104d96894a5dee9ac0"
+        },
+        {
+          "bytes": 13606,
+          "path": "attempt/case/processors120/constant/polyMesh/boundaryProcAddressing",
+          "sha256": "39e7d4254365e96ff21c302481e03a5383a02be84ff090fbad8e79e1519f0098"
+        },
+        {
+          "bytes": 40402372,
+          "path": "attempt/case/processors120/constant/polyMesh/cellProcAddressing",
+          "sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6"
+        },
+        {
+          "bytes": 125645804,
+          "path": "attempt/case/processors120/constant/polyMesh/faceProcAddressing",
+          "sha256": "dd1b41f360d77887b273de29a8b4b8791abd86e8dee51aed95c26d254a06aa99"
+        },
+        {
+          "bytes": 629897118,
+          "path": "attempt/case/processors120/constant/polyMesh/faces",
+          "sha256": "8f4a7929dfba9b0b75bac1d8c209d05b04b50f179b4782e8ece1da0cb9376027"
+        },
+        {
+          "bytes": 119217148,
+          "path": "attempt/case/processors120/constant/polyMesh/neighbour",
+          "sha256": "9bbdd059721eb026236882eaac7fe8270f4ab41ed36dd75e9a168f316ed68349"
+        },
+        {
+          "bytes": 125645948,
+          "path": "attempt/case/processors120/constant/polyMesh/owner",
+          "sha256": "c58d04297282a48e6179fc141406240a8eccca61ccd079e5e954e437c08f528b"
+        },
+        {
+          "bytes": 44956136,
+          "path": "attempt/case/processors120/constant/polyMesh/pointProcAddressing",
+          "sha256": "f5c6092911e1a09c5fbd21a4d64ad19a1451116c510287d51d746c9831e12884"
+        },
+        {
+          "bytes": 269710334,
+          "path": "attempt/case/processors120/constant/polyMesh/points",
+          "sha256": "c2ed9859fed5ec3a3e9e539b7755f1d7abedbbf8dbbb731338706d332672db0b"
+        },
+        {
+          "bytes": 4338,
+          "path": "attempt/case/system/controlDict",
+          "sha256": "47e2c3e66ee4d71d6a18752153ce22155c5dc3b9b7f59cccbea54704afc34dc5"
+        },
+        {
+          "bytes": 164,
+          "path": "attempt/case/system/decomposeParDict",
+          "sha256": "8df44edca8a337353994b51c5084e34d55226838c5a591d4b7d378ae57a2f180"
+        },
+        {
+          "bytes": 1159,
+          "path": "attempt/case/system/fvSchemes",
+          "sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13"
+        },
+        {
+          "bytes": 2111,
+          "path": "attempt/case/system/fvSolution",
+          "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+        },
+        {
+          "bytes": 842,
+          "path": "attempt/case/system/setExprFieldsDict",
+          "sha256": "1feb5a66222198a2133b26353fd75dfeecdb9fa61e877be27d73df977ad5e891"
+        },
+        {
+          "bytes": 26288,
+          "path": "attempt/ledger/summary.json",
+          "sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300"
+        },
+        {
+          "bytes": 6678,
+          "path": "attempt/manifest.json",
+          "sha256": "30992c04b1871c3c0204e28ff8fe60ec2cda514a32557e59d97b25559eb09be7"
+        }
+      ],
+      "source_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9"
+    },
+    "setup_command": "srun",
+    "solver_elapsed_s": 1569.0426661979873,
+    "solver_end_marker": false,
+    "solver_exit_code": 143,
+    "solver_log_sha256": "215d933a024026fe07b1780f5e8370d41c1ac2ce3e497324ec1fd4c7ea10cd1f",
+    "solver_max_u_m_s": 3.84612084717e+51,
+    "solver_started_monotonic": 2003545.7344867,
+    "solver_started_utc": "2026-10-28T15:24:01.424499+00:00",
+    "solver_time_s": 0.2496,
+    "solver_time_steps_recorded": 495,
+    "solver_version": "v2512",
+    "solver_wall_s": 1569.0582822740544,
+    "start_time_s": 0.2,
+    "started_utc": "2026-10-28T15:23:04.612273+00:00",
+    "status": "failed_preserved",
+    "stop_reason": "operational stop: max|U|=3.84612e+51 m/s exceeds 1000 m/s",
+    "stop_requested_utc": "2026-10-28T15:50:05.959082+00:00",
+    "stop_signal_acknowledged_utc": "2026-10-28T15:50:08.461250+00:00",
+    "stop_signal_job_step": "14702499.1",
+    "stop_signal_request_receipt": {
+      "signal_command": {
+        "command": [
+          "scancel",
+          "--signal=12",
+          "14702499.1"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "step_id": "1",
+      "step_identity": [
+        "14702499",
+        "1",
+        "120",
+        "0"
+      ],
+      "task_count": 120,
+      "verification": {
+        "active_job_query": {
+          "command": [
+            "scontrol",
+            "show",
+            "job",
+            "-o",
+            "14702499"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "JobId=14702499 JobName=ml-vof UserId=nk_memj(16018) GroupId=nk_memj(16018) MCS_label=N/A Priority=2092 Nice=0 Account=nk_meshapplied QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:27:07 TimeLimit=01:30:00 TimeMin=N/A SubmitTime=2026-10-28T16:21:00 EligibleTime=2026-10-28T16:22:08 AccrueTime=2026-10-28T16:22:08 StartTime=2026-10-28T16:23:00 EndTime=2026-10-28T17:53:00 Deadline=N/A PreemptEligibleTime=2026-10-28T16:23:00 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-28T16:23:00 Scheduler=Backfill Partition=cpu-short AllocNode:Sid=10.150.1.134:1222027 ReqNodeList=(null) ExcNodeList=(null) NodeList=x1001c4s1b0n[0-1],x1001c4s2b0n0 BatchHost=x1001c4s1b0n0 NumNodes=3 NumCPUs=120 NumTasks=120 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=120,mem=66G,node=3,billing=120 AllocTRES=cpu=120,mem=66G,node=3,billing=120 Socks/Node=* NtasksPerN:B:S:C=40:0:*:1 CoreSpec=* MinCPUsNode=40 MinMemoryNode=22G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-source-20261028/unpacked/cases/e1_rouaix_hpc_restart/restart_pressure.sbatch WorkDir=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028 StdErr=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/slurm-14702499.out StdIn=/dev/null StdOut=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/slurm-14702499.out TresPerTask=cpu=1 \n"
+        },
+        "job_wide_step_query": {
+          "command": [
+            "scontrol",
+            "-o",
+            "show",
+            "step",
+            "14702499"
+          ],
+          "returncode": 1,
+          "stderr": "",
+          "stdout": "Job step 14702499. not found\n"
+        },
+        "specific_step_query": {
+          "command": [
+            "scontrol",
+            "show",
+            "step",
+            "-o",
+            "14702499.1"
+          ],
+          "returncode": 1,
+          "stderr": "",
+          "stdout": "Job step 14702499.1 not found\n"
+        },
+        "verified_by": "rank_zero_step_receipt_and_matching_active_job_no_stepmgr"
+      }
+    },
+    "stop_signal_task_count": 120,
+    "stop_signals": [
+      "12"
+    ],
+    "target_time_s": 0.3,
+    "traceback": "Traceback (most recent call last):\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-source-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 1117, in run\n    endpoint = verify_endpoint(case, float(tracker.current_time_s or 0.0))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-source-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 720, in verify_endpoint\n    raise RestartError(f\"collated endpoint {time_name} lacks required fields: {missing}\")\nRestartError: collated endpoint 0.249600000000 lacks required fields: ['U', 'alpha.water', 'p_rgh', 'k', 'epsilon', 'nut', 'p', 'phi']\n",
+    "updated_utc": "2026-10-28T15:51:46.183310+00:00",
+    "variant": "pressure-total-p0-zero",
+    "wall_budget_s": 5400,
+    "write_and_stop_contract": {
+      "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+      "scope": "Installed source and case configuration; current runtime banner checked after solve.",
+      "signal": 12,
+      "source_sha256": "5571278a48efd49507546d9ac4aa419519010d5a2de822992d53e287761a7a03"
+    }
+  },
+  "scheduler_accounting": {
+    "cpu_accounting": "unavailable",
+    "sacct_error": "RuntimeError: sacct exit 1: sacct: error: _open_persist_conn: failed to open persistent connection to host:localhost:6819: Connection refused\nsacct: error: Sending PersistInit msg: Connection refused\nsacct: error: Problem talking to the database: Connection refused\n",
+    "source": "scontrol",
+    "status": "partial"
+  },
+  "schema_version": 1,
+  "selected_files": [
+    {
+      "bytes": 12402,
+      "path": "attempt/case/case-inputs.json",
+      "sha256": "ed2b4c66a7a6c30e1654c3e8e9a6e49277fb47634320232c20c8b10ba063ebb7"
+    },
+    {
+      "bytes": 4342,
+      "path": "attempt/case/system/controlDict",
+      "sha256": "e8d2956f7d53cdd7c1361f3de12a43d395305e0b8a99343bffd7943a88d045a7"
+    },
+    {
+      "bytes": 1159,
+      "path": "attempt/case/system/fvSchemes",
+      "sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13"
+    },
+    {
+      "bytes": 2111,
+      "path": "attempt/case/system/fvSolution",
+      "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+    },
+    {
+      "bytes": 3123,
+      "path": "attempt/manifest.json",
+      "sha256": "1fc0363f79fb0ab90a4e1ac3b61c5c2e4eb37391b1f09efe8ca1cb4873c25e0e"
+    },
+    {
+      "bytes": 10812,
+      "path": "attempt/max-speed.csv",
+      "sha256": "fa7a2260dd08e8c422b0cb1de280c5cd56b492c96b2443beaec8b06de07a292f"
+    },
+    {
+      "bytes": 2629,
+      "path": "attempt/native-source-evidence.json",
+      "sha256": "24c15eb7c9f3dcd84ead09b884a00474685762610e9a8661c6c6c9af2269c6e3"
+    },
+    {
+      "bytes": 59,
+      "path": "attempt/rank0-affinity.txt",
+      "sha256": "787b18f192ce2b39192510fdd2bed0baa5abe1d17afe709b30034a920f9ca6af"
+    },
+    {
+      "bytes": 2069466,
+      "path": "attempt/solver.log",
+      "sha256": "215d933a024026fe07b1780f5e8370d41c1ac2ce3e497324ec1fd4c7ea10cd1f"
+    }
+  ],
+  "slurm": {
+    "accounting_source": "scontrol",
+    "parent": {
+      "allocated_cpus": "120",
+      "elapsed_raw": "00:28:46",
+      "exit_code": "1:0",
+      "job_id": "14702499",
+      "max_rss": "Unknown",
+      "state": "FAILED",
+      "total_cpu": "Unknown"
+    },
+    "steps": []
+  }
+}

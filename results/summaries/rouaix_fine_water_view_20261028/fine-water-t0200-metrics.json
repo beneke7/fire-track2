@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:08:48.276497+00:00",
+  "time_s": 0.2,
+  "source_mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+  "mesh_cells": 10099265,
+  "coordinate_frame": {
+    "x": "native mesh x; nozzle at 0 m and positive downstream",
+    "y": "native mesh y; upward positive and nozzle/wall reference at 0 m",
+    "z": "spanwise; plotted from an orthographic +z side view"
+  },
+  "raw_alpha_extrema": {
+    "min": 0.0,
+    "max": 1.0,
+    "values_clipped": false
+  },
+  "domain_volume_m3": 2300.0000008438396,
+  "water_volume_from_global_alpha_integral_m3": 0.2508975764461947,
+  "water_centroid_m": [
+    0.1337968162415824,
+    -1.052436025766367,
+    0.00025151354692253214
+  ],
+  "solver_ledger_check": null,
+  "threshold_support_by_cell_centres_and_volumes": {
+    "alpha_ge_0.01": {
+      "threshold": 0.01,
+      "cell_count": 124708,
+      "cell_support_volume_m3": 0.30730656102874676,
+      "water_volume_in_selected_cells_m3": 0.25073315855419265,
+      "cell_center_extents_m": {
+        "x": [
+          -0.18854748457670212,
+          3.079608917236328
+        ],
+        "y": [
+          -2.591306209564209,
+          -0.007029033033177257
+        ],
+        "z": [
+          -1.0930508375167847,
+          1.0930508375167847
+        ]
+      },
+      "selected_water_centroid_m": [
+        0.12990135731809394,
+        -1.052157133479159,
+        0.00023382681819522717
+      ],
+      "cells_inside_plot_bounds": 124708,
+      "cells_outside_plot_bounds": 0,
+      "support_cell_volume_inside_plot_bounds_m3": 0.30730656102874676
+    },
+    "alpha_ge_0.1": {
+      "threshold": 0.1,
+      "cell_count": 117912,
+      "cell_support_volume_m3": 0.28524179059469773,
+      "water_volume_in_selected_cells_m3": 0.24975735901055351,
+      "cell_center_extents_m": {
+        "x": [
+          -0.18854748457670212,
+          3.079608917236328
+        ],
+        "y": [
+          -2.591306209564209,
+          -0.007029033033177257
+        ],
+        "z": [
+          -0.9331044852733612,
+          0.9469699710607529
+        ]
+      },
+      "selected_water_centroid_m": [
+        0.1285364339556549,
+        -1.0498302403901671,
+        0.00027435478932467293
+      ],
+      "cells_inside_plot_bounds": 117912,
+      "cells_outside_plot_bounds": 0,
+      "support_cell_volume_inside_plot_bounds_m3": 0.28524179059469773
+    }
+  },
+  "native_mesh_cell_order_check": {
+    "cells": 10099265,
+    "max_abs_centre_difference_m": 0.0,
+    "max_abs_volume_difference_m3": 0.0,
+    "volume_sum_m3": 2300.0000008438396
+  },
+  "native_threshold_surfaces": [
+    {
+      "threshold": 0.01,
+      "threshold_semantics": "native cell alpha.water >= threshold; raw values not clipped",
+      "selected_cells": 124708,
+      "surface_points": 54008,
+      "surface_polygons": 52893,
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/surfaces-t0200/alpha-ge-0.01-t0.2000.vtp",
+      "sha256": "7b3d70d1dd9eb02c99c09336a4f03936e881494e818c684b477364118a63ce2a",
+      "bytes": 1294081
+    },
+    {
+      "threshold": 0.1,
+      "threshold_semantics": "native cell alpha.water >= threshold; raw values not clipped",
+      "selected_cells": 117912,
+      "surface_points": 50011,
+      "surface_polygons": 49026,
+      "path": "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/surfaces-t0200/alpha-ge-0.1-t0.2000.vtp",
+      "sha256": "ca71f8a12b7a412d1b252cf74a460cdac5d70b18b33b14980f6faff8635a51ba",
+      "bytes": 1195580
+    }
+  ],
+  "processing": {
+    "elapsed_s": 10.05,
+    "peak_rss_gib": 2.712921142578125,
+    "mesh_reader": "ParaView OpenFOAMReader; reconstructed case internalMesh",
+    "surface_extraction": "VTK cell threshold + exterior geometry filter",
+    "rendering": "Matplotlib Agg CPU; no ParaView Render or SaveScreenshot/OpenGL draw call"
+  },
+  "plot": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/fine-water-t0200.png",
+    "sha256": "8d81bf606a8a7ced8c02693e8567018414561ed5def7fb87a6d7839183657b73",
+    "bytes": 107756,
+    "dpi": 180,
+    "projection": "+z orthographic projection of native-cell threshold exterior polygons",
+    "plot_bounds_m": {
+      "x": [
+        -0.5,
+        15.5
+      ],
+      "y": [
+        -6.2,
+        0.65
+      ]
+    },
+    "same_camera_frame_as_coarse_view": true,
+    "render_backend": "Matplotlib Agg CPU",
+    "continuous_interface_reconstructed": false,
+    "axes_clip_to_plot_bounds": true
+  },
+  "paraview_state": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/fine-water-t0200.pvsm",
+    "sha256": "b0b478d846961e44ca45723a47dd172b3d55c42da87f445905349ae7cde2009d",
+    "bytes": 200897,
+    "saved_without_render": true,
+    "contains_surface_readers": [
+      "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/surfaces-t0200/alpha-ge-0.01-t0.2000.vtp",
+      "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/surfaces-t0200/alpha-ge-0.1-t0.2000.vtp"
+    ],
+    "previous_reader_only_state_sha256": "c8ce79773f2e75aee8aaf06c2e0c5323dbea07c4f1885a2e4a9a795e3d0c2f66",
+    "default_camera": {
+      "camera_projection": "parallel, +z view",
+      "camera_position_m": [
+        1.6,
+        -1.325,
+        10.0
+      ],
+      "camera_focal_point_m": [
+        1.6,
+        -1.325,
+        0.0
+      ],
+      "camera_view_up": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "camera_parallel_scale_m": 1.675,
+      "view_size_px": [
+        1200,
+        1005
+      ],
+      "view_bounds_m": {
+        "x": [
+          -0.4,
+          3.6
+        ],
+        "y": [
+          -3.0,
+          0.35
+        ]
+      },
+      "surface_file_names_relative_to_state": [
+        "surfaces-t0200/alpha-ge-0.01-t0.2000.vtp",
+        "surfaces-t0200/alpha-ge-0.1-t0.2000.vtp"
+      ],
+      "visible_surface": "alpha-ge-0.01-t0.2000.vtp",
+      "second_threshold_reader_available_but_hidden": "alpha-ge-0.1-t0.2000.vtp",
+      "render_invoked": false,
+      "screenshot_invoked": false
+    },
+    "previous_absolute_path_zoom_pvsm_sha256": "6ceb9f182566a3e0912693b7757305c351358c986e7bf45dc1fd2eba9e33e143",
+    "relative_surface_paths": [
+      "surfaces-t0200/alpha-ge-0.01-t0.2000.vtp",
+      "surfaces-t0200/alpha-ge-0.1-t0.2000.vtp"
+    ],
+    "surface_payloads_in_public_summary": true,
+    "load_state_validation": {
+      "loaded_from_public_summary_directory": true,
+      "loaded_from_relocated_data_directory": true,
+      "alpha_ge_0.01_cells_loaded_both_times": 52893,
+      "alpha_ge_0.1_cells_loaded_both_times": 49026,
+      "render_or_screenshot_invoked_during_load": false,
+      "test_utc": "2026-10-28T16:08:48.276358+00:00"
+    },
+    "environment_note": "ParaView emitted a nonfatal OpenVKL CPU-device initialization warning while creating the view proxy; both summary and relocated states loaded successfully without a render call."
+  },
+  "input_receipts": {
+    "mapped_alpha_receipt": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/global-alpha-t0200.json",
+    "mapped_alpha_receipt_sha256": "58968b9ffb11acb4bd2aedd60309895e85bb7054e8ed2759a4ae1f4acc8e3ddc",
+    "mapped_alpha_npz": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/global-alpha-t0200.npz",
+    "mapped_alpha_npz_sha256": "9a11d482d9157b40d0fed9fcd1e7d61453e1a96b1f2341d598d7ba84d286a090",
+    "native_geometry_receipt": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/native-cell-centres-volumes.json",
+    "native_geometry_receipt_sha256": "f74b787944d7bc434b4f3d50e35c33dd0b20059744a30589ece01afb020309b1",
+    "native_geometry_npz": "/Users/bene/fire-track2/results/runs/rouaix-fine-water-view-20261028/staging/native-cell-centres-volumes.npz",
+    "native_geometry_npz_sha256": "f98e9b71773d871ba11d2a751931ab96dc3d262f25e480e9d3c47d40f69a1add"
+  },
+  "interpretation": "Exploratory view of the unchanged t=0.2 parent restart checkpoint only. The solver later failed at t=0.2496 before the requested .25 write. This view does not show the failed continuation, validate the discretization, or establish a paper comparison.",
+  "run_context": {
+    "job_id": "14702499",
+    "viewed_field_time_s": 0.2,
+    "viewed_field_role": "unchanged parent restart checkpoint at the start of this job; not a post-restart progress snapshot",
+    "parent_checkpoint_time_s": 0.2,
+    "alpha_field_hash_matches_unchanged_checkpoint": true,
+    "attempt_manifest_path": "/Users/bene/fire-track2/results/summaries/rouaix_pressure_total_restart_20261028/live-14702499/attempt-manifest.json",
+    "attempt_manifest_sha256": "1fc0363f79fb0ab90a4e1ac3b61c5c2e4eb37391b1f09efe8ca1cb4873c25e0e",
+    "parent_checkpoint_receipt_sha256": "58ed6a4413d56d660b96ef4c5aa4f6031a3125c682a1d4b48217c5dfe3f21008",
+    "failure_inspection_path": "/Users/bene/fire-track2/results/summaries/rouaix_pressure_total_restart_20261028/live-14702499/failure-20261028T155146Z/failure-inspection.json",
+    "failure_inspection_sha256": "b7da32d634667144aa0941bce65e0687f9ef01cb6f8a71543e5ae21a92b54260",
+    "verified_closed_time_directories": [
+      "processors120/0.200000000000"
+    ],
+    "missing_requested_outputs": [
+      "processors120/0.250000000000",
+      "processors120/0.300000000000",
+      "terminal-status.json",
+      "ledger/summary.json"
+    ],
+    "solver_actual_end_time_s": 0.2496,
+    "solver_end_marker": false,
+    "first_explosive_max_speed_time_s": 0.2495,
+    "first_explosive_max_speed_m_s": 3.84612084717e+51,
+    "solver_failure_causality": "not established; the source records a p_rgh total-pressure sensitivity, but these observations alone do not attribute the numerical blow-up to that boundary change",
+    "archived_parent_run_sha256": "959e129d854689f0a7e5ce90fad7999bcc9f7536f3439024ce045aa8b6173029",
+    "run_state_path": "results/summaries/rouaix_pressure_total_restart_20261028/live-14702499/run-state-20261028T1524Z.json",
+    "run_state_sha256": "deb011c7c3ae528e3f7e2750fe958de8e8878f5e24f21668c353c1d9af7da990"
+  },
+  "same_field_parent_inventory_check": {
+    "reference_description": "parent checkpoint inventory from the declared t=0.2 restart source; this failed continuation produced no ledger summary",
+    "reference_time_s": 0.2,
+    "parent_checkpoint_inventory_m3": 0.2508975771509,
+    "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+    "parent_checkpoint_receipt_sha256": "58ed6a4413d56d660b96ef4c5aa4f6031a3125c682a1d4b48217c5dfe3f21008",
+    "alpha_field_sha256_matches_parent_restart": true,
+    "mapped_field_integral_m3": 0.2508975764461947,
+    "signed_difference_m3": -7.047052941189236e-10,
+    "relative_difference": -2.808736944060186e-09
+  },
+  "zoom_plot": {
+    "path": "/Users/bene/fire-track2/results/summaries/rouaix_fine_water_view_20261028/fine-water-t0200-zoom.png",
+    "sha256": "aaa121388c785d499c0cba1628b9fa9c2228d6cfa50f8332e19f8ca57677401c",
+    "bytes": 112724,
+    "dpi": 180,
+    "plot_bounds_m": {
+      "x": [
+        -0.4,
+        3.6
+      ],
+      "y": [
+        -3.0,
+        0.35
+      ]
+    },
+    "same_nozzle_reference_and_equal_aspect": true,
+    "all_selected_cell_centres_inside_bounds": true,
+    "render_backend": "Matplotlib Agg CPU",
+    "actual_polygon_projection": true,
+    "x_tick_values_m": [
+      0.0,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "y_tick_values_m": [
+      -3.0,
+      -2.0,
+      -1.0,
+      0.0
+    ],
+    "title": "Computed \u03b1.water at t = 0.2000 s \u2022 saved parent checkpoint \u2022 10,099,265 cells"
+  }
+}

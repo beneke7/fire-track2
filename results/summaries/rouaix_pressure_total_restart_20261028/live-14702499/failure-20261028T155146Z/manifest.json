@@ -1,0 +1,69 @@
+{
+  "case_id": "rouaix-restart-pressure-total-p0-zero-0300",
+  "controlDict_hashes": {
+    "after_sha256": "e8d2956f7d53cdd7c1361f3de12a43d395305e0b8a99343bffd7943a88d045a7",
+    "before_sha256": "47e2c3e66ee4d71d6a18752153ce22155c5dc3b9b7f59cccbea54704afc34dc5"
+  },
+  "delta_t_s": 0.0001,
+  "execution_backend": "slurm-native",
+  "field_write_times_s": [
+    0.25,
+    0.3
+  ],
+  "file_handler": "collated",
+  "formal_validation_decision": null,
+  "horizon_s": 0.3,
+  "job_id": "14702499",
+  "memory_gib_per_node": 22,
+  "momentum_convection": "limitedLinearV 1",
+  "native_solver": {
+    "architecture": "x86_64",
+    "build": "_87ed40d256-20251219",
+    "executable_path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/platforms/linux64GccDPInt32Opt/bin/interIsoFoam",
+    "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "label_size_bits": 32,
+    "module_list_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/module-list-14702499.log",
+    "module_list_sha256": "eedc0dca886cf7483f2b27acf8d0ee256efd07b7a83270880cda83994acb081e",
+    "module_name": "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH",
+    "precision": "DP",
+    "solver_banner_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499/attempt/native-source-evidence.solver-banner.log",
+    "solver_banner_sha256": "8b27dd2b6fc5b80a6ef959f82538beabca9d8efecc9a4b4291549498ce59ba67",
+    "version": "v2512",
+    "wm_options": "linux64GccDPInt32Opt",
+    "wm_project_dir": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512"
+  },
+  "native_source_evidence_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-total-restart-20261028/rouaix-restart-pressure-total-p0-zero-14702499/attempt/native-source-evidence.json",
+  "native_source_evidence_sha256": "24c15eb7c9f3dcd84ead09b884a00474685762610e9a8661c6c6c9af2269c6e3",
+  "node_count": 3,
+  "numerical_variant": "original",
+  "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+  "parent_checkpoint_inventory_m3": 0.2508975771509,
+  "parent_checkpoint_receipt_sha256": "58ed6a4413d56d660b96ef4c5aa4f6031a3125c682a1d4b48217c5dfe3f21008",
+  "parent_checkpoint_time_s": 0.2,
+  "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+  "parent_smoke_job_id": null,
+  "pressure_total_p0_zero_sensitivity": {
+    "dictionary_sha256": "69504e4ebaa2a9bda32cb86f0a7d981d5630aac0f0fdfd06be9a8daf639094a7",
+    "p0_gauge_pa": 0.0,
+    "patches": [
+      "downstreamOutlet",
+      "bottomOutlet",
+      "spanwiseMinus",
+      "spanwisePlus"
+    ],
+    "scope": "four p_rgh open boundaries only; no paper boundary-condition correction",
+    "type": "prghTotalPressure"
+  },
+  "rank_count": 120,
+  "requested_incremental_duration_s": 0.09999999999999998,
+  "schema_version": 1,
+  "solver_version": "v2512",
+  "start_time_s": 0.2,
+  "tasks_per_node": [
+    40,
+    40,
+    40
+  ],
+  "wall_budget_s": 5400,
+  "write_interval_s": 0.05
+}

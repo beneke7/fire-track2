@@ -1,8 +1,26 @@
 # Rouaix failure diagnosis and next tests
 
-Updated 28 October 2026, 15:27 UTC. This is the ranked working diagnosis for
+Updated 28 October 2026, 15:55 UTC. This is the ranked working diagnosis for
 the numerical failures, with separate notes on reproduction fidelity. It is
 not an E1 acceptance decision.
+
+The fine pressure-only trial 14702499 failed despite the coarse improvement.
+At 0.2494 s its max speed was 107.34 m/s. During 0.2495 s the U solves still
+met their criteria, but the second and third GAMG pressure solves diverged to
+3.45e19 and 8.65e22 residuals, each hitting 100 iterations. Velocity and RANS
+fields then exploded; the attempted 0.2496 s step raised an FPE in the U solve.
+This is an abrupt interior pressure-solve failure at a different reported
+location from the old boundary runaway, not evidence that the same mechanism
+was cured. No new field checkpoint or endpoint ledger survived. The next
+matched control changes the pressure linear solver to PCG/DIC, preserving the
+fixed step and physics, with rolling checkpoints for diagnosis. This tests the
+linear-solver trigger; it does not assume the matrix or coupled state was sound.
+The iteration cap also changes from 100 to 1000, so report whether that cap
+matters. Independent blocker review supports this ordering. The next timestep
+control, if needed, is original GAMG/PTOTAL0 at 0.05 ms from the same donor;
+the pre-failure bulk/interface Co maxima were 1.22174/0.84836. Matrix capture
+would follow only if these controls leave the trigger unresolved, with passive
+collective diagnostics verified before an expensive replay.
 
 The strongest present evidence concerns open-boundary pressure treatment.
 The coarse all-air original and upwind cases failed near the same corner.
@@ -17,10 +35,10 @@ original-pressure water control reached the200 m/s operational guard around
 on this coarse mesh, while fine-grid transfer and paper agreement remain open. A separate fixed0.3 ms
 water trial also completed0.30 s:1,000 steps in274 solver seconds, peak105.32 m/s,
 alpha[0,1] and bulk/interface Co maxima0.776/0.491. The exact mapped field
-comparison finds0.190118 m3 alpha L1 difference and0.08742 m water-centroid
-shift at0.30 s. Half-L1 corresponds to about25.1% of water redistributed,
+comparison finds 0.190118 m3 alpha L1 difference and 0.08742 m water-centroid
+shift at 0.30 s. Half-L1 corresponds to about 25.1% of water redistributed,
 despite nearly equal total inventory. This is substantial temporal sensitivity;
-the fine reference retains0.1 ms. It does not establish convergence at0.1 ms.
+the fine reference retains 0.1 ms. It does not establish convergence at 0.1 ms.
 
 ## Physical and numerical causes
 
@@ -28,7 +46,9 @@ the fine reference retains0.1 ms. It does not establish convergence at0.1 ms.
    static-pressure outlets and prescribed reverse-flow tangential velocity can
    interact with the pressure/velocity solution. The controlled pressure change
    removed the coarse air runaway through 0.30 s. The matched water pair now supports the same boundary sensitivity. Next,
-   run the fine-grid restart and inspect local boundary flux signs. This is
+   inspect fine-grid boundary flux signs. The fine pressure trial failed by
+   an abrupt interior pressure-solve divergence, so the coarse result does not
+   establish a complete cure. This is
    evidence of boundary sensitivity, not proof that the candidate is the correct
    physical far-field condition.
 
@@ -45,6 +65,10 @@ the fine reference retains0.1 ms. It does not establish convergence at0.1 ms.
    Map the fine hotspot, inspect cell-local skewness/nonorthogonality and refine
    or improve the offending transition. A global Mesh OK does not prove adequate
    accuracy, and hex cells are not inherently better than the paper's mesh.
+   The new failure addresses map to an interior 2.58e-6 m3 hex velocity cell
+   and two roughly 2.06e-5 m3 pressure cells of polyhedral representation.
+   Static geometry alone supplies neither the failed-time phase nor a causal
+   defect. [Exact address map and geometry](../results/summaries/rouaix_fine_water_view_20261028/hotspot-cell-geometry.json).
 
 4. **Insufficient pressure/velocity coupling — untested control.** The current
    reference uses one PIMPLE outer iteration and three pressure correctors.
@@ -107,8 +131,12 @@ the fine reference retains0.1 ms. It does not establish convergence at0.1 ms.
     mixture density, local phi, U and backflow alpha together. Avoid fixing a
     full velocity vector on open faces: that would also constrain normal flow.
 
-13. **Linear solver conditioning and stopping criteria — symptom and possible
-    contributor.** The failed continuation ended in GAMG, with eleven failed
+13. **Linear solver conditioning and stopping criteria — now a direct fine-grid
+    trigger to test.** Trial 14702499 had converged U solves immediately before
+    two divergent GAMG pressure solves within 0.2495 s. The next U solve then
+    raised an FPE. A matched PCG/DIC sensitivity will distinguish a GAMG failure
+    from a pressure system that remains problematic under another solver.
+    The earlier unchanged continuation ended in GAMG, with eleven failed
     U/k/epsilon solve records. Pressure records meeting their configured criteria
     did not make the whole calculation converged. Examine equation residuals,
     iterations and conditioning before testing an alternative solver/preconditioner.
@@ -170,15 +198,22 @@ the fine reference retains0.1 ms. It does not establish convergence at0.1 ms.
 ## Current sequence
 
 The matched coarse pair and native early-save tests are complete. Fine-grid
-pressure-only restart14702499 is running from the same0.20 s donor, with a
-0.25 s diagnostic checkpoint and0.30 s target. Native preflight passed on
-the actual120-rank checkpoint; the prior failure window remains ahead.
-Prepare a bounded0.30→0.50 s continuation conditional on a verified healthy
-parent endpoint and incremental mass ledger. Beyond0.50 s, use measured cost
+pressure-only restart 14702499 failed before its first 0.25 s output. Preserve
+its raw solve sequence and verified failure archive. Prepare the matched
+PCG/DIC trial with more frequent rolling checkpoints, then inspect convergence,
+cost and actual fields before advancing. The unsubmitted 0.30→0.50 s
+continuation requires a clean verified parent; 14702499 cannot qualify.
+Beyond 0.50 s, use measured cost
 and field diagnostics to choose the next horizon and matched timestep/scaling
-pilots before a roughly5 s commitment. If the pressure change fails, use the matched laminar air control
+pilots before a roughly 5 s commitment. If the pressure change fails, use the matched laminar air control
 and a separate two-outer-iteration control to distinguish turbulence and coupling.
 No field clipping or changed physical acceptance tolerance is part of this plan.
+
+The 0.50 s stage is an early breakup diagnostic: the paper's §3.1 estimate
+10D/Uj gives about 0.4 s for Case 1. It is not the published long-time profile.
+Figure 5 explicitly shows 4.5 s; Figure 13 does not state its sampling or averaging
+window. Later penetration/width overlays must retain that timing uncertainty,
+the alpha threshold and the mesh/wall-model differences above.
 
 ## Evidence
 

@@ -24,16 +24,35 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-Rouaix update (28 October15:27 UTC): fine pressure-boundary restart14702499
-is RUNNING on120 CPU ranks across three nodes, fixed0.1 ms, from0.20 to0.30 s.
-Native preflight verified unchanged internal pressure and other checkpoint
-fields. At15:26 UTC it reached0.2052 s with max speed about109 m/s; the prior
-failure window is still ahead. Auditor14702500 is pending afterany. A bounded
-verified-parent0.30→0.50 s continuation is being implemented, not yet armed.
-Coarse pressure-only air/water controls completed0.30 s; matched original
-pressure water guarded near0.17 s. The faster0.3 ms water case has a measured
-0.08742 m centroid shift and about25.1% half-L1 redistribution relative to
-the0.1 ms field, so the fine reference retains0.1 ms. Native early-save14700599
+Rouaix update (28 October 16:37 UTC): matched PCG/DIC trial 14705632 is RUNNING
+on 120 ranks/three nodes, fixed 0.1 ms, target 0.255 s. Native preflight passed;
+first 20 steps reached 0.2020 s with bounded alpha, U about 110 m/s and final
+pressure solves converged in 466–518 iterations. The increased iteration cap
+is material. Early 4.93 s/step predicts about 45 minutes for 550 steps, within
+the two-hour limit. Rolling 5 ms writes retain two checkpoints. Auditor
+14705633 is pending afterany. Controller 14706859 is released/pending after
+the parent; it will verify the clean .255 s checkpoint and ledger before
+submitting an unchanged PCG/DIC .255→.30 s child plus auditor. Failed,
+incomplete or unconverged parents are refused. Controller uses two CPU slots
+for 4 GiB, one compute thread, 15-minute cap; obsolete probes canceled.
+All 207 affected tests pass; Ruff/format pass.
+The verified current-run 0.215 s alpha checkpoint is retained for CPU-rendered
+3D, cell-detail and interpolated-isosurface figures; its integrated volume
+matches native history to 1.14e-8 relative. [Figures](../results/summaries/rouaix_repro_figures_20261028/README.md).
+Fine pressure-boundary restart 14702499
+FAILED after 495 fixed 0.1 ms steps. Speed was 107.34 m/s at 0.2494 s; GAMG
+pressure solves diverged within 0.2495 s, followed by catastrophic velocity
+growth and an FPE in the attempted 0.2496 s U solve. Signal acknowledgement
+was verified, but no new endpoint/End/ledger survived. The failure archive is
+verified; auditor 14702500 completed 0:0.
+The 0.30→0.50 s continuation is unsubmitted and cannot use this failed parent.
+Native preflight had verified the intended boundary-only change.
+Independent blocker review supports this pilot, with a matched half-step
+GAMG control next if needed; survival alone cannot establish the cause.
+Coarse pressure-only air/water controls completed 0.30 s; matched original
+pressure water guarded near 0.17 s. The faster 0.3 ms water case has a measured
+0.08742 m centroid shift and about 25.1% half-L1 redistribution relative to
+the 0.1 ms field, so the fine reference retains 0.1 ms. Native early-save 14700599
 and its auditor passed. No local Rouaix solver is active; unrelated I4F jobs
 remain untouched. Fine stability, timestep convergence and paper agreement
 remain unproved. [Diagnosis](ROUAIX_FAILURE_DIAGNOSIS.md),

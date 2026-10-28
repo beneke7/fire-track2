@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-28T16:40:37.473633+00:00",
+  "purpose": "lossless source-state identity for figures from the saved t=0.215 s checkpoint",
+  "checkpoint": {
+    "field": "alpha.water",
+    "time_s": 0.215,
+    "remote_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028/rouaix-restart-pressure-total-pcgdic-14705632/attempt/case/processors120/0.215000000000/alpha.water",
+    "remote_size_bytes": 93327552,
+    "remote_sha256": "687a5e7f395825c85ffdc6fc6a919fbd99c0b7b8f7fee7ec526e70dc9f53c56a",
+    "remote_pre_post_stat_identical": true,
+    "remote_pre_post_size_mtime_epoch_inode": [
+      93327552,
+      1793204554,
+      144123862232147258
+    ],
+    "local_path": "results/runs/rouaix-repro-figures-20261028/staging/pcg-alpha.water-t0215",
+    "local_size_bytes": 93327552,
+    "local_sha256": "687a5e7f395825c85ffdc6fc6a919fbd99c0b7b8f7fee7ec526e70dc9f53c56a",
+    "remote_and_local_sha_match": true,
+    "solver_log_row": "Time = 0.215000000000; volIntegrate(region0) of alpha.water = 0.269713860359 m3",
+    "mapped_integral_m3": 0.2697138634278991,
+    "mapped_minus_solver_log_m3": 3.0688990793059645e-09,
+    "mapped_relative_difference": 1.1378351395145714e-08,
+    "raw_alpha_min_max": [
+      0.0,
+      1.0
+    ],
+    "values_clipped": false
+  },
+  "run_identity": {
+    "slurm_job_id": 14705632,
+    "slurm_state_at_post_copy_query": "RUNNING",
+    "case_id": "rouaix-restart-pressure-total-pcgdic-0255",
+    "parent_checkpoint_time_s": 0.2,
+    "run_start_time_s": 0.2,
+    "solver": "interIsoFoam v2512",
+    "numerical_sensitivity": "PCG/DIC for p_rgh; exploratory numerical sensitivity, not a physics correction or validation",
+    "rank_count": 120,
+    "run_manifest_sha256": "020cd8f8056a45594856d25542519f71af7588fd4d87b6a481ac29907ba4ad71",
+    "case_inputs_sha256": "0a24f1eeb69c0ae84bef651437b6a91e870c317dca8045dedfcee54cfb12bb00",
+    "native_source_evidence_sha256": "2e92d4f8374ca04471f3f4abe44b3cfdc5831d29db4e15921f88c7caabe7738e",
+    "solver_binary_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549"
+  },
+  "native_mesh_mapping": {
+    "native_cells": 10099265,
+    "native_mesh_manifest_sha256": "4347c663a52b3dda878f0b32d60b4ff485a767417b784e89145c6adc0298d670",
+    "cellProcAddressing_path": "results/runs/rouaix-repro-figures-20261028/staging/pcg-cellProcAddressing",
+    "cellProcAddressing_size_bytes": 40402372,
+    "cellProcAddressing_sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6",
+    "ranks": 120,
+    "exact_global_cell_cover": true,
+    "mapped_field_npz_sha256": "aec3876e6019c8ec77f4cef2ea4e0537c00d473829b674a6ba696f2189ac1dcf",
+    "mapping_receipt_sha256": "8e360aedba45fbc922953434b8f90101c1d9db84fcdbe80af6bdea5be6396f7e",
+    "mapping_source": "scripts/../results/runs/rouaix-fine-water-view-20261028/map_collated_alpha.py",
+    "coordinate_frame": {
+      "x": "crossflow",
+      "y": "upward",
+      "z": "lateral"
+    }
+  },
+  "retrieval": {
+    "command": "rsync -ah --partial -e 'ssh -S /tmp/fire-track2-komondor-%C -oBatchMode=yes' nk_memj@komondor.hpc.kifu.hu:/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028/rouaix-restart-pressure-total-pcgdic-14705632/attempt/case/processors120/0.215000000000/alpha.water results/runs/rouaix-repro-figures-20261028/staging/pcg-alpha.water-t0215",
+    "remote_stat_before_and_after_read": [
+      93327552,
+      1793204554,
+      144123862232147258
+    ],
+    "remote_hash_checked_before_and_after_transfer": true,
+    "live_case_modified": false
+  },
+  "limitations": [
+    "This is a saved intermediate checkpoint from an active continuation, not a terminal output.",
+    "The PCG/DIC branch is an exploratory linear-solver sensitivity, not an E1 validation result.",
+    "One alternative contour applies cell-to-point interpolation for visualization only; the mapped source field remains unchanged."
+  ]
+}

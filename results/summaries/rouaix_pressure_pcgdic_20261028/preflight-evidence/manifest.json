@@ -1,0 +1,98 @@
+{
+  "case_id": "rouaix-restart-pressure-total-pcgdic-0255",
+  "controlDict_hashes": {
+    "after_sha256": "a85f673784e54ba1fba732c229ce0f3acb03b286c00df37cd4aac8e691552749",
+    "before_sha256": "47e2c3e66ee4d71d6a18752153ce22155c5dc3b9b7f59cccbea54704afc34dc5",
+    "rolling_checkpoint_retention": {
+      "after_sha256": "70675ca02507bf3911d92d8faf8e19b9fb022b315510e9e2f03b06b041b27467",
+      "before_sha256": "a85f673784e54ba1fba732c229ce0f3acb03b286c00df37cd4aac8e691552749",
+      "previous_purge_write": 0,
+      "retained_checkpoint_count": 2
+    }
+  },
+  "delta_t_s": 0.0001,
+  "execution_backend": "slurm-native",
+  "field_write_times_s": [
+    0.205,
+    0.21,
+    0.215,
+    0.22,
+    0.225,
+    0.23,
+    0.235,
+    0.24,
+    0.245,
+    0.25,
+    0.255
+  ],
+  "file_handler": "collated",
+  "formal_validation_decision": null,
+  "horizon_s": 0.255,
+  "job_id": "14705632",
+  "memory_gib_per_node": 22,
+  "momentum_convection": "limitedLinearV 1",
+  "native_solver": {
+    "architecture": "x86_64",
+    "build": "_87ed40d256-20251219",
+    "executable_path": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512/platforms/linux64GccDPInt32Opt/bin/interIsoFoam",
+    "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+    "label_size_bits": 32,
+    "module_list_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028/module-list-14705632.log",
+    "module_list_sha256": "eedc0dca886cf7483f2b27acf8d0ee256efd07b7a83270880cda83994acb081e",
+    "module_name": "OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH",
+    "precision": "DP",
+    "solver_banner_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028/rouaix-restart-pressure-total-pcgdic-14705632/attempt/native-source-evidence.solver-banner.log",
+    "solver_banner_sha256": "8b27dd2b6fc5b80a6ef959f82538beabca9d8efecc9a4b4291549498ce59ba67",
+    "version": "v2512",
+    "wm_options": "linux64GccDPInt32Opt",
+    "wm_project_dir": "/scratch/software/packages/openfoam/v2512-20251230/OpenFOAM-v2512"
+  },
+  "native_source_evidence_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-pressure-pcgdic-restart-20261028/rouaix-restart-pressure-total-pcgdic-14705632/attempt/native-source-evidence.json",
+  "native_source_evidence_sha256": "2e92d4f8374ca04471f3f4abe44b3cfdc5831d29db4e15921f88c7caabe7738e",
+  "node_count": 3,
+  "numerical_variant": "original",
+  "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+  "parent_checkpoint_inventory_m3": 0.2508975771509,
+  "parent_checkpoint_receipt_sha256": "14a78a527ffb6ac21d9c4dd3ab49303bcd432cae1484b15214c194e21627b335",
+  "parent_checkpoint_time_s": 0.2,
+  "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+  "parent_smoke_job_id": null,
+  "pressure_linear_solver_sensitivity": {
+    "after_sha256": "03f4eee4fdc00a3a84751e2f3fb20b537146d159095eb7d8591d5e4df69c2ae7",
+    "before_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+    "checkpoint_policy": "writeInterval 0.005 s and purgeWrite 2; last two field checkpoints retained",
+    "input": "same original .2 donor and p0=0 total-pressure patch treatment as job 14702499",
+    "p_rghFinal": "inherits PCG/DIC with relTol 0",
+    "p_rgh_maxIter": 1000,
+    "parent_solver": "GAMG",
+    "preconditioner": "DIC",
+    "relTol": "0.01",
+    "scope": "only p_rgh linear solver changed; exploratory numerical sensitivity, not a physics correction",
+    "solver": "PCG",
+    "tolerance": "1e-8"
+  },
+  "pressure_total_p0_zero_sensitivity": {
+    "dictionary_sha256": "69504e4ebaa2a9bda32cb86f0a7d981d5630aac0f0fdfd06be9a8daf639094a7",
+    "p0_gauge_pa": 0.0,
+    "patches": [
+      "downstreamOutlet",
+      "bottomOutlet",
+      "spanwiseMinus",
+      "spanwisePlus"
+    ],
+    "scope": "four p_rgh open boundaries only; no paper boundary-condition correction",
+    "type": "prghTotalPressure"
+  },
+  "rank_count": 120,
+  "requested_incremental_duration_s": 0.05499999999999999,
+  "schema_version": 1,
+  "solver_version": "v2512",
+  "start_time_s": 0.2,
+  "tasks_per_node": [
+    40,
+    40,
+    40
+  ],
+  "wall_budget_s": 7200,
+  "write_interval_s": 0.005
+}
