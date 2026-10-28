@@ -1,5 +1,22 @@
 # Live project status
 
+## Workstation update — 2026-10-28 16:47 UTC
+
+The user confirmed four vertical dividers per outlet and estimated 10–20 mm
+thickness. The new [inspectable geometry](../results/summaries/i4f_20261028/rounded-divider-model/README.md) uses nominal
+15 mm plates with an assumed 7.5 mm rounded nose, no post-rise straight and
+1 m transition/mouth. STEP units and closed solids were checked. This is a CAD
+candidate; the existing CFD mesh still has zero-thickness dividers. A local
+finite-plate mesh is being prepared separately. The longer diagnostic stopped
+at .519709 s on sustained final pressure limiting; it did not reach 2 s or
+complete discharge. The cold-start time-resolution baseline continues.
+
+The [smoother current-baseline video](../results/summaries/i4f_20261028/demo-video/i4f-current-coldcase-initial-filling-interpolated-40x-1080p.mp4)
+uses explicitly labelled display interpolation over computed t=0–.300 s;
+it does not simulate the new rounded dividers. Local lint/format/tests passed
+(985 tests, two documented skips). Earlier workstation execution statements
+below are historical; HPC state remains owned by the server agent.
+
 Updated: 2026-10-27 13:10 UTC. Workstation scope: **I4F internal tank-to-nozzle discharge**.
 Aerial/HPC work belongs to the separate server agent; see [HPC_STATUS.md](HPC_STATUS.md).
 No complete trustworthy CFD discharge, accepted 1.0/0.8 m engineering comparison,

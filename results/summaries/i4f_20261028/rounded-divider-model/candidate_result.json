@@ -1,0 +1,145 @@
+{
+  "status": "rounded finite-thickness divider geometry candidate; no fluid mesh or CFD",
+  "run_id": "i4f-rounded-divider-candidate-20261028T163928Z",
+  "created_utc": "2026-10-28T16:38:51.275291+00:00",
+  "generator_sha256": "f0bdad04011194f4493ede1d0da6c840db3abe23f7c75c1c2de7d96c449139f0",
+  "run_source_snapshot": "results/runs/i4f-rounded-divider-candidate-20261028T163928Z/source/generate.py",
+  "run_source_snapshot_sha256": "f0bdad04011194f4493ede1d0da6c840db3abe23f7c75c1c2de7d96c449139f0",
+  "geometry": {
+    "units": "SI metres; +X discharge; Y separates tanks and spans mouth width; +Z up",
+    "divider_count_per_outlet": 4,
+    "outlet_count": 4,
+    "passages_per_outlet": 5,
+    "thickness_nominal_m": 0.015,
+    "thickness_basis": "User reported range 0.010\u20130.020 m; nominal selected at midpoint, not measured",
+    "normal_section_thickness_m_per_station": [
+      0.015,
+      0.015,
+      0.015,
+      0.015
+    ],
+    "nose_radius_m": 0.0075,
+    "nose_shape": "tangent semicircle; radius selected as half nominal thickness, not measured",
+    "divider_start_x_m": 4.216666666666667,
+    "mouth_x_m": 4.8,
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15,
+    "nominal_equal_clear_mouth_gap_m": 0.188,
+    "gross_mouth_area_m2_each": 0.15,
+    "open_mouth_area_m2_each": 0.141,
+    "nominal_blockage_fraction_at_mouth": 0.06000000000000005,
+    "pipe_transition_join_mode": "flush-at-inlet",
+    "post_rise_straight_m": 0.0,
+    "transition_and_mouth_length_m": 1.0
+  },
+  "checks": {
+    "full_assembly_STEP_solids_valid": true,
+    "divider_STEP_solids_valid": true,
+    "single_outlet_STEP_solids_valid": true,
+    "STEP_units": {
+      "declared_length_unit": "mm",
+      "coordinate_scale_to_mm": 1000.0,
+      "full_assembly_imported_bounds_mm": [
+        0.0,
+        4800.0000001,
+        -1050.0000001,
+        1050.0000001,
+        349.99999989996695,
+        1700.0
+      ],
+      "single_outlet_imported_bounds_mm": [
+        4215.4027419295935,
+        4800.0000001,
+        -919.1193156376876,
+        -237.99999989992395,
+        570.2310736813869,
+        729.7689262394565
+      ]
+    },
+    "divider_STL_closedness": {
+      "path": "rounded_finite_dividers.stl",
+      "triangle_count": 4320,
+      "point_count_after_welding": 2192,
+      "connected_component_count": 16,
+      "expected_component_count": 16,
+      "boundary_edge_count": 0,
+      "nonmanifold_edge_count": 0,
+      "watertight_components": true
+    },
+    "single_outlet_STL_closedness": {
+      "path": "single_outlet_plates.stl",
+      "triangle_count": 1370,
+      "point_count_after_welding": 693,
+      "connected_component_count": 4,
+      "expected_component_count": 4,
+      "boundary_edge_count": 0,
+      "nonmanifold_edge_count": 0,
+      "watertight_components": true
+    }
+  },
+  "limitations": [
+    "Geometry candidate only; no fluid mesh or CFD run.",
+    "The upstream divider start, exact thickness within the user-reported range, nose radius/profile, mounting and manufacturing details remain unmeasured.",
+    "The prior CFD mesh is not modified and used zero-thickness baffle faces; current finite blockage and nose must be represented by a regenerated solid-excluding fluid mesh.",
+    "Section area values are discrete BREP slab samples, not proof of a continuous minimum-area bound."
+  ],
+  "artifacts": {
+    "all_16_dividers.stl": {
+      "path": "all_16_dividers.stl",
+      "bytes": 1364345,
+      "sha256": "5b1f2128fe1252aee6674cee71ce3c605eb33ed41db5e1ab2fff27b4f979b708"
+    },
+    "divider_solids.step": {
+      "path": "divider_solids.step",
+      "bytes": 1261032,
+      "sha256": "afe66834ae6579e88d7cf42e060dc05d18502b1f26d57f03d71b23c8b742845e"
+    },
+    "full_assembly.step": {
+      "path": "full_assembly.step",
+      "bytes": 1666494,
+      "sha256": "144068c9409c8ccaa3844f743a0e5025abcdc246ef8128b98d7c94a702c59b43"
+    },
+    "full_assembly.stl": {
+      "path": "full_assembly.stl",
+      "bytes": 9911007,
+      "sha256": "525c7e98d0cd4f874b39c3656223ea28714f92a52471a058b3f12ce8374d06c0"
+    },
+    "mouth_channel_dimensions.png": {
+      "path": "mouth_channel_dimensions.png",
+      "bytes": 47479,
+      "sha256": "312d25f4b18f9f80b08011b5ce1aee266dd16bc4bb14073d1a3f5f10450b1a09"
+    },
+    "overview.png": {
+      "path": "overview.png",
+      "bytes": 414066,
+      "sha256": "e0faa61984aca07d4366873d05ed6360cb5dc7790eb7fecede245bf643e21590"
+    },
+    "rounded_nose_closeup.png": {
+      "path": "rounded_nose_closeup.png",
+      "bytes": 171907,
+      "sha256": "dfc87708c225f72174b4e71f0debcf4f1805e2fe54bb30041fd1ec2094671ce4"
+    },
+    "single_outlet_4_dividers.stl": {
+      "path": "single_outlet_4_dividers.stl",
+      "bytes": 434739,
+      "sha256": "54fea37be1aa2a5007dbe66ec29400d3443bfc24bbae9bf002e2c4e6a7a27942"
+    },
+    "single_outlet_dividers.step": {
+      "path": "single_outlet_dividers.step",
+      "bytes": 309227,
+      "sha256": "c4d75f70bc8f2a9f338122c45adaae24d99a2da797f12d52aef7b3cbafbea4d1"
+    },
+    "single_outlet_plates.png": {
+      "path": "single_outlet_plates.png",
+      "bytes": 200900,
+      "sha256": "5b499388ddc64561cf3dbb40817e1c963c10283d5b4d58e80405c11735154437"
+    },
+    "transition_sections.png": {
+      "path": "transition_sections.png",
+      "bytes": 75245,
+      "sha256": "81c0c6e854ff99020a8b95d696e9ccc5bd0d020b903fa778b15c12663a470981"
+    }
+  },
+  "post_generation_worktree_source_sha256": "8b7e30b39cdd669e0656830af5d143b5d739704e4c11546e95ce8c72ff65caef",
+  "post_generation_source_note": "Only Ruff import ordering and formatting were applied after generation; the exact executed file is preserved and hashed at run_source_snapshot."
+}

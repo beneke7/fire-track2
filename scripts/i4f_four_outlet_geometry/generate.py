@@ -34,19 +34,26 @@ from OCP.BRepBuilderAPI import (
     BRepBuilderAPI_MakeEdge,
     BRepBuilderAPI_MakeFace,
     BRepBuilderAPI_MakeWire,
+    BRepBuilderAPI_Transform,
 )
 from OCP.BRepCheck import BRepCheck_Analyzer
 from OCP.BRepGProp import BRepGProp
 from OCP.BRepMesh import BRepMesh_IncrementalMesh
 from OCP.BRepOffsetAPI import BRepOffsetAPI_MakePipe, BRepOffsetAPI_ThruSections
-from OCP.BRepPrimAPI import BRepPrimAPI_MakeCylinder
+from OCP.BRepPrimAPI import BRepPrimAPI_MakeCylinder, BRepPrimAPI_MakePrism
 from OCP.collections import Array1_gp_Pnt, HSequence_TopoDS_Shape
 from OCP.Geom import Geom_BezierCurve
-from OCP.gp import gp_Ax2, gp_Circ, gp_Dir, gp_Pln, gp_Pnt
+from OCP.gp import gp_Ax2, gp_Circ, gp_Dir, gp_Pln, gp_Pnt, gp_Trsf, gp_Vec
 from OCP.GProp import GProp_GProps
 from OCP.IFSelect import IFSelect_RetDone
+from OCP.Interface import Interface_Static
 from OCP.ShapeAnalysis import ShapeAnalysis_FreeBounds
-from OCP.STEPControl import STEPControl_AsIs, STEPControl_Reader, STEPControl_Writer
+from OCP.STEPControl import (
+    STEPControl_AsIs,
+    STEPControl_Controller,
+    STEPControl_Reader,
+    STEPControl_Writer,
+)
 from OCP.StlAPI import StlAPI_Writer
 from OCP.TopAbs import TopAbs_EDGE, TopAbs_SOLID
 from OCP.TopExp import TopExp_Explorer
@@ -393,6 +400,129 @@ def make_tall_plate(rows, thickness: float):
     return loft.Shape()
 
 
+def make_oriented_plate_wire(center, tangent_xy, thickness: float, height: float):
+    """Return a vertical rectangular plate section normal to a horizontal tangent."""
+    x, y, z = map(float, center)
+    tx, ty = map(float, tangent_xy)
+    norm = math.hypot(tx, ty)
+    if norm <= 0:
+        raise ValueError("Plate tangent must have positive length")
+    tx, ty = tx / norm, ty / norm
+    nx, ny = -ty, tx
+    half_t = thickness / 2
+    half_h = height / 2
+    points = [
+        gp_Pnt(x + nx * half_t, y + ny * half_t, z - half_h),
+        gp_Pnt(x - nx * half_t, y - ny * half_t, z - half_h),
+        gp_Pnt(x - nx * half_t, y - ny * half_t, z + half_h),
+        gp_Pnt(x + nx * half_t, y + ny * half_t, z + half_h),
+    ]
+    wire = BRepBuilderAPI_MakeWire()
+    for first, second in zip(points, points[1:] + points[:1]):
+        wire.Add(BRepBuilderAPI_MakeEdge(first, second).Edge())
+    if not wire.IsDone():
+        raise RuntimeError("Could not construct oriented rounded-divider body section")
+    return wire.Wire()
+
+
+def make_semicircular_nose(center, tangent_xy, radius: float, height: float):
+    """Build a closed half-cylinder cap, tangent to the rounded-divider body."""
+    cx, cy, zc = map(float, center)
+    tx, ty = map(float, tangent_xy)
+    norm = math.hypot(tx, ty)
+    if norm <= 0:
+        raise ValueError("Rounded-divider nose tangent must have positive length")
+    tx, ty = tx / norm, ty / norm
+    normal = (-ty, tx)
+    z0 = zc - height / 2
+    axis = gp_Ax2(gp_Pnt(cx, cy, z0), gp_Dir(0, 0, 1), gp_Dir(tx, ty, 0))
+    circle = gp_Circ(axis, radius)
+    # The arc runs from the positive transverse side, around the upstream tip,
+    # to the negative transverse side. Closing with the diameter makes a
+    # genuinely closed semicircular prism, rather than a rounded display edge.
+    arc = BRepBuilderAPI_MakeEdge(circle, math.pi / 2, 3 * math.pi / 2).Edge()
+    side_plus = gp_Pnt(cx + radius * normal[0], cy + radius * normal[1], z0)
+    side_minus = gp_Pnt(cx - radius * normal[0], cy - radius * normal[1], z0)
+    diameter = BRepBuilderAPI_MakeEdge(side_minus, side_plus).Edge()
+    wire = BRepBuilderAPI_MakeWire()
+    wire.Add(arc)
+    wire.Add(diameter)
+    if not wire.IsDone():
+        raise RuntimeError("Could not construct rounded-divider semicircle wire")
+    face = BRepBuilderAPI_MakeFace(wire.Wire(), True)
+    if not face.IsDone() or not BRepCheck_Analyzer(face.Face()).IsValid():
+        raise RuntimeError("Rounded-divider nose profile is not a valid closed face")
+    prism = BRepPrimAPI_MakePrism(face.Face(), gp_Vec(0, 0, height), True)
+    if not prism.IsDone() or len(solids(prism.Shape())) != 1:
+        raise RuntimeError("Rounded-divider nose did not form one closed solid")
+    if not BRepCheck_Analyzer(prism.Shape()).IsValid():
+        raise RuntimeError("Rounded-divider nose solid failed BREP validity")
+    return prism.Shape()
+
+
+def make_rounded_tall_plate(rows, thickness: float, nose_radius: float):
+    """Build a finite-thickness plate with a semicircular leading nose.
+
+    The rounded tip preserves the first centerline point: its circle center is
+    moved one nose radius down the local first-segment tangent, and its upstream
+    arc tip lands at the original start point. The downstream loft begins at
+    the tangent plane through that circle center.
+    """
+    if len(rows) < 2:
+        raise ValueError("A rounded divider needs at least two centerline stations")
+    x0, y0, z0 = map(float, rows[0])
+    x1, y1, _ = map(float, rows[1])
+    dx, dy = x1 - x0, y1 - y0
+    distance = math.hypot(dx, dy)
+    if distance <= 0 or dx <= 0:
+        raise ValueError("Rounded-divider leading tangent must advance downstream")
+    segment_tangents = []
+    for first, second in zip(rows, rows[1:]):
+        sx, sy = float(second[0]) - float(first[0]), float(second[1]) - float(first[1])
+        segment_length = math.hypot(sx, sy)
+        if segment_length <= 0 or sx <= 0:
+            raise ValueError("Rounded-divider body centerline must advance monotonically")
+        segment_tangents.append((sx / segment_length, sy / segment_length))
+    station_tangents = []
+    for index in range(len(rows)):
+        if index == 0:
+            station_tangents.append(segment_tangents[0])
+        elif index == len(rows) - 1:
+            station_tangents.append(segment_tangents[-1])
+        else:
+            tx = segment_tangents[index - 1][0] + segment_tangents[index][0]
+            ty = segment_tangents[index - 1][1] + segment_tangents[index][1]
+            tangent_length = math.hypot(tx, ty)
+            if tangent_length <= 0:
+                raise ValueError("Rounded-divider local station tangent is undefined")
+            station_tangents.append((tx / tangent_length, ty / tangent_length))
+    tangent = station_tangents[0]
+    center = (x0 + nose_radius * tangent[0], y0 + nose_radius * tangent[1], z0)
+    body_centers = [center, *[tuple(map(float, row)) for row in rows[1:]]]
+
+    loft = BRepOffsetAPI_ThruSections(True, True, 1e-5)
+    for section_center, section_tangent in zip(body_centers, station_tangents):
+        loft.AddWire(make_oriented_plate_wire(section_center, section_tangent, thickness, 0.300))
+    loft.Build()
+    if not loft.IsDone() or len(solids(loft.Shape())) != 1:
+        raise RuntimeError("Rounded-divider body loft did not form one solid")
+    body = loft.Shape()
+    if not BRepCheck_Analyzer(body).IsValid():
+        raise RuntimeError("Rounded-divider body loft failed BREP validity")
+    nose = make_semicircular_nose(center, tangent, nose_radius, 0.300)
+    rounded = require_fuse(body, nose)
+    if len(solids(rounded)) != 1 or not BRepCheck_Analyzer(rounded).IsValid():
+        raise RuntimeError("Fused rounded-divider body/nose is not one valid solid")
+    return rounded, {
+        "leading_tip_xyz_m": [x0, y0, z0],
+        "semicircle_center_xyz_m": list(center),
+        "tangent_xy_unit": list(tangent),
+        "body_station_tangents_xy": [list(value) for value in station_tangents],
+        "normal_section_thickness_m": [thickness] * len(rows),
+        "radius_m": nose_radius,
+    }
+
+
 def make_midface(row0, row1, half_height: float):
     x0, y0, z0 = row0
     x1, y1, z1 = row1
@@ -419,6 +549,52 @@ def write_step(shape, path: Path):
         raise RuntimeError(f"STEP export failed for {path}: {status}")
 
 
+def write_step_with_units(shape, path: Path, coordinate_scale: float, length_unit: str = "MM"):
+    """Write SI-coordinate geometry with explicit STEP units and coordinate scaling.
+
+    Project geometry is represented in metres. Candidate STEP exports scale the
+    coordinates to millimetres and declare millimetres, so a 4.8 m mouth reads
+    as 4800 mm in CAD. The historical writer above remains unchanged.
+    """
+    if not math.isfinite(coordinate_scale) or coordinate_scale <= 0:
+        raise ValueError("STEP coordinate scale must be finite and positive")
+    STEPControl_Controller.Init_s()
+    previous_unit = Interface_Static.CVal_s("write.step.unit")
+    Interface_Static.SetCVal_s("write.step.unit", length_unit)
+    try:
+        if coordinate_scale == 1.0:
+            exported_shape = shape
+        else:
+            transform = gp_Trsf()
+            transform.SetScale(gp_Pnt(0, 0, 0), coordinate_scale)
+            exported_shape = BRepBuilderAPI_Transform(shape, transform, True).Shape()
+        writer = STEPControl_Writer()
+        writer.Transfer(exported_shape, STEPControl_AsIs)
+        status = writer.Write(str(path))
+        if status != IFSelect_RetDone:
+            raise RuntimeError(f"STEP export failed for {path}: {status}")
+    finally:
+        Interface_Static.SetCVal_s("write.step.unit", previous_unit)
+
+
+def step_length_unit(path: Path) -> str | None:
+    text = path.read_text(encoding="ascii", errors="replace")
+    if "SI_UNIT(.MILLI.,.METRE.)" in text:
+        return "mm"
+    if "SI_UNIT($,.METRE.)" in text:
+        return "m"
+    return None
+
+
+def step_imported_bounds(path: Path) -> list[float]:
+    reader = STEPControl_Reader()
+    status = reader.ReadFile(str(path))
+    if status != IFSelect_RetDone:
+        raise RuntimeError(f"STEP bounds readback failed for {path}: {status}")
+    reader.TransferRoots()
+    return bounds(reader.OneShape())
+
+
 def step_readback(path: Path) -> dict:
     reader = STEPControl_Reader()
     status = reader.ReadFile(str(path))
@@ -440,6 +616,45 @@ def write_stl(shape, path: Path, linear_deflection_m: float = 0.004):
     writer = StlAPI_Writer()
     if not writer.Write(shape, str(path)):
         raise RuntimeError(f"STL export failed for {path}")
+
+
+def stl_closedness(path: Path, expected_components: int) -> dict:
+    """Check the exported triangle mesh is a collection of closed solid shells."""
+    mesh = pv.read(str(path)).extract_surface().triangulate().clean(tolerance=1e-9)
+    if mesh.n_cells == 0:
+        raise RuntimeError(f"Exported STL is empty: {path}")
+    boundary = mesh.extract_feature_edges(
+        boundary_edges=True,
+        feature_edges=False,
+        manifold_edges=False,
+        non_manifold_edges=False,
+    )
+    nonmanifold = mesh.extract_feature_edges(
+        boundary_edges=False,
+        feature_edges=False,
+        manifold_edges=False,
+        non_manifold_edges=True,
+    )
+    connected = mesh.connectivity(extraction_mode="all")
+    regions = np.asarray(connected.cell_data.get("RegionId", []), dtype=np.int64)
+    component_count = int(np.unique(regions).size) if len(regions) else 0
+    result = {
+        "path": path.name,
+        "triangle_count": int(mesh.n_cells),
+        "point_count_after_welding": int(mesh.n_points),
+        "connected_component_count": component_count,
+        "expected_component_count": expected_components,
+        "boundary_edge_count": int(boundary.n_cells),
+        "nonmanifold_edge_count": int(nonmanifold.n_cells),
+        "watertight_components": bool(
+            component_count == expected_components
+            and boundary.n_cells == 0
+            and nonmanifold.n_cells == 0
+        ),
+    }
+    if not result["watertight_components"]:
+        raise RuntimeError(f"Rounded divider STL is not a watertight solid mesh: {result}")
+    return result
 
 
 def section_area(
@@ -487,6 +702,8 @@ def render_assembly(
     divider_count: int,
     divider_thickness_m: float,
     pipe_transition_join: str,
+    divider_leading_edge: str = "square",
+    nose_radius_m: float | None = None,
 ):
     fig = plt.figure(figsize=(13, 8), dpi=150)
     ax = fig.add_subplot(111, projection="3d")
@@ -519,11 +736,19 @@ def render_assembly(
     ax.set_xlabel("X · discharge (+X), m")
     ax.set_ylabel("Y · tank columns / mouth width, m")
     ax.set_zlabel("Z · vertical, m")
+    if divider_leading_edge == "rounded":
+        divider_label = (
+            f"{divider_count} finite {1000 * divider_thickness_m:g} mm dividers per outlet · "
+            f"rounded nose R{1000 * float(nose_radius_m):g} mm (geometry candidate)"
+        )
+    else:
+        divider_label = (
+            f"{divider_count} assumed {1000 * divider_thickness_m:g} mm fitted divider solids"
+        )
     ax.set_title(
         f"Provisional {tank_axis}-axis two-tank / four-outlet envelope\n"
         f"Pipe/transition join: {pipe_transition_join}\n"
-        f"Grey: envelope · amber: {divider_count} assumed "
-        f"{1000 * divider_thickness_m:g} mm fitted divider solids"
+        f"Grey: fluid envelope · amber: {divider_label}"
     )
     ax.grid(False)
     fig.tight_layout()
@@ -724,11 +949,154 @@ def render_sections(
     plt.close(fig)
 
 
+def render_single_outlet_plates(plates_stl: Path, output: Path, closeup: bool = False):
+    """Render one outlet's four finite divider solids without a covering shell."""
+    mesh = pv.read(str(plates_stl)).extract_surface().triangulate().clean()
+    if mesh.n_cells == 0:
+        raise RuntimeError("Single-outlet divider STL is empty")
+    if closeup:
+        xmin, xmax, ymin, ymax, zmin, zmax = mesh.bounds
+        nose_end_x = min(xmax, xmin + 0.10)
+        mesh = mesh.clip_box(
+            bounds=(xmin - 0.002, nose_end_x, ymin - 0.01, ymax + 0.01, zmin - 0.01, zmax + 0.01),
+            invert=False,
+        )
+        if mesh.n_cells == 0:
+            raise RuntimeError("Rounded-divider nose close-up clip is empty")
+    triangles = np.asarray(mesh.points[mesh.faces.reshape((-1, 4))[:, 1:]], dtype=float)
+    fig = plt.figure(figsize=(10, 7), dpi=180)
+    ax = fig.add_subplot(111, projection="3d")
+    ax.add_collection3d(
+        Poly3DCollection(
+            triangles,
+            facecolor="#e6a62e",
+            edgecolor="#76521a",
+            linewidth=0.12,
+            alpha=1.0,
+        )
+    )
+    xmin, xmax, ymin, ymax, zmin, zmax = mesh.bounds
+    spans = (xmax - xmin, ymax - ymin, zmax - zmin)
+    centers = (0.5 * (xmin + xmax), 0.5 * (ymin + ymax), 0.5 * (zmin + zmax))
+    span = max(spans)
+    ax.set_xlim(centers[0] - span * 0.56, centers[0] + span * 0.56)
+    ax.set_ylim(centers[1] - span * 0.56, centers[1] + span * 0.56)
+    ax.set_zlim(centers[2] - span * 0.36, centers[2] + span * 0.36)
+    ax.set_box_aspect((1.35, 1.0, 0.42))
+    ax.view_init(elev=27, azim=-57)
+    ax.set_xlabel("X · discharge (+X), m")
+    ax.set_ylabel("Y · mouth width, m")
+    ax.set_zlabel("Z · vertical, m")
+    if closeup:
+        ax.set_title(
+            "Rounded leading-edge close-up · R = 7.5 mm · gauge = 15 mm\n"
+            "Downstream portions clipped for display"
+        )
+    else:
+        ax.set_title(
+            "One outlet · four finite-thickness rounded dividers\nNose radius = thickness / 2"
+        )
+    ax.grid(False)
+    fig.tight_layout()
+    fig.savefig(output, facecolor="white")
+    plt.close(fig)
+
+
+def render_mouth_channel_dimensions(output: Path, thickness: float, divider_count: int):
+    """Render the nominal mouth cross-section with all five equal clear gaps."""
+    width, height = MOUTH_W_M, MOUTH_H_M
+    gap = (width - divider_count * thickness) / (divider_count + 1)
+    if gap <= 0:
+        raise RuntimeError("Rounded dividers leave no clear mouth channels")
+    centers = equal_gap_centers(width, divider_count, thickness)
+    fig, ax = plt.subplots(figsize=(10, 4.8), dpi=180)
+    ax.add_patch(
+        Rectangle(
+            (-width / 2, -height / 2),
+            width,
+            height,
+            facecolor="#eaf1f6",
+            edgecolor="#263746",
+            linewidth=1.8,
+        )
+    )
+    for center in centers:
+        ax.add_patch(
+            Rectangle(
+                (center - thickness / 2, -height / 2),
+                thickness,
+                height,
+                facecolor="#e6a62e",
+                edgecolor="#76521a",
+                linewidth=1.1,
+            )
+        )
+    divider = centers[1] if divider_count > 1 else centers[0]
+    left, right = divider - thickness / 2, divider + thickness / 2
+    gap_left = right
+    gap_right = centers[2] - thickness / 2 if divider_count > 2 else left + gap
+    ydim = -0.090
+    ax.annotate(
+        "",
+        xy=(gap_left, ydim),
+        xytext=(gap_right, ydim),
+        arrowprops={"arrowstyle": "<->", "color": "#176b3a", "lw": 1.4},
+    )
+    ax.text(
+        0.5 * (gap_left + gap_right),
+        ydim - height * 0.10,
+        f"equal clear gap = {gap * 1000:.0f} mm",
+        ha="center",
+        va="top",
+        color="#176b3a",
+        fontsize=10,
+    )
+    ax.annotate(
+        "",
+        xy=(-width / 2, 0.102),
+        xytext=(width / 2, 0.102),
+        arrowprops={"arrowstyle": "<->", "color": "#33495e", "lw": 1.1},
+    )
+    ax.text(
+        0.0,
+        0.106,
+        "1000 mm mouth",
+        ha="center",
+        va="bottom",
+        color="#33495e",
+        fontsize=10,
+    )
+    ax.set_xlim(-0.59, 0.59)
+    ax.set_ylim(-0.14, 0.14)
+    ax.set_aspect("equal", adjustable="box")
+    ax.set_xlabel("Y · outlet width, m")
+    ax.set_ylabel("Z · outlet height, m")
+    ax.set_title(
+        f"Nominal mouth · {divider_count} vertical plates · {thickness * 1000:g} mm gauge · "
+        f"{divider_count + 1} equal channels"
+    )
+    ax.grid(True, alpha=0.18)
+    fig.tight_layout()
+    fig.savefig(output, facecolor="white")
+    plt.close(fig)
+
+
 def generate(args) -> dict:
     stations = downstream_stations(args.post_rise_straight_m, args.transition_and_mouth_length_m)
     output = args.output_dir.resolve()
+    rounded_candidate = args.lamella_leading_edge == "rounded"
+    step_coordinate_scale = 1000.0 if rounded_candidate else 1.0
+
+    def export_step(shape, path):
+        if rounded_candidate:
+            write_step_with_units(shape, path, step_coordinate_scale, "MM")
+        else:
+            write_step(shape, path)
+
     geometry_dir = output / "geometry"
-    divider_dir = geometry_dir / "mid_surfaces"
+    divider_dir = geometry_dir / (
+        "rounded_dividers" if args.lamella_leading_edge == "rounded" else "mid_surfaces"
+    )
     figures_dir = output / "figures"
     stl_dir = output / "stl"
     for directory in (geometry_dir, divider_dir, figures_dir, stl_dir):
@@ -989,7 +1357,15 @@ def generate(args) -> dict:
                         centerline_start if station == 0 else y_pipe if station == 1 else y_mouth
                     )
                     rows.append((x, local_center + centers[divider_index], branch["mouth_z_m"]))
-                stock = make_tall_plate(rows, args.lamella_thickness_m)
+                nose_record = None
+                if args.lamella_leading_edge == "rounded":
+                    stock, nose_record = make_rounded_tall_plate(
+                        rows,
+                        args.lamella_thickness_m,
+                        args.effective_lamella_nose_radius_m,
+                    )
+                else:
+                    stock = make_tall_plate(rows, args.lamella_thickness_m)
                 fitted_plate = require_common(stock, transition)
                 if len(solids(fitted_plate)) != 1 or not BRepCheck_Analyzer(fitted_plate).IsValid():
                     raise RuntimeError(
@@ -998,27 +1374,43 @@ def generate(args) -> dict:
                 plate_solids.append(fitted_plate)
 
                 clipped_segments = []
-                for row0, row1 in zip(rows, rows[1:]):
-                    clipped = require_common(make_midface(row0, row1, MOUTH_H_M), transition)
-                    if not BRepCheck_Analyzer(clipped).IsValid() or surface_area(clipped) <= 1e-10:
-                        raise RuntimeError(
-                            "Clipped divider mid-surface segment is invalid or empty"
-                        )
-                    clipped_segments.append(clipped)
-                    mid_faces.append(clipped)
                 label = f"tank{tank_index:02d}_{branch['name']}_divider{divider_index + 1:02d}"
                 group_path = divider_dir / f"{label}.step"
-                write_step(compound(clipped_segments), group_path)
+                if args.lamella_leading_edge == "rounded":
+                    export_step(fitted_plate, group_path)
+                else:
+                    for row0, row1 in zip(rows, rows[1:]):
+                        clipped = require_common(make_midface(row0, row1, MOUTH_H_M), transition)
+                        if (
+                            not BRepCheck_Analyzer(clipped).IsValid()
+                            or surface_area(clipped) <= 1e-10
+                        ):
+                            raise RuntimeError(
+                                "Clipped divider mid-surface segment is invalid or empty"
+                            )
+                        clipped_segments.append(clipped)
+                        mid_faces.append(clipped)
+                    export_step(compound(clipped_segments), group_path)
                 divider_records.append(
                     {
                         "label": label,
-                        "candidate_face_zone": f"baffle_{label}",
                         "tank_index": tank_index,
                         "branch": branch["name"],
                         "divider_index": divider_index + 1,
-                        "segment_count": len(clipped_segments),
+                        "geometry_kind": (
+                            "finite-thickness rounded solid"
+                            if args.lamella_leading_edge == "rounded"
+                            else "zero-thickness clipped surface segments"
+                        ),
+                        "candidate_face_zone": (
+                            None if args.lamella_leading_edge == "rounded" else f"baffle_{label}"
+                        ),
+                        "surface_segment_count": len(clipped_segments),
                         "stations_x_m": list(xs),
                         "centerline_points_xyz_m": [list(row) for row in rows],
+                        "rounded_nose": nose_record,
+                        "fitted_solid_bounds_m": bounds(fitted_plate),
+                        "fitted_solid_volume_m3": volume(fitted_plate),
                         "step": group_path.relative_to(output).as_posix(),
                     }
                 )
@@ -1027,15 +1419,31 @@ def generate(args) -> dict:
     envelope = compound(envelope_components)
     joined_branches = compound(joined_branch_shapes)
     finite_dividers = compound(plate_solids)
-    zero_thickness = compound(mid_faces)
     envelope_step = geometry_dir / "two_tank_four_outlet_aligned_ruled_envelope.step"
     joined_branches_step = geometry_dir / "four_pipe_transition_joined_branches.step"
-    finite_step = geometry_dir / "four_mouth_fitted_divider_solids.step"
-    mid_step = geometry_dir / "four_mouth_zero_thickness_divider_surfaces.step"
-    write_step(envelope, envelope_step)
-    write_step(joined_branches, joined_branches_step)
-    write_step(finite_dividers, finite_step)
-    write_step(zero_thickness, mid_step)
+    if args.lamella_leading_edge == "rounded":
+        finite_step = geometry_dir / "four_mouth_rounded_finite_divider_solids.step"
+        single_outlet_step = geometry_dir / "single_outlet_rounded_divider_solids.step"
+        full_assembly_step = geometry_dir / "two_tank_four_outlet_rounded_divider_assembly.step"
+        mid_step = None
+        full_assembly_shape = compound([envelope, finite_dividers])
+        single_outlet_shape = compound(plate_solids[: args.lamella_count])
+    else:
+        finite_step = geometry_dir / "four_mouth_fitted_divider_solids.step"
+        single_outlet_step = None
+        full_assembly_step = None
+        full_assembly_shape = None
+        single_outlet_shape = None
+        mid_step = geometry_dir / "four_mouth_zero_thickness_divider_surfaces.step"
+    zero_thickness = compound(mid_faces) if mid_faces else None
+    export_step(envelope, envelope_step)
+    export_step(joined_branches, joined_branches_step)
+    export_step(finite_dividers, finite_step)
+    if zero_thickness is not None and mid_step is not None:
+        export_step(zero_thickness, mid_step)
+    if full_assembly_step is not None:
+        export_step(full_assembly_shape, full_assembly_step)
+        export_step(single_outlet_shape, single_outlet_step)
     envelope_check = step_readback(envelope_step)
     joined_branches_check = step_readback(joined_branches_step)
     finite_check = step_readback(finite_step)
@@ -1046,6 +1454,45 @@ def generate(args) -> dict:
     expected_plate_count = len(transition_rows) * args.lamella_count
     if finite_check["solid_count"] != expected_plate_count or not finite_check["all_solids_valid"]:
         raise RuntimeError(f"Divider STEP round-trip failed: {finite_check}")
+    if full_assembly_step is not None:
+        full_assembly_check = step_readback(full_assembly_step)
+        single_outlet_check = step_readback(single_outlet_step)
+        if (
+            full_assembly_check["solid_count"]
+            != envelope_check["solid_count"] + expected_plate_count
+            or not full_assembly_check["all_solids_valid"]
+        ):
+            raise RuntimeError(f"Full assembly STEP round-trip failed: {full_assembly_check}")
+        if (
+            single_outlet_check["solid_count"] != args.lamella_count
+            or not single_outlet_check["all_solids_valid"]
+        ):
+            raise RuntimeError(f"Single-outlet STEP round-trip failed: {single_outlet_check}")
+        step_units_validation = {
+            "declared_length_unit": step_length_unit(full_assembly_step),
+            "coordinate_scale_to_mm": step_coordinate_scale,
+            "full_assembly_imported_bounds_mm": step_imported_bounds(full_assembly_step),
+            "single_outlet_imported_bounds_mm": step_imported_bounds(single_outlet_step),
+        }
+        if step_units_validation["declared_length_unit"] != "mm":
+            raise RuntimeError(
+                f"Rounded candidate STEP does not declare millimetres: {step_units_validation}"
+            )
+        if abs(step_units_validation["full_assembly_imported_bounds_mm"][1] - 4800.0) > 0.1:
+            raise RuntimeError(
+                f"Rounded candidate STEP scale check failed: {step_units_validation}"
+            )
+        if (
+            abs(step_units_validation["single_outlet_imported_bounds_mm"][1] - 4800.0) > 0.1
+            or step_units_validation["single_outlet_imported_bounds_mm"][0] < 4210.0
+        ):
+            raise RuntimeError(
+                f"Single-outlet STEP scale/start check failed: {step_units_validation}"
+            )
+    else:
+        full_assembly_check = None
+        single_outlet_check = None
+        step_units_validation = None
 
     sections = []
     representative = transition_rows[0][3]
@@ -1097,10 +1544,31 @@ def generate(args) -> dict:
 
     envelope_stl = stl_dir / "envelope.stl"
     joined_branches_stl = stl_dir / "four_pipe_transition_joined_branches.stl"
-    dividers_stl = stl_dir / "fitted_dividers.stl"
-    write_stl(envelope, envelope_stl)
-    write_stl(joined_branches, joined_branches_stl, linear_deflection_m=0.00075)
-    write_stl(finite_dividers, dividers_stl)
+    if rounded_candidate:
+        dividers_stl = stl_dir / "rounded_finite_dividers.stl"
+        full_assembly_stl = stl_dir / "fullassembly.stl"
+        single_outlet_stl = stl_dir / "single_outlet_plates.stl"
+    else:
+        dividers_stl = stl_dir / "fitted_dividers.stl"
+        full_assembly_stl = None
+        single_outlet_stl = None
+    if rounded_candidate:
+        # Mesh the overview assembly before any high-resolution outlet export;
+        # the BREP compounds share faces, and the later local nose refinement
+        # would otherwise propagate into this deliberately compact STL.
+        write_stl(full_assembly_shape, full_assembly_stl, linear_deflection_m=0.006)
+        write_stl(envelope, envelope_stl)
+        write_stl(joined_branches, joined_branches_stl, linear_deflection_m=0.00075)
+        write_stl(finite_dividers, dividers_stl, linear_deflection_m=0.00020)
+        write_stl(single_outlet_shape, single_outlet_stl, linear_deflection_m=0.00012)
+        divider_stl_check = stl_closedness(dividers_stl, expected_plate_count)
+        single_outlet_stl_check = stl_closedness(single_outlet_stl, args.lamella_count)
+    else:
+        write_stl(envelope, envelope_stl)
+        write_stl(joined_branches, joined_branches_stl, linear_deflection_m=0.00075)
+        write_stl(finite_dividers, dividers_stl)
+        divider_stl_check = None
+        single_outlet_stl_check = None
     assembly_png = figures_dir / "two_tank_four_outlet_assembly.png"
     sections_png = figures_dir / "transition_cross_sections.png"
     tank_connection_png = figures_dir / f"tank_connection_section_{args.tank_axis}.png"
@@ -1116,6 +1584,8 @@ def generate(args) -> dict:
         args.lamella_count,
         args.lamella_thickness_m,
         args.pipe_transition_join,
+        args.lamella_leading_edge,
+        args.effective_lamella_nose_radius_m,
     )
     render_tank_connection_section(envelope_stl, tank_connection_png, args.tank_axis)
     render_branch_join_sections(
@@ -1132,6 +1602,19 @@ def generate(args) -> dict:
         args.lamella_thickness_m,
         stations,
     )
+    if rounded_candidate:
+        plates_overview_png = figures_dir / "single_outlet_plates.png"
+        nose_detail_png = figures_dir / "rounded_nose_closeup.png"
+        mouth_dimensions_png = figures_dir / "rounded_mouth_channel_dimensions.png"
+        render_single_outlet_plates(single_outlet_stl, plates_overview_png)
+        render_single_outlet_plates(single_outlet_stl, nose_detail_png, closeup=True)
+        render_mouth_channel_dimensions(
+            mouth_dimensions_png, args.lamella_thickness_m, args.lamella_count
+        )
+    else:
+        plates_overview_png = None
+        nose_detail_png = None
+        mouth_dimensions_png = None
 
     sections_path = output / "transition_sections.csv"
     with sections_path.open("w", newline="", encoding="utf-8") as stream:
@@ -1142,9 +1625,17 @@ def generate(args) -> dict:
     mid_index.write_text(
         json.dumps(
             {
-                "status": "geometry-only zero-thickness divider candidates; no mesh faceZones created",
+                "status": (
+                    "finite-thickness rounded divider solids; no zero-thickness surfaces exported; "
+                    "CFD fluid mesh must be regenerated with the solids excluded"
+                    if rounded_candidate
+                    else "geometry-only zero-thickness divider candidates; no mesh faceZones created"
+                ),
                 "count": len(divider_records),
                 "surface_segment_count": len(mid_faces),
+                "solid_count": len(plate_solids),
+                "leading_edge_mode": args.lamella_leading_edge,
+                "nose_radius_m": args.effective_lamella_nose_radius_m,
                 "dividers": divider_records,
             },
             indent=2,
@@ -1161,7 +1652,11 @@ def generate(args) -> dict:
         except importlib.metadata.PackageNotFoundError:
             package_versions[package] = "not installed"
     summary = {
-        "status": "reproducible provisional geometry source smoke generation; no mesh or CFD",
+        "status": (
+            "rounded finite-thickness divider geometry candidate; no fluid mesh or CFD"
+            if rounded_candidate
+            else "reproducible provisional geometry source smoke generation; no mesh or CFD"
+        ),
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "generator": generator_path.name,
         "generator_sha256": sha256(generator_path),
@@ -1217,12 +1712,29 @@ def generate(args) -> dict:
             "intermediate_width_m_assumed": args.intermediate_width_m,
             "divider_count_per_mouth": args.lamella_count,
             "divider_thickness_m_assumed_not_measured": args.lamella_thickness_m,
+            "divider_thickness_basis": (
+                "User reported 10-20 mm thickness; 15 mm is the selected nominal for this geometry candidate."
+                if rounded_candidate
+                else "Historical geometry-generator default or command-line assumption; not measured."
+            ),
             "divider_start_x_m_assumed": stations.lamella_start_x_m,
             "divider_geometry": (
-                f"{args.lamella_count} equally spaced plates fanned through the aligned ruled "
-                f"transition; {args.lamella_thickness_m:g} m thickness is assumed. "
-                "Zero-thickness candidates are separate from fitted display solids."
+                (
+                    f"{args.lamella_count} vertical finite-thickness plates per outlet, equally "
+                    f"spaced through the aligned ruled transition; {args.lamella_thickness_m:g} m "
+                    "nominal gauge. Each leading edge is a semicircle of radius thickness/2, "
+                    "oriented tangent to the first divider-centerline segment and clipped to the "
+                    "transition envelope. These are closed geometry solids, not an existing CFD mesh."
+                )
+                if rounded_candidate
+                else (
+                    f"{args.lamella_count} equally spaced plates fanned through the aligned ruled "
+                    f"transition; {args.lamella_thickness_m:g} m thickness is assumed. "
+                    "Zero-thickness candidates are separate from fitted display solids."
+                )
             ),
+            "divider_leading_edge_mode": args.lamella_leading_edge,
+            "divider_nose_radius_m": args.effective_lamella_nose_radius_m,
             "tank_length": "capacity divided by circular cross-sectional area; ideal flat-ended length, no end-cap correction",
         },
         "tank_metrics": {
@@ -1253,6 +1765,7 @@ def generate(args) -> dict:
             "divider_count": len(divider_records),
             "zero_thickness_segment_count": len(mid_faces),
             "passages_per_mouth": args.lamella_count + 1,
+            "rounded_nose_count": len(plate_solids) if rounded_candidate else 0,
         },
         "tank_connection_checks": {
             "method": (
@@ -1289,6 +1802,10 @@ def generate(args) -> dict:
             "pipe_area_m2": pipe_area,
             "gross_mouth_area_m2_each": mouth_area,
             "nominal_divider_open_mouth_area_m2_each": mouth_open_area,
+            "nominal_equal_clear_mouth_gap_m": (
+                MOUTH_W_M - args.lamella_count * args.lamella_thickness_m
+            )
+            / (args.lamella_count + 1),
             "section_samples_one_transition_only_m2": sections,
             "endpoint_probe_to_pipe_area_ratio": pipe_opening_ratio,
             "continuous_minimum_area": "not proven; section values are discrete BREP slab samples",
@@ -1297,17 +1814,56 @@ def generate(args) -> dict:
             "envelope_step": envelope_step.relative_to(output).as_posix(),
             "joined_pipe_transition_step": joined_branches_step.relative_to(output).as_posix(),
             "fitted_dividers_step": finite_step.relative_to(output).as_posix(),
-            "zero_thickness_surfaces_step": mid_step.relative_to(output).as_posix(),
+            "zero_thickness_surfaces_step": (
+                mid_step.relative_to(output).as_posix() if mid_step is not None else None
+            ),
+            "single_outlet_dividers_step": (
+                single_outlet_step.relative_to(output).as_posix()
+                if single_outlet_step is not None
+                else None
+            ),
+            "full_assembly_step": (
+                full_assembly_step.relative_to(output).as_posix()
+                if full_assembly_step is not None
+                else None
+            ),
+            "full_assembly_stl": (
+                full_assembly_stl.relative_to(output).as_posix()
+                if full_assembly_stl is not None
+                else None
+            ),
+            "single_outlet_dividers_stl": (
+                single_outlet_stl.relative_to(output).as_posix()
+                if single_outlet_stl is not None
+                else None
+            ),
+            "divider_stl": dividers_stl.relative_to(output).as_posix(),
             "divider_index": mid_index.relative_to(output).as_posix(),
             "assembly_png": assembly_png.relative_to(output).as_posix(),
             "section_png": sections_png.relative_to(output).as_posix(),
             "tank_connection_section_png": tank_connection_png.relative_to(output).as_posix(),
             "four_join_longitudinal_section_png": branch_join_png.relative_to(output).as_posix(),
+            "single_outlet_plates_png": (
+                plates_overview_png.relative_to(output).as_posix() if plates_overview_png else None
+            ),
+            "single_outlet_rounded_noses_png": (
+                nose_detail_png.relative_to(output).as_posix() if nose_detail_png else None
+            ),
+            "rounded_mouth_channel_dimensions_png": (
+                mouth_dimensions_png.relative_to(output).as_posix()
+                if mouth_dimensions_png
+                else None
+            ),
         },
         "roundtrip": {
             "envelope": envelope_check,
             "joined_pipe_transitions": joined_branches_check,
             "fitted_dividers": finite_check,
+            "full_assembly": full_assembly_check,
+            "single_outlet_dividers": single_outlet_check,
+            "step_units_validation": step_units_validation,
+            "divider_stl_closedness": divider_stl_check,
+            "single_outlet_stl_closedness": single_outlet_stl_check,
         },
     }
     (output / "geometry_summary.json").write_text(
@@ -1342,6 +1898,18 @@ def parse_args():
     parser.add_argument("--lamella-count", type=int, default=4)
     parser.add_argument("--lamella-thickness-m", type=float, default=0.004)
     parser.add_argument(
+        "--lamella-leading-edge",
+        choices=("square", "rounded"),
+        default="square",
+        help="square preserves historical divider output; rounded builds finite capped solids",
+    )
+    parser.add_argument(
+        "--lamella-nose-radius-m",
+        type=float,
+        default=None,
+        help="rounded leading semicircle radius; defaults to half the divider thickness",
+    )
+    parser.add_argument(
         "--post-rise-straight-m",
         type=float,
         default=POST_RISE_STRAIGHT_DEFAULT_M,
@@ -1363,6 +1931,13 @@ def parse_args():
         ),
     )
     args = parser.parse_args()
+    args.effective_lamella_nose_radius_m = (
+        args.lamella_nose_radius_m
+        if args.lamella_nose_radius_m is not None
+        else args.lamella_thickness_m / 2
+        if args.lamella_leading_edge == "rounded"
+        else None
+    )
     errors = validate_inputs(args)
     if errors:
         parser.error("; ".join(errors))
@@ -1386,6 +1961,16 @@ def validate_inputs(args) -> list[str]:
     ]
     if args.lamella_count < 1:
         errors.append("--lamella-count must be at least 1")
+    if args.lamella_leading_edge == "rounded":
+        radius = args.effective_lamella_nose_radius_m
+        if not math.isfinite(radius) or radius <= 0:
+            errors.append("rounded divider nose radius must be finite and greater than zero")
+        elif not math.isclose(2 * radius, args.lamella_thickness_m, rel_tol=0, abs_tol=1e-9):
+            errors.append(
+                "a semicircular leading nose requires --lamella-nose-radius-m = thickness / 2"
+            )
+    elif args.lamella_nose_radius_m is not None:
+        errors.append("--lamella-nose-radius-m requires --lamella-leading-edge rounded")
     if not math.isfinite(args.post_rise_straight_m) or args.post_rise_straight_m < 0:
         errors.append("--post-rise-straight-m must be finite and nonnegative")
     if (

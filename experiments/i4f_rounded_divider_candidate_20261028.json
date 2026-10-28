@@ -1,0 +1,120 @@
+{
+  "experiment_id": "i4f-rounded-divider-candidate-20261028",
+  "status": "exploratory geometry candidate; no CFD or mesh result",
+  "created_utc": "2026-10-28T16:38:51.275291+00:00",
+  "purpose": "Create closed finite-thickness rounded-divider geometry reflecting the latest reported outlet divider count, orientation and thickness range for inspection and subsequent mesh preparation.",
+  "user_reported_hardware": {
+    "dividers_per_outlet": {
+      "value": 4,
+      "basis": "user-confirmed on 2026-10-28"
+    },
+    "orientation": {
+      "value": "vertical",
+      "basis": "user-confirmed on 2026-10-28"
+    },
+    "thickness_range_m": {
+      "value": [
+        0.01,
+        0.02
+      ],
+      "basis": "user-reported range; not a direct measurement"
+    },
+    "leading_edge": {
+      "value": "rounded",
+      "basis": "user requested rounded leading edges; exact profile/radius not supplied"
+    }
+  },
+  "selected_geometry_inputs": {
+    "thickness_m": 0.015,
+    "thickness_selection": "midpoint of reported 10\u201320 mm range; provisional nominal",
+    "thickness_direction": "15 mm local normal section at four body stations along each curved plate",
+    "leading_edge_shape": "semicircular nose tangent to first divider centerline segment",
+    "nose_radius_m": 0.0075,
+    "nose_radius_selection": "half nominal thickness; provisional, not measured",
+    "divider_start_x_m": 4.216666666666667,
+    "transition_and_mouth_length_m": 1.0,
+    "mouth_width_m": 1.0,
+    "mouth_height_m": 0.15,
+    "pipe_transition_join": "flush-at-inlet",
+    "post_rise_straight_m": 0.0,
+    "placement": "four equally spaced vertical plates per outlet, following current provisional aligned ruled transition; mounting not specified"
+  },
+  "command": {
+    "executable": "scripts/i4f_four_outlet_geometry/.venv/bin/python",
+    "argv": [
+      "scripts/i4f_four_outlet_geometry/generate.py",
+      "--output-dir",
+      "results/runs/i4f-rounded-divider-candidate-20261028T163928Z",
+      "--pipe-transition-join",
+      "flush-at-inlet",
+      "--post-rise-straight-m",
+      "0",
+      "--transition-and-mouth-length-m",
+      "1.0",
+      "--lamella-count",
+      "4",
+      "--lamella-thickness-m",
+      "0.015",
+      "--lamella-leading-edge",
+      "rounded",
+      "--lamella-nose-radius-m",
+      "0.0075"
+    ]
+  },
+  "implementation": {
+    "source": "scripts/i4f_four_outlet_geometry/generate.py",
+    "executed_source_sha256": "f0bdad04011194f4493ede1d0da6c840db3abe23f7c75c1c2de7d96c449139f0",
+    "executed_source_snapshot": "results/runs/i4f-rounded-divider-candidate-20261028T163928Z/source/generate.py",
+    "executed_source_snapshot_sha256": "f0bdad04011194f4493ede1d0da6c840db3abe23f7c75c1c2de7d96c449139f0",
+    "legacy_defaults_preserved": {
+      "lamella_thickness_m": 0.004,
+      "lamella_leading_edge": "square"
+    },
+    "runtime": {
+      "python": "3.12.3",
+      "packages": {
+        "cadquery-ocp": "8.0.1.1.0",
+        "numpy": "2.5.4",
+        "matplotlib": "3.11.2",
+        "pyvista": "0.49.1",
+        "vtk": "9.6.2"
+      }
+    },
+    "post_generation_worktree_source_sha256": "8b7e30b39cdd669e0656830af5d143b5d739704e4c11546e95ce8c72ff65caef",
+    "post_generation_source_note": "Only Ruff import ordering and formatting were applied after generation; the exact executed file is preserved and hashed at executed_source_snapshot."
+  },
+  "result": {
+    "run_bundle": "results/runs/i4f-rounded-divider-candidate-20261028T163928Z",
+    "result_summary": "results/summaries/i4f_20261028/rounded-divider-model/candidate_result.json",
+    "divider_solids": 16,
+    "single_outlet_solids": 4,
+    "full_assembly_solids": 26,
+    "nominal_equal_clear_exit_gap_m": 0.188,
+    "nominal_exit_area_blockage_fraction": 0.06000000000000005,
+    "step_declares_mm": true,
+    "step_full_assembly_xmax_mm": 4800.0000001,
+    "watertight_STL_divider_components": true,
+    "watertight_STL_single_outlet_components": true,
+    "artifacts_directory": "results/summaries/i4f_20261028/rounded-divider-model"
+  },
+  "prior_attempts": [
+    {
+      "run_id": "i4f-rounded-divider-candidate-20261028T162755Z",
+      "outcome": "geometry generated, then output validation incorrectly expected apparatus x-maximum 6800 mm instead of 4800 mm; attempt-001-record.json preserved."
+    },
+    {
+      "run_id": "i4f-rounded-divider-candidate-20261028T163055Z",
+      "outcome": "generation stopped at first plate on a misspelled OCP API; attempt-002-record.json preserved."
+    },
+    {
+      "run_id": "i4f-rounded-divider-candidate-20261028T163136Z",
+      "outcome": "valid closed geometry and units, but full-assembly STL exceeded 10 MB; superseded after reducing mesh deflection for that export."
+    }
+  ],
+  "scientific_limits": [
+    "This is a geometry candidate for visual inspection, not a hardware validation or CFD result.",
+    "Do not infer uniform discharge or performance from the model.",
+    "The earlier fluid mesh retains zero-thickness dividers and does not include this candidate geometry or its nominal 6% mouth-area blockage.",
+    "A new mesh must exclude the closed solids from fluid and include local refinement; about 2 mm near the rounded 15 mm nose is a starting screening scale, not an acceptance tolerance."
+  ]
+}

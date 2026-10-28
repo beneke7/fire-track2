@@ -41,7 +41,13 @@
       "count": 4,
       "spacing": "equally spaced",
       "start_location": "about halfway through expansion/outlet",
-      "status": "User-reported first-pass description; detailed orientation/dimensions unknown."
+      "status": "Count/orientation confirmed and 10–20 mm gauge estimated by user on 2026-10-28; exact radius, start station and mounting remain unspecified.",
+      "orientation": "vertical; four per outlet",
+      "count_scope": "per outlet",
+      "thickness_range_m": [
+        0.01,
+        0.02
+      ]
     }
   },
   "unresolved": [
@@ -50,7 +56,7 @@
     "Valve opening time/law remains unknown; the approximate 5 s report refers to total discharge duration.",
     "The 12 bar gauge/absolute convention remains unknown; next absolute-pressure scenarios are a primary-agent modeling choice, not a measured conversion.",
     "Gas composition, temperature, pressure-control/regulator details and pressure history; earlier CO2 notes remain historical context, not confirmation.",
-    "Lamella orientation, dimensions, thickness, and exact hardware reference frame.",
+    "Exact lamella gauge within the reported 10–20 mm range, nose radius/profile, start station and mounting details.",
     "Meaning and units of bigger: 240.",
     "Interpretation of the prior aerial-operation notes about 15–60 m, canopy, helicopter speed 30–60 m/s, and “folfele megyunk”; these remain outside current internal-flow boundaries."
   ],
@@ -239,6 +245,32 @@
       "reply_verbatim": "Initially contain air",
       "interpretation": "Downstream of each valve is initially air-filled. This supersedes the fully primed downstream-line hypothesis for new baseline runs. The tank-to-valve upstream passage remains wetted where connected below the tank free surface; its separate inventory and the effective plane of the distributed scalar valve require explicit geometric definition.",
       "case_change_status": "Primary directed a new immutable compact air-filled-downstream case, graceful save of the old long primed-line run, and no long continuation of the compact primed pilot. Historical inputs/results are preserved."
+    },
+    {
+      "date": "2026-10-28",
+      "recorded_utc": "2026-10-28T16:23:41.222058+00:00",
+      "source": "Direct user messages and submitted clarification answer in the project chat.",
+      "exact_user_answers": {
+        "orientation_and_scope": "Yes—four vertical dividers per outlet",
+        "thickness_and_requested_rounding": "but they are much wider than 4mm, like 1-2 cm, and they should have a rounded edge regarding the mesh, that can be big help also! and pls upload a 3d modellof the things i can inspect to gh too!"
+      },
+      "confirmed_facts": {
+        "divider_count_per_outlet": 4,
+        "orientation": "vertical; splits the 1 m width into five channels",
+        "thickness_range_m": [
+          0.01,
+          0.02
+        ],
+        "thickness_status": "User estimate, not a calibrated measurement."
+      },
+      "user_requested_model_change": "Represent rounded leading edges in the actual meshing geometry; export an inspectable 3D model to GitHub.",
+      "provisional_next_candidate_choices": {
+        "thickness_m": 0.015,
+        "leading_edge": "semicircular rounded nose",
+        "nose_radius_m": 0.0075,
+        "status": "Primary-agent candidate choices within the reported gauge range; radius/profile not measured or explicitly specified by the user."
+      },
+      "historical_scope": "Earlier 4 mm CAD solids and zero-thickness CFD baffles remain historical inputs. No existing generated geometry, mesh or simulation is changed retroactively."
     }
   ],
   "history_snapshots": {
@@ -315,7 +347,16 @@
       "count": 4,
       "spacing": "equally spaced",
       "start_location": "about halfway through expansion/outlet",
-      "scope": "first pass"
+      "scope": "Count/orientation confirmed 2026-10-28; thickness estimated; approximate equal spacing/start location retained from earlier notes.",
+      "count_scope": "per outlet",
+      "total_dividers_across_four_outlets": 16,
+      "orientation": "vertical; five channels across each outlet width",
+      "thickness_range_m": [
+        0.01,
+        0.02
+      ],
+      "thickness_status": "User estimate confirmed 2026-10-28; exact gauge unknown.",
+      "rounded_leading_edge_request": "User requests rounded edges in the mesh; actual hardware radius/profile unknown."
     },
     "provenance": "User-reported, not measured or verified against supplied CAD.",
     "initial_downstream_fill": {
