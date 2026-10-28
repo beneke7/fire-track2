@@ -17,18 +17,23 @@
 
 set -eo pipefail
 
-SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v2-20261027
+SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v3-20261028/unpacked
 RUN_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027
 : "${ROUAIX_PARENT_SMOKE_JOB_ID:?submit with the v2 smoke job ID}"
 
 module load cray-python/3.11.7 > "$RUN_ROOT/modules-$SLURM_JOB_ID.log" 2>&1
 module load openfoam >> "$RUN_ROOT/modules-$SLURM_JOB_ID.log" 2>&1
 module load OpenFOAM/v2512-DP32-Gcc-CRAY-MPICH >> "$RUN_ROOT/modules-$SLURM_JOB_ID.log" 2>&1
+read -r -a foam_bash_args <<< "$FOAM_BASH"
 set +e +u
-source "$FOAM_BASH" >> "$RUN_ROOT/modules-$SLURM_JOB_ID.log" 2>&1
+source "${foam_bash_args[@]}" >> "$RUN_ROOT/modules-$SLURM_JOB_ID.log" 2>&1
 foam_source_status=$?
 set -euo pipefail
-[[ $foam_source_status == 0 ]]
+if (( foam_source_status != 0 )); then
+  printf 'ERROR: OpenFOAM environment setup failed (exit %s); see %s\n' \
+    "$foam_source_status" "$RUN_ROOT/modules-$SLURM_JOB_ID.log" >&2
+  exit "$foam_source_status"
+fi
 [[ ${WM_PROJECT_VERSION:-} == v2512 ]]
 [[ ${WM_LABEL_SIZE:-} == 32 ]]
 [[ ${WM_PRECISION_OPTION:-} == DP ]]

@@ -1,27 +1,30 @@
 # Komondor Rouaix status
 
-Updated 2026-10-27 18:04 UTC (19:04 CET). Analytical E0 remains the only
+Updated 2026-10-28 09:04 UTC (10:04 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-**Smoke14676288 and original restart control14676290 are released.**
-Both request120 ranks over three nodes (40/node),22 GiB/node, cpu-short.
-The smoke targets0.20→0.201 s in ten fixed0.1 ms steps, capped at20 minutes.
-The control targets0.20→0.30 s in1000 steps, capped at90 minutes, and waits
-on afterok:14676288 with invalid-dependency cancellation. Its runtime gate
-checks actual clean smoke/time/ledger/convergence/archive evidence, not just
-the scheduler's success flag. Auditors14676361/14676362 are armed afterany.
-No native restart steps have yet been observed.
+**Replacement smoke14688328 and gated control14688329 are released.**
+At28 October09:04:26 UTC, smoke is RUNNING with all120 CPUs and is verifying/
+extracting the donor checkpoint. Control waits on afterok:14688328. Both request120 ranks on three nodes,
+40/node and22 GiB/node in cpu-short. Smoke targets0.20→0.201 s in ten fixed
+0.1 ms steps (20-minute cap); control targets0.20→0.30 s (90-minute cap).
+Auditors14688330/14688331 are armed afterany. Runtime control gating still
+requires actual successful smoke/time/ledger/convergence/archive evidence.
+Native restart success remains unproven.
 
-The earlier two-node smoke14675897/auditor14676006 were cancelled while
-pending, with zero elapsed time and zero allocated CPUs. Three40-rank blocks
-fit the fragmented short queue better than two60-rank blocks in the test-only
-forecast; this does not reserve capacity. The120-way mesh decomposition is
-unchanged. Hardware/placement differs from the single-node donor.
-[Restart declaration](../experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md) and
-[source, submission and release receipts](../results/summaries/rouaix_restart_controls_20261027/README.md).
-The pressure/backflow-energy candidate is declared but **not submitted**.
+V2 smoke14676288 FAILED1:0 in three seconds at27 October18:15:24 UTC,
+before Python or CFD. Its launcher quoted the module's argument-bearing
+FOAM_BASH as one filename; inspection also found a missing unpacked source-path
+component. Control14676290 cancelled without allocation. Both auditors completed.
+These are launcher defects, not CFD results. V3 corrects startup/path only;
+physics, timestep and resources are unchanged. Actual Komondor module startup,
+frozen source hashes and runner --help pass, alongside119 affected tests,
+Ruff and shell syntax. V1/v2 source and failure evidence remain preserved.
+[Declaration](../experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md) and
+[source/submission evidence](../results/summaries/rouaix_restart_controls_20261027/README.md).
+The pressure/backflow-energy candidate remains unsubmitted.
 
 **14669440 (`ml-vof`) COMPLETED 0:0** on one CPU node with 120 ranks.
 It reached all **2000 fixed 0.1 ms steps through 0.20 s** on the unchanged

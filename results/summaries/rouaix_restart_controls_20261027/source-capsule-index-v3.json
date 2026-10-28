@@ -1,0 +1,130 @@
+{
+  "allocation": {
+    "gpu_request": null,
+    "memory_gib_per_node": 22,
+    "nodes": 3,
+    "partition": "cpu-short",
+    "ranks": 120,
+    "tasks_per_node": [
+      40,
+      40,
+      40
+    ]
+  },
+  "capsule": "restart-source-v3.tar.gz",
+  "capsule_bytes": 129777,
+  "capsule_sha256": "89b74ab3ab19f4814b07f25ac36926d03d4a680781b6aae0b6a88e0c60bac82e",
+  "changes": "v2 startup-only corrections: argument-bearing FOAM_BASH and unpacked v3 source root; regression/declaration updated",
+  "checks": {
+    "actual_native_module_bootstrap": "passed",
+    "affected_tests": "119 passed",
+    "ruff": "passed",
+    "shell_syntax": "passed"
+  },
+  "created_utc": "2026-10-28T09:01:26.896520+00:00",
+  "dirty": true,
+  "files": [
+    {
+      "bytes": 40923,
+      "path": "cases/e1_rouaix_hpc_restart/run_restart.py",
+      "sha256": "a7120e3fc1be1194c24856b9a152bc0b1b414b425b8c29f4868159c3507c052c"
+    },
+    {
+      "bytes": 2067,
+      "path": "cases/e1_rouaix_hpc_restart/restart_smoke_v2.sbatch",
+      "sha256": "9845634508465bc1270af73b3c312d27eb831958e9c514c17c72d2ff01ce1efc"
+    },
+    {
+      "bytes": 2170,
+      "path": "cases/e1_rouaix_hpc_restart/restart_control.sbatch",
+      "sha256": "a13882d9b39d82a0aa5b20793254ac10577f59e397c9ea4fe564c8dde60ac7e2"
+    },
+    {
+      "bytes": 24943,
+      "path": "cases/e1_rouaix_hpc_restart/audit_restart.py",
+      "sha256": "5ecdc5216480ee50c65f423c60da688d1afa036a6a668518b70f7dd5d3c7ba3d"
+    },
+    {
+      "bytes": 96464,
+      "path": "cases/e1_rouaix_hpc/run_pilot.py",
+      "sha256": "40451793b20fb7365dc7a691f16557ce349719735295f7aa2ffddb1ba7f4d21a"
+    },
+    {
+      "bytes": 10632,
+      "path": "cases/e1_rouaix_hpc/collect_native_provenance.py",
+      "sha256": "c1ad1f7dd8ae5118ad9ba36b7cca3a362b85fb38b3058a351eb46eb9d8d9ca35"
+    },
+    {
+      "bytes": 45698,
+      "path": "cases/e1_rouaix_hpc/prepare_case.py",
+      "sha256": "d117fa7d0a08ccbadb1dc38c515a0f55f1a9dde6812d689d8458a4c506c2e7dc"
+    },
+    {
+      "bytes": 2631,
+      "path": "cases/e1_rouaix_hpc/source-provenance.json",
+      "sha256": "947a39931ceb724795f1305194ae6309aa3216730baf231b8bebc4df2896e751"
+    },
+    {
+      "bytes": 37319,
+      "path": "scripts/hpc_metrics.py",
+      "sha256": "9fa244d633bd37932da253e275acfb7a8d4b182a817bb56bf060195abef89d7b"
+    },
+    {
+      "bytes": 105688,
+      "path": "scripts/audit_iso_vof_ledger.py",
+      "sha256": "4df8cc2088a5115290a709c90a2ea746b06d29e10935608f1f0c4857e1dacc80"
+    },
+    {
+      "bytes": 72383,
+      "path": "scripts/continue_rouaix_case.py",
+      "sha256": "bd0c867e3f3e158b3cbb715c429b80d607602368eb7afe707f198074a915c656"
+    },
+    {
+      "bytes": 45655,
+      "path": "scripts/audit_interface_wave_flux.py",
+      "sha256": "1338ee5939157ccba37c700a3c09a83ee58c31d4aa66328d3b9cb04385ef3f3f"
+    },
+    {
+      "bytes": 8585,
+      "path": "experiments/E1_ROUAIX_RESTART_CONTROLS_20261027.md",
+      "sha256": "c40c0d4ecf697d1267aead86bf84144c64e85a074d6dd80fff277f00c477205d"
+    },
+    {
+      "bytes": 8190,
+      "path": "results/runs/rouaix-restart-controls-20261027/research/outlet-control-review.md",
+      "sha256": "db43d7e9e657ec070bcc46ae39ca52451abf2ee00999ce452811850344ab2a3a"
+    },
+    {
+      "bytes": 13505,
+      "path": "tests/test_rouaix_hpc_restart.py",
+      "sha256": "617e55f856cf74f62ebd81e267dfbeccccff23ce5283028810b6d6eaad44e2a8"
+    },
+    {
+      "bytes": 9038,
+      "path": "tests/test_rouaix_hpc_restart_audit.py",
+      "sha256": "4e9089bde5ddb1b85287694b484358b142ff4c6af12c96ee485ebfd5c2e1a215"
+    }
+  ],
+  "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+  "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+  "revision": "ab4154d87e0c938e25d1062705631eaf48e34e0c",
+  "run_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027",
+  "schema_version": 2,
+  "source_root": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v2-20261027",
+  "variants": {
+    "original-control": {
+      "case_id": "rouaix-restart-original-control-0300",
+      "delta_t_s": 0.0001,
+      "start_time_s": 0.2,
+      "target_time_s": 0.3,
+      "wall_limit_s": 5400
+    },
+    "original-smoke": {
+      "case_id": "rouaix-restart-original-smoke-0201",
+      "delta_t_s": 0.0001,
+      "start_time_s": 0.2,
+      "target_time_s": 0.201,
+      "wall_limit_s": 1200
+    }
+  }
+}

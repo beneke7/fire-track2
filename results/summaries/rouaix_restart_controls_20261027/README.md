@@ -1,42 +1,33 @@
 # Komondor restart work — current queue
 
-**14676288** is a released restart smoke: load the verified0.20 s donor,
-run ten fixed0.1 ms steps to0.201 s, and verify checkpoint/diagnostics/
-incremental mass accounting. It has a20-minute cap.
+At28 October09:04 UTC, replacement smoke **14688328** and control **14688329**
+are released. Smoke has all120 CPUs and is verifying/extracting the donor;
+control is pending its dependency. Smoke targets0.20→0.201 s in ten fixed0.1 ms steps,
+20-minute cap. Control targets0.20→0.30 s in1000 steps,90-minute cap, with
+`afterok:14688328`, invalid-dependency cancellation and independent runtime
+checks of actual smoke/time/ledger/convergence/archive evidence.
+Both use120 ranks on three nodes,40/node,22 GiB/node, collated fields,
+cpu-short, one CPU/rank, no GPUs or automatic retries. Auditors14688330/14688331
+are armed afterany; their successful capture is not a scientific pass.
+`submission-v3.json`, `afterany-manifest-v3.json` and held readback preserve
+identities, source path and release time. Native restart steps remain unproven.
 
-**14676290** is the released unchanged original-scheme control through
-0.30 s (1000 continuation steps), with a90-minute cap. It waits on
-`afterok:14676288`, cancels if that dependency fails, and independently checks
-the actual smoke endpoint, ten-step count, three-node layout, residuals,
-incremental ledger and verified archive before its own solver launch.
+V2 smoke14676288 obtained120 CPUs but FAILED1:0 in three seconds at27 October
+18:15:24 UTC before Python/CFD. The launcher quoted the module's FOAM_BASH,
+which contains a bashrc path plus six startup arguments, as one filename.
+Inspection also found its source root omitted `/unpacked`. Control14676290
+cancelled without allocation; both afterany audits completed. `failed-v2/`
+preserves native stderr, login-node accounting and terminal audit receipts.
+No numerical result was produced. Earlier v1 jobs were cancelled before
+allocation. Their exact source/submission/release records remain historical.
 
-Both use **120 MPI ranks across three nodes,40/node,22 GiB/node** (66 GiB
-total), cpu-short, one CPU/rank, collated I/O, no GPU/requeue. This keeps the
-120-way checkpoint decomposition and avoids replaying the first0.20 s.
-The distribution favors fragmented short-partition capacity; forecast starts
-are not reservations. No restart steps had been observed at release.
+V3 changes startup/path handling and adds a regression for the actual
+argument-bearing module value and setup failure. Capsule SHA:
+`89b74ab3ab19f4814b07f25ac36926d03d4a680781b6aae0b6a88e0c60bac82e`.
+All16 remote files match the frozen index; actual Komondor module startup,
+v2512/DP32, seven source arguments, and the frozen runner's --help passed.
+Cray Python supplies NumPy1.24.4. The119 affected tests, Ruff, formatting and
+shell syntax passed. Full repository checks were not rerun.
 
-Native v3 afterany auditors14676361/14676362 are armed, each bounded to one
-CPU,1800 MiB,ten minutes. `afterany-manifest-v2.json` binds their expected
-source/run paths, IDs, ranks, horizons and timesteps. Native auditor capture
-success alone is not a scientific or restart compatibility pass.
-
-`README-v2.md`, `submission-v2.json` and `slurm-readback-v2.txt` preserve the
-held submission; `v2-release-and-v1-cancel.txt` and `v2-auditor-submit.txt`
-record subsequent root actions. V1 jobs14675897/14676006 were replaced
-while pending, with zero allocated CPUs and no solver steps; exact old
-sources/receipts remain here. Do not reuse the preliminary v1 launcher.
-
-The frozen v2 capsule SHA is
-`d4de27c68f50afca40920e8553a3b82992777516cc6c6958ad9b300bf495c5dd`.
-Remote source hashes and Cray Python imports passed. NumPy1.24.4 is supplied
-by the existing Cray Python environment; no dependency was installed.
-Thirteen focused restart tests passed; the combined affected HPC/restart run
-passed105 tests. Ruff, formatting and shell syntax passed.
-The smoke has not yet demonstrated native restart success; the full repository
-suite was not rerun. The13-test unit success does not replace the native smoke.
-
-The declared p0=0 total-pressure sensitivity is **not submitted**. The unchanged
-restart control must first establish behavior across the previous instability
-window. That future pressure treatment is diagnostic, not a paper-matched BC
-or a validated fix. All CFD remains exploratory; only analytical E0 has passed.
+The p0=0 total-pressure sensitivity remains unsubmitted. All CFD is exploratory;
+only analytical E0 has passed. No restart equivalence or stability is claimed.

@@ -52,6 +52,15 @@ verified. Preserve the zero-step cancellation and v1 source; do not run both.
 The extra2 GiB memory does not increase total CPU ranks. These forecasts
 are provisional and do not reserve capacity.
 
+Startup correction (28 October): v2 smoke14676288 obtained its requested
+allocation but failed in three seconds before Python/CFD. Its shell quoted
+FOAM_BASH, whose module-provided value includes bashrc arguments, as one path.
+The launcher also omitted `/unpacked` from its frozen source root. Control
+14676290 cancelled with zero allocation. Preserve v2 and its audit receipts;
+freeze a new v3 source with only launcher/path corrections and regression
+checks. Repeat the same declared smoke/control once with no physics changes,
+and retain the actual-smoke success gate and bounded afterany captures.
+
 ## Finite job sequence
 
 1. **RSMOKE-ORIG:** 0.2000 to 0.2010 s, exactly ten fixed steps, unchanged

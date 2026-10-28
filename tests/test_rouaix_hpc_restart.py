@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import tarfile
+from pathlib import Path
 
 import pytest
 
@@ -20,6 +23,70 @@ from cases.e1_rouaix_hpc_restart.run_restart import (
     validate_allocation,
     validate_smoke_preflight,
 )
+
+
+def test_restart_sbatch_openfoam_bootstrap_preserves_module_args_and_reports_failure(
+    tmp_path: Path,
+) -> None:
+    scripts = [
+        Path(__file__).resolve().parents[1] / "cases/e1_rouaix_hpc_restart/restart_smoke_v2.sbatch",
+        Path(__file__).resolve().parents[1] / "cases/e1_rouaix_hpc_restart/restart_control.sbatch",
+    ]
+    source_blocks = []
+    for script_path in scripts:
+        text = script_path.read_text(encoding="utf-8")
+        assert (
+            "SOURCE_ROOT=/project/nk_meshapplied/bene/fire-track2-hpc/"
+            "rouaix-restart-source-v3-20261028/unpacked"
+        ) in text
+        start = text.index('read -r -a foam_bash_args <<< "$FOAM_BASH"')
+        end = text.index("\n[[ ${WM_PROJECT_VERSION:-} == v2512 ]]", start)
+        source_blocks.append(text[start:end])
+    assert source_blocks[0] == source_blocks[1]
+
+    fake_bashrc = tmp_path / "bashrc"
+    args_record = tmp_path / "source-args.txt"
+    fake_bashrc.write_text(
+        'printf "%s\\n" "$@" > "$FOAM_ARGS_RECORD"\n'
+        "[[ $1 == WM_PROJECT_VERSION=v2512 ]] || return 11\n"
+        "[[ $2 == WM_COMPILER=Gcc ]] || return 12\n"
+        "[[ $3 == WM_MPLIB=CRAY-MPICH ]] || return 13\n"
+        "[[ $4 == WM_COMPILE_OPTION=Opt ]] || return 14\n"
+        "[[ $5 == WM_LABEL_SIZE=32 ]] || return 15\n"
+        "[[ $6 == WM_PRECISION_OPTION=DP ]] || return 16\n",
+        encoding="utf-8",
+    )
+    env = os.environ.copy()
+    env.update(
+        FOAM_BASH=(
+            f"{fake_bashrc} WM_PROJECT_VERSION=v2512 WM_COMPILER=Gcc "
+            "WM_MPLIB=CRAY-MPICH WM_COMPILE_OPTION=Opt WM_LABEL_SIZE=32 "
+            "WM_PRECISION_OPTION=DP"
+        ),
+        FOAM_ARGS_RECORD=str(args_record),
+        RUN_ROOT=str(tmp_path),
+        SLURM_JOB_ID="test",
+    )
+    successful = subprocess.run(
+        ["bash", "-c", source_blocks[0]], env=env, capture_output=True, text=True
+    )
+    assert successful.returncode == 0, successful.stderr
+    assert args_record.read_text(encoding="utf-8").splitlines() == [
+        "WM_PROJECT_VERSION=v2512",
+        "WM_COMPILER=Gcc",
+        "WM_MPLIB=CRAY-MPICH",
+        "WM_COMPILE_OPTION=Opt",
+        "WM_LABEL_SIZE=32",
+        "WM_PRECISION_OPTION=DP",
+    ]
+
+    fake_bashrc.write_text("return 23\n", encoding="utf-8")
+    failed = subprocess.run(
+        ["bash", "-c", source_blocks[0]], env=env, capture_output=True, text=True
+    )
+    assert failed.returncode == 23
+    assert "OpenFOAM environment setup failed" in failed.stderr
+    assert "modules-test.log" in failed.stderr
 
 
 def test_restart_configs_have_frozen_smoke_and_control_horizons() -> None:
