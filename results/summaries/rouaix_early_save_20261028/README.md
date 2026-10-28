@@ -13,13 +13,15 @@ public helper: live job/current UID/task count and own rank-zero identity
 matched, scancel signal12 returned0, and the child received SIGUSR2. The helper
 persists acknowledgement before waiting and fails closed for other query errors.
 
-V3 native CFD early-save14700599 and afterany audit14700602 are released and
-pending at last readback. They use120 tasks on3 nodes,40/node,22 GiB/node,
+V3 native CFD early-save14700599 and afterany audit14700602 both COMPLETED0:0.
+The solver stopped after5 continuation steps at0.2005 s, acknowledged signal12,
+and verified End/exit0, all endpoint fields, incremental ledger and archive.
+Whole solver-job wall was3m35s, its solver step25s; the audit took46s. They use120 tasks on3 nodes,40/node,22 GiB/node,
 20 minutes. The source is recovered from the tested v2 capsule, with only the
 Slurm helper, its tests and isolated v3 launcher paths replaced. All20 file
 hashes and native saved-time/config preflight passed. It requests save after
 three healthy fixed0.1 ms continuation steps from the original water donor.
 
 [V3 source and queue evidence](v3/README.md). No new fine-pressure physical run
-has been submitted. A healthy partial native End/endpoint/ledger still needs
-to be observed before claiming the complete native save path works.
+has been submitted. The intended healthy partial native End/endpoint/ledger is now observed;
+this is an operational diagnostic, not a physical acceptance gate.

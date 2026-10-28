@@ -1,6 +1,6 @@
 # Rouaix failure diagnosis and next tests
 
-Updated 28 October 2026, 13:39 UTC. This is the ranked working diagnosis for
+Updated 28 October 2026, 14:00 UTC. This is the ranked working diagnosis for
 the numerical failures, with separate notes on reproduction fidelity. It is
 not an E1 acceptance decision.
 
@@ -138,7 +138,9 @@ comparison is still open. The0.1 ms reference remains preserved.
     its timestamp after waiting. Those receipt defects are corrected in the new
     source. The native probe then found that its active-step lookup reports
     not-found while the owned step is alive; this can prevent the signal request.
-    Resolve the Slurm query/delivery path and prove a healthy early save. This
+    The corrected public helper passed a live owned-step probe, then the120-rank
+    native smoke14700599 saved at0.2005 s with End/exit0 and verified fields/ledger.
+    The complete native save path now passes this healthy diagnostic. This
     explains lost endpoint evidence, not the physical velocity growth.
 
 18. **Launcher and metadata parsing — earlier confirmed, repaired failures.**

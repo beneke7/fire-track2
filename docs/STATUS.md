@@ -13,7 +13,8 @@ water pilot also completed in274 solver seconds versus1018 at0.1 ms; measured
 cost comparison is affected by different concurrent load. This establishes a
 working coarse VOF setup and a pressure-boundary stability effect; fine-grid,
 time-convergence and paper agreement remain unproved. Actual native helper
-probe14700561 passed; v3 early-save14700599/audit14700602 are released and pending. Fine pressure candidate
+probe14700561 passed; v3 early-save14700599/audit14700602 both completed: signal acknowledged,
+verified0.2005 s endpoint/End0/ledger/archive. The native save path now passes. Fine pressure candidate
 is prepared/unsubmitted pending native preflight. All150 affected tests pass.
 I4F is untouched. [Diagnosis](ROUAIX_FAILURE_DIAGNOSIS.md),
 [metrics](../results/summaries/rouaix_backflow_local_20261028/README.md).

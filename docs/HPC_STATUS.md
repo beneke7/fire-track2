@@ -23,8 +23,11 @@ Native early-save14700220/v2 14700456 finished0.202 s without a signal ack;
 source fixes exposed site step-query invisibility, then an owner-format parse
 error. Actual public-helper probe14700561 now passed with exact owned-step
 SIGUSR2 receipt and acknowledgement before waiting. The corrected helper retains
-live-job/owner/task/rank-zero identity checks. V3 native healthy early-save14700599 and audit14700602 are released/pending
-from the recovered tested source with only the helper patched;
+live-job/owner/task/rank-zero identity checks. V3 native early-save14700599 COMPLETED0:0 in3m35s, with a25 s solver step.
+It acknowledged signal12, saved at0.2005 s after5 complete continuation steps,
+verified all endpoint fields, End/exit0, incremental ledger and archive.
+Auditor14700602 completed in46s. The recovered tested source used only the
+helper/test/launcher patch;
 the fine pressure candidate remains prepared but unsubmitted. Its actual native
 changeDictionary boundary edit/field-hash preflight is still required.
 [Cause and test map](ROUAIX_FAILURE_DIAGNOSIS.md). All150 affected tests pass;
