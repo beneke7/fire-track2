@@ -1,0 +1,243 @@
+{
+  "schema": "i4f-current-coldcase-demo-video-provenance/v1",
+  "artifact": {
+    "path": "results/summaries/i4f_20261028/demo-video/i4f-current-coldcase-initial-filling-interpolated-40x-1080p.mp4",
+    "sha256": "2532f41edc0822ec95b78457f15f31e57114c4ce68c44de52f19e4f43f985d89",
+    "size_bytes": 567093,
+    "probe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1920,
+          "height": 1080,
+          "pix_fmt": "yuv420p",
+          "r_frame_rate": "30/1",
+          "nb_frames": "361"
+        }
+      ],
+      "format": {
+        "duration": "12.033333",
+        "size": "567093"
+      }
+    },
+    "title": "Provisional water–air CFD: initial filling",
+    "on_screen_caption": "0.000–0.300 s physical  |  40× slower  |  display interpolation between saved states"
+  },
+  "source_case": {
+    "bundle": "results/runs/i4f-cold-courant-20261028T132704Z",
+    "case": "results/runs/i4f-cold-courant-20261028T132704Z/arms/cold-courant/case",
+    "classification": "299214-cell corrected flush-at-inlet cold-start case; full two-tank/four-outlet apparatus; 1.0 m transition + mouth; downstream passages initially air-filled",
+    "git_head_at_sidecar_generation": "4e54f09661edf0a71a83e97c8300cc06d81ccbe5"
+  },
+  "geometry_caveat": "The CFD source uses the older zero-thickness divider surface approximation. The current user-corrected 10–20 mm rounded-edge dividers are represented by a separate newer CAD asset and are NOT simulated in this video. The upstream feed and bend remain visible; the 1.0 m dimension applies only from x=3.8 to x=4.8 m.",
+  "field_and_mesh_mapping": {
+    "mesh_cells": 299214,
+    "static_mesh": "Reconstructed from immutable collated processors10 mesh using reconstructParMesh -constant; field mapping uses the resulting staged cellProcAddressing, never the original live source map.",
+    "staged_cellProcAddressing_sha256": "9615cff0b76c66604c7dd471cb8bc80e23356bc83bb189b384a235539964b7a1",
+    "native_C_to_VTK_cell_center_nearest_identity": 299214,
+    "unique_nearest_VTK_center_ids": 299214,
+    "maximum_native_C_to_VTK_center_distance_m": 0.0074795105456230875,
+    "accepted_center_distance_limit_m": 0.01,
+    "old_live_source_map_sha256": "d37e0adf68ac5ff16fd39befb985769a62737d0d84d2788d8fe189f8f49c0f33",
+    "old_map_negative_control_identity_matches": 0,
+    "independent_t0_global_C_V_alpha_crosscheck": "exact array equality; original-map and staged-map initial water volume agree at 3.202165993106066 m3"
+  },
+  "native_snapshots": [
+    {
+      "time_s": 0.0,
+      "native_checkpoint": "results/runs/i4f-cold-courant-20261028T132704Z/arms/cold-courant/case/processors10/0",
+      "alpha_U_field_hashes": {
+        "U": {
+          "sha256": "cd1131be54bffef9ccf8174b290ecbfb0293b18acb5ec551ddb7e5331aa5cf1d",
+          "bytes": 12005
+        },
+        "alpha.water": {
+          "sha256": "838fc23481c194b0241f6d3fd3333874b70b52d38f294b49a95c753f843988d9",
+          "bytes": 963416
+        }
+      },
+      "native_water_volume_m3": 3.2021659931060666,
+      "external_roi": {
+        "mouth_plane_x_m": 4.8,
+        "alpha_ge_0p5_cell_count": 0,
+        "alpha_weighted_volume_m3": 0.0,
+        "bulk_volume_m3": 0.0
+      },
+      "geometry_mapping_check": {
+        "matching_nearest_center_ids": 299214,
+        "unique_ids": 299214,
+        "max_distance_m": 0.0074795105456230875,
+        "staged_map_sha256": "9615cff0b76c66604c7dd471cb8bc80e23356bc83bb189b384a235539964b7a1"
+      },
+      "input_frame": {
+        "path": "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-native-t0/cutaway-full-t0.png",
+        "sha256": "c162f5b8f954bba1a8ab7abf1e09da5dba1e3a3fdcfcaad49602301ca01af7c8"
+      },
+      "render_script_sha256": "3001806657011d7bcf5998975946f6e080a0c5450dcc25ab5675a3c50a1ad647",
+      "render_backend": {
+        "render_window_class": "vtkEGLRenderWindow",
+        "vendor": "OpenGL vendor string:  NVIDIA Corporation",
+        "renderer": "OpenGL renderer string:  NVIDIA GeForce RTX 5090/PCIe/SSE2",
+        "capability_report_sha256": "8bea3774620b65976a0b8fc6bc09461a0e98e6e06fc477291c9d94c201cb8453"
+      },
+      "wall_stl_sha256": "72fda09da621c78cd6dc0df1a239e5564ab7dad66900b0560a859ee22135bde3"
+    },
+    {
+      "time_s": 0.0999569592323,
+      "native_checkpoint": "results/runs/i4f-cold-courant-20261028T132704Z/arms/cold-courant/case/processors10/0.0999569592323",
+      "alpha_U_field_hashes": {
+        "U": {
+          "sha256": "bd86228163c4c9138f669e143cfc5c47a1e2546bd0b2a1d27d1774af9d0b1f3a",
+          "bytes": 7938895
+        },
+        "alpha.water": {
+          "sha256": "c7bc8940614e548f4d9cf7929f274bd3297b36c44244779d9e9d541cfab2b47e",
+          "bytes": 2651953
+        }
+      },
+      "native_water_volume_m3": 3.202265744130248,
+      "external_roi": {
+        "mouth_plane_x_m": 4.8,
+        "alpha_ge_0p5_cell_count": 0,
+        "alpha_weighted_volume_m3": 3.5697147107750785e-212,
+        "bulk_volume_m3": 0.0
+      },
+      "geometry_mapping_check": {
+        "matching_nearest_center_ids": 299214,
+        "unique_ids": 299214,
+        "max_distance_m": 0.0074795105456230875,
+        "staged_map_sha256": "9615cff0b76c66604c7dd471cb8bc80e23356bc83bb189b384a235539964b7a1"
+      },
+      "input_frame": {
+        "path": "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-native-t0.0999569592323/cutaway-full-t0.0999569592323.png",
+        "sha256": "7f7a9fd97d356bf90df09c8d8379316a7f174d190694296da8bbe050a12b232a"
+      },
+      "render_script_sha256": "3001806657011d7bcf5998975946f6e080a0c5450dcc25ab5675a3c50a1ad647",
+      "render_backend": {
+        "render_window_class": "vtkEGLRenderWindow",
+        "vendor": "OpenGL vendor string:  NVIDIA Corporation",
+        "renderer": "OpenGL renderer string:  NVIDIA GeForce RTX 5090/PCIe/SSE2",
+        "capability_report_sha256": "8bea3774620b65976a0b8fc6bc09461a0e98e6e06fc477291c9d94c201cb8453"
+      },
+      "wall_stl_sha256": "72fda09da621c78cd6dc0df1a239e5564ab7dad66900b0560a859ee22135bde3"
+    },
+    {
+      "time_s": 0.200036582108,
+      "native_checkpoint": "results/runs/i4f-cold-courant-20261028T132704Z/arms/cold-courant/case/processors10/0.200036582108",
+      "alpha_U_field_hashes": {
+        "U": {
+          "sha256": "8789cf353e6d1de57b3d1459e577400cdd6954dcd4e0d5125f02a3d3f91cd78e",
+          "bytes": 7938894
+        },
+        "alpha.water": {
+          "sha256": "d0ae2d31a10088891212e6cfb11f74c5de12376f54ebcd5ad1ced9b1fcc96449",
+          "bytes": 2651952
+        }
+      },
+      "native_water_volume_m3": 3.2024559493430704,
+      "external_roi": {
+        "mouth_plane_x_m": 4.8,
+        "alpha_ge_0p5_cell_count": 0,
+        "alpha_weighted_volume_m3": 1.208427790086665e-164,
+        "bulk_volume_m3": 0.0
+      },
+      "geometry_mapping_check": {
+        "matching_nearest_center_ids": 299214,
+        "unique_ids": 299214,
+        "max_distance_m": 0.0074795105456230875,
+        "staged_map_sha256": "9615cff0b76c66604c7dd471cb8bc80e23356bc83bb189b384a235539964b7a1"
+      },
+      "input_frame": {
+        "path": "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-corrected-nvidia-t0.200036582108/cutaway-full-t0.200036582108.png",
+        "sha256": "c59332da93471adbc3296271e2b5694fbb4582d8855a346aed7ec4e50382a3d3"
+      },
+      "render_script_sha256": "824d9c3bb9045b7a4836e11e54cf43f202b0f71f8dc215f894831818a06e798d",
+      "render_backend": {
+        "render_window_class": "vtkEGLRenderWindow",
+        "vendor": "OpenGL vendor string:  NVIDIA Corporation",
+        "renderer": "OpenGL renderer string:  NVIDIA GeForce RTX 5090/PCIe/SSE2",
+        "capability_report_sha256": "8bea3774620b65976a0b8fc6bc09461a0e98e6e06fc477291c9d94c201cb8453"
+      },
+      "wall_stl_sha256": "72fda09da621c78cd6dc0df1a239e5564ab7dad66900b0560a859ee22135bde3"
+    },
+    {
+      "time_s": 0.300006322601,
+      "native_checkpoint": "results/runs/i4f-cold-courant-20261028T132704Z/arms/cold-courant/case/processors10/0.300006322601",
+      "alpha_U_field_hashes": {
+        "U": {
+          "sha256": "60005c9475eca39f28ebdcb8481249e012f73a94a8fdc8aa8f295fc3415893ce",
+          "bytes": 7938894
+        },
+        "alpha.water": {
+          "sha256": "a63b6323dbf364dd2e06acb367229f00c8db697c7ec07e65847feb68aba151c1",
+          "bytes": 2651952
+        }
+      },
+      "native_water_volume_m3": 3.2027714990204914,
+      "external_roi": {
+        "mouth_plane_x_m": 4.8,
+        "alpha_ge_0p5_cell_count": 0,
+        "alpha_weighted_volume_m3": 1.6184678945157208e-130,
+        "bulk_volume_m3": 0.0
+      },
+      "geometry_mapping_check": {
+        "matching_nearest_center_ids": 299214,
+        "unique_ids": 299214,
+        "max_distance_m": 0.0074795105456230875,
+        "staged_map_sha256": "9615cff0b76c66604c7dd471cb8bc80e23356bc83bb189b384a235539964b7a1"
+      },
+      "input_frame": {
+        "path": "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-native-t0.300006322601/cutaway-full-t0.300006322601.png",
+        "sha256": "0deef5ffa7ab8d5252348c09a01b434ef7320f8cdc0d95b4e7cd5110611a55ac"
+      },
+      "render_script_sha256": "3001806657011d7bcf5998975946f6e080a0c5450dcc25ab5675a3c50a1ad647",
+      "render_backend": {
+        "render_window_class": "vtkEGLRenderWindow",
+        "vendor": "OpenGL vendor string:  NVIDIA Corporation",
+        "renderer": "OpenGL renderer string:  NVIDIA GeForce RTX 5090/PCIe/SSE2",
+        "capability_report_sha256": "8bea3774620b65976a0b8fc6bc09461a0e98e6e06fc477291c9d94c201cb8453"
+      },
+      "wall_stl_sha256": "72fda09da621c78cd6dc0df1a239e5564ab7dad66900b0560a859ee22135bde3"
+    }
+  ],
+  "rendering_and_display": {
+    "renderer": "Fixed camera; current reconstructed 299214-cell geometry and native cold-case alpha.water. Water uses native cell alpha>=0.5 threshold; cyan interface is alpha=0.5 after spatial cell-to-point interpolation.",
+    "frame_renderer": "NVIDIA GeForce RTX 5090 EGL; renderer only (no CFD compute).",
+    "temporal_interpolation": "FFmpeg minterpolate motion-compensated interpolation applied to the four sparse native snapshots after scaling presentation time by 40. Two static last-state pads provide motion-estimation lookahead. Titles and captions are burned in after interpolation.",
+    "displayed_physical_interval_s": [
+      0.0,
+      0.300006322601
+    ],
+    "slowdown_factor": 40,
+    "interpolation_is_display_only": true,
+    "new_CFD_states_created": false,
+    "visual_review": "Frames at display 2, 6 and 10 s correspond to nominal physical 0.05, 0.15 and 0.25 s and show partial progressive motion rather than held snapshots. The final frame at 12 s includes the exact 0.300006322601 s saved state; its central image differs from the scaled native snapshot by 1.19 mean RGB levels after H.264 encoding."
+  },
+  "visualization_checks": {
+    "water_volume_m3_by_saved_time": {
+      "0.0": 3.2021659931060666,
+      "0.0999569592323": 3.202265744130248,
+      "0.200036582108": 3.2024559493430704,
+      "0.300006322601": 3.2027714990204914
+    },
+    "exterior_roi": "At x>=4.8 m all four native snapshots contain zero cells with alpha>=0.5; alpha-weighted exterior volume is numerical zero (maximum magnitude 1.62e-130 m3)."
+  },
+  "review_assets": {
+    "preview": "results/summaries/i4f_20261028/demo-video/video-preview-current-coldcase-40x.png",
+    "motion_interpolation_contact_sheet": "results/summaries/i4f_20261028/demo-video/video-interpolation-check-current-coldcase.png",
+    "native_snapshot_manifests": [
+      "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-native-t0/metadata-render-t0.json",
+      "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-native-t0.0999569592323/metadata-render-t0.0999569592323.json",
+      "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-corrected-nvidia-t0.200036582108/metadata-render-t0.200036582108.json",
+      "results/runs/i4f-current-geometry-demo-20261028T160556Z/frames-native-t0.300006322601/metadata-render-t0.300006322601.json"
+    ],
+    "video_attempt_record": "results/runs/i4f-current-geometry-demo-20261028T160556Z/attempts/attempt-015-motion-interpolation-endpoint/attempt-record.json"
+  },
+  "limitations": [
+    "Exploratory water–air CFD visualization; not a validation result or measured discharge prediction.",
+    "The physical model does not include the revised finite-thickness rounded dividers.",
+    "The video interpolates between saved fields for display; intermediate image states are not solver output.",
+    "No liquid has crossed the x=4.8 m mouth in the displayed native interval."
+  ]
+}
