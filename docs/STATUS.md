@@ -7,13 +7,14 @@ or hardware validation exists yet. The objective remains a publishable provision
 hydraulic calculation with supported engineering conclusions.
 
 HPC/Rouaix status is maintained separately in [HPC_STATUS.md](HPC_STATUS.md).
-At2026-10-28 09:11 UTC, v4 smoke14689395 and original control14689396 are
-released and pending (three nodes ×40 ranks, fixed0.1 ms). Control requires
-verified smoke success; auditors14689397/14689398 are armed. V3 passed shell
-startup but rejected ordinary checkpoint-time roundoff before CFD; its numeric
-metadata check is corrected and tested against the exact saved file. V2/v3
-failures and source are preserved. All126 affected tests pass. Native restart
-success is unproven; the pressure candidate remains unsubmitted. I4F is unchanged.
+At2026-10-28 11:18 UTC, no Rouaix job is running or pending. Smoke14689395
+completed ten fixed0.1 ms steps through0.201 s (Umax111.98 m/s,81 linear solves
+converged, terminal archive/ledger verified). Control14689396 ran120 ranks on
+three nodes, then failed near0.266 s with unphysical U growth and a pressure
+GAMG floating-point exception. No clean final checkpoint or new interval ledger
+exists for that branch. Both afterany audits completed. Terminal evidence and
+guard behavior are being inspected; no identical retry or pressure candidate
+is submitted. Short native restart works; instability is unresolved. I4F is unchanged.
 
 ## Running now
 

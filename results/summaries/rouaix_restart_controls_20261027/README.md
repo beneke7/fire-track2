@@ -1,15 +1,30 @@
 # Komondor restart work — current queue
 
-At28 October09:11 UTC, v4 smoke **14689395** and control **14689396** are
-released and pending. Smoke targets0.20→0.201 s in ten fixed0.1 ms steps,
-20-minute cap. Control targets0.20→0.30 s in1000 steps,90-minute cap, with
-`afterok:14689395`, invalid-dependency cancellation and independent runtime
-checks of actual smoke/time/ledger/convergence/archive evidence.
-Both use120 ranks on three nodes,40/node,22 GiB/node, collated fields,
-cpu-short, one CPU/rank, no GPUs or automatic retries. Auditors14689397/14689398
-are armed afterany; capture success is not a scientific pass. V4 submission,
-manifest and held readback preserve IDs, paths and release time. No native
-restart steps have been proved yet.
+At28 October11:18 UTC, both v4 CFD jobs and their auditors are terminal;
+no Rouaix solver is running or pending.
+
+- **Smoke14689395 COMPLETED0:0:** ten fixed0.1 ms steps from0.20 to0.201 s,
+  peak111.97527 m/s; all81 configured linear solves converged. Verified terminal
+  fields/archive and incremental ledger residual-6.33e-10 kg. Whole job4m03s,
+  solver step39s. This demonstrates short native restart execution.
+- **Control14689396 FAILED1:0:**35m47s whole job,120 ranks on three nodes,
+  solver step32m36s. It logged658 complete continuation steps through0.2658 s
+  and began0.2659 s, with unphysical speed growth and pressure GAMG FPE onrank12.
+  No clean End or verified final fields exist. No new interval ledger is claimed.
+  The speed guard requested signal12 but did not capture a clean endpoint.
+- **Auditors14689397/14689398 COMPLETED0:0**, preserving both outcomes.
+
+The0.30 s target was not reached. Native restart execution is established;
+bitwise equivalence, stability and physical reproduction are not. Both old/new controls first cross1000 m/s at0.2625 s at the same reported
+boundary point, with1045.53/1033.79 m/s respectively. They are not claimed
+bitwise equivalent or proven to share a cause. The posthoc parser finds11
+failed U/k/epsilon solve records in the new control. Exact signal-vs-FPE timing
+is unresolved: stop_requested_utc is recorded after the blocking stop call. No identical retry or
+pressure/backflow candidate is submitted. V4 uses120 ranks, three nodes ×40,
+22 GiB/node, collated fields and fixed0.1 ms with bounded afterany capture.
+The submission/manifest/held readback retain exact source and dependencies.
+[Verified terminal evidence](terminal-v4/README.md) includes raw logs, speed traces,
+accounting and hash/CRC-checked audit bundles.
 
 V2 smoke14676288 obtained120 CPUs but FAILED1:0 in three seconds at27 October
 18:15:24 UTC before Python/CFD. Its launcher quoted argument-bearing FOAM_BASH

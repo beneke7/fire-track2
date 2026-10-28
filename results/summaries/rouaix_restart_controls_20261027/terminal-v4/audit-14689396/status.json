@@ -1,0 +1,770 @@
+{
+  "jobs": {
+    "14689396": {
+      "archive_sha256": "f92cf5745f501a4714f1a6517da041e51136013c113f33288cb153612d40d649",
+      "audit_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/afterany-audit/14689396/jobs/14689396/f92cf5745f501a4714f1a6517da041e51136013c113f33288cb153612d40d649/audit.json",
+      "bundle_path": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/afterany-audit/14689396/jobs/14689396/f92cf5745f501a4714f1a6517da041e51136013c113f33288cb153612d40d649/audit-bundle.tar.gz",
+      "bundle_sha256": "a76236c66db3c71633dd564f099e1ebb0335338d52600ec15be1a2f42a4a16ed",
+      "classification": "slurm_failed",
+      "job_id": "14689396",
+      "mode": "slurm-afterany",
+      "phase": "captured",
+      "run_state": {
+        "allocation": {
+          "cpus_per_task": 1,
+          "gpu_request": null,
+          "memory_mb_per_node": 22528,
+          "nodelist": "x1001c4s1b0n[0-1],x1001c4s2b0n0",
+          "nodes": 3,
+          "partition": "cpu-short",
+          "ranks": 120,
+          "tasks_per_node": [
+            40,
+            40,
+            40
+          ]
+        },
+        "attempt_archive_status": "verified_crc_hash_and_member_list",
+        "case_id": "rouaix-restart-original-control-0300",
+        "current_solver_stop_signal_banner_confirmed": true,
+        "delta_t_s": 0.0001,
+        "error": "RestartError: collated endpoint 0.265900000000 lacks required fields: ['U', 'alpha.water', 'p_rgh', 'k', 'epsilon', 'nut', 'p', 'phi']",
+        "execution_backend": "native-slurm-openfoam",
+        "free_disk_bytes": 2096278822912,
+        "free_disk_bytes_last": {
+          "shared_run_free_bytes": 2096278822912,
+          "workspace_free_bytes": 2096278822912
+        },
+        "free_disk_bytes_min_observed": 2095265337344,
+        "job_id": "14689396",
+        "job_name": "ml-vof",
+        "manifest_sha256": "439e04a59d45ccb0bdfa4f7af9f97eec0d2097abf828a41f951ef078f730c38c",
+        "max_speed_csv_sha256": "d9aef28c85d2da20cf9acdab6829107dabf5a36b16c0d07dcf8297b57aec399b",
+        "max_u_seen_m_s": 22532440324.1,
+        "monitor_fault_after_exit": "missing per-step fieldMinMax max|U| at t=0.2659 s",
+        "parent_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9",
+        "parent_checkpoint_time_s": 0.2,
+        "parent_smoke_job_id": "14689395",
+        "pause_observed": false,
+        "pause_paths": [
+          "/project/nk_meshapplied/bene/fire-track2-hpc/PAUSE",
+          "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/rouaix-restart-original-control-14689396/PAUSE",
+          "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/PAUSE"
+        ],
+        "result_archive": "/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/rouaix-restart-original-control-14689396/result.tar.gz",
+        "result_archive_member_sizes": [
+          {
+            "bytes": 11935,
+            "path": "attempt/case/case-inputs.json"
+          },
+          {
+            "bytes": 732,
+            "path": "attempt/case/constant/g"
+          },
+          {
+            "bytes": 755,
+            "path": "attempt/case/constant/hRef"
+          },
+          {
+            "bytes": 1648,
+            "path": "attempt/case/constant/polyMesh/boundary"
+          },
+          {
+            "bytes": 614667938,
+            "path": "attempt/case/constant/polyMesh/faces"
+          },
+          {
+            "bytes": 122238906,
+            "path": "attempt/case/constant/polyMesh/neighbour"
+          },
+          {
+            "bytes": 122614462,
+            "path": "attempt/case/constant/polyMesh/owner"
+          },
+          {
+            "bytes": 250857142,
+            "path": "attempt/case/constant/polyMesh/points"
+          },
+          {
+            "bytes": 881,
+            "path": "attempt/case/constant/transportProperties"
+          },
+          {
+            "bytes": 952,
+            "path": "attempt/case/constant/turbulenceProperties"
+          },
+          {
+            "bytes": 298,
+            "path": "attempt/case/parent-checkpoint-receipt.json"
+          },
+          {
+            "bytes": 39646,
+            "path": "attempt/case/postProcessing/aircraftWallFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 38911,
+            "path": "attempt/case/postProcessing/alphaExtrema/0.200000000000/fieldMinMax.dat"
+          },
+          {
+            "bytes": 39016,
+            "path": "attempt/case/postProcessing/bottomOutletFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 39020,
+            "path": "attempt/case/postProcessing/downstreamOutletFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 682071,
+            "path": "attempt/case/postProcessing/failureLocations/0.200000000000/fieldMinMax.dat"
+          },
+          {
+            "bytes": 39669,
+            "path": "attempt/case/postProcessing/gasInletFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 40324,
+            "path": "attempt/case/postProcessing/nozzleFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 39674,
+            "path": "attempt/case/postProcessing/spanwiseMinusFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 39674,
+            "path": "attempt/case/postProcessing/spanwisePlusFlux/0.200000000000/surfaceFieldValue.dat"
+          },
+          {
+            "bytes": 38911,
+            "path": "attempt/case/postProcessing/speedExtrema/0.200000000000/fieldMinMax.dat"
+          },
+          {
+            "bytes": 26473,
+            "path": "attempt/case/postProcessing/waterVolume/0.200000000000/volFieldValue.dat"
+          },
+          {
+            "bytes": 280345074,
+            "path": "attempt/case/processors120/0.200000000000/U"
+          },
+          {
+            "bytes": 93113216,
+            "path": "attempt/case/processors120/0.200000000000/alpha.water"
+          },
+          {
+            "bytes": 93708944,
+            "path": "attempt/case/processors120/0.200000000000/epsilon"
+          },
+          {
+            "bytes": 93704028,
+            "path": "attempt/case/processors120/0.200000000000/k"
+          },
+          {
+            "bytes": 93779707,
+            "path": "attempt/case/processors120/0.200000000000/nut"
+          },
+          {
+            "bytes": 93500698,
+            "path": "attempt/case/processors120/0.200000000000/p"
+          },
+          {
+            "bytes": 94232250,
+            "path": "attempt/case/processors120/0.200000000000/p_rgh"
+          },
+          {
+            "bytes": 251579442,
+            "path": "attempt/case/processors120/0.200000000000/phi"
+          },
+          {
+            "bytes": 1016,
+            "path": "attempt/case/processors120/0.200000000000/uniform/cumulativeContErr"
+          },
+          {
+            "bytes": 5527,
+            "path": "attempt/case/processors120/0.200000000000/uniform/functionObjects/functionObjectProperties"
+          },
+          {
+            "bytes": 1060,
+            "path": "attempt/case/processors120/0.200000000000/uniform/time"
+          },
+          {
+            "bytes": 530651,
+            "path": "attempt/case/processors120/constant/polyMesh/boundary"
+          },
+          {
+            "bytes": 13606,
+            "path": "attempt/case/processors120/constant/polyMesh/boundaryProcAddressing"
+          },
+          {
+            "bytes": 40402372,
+            "path": "attempt/case/processors120/constant/polyMesh/cellProcAddressing"
+          },
+          {
+            "bytes": 125645804,
+            "path": "attempt/case/processors120/constant/polyMesh/faceProcAddressing"
+          },
+          {
+            "bytes": 629897118,
+            "path": "attempt/case/processors120/constant/polyMesh/faces"
+          },
+          {
+            "bytes": 119217148,
+            "path": "attempt/case/processors120/constant/polyMesh/neighbour"
+          },
+          {
+            "bytes": 125645948,
+            "path": "attempt/case/processors120/constant/polyMesh/owner"
+          },
+          {
+            "bytes": 44956136,
+            "path": "attempt/case/processors120/constant/polyMesh/pointProcAddressing"
+          },
+          {
+            "bytes": 269710334,
+            "path": "attempt/case/processors120/constant/polyMesh/points"
+          },
+          {
+            "bytes": 4341,
+            "path": "attempt/case/system/controlDict"
+          },
+          {
+            "bytes": 164,
+            "path": "attempt/case/system/decomposeParDict"
+          },
+          {
+            "bytes": 1159,
+            "path": "attempt/case/system/fvSchemes"
+          },
+          {
+            "bytes": 2111,
+            "path": "attempt/case/system/fvSolution"
+          },
+          {
+            "bytes": 842,
+            "path": "attempt/case/system/setExprFieldsDict"
+          },
+          {
+            "bytes": 2615,
+            "path": "attempt/manifest.json"
+          },
+          {
+            "bytes": 14377,
+            "path": "attempt/max-speed.csv"
+          },
+          {
+            "bytes": 2611,
+            "path": "attempt/native-source-evidence.json"
+          },
+          {
+            "bytes": 928,
+            "path": "attempt/native-source-evidence.solver-banner.log"
+          },
+          {
+            "bytes": 26288,
+            "path": "attempt/parent-ledger-summary.json"
+          },
+          {
+            "bytes": 6678,
+            "path": "attempt/parent-seed-manifest.json"
+          },
+          {
+            "bytes": 59,
+            "path": "attempt/rank0-affinity.txt"
+          },
+          {
+            "bytes": 11400,
+            "path": "attempt/seed-verification-copy.json"
+          },
+          {
+            "bytes": 11400,
+            "path": "attempt/seed-verification.json"
+          },
+          {
+            "bytes": 17,
+            "path": "attempt/solver-step-identity.txt"
+          },
+          {
+            "bytes": 459,
+            "path": "attempt/solver-step.sh"
+          },
+          {
+            "bytes": 2779148,
+            "path": "attempt/solver.log"
+          },
+          {
+            "bytes": 45655,
+            "path": "attempt/source/audit_interface_wave_flux.py"
+          },
+          {
+            "bytes": 105688,
+            "path": "attempt/source/audit_iso_vof_ledger.py"
+          },
+          {
+            "bytes": 24943,
+            "path": "attempt/source/audit_restart.py"
+          },
+          {
+            "bytes": 10632,
+            "path": "attempt/source/collect_native_provenance.py"
+          },
+          {
+            "bytes": 72383,
+            "path": "attempt/source/continue_rouaix_case.py"
+          },
+          {
+            "bytes": 37319,
+            "path": "attempt/source/hpc_metrics.py"
+          },
+          {
+            "bytes": 45698,
+            "path": "attempt/source/prepare_case.py"
+          },
+          {
+            "bytes": 2170,
+            "path": "attempt/source/restart_control.sbatch"
+          },
+          {
+            "bytes": 96464,
+            "path": "attempt/source/run_pilot.py"
+          },
+          {
+            "bytes": 42400,
+            "path": "attempt/source/run_restart.py"
+          },
+          {
+            "bytes": 2631,
+            "path": "attempt/source/source-provenance.json"
+          },
+          {
+            "bytes": 1074,
+            "path": "attempt/source-capsule-index.json"
+          }
+        ],
+        "result_archive_members": 106,
+        "result_archive_sha256": "f92cf5745f501a4714f1a6517da041e51136013c113f33288cb153612d40d649",
+        "run_wall_s": 2046.8109278699849,
+        "schema_version": 1,
+        "seed_verification": {
+          "archive_member_count": 131,
+          "archive_members_sha256": "512371d786df18b363ff8969c9a994aff7974d2e80132cec8bd98e310025bc48",
+          "archive_status": "verified_crc_hash_and_member_list",
+          "checkpoint_fields": {
+            "U": {
+              "bytes": 280345074,
+              "sha256": "2c928e1c126045e4263a48d7cb1a812027ddd3804c9b65d6199d2c0ab9433ac9"
+            },
+            "alpha.water": {
+              "bytes": 93113216,
+              "sha256": "20540502bf31d352d21e83d8249cecd3c66cd11bb011fd80103b01e2b5e71251"
+            },
+            "epsilon": {
+              "bytes": 93708944,
+              "sha256": "45dd9225816370ae52dda7c158c008e4f3918ee1f581f82865d40bc98751e44a"
+            },
+            "k": {
+              "bytes": 93704028,
+              "sha256": "73b735f5441c44fff2c07672a61b9d5b68905ed5187931de7ca897f345c61bc2"
+            },
+            "nut": {
+              "bytes": 93779707,
+              "sha256": "c538c8277fc5fade90dd2e80f1001140270f0f5508826c46559612fdf3596c3f"
+            },
+            "p": {
+              "bytes": 93500698,
+              "sha256": "2c544cdc7ed00f3a0c1457d12d067f68b233b48a91e5948c1fb2184a6db0d41c"
+            },
+            "p_rgh": {
+              "bytes": 94232250,
+              "sha256": "f202668608c245d07c70ac5de24199897a30f5a6680b519b998e3b079a1930e4"
+            },
+            "phi": {
+              "bytes": 251579442,
+              "sha256": "1f3143d846159323063d417203875ab36d859fa75594707f686cb5915b691e66"
+            },
+            "uniform/cumulativeContErr": {
+              "bytes": 1016,
+              "sha256": "b9c3d685a3a73a06bd666cdbe61a96b125dd347cdeeec5c375a6ab0578a4a940"
+            },
+            "uniform/functionObjects/functionObjectProperties": {
+              "bytes": 5527,
+              "sha256": "5997af1cf8916ebf36d47b179573667e1f4d398dc5e62312a5855f3a8daa74fc"
+            },
+            "uniform/time": {
+              "bytes": 1060,
+              "sha256": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+            }
+          },
+          "checkpoint_receipt_sha256": "58ed6a4413d56d660b96ef4c5aa4f6031a3125c682a1d4b48217c5dfe3f21008",
+          "collated_decomposition_mesh": {
+            "boundary": {
+              "bytes": 530651,
+              "sha256": "1be8f2a6ec13edee2d795e09a061f3cd87ffe06fa8e1f8104d96894a5dee9ac0"
+            },
+            "boundaryProcAddressing": {
+              "bytes": 13606,
+              "sha256": "39e7d4254365e96ff21c302481e03a5383a02be84ff090fbad8e79e1519f0098"
+            },
+            "cellProcAddressing": {
+              "bytes": 40402372,
+              "sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6"
+            },
+            "faceProcAddressing": {
+              "bytes": 125645804,
+              "sha256": "dd1b41f360d77887b273de29a8b4b8791abd86e8dee51aed95c26d254a06aa99"
+            },
+            "faces": {
+              "bytes": 629897118,
+              "sha256": "8f4a7929dfba9b0b75bac1d8c209d05b04b50f179b4782e8ece1da0cb9376027"
+            },
+            "neighbour": {
+              "bytes": 119217148,
+              "sha256": "9bbdd059721eb026236882eaac7fe8270f4ab41ed36dd75e9a168f316ed68349"
+            },
+            "owner": {
+              "bytes": 125645948,
+              "sha256": "c58d04297282a48e6179fc141406240a8eccca61ccd079e5e954e437c08f528b"
+            },
+            "pointProcAddressing": {
+              "bytes": 44956136,
+              "sha256": "f5c6092911e1a09c5fbd21a4d64ad19a1451116c510287d51d746c9831e12884"
+            },
+            "points": {
+              "bytes": 269710334,
+              "sha256": "c2ed9859fed5ec3a3e9e539b7755f1d7abedbbf8dbbb731338706d332672db0b"
+            }
+          },
+          "parent_case_input_sha256": {
+            "case-inputs.json": "4461b2958f995363945521260cca93ff6142529f0c27753133f43d02b5d8a771",
+            "constant/polyMesh/boundary": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779",
+            "constant/polyMesh/faces": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160",
+            "constant/polyMesh/neighbour": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc",
+            "constant/polyMesh/owner": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb",
+            "constant/polyMesh/points": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d",
+            "constant/transportProperties": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f",
+            "constant/turbulenceProperties": "c6a7d91e95eff3464545922a9baaab454a7da870fbefffc05640fb6c63d4f3ab",
+            "system/controlDict": "47e2c3e66ee4d71d6a18752153ce22155c5dc3b9b7f59cccbea54704afc34dc5",
+            "system/decomposeParDict": "8df44edca8a337353994b51c5084e34d55226838c5a591d4b7d378ae57a2f180",
+            "system/fvSchemes": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13",
+            "system/fvSolution": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+          },
+          "parent_inventory_m3": 0.2508975771509,
+          "parent_ledger_sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300",
+          "parent_manifest_sha256": "30992c04b1871c3c0204e28ff8fe60ec2cda514a32557e59d97b25559eb09be7",
+          "schema_version": 1,
+          "selected_files": [
+            {
+              "bytes": 11397,
+              "path": "attempt/case/case-inputs.json",
+              "sha256": "4461b2958f995363945521260cca93ff6142529f0c27753133f43d02b5d8a771"
+            },
+            {
+              "bytes": 732,
+              "path": "attempt/case/constant/g",
+              "sha256": "18f0445d263795f548dd7cbe066b74d4fa2458ede883efcd94d95f3c5a89d7d4"
+            },
+            {
+              "bytes": 755,
+              "path": "attempt/case/constant/hRef",
+              "sha256": "f2999e33aeeab37967b295381c225dcb2a0a0f8dbed45a7eb0e66e86867cca82"
+            },
+            {
+              "bytes": 1648,
+              "path": "attempt/case/constant/polyMesh/boundary",
+              "sha256": "574392c950271c8c4c1d389bd4ca0e1424bb54a309030f57743405766d32e779"
+            },
+            {
+              "bytes": 614667938,
+              "path": "attempt/case/constant/polyMesh/faces",
+              "sha256": "189d7c0e976e7d59d00b1397209d79feec3499098b304c9c5d9c327f3462d160"
+            },
+            {
+              "bytes": 122238906,
+              "path": "attempt/case/constant/polyMesh/neighbour",
+              "sha256": "4ed021ba510f6800b7c90e90e80783cccbb1e1e5b5c9ec2a565e9e4031d661fc"
+            },
+            {
+              "bytes": 122614462,
+              "path": "attempt/case/constant/polyMesh/owner",
+              "sha256": "05a61c7b0780d1aee5d8258612b69b10263097d2f60a7dbaeb3b1ae8135d47bb"
+            },
+            {
+              "bytes": 250857142,
+              "path": "attempt/case/constant/polyMesh/points",
+              "sha256": "60fe45a13019eb5904ac21ca5ddd6c97ac581025a6d62dee91b5e8c01155298d"
+            },
+            {
+              "bytes": 881,
+              "path": "attempt/case/constant/transportProperties",
+              "sha256": "be3f42f6560eb19392aca767168a97e38223646dcb301b3d3b6b71e8565dd24f"
+            },
+            {
+              "bytes": 952,
+              "path": "attempt/case/constant/turbulenceProperties",
+              "sha256": "c6a7d91e95eff3464545922a9baaab454a7da870fbefffc05640fb6c63d4f3ab"
+            },
+            {
+              "bytes": 280345074,
+              "path": "attempt/case/processors120/0.200000000000/U",
+              "sha256": "2c928e1c126045e4263a48d7cb1a812027ddd3804c9b65d6199d2c0ab9433ac9"
+            },
+            {
+              "bytes": 93113216,
+              "path": "attempt/case/processors120/0.200000000000/alpha.water",
+              "sha256": "20540502bf31d352d21e83d8249cecd3c66cd11bb011fd80103b01e2b5e71251"
+            },
+            {
+              "bytes": 93708944,
+              "path": "attempt/case/processors120/0.200000000000/epsilon",
+              "sha256": "45dd9225816370ae52dda7c158c008e4f3918ee1f581f82865d40bc98751e44a"
+            },
+            {
+              "bytes": 93704028,
+              "path": "attempt/case/processors120/0.200000000000/k",
+              "sha256": "73b735f5441c44fff2c07672a61b9d5b68905ed5187931de7ca897f345c61bc2"
+            },
+            {
+              "bytes": 93779707,
+              "path": "attempt/case/processors120/0.200000000000/nut",
+              "sha256": "c538c8277fc5fade90dd2e80f1001140270f0f5508826c46559612fdf3596c3f"
+            },
+            {
+              "bytes": 93500698,
+              "path": "attempt/case/processors120/0.200000000000/p",
+              "sha256": "2c544cdc7ed00f3a0c1457d12d067f68b233b48a91e5948c1fb2184a6db0d41c"
+            },
+            {
+              "bytes": 94232250,
+              "path": "attempt/case/processors120/0.200000000000/p_rgh",
+              "sha256": "f202668608c245d07c70ac5de24199897a30f5a6680b519b998e3b079a1930e4"
+            },
+            {
+              "bytes": 251579442,
+              "path": "attempt/case/processors120/0.200000000000/phi",
+              "sha256": "1f3143d846159323063d417203875ab36d859fa75594707f686cb5915b691e66"
+            },
+            {
+              "bytes": 1016,
+              "path": "attempt/case/processors120/0.200000000000/uniform/cumulativeContErr",
+              "sha256": "b9c3d685a3a73a06bd666cdbe61a96b125dd347cdeeec5c375a6ab0578a4a940"
+            },
+            {
+              "bytes": 5527,
+              "path": "attempt/case/processors120/0.200000000000/uniform/functionObjects/functionObjectProperties",
+              "sha256": "5997af1cf8916ebf36d47b179573667e1f4d398dc5e62312a5855f3a8daa74fc"
+            },
+            {
+              "bytes": 1060,
+              "path": "attempt/case/processors120/0.200000000000/uniform/time",
+              "sha256": "e12839ceb297b92a41caf28dd23fd72366e0e12e80a0dd191fbdf07ca4827fcb"
+            },
+            {
+              "bytes": 530651,
+              "path": "attempt/case/processors120/constant/polyMesh/boundary",
+              "sha256": "1be8f2a6ec13edee2d795e09a061f3cd87ffe06fa8e1f8104d96894a5dee9ac0"
+            },
+            {
+              "bytes": 13606,
+              "path": "attempt/case/processors120/constant/polyMesh/boundaryProcAddressing",
+              "sha256": "39e7d4254365e96ff21c302481e03a5383a02be84ff090fbad8e79e1519f0098"
+            },
+            {
+              "bytes": 40402372,
+              "path": "attempt/case/processors120/constant/polyMesh/cellProcAddressing",
+              "sha256": "8859c12cc8f538850a5d32f6bb350c29ed6c8bbfa70639736677a649865507a6"
+            },
+            {
+              "bytes": 125645804,
+              "path": "attempt/case/processors120/constant/polyMesh/faceProcAddressing",
+              "sha256": "dd1b41f360d77887b273de29a8b4b8791abd86e8dee51aed95c26d254a06aa99"
+            },
+            {
+              "bytes": 629897118,
+              "path": "attempt/case/processors120/constant/polyMesh/faces",
+              "sha256": "8f4a7929dfba9b0b75bac1d8c209d05b04b50f179b4782e8ece1da0cb9376027"
+            },
+            {
+              "bytes": 119217148,
+              "path": "attempt/case/processors120/constant/polyMesh/neighbour",
+              "sha256": "9bbdd059721eb026236882eaac7fe8270f4ab41ed36dd75e9a168f316ed68349"
+            },
+            {
+              "bytes": 125645948,
+              "path": "attempt/case/processors120/constant/polyMesh/owner",
+              "sha256": "c58d04297282a48e6179fc141406240a8eccca61ccd079e5e954e437c08f528b"
+            },
+            {
+              "bytes": 44956136,
+              "path": "attempt/case/processors120/constant/polyMesh/pointProcAddressing",
+              "sha256": "f5c6092911e1a09c5fbd21a4d64ad19a1451116c510287d51d746c9831e12884"
+            },
+            {
+              "bytes": 269710334,
+              "path": "attempt/case/processors120/constant/polyMesh/points",
+              "sha256": "c2ed9859fed5ec3a3e9e539b7755f1d7abedbbf8dbbb731338706d332672db0b"
+            },
+            {
+              "bytes": 4338,
+              "path": "attempt/case/system/controlDict",
+              "sha256": "47e2c3e66ee4d71d6a18752153ce22155c5dc3b9b7f59cccbea54704afc34dc5"
+            },
+            {
+              "bytes": 164,
+              "path": "attempt/case/system/decomposeParDict",
+              "sha256": "8df44edca8a337353994b51c5084e34d55226838c5a591d4b7d378ae57a2f180"
+            },
+            {
+              "bytes": 1159,
+              "path": "attempt/case/system/fvSchemes",
+              "sha256": "fe51e9c9c3ee93cdff16956f813ce03b5e9d2406b7bb9974206c5db977a2db13"
+            },
+            {
+              "bytes": 2111,
+              "path": "attempt/case/system/fvSolution",
+              "sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4"
+            },
+            {
+              "bytes": 842,
+              "path": "attempt/case/system/setExprFieldsDict",
+              "sha256": "1feb5a66222198a2133b26353fd75dfeecdb9fa61e877be27d73df977ad5e891"
+            },
+            {
+              "bytes": 26288,
+              "path": "attempt/ledger/summary.json",
+              "sha256": "0baa380005d188edf6c94a0c175b790a5a8af5fa79773ff37ace5da5dda2f300"
+            },
+            {
+              "bytes": 6678,
+              "path": "attempt/manifest.json",
+              "sha256": "30992c04b1871c3c0204e28ff8fe60ec2cda514a32557e59d97b25559eb09be7"
+            }
+          ],
+          "source_archive_sha256": "31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9"
+        },
+        "smoke_preflight": {
+          "conservation_tolerance_decision": "raw residuals retained; no acceptance threshold inferred",
+          "job_id": "14689395",
+          "ledger_residuals_kg": {
+            "closure_residual_kg": -6.332145509324594e-10,
+            "max_abs_cumulative_closure_residual_kg": 6.33213334132e-10,
+            "max_abs_per_step_closure_residual_kg": 1.2796053704480781e-10
+          },
+          "ledger_sha256": "06e23a94732db524fca222c2537aec36b7313e45fcec46534192149c9fe49008",
+          "result_archive_member_count": 126,
+          "result_archive_sha256": "3852dfa4d24939020cebb17feac53697cd7b0f2550f3dd02ce5b51db900732ea",
+          "run_state_sha256": "0b9f83c59895d8c9439d4389911f43ef43307b9bd7b34b66c838a3d8ef2db449",
+          "solver_convergence": {
+            "all_converged": true,
+            "by_field": {
+              "Ux": {
+                "failed_count": 0,
+                "max_final_residual": 9.81323586703e-09,
+                "max_iterations": 3,
+                "solve_count": 10
+              },
+              "Uy": {
+                "failed_count": 0,
+                "max_final_residual": 8.0463644215e-09,
+                "max_iterations": 6,
+                "solve_count": 10
+              },
+              "Uz": {
+                "failed_count": 0,
+                "max_final_residual": 9.82193886011e-09,
+                "max_iterations": 6,
+                "solve_count": 10
+              },
+              "epsilon": {
+                "failed_count": 0,
+                "max_final_residual": 6.43141728496e-09,
+                "max_iterations": 14,
+                "solve_count": 10
+              },
+              "k": {
+                "failed_count": 0,
+                "max_final_residual": 8.06719083904e-09,
+                "max_iterations": 16,
+                "solve_count": 10
+              },
+              "p_rgh": {
+                "failed_count": 0,
+                "max_final_residual": 8.67213436901e-05,
+                "max_iterations": 11,
+                "solve_count": 30
+              },
+              "pcorr": {
+                "failed_count": 0,
+                "max_final_residual": 9.84895824768e-11,
+                "max_iterations": 764,
+                "solve_count": 1
+              }
+            },
+            "criteria": "final residual <= tolerance or <= initial residual * relTol; final PIMPLE controls and maxIter/minIter applied",
+            "failed_record_count": 0,
+            "failure_examples": [],
+            "fvSolution_sha256": "c2105cc5a051638189f80573fd3d3f4b5d7880a64a73668720905bd6334f88a4",
+            "pimple": {
+              "nCorrectors": 3,
+              "nNonOrthogonalCorrectors": 0,
+              "nOuterCorrectors": 1
+            },
+            "schema_version": 1,
+            "solver_record_count": 81
+          },
+          "status": "verified_clean_smoke_archive_ledger_and_convergence",
+          "terminal_status_sha256": "17f12a7cbf41cbb9d57a1523243fa2a80317006f911c67250500154f2d79d455"
+        },
+        "solver_elapsed_s": 1955.8251712310594,
+        "solver_end_marker": false,
+        "solver_exit_code": 143,
+        "solver_log_sha256": "a2c4164fff2429b9f060a71998d2222c0d3b167711d17c5ce41e593d76685821",
+        "solver_max_u_m_s": 22532440324.1,
+        "solver_started_monotonic": 1981677.271269863,
+        "solver_started_utc": "2026-10-28T09:19:32.961283+00:00",
+        "solver_time_s": 0.2659,
+        "solver_time_steps_recorded": 658,
+        "solver_version": "v2512",
+        "solver_wall_s": 1956.1355422360357,
+        "start_time_s": 0.2,
+        "started_utc": "2026-10-28T09:18:02.291075+00:00",
+        "status": "failed_preserved",
+        "stop_reason": "operational stop: max|U|=1033.79 m/s exceeds 1000 m/s",
+        "stop_requested_utc": "2026-10-28T09:52:08.783273+00:00",
+        "stop_signals": [
+          "12"
+        ],
+        "target_time_s": 0.3,
+        "traceback": "Traceback (most recent call last):\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v4-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 845, in run\n    endpoint = verify_endpoint(case, float(tracker.current_time_s or 0.0))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-source-v4-20261028/unpacked/cases/e1_rouaix_hpc_restart/run_restart.py\", line 507, in verify_endpoint\n    raise RestartError(f\"collated endpoint {time_name} lacks required fields: {missing}\")\nRestartError: collated endpoint 0.265900000000 lacks required fields: ['U', 'alpha.water', 'p_rgh', 'k', 'epsilon', 'nut', 'p', 'phi']\n",
+        "updated_utc": "2026-10-28T09:53:45.150976+00:00",
+        "variant": "original-control",
+        "wall_budget_s": 5400,
+        "write_and_stop_contract": {
+          "executable_sha256": "1907a33483b27dcca0bf17b36e8b8165983a2bbf39f7bde660860b7fe27e3549",
+          "scope": "Installed source and case configuration; current runtime banner checked after solve.",
+          "signal": 12,
+          "source_sha256": "5571278a48efd49507546d9ac4aa419519010d5a2de822992d53e287761a7a03"
+        }
+      },
+      "sacct": {
+        "accounting_source": "scontrol",
+        "parent": {
+          "allocated_cpus": "120",
+          "elapsed_raw": "00:35:47",
+          "exit_code": "1:0",
+          "job_id": "14689396",
+          "max_rss": "Unknown",
+          "state": "FAILED",
+          "total_cpu": "Unknown"
+        },
+        "steps": []
+      },
+      "scheduler_accounting": {
+        "cpu_accounting": "unavailable",
+        "sacct_error": "RuntimeError: sacct exit 1: sacct: error: _open_persist_conn: failed to open persistent connection to host:localhost:6819: Connection refused\nsacct: error: Sending PersistInit msg: Connection refused\nsacct: error: Problem talking to the database: Connection refused\n",
+        "source": "scontrol",
+        "status": "partial"
+      },
+      "updated_utc": "2026-10-28T09:55:30Z"
+    }
+  },
+  "phase": "captured",
+  "schema_version": 1,
+  "updated_utc": "2026-10-28T09:56:05Z"
+}

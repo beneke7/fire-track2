@@ -1,0 +1,839 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2512                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _87ed40d256-20251219 OPENFOAM=2512 version=v2512
+Arch   : "LSB;label=32;scalar=64"
+Exec   : interIsoFoam -parallel
+Date   : Oct 28 2026
+Time   : 10:14:24
+Host   : x1001c4s1b0n0
+PID    : 338922
+I/O    : collated [unthreaded] (maxThreadFileBufferSize = 0).
+         With non-blocking transfer, buffer-size = 1e+09
+Case   : /project/nk_meshapplied/bene/fire-track2-hpc/rouaix-restart-controls-20261027/rouaix-restart-original-smoke-14689395/attempt/case
+nProcs : 120
+Hosts  :
+(
+    (x1001c4s1b0n0 40)
+    (x1001c4s1b0n1 40)
+    (x1001c4s2b0n0 40)
+)
+Pstream initialized with:
+    node communication : on [type=host] (120 ranks, 3 nodes)
+    topology controls  : none
+    consensus exchange : 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStamp (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+sigWriteNow : Enabling writing upon signal 10
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Overriding OptimisationSwitches according to controlDict
+    fileHandler (unregistered)
+    maxThreadFileBufferSize 0;
+
+    writeNowSignal  10;
+
+sigWriteNow : Enabling writing upon signal 10
+    stopAtWriteNowSignal 12;
+
+sigStopAtWriteNow : Enabling writing and stopping upon signal 12
+Create mesh for time = 0.200000000000
+
+
+PIMPLE: Operating solver in PISO mode
+
+Reading field p_rgh
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Reading transportProperties
+
+Selecting incompressible transport model Newtonian
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type RAS
+Selecting RAS turbulence model realizableKE
+RAS
+{
+    RASModel        realizableKE;
+    turbulence      on;
+    printCoeffs     on;
+    A0              4;
+    C2              1.9;
+    sigmak          1;
+    sigmaEps        1.2;
+}
+
+
+Reading g
+
+Reading hRef
+Calculating field g.h
+
+No MRF models present
+
+No finite volume options present
+Selecting reconstructionScheme: isoAlpha
+DICPCG:  Solving for pcorr, Initial residual = 1, Final residual = 9.84895824768e-11, No Iterations 764
+time step continuity errors : sum local = 5.40633548388e-18, global = 8.90759986727e-22, cumulative = 2.28980135169e-08
+Courant Number mean: 0.0704086112494 max: 1.23425491981
+
+Starting time loop
+
+surfaceFieldValue nozzleFlux:
+    operation     = sum
+
+
+surfaceFieldValue gasInletFlux:
+    operation     = sum
+
+
+surfaceFieldValue downstreamOutletFlux:
+    operation     = sum
+
+
+surfaceFieldValue bottomOutletFlux:
+    operation     = sum
+
+
+surfaceFieldValue spanwiseMinusFlux:
+    operation     = sum
+
+
+surfaceFieldValue spanwisePlusFlux:
+    operation     = sum
+
+
+surfaceFieldValue aircraftWallFlux:
+    operation     = sum
+
+
+Courant Number mean: 0.0704086112494 max: 1.23425491981
+Interface Courant Number mean: 5.5893660044e-06 max: 0.804109330171
+Time = 0.200100000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -5.27953271176e-14, max(alpha) = 1 + 2.22044604925e-16
+Phase-1 volume fraction = 0.000109140453348  Min(alpha.water) = -1.96855750898e-19  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.73708087448e-05, Final residual = 8.76683545811e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000203217116139, Final residual = 4.18389774809e-09, No Iterations 4
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00111295347952, Final residual = 5.83994452312e-09, No Iterations 5
+GAMG:  Solving for p_rgh, Initial residual = 0.00868747463852, Final residual = 8.67213436901e-05, No Iterations 2
+time step continuity errors : sum local = 5.51223053449e-09, global = -1.03502692084e-12, cumulative = 2.289697849e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00119133945792, Final residual = 6.98496121054e-06, No Iterations 3
+time step continuity errors : sum local = 4.44216703429e-10, global = -9.450062572e-12, cumulative = 2.28875284274e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000215203525643, Final residual = 9.65685440177e-09, No Iterations 10
+time step continuity errors : sum local = 6.14155262836e-13, global = -9.11809138421e-14, cumulative = 2.28874372465e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.12643187541e-05, Final residual = 6.43141728496e-09, No Iterations 14
+bounding epsilon, min: -0.727907459325 max: 142510.861696 average: 3342.79666254
+smoothSolver:  Solving for k, Initial residual = 3.93913102149e-05, Final residual = 8.06719083904e-09, No Iterations 16
+ExecutionTime = 8.85 s  ClockTime = 9 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.2510230427
+
+surfaceFieldValue nozzleFlux write:
+    total faces   = 924
+    total area    = 0.125465549348
+
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    total faces   = 8010
+    total area    = 115
+
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    total faces   = 8010
+    total area    = 115
+
+    sum(downstreamOutlet) of phi = 8042.03088379
+    sum(downstreamOutlet) of alphaPhi_ = 1.37855734634e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    total faces   = 16110
+    total area    = 320
+
+    sum(bottomOutlet) of phi = 390.223208595
+    sum(bottomOutlet) of alphaPhi_ = 7.00428054265e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    total faces   = 15931
+    total area    = 219.317121995
+
+    sum(spanwiseMinus) of phi = -190.556649166
+    sum(spanwiseMinus) of alphaPhi_ = 1.7377113759e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    total faces   = 15931
+    total area    = 219.317121995
+
+    sum(spanwisePlus) of phi = -190.392004874
+    sum(spanwisePlus) of alphaPhi_ = 1.05691834555e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    total faces   = 28974
+    total area    = 139.874534451
+
+    sum(aircraftWall) of phi = -1.946921903e-38
+    sum(aircraftWall) of alphaPhi_ = -1.04228414608e-42
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 111.975271939
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 111.975271939 in cell 83294 at location (0.817039106145 -1.80478898752 0.592924190817) on processor 82
+    min(epsilon) = 0.0106357690859 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 142510.861696 in cell 3535 at location (0.188547486034 -0.0491778475471 -0.239700620843) on processor 71
+    min(k) = 0.00793280331557 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 988.487953055 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.32099930316 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -30325.6413085 in cell 47727 at location (1.80865921788 -2.57725990539 -0.187687929561) on processor 100
+    max(p_rgh) = 3394.78718251 in cell 77602 at location (-0.188547486034 -0.245802906309 0.00501762707782) on processor 68
+
+Courant Number mean: 0.0704089164958 max: 1.23400375013
+Interface Courant Number mean: 5.65555130403e-06 max: 0.802559665845
+Time = 0.200200000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -9.75943350757e-14, max(alpha) = 1 + 2.45903297724e-11
+Phase-1 volume fraction = 0.000109195003587  Min(alpha.water) = 0  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.69885955538e-05, Final residual = 9.81323586703e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.00020228782214, Final residual = 6.97155226822e-09, No Iterations 5
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00110992585564, Final residual = 9.82193886011e-09, No Iterations 5
+GAMG:  Solving for p_rgh, Initial residual = 0.0086855632088, Final residual = 8.30537578006e-05, No Iterations 2
+time step continuity errors : sum local = 5.27779253949e-09, global = 1.50332875664e-11, cumulative = 2.29024705341e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00118216510607, Final residual = 7.16967849468e-06, No Iterations 3
+time step continuity errors : sum local = 4.5571635519e-10, global = -7.02064092459e-12, cumulative = 2.28954498931e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000213376798319, Final residual = 6.03666682305e-09, No Iterations 11
+time step continuity errors : sum local = 3.83584922433e-13, global = -5.29973762721e-14, cumulative = 2.28953968958e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.13848174388e-05, Final residual = 6.39280779344e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.94118945856e-05, Final residual = 8.00639091592e-09, No Iterations 16
+bounding k, min: -1.47420405515 max: 990.458097294 average: 52.0636483595
+ExecutionTime = 11.67 s  ClockTime = 12 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.251148508249
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.03593503
+    sum(downstreamOutlet) of alphaPhi_ = 1.36083903207e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.315514358
+    sum(bottomOutlet) of alphaPhi_ = 7.0687842744e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.60568956
+    sum(spanwiseMinus) of alphaPhi_ = 1.85429119964e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.44076001
+    sum(spanwisePlus) of alphaPhi_ = 1.09357236438e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = -4.30412220667e-39
+    sum(aircraftWall) of alphaPhi_ = -2.67964165701e-50
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 110.69700678
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 110.69700678 in cell 83294 at location (0.817039106145 -1.80478898752 0.592924190817) on processor 82
+    min(epsilon) = 0.0106357948542 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 142320.051747 in cell 3535 at location (0.188547486034 -0.0491778475471 -0.239700620843) on processor 71
+    min(k) = 0.00793267761816 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 990.458097294 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.32536532807 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -30071.2474049 in cell 8105 at location (0.495810055866 -2.33851638777 0.183364694797) on processor 83
+    max(p_rgh) = 3395.27393676 in cell 75993 at location (-0.174581005587 -0.414345461888 0.00511821308279) on processor 68
+
+Courant Number mean: 0.0704092204 max: 1.23486124918
+Interface Courant Number mean: 5.6623039017e-06 max: 0.803216891641
+Time = 0.200300000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -7.26684315602e-14, max(alpha) = 1 + 1.16082699009e-11
+Phase-1 volume fraction = 0.000109249553792  Min(alpha.water) = -3.44107134822e-20  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.70367808621e-05, Final residual = 8.10612333819e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000202147593554, Final residual = 5.04104889887e-09, No Iterations 4
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00110619233897, Final residual = 7.69600644682e-09, No Iterations 5
+GAMG:  Solving for p_rgh, Initial residual = 0.00871900159199, Final residual = 8.51412163876e-05, No Iterations 2
+time step continuity errors : sum local = 5.40710339793e-09, global = 1.63050166517e-11, cumulative = 2.29117019124e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00119420599668, Final residual = 7.20550766427e-06, No Iterations 3
+time step continuity errors : sum local = 4.57868958756e-10, global = 1.076574539e-11, cumulative = 2.29224676578e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00021412752923, Final residual = 8.06367147518e-09, No Iterations 10
+time step continuity errors : sum local = 5.12571938127e-13, global = -2.63394313171e-14, cumulative = 2.29224413184e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.14549679108e-05, Final residual = 6.35530108755e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.94609175224e-05, Final residual = 7.94644436127e-09, No Iterations 16
+ExecutionTime = 14.37 s  ClockTime = 15 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.251273973721
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.04101
+    sum(downstreamOutlet) of alphaPhi_ = 1.34409219148e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.40774476
+    sum(bottomOutlet) of alphaPhi_ = 7.73136922284e-07
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.654425546
+    sum(spanwiseMinus) of alphaPhi_ = 1.97800371433e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.489710181
+    sum(spanwisePlus) of alphaPhi_ = 1.13123758675e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = -2.88472383864e-38
+    sum(aircraftWall) of alphaPhi_ = 1.3137321236e-42
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 109.784673164
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 109.784673164 in cell 83296 at location (0.817039106145 -1.80478290351 0.580945722882) on processor 82
+    min(epsilon) = 0.0106358204327 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 142128.531244 in cell 3535 at location (0.188547486034 -0.0491778475471 -0.239700620843) on processor 71
+    min(k) = 0.00793255767064 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 992.396001968 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.32964060185 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -32226.0550284 in cell 4731 at location (1.85055865922 -2.52115108286 -0.366896322493) on processor 100
+    max(p_rgh) = 3393.9724455 in cell 77602 at location (-0.188547486034 -0.245802906309 0.00501762707782) on processor 68
+
+Courant Number mean: 0.0704095277248 max: 1.23462030968
+Interface Courant Number mean: 5.66894037113e-06 max: 0.79309454165
+Time = 0.200400000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -9.79652557972e-14, max(alpha) = 1 + 2.47730724823e-11
+Phase-1 volume fraction = 0.000109304103966  Min(alpha.water) = -5.42101086243e-20  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.73536725479e-05, Final residual = 8.27412274188e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000202399077681, Final residual = 1.22990963917e-09, No Iterations 5
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00111182307285, Final residual = 2.36064096867e-09, No Iterations 6
+GAMG:  Solving for p_rgh, Initial residual = 0.00884932178626, Final residual = 3.11582324883e-05, No Iterations 3
+time step continuity errors : sum local = 1.97994020271e-09, global = 1.79537158991e-11, cumulative = 2.29403950343e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00120675703596, Final residual = 6.21388226301e-06, No Iterations 3
+time step continuity errors : sum local = 3.95013146275e-10, global = 7.19482834127e-12, cumulative = 2.29475898626e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000206941303707, Final residual = 8.15269316818e-09, No Iterations 10
+time step continuity errors : sum local = 5.18422062695e-13, global = -3.33623791179e-14, cumulative = 2.29475565002e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.1287460471e-05, Final residual = 6.31906072264e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.93378464367e-05, Final residual = 7.88713312074e-09, No Iterations 16
+ExecutionTime = 17.16 s  ClockTime = 17 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.251399439123
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.04609052
+    sum(downstreamOutlet) of alphaPhi_ = 1.32826555398e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.499748486
+    sum(bottomOutlet) of alphaPhi_ = 1.47846183502e-06
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.703716325
+    sum(spanwiseMinus) of alphaPhi_ = 2.109634943e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.538018866
+    sum(spanwisePlus) of alphaPhi_ = 1.1700014752e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = 8.47445288238e-39
+    sum(aircraftWall) of alphaPhi_ = -1.34129921191e-41
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 110.028618496
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 110.028618496 in cell 83296 at location (0.817039106145 -1.80478290351 0.580945722882) on processor 82
+    min(epsilon) = 0.0106358458267 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 141936.322263 in cell 3535 at location (0.188547486034 -0.0491778475471 -0.239700620843) on processor 71
+    min(k) = 0.00793244312218 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 994.300098574 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.3338134311 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -31392.1795541 in cell 32704 at location (0.551675977654 -2.39467872247 0.0063597080195) on processor 83
+    max(p_rgh) = 3395.87936309 in cell 75993 at location (-0.174581005587 -0.414345461888 0.00511821308279) on processor 68
+
+Courant Number mean: 0.0704098259623 max: 1.23522324133
+Interface Courant Number mean: 5.63982854862e-06 max: 0.805936619102
+Time = 0.200500000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -2.96810629158e-13, max(alpha) = 1 + 1.84017245886e-11
+Phase-1 volume fraction = 0.000109358654205  Min(alpha.water) = 0  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.73609215034e-05, Final residual = 6.37075445915e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000203015767317, Final residual = 1.31800060019e-09, No Iterations 5
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00111381849265, Final residual = 3.32479436367e-09, No Iterations 6
+GAMG:  Solving for p_rgh, Initial residual = 0.00883575364888, Final residual = 2.96417407618e-05, No Iterations 3
+time step continuity errors : sum local = 1.88399569224e-09, global = -1.64213920997e-12, cumulative = 2.2945914361e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00120947098583, Final residual = 5.27275768565e-06, No Iterations 3
+time step continuity errors : sum local = 3.35234046983e-10, global = -6.09157712105e-12, cumulative = 2.29398227839e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00020654195158, Final residual = 9.91458858034e-09, No Iterations 9
+time step continuity errors : sum local = 6.30449205962e-13, global = -5.09851908583e-14, cumulative = 2.29397717987e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.16280414743e-05, Final residual = 6.28377851016e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.93394614096e-05, Final residual = 7.82792870364e-09, No Iterations 16
+ExecutionTime = 19.92 s  ClockTime = 20 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.251524904672
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.05120495
+    sum(downstreamOutlet) of alphaPhi_ = 1.31330709529e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.591738948
+    sum(bottomOutlet) of alphaPhi_ = 7.07894016892e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.75295865
+    sum(spanwiseMinus) of alphaPhi_ = 2.24917795975e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.586295515
+    sum(spanwisePlus) of alphaPhi_ = 1.21017425186e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = -1.84597509386e-38
+    sum(aircraftWall) of alphaPhi_ = 2.04608389159e-41
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 109.831635426
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 109.831635426 in cell 81879 at location (0.928770949721 -2.14187010553 0.76257103502) on processor 104
+    min(epsilon) = 0.0106358710263 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 142897.117812 in cell 66516 at location (0.900837988827 -2.00144788003 -0.653989668063) on processor 93
+    min(k) = 0.0079323339984 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 996.169192223 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.33787938169 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -32184.156152 in cell 32696 at location (0.551675977654 -2.39472177523 0.031795978261) on processor 83
+    max(p_rgh) = 3394.51067411 in cell 77602 at location (-0.188547486034 -0.245802906309 0.00501762707782) on processor 68
+
+Courant Number mean: 0.0704101274068 max: 1.23512528723
+Interface Courant Number mean: 5.72586335465e-06 max: 0.797101872585
+Time = 0.200600000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -9.85814586889e-14, max(alpha) = 1 + 2.50324205808e-11
+Phase-1 volume fraction = 0.000109413204444  Min(alpha.water) = -4.06575814682e-20  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.70356240201e-05, Final residual = 6.11220779668e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000201934837585, Final residual = 4.86846728991e-09, No Iterations 4
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00110918071005, Final residual = 7.99260029656e-09, No Iterations 5
+GAMG:  Solving for p_rgh, Initial residual = 0.00867351050648, Final residual = 8.33307165044e-05, No Iterations 2
+time step continuity errors : sum local = 5.29635355823e-09, global = 1.06308270266e-11, cumulative = 2.29504026257e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00118718933036, Final residual = 6.46116662434e-06, No Iterations 3
+time step continuity errors : sum local = 4.10787782698e-10, global = 5.8474767166e-12, cumulative = 2.29562501025e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000211039601512, Final residual = 7.52222090565e-09, No Iterations 10
+time step continuity errors : sum local = 4.7837772862e-13, global = 4.68933796572e-14, cumulative = 2.29562969958e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.12026534446e-05, Final residual = 6.24938738375e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.92018181112e-05, Final residual = 7.76910313823e-09, No Iterations 16
+ExecutionTime = 22.64 s  ClockTime = 23 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.251650370221
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.05635593
+    sum(downstreamOutlet) of alphaPhi_ = 1.29916462493e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.683708013
+    sum(bottomOutlet) of alphaPhi_ = 7.07131213388e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.802290056
+    sum(spanwiseMinus) of alphaPhi_ = 2.39714986838e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.634640548
+    sum(spanwisePlus) of alphaPhi_ = 1.25144327881e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = 1.81451943452e-39
+    sum(aircraftWall) of alphaPhi_ = -9.66503360097e-42
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 109.656236612
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 109.656236612 in cell 52067 at location (0.831005586592 -2.15594142978 -0.63948506919) on processor 93
+    min(epsilon) = 0.0106358960365 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 145860.711583 in cell 66516 at location (0.900837988827 -2.00144788003 -0.653989668063) on processor 93
+    min(k) = 0.00793222996151 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 998.001933459 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.34182912591 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -34949.4855195 in cell 32529 at location (0.551675977654 -2.39472745979 -0.0572174570472) on processor 83
+    max(p_rgh) = 4452.38075898 in cell 17903 at location (0.670391061453 -1.81181907849 0.755174894834) on processor 82
+
+Courant Number mean: 0.0704104304996 max: 1.23550321904
+Interface Courant Number mean: 5.73616456553e-06 max: 0.779521404211
+Time = 0.200700000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -9.60510752383e-14, max(alpha) = 1 + 1.06217257212e-11
+Phase-1 volume fraction = 0.000109467754683  Min(alpha.water) = -4.94667241197e-19  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.68114050231e-05, Final residual = 4.09836164477e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000201428181003, Final residual = 4.47718028643e-09, No Iterations 4
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00110639525093, Final residual = 5.0684440852e-09, No Iterations 6
+GAMG:  Solving for p_rgh, Initial residual = 0.00870220912819, Final residual = 7.95940097216e-05, No Iterations 2
+time step continuity errors : sum local = 5.06194385997e-09, global = -3.38782424504e-12, cumulative = 2.29529091716e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.0011828861425, Final residual = 6.39515688009e-06, No Iterations 3
+time step continuity errors : sum local = 4.06750846782e-10, global = -1.23693009029e-11, cumulative = 2.29405398707e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000212323421402, Final residual = 9.7515453162e-09, No Iterations 10
+time step continuity errors : sum local = 6.20104515559e-13, global = -8.88641116459e-14, cumulative = 2.29404510066e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.11846355165e-05, Final residual = 6.21612849954e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.9208769314e-05, Final residual = 7.71047374494e-09, No Iterations 16
+ExecutionTime = 25.36 s  ClockTime = 26 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.251775835771
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.0615372
+    sum(downstreamOutlet) of alphaPhi_ = 1.28578623689e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.775528435
+    sum(bottomOutlet) of alphaPhi_ = 7.06368557721e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.851370042
+    sum(spanwiseMinus) of alphaPhi_ = 2.55397429197e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.682929997
+    sum(spanwisePlus) of alphaPhi_ = 1.29385718977e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = -1.41663191415e-38
+    sum(aircraftWall) of alphaPhi_ = -3.00908444011e-42
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 110.112356642
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 110.112356642 in cell 65290 at location (0.677374301676 -1.77669915755 0.758389464066) on processor 82
+    min(epsilon) = 0.0106359208478 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 145893.212979 in cell 66516 at location (0.900837988827 -2.00144788003 -0.653989668063) on processor 93
+    min(k) = 0.00793213102995 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 999.797440299 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.34562564401 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -31475.2163639 in cell 32529 at location (0.551675977654 -2.39472745979 -0.0572174570472) on processor 83
+    max(p_rgh) = 3394.69161017 in cell 77602 at location (-0.188547486034 -0.245802906309 0.00501762707782) on processor 68
+
+Courant Number mean: 0.0704107309971 max: 1.23548259613
+Interface Courant Number mean: 5.72998628373e-06 max: 0.796516477859
+Time = 0.200800000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -7.61859288531e-14, max(alpha) = 1 + 2.1615154111e-11
+Phase-1 volume fraction = 0.000109522304922  Min(alpha.water) = 0  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.72168216183e-05, Final residual = 6.35683273589e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000201699958996, Final residual = 5.52466563651e-09, No Iterations 4
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00110591987214, Final residual = 5.76956021338e-09, No Iterations 6
+GAMG:  Solving for p_rgh, Initial residual = 0.00885123839353, Final residual = 8.39941902984e-05, No Iterations 2
+time step continuity errors : sum local = 5.33755954917e-09, global = 1.06634797767e-11, cumulative = 2.29511144863e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00120749263443, Final residual = 6.55608181153e-06, No Iterations 3
+time step continuity errors : sum local = 4.16821337534e-10, global = 8.30976446497e-12, cumulative = 2.29594242508e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000217774793615, Final residual = 8.5868125843e-09, No Iterations 10
+time step continuity errors : sum local = 5.46275514199e-13, global = 7.14000706748e-14, cumulative = 2.29594956509e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.13093002529e-05, Final residual = 6.18385607549e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.92065864548e-05, Final residual = 7.65159874254e-09, No Iterations 16
+ExecutionTime = 28.1 s  ClockTime = 28 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.25190130132
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.06673406
+    sum(downstreamOutlet) of alphaPhi_ = 1.27312071861e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.867280596
+    sum(bottomOutlet) of alphaPhi_ = 7.05606010428e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.9006169
+    sum(spanwiseMinus) of alphaPhi_ = 2.72032561136e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.731121934
+    sum(spanwisePlus) of alphaPhi_ = 1.33750041541e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = 1.75039683244e-38
+    sum(aircraftWall) of alphaPhi_ = -1.24122037223e-41
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 109.409160549
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 109.409160549 in cell 52065 at location (0.844972067039 -2.15594142978 -0.63948506919) on processor 93
+    min(epsilon) = 0.010635945465 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 146814.816023 in cell 72706 at location (0.914804469274 -2.00144788003 -0.653989668063) on processor 93
+    min(k) = 0.00793203690156 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 1001.55424702 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.34924839588 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -32473.0033482 in cell 23956 at location (0.579608938547 -2.3385251345 -0.36039518904) on processor 93
+    max(p_rgh) = 5735.00855147 in cell 43370 at location (0.810055865922 -2.00845987255 -0.844064953492) on processor 93
+
+Courant Number mean: 0.0704110315728 max: 1.23574257259
+Interface Courant Number mean: 5.6909578061e-06 max: 0.833313238681
+Time = 0.200900000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -8.66815041121e-14, max(alpha) = 1 + 2.15760742606e-12
+Phase-1 volume fraction = 0.00010957685516  Min(alpha.water) = -2.13928758741e-19  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.72551342042e-05, Final residual = 8.79254075413e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000201868772596, Final residual = 1.02337736863e-09, No Iterations 6
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00111235441675, Final residual = 4.75370903387e-09, No Iterations 6
+GAMG:  Solving for p_rgh, Initial residual = 0.00903184129192, Final residual = 3.21959412916e-05, No Iterations 3
+time step continuity errors : sum local = 2.04877538346e-09, global = 2.2919260798e-11, cumulative = 2.29824149117e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00123499699702, Final residual = 6.46843628535e-06, No Iterations 3
+time step continuity errors : sum local = 4.11889645549e-10, global = 2.15280859132e-11, cumulative = 2.30039429976e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000209368282206, Final residual = 6.31048367217e-09, No Iterations 11
+time step continuity errors : sum local = 4.02168784414e-13, global = 6.14021391472e-14, cumulative = 2.30040043997e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.14686376725e-05, Final residual = 6.15276603283e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.9180814971e-05, Final residual = 7.59285279576e-09, No Iterations 16
+ExecutionTime = 30.97 s  ClockTime = 31 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.252026766869
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.07195293
+    sum(downstreamOutlet) of alphaPhi_ = 1.26111789059e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 390.95894233
+    sum(bottomOutlet) of alphaPhi_ = 7.04843487787e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.949834847
+    sum(spanwiseMinus) of alphaPhi_ = 2.89653878776e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.779065001
+    sum(spanwisePlus) of alphaPhi_ = 1.38242866691e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = 2.69886796932e-38
+    sum(aircraftWall) of alphaPhi_ = -7.85882997381e-42
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 109.650327606
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 109.650327606 in cell 65290 at location (0.677374301676 -1.77669915755 0.758389464066) on processor 82
+    min(epsilon) = 0.0106359698776 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 144706.41756 in cell 72706 at location (0.914804469274 -2.00144788003 -0.653989668063) on processor 93
+    min(k) = 0.00793194756903 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 1003.27128985 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.35268996849 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -32511.7989493 in cell 75506 at location (1.71089385475 -2.5070381004 0.212126249908) on processor 99
+    max(p_rgh) = 3396.82904099 in cell 75993 at location (-0.174581005587 -0.414345461888 0.00511821308279) on processor 68
+
+Courant Number mean: 0.0704113350669 max: 1.23575535283
+Interface Courant Number mean: 5.72298314659e-06 max: 0.784829930486
+Time = 0.201000000000
+
+PIMPLE: iteration 1
+isoAdvection: After conservative bounding: min(alpha) = -8.93836933634e-14, max(alpha) = 1 + 2.61124455392e-12
+Phase-1 volume fraction = 0.000109631405399  Min(alpha.water) = 0  Max(alpha.water) = 1
+DILUPBiCGStab:  Solving for Ux, Initial residual = 4.71352107774e-05, Final residual = 8.07252757776e-09, No Iterations 3
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.000202360279628, Final residual = 8.0463644215e-09, No Iterations 4
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.001117695394, Final residual = 5.1836971162e-09, No Iterations 5
+GAMG:  Solving for p_rgh, Initial residual = 0.00881011493762, Final residual = 8.32829337616e-05, No Iterations 2
+time step continuity errors : sum local = 5.31001381482e-09, global = 2.10640640064e-12, cumulative = 2.30061108061e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.00118946496355, Final residual = 6.93766337122e-06, No Iterations 3
+time step continuity errors : sum local = 4.42519873139e-10, global = -1.53296582888e-11, cumulative = 2.29907811478e-08
+GAMG:  Solving for p_rgh, Initial residual = 0.000210985889646, Final residual = 5.83061678296e-09, No Iterations 11
+time step continuity errors : sum local = 3.71815538938e-13, global = -5.32733805718e-14, cumulative = 2.29907278745e-08
+smoothSolver:  Solving for epsilon, Initial residual = 5.12888149862e-05, Final residual = 6.12267964107e-09, No Iterations 14
+smoothSolver:  Solving for k, Initial residual = 3.90918139491e-05, Final residual = 7.53394947368e-09, No Iterations 16
+ExecutionTime = 34.96 s  ClockTime = 35 s
+
+volFieldValue waterVolume write:
+    volIntegrate(region0) of alpha.water = 0.252152232418
+
+surfaceFieldValue nozzleFlux write:
+    sum(nozzle) of phi = -1.25465549348
+    sum(nozzle) of alphaPhi_ = -1.25465549348
+
+surfaceFieldValue gasInletFlux write:
+    sum(gasInlet) of phi = -8050
+    sum(gasInlet) of alphaPhi_ = 0
+
+surfaceFieldValue downstreamOutletFlux write:
+    sum(downstreamOutlet) of phi = 8042.07720418
+    sum(downstreamOutlet) of alphaPhi_ = 1.24972889897e-10
+
+surfaceFieldValue bottomOutletFlux write:
+    sum(bottomOutlet) of phi = 391.050491453
+    sum(bottomOutlet) of alphaPhi_ = 7.04081019767e-11
+
+surfaceFieldValue spanwiseMinusFlux write:
+    sum(spanwiseMinus) of phi = -190.999223449
+    sum(spanwiseMinus) of alphaPhi_ = 3.08362593806e-75
+
+surfaceFieldValue spanwisePlusFlux write:
+    sum(spanwisePlus) of phi = -190.826854539
+    sum(spanwisePlus) of alphaPhi_ = 1.42887219508e-79
+
+surfaceFieldValue aircraftWallFlux write:
+    sum(aircraftWall) of phi = 1.24382994813e-38
+    sum(aircraftWall) of alphaPhi_ = -9.42694895825e-42
+
+fieldMinMax alphaExtrema write:
+    min/max(alpha.water) = 0 1
+
+fieldMinMax speedExtrema write:
+    min/max(mag(U)) = 0 109.308934042
+
+fieldMinMax failureLocations write:
+    min(mag(U)) = 0 in cell 62249 at location (2.69553072626 0 -1.67222222222) on processor 0
+    max(mag(U)) = 109.308934042 in cell 52065 at location (0.844972067039 -2.15594142978 -0.63948506919) on processor 93
+    min(epsilon) = 0.0106359940866 in cell 29925 at location (0.104748603352 -0.217716778973 0.0549709223076) on processor 65
+    max(epsilon) = 143347.064128 in cell 72701 at location (0.928770949721 -2.00144788003 -0.653989668063) on processor 93
+    min(k) = 0.00793186273762 in cell 45935 at location (-0.00698324022346 -0.344120868194 0.1878208021) on processor 65
+    max(k) = 1004.94767723 in cell 65690 at location (0.775139664804 -1.03235133631 0.666264119214) on processor 85
+    min(nut) = 0 in cell 4 at location (2.80726256983 -5.56179775281 -6.00280898876) on processor 0
+    max(nut) = 2.35601305121 in cell 57478 at location (0.314245810056 -1.11658783889 -0.0722695921464) on processor 77
+    min(p_rgh) = -31340.9505627 in cell 13209 at location (0.579608938547 -2.3806595918 -0.247613806115) on processor 83
+    max(p_rgh) = 3397.57740354 in cell 75993 at location (-0.174581005587 -0.414345461888 0.00511821308279) on processor 68
+
+End
+
+Finalising parallel run

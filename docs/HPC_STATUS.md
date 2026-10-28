@@ -1,18 +1,34 @@
 # Komondor Rouaix status
 
-Updated 2026-10-28 09:11 UTC (10:11 CET). Analytical E0 remains the only
+Updated 2026-10-28 11:18 UTC (12:18 CET). Analytical E0 remains the only
 passed gate. All CFD runs here are exploratory.
 
 ## Current execution
 
-**V4 smoke14689395 and gated control14689396 are released.**
-At28 October09:10:58 UTC, smoke is pending scheduler evaluation and control
-waits on afterok:14689395. Auditors14689397/14689398 are armed afterany.
-Both request120 ranks on three nodes,40/node and22 GiB/node in cpu-short.
-Smoke targets0.20→0.201 s, ten fixed0.1 ms steps,20-minute cap; control targets
-0.20→0.30 s,90-minute cap, gated by actual smoke/ledger/convergence/archive
-success. Native restart compatibility and survival through the failure window
-remain unproven.
+**No Rouaix solver or follow-up job is running or pending at28 October11:17 UTC.**
+V4 smoke14689395 COMPLETED0:0: ten fixed0.1 ms steps from0.20 to0.201 s,
+peak111.97527 m/s, all81 configured linear solves converged. Its incremental
+mass residual is-6.33e-10 kg, with terminal fields and verified archive. Whole
+job wall was4m03s; the solver step used39s. This demonstrates native restart
+execution and short continuation, not bitwise equivalence or physical validity.
+
+Control14689396 obtained its full120 ranks across three nodes and FAILED1:0
+at09:53:44 UTC after35m47s. It logged658 complete post-restart steps and began
+Time0.2659 s, then pressure GAMG raised a floating-point exception on rank12.
+Recorded speed grew to2.253e10 m/s. No clean End or verified final fields exist;
+no new incremental ledger is available for this failed branch. The1000 m/s
+guard requested signal12 but did not secure a terminal checkpoint before the
+failure. Raw logs and verified archive are retained. Auditors14689397/14689398
+both completed. First guard crossing was0.2625 s at the same reported boundary
+point as the prior run (new1033.79 versus old1045.53 m/s). This is not proof of
+identical cells or cause; the old final volume peak was a different point.
+The posthoc audit finds11 linear-solve criterion failures in U/k/epsilon;
+configured p_rgh criterion success does not make the overall run converged.
+The recorded stop_requested_utc is written after a blocking stop call, so it
+cannot establish exact signal-send timing relative to the FPE.
+The target0.30 s was not reached; this did not fix the prior instability near0.26 s.
+No identical retry or pressure candidate has been submitted.
+[Verified terminal logs, metrics and audits](../results/summaries/rouaix_restart_controls_20261027/terminal-v4/README.md).
 
 V3 smoke14688328 passed native startup but failed before CFD on literal
 checkpoint-time matching. Its saved value0.199999999999994293 differs from0.2
@@ -50,7 +66,7 @@ Native afterany auditor **14669459 COMPLETED 0:0** in 46 s. Its recorded
 archive SHA is `31010755e705010771de7ed00fb5fb9990e7d2621237c3d881ee22b826cf25c9`,
 classified `completed_horizon_converged_exploratory_only`. Login-node sacct
 independently confirms both donor terminal states. The donor is complete;
-the new restart sequence above is queued. Other jobs on the shared login are unrelated.
+the new restart sequence above is terminal. Other jobs on the shared login are unrelated.
 The run stops before the prior 0.2281/0.2341/0.2511 s events, so it does not
 establish survival through the failure window or validate the water physics.
 The terminal audit records 250.328864 kg injected and a +1.67e-6 kg ledger
